@@ -14,6 +14,7 @@ on:
       - 'TestCI.cmd'
       - '.github/codeql/codeql-config.yml'
       - '.github/ISSUE_TEMPLATE/**'
+      - '.github/workflows/announcements.yml'
       - '.github/workflows/codeql.yml'
       - '.github/workflows/codespell.yml'
       - '.github/workflows/hash.yml'
@@ -47,6 +48,7 @@ on:
       - 'TestCI.cmd'
       - '.github/codeql/codeql-config.yml'
       - '.github/ISSUE_TEMPLATE/**'
+      - '.github/workflows/announcements.yml'
       - '.github/workflows/codeql.yml'
       - '.github/workflows/codespell.yml'
       - '.github/workflows/hash.yml'
@@ -85,10 +87,12 @@ env:
   #ghQtBuilds_hash_x64: 673c288feeabd11ec66f9f454d49cde3945cbd3e3f71283b7a6c4df0893b19f2
 
 jobs:
-          
+
   Build_x64_Qt6:
     runs-on: windows-2022
     timeout-minutes: 45
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout code
@@ -114,7 +118,7 @@ jobs:
 
       - name: Build Sandboxie x64 (all)
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
-        
+
       - name: Build Sandboxie x64 (drv)
         run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
 
@@ -123,7 +127,7 @@ jobs:
     #
 
 #      - name: Install Qt6 x64
-#        uses: jurplel/install-qt-action@v4.3.0
+#        uses: jurplel/install-qt-action@v4.3.1
 #        with:
 #      #    version: '6.2.4'
 #          version: '${{ env.qt6_version }}'
@@ -204,6 +208,8 @@ jobs:
   Build_ARM64_Qt6:
     runs-on: windows-2022
     timeout-minutes: 45
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout code
@@ -240,7 +246,7 @@ jobs:
     #
 
       - name: Install Qt6 x64
-        uses: jurplel/install-qt-action@v4.3.0
+        uses: jurplel/install-qt-action@v4.3.1
         with:
       #    version: '6.2.4'
           version: '${{ env.qt6_version }}'
@@ -252,7 +258,7 @@ jobs:
           cache: true
 
       - name: Install Qt6 ARM64
-        uses: jurplel/install-qt-action@v4.3.0
+        uses: jurplel/install-qt-action@v4.3.1
         with:
       #    version: '6.2.4'
           version: '${{ env.qt6_version }}'

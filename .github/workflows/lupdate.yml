@@ -13,6 +13,8 @@ jobs:
     if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: write
 
     steps:
       - name: Install Qt 5 packages
@@ -75,6 +77,8 @@ jobs:
     if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
     runs-on: windows-2022
     timeout-minutes: 15
+    permissions:
+      contents: write
 
     steps:
 

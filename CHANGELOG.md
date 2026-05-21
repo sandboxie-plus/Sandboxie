@@ -5,6 +5,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.17.6 / 5.72.6] - 2026-05-17
+
+### Added
+- added "(Administrator)" to the main window title when running with elevated privileges
+
+### Changed
+- improved box import/export behaviour [#5362](https://github.com/sandboxie-plus/Sandboxie/issues/5362)
+- changed export/import format to store box config as `BoxName.ini` with `[BoxName]` section header instead of `BoxName/BoxConfig.ini`
+  - import supports both old and new formats for backward compatibility
+  - the new format is 1:1 compatible with portable boxes, allowing to just unpack an export archive and add the boxes as portable
+
+### Fixed
+- fixed issue with hook registration
+- fixed high CPU usage caused by DWM with applications using custom title bars (e.g., Delphi VCL)
+
 
 
 ## [1.17.6 / 5.72.6] - 2026-05-??
@@ -38,7 +53,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed box rename failing with "The parameter is incorrect" since 1.17.3, caused by multi-line section content being rejected by the new ContainsCRLF check in CIniFile::AddValue
 - fixed renamed sandbox not being re-selected in the UI after a successful rename
 - fixed sandboxed app tray icons not showing with `OpenWinClass=*` by proxying `Shell_NotifyIcon`; can be disabled with `UseShellNotifyIconProxy` (default enabled, supports `process` and `!process` selectors)
-- fixed track WS_EX_TOPMOST extended style, detect topmost state changes, and use appropriate HWND_TOPMOST vs HWND_TOP ordering to ensure correct border visibility and z-order when topmost status changes. [#5358](https://github.com/sandboxie-plus/Sandboxie/issues/5358)
+- fixed track WS_EX_TOPMOST extended style, detect topmost state changes, and use appropriate HWND_TOPMOST vs HWND_TOP ordering to ensure correct border visibility and z-order when topmost status changes [#5358](https://github.com/sandboxie-plus/Sandboxie/issues/5358)
 
 
 
@@ -75,10 +90,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "Label only" border mode option (`onlbl`, `ttllbl`, `alllbl`) that hides the colored border frame and shows only the sandbox name (or alias) label [#5239](https://github.com/sandboxie-plus/Sandboxie/pull/5239)
 - added MIDI workaround template for Windows 11 [#5183](https://github.com/sandboxie-plus/Sandboxie/issues/5183) [#5203](https://github.com/sandboxie-plus/Sandboxie/issues/5203#issuecomment-3938495163) (thanks xsmolasses)
 - added new tray customization options (Global Settings > Shell Integration > System Tray): [#5254](https://github.com/sandboxie-plus/Sandboxie/pull/5254)
-  - "Show icons in tray context menu" (`Options/TrayIcons`) — controls whether custom sandbox icons are displayed in the tray menu.
-  - "Show box alias name instead of box name in tray" (`Options/TrayUseAlias`) — displays the configured alias/display name in both compact and regular tray menus.
-  - "Show sandbox status as tooltip in tray list" (`Options/TrayStatusTip`) now supports tri-state behavior: unchecked = never, partial = while Ctrl or Shift is held (default), checked = always.
-  - "Show overlay icons for boxes in tray list" (`Options/TrayOverlayIcons`) — shows the same box-state overlays used in the main sandbox list (no-force, disk image mounted/unmounted, RAM disk, auto-delete) on tray icons in both the compact widget and the regular context menu.
+  - "Show icons in tray context menu" (`Options/TrayIcons`) - controls whether custom sandbox icons are displayed in the tray menu.
+  - "Show box alias name instead of box name in tray" (`Options/TrayUseAlias`) - displays the configured alias/display name in both compact and regular tray menus.
+  - "Show sandbox status as tooltip in tray list" (`Options/TrayStatusTip`) now supports tri-state behaviour: unchecked = never, partial = while Ctrl or Shift is held (default), checked = always.
+  - "Show overlay icons for boxes in tray list" (`Options/TrayOverlayIcons`) - shows the same box-state overlays used in the main sandbox list (no-force, disk image mounted/unmounted, RAM disk, auto-delete) on tray icons in both the compact widget and the regular context menu.
 - added border capture exclusion via `HideBordersFromCapture`
   - keeps border frames and labels out of screenshots and screen recordings; defaults to `CoverBoxedWindows`
 - added border label width and taskbar clipping options
@@ -91,7 +106,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reduced constant GUI CPU usage by caching custom `BoxIcon` resolution in the sandbox model instead of reloading icon resources on refresh
 - throttled internet connectivity check in SandMan main timer to once every 60 seconds and cache the result
   - updater only runs when device has internet connectivity, eliminating wasted network attempts and reducing repeated `HKLM\\SYSTEM\\Setup\\SystemSetupInProgress` registry checks
-- changed duplicate sandbox behavior so active box aliases also receive the "Copy" suffix on duplication
+- changed duplicate sandbox behaviour so active box aliases also receive the "Copy" suffix on duplication
 - changed tray sandbox/group ordering to mirror sandbox list mode (manual / ascending / descending), including group ordering
 - improved tray/sandbox submenu icon caching by resolving `DblClickAction` target paths (`GetCommandFile`) only on cache misses and caching `LoadWindowsIcon(path,index)` results for Run/Start menu entries, reducing repeated system icon extraction when opening menus
 - improved border rendering
@@ -101,25 +116,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed duplicated boxes not preserving the original box group assignment
 - fixed double-clicking on a group's empty path/command line crash [#5253](https://github.com/sandboxie-plus/Sandboxie/pull/5253)
 - fixed compact tray box list clipping long sandbox names; width is now measured precisely per item using font metrics and scales correctly at any DPI [#5254](https://github.com/sandboxie-plus/Sandboxie/pull/5254)
-- fixed WOW64 registry view inheritance for relative key opens in `SbieDll`, preserving parent `KEY_WOW64_32KEY/KEY_WOW64_64KEY` semantics across `NtOpenKey`/`NtCreateKey` [#5171](https://github.com/sandboxie-plus/Sandboxie/issue/7171) [#5244](https://github.com/sandboxie-plus/Sandboxie/pull/5244)
+- fixed WOW64 registry view inheritance for relative key opens in `SbieDll`, preserving parent `KEY_WOW64_32KEY/KEY_WOW64_64KEY` semantics across `NtOpenKey`/`NtCreateKey` [#5171](https://github.com/sandboxie-plus/Sandboxie/issues/5171) [#5244](https://github.com/sandboxie-plus/Sandboxie/pull/5244)
 - fixed handle leak in `ScanStartMenu`: `IShellLinkW` and `IPersistFile` COM interfaces were never released in `ResolveShortcut`, permanently retaining handles (file, registry, icon) for every `.lnk` shortcut scanned; replaced raw pointers with `CComPtr` to ensure `Release()` on all exit paths
 - fixed parsing logic for `ClosedClsid` and `ClosedRT` settings [#5263](https://github.com/sandboxie-plus/Sandboxie/pull/5263)
 - FIXED SECURITY ISSUE ID-32: EditPassword Hash Entropy Loss, new passwords will be salted SHA-256 and Base64-encoded
   - Note: the fix only takes effect when the password is being set, existing passwords remain weak
-- FIXED SECURITY ISSUE ID-33
-- fixed Local Denial of Service (DoS) Vulnerability Exploitable by Sandboxed Process CVE-2026-32603 (reported by sammy12342)
-- FIXED SECURITY ISSUE ID-34
-- fixed Sandboxie-Plus EditAdminOnly Bypass via INI CRLF Injection CVE-2026-34458 (reported by sammy12342)
-- FIXED SECURITY ISSUE ID-35
-- fixed issues with GetRawInputDeviceInfoSlave CVE-2026-34459 (reported by sammy12342)
-- FIXED SECURITY ISSUE ID-36
-- fixed an issue with RunSbieCtrl CVE-2026-34461 (reported by Yanchon918s)
-- FIXED SECURITY ISSUE ID-37
-- fixed name validation in ProcessServer handlers CVE-2026-34462 (reported by Yanchon918s)
-- FIXED SECURITY ISSUE ID-38
-- fixed parameter validation in NamedPipeServer CVE-2026-34464 (reported by Yanchon918s)
-- FIXED SECURITY ISSUE ID-39
-- fixed Local Privilege Escalation via TOCTOU in UpdUtil Addon Installation CVE-2026-34596 (reported by sammy12342)
+- FIXED SECURITY ISSUE ID-33: Local Denial of Service (DoS) Vulnerability Exploitable by Sandboxed Process CVE-2026-32603 (reported by sammy12342)
+- FIXED SECURITY ISSUE ID-34: Sandboxie-Plus EditAdminOnly Bypass via INI CRLF Injection CVE-2026-34458 (reported by sammy12342)
+- FIXED SECURITY ISSUE ID-35: issues with GetRawInputDeviceInfoSlave CVE-2026-34459 (reported by sammy12342)
+- FIXED SECURITY ISSUE ID-36: issue with RunSbieCtrl CVE-2026-34461 (reported by Yanchon918s)
+- FIXED SECURITY ISSUE ID-37: name validation in ProcessServer handlers CVE-2026-34462 (reported by Yanchon918s)
+- FIXED SECURITY ISSUE ID-38: parameter validation in NamedPipeServer CVE-2026-34464 (reported by Yanchon918s)
+- FIXED SECURITY ISSUE ID-39: Local Privilege Escalation via TOCTOU in UpdUtil Addon Installation CVE-2026-34596 (reported by sammy12342)
+
 
 
 ## [1.17.2 / 5.72.2] - 2026-02-18
@@ -248,7 +257,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Enhanced INI Editor: Major improvements to the "Edit INI Section" dialog.
-  - Dedicated Editor Settings: A new "Editor Settings" window for configuring all INI editor behavior.
+  - Dedicated Editor Settings: A new "Editor Settings" window for configuring all INI editor behaviour.
   - Setting Validation: INI keys are now visually validated against `SbieSettings.ini` to catch configuration errors. (1.16.2)
   - Contextual Tooltips: Tooltips for INI keys with metadata sourced from `SbieSettings.ini`, and configurable verbosity levels. (1.16.2, 1.16.4)
   - Auto-completion: Auto-completion for INI keys using `SbieSettings.ini` as a reference, with a consent-based opt-in system. (1.16.3)

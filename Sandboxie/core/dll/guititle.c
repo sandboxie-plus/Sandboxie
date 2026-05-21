@@ -155,6 +155,27 @@ _FX BOOLEAN Gui_ShouldCreateTitle(HWND hWnd)
         ULONG style = (ULONG)__sys_GetWindowLongW(hWnd, GWL_STYLE);
         if ((style & WS_CAPTION) == WS_CAPTION) {
 
+            //
+            // Check for custom titlebar - if the client area extends close to
+            // the top of the window, the application is rendering its own
+            // titlebar (e.g., VCL TCustomTitleBarPanel, Qt, Electron, etc.)
+            // and modifying the title causes excessive repainting.
+            //
+
+            RECT windowRect;
+            POINT clientOrigin = {0, 0};
+            if (__sys_GetWindowRect(hWnd, &windowRect) &&
+                __sys_ClientToScreen(hWnd, &clientOrigin)) {
+
+                int titleBarHeight = clientOrigin.y - windowRect.top;
+
+                // Standard titlebar is typically 20-40 pixels. If the gap is
+                // less than 10 pixels, it's a custom titlebar - skip modification.
+                if (titleBarHeight < 10)
+                    return FALSE;
+            }
+
+            // $Workaround$ - 3rd party fix
             WCHAR clsnm[256];
             UINT nChars = __sys_RealGetWindowClassW(hWnd, clsnm, sizeof(clsnm) - 1);
 

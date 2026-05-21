@@ -10,6 +10,41 @@
 
 ## Fixed vulnerabilities
 
+### SECURITY ISSUE ID-39 (reported by sammy12342)
+Local Privilege Escalation via TOCTOU in UpdUtil addon installation (CVE-2026-34596)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-38 (reported by Yanchon918s)
+Parameter validation in NamedPipeServer (CVE-2026-34464)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-37 (reported by Yanchon918s)
+Name validation in ProcessServer handlers (CVE-2026-34462)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-36 (reported by Yanchon918s)
+Issue with RunSbieCtrl (CVE-2026-34461)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-35 (reported by sammy12342)
+Issues with GetRawInputDeviceInfoSlave (CVE-2026-34459)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-34 (reported by sammy12342)
+EditAdminOnly bypass via INI CRLF injection in Sandboxie Plus (CVE-2026-34458)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-33 (reported by sammy12342)
+Local Denial of Service (DoS) vulnerability exploitable by sandboxed process (CVE-2026-32603)
+
+fixed in: 1.17.3 / 5.72.3
+
 ### SECURITY ISSUE ID-32
 EditPassword hash entropy loss: new passwords will be salted SHA-256 and base64-encoded
 - Note: existing passwords remain weak

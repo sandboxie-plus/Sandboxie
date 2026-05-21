@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2026 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -3698,9 +3698,12 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
 // WndHookNotifySlave
 //---------------------------------------------------------------------------
 
+typedef DWORD (*P_GetProcessIdOfThread)(HANDLE Thread);
 
 ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
 {
+    static P_GetProcessIdOfThread pGetProcessIdOfThread = (P_GetProcessIdOfThread)GetProcAddress(_Kernel32, "GetProcessIdOfThread");
+
     GUI_WND_HOOK_NOTIFY_REQ *req = (GUI_WND_HOOK_NOTIFY_REQ *)args->req_buf;
     GUI_WND_HOOK_NOTIFY_RPL *rpl = (GUI_WND_HOOK_NOTIFY_RPL *)args->rpl_buf;
 
@@ -3717,6 +3720,10 @@ ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
         HANDLE hThread = OpenThread(THREAD_SET_CONTEXT, FALSE, (DWORD)whk->hthread);
 		if (hThread)
 		{
+            DWORD ownerPid = pGetProcessIdOfThread ? pGetProcessIdOfThread(hThread) : -1;
+            if (ownerPid != args->pid)
+                rpl->status = STATUS_ACCESS_DENIED;
+            else
 #ifdef _WIN64
             if (whk->isWoW64)
             {
@@ -3735,11 +3742,15 @@ ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
                 if(!pNtQueueApcThread)
                     pNtQueueApcThread = (PNT_QUEUE_APC_THREAD)GetProcAddress(_Ntdll, "NtQueueApcThread");
 
-		        pNtQueueApcThread(hThread, ApcRoutine, (PVOID)whk->hthread , NULL, NULL);
+		        if (NT_SUCCESS(pNtQueueApcThread(hThread, ApcRoutine, (PVOID)whk->hthread , NULL, NULL)))
+                    rpl->status = STATUS_SUCCESS;
             }
             else
 #endif _WIN64
-			    QueueUserAPC((PAPCFUNC)whk->hproc, hThread, (ULONG_PTR)req->threadid);
+            {
+                if(QueueUserAPC((PAPCFUNC)whk->hproc, hThread, (ULONG_PTR)req->threadid))
+                    rpl->status = STATUS_SUCCESS;
+            }
 
 			CloseHandle(hThread);
 
@@ -3759,8 +3770,6 @@ ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
 
     LeaveCriticalSection(&m_SlavesLock);
 
-    rpl->status = STATUS_SUCCESS;
-
     args->rpl_len = sizeof(GUI_WND_HOOK_NOTIFY_RPL);
     
     return STATUS_SUCCESS;
@@ -3773,6 +3782,8 @@ ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
 
 ULONG GuiServer::WndHookRegisterSlave(SlaveArgs* args)
 {
+    static P_GetProcessIdOfThread pGetProcessIdOfThread = (P_GetProcessIdOfThread)GetProcAddress(_Kernel32, "GetProcessIdOfThread");
+
     GUI_WND_HOOK_REGISTER_REQ* req = (GUI_WND_HOOK_REGISTER_REQ*)args->req_buf;
     GUI_WND_HOOK_REGISTER_RPL* rpl = (GUI_WND_HOOK_REGISTER_RPL*)args->rpl_buf;
 
@@ -3792,6 +3803,15 @@ ULONG GuiServer::WndHookRegisterSlave(SlaveArgs* args)
     
     if (req->hthread && req->hproc) // register
     {
+        // Validate thread ownership - reject if hthread is not in the caller's process
+        HANDLE hThread = OpenThread(THREAD_QUERY_LIMITED_INFORMATION, FALSE, req->hthread);
+        if (!hThread) 
+            return STATUS_UNSUCCESSFUL;
+        DWORD ownerPid = pGetProcessIdOfThread ? pGetProcessIdOfThread(hThread) : -1;
+        CloseHandle(hThread);
+        if (ownerPid != args->pid)
+            return STATUS_ACCESS_DENIED;
+
         if (!whk) // add if not already added
         {
             whk = (WND_HOOK *)HeapAlloc(GetProcessHeap(), 0, sizeof(WND_HOOK));

@@ -2641,6 +2641,57 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
              <string>Sandboxie.ini</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_19">
+             <item row="2" column="2">
+              <widget class="QLabel" name="label_31">
+               <property name="text">
+                <string>In the below list you can add paths to configuration inis of portable boxes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="3" rowspan="2">
+              <widget class="QPushButton" name="btnSetPassword">
+               <property name="text">
+                <string>Change Password</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="2">
+              <widget class="QCheckBox" name="chkAdminOnly">
+               <property name="text">
+                <string>Only Administrator user accounts can make changes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="3">
+              <widget class="QToolButton" name="btnAddBox">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Add Portable Box</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="2">
+              <widget class="QCheckBox" name="chkPassRequired">
+               <property name="text">
+                <string>Password must be entered in order to make changes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="2">
+              <widget class="QLabel" name="label_30">
+               <property name="text">
+                <string>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
              <item row="6" column="3">
               <widget class="QToolButton" name="btnRemBox">
                <property name="sizePolicy">
@@ -2663,36 +2714,10 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                </column>
               </widget>
              </item>
-             <item row="10" column="2">
-              <widget class="QCheckBox" name="chkPassRequired">
+             <item row="12" column="2">
+              <widget class="QCheckBox" name="chkAdminOnlyFP">
                <property name="text">
-                <string>Password must be entered in order to make changes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0" colspan="4">
-              <widget class="QLabel" name="lblIni">
-               <property name="font">
-                <font>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
-               <property name="text">
-                <string>Sandbox Configuration</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="3">
-              <widget class="QToolButton" name="btnMkBox">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Create Portable Box</string>
+                <string>Only Administrator user accounts can use Pause Forcing Programs command</string>
                </property>
               </widget>
              </item>
@@ -2710,7 +2735,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
               </spacer>
              </item>
              <item row="3" column="3">
-              <widget class="QToolButton" name="btnAddBox">
+              <widget class="QToolButton" name="btnMkBox">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -2718,21 +2743,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>Import Portable Box</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="2">
-              <widget class="QCheckBox" name="chkAdminOnly">
-               <property name="text">
-                <string>Only Administrator user accounts can make changes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="2">
-              <widget class="QCheckBox" name="chkAdminOnlyFP">
-               <property name="text">
-                <string>Only Administrator user accounts can use Pause Forcing Programs command</string>
+                <string>Create Portable Box</string>
                </property>
               </widget>
              </item>
@@ -2749,10 +2760,43 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                </property>
               </spacer>
              </item>
-             <item row="10" column="3" rowspan="2">
-              <widget class="QPushButton" name="btnSetPassword">
+             <item row="5" column="3">
+              <widget class="QToolButton" name="btnAddRoot">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
-                <string>Change Password</string>
+                <string>Add Portable Root</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="2">
+              <widget class="QCheckBox" name="chkClearPass">
+               <property name="text">
+                <string>Clear password when main window becomes hidden</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="chkWatchConfig">
+               <property name="text">
+                <string>Watch Sandboxie.ini for changes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0" colspan="4">
+              <widget class="QLabel" name="lblIni">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Sandbox Configuration</string>
                </property>
               </widget>
              </item>
@@ -2766,50 +2810,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                </property>
                <property name="text">
                 <string>Config protection</string>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="2">
-              <widget class="QCheckBox" name="chkClearPass">
-               <property name="text">
-                <string>Clear password when main window becomes hidden</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="2">
-              <widget class="QLabel" name="label_30">
-               <property name="text">
-                <string>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <widget class="QLabel" name="label_31">
-               <property name="text">
-                <string>In the below list you can add paths to configuration inis of portable boxes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="chkWatchConfig">
-               <property name="text">
-                <string>Watch Sandboxie.ini for changes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="3">
-              <widget class="QToolButton" name="btnAddRoot">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Add Portable Root</string>
                </property>
               </widget>
              </item>

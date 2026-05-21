@@ -3188,6 +3188,7 @@ void CSettingsWindow::LoadCertificate(QString CertPath)
 	}
 }
 
+#define GET_DAYS_FROM_SEC(sec) (((sec) + (60*60*24 - 1)) / (60*60*24))
 
 void CSettingsWindow::UpdateCert()
 {
@@ -3222,7 +3223,7 @@ void CSettingsWindow::UpdateCert()
 			QString infoMsg = tr("This supporter certificate has expired, please <a href=\"%1\">get an updated certificate</a>.").arg(ReNewUrl);
 			if (g_CertInfo.active) {
 				if (g_CertInfo.grace_period)
-					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg((g_CertInfo.expirers_in_sec + 30*60*60*24) / (60*60*24)));
+					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg(GET_DAYS_FROM_SEC(g_CertInfo.expirers_in_sec + 30*60*60*24)));
 				else if (!g_CertInfo.outdated) // must be an expiren medium or large cert on an old build
 					infoMsg.append(tr("<br /><font color='red'>For the current build Plus features remain enabled</font>, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database."));
 			} else
@@ -3232,7 +3233,7 @@ void CSettingsWindow::UpdateCert()
 		}
 		else {
 			if (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30)) {
-				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"%2\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60*60*24)).arg(ReNewUrl));
+				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"%2\">get an updated certificate</a>.").arg(GET_DAYS_FROM_SEC(g_CertInfo.expirers_in_sec)).arg(ReNewUrl));
 				ui.lblCertExp->setVisible(true);
 			}
 			/*#ifdef _DEBUG
@@ -3267,9 +3268,9 @@ void CSettingsWindow::UpdateCert()
 
 		QString ExpInfo;
 		if(g_CertInfo.expirers_in_sec > 0)
-			ExpInfo = tr("Expires in: %1 days").arg(g_CertInfo.expirers_in_sec / (60*60*24));
+			ExpInfo = tr("Expires in: %1 days").arg(GET_DAYS_FROM_SEC(g_CertInfo.expirers_in_sec));
 		else if(g_CertInfo.expirers_in_sec < 0)
-			ExpInfo = tr("Expired: %1 days ago").arg(-g_CertInfo.expirers_in_sec / (60*60*24));
+			ExpInfo = tr("Expired: %1 days ago").arg(GET_DAYS_FROM_SEC(-g_CertInfo.expirers_in_sec));
 		if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
 			ExpInfo += tr("; eligible Patreons can always <a href=\"https://xanasoft.com/get-supporter-certificate/\">obtain an updated certificate</a> from xanasoft.com");
 		ui.lblCert->setText(ExpInfo);

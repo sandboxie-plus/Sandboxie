@@ -22,6 +22,8 @@ jobs:
   Build_x64_Qt5:
     runs-on: windows-2022
     timeout-minutes: 45
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout code
@@ -55,7 +57,7 @@ jobs:
     #
 
 #      - name: Install Qt6 x64
-#        uses: jurplel/install-qt-action@v4.3.0
+#        uses: jurplel/install-qt-action@v4.3.1
 #        with:
 #      #    version: '6.2.4'
 #          version: '6.3.1'
@@ -133,6 +135,8 @@ jobs:
   Build_x86_Qt5:
     runs-on: windows-2022
     timeout-minutes: 45
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout code

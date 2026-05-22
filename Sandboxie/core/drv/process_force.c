@@ -30,11 +30,19 @@
 #include "token.h"
 #include "common/pattern.h"
 #include "common/my_version.h"
-#define BREAKOUT_MATCH_NO_CRT
-#define BREAKOUT_MATCH_NO_QUERY_HELPERS
-#include "common/breakout_match.h"
-#undef BREAKOUT_MATCH_NO_CRT
-#undef BREAKOUT_MATCH_NO_QUERY_HELPERS
+#define PROGRAM_CONTROL_RULE_NO_CRT
+#define PROGRAM_CONTROL_RULE_NO_QUERY_HELPERS
+#include "common/program_control_rule.h"
+#undef PROGRAM_CONTROL_RULE_NO_CRT
+#undef PROGRAM_CONTROL_RULE_NO_QUERY_HELPERS
+
+static BOOLEAN Process_UseRuleExtensions(const WCHAR *boxname, const WCHAR *setting)
+{
+    if (!ProgramControl_IsRuleExtensionSetting(setting))
+        return TRUE;
+
+    return Conf_Get_Boolean(boxname, L"UseForceBreakoutRuleExtensions", 0, FALSE);
+}
 
 
 //---------------------------------------------------------------------------
@@ -62,6 +70,10 @@ typedef struct _FORCE_ENTRY {
     ULONG len;
     WCHAR *buf;
     PATTERN *pat;
+    BOOLEAN has_priority;
+    LONG priority;
+    BOOLEAN has_recursive;
+    LONG recursive_depth;
 
 } FORCE_ENTRY;
 
@@ -127,7 +139,12 @@ static BOX *Process_CheckForceFolder(
     const WCHAR *prioritizeName, const WCHAR *prioritizePath);
 
 static BOOLEAN Process_CheckForceProcessList(
-    BOX *box, LIST* ForceProcess, const WCHAR* name, const WCHAR* path);
+    BOX *box, LIST* ForceProcess, const WCHAR* name, const WCHAR* path,
+    BOOLEAN *outHasPriority, LONG *outPriority);
+
+static BOOLEAN Process_CheckForceFolderList(
+    BOX *box, LIST* ForceFolder, ULONG prefix_len, const WCHAR *path,
+    BOOLEAN *outHasPriority, LONG *outPriority);
 
 static BOOLEAN Process_CheckBreakoutProcessList(
     BOX *box, LIST* BreakoutProcess, const WCHAR* name, const WCHAR* path);
@@ -141,11 +158,20 @@ static FORCE_BOX* Process_FindForceBoxByName(
 static BOOLEAN Process_GetMatchedBreakoutTarget(
     BOX *box, const WCHAR *processName, const WCHAR *folderScopeName, const WCHAR *path, WCHAR *outTarget, ULONG outTargetCch);
 
+static BOOLEAN Process_ShouldReplaceBreakoutTarget(
+    BOOLEAN hasCurrentMatch,
+    BOOLEAN currentHasPriority,
+    LONG currentPriority,
+    BOOLEAN candidateHasPriority,
+    LONG candidatePriority);
+
 static BOOLEAN Process_MatchBreakoutProcessRuleRaw(
     BOX *box, const WCHAR *rule, const WCHAR *name, const WCHAR *path);
 
+static BOOLEAN Process_IsPathLikeBreakoutRule(const WCHAR *rule);
+
 static BOOLEAN Process_MatchBreakoutFolderRuleRaw(
-    BOX *box, const WCHAR *rule, const WCHAR *name, const WCHAR *path);
+    BOX *box, const SBIE_NORMALIZED_RULE *normalized, const WCHAR *name, const WCHAR *path);
 
 static BOOLEAN Process_FindMatchingBreakoutFolderRule(
     BOX *box, const WCHAR *name, const WCHAR *path, BOOLEAN requireTarget,
@@ -157,10 +183,33 @@ static WCHAR* Process_NormalizeBreakoutRulePath(
     BOX *box, const WCHAR *rule, const WCHAR *setting, ULONG *out_len);
 
 static BOX *Process_CheckForceProcess(
-    LIST *boxes, const WCHAR *name, const WCHAR* path, BOOLEAN alert, ULONG *IsAlert, const WCHAR *ParentName, const WCHAR *ParentPath, BOOLEAN *pForcedByChildren);
+    LIST *boxes, const WCHAR *name, const WCHAR* path, const WCHAR *docPath, BOOLEAN alert, ULONG *IsAlert, const WCHAR *ParentName, const WCHAR *ParentPath, BOOLEAN *pForcedByChildren);
+
+static BOOLEAN Process_GetBreakoutDocumentPriority(
+    BOX *box, const WCHAR *scopeName, const WCHAR *docPath,
+    BOOLEAN *outHasPriority, LONG *outPriority);
+
+static BOOLEAN Process_GetBreakoutDocumentTarget(
+    BOX *box, const WCHAR *scopeName, const WCHAR *docPath,
+    WCHAR *outTarget, ULONG outTargetCch);
 
 static BOOLEAN Process_IsPrioritizedBreakoutMatch(
     BOX *box, const WCHAR *processName, const WCHAR *folderScopeName, const WCHAR *path);
+
+static BOOLEAN Process_GetMatchedBreakoutPriority(
+    BOX *box, const WCHAR *processName, const WCHAR *folderScopeName, const WCHAR *path,
+    BOOLEAN *outHasPriority, LONG *outPriority);
+
+static BOOLEAN Process_IsRuleImageScoped(const WCHAR *rawRule);
+
+static BOOLEAN Process_HasImageScopedBreakoutMatch(
+    BOX *box, const WCHAR *processName, const WCHAR *folderScopeName, const WCHAR *path);
+
+/*
+ * These breakout helpers stay driver-local. They operate on BOX/LIST/FORCE_ENTRY
+ * state in kernel memory and are reused by multiple force-capture entry points.
+ * Keep only pure parsing and arbitration helpers in program_control_rule.h.
+ */
 
 static void Process_CheckAlertFolder(
 	LIST *boxes, const WCHAR *path, ULONG *IsAlert);
@@ -176,11 +225,9 @@ static BOOLEAN Process_CheckMoTW(const WCHAR *path);
 static BOOLEAN Process_GetSettingsForImageName_Bool(
     BOX *box, const WCHAR *imageName, const WCHAR *setting, BOOLEAN defval);
 
-
 //---------------------------------------------------------------------------
 // Process_GetForcedStartBox
 //---------------------------------------------------------------------------
-
 
 _FX BOX *Process_GetForcedStartBox(
     HANDLE ProcessId, HANDLE ParentId, const WCHAR *ImagePath, BOOLEAN* pHostInject, const WCHAR *pSidString, BOOLEAN *pForcedByChildren)
@@ -320,15 +367,14 @@ _FX BOX *Process_GetForcedStartBox(
 
             box = Process_CheckForceFolder(
                         &boxes, ImagePath2, force_alert, &alert, ParentName ? ParentName : ImageName, ImagePath2);
-
             if ((! box) && (! alert)) {
                 box = Process_CheckForceProcess(
-                    &boxes, ImageName, ImagePath2, force_alert, &alert, ParentName, ParentPath, pForcedByChildren);
+                    &boxes, ImageName, ImagePath2, DocArg, force_alert, &alert, ParentName, ParentPath, pForcedByChildren);
             }
 
             if ((! box) && CurDir && !is_start_exe && (! alert)) {
                 box = Process_CheckForceFolder(
-                    &boxes, CurDir, force_alert, &alert, ParentName ? ParentName : ImageName, ImagePath2);
+                        &boxes, CurDir, force_alert, &alert, ParentName ? ParentName : ImageName, ImagePath2);
             }
 
             if ((! box) && DocArg && !is_start_exe && (! alert)) {
@@ -804,27 +850,45 @@ _FX void Process_GetDocArg(
         if (len) {
 
             WCHAR *doc;
+            WCHAR *doc_end;
+            WCHAR saved_end = 0;
 
-            // Remove any leading spaces or quotes
-            while (len && (*ptr == L' ' || *ptr == L'"')) {
+            while (len && *ptr == L' ') {
                 --len;
                 ++ptr;
             }
 
-
-            // Now strip any trailing backslashes, quotes or spaces
-            while (len && (ptr[len - 1] == L'\\' || ptr[len - 1] == L' ' || ptr[len - 1] == L'"')) {
+            if (len && *ptr == L'"') {
                 --len;
-                ptr[len] = 0;
+                ++ptr;
+
+                doc = ptr;
+                doc_end = ptr;
+                while (len && *doc_end != L'"') {
+                    --len;
+                    ++doc_end;
+                }
+            } else {
+                doc = ptr;
+                doc_end = ptr;
+                while (len && *doc_end != L' ' && *doc_end != L'\t') {
+                    --len;
+                    ++doc_end;
+                }
             }
 
-            doc = ptr;
-            // DbgPrint("After Doc Trim: [%S]\n", doc);
+            saved_end = *doc_end;
+            *doc_end = L'\0';
 
-            //
-            // now that we've stripped any quotes, leading spaces
-            // and suffix backslashes, get a canonical path
-            //
+            // Strip trailing separators from the extracted token only.
+            while (*doc) {
+                SIZE_T doc_len = wcslen(doc);
+                if (!doc_len)
+                    break;
+                if (doc[doc_len - 1] != L'\\' && doc[doc_len - 1] != L' ' && doc[doc_len - 1] != L'"')
+                    break;
+                doc[doc_len - 1] = L'\0';
+            }
 
             if (*doc) {
 
@@ -835,6 +899,8 @@ _FX void Process_GetDocArg(
                     *pDocArgLen = 0;
                 }
             }
+
+            *doc_end = saved_end;
         }
 
         Mem_Free(Buffer, Length);
@@ -1040,6 +1106,7 @@ _FX void Process_AddForceFolders(
     const WCHAR *value;
     FORCE_ENTRY *folder;
     const BOOLEAN breakout_setting = (_wcsicmp(Setting, L"BreakoutFolder") == 0 || _wcsicmp(Setting, L"BreakoutProcess") == 0);
+    const BOOLEAN use_rule_extensions = Process_UseRuleExtensions(section, Setting);
 
     index2 = 0;
 
@@ -1050,22 +1117,25 @@ _FX void Process_AddForceFolders(
         WCHAR *value_copy;
         WCHAR *value_norm;
         ULONG value_norm_len;
+        SBIE_NORMALIZED_RULE normalized;
 
         value = Conf_Get(section, Setting, index2);
         if (! value)
             break;
         ++index2;
 
-        value_copy = NULL;
+        value_copy = Mem_AllocString(Driver_Pool, value);
+        if (!value_copy)
+            continue;
+
+        if (!ProgramControl_ParseRuleExtensionsInPlace(value_copy, &normalized, use_rule_extensions)) {
+            Mem_FreeString(value_copy);
+            continue;
+        }
+
+        value = normalized.base_rule;
+
         if (breakout_setting) {
-            const WCHAR *sep = wcschr(value, L'|');
-            if (sep && sep > value && sep[1]) {
-                value_copy = Mem_AllocString(Driver_Pool, value);
-                if (!value_copy)
-                    continue;
-                value_copy[sep - value] = L'\0';
-                value = value_copy;
-            }
 
             // Accept drive-relative wildcard forms like "C:*\firefox.exe"
             // by normalizing to rooted DOS form "C:\*\firefox.exe".
@@ -1155,6 +1225,11 @@ _FX void Process_AddForceFolders(
             Mem_Free(buf, buf_len);
             break;
         }
+
+        folder->has_priority = normalized.has_priority ? TRUE : FALSE;
+        folder->priority = normalized.has_priority ? normalized.priority : -1;
+        folder->has_recursive = normalized.has_recursive ? TRUE : FALSE;
+        folder->recursive_depth = normalized.has_recursive ? normalized.recursive_depth : -1;
 
         if (wcschr(buf, L'*') || wcschr(buf, L'?')) {
 
@@ -1452,10 +1527,19 @@ _FX BOX *Process_CheckBoxPath(LIST *boxes, const WCHAR *path)
 
 
 _FX BOOLEAN Process_CheckForceFolderList(
-    BOX *box, LIST* ForceFolder, ULONG prefix_len, const WCHAR *path)
+    BOX *box, LIST* ForceFolder, ULONG prefix_len, const WCHAR *path,
+    BOOLEAN *outHasPriority, LONG *outPriority)
 {
     ULONG path_lwr_len = 0;
     WCHAR *path_lwr = NULL;
+    BOOLEAN matched = FALSE;
+    BOOLEAN hasPriority = FALSE;
+    LONG bestPriority = -1;
+
+    if (outHasPriority)
+        *outHasPriority = FALSE;
+    if (outPriority)
+        *outPriority = -1;
 
     FORCE_ENTRY *folder = List_Head(ForceFolder);
     while (folder) {
@@ -1492,14 +1576,43 @@ _FX BOOLEAN Process_CheckForceFolderList(
             if (folder_len && prefix_len >= folder_len &&
                     path[folder_len] == L'\\' &&
                     Box_NlsStrCmp(path, folder->buf, folder_len) == 0) {
+                if (folder->has_recursive && folder->recursive_depth >= 0) {
+                    const WCHAR *dir_begin = path + folder_len;
+                    const WCHAR *dir_end = path + prefix_len;
+                    LONG depth = 0;
 
-                match = TRUE;
+                    if (*dir_begin == L'\\')
+                        ++dir_begin;
+
+                    if (dir_begin < dir_end) {
+                        const WCHAR *p = dir_begin;
+                        depth = 1;
+                        while (p < dir_end) {
+                            if (*p == L'\\')
+                                ++depth;
+                            ++p;
+                        }
+                    }
+
+                    if (depth <= folder->recursive_depth)
+                        match = TRUE;
+                }
+                else {
+                    match = TRUE;
+                }
             }
         }
 
         if (match) {
+            matched = TRUE;
 
-            break;
+            if (folder->has_priority && (!hasPriority || folder->priority < bestPriority)) {
+                hasPriority = TRUE;
+                bestPriority = folder->priority;
+            }
+
+            if (!outHasPriority && !outPriority)
+                break;
         }
 
         folder = List_Next(folder);
@@ -1508,9 +1621,14 @@ _FX BOOLEAN Process_CheckForceFolderList(
     if (path_lwr)
         Mem_FreeString(path_lwr);
 
-    if (folder) // found
-        return TRUE;
-    return FALSE;
+    if (hasPriority) {
+        if (outHasPriority)
+            *outHasPriority = TRUE;
+        if (outPriority)
+            *outPriority = bestPriority;
+    }
+
+    return matched;
 }
 
 
@@ -1524,10 +1642,6 @@ _FX BOOLEAN Process_IsPrioritizedBreakoutMatch(
 {
     BOOLEAN breakout_match = FALSE;
     LIST BreakoutProcess;
-    const WCHAR *scope_name = (folderScopeName && *folderScopeName) ? folderScopeName : processName;
-
-    if (!Process_GetSettingsForImageName_Bool(box, scope_name, L"PrioritizeBreakoutOverForce", FALSE))
-        return FALSE;
 
     List_Init(&BreakoutProcess);
 
@@ -1552,6 +1666,239 @@ finish:
     Process_DeleteForceDataFolders(&BreakoutProcess);
 
     return breakout_match;
+}
+
+static BOOLEAN Process_GetMatchedBreakoutPriority(
+    BOX *box, const WCHAR *processName, const WCHAR *folderScopeName, const WCHAR *path,
+    BOOLEAN *outHasPriority, LONG *outPriority)
+{
+    const WCHAR *scopeName;
+    const WCHAR *value;
+    ULONG index;
+    BOOLEAN matched = FALSE;
+    BOOLEAN hasPriority = FALSE;
+    LONG bestPriority = -1;
+    BOOLEAN use_breakout_process_extensions;
+    BOOLEAN use_breakout_folder_extensions;
+
+    if (outHasPriority)
+        *outHasPriority = FALSE;
+    if (outPriority)
+        *outPriority = -1;
+
+    if (!box || !processName || !*processName || !path || !*path)
+        return FALSE;
+
+    use_breakout_process_extensions = Process_UseRuleExtensions(box->name, L"BreakoutProcess");
+    use_breakout_folder_extensions = Process_UseRuleExtensions(box->name, L"BreakoutFolder");
+
+    scopeName = (folderScopeName && *folderScopeName) ? folderScopeName : processName;
+
+    index = 0;
+    while (1) {
+        WCHAR *ruleCopy;
+        WCHAR *rule;
+        SBIE_NORMALIZED_RULE normalized;
+
+        value = Conf_Get(box->name, L"BreakoutProcess", index);
+        if (!value)
+            break;
+        ++index;
+
+        ruleCopy = Mem_AllocString(Driver_Pool, value);
+        if (!ruleCopy)
+            continue;
+
+        rule = ProgramControl_MatchImageScopeAndGetValue(ruleCopy, processName, Process_BreakoutMatchImage, box);
+        if (!rule) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (!ProgramControl_ParseRuleExtensionsInPlace(rule, &normalized, use_breakout_process_extensions)) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if ((wcschr(normalized.base_rule, L'*') || wcschr(normalized.base_rule, L'?')) && !Process_IsPathLikeBreakoutRule(normalized.base_rule)) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (Process_MatchBreakoutProcessRuleRaw(box, normalized.base_rule, processName, path)) {
+            matched = TRUE;
+            if (normalized.has_priority && (!hasPriority || normalized.priority < bestPriority)) {
+                hasPriority = TRUE;
+                bestPriority = normalized.priority;
+            }
+        }
+
+        Mem_FreeString(ruleCopy);
+    }
+
+    index = 0;
+    while (1) {
+        WCHAR *ruleCopy;
+        WCHAR *rule;
+        SBIE_NORMALIZED_RULE normalized;
+
+        value = Conf_Get(box->name, L"BreakoutFolder", index);
+        if (!value)
+            break;
+        ++index;
+
+        ruleCopy = Mem_AllocString(Driver_Pool, value);
+        if (!ruleCopy)
+            continue;
+
+        rule = ProgramControl_MatchImageScopeAndGetValue(ruleCopy, scopeName, Process_BreakoutMatchImage, box);
+        if (!rule) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (!ProgramControl_ParseRuleExtensionsInPlace(rule, &normalized, use_breakout_folder_extensions)) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (Process_MatchBreakoutFolderRuleRaw(box, &normalized, scopeName, path)) {
+            matched = TRUE;
+            if (normalized.has_priority && (!hasPriority || normalized.priority < bestPriority)) {
+                hasPriority = TRUE;
+                bestPriority = normalized.priority;
+            }
+        }
+
+        Mem_FreeString(ruleCopy);
+    }
+
+    if (hasPriority) {
+        if (outHasPriority)
+            *outHasPriority = TRUE;
+        if (outPriority)
+            *outPriority = bestPriority;
+    }
+
+    return matched;
+}
+
+static BOOLEAN Process_IsRuleImageScoped(const WCHAR *rawRule)
+{
+    const WCHAR *comma;
+    const WCHAR *ext;
+
+    if (!rawRule || !*rawRule)
+        return FALSE;
+
+    comma = wcschr(rawRule, L',');
+    if (!comma)
+        return FALSE;
+
+    ext = wcschr(rawRule, L'|');
+    if (!ext)
+        return TRUE;
+
+    return (comma < ext) ? TRUE : FALSE;
+}
+
+static BOOLEAN Process_HasImageScopedBreakoutMatch(
+    BOX *box, const WCHAR *processName, const WCHAR *folderScopeName, const WCHAR *path)
+{
+    ULONG index;
+    const WCHAR *scopeName;
+    const WCHAR *value;
+    BOOLEAN use_breakout_process_extensions;
+    BOOLEAN use_breakout_folder_extensions;
+
+    if (!box || !processName || !*processName || !path || !*path)
+        return FALSE;
+
+    use_breakout_process_extensions = Process_UseRuleExtensions(box->name, L"BreakoutProcess");
+    use_breakout_folder_extensions = Process_UseRuleExtensions(box->name, L"BreakoutFolder");
+
+    scopeName = (folderScopeName && *folderScopeName) ? folderScopeName : processName;
+
+    index = 0;
+    while (1) {
+        WCHAR *ruleCopy;
+        WCHAR *rule;
+        SBIE_NORMALIZED_RULE normalized;
+
+        value = Conf_Get(box->name, L"BreakoutProcess", index);
+        if (!value)
+            break;
+        ++index;
+
+        if (!Process_IsRuleImageScoped(value))
+            continue;
+
+        ruleCopy = Mem_AllocString(Driver_Pool, value);
+        if (!ruleCopy)
+            continue;
+
+        rule = ProgramControl_MatchImageScopeAndGetValue(ruleCopy, processName, Process_BreakoutMatchImage, box);
+        if (!rule) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (!ProgramControl_ParseRuleExtensionsInPlace(rule, &normalized, use_breakout_process_extensions)) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if ((wcschr(normalized.base_rule, L'*') || wcschr(normalized.base_rule, L'?')) && !Process_IsPathLikeBreakoutRule(normalized.base_rule)) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (Process_MatchBreakoutProcessRuleRaw(box, normalized.base_rule, processName, path)) {
+            Mem_FreeString(ruleCopy);
+            return TRUE;
+        }
+
+        Mem_FreeString(ruleCopy);
+    }
+
+    index = 0;
+    while (1) {
+        WCHAR *ruleCopy;
+        WCHAR *rule;
+        SBIE_NORMALIZED_RULE normalized;
+
+        value = Conf_Get(box->name, L"BreakoutFolder", index);
+        if (!value)
+            break;
+        ++index;
+
+        if (!Process_IsRuleImageScoped(value))
+            continue;
+
+        ruleCopy = Mem_AllocString(Driver_Pool, value);
+        if (!ruleCopy)
+            continue;
+
+        rule = ProgramControl_MatchImageScopeAndGetValue(ruleCopy, scopeName, Process_BreakoutMatchImage, box);
+        if (!rule) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (!ProgramControl_ParseRuleExtensionsInPlace(rule, &normalized, use_breakout_folder_extensions)) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (Process_MatchBreakoutFolderRuleRaw(box, &normalized, scopeName, path)) {
+            Mem_FreeString(ruleCopy);
+            return TRUE;
+        }
+
+        Mem_FreeString(ruleCopy);
+    }
+
+    return FALSE;
 }
 
 
@@ -1680,14 +2027,31 @@ _FX BOX *Process_CheckForceFolder(
 
     box = List_Head(boxes);
     while (box) {
+        BOOLEAN force_has_priority = FALSE;
+        LONG force_priority = -1;
 
-        if (Process_CheckForceFolderList(box->box, &box->ForceFolder, prefix_len, path)) {
+        if (Process_CheckForceFolderList(box->box, &box->ForceFolder, prefix_len, path, &force_has_priority, &force_priority)) {
 
-            BOOLEAN prioritize_breakout = Process_GetSettingsForImageName_Bool(box->box, folder_scope_name, L"PrioritizeBreakoutOverForce", FALSE);
+            BOOLEAN image_scoped_breakout = Process_HasImageScopedBreakoutMatch(box->box, name, folder_scope_name, breakout_path);
+            BOOLEAN effective_prioritize_breakout = FALSE;
+            BOOLEAN breakout_has_priority = FALSE;
+            LONG breakout_priority = -1;
             BOOLEAN has_target_override = FALSE;
             WCHAR target_box[BOXNAME_COUNT] = { 0 };
 
-            if (prioritize_breakout)
+            Process_GetMatchedBreakoutPriority(box->box, name, folder_scope_name, breakout_path, &breakout_has_priority, &breakout_priority);
+
+            effective_prioritize_breakout = SbiePolicy_ShouldPrioritizeBreakout(
+                FALSE,
+                force_has_priority ? 1 : 0,
+                force_priority,
+                breakout_has_priority ? 1 : 0,
+                breakout_priority) ? TRUE : FALSE;
+
+            // No-priority behavior must remain legacy (1.17.6): force wins.
+            (void)image_scoped_breakout;
+
+            if (effective_prioritize_breakout)
                 has_target_override = Process_GetMatchedBreakoutTarget(box->box, name, folder_scope_name, breakout_path, target_box, BOXNAME_COUNT);
 
             if (has_target_override) {
@@ -1701,7 +2065,7 @@ _FX BOX *Process_CheckForceFolder(
                 }
             }
 
-            if (prioritize_breakout && !has_target_override && Process_IsPrioritizedBreakoutMatch(box->box, name, folder_scope_name, breakout_path)) {
+            if (effective_prioritize_breakout && !has_target_override && Process_IsPrioritizedBreakoutMatch(box->box, name, folder_scope_name, breakout_path)) {
                 box = List_Next(box);
                 continue;
             }
@@ -1727,7 +2091,8 @@ _FX BOX *Process_CheckForceFolder(
 
 
 _FX BOOLEAN Process_CheckForceProcessList(
-    BOX *box, LIST* ForceProcess, const WCHAR* name, const WCHAR* path)
+    BOX *box, LIST* ForceProcess, const WCHAR* name, const WCHAR* path,
+    BOOLEAN *outHasPriority, LONG *outPriority)
 {
     //FORCE_PROCESS *process = List_Head(ForceProcess);
     //while (process) {
@@ -1743,6 +2108,14 @@ _FX BOOLEAN Process_CheckForceProcessList(
 
     ULONG path_lwr_len = 0;
     WCHAR *path_lwr = NULL;
+    BOOLEAN matched = FALSE;
+    BOOLEAN hasPriority = FALSE;
+    LONG bestPriority = -1;
+
+    if (outHasPriority)
+        *outHasPriority = FALSE;
+    if (outPriority)
+        *outPriority = -1;
 
     FORCE_ENTRY *folder = List_Head(ForceProcess);
     while (folder) {
@@ -1770,7 +2143,6 @@ _FX BOOLEAN Process_CheckForceProcessList(
 
         } else {
 
-            ULONG folder_len = folder->len;
             if (Process_MatchImage(box, folder->buf, 0, name, 1)) {
 
                 match = TRUE;
@@ -1778,8 +2150,15 @@ _FX BOOLEAN Process_CheckForceProcessList(
         }
 
         if (match) {
+            matched = TRUE;
 
-            break;
+            if (folder->has_priority && (!hasPriority || folder->priority < bestPriority)) {
+                hasPriority = TRUE;
+                bestPriority = folder->priority;
+            }
+
+            if (!outHasPriority && !outPriority)
+                break;
         }
 
         folder = List_Next(folder);
@@ -1788,14 +2167,19 @@ _FX BOOLEAN Process_CheckForceProcessList(
     if (path_lwr)
         Mem_FreeString(path_lwr);
 
-    if (folder) // found
-        return TRUE;
-    return FALSE;
+    if (hasPriority) {
+        if (outHasPriority)
+            *outHasPriority = TRUE;
+        if (outPriority)
+            *outPriority = bestPriority;
+    }
+
+    return matched;
 }
 
 static BOOLEAN Process_IsPathLikeBreakoutRule(const WCHAR *rule)
 {
-    return (rule && (wcschr(rule, L'\\') || wcschr(rule, L'/')));
+    return ProgramControl_RuleLooksLikePath(rule) ? TRUE : FALSE;
 }
 
 static BOOLEAN Process_MatchBreakoutProcessRuleRaw(
@@ -1846,12 +2230,17 @@ static BOOLEAN Process_MatchBreakoutProcessRuleRaw(
 }
 
 static BOOLEAN Process_MatchBreakoutFolderRuleRaw(
-    BOX *box, const WCHAR *rule, const WCHAR *name, const WCHAR *path)
+    BOX *box, const SBIE_NORMALIZED_RULE *normalized, const WCHAR *name, const WCHAR *path)
 {
+    const WCHAR *rule;
     const WCHAR *ptr;
     ULONG prefix_len;
     BOOLEAN match = FALSE;
 
+    if (!normalized)
+        return FALSE;
+
+    rule = normalized->base_rule;
     if (!rule || !*rule)
         return FALSE;
 
@@ -1892,6 +2281,44 @@ static BOOLEAN Process_MatchBreakoutFolderRuleRaw(
             Pattern_Free(pat);
         if (path_lwr)
             Mem_FreeString(path_lwr);
+
+        // Apply Recursive depth limit for wildcard rules that matched.
+        // Find the base folder: the last backslash before any wildcard
+        // character in match_rule. Count directory levels from there
+        // to prefix_len to determine depth.
+        if (match && normalized->has_recursive && normalized->recursive_depth >= 0) {
+            const WCHAR *wc_scan = match_rule;
+            const WCHAR *wc_last_sep = NULL;
+            while (*wc_scan && *wc_scan != L'*' && *wc_scan != L'?') {
+                if (*wc_scan == L'\\')
+                    wc_last_sep = wc_scan;
+                ++wc_scan;
+            }
+            if (wc_last_sep) {
+                ULONG base_len = (ULONG)(wc_last_sep - match_rule);
+                if (base_len < prefix_len) {
+                    const WCHAR *dir_begin = path + base_len;
+                    const WCHAR *dir_end = path + prefix_len;
+                    LONG depth = 0;
+
+                    if (*dir_begin == L'\\')
+                        ++dir_begin;
+
+                    if (dir_begin < dir_end) {
+                        const WCHAR *dp = dir_begin;
+                        depth = 1;
+                        while (dp < dir_end) {
+                            if (*dp == L'\\')
+                                ++depth;
+                            ++dp;
+                        }
+                    }
+
+                    if (depth > normalized->recursive_depth)
+                        match = FALSE;
+                }
+            }
+        }
     }
     else {
         ULONG rule_len = (ULONG)wcslen(match_rule);
@@ -1901,7 +2328,30 @@ static BOOLEAN Process_MatchBreakoutFolderRuleRaw(
         if (rule_len && prefix_len >= rule_len &&
             path[rule_len] == L'\\' &&
             Box_NlsStrCmp(path, match_rule, rule_len) == 0) {
-            match = TRUE;
+            if (normalized->has_recursive && normalized->recursive_depth >= 0) {
+                const WCHAR *dir_begin = path + rule_len;
+                const WCHAR *dir_end = path + prefix_len;
+                LONG depth = 0;
+
+                if (*dir_begin == L'\\')
+                    ++dir_begin;
+
+                if (dir_begin < dir_end) {
+                    const WCHAR *p = dir_begin;
+                    depth = 1;
+                    while (p < dir_end) {
+                        if (*p == L'\\')
+                            ++depth;
+                        ++p;
+                    }
+                }
+
+                if (depth <= normalized->recursive_depth)
+                    match = TRUE;
+            }
+            else {
+                match = TRUE;
+            }
         }
     }
 
@@ -1923,14 +2373,17 @@ static BOOLEAN Process_FindMatchingBreakoutFolderRule(
 {
     ULONG index = 0;
     const WCHAR *value;
+    BOOLEAN use_breakout_folder_extensions;
 
     if (outTarget && outTargetCch)
         outTarget[0] = L'\0';
 
+    use_breakout_folder_extensions = Process_UseRuleExtensions(box->name, L"BreakoutFolder");
+
     while (1) {
         WCHAR *rule_copy;
         WCHAR *rule;
-        WCHAR *sep;
+        SBIE_NORMALIZED_RULE normalized;
         const WCHAR *target = NULL;
         BOOLEAN match;
 
@@ -1943,23 +2396,26 @@ static BOOLEAN Process_FindMatchingBreakoutFolderRule(
         if (!rule_copy)
             continue;
 
-        rule = Breakout_MatchImageScopeAndGetValue(rule_copy, name, Process_BreakoutMatchImage, box);
+        rule = ProgramControl_MatchImageScopeAndGetValue(rule_copy, name, Process_BreakoutMatchImage, box);
         if (!rule) {
             Mem_FreeString(rule_copy);
             continue;
         }
 
-        sep = Breakout_FindTargetSeparator(rule);
-        if (sep) {
-            *sep = L'\0';
-            target = sep + 1;
-        }
-        else if (requireTarget) {
+        if (!ProgramControl_ParseRuleExtensionsInPlace(rule, &normalized, use_breakout_folder_extensions)) {
             Mem_FreeString(rule_copy);
             continue;
         }
 
-        match = Process_MatchBreakoutFolderRuleRaw(box, rule, name, path);
+        if (normalized.has_target_box)
+            target = normalized.target_box;
+
+        if (requireTarget && (!target || !*target)) {
+            Mem_FreeString(rule_copy);
+            continue;
+        }
+
+        match = Process_MatchBreakoutFolderRuleRaw(box, &normalized, name, path);
         if (match) {
             if (requireTarget && outTarget && outTargetCch && target) {
                 wcsncpy(outTarget, target, outTargetCch - 1);
@@ -2022,6 +2478,25 @@ static WCHAR* Process_NormalizeBreakoutRulePath(
         *dst_ptr = L'\0';
     }
 
+    //
+    // If the path is in DOS format (e.g. "E:\Files\*.txt"), translate it
+    // to NT device format (e.g. "\Device\HarddiskVolume2\Files\*.txt")
+    // before calling File_TranslateReparsePoints, which only accepts paths
+    // starting with "\Device\".  File_TranslateDosToNt translates only the
+    // drive letter portion, so wildcard suffixes are preserved correctly.
+    //
+
+    if (tmp1[0] && tmp1[1] == L':') {
+        WCHAR *nt_path = NULL;
+        ULONG nt_path_len = 0;
+        NTSTATUS status = File_TranslateDosToNt(tmp1, Driver_Pool, &nt_path, &nt_path_len);
+        if (NT_SUCCESS(status) && nt_path) {
+            Mem_Free(tmp1, buf_len);
+            tmp1 = nt_path;
+            buf_len = nt_path_len;
+        }
+    }
+
     tmp2 = File_TranslateReparsePoints(tmp1, Driver_Pool);
     if (tmp2) {
         Mem_Free(tmp1, buf_len);
@@ -2061,60 +2536,221 @@ static FORCE_BOX* Process_FindForceBoxByName(
     return NULL;
 }
 
+static BOOLEAN Process_ShouldReplaceBreakoutTarget(
+    BOOLEAN hasCurrentMatch,
+    BOOLEAN currentHasPriority,
+    LONG currentPriority,
+    BOOLEAN candidateHasPriority,
+    LONG candidatePriority)
+{
+    return ProgramControl_ShouldReplaceTargetMatch(
+        hasCurrentMatch ? 1 : 0,
+        currentHasPriority ? 1 : 0,
+        currentPriority,
+        0,
+        candidateHasPriority ? 1 : 0,
+        candidatePriority,
+        0) ? TRUE : FALSE;
+}
+
 static BOOLEAN Process_GetMatchedBreakoutTarget(
     BOX *box, const WCHAR *processName, const WCHAR *folderScopeName, const WCHAR *path, WCHAR *outTarget, ULONG outTargetCch)
 {
     ULONG index = 0;
     const WCHAR *value;
+    const WCHAR *scopeName;
+    BOOLEAN process_match = FALSE;
+    BOOLEAN process_has_priority = FALSE;
+    LONG process_priority = -1;
+    BOOLEAN process_target_match = FALSE;
+    BOOLEAN process_target_has_priority = FALSE;
+    LONG process_target_priority = -1;
+    BOOLEAN folder_match = FALSE;
+    BOOLEAN folder_has_priority = FALSE;
+    LONG folder_priority = -1;
+    BOOLEAN folder_target_match = FALSE;
+    BOOLEAN folder_target_has_priority = FALSE;
+    LONG folder_target_priority = -1;
+    WCHAR process_target_box[BOXNAME_COUNT] = { 0 };
+    WCHAR folder_target_box[BOXNAME_COUNT] = { 0 };
+    BOOLEAN use_breakout_process_extensions;
+    BOOLEAN use_breakout_folder_extensions;
 
     if (!outTarget || outTargetCch == 0)
         return FALSE;
 
+    if (!box || !processName || !*processName || !path || !*path)
+        return FALSE;
+
+    use_breakout_process_extensions = Process_UseRuleExtensions(box->name, L"BreakoutProcess");
+    use_breakout_folder_extensions = Process_UseRuleExtensions(box->name, L"BreakoutFolder");
+
     outTarget[0] = L'\0';
+    scopeName = (folderScopeName && *folderScopeName) ? folderScopeName : processName;
 
     while (1) {
         WCHAR *rule;
-        WCHAR *sep;
         WCHAR *rule_copy;
-        ULONG rule_copy_len;
+        SBIE_NORMALIZED_RULE normalized;
 
         value = Conf_Get(box->name, L"BreakoutProcess", index);
         if (!value)
             break;
         ++index;
 
-        sep = wcschr(value, L'|');
-        if (!sep || sep <= value || !sep[1])
-            continue;
-
-        rule_copy_len = ((ULONG)(sep - value) + 1) * sizeof(WCHAR);
-        rule_copy = Mem_Alloc(Driver_Pool, rule_copy_len);
+        rule_copy = Mem_AllocString(Driver_Pool, value);
         if (!rule_copy)
             continue;
 
-        wmemcpy(rule_copy, value, (ULONG)(sep - value));
-        rule_copy[sep - value] = L'\0';
-        rule = rule_copy;
-
-        if ((wcschr(rule, L'*') || wcschr(rule, L'?')) && !Process_IsPathLikeBreakoutRule(rule)) {
-            Mem_Free(rule_copy, rule_copy_len);
+        rule = ProgramControl_MatchImageScopeAndGetValue(rule_copy, processName, Process_BreakoutMatchImage, box);
+        if (!rule) {
+            Mem_FreeString(rule_copy);
             continue;
         }
 
-        if (Process_MatchBreakoutProcessRuleRaw(box, rule, processName, path)) {
-            wcsncpy(outTarget, sep + 1, outTargetCch - 1);
-            outTarget[outTargetCch - 1] = L'\0';
-            Mem_Free(rule_copy, rule_copy_len);
-            return TRUE;
+        if (!ProgramControl_ParseRuleExtensionsInPlace(rule, &normalized, use_breakout_process_extensions)) {
+            Mem_FreeString(rule_copy);
+            continue;
         }
 
-        Mem_Free(rule_copy, rule_copy_len);
+        if ((wcschr(normalized.base_rule, L'*') || wcschr(normalized.base_rule, L'?')) && !Process_IsPathLikeBreakoutRule(normalized.base_rule)) {
+            Mem_FreeString(rule_copy);
+            continue;
+        }
+
+        if (Process_MatchBreakoutProcessRuleRaw(box, normalized.base_rule, processName, path)) {
+            process_match = TRUE;
+            if (normalized.has_priority && (!process_has_priority || normalized.priority < process_priority)) {
+                process_has_priority = TRUE;
+                process_priority = normalized.priority;
+            }
+
+            if (normalized.has_target_box && normalized.target_box && *normalized.target_box) {
+                if (Process_ShouldReplaceBreakoutTarget(
+                        process_target_match,
+                        process_target_has_priority,
+                        process_target_priority,
+                        normalized.has_priority ? TRUE : FALSE,
+                        normalized.priority)) {
+                    wcsncpy(process_target_box, normalized.target_box, BOXNAME_COUNT - 1);
+                    process_target_box[BOXNAME_COUNT - 1] = L'\0';
+                    process_target_match = TRUE;
+                    process_target_has_priority = normalized.has_priority ? TRUE : FALSE;
+                    process_target_priority = normalized.priority;
+                }
+            }
+        }
+
+        Mem_FreeString(rule_copy);
     }
 
-    if (Process_FindMatchingBreakoutFolderRule(box, (folderScopeName && *folderScopeName) ? folderScopeName : processName, path, TRUE, outTarget, outTargetCch))
-        return TRUE;
+    index = 0;
+    while (1) {
+        WCHAR *rule_copy;
+        WCHAR *rule;
+        SBIE_NORMALIZED_RULE normalized;
 
-    return FALSE;
+        value = Conf_Get(box->name, L"BreakoutFolder", index);
+        if (!value)
+            break;
+        ++index;
+
+        rule_copy = Mem_AllocString(Driver_Pool, value);
+        if (!rule_copy)
+            continue;
+
+        rule = ProgramControl_MatchImageScopeAndGetValue(rule_copy, scopeName, Process_BreakoutMatchImage, box);
+        if (!rule) {
+            Mem_FreeString(rule_copy);
+            continue;
+        }
+
+        if (!ProgramControl_ParseRuleExtensionsInPlace(rule, &normalized, use_breakout_folder_extensions)) {
+            Mem_FreeString(rule_copy);
+            continue;
+        }
+
+        if (Process_MatchBreakoutFolderRuleRaw(box, &normalized, scopeName, path)) {
+            folder_match = TRUE;
+            if (normalized.has_priority && (!folder_has_priority || normalized.priority < folder_priority)) {
+                folder_has_priority = TRUE;
+                folder_priority = normalized.priority;
+            }
+
+            if (normalized.has_target_box && normalized.target_box && *normalized.target_box) {
+                if (Process_ShouldReplaceBreakoutTarget(
+                        folder_target_match,
+                        folder_target_has_priority,
+                        folder_target_priority,
+                        normalized.has_priority ? TRUE : FALSE,
+                        normalized.priority)) {
+                    wcsncpy(folder_target_box, normalized.target_box, BOXNAME_COUNT - 1);
+                    folder_target_box[BOXNAME_COUNT - 1] = L'\0';
+                    folder_target_match = TRUE;
+                    folder_target_has_priority = normalized.has_priority ? TRUE : FALSE;
+                    folder_target_priority = normalized.priority;
+                }
+            }
+        }
+
+        Mem_FreeString(rule_copy);
+    }
+
+    if (!process_match && !folder_match)
+        return FALSE;
+
+    // Pick winning breakout side first, then allow only that side's target.
+    BOOLEAN use_process_target = process_match ? TRUE : FALSE;
+    if (process_match && folder_match) {
+        if (process_has_priority != folder_has_priority)
+            use_process_target = process_has_priority ? TRUE : FALSE;
+        else if (process_has_priority && folder_has_priority) {
+            if (process_priority < folder_priority)
+                use_process_target = TRUE;
+            else if (process_priority > folder_priority)
+                use_process_target = FALSE;
+            else
+                use_process_target = TRUE;
+        }
+        else {
+            // No explicit priority on either side -> BreakoutProcess wins tie.
+            use_process_target = TRUE;
+        }
+    }
+
+    if (use_process_target) {
+        if (!process_target_match)
+            return FALSE;
+
+        // Do not apply a weaker targeted rule when a stronger non-target
+        // breakout match already won on the same side.
+        if (process_has_priority) {
+            if (!process_target_has_priority)
+                return FALSE;
+            if (process_target_priority > process_priority)
+                return FALSE;
+        }
+
+        wcsncpy(outTarget, process_target_box, outTargetCch - 1);
+        outTarget[outTargetCch - 1] = L'\0';
+        return TRUE;
+    }
+
+    if (!folder_target_match)
+        return FALSE;
+
+    // Do not apply a weaker targeted rule when a stronger non-target
+    // breakout match already won on the same side.
+    if (folder_has_priority) {
+        if (!folder_target_has_priority)
+            return FALSE;
+        if (folder_target_priority > folder_priority)
+            return FALSE;
+    }
+
+    wcsncpy(outTarget, folder_target_box, outTargetCch - 1);
+    outTarget[outTargetCch - 1] = L'\0';
+    return TRUE;
 }
 
 static BOOLEAN Process_IsSelfTargetedBreakoutMatch(
@@ -2184,12 +2820,220 @@ static BOOLEAN Process_CheckBreakoutProcessList(
 
 
 //---------------------------------------------------------------------------
+// Process_MatchBreakoutDocumentRule
+//---------------------------------------------------------------------------
+
+static BOOLEAN Process_MatchBreakoutDocumentRule(
+    BOX *box, const WCHAR *rule, const WCHAR *docPath)
+{
+    BOOLEAN match = FALSE;
+    BOOLEAN rule_has_wildcard;
+    BOOLEAN rule_has_separator;
+
+    if (!rule || !*rule || !docPath || !*docPath)
+        return FALSE;
+
+    rule_has_wildcard = (wcschr(rule, L'*') || wcschr(rule, L'?')) ? TRUE : FALSE;
+    rule_has_separator = (wcschr(rule, L'\\') || wcschr(rule, L'/')) ? TRUE : FALSE;
+    if (!Process_IsPathLikeBreakoutRule(rule)) {
+        // Allow simple filename-style wildcard rules like "*.txt".
+        if (!(rule_has_wildcard && !rule_has_separator))
+            return FALSE;
+    }
+
+    WCHAR *norm = Process_NormalizeBreakoutRulePath(box, rule, L"BreakoutDocument", NULL);
+    const WCHAR *match_rule = norm ? norm : rule;
+
+    if (wcschr(match_rule, L'*') || wcschr(match_rule, L'?')) {
+        WCHAR *path_lwr = Mem_AllocString(Driver_Pool, docPath);
+        PATTERN *pat = Pattern_Create(box->expand_args->pool, match_rule, TRUE, 0);
+
+        if (path_lwr) {
+            _wcslwr(path_lwr);
+            ULONG path_lwr_len = wcslen(path_lwr);
+            if (pat)
+                match = Pattern_Match(pat, path_lwr, path_lwr_len);
+        }
+
+        if (pat)
+            Pattern_Free(pat);
+        if (path_lwr)
+            Mem_FreeString(path_lwr);
+    } else {
+        ULONG rule_len = (ULONG)wcslen(match_rule);
+        if (rule_len == wcslen(docPath) && _wcsnicmp(match_rule, docPath, rule_len) == 0)
+            match = TRUE;
+    }
+
+    if (norm)
+        Mem_FreeString(norm);
+
+    return match;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_GetBreakoutDocumentPriority
+//---------------------------------------------------------------------------
+
+static BOOLEAN Process_GetBreakoutDocumentPriority(
+    BOX *box, const WCHAR *scopeName, const WCHAR *docPath,
+    BOOLEAN *outHasPriority, LONG *outPriority)
+{
+    const WCHAR *value;
+    ULONG index;
+    BOOLEAN matched = FALSE;
+    BOOLEAN hasPriority = FALSE;
+    LONG bestPriority = -1;
+    BOOLEAN use_breakout_document_extensions;
+
+    if (outHasPriority)
+        *outHasPriority = FALSE;
+    if (outPriority)
+        *outPriority = -1;
+
+    if (!box || !docPath || !*docPath)
+        return FALSE;
+
+    use_breakout_document_extensions = Process_UseRuleExtensions(box->name, L"BreakoutDocument");
+
+    index = 0;
+    while (1) {
+        WCHAR *ruleCopy;
+        WCHAR *rule;
+        SBIE_NORMALIZED_RULE normalized;
+
+        value = Conf_Get(box->name, L"BreakoutDocument", index);
+        if (!value)
+            break;
+        ++index;
+
+        ruleCopy = Mem_AllocString(Driver_Pool, value);
+        if (!ruleCopy)
+            continue;
+
+        rule = scopeName
+            ? ProgramControl_MatchImageScopeAndGetValue(ruleCopy, scopeName, Process_BreakoutMatchImage, box)
+            : ruleCopy;
+        if (!rule) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (!ProgramControl_ParseRuleExtensionsInPlace(rule, &normalized, use_breakout_document_extensions)) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (Process_MatchBreakoutDocumentRule(box, normalized.base_rule, docPath)) {
+            matched = TRUE;
+            if (normalized.has_priority && (!hasPriority || normalized.priority < bestPriority)) {
+                hasPriority = TRUE;
+                bestPriority = normalized.priority;
+            }
+        }
+
+        Mem_FreeString(ruleCopy);
+    }
+
+    if (hasPriority) {
+        if (outHasPriority)
+            *outHasPriority = TRUE;
+        if (outPriority)
+            *outPriority = bestPriority;
+    }
+
+    return matched;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_GetBreakoutDocumentTarget
+//---------------------------------------------------------------------------
+
+static BOOLEAN Process_GetBreakoutDocumentTarget(
+    BOX *box, const WCHAR *scopeName, const WCHAR *docPath,
+    WCHAR *outTarget, ULONG outTargetCch)
+{
+    const WCHAR *value;
+    ULONG index;
+    BOOLEAN hasMatch = FALSE;
+    BOOLEAN bestHasPriority = FALSE;
+    LONG bestPriority = -1;
+    BOOLEAN use_breakout_document_extensions;
+
+    if (!outTarget || outTargetCch == 0)
+        return FALSE;
+
+    if (!box || !docPath || !*docPath)
+        return FALSE;
+
+    use_breakout_document_extensions = Process_UseRuleExtensions(box->name, L"BreakoutDocument");
+
+    outTarget[0] = L'\0';
+
+    index = 0;
+    while (1) {
+        WCHAR *ruleCopy;
+        WCHAR *rule;
+        SBIE_NORMALIZED_RULE normalized;
+
+        value = Conf_Get(box->name, L"BreakoutDocument", index);
+        if (!value)
+            break;
+        ++index;
+
+        ruleCopy = Mem_AllocString(Driver_Pool, value);
+        if (!ruleCopy)
+            continue;
+
+        rule = scopeName
+            ? ProgramControl_MatchImageScopeAndGetValue(ruleCopy, scopeName, Process_BreakoutMatchImage, box)
+            : ruleCopy;
+        if (!rule) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (!ProgramControl_ParseRuleExtensionsInPlace(rule, &normalized, use_breakout_document_extensions)) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (!normalized.has_target_box || !normalized.target_box || !*normalized.target_box) {
+            Mem_FreeString(ruleCopy);
+            continue;
+        }
+
+        if (Process_MatchBreakoutDocumentRule(box, normalized.base_rule, docPath)) {
+            if (Process_ShouldReplaceBreakoutTarget(
+                    hasMatch,
+                    bestHasPriority,
+                    bestPriority,
+                    normalized.has_priority ? TRUE : FALSE,
+                    normalized.priority)) {
+                wcsncpy(outTarget, normalized.target_box, outTargetCch - 1);
+                outTarget[outTargetCch - 1] = L'\0';
+                hasMatch = TRUE;
+                bestHasPriority = normalized.has_priority ? TRUE : FALSE;
+                bestPriority = normalized.priority;
+            }
+        }
+
+        Mem_FreeString(ruleCopy);
+    }
+
+    return hasMatch;
+}
+
+
+//---------------------------------------------------------------------------
 // Process_CheckForceProcess
 //---------------------------------------------------------------------------
 
 
 _FX BOX *Process_CheckForceProcess(
-    LIST *boxes, const WCHAR *name, const WCHAR* path, BOOLEAN alert, ULONG *IsAlert, const WCHAR *ParentName, const WCHAR *ParentPath, BOOLEAN *pForcedByChildren)
+    LIST *boxes, const WCHAR *name, const WCHAR* path, const WCHAR *docPath, BOOLEAN alert, ULONG *IsAlert, const WCHAR *ParentName, const WCHAR *ParentPath, BOOLEAN *pForcedByChildren)
 {
     FORCE_BOX *box;
 
@@ -2214,16 +3058,65 @@ _FX BOX *Process_CheckForceProcess(
 
     box = List_Head(boxes);
     while (box) {
+        BOOLEAN force_has_priority = FALSE;
+        LONG force_priority = -1;
 
-        if (Process_CheckForceProcessList(box->box, &box->ForceProcess, name, path)) {
+        if (Process_CheckForceProcessList(box->box, &box->ForceProcess, name, path, &force_has_priority, &force_priority)) {
 
             const WCHAR *folder_scope_name = (ParentName && *ParentName) ? ParentName : name;
-            BOOLEAN prioritize_breakout = Process_GetSettingsForImageName_Bool(box->box, folder_scope_name, L"PrioritizeBreakoutOverForce", FALSE);
+            BOOLEAN image_scoped_breakout = Process_HasImageScopedBreakoutMatch(box->box, name, folder_scope_name, path);
+            BOOLEAN effective_prioritize_breakout = FALSE;
+            BOOLEAN breakout_has_priority = FALSE;
+            LONG breakout_priority = -1;
             BOOLEAN has_target_override = FALSE;
             WCHAR target_box[BOXNAME_COUNT] = { 0 };
 
-            if (prioritize_breakout)
-                has_target_override = Process_GetMatchedBreakoutTarget(box->box, name, folder_scope_name, path, target_box, BOXNAME_COUNT);
+            Process_GetMatchedBreakoutPriority(box->box, name, folder_scope_name, path, &breakout_has_priority, &breakout_priority);
+
+            // Also check BreakoutDocument rules against the document argument.
+            // Track whether BreakoutDocument won the priority contest so its
+            // TargetBox is only applied when it has the higher priority.
+            BOOLEAN bd_contributed_priority = FALSE;
+            if (docPath && *docPath) {
+                BOOLEAN bd_has_priority = FALSE;
+                LONG bd_priority = -1;
+                if (Process_GetBreakoutDocumentPriority(box->box, folder_scope_name, docPath, &bd_has_priority, &bd_priority)) {
+                    if (bd_has_priority) {
+                        if (!breakout_has_priority || bd_priority < breakout_priority) {
+                            breakout_has_priority = TRUE;
+                            breakout_priority = bd_priority;
+                            bd_contributed_priority = TRUE;
+                        } else if (bd_priority == breakout_priority) {
+                            // Tie: BreakoutDocument may also contribute its target.
+                            bd_contributed_priority = TRUE;
+                        }
+                    } else if (!breakout_has_priority) {
+                        // Neither has an explicit priority: equal footing,
+                        // BreakoutDocument target may apply.
+                        bd_contributed_priority = TRUE;
+                    }
+                }
+            }
+
+            effective_prioritize_breakout = SbiePolicy_ShouldPrioritizeBreakout(
+                FALSE,
+                force_has_priority ? 1 : 0,
+                force_priority,
+                breakout_has_priority ? 1 : 0,
+                breakout_priority) ? TRUE : FALSE;
+
+            // No-priority behavior must remain legacy (1.17.5): force wins.
+            (void)image_scoped_breakout;
+
+            if (effective_prioritize_breakout) {
+                if (bd_contributed_priority && docPath && *docPath) {
+                    // BreakoutDocument won or tied the priority contest, so it owns
+                    // target resolution for this document-open path.
+                    has_target_override = Process_GetBreakoutDocumentTarget(box->box, folder_scope_name, docPath, target_box, BOXNAME_COUNT);
+                } else {
+                    has_target_override = Process_GetMatchedBreakoutTarget(box->box, name, folder_scope_name, path, target_box, BOXNAME_COUNT);
+                }
+            }
 
             if (has_target_override) {
                 FORCE_BOX *target = Process_FindForceBoxByName(boxes, target_box);
@@ -2236,7 +3129,8 @@ _FX BOX *Process_CheckForceProcess(
                 }
             }
 
-            if (prioritize_breakout && !has_target_override && Process_IsPrioritizedBreakoutMatch(box->box, name, folder_scope_name, path)) {
+            if (effective_prioritize_breakout && !has_target_override &&
+                (bd_contributed_priority || Process_IsPrioritizedBreakoutMatch(box->box, name, folder_scope_name, path))) {
                 box = List_Next(box);
                 continue;
             }
@@ -2249,15 +3143,60 @@ _FX BOX *Process_CheckForceProcess(
             return box->box;
         }
 
-        if (ParentName && Process_CheckForceProcessList(box->box, &box->ForceChildren, ParentName, ParentPath) && _wcsicmp(name, L"Sandman.exe") != 0) { // except for sandman exe
+        if (ParentName && Process_CheckForceProcessList(box->box, &box->ForceChildren, ParentName, ParentPath, &force_has_priority, &force_priority) && _wcsicmp(name, L"Sandman.exe") != 0) { // except for sandman exe
 
             const WCHAR *folder_scope_name = ParentName;
-            BOOLEAN prioritize_breakout = Process_GetSettingsForImageName_Bool(box->box, folder_scope_name, L"PrioritizeBreakoutOverForce", FALSE);
+            BOOLEAN image_scoped_breakout = Process_HasImageScopedBreakoutMatch(box->box, name, folder_scope_name, path);
+            BOOLEAN effective_prioritize_breakout = FALSE;
+            BOOLEAN breakout_has_priority = FALSE;
+            LONG breakout_priority = -1;
             BOOLEAN has_target_override = FALSE;
             WCHAR target_box[BOXNAME_COUNT] = { 0 };
 
-            if (prioritize_breakout)
+            Process_GetMatchedBreakoutPriority(box->box, name, folder_scope_name, path, &breakout_has_priority, &breakout_priority);
+
+            // Also check BreakoutDocument rules against the document argument.
+            // Track whether BreakoutDocument won the priority contest so its
+            // TargetBox is only applied when it has the higher priority.
+            BOOLEAN bd_contributed_priority = FALSE;
+            if (docPath && *docPath) {
+                BOOLEAN bd_has_priority = FALSE;
+                LONG bd_priority = -1;
+                if (Process_GetBreakoutDocumentPriority(box->box, folder_scope_name, docPath, &bd_has_priority, &bd_priority)) {
+                    if (bd_has_priority) {
+                        if (!breakout_has_priority || bd_priority < breakout_priority) {
+                            breakout_has_priority = TRUE;
+                            breakout_priority = bd_priority;
+                            bd_contributed_priority = TRUE;
+                        } else if (bd_priority == breakout_priority) {
+                            // Tie: BreakoutDocument may also contribute its target.
+                            bd_contributed_priority = TRUE;
+                        }
+                    } else if (!breakout_has_priority) {
+                        // Neither has an explicit priority: equal footing,
+                        // BreakoutDocument target may apply.
+                        bd_contributed_priority = TRUE;
+                    }
+                }
+            }
+
+            effective_prioritize_breakout = SbiePolicy_ShouldPrioritizeBreakout(
+                FALSE,
+                force_has_priority ? 1 : 0,
+                force_priority,
+                breakout_has_priority ? 1 : 0,
+                breakout_priority) ? TRUE : FALSE;
+
+            // No-priority behavior must remain legacy (1.17.5): force wins.
+            (void)image_scoped_breakout;
+
+            if (effective_prioritize_breakout) {
                 has_target_override = Process_GetMatchedBreakoutTarget(box->box, name, folder_scope_name, path, target_box, BOXNAME_COUNT);
+                // Check BreakoutDocument for a target box only when it won
+                // the priority contest against BreakoutProcess rules.
+                if (!has_target_override && bd_contributed_priority && docPath && *docPath)
+                    has_target_override = Process_GetBreakoutDocumentTarget(box->box, folder_scope_name, docPath, target_box, BOXNAME_COUNT);
+            }
 
             if (has_target_override) {
                 FORCE_BOX *target = Process_FindForceBoxByName(boxes, target_box);
@@ -2272,7 +3211,8 @@ _FX BOX *Process_CheckForceProcess(
                 }
             }
 
-            if (prioritize_breakout && !has_target_override && Process_IsPrioritizedBreakoutMatch(box->box, name, folder_scope_name, path)) {
+            if (effective_prioritize_breakout && !has_target_override &&
+                (bd_contributed_priority || Process_IsPrioritizedBreakoutMatch(box->box, name, folder_scope_name, path))) {
                 box = List_Next(box);
                 continue;
             }
@@ -2321,10 +3261,6 @@ _FX void Process_CheckAlertFolder(
         prefix_len = (ULONG)(ptr - path);
     else
         prefix_len = 0;
-
-    if (! prefix_len)
-        return;
-
     //
     // check if the folder is alerted to any box
     //
@@ -2332,7 +3268,7 @@ _FX void Process_CheckAlertFolder(
     box = List_Head(boxes);
     while (box) {
 
-        if (Process_CheckForceFolderList(box->box, &box->AlertFolder, prefix_len, path)) {
+        if (Process_CheckForceFolderList(box->box, &box->AlertFolder, prefix_len, path, NULL, NULL)) {
             *IsAlert = 1;
 			return;
         }
@@ -2359,7 +3295,7 @@ static _FX void Process_CheckAlertProcess(
     box = List_Head(boxes);
     while (box) {
 
-        if (Process_CheckForceProcessList(box->box, &box->AlertProcess, name, path)) {
+        if (Process_CheckForceProcessList(box->box, &box->AlertProcess, name, path, NULL, NULL)) {
             *IsAlert = 1;
             return;
         }
@@ -2458,15 +3394,15 @@ _FX BOOLEAN Process_IsBreakoutProcess(
 
     Conf_AdjustUseCount(TRUE);
 
-    Process_AddForceProcesses(&BreakoutProcess, L"BreakoutProcess", box->name);
+    Process_AddForceFolders(&BreakoutProcess, L"BreakoutProcess", box, box->name);
         
     Conf_AdjustUseCount(FALSE);
 
-    IsBreakout = Process_CheckForceProcessList(box, &BreakoutProcess, ImageName, ImagePath2);
+    IsBreakout = Process_CheckBreakoutProcessList(box, &BreakoutProcess, ImageName, ImagePath2);
     if (!IsBreakout)
         IsBreakout = Process_FindMatchingBreakoutFolderRule(box, ImageName, ImagePath2, FALSE, NULL, 0);
 
-    Process_DeleteForceDataProcesses(&BreakoutProcess);
+    Process_DeleteForceDataFolders(&BreakoutProcess);
 
 finish:
     Mem_Free(ImagePath2, ImagePath2_len);
@@ -2654,6 +3590,51 @@ _FX BOOLEAN Process_FcpCheck(HANDLE ProcessId, WCHAR* boxname)
     KeLowerIrql(irql);
 
     return found;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_MatchForceChildrenRule
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Process_MatchForceChildrenRule(
+    BOX *box, const WCHAR *parent_name, const WCHAR *parent_path,
+    BOOLEAN *outHasPriority, LONG *outPriority)
+{
+    LIST boxes;
+    FORCE_BOX *force_box;
+    BOOLEAN matched = FALSE;
+
+    if (outHasPriority)
+        *outHasPriority = FALSE;
+    if (outPriority)
+        *outPriority = -1;
+
+    if (!box || !box->sid || !parent_name || !*parent_name || !parent_path || !*parent_path)
+        return FALSE;
+
+    Process_CreateForceData(&boxes, box->sid, box->session_id);
+
+    force_box = List_Head(&boxes);
+    while (force_box) {
+        if (force_box->box->name_len == box->name_len
+                && _wcsicmp(force_box->box->name, box->name) == 0) {
+            matched = Process_CheckForceProcessList(
+                force_box->box,
+                &force_box->ForceChildren,
+                parent_name,
+                parent_path,
+                outHasPriority,
+                outPriority);
+            break;
+        }
+
+        force_box = List_Next(force_box);
+    }
+
+    Process_DeleteForceData(&boxes);
+    return matched;
 }
 
 

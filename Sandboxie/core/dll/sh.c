@@ -372,9 +372,14 @@ _FX WCHAR *SH32_AdjustPath(WCHAR *src, WCHAR **pArgs)
 
 _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len)
 {
+    // Strip outer quotes if present (e.g. ShellExecuteEx lpFile can arrive quoted).
+    if (len >= 2 && path[0] == L'"' && path[len - 1] == L'"') {
+        path++;
+        len -= 2;
+    }
+
     if (SbieDll_CheckPatternInList(path, len, NULL, L"BreakoutDocument")) {
 
-        NTSTATUS status;
         static WCHAR* _QueueName = NULL;
 
         if (!_QueueName) {
@@ -388,25 +393,29 @@ _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len)
 
         USER_SHELL_EXEC_REQ* req = (USER_SHELL_EXEC_REQ*)Dll_AllocTemp(req_len);
 
-        WCHAR* path_buff = ((UCHAR*)req) + path_pos;
-        memcpy(path_buff, path, path_len);
+        WCHAR* path_buff = (WCHAR*)((UCHAR*)req + path_pos);
+        wmemcpy(path_buff, path, len);
+        path_buff[len] = L'\0';
 
         req->msgid = USER_SHELL_EXEC;
-
         req->FileNameOffset = path_pos;
 
         ULONG* rpl = SbieDll_CallProxySvr(_QueueName, req, req_len, sizeof(*rpl), 100);
-        if (!rpl)
-            status = STATUS_INTERNAL_ERROR;
-        else {
-            status = rpl[0];
-
-            Dll_Free(rpl);
-        }
 
         Dll_Free(req);
 
-        return TRUE;
+        if (!rpl) {
+            // Service communication failed (SBIE2203 already logged).
+            // Fall back to normal document open in source box.
+            return FALSE;
+        }
+
+        // rpl[1] is the fallback flag: non-zero means the service could not open
+        // the document (e.g., target box invalid) and the DLL should fall back to
+        // letting the normal path handle it (opens in source box).
+        BOOL fallback = (rpl[1] != 0);
+        Dll_Free(rpl);
+        return !fallback;
     }
 
     return FALSE;
@@ -806,6 +815,8 @@ _FX BOOL SH32_Shell_NotifyIconW(
     }
 
     if (Gui_OpenAllWinClasses && Gui_UseProxyService
+        // Image selectors for this setting are resolved via
+        // Config_MatchImageAndGetValue, including '!image' negation.
         && Config_GetSettingsForImageName_bool(SH32_UseShellNotifyIconProxy, TRUE)) {
 
         //

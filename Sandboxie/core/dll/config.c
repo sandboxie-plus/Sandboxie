@@ -24,6 +24,7 @@
 #include "dll.h"
 #include "common/pool.h"
 #include "common/pattern.h"
+#include "common/program_control_rule.h"
 #include "core/svc/SbieIniWire.h"
 
 //---------------------------------------------------------------------------
@@ -38,6 +39,14 @@
 
 extern POOL* Dll_Pool;
 extern POOL* Dll_PoolTemp;
+
+static BOOLEAN Config_UseRuleExtensions(const WCHAR* boxname, const WCHAR* setting)
+{
+    if (!ProgramControl_IsRuleExtensionSetting(setting))
+        return TRUE;
+
+    return SbieApi_QueryConfBool(boxname, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
+}
 
 //---------------------------------------------------------------------------
 // Config_MatchImage
@@ -312,7 +321,9 @@ _FX BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, L
 {
     WCHAR conf_buf[2048];
     const BOOLEAN breakout_folder_setting = (_wcsicmp(setting, L"BreakoutFolder") == 0);
-    const BOOLEAN breakout_document_setting = (_wcsicmp(setting, L"BreakoutDocument") == 0);
+    const BOOLEAN force_folder_setting = (_wcsicmp(setting, L"ForceFolder") == 0);
+    const BOOLEAN extension_setting = ProgramControl_IsRuleExtensionSetting(setting) ? TRUE : FALSE;
+    const BOOLEAN use_rule_extensions = Config_UseRuleExtensions(boxname, setting);
 
     PATTERN* pat;
 
@@ -329,22 +340,20 @@ _FX BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, L
         WCHAR* value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, &level);
         if (value)
         {
-            if (breakout_folder_setting) {
-                // BreakoutFolder supports optional target suffix: path_pattern|BoxName.
-                // Strip the target suffix first, then trim any trailing backslash from the path.
-                WCHAR* sep = wcschr(value, L'|');
-                if (sep && sep > value && sep[1])
-                    *sep = L'\0';
+            if (extension_setting) {
+                SBIE_NORMALIZED_RULE normalized;
+                if (!ProgramControl_ParseRuleExtensionsInPlace(value, &normalized, use_rule_extensions ? 1 : 0))
+                    continue;
+                value = normalized.base_rule;
+            }
 
+            if (breakout_folder_setting || force_folder_setting) {
                 // Trim trailing backslashes so patterns like "C:\path\" match "C:\path".
+                // ForceFolder dir lengths in ProcessServer/UserServer exclude the trailing
+                // backslash; the pattern must match that form to avoid a length mismatch.
                 size_t val_len = wcslen(value);
                 while (val_len > 0 && value[val_len - 1] == L'\\')
                     value[--val_len] = L'\0';
-            } else if (breakout_document_setting) {
-                // BreakoutDocument supports an optional target suffix: path_pattern|BoxName.
-                WCHAR* sep = wcschr(value, L'|');
-                if (sep && sep > value && sep[1])
-                    *sep = L'\0';
             }
 
             if (dos && *value != L'*')
@@ -637,24 +646,29 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_GetStringsForStringList(const WCHAR* string, con
 
 BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting)
 {
-    WCHAR buf[66];
-    const BOOLEAN breakout_process_setting = (_wcsicmp(setting, L"BreakoutProcess") == 0);
+    WCHAR buf[CONF_LINE_LEN];
+    const BOOLEAN extension_setting = (
+        ProgramControl_IsRuleExtensionSetting(setting) &&
+        _wcsicmp(setting, L"BreakoutFolder") != 0 &&
+        _wcsicmp(setting, L"BreakoutDocument") != 0 &&
+        _wcsicmp(setting, L"ForceFolder") != 0) ? TRUE : FALSE;
+    const BOOLEAN use_rule_extensions = Config_UseRuleExtensions(boxname, setting);
     ULONG index = 0;
     while (1) {
-        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
+        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, sizeof(buf) - sizeof(WCHAR));
         ++index;
         if (NT_SUCCESS(status)) {
-            if (_wcsicmp(buf, string) == 0) {
-                return TRUE;
+            if (extension_setting) {
+                SBIE_NORMALIZED_RULE normalized;
+                if (!ProgramControl_ParseRuleExtensionsInPlace(buf, &normalized, use_rule_extensions ? 1 : 0))
+                    continue;
+                if (_wcsicmp(normalized.base_rule, string) == 0)
+                    return TRUE;
+                continue;
             }
 
-            if (breakout_process_setting) {
-                WCHAR* sep = wcschr(buf, L'|');
-                if (sep && sep > buf && sep[1]) {
-                    SIZE_T len = (SIZE_T)(sep - buf);
-                    if (wcslen(string) == len && _wcsnicmp(buf, string, len) == 0)
-                        return TRUE;
-                }
+            if (_wcsicmp(buf, string) == 0) {
+                return TRUE;
             }
         }
         else if (status != STATUS_BUFFER_TOO_SMALL)
@@ -671,10 +685,10 @@ BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, con
 
 BOOLEAN SbieDll_CheckStringInListA(const char* string, const WCHAR* boxname, const WCHAR* setting)
 {
-    WCHAR buf[66];
+    WCHAR buf[CONF_LINE_LEN];
     ULONG index = 0;
     while (1) {
-        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
+        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, sizeof(buf) - sizeof(WCHAR));
         ++index;
         if (NT_SUCCESS(status)) {
             WCHAR* ptr = buf;

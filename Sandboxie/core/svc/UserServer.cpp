@@ -28,6 +28,7 @@
 #include "core/dll/sbiedll.h"
 #include "core/drv/api_defs.h"
 #include "common/my_version.h"
+#include "common/program_control_rule.h"
 #include <stdlib.h>
 #include <sddl.h>
 #include <aclapi.h>
@@ -71,80 +72,61 @@ typedef struct _USER_WORKER {
 // Variables
 //---------------------------------------------------------------------------
 
-static WCHAR* UserServer_FindBreakoutTargetSeparator(WCHAR* value)
+static int UserServer_MatchImage(const WCHAR* pattern, const WCHAR* imageName, void* context)
 {
-    WCHAR* sep = wcschr(value, L'|');
-    if (!sep || sep <= value || !sep[1])
-        return NULL;
+    (void)context;
+    return SbieDll_MatchImage(pattern, imageName, NULL) ? 1 : 0;
+}
 
-    return sep;
+static void UserServer_AdjustFolderRule(WCHAR* value, void* context)
+{
+    (void)context;
+    if (value && *value != L'*')
+        SbieDll_TranslateNtToDosPath(value);
 }
 
 static WCHAR* UserServer_MatchImageAndGetValue(WCHAR* value, const WCHAR* imageName, ULONG* pLevel)
 {
-    WCHAR* tmp = wcschr(value, L',');
+    return ProgramControl_MatchImageScopeAndGetValueEx(
+        value,
+        imageName,
+        UserServer_MatchImage,
+        NULL,
+        (unsigned long*)pLevel);
+}
 
-    if (tmp) {
+static BOOLEAN UserServer_UseRuleExtensions(const WCHAR* boxname, const WCHAR* setting)
+{
+    if (!ProgramControl_IsRuleExtensionSetting(setting))
+        return TRUE;
 
-        BOOLEAN inv;
-        BOOLEAN match;
-        ULONG len;
-
-        if (!imageName)
-            return NULL;
-
-        if (*value == L'!') {
-            inv = TRUE;
-            ++value;
-        } else
-            inv = FALSE;
-
-        len = (ULONG)(tmp - value);
-        if (len) {
-            WCHAR saved = value[len];
-            value[len] = L'\0';
-            match = SbieDll_MatchImage(value, imageName, NULL);
-            value[len] = saved;
-            if (inv)
-                match = !match;
-            if (!match)
-                return NULL;
-            else if (pLevel) {
-                if (len == 1 && *value == L'*')
-                    *pLevel = 2;
-                else
-                    *pLevel = inv ? 1 : 0;
-            }
-        }
-
-        value = tmp + 1;
-    }
-    else {
-
-        if (pLevel)
-            *pLevel = 2;
-    }
-
-    if (!*value)
-        return NULL;
-
-    return value;
+    return SbieApi_QueryConfBool(boxname, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
 }
 
 static BOOLEAN UserServer_GetBreakoutDocumentTarget(
     const WCHAR* boxname, const WCHAR* imageName, const WCHAR* path, ULONG length,
-    WCHAR* outTarget, ULONG outTargetCch)
+    WCHAR* outTarget, ULONG outTargetCch, LONG* outPriority)
 {
     WCHAR conf_buf[2048];
     WCHAR* path_lwr;
     POOL* pool;
-    ULONG found_level = (ULONG)-1;
-    BOOLEAN found = FALSE;
+    ULONG best_level = (ULONG)-1;
+    BOOLEAN has_match = FALSE;
+    BOOLEAN has_target = FALSE;
+    BOOLEAN best_has_priority = FALSE;
+    LONG best_priority = -1;
     ULONG index = 0;
     ULONG path_len = (length + 1) * sizeof(WCHAR);
+    BOOLEAN use_rule_extensions;
 
     if (!boxname || !imageName || !path || !outTarget || outTargetCch == 0)
         return FALSE;
+
+    use_rule_extensions = UserServer_UseRuleExtensions(boxname, L"BreakoutDocument");
+
+    outTarget[0] = L'\0';
+    if (outPriority)
+        *outPriority = -1;
 
     path_lwr = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, path_len);
     if (!path_lwr)
@@ -175,14 +157,14 @@ static BOOLEAN UserServer_GetBreakoutDocumentTarget(
 
         ULONG level = (ULONG)-1;
         WCHAR* value = UserServer_MatchImageAndGetValue(conf_buf, imageName, &level);
-        if (!value || level > found_level)
+        if (!value)
             continue;
 
-        WCHAR* sep = UserServer_FindBreakoutTargetSeparator(value);
-        if (!sep)
+        SBIE_NORMALIZED_RULE normalized;
+        if (!ProgramControl_ParseRuleExtensionsInPlace(value, &normalized, use_rule_extensions ? 1 : 0))
             continue;
 
-        *sep = L'\0';
+        value = normalized.base_rule;
         if (*value != L'*')
             SbieDll_TranslateNtToDosPath(value);
 
@@ -191,9 +173,31 @@ static BOOLEAN UserServer_GetBreakoutDocumentTarget(
             continue;
 
         if (Pattern_Match(pattern, path_lwr, length)) {
-            wcscpy_s(outTarget, outTargetCch, sep + 1);
-            found_level = level;
-            found = TRUE;
+            if (ProgramControl_ShouldReplaceTargetMatch(
+                    has_match,
+                    best_has_priority,
+                    best_priority,
+                    best_level,
+                    normalized.has_priority,
+                    normalized.priority,
+                    level)) {
+                has_match = TRUE;
+                best_has_priority = normalized.has_priority ? TRUE : FALSE;
+                best_priority = normalized.priority;
+                best_level = level;
+
+                if (outPriority)
+                    *outPriority = normalized.has_priority ? normalized.priority : -1;
+
+                if (normalized.has_target_box && normalized.target_box && *normalized.target_box) {
+                    wcscpy_s(outTarget, outTargetCch, normalized.target_box);
+                    has_target = TRUE;
+                }
+                else {
+                    outTarget[0] = L'\0';
+                    has_target = FALSE;
+                }
+            }
         }
 
         Pattern_Free(pattern);
@@ -201,7 +205,223 @@ static BOOLEAN UserServer_GetBreakoutDocumentTarget(
 
     Pool_Delete(pool);
     HeapFree(GetProcessHeap(), 0, path_lwr);
+    return has_target;
+}
+
+// Scans ForceFolder rules to find if any match the directory containing path.
+// Returns TRUE if a match is found, and sets *outPriority to the Priority=N
+// value of the best-matching rule (-1 if no Priority= was specified).
+static BOOLEAN UserServer_GetForceFolderPriority(
+    const WCHAR* boxname, const WCHAR* imageName, const WCHAR* path, ULONG path_len,
+    LONG* outPriority)
+{
+    ULONG dir_len;
+    WCHAR* dir_path;
+    BOOLEAN use_rule_extensions;
+    BOOLEAN has_priority = FALSE;
+    LONG best_priority = -1;
+
+    // Find the directory length (characters before the last backslash).
+    dir_len = 0;
+    {
+        const WCHAR* p = path;
+        const WCHAR* end = path + path_len;
+        while (p < end && *p) {
+            if (*p == L'\\')
+                dir_len = (ULONG)(p - path);
+            ++p;
+        }
+    }
+
+    if (!dir_len)
+        return FALSE;
+
+    use_rule_extensions = UserServer_UseRuleExtensions(boxname, L"ForceFolder");
+
+    if (outPriority)
+        *outPriority = -1;
+
+    dir_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, (dir_len + 1) * sizeof(WCHAR));
+    if (!dir_path)
+        return FALSE;
+
+    memcpy(dir_path, path, dir_len * sizeof(WCHAR));
+    dir_path[dir_len] = L'\0';
+
+    BOOLEAN found = ProgramControl_CheckFolderSettingMatchFromConf(
+        boxname,
+        L"ForceFolder",
+        imageName,
+        dir_path,
+        dir_len,
+        1,
+        &has_priority,
+        &best_priority,
+        use_rule_extensions ? 1 : 0,
+        UserServer_MatchImage,
+        NULL,
+        UserServer_AdjustFolderRule,
+        NULL) ? TRUE : FALSE;
+
+    if (outPriority)
+        *outPriority = has_priority ? best_priority : -1;
+
+    HeapFree(GetProcessHeap(), 0, dir_path);
     return found;
+}
+
+// Scans ForceProcess rules to check if any match the given image name.
+// Returns TRUE if a match is found, and sets *outPriority to the Priority=N
+// value of the best-matching rule (-1 if no Priority= was specified).
+static BOOLEAN UserServer_QueryImageRuleMatch(
+    const WCHAR* boxname, const WCHAR* setting, const WCHAR* imageName,
+    LONG* outPriority, WCHAR* outTarget, ULONG outTargetCch)
+{
+    WCHAR conf_buf[2048];
+    BOOLEAN found = FALSE;
+    BOOLEAN best_has_priority = FALSE;
+    LONG best_priority = -1;
+    ULONG index = 0;
+    BOOLEAN use_rule_extensions;
+
+    if (!boxname || !setting || !imageName)
+        return FALSE;
+
+    use_rule_extensions = UserServer_UseRuleExtensions(boxname, setting);
+
+    if (outPriority)
+        *outPriority = -1;
+    if (outTarget && outTargetCch > 0)
+        outTarget[0] = L'\0';
+
+    while (1) {
+
+        NTSTATUS status = SbieApi_QueryConf(
+            boxname, setting, index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status)) {
+            if (status == STATUS_BUFFER_TOO_SMALL) {
+                ++index;
+                continue;
+            }
+            break;
+        }
+        ++index;
+
+        SBIE_NORMALIZED_RULE normalized;
+        if (!ProgramControl_ParseRuleExtensionsInPlace(conf_buf, &normalized, use_rule_extensions ? 1 : 0))
+            continue;
+
+        if (!SbieDll_MatchImage(normalized.base_rule, imageName, NULL))
+            continue;
+
+        if (ProgramControl_ShouldReplaceTargetMatch(
+                found,
+                best_has_priority,
+                best_priority,
+                2,
+                normalized.has_priority,
+                normalized.priority,
+                2)) {
+            found = TRUE;
+            best_has_priority = normalized.has_priority ? TRUE : FALSE;
+            best_priority = normalized.priority;
+
+            if (outTarget && outTargetCch > 0) {
+                if (normalized.has_target_box && normalized.target_box && *normalized.target_box)
+                    wcscpy_s(outTarget, outTargetCch, normalized.target_box);
+                else
+                    outTarget[0] = L'\0';
+            }
+        }
+    }
+
+    if (found && outPriority)
+        *outPriority = best_has_priority ? best_priority : -1;
+
+    return found;
+}
+
+static BOOLEAN UserServer_GetForceProcessPriority(
+    const WCHAR* boxname, const WCHAR* imageName, LONG* outPriority)
+{
+    return UserServer_QueryImageRuleMatch(
+        boxname, L"ForceProcess", imageName, outPriority, NULL, 0);
+}
+
+// Scans BreakoutProcess rules to check if any match the given image name.
+// Returns TRUE if a match is found, and sets *outPriority to the Priority=N
+// value of the best-matching rule (-1 if no Priority= was specified).
+static BOOLEAN UserServer_GetBreakoutProcessPriority(
+    const WCHAR* boxname, const WCHAR* imageName, LONG* outPriority,
+    WCHAR* outTarget, ULONG outTargetCch)
+{
+    return UserServer_QueryImageRuleMatch(
+        boxname, L"BreakoutProcess", imageName, outPriority, outTarget, outTargetCch);
+}
+
+static ULONG UserServer_MapLaunchFailureStatusFromLastError(void)
+{
+    DWORD err = GetLastError();
+
+    if (err == ERROR_FILE_NOT_FOUND)
+        return STATUS_OBJECT_NAME_NOT_FOUND;
+    if (err == ERROR_PATH_NOT_FOUND || err == ERROR_INVALID_DRIVE)
+        return STATUS_OBJECT_PATH_NOT_FOUND;
+    if (err == ERROR_NO_ASSOCIATION)
+        return (ULONG)HRESULT_FROM_WIN32(ERROR_NO_ASSOCIATION);
+
+    return STATUS_UNSUCCESSFUL;
+}
+
+static BOOLEAN UserServer_ShouldFallbackToSourceOnLaunchFailure(ULONG status)
+{
+    return (
+        status == STATUS_OBJECT_NAME_NOT_FOUND ||
+        status == STATUS_OBJECT_PATH_NOT_FOUND ||
+        status == (ULONG)HRESULT_FROM_WIN32(ERROR_NO_ASSOCIATION)
+    ) ? TRUE : FALSE;
+}
+
+static BOOLEAN UserServer_IsLikelyFileSystemPath(const WCHAR* path)
+{
+    if (!path || !*path)
+        return FALSE;
+
+    // Drive-qualified DOS path, e.g. C:\foo
+    if ((((path[0] >= L'A' && path[0] <= L'Z') || (path[0] >= L'a' && path[0] <= L'z')) &&
+         path[1] == L':' &&
+         (path[2] == L'\\' || path[2] == L'/')))
+        return TRUE;
+
+    // UNC path, e.g. \\server\share
+    if ((path[0] == L'\\' && path[1] == L'\\') ||
+        (path[0] == L'/' && path[1] == L'/'))
+        return TRUE;
+
+    // NT-style path prefixes used by some callers.
+    if ((path[0] == L'\\' && path[1] == L'?' && path[2] == L'?' && path[3] == L'\\') ||
+        (path[0] == L'\\' && path[1] == L'?' && path[2] == L'\\'))
+        return TRUE;
+
+    return FALSE;
+}
+
+static BOOLEAN UserServer_ShouldFallbackToSourceOnHostMissingPath(const WCHAR* path)
+{
+    DWORD attrs;
+    DWORD err;
+
+    if (!UserServer_IsLikelyFileSystemPath(path))
+        return FALSE;
+
+    attrs = GetFileAttributesW(path);
+    if (attrs != INVALID_FILE_ATTRIBUTES)
+        return FALSE;
+
+    err = GetLastError();
+    return (err == ERROR_FILE_NOT_FOUND ||
+            err == ERROR_PATH_NOT_FOUND ||
+            err == ERROR_INVALID_DRIVE) ? TRUE : FALSE;
 }
 
 static ULONG UserServer_OpenDocumentInTargetBox(const WCHAR* targetBox, const WCHAR* path, const WCHAR* lpDirectory)
@@ -275,11 +495,50 @@ static ULONG UserServer_OpenDocumentInTargetBox(const WCHAR* targetBox, const WC
 
     HeapFree(GetProcessHeap(), 0, cmdline);
     if (!ok)
-        return STATUS_UNSUCCESSFUL;
+        return UserServer_MapLaunchFailureStatusFromLastError();
 
     CloseHandle(pi.hThread);
     CloseHandle(pi.hProcess);
     return STATUS_SUCCESS;
+}
+
+// Opens a document unboxed by adding this worker process to the DFP
+// (Disable Force Process) list, then calling ShellExecuteEx. Any document
+// handler (e.g. notepad++.exe) spawned as a direct child inherits DFP via
+// Process_NotifyProcess_Create, so ForceProcess rules are skipped for it.
+static ULONG UserServer_OpenDocumentUnboxed(const WCHAR* path, const WCHAR* lpDirectory)
+{
+    // Add this worker process to DFP. When ShellExecuteEx creates the document
+    // handler (e.g. notepad++.exe) as a direct child, the driver propagates DFP
+    // to it and skips any matching ForceProcess rules.
+    ULONG dfp_state = DISABLE_JUST_THIS_PROCESS;
+    SbieApi_DisableForceProcess(&dfp_state, NULL);
+
+    SHELLEXECUTEINFO shex;
+    memzero(&shex, sizeof(SHELLEXECUTEINFO));
+    shex.cbSize = sizeof(SHELLEXECUTEINFO);
+    shex.fMask = 0;
+    shex.hwnd = NULL;
+    shex.lpVerb = L"open";
+    shex.lpFile = path;
+    shex.lpParameters = NULL;
+    shex.lpDirectory = lpDirectory;
+    shex.nShow = SW_SHOWNORMAL;
+    shex.hInstApp = NULL;
+
+    typedef BOOL (*P_ShellExecuteEx)(void *);
+    HMODULE shell32 = GetModuleHandleW(L"shell32.dll");
+    if (!shell32)
+        shell32 = LoadLibraryW(L"shell32.dll");
+    P_ShellExecuteEx pShellExecuteEx = shell32
+        ? (P_ShellExecuteEx)GetProcAddress(shell32, "ShellExecuteExW")
+        : NULL;
+    if (!pShellExecuteEx)
+        return STATUS_ENTRYPOINT_NOT_FOUND;
+
+    if (pShellExecuteEx(&shex))
+        return STATUS_SUCCESS;
+    return UserServer_MapLaunchFailureStatusFromLastError();
 }
 
 //---------------------------------------------------------------------------
@@ -533,6 +792,50 @@ ULONG UserServer::StartWorker(ULONG session_id)
     HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, cmdline);
 
     return status;
+}
+
+static SBIE_POLICY_DECISION UserServer_ResolveDocumentPolicy(
+    BOOLEAN breakout_has_target,
+    int force_process_match_input,
+    int force_folder_match_input,
+    BOOLEAN force_has_priority,
+    LONG force_priority,
+    BOOLEAN breakout_has_priority,
+    LONG breakout_priority)
+{
+    SBIE_RULE_MATCH_SET matches;
+    SBIE_POLICY_INPUT in;
+
+    memzero(&matches, sizeof(matches));
+    memzero(&in, sizeof(in));
+
+    // force_process_match_input: set by caller based on whether the caller's image
+    // (the document handler that will be re-launched) matches any ForceProcess rule.
+    // force_folder_match_input: set by caller using the scope-aware ForceFolder check
+    // (UserServer_GetForceFolderPriority) so image-scoped rules are respected.
+    matches.force_process_match = force_process_match_input;
+    matches.force_folder_match = force_folder_match_input;
+    matches.force_children_match = 0;
+    matches.breakout_process_match = 0;
+    matches.breakout_folder_match = 0;
+    matches.breakout_document_match = 1;
+    matches.breakout_has_target = breakout_has_target ? 1 : 0;
+
+    in.context_kind = SBIE_CTX_SANDBOXED_DOCUMENT_OPEN;
+    in.caller_forced_by_children = 0;
+    in.source_equals_candidate_box = 1;
+
+    // Legacy default for BreakoutDocument (1.17.5): breakout wins when matched.
+    // Priority-aware behavior overrides this default; equal-priority ties fall back
+    // to this same legacy ordering.
+    return SbiePolicy_ResolveWithPriorities(
+        &in,
+        &matches,
+        TRUE,
+        force_has_priority ? 1 : 0,
+        force_priority,
+        breakout_has_priority ? 1 : 0,
+        breakout_priority);
 }
 
 
@@ -989,6 +1292,10 @@ ULONG UserServer::OpenFile(WorkerArgs *args)
 //---------------------------------------------------------------------------
 
 
+// Fallback flag written to rpl_buf[1]: non-zero tells the DLL to fall back to
+// opening the document in the source box instead of treating the call as handled.
+#define USER_DOCUMENT_FALLBACK_TO_SOURCE 1
+
 ULONG UserServer::OpenDocument(WorkerArgs *args)
 {
     USER_SHELL_EXEC_REQ *req = (USER_SHELL_EXEC_REQ *)args->req_buf;
@@ -997,6 +1304,10 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
         return STATUS_INFO_LENGTH_MISMATCH;
 
     WCHAR* path_buff = (WCHAR*)(((UCHAR*)req) + req->FileNameOffset);
+
+    // Always send two ULONGs: rpl_buf[0] = status, rpl_buf[1] = fallback flag.
+    args->rpl_len = 2 * sizeof(ULONG);
+    ((ULONG*)args->rpl_buf)[1] = 0;
 
     //
     // check if the caller belongs to our session
@@ -1019,6 +1330,136 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
     ULONG path_len = (ULONG)wcslen(path_buff);
     if (SbieDll_CheckPatternInList(path_buff, path_len, boxname, L"BreakoutDocument")) {
 
+        LONG bd_priority = -1;
+        LONG ff_priority = -1;
+        LONG fp_priority = -1;
+
+        WCHAR targetBox[BOXNAME_COUNT] = { 0 };
+        BOOLEAN has_target = UserServer_GetBreakoutDocumentTarget(
+            boxname, image, path_buff, path_len, targetBox, BOXNAME_COUNT, &bd_priority);
+
+        // ForceFolder: check if document's directory matches any ForceFolder rule.
+        // Capture the match result for use as force_folder_match (scope-aware).
+        BOOLEAN ff_match = UserServer_GetForceFolderPriority(boxname, image, path_buff, path_len, &ff_priority);
+
+        // ForceProcess: the document handler (e.g., notepad++.exe) is what ForceProcess
+        // targets, not the caller (e.g., explorer.exe). Resolve the actual handler for
+        // the document extension via shlwapi AssocQueryStringW so the priority comparison
+        // uses the correct image name. Fall back to the caller's image if resolution fails.
+        WCHAR handlerImage[96] = { 0 };
+        const WCHAR* fpCheckImage = image;
+        {
+            typedef HRESULT (WINAPI *P_AssocQueryStringW)(DWORD, DWORD, LPCWSTR, LPCWSTR, LPWSTR, DWORD*);
+            HMODULE hShlwapi = GetModuleHandleW(L"shlwapi.dll");
+            if (!hShlwapi)
+                hShlwapi = LoadLibraryW(L"shlwapi.dll");
+            if (hShlwapi) {
+                P_AssocQueryStringW pAssocQuery = (P_AssocQueryStringW)GetProcAddress(hShlwapi, "AssocQueryStringW");
+                if (pAssocQuery) {
+                    DWORD len = 0;
+                    // ASSOCF_NONE = 0, ASSOCSTR_EXECUTABLE = 2
+                    HRESULT hr = pAssocQuery(0, 2, path_buff, NULL, NULL, &len);
+                    if ((hr == E_POINTER || hr == S_FALSE) && len > 0) {
+                        WCHAR* handlerPath = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len * sizeof(WCHAR));
+                        if (handlerPath) {
+                            hr = pAssocQuery(0, 2, path_buff, NULL, handlerPath, &len);
+                            if (SUCCEEDED(hr) && handlerPath[0]) {
+                                const WCHAR* slash = wcsrchr(handlerPath, L'\\');
+                                if (wcscpy_s(handlerImage, _countof(handlerImage), slash ? slash + 1 : handlerPath) == 0)
+                                    fpCheckImage = handlerImage;
+                            }
+                            HeapFree(GetProcessHeap(), 0, handlerPath);
+                        }
+                    }
+                }
+            }
+        }
+        BOOLEAN fp_match = UserServer_GetForceProcessPriority(boxname, fpCheckImage, &fp_priority);
+
+        // BreakoutProcess: check if the handler image also matches a BreakoutProcess
+        // rule.  When BreakoutProcess has a lower priority number than BreakoutDocument,
+        // BP wins the breakout-side contest and its TargetBox (if any) is used.
+        LONG bp_priority = -1;
+        WCHAR bp_targetBox[BOXNAME_COUNT] = { 0 };
+        UserServer_GetBreakoutProcessPriority(boxname, fpCheckImage, &bp_priority, bp_targetBox, BOXNAME_COUNT);
+
+        // Arbitrate within the breakout side: the winner is whichever of
+        // BreakoutDocument and BreakoutProcess has the lower priority number.
+        // No explicit priority (= -1) loses to any explicit priority (>= 0).
+        // On equal priority, BreakoutDocument wins. Both unset priorities are
+        // treated as an equal-priority tie.
+        BOOLEAN bp_wins;
+        if (bp_priority >= 0 && bd_priority >= 0)
+            bp_wins = (bp_priority < bd_priority) ? TRUE : FALSE;
+        else if (bp_priority >= 0)
+            bp_wins = TRUE;
+        else if (bd_priority >= 0)
+            bp_wins = FALSE;
+        else
+            bp_wins = FALSE;
+
+        // The effective breakout priority for comparison against force rules.
+        LONG breakout_winner_priority = bp_wins ? bp_priority : bd_priority;
+
+        // When BP wins and has a TargetBox, adopt it as the routing target so the
+        // document opens in that box (and the existing API_IS_BOX_ENABLED check
+        // handles the invalid-target fallback path).
+        BOOLEAN has_target_effective;
+        if (bp_wins && bp_targetBox[0] != L'\0') {
+            wcscpy_s(targetBox, BOXNAME_COUNT, bp_targetBox);
+            has_target_effective = TRUE;
+        } else {
+            // BD wins, or BP wins without a TargetBox (routes unboxed).
+            has_target_effective = has_target && !bp_wins;
+        }
+
+        // Combined force priority: take the most specific (lowest number) among
+        // matching ForceFolder and ForceProcess rules that carry explicit Priority=N.
+        LONG force_priority = -1;
+        BOOLEAN force_has_priority = FALSE;
+        if (ff_priority >= 0) {
+            force_has_priority = TRUE;
+            force_priority = ff_priority;
+        }
+        if (fp_priority >= 0) {
+            if (!force_has_priority || fp_priority < force_priority) {
+                force_has_priority = TRUE;
+                force_priority = fp_priority;
+            }
+        }
+        BOOLEAN breakout_has_priority = (breakout_winner_priority >= 0);
+
+        // Default: breakout wins only when TargetBox is explicitly specified.
+        // For BREAKOUT_UNBOXED (no TargetBox), ForceProcess/ForceFolder dominates
+        // unless BreakoutDocument has an explicit lower Priority=N to override it.
+        // has_target_effective reflects whether BreakoutDocument won within the
+        // breakout side (vs BreakoutProcess); breakout_winner_priority is the
+        // priority of the winning breakout rule.
+        SBIE_POLICY_DECISION decision = UserServer_ResolveDocumentPolicy(
+            has_target_effective,    // breakout_has_target: FALSE when BreakoutProcess wins
+            fp_match ? 1 : 0,        // force_process_match: handler image vs ForceProcess rules
+            ff_match ? 1 : 0,        // force_folder_match: scope-aware result from GetForceFolderPriority
+            force_has_priority,
+            force_priority,
+            breakout_has_priority,
+            breakout_winner_priority);
+
+        if (decision == SBIE_DECISION_FORCE_SAME_BOX ||
+            decision == SBIE_DECISION_FORCE_OTHER_BOX ||
+            decision == SBIE_DECISION_DENY_FALLBACK ||
+            decision == SBIE_DECISION_NO_MATCH) {
+            // Policy says keep document in source box; signal fallback without logging an error.
+            ((ULONG*)args->rpl_buf)[1] = USER_DOCUMENT_FALLBACK_TO_SOURCE;
+            return STATUS_SUCCESS;
+        }
+
+        // For box-only files (missing on host), breakout launch from the service
+        // cannot resolve the document path. Fall back to source-box handling.
+        if (UserServer_ShouldFallbackToSourceOnHostMissingPath(path_buff)) {
+            ((ULONG*)args->rpl_buf)[1] = USER_DOCUMENT_FALLBACK_TO_SOURCE;
+            return STATUS_SUCCESS;
+        }
+
         // When BreakoutUseTargetDir is set, use the document's parent directory
         // as the working directory for the launched viewer, not the Launcher's home path.
         WCHAR doc_dir[MAX_PATH] = { 0 };
@@ -1033,39 +1474,32 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
             }
         }
 
-        WCHAR targetBox[BOXNAME_COUNT] = { 0 };
-        if (UserServer_GetBreakoutDocumentTarget(
-                boxname, image, path_buff, path_len, targetBox, BOXNAME_COUNT)) {
+        if (decision == SBIE_DECISION_BREAKOUT_TARGET_BOX) {
 
             if (!NT_SUCCESS(SbieApi_Call(
                     API_IS_BOX_ENABLED, 3,
-                    (ULONG_PTR)targetBox, (ULONG_PTR)sid, (ULONG_PTR)session_id)))
-                return STATUS_ACCESS_DENIED;
+                    (ULONG_PTR)targetBox, (ULONG_PTR)sid, (ULONG_PTR)session_id))) {
+                // Target box not available; signal fallback without logging SBIE2203.
+                ((ULONG*)args->rpl_buf)[1] = USER_DOCUMENT_FALLBACK_TO_SOURCE;
+                return STATUS_SUCCESS;
+            }
 
-            return UserServer_OpenDocumentInTargetBox(targetBox, path_buff, doc_dir[0] ? doc_dir : NULL);
+            ULONG launch_status = UserServer_OpenDocumentInTargetBox(targetBox, path_buff, doc_dir[0] ? doc_dir : NULL);
+            if (!NT_SUCCESS(launch_status) && UserServer_ShouldFallbackToSourceOnLaunchFailure(launch_status)) {
+                ((ULONG*)args->rpl_buf)[1] = USER_DOCUMENT_FALLBACK_TO_SOURCE;
+                return STATUS_SUCCESS;
+            }
+            return launch_status;
         }
 
-        SHELLEXECUTEINFO shex;
-        memzero(&shex, sizeof(SHELLEXECUTEINFO));
-        shex.cbSize = sizeof(SHELLEXECUTEINFO);
-        shex.fMask = 0;
-        shex.hwnd = NULL;
-        shex.lpVerb = L"open";
-        shex.lpFile = path_buff;
-        shex.lpParameters = NULL;
-        shex.lpDirectory = doc_dir[0] ? doc_dir : NULL;
-        shex.nShow = SW_SHOWNORMAL;
-        shex.hInstApp = NULL;
-
-        typedef BOOL (*P_ShellExecuteEx)(void *);
-        HMODULE shell32 = LoadLibrary(L"shell32.dll");
-        P_ShellExecuteEx pShellExecuteEx = (P_ShellExecuteEx)GetProcAddress(shell32, "ShellExecuteExW");
-        if (!pShellExecuteEx)
-            return STATUS_ENTRYPOINT_NOT_FOUND;
-
-        if (pShellExecuteEx(&shex))
+        // BREAKOUT_UNBOXED: open the document with DFP set on this worker so
+        // the document handler inherits DFP and is not re-forced by ForceProcess.
+        ULONG launch_status = UserServer_OpenDocumentUnboxed(path_buff, doc_dir[0] ? doc_dir : NULL);
+        if (!NT_SUCCESS(launch_status) && UserServer_ShouldFallbackToSourceOnLaunchFailure(launch_status)) {
+            ((ULONG*)args->rpl_buf)[1] = USER_DOCUMENT_FALLBACK_TO_SOURCE;
             return STATUS_SUCCESS;
-        return STATUS_UNSUCCESSFUL;
+        }
+        return launch_status;
     }
 
     return STATUS_ACCESS_DENIED;

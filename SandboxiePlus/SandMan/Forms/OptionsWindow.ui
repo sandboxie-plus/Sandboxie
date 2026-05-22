@@ -2216,6 +2216,21 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                <string>Name</string>
               </property>
              </column>
+                <column>
+                 <property name="text">
+                  <string>Priority</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Recursive</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Target Box</string>
+                 </property>
+                </column>
             </widget>
            </item>
            <item row="5" column="1">
@@ -2328,12 +2343,38 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                    <string>Name</string>
                   </property>
                  </column>
+                <column>
+                 <property name="text">
+                  <string>Priority</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Recursive</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Target Box</string>
+                 </property>
+                </column>
                 </widget>
                </item>
                <item row="8" column="0">
                 <widget class="QCheckBox" name="chkDisableForced">
                  <property name="text">
                   <string>Disable forced Process and Folder for this sandbox</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkUseForceBreakoutRuleExtensions">
+                 <property name="toolTip">
+                  <string>Enable Force/Breakout rule extensions (Priority, Recursive, TargetBox).
+When enabled, sandboxed and unsandboxed launch paths parse these extensions.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use Force/Breakout rule extensions</string>
                  </property>
                 </widget>
                </item>
@@ -2523,12 +2564,13 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                 </widget>
                </item>
                <item row="8" column="0" colspan="2">
-                <widget class="QCheckBox" name="chkPrioritizeBreakoutOverForce">
-                                 <property name="toolTip">
-                                    <string>Required for TargetBoxing (BreakoutProcess/BreakoutFolder rules using |TargetBox).</string>
-                                 </property>
+                <widget class="QCheckBox" name="chkBreakoutUseTargetDir">
+                 <property name="toolTip">
+                  <string>When breakout is allowed and no working directory is provided by the caller, use the target executable's folder as working directory.
+This helps prevent ForceFolder rules from re-forcing breakout child processes that inherit sandbox working directory.</string>
+                 </property>
                  <property name="text">
-                  <string>Prioritize Breakout rules over Force rules</string>
+                  <string>Use breakout target directory as working directory</string>
                  </property>
                 </widget>
                </item>
@@ -6420,10 +6462,12 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>chkShowForceTmpl</tabstop>
   <tabstop>btnDelForce</tabstop>
   <tabstop>chkDisableForced</tabstop>
+  <tabstop>chkUseForceBreakoutRuleExtensions</tabstop>
   <tabstop>treeBreakout</tabstop>
   <tabstop>btnBreakoutProg</tabstop>
   <tabstop>btnBreakoutDir</tabstop>
   <tabstop>chkShowBreakoutTmpl</tabstop>
+  <tabstop>chkBreakoutUseTargetDir</tabstop>
   <tabstop>btnDelBreakout</tabstop>
   <tabstop>tabsStop</tabstop>
   <tabstop>treeStop</tabstop>

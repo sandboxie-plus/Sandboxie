@@ -7,6 +7,331 @@
 #include "../MiscHelpers/Common/ComboInputDialog.h"
 #include "../MiscHelpers/Common/SettingsWidgets.h"
 #include "Helpers/WinAdmin.h"
+#include <limits>
+
+namespace {
+
+const int kRulePriorityColumn = 2;
+const int kRuleRecursiveColumn = 3;
+const int kRuleTargetBoxColumn = 4;
+const int kRuleOriginalRuleRole = Qt::UserRole + 10;
+const int kRuleActualTypeRole = Qt::UserRole + 11;
+
+struct RuleExtensionsUi
+{
+	QString baseRule;
+	QString priority;
+	QString recursive;
+	QString targetBox;
+};
+
+class CRuleTreeItem : public QTreeWidgetItem
+{
+public:
+	using QTreeWidgetItem::QTreeWidgetItem;
+
+	bool operator<(const QTreeWidgetItem& other) const override
+	{
+		QTreeWidget* pTree = treeWidget();
+		int sortColumn = pTree ? pTree->sortColumn() : -1;
+
+		if (sortColumn == kRulePriorityColumn) {
+			auto toPriorityRank = [](const QString& text) -> qlonglong {
+				QString value = text.trimmed();
+				if (value.isEmpty() || value == "-")
+					return (std::numeric_limits<qlonglong>::max)();
+
+				bool ok = false;
+				qlonglong parsed = value.toLongLong(&ok);
+				if (!ok)
+					return (std::numeric_limits<qlonglong>::max)();
+
+				return parsed;
+			};
+
+			qlonglong leftRank = toPriorityRank(data(sortColumn, Qt::DisplayRole).toString());
+			qlonglong rightRank = toPriorityRank(other.data(sortColumn, Qt::DisplayRole).toString());
+
+			if (leftRank != rightRank)
+				return leftRank < rightRank;
+		}
+
+		return QTreeWidgetItem::operator<(other);
+	}
+};
+
+static bool RuleTypeSupportsPriority(int type)
+{
+	return (type == COptionsWindow::eProcess || type == COptionsWindow::ePath || type == COptionsWindow::eText || type == COptionsWindow::eParent);
+}
+
+static bool RuleTypeSupportsRecursive(int type)
+{
+	return (type == COptionsWindow::ePath);
+}
+
+static bool RuleTypeSupportsTargetBox(bool breakoutTree, int type)
+{
+	return (breakoutTree && (type == COptionsWindow::eProcess || type == COptionsWindow::ePath || type == COptionsWindow::eText));
+}
+
+static bool ParseLongValue(const QString& value, qlonglong* out)
+{
+	if (!out)
+		return false;
+
+	bool ok = false;
+	qlonglong parsed = value.trimmed().toLongLong(&ok);
+	if (!ok)
+		return false;
+
+	*out = parsed;
+	return true;
+}
+
+static QString GetRuleKey(const QString& token)
+{
+	int eqPos = token.indexOf('=');
+	return (eqPos >= 0 ? token.left(eqPos) : token).trimmed();
+}
+
+static bool IsKnownRuleExtension(const QString& token)
+{
+	QString key = GetRuleKey(token);
+	return key.compare("TargetBox", Qt::CaseInsensitive) == 0
+		|| key.compare("Priority", Qt::CaseInsensitive) == 0
+		|| key.compare("Recursive", Qt::CaseInsensitive) == 0;
+}
+
+static QString BuildRuleWithBaseAndTokens(const QString& baseRule, const QStringList& tokens)
+{
+	QStringList out;
+	out.reserve(tokens.size() + 1);
+	out.append(baseRule);
+	for (const QString& token : tokens) {
+		QString trimmed = token.trimmed();
+		if (!trimmed.isEmpty())
+			out.append(trimmed);
+	}
+	return out.join("|");
+}
+
+static QString FormatRuleDisplayValue(bool enabled, bool supported, const QString& value, bool formatZeroAsNo = false)
+{
+	if (!supported)
+		return "N/A";
+	if (!enabled)
+		return "-";
+	if (value.trimmed().isEmpty())
+		return "-";
+	if (formatZeroAsNo && value == "0")
+		return "n (0)";
+	return value;
+}
+
+static QString CanonicalizeBoxNameCase(const QString& boxName)
+{
+	QString trimmed = boxName.trimmed();
+	if (trimmed.isEmpty())
+		return trimmed;
+
+	QMap<QString, CSandBoxPtr> allBoxes = theAPI->GetAllBoxes();
+	for (auto it = allBoxes.constBegin(); it != allBoxes.constEnd(); ++it) {
+		if (!it.value() || !it.value()->IsEnabled())
+			continue;
+
+		QString existingName = it.value()->GetName();
+		if (existingName.compare(trimmed, Qt::CaseInsensitive) == 0)
+			return existingName;
+	}
+
+	return trimmed;
+}
+
+static void RefreshRuleExtensionsDisplayForTree(QTreeWidget* pTree, bool breakoutTree, bool enabled)
+{
+	if (!pTree)
+		return;
+
+	bool sortingEnabled = pTree->isSortingEnabled();
+	if (sortingEnabled)
+		pTree->setSortingEnabled(false);
+
+	for (int i = 0; i < pTree->topLevelItemCount(); ++i) {
+		QTreeWidgetItem* pItem = pTree->topLevelItem(i);
+		if (!pItem)
+			continue;
+
+		int type = pItem->data(0, Qt::UserRole).toInt();
+		int actualType = pItem->data(0, kRuleActualTypeRole).toInt();
+		if (actualType == 0)
+			actualType = type;
+
+		QString priority = pItem->data(kRulePriorityColumn, Qt::UserRole).toString();
+		QString recursive = pItem->data(kRuleRecursiveColumn, Qt::UserRole).toString();
+		QString targetBox = CanonicalizeBoxNameCase(pItem->data(kRuleTargetBoxColumn, Qt::UserRole).toString());
+		pItem->setData(kRuleTargetBoxColumn, Qt::UserRole, targetBox);
+
+		if (kRulePriorityColumn < pTree->columnCount())
+			pItem->setText(kRulePriorityColumn, FormatRuleDisplayValue(enabled, RuleTypeSupportsPriority(actualType), priority));
+		if (kRuleRecursiveColumn < pTree->columnCount())
+			pItem->setText(kRuleRecursiveColumn, FormatRuleDisplayValue(enabled, RuleTypeSupportsRecursive(actualType), recursive, true));
+		if (kRuleTargetBoxColumn < pTree->columnCount()) {
+			pItem->setText(kRuleTargetBoxColumn, FormatRuleDisplayValue(enabled, RuleTypeSupportsTargetBox(breakoutTree, actualType), targetBox));
+			if (enabled && RuleTypeSupportsTargetBox(breakoutTree, actualType) && !targetBox.isEmpty())
+				pItem->setToolTip(kRuleTargetBoxColumn, targetBox);
+			else
+				pItem->setToolTip(kRuleTargetBoxColumn, QString());
+		}
+	}
+
+	if (sortingEnabled)
+		pTree->setSortingEnabled(true);
+}
+
+static RuleExtensionsUi ParseRuleExtensionsForUi(const QString& rule)
+{
+	RuleExtensionsUi out;
+	QStringList parts = rule.split("|", Qt::KeepEmptyParts);
+
+	if (!parts.isEmpty())
+		out.baseRule = parts.takeFirst();
+
+	for (const QString& rawToken : parts) {
+		QString token = rawToken.trimmed();
+		if (token.isEmpty())
+			continue;
+
+		int eqPos = token.indexOf('=');
+		QString key = (eqPos >= 0) ? token.left(eqPos).trimmed() : token;
+		QString value = (eqPos >= 0) ? token.mid(eqPos + 1).trimmed() : QString();
+
+		if (key.compare("TargetBox", Qt::CaseInsensitive) == 0 && !value.isEmpty())
+			out.targetBox = value;
+		else if (key.compare("Priority", Qt::CaseInsensitive) == 0 && !value.isEmpty())
+			out.priority = value;
+		else if (key.compare("Recursive", Qt::CaseInsensitive) == 0) {
+			if (value.isEmpty())
+				out.recursive = "y";
+			else {
+				QString normalized = value.toLower();
+				if (normalized == "*" || normalized == "y" || normalized == "yes" || normalized == "true")
+					out.recursive = "y";
+				else if (normalized == "n" || normalized == "no" || normalized == "false")
+					out.recursive = "0";
+				else
+					out.recursive = normalized;
+			}
+		}
+	}
+
+	return out;
+}
+
+static void ApplyRuleExtensionsToItem(QTreeWidgetItem* pItem, bool breakoutTree, int type, const RuleExtensionsUi& ext, bool showValues)
+{
+	if (!pItem)
+		return;
+
+	if (RuleTypeSupportsPriority(type)) {
+		pItem->setData(kRulePriorityColumn, Qt::UserRole, ext.priority);
+		pItem->setText(kRulePriorityColumn, FormatRuleDisplayValue(showValues, true, ext.priority));
+	}
+	else {
+		pItem->setData(kRulePriorityColumn, Qt::UserRole, QString());
+		pItem->setText(kRulePriorityColumn, FormatRuleDisplayValue(showValues, false, QString()));
+	}
+
+	if (RuleTypeSupportsRecursive(type)) {
+		pItem->setData(kRuleRecursiveColumn, Qt::UserRole, ext.recursive);
+		pItem->setText(kRuleRecursiveColumn, FormatRuleDisplayValue(showValues, true, ext.recursive, true));
+	}
+	else {
+		pItem->setData(kRuleRecursiveColumn, Qt::UserRole, QString());
+		pItem->setText(kRuleRecursiveColumn, FormatRuleDisplayValue(showValues, false, QString(), true));
+	}
+
+	if (RuleTypeSupportsTargetBox(breakoutTree, type)) {
+		QString targetBox = CanonicalizeBoxNameCase(ext.targetBox);
+		pItem->setData(kRuleTargetBoxColumn, Qt::UserRole, targetBox);
+		pItem->setText(kRuleTargetBoxColumn, FormatRuleDisplayValue(showValues, true, targetBox));
+		if (showValues && !targetBox.isEmpty())
+			pItem->setToolTip(kRuleTargetBoxColumn, targetBox);
+		else
+			pItem->setToolTip(kRuleTargetBoxColumn, QString());
+	}
+	else {
+		pItem->setData(kRuleTargetBoxColumn, Qt::UserRole, QString());
+		pItem->setText(kRuleTargetBoxColumn, FormatRuleDisplayValue(showValues, false, QString()));
+		pItem->setToolTip(kRuleTargetBoxColumn, QString());
+	}
+}
+
+static QString BuildRuleWithExtensionsFromItem(QTreeWidgetItem* pItem, bool breakoutTree, int type, bool useExtensions)
+{
+	QString baseRule = pItem->data(1, Qt::UserRole).toString().trimmed();
+	if (baseRule.isEmpty())
+		return baseRule;
+
+	QString originalRule = pItem->data(1, kRuleOriginalRuleRole).toString().trimmed();
+	if (originalRule.isEmpty())
+		originalRule = baseRule;
+
+	QStringList originalParts = originalRule.split("|", Qt::KeepEmptyParts);
+	if (!originalParts.isEmpty())
+		originalParts.takeFirst();
+
+	if (!useExtensions) {
+		QString preservedRule = BuildRuleWithBaseAndTokens(baseRule, originalParts);
+		pItem->setData(1, kRuleOriginalRuleRole, preservedRule);
+		return preservedRule;
+	}
+
+	QStringList keptTokens;
+	for (const QString& part : originalParts) {
+		if (!IsKnownRuleExtension(part))
+			keptTokens.append(part.trimmed());
+	}
+
+	if (RuleTypeSupportsTargetBox(breakoutTree, type)) {
+		QString targetBox = pItem->data(kRuleTargetBoxColumn, Qt::UserRole).toString().trimmed();
+		if (!targetBox.isEmpty())
+			keptTokens.append("TargetBox=" + targetBox);
+	}
+
+	if (RuleTypeSupportsRecursive(type)) {
+		QString recursive = pItem->data(kRuleRecursiveColumn, Qt::UserRole).toString().trimmed();
+		if (!recursive.isEmpty()) {
+			if (recursive == "-") {
+				// Sentinel for clearing Recursive extension
+			}
+			else if (recursive.compare("y", Qt::CaseInsensitive) == 0 || recursive.compare("yes", Qt::CaseInsensitive) == 0 || recursive.compare("true", Qt::CaseInsensitive) == 0)
+				keptTokens.append("Recursive=y");
+			else if (recursive.compare("n", Qt::CaseInsensitive) == 0 || recursive.compare("no", Qt::CaseInsensitive) == 0 || recursive.compare("false", Qt::CaseInsensitive) == 0)
+				keptTokens.append("Recursive=n");
+			else {
+				qlonglong depth = -1;
+				if (ParseLongValue(recursive, &depth) && depth >= 0)
+					keptTokens.append("Recursive=" + QString::number(depth));
+			}
+		}
+	}
+
+	if (RuleTypeSupportsPriority(type)) {
+		QString priority = pItem->data(kRulePriorityColumn, Qt::UserRole).toString().trimmed();
+		if (!priority.isEmpty() && priority != "-1") {
+			qlonglong value = -1;
+			if (ParseLongValue(priority, &value) && value >= 0)
+				keptTokens.append("Priority=" + QString::number(value));
+		}
+	}
+
+	QString finalRule = BuildRuleWithBaseAndTokens(baseRule, keptTokens);
+	pItem->setData(1, kRuleOriginalRuleRole, finalRule);
+	return finalRule;
+}
+
+}
 
 
 void COptionsWindow::LoadForced()
@@ -53,10 +378,13 @@ void COptionsWindow::LoadForced()
 	foreach(const QString& Value, m_pBox->GetTextList("BreakoutDocumentDisabled", m_Template))
 		AddBreakoutEntry(Value, (int)eText, true);
 
-	ui.chkPrioritizeBreakoutOverForce->setChecked(m_pBox->GetBool("PrioritizeBreakoutOverForce", false));
+	ReadGlobalCheck(ui.chkUseForceBreakoutRuleExtensions, "UseForceBreakoutRuleExtensions", false);
+	ui.chkBreakoutUseTargetDir->setChecked(m_pBox->GetBool("BreakoutUseTargetDir", false, true, true));
 
 	LoadForcedTmpl();
 	LoadBreakoutTmpl();
+	RefreshRuleExtensionsDisplayForTree(ui.treeForced, false, ui.chkUseForceBreakoutRuleExtensions->isChecked());
+	RefreshRuleExtensionsDisplayForTree(ui.treeBreakout, true, ui.chkUseForceBreakoutRuleExtensions->isChecked());
 
 	m_ForcedChanged = false;
 }
@@ -125,7 +453,12 @@ void COptionsWindow::LoadBreakoutTmpl(bool bUpdate)
 
 void COptionsWindow::AddForcedEntry(const QString& Name, int type, bool disabled, const QString& Template)
 {
-	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	RuleExtensionsUi ext = ParseRuleExtensionsForUi(Name);
+	QString baseRule = ext.baseRule;
+	if (baseRule.isEmpty())
+		baseRule = Name;
+
+	QTreeWidgetItem* pItem = new CRuleTreeItem();
 	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
 	QString Type;
 	switch (type)
@@ -136,14 +469,22 @@ void COptionsWindow::AddForcedEntry(const QString& Name, int type, bool disabled
 	}
 	pItem->setText(0, Type + (Template.isEmpty() ? "" : (" (" + Template + ")")));
 	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? type : (int)eTemplate);
-	SetProgramItem(Name, pItem, 1);
+	pItem->setData(0, kRuleActualTypeRole, type);
+	SetProgramItem(baseRule, pItem, 1);
+	pItem->setData(1, kRuleOriginalRuleRole, Name);
+	ApplyRuleExtensionsToItem(pItem, false, type, ext, ui.chkUseForceBreakoutRuleExtensions->isChecked());
 	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 	ui.treeForced->addTopLevelItem(pItem);
 }
 
 void COptionsWindow::AddBreakoutEntry(const QString& Name, int type, bool disabled, const QString& Template)
 {
-	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	RuleExtensionsUi ext = ParseRuleExtensionsForUi(Name);
+	QString baseRule = ext.baseRule;
+	if (baseRule.isEmpty())
+		baseRule = Name;
+
+	QTreeWidgetItem* pItem = new CRuleTreeItem();
 	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
 	QString Type;
 	switch (type)
@@ -155,13 +496,18 @@ void COptionsWindow::AddBreakoutEntry(const QString& Name, int type, bool disabl
 	pItem->setText(0, Type + (Template.isEmpty() ? "" : (" (" + Template + ")")));
 
 	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? type : (int)eTemplate);
-	SetProgramItem(Name, pItem, 1, QString(), type == eProcess);
+	pItem->setData(0, kRuleActualTypeRole, type);
+	SetProgramItem(baseRule, pItem, 1, QString(), type == eProcess);
+	pItem->setData(1, kRuleOriginalRuleRole, Name);
+	ApplyRuleExtensionsToItem(pItem, true, type, ext, ui.chkUseForceBreakoutRuleExtensions->isChecked());
 	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 	ui.treeBreakout->addTopLevelItem(pItem);
 }
 
 void COptionsWindow::SaveForced()
 {
+	const bool useRuleExtensions = ui.chkUseForceBreakoutRuleExtensions->isChecked();
+
 	QStringList ForceProcess;
 	QStringList ForceProcessDisabled;
 	QStringList ForceChildren;
@@ -176,18 +522,20 @@ void COptionsWindow::SaveForced()
 		if (Type == (int)eTemplate)
 			continue; // entry from template
 
+		QString RuleValue = BuildRuleWithExtensionsFromItem(pItem, false, Type, useRuleExtensions);
+
 		if (pItem->checkState(0) == Qt::Checked) {
 			switch (Type) {
-			case eProcess:	ForceProcess.append(pItem->data(1, Qt::UserRole).toString()); break;
-			case eParent:	ForceChildren.append(pItem->data(1, Qt::UserRole).toString()); break;
-			case ePath:		ForceFolder.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case eProcess:	ForceProcess.append(RuleValue); break;
+			case eParent:	ForceChildren.append(RuleValue); break;
+			case ePath:		ForceFolder.append(RuleValue); break;
 			}
 		}
 		else {
 			switch (Type) {
-			case eProcess:	ForceProcessDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
-			case eParent:	ForceChildrenDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
-			case ePath:		ForceFolderDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case eProcess:	ForceProcessDisabled.append(RuleValue); break;
+			case eParent:	ForceChildrenDisabled.append(RuleValue); break;
+			case ePath:		ForceFolderDisabled.append(RuleValue); break;
 			}
 		}
 	}
@@ -216,18 +564,20 @@ void COptionsWindow::SaveForced()
 		if (Type == (int)eTemplate)
 			continue; // entry from template
 
+		QString RuleValue = BuildRuleWithExtensionsFromItem(pItem, true, Type, useRuleExtensions);
+
 		if (pItem->checkState(0) == Qt::Checked) {
 			switch (Type) {
-			case eProcess:	BreakoutProcess.append(pItem->data(1, Qt::UserRole).toString()); break;
-			case ePath: BreakoutFolder.append(pItem->data(1, Qt::UserRole).toString()); break;
-			case eText: BreakoutDocument.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case eProcess:	BreakoutProcess.append(RuleValue); break;
+			case ePath: BreakoutFolder.append(RuleValue); break;
+			case eText: BreakoutDocument.append(RuleValue); break;
 			}
 		}
 		else {
 			switch (Type) {
-			case eProcess:	BreakoutProcessDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
-			case ePath: BreakoutFolderDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
-			case eText: BreakoutDocumentDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case eProcess:	BreakoutProcessDisabled.append(RuleValue); break;
+			case ePath: BreakoutFolderDisabled.append(RuleValue); break;
+			case eText: BreakoutDocumentDisabled.append(RuleValue); break;
 			}
 		}
 	}
@@ -238,9 +588,43 @@ void COptionsWindow::SaveForced()
 	WriteTextList("BreakoutFolderDisabled", BreakoutFolderDisabled);
 	WriteTextList("BreakoutDocument", BreakoutDocument);
 	WriteTextList("BreakoutDocumentDisabled", BreakoutDocumentDisabled);
-	WriteAdvancedCheck(ui.chkPrioritizeBreakoutOverForce, "PrioritizeBreakoutOverForce", "y", "");
+	WriteAdvancedCheck(ui.chkBreakoutUseTargetDir, "BreakoutUseTargetDir", "y", "");
+	WriteGlobalCheck(ui.chkUseForceBreakoutRuleExtensions, "UseForceBreakoutRuleExtensions", false);
 
 	m_ForcedChanged = false;
+}
+
+void COptionsWindow::OnRuleExtensionsToggled(bool checked)
+{
+	if (checked) {
+		QMessageBox::StandardButton choice = QMessageBox::warning(
+			this,
+			"Sandboxie-Plus",
+			tr("Enabling Force/Breakout rule extensions changes how Force* and Breakout* rules are parsed for sandboxed and unsandboxed launches.\n\n"
+			   "Use this only if you understand Priority, Recursive, and TargetBox semantics.\n\n"
+			   "Click Help to open the documentation page for this setting.\n\n"
+			   "Do you want to enable rule extensions?"),
+			QMessageBox::Yes | QMessageBox::No | QMessageBox::Help,
+			QMessageBox::No);
+
+		if (choice == QMessageBox::Help) {
+			theGUI->OpenUrl("sbie://docs/UseForceBreakoutRuleExtensions");
+			QSignalBlocker blocker(ui.chkUseForceBreakoutRuleExtensions);
+			ui.chkUseForceBreakoutRuleExtensions->setChecked(false);
+			return;
+		}
+
+		if (choice != QMessageBox::Yes)
+		{
+			QSignalBlocker blocker(ui.chkUseForceBreakoutRuleExtensions);
+			ui.chkUseForceBreakoutRuleExtensions->setChecked(false);
+			return;
+		}
+	}
+
+	OnForcedChanged();
+	RefreshRuleExtensionsDisplayForTree(ui.treeForced, false, ui.chkUseForceBreakoutRuleExtensions->isChecked());
+	RefreshRuleExtensionsDisplayForTree(ui.treeBreakout, true, ui.chkUseForceBreakoutRuleExtensions->isChecked());
 }
 
 void COptionsWindow::OnForceProg()

@@ -31,7 +31,7 @@
 #include "core/drv/api_defs.h"
 #include "msgs/msgs.h"
 #include "common/str_util.h"
-#include "common/breakout_match.h"
+#include "common/program_control_rule.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -155,6 +155,8 @@ static BOOLEAN Proc_IsBreakoutCandidate(
     const WCHAR *appPath, const WCHAR *boxname, BOOLEAN allowTargeted);
 
 static int Proc_BreakoutMatchImage(const WCHAR *pattern, const WCHAR *imageName, void *context);
+
+static void Proc_AdjustBreakoutProcessRule(WCHAR *value, void *context);
 
 static void Proc_AdjustBreakoutFolderRule(WCHAR *value, void *context);
 
@@ -796,42 +798,20 @@ _FX const WCHAR* SbieDll_FindArgumentEnd(const WCHAR* arguments)
 static BOOLEAN Proc_CheckBreakoutProcessInList(
     const WCHAR *imageName, const WCHAR *appPath, const WCHAR *boxname, BOOLEAN allowTargeted)
 {
-    WCHAR buf[CONF_LINE_LEN];
-    ULONG index = 0;
     ULONG appPathLen;
+    BOOLEAN use_rule_extensions;
 
     if (!imageName || !*imageName || !appPath || !*appPath)
         return FALSE;
 
     appPathLen = wcslen(appPath);
+    use_rule_extensions = SbieApi_QueryConfBool(boxname, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
 
-    while (1) {
-        NTSTATUS status = SbieApi_QueryConf(boxname, L"BreakoutProcess", index, buf, sizeof(buf) - 16 * sizeof(WCHAR));
-        WCHAR *sep;
-        WCHAR *value = buf;
-
-        ++index;
-        if (!NT_SUCCESS(status)) {
-            if (status == STATUS_BUFFER_TOO_SMALL)
-                continue;
-            break;
-        }
-
-        sep = Breakout_FindTargetSeparator(value);
-        if (sep) {
-            if (!allowTargeted)
-                continue;
-            *sep = L'\0';
-        }
-
-        if (*value != L'*' && Breakout_RuleLooksLikePath(value))
-            SbieDll_TranslateNtToDosPath(value);
-
-        if (Breakout_MatchProcessRule(value, imageName, appPath, appPathLen))
-            return TRUE;
-    }
-
-    return FALSE;
+    return ProgramControl_FindProcessSettingMatch(
+        boxname, L"BreakoutProcess", imageName, appPath, appPathLen,
+        allowTargeted ? 1 : 0, use_rule_extensions ? 1 : 0,
+        Proc_AdjustBreakoutProcessRule, NULL,
+        NULL, 0, NULL, NULL, NULL) ? TRUE : FALSE;
 }
 
 static BOOLEAN Proc_CheckBreakoutFolderInList(
@@ -839,6 +819,7 @@ static BOOLEAN Proc_CheckBreakoutFolderInList(
 {
     const WCHAR *lpProgram;
     ULONG appDirLen;
+    BOOLEAN use_rule_extensions;
 
     if (!appPath || !*appPath)
         return FALSE;
@@ -848,12 +829,13 @@ static BOOLEAN Proc_CheckBreakoutFolderInList(
         return FALSE;
 
     appDirLen = (ULONG)(lpProgram - appPath);
+    use_rule_extensions = SbieApi_QueryConfBool(boxname, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
 
     // Use the calling process image (Dll_ImageName) for image-scope matching.
     // The caller is the parent launching the target, so folder scope must
     // reflect who is launching, not what is being launched.
-    return Breakout_CheckFolderMatchFromConf(
-        boxname, Dll_ImageName, appPath, appDirLen, allowTargeted,
+    return ProgramControl_CheckFolderMatchFromConf(
+        boxname, Dll_ImageName, appPath, appDirLen, allowTargeted, use_rule_extensions ? 1 : 0,
         Proc_BreakoutMatchImage, NULL, Proc_AdjustBreakoutFolderRule, NULL) ? TRUE : FALSE;
 }
 
@@ -862,9 +844,15 @@ static int Proc_BreakoutMatchImage(const WCHAR *pattern, const WCHAR *imageName,
     return SbieDll_MatchImage(pattern, imageName, NULL) ? 1 : 0;
 }
 
+static void Proc_AdjustBreakoutProcessRule(WCHAR *value, void *context)
+{
+    if (value && *value != L'*' && ProgramControl_RuleLooksLikePath(value))
+        SbieDll_TranslateNtToDosPath(value);
+}
+
 static void Proc_AdjustBreakoutFolderRule(WCHAR *value, void *context)
 {
-    Breakout_TrimTrailingBackslashes(value);
+    ProgramControl_TrimTrailingBackslashes(value);
     if (*value != L'*')
         SbieDll_TranslateNtToDosPath(value);
 }
@@ -878,7 +866,7 @@ static BOOLEAN Proc_IsBreakoutCandidate(
         return FALSE;
 
     lpProgram = wcsrchr(appPath, L'\\');
-    if (!lpProgram || Breakout_IsPathInHome(appPath))
+    if (!lpProgram || ProgramControl_IsPathInHome(appPath))
         return FALSE;
 
     return (Proc_CheckBreakoutProcessInList(lpProgram + 1, appPath, boxname, allowTargeted)
@@ -1091,9 +1079,8 @@ _FX BOOL Proc_CreateProcessInternalW(
 
     SaveCurrentDirectory = lpCurrentDirectory;
 
-    BOOLEAN allow_targeted_breakout = Config_GetSettingsForImageName_bool(L"PrioritizeBreakoutOverForce", FALSE);
-    BOOLEAN is_breakout_candidate = Proc_IsBreakoutCandidate(lpApplicationName, NULL, allow_targeted_breakout)
-        || (Dll_BoxName && Proc_IsBreakoutCandidate(lpApplicationName, Dll_BoxName, allow_targeted_breakout));
+    BOOLEAN is_breakout_candidate = Proc_IsBreakoutCandidate(lpApplicationName, NULL, TRUE)
+        || (Dll_BoxName && Proc_IsBreakoutCandidate(lpApplicationName, Dll_BoxName, TRUE));
 
     // For normal launches, keep existing boxed CWD selection behavior.
     if (!is_breakout_candidate)
@@ -1350,34 +1337,53 @@ _FX BOOL Proc_CreateProcessInternalW(
 
     //
     // check if this is a break out candidate
-    // BreakoutProcess and BreakoutFolder entries may include optional "|BoxName" targets.
+    // BreakoutProcess and BreakoutFolder entries may include optional "|TargetBox=BoxName" extensions.
     //
 
-    if(lpApplicationName) {
-        BOOLEAN allow_targeted_breakout = Config_GetSettingsForImageName_bool(L"PrioritizeBreakoutOverForce", FALSE);
-        const WCHAR* lpProgram = wcsrchr(lpApplicationName, L'\\');
-        
-        // Check if current (parent) process was forced by ForceChildren
-        // If so and PrioritizeBreakoutOverForce is not set, block breakout
-        BOOLEAN caller_forced_by_children = FALSE;
-        if (Dll_BoxName) {
-            ULONG caller_flags = (ULONG)SbieApi_QueryProcessInfo(GetCurrentProcess(), 0);
-            if (caller_flags & SBIE_FLAG_FORCED_CHILD_PROCESS) {
-                // Check per-box setting
-                BOOLEAN prioritize_breakout = Config_GetSettingsForImageName_bool(L"PrioritizeBreakoutOverForce", FALSE);
-                if (!prioritize_breakout) {
-                    caller_forced_by_children = TRUE;
-                }
-            }
-        }
+    const WCHAR* lpArguments = NULL;
+    BOOLEAN bd_fallback = FALSE;
+    if (lpCommandLine)
+        lpArguments = SbieDll_FindArgumentEnd(lpCommandLine);
 
-        if (!caller_forced_by_children &&
-            (Proc_IsBreakoutCandidate(lpApplicationName, NULL, allow_targeted_breakout)
-            || (Dll_BoxName && Proc_IsBreakoutCandidate(lpApplicationName, Dll_BoxName, allow_targeted_breakout)))) {
-                
-                const WCHAR* lpArguments = NULL;
-                if (lpCommandLine)
-                    lpArguments = SbieDll_FindArgumentEnd(lpCommandLine);
+    // Evaluate BreakoutDocument before breakout-candidate checks as well.
+    // This allows document priority arbitration to work even when there is no
+    // BreakoutProcess/BreakoutFolder match.
+    if (lpArguments) {
+        const WCHAR *doc = lpArguments;
+        while (*doc == L' ') ++doc;
+        const WCHAR *doc_start, *doc_end;
+        if (*doc == L'"') {
+            doc_start = doc + 1;
+            doc_end = wcschr(doc_start, L'"');
+            if (!doc_end) doc_end = doc_start + wcslen(doc_start);
+        } else {
+            doc_start = doc;
+            doc_end = doc_start;
+            while (*doc_end && *doc_end != L' ') ++doc_end;
+        }
+        ULONG doc_len = (ULONG)(doc_end - doc_start);
+        if (doc_len > 0 &&
+            SbieDll_CheckPatternInList(doc_start, doc_len, NULL, L"BreakoutDocument")) {
+            if (SH32_BreakoutDocument(doc_start, doc_len)) {
+                ok = TRUE;
+                err = 0;
+                goto finish;
+            }
+            // BD matched but UserServer signaled fallback to source box
+            // (e.g., invalid TargetBox or service communication failure).
+            // If this launch is also a breakout candidate, skip the unboxed
+            // launch and fall through to normal process creation.
+            bd_fallback = TRUE;
+        }
+    }
+
+    if(lpApplicationName) {
+        const WCHAR* lpProgram = wcsrchr(lpApplicationName, L'\\');
+
+        // The service (ProcessServer.cpp) enforces ForceChildren-forced caller policy
+        // based on Priority= extensions; no early gate needed here.
+        if (Proc_IsBreakoutCandidate(lpApplicationName, NULL, TRUE)
+            || (Dll_BoxName && Proc_IsBreakoutCandidate(lpApplicationName, Dll_BoxName, TRUE))) {
 
                 WCHAR *mybuf = Dll_Alloc((wcslen(lpApplicationName) + 2 + (lpArguments ? wcslen(lpArguments) + 8192 : 0) + 1) * sizeof(WCHAR));
                 if (mybuf) {
@@ -1499,9 +1505,10 @@ _FX BOOL Proc_CreateProcessInternalW(
                         |   BELOW_NORMAL_PRIORITY_CLASS | IDLE_PRIORITY_CLASS
                         |   CREATE_UNICODE_ENVIRONMENT);
 
-                    ok = SbieDll_RunSandboxed(L"*UNBOXED*", mybuf, lpCurrentDirectory, crflags2, lpStartupInfo, lpProcessInformation);
-
-                    err = GetLastError();
+                    if (!bd_fallback) {
+                        ok = SbieDll_RunSandboxed(L"*UNBOXED*", mybuf, lpCurrentDirectory, crflags2, lpStartupInfo, lpProcessInformation);
+                        err = GetLastError();
+                    }
 
                     Dll_Free(mybuf);
 
@@ -1509,7 +1516,7 @@ _FX BOOL Proc_CreateProcessInternalW(
                     // when the service returns ERROR_NOT_SUPPORTED this means we should take the normal process creation route
                     //
 
-                    if(err != ERROR_NOT_SUPPORTED)
+                    if (!bd_fallback && err != ERROR_NOT_SUPPORTED)
                         goto finish;
                 }
             }
@@ -1520,7 +1527,8 @@ _FX BOOL Proc_CreateProcessInternalW(
     // in the Templates.ini and check whenever explorer wants to start a process
     //
 
-    if (lpCommandLine && Config_GetSettingsForImageName_bool(L"BreakoutDocumentProcess", FALSE))
+    if (!TlsData->sh32_shell_execute &&
+        lpCommandLine && Config_GetSettingsForImageName_bool(L"BreakoutDocumentProcess", FALSE))
     {
         const WCHAR* temp = lpCommandLine;
         if (*temp == L'"') temp = wcschr(temp + 1, L'"');
@@ -3386,3 +3394,4 @@ _FX void Proc_RestartProcessOutOfPcaJob(void)
 
     ExitProcess(0);
 }
+

@@ -423,6 +423,10 @@ void Process_GetCommandLine(
 BOX *Process_GetForcedStartBox(
     HANDLE ProcessId, HANDLE ParentId, const WCHAR *ImagePath, BOOLEAN* pHostInject, const WCHAR *pSidString, BOOLEAN *pForcedByChildren);
 
+BOOLEAN Process_MatchForceChildrenRule(
+    BOX *box, const WCHAR *parent_name, const WCHAR *parent_path,
+    BOOLEAN *outHasPriority, LONG *outPriority);
+
 
 #ifdef DRV_BREAKOUT
 BOOLEAN Process_IsBreakoutProcess(BOX *box, const WCHAR *ImagePath);

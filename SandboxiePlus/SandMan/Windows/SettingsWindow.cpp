@@ -719,6 +719,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.chkSandboxMoTW, SIGNAL(stateChanged(int)), this, SLOT(OnMoTWChange()));
 	connect(ui.cmbMoTWSandbox, SIGNAL(currentIndexChanged(int)), this, SLOT(OnMoTWChange()));
+	connect(ui.chkUseForceBreakoutRuleExtensions, SIGNAL(clicked(bool)), this, SLOT(OnRuleExtensionsGlobalToggled(bool)));
 
 	// USB
 	connect(ui.chkSandboxUsb, SIGNAL(stateChanged(int)), this, SLOT(OnVolumeChanged()));
@@ -1595,6 +1596,7 @@ void CSettingsWindow::LoadSettings()
 
 		QString MoTWBox = theAPI->GetGlobalSettings()->GetText("MarkOfTheWebBox", "Web_Box");
 		ui.chkSandboxMoTW->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceMarkOfTheWeb", false));
+		ui.chkUseForceBreakoutRuleExtensions->setChecked(theAPI->GetGlobalSettings()->GetBool("UseForceBreakoutRuleExtensions", false));
 		QString USBBox = theAPI->GetGlobalSettings()->GetText("UsbSandbox", "USB_Box");
 		ui.chkSandboxUsb->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceUsbDrives", false));
 
@@ -1671,6 +1673,7 @@ void CSettingsWindow::LoadSettings()
 		ui.btnAddWarnProg->setEnabled(false);
 		ui.btnDelWarnProg->setEnabled(false);
 		ui.chkSandboxMoTW->setEnabled(false);
+		ui.chkUseForceBreakoutRuleExtensions->setEnabled(false);
 		ui.cmbMoTWSandbox->setEnabled(false);
 		ui.chkSandboxUsb->setEnabled(false);
 		ui.cmbUsbSandbox->setEnabled(false);
@@ -1756,6 +1759,39 @@ void CSettingsWindow::OnRamDiskChange()
 void CSettingsWindow::OnMoTWChange()
 {
 	ui.cmbMoTWSandbox->setEnabled(ui.chkSandboxMoTW->isChecked());
+	OnOptChanged();
+}
+
+void CSettingsWindow::OnRuleExtensionsGlobalToggled(bool checked)
+{
+	if (checked) {
+		QMessageBox::StandardButton choice = QMessageBox::warning(
+			this,
+			"Sandboxie-Plus",
+			tr("Enabling Force/Breakout rule extensions changes how Force* and Breakout* rules are parsed for sandboxed and unsandboxed launches.\n\n"
+			   "Use this only if you understand Priority, Recursive, and TargetBox semantics.\n\n"
+			   "Click Help to open the documentation page for this setting.\n\n"
+			   "Do you want to enable rule extensions?"),
+			QMessageBox::Yes | QMessageBox::No | QMessageBox::Help,
+			QMessageBox::No);
+
+		if (choice == QMessageBox::Help) {
+			theGUI->OpenUrl("sbie://docs/UseForceBreakoutRuleExtensions");
+			bool blocked = ui.chkUseForceBreakoutRuleExtensions->blockSignals(true);
+			ui.chkUseForceBreakoutRuleExtensions->setChecked(false);
+			ui.chkUseForceBreakoutRuleExtensions->blockSignals(blocked);
+			return;
+		}
+
+		if (choice != QMessageBox::Yes)
+		{
+			bool blocked = ui.chkUseForceBreakoutRuleExtensions->blockSignals(true);
+			ui.chkUseForceBreakoutRuleExtensions->setChecked(false);
+			ui.chkUseForceBreakoutRuleExtensions->blockSignals(blocked);
+			return;
+		}
+	}
+
 	OnOptChanged();
 }
 
@@ -2227,6 +2263,7 @@ void CSettingsWindow::SaveSettings()
 			}
 
 			WriteAdvancedCheck(ui.chkSandboxMoTW, "ForceMarkOfTheWeb", "y", "");
+			WriteAdvancedCheck(ui.chkUseForceBreakoutRuleExtensions, "UseForceBreakoutRuleExtensions", "y", "");
 
 			QString MoTWSandbox = ui.cmbMoTWSandbox->currentData().toString();
 			SB_STATUS Status = theAPI->ValidateName(MoTWSandbox);

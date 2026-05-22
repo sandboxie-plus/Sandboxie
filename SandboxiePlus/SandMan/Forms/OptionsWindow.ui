@@ -2216,21 +2216,21 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                <string>Name</string>
               </property>
              </column>
-                <column>
-                 <property name="text">
-                  <string>Priority</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Recursive</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Target Box</string>
-                 </property>
-                </column>
+             <column>
+              <property name="text">
+               <string>Priority</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Recursive</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Target Box</string>
+              </property>
+             </column>
             </widget>
            </item>
            <item row="5" column="1">
@@ -2343,21 +2343,21 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                    <string>Name</string>
                   </property>
                  </column>
-                <column>
-                 <property name="text">
-                  <string>Priority</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Recursive</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Target Box</string>
-                 </property>
-                </column>
+                 <column>
+                  <property name="text">
+                   <string>Priority</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Recursive</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Target Box</string>
+                  </property>
+                 </column>
                 </widget>
                </item>
                <item row="8" column="0">

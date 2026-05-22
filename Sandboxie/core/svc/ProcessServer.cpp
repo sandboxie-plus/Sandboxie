@@ -271,6 +271,95 @@ static SBIE_POLICY_DECISION ProcessServer_ResolveProcessPolicy(
         breakout_priority);
 }
 
+static BOOLEAN ProcessServer_ShouldReplaceForceWinner(
+    BOOLEAN hasCurrentWinner,
+    BOOLEAN currentHasPriority,
+    LONG currentPriority,
+    BOOLEAN candidateHasPriority,
+    LONG candidatePriority)
+{
+    if (!hasCurrentWinner)
+        return TRUE;
+
+    if (candidateHasPriority != currentHasPriority)
+        return candidateHasPriority ? TRUE : FALSE;
+
+    if (candidateHasPriority && candidatePriority != currentPriority)
+        return (candidatePriority < currentPriority) ? TRUE : FALSE;
+
+    return FALSE;
+}
+
+static void ProcessServer_AssignForceWinner(
+    BOOLEAN source_equals_candidate_box,
+    BOOLEAN candidate_has_priority,
+    LONG candidate_priority,
+    const WCHAR* candidate_box,
+    BOOLEAN* out_have_winner,
+    BOOLEAN* out_winner_source_equals,
+    BOOLEAN* out_winner_has_priority,
+    LONG* out_winner_priority,
+    WCHAR* out_winner_box)
+{
+    *out_have_winner = TRUE;
+    *out_winner_source_equals = source_equals_candidate_box;
+    *out_winner_has_priority = candidate_has_priority;
+    *out_winner_priority = candidate_priority;
+    wcscpy(out_winner_box, candidate_box);
+}
+
+// Returns TRUE only when caller should stop scanning remaining boxes.
+static BOOLEAN ProcessServer_UpdateForceWinnerAndCheckStop(
+    BOOLEAN use_rule_extensions,
+    BOOLEAN source_equals_candidate_box,
+    BOOLEAN candidate_has_priority,
+    LONG candidate_priority,
+    const WCHAR* candidate_box,
+    BOOLEAN* out_have_winner,
+    BOOLEAN* out_winner_source_equals,
+    BOOLEAN* out_winner_has_priority,
+    LONG* out_winner_priority,
+    WCHAR* out_winner_box)
+{
+    if (!use_rule_extensions) {
+        if (!*out_have_winner) {
+            ProcessServer_AssignForceWinner(
+                source_equals_candidate_box,
+                candidate_has_priority,
+                candidate_priority,
+                candidate_box,
+                out_have_winner,
+                out_winner_source_equals,
+                out_winner_has_priority,
+                out_winner_priority,
+                out_winner_box);
+        }
+
+        // Legacy behavior: first force winner across boxes.
+        return TRUE;
+    }
+
+    if (ProcessServer_ShouldReplaceForceWinner(
+            *out_have_winner,
+            *out_winner_has_priority,
+            *out_winner_priority,
+            candidate_has_priority,
+            candidate_priority)) {
+        ProcessServer_AssignForceWinner(
+            source_equals_candidate_box,
+            candidate_has_priority,
+            candidate_priority,
+            candidate_box,
+            out_have_winner,
+            out_winner_source_equals,
+            out_winner_has_priority,
+            out_winner_priority,
+            out_winner_box);
+    }
+
+    return FALSE;
+}
+
 //---------------------------------------------------------------------------
 // Constructor
 //---------------------------------------------------------------------------
@@ -1052,6 +1141,12 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                             if (BoxNameOrModelPid == 0) {
                                 WCHAR BoxName[BOXNAME_COUNT];
                                 int index = -1;
+                                BOOLEAN have_force_winner = FALSE;
+                                BOOLEAN winner_source_equals = FALSE;
+                                BOOLEAN winner_has_priority = FALSE;
+                                LONG winner_priority = -1;
+                                BOOLEAN source_use_rule_extensions = ProcessServer_UseRuleExtensions(SourceBox);
+                                WCHAR winner_box[BOXNAME_COUNT] = { 0 };
 
                                 while (1) {
                                     SBIE_POLICY_DECISION decision;
@@ -1125,23 +1220,37 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                                         breakout_has_priority,
                                         breakout_priority);
 
-                                    if (decision == SBIE_DECISION_FORCE_SAME_BOX) {
+                                    if (decision == SBIE_DECISION_FORCE_SAME_BOX ||
+                                        decision == SBIE_DECISION_FORCE_OTHER_BOX) {
+
+                                        if (ProcessServer_UpdateForceWinnerAndCheckStop(
+                                                source_use_rule_extensions,
+                                                source_equals_candidate_box,
+                                                force_has_priority,
+                                                force_priority,
+                                                BoxName,
+                                                &have_force_winner,
+                                                &winner_source_equals,
+                                                &winner_has_priority,
+                                                &winner_priority,
+                                                winner_box)) {
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                if (have_force_winner) {
+                                    if (winner_source_equals) {
 
                                         // Deny breakout; DLL will create the process normally in the sandbox.
                                         lvl = 0;
                                         err = ERROR_NOT_SUPPORTED;
                                         goto end;
-
-                                    } else if (decision == SBIE_DECISION_FORCE_OTHER_BOX) {
-
-                                        //
-                                        // Force to a different box.
-                                        //
-
-                                        BoxNameOrModelPid = (LONG_PTR)boxname;
-                                        wcscpy(boxname, BoxName);
-                                        break;
                                     }
+
+                                    // Force to the selected other box.
+                                    BoxNameOrModelPid = (LONG_PTR)boxname;
+                                    wcscpy(boxname, winner_box);
                                 }
 
                                 if (BoxNameOrModelPid == 0 && has_explicit_target) {

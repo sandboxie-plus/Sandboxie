@@ -270,6 +270,79 @@ static BOOLEAN UserServer_GetForceFolderPriority(
     return found;
 }
 
+// Scans BreakoutFolder rules to find if any match the handler directory.
+// Returns TRUE if a match is found, and sets *outPriority to the Priority=N
+// value of the best-matching rule (-1 if no Priority= was specified).
+static BOOLEAN UserServer_GetBreakoutFolderPriority(
+    const WCHAR* boxname, const WCHAR* imageName, const WCHAR* appPath, ULONG appDirLen,
+    LONG* outPriority)
+{
+    BOOLEAN use_rule_extensions;
+    BOOLEAN has_priority = FALSE;
+    LONG best_priority = -1;
+    BOOLEAN found;
+
+    if (outPriority)
+        *outPriority = -1;
+
+    if (!boxname || !imageName || !*imageName || !appPath || !*appPath || !appDirLen)
+        return FALSE;
+
+    use_rule_extensions = UserServer_UseRuleExtensions(boxname, L"BreakoutFolder");
+
+    found = ProgramControl_CheckFolderSettingMatchFromConf(
+        boxname,
+        L"BreakoutFolder",
+        imageName,
+        appPath,
+        appDirLen,
+        1,
+        &has_priority,
+        &best_priority,
+        use_rule_extensions ? 1 : 0,
+        UserServer_MatchImage,
+        NULL,
+        UserServer_AdjustFolderRule,
+        NULL) ? TRUE : FALSE;
+
+    if (outPriority)
+        *outPriority = has_priority ? best_priority : -1;
+
+    return found;
+}
+
+static BOOLEAN UserServer_GetBreakoutFolderTarget(
+    const WCHAR* boxname, const WCHAR* imageName, const WCHAR* appPath, ULONG appDirLen,
+    WCHAR* outTarget, ULONG outTargetCch)
+{
+    BOOLEAN use_rule_extensions;
+
+    if (!outTarget || outTargetCch == 0)
+        return FALSE;
+
+    outTarget[0] = L'\0';
+
+    if (!boxname || !imageName || !*imageName || !appPath || !*appPath || !appDirLen)
+        return FALSE;
+
+    use_rule_extensions = UserServer_UseRuleExtensions(boxname, L"BreakoutFolder");
+
+    return ProgramControl_GetFolderTargetFromConf(
+        boxname,
+        imageName,
+        appPath,
+        appDirLen,
+        outTarget,
+        outTargetCch,
+        NULL,
+        NULL,
+        use_rule_extensions ? 1 : 0,
+        UserServer_MatchImage,
+        NULL,
+        UserServer_AdjustFolderRule,
+        NULL) ? TRUE : FALSE;
+}
+
 // Scans ForceProcess rules to check if any match the given image name.
 // Returns TRUE if a match is found, and sets *outPriority to the Priority=N
 // value of the best-matching rule (-1 if no Priority= was specified).
@@ -357,6 +430,81 @@ static BOOLEAN UserServer_GetBreakoutProcessPriority(
 {
     return UserServer_QueryImageRuleMatch(
         boxname, L"BreakoutProcess", imageName, outPriority, outTarget, outTargetCch);
+}
+
+static BOOLEAN UserServer_IsPrimaryPreferredByPriority(
+    LONG primaryPriority,
+    LONG secondaryPriority,
+    BOOLEAN preferPrimaryOnTie)
+{
+    // Generic priority comparison helper.
+    // Example 1: primary=2, secondary=5 -> TRUE (lower numeric priority wins).
+    // Example 2: primary=-1, secondary=0 -> FALSE (explicit priority beats unset).
+    // Example 3: primary=-1, secondary=-1, preferPrimaryOnTie=TRUE -> TRUE (tie goes primary).
+    BOOLEAN primary_has_priority = (primaryPriority >= 0) ? TRUE : FALSE;
+    BOOLEAN secondary_has_priority = (secondaryPriority >= 0) ? TRUE : FALSE;
+
+    if (primary_has_priority && secondary_has_priority) {
+        if (primaryPriority < secondaryPriority)
+            return TRUE;
+        if (primaryPriority > secondaryPriority)
+            return FALSE;
+        return preferPrimaryOnTie ? TRUE : FALSE;
+    }
+
+    if (primary_has_priority != secondary_has_priority)
+        return primary_has_priority ? TRUE : FALSE;
+
+    return preferPrimaryOnTie ? TRUE : FALSE;
+}
+
+static void UserServer_SelectBreakoutProcessFolderWinner(
+    BOOLEAN bp_match,
+    LONG bp_priority,
+    const WCHAR* bp_targetBox,
+    BOOLEAN bf_match,
+    LONG bf_priority,
+    BOOLEAN bf_has_target,
+    const WCHAR* bf_targetBox,
+    BOOLEAN* outMatch,
+    LONG* outPriority,
+    BOOLEAN* outHasTarget,
+    WCHAR* outTargetBox,
+    ULONG outTargetCch)
+{
+    if (!outMatch || !outPriority || !outHasTarget || !outTargetBox || outTargetCch == 0)
+        return;
+
+    *outMatch = FALSE;
+    *outPriority = -1;
+    *outHasTarget = FALSE;
+    outTargetBox[0] = L'\0';
+
+    if (!bp_match && !bf_match)
+        return;
+
+    *outMatch = TRUE;
+
+    BOOLEAN winner_is_bp;
+    if (bp_match && bf_match)
+        winner_is_bp = UserServer_IsPrimaryPreferredByPriority(bp_priority, bf_priority, TRUE);
+    else
+        winner_is_bp = bp_match ? TRUE : FALSE;
+
+    if (winner_is_bp) {
+        *outPriority = bp_priority;
+        if (bp_targetBox && *bp_targetBox) {
+            *outHasTarget = TRUE;
+            wcscpy_s(outTargetBox, outTargetCch, bp_targetBox);
+        }
+    }
+    else {
+        *outPriority = bf_priority;
+        if (bf_has_target && bf_targetBox && *bf_targetBox) {
+            *outHasTarget = TRUE;
+            wcscpy_s(outTargetBox, outTargetCch, bf_targetBox);
+        }
+    }
 }
 
 static ULONG UserServer_MapLaunchFailureStatusFromLastError(void)
@@ -1331,8 +1479,10 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
     if (SbieDll_CheckPatternInList(path_buff, path_len, boxname, L"BreakoutDocument")) {
 
         LONG bd_priority = -1;
+        LONG bf_priority = -1;
         LONG ff_priority = -1;
         LONG fp_priority = -1;
+        LONG bp_priority = -1;
 
         WCHAR targetBox[BOXNAME_COUNT] = { 0 };
         BOOLEAN has_target = UserServer_GetBreakoutDocumentTarget(
@@ -1347,6 +1497,7 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
         // the document extension via shlwapi AssocQueryStringW so the priority comparison
         // uses the correct image name. Fall back to the caller's image if resolution fails.
         WCHAR handlerImage[96] = { 0 };
+        WCHAR handlerPathBuf[MAX_PATH] = { 0 };
         const WCHAR* fpCheckImage = image;
         {
             typedef HRESULT (WINAPI *P_AssocQueryStringW)(DWORD, DWORD, LPCWSTR, LPCWSTR, LPWSTR, DWORD*);
@@ -1364,6 +1515,7 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
                         if (handlerPath) {
                             hr = pAssocQuery(0, 2, path_buff, NULL, handlerPath, &len);
                             if (SUCCEEDED(hr) && handlerPath[0]) {
+                                wcscpy_s(handlerPathBuf, _countof(handlerPathBuf), handlerPath);
                                 const WCHAR* slash = wcsrchr(handlerPath, L'\\');
                                 if (wcscpy_s(handlerImage, _countof(handlerImage), slash ? slash + 1 : handlerPath) == 0)
                                     fpCheckImage = handlerImage;
@@ -1376,41 +1528,77 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
         }
         BOOLEAN fp_match = UserServer_GetForceProcessPriority(boxname, fpCheckImage, &fp_priority);
 
+        // BreakoutFolder: check the resolved handler path against BreakoutFolder
+        // rules, scoped by the source process image (same as process-start folder scope).
+        WCHAR bf_targetBox[BOXNAME_COUNT] = { 0 };
+        BOOLEAN bf_match = FALSE;
+        BOOLEAN bf_has_target = FALSE;
+        if (handlerPathBuf[0]) {
+            const WCHAR* handlerSlash = wcsrchr(handlerPathBuf, L'\\');
+            if (handlerSlash && handlerSlash > handlerPathBuf) {
+                ULONG handlerDirLen = (ULONG)(handlerSlash - handlerPathBuf);
+                bf_match = UserServer_GetBreakoutFolderPriority(
+                    boxname,
+                    image,
+                    handlerPathBuf,
+                    handlerDirLen,
+                    &bf_priority);
+                bf_has_target = UserServer_GetBreakoutFolderTarget(
+                    boxname,
+                    image,
+                    handlerPathBuf,
+                    handlerDirLen,
+                    bf_targetBox,
+                    BOXNAME_COUNT);
+            }
+        }
+
         // BreakoutProcess: check if the handler image also matches a BreakoutProcess
         // rule.  When BreakoutProcess has a lower priority number than BreakoutDocument,
         // BP wins the breakout-side contest and its TargetBox (if any) is used.
-        LONG bp_priority = -1;
         WCHAR bp_targetBox[BOXNAME_COUNT] = { 0 };
-        UserServer_GetBreakoutProcessPriority(boxname, fpCheckImage, &bp_priority, bp_targetBox, BOXNAME_COUNT);
+        BOOLEAN bp_match = UserServer_GetBreakoutProcessPriority(boxname, fpCheckImage, &bp_priority, bp_targetBox, BOXNAME_COUNT);
 
-        // Arbitrate within the breakout side: the winner is whichever of
-        // BreakoutDocument and BreakoutProcess has the lower priority number.
+        // First arbitrate within process-start breakout rules: BreakoutProcess vs BreakoutFolder.
+        // Tie behavior follows process-start semantics: BreakoutProcess wins equal priority.
+        BOOLEAN breakout_pf_match = FALSE;
+        LONG breakout_pf_priority = -1;
+        BOOLEAN breakout_pf_has_target = FALSE;
+        WCHAR breakout_pf_targetBox[BOXNAME_COUNT] = { 0 };
+
+        UserServer_SelectBreakoutProcessFolderWinner(
+            bp_match,
+            bp_priority,
+            bp_targetBox,
+            bf_match,
+            bf_priority,
+            bf_has_target,
+            bf_targetBox,
+            &breakout_pf_match,
+            &breakout_pf_priority,
+            &breakout_pf_has_target,
+            breakout_pf_targetBox,
+            BOXNAME_COUNT);
+
+        // Arbitrate within the breakout side: BreakoutDocument vs the winning
+        // process-start breakout rule (BreakoutProcess or BreakoutFolder).
         // No explicit priority (= -1) loses to any explicit priority (>= 0).
         // On equal priority, BreakoutDocument wins. Both unset priorities are
         // treated as an equal-priority tie.
-        BOOLEAN bp_wins;
-        if (bp_priority >= 0 && bd_priority >= 0)
-            bp_wins = (bp_priority < bd_priority) ? TRUE : FALSE;
-        else if (bp_priority >= 0)
-            bp_wins = TRUE;
-        else if (bd_priority >= 0)
-            bp_wins = FALSE;
-        else
-            bp_wins = FALSE;
+        BOOLEAN bd_wins = TRUE;
+        if (breakout_pf_match)
+            bd_wins = UserServer_IsPrimaryPreferredByPriority(bd_priority, breakout_pf_priority, TRUE);
 
         // The effective breakout priority for comparison against force rules.
-        LONG breakout_winner_priority = bp_wins ? bp_priority : bd_priority;
+        LONG breakout_winner_priority = bd_wins ? bd_priority : breakout_pf_priority;
 
-        // When BP wins and has a TargetBox, adopt it as the routing target so the
-        // document opens in that box (and the existing API_IS_BOX_ENABLED check
-        // handles the invalid-target fallback path).
-        BOOLEAN has_target_effective;
-        if (bp_wins && bp_targetBox[0] != L'\0') {
-            wcscpy_s(targetBox, BOXNAME_COUNT, bp_targetBox);
+        // Apply target from the breakout-side winner only.
+        BOOLEAN has_target_effective = FALSE;
+        if (bd_wins)
+            has_target_effective = has_target ? TRUE : FALSE;
+        else if (breakout_pf_has_target && breakout_pf_targetBox[0] != L'\0') {
+            wcscpy_s(targetBox, BOXNAME_COUNT, breakout_pf_targetBox);
             has_target_effective = TRUE;
-        } else {
-            // BD wins, or BP wins without a TargetBox (routes unboxed).
-            has_target_effective = has_target && !bp_wins;
         }
 
         // Combined force priority: take the most specific (lowest number) among
@@ -1432,11 +1620,10 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
         // Default: breakout wins only when TargetBox is explicitly specified.
         // For BREAKOUT_UNBOXED (no TargetBox), ForceProcess/ForceFolder dominates
         // unless BreakoutDocument has an explicit lower Priority=N to override it.
-        // has_target_effective reflects whether BreakoutDocument won within the
-        // breakout side (vs BreakoutProcess); breakout_winner_priority is the
-        // priority of the winning breakout rule.
+        // has_target_effective and breakout_winner_priority reflect the breakout-side
+        // winner across BreakoutDocument, BreakoutProcess, and BreakoutFolder.
         SBIE_POLICY_DECISION decision = UserServer_ResolveDocumentPolicy(
-            has_target_effective,    // breakout_has_target: FALSE when BreakoutProcess wins
+            has_target_effective,
             fp_match ? 1 : 0,        // force_process_match: handler image vs ForceProcess rules
             ff_match ? 1 : 0,        // force_folder_match: scope-aware result from GetForceFolderPriority
             force_has_priority,

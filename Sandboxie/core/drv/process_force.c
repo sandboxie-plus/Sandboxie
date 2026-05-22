@@ -2553,6 +2553,23 @@ static BOOLEAN Process_ShouldReplaceBreakoutTarget(
         0) ? TRUE : FALSE;
 }
 
+static BOOLEAN Process_ShouldReplaceForceWinner(
+    BOOLEAN hasCurrentWinner,
+    BOOLEAN currentHasPriority,
+    LONG currentPriority,
+    BOOLEAN candidateHasPriority,
+    LONG candidatePriority)
+{
+    return ProgramControl_ShouldReplaceTargetMatch(
+        hasCurrentWinner ? 1 : 0,
+        currentHasPriority ? 1 : 0,
+        currentPriority,
+        0,
+        candidateHasPriority ? 1 : 0,
+        candidatePriority,
+        0) ? TRUE : FALSE;
+}
+
 static BOOLEAN Process_GetMatchedBreakoutTarget(
     BOX *box, const WCHAR *processName, const WCHAR *folderScopeName, const WCHAR *path, WCHAR *outTarget, ULONG outTargetCch)
 {
@@ -3036,6 +3053,11 @@ _FX BOX *Process_CheckForceProcess(
     LIST *boxes, const WCHAR *name, const WCHAR* path, const WCHAR *docPath, BOOLEAN alert, ULONG *IsAlert, const WCHAR *ParentName, const WCHAR *ParentPath, BOOLEAN *pForcedByChildren)
 {
     FORCE_BOX *box;
+    FORCE_BOX *force_winner = NULL;
+    BOOLEAN force_winner_from_children = FALSE;
+    BOOLEAN force_winner_has_priority = FALSE;
+    LONG force_winner_priority = -1;
+    BOOLEAN have_force_winner = FALSE;
 
     if (pForcedByChildren)
         *pForcedByChildren = FALSE;
@@ -3062,6 +3084,17 @@ _FX BOX *Process_CheckForceProcess(
         LONG force_priority = -1;
 
         if (Process_CheckForceProcessList(box->box, &box->ForceProcess, name, path, &force_has_priority, &force_priority)) {
+
+            if (have_force_winner &&
+                !Process_ShouldReplaceForceWinner(
+                    have_force_winner,
+                    force_winner_has_priority,
+                    force_winner_priority,
+                    force_has_priority,
+                    force_priority)) {
+                box = List_Next(box);
+                continue;
+            }
 
             const WCHAR *folder_scope_name = (ParentName && *ParentName) ? ParentName : name;
             BOOLEAN image_scoped_breakout = Process_HasImageScopedBreakoutMatch(box->box, name, folder_scope_name, path);
@@ -3140,10 +3173,35 @@ _FX BOX *Process_CheckForceProcess(
                 return NULL;
             }
 
-            return box->box;
+            if (Process_ShouldReplaceForceWinner(
+                    have_force_winner,
+                    force_winner_has_priority,
+                    force_winner_priority,
+                    force_has_priority,
+                    force_priority)) {
+                force_winner = box;
+                force_winner_from_children = FALSE;
+                force_winner_has_priority = force_has_priority;
+                force_winner_priority = force_priority;
+                have_force_winner = TRUE;
+            }
+
+            box = List_Next(box);
+            continue;
         }
 
         if (ParentName && Process_CheckForceProcessList(box->box, &box->ForceChildren, ParentName, ParentPath, &force_has_priority, &force_priority) && _wcsicmp(name, L"Sandman.exe") != 0) { // except for sandman exe
+
+            if (have_force_winner &&
+                !Process_ShouldReplaceForceWinner(
+                    have_force_winner,
+                    force_winner_has_priority,
+                    force_winner_priority,
+                    force_has_priority,
+                    force_priority)) {
+                box = List_Next(box);
+                continue;
+            }
 
             const WCHAR *folder_scope_name = ParentName;
             BOOLEAN image_scoped_breakout = Process_HasImageScopedBreakoutMatch(box->box, name, folder_scope_name, path);
@@ -3222,10 +3280,21 @@ _FX BOX *Process_CheckForceProcess(
                 return NULL;
             }
 
-            if (pForcedByChildren)
-                *pForcedByChildren = TRUE;
+            if (Process_ShouldReplaceForceWinner(
+                    have_force_winner,
+                    force_winner_has_priority,
+                    force_winner_priority,
+                    force_has_priority,
+                    force_priority)) {
+                force_winner = box;
+                force_winner_from_children = TRUE;
+                force_winner_has_priority = force_has_priority;
+                force_winner_priority = force_priority;
+                have_force_winner = TRUE;
+            }
 
-            return box->box;
+            box = List_Next(box);
+            continue;
         }
 
         //if (Process_IsWindowsExplorerParent(ParentId) && Conf_Get_Boolean(box->box->name, L"ForceExplorerChild", 0, FALSE)) {
@@ -3234,6 +3303,12 @@ _FX BOX *Process_CheckForceProcess(
         //}
 
         box = List_Next(box);
+    }
+
+    if (have_force_winner) {
+        if (pForcedByChildren)
+            *pForcedByChildren = force_winner_from_children;
+        return force_winner->box;
     }
 
     return NULL;

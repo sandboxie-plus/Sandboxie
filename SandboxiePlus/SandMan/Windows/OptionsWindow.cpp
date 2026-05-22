@@ -1879,6 +1879,12 @@ QMap<int, QStringList> COptionsWindow::GetUsedRulePrioritySources(const QTreeWid
 		"BreakoutDocument", "BreakoutDocumentDisabled"
 	};
 
+	const QStringList crossBoxForceSettings = {
+		"ForceProcess", "ForceProcessDisabled",
+		"ForceChildren", "ForceChildrenDisabled",
+		"ForceFolder", "ForceFolderDisabled"
+	};
+
 	collectTree(ui.treeForced, tr("force"));
 	collectTree(ui.treeBreakout, tr("breakout"));
 
@@ -1905,6 +1911,28 @@ QMap<int, QStringList> COptionsWindow::GetUsedRulePrioritySources(const QTreeWid
 			collectRuleList(
 				m_pBox->GetTextListTmpl(setting, Template),
 				tr("template %1, %2, %3").arg(Template, settingKind(setting), settingState(setting)));
+		}
+	}
+
+	// Include Force* priorities from other enabled boxes so conflicting values can be shown as unavailable.
+	if (!m_Template) {
+		QMap<QString, CSandBoxPtr> allBoxes = m_pBox->GetAPI()->GetAllBoxes();
+		QString currentBoxName = m_pBox->GetName();
+
+		for (auto it = allBoxes.constBegin(); it != allBoxes.constEnd(); ++it) {
+			const CSandBoxPtr& pOtherBox = it.value();
+			if (!pOtherBox || !pOtherBox->IsEnabled())
+				continue;
+
+			QString otherBoxName = pOtherBox->GetName();
+			if (otherBoxName.isEmpty() || otherBoxName.compare(currentBoxName, Qt::CaseInsensitive) == 0)
+				continue;
+
+			for (const QString& setting : crossBoxForceSettings) {
+				collectRuleList(
+					pOtherBox->GetTextList(setting, false),
+					tr("box %1, %2, %3").arg(otherBoxName, settingKind(setting), settingState(setting)));
+			}
 		}
 	}
 

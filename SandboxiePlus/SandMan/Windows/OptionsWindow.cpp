@@ -19,6 +19,85 @@
 #include <QRegularExpressionValidator>
 #include <QStandardItemModel>
 
+static bool GetWildcardAnchorForRule(const QString& baseRule, QString* pAnchor, QChar* pWildcardChar = nullptr)
+{
+	QString rule = baseRule.trimmed();
+	if (rule.isEmpty())
+		return false;
+
+	int wildcardPos = -1;
+	QChar wildcardChar;
+	for (int i = 0; i < rule.length(); ++i) {
+		QChar ch = rule[i];
+		if (ch == '*' || ch == '?') {
+			wildcardPos = i;
+			wildcardChar = ch;
+			break;
+		}
+	}
+
+	if (wildcardPos < 0)
+		return false;
+
+	QString prefix = rule.left(wildcardPos);
+	int lastSlash = prefix.lastIndexOf('\\');
+	int lastForwardSlash = prefix.lastIndexOf('/');
+	int cutPos = qMax(lastSlash, lastForwardSlash);
+	if (cutPos < 0)
+		return false;
+
+	if (pAnchor)
+		*pAnchor = prefix.left(cutPos + 1).trimmed();
+	if (pWildcardChar)
+		*pWildcardChar = wildcardChar;
+
+	return true;
+}
+
+static QString RecursiveDisplayTextForValue(const QString& value)
+{
+	QString normalized = value.trimmed().toLower();
+	if (normalized == "n" || normalized == "0" || normalized == "no" || normalized == "false")
+		return QObject::tr("no (0)");
+	if (normalized == "y" || normalized == "yes" || normalized == "true" || normalized == "*")
+		return QObject::tr("yes (unlimited)");
+
+	bool ok = false;
+	int depth = normalized.toInt(&ok);
+	if (ok && depth >= 0)
+		return QObject::tr("depth %1").arg(depth);
+
+	return value;
+}
+
+static QString BuildRecursiveOptionTooltip(const QString& optionValue, const QString& anchor)
+{
+	QString value = optionValue.trimmed().toLower();
+	QString tip;
+
+	if (value == "-")
+		tip = QObject::tr("No explicit recursion mode.");
+	else if (value == "n" || value == "0")
+		tip = QObject::tr("No recursion, only the matched folder.");
+	else if (value == "y")
+		tip = QObject::tr("Unlimited recursion from the wildcard anchor.");
+	else {
+		bool ok = false;
+		int depth = value.toInt(&ok);
+		if (ok && depth >= 0)
+			tip = QObject::tr("Include up to %1 subfolder level(s) from the wildcard anchor.").arg(depth);
+	}
+
+	if (value != "-") {
+		if (!anchor.isEmpty())
+			tip += (tip.isEmpty() ? QString() : QString("\n")) + QObject::tr("Wildcard anchor (first wildcard): %1").arg(anchor);
+		else
+			tip += (tip.isEmpty() ? QString() : QString("\n")) + QObject::tr("Wildcard anchor: not applicable (exact path, no '*' or '?').");
+	}
+
+	return tip;
+}
+
 
 class NoEditDelegate : public QStyledItemDelegate {
 public:
@@ -265,6 +344,8 @@ public:
 						continue;
 
 					if (usedPrioritySources.contains(value)) {
+						if (!pEntry->text().contains(tr("(in use)"), Qt::CaseInsensitive))
+							pEntry->setText(tr("%1 (in use)").arg(pEntry->text()));
 						pEntry->setEnabled(false);
 						QStringList sources = usedPrioritySources.value(value);
 						if (!sources.isEmpty())
@@ -284,10 +365,14 @@ public:
 			setupWideDropdown(pBox);
 			pBox->addItem(tr("Not set"), "-");
 			pBox->setItemData(0, tr("unlimited"), Qt::ToolTipRole);
-			pBox->addItem("n (0)", "0");
-			for (int i = 1; i <= 9; ++i)
-				pBox->addItem(QString::number(i), QString::number(i));
-			pBox->addItem("y (unlimited)", "y");
+			pBox->addItem(RecursiveDisplayTextForValue("n"), "n");
+			pBox->setItemData(1, tr("No recursion, only the matched folder."), Qt::ToolTipRole);
+			pBox->addItem(RecursiveDisplayTextForValue("y"), "y");
+			pBox->setItemData(2, tr("Unlimited recursion from the wildcard anchor."), Qt::ToolTipRole);
+			for (int i = 1; i <= 9; ++i) {
+				pBox->addItem(RecursiveDisplayTextForValue(QString::number(i)), QString::number(i));
+				pBox->setItemData(pBox->count() - 1, tr("Include up to %1 subfolder level(s) from the wildcard anchor.").arg(i), Qt::ToolTipRole);
+			}
 
 			QSet<int> usedRecursiveValues = m_pOptions->GetUsedRuleRecursiveValues(pItem);
 			QList<int> customRecursiveValues;
@@ -299,7 +384,7 @@ public:
 			for (int value : customRecursiveValues) {
 				QString valueText = QString::number(value);
 				if (pBox->findData(valueText) < 0)
-					pBox->addItem(valueText, valueText);
+					pBox->addItem(RecursiveDisplayTextForValue(valueText), valueText);
 			}
 
 			setupWideDropdown(pBox);
@@ -342,19 +427,38 @@ public:
 			QString value = pItem->data(index.column(), Qt::UserRole).toString().trimmed();
 			if (m_Column == 3 && value == "*")
 				value = "y";
-			if (m_Column == 3 && (value.compare("n", Qt::CaseInsensitive) == 0 || value.compare("no", Qt::CaseInsensitive) == 0 || value.compare("false", Qt::CaseInsensitive) == 0))
-				value = "0";
+			if (m_Column == 3 && (value.compare("n", Qt::CaseInsensitive) == 0 || value.compare("no", Qt::CaseInsensitive) == 0 || value.compare("false", Qt::CaseInsensitive) == 0 || value == "0"))
+				value = "n";
 			if (m_Column == 3 && (value.compare("y", Qt::CaseInsensitive) == 0 || value.compare("yes", Qt::CaseInsensitive) == 0 || value.compare("true", Qt::CaseInsensitive) == 0))
 				value = "y";
 			if (m_Column == 3 && value.isEmpty())
 				value = "-";
 
+			if (m_Column == 3) {
+				QString baseRule = pItem->data(1, Qt::UserRole).toString();
+				QString anchor;
+				QChar wildcardChar;
+				bool hasWildcardAnchor = GetWildcardAnchorForRule(baseRule, &anchor, &wildcardChar);
+				for (int row = 0; row < pBox->count(); ++row) {
+					QString optionValue = pBox->itemData(row).toString();
+					QString tip = BuildRecursiveOptionTooltip(optionValue, anchor);
+					if (hasWildcardAnchor && optionValue != "-")
+						tip += QString("\n") + tr("Wildcard operator: %1").arg(QString(wildcardChar));
+					if (!tip.isEmpty())
+						pBox->setItemData(row, tip, Qt::ToolTipRole);
+				}
+			}
+
 			// If a persisted numeric value is outside preset ranges, expose it in the dropdown list.
 			if (m_Column == 2 || m_Column == 3) {
 				bool ok = false;
 				qlonglong customValue = value.toLongLong(&ok);
-				if (ok && customValue >= 0 && pBox->findData(value) < 0)
-					pBox->addItem(value, value);
+				if (ok && customValue >= 0 && pBox->findData(value) < 0) {
+					if (m_Column == 3)
+						pBox->addItem(RecursiveDisplayTextForValue(value), value);
+					else
+						pBox->addItem(value, value);
+				}
 			}
 
 			// Empty value for TargetBox is normal (no extension)
@@ -409,8 +513,8 @@ public:
 				if (value == "-") {
 					value.clear();
 				}
-				else if (value == "n" || value == "no" || value == "false") {
-					value = "0";
+				else if (value == "n" || value == "no" || value == "false" || value == "0") {
+					value = "n";
 				}
 				else if (value == "y" || value == "yes" || value == "true") {
 					value = "y";
@@ -425,8 +529,13 @@ public:
 
 			// Empty value already signals no TargetBox extension
 
+			QString displayValue = value;
+			if (m_Column == 3) {
+				displayValue = RecursiveDisplayTextForValue(value);
+			}
+
 			bool prev = m_pTree->blockSignals(true);
-			pItem->setText(index.column(), value);
+			pItem->setText(index.column(), displayValue);
 			m_pTree->blockSignals(prev);
 			pItem->setData(index.column(), Qt::UserRole, value);
 			return;

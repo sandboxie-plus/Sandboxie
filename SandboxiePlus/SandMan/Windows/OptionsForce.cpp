@@ -122,11 +122,85 @@ static QString FormatRuleDisplayValue(bool enabled, bool supported, const QStrin
 		return "N/A";
 	if (!enabled)
 		return "-";
-	if (value.trimmed().isEmpty())
+	QString trimmedValue = value.trimmed();
+	if (trimmedValue.isEmpty())
 		return "-";
-	if (formatZeroAsNo && value == "0")
-		return "n (0)";
-	return value;
+	if (formatZeroAsNo) {
+		QString normalized = trimmedValue.toLower();
+		if (normalized == "0" || normalized == "n" || normalized == "no" || normalized == "false")
+			return QObject::tr("no (0)");
+		if (normalized == "y" || normalized == "yes" || normalized == "true" || normalized == "*")
+			return QObject::tr("yes (unlimited)");
+	}
+	return trimmedValue;
+}
+
+static bool GetWildcardAnchor(const QString& baseRule, QString* pAnchor, QChar* pWildcardChar = nullptr)
+{
+	QString rule = baseRule.trimmed();
+	if (rule.isEmpty())
+		return false;
+
+	int wildcardPos = -1;
+	QChar wildcardChar;
+	for (int i = 0; i < rule.length(); ++i) {
+		QChar ch = rule[i];
+		if (ch == '*' || ch == '?') {
+			wildcardPos = i;
+			wildcardChar = ch;
+			break;
+		}
+	}
+
+	if (wildcardPos < 0)
+		return false;
+
+	QString prefix = rule.left(wildcardPos);
+	int lastSlash = prefix.lastIndexOf('\\');
+	int lastForwardSlash = prefix.lastIndexOf('/');
+	int cutPos = qMax(lastSlash, lastForwardSlash);
+	if (cutPos < 0)
+		return false;
+
+	if (pAnchor)
+		*pAnchor = prefix.left(cutPos + 1).trimmed();
+	if (pWildcardChar)
+		*pWildcardChar = wildcardChar;
+
+	return true;
+}
+
+static QString BuildRecursiveTooltip(const QString& baseRule, const QString& recursiveValue)
+{
+	QString normalized = recursiveValue.trimmed().toLower();
+	QString modeText;
+	if (normalized == "0" || normalized == "n" || normalized == "no" || normalized == "false")
+		modeText = QObject::tr("Recursion: no (0). Only the matched folder itself is used.");
+	else if (normalized == "y" || normalized == "yes" || normalized == "true" || normalized == "*")
+		modeText = QObject::tr("Recursion: yes (unlimited). All subfolder levels are used.");
+	else {
+		bool ok = false;
+		int depth = normalized.toInt(&ok);
+		if (ok && depth >= 0)
+			modeText = QObject::tr("Recursion depth: %1. Includes up to %1 subfolder level(s)." ).arg(depth);
+	}
+
+	QString anchor;
+	QChar wildcardChar;
+	bool hasWildcardAnchor = GetWildcardAnchor(baseRule, &anchor, &wildcardChar);
+	if (hasWildcardAnchor && !anchor.isEmpty()) {
+		if (!modeText.isEmpty())
+			modeText += "\n";
+		modeText += QObject::tr("Wildcard anchor (first wildcard): %1").arg(anchor);
+		modeText += "\n" + QObject::tr("Wildcard operator: %1").arg(QString(wildcardChar));
+	}
+	else {
+		if (!modeText.isEmpty())
+			modeText += "\n";
+		modeText += QObject::tr("Wildcard anchor: not applicable (exact path, no '*' or '?').");
+	}
+
+	return modeText;
 }
 
 static QString CanonicalizeBoxNameCase(const QString& boxName)
@@ -176,6 +250,15 @@ static void RefreshRuleExtensionsDisplayForTree(QTreeWidget* pTree, bool breakou
 			pItem->setText(kRulePriorityColumn, FormatRuleDisplayValue(enabled, RuleTypeSupportsPriority(actualType), priority));
 		if (kRuleRecursiveColumn < pTree->columnCount())
 			pItem->setText(kRuleRecursiveColumn, FormatRuleDisplayValue(enabled, RuleTypeSupportsRecursive(actualType), recursive, true));
+		if (kRuleRecursiveColumn < pTree->columnCount()) {
+			if (enabled && RuleTypeSupportsRecursive(actualType) && !recursive.trimmed().isEmpty()) {
+				QString baseRule = pItem->data(1, Qt::UserRole).toString();
+				pItem->setToolTip(kRuleRecursiveColumn, BuildRecursiveTooltip(baseRule, recursive));
+			}
+			else {
+				pItem->setToolTip(kRuleRecursiveColumn, QString());
+			}
+		}
 		if (kRuleTargetBoxColumn < pTree->columnCount()) {
 			pItem->setText(kRuleTargetBoxColumn, FormatRuleDisplayValue(enabled, RuleTypeSupportsTargetBox(breakoutTree, actualType), targetBox));
 			if (enabled && RuleTypeSupportsTargetBox(breakoutTree, actualType) && !targetBox.isEmpty())
@@ -218,7 +301,9 @@ static RuleExtensionsUi ParseRuleExtensionsForUi(const QString& rule)
 				if (normalized == "*" || normalized == "y" || normalized == "yes" || normalized == "true")
 					out.recursive = "y";
 				else if (normalized == "n" || normalized == "no" || normalized == "false")
-					out.recursive = "0";
+						out.recursive = "n";
+					else if (normalized == "0")
+						out.recursive = "n";
 				else
 					out.recursive = normalized;
 			}
@@ -245,10 +330,15 @@ static void ApplyRuleExtensionsToItem(QTreeWidgetItem* pItem, bool breakoutTree,
 	if (RuleTypeSupportsRecursive(type)) {
 		pItem->setData(kRuleRecursiveColumn, Qt::UserRole, ext.recursive);
 		pItem->setText(kRuleRecursiveColumn, FormatRuleDisplayValue(showValues, true, ext.recursive, true));
+		if (showValues && !ext.recursive.trimmed().isEmpty())
+			pItem->setToolTip(kRuleRecursiveColumn, BuildRecursiveTooltip(pItem->data(1, Qt::UserRole).toString(), ext.recursive));
+		else
+			pItem->setToolTip(kRuleRecursiveColumn, QString());
 	}
 	else {
 		pItem->setData(kRuleRecursiveColumn, Qt::UserRole, QString());
 		pItem->setText(kRuleRecursiveColumn, FormatRuleDisplayValue(showValues, false, QString(), true));
+		pItem->setToolTip(kRuleRecursiveColumn, QString());
 	}
 
 	if (RuleTypeSupportsTargetBox(breakoutTree, type)) {

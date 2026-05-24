@@ -727,13 +727,30 @@ static ULONG UserServer_OpenDocumentUnboxed(const WCHAR* launchPath, const WCHAR
     SbieApi_DisableForceProcess(&dfp_state, NULL);
 
     SHELLEXECUTEINFO shex;
+    WCHAR* quotedParam = NULL;
+    const WCHAR* shellParams = NULL;
     memzero(&shex, sizeof(SHELLEXECUTEINFO));
     shex.cbSize = sizeof(SHELLEXECUTEINFO);
     shex.fMask = 0;
     shex.hwnd = NULL;
     shex.lpVerb = L"open";
+
+    if (launchPath && *launchPath) {
+        size_t pathLen = wcslen(path);
+        quotedParam = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, (pathLen + 3) * sizeof(WCHAR));
+        if (!quotedParam)
+            return STATUS_INSUFFICIENT_RESOURCES;
+
+        // Keep the document path as one argv token for handlers when it contains spaces.
+        quotedParam[0] = L'"';
+        wmemcpy(quotedParam + 1, path, pathLen);
+        quotedParam[pathLen + 1] = L'"';
+        quotedParam[pathLen + 2] = L'\0';
+        shellParams = quotedParam;
+    }
+
     shex.lpFile = (launchPath && *launchPath) ? launchPath : path;
-    shex.lpParameters = (launchPath && *launchPath) ? path : NULL;
+    shex.lpParameters = shellParams;
     shex.lpDirectory = lpDirectory;
     shex.nShow = SW_SHOWNORMAL;
     shex.hInstApp = NULL;
@@ -745,11 +762,20 @@ static ULONG UserServer_OpenDocumentUnboxed(const WCHAR* launchPath, const WCHAR
     P_ShellExecuteEx pShellExecuteEx = shell32
         ? (P_ShellExecuteEx)GetProcAddress(shell32, "ShellExecuteExW")
         : NULL;
-    if (!pShellExecuteEx)
+    if (!pShellExecuteEx) {
+        if (quotedParam)
+            HeapFree(GetProcessHeap(), 0, quotedParam);
         return STATUS_ENTRYPOINT_NOT_FOUND;
+    }
 
-    if (pShellExecuteEx(&shex))
+    if (pShellExecuteEx(&shex)) {
+        if (quotedParam)
+            HeapFree(GetProcessHeap(), 0, quotedParam);
         return STATUS_SUCCESS;
+    }
+
+    if (quotedParam)
+        HeapFree(GetProcessHeap(), 0, quotedParam);
     return UserServer_MapLaunchFailureStatusFromLastError();
 }
 

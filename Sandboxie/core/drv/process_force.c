@@ -158,13 +158,6 @@ static FORCE_BOX* Process_FindForceBoxByName(
 static BOOLEAN Process_GetMatchedBreakoutTarget(
     BOX *box, const WCHAR *processName, const WCHAR *folderScopeName, const WCHAR *path, WCHAR *outTarget, ULONG outTargetCch);
 
-static BOOLEAN Process_ShouldReplaceBreakoutTarget(
-    BOOLEAN hasCurrentMatch,
-    BOOLEAN currentHasPriority,
-    LONG currentPriority,
-    BOOLEAN candidateHasPriority,
-    LONG candidatePriority);
-
 static BOOLEAN Process_MatchBreakoutProcessRuleRaw(
     BOX *box, const WCHAR *rule, const WCHAR *name, const WCHAR *path);
 
@@ -2554,40 +2547,6 @@ static FORCE_BOX* Process_FindForceBoxByName(
     return NULL;
 }
 
-static BOOLEAN Process_ShouldReplaceBreakoutTarget(
-    BOOLEAN hasCurrentMatch,
-    BOOLEAN currentHasPriority,
-    LONG currentPriority,
-    BOOLEAN candidateHasPriority,
-    LONG candidatePriority)
-{
-    return ProgramControl_ShouldReplaceTargetMatch(
-        hasCurrentMatch ? 1 : 0,
-        currentHasPriority ? 1 : 0,
-        currentPriority,
-        0,
-        candidateHasPriority ? 1 : 0,
-        candidatePriority,
-        0) ? TRUE : FALSE;
-}
-
-static BOOLEAN Process_ShouldReplaceForceWinner(
-    BOOLEAN hasCurrentWinner,
-    BOOLEAN currentHasPriority,
-    LONG currentPriority,
-    BOOLEAN candidateHasPriority,
-    LONG candidatePriority)
-{
-    return ProgramControl_ShouldReplaceTargetMatch(
-        hasCurrentWinner ? 1 : 0,
-        currentHasPriority ? 1 : 0,
-        currentPriority,
-        0,
-        candidateHasPriority ? 1 : 0,
-        candidatePriority,
-        0) ? TRUE : FALSE;
-}
-
 static BOOLEAN Process_GetMatchedBreakoutTarget(
     BOX *box, const WCHAR *processName, const WCHAR *folderScopeName, const WCHAR *path, WCHAR *outTarget, ULONG outTargetCch)
 {
@@ -2661,12 +2620,12 @@ static BOOLEAN Process_GetMatchedBreakoutTarget(
             }
 
             if (normalized.has_target_box && normalized.target_box && *normalized.target_box) {
-                if (Process_ShouldReplaceBreakoutTarget(
-                        process_target_match,
-                        process_target_has_priority,
-                        process_target_priority,
-                        normalized.has_priority ? TRUE : FALSE,
-                        normalized.priority)) {
+                if (ProgramControl_ShouldReplacePriorityWinner(
+                    process_target_match ? 1 : 0,
+                    process_target_has_priority ? 1 : 0,
+                    process_target_priority,
+                    normalized.has_priority ? 1 : 0,
+                    normalized.priority)) {
                     wcsncpy(process_target_box, normalized.target_box, BOXNAME_COUNT - 1);
                     process_target_box[BOXNAME_COUNT - 1] = L'\0';
                     process_target_match = TRUE;
@@ -2713,12 +2672,12 @@ static BOOLEAN Process_GetMatchedBreakoutTarget(
             }
 
             if (normalized.has_target_box && normalized.target_box && *normalized.target_box) {
-                if (Process_ShouldReplaceBreakoutTarget(
-                        folder_target_match,
-                        folder_target_has_priority,
-                        folder_target_priority,
-                        normalized.has_priority ? TRUE : FALSE,
-                        normalized.priority)) {
+                if (ProgramControl_ShouldReplacePriorityWinner(
+                    folder_target_match ? 1 : 0,
+                    folder_target_has_priority ? 1 : 0,
+                    folder_target_priority,
+                    normalized.has_priority ? 1 : 0,
+                    normalized.priority)) {
                     wcsncpy(folder_target_box, normalized.target_box, BOXNAME_COUNT - 1);
                     folder_target_box[BOXNAME_COUNT - 1] = L'\0';
                     folder_target_match = TRUE;
@@ -3046,11 +3005,11 @@ static BOOLEAN Process_GetBreakoutDocumentTarget(
         }
 
         if (Process_MatchBreakoutDocumentRule(box, normalized.base_rule, docPath)) {
-            if (Process_ShouldReplaceBreakoutTarget(
-                    hasMatch,
-                    bestHasPriority,
+                if (ProgramControl_ShouldReplacePriorityWinner(
+                    hasMatch ? 1 : 0,
+                    bestHasPriority ? 1 : 0,
                     bestPriority,
-                    normalized.has_priority ? TRUE : FALSE,
+                    normalized.has_priority ? 1 : 0,
                     normalized.priority)) {
                 wcsncpy(outTarget, normalized.target_box, outTargetCch - 1);
                 outTarget[outTargetCch - 1] = L'\0';
@@ -3108,11 +3067,11 @@ static void Process_GetBreakoutDocumentPriorityBest(
 
         matched2 = Process_GetBreakoutDocumentPriority(box, secondaryScopeName, docPath, &hasPriority2, &priority2);
         if (matched2) {
-            if (!matched || Process_ShouldReplaceBreakoutTarget(
-                    matched,
-                    hasPriority,
+                if (!matched || ProgramControl_ShouldReplacePriorityWinner(
+                    matched ? 1 : 0,
+                    hasPriority ? 1 : 0,
                     priority,
-                    hasPriority2,
+                    hasPriority2 ? 1 : 0,
                     priority2)) {
                 matched = TRUE;
                 hasPriority = hasPriority2;
@@ -3179,12 +3138,12 @@ static BOOLEAN Process_GetBreakoutDocumentTargetBest(
             &hasPriority2,
             &priority2);
 
-        if (has2 && Process_ShouldReplaceBreakoutTarget(
-                hasBest,
-                bestHasPriority,
-                bestPriority,
-                hasPriority2,
-                priority2)) {
+        if (has2 && ProgramControl_ShouldReplacePriorityWinner(
+            hasBest ? 1 : 0,
+            bestHasPriority ? 1 : 0,
+            bestPriority,
+            hasPriority2 ? 1 : 0,
+            priority2)) {
             hasBest = TRUE;
             bestHasPriority = hasPriority2;
             bestPriority = priority2;
@@ -3245,11 +3204,11 @@ _FX BOX *Process_CheckForceProcess(
         if (Process_CheckForceProcessList(box->box, &box->ForceProcess, name, path, &force_has_priority, &force_priority)) {
 
             if (have_force_winner &&
-                !Process_ShouldReplaceForceWinner(
-                    have_force_winner,
-                    force_winner_has_priority,
+                !ProgramControl_ShouldReplacePriorityWinner(
+                    have_force_winner ? 1 : 0,
+                    force_winner_has_priority ? 1 : 0,
                     force_winner_priority,
-                    force_has_priority,
+                    force_has_priority ? 1 : 0,
                     force_priority)) {
                 box = List_Next(box);
                 continue;
@@ -3347,11 +3306,11 @@ _FX BOX *Process_CheckForceProcess(
                 return NULL;
             }
 
-            if (Process_ShouldReplaceForceWinner(
-                    have_force_winner,
-                    force_winner_has_priority,
+                if (ProgramControl_ShouldReplacePriorityWinner(
+                    have_force_winner ? 1 : 0,
+                    force_winner_has_priority ? 1 : 0,
                     force_winner_priority,
-                    force_has_priority,
+                    force_has_priority ? 1 : 0,
                     force_priority)) {
                 force_winner = box;
                 force_winner_from_children = FALSE;
@@ -3367,11 +3326,11 @@ _FX BOX *Process_CheckForceProcess(
         if (ParentName && Process_CheckForceProcessList(box->box, &box->ForceChildren, ParentName, ParentPath, &force_has_priority, &force_priority) && _wcsicmp(name, L"SandMan.exe") != 0) { // except for SandMan exe
 
             if (have_force_winner &&
-                !Process_ShouldReplaceForceWinner(
-                    have_force_winner,
-                    force_winner_has_priority,
+                !ProgramControl_ShouldReplacePriorityWinner(
+                    have_force_winner ? 1 : 0,
+                    force_winner_has_priority ? 1 : 0,
                     force_winner_priority,
-                    force_has_priority,
+                    force_has_priority ? 1 : 0,
                     force_priority)) {
                 box = List_Next(box);
                 continue;
@@ -3469,11 +3428,11 @@ _FX BOX *Process_CheckForceProcess(
                 return NULL;
             }
 
-            if (Process_ShouldReplaceForceWinner(
-                    have_force_winner,
-                    force_winner_has_priority,
+                if (ProgramControl_ShouldReplacePriorityWinner(
+                    have_force_winner ? 1 : 0,
+                    force_winner_has_priority ? 1 : 0,
                     force_winner_priority,
-                    force_has_priority,
+                    force_has_priority ? 1 : 0,
                     force_priority)) {
                 force_winner = box;
                 force_winner_from_children = TRUE;

@@ -1570,8 +1570,18 @@ _FX BOOL Proc_CreateProcessInternalW(
 
             const WCHAR* arg1 = temp;
             const WCHAR* arg1_end = NULL;
-            if (*arg1 == L'"') temp = wcschr(arg1 + 1, L'"');
-            if (!arg1_end) arg1_end = wcschr(arg1, L'\0');
+
+            if (*arg1 == L'"') {
+                arg1++;
+                arg1_end = wcschr(arg1, L'"');
+                if (!arg1_end)
+                    arg1_end = wcschr(arg1, L'\0');
+            }
+            else {
+                arg1_end = arg1;
+                while (*arg1_end && *arg1_end != L' ')
+                    ++arg1_end;
+            }
 
             WCHAR created_image_buf[96] = { 0 };
             const size_t created_image_buf_cch = sizeof(created_image_buf) / sizeof(created_image_buf[0]);

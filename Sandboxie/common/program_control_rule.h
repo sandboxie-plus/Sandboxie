@@ -404,6 +404,45 @@ static __inline int ProgramControl_ShouldReplaceTargetMatch(
     return 0;
 }
 
+static __inline int ProgramControl_ShouldReplacePriorityWinner(
+    int hasCurrentWinner,
+    int currentHasPriority,
+    long currentPriority,
+    int candidateHasPriority,
+    long candidatePriority)
+{
+    return ProgramControl_ShouldReplaceTargetMatch(
+        hasCurrentWinner,
+        currentHasPriority,
+        currentPriority,
+        0,
+        candidateHasPriority,
+        candidatePriority,
+        0);
+}
+
+static __inline int ProgramControl_IsPrimaryPreferredByPriority(
+    long primaryPriority,
+    long secondaryPriority,
+    int preferPrimaryOnTie)
+{
+    int primaryHasPriority = (primaryPriority >= 0) ? 1 : 0;
+    int secondaryHasPriority = (secondaryPriority >= 0) ? 1 : 0;
+
+    if (primaryHasPriority && secondaryHasPriority) {
+        if (primaryPriority < secondaryPriority)
+            return 1;
+        if (primaryPriority > secondaryPriority)
+            return 0;
+        return preferPrimaryOnTie ? 1 : 0;
+    }
+
+    if (primaryHasPriority != secondaryHasPriority)
+        return primaryHasPriority ? 1 : 0;
+
+    return preferPrimaryOnTie ? 1 : 0;
+}
+
 static __inline int ProgramControl_ShouldAcceptTargetChoice(
     int overallHasMatch,
     int overallHasPriority,
@@ -760,6 +799,140 @@ static __inline int ProgramControl_GetFolderPriorityFromConf(
         boxname, L"BreakoutFolder", imageName, appPath, appDirLen,
         outHasPriority, outPriority, useRuleExtensions, matchImage, matchContext,
         adjustRule, adjustContext);
+}
+
+static __inline int ProgramControl_MatchDocumentRule(
+    const WCHAR *rule,
+    const WCHAR *docPath,
+    unsigned long docPathLen)
+{
+    size_t ruleLen;
+
+    if (!rule || !*rule || !docPath || !*docPath)
+        return 0;
+
+    if (!docPathLen)
+        docPathLen = (unsigned long)wcslen(docPath);
+
+    if (wcschr(rule, L'*') || wcschr(rule, L'?'))
+        return ProgramControl_WildcardMatchI(rule, docPath);
+
+    ruleLen = wcslen(rule);
+    if ((unsigned long)ruleLen != docPathLen)
+        return 0;
+
+    return (_wcsnicmp(rule, docPath, ruleLen) == 0);
+}
+
+static __inline int ProgramControl_FindDocumentSettingMatch(
+    const WCHAR *boxname,
+    const WCHAR *setting,
+    const WCHAR *imageName,
+    const WCHAR *docPath,
+    unsigned long docPathLen,
+    int allowTargeted,
+    int useRuleExtensions,
+    BreakoutMatchImageFn matchImage,
+    void *matchContext,
+    BreakoutAdjustRuleFn adjustRule,
+    void *adjustContext,
+    int *outHasTarget,
+    WCHAR *outTarget,
+    size_t outTargetCch,
+    BOOLEAN *outHasPriority,
+    LONG *outPriority,
+    unsigned long *outLevel)
+{
+    WCHAR buf[CONF_LINE_LEN];
+    unsigned long index = 0;
+    int hasMatch = 0;
+    int bestHasPriority = 0;
+    long bestPriority = -1;
+    unsigned long bestLevel = (unsigned long)-1;
+    int bestHasTarget = 0;
+
+    if (outHasTarget)
+        *outHasTarget = 0;
+    if (outTarget && outTargetCch)
+        outTarget[0] = L'\0';
+    if (outHasPriority)
+        *outHasPriority = FALSE;
+    if (outPriority)
+        *outPriority = -1;
+    if (outLevel)
+        *outLevel = (unsigned long)-1;
+
+    if (!boxname || !setting || !imageName || !*imageName || !docPath || !*docPath)
+        return 0;
+
+    if (!docPathLen)
+        docPathLen = (unsigned long)wcslen(docPath);
+
+    while (1) {
+        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, sizeof(buf) - sizeof(WCHAR));
+        WCHAR *value;
+        SBIE_NORMALIZED_RULE rule;
+        unsigned long level = 2;
+
+        ++index;
+        if (!NT_SUCCESS(status)) {
+            if (status == STATUS_BUFFER_TOO_SMALL)
+                continue;
+            break;
+        }
+
+        value = ProgramControl_MatchImageScopeAndGetValueEx(buf, imageName, matchImage, matchContext, &level);
+        if (!value)
+            continue;
+
+        if (!ProgramControl_ParseRuleExtensionsInPlace(value, &rule, useRuleExtensions))
+            continue;
+
+        if (rule.has_target_box && !allowTargeted)
+            continue;
+
+        if (adjustRule)
+            adjustRule(rule.base_rule, adjustContext);
+
+        if (!ProgramControl_MatchDocumentRule(rule.base_rule, docPath, docPathLen))
+            continue;
+
+        if (ProgramControl_ShouldReplaceTargetMatch(
+                hasMatch,
+                bestHasPriority,
+                bestPriority,
+                bestLevel,
+                rule.has_priority,
+                rule.priority,
+                level)) {
+            hasMatch = 1;
+            bestHasPriority = rule.has_priority;
+            bestPriority = rule.has_priority ? rule.priority : -1;
+            bestLevel = level;
+            bestHasTarget = (rule.has_target_box && rule.target_box && *rule.target_box) ? 1 : 0;
+
+            if (bestHasTarget) {
+                if (outTarget && outTargetCch)
+                    wcscpy_s(outTarget, outTargetCch, rule.target_box);
+            }
+            else if (outTarget && outTargetCch) {
+                outTarget[0] = L'\0';
+            }
+        }
+    }
+
+    if (hasMatch) {
+        if (outHasTarget)
+            *outHasTarget = bestHasTarget;
+        if (outHasPriority)
+            *outHasPriority = bestHasPriority ? TRUE : FALSE;
+        if (outPriority)
+            *outPriority = bestHasPriority ? bestPriority : -1;
+        if (outLevel)
+            *outLevel = bestLevel;
+    }
+
+    return hasMatch;
 }
 
 #endif

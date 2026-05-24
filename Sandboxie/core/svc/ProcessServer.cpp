@@ -138,15 +138,8 @@ static bool ProcessServer_GetBreakoutDocumentMatch(
     WCHAR* outTarget,
     size_t outTargetCch)
 {
-    WCHAR buf[CONF_LINE_LEN];
-    ULONG index = 0;
     const BOOLEAN use_rule_extensions = ProcessServer_UseRuleExtensions(boxname);
-    BOOLEAN hasMatch = FALSE;
-    BOOLEAN bestHasPriority = FALSE;
-    LONG bestPriority = -1;
-    ULONG bestLevel = (ULONG)-1;
-    BOOLEAN bestHasTarget = FALSE;
-    WCHAR bestTarget[BOXNAME_COUNT] = { 0 };
+    int hasTarget = 0;
 
     if (outHasTarget)
         *outHasTarget = FALSE;
@@ -160,73 +153,24 @@ static bool ProcessServer_GetBreakoutDocumentMatch(
     if (!boxname || !*boxname || !imageName || !*imageName || !docPath || !docPathLen)
         return false;
 
-    while (1) {
-        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, L"BreakoutDocument", index, buf, sizeof(buf) - sizeof(WCHAR));
-        WCHAR* value;
-        ULONG level = 2;
-        SBIE_NORMALIZED_RULE rule;
-
-        ++index;
-        if (!NT_SUCCESS(status)) {
-            if (status == STATUS_BUFFER_TOO_SMALL)
-                continue;
-            break;
-        }
-
-        value = ProgramControl_MatchImageScopeAndGetValueEx(
-            buf,
+    if (!ProgramControl_FindDocumentSettingMatch(
+            boxname,
+            L"BreakoutDocument",
             imageName,
+            docPath,
+            docPathLen,
+            1,
+            use_rule_extensions ? 1 : 0,
             ProcessServer_BreakoutMatchImage,
             NULL,
-            &level);
-        if (!value)
-            continue;
-
-        if (!ProgramControl_ParseRuleExtensionsInPlace(value, &rule, use_rule_extensions ? 1 : 0))
-            continue;
-
-        {
-            const WCHAR* docRule = rule.base_rule;
-            BOOLEAN docMatch = FALSE;
-
-            if (docRule && *docRule) {
-                if (wcschr(docRule, L'*') || wcschr(docRule, L'?')) {
-                    // BreakoutDocument commonly uses wildcard patterns like *.txt.
-                    docMatch = ProgramControl_WildcardMatchI(docRule, docPath) ? TRUE : FALSE;
-                }
-                else {
-                    size_t ruleLen = wcslen(docRule);
-                    if ((ULONG)ruleLen == docPathLen && _wcsnicmp(docRule, docPath, ruleLen) == 0)
-                        docMatch = TRUE;
-                }
-            }
-
-            if (!docMatch)
-                continue;
-        }
-
-        if (ProgramControl_ShouldReplaceTargetMatch(
-                hasMatch ? 1 : 0,
-                bestHasPriority ? 1 : 0,
-                bestPriority,
-                bestLevel,
-                rule.has_priority ? 1 : 0,
-                rule.priority,
-                level)) {
-            hasMatch = TRUE;
-            bestHasPriority = rule.has_priority ? TRUE : FALSE;
-            bestPriority = rule.has_priority ? rule.priority : -1;
-            bestLevel = level;
-            bestHasTarget = (rule.has_target_box && rule.target_box && *rule.target_box) ? TRUE : FALSE;
-
-            if (bestHasTarget)
-                wcscpy(bestTarget, rule.target_box);
-            else
-                bestTarget[0] = L'\0';
-        }
-    }
-
-    if (!hasMatch) {
+            NULL,
+            NULL,
+            &hasTarget,
+            outTarget,
+            outTargetCch,
+            outHasPriority,
+            outPriority,
+            NULL)) {
         // Fallback for process-start breakout path: if the document path itself
         // matches BreakoutDocument, treat it as breakout even when image-scope
         // parsing did not pick a winner in this service-side context.
@@ -239,19 +183,11 @@ static bool ProcessServer_GetBreakoutDocumentMatch(
             *outPriority = -1;
         if (outHasTarget)
             *outHasTarget = FALSE;
-        if (outTarget && outTargetCch)
-            outTarget[0] = L'\0';
         return true;
     }
 
-    if (outHasPriority)
-        *outHasPriority = bestHasPriority;
-    if (outPriority)
-        *outPriority = bestHasPriority ? bestPriority : -1;
     if (outHasTarget)
-        *outHasTarget = bestHasTarget;
-    if (outTarget && outTargetCch && bestHasTarget)
-        wcscpy_s(outTarget, outTargetCch, bestTarget);
+        *outHasTarget = hasTarget ? TRUE : FALSE;
 
     return true;
 }
@@ -429,25 +365,6 @@ static SBIE_POLICY_DECISION ProcessServer_ResolveProcessPolicy(
         breakout_priority);
 }
 
-static BOOLEAN ProcessServer_ShouldReplaceForceWinner(
-    BOOLEAN hasCurrentWinner,
-    BOOLEAN currentHasPriority,
-    LONG currentPriority,
-    BOOLEAN candidateHasPriority,
-    LONG candidatePriority)
-{
-    if (!hasCurrentWinner)
-        return TRUE;
-
-    if (candidateHasPriority != currentHasPriority)
-        return candidateHasPriority ? TRUE : FALSE;
-
-    if (candidateHasPriority && candidatePriority != currentPriority)
-        return (candidatePriority < currentPriority) ? TRUE : FALSE;
-
-    return FALSE;
-}
-
 static void ProcessServer_AssignForceWinner(
     BOOLEAN source_equals_candidate_box,
     BOOLEAN candidate_has_priority,
@@ -497,11 +414,11 @@ static BOOLEAN ProcessServer_UpdateForceWinnerAndCheckStop(
         return TRUE;
     }
 
-    if (ProcessServer_ShouldReplaceForceWinner(
-            *out_have_winner,
-            *out_winner_has_priority,
+    if (ProgramControl_ShouldReplacePriorityWinner(
+            *out_have_winner ? 1 : 0,
+            *out_winner_has_priority ? 1 : 0,
             *out_winner_priority,
-            candidate_has_priority,
+            candidate_has_priority ? 1 : 0,
             candidate_priority)) {
         ProcessServer_AssignForceWinner(
             source_equals_candidate_box,

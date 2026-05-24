@@ -106,18 +106,16 @@ static WCHAR* UserServer_GetReqStringByOffset(const void* req_buf, ULONG req_len
 static void UserServer_AdjustFolderRule(WCHAR* value, void* context)
 {
     (void)context;
+    ProgramControl_TrimTrailingBackslashes(value);
     if (value && *value != L'*')
         SbieDll_TranslateNtToDosPath(value);
 }
 
-static WCHAR* UserServer_MatchImageAndGetValue(WCHAR* value, const WCHAR* imageName, ULONG* pLevel)
+static void UserServer_AdjustDocumentRule(WCHAR* value, void* context)
 {
-    return ProgramControl_MatchImageScopeAndGetValueEx(
-        value,
-        imageName,
-        UserServer_MatchImage,
-        NULL,
-        (unsigned long*)pLevel);
+    (void)context;
+    if (value && *value != L'*')
+        SbieDll_TranslateNtToDosPath(value);
 }
 
 static BOOLEAN UserServer_UseRuleExtensions(const WCHAR* boxname, const WCHAR* setting)
@@ -132,17 +130,9 @@ static BOOLEAN UserServer_GetBreakoutDocumentTarget(
     const WCHAR* boxname, const WCHAR* imageName, const WCHAR* path, ULONG length,
     WCHAR* outTarget, ULONG outTargetCch, LONG* outPriority, BOOLEAN* outHasMatch, ULONG* outLevel)
 {
-    WCHAR conf_buf[2048];
-    WCHAR* path_lwr;
-    POOL* pool;
-    ULONG best_level = (ULONG)-1;
-    BOOLEAN has_match = FALSE;
-    BOOLEAN has_target = FALSE;
-    BOOLEAN best_has_priority = FALSE;
-    LONG best_priority = -1;
-    ULONG index = 0;
-    ULONG path_len = (length + 1) * sizeof(WCHAR);
     BOOLEAN use_rule_extensions;
+    int has_target = 0;
+    BOOLEAN has_match;
 
     if (!boxname || !imageName || !path || !outTarget || outTargetCch == 0)
         return FALSE;
@@ -157,88 +147,28 @@ static BOOLEAN UserServer_GetBreakoutDocumentTarget(
     if (outLevel)
         *outLevel = (ULONG)-1;
 
-    path_lwr = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, path_len);
-    if (!path_lwr)
-        return FALSE;
+    has_match = ProgramControl_FindDocumentSettingMatch(
+        boxname,
+        L"BreakoutDocument",
+        imageName,
+        path,
+        length,
+        1,
+        use_rule_extensions ? 1 : 0,
+        UserServer_MatchImage,
+        NULL,
+        UserServer_AdjustDocumentRule,
+        NULL,
+        &has_target,
+        outTarget,
+        outTargetCch,
+        NULL,
+        outPriority,
+        (unsigned long*)outLevel) ? TRUE : FALSE;
 
-    memcpy(path_lwr, path, path_len);
-    path_lwr[length] = L'\0';
-    _wcslwr(path_lwr);
+    if (outHasMatch)
+        *outHasMatch = has_match;
 
-    pool = Pool_Create();
-    if (!pool) {
-        HeapFree(GetProcessHeap(), 0, path_lwr);
-        return FALSE;
-    }
-
-    while (1) {
-
-        NTSTATUS status = SbieApi_QueryConf(
-            boxname, L"BreakoutDocument", index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
-        if (!NT_SUCCESS(status)) {
-            if (status == STATUS_BUFFER_TOO_SMALL) {
-                ++index;
-                continue;
-            }
-            break;
-        }
-        ++index;
-
-        ULONG level = (ULONG)-1;
-        WCHAR* value = UserServer_MatchImageAndGetValue(conf_buf, imageName, &level);
-        if (!value)
-            continue;
-
-        SBIE_NORMALIZED_RULE normalized;
-        if (!ProgramControl_ParseRuleExtensionsInPlace(value, &normalized, use_rule_extensions ? 1 : 0))
-            continue;
-
-        value = normalized.base_rule;
-        if (*value != L'*')
-            SbieDll_TranslateNtToDosPath(value);
-
-        PATTERN* pattern = Pattern_Create(pool, value, TRUE, level);
-        if (!pattern)
-            continue;
-
-        if (Pattern_Match(pattern, path_lwr, length)) {
-            if (ProgramControl_ShouldReplaceTargetMatch(
-                    has_match,
-                    best_has_priority,
-                    best_priority,
-                    best_level,
-                    normalized.has_priority,
-                    normalized.priority,
-                    level)) {
-                has_match = TRUE;
-                best_has_priority = normalized.has_priority ? TRUE : FALSE;
-                best_priority = normalized.priority;
-                best_level = level;
-
-                if (outPriority)
-                    *outPriority = normalized.has_priority ? normalized.priority : -1;
-                if (outLevel)
-                    *outLevel = level;
-
-                if (normalized.has_target_box && normalized.target_box && *normalized.target_box) {
-                    wcscpy_s(outTarget, outTargetCch, normalized.target_box);
-                    has_target = TRUE;
-                }
-                else {
-                    outTarget[0] = L'\0';
-                    has_target = FALSE;
-                }
-            }
-
-            if (outHasMatch)
-                *outHasMatch = TRUE;
-        }
-
-        Pattern_Free(pattern);
-    }
-
-    Pool_Delete(pool);
-    HeapFree(GetProcessHeap(), 0, path_lwr);
     return has_target;
 }
 
@@ -433,114 +363,62 @@ static BOOLEAN UserServer_GetBreakoutFolderTarget(
 // value of the best-matching rule (-1 if no Priority= was specified).
 static BOOLEAN UserServer_QueryImageRuleMatch(
     const WCHAR* boxname, const WCHAR* setting, const WCHAR* imageName,
+    const WCHAR* appPath, ULONG appPathLen,
     LONG* outPriority, WCHAR* outTarget, ULONG outTargetCch)
 {
-    WCHAR conf_buf[2048];
-    BOOLEAN found = FALSE;
-    BOOLEAN best_has_priority = FALSE;
-    LONG best_priority = -1;
-    ULONG index = 0;
     BOOLEAN use_rule_extensions;
+    const WCHAR* matchPath;
+    ULONG matchPathLen;
+    int hasTarget = 0;
 
     if (!boxname || !setting || !imageName)
         return FALSE;
 
     use_rule_extensions = UserServer_UseRuleExtensions(boxname, setting);
 
+    matchPath = (appPath && *appPath) ? appPath : imageName;
+    matchPathLen = appPathLen;
+    if (!matchPathLen)
+        matchPathLen = (ULONG)wcslen(matchPath);
+
     if (outPriority)
         *outPriority = -1;
     if (outTarget && outTargetCch > 0)
         outTarget[0] = L'\0';
 
-    while (1) {
-
-        NTSTATUS status = SbieApi_QueryConf(
-            boxname, setting, index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
-        if (!NT_SUCCESS(status)) {
-            if (status == STATUS_BUFFER_TOO_SMALL) {
-                ++index;
-                continue;
-            }
-            break;
-        }
-        ++index;
-
-        SBIE_NORMALIZED_RULE normalized;
-        if (!ProgramControl_ParseRuleExtensionsInPlace(conf_buf, &normalized, use_rule_extensions ? 1 : 0))
-            continue;
-
-        if (!SbieDll_MatchImage(normalized.base_rule, imageName, NULL))
-            continue;
-
-        if (ProgramControl_ShouldReplaceTargetMatch(
-                found,
-                best_has_priority,
-                best_priority,
-                2,
-                normalized.has_priority,
-                normalized.priority,
-                2)) {
-            found = TRUE;
-            best_has_priority = normalized.has_priority ? TRUE : FALSE;
-            best_priority = normalized.priority;
-
-            if (outTarget && outTargetCch > 0) {
-                if (normalized.has_target_box && normalized.target_box && *normalized.target_box)
-                    wcscpy_s(outTarget, outTargetCch, normalized.target_box);
-                else
-                    outTarget[0] = L'\0';
-            }
-        }
-    }
-
-    if (found && outPriority)
-        *outPriority = best_has_priority ? best_priority : -1;
-
-    return found;
+    return ProgramControl_FindProcessSettingMatch(
+        boxname,
+        setting,
+        imageName,
+        matchPath,
+        matchPathLen,
+        1,
+        use_rule_extensions ? 1 : 0,
+        NULL,
+        NULL,
+        outTarget,
+        outTargetCch,
+        &hasTarget,
+        NULL,
+        outPriority) ? TRUE : FALSE;
 }
 
 static BOOLEAN UserServer_GetForceProcessPriority(
-    const WCHAR* boxname, const WCHAR* imageName, LONG* outPriority)
+    const WCHAR* boxname, const WCHAR* imageName, const WCHAR* appPath, ULONG appPathLen, LONG* outPriority)
 {
     return UserServer_QueryImageRuleMatch(
-        boxname, L"ForceProcess", imageName, outPriority, NULL, 0);
+        boxname, L"ForceProcess", imageName, appPath, appPathLen, outPriority, NULL, 0);
 }
 
 // Scans BreakoutProcess rules to check if any match the given image name.
 // Returns TRUE if a match is found, and sets *outPriority to the Priority=N
 // value of the best-matching rule (-1 if no Priority= was specified).
 static BOOLEAN UserServer_GetBreakoutProcessPriority(
-    const WCHAR* boxname, const WCHAR* imageName, LONG* outPriority,
+    const WCHAR* boxname, const WCHAR* imageName, const WCHAR* appPath, ULONG appPathLen, LONG* outPriority,
     WCHAR* outTarget, ULONG outTargetCch)
 {
     return UserServer_QueryImageRuleMatch(
-        boxname, L"BreakoutProcess", imageName, outPriority, outTarget, outTargetCch);
-}
-
-static BOOLEAN UserServer_IsPrimaryPreferredByPriority(
-    LONG primaryPriority,
-    LONG secondaryPriority,
-    BOOLEAN preferPrimaryOnTie)
-{
-    // Generic priority comparison helper.
-    // Example 1: primary=2, secondary=5 -> TRUE (lower numeric priority wins).
-    // Example 2: primary=-1, secondary=0 -> FALSE (explicit priority beats unset).
-    // Example 3: primary=-1, secondary=-1, preferPrimaryOnTie=TRUE -> TRUE (tie goes primary).
-    BOOLEAN primary_has_priority = (primaryPriority >= 0) ? TRUE : FALSE;
-    BOOLEAN secondary_has_priority = (secondaryPriority >= 0) ? TRUE : FALSE;
-
-    if (primary_has_priority && secondary_has_priority) {
-        if (primaryPriority < secondaryPriority)
-            return TRUE;
-        if (primaryPriority > secondaryPriority)
-            return FALSE;
-        return preferPrimaryOnTie ? TRUE : FALSE;
-    }
-
-    if (primary_has_priority != secondary_has_priority)
-        return primary_has_priority ? TRUE : FALSE;
-
-    return preferPrimaryOnTie ? TRUE : FALSE;
+        boxname, L"BreakoutProcess", imageName, appPath, appPathLen, outPriority, outTarget, outTargetCch);
 }
 
 static void UserServer_SelectBreakoutProcessFolderWinner(
@@ -572,7 +450,7 @@ static void UserServer_SelectBreakoutProcessFolderWinner(
 
     BOOLEAN winner_is_bp;
     if (bp_match && bf_match)
-        winner_is_bp = UserServer_IsPrimaryPreferredByPriority(bp_priority, bf_priority, TRUE);
+        winner_is_bp = ProgramControl_IsPrimaryPreferredByPriority(bp_priority, bf_priority, 1) ? TRUE : FALSE;
     else
         winner_is_bp = bp_match ? TRUE : FALSE;
 
@@ -690,6 +568,63 @@ static BOOLEAN UserServer_ShouldFallbackToSourceOnHostMissingPath(const WCHAR* p
     return (err == ERROR_FILE_NOT_FOUND ||
             err == ERROR_PATH_NOT_FOUND ||
             err == ERROR_INVALID_DRIVE) ? TRUE : FALSE;
+}
+
+static BOOLEAN UserServer_ResolveAssociatedHandler(
+    const WCHAR* docPath,
+    WCHAR* outImage,
+    ULONG outImageCch,
+    WCHAR* outPath,
+    ULONG outPathCch)
+{
+    typedef HRESULT (WINAPI *P_AssocQueryStringW)(DWORD, DWORD, LPCWSTR, LPCWSTR, LPWSTR, DWORD*);
+    HMODULE hShlwapi;
+    P_AssocQueryStringW pAssocQuery;
+    DWORD len;
+    HRESULT hr;
+
+    if (!outImage || outImageCch == 0 || !outPath || outPathCch == 0)
+        return FALSE;
+
+    outImage[0] = L'\0';
+    outPath[0] = L'\0';
+
+    if (!docPath || !*docPath)
+        return FALSE;
+
+    hShlwapi = GetModuleHandleW(L"shlwapi.dll");
+    if (!hShlwapi)
+        hShlwapi = LoadLibraryW(L"shlwapi.dll");
+    if (!hShlwapi)
+        return FALSE;
+
+    pAssocQuery = (P_AssocQueryStringW)GetProcAddress(hShlwapi, "AssocQueryStringW");
+    if (!pAssocQuery)
+        return FALSE;
+
+    len = 0;
+    // ASSOCF_NONE = 0, ASSOCSTR_EXECUTABLE = 2
+    hr = pAssocQuery(0, 2, docPath, NULL, NULL, &len);
+    if (!((hr == E_POINTER || hr == S_FALSE) && len > 0))
+        return FALSE;
+
+    {
+        WCHAR* handlerPath = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len * sizeof(WCHAR));
+        if (!handlerPath)
+            return FALSE;
+
+        hr = pAssocQuery(0, 2, docPath, NULL, handlerPath, &len);
+        if (SUCCEEDED(hr) && handlerPath[0]) {
+            const WCHAR* slash;
+            wcscpy_s(outPath, outPathCch, handlerPath);
+            slash = wcsrchr(handlerPath, L'\\');
+            wcscpy_s(outImage, outImageCch, slash ? slash + 1 : handlerPath);
+        }
+
+        HeapFree(GetProcessHeap(), 0, handlerPath);
+    }
+
+    return (outImage[0] != L'\0' && outPath[0] != L'\0') ? TRUE : FALSE;
 }
 
 static ULONG UserServer_OpenDocumentInTargetBox(const WCHAR* targetBox, const WCHAR* launchPath, const WCHAR* path, const WCHAR* lpDirectory)
@@ -1616,35 +1551,27 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
 
     ULONG path_len = (ULONG)wcslen(path_buff);
     {
-        // Resolve the associated handler once and reuse it for rule checks.
+        const BOOLEAN explicit_image_launch = (createdImage && *createdImage) ? TRUE : FALSE;
         WCHAR handlerImage[96] = { 0 };
         WCHAR handlerPathBuf[MAX_PATH] = { 0 };
-        const WCHAR* fpCheckImage = image;
-        {
-            typedef HRESULT (WINAPI *P_AssocQueryStringW)(DWORD, DWORD, LPCWSTR, LPCWSTR, LPWSTR, DWORD*);
-            HMODULE hShlwapi = GetModuleHandleW(L"shlwapi.dll");
-            if (!hShlwapi)
-                hShlwapi = LoadLibraryW(L"shlwapi.dll");
-            if (hShlwapi) {
-                P_AssocQueryStringW pAssocQuery = (P_AssocQueryStringW)GetProcAddress(hShlwapi, "AssocQueryStringW");
-                if (pAssocQuery) {
-                    DWORD len = 0;
-                    // ASSOCF_NONE = 0, ASSOCSTR_EXECUTABLE = 2
-                    HRESULT hr = pAssocQuery(0, 2, path_buff, NULL, NULL, &len);
-                    if ((hr == E_POINTER || hr == S_FALSE) && len > 0) {
-                        WCHAR* handlerPath = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len * sizeof(WCHAR));
-                        if (handlerPath) {
-                            hr = pAssocQuery(0, 2, path_buff, NULL, handlerPath, &len);
-                            if (SUCCEEDED(hr) && handlerPath[0]) {
-                                wcscpy_s(handlerPathBuf, _countof(handlerPathBuf), handlerPath);
-                                const WCHAR* slash = wcsrchr(handlerPath, L'\\');
-                                if (wcscpy_s(handlerImage, _countof(handlerImage), slash ? slash + 1 : handlerPath) == 0)
-                                    fpCheckImage = handlerImage;
-                            }
-                            HeapFree(GetProcessHeap(), 0, handlerPath);
-                        }
-                    }
-                }
+        const WCHAR* policyImage = image;
+        const WCHAR* policyPath = NULL;
+
+        // For explicit exe+document launches, use the explicit image/path scope.
+        // For shell-style launches, resolve the default handler and use that scope.
+        if (explicit_image_launch) {
+            policyImage = createdImage;
+            policyPath = effectiveLaunchPath;
+        }
+        else {
+            if (UserServer_ResolveAssociatedHandler(
+                    path_buff,
+                    handlerImage,
+                    (ULONG)_countof(handlerImage),
+                    handlerPathBuf,
+                    (ULONG)_countof(handlerPathBuf))) {
+                policyImage = handlerImage;
+                policyPath = handlerPathBuf;
             }
         }
 
@@ -1685,12 +1612,11 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
                 BOXNAME_COUNT);
         }
 
-        // Evaluate handler-image scope too, and choose the stronger winner.
-        // This allows handler-scoped rules to beat less specific global matches.
-        if (fpCheckImage != image) {
+        // Use handler-image scope only for shell-style document opens.
+        if (!explicit_image_launch && policyImage != image) {
             UserServer_UpdateBreakoutDocumentWinner(
                 boxname,
-                fpCheckImage,
+                policyImage,
                 path_buff,
                 path_len,
                 &bd_match,
@@ -1713,40 +1639,51 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
         // Capture the match result for use as force_folder_match (scope-aware).
         BOOLEAN ff_match = UserServer_GetForceFolderPriority(boxname, image, path_buff, path_len, &ff_priority);
 
-        // ForceProcess: the document handler (e.g., notepad++.exe) is what ForceProcess
-        // targets, not the caller (e.g., explorer.exe). Reuse the handler resolved above.
-        BOOLEAN fp_match = UserServer_GetForceProcessPriority(boxname, fpCheckImage, &fp_priority);
+        // ForceProcess/BreakoutProcess target the effective launch image.
+        ULONG policyPathLen = (policyPath && policyPath[0]) ? (ULONG)wcslen(policyPath) : 0;
+        BOOLEAN fp_match = UserServer_GetForceProcessPriority(
+            boxname,
+            policyImage,
+            policyPath,
+            policyPathLen,
+            &fp_priority);
 
-        // BreakoutFolder: check the resolved handler path against BreakoutFolder
-        // rules, scoped by the source process image (same as process-start folder scope).
+        // BreakoutFolder checks the effective launch path (explicit image path or handler path).
         WCHAR bf_targetBox[BOXNAME_COUNT] = { 0 };
         BOOLEAN bf_match = FALSE;
         BOOLEAN bf_has_target = FALSE;
-        if (handlerPathBuf[0]) {
-            const WCHAR* handlerSlash = wcsrchr(handlerPathBuf, L'\\');
-            if (handlerSlash && handlerSlash > handlerPathBuf) {
-                ULONG handlerDirLen = (ULONG)(handlerSlash - handlerPathBuf);
+        if (policyPath && policyPath[0]) {
+            const WCHAR* policySlash = wcsrchr(policyPath, L'\\');
+            if (policySlash && policySlash > policyPath) {
+                ULONG handlerDirLen = (ULONG)(policySlash - policyPath);
                 bf_match = UserServer_GetBreakoutFolderPriority(
                     boxname,
                     image,
-                    handlerPathBuf,
+                    policyPath,
                     handlerDirLen,
                     &bf_priority);
                 bf_has_target = UserServer_GetBreakoutFolderTarget(
                     boxname,
                     image,
-                    handlerPathBuf,
+                    policyPath,
                     handlerDirLen,
                     bf_targetBox,
                     BOXNAME_COUNT);
             }
         }
 
-        // BreakoutProcess: check if the handler image also matches a BreakoutProcess
-        // rule.  When BreakoutProcess has a lower priority number than BreakoutDocument,
+        // BreakoutProcess: check if the effective launch image also matches a BreakoutProcess
+        // rule. When BreakoutProcess has a lower priority number than BreakoutDocument,
         // BP wins the breakout-side contest and its TargetBox (if any) is used.
         WCHAR bp_targetBox[BOXNAME_COUNT] = { 0 };
-        BOOLEAN bp_match = UserServer_GetBreakoutProcessPriority(boxname, fpCheckImage, &bp_priority, bp_targetBox, BOXNAME_COUNT);
+        BOOLEAN bp_match = UserServer_GetBreakoutProcessPriority(
+            boxname,
+            policyImage,
+            policyPath,
+            policyPathLen,
+            &bp_priority,
+            bp_targetBox,
+            BOXNAME_COUNT);
 
         // First arbitrate within process-start breakout rules: BreakoutProcess vs BreakoutFolder.
         // Tie behavior follows process-start semantics: BreakoutProcess wins equal priority.
@@ -1776,7 +1713,7 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
         // treated as an equal-priority tie.
         BOOLEAN bd_wins = TRUE;
         if (breakout_pf_match)
-            bd_wins = UserServer_IsPrimaryPreferredByPriority(bd_priority, breakout_pf_priority, TRUE);
+            bd_wins = ProgramControl_IsPrimaryPreferredByPriority(bd_priority, breakout_pf_priority, 1) ? TRUE : FALSE;
 
         // The effective breakout priority for comparison against force rules.
         LONG breakout_winner_priority = bd_wins ? bd_priority : breakout_pf_priority;

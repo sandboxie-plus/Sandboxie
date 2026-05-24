@@ -1342,39 +1342,59 @@ _FX BOOL Proc_CreateProcessInternalW(
 
     const WCHAR* lpArguments = NULL;
     BOOLEAN bd_fallback = FALSE;
+    BOOLEAN has_explicit_executable = (lpApplicationName && *lpApplicationName) ? TRUE : FALSE;
+    BOOLEAN has_breakout_document_arg = FALSE;
+    const WCHAR *doc_start = NULL;
+    ULONG doc_len = 0;
+    const WCHAR *created_image = NULL;
     if (lpCommandLine)
         lpArguments = SbieDll_FindArgumentEnd(lpCommandLine);
+
+    if (lpArguments) {
+        const WCHAR *doc = lpArguments;
+        const WCHAR *doc_end;
+        while (*doc == L' ') ++doc;
+        if (*doc == L'"') {
+            doc_start = doc + 1;
+            doc_end = wcschr(doc_start, L'"');
+            if (!doc_end)
+                doc_end = doc_start + wcslen(doc_start);
+        } else {
+            doc_start = doc;
+            doc_end = doc_start;
+            while (*doc_end && *doc_end != L' ')
+                ++doc_end;
+        }
+
+        doc_len = (ULONG)(doc_end - doc_start);
+
+        if (lpApplicationName) {
+            const WCHAR *slash = wcsrchr(lpApplicationName, L'\\');
+            created_image = (slash && slash[1]) ? (slash + 1) : lpApplicationName;
+        }
+
+        if (doc_len > 0 &&
+            SbieDll_CheckPatternInList(doc_start, doc_len, NULL, L"BreakoutDocument"))
+            has_breakout_document_arg = TRUE;
+
+    }
 
     // Evaluate BreakoutDocument before breakout-candidate checks as well.
     // This allows document priority arbitration to work even when there is no
     // BreakoutProcess/BreakoutFolder match.
-    if (lpArguments) {
-        const WCHAR *doc = lpArguments;
-        while (*doc == L' ') ++doc;
-        const WCHAR *doc_start, *doc_end;
-        if (*doc == L'"') {
-            doc_start = doc + 1;
-            doc_end = wcschr(doc_start, L'"');
-            if (!doc_end) doc_end = doc_start + wcslen(doc_start);
-        } else {
-            doc_start = doc;
-            doc_end = doc_start;
-            while (*doc_end && *doc_end != L' ') ++doc_end;
+    // Only treat as BreakoutDocument when launch is shell-style (no explicit exe).
+    // If an explicit executable is present, keep direct CreateProcess semantics.
+    if (!has_explicit_executable && has_breakout_document_arg) {
+        if (SH32_BreakoutDocument(doc_start, doc_len, created_image, lpApplicationName)) {
+            ok = TRUE;
+            err = 0;
+            goto finish;
         }
-        ULONG doc_len = (ULONG)(doc_end - doc_start);
-        if (doc_len > 0 &&
-            SbieDll_CheckPatternInList(doc_start, doc_len, NULL, L"BreakoutDocument")) {
-            if (SH32_BreakoutDocument(doc_start, doc_len)) {
-                ok = TRUE;
-                err = 0;
-                goto finish;
-            }
-            // BD matched but UserServer signaled fallback to source box
-            // (e.g., invalid TargetBox or service communication failure).
-            // If this launch is also a breakout candidate, skip the unboxed
-            // launch and fall through to normal process creation.
-            bd_fallback = TRUE;
-        }
+        // BD matched but UserServer signaled fallback to source box
+        // (e.g., invalid TargetBox or service communication failure).
+        // If this launch is also a breakout candidate, skip the unboxed
+        // launch and fall through to normal process creation.
+        bd_fallback = TRUE;
     }
 
     if(lpApplicationName) {
@@ -1383,7 +1403,8 @@ _FX BOOL Proc_CreateProcessInternalW(
         // The service (ProcessServer.cpp) enforces ForceChildren-forced caller policy
         // based on Priority= extensions; no early gate needed here.
         if (Proc_IsBreakoutCandidate(lpApplicationName, NULL, TRUE)
-            || (Dll_BoxName && Proc_IsBreakoutCandidate(lpApplicationName, Dll_BoxName, TRUE))) {
+            || (Dll_BoxName && Proc_IsBreakoutCandidate(lpApplicationName, Dll_BoxName, TRUE))
+            || (has_explicit_executable && has_breakout_document_arg)) {
 
                 WCHAR *mybuf = Dll_Alloc((wcslen(lpApplicationName) + 2 + (lpArguments ? wcslen(lpArguments) + 8192 : 0) + 1) * sizeof(WCHAR));
                 if (mybuf) {
@@ -1508,6 +1529,16 @@ _FX BOOL Proc_CreateProcessInternalW(
                     if (!bd_fallback) {
                         ok = SbieDll_RunSandboxed(L"*UNBOXED*", mybuf, lpCurrentDirectory, crflags2, lpStartupInfo, lpProcessInformation);
                         err = GetLastError();
+
+                        // If explicit exe+document breakout was denied by ProcessServer
+                        // (ERROR_NOT_SUPPORTED), try UserServer's document breakout path
+                        // before falling back to normal source-box CreateProcess.
+                        if (!ok && err == ERROR_NOT_SUPPORTED && has_explicit_executable && has_breakout_document_arg && doc_start && doc_len > 0) {
+                            if (SH32_BreakoutDocument(doc_start, doc_len, created_image, lpApplicationName)) {
+                                ok = TRUE;
+                                err = 0;
+                            }
+                        }
                     }
 
                     Dll_Free(mybuf);
@@ -1542,7 +1573,41 @@ _FX BOOL Proc_CreateProcessInternalW(
             if (*arg1 == L'"') temp = wcschr(arg1 + 1, L'"');
             if (!arg1_end) arg1_end = wcschr(arg1, L'\0');
 
-            if (arg1 != arg1_end && SH32_BreakoutDocument(arg1, (ULONG)(arg1_end - arg1)))
+            WCHAR created_image_buf[96] = { 0 };
+            const size_t created_image_buf_cch = sizeof(created_image_buf) / sizeof(created_image_buf[0]);
+            const WCHAR *created_image = NULL;
+            {
+                const WCHAR *cmd = lpCommandLine;
+                const WCHAR *exe = cmd;
+                const WCHAR *exe_end = NULL;
+
+                while (*exe == L' ') ++exe;
+                if (*exe == L'"') {
+                    exe++;
+                    exe_end = wcschr(exe, L'"');
+                    if (!exe_end)
+                        exe_end = wcschr(exe, L'\0');
+                } else {
+                    exe_end = exe;
+                    while (*exe_end && *exe_end != L' ') ++exe_end;
+                }
+
+                if (exe_end && exe_end > exe) {
+                    const WCHAR *slash = exe_end;
+                    while (slash > exe && slash[-1] != L'\\' && slash[-1] != L'/')
+                        --slash;
+                    size_t img_len = (size_t)(exe_end - slash);
+                    if (img_len >= created_image_buf_cch)
+                        img_len = created_image_buf_cch - 1;
+                    if (img_len > 0) {
+                        wmemcpy(created_image_buf, slash, img_len);
+                        created_image_buf[img_len] = L'\0';
+                        created_image = created_image_buf;
+                    }
+                }
+            }
+
+            if (arg1 != arg1_end && SH32_BreakoutDocument(arg1, (ULONG)(arg1_end - arg1), created_image, NULL))
                 return TRUE;
         }
     }

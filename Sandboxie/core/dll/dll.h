@@ -602,7 +602,7 @@ ULONG_PTR ProtectCall4(
     void *CallAddress,
     ULONG_PTR Arg1, ULONG_PTR Arg2, ULONG_PTR Arg3, ULONG_PTR Arg4);
 
-BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len);
+BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *createdImage, const WCHAR *launchPath);
 
 BOOL SH32_DoRunAs(
     const WCHAR *CmdLine, const WCHAR *WorkDir,

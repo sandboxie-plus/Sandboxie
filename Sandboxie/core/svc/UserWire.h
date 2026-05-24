@@ -81,6 +81,8 @@ struct tagUSER_SHELL_EXEC_REQ
     ULONG msgid;
     
     ULONG FileNameOffset;
+    ULONG ImageNameOffset; // optional created-process image name, 0 when absent
+    ULONG LaunchPathOffset; // optional full executable path, 0 when absent
 };
 
 

@@ -1303,7 +1303,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
         KeLowerIrql(irql);
 
         if (parent_was_sandboxed && box && parent_image_path_copy
-                && _wcsicmp(nptr1, L"Sandman.exe") != 0) {
+                && _wcsicmp(nptr1, L"SandMan.exe") != 0) {
             const WCHAR *parent_image_name = wcsrchr(parent_image_path_copy, L'\\');
             if (parent_image_name && parent_image_name[1])
                 ++parent_image_name;

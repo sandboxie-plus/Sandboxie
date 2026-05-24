@@ -370,7 +370,7 @@ _FX WCHAR *SH32_AdjustPath(WCHAR *src, WCHAR **pArgs)
 //---------------------------------------------------------------------------
 
 
-_FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len)
+_FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *createdImage, const WCHAR *launchPath)
 {
     // Strip outer quotes if present (e.g. ShellExecuteEx lpFile can arrive quoted).
     if (len >= 2 && path[0] == L'"' && path[len - 1] == L'"') {
@@ -388,8 +388,12 @@ _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len)
         }
 
         ULONG path_len = (len + 1) * sizeof(WCHAR);
-        ULONG req_len = sizeof(USER_SHELL_EXEC_REQ) + path_len;
+        ULONG image_len = (createdImage && *createdImage) ? ((ULONG)wcslen(createdImage) + 1) * sizeof(WCHAR) : 0;
+        ULONG launch_len = (launchPath && *launchPath) ? ((ULONG)wcslen(launchPath) + 1) * sizeof(WCHAR) : 0;
+        ULONG req_len = sizeof(USER_SHELL_EXEC_REQ) + path_len + image_len + launch_len;
         ULONG path_pos = sizeof(USER_SHELL_EXEC_REQ);
+        ULONG image_pos = path_pos + path_len;
+        ULONG launch_pos = image_pos + image_len;
 
         USER_SHELL_EXEC_REQ* req = (USER_SHELL_EXEC_REQ*)Dll_AllocTemp(req_len);
 
@@ -399,6 +403,18 @@ _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len)
 
         req->msgid = USER_SHELL_EXEC;
         req->FileNameOffset = path_pos;
+        req->ImageNameOffset = 0;
+        req->LaunchPathOffset = 0;
+        if (image_len) {
+            WCHAR *img_buff = (WCHAR*)((UCHAR*)req + image_pos);
+            wmemcpy(img_buff, createdImage, image_len / sizeof(WCHAR));
+            req->ImageNameOffset = image_pos;
+        }
+        if (launch_len) {
+            WCHAR *launch_buff = (WCHAR*)((UCHAR*)req + launch_pos);
+            wmemcpy(launch_buff, launchPath, launch_len / sizeof(WCHAR));
+            req->LaunchPathOffset = launch_pos;
+        }
 
         ULONG* rpl = SbieDll_CallProxySvr(_QueueName, req, req_len, sizeof(*rpl), 100);
 
@@ -444,7 +460,7 @@ _FX BOOL SH32_ShellExecuteExW(SHELLEXECUTEINFOW *lpExecInfo)
 
     if (lpExecInfo->lpFile) {
 
-        if (SH32_BreakoutDocument(lpExecInfo->lpFile, wcslen(lpExecInfo->lpFile)))
+        if (SH32_BreakoutDocument(lpExecInfo->lpFile, wcslen(lpExecInfo->lpFile), NULL, NULL))
             return TRUE;
     }
 

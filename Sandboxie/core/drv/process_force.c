@@ -191,7 +191,25 @@ static BOOLEAN Process_GetBreakoutDocumentPriority(
 
 static BOOLEAN Process_GetBreakoutDocumentTarget(
     BOX *box, const WCHAR *scopeName, const WCHAR *docPath,
-    WCHAR *outTarget, ULONG outTargetCch);
+    WCHAR *outTarget, ULONG outTargetCch,
+    BOOLEAN *outHasPriority, LONG *outPriority);
+
+static void Process_GetBreakoutDocumentPriorityBest(
+    BOX *box,
+    const WCHAR *primaryScopeName,
+    const WCHAR *secondaryScopeName,
+    const WCHAR *docPath,
+    BOOLEAN *outMatched,
+    BOOLEAN *outHasPriority,
+    LONG *outPriority);
+
+static BOOLEAN Process_GetBreakoutDocumentTargetBest(
+    BOX *box,
+    const WCHAR *primaryScopeName,
+    const WCHAR *secondaryScopeName,
+    const WCHAR *docPath,
+    WCHAR *outTarget,
+    ULONG outTargetCch);
 
 static BOOLEAN Process_IsPrioritizedBreakoutMatch(
     BOX *box, const WCHAR *processName, const WCHAR *folderScopeName, const WCHAR *path);
@@ -2970,7 +2988,8 @@ static BOOLEAN Process_GetBreakoutDocumentPriority(
 
 static BOOLEAN Process_GetBreakoutDocumentTarget(
     BOX *box, const WCHAR *scopeName, const WCHAR *docPath,
-    WCHAR *outTarget, ULONG outTargetCch)
+    WCHAR *outTarget, ULONG outTargetCch,
+    BOOLEAN *outHasPriority, LONG *outPriority)
 {
     const WCHAR *value;
     ULONG index;
@@ -2988,6 +3007,10 @@ static BOOLEAN Process_GetBreakoutDocumentTarget(
     use_breakout_document_extensions = Process_UseRuleExtensions(box->name, L"BreakoutDocument");
 
     outTarget[0] = L'\0';
+    if (outHasPriority)
+        *outHasPriority = FALSE;
+    if (outPriority)
+        *outPriority = -1;
 
     index = 0;
     while (1) {
@@ -3040,7 +3063,143 @@ static BOOLEAN Process_GetBreakoutDocumentTarget(
         Mem_FreeString(ruleCopy);
     }
 
+    if (hasMatch) {
+        if (outHasPriority)
+            *outHasPriority = bestHasPriority;
+        if (outPriority)
+            *outPriority = bestHasPriority ? bestPriority : -1;
+    }
+
     return hasMatch;
+}
+
+static void Process_GetBreakoutDocumentPriorityBest(
+    BOX *box,
+    const WCHAR *primaryScopeName,
+    const WCHAR *secondaryScopeName,
+    const WCHAR *docPath,
+    BOOLEAN *outMatched,
+    BOOLEAN *outHasPriority,
+    LONG *outPriority)
+{
+    BOOLEAN matched = FALSE;
+    BOOLEAN hasPriority = FALSE;
+    LONG priority = -1;
+
+    if (outMatched)
+        *outMatched = FALSE;
+    if (outHasPriority)
+        *outHasPriority = FALSE;
+    if (outPriority)
+        *outPriority = -1;
+
+    if (!box || !docPath || !*docPath)
+        return;
+
+    if (primaryScopeName && *primaryScopeName) {
+        matched = Process_GetBreakoutDocumentPriority(box, primaryScopeName, docPath, &hasPriority, &priority);
+    }
+
+    if (secondaryScopeName && *secondaryScopeName &&
+        (!primaryScopeName || _wcsicmp(primaryScopeName, secondaryScopeName) != 0)) {
+        BOOLEAN matched2 = FALSE;
+        BOOLEAN hasPriority2 = FALSE;
+        LONG priority2 = -1;
+
+        matched2 = Process_GetBreakoutDocumentPriority(box, secondaryScopeName, docPath, &hasPriority2, &priority2);
+        if (matched2) {
+            if (!matched || Process_ShouldReplaceBreakoutTarget(
+                    matched,
+                    hasPriority,
+                    priority,
+                    hasPriority2,
+                    priority2)) {
+                matched = TRUE;
+                hasPriority = hasPriority2;
+                priority = priority2;
+            }
+        }
+    }
+
+    if (outMatched)
+        *outMatched = matched;
+    if (outHasPriority)
+        *outHasPriority = hasPriority;
+    if (outPriority)
+        *outPriority = hasPriority ? priority : -1;
+}
+
+static BOOLEAN Process_GetBreakoutDocumentTargetBest(
+    BOX *box,
+    const WCHAR *primaryScopeName,
+    const WCHAR *secondaryScopeName,
+    const WCHAR *docPath,
+    WCHAR *outTarget,
+    ULONG outTargetCch)
+{
+    WCHAR bestTarget[BOXNAME_COUNT] = { 0 };
+    BOOLEAN hasBest = FALSE;
+    BOOLEAN bestHasPriority = FALSE;
+    LONG bestPriority = -1;
+
+    if (!outTarget || outTargetCch == 0)
+        return FALSE;
+
+    outTarget[0] = L'\0';
+
+    if (!box || !docPath || !*docPath)
+        return FALSE;
+
+    if (primaryScopeName && *primaryScopeName) {
+        BOOLEAN hasPriority1 = FALSE;
+        LONG priority1 = -1;
+        hasBest = Process_GetBreakoutDocumentTarget(
+            box,
+            primaryScopeName,
+            docPath,
+            bestTarget,
+            BOXNAME_COUNT,
+            &hasPriority1,
+            &priority1);
+        bestHasPriority = hasPriority1;
+        bestPriority = priority1;
+    }
+
+    if (secondaryScopeName && *secondaryScopeName &&
+        (!primaryScopeName || _wcsicmp(primaryScopeName, secondaryScopeName) != 0)) {
+        WCHAR target2[BOXNAME_COUNT] = { 0 };
+        BOOLEAN hasPriority2 = FALSE;
+        LONG priority2 = -1;
+        BOOLEAN has2 = Process_GetBreakoutDocumentTarget(
+            box,
+            secondaryScopeName,
+            docPath,
+            target2,
+            BOXNAME_COUNT,
+            &hasPriority2,
+            &priority2);
+
+        if (has2 && Process_ShouldReplaceBreakoutTarget(
+                hasBest,
+                bestHasPriority,
+                bestPriority,
+                hasPriority2,
+                priority2)) {
+            hasBest = TRUE;
+            bestHasPriority = hasPriority2;
+            bestPriority = priority2;
+            wcsncpy(bestTarget, target2, BOXNAME_COUNT - 1);
+            bestTarget[BOXNAME_COUNT - 1] = L'\0';
+        }
+    }
+
+    if (hasBest) {
+        wcsncpy(outTarget, bestTarget, outTargetCch - 1);
+        outTarget[outTargetCch - 1] = L'\0';
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 
@@ -3111,9 +3270,18 @@ _FX BOX *Process_CheckForceProcess(
             // TargetBox is only applied when it has the higher priority.
             BOOLEAN bd_contributed_priority = FALSE;
             if (docPath && *docPath) {
+                BOOLEAN bd_matched = FALSE;
                 BOOLEAN bd_has_priority = FALSE;
                 LONG bd_priority = -1;
-                if (Process_GetBreakoutDocumentPriority(box->box, folder_scope_name, docPath, &bd_has_priority, &bd_priority)) {
+                Process_GetBreakoutDocumentPriorityBest(
+                    box->box,
+                    folder_scope_name,
+                    name,
+                    docPath,
+                    &bd_matched,
+                    &bd_has_priority,
+                    &bd_priority);
+                if (bd_matched) {
                     if (bd_has_priority) {
                         if (!breakout_has_priority || bd_priority < breakout_priority) {
                             breakout_has_priority = TRUE;
@@ -3138,14 +3306,20 @@ _FX BOX *Process_CheckForceProcess(
                 breakout_has_priority ? 1 : 0,
                 breakout_priority) ? TRUE : FALSE;
 
-            // No-priority behavior must remain legacy (1.17.5): force wins.
+            // No-priority behavior must remain legacy (1.17.6): force wins.
             (void)image_scoped_breakout;
 
             if (effective_prioritize_breakout) {
                 if (bd_contributed_priority && docPath && *docPath) {
                     // BreakoutDocument won or tied the priority contest, so it owns
                     // target resolution for this document-open path.
-                    has_target_override = Process_GetBreakoutDocumentTarget(box->box, folder_scope_name, docPath, target_box, BOXNAME_COUNT);
+                    has_target_override = Process_GetBreakoutDocumentTargetBest(
+                        box->box,
+                        folder_scope_name,
+                        name,
+                        docPath,
+                        target_box,
+                        BOXNAME_COUNT);
                 } else {
                     has_target_override = Process_GetMatchedBreakoutTarget(box->box, name, folder_scope_name, path, target_box, BOXNAME_COUNT);
                 }
@@ -3190,7 +3364,7 @@ _FX BOX *Process_CheckForceProcess(
             continue;
         }
 
-        if (ParentName && Process_CheckForceProcessList(box->box, &box->ForceChildren, ParentName, ParentPath, &force_has_priority, &force_priority) && _wcsicmp(name, L"Sandman.exe") != 0) { // except for sandman exe
+        if (ParentName && Process_CheckForceProcessList(box->box, &box->ForceChildren, ParentName, ParentPath, &force_has_priority, &force_priority) && _wcsicmp(name, L"SandMan.exe") != 0) { // except for SandMan exe
 
             if (have_force_winner &&
                 !Process_ShouldReplaceForceWinner(
@@ -3218,9 +3392,18 @@ _FX BOX *Process_CheckForceProcess(
             // TargetBox is only applied when it has the higher priority.
             BOOLEAN bd_contributed_priority = FALSE;
             if (docPath && *docPath) {
+                BOOLEAN bd_matched = FALSE;
                 BOOLEAN bd_has_priority = FALSE;
                 LONG bd_priority = -1;
-                if (Process_GetBreakoutDocumentPriority(box->box, folder_scope_name, docPath, &bd_has_priority, &bd_priority)) {
+                Process_GetBreakoutDocumentPriorityBest(
+                    box->box,
+                    folder_scope_name,
+                    name,
+                    docPath,
+                    &bd_matched,
+                    &bd_has_priority,
+                    &bd_priority);
+                if (bd_matched) {
                     if (bd_has_priority) {
                         if (!breakout_has_priority || bd_priority < breakout_priority) {
                             breakout_has_priority = TRUE;
@@ -3245,7 +3428,7 @@ _FX BOX *Process_CheckForceProcess(
                 breakout_has_priority ? 1 : 0,
                 breakout_priority) ? TRUE : FALSE;
 
-            // No-priority behavior must remain legacy (1.17.5): force wins.
+            // No-priority behavior must remain legacy (1.17.6): force wins.
             (void)image_scoped_breakout;
 
             if (effective_prioritize_breakout) {
@@ -3253,7 +3436,13 @@ _FX BOX *Process_CheckForceProcess(
                 // Check BreakoutDocument for a target box only when it won
                 // the priority contest against BreakoutProcess rules.
                 if (!has_target_override && bd_contributed_priority && docPath && *docPath)
-                    has_target_override = Process_GetBreakoutDocumentTarget(box->box, folder_scope_name, docPath, target_box, BOXNAME_COUNT);
+                    has_target_override = Process_GetBreakoutDocumentTargetBest(
+                        box->box,
+                        folder_scope_name,
+                        name,
+                        docPath,
+                        target_box,
+                        BOXNAME_COUNT);
             }
 
             if (has_target_override) {

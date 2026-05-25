@@ -16,6 +16,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed VMware Workstation Pro 26H1 QueryDosDevice crash [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
 
 
+## [1.17.7 / 5.72.7] - 2026-05-??
+
+### Fixed
+- fixed crash in VMware when running inside sandbox caused by NtQueryDirectoryObject hook returning non-null-terminated strings and uninitialized padding bytes in OBJECT_DIRECTORY_INFORMATION structures, which caused QueryDosDeviceW to crash in wcscmp [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
+
+
 
 ## [1.17.6 / 5.72.6] - 2026-05-17
 
@@ -29,6 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - the new format is 1:1 compatible with portable boxes, allowing to just unpack an export archive and add the boxes as portable
 
 ### Fixed
+- FIXED SECURITY ISSUE ID-40
 - fixed issue with hook registration
 - fixed high CPU usage caused by DWM with applications using custom title bars (e.g., Delphi VCL)
 

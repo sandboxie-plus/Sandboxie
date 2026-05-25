@@ -4978,7 +4978,7 @@ _FX NTSTATUS Ipc_MergeDirectoryObject(IPC_MERGE *merge, WCHAR* path, BOOLEAN joi
 
         for (POBJECT_DIRECTORY_INFORMATION directoryInfo = buffer; directoryInfo->Name.Length != 0; directoryInfo++)
         {
-            ULONG len = sizeof(IPC_MERGE_ENTRY) + (directoryInfo->Name.MaximumLength + directoryInfo->TypeName.MaximumLength) * sizeof(WCHAR);
+            ULONG len = sizeof(IPC_MERGE_ENTRY) + directoryInfo->Name.MaximumLength + directoryInfo->TypeName.MaximumLength;
 
             //
             // when we are joining we remove the older entries when a duplicate is encountered
@@ -5122,6 +5122,15 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
 	}
 
     //
+    // check minimum buffer size - must fit at least the terminator entry
+    //
+
+    if (Buffer && Length < sizeof(OBJECT_DIRECTORY_INFORMATION)) {
+        LeaveCriticalSection(&Ipc_Handles_CritSec);
+        return STATUS_BUFFER_TOO_SMALL;
+    }
+
+    //
     // count the buffer space
     //
 
@@ -5129,7 +5138,8 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
     ULONG TotalLength = sizeof(OBJECT_DIRECTORY_INFORMATION);
     for (IPC_MERGE_ENTRY* cur = entry; cur; cur = List_Next(cur)) {
 
-        ULONG len = sizeof(OBJECT_DIRECTORY_INFORMATION) + (cur->Name.MaximumLength + cur->TypeName.MaximumLength) * sizeof(WCHAR);
+        // add 2 * sizeof(WCHAR) for null terminators
+        ULONG len = sizeof(OBJECT_DIRECTORY_INFORMATION) + cur->Name.MaximumLength + cur->TypeName.MaximumLength + 2 * sizeof(WCHAR);
 
         if (Buffer && TotalLength + len > Length)
             break; // not enough space for this entry
@@ -5156,7 +5166,7 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
     //
 
     POBJECT_DIRECTORY_INFORMATION directoryInfo = Buffer;
-    WCHAR* ptr = directoryInfo + CountToGo + 1;
+    WCHAR* ptr = (WCHAR*)((UCHAR*)Buffer + (CountToGo + 1) * sizeof(OBJECT_DIRECTORY_INFORMATION));
 
     ULONG EndIndex = indexCounter + CountToGo;
     for (; entry && indexCounter < EndIndex; indexCounter++) {
@@ -5164,15 +5174,17 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
         if (directoryInfo) {
 
             directoryInfo->Name.Length = entry->Name.Length;
-            directoryInfo->Name.MaximumLength = entry->Name.MaximumLength;
+            directoryInfo->Name.MaximumLength = entry->Name.MaximumLength + sizeof(WCHAR);
             directoryInfo->Name.Buffer = ptr;
             memcpy(ptr, entry->Name.Buffer, entry->Name.MaximumLength);
+            ptr[entry->Name.Length / sizeof(WCHAR)] = L'\0';
             ptr += directoryInfo->Name.MaximumLength / sizeof(WCHAR);
 
             directoryInfo->TypeName.Length = entry->TypeName.Length;
-            directoryInfo->TypeName.MaximumLength = entry->TypeName.MaximumLength;
+            directoryInfo->TypeName.MaximumLength = entry->TypeName.MaximumLength + sizeof(WCHAR);
             directoryInfo->TypeName.Buffer = ptr;
             memcpy(ptr, entry->TypeName.Buffer, entry->TypeName.MaximumLength);
+            ptr[entry->TypeName.Length / sizeof(WCHAR)] = L'\0';
             ptr += directoryInfo->TypeName.MaximumLength / sizeof(WCHAR);
 
             directoryInfo++;
@@ -5183,13 +5195,12 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
 
     //
     // terminate listing with an empty entry
+    // Must zero entire structure including padding bytes for RtlCompareMemory check in QueryDosDeviceW
     //
 
     if (directoryInfo) {
 
-        directoryInfo->Name.Length = directoryInfo->TypeName.Length = 0;
-        directoryInfo->Name.MaximumLength = directoryInfo->TypeName.MaximumLength = 0;
-        directoryInfo->Name.Buffer = directoryInfo->TypeName.Buffer = NULL;
+        memset(directoryInfo, 0, sizeof(OBJECT_DIRECTORY_INFORMATION));
     }
 
     //

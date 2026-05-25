@@ -452,8 +452,11 @@ _FX NTSTATUS Session_Api_DisableForce(PROCESS *proc, ULONG64 *parms)
             time.QuadPart = 0;
 
         if (in_flag_value == DISABLE_JUST_THIS_PROCESS) {
+            HANDLE process_id = args->process_id.val;
+            if (!process_id)
+                process_id = PsGetCurrentProcessId();
 
-            Process_DfpInsert(PROCESS_TERMINATED, PsGetCurrentProcessId());
+            Process_DfpInsert(PROCESS_TERMINATED, process_id);
 
         } else {
 

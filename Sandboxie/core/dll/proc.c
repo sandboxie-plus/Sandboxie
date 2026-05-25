@@ -154,6 +154,22 @@ static BOOLEAN Proc_CheckBreakoutFolderInList(
 static BOOLEAN Proc_IsBreakoutCandidate(
     const WCHAR *appPath, const WCHAR *boxname, BOOLEAN allowTargeted);
 
+static void Proc_SetLaunchContextFromPath(
+    const WCHAR *exePath,
+    WCHAR *launchPathBuf,
+    ULONG launchPathBufCch,
+    WCHAR *createdImageBuf,
+    ULONG createdImageBufCch,
+    const WCHAR **outLaunchPath,
+    const WCHAR **outCreatedImage);
+
+static BOOLEAN Proc_TryBreakoutDocumentCandidate(
+    const WCHAR *arg,
+    ULONG arg_len,
+    const WCHAR *caller_dir,
+    const WCHAR *created_image,
+    const WCHAR *launch_path);
+
 static int Proc_BreakoutMatchImage(const WCHAR *pattern, const WCHAR *imageName, void *context);
 
 static void Proc_AdjustBreakoutProcessRule(WCHAR *value, void *context);
@@ -873,6 +889,122 @@ static BOOLEAN Proc_IsBreakoutCandidate(
         || Proc_CheckBreakoutFolderInList(appPath, boxname, allowTargeted));
 }
 
+static void Proc_SetLaunchContextFromPath(
+    const WCHAR *exePath,
+    WCHAR *launchPathBuf,
+    ULONG launchPathBufCch,
+    WCHAR *createdImageBuf,
+    ULONG createdImageBufCch,
+    const WCHAR **outLaunchPath,
+    const WCHAR **outCreatedImage)
+{
+    const WCHAR *slash;
+    size_t len;
+
+    if (!outLaunchPath || !outCreatedImage || !launchPathBuf || !createdImageBuf ||
+            launchPathBufCch == 0 || createdImageBufCch == 0)
+        return;
+
+    *outLaunchPath = NULL;
+    *outCreatedImage = NULL;
+
+    launchPathBuf[0] = L'\0';
+    createdImageBuf[0] = L'\0';
+
+    if (!exePath || !*exePath)
+        return;
+
+    len = wcslen(exePath);
+    if (len >= launchPathBufCch)
+        len = launchPathBufCch - 1;
+    if (!len)
+        return;
+
+    wmemcpy(launchPathBuf, exePath, len);
+    launchPathBuf[len] = L'\0';
+    *outLaunchPath = launchPathBuf;
+
+    slash = wcsrchr(launchPathBuf, L'\\');
+    if (!slash)
+        slash = wcsrchr(launchPathBuf, L'/');
+    if (slash && slash[1])
+        ++slash;
+    else
+        slash = launchPathBuf;
+
+    len = wcslen(slash);
+    if (len >= createdImageBufCch)
+        len = createdImageBufCch - 1;
+    if (!len)
+        return;
+
+    wmemcpy(createdImageBuf, slash, len);
+    createdImageBuf[len] = L'\0';
+    *outCreatedImage = createdImageBuf;
+}
+
+static BOOLEAN Proc_TryBreakoutDocumentCandidate(
+    const WCHAR *arg,
+    ULONG arg_len,
+    const WCHAR *caller_dir,
+    const WCHAR *created_image,
+    const WCHAR *launch_path)
+{
+    BOOLEAN is_abs;
+    const WCHAR *doc_path;
+    ULONG doc_len;
+    WCHAR arg_buf[MAX_PATH];
+    WCHAR doc_path_buf[MAX_PATH];
+
+    if (!arg || !arg_len)
+        return FALSE;
+
+    if (arg[0] == L'-' || arg[0] == L'/')
+        return FALSE;
+
+    is_abs = FALSE;
+    if (arg_len >= 2 &&
+            ((arg[0] >= L'A' && arg[0] <= L'Z') || (arg[0] >= L'a' && arg[0] <= L'z')) &&
+            arg[1] == L':') {
+        is_abs = TRUE;
+    }
+    if (arg[0] == L'\\' || arg[0] == L'/')
+        is_abs = TRUE;
+
+    if (is_abs)
+        return SH32_BreakoutDocument(arg, arg_len, created_image, launch_path);
+
+    if (arg_len >= ARRAYSIZE(arg_buf))
+        arg_len = ARRAYSIZE(arg_buf) - 1;
+    if (!arg_len)
+        return FALSE;
+
+    wmemcpy(arg_buf, arg, arg_len);
+    arg_buf[arg_len] = L'\0';
+
+    doc_path = arg_buf;
+    if (caller_dir && *caller_dir) {
+        const WCHAR* sep = L"";
+        ULONG dir_len = (ULONG)wcslen(caller_dir);
+        if (dir_len > 0 && caller_dir[dir_len - 1] != L'\\' && caller_dir[dir_len - 1] != L'/')
+            sep = L"\\";
+
+        Sbie_snwprintf(doc_path_buf, ARRAYSIZE(doc_path_buf), L"%s%s%s", caller_dir, sep, arg_buf);
+        doc_path = doc_path_buf;
+    }
+    else {
+        DWORD full_len = GetFullPathName(arg_buf, ARRAYSIZE(doc_path_buf), doc_path_buf, NULL);
+        if (full_len > 0 && full_len < ARRAYSIZE(doc_path_buf))
+            doc_path = doc_path_buf;
+    }
+
+    doc_len = (ULONG)wcslen(doc_path);
+    if (!doc_len)
+        return FALSE;
+
+    return SH32_BreakoutDocument(doc_path, doc_len, created_image, launch_path);
+}
+
 
 //---------------------------------------------------------------------------
 // Proc_IsLikelyElectronProcess
@@ -1558,67 +1690,141 @@ _FX BOOL Proc_CreateProcessInternalW(
     // in the Templates.ini and check whenever explorer wants to start a process
     //
 
-    if (!TlsData->sh32_shell_execute &&
-        lpCommandLine && Config_GetSettingsForImageName_bool(L"BreakoutDocumentProcess", FALSE))
-    {
-        const WCHAR* temp = lpCommandLine;
-        if (*temp == L'"') temp = wcschr(temp + 1, L'"');
-        else temp = wcschr(temp, L' ');
-        if (temp) 
+    if (lpCommandLine &&
+            !TlsData->sh32_shell_execute &&
+            Config_GetSettingsForImageName_bool(L"BreakoutDocumentProcess", FALSE)) {
+
+        typedef LPWSTR* (WINAPI *P_CommandLineToArgvW)(LPCWSTR, int*);
+        P_CommandLineToArgvW pCommandLineToArgvW = NULL;
+        HMODULE hShell32 = GetModuleHandle(DllName_shell32);
+        LPWSTR* argv = NULL;
+        int argc = 0;
+        const WCHAR* caller_dir = (const WCHAR*)lpCurrentDirectory;
+        const WCHAR* launch_path = NULL;
+        WCHAR launch_path_buf[MAX_PATH] = { 0 };
+        const WCHAR* created_image = NULL;
+        WCHAR created_image_buf[96] = { 0 };
+
         {
-            while (*++temp == L' ');
+            const WCHAR* exe = lpCommandLine;
+            const WCHAR* exe_end = NULL;
+            ULONG exe_len = 0;
 
-            const WCHAR* arg1 = temp;
-            const WCHAR* arg1_end = NULL;
+            while (*exe == L' ' || *exe == L'\t')
+                ++exe;
 
-            if (*arg1 == L'"') {
-                arg1++;
-                arg1_end = wcschr(arg1, L'"');
-                if (!arg1_end)
-                    arg1_end = wcschr(arg1, L'\0');
+            if (*exe == L'"') {
+                ++exe;
+                exe_end = wcschr(exe, L'"');
+                if (!exe_end)
+                    exe_end = wcschr(exe, L'\0');
             }
             else {
-                arg1_end = arg1;
-                while (*arg1_end && *arg1_end != L' ')
-                    ++arg1_end;
+                exe_end = exe;
+                while (*exe_end && *exe_end != L' ' && *exe_end != L'\t')
+                    ++exe_end;
             }
 
-            WCHAR created_image_buf[96] = { 0 };
-            const size_t created_image_buf_cch = sizeof(created_image_buf) / sizeof(created_image_buf[0]);
-            const WCHAR *created_image = NULL;
-            {
-                const WCHAR *cmd = lpCommandLine;
-                const WCHAR *exe = cmd;
-                const WCHAR *exe_end = NULL;
+            exe_len = (ULONG)(exe_end - exe);
+            if (exe_len > 0) {
+                WCHAR exe_buf[MAX_PATH] = { 0 };
+                if (exe_len >= ARRAYSIZE(exe_buf))
+                    exe_len = ARRAYSIZE(exe_buf) - 1;
+                wmemcpy(exe_buf, exe, exe_len);
+                exe_buf[exe_len] = L'\0';
+                Proc_SetLaunchContextFromPath(
+                    exe_buf,
+                    launch_path_buf,
+                    ARRAYSIZE(launch_path_buf),
+                    created_image_buf,
+                    ARRAYSIZE(created_image_buf),
+                    &launch_path,
+                    &created_image);
+            }
+        }
 
-                while (*exe == L' ') ++exe;
-                if (*exe == L'"') {
-                    exe++;
-                    exe_end = wcschr(exe, L'"');
-                    if (!exe_end)
-                        exe_end = wcschr(exe, L'\0');
-                } else {
-                    exe_end = exe;
-                    while (*exe_end && *exe_end != L' ') ++exe_end;
+        if (hShell32)
+            pCommandLineToArgvW = (P_CommandLineToArgvW)GetProcAddress(hShell32, "CommandLineToArgvW");
+
+        if (pCommandLineToArgvW)
+            argv = pCommandLineToArgvW(lpCommandLine, &argc);
+
+        if (argv && argc > 0) {
+            const WCHAR *exe_path = argv[0];
+            Proc_SetLaunchContextFromPath(
+                exe_path,
+                launch_path_buf,
+                ARRAYSIZE(launch_path_buf),
+                created_image_buf,
+                ARRAYSIZE(created_image_buf),
+                &launch_path,
+                &created_image);
+
+            for (int i = 1; i < argc; ++i) {
+                const WCHAR* arg = argv[i];
+                ULONG arg_len;
+
+                if (!arg || !*arg)
+                    continue;
+
+                arg_len = (ULONG)wcslen(arg);
+                if (!arg_len)
+                    continue;
+
+                if (Proc_TryBreakoutDocumentCandidate(arg, arg_len, caller_dir, created_image, launch_path)) {
+                    LocalFree(argv);
+                    return TRUE;
                 }
+            }
 
-                if (exe_end && exe_end > exe) {
-                    const WCHAR *slash = exe_end;
-                    while (slash > exe && slash[-1] != L'\\' && slash[-1] != L'/')
-                        --slash;
-                    size_t img_len = (size_t)(exe_end - slash);
-                    if (img_len >= created_image_buf_cch)
-                        img_len = created_image_buf_cch - 1;
-                    if (img_len > 0) {
-                        wmemcpy(created_image_buf, slash, img_len);
-                        created_image_buf[img_len] = L'\0';
-                        created_image = created_image_buf;
+            LocalFree(argv);
+        }
+        else {
+            // Fallback to lightweight parsing when shell32 parser is unavailable.
+            const WCHAR* temp = lpCommandLine;
+            if (*temp == L'"') temp = wcschr(temp + 1, L'"');
+            else temp = wcschr(temp, L' ');
+            if (temp)
+            {
+                while (*++temp == L' ');
+
+                {
+                    const WCHAR* scan = temp;
+
+                    while (*scan) {
+                        const WCHAR* arg = NULL;
+                        const WCHAR* arg_end = NULL;
+                        ULONG arg_len;
+
+                        while (*scan == L' ' || *scan == L'\t')
+                            ++scan;
+                        if (!*scan)
+                            break;
+
+                        arg = scan;
+                        if (*arg == L'"') {
+                            ++arg;
+                            arg_end = wcschr(arg, L'"');
+                            if (!arg_end)
+                                arg_end = wcschr(arg, L'\0');
+                            scan = (*arg_end == L'"') ? (arg_end + 1) : arg_end;
+                        }
+                        else {
+                            arg_end = arg;
+                            while (*arg_end && *arg_end != L' ' && *arg_end != L'\t')
+                                ++arg_end;
+                            scan = arg_end;
+                        }
+
+                        arg_len = (ULONG)(arg_end - arg);
+                        if (!arg_len)
+                            continue;
+
+                        if (Proc_TryBreakoutDocumentCandidate(arg, arg_len, caller_dir, created_image, launch_path))
+                            return TRUE;
                     }
                 }
             }
-
-            if (arg1 != arg1_end && SH32_BreakoutDocument(arg1, (ULONG)(arg1_end - arg1), created_image, NULL))
-                return TRUE;
         }
     }
 

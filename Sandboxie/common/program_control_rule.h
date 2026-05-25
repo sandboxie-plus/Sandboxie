@@ -949,8 +949,11 @@ static __inline int ProgramControl_MatchProcessRule(
     if (_wcsicmp(rule, imageName) == 0)
         return 1;
 
-    if (!ProgramControl_RuleLooksLikePath(rule))
+    if (!ProgramControl_RuleLooksLikePath(rule)) {
+        if (wcschr(rule, L'*') || wcschr(rule, L'?'))
+            return ProgramControl_WildcardMatchI(rule, imageName);
         return 0;
+    }
 
     ruleLen = wcslen(rule);
     if (!ruleLen)
@@ -963,6 +966,30 @@ static __inline int ProgramControl_MatchProcessRule(
         return 0;
 
     return (_wcsnicmp(rule, appPath, ruleLen) == 0);
+}
+
+static __inline int ProgramControl_IsBroadWildcardImageRule(const WCHAR *rule)
+{
+    const WCHAR *p;
+    const WCHAR *lastDot = NULL;
+    const WCHAR *scanEnd;
+
+    if (!rule || !*rule)
+        return 1;
+
+    for (p = rule; *p; ++p) {
+        if (*p == L'.')
+            lastDot = p;
+    }
+
+    scanEnd = lastDot ? lastDot : p;
+
+    for (p = rule; p < scanEnd; ++p) {
+        if (*p != L'*' && *p != L'?')
+            return 0;
+    }
+
+    return 1;
 }
 
 static __inline int ProgramControl_MatchFolderRule(
@@ -1118,6 +1145,13 @@ static __inline int ProgramControl_FindProcessSettingMatch(
 
         if (!ProgramControl_ParseRuleExtensionsInPlace(buf, &rule, useRuleExtensions))
             continue;
+
+        if (_wcsicmp(setting, L"BreakoutProcess") == 0 &&
+            (wcschr(rule.base_rule, L'*') || wcschr(rule.base_rule, L'?')) &&
+            !ProgramControl_RuleLooksLikePath(rule.base_rule) &&
+            ProgramControl_IsBroadWildcardImageRule(rule.base_rule)) {
+            continue;
+        }
 
         if (rule.has_target_box && !allowTargeted)
             continue;

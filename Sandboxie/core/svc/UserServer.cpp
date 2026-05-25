@@ -1815,9 +1815,10 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
 
         if (decision == SBIE_DECISION_BREAKOUT_TARGET_BOX) {
 
-            if (!NT_SUCCESS(SbieApi_Call(
+            LONG target_enabled_status = SbieApi_Call(
                     API_IS_BOX_ENABLED, 3,
-                    (ULONG_PTR)targetBox, (ULONG_PTR)sid, (ULONG_PTR)session_id))) {
+                    (ULONG_PTR)targetBox, (ULONG_PTR)sid, (ULONG_PTR)session_id);
+            if (!NT_SUCCESS(target_enabled_status)) {
                 // Target box not available; signal fallback without logging SBIE2203.
                 ((ULONG*)args->rpl_buf)[1] = USER_DOCUMENT_FALLBACK_TO_SOURCE;
                 return STATUS_SUCCESS;

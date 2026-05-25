@@ -598,7 +598,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="473"/>
         <source>No boxes selected for separate file export.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有选择要单独导出文件的沙箱。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="515"/>

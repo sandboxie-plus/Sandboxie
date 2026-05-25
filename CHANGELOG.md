@@ -5,6 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.17.7 / 5.72.7] - 2026-05-??
+
+### Changed
+- disabled rich text acceptance in 'Edit ini Section' [baa6968](https://github.com/sandboxie-plus/Sandboxie/commit/baa6968420e0ebd6b4cd93821cf019fcd0e0fc35)
+
+
+
 ## [1.17.6 / 5.72.6] - 2026-05-17
 
 ### Added
@@ -28,6 +37,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added workaround for SBIE2205 OpenDesktop when requesting default desktop
 
 ### Fixed
+- fixed Epic Games not launching [#5281](https://github.com/sandboxie-plus/Sandboxie/issues/5281) [#5303](https://github.com/sandboxie-plus/Sandboxie/issues/5303) [#5344](https://github.com/sandboxie-plus/Sandboxie/pull/5344)
 - fixed box rename failing with "The parameter is incorrect" since 1.17.3, caused by multi-line section content being rejected by the new ContainsCRLF check in CIniFile::AddValue
 - fixed renamed sandbox not being re-selected in the UI after a successful rename
 - fixed sandboxed app tray icons not showing with `OpenWinClass=*` by proxying `Shell_NotifyIcon`; can be disabled with `UseShellNotifyIconProxy` (default enabled, supports `process` and `!process` selectors)

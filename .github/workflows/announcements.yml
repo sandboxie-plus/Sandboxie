@@ -6,13 +6,17 @@ on:
 
 jobs:
   lock-announcements:
+    name: ${{ github.workflow }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
       discussions: write
 
     steps:
-      - name: Lock previous announcement(s)
+      - name: Wait for tag propagation
+        run: sleep 30
+
+      - name: ${{ github.workflow }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}

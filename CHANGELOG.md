@@ -35,8 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - the new format is 1:1 compatible with portable boxes, allowing to just unpack an export archive and add the boxes as portable
 
 ### Fixed
-- FIXED SECURITY ISSUE ID-40
-- fixed issue with hook registration
+- FIXED SECURITY ISSUE ID-40: issue with APC injection vulnerability
 - fixed high CPU usage caused by DWM with applications using custom title bars (e.g., Delphi VCL)
 
 

@@ -12,6 +12,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - disabled rich text acceptance in 'Edit ini Section' [baa6968](https://github.com/sandboxie-plus/Sandboxie/commit/baa6968420e0ebd6b4cd93821cf019fcd0e0fc35)
 
+### Fixed
+- fixed VMware Workstation Pro 26H1 QueryDosDevice crash [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
+
 
 
 ## [1.17.6 / 5.72.6] - 2026-05-17

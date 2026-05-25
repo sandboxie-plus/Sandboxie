@@ -280,6 +280,13 @@ _FX BOOLEAN File_Init(void)
         if (DefineDosDeviceW) {
             SBIEDLL_HOOK(File_,DefineDosDeviceW);
         }
+
+        void *QueryDosDeviceW =
+            GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
+                "QueryDosDeviceW");
+        if (QueryDosDeviceW) {
+            SBIEDLL_HOOK(File_,QueryDosDeviceW);
+        }
     }
 
     if (Dll_OsBuild >= 8400 && Dll_IsSystemSid) {

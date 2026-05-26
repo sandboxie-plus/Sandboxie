@@ -403,24 +403,6 @@ static BOOLEAN UserServer_QueryImageRuleMatch(
         outPriority) ? TRUE : FALSE;
 }
 
-static BOOLEAN UserServer_GetForceProcessPriority(
-    const WCHAR* boxname, const WCHAR* imageName, const WCHAR* appPath, ULONG appPathLen, LONG* outPriority)
-{
-    return UserServer_QueryImageRuleMatch(
-        boxname, L"ForceProcess", imageName, appPath, appPathLen, outPriority, NULL, 0);
-}
-
-// Scans BreakoutProcess rules to check if any match the given image name.
-// Returns TRUE if a match is found, and sets *outPriority to the Priority=N
-// value of the best-matching rule (-1 if no Priority= was specified).
-static BOOLEAN UserServer_GetBreakoutProcessPriority(
-    const WCHAR* boxname, const WCHAR* imageName, const WCHAR* appPath, ULONG appPathLen, LONG* outPriority,
-    WCHAR* outTarget, ULONG outTargetCch)
-{
-    return UserServer_QueryImageRuleMatch(
-        boxname, L"BreakoutProcess", imageName, appPath, appPathLen, outPriority, outTarget, outTargetCch);
-}
-
 static void UserServer_SelectBreakoutProcessFolderWinner(
     BOOLEAN bp_match,
     LONG bp_priority,
@@ -1667,12 +1649,15 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
 
         // ForceProcess/BreakoutProcess target the effective launch image.
         ULONG policyPathLen = (policyPath && policyPath[0]) ? (ULONG)wcslen(policyPath) : 0;
-        BOOLEAN fp_match = UserServer_GetForceProcessPriority(
+        BOOLEAN fp_match = UserServer_QueryImageRuleMatch(
             boxname,
+            L"ForceProcess",
             policyImage,
             policyPath,
             policyPathLen,
-            &fp_priority);
+            &fp_priority,
+            NULL,
+            0);
 
         // BreakoutFolder checks the effective launch path (explicit image path or handler path).
         WCHAR bf_targetBox[BOXNAME_COUNT] = { 0 };
@@ -1702,8 +1687,9 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
         // rule. When BreakoutProcess has a lower priority number than BreakoutDocument,
         // BP wins the breakout-side contest and its TargetBox (if any) is used.
         WCHAR bp_targetBox[BOXNAME_COUNT] = { 0 };
-        BOOLEAN bp_match = UserServer_GetBreakoutProcessPriority(
+        BOOLEAN bp_match = UserServer_QueryImageRuleMatch(
             boxname,
+            L"BreakoutProcess",
             policyImage,
             policyPath,
             policyPathLen,

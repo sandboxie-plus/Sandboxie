@@ -372,13 +372,26 @@ _FX WCHAR *SH32_AdjustPath(WCHAR *src, WCHAR **pArgs)
 
 _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *createdImage, const WCHAR *launchPath)
 {
+    BOOLEAN use_rule_extensions;
+
     // Strip outer quotes if present (e.g. ShellExecuteEx lpFile can arrive quoted).
     if (len >= 2 && path[0] == L'"' && path[len - 1] == L'"') {
         path++;
         len -= 2;
     }
 
-    if (SbieDll_CheckPatternInList(path, len, NULL, L"BreakoutDocument")) {
+    use_rule_extensions = SbieApi_QueryConfBool(NULL, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
+
+    // Backward compatibility: with rule extensions disabled, keep the legacy
+    // local pre-check and only call UserServer when the base path rule matches.
+    if (!use_rule_extensions && !SbieDll_CheckPatternInList(path, len, NULL, L"BreakoutDocument"))
+        return FALSE;
+
+    // With rule extensions enabled, always consult UserServer so image-scoped
+    // BreakoutDocument rules and priority/TargetBox extensions follow one path.
+    // UserServer returns fallback=1 when no breakout match applies.
+
+    {
 
         static WCHAR* _QueueName = NULL;
 
@@ -416,7 +429,7 @@ _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *create
             req->LaunchPathOffset = launch_pos;
         }
 
-        ULONG* rpl = SbieDll_CallProxySvr(_QueueName, req, req_len, sizeof(*rpl), 100);
+        ULONG* rpl = SbieDll_CallProxySvr(_QueueName, req, req_len, 2 * sizeof(*rpl), 100);
 
         Dll_Free(req);
 
@@ -434,7 +447,7 @@ _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *create
         return !fallback;
     }
 
-    return FALSE;
+    //return FALSE;
 }
 
 

@@ -1474,6 +1474,7 @@ _FX BOOL Proc_CreateProcessInternalW(
 
     const WCHAR* lpArguments = NULL;
     BOOLEAN bd_fallback = FALSE;
+    BOOLEAN use_rule_extensions = SbieApi_QueryConfBool(NULL, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
     BOOLEAN has_explicit_executable = (lpApplicationName && *lpApplicationName) ? TRUE : FALSE;
     BOOLEAN has_breakout_document_arg = FALSE;
     const WCHAR *doc_start = NULL;
@@ -1512,21 +1513,19 @@ _FX BOOL Proc_CreateProcessInternalW(
     }
 
     // Evaluate BreakoutDocument before breakout-candidate checks as well.
-    // This allows document priority arbitration to work even when there is no
-    // BreakoutProcess/BreakoutFolder match.
-    // Only treat as BreakoutDocument when launch is shell-style (no explicit exe).
-    // If an explicit executable is present, keep direct CreateProcess semantics.
-    if (!has_explicit_executable && has_breakout_document_arg) {
+    // Keep legacy behavior when extensions are disabled (path pre-check gate),
+    // and use unified UserServer arbitration when extensions are enabled.
+    if (doc_start && doc_len > 0 && (use_rule_extensions || has_breakout_document_arg)) {
         if (SH32_BreakoutDocument(doc_start, doc_len, created_image, lpApplicationName)) {
             ok = TRUE;
             err = 0;
             goto finish;
         }
-        // BD matched but UserServer signaled fallback to source box
-        // (e.g., invalid TargetBox or service communication failure).
-        // If this launch is also a breakout candidate, skip the unboxed
-        // launch and fall through to normal process creation.
-        bd_fallback = TRUE;
+        // UserServer no-match/fallback must not suppress explicit executable
+        // breakout flow. For explicit executable launches, continue to
+        //  *UNBOXED* arbitration below.
+        if (!has_explicit_executable)
+            bd_fallback = TRUE;
     }
 
     if(lpApplicationName) {

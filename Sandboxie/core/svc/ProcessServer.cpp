@@ -58,12 +58,6 @@ static BOOLEAN ProcessServer_UseRuleExtensions(const WCHAR* boxname)
     return SbieApi_QueryConfBool(boxname, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
 }
 
-static bool ProcessServer_CheckBreakoutProcessMatch(const WCHAR* boxname, const WCHAR* imageName, const WCHAR* appPath, ULONG appPathLen)
-{
-    const BOOLEAN use_rule_extensions = ProcessServer_UseRuleExtensions(boxname);
-    return ProgramControl_FindProcessMatch(boxname, imageName, appPath, appPathLen, use_rule_extensions ? 1 : 0, NULL, 0, NULL) ? true : false;
-}
-
 static int ProcessServer_BreakoutMatchImage(const WCHAR* pattern, const WCHAR* imageName, void* context)
 {
     return SbieDll_MatchImage(pattern, imageName, NULL) ? 1 : 0;
@@ -74,15 +68,6 @@ static void ProcessServer_AdjustBreakoutFolderRule(WCHAR* value, void* context)
     ProgramControl_TrimTrailingBackslashes(value);
     if (*value != L'*')
         SbieDll_TranslateNtToDosPath(value);
-}
-
-static bool ProcessServer_CheckBreakoutFolderMatch(const WCHAR* boxname, const WCHAR* imageName, const WCHAR* appPath, ULONG appDirLen)
-{
-    const BOOLEAN use_rule_extensions = ProcessServer_UseRuleExtensions(boxname);
-    return ProgramControl_CheckFolderMatchFromConf(
-        boxname, imageName, appPath, appDirLen, 1, use_rule_extensions ? 1 : 0,
-        ProcessServer_BreakoutMatchImage, NULL,
-        ProcessServer_AdjustBreakoutFolderRule, NULL) ? true : false;
 }
 
 static bool ProcessServer_GetBreakoutProcessTarget(
@@ -304,20 +289,6 @@ static void ProcessServer_GetBreakoutFolderPriority(const WCHAR* boxname, const 
         boxname, imageName, appPath, appDirLen, hasPriority, priority, use_rule_extensions ? 1 : 0,
         ProcessServer_BreakoutMatchImage, NULL,
         ProcessServer_AdjustBreakoutFolderRule, NULL);
-}
-
-static WCHAR* ProcessServer_FindExecutableTokenEnd(WCHAR* start)
-{
-    WCHAR* p;
-
-    if (!start)
-        return NULL;
-
-    p = start;
-    while (*p && *p != L' ' && *p != L'\t')
-        ++p;
-
-    return p;
 }
 
 static SBIE_POLICY_DECISION ProcessServer_ResolveProcessPolicy(
@@ -983,7 +954,9 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                     ptr = wcschr(lpApplicationName, L'\"');
                 }
                 else {
-                    ptr = ProcessServer_FindExecutableTokenEnd(lpApplicationName);
+                    ptr = lpApplicationName;
+                    while (*ptr && *ptr != L' ' && *ptr != L'\t')
+                        ++ptr;
                 }
 
                 if (ptr) {
@@ -1044,9 +1017,28 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                         // if its a BreakoutProcess or BreakoutFolder we must also test if the path is not in the sandbox itself
                         //
 
-                        bool breakout_process = ProcessServer_CheckBreakoutProcessMatch(boxname, lpProgram + 1, lpApplicationName, (ULONG)wcslen(lpApplicationName))
-                            && IsHostPath((HANDLE)(ULONG_PTR)CallerPid, lpApplicationName);
-                        bool breakout_folder = ProcessServer_CheckBreakoutFolderMatch(boxname, folderScopeImage, lpApplicationName, (ULONG)(lpProgram - lpApplicationName));
+                        const BOOLEAN use_rule_extensions = ProcessServer_UseRuleExtensions(boxname);
+                        bool breakout_process = ProgramControl_FindProcessMatch(
+                            boxname,
+                            lpProgram + 1,
+                            lpApplicationName,
+                            (ULONG)wcslen(lpApplicationName),
+                            use_rule_extensions ? 1 : 0,
+                            NULL,
+                            0,
+                            NULL) ? true : false;
+                        breakout_process = breakout_process && IsHostPath((HANDLE)(ULONG_PTR)CallerPid, lpApplicationName);
+                        bool breakout_folder = ProgramControl_CheckFolderMatchFromConf(
+                            boxname,
+                            folderScopeImage,
+                            lpApplicationName,
+                            (ULONG)(lpProgram - lpApplicationName),
+                            1,
+                            use_rule_extensions ? 1 : 0,
+                            ProcessServer_BreakoutMatchImage,
+                            NULL,
+                            ProcessServer_AdjustBreakoutFolderRule,
+                            NULL) ? true : false;
                         bool breakout_document = false;
                         BOOLEAN breakout_document_has_priority = FALSE;
                         LONG breakout_document_priority = -1;

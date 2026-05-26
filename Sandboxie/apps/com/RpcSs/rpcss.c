@@ -460,7 +460,7 @@ _FX int __stdcall WinMain(
         InitComplete(myData);
     }
 
-    if (1) {
+    if (!SbieApi_QueryConfBool(NULL, L"RunRpcssAsSystem", FALSE)) {
         ULONG idThread;
         HANDLE hThread = CreateThread(
             NULL, 0, (LPTHREAD_START_ROUTINE)Dde_Thread, 0, CREATE_SUSPENDED, &idThread);

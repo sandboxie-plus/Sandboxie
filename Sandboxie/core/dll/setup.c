@@ -151,6 +151,12 @@ static P_CM_Add_Driver_Package_ExW  __sys_CM_Add_Driver_Package_ExW = NULL;
 #define FIND_EP1(x,s) __sys_##x##s = (P_##x) GetProcAddress(module, #x#s)
 #define FIND_EP2(x) FIND_EP1(x,A); FIND_EP1(x,W);
 
+#ifndef CR_ACCESS_DENIED
+#define CR_ACCESS_DENIED 0x00000033
+#endif
+
+#define SETUP_CM_DRIVER_PACKAGE_BLOCKED_STATUS CR_ACCESS_DENIED
+
 
 //---------------------------------------------------------------------------
 // Setup_Init_SetupApi
@@ -177,13 +183,7 @@ _FX BOOLEAN Setup_Init_SetupApi(HMODULE module)
 
 _FX ULONG Setup_VerifyCatalogFile(const WCHAR *CatalogFullPath)
 {
-    // ERROR_AUTHENTICODE_TRUSTED_PUBLISHER     (APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x241)
-    ULONG rc = __sys_VerifyCatalogFile(CatalogFullPath);
-    if (rc != 0 && rc != ERROR_AUTHENTICODE_TRUSTED_PUBLISHER) {
-        SetLastError(0);
-        rc = 0;
-    }
-    return rc;
+    return __sys_VerifyCatalogFile(CatalogFullPath);
 }
 
 
@@ -288,7 +288,7 @@ _FX ULONG Setup_CM_Add_Driver_PackageW(
     ULONG_PTR Unknown10)
 {
     SbieApi_Log(2205, L"CM Add Driver Package");
-    return 0;
+    return SETUP_CM_DRIVER_PACKAGE_BLOCKED_STATUS;
 }
 
 
@@ -304,7 +304,7 @@ _FX ULONG Setup_CM_Add_Driver_Package_ExW(
     ULONG_PTR Unknown10, ULONG_PTR Unknown11)
 {
     SbieApi_Log(2205, L"CM Add Driver Package Ex");
-    return 0;
+    return SETUP_CM_DRIVER_PACKAGE_BLOCKED_STATUS;
 }
 
 

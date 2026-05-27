@@ -154,6 +154,8 @@ static BOOLEAN Proc_CheckBreakoutFolderInList(
 static BOOLEAN Proc_IsBreakoutCandidate(
     const WCHAR *appPath, const WCHAR *boxname, BOOLEAN allowTargeted);
 
+static BOOLEAN Proc_ShouldIgnoreBreakout(void);
+
 static void Proc_SetLaunchContextFromPath(
     const WCHAR *exePath,
     WCHAR *launchPathBuf,
@@ -889,6 +891,24 @@ static BOOLEAN Proc_IsBreakoutCandidate(
         || Proc_CheckBreakoutFolderInList(appPath, boxname, allowTargeted));
 }
 
+static BOOLEAN Proc_ShouldIgnoreBreakout(void)
+{
+    WCHAR value[16];
+    DWORD len = GetEnvironmentVariable(L"SBIE_RUN_SANDBOXED_IGNORE_BREAKOUT", value, ARRAYSIZE(value));
+
+    if (len == 0 || len >= ARRAYSIZE(value))
+        return FALSE;
+
+    if (value[0] == L'1')
+        return TRUE;
+    if (_wcsicmp(value, L"y") == 0 ||
+        _wcsicmp(value, L"yes") == 0 ||
+        _wcsicmp(value, L"true") == 0)
+        return TRUE;
+
+    return FALSE;
+}
+
 static void Proc_SetLaunchContextFromPath(
     const WCHAR *exePath,
     WCHAR *launchPathBuf,
@@ -1211,8 +1231,13 @@ _FX BOOL Proc_CreateProcessInternalW(
 
     SaveCurrentDirectory = lpCurrentDirectory;
 
-    BOOLEAN is_breakout_candidate = Proc_IsBreakoutCandidate(lpApplicationName, NULL, TRUE)
-        || (Dll_BoxName && Proc_IsBreakoutCandidate(lpApplicationName, Dll_BoxName, TRUE));
+    BOOLEAN ignore_breakout = Proc_ShouldIgnoreBreakout();
+
+    BOOLEAN is_breakout_candidate = FALSE;
+    if (!ignore_breakout) {
+        is_breakout_candidate = Proc_IsBreakoutCandidate(lpApplicationName, NULL, TRUE)
+            || (Dll_BoxName && Proc_IsBreakoutCandidate(lpApplicationName, Dll_BoxName, TRUE));
+    }
 
     // For normal launches, keep existing boxed CWD selection behavior.
     if (!is_breakout_candidate)
@@ -1515,7 +1540,7 @@ _FX BOOL Proc_CreateProcessInternalW(
     // Evaluate BreakoutDocument before breakout-candidate checks as well.
     // Keep legacy behavior when extensions are disabled (path pre-check gate),
     // and use unified UserServer arbitration when extensions are enabled.
-    if (doc_start && doc_len > 0 && (use_rule_extensions || has_breakout_document_arg)) {
+    if (!ignore_breakout && doc_start && doc_len > 0 && (use_rule_extensions || has_breakout_document_arg)) {
         if (SH32_BreakoutDocument(doc_start, doc_len, created_image, lpApplicationName)) {
             ok = TRUE;
             err = 0;
@@ -1528,7 +1553,7 @@ _FX BOOL Proc_CreateProcessInternalW(
             bd_fallback = TRUE;
     }
 
-    if(lpApplicationName) {
+    if (!ignore_breakout && lpApplicationName) {
         const WCHAR* lpProgram = wcsrchr(lpApplicationName, L'\\');
 
         // The service (ProcessServer.cpp) enforces ForceChildren-forced caller policy
@@ -1689,7 +1714,7 @@ _FX BOOL Proc_CreateProcessInternalW(
     // in the Templates.ini and check whenever explorer wants to start a process
     //
 
-    if (lpCommandLine &&
+    if (!ignore_breakout && lpCommandLine &&
             !TlsData->sh32_shell_execute &&
             Config_GetSettingsForImageName_bool(L"BreakoutDocumentProcess", FALSE)) {
 

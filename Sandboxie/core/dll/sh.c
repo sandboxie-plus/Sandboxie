@@ -370,9 +370,31 @@ _FX WCHAR *SH32_AdjustPath(WCHAR *src, WCHAR **pArgs)
 //---------------------------------------------------------------------------
 
 
+static BOOLEAN SH32_ShouldIgnoreBreakout(void)
+{
+    WCHAR value[16];
+    DWORD len = GetEnvironmentVariable(L"SBIE_RUN_SANDBOXED_IGNORE_BREAKOUT", value, ARRAYSIZE(value));
+
+    if (len == 0 || len >= ARRAYSIZE(value))
+        return FALSE;
+
+    if (value[0] == L'1')
+        return TRUE;
+    if (_wcsicmp(value, L"y") == 0 ||
+        _wcsicmp(value, L"yes") == 0 ||
+        _wcsicmp(value, L"true") == 0)
+        return TRUE;
+
+    return FALSE;
+}
+
+
 _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *createdImage, const WCHAR *launchPath)
 {
     BOOLEAN use_rule_extensions;
+
+    if (SH32_ShouldIgnoreBreakout())
+        return FALSE;
 
     // Strip outer quotes if present (e.g. ShellExecuteEx lpFile can arrive quoted).
     if (len >= 2 && path[0] == L'"' && path[len - 1] == L'"') {

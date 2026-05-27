@@ -1087,6 +1087,8 @@ SB_RESULT(quint32) CSbieAPI::RunStart(const QString& BoxName, const QString& Com
 		StartArgs += "/elevated ";
 	if (Flags & eStartFCP)
 		StartArgs += "/fcp ";
+	if (Flags & eStartIgnoreBreakout)
+		StartArgs += "/ignore_breakout ";
 
 	if (!BoxName.isEmpty())
 		StartArgs += "/box:" + BoxName + " ";

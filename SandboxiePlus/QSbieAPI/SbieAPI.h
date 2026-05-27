@@ -154,7 +154,8 @@ public:
 	{
 		eStartDefault = 0,
 		eStartElevated = 1,
-		eStartFCP = 2
+		eStartFCP = 2,
+		eStartIgnoreBreakout = 4
 	};
 
 	virtual SB_RESULT(quint32) RunStart(const QString& BoxName, const QString& Command, EStartFlags Flags = eStartDefault, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);

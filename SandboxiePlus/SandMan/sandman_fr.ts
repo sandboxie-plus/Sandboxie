@@ -495,7 +495,7 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Source</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
@@ -510,7 +510,7 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="BoxTransfer.cpp" line="98"/>
         <source>Export each box to its own file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter chaque bac dans son propre fichier</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="103"/>
@@ -561,7 +561,7 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="BoxTransfer.cpp" line="251"/>
         <source>Duplicate!</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliqué !</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="429"/>
@@ -572,12 +572,12 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="BoxTransfer.cpp" line="444"/>
         <source>Cannot export: Sandbox has running processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportation impossible : le bac a des processus en cours d&apos;exécution.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="449"/>
         <source>Cannot export: Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportation impossible : le bac est vide.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="468"/>
@@ -587,7 +587,7 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="BoxTransfer.cpp" line="473"/>
         <source>No boxes selected for separate file export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun bac sélectionné pour l&apos;exportation de fichiers séparés.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="515"/>
@@ -597,42 +597,42 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="BoxTransfer.cpp" line="549"/>
         <source>Select Export Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir le dossier d&apos;exportation</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="583"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished">Exporter le bac</translation>
+        <translation>Exporter le bac</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="863"/>
         <source>Password for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe pour %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="878"/>
         <source>Failed to open archive (%1): %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec d&apos;ouverture de l&apos;archive (%1) : %2</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="936"/>
         <source>Select Archives</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir les archives</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="937"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>Archive 7-Zip (*.7z);;Archive Zip (*.zip);;Toutes les archives (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="973"/>
         <source>The selected archives do not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les archives sélectionnées ne contiennent aucune donnée de bac.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="999"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;importer plusieurs bacs avec le même nom (« %1 »). Veuillez d&apos;abord les renommer.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1065"/>
@@ -651,7 +651,7 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     </message>
     <message>
         <source>The archive does not contain any sandbox data.</source>
-        <translation type="vanished">L&apos;archive ne contient aucune donnée de bac à sable.</translation>
+        <translation type="vanished">L&apos;archive ne contient aucune donnée de bac.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="987"/>
@@ -1122,28 +1122,28 @@ Erreur : %1</translation>
 <context>
     <name>CCodeEdit</name>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1006"/>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2095"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1007"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2096"/>
         <source>Find</source>
         <translation>Rechercher</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1011"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1012"/>
         <source>FindNext</source>
         <translation>Rechercher le suivant</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1021"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1022"/>
         <source>GoTo</source>
         <translation>Aller à</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1438"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1439"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
         <translation>Vouliez-vous dire : %1 ? (Appuyez sur « Ctrl + R » pour remplacer)</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2095"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2096"/>
         <source>F3: Find Next
 + Shift: Backward
 + Ctrl: Case Sensitively
@@ -1158,7 +1158,7 @@ Find String:</source>
 Chaine de recherche :</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2121"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2122"/>
         <source>Go to Line:</source>
         <translation>Aller à la ligne :</translation>
     </message>
@@ -4371,7 +4371,7 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="517"/>
         <source> (Administrator)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Administrateur)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="764"/>
@@ -12508,7 +12508,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2674"/>
         <source>Add Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un bac portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2704"/>

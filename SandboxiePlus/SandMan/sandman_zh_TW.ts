@@ -1192,28 +1192,28 @@ Error: %1</source>
 <context>
     <name>CCodeEdit</name>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1006"/>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2095"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1007"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2096"/>
         <source>Find</source>
         <translation>尋找</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1011"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1012"/>
         <source>FindNext</source>
         <translation>尋找下一个</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1021"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1022"/>
         <source>GoTo</source>
         <translation>移至</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1438"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1439"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
         <translation>您是不是在指: %1？ (按下 Ctrl+R 以替換)</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2095"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2096"/>
         <source>F3: Find Next
 + Shift: Backward
 + Ctrl: Case Sensitively
@@ -1228,7 +1228,7 @@ Find String:</source>
 尋找字串:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2121"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2122"/>
         <source>Go to Line:</source>
         <translation>移至行:</translation>
     </message>

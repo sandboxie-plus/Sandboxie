@@ -10,6 +10,11 @@
 
 ## Fixed vulnerabilities
 
+### SECURITY ISSUE ID-40 (reported by b0l0k)
+Sandboxie APC Injection Sandbox Escape
+
+fixed in: 1.17.6 / 5.72.6
+
 ### SECURITY ISSUE ID-39 (reported by sammy12342)
 Local Privilege Escalation via TOCTOU in UpdUtil addon installation (CVE-2026-34596)
 

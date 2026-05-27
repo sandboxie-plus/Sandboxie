@@ -5,6 +5,33 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.17.7 / 5.72.7] - 2026-05-??
+
+### Added
+- added `UseForceBreakoutRuleExtensions=[y|n]` (default disabled) for extension parsing in `ForceProcess`, `ForceFolder`, `ForceChildren`, `BreakoutProcess`, `BreakoutFolder`, and `BreakoutDocument`
+- added `|Priority=`, `|Recursive=`, and `|TargetBox=` metadata support for Force/Breakout rules when extensions are enabled
+- added `|TargetBox=<BoxName>` routing for `BreakoutProcess`, `BreakoutFolder`, and `BreakoutDocument`
+- added `BreakoutUseTargetDir` (global and `process,value` forms) to use the target directory as breakout CWD
+- added path-pattern matching for `BreakoutProcess` alongside image-name matching
+  - warning: avoid broad wildcard rules such as `*`, `*.exe`, or `C:\*.exe`; use a specific directory prefix whenever possible
+- added runtime breakout bypass controls: Start.exe `/ignore_breakout` (`/ibp`), `SBIE_RUN_SANDBOXED_IGNORE_BREAKOUT=1`, and SandMan "Ignore Breakout"
+
+### Changed
+- changed force-vs-breakout arbitration to use explicit `Priority` (lower value wins) while keeping legacy defaults when priorities are not set
+  - process starts remain force-first by default
+  - document opens remain breakout-first by default
+- changed breakout winner selection across `BreakoutProcess`, `BreakoutFolder`, and `BreakoutDocument`; `TargetBox` is taken from the winning breakout rule
+- changed invalid or unavailable `TargetBox` handling to fall back to normal boxed creation (process start) or source-box handling (document open)
+- changed `BreakoutProcess` evaluation to require host-path validation and ignore broad wildcard-only non-path rules
+- changed `BreakoutFolder` matching with trailing-backslash normalization, improved wildcard handling, and `Recursive` depth limits
+- changed `ForceChildren` lineage handling across descendants and model-pid/PCA restart paths, including ancestor-chain checks in service arbitration
+- changed DLL/service breakout handoff so targeted candidates are included and final arbitration/retargeting is resolved service-side
+
+
+
+
 ## [1.17.6 / 5.72.6] - 2026-05-17
 
 ### Added
@@ -22,28 +49,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.6 / 5.72.6] - 2026-05-??
-
-### Added
-- added optional target-box suffix support for breakout rules, enabling use as a Force alternative:
-  - `BreakoutProcess=program.exe|TargetBox`
-  - `BreakoutFolder=path_pattern|TargetBox`
-  - `BreakoutDocument=path_pattern|TargetBox`
-- added `BreakoutUseTargetDir` (supports global and `process,value` forms) to prefer the target executable directory as breakout CWD
-- added path pattern support for `BreakoutProcess`, enabling full-qualified-path matching like `C:\Program Files\app\*.exe` in addition to name-only matching
-  - warning: avoid using purely wildcard patterns such as `*`, `*.exe`, or `C:\*.exe` as these match all processes or all executables and can significantly reduce sandboxing protection; always include a specific directory prefix to limit the scope of the rule
-
-### Changed
-- changed breakout handoff to support explicit target-box routing and improved wildcard folder rule matching with trailing backslash normalization for `BreakoutFolder`
-- changed force/breakout interaction so `PrioritizeBreakoutOverForce=y` skips source-box `ForceProcess`/`ForceFolder`/`ForceChildren` capture for matching breakout rules while still allowing other boxes to force the process
-  - note: when `BreakoutProcess` uses path-based rules, `ForceFolder` or wildcard `ForceProcess` rules can still force unmatched child processes spawned by a breakout-launched parent
-- changed ForceChildren-origin propagation to persist across child process inheritance and model-pid starts (including PCA restart path), enabling consistent breakout arbitration after restart
-
-### Fixed
-- fixed Sandboxie breakout argument rewriting dropping quotes around translated document paths, causing unquoted file path arguments (with spaces) to not be recognized correctly by applications
-
-
-  
 ## [1.17.5 / 5.72.5] - 2026-05-02
 
 ### Added

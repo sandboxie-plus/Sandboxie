@@ -32,7 +32,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed crash in VMware when running inside sandbox caused by NtQueryDirectoryObject hook returning non-null-terminated strings and uninitialized padding bytes in OBJECT_DIRECTORY_INFORMATION structures, which caused QueryDosDeviceW to crash in wcscmp [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
-
+- fixed Sandboxie breakout argument rewriting dropping quotes around translated document paths, causing unquoted file path arguments (with spaces) to not be recognized correctly by applications
 
 
 ## [1.17.6 / 5.72.6] - 2026-05-17

@@ -1354,6 +1354,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                                     BOOLEAN force_has_priority = FALSE;
                                     LONG force_priority = -1;
                                     BOOLEAN source_equals_candidate_box;
+                                    BOOLEAN candidate_use_rule_extensions;
 
                                     index = SbieApi_EnumBoxesEx(index, BoxName, TRUE);
                                     if (index == -1)
@@ -1362,6 +1363,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                                         continue;
 
                                     source_equals_candidate_box = (_wcsicmp(SourceBox, BoxName) == 0) ? TRUE : FALSE;
+                                    candidate_use_rule_extensions = SbieApi_QueryConfBool(BoxName, L"UseForceBreakoutRuleExtensions", FALSE);
 
                                     force_process_match = ProcessServer_GetForceProcessMatch(
                                         BoxName,
@@ -1370,7 +1372,20 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                                         (ULONG)wcslen(lpApplicationName),
                                         &force_has_priority,
                                         &force_priority);
-                                    force_folder_match = SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName), BoxName, L"ForceFolder") ? TRUE : FALSE;
+                                    force_folder_match = ProgramControl_CheckFolderSettingMatchFromConf(
+                                        BoxName,
+                                        L"ForceFolder",
+                                        folderScopeImage,
+                                        lpApplicationName,
+                                        (ULONG)(lpProgram - lpApplicationName),
+                                        1,
+                                        &force_has_priority,
+                                        &force_priority,
+                                        candidate_use_rule_extensions ? 1 : 0,
+                                        ProcessServer_BreakoutMatchImage,
+                                        NULL,
+                                        ProcessServer_AdjustBreakoutFolderRule,
+                                        NULL) ? TRUE : FALSE;
                                     force_children_match = FALSE;
 
                                     if (callerProgram && callerImageDirLen) {
@@ -1385,21 +1400,6 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
 
                                     // Extract best force priority: ForceProcess by name/path, ForceFolder by path,
                                     // and ForceChildren by caller image/name.
-                                    if (force_folder_match) {
-                                            BOOLEAN ffp = FALSE;
-                                            LONG ffpv = -1;
-                                            BOOLEAN use_rule_extensions = SbieApi_QueryConfBool(BoxName, L"UseForceBreakoutRuleExtensions", FALSE);
-                                            ProgramControl_GetFolderPriorityFromConfEx(
-                                                BoxName, L"ForceFolder", folderScopeImage, lpApplicationName, (ULONG)(lpProgram - lpApplicationName),
-                                                &ffp, &ffpv, use_rule_extensions ? 1 : 0,
-                                                ProcessServer_BreakoutMatchImage, NULL,
-                                                ProcessServer_AdjustBreakoutFolderRule, NULL);
-                                            if (ffp && (!force_has_priority || ffpv < force_priority)) {
-                                                force_has_priority = TRUE;
-                                                force_priority = ffpv;
-                                            }
-                                    }
-
                                     if (force_children_match && force_children_has_priority && (!force_has_priority || force_children_priority < force_priority)) {
                                         force_has_priority = TRUE;
                                         force_priority = force_children_priority;

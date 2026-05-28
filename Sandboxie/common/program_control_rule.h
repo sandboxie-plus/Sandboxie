@@ -38,7 +38,9 @@ typedef struct _SBIE_NORMALIZED_RULE
     WCHAR *target_box;
     int has_target_box;
     int has_recursive;
+    long recursive_min_depth; // minimum depth, defaults to 0
     long recursive_depth;   // -1 means unlimited
+    int recursive_anchor_from_last; // 0 means first wildcard, 1 means last wildcard
     int has_priority;
     long priority;
 } SBIE_NORMALIZED_RULE;
@@ -271,6 +273,158 @@ static __inline int ProgramControl_ParseLong(const WCHAR *value, long *outValue)
     return 1;
 }
 
+static __inline int ProgramControl_ParseLongSegment(const WCHAR *value, size_t valueLen, long *outValue)
+{
+    long result = 0;
+    int sign = 1;
+    size_t i = 0;
+
+    if (!value || !valueLen || !outValue)
+        return 0;
+
+    if (value[0] == L'-') {
+        sign = -1;
+        i = 1;
+    }
+    else if (value[0] == L'+') {
+        i = 1;
+    }
+
+    if (i >= valueLen)
+        return 0;
+
+    while (i < valueLen) {
+        WCHAR ch = value[i];
+        if (ch < L'0' || ch > L'9')
+            return 0;
+        result = (result * 10) + (long)(ch - L'0');
+        ++i;
+    }
+
+    *outValue = result * sign;
+    return 1;
+}
+
+static __inline int ProgramControl_ParseRecursiveAnchorSegment(
+    const WCHAR *value, size_t valueLen, int *outAnchorFromLast)
+{
+    if (!outAnchorFromLast)
+        return 0;
+
+    if (!value || !valueLen) {
+        *outAnchorFromLast = 1;
+        return 1;
+    }
+
+    if (valueLen == 5 && _wcsnicmp(value, L"first", 5) == 0) {
+        *outAnchorFromLast = 0;
+        return 1;
+    }
+
+    if (valueLen == 4 && _wcsnicmp(value, L"last", 4) == 0) {
+        *outAnchorFromLast = 1;
+        return 1;
+    }
+
+    return 0;
+}
+
+static __inline int ProgramControl_ParseRecursiveSpec(
+    const WCHAR *value, long *outMinDepth, long *outMaxDepth, int *outAnchorFromLast)
+{
+    const WCHAR *anchorSep;
+    const WCHAR *sep = NULL;
+    size_t valueLen;
+    long minDepth = 0;
+    long maxDepth = -1;
+    int anchorFromLast = 1;
+    size_t i;
+
+    if (!value || !*value || !outMinDepth || !outMaxDepth || !outAnchorFromLast)
+        return 0;
+
+    anchorSep = wcschr(value, L';');
+    if (anchorSep) {
+        size_t anchorLen = wcslen(anchorSep + 1);
+        if (!anchorLen)
+            return 0;
+        if (!ProgramControl_ParseRecursiveAnchorSegment(anchorSep + 1, anchorLen, &anchorFromLast))
+            return 0;
+        valueLen = (size_t)(anchorSep - value);
+    }
+    else {
+        valueLen = wcslen(value);
+    }
+
+    if (!valueLen)
+        return 0;
+
+    for (i = 0; i < valueLen; ++i) {
+        if (value[i] == L'-') {
+            sep = value + i;
+            break;
+        }
+    }
+
+    if (sep) {
+        const WCHAR *right;
+        size_t leftLen;
+        size_t rightLen;
+
+        leftLen = (size_t)(sep - value);
+        right = sep + 1;
+        rightLen = valueLen - leftLen - 1;
+
+        if (!leftLen || !rightLen)
+            return 0;
+
+        if (!ProgramControl_ParseLongSegment(value, leftLen, &minDepth) || minDepth < 0)
+            return 0;
+
+        if (rightLen == 1 && (*right == L'*' || *right == L'y' || *right == L'Y')) {
+            maxDepth = -1;
+        }
+        else if (rightLen == 1 && (*right == L'n' || *right == L'N')) {
+            maxDepth = 0;
+        }
+        else {
+            if (!ProgramControl_ParseLongSegment(right, rightLen, &maxDepth) || maxDepth < 0)
+                return 0;
+        }
+
+        if (maxDepth >= 0 && minDepth > maxDepth)
+            return 0;
+
+        *outMinDepth = minDepth;
+        *outMaxDepth = maxDepth;
+        *outAnchorFromLast = anchorFromLast;
+        return 1;
+    }
+
+    if (valueLen == 1 && (*value == L'*' || *value == L'y' || *value == L'Y')) {
+        *outMinDepth = 0;
+        *outMaxDepth = -1;
+        *outAnchorFromLast = anchorFromLast;
+        return 1;
+    }
+
+    if (valueLen == 1 && (*value == L'n' || *value == L'N')) {
+        *outMinDepth = 0;
+        *outMaxDepth = 0;
+        *outAnchorFromLast = anchorFromLast;
+        return 1;
+    }
+
+    if (ProgramControl_ParseLongSegment(value, valueLen, &maxDepth) && maxDepth >= 0) {
+        *outMinDepth = 0;
+        *outMaxDepth = maxDepth;
+        *outAnchorFromLast = anchorFromLast;
+        return 1;
+    }
+
+    return 0;
+}
+
 static __inline int ProgramControl_ParseRuleExtensionsInPlace(
     WCHAR *value,
     SBIE_NORMALIZED_RULE *outRule,
@@ -286,7 +440,9 @@ static __inline int ProgramControl_ParseRuleExtensionsInPlace(
     outRule->target_box = NULL;
     outRule->has_target_box = 0;
     outRule->has_recursive = 0;
+    outRule->recursive_min_depth = 0;
     outRule->recursive_depth = -1;
+    outRule->recursive_anchor_from_last = 1;
     // -1 is an internal sentinel meaning "no explicit priority set".
     outRule->has_priority = 0;
     outRule->priority = -1;
@@ -326,19 +482,15 @@ static __inline int ProgramControl_ParseRuleExtensionsInPlace(
             }
             else if (_wcsicmp(token, L"Recursive") == 0) {
                 const WCHAR *rv = eq + 1;
-                long depth = -1;
+                long minDepth = 0;
+                long maxDepth = -1;
+                int anchorFromLast = 1;
 
-                if (*rv == L'*' || *rv == L'y' || *rv == L'Y') {
+                if (ProgramControl_ParseRecursiveSpec(rv, &minDepth, &maxDepth, &anchorFromLast)) {
                     outRule->has_recursive = 1;
-                    outRule->recursive_depth = -1;
-                }
-                else if (*rv == L'n' || *rv == L'N') {
-                    outRule->has_recursive = 1;
-                    outRule->recursive_depth = 0;
-                }
-                else if (ProgramControl_ParseLong(rv, &depth) && depth >= 0) {
-                    outRule->has_recursive = 1;
-                    outRule->recursive_depth = depth;
+                    outRule->recursive_min_depth = minDepth;
+                    outRule->recursive_depth = maxDepth;
+                    outRule->recursive_anchor_from_last = anchorFromLast;
                 }
             }
             else if (_wcsicmp(token, L"Priority") == 0) {
@@ -355,6 +507,7 @@ static __inline int ProgramControl_ParseRuleExtensionsInPlace(
         }
         else if (_wcsicmp(token, L"Recursive") == 0) {
             outRule->has_recursive = 1;
+            outRule->recursive_min_depth = 0;
             outRule->recursive_depth = -1;
         }
 
@@ -1023,6 +1176,74 @@ static __inline int ProgramControl_MatchFolderRule(
     return (_wcsnicmp(rule, appPath, ruleLen) == 0);
 }
 
+static __inline int ProgramControl_FindWildcardAnchorBaseLen(
+    const WCHAR *rule,
+    int anchorFromLast,
+    const WCHAR *appPath,
+    unsigned long appDirLen,
+    size_t *outBaseLen)
+{
+    const WCHAR *scan;
+    unsigned long sepCount = 0;
+    unsigned long anchorSepOrdinal = 0;
+    int hasAnchor = 0;
+    size_t fallbackBaseLen = 0;
+    const WCHAR *lastSep = NULL;
+    const WCHAR *anchorSep = NULL;
+
+    if (!rule || !*rule || !outBaseLen)
+        return 0;
+
+    scan = rule;
+    while (*scan) {
+        if (*scan == L'\\') {
+            lastSep = scan;
+            ++sepCount;
+        }
+        else if (*scan == L'*' || *scan == L'?') {
+            anchorSep = lastSep;
+            anchorSepOrdinal = sepCount;
+            hasAnchor = (anchorSep != NULL) ? 1 : 0;
+            if (!anchorFromLast)
+                break;
+        }
+        ++scan;
+    }
+
+    if (!anchorSep)
+        return 0;
+
+    fallbackBaseLen = (size_t)(anchorSep - rule);
+
+    if (!appPath || !appDirLen) {
+        *outBaseLen = fallbackBaseLen;
+        return 1;
+    }
+
+    if (!hasAnchor || !anchorSepOrdinal) {
+        *outBaseLen = fallbackBaseLen;
+        return 1;
+    }
+
+    {
+        unsigned long pathSepCount = 0;
+        unsigned long i = 0;
+        for (i = 0; i < appDirLen; ++i) {
+            if (appPath[i] != L'\\')
+                continue;
+
+            ++pathSepCount;
+            if (pathSepCount == anchorSepOrdinal) {
+                *outBaseLen = (size_t)i;
+                return 1;
+            }
+        }
+    }
+
+    *outBaseLen = fallbackBaseLen;
+    return 1;
+}
+
 static __inline int ProgramControl_MatchFolderRuleNormalized(
     const SBIE_NORMALIZED_RULE *rule, const WCHAR *appPath, unsigned long appDirLen)
 {
@@ -1034,26 +1255,19 @@ static __inline int ProgramControl_MatchFolderRuleNormalized(
     if (!ProgramControl_MatchFolderRule(rule->base_rule, appPath, appDirLen))
         return 0;
 
-    if (!rule->has_recursive || rule->recursive_depth < 0)
+    if (!rule->has_recursive)
         return 1;
 
     if (wcschr(rule->base_rule, L'*') || wcschr(rule->base_rule, L'?')) {
-        // For wildcard rules, find the base folder: last backslash before
-        // any wildcard character, then count depth from there.
-        const WCHAR *wc_scan = rule->base_rule;
-        const WCHAR *wc_last_sep = NULL;
         size_t wc_base_len;
 
-        while (*wc_scan && *wc_scan != L'*' && *wc_scan != L'?') {
-            if (*wc_scan == L'\\')
-                wc_last_sep = wc_scan;
-            ++wc_scan;
-        }
-
-        if (!wc_last_sep)
+        if (!ProgramControl_FindWildcardAnchorBaseLen(
+                rule->base_rule,
+                rule->recursive_anchor_from_last,
+            appPath,
+            appDirLen,
+                &wc_base_len))
             return 1;
-
-        wc_base_len = (size_t)(wc_last_sep - rule->base_rule);
 
         if (wc_base_len >= appDirLen)
             return 1;
@@ -1076,7 +1290,11 @@ static __inline int ProgramControl_MatchFolderRuleNormalized(
                 }
             }
 
-            return (depth <= rule->recursive_depth) ? 1 : 0;
+            if (depth < rule->recursive_min_depth)
+                return 0;
+            if (rule->recursive_depth >= 0 && depth > rule->recursive_depth)
+                return 0;
+            return 1;
         }
     }
 
@@ -1105,7 +1323,11 @@ static __inline int ProgramControl_MatchFolderRuleNormalized(
             }
         }
 
-        return (depth <= rule->recursive_depth) ? 1 : 0;
+        if (depth < rule->recursive_min_depth)
+            return 0;
+        if (rule->recursive_depth >= 0 && depth > rule->recursive_depth)
+            return 0;
+        return 1;
     }
 }
 

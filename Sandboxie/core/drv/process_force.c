@@ -73,7 +73,9 @@ typedef struct _FORCE_ENTRY {
     BOOLEAN has_priority;
     LONG priority;
     BOOLEAN has_recursive;
+    LONG recursive_min_depth;
     LONG recursive_depth;
+    BOOLEAN recursive_anchor_from_last;
 
 } FORCE_ENTRY;
 
@@ -1238,7 +1240,9 @@ _FX void Process_AddForceFolders(
         folder->has_priority = normalized.has_priority ? TRUE : FALSE;
         folder->priority = normalized.has_priority ? normalized.priority : -1;
         folder->has_recursive = normalized.has_recursive ? TRUE : FALSE;
+        folder->recursive_min_depth = normalized.has_recursive ? normalized.recursive_min_depth : 0;
         folder->recursive_depth = normalized.has_recursive ? normalized.recursive_depth : -1;
+        folder->recursive_anchor_from_last = normalized.has_recursive ? (normalized.recursive_anchor_from_last ? TRUE : FALSE) : TRUE;
 
         if (wcschr(buf, L'*') || wcschr(buf, L'?')) {
 
@@ -1251,17 +1255,11 @@ _FX void Process_AddForceFolders(
                 break;
             }
 
-            // Some wildcard settings need original rule text at match time.
-            if (breakout_setting || image_wildcard_setting) {
-                folder->buf_len = buf_len;
-                folder->len = wcslen(buf);
-                folder->buf = buf;
-            } else {
-                Mem_Free(buf, buf_len);
-                folder->buf_len = 0;
-                folder->len = 0;
-                folder->buf = NULL;
-            }
+            // Keep wildcard rule text so shared folder/process match helpers can
+            // apply recursive and path-shape semantics consistently.
+            folder->buf_len = buf_len;
+            folder->len = wcslen(buf);
+            folder->buf = buf;
 
         } else {
 
@@ -1571,8 +1569,40 @@ _FX BOOLEAN Process_CheckForceFolderList(
             }
 
             if (path_lwr) {
-                match = Pattern_Match(
-                                    folder->pat, path_lwr, path_lwr_len);
+                match = Pattern_Match(folder->pat, path_lwr, path_lwr_len);
+
+                if (match && folder->has_recursive && folder->buf) {
+                    size_t base_len = 0;
+                    if (ProgramControl_FindWildcardAnchorBaseLen(
+                            folder->buf,
+                            folder->recursive_anchor_from_last ? 1 : 0,
+                            path_lwr,
+                            path_lwr_len,
+                            &base_len)) {
+                        if (base_len < path_lwr_len) {
+                            const WCHAR *dir_begin = path_lwr + base_len;
+                            const WCHAR *dir_end = path_lwr + path_lwr_len;
+                            LONG depth = 0;
+
+                            if (*dir_begin == L'\\')
+                                ++dir_begin;
+
+                            if (dir_begin < dir_end) {
+                                const WCHAR *p = dir_begin;
+                                depth = 1;
+                                while (p < dir_end) {
+                                    if (*p == L'\\')
+                                        ++depth;
+                                    ++p;
+                                }
+                            }
+
+                            if (depth < folder->recursive_min_depth ||
+                                    (folder->recursive_depth >= 0 && depth > folder->recursive_depth))
+                                match = FALSE;
+                        }
+                    }
+                }
             }
 
         } else {
@@ -1585,7 +1615,7 @@ _FX BOOLEAN Process_CheckForceFolderList(
             if (folder_len && prefix_len >= folder_len &&
                     path[folder_len] == L'\\' &&
                     Box_NlsStrCmp(path, folder->buf, folder_len) == 0) {
-                if (folder->has_recursive && folder->recursive_depth >= 0) {
+                if (folder->has_recursive) {
                     const WCHAR *dir_begin = path + folder_len;
                     const WCHAR *dir_end = path + prefix_len;
                     LONG depth = 0;
@@ -1603,7 +1633,7 @@ _FX BOOLEAN Process_CheckForceFolderList(
                         }
                     }
 
-                    if (depth <= folder->recursive_depth)
+                    if (depth >= folder->recursive_min_depth && (folder->recursive_depth < 0 || depth <= folder->recursive_depth))
                         match = TRUE;
                 }
                 else {
@@ -1881,10 +1911,15 @@ _FX BOX *Process_CheckForceFolder(
 {
     const WCHAR *ptr;
     const WCHAR *name;
+    const WCHAR *breakout_name;
     const WCHAR *folder_scope_name;
     const WCHAR *breakout_path;
     ULONG prefix_len;
     FORCE_BOX *box;
+    FORCE_BOX *force_winner = NULL;
+    BOOLEAN force_winner_has_priority = FALSE;
+    LONG force_winner_priority = -1;
+    BOOLEAN have_force_winner = FALSE;
 
     //
     // make sure we have a proper path
@@ -1902,6 +1937,13 @@ _FX BOX *Process_CheckForceFolder(
     name = ptr + 1;
     folder_scope_name = (prioritizeName && *prioritizeName) ? prioritizeName : name;
     breakout_path = (prioritizePath && *prioritizePath) ? prioritizePath : path;
+    breakout_name = name;
+
+    // If ForceFolder matched via CurDir/DocArg, keep BreakoutProcess image-name
+    // matching anchored to the executable path instead of the folder/doc leaf.
+    ptr = wcsrchr(breakout_path, L'\\');
+    if (ptr && ptr[1])
+        breakout_name = ptr + 1;
 
     //
     // never force a program from the Sandboxie home directory
@@ -1925,13 +1967,24 @@ _FX BOX *Process_CheckForceFolder(
         LONG force_priority = -1;
 
         if (Process_CheckForceFolderList(box->box, &box->ForceFolder, prefix_len, path, &force_has_priority, &force_priority)) {
+            if (have_force_winner &&
+                !ProgramControl_ShouldReplacePriorityWinner(
+                    have_force_winner ? 1 : 0,
+                    force_winner_has_priority ? 1 : 0,
+                    force_winner_priority,
+                    force_has_priority ? 1 : 0,
+                    force_priority)) {
+                box = List_Next(box);
+                continue;
+            }
+
             BOOLEAN effective_prioritize_breakout = FALSE;
             BOOLEAN breakout_has_priority = FALSE;
             LONG breakout_priority = -1;
             BOOLEAN has_target_override = FALSE;
             WCHAR target_box[BOXNAME_COUNT] = { 0 };
 
-            Process_GetMatchedBreakoutPriority(box->box, name, folder_scope_name, breakout_path, &breakout_has_priority, &breakout_priority);
+            Process_GetMatchedBreakoutPriority(box->box, breakout_name, folder_scope_name, breakout_path, &breakout_has_priority, &breakout_priority);
 
             effective_prioritize_breakout = SbiePolicy_ShouldPrioritizeBreakout(
                 FALSE,
@@ -1941,7 +1994,7 @@ _FX BOX *Process_CheckForceFolder(
                 breakout_priority) ? TRUE : FALSE;
 
             if (effective_prioritize_breakout)
-                has_target_override = Process_GetMatchedBreakoutTarget(box->box, name, folder_scope_name, breakout_path, target_box, BOXNAME_COUNT);
+                has_target_override = Process_GetMatchedBreakoutTarget(box->box, breakout_name, folder_scope_name, breakout_path, target_box, BOXNAME_COUNT);
 
             if (has_target_override) {
                 FORCE_BOX *target = Process_FindForceBoxByName(boxes, target_box);
@@ -1954,7 +2007,7 @@ _FX BOX *Process_CheckForceFolder(
                 }
             }
 
-            if (effective_prioritize_breakout && !has_target_override && Process_IsPrioritizedBreakoutMatch(box->box, name, folder_scope_name, breakout_path)) {
+            if (effective_prioritize_breakout && !has_target_override && Process_IsPrioritizedBreakoutMatch(box->box, breakout_name, folder_scope_name, breakout_path)) {
                 box = List_Next(box);
                 continue;
             }
@@ -1964,11 +2017,27 @@ _FX BOX *Process_CheckForceFolder(
                 return NULL;
             }
 
-            return box->box;
+            if (ProgramControl_ShouldReplacePriorityWinner(
+                    have_force_winner ? 1 : 0,
+                    force_winner_has_priority ? 1 : 0,
+                    force_winner_priority,
+                    force_has_priority ? 1 : 0,
+                    force_priority)) {
+                force_winner = box;
+                force_winner_has_priority = force_has_priority;
+                force_winner_priority = force_priority;
+                have_force_winner = TRUE;
+            }
+
+            box = List_Next(box);
+            continue;
         }
 
         box = List_Next(box);
     }
+
+    if (have_force_winner)
+        return force_winner->box;
 
     return NULL;
 }
@@ -2179,19 +2248,15 @@ static BOOLEAN Process_MatchBreakoutFolderRuleRaw(
             Mem_FreeString(path_lwr);
 
         // Apply Recursive depth limit for wildcard rules that matched.
-        // Find the base folder: the last backslash before any wildcard
-        // character in match_rule. Count directory levels from there
-        // to prefix_len to determine depth.
-        if (match && normalized->has_recursive && normalized->recursive_depth >= 0) {
-            const WCHAR *wc_scan = match_rule;
-            const WCHAR *wc_last_sep = NULL;
-            while (*wc_scan && *wc_scan != L'*' && *wc_scan != L'?') {
-                if (*wc_scan == L'\\')
-                    wc_last_sep = wc_scan;
-                ++wc_scan;
-            }
-            if (wc_last_sep) {
-                ULONG base_len = (ULONG)(wc_last_sep - match_rule);
+        // Base folder anchor follows Recursive anchor mode.
+        if (match && normalized->has_recursive) {
+            size_t base_len = 0;
+            if (ProgramControl_FindWildcardAnchorBaseLen(
+                    match_rule,
+                    normalized->recursive_anchor_from_last,
+                    path,
+                    prefix_len,
+                    &base_len)) {
                 if (base_len < prefix_len) {
                     const WCHAR *dir_begin = path + base_len;
                     const WCHAR *dir_end = path + prefix_len;
@@ -2210,7 +2275,7 @@ static BOOLEAN Process_MatchBreakoutFolderRuleRaw(
                         }
                     }
 
-                    if (depth > normalized->recursive_depth)
+                    if (depth < normalized->recursive_min_depth || (normalized->recursive_depth >= 0 && depth > normalized->recursive_depth))
                         match = FALSE;
                 }
             }
@@ -2224,7 +2289,7 @@ static BOOLEAN Process_MatchBreakoutFolderRuleRaw(
         if (rule_len && prefix_len >= rule_len &&
             path[rule_len] == L'\\' &&
             Box_NlsStrCmp(path, match_rule, rule_len) == 0) {
-            if (normalized->has_recursive && normalized->recursive_depth >= 0) {
+            if (normalized->has_recursive) {
                 const WCHAR *dir_begin = path + rule_len;
                 const WCHAR *dir_end = path + prefix_len;
                 LONG depth = 0;
@@ -2242,7 +2307,7 @@ static BOOLEAN Process_MatchBreakoutFolderRuleRaw(
                     }
                 }
 
-                if (depth <= normalized->recursive_depth)
+                if (depth >= normalized->recursive_min_depth && (normalized->recursive_depth < 0 || depth <= normalized->recursive_depth))
                     match = TRUE;
             }
             else {

@@ -1045,7 +1045,7 @@ static SBIE_POLICY_DECISION UserServer_ResolveDocumentPolicy(
     in.caller_forced_by_children = 0;
     in.source_equals_candidate_box = 1;
 
-    // Legacy default for BreakoutDocument (1.17.5): breakout wins when matched.
+    // Legacy default for BreakoutDocument (1.17.6): breakout wins when matched.
     // Priority-aware behavior overrides this default; equal-priority ties fall back
     // to this same legacy ordering.
     return SbiePolicy_ResolveWithPriorities(

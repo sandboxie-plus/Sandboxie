@@ -19,35 +19,116 @@
 #include <QRegularExpressionValidator>
 #include <QStandardItemModel>
 
-static bool GetWildcardAnchorForRule(const QString& baseRule, QString* pAnchor, QChar* pWildcardChar = nullptr)
+static bool ParseRecursiveUiSpec(const QString& rawValue, QString* pDepthValue, bool* pAnchorFromLast, bool* pHasExplicitAnchor)
+{
+	QString value = rawValue.trimmed();
+	QString depthValue;
+	bool anchorFromLast = true;
+	bool hasExplicitAnchor = false;
+
+	if (value.isEmpty() || value == "-")
+		return false;
+
+	int anchorPos = value.indexOf(';');
+	if (anchorPos >= 0) {
+		depthValue = value.left(anchorPos).trimmed();
+		QString anchorValue = value.mid(anchorPos + 1).trimmed().toLower();
+		if (depthValue.isEmpty())
+			return false;
+		if (anchorValue == "first") {
+			anchorFromLast = false;
+			hasExplicitAnchor = true;
+		}
+		else if (anchorValue == "last") {
+			anchorFromLast = true;
+			hasExplicitAnchor = true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		depthValue = value;
+	}
+
+	QString lower = depthValue.toLower();
+	QString normalizedDepth;
+	if (lower == "*" || lower == "y" || lower == "yes" || lower == "true")
+		normalizedDepth = "y";
+	else if (lower == "n" || lower == "no" || lower == "false" || lower == "0")
+		normalizedDepth = "n";
+	else {
+		int rangePos = depthValue.indexOf('-');
+		if (rangePos > 0 && rangePos + 1 < depthValue.length()) {
+			QString left = depthValue.left(rangePos).trimmed();
+			QString right = depthValue.mid(rangePos + 1).trimmed();
+			bool minOk = false;
+			bool maxOk = false;
+			int minDepth = left.toInt(&minOk);
+			int maxDepth = right.toInt(&maxOk);
+			if (!minOk || !maxOk || minDepth < 0 || maxDepth < minDepth)
+				return false;
+			normalizedDepth = QString::number(minDepth) + "-" + QString::number(maxDepth);
+		}
+		else {
+			bool ok = false;
+			int depth = depthValue.toInt(&ok);
+			if (!ok || depth < 0)
+				return false;
+			normalizedDepth = QString::number(depth);
+		}
+	}
+
+	if (pDepthValue)
+		*pDepthValue = normalizedDepth;
+	if (pAnchorFromLast)
+		*pAnchorFromLast = anchorFromLast;
+	if (pHasExplicitAnchor)
+		*pHasExplicitAnchor = hasExplicitAnchor;
+	return true;
+}
+
+static QString NormalizeRecursiveUiValue(const QString& rawValue)
+{
+	QString depthValue;
+	bool anchorFromLast = true;
+	bool hasExplicitAnchor = false;
+
+	if (!ParseRecursiveUiSpec(rawValue, &depthValue, &anchorFromLast, &hasExplicitAnchor))
+		return QString();
+
+	return hasExplicitAnchor ? (depthValue + ";" + (anchorFromLast ? "last" : "first")) : depthValue;
+}
+
+static bool GetWildcardAnchorForRule(const QString& baseRule, bool anchorFromLast, QString* pAnchor, QChar* pWildcardChar = nullptr)
 {
 	QString rule = baseRule.trimmed();
 	if (rule.isEmpty())
 		return false;
 
+	int lastSlash = -1;
+	int anchorSlash = -1;
 	int wildcardPos = -1;
 	QChar wildcardChar;
 	for (int i = 0; i < rule.length(); ++i) {
 		QChar ch = rule[i];
-		if (ch == '*' || ch == '?') {
+		if (ch == '\\' || ch == '/') {
+			lastSlash = i;
+		}
+		else if (ch == '*' || ch == '?') {
 			wildcardPos = i;
 			wildcardChar = ch;
-			break;
+			anchorSlash = lastSlash;
+			if (!anchorFromLast)
+				break;
 		}
 	}
 
-	if (wildcardPos < 0)
-		return false;
-
-	QString prefix = rule.left(wildcardPos);
-	int lastSlash = prefix.lastIndexOf('\\');
-	int lastForwardSlash = prefix.lastIndexOf('/');
-	int cutPos = qMax(lastSlash, lastForwardSlash);
-	if (cutPos < 0)
+	if (wildcardPos < 0 || anchorSlash < 0)
 		return false;
 
 	if (pAnchor)
-		*pAnchor = prefix.left(cutPos + 1).trimmed();
+		*pAnchor = rule.left(anchorSlash + 1).trimmed();
 	if (pWildcardChar)
 		*pWildcardChar = wildcardChar;
 
@@ -56,44 +137,75 @@ static bool GetWildcardAnchorForRule(const QString& baseRule, QString* pAnchor, 
 
 static QString RecursiveDisplayTextForValue(const QString& value)
 {
-	QString normalized = value.trimmed().toLower();
-	if (normalized == "n" || normalized == "0" || normalized == "no" || normalized == "false")
-		return QObject::tr("no (0)");
-	if (normalized == "y" || normalized == "yes" || normalized == "true" || normalized == "*")
-		return QObject::tr("yes (unlimited)");
+	QString normalized = NormalizeRecursiveUiValue(value);
+	QString depthValue;
+	bool anchorFromLast = true;
+	bool hasExplicitAnchor = false;
+	QString display;
 
-	bool ok = false;
-	int depth = normalized.toInt(&ok);
-	if (ok && depth >= 0)
-		return QObject::tr("depth %1").arg(depth);
+	if (normalized.isEmpty() || !ParseRecursiveUiSpec(normalized, &depthValue, &anchorFromLast, &hasExplicitAnchor))
+		return value;
 
-	return value;
+	QString lower = depthValue.toLower();
+	if (lower == "n")
+		display = QObject::tr("no (0)");
+	else if (lower == "y")
+		display = QObject::tr("yes (unlimited)");
+	else if (depthValue.contains('-'))
+		display = QObject::tr("depth %1").arg(depthValue);
+	else
+		display = QObject::tr("depth %1").arg(depthValue);
+
+	if (hasExplicitAnchor)
+		display += QObject::tr(" (%1)").arg(anchorFromLast ? QObject::tr("last") : QObject::tr("first"));
+
+	return display;
 }
 
-static QString BuildRecursiveOptionTooltip(const QString& optionValue, const QString& anchor)
+static QString BuildRecursiveOptionTooltip(const QString& optionValue, const QString& baseRule)
 {
-	QString value = optionValue.trimmed().toLower();
+	QString normalized = NormalizeRecursiveUiValue(optionValue);
+	QString depthValue;
+	bool anchorFromLast = true;
+	bool hasExplicitAnchor = false;
 	QString tip;
+	QString trimmedRule = baseRule.trimmed();
 
-	if (value == "-")
-		tip = QObject::tr("No explicit recursion mode.");
-	else if (value == "n" || value == "0")
+	if (optionValue.trimmed() == "-")
+		return QObject::tr("No explicit recursion mode.");
+
+	if (normalized.isEmpty() || !ParseRecursiveUiSpec(normalized, &depthValue, &anchorFromLast, &hasExplicitAnchor))
+		return QString();
+
+	if (depthValue == "n")
 		tip = QObject::tr("No recursion, only the matched folder.");
-	else if (value == "y")
+	else if (depthValue == "y")
 		tip = QObject::tr("Unlimited recursion from the wildcard anchor.");
-	else {
-		bool ok = false;
-		int depth = value.toInt(&ok);
-		if (ok && depth >= 0)
-			tip = QObject::tr("Include up to %1 subfolder level(s) from the wildcard anchor.").arg(depth);
+	else if (depthValue.contains('-')) {
+		QStringList parts = depthValue.split('-', Qt::KeepEmptyParts);
+		if (parts.size() == 2)
+			tip = QObject::tr("Include subfolder levels from %1 to %2 (inclusive) from the wildcard anchor.").arg(parts[0].trimmed(), parts[1].trimmed());
 	}
+	else
+		tip = QObject::tr("Include up to %1 subfolder level(s) from the wildcard anchor.").arg(depthValue);
 
-	if (value != "-") {
-		if (!anchor.isEmpty())
-			tip += (tip.isEmpty() ? QString() : QString("\n")) + QObject::tr("Wildcard anchor (first wildcard): %1").arg(anchor);
-		else
-			tip += (tip.isEmpty() ? QString() : QString("\n")) + QObject::tr("Wildcard anchor: not applicable (exact path, no '*' or '?').");
-	}
+	QString anchor;
+	QChar wildcardChar;
+	bool hasWildcardAnchor = GetWildcardAnchorForRule(baseRule, anchorFromLast, &anchor, &wildcardChar);
+	QString anchorMode = anchorFromLast ? QObject::tr("last") : QObject::tr("first");
+	if (hasWildcardAnchor)
+		tip += (tip.isEmpty() ? QString() : QString("\n")) + QObject::tr("Wildcard anchor (%1 wildcard): %2 (anchor folder depth is 0)").arg(anchorMode, anchor);
+	else
+		tip += (tip.isEmpty() ? QString() : QString("\n")) + QObject::tr("Wildcard anchor: not applicable (exact path, no '*' or '?').");
+
+	if (hasExplicitAnchor)
+		tip += QString("\n") + QObject::tr("Explicit anchor mode: %1").arg(anchorMode);
+
+	if (hasWildcardAnchor)
+		tip += QString("\n") + QObject::tr("Wildcard operator: %1").arg(QString(wildcardChar));
+
+	if (trimmedRule.endsWith("\\*") || trimmedRule.endsWith("/*"))
+		tip += (tip.isEmpty() ? QString() : QString("\n")) + QObject::tr("Rule ends with '\\*': matching starts beyond the anchor folder, so the anchor folder itself is not matched. This is legacy behavior.");
 
 	return tip;
 }
@@ -373,23 +485,34 @@ public:
 				pBox->addItem(RecursiveDisplayTextForValue(QString::number(i)), QString::number(i));
 				pBox->setItemData(pBox->count() - 1, tr("Include up to %1 subfolder level(s) from the wildcard anchor.").arg(i), Qt::ToolTipRole);
 			}
-
-			QSet<int> usedRecursiveValues = m_pOptions->GetUsedRuleRecursiveValues(pItem);
-			QList<int> customRecursiveValues;
-			for (int value : usedRecursiveValues) {
-				if (value > 9)
-					customRecursiveValues.append(value);
+			const QStringList rangePresets = { "1-2", "1-3", "1-5", "2-4", "2-2" };
+			for (const QString& preset : rangePresets) {
+				if (pBox->findData(preset) < 0)
+					pBox->addItem(RecursiveDisplayTextForValue(preset), preset);
 			}
-			std::sort(customRecursiveValues.begin(), customRecursiveValues.end());
-			for (int value : customRecursiveValues) {
-				QString valueText = QString::number(value);
+
+			QSet<QString> usedRecursiveValues = m_pOptions->GetUsedRuleRecursiveValues(pItem);
+			QStringList customRecursiveValues = usedRecursiveValues.values();
+			std::sort(customRecursiveValues.begin(), customRecursiveValues.end(), [](const QString& left, const QString& right) {
+				return left.compare(right, Qt::CaseInsensitive) < 0;
+			});
+			for (const QString& valueText : customRecursiveValues) {
+				if (valueText.isEmpty())
+					continue;
 				if (pBox->findData(valueText) < 0)
 					pBox->addItem(RecursiveDisplayTextForValue(valueText), valueText);
 			}
 
 			setupWideDropdown(pBox);
-			QRegularExpression rx("^(?:-|[yYnN]|[0-9]+)$");
+			QRegularExpression rx("^(?:-|[yYnN]|[0-9]+(?:\\s*-\\s*[0-9]+)?)(?:\\s*;\\s*(?:[Ff][Ii][Rr][Ss][Tt]|[Ll][Aa][Ss][Tt]))?$");
 			pBox->lineEdit()->setValidator(new QRegularExpressionValidator(rx, pBox));
+			connect(pBox, qOverload<int>(&QComboBox::currentIndexChanged), [pBox](int idx){
+				if (idx < 0)
+					return;
+				QString raw = pBox->itemData(idx).toString().trimmed();
+				if (!raw.isEmpty())
+					pBox->setEditText(raw);
+			});
 			connectEditable(pBox);
 			return pBox;
 		}
@@ -425,38 +548,32 @@ public:
 				return;
 
 			QString value = pItem->data(index.column(), Qt::UserRole).toString().trimmed();
-			if (m_Column == 3 && value == "*")
-				value = "y";
-			if (m_Column == 3 && (value.compare("n", Qt::CaseInsensitive) == 0 || value.compare("no", Qt::CaseInsensitive) == 0 || value.compare("false", Qt::CaseInsensitive) == 0 || value == "0"))
-				value = "n";
-			if (m_Column == 3 && (value.compare("y", Qt::CaseInsensitive) == 0 || value.compare("yes", Qt::CaseInsensitive) == 0 || value.compare("true", Qt::CaseInsensitive) == 0))
-				value = "y";
-			if (m_Column == 3 && value.isEmpty())
-				value = "-";
+			if (m_Column == 3) {
+				value = NormalizeRecursiveUiValue(value);
+				if (value.isEmpty())
+					value = "-";
+			}
 
 			if (m_Column == 3) {
 				QString baseRule = pItem->data(1, Qt::UserRole).toString();
-				QString anchor;
-				QChar wildcardChar;
-				bool hasWildcardAnchor = GetWildcardAnchorForRule(baseRule, &anchor, &wildcardChar);
 				for (int row = 0; row < pBox->count(); ++row) {
 					QString optionValue = pBox->itemData(row).toString();
-					QString tip = BuildRecursiveOptionTooltip(optionValue, anchor);
-					if (hasWildcardAnchor && optionValue != "-")
-						tip += QString("\n") + tr("Wildcard operator: %1").arg(QString(wildcardChar));
+					QString tip = BuildRecursiveOptionTooltip(optionValue, baseRule);
 					if (!tip.isEmpty())
 						pBox->setItemData(row, tip, Qt::ToolTipRole);
 				}
 			}
 
-			// If a persisted numeric value is outside preset ranges, expose it in the dropdown list.
+			// If a persisted value is outside preset ranges, expose it in the dropdown list.
 			if (m_Column == 2 || m_Column == 3) {
-				bool ok = false;
-				qlonglong customValue = value.toLongLong(&ok);
-				if (ok && customValue >= 0 && pBox->findData(value) < 0) {
-					if (m_Column == 3)
+				if (m_Column == 3) {
+					if (!value.isEmpty() && pBox->findData(value) < 0)
 						pBox->addItem(RecursiveDisplayTextForValue(value), value);
-					else
+				}
+				else {
+					bool ok = false;
+					qlonglong customValue = value.toLongLong(&ok);
+					if (ok && customValue >= 0 && pBox->findData(value) < 0)
 						pBox->addItem(value, value);
 				}
 			}
@@ -466,7 +583,9 @@ public:
 
 			int idx = pBox->findData(value);
 			pBox->setCurrentIndex(idx);
-			if (idx == -1)
+			if (m_Column == 2 || m_Column == 3)
+				pBox->setEditText(value);
+			else if (idx == -1)
 				pBox->setCurrentText(value);
 			return;
 		}
@@ -509,22 +628,7 @@ public:
 				value = typedValue;
 
 			if (m_Column == 3) {
-				value = value.toLower();
-				if (value == "-") {
-					value.clear();
-				}
-				else if (value == "n" || value == "no" || value == "false" || value == "0") {
-					value = "n";
-				}
-				else if (value == "y" || value == "yes" || value == "true") {
-					value = "y";
-				}
-				else {
-					bool ok = false;
-					value.toULongLong(&ok);
-					if (!ok)
-						value.clear();
-				}
+				value = NormalizeRecursiveUiValue(value);
 			}
 
 			// Empty value already signals no TargetBox extension
@@ -538,6 +642,20 @@ public:
 			pItem->setText(index.column(), displayValue);
 			m_pTree->blockSignals(prev);
 			pItem->setData(index.column(), Qt::UserRole, value);
+
+			if (m_Column == 2) {
+				if (value.isEmpty() || value == "-1")
+					pItem->setToolTip(index.column(), tr("No explicit priority."));
+				else
+					pItem->setToolTip(index.column(), tr("Priority: %1").arg(value));
+			}
+			else if (m_Column == 3) {
+				QString baseRule = pItem->data(1, Qt::UserRole).toString();
+				pItem->setToolTip(index.column(), BuildRecursiveOptionTooltip(value, baseRule));
+			}
+			else if (m_Column == 4) {
+				pItem->setToolTip(index.column(), value);
+			}
 			return;
 		}
 
@@ -1009,7 +1127,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.btnDelBreakout, SIGNAL(clicked(bool)), this, SLOT(OnDelBreakout()));
 	connect(ui.chkShowBreakoutTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowBreakoutTmpl()));
 	connect(ui.chkBreakoutUseTargetDir, SIGNAL(clicked(bool)), this, SLOT(OnForcedChanged()));
-	connect(ui.chkUseForceBreakoutRuleExtensions, SIGNAL(clicked(bool)), this, SLOT(OnRuleExtensionsToggled(bool)));
+	connect(ui.chkUseForceBreakoutRuleExtensions, SIGNAL(stateChanged(int)), this, SLOT(OnRuleExtensionsToggled(int)));
 	//ui.treeBreakout->setEditTriggers(QAbstractItemView::DoubleClicked);
 	ui.treeBreakout->setItemDelegateForColumn(0, new NoEditDelegate(this));
 	ui.treeBreakout->setItemDelegateForColumn(1, new ProgramsDelegate(this, ui.treeBreakout, -1, this));
@@ -1894,7 +2012,12 @@ void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int
 
 bool COptionsWindow::IsRuleExtensionsEnabled() const
 {
-	return ui.chkUseForceBreakoutRuleExtensions->isChecked();
+	Qt::CheckState state = ui.chkUseForceBreakoutRuleExtensions->checkState();
+	if (state == Qt::Checked)
+		return true;
+	if (state == Qt::Unchecked)
+		return false;
+	return m_pBox->GetBool("UseForceBreakoutRuleExtensions", false, true, true);
 }
 
 QSet<int> COptionsWindow::GetUsedRulePriorities(const QTreeWidgetItem* pExclude) const
@@ -2055,27 +2178,14 @@ QMap<int, QStringList> COptionsWindow::GetUsedRulePrioritySources(const QTreeWid
 	return result;
 }
 
-QSet<int> COptionsWindow::GetUsedRuleRecursiveValues(const QTreeWidgetItem* pExclude) const
+QSet<QString> COptionsWindow::GetUsedRuleRecursiveValues(const QTreeWidgetItem* pExclude) const
 {
-	QSet<int> used;
+	QSet<QString> used;
 
-	auto normalizeRecursiveValue = [](const QString& rawValue) {
-		QString value = rawValue.trimmed();
-		if (value == "*")
-			value = "y";
-		if (value.compare("n", Qt::CaseInsensitive) == 0 || value.compare("no", Qt::CaseInsensitive) == 0 || value.compare("false", Qt::CaseInsensitive) == 0)
-			return QString("0");
-		if (value.compare("y", Qt::CaseInsensitive) == 0 || value.compare("yes", Qt::CaseInsensitive) == 0 || value.compare("true", Qt::CaseInsensitive) == 0)
-			return QString("y");
-		return value;
-	};
-
-	auto addNumericRecursive = [&](const QString& text) {
-		QString value = normalizeRecursiveValue(text);
-		bool ok = false;
-		int numericValue = value.toInt(&ok);
-		if (ok && numericValue >= 0)
-			used.insert(numericValue);
+	auto addRecursive = [&](const QString& text) {
+		QString value = NormalizeRecursiveUiValue(text);
+		if (!value.isEmpty())
+			used.insert(value);
 	};
 
 	auto collectTree = [&](QTreeWidget* pTree) {
@@ -2098,7 +2208,7 @@ QSet<int> COptionsWindow::GetUsedRuleRecursiveValues(const QTreeWidgetItem* pExc
 			if (text.isEmpty())
 				continue;
 
-			addNumericRecursive(text);
+			addRecursive(text);
 		}
 	};
 
@@ -2110,7 +2220,7 @@ QSet<int> COptionsWindow::GetUsedRuleRecursiveValues(const QTreeWidgetItem* pExc
 				if (!part.startsWith("Recursive=", Qt::CaseInsensitive))
 					continue;
 
-				addNumericRecursive(part.mid(10));
+				addRecursive(part.mid(10));
 				break;
 			}
 		}

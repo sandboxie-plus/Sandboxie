@@ -24,7 +24,7 @@ public:
 	bool			IsRuleExtensionsEnabled() const;
 	QSet<int>		GetUsedRulePriorities(const QTreeWidgetItem* pExclude) const;
 	QMap<int, QStringList>	GetUsedRulePrioritySources(const QTreeWidgetItem* pExclude) const;
-	QSet<int>		GetUsedRuleRecursiveValues(const QTreeWidgetItem* pExclude) const;
+	QSet<QString>	GetUsedRuleRecursiveValues(const QTreeWidgetItem* pExclude) const;
 
 	static void		TriggerPathReload();
 
@@ -103,7 +103,7 @@ private slots:
 	void OnShowForceTmpl()			{ LoadForcedTmpl(true); }
 	void OnForcedChanged();
 	void OnForcedChanged(QTreeWidgetItem *pItem, int);
-	void OnRuleExtensionsToggled(bool checked);
+	void OnRuleExtensionsToggled(int state);
 
 	void OnBreakoutProg();
 	void OnBreakoutBrowse();

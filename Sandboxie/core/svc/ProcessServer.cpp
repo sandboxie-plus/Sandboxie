@@ -233,10 +233,9 @@ static BOOLEAN ProcessServer_CheckForceChildrenMatch(
     BOOLEAN *outHasPriority,
     LONG *outPriority)
 {
-    BOOLEAN match = FALSE;
-    BOOLEAN hasPriority = FALSE;
-    LONG bestPriority = -1;
     const BOOLEAN use_rule_extensions = SbieApi_QueryConfBool(boxName, L"UseForceBreakoutRuleExtensions", FALSE);
+
+    UNREFERENCED_PARAMETER(callerDirLen);
 
     if (outHasPriority)
         *outHasPriority = FALSE;
@@ -246,40 +245,21 @@ static BOOLEAN ProcessServer_CheckForceChildrenMatch(
     if (!boxName || !callerImageName || !*callerImageName || !callerImagePath || !*callerImagePath)
         return FALSE;
 
-    if (SbieDll_CheckStringInList(callerImageName, boxName, L"ForceChildren")) {
-        BOOLEAN p = FALSE;
-        LONG pv = -1;
-        match = TRUE;
-        ProcessServer_GetStringRulePriority(callerImageName, boxName, L"ForceChildren", &p, &pv);
-        if (p && (!hasPriority || pv < bestPriority)) {
-            hasPriority = TRUE;
-            bestPriority = pv;
-        }
-    }
-
-    if (callerDirLen && SbieDll_CheckPatternInList(callerImagePath, callerDirLen, boxName, L"ForceChildren")) {
-        BOOLEAN p = FALSE;
-        LONG pv = -1;
-        match = TRUE;
-        ProgramControl_GetFolderPriorityFromConfEx(
-            boxName, L"ForceChildren", callerImageName, callerImagePath, callerDirLen,
-            &p, &pv, use_rule_extensions ? 1 : 0,
-            ProcessServer_BreakoutMatchImage, NULL,
-            ProcessServer_AdjustBreakoutFolderRule, NULL);
-        if (p && (!hasPriority || pv < bestPriority)) {
-            hasPriority = TRUE;
-            bestPriority = pv;
-        }
-    }
-
-    if (hasPriority) {
-        if (outHasPriority)
-            *outHasPriority = TRUE;
-        if (outPriority)
-            *outPriority = bestPriority;
-    }
-
-    return match;
+    return ProgramControl_FindProcessSettingMatch(
+        boxName,
+        L"ForceChildren",
+        callerImageName,
+        callerImagePath,
+        (ULONG)wcslen(callerImagePath),
+        0,
+        use_rule_extensions ? 1 : 0,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        NULL,
+        outHasPriority,
+        outPriority) ? TRUE : FALSE;
 }
 
 static void ProcessServer_GetBreakoutFolderPriority(const WCHAR* boxname, const WCHAR* imageName, const WCHAR* appPath, ULONG appDirLen, BOOLEAN* hasPriority, LONG* priority)
@@ -1225,11 +1205,11 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                                 }
                             }
 
-                            // For sandboxed callers without SBIE_FLAG_FORCED_CHILD_PROCESS, the driver does
-                            // not propagate forced_by_children through sandboxed parents. Walk up the process
+                            // For sandboxed callers without SBIE_FLAG_FORCED_CHILD_PROCESS, walk the process
                             // tree to check if any sandboxed ancestor in the source box matches ForceChildren.
-                            // This ensures descendants of ForceChildren-matched processes (e.g., Firefox
-                            // spawned by Launcher.exe) cannot break out their own children.
+                            // The driver now propagates forced_by_children for direct descendants, but this
+                            // ancestor walk remains as a conservative fallback for lineage edge cases where
+                            // the explicit flag may be unavailable at this decision point.
                             if (CallerInSandbox && !(CallerProcessFlags & SBIE_FLAG_FORCED_CHILD_PROCESS)) {
                                 HANDLE AncestorHandle = CallerProcessHandle;
                                 BOOLEAN ancestor_deny = FALSE;

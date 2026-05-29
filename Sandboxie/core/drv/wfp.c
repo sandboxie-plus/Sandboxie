@@ -876,7 +876,6 @@ void WFP_classify(
 		UINT16 remote_port = inFixedValues->incomingValue[remotePortIndex].value.uint16;
 
 
-		BOOLEAN log = FALSE;
 		BOOLEAN block = FALSE;
 		BOOLEAN noloop = FALSE;
 		BOOLEAN isloopback = FALSE;
@@ -895,7 +894,6 @@ void WFP_classify(
 		wfp_proc = map_get(&WFP_Processes, processId);
 		if (wfp_proc) {
 
-			log = wfp_proc->LogTraffic;
 			block = wfp_proc->BlockInternet;
 			noloop = wfp_proc->BlockLoopback;
 			isloopback = WFP_isLoopback(&remote_ip);
@@ -911,52 +909,13 @@ void WFP_classify(
     
 		KeReleaseSpinLock(&WFP_MapLock, irql);
 
-		// TODO: Fix-Me, no ETW logging for now, we are here at DISPATCH_LEVEL but Session_MonitorPut is using pagable memory,
-		// we need either to create a logging proxy using non-paged pool, or change the tracking mechanism to use non-paged pool itself.
-        /*if (log){
-
-			BOOLEAN send = (filter->filterId == WFP_send_filter_id_v4) || (filter->filterId == WFP_send_filter_id_v6);
-			BOOLEAN v6 = (filter->filterId == WFP_send_filter_id_v6) || (filter->filterId == WFP_recv_filter_id_v6);
-
-			
-			//RtlStringCbPrintfW at DISPATCH_LEVEL or higher can cause a BSOD, 
-			//the issue is with accessing unicode tables, which may be paged out.
-
-			//The documentation for KdPrint() states it this way:
-
-			//<wdk>
-			//Format
-			//Specifies a pointer to the format string to print. The Format string
-			//supports all the printf-style formatting codes. However, the Unicode format
-			//codes (%C, %S, %lc, %ls, %wc, %ws, and %wZ) can only be used with IRQL =
-			//PASSIVE_LEVEL.
-			//</wdk>
-
-			//RtlStringCbPrintfA is technically also not permitted so a better solution needs to be found
-			
-
-			char trace_strA[256];
-			if (v6) {
-				RtlStringCbPrintfA(trace_strA, sizeof(trace_strA), "%s Network Traffic; Port: %u; Prot: %u; IPv6: %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x", 
-					send ? "Outgoing " : "Incoming ", remote_port, protocol,
-					remote_ip.Data[0], remote_ip.Data[1], remote_ip.Data[2], remote_ip.Data[3], remote_ip.Data[4], remote_ip.Data[5], remote_ip.Data[6], remote_ip.Data[7],
-					remote_ip.Data[8], remote_ip.Data[9], remote_ip.Data[10], remote_ip.Data[11], remote_ip.Data[12], remote_ip.Data[13], remote_ip.Data[14], remote_ip.Data[15]);
-			}
-			else {
-				RtlStringCbPrintfA(trace_strA, sizeof(trace_strA), "%s Network Traffic; Port: %u; Prot: %u; IPv4: %d.%d.%d.%d", 
-					send ? "Outgoing " : "Incoming ", remote_port, protocol,
-					remote_ip.Data[12], remote_ip.Data[13], remote_ip.Data[14], remote_ip.Data[15]);
-			}
-
-			WCHAR trace_str[256];
-			char* cptr = trace_strA;
-			WCHAR* wptr = trace_str;
-			while (*cptr != '\0')
-				*wptr++ = *cptr++;
-			*wptr = L'\0';
-
-            Session_MonitorPut(MONITOR_NETFW | (block ? MONITOR_DENY : MONITOR_OPEN), trace_str, PsGetCurrentProcessId());
-        }*/
+		//
+		// NetFwTrace must not log inline here. WFP classify can run at
+		// DISPATCH_LEVEL, while Session_MonitorPut takes the session
+		// ERESOURCE path and the monitor ring is backed by PagedPool.
+		// Use nonpaged classify-side capture plus a PASSIVE_LEVEL monitor writer
+		// before enabling traffic logging.
+		//
 
 		if (block) {
 

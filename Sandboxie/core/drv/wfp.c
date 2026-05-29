@@ -86,6 +86,8 @@ DEFINE_GUID(WPF_RECV_CALLOUT_GUID_V6,	// 0bf56435-71e4-4de7-bd0b-1af0b4cbb9f9
 #define WFP_FILTER_NAME L"SbieFilter"
 #define WFP_FILTER_DESCRIPTION L"A filter that uses by sandboxie to implement internet restrictions"
 
+#define WFP_TRACE_QUEUE_CAPACITY 256
+
 
 //---------------------------------------------------------------------------
 // Structures and Types
@@ -101,6 +103,18 @@ typedef struct _WFP_PROCESS {
 	LIST NetFwRules;
 
 } WFP_PROCESS;
+
+typedef struct _WFP_TRACE_RECORD {
+
+	HANDLE ProcessId;
+	BOOLEAN Send;
+	BOOLEAN V6;
+	BOOLEAN Block;
+	UCHAR Protocol;
+	UINT16 RemotePort;
+	IP_ADDRESS RemoteIp;
+
+} WFP_TRACE_RECORD;
 
 
 //---------------------------------------------------------------------------
@@ -120,6 +134,23 @@ const WCHAR* Process_MatchImageAndGetValue(BOX* box, const WCHAR* value, const W
 ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);
 
 void WFP_FreeRules(LIST* NetFwRules);
+
+BOOLEAN WFP_TraceStart(void);
+
+void WFP_TraceStop(void);
+
+void WFP_TraceEnqueueFromClassify(
+	HANDLE processId,
+	BOOLEAN send,
+	BOOLEAN v6,
+	const IP_ADDRESS* remote_ip,
+	UINT16 remote_port,
+	UCHAR protocol,
+	BOOLEAN block);
+
+void WFP_TraceThreadProc(PVOID StartContext);
+
+void WFP_TraceWrite(const WFP_TRACE_RECORD* record);
 
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, WFP_Init)
@@ -201,6 +232,17 @@ static BOOLEAN WPF_MapInitialized = FALSE;
 static map_base_t WFP_Processes;
 static KSPIN_LOCK WFP_MapLock;
 
+static WFP_TRACE_RECORD* WFP_TraceQueue = NULL;
+static ULONG WFP_TraceQueueRead = 0;
+static ULONG WFP_TraceQueueWrite = 0;
+static ULONG WFP_TraceQueueCount = 0;
+static ULONG WFP_TraceDropCount = 0;
+static KSPIN_LOCK WFP_TraceLock;
+static KEVENT WFP_TraceEvent;
+static HANDLE WFP_TraceThreadHandle = NULL;
+static BOOLEAN WFP_TraceStopping = FALSE;
+static BOOLEAN WFP_TraceReady = FALSE;
+
 
 //---------------------------------------------------------------------------
 // WFP_Alloc
@@ -221,6 +263,243 @@ _FX VOID* WFP_Alloc(void* pool, size_t size)
 _FX VOID WFP_Free(void* pool, void* ptr)
 {
 	ExFreePoolWithTag(ptr, tzuk);
+}
+
+
+//---------------------------------------------------------------------------
+// WFP_TraceStart
+//---------------------------------------------------------------------------
+
+
+BOOLEAN WFP_TraceStart(void)
+{
+	if (WFP_TraceReady)
+		return TRUE;
+
+	WFP_TraceQueue = WFP_Alloc(NULL, sizeof(WFP_TRACE_RECORD) * WFP_TRACE_QUEUE_CAPACITY);
+	if (!WFP_TraceQueue)
+		return FALSE;
+	memzero(WFP_TraceQueue, sizeof(WFP_TRACE_RECORD) * WFP_TRACE_QUEUE_CAPACITY);
+
+	KeInitializeSpinLock(&WFP_TraceLock);
+	KeInitializeEvent(&WFP_TraceEvent, SynchronizationEvent, FALSE);
+
+	WFP_TraceQueueRead = 0;
+	WFP_TraceQueueWrite = 0;
+	WFP_TraceQueueCount = 0;
+	WFP_TraceDropCount = 0;
+	WFP_TraceStopping = FALSE;
+
+	OBJECT_ATTRIBUTES objattrs;
+	InitializeObjectAttributes(&objattrs, NULL, OBJ_KERNEL_HANDLE, NULL, NULL);
+
+	NTSTATUS status = PsCreateSystemThread(
+		&WFP_TraceThreadHandle,
+		THREAD_ALL_ACCESS,
+		&objattrs,
+		NULL,
+		NULL,
+		WFP_TraceThreadProc,
+		NULL);
+
+	if (!NT_SUCCESS(status)) {
+		WFP_Free(NULL, WFP_TraceQueue);
+		WFP_TraceQueue = NULL;
+		WFP_TraceThreadHandle = NULL;
+		return FALSE;
+	}
+
+	WFP_TraceReady = TRUE;
+	return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// WFP_TraceStop
+//---------------------------------------------------------------------------
+
+
+void WFP_TraceStop(void)
+{
+	if (!WFP_TraceQueue && !WFP_TraceThreadHandle)
+		return;
+
+	KIRQL irql;
+
+#ifdef _WIN64
+	irql = KeAcquireSpinLockRaiseToDpc(&WFP_TraceLock);
+#else
+	KeAcquireSpinLock(&WFP_TraceLock, &irql);
+#endif
+
+	WFP_TraceReady = FALSE;
+	WFP_TraceStopping = TRUE;
+
+	KeReleaseSpinLock(&WFP_TraceLock, irql);
+
+	KeSetEvent(&WFP_TraceEvent, 0, FALSE);
+
+	if (WFP_TraceThreadHandle) {
+		ZwWaitForSingleObject(WFP_TraceThreadHandle, FALSE, NULL);
+		ZwClose(WFP_TraceThreadHandle);
+		WFP_TraceThreadHandle = NULL;
+	}
+
+	if (WFP_TraceQueue) {
+		WFP_Free(NULL, WFP_TraceQueue);
+		WFP_TraceQueue = NULL;
+	}
+
+	WFP_TraceQueueRead = 0;
+	WFP_TraceQueueWrite = 0;
+	WFP_TraceQueueCount = 0;
+}
+
+
+//---------------------------------------------------------------------------
+// WFP_TraceEnqueueFromClassify
+//---------------------------------------------------------------------------
+
+
+void WFP_TraceEnqueueFromClassify(
+	HANDLE processId,
+	BOOLEAN send,
+	BOOLEAN v6,
+	const IP_ADDRESS* remote_ip,
+	UINT16 remote_port,
+	UCHAR protocol,
+	BOOLEAN block)
+{
+	if (!WFP_TraceReady || !WFP_TraceQueue)
+		return;
+
+	KIRQL irql;
+
+#ifdef _WIN64
+	irql = KeAcquireSpinLockRaiseToDpc(&WFP_TraceLock);
+#else
+	KeAcquireSpinLock(&WFP_TraceLock, &irql);
+#endif
+
+	if (!WFP_TraceReady || WFP_TraceStopping || !WFP_TraceQueue) {
+		KeReleaseSpinLock(&WFP_TraceLock, irql);
+		return;
+	}
+
+	if (WFP_TraceQueueCount == WFP_TRACE_QUEUE_CAPACITY) {
+		++WFP_TraceDropCount;
+		KeReleaseSpinLock(&WFP_TraceLock, irql);
+		return;
+	}
+
+	WFP_TRACE_RECORD* record = &WFP_TraceQueue[WFP_TraceQueueWrite];
+	record->ProcessId = processId;
+	record->Send = send;
+	record->V6 = v6;
+	record->Block = block;
+	record->Protocol = protocol;
+	record->RemotePort = remote_port;
+	memcpy(&record->RemoteIp, remote_ip, sizeof(IP_ADDRESS));
+
+	WFP_TraceQueueWrite = (WFP_TraceQueueWrite + 1) % WFP_TRACE_QUEUE_CAPACITY;
+	++WFP_TraceQueueCount;
+
+	KeReleaseSpinLock(&WFP_TraceLock, irql);
+
+	KeSetEvent(&WFP_TraceEvent, 0, FALSE);
+}
+
+
+//---------------------------------------------------------------------------
+// WFP_TraceThreadProc
+//---------------------------------------------------------------------------
+
+
+void WFP_TraceThreadProc(PVOID StartContext)
+{
+	UNREFERENCED_PARAMETER(StartContext);
+
+	while (1) {
+
+		KeWaitForSingleObject(&WFP_TraceEvent, Executive, KernelMode, FALSE, NULL);
+
+		while (1) {
+
+			WFP_TRACE_RECORD record;
+			BOOLEAN have_record = FALSE;
+			BOOLEAN should_stop = FALSE;
+			KIRQL irql;
+
+#ifdef _WIN64
+			irql = KeAcquireSpinLockRaiseToDpc(&WFP_TraceLock);
+#else
+			KeAcquireSpinLock(&WFP_TraceLock, &irql);
+#endif
+
+			if (WFP_TraceQueueCount != 0 && WFP_TraceQueue) {
+				memcpy(&record, &WFP_TraceQueue[WFP_TraceQueueRead], sizeof(WFP_TRACE_RECORD));
+				WFP_TraceQueueRead = (WFP_TraceQueueRead + 1) % WFP_TRACE_QUEUE_CAPACITY;
+				--WFP_TraceQueueCount;
+				have_record = TRUE;
+			}
+			else if (WFP_TraceStopping)
+				should_stop = TRUE;
+
+			KeReleaseSpinLock(&WFP_TraceLock, irql);
+
+			if (have_record)
+				WFP_TraceWrite(&record);
+			else if (should_stop)
+				PsTerminateSystemThread(STATUS_SUCCESS);
+			else
+				break;
+		}
+	}
+}
+
+
+//---------------------------------------------------------------------------
+// WFP_TraceWrite
+//---------------------------------------------------------------------------
+
+
+void WFP_TraceWrite(const WFP_TRACE_RECORD* record)
+{
+	WCHAR trace_str[256];
+
+	if (record->V6) {
+		RtlStringCbPrintfW(
+			trace_str, sizeof(trace_str),
+			L"%s Network Traffic; Port: %u; Prot: %u; IPv6: %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x",
+			record->Send ? L"Outgoing" : L"Incoming",
+			record->RemotePort,
+			record->Protocol,
+			record->RemoteIp.Data[0], record->RemoteIp.Data[1],
+			record->RemoteIp.Data[2], record->RemoteIp.Data[3],
+			record->RemoteIp.Data[4], record->RemoteIp.Data[5],
+			record->RemoteIp.Data[6], record->RemoteIp.Data[7],
+			record->RemoteIp.Data[8], record->RemoteIp.Data[9],
+			record->RemoteIp.Data[10], record->RemoteIp.Data[11],
+			record->RemoteIp.Data[12], record->RemoteIp.Data[13],
+			record->RemoteIp.Data[14], record->RemoteIp.Data[15]);
+	}
+	else {
+		RtlStringCbPrintfW(
+			trace_str, sizeof(trace_str),
+			L"%s Network Traffic; Port: %u; Prot: %u; IPv4: %d.%d.%d.%d",
+			record->Send ? L"Outgoing" : L"Incoming",
+			record->RemotePort,
+			record->Protocol,
+			record->RemoteIp.Data[12],
+			record->RemoteIp.Data[13],
+			record->RemoteIp.Data[14],
+			record->RemoteIp.Data[15]);
+	}
+
+	Session_MonitorPut(
+		MONITOR_NETFW | (record->Block ? MONITOR_DENY : MONITOR_OPEN),
+		trace_str,
+		record->ProcessId);
 }
 
 
@@ -260,16 +539,22 @@ _FX BOOLEAN WFP_Load(void)
 
 	map_resize(&WFP_Processes, 128); // prepare some buckets for better performance
 
+	if (!WFP_TraceStart())
+		DbgPrint("Sbie WFP trace logger disabled: initialization failed\r\n");
+
 	DbgPrint("Sbie WFP enabled\r\n");
 
-	if (!Mem_GetLockResource(&WFP_InitLock, TRUE))
+	if (!Mem_GetLockResource(&WFP_InitLock, TRUE)) {
+		WFP_TraceStop();
 		return FALSE;
+	}
 
 	NTSTATUS status = FwpmBfeStateSubscribeChanges((void*)Api_DeviceObject, WFP_state_changed, NULL, &WFP_state_handle);
 	if (!NT_SUCCESS(status)) {
 		DbgPrint("Sbie WFP failed to install state change callback\r\n");
 		Mem_FreeLockResource(&WFP_InitLock);
 		WFP_InitLock = NULL;
+		WFP_TraceStop();
 		return FALSE;
 	}
 
@@ -322,6 +607,8 @@ _FX void WFP_Unload(void)
 		Mem_FreeLockResource(&WFP_InitLock);
 		WFP_InitLock = NULL;
 	}
+
+	WFP_TraceStop();
 
 	if (WPF_MapInitialized) {
 
@@ -429,8 +716,13 @@ Exit:
 		DbgPrint("Sbie WFP initialization failed, stage %02x, status 0x%08x\r\n", stage, status);
 
 		if (in_transaction == TRUE) {
-			FwpmTransactionAbort(WFP_engine_handle);
-			_Analysis_assume_lock_not_held_(WFP_engine_handle); // Potential leak if "FwpmTransactionAbort" fails
+			// SREV-344: abort is the primary rollback edge; closing the
+			// dynamic session below is the final owner cleanup edge if
+			// BFE/RPC returns an abort error.
+			NTSTATUS abort_status = FwpmTransactionAbort(WFP_engine_handle);
+			_Analysis_assume_lock_not_held_(WFP_engine_handle);
+			if (!NT_SUCCESS(abort_status))
+				DbgPrint("Sbie WFP transaction abort failed, status 0x%08x\r\n", abort_status);
 		}
 		if (callout_registered) {
 			FwpsCalloutUnregisterById(WFP_send_callout_id_v4);
@@ -707,8 +999,10 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 
 		if (!ok) {
 			memcpy(&OldNetFwRules, &NewNetFwRules, sizeof(LIST));
-			BlockInternet = TRUE; // on roule failure we lust block everything
-			// todo: log error
+			// SREV-345: WFP_LoadRules logs the allocation failure at the
+			// rule owner. This refresh path owns fail-closed policy and
+			// cleanup of any partially loaded rule list.
+			BlockInternet = TRUE;
 		}
 		
 		BlockLoopback = Process_GetConf_bool(proc, L"BlockLocalLoop", FALSE);
@@ -876,10 +1170,12 @@ void WFP_classify(
 		UINT16 remote_port = inFixedValues->incomingValue[remotePortIndex].value.uint16;
 
 
-		BOOLEAN log = FALSE;
 		BOOLEAN block = FALSE;
+		BOOLEAN log = FALSE;
 		BOOLEAN noloop = FALSE;
 		BOOLEAN isloopback = FALSE;
+		BOOLEAN send = (filter->filterId == WFP_send_filter_id_v4) || (filter->filterId == WFP_send_filter_id_v6);
+		BOOLEAN v6 = (filter->filterId == WFP_send_filter_id_v6) || (filter->filterId == WFP_recv_filter_id_v6);
 
 
 		KIRQL irql; 
@@ -908,55 +1204,11 @@ void WFP_classify(
 				block = NetFw_BlockTraffic(&wfp_proc->NetFwRules, &remote_ip, remote_port, protocol);
 			}
 		}
-    
+
 		KeReleaseSpinLock(&WFP_MapLock, irql);
 
-		// TODO: Fix-Me, no ETW logging for now, we are here at DISPATCH_LEVEL but Session_MonitorPut is using pagable memory,
-		// we need either to create a logging proxy using non-paged pool, or change the tracking mechanism to use non-paged pool itself.
-        /*if (log){
-
-			BOOLEAN send = (filter->filterId == WFP_send_filter_id_v4) || (filter->filterId == WFP_send_filter_id_v6);
-			BOOLEAN v6 = (filter->filterId == WFP_send_filter_id_v6) || (filter->filterId == WFP_recv_filter_id_v6);
-
-			
-			//RtlStringCbPrintfW at DISPATCH_LEVEL or higher can cause a BSOD, 
-			//the issue is with accessing unicode tables, which may be paged out.
-
-			//The documentation for KdPrint() states it this way:
-
-			//<wdk>
-			//Format
-			//Specifies a pointer to the format string to print. The Format string
-			//supports all the printf-style formatting codes. However, the Unicode format
-			//codes (%C, %S, %lc, %ls, %wc, %ws, and %wZ) can only be used with IRQL =
-			//PASSIVE_LEVEL.
-			//</wdk>
-
-			//RtlStringCbPrintfA is technically also not permitted so a better solution needs to be found
-			
-
-			char trace_strA[256];
-			if (v6) {
-				RtlStringCbPrintfA(trace_strA, sizeof(trace_strA), "%s Network Traffic; Port: %u; Prot: %u; IPv6: %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x", 
-					send ? "Outgoing " : "Incoming ", remote_port, protocol,
-					remote_ip.Data[0], remote_ip.Data[1], remote_ip.Data[2], remote_ip.Data[3], remote_ip.Data[4], remote_ip.Data[5], remote_ip.Data[6], remote_ip.Data[7],
-					remote_ip.Data[8], remote_ip.Data[9], remote_ip.Data[10], remote_ip.Data[11], remote_ip.Data[12], remote_ip.Data[13], remote_ip.Data[14], remote_ip.Data[15]);
-			}
-			else {
-				RtlStringCbPrintfA(trace_strA, sizeof(trace_strA), "%s Network Traffic; Port: %u; Prot: %u; IPv4: %d.%d.%d.%d", 
-					send ? "Outgoing " : "Incoming ", remote_port, protocol,
-					remote_ip.Data[12], remote_ip.Data[13], remote_ip.Data[14], remote_ip.Data[15]);
-			}
-
-			WCHAR trace_str[256];
-			char* cptr = trace_strA;
-			WCHAR* wptr = trace_str;
-			while (*cptr != '\0')
-				*wptr++ = *cptr++;
-			*wptr = L'\0';
-
-            Session_MonitorPut(MONITOR_NETFW | (block ? MONITOR_DENY : MONITOR_OPEN), trace_str, PsGetCurrentProcessId());
-        }*/
+		if (log)
+			WFP_TraceEnqueueFromClassify(processId, send, v6, &remote_ip, remote_port, (UCHAR)protocol, block);
 
 		if (block) {
 

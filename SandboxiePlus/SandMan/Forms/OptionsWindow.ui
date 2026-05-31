@@ -2564,6 +2564,13 @@ When enabled, sandboxed and unsandboxed launch paths parse these extensions.</st
                 </widget>
                </item>
                <item row="8" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkDisableBreakout">
+                 <property name="text">
+                  <string>Disable all Breakout rules for this sandbox</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="0" colspan="2">
                 <widget class="QCheckBox" name="chkBreakoutUseTargetDir">
                  <property name="toolTip">
                   <string>When breakout is allowed and no working directory is provided by the caller, use the target executable's folder as working directory.
@@ -2574,7 +2581,7 @@ This helps prevent ForceFolder rules from re-forcing breakout child processes th
                  </property>
                 </widget>
                </item>
-               <item row="9" column="0" colspan="2">
+               <item row="10" column="0" colspan="2">
                 <widget class="QLabel" name="lblBreakOut">
                  <property name="text">
                   <string>&lt;b&gt;&lt;font color='red'&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc...) extensions. Please review the security section for each option in the documentation before use.</string>
@@ -6467,6 +6474,7 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>btnBreakoutProg</tabstop>
   <tabstop>btnBreakoutDir</tabstop>
   <tabstop>chkShowBreakoutTmpl</tabstop>
+  <tabstop>chkDisableBreakout</tabstop>
   <tabstop>chkBreakoutUseTargetDir</tabstop>
   <tabstop>btnDelBreakout</tabstop>
   <tabstop>tabsStop</tabstop>

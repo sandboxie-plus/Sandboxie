@@ -44,6 +44,11 @@ static BOOLEAN Process_UseRuleExtensions(const WCHAR *boxname, const WCHAR *sett
     return Conf_Get_Boolean(boxname, L"UseForceBreakoutRuleExtensions", 0, FALSE);
 }
 
+static BOOLEAN Process_AreBreakoutRulesEnabled(const WCHAR *boxname)
+{
+    return Conf_Get_Boolean(boxname, L"DisableBreakoutRules", 0, FALSE) ? FALSE : TRUE;
+}
+
 
 //---------------------------------------------------------------------------
 // Structures and Types
@@ -1682,6 +1687,9 @@ _FX BOOLEAN Process_IsPrioritizedBreakoutMatch(
     BOOLEAN breakout_match = FALSE;
     LIST BreakoutProcess;
 
+    if (!box || !Process_AreBreakoutRulesEnabled(box->name))
+        return FALSE;
+
     List_Init(&BreakoutProcess);
 
     Conf_AdjustUseCount(TRUE);
@@ -1726,6 +1734,9 @@ static BOOLEAN Process_GetMatchedBreakoutPriority(
         *outPriority = -1;
 
     if (!box || !processName || !*processName || !path || !*path)
+        return FALSE;
+
+    if (!Process_AreBreakoutRulesEnabled(box->name))
         return FALSE;
 
     use_breakout_process_extensions = Process_UseRuleExtensions(box->name, L"BreakoutProcess");
@@ -2526,6 +2537,9 @@ static BOOLEAN Process_GetMatchedBreakoutTarget(
     if (!box || !processName || !*processName || !path || !*path)
         return FALSE;
 
+    if (!Process_AreBreakoutRulesEnabled(box->name))
+        return FALSE;
+
     use_breakout_process_extensions = Process_UseRuleExtensions(box->name, L"BreakoutProcess");
     use_breakout_folder_extensions = Process_UseRuleExtensions(box->name, L"BreakoutFolder");
 
@@ -2848,6 +2862,9 @@ static BOOLEAN Process_GetBreakoutDocumentPriority(
     if (!box || !docPath || !*docPath)
         return FALSE;
 
+    if (!Process_AreBreakoutRulesEnabled(box->name))
+        return FALSE;
+
     use_breakout_document_extensions = Process_UseRuleExtensions(box->name, L"BreakoutDocument");
 
     index = 0;
@@ -2920,6 +2937,9 @@ static BOOLEAN Process_GetBreakoutDocumentTarget(
         return FALSE;
 
     if (!box || !docPath || !*docPath)
+        return FALSE;
+
+    if (!Process_AreBreakoutRulesEnabled(box->name))
         return FALSE;
 
     use_breakout_document_extensions = Process_UseRuleExtensions(box->name, L"BreakoutDocument");
@@ -3552,6 +3572,9 @@ _FX BOOLEAN Process_IsBreakoutProcess(
     if (!NT_SUCCESS(status)) {
         return FALSE;
     }
+
+    if (!Process_AreBreakoutRulesEnabled(box->name))
+        goto finish;
 
     //
     // never break out a program from the Sandboxie home directory

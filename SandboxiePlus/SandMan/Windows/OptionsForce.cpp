@@ -674,6 +674,7 @@ void COptionsWindow::LoadForced()
 		ui.chkUseForceBreakoutRuleExtensions->setProperty(kRuleExtensionsPrevStateProperty, (int)ui.chkUseForceBreakoutRuleExtensions->checkState());
 	}
 	ui.chkBreakoutUseTargetDir->setChecked(m_pBox->GetBool("BreakoutUseTargetDir", false, true, true));
+	ui.chkDisableBreakout->setChecked(m_pBox->GetBool("DisableBreakoutRules", false));
 
 	LoadForcedTmpl();
 	LoadBreakoutTmpl();
@@ -891,6 +892,7 @@ void COptionsWindow::SaveForced()
 	WriteTextList("BreakoutFolderDisabled", BreakoutFolderDisabled);
 	WriteTextList("BreakoutDocument", BreakoutDocument);
 	WriteTextList("BreakoutDocumentDisabled", BreakoutDocumentDisabled);
+	WriteAdvancedCheck(ui.chkDisableBreakout, "DisableBreakoutRules", "y", "");
 	WriteAdvancedCheck(ui.chkBreakoutUseTargetDir, "BreakoutUseTargetDir", "y", "");
 	{
 		SB_STATUS status;

@@ -1126,6 +1126,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.btnBreakoutDoc, SIGNAL(clicked(bool)), this, SLOT(OnBreakoutDoc()));
 	connect(ui.btnDelBreakout, SIGNAL(clicked(bool)), this, SLOT(OnDelBreakout()));
 	connect(ui.chkShowBreakoutTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowBreakoutTmpl()));
+	connect(ui.chkDisableBreakout, SIGNAL(clicked(bool)), this, SLOT(OnForcedChanged()));
 	connect(ui.chkBreakoutUseTargetDir, SIGNAL(clicked(bool)), this, SLOT(OnForcedChanged()));
 	connect(ui.chkUseForceBreakoutRuleExtensions, SIGNAL(stateChanged(int)), this, SLOT(OnRuleExtensionsToggled(int)));
 	//ui.treeBreakout->setEditTriggers(QAbstractItemView::DoubleClicked);
@@ -2111,10 +2112,13 @@ QMap<int, QStringList> COptionsWindow::GetUsedRulePrioritySources(const QTreeWid
 		"BreakoutDocument", "BreakoutDocumentDisabled"
 	};
 
-	const QStringList crossBoxForceSettings = {
+	const QStringList crossBoxRuleSettings = {
 		"ForceProcess", "ForceProcessDisabled",
 		"ForceChildren", "ForceChildrenDisabled",
-		"ForceFolder", "ForceFolderDisabled"
+		"ForceFolder", "ForceFolderDisabled",
+		"BreakoutProcess", "BreakoutProcessDisabled",
+		"BreakoutFolder", "BreakoutFolderDisabled",
+		"BreakoutDocument", "BreakoutDocumentDisabled"
 	};
 
 	collectTree(ui.treeForced, tr("force"));
@@ -2146,7 +2150,7 @@ QMap<int, QStringList> COptionsWindow::GetUsedRulePrioritySources(const QTreeWid
 		}
 	}
 
-	// Include Force* priorities from other enabled boxes so conflicting values can be shown as unavailable.
+	// Include rule priorities from other enabled boxes so cross-box conflicts are shown as unavailable.
 	if (!m_Template) {
 		QMap<QString, CSandBoxPtr> allBoxes = m_pBox->GetAPI()->GetAllBoxes();
 		QString currentBoxName = m_pBox->GetName();
@@ -2160,7 +2164,7 @@ QMap<int, QStringList> COptionsWindow::GetUsedRulePrioritySources(const QTreeWid
 			if (otherBoxName.isEmpty() || otherBoxName.compare(currentBoxName, Qt::CaseInsensitive) == 0)
 				continue;
 
-			for (const QString& setting : crossBoxForceSettings) {
+			for (const QString& setting : crossBoxRuleSettings) {
 				collectRuleList(
 					pOtherBox->GetTextList(setting, false),
 					tr("box %1, %2, %3").arg(otherBoxName, settingKind(setting), settingState(setting)));

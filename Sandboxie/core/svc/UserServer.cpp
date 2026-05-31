@@ -126,6 +126,11 @@ static BOOLEAN UserServer_UseRuleExtensions(const WCHAR* boxname, const WCHAR* s
     return SbieApi_QueryConfBool(boxname, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
 }
 
+static BOOLEAN UserServer_AreBreakoutRulesEnabled(const WCHAR* boxname)
+{
+    return SbieApi_QueryConfBool(boxname, L"DisableBreakoutRules", FALSE) ? FALSE : TRUE;
+}
+
 static BOOLEAN UserServer_GetBreakoutDocumentTarget(
     const WCHAR* boxname, const WCHAR* imageName, const WCHAR* path, ULONG length,
     WCHAR* outTarget, ULONG outTargetCch, LONG* outPriority, BOOLEAN* outHasMatch, ULONG* outLevel)
@@ -1045,7 +1050,7 @@ static SBIE_POLICY_DECISION UserServer_ResolveDocumentPolicy(
     in.caller_forced_by_children = 0;
     in.source_equals_candidate_box = 1;
 
-    // Legacy default for BreakoutDocument (1.17.6): breakout wins when matched.
+    // Legacy default for BreakoutDocument (1.17.x): breakout wins when matched.
     // Priority-aware behavior overrides this default; equal-priority ties fall back
     // to this same legacy ordering.
     return SbiePolicy_ResolveWithPriorities(
@@ -1556,6 +1561,11 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
     //
     // check the BreakoutDocument list and execute if ok
     //
+
+    if (!UserServer_AreBreakoutRulesEnabled(boxname)) {
+        ((ULONG*)args->rpl_buf)[1] = USER_DOCUMENT_FALLBACK_TO_SOURCE;
+        return STATUS_SUCCESS;
+    }
 
     ULONG path_len = (ULONG)wcslen(path_buff);
     {

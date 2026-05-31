@@ -396,6 +396,9 @@ _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *create
     if (SH32_ShouldIgnoreBreakout())
         return FALSE;
 
+    if (SbieApi_QueryConfBool(NULL, L"DisableBreakoutRules", FALSE))
+        return FALSE;
+
     // Strip outer quotes if present (e.g. ShellExecuteEx lpFile can arrive quoted).
     if (len >= 2 && path[0] == L'"' && path[len - 1] == L'"') {
         path++;

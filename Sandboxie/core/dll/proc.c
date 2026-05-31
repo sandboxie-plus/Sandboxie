@@ -1500,6 +1500,7 @@ _FX BOOL Proc_CreateProcessInternalW(
     const WCHAR* lpArguments = NULL;
     BOOLEAN bd_fallback = FALSE;
     BOOLEAN use_rule_extensions = SbieApi_QueryConfBool(NULL, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
+    BOOLEAN breakout_rules_enabled = SbieApi_QueryConfBool(NULL, L"DisableBreakoutRules", FALSE) ? FALSE : TRUE;
     BOOLEAN has_explicit_executable = (lpApplicationName && *lpApplicationName) ? TRUE : FALSE;
     BOOLEAN has_breakout_document_arg = FALSE;
     const WCHAR *doc_start = NULL;
@@ -1531,7 +1532,7 @@ _FX BOOL Proc_CreateProcessInternalW(
             created_image = (slash && slash[1]) ? (slash + 1) : lpApplicationName;
         }
 
-        if (doc_len > 0 &&
+        if (breakout_rules_enabled && doc_len > 0 &&
             SbieDll_CheckPatternInList(doc_start, doc_len, NULL, L"BreakoutDocument"))
             has_breakout_document_arg = TRUE;
 
@@ -1540,7 +1541,7 @@ _FX BOOL Proc_CreateProcessInternalW(
     // Evaluate BreakoutDocument before breakout-candidate checks as well.
     // Keep legacy behavior when extensions are disabled (path pre-check gate),
     // and use unified UserServer arbitration when extensions are enabled.
-    if (!ignore_breakout && doc_start && doc_len > 0 && (use_rule_extensions || has_breakout_document_arg)) {
+    if (!ignore_breakout && breakout_rules_enabled && doc_start && doc_len > 0 && (use_rule_extensions || has_breakout_document_arg)) {
         if (SH32_BreakoutDocument(doc_start, doc_len, created_image, lpApplicationName)) {
             ok = TRUE;
             err = 0;
@@ -1553,7 +1554,7 @@ _FX BOOL Proc_CreateProcessInternalW(
             bd_fallback = TRUE;
     }
 
-    if (!ignore_breakout && lpApplicationName) {
+    if (!ignore_breakout && breakout_rules_enabled && lpApplicationName) {
         const WCHAR* lpProgram = wcsrchr(lpApplicationName, L'\\');
 
         // The service (ProcessServer.cpp) enforces ForceChildren-forced caller policy
@@ -1714,7 +1715,7 @@ _FX BOOL Proc_CreateProcessInternalW(
     // in the Templates.ini and check whenever explorer wants to start a process
     //
 
-    if (!ignore_breakout && lpCommandLine &&
+    if (!ignore_breakout && breakout_rules_enabled && lpCommandLine &&
             !TlsData->sh32_shell_execute &&
             Config_GetSettingsForImageName_bool(L"BreakoutDocumentProcess", FALSE)) {
 

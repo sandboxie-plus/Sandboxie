@@ -13,13 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - disabled rich text acceptance in 'Edit ini Section' [baa6968](https://github.com/sandboxie-plus/Sandboxie/commit/baa6968420e0ebd6b4cd93821cf019fcd0e0fc35)
 
 ### Fixed
-- fixed VMware Workstation Pro 26H1 QueryDosDevice crash [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
-
-
-## [1.17.7 / 5.72.7] - 2026-05-??
-
-### Fixed
 - fixed crash in VMware when running inside sandbox caused by NtQueryDirectoryObject hook returning non-null-terminated strings and uninitialized padding bytes in OBJECT_DIRECTORY_INFORMATION structures, which caused QueryDosDeviceW to crash in wcscmp [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
+- Add short-name fallback cache and heuristics [#5404](https://github.com/sandboxie-plus/Sandboxie/pull/5404)
+
 
 
 

@@ -351,7 +351,7 @@ std::wstring GetSecureTempPath()
 }
 
 bool CopyToSecureTemp(const std::wstring& src_dir, const std::wstring& secure_dir,
-                      std::shared_ptr<SFiles> pFiles, std::vector<HANDLE>& deleteOnCloseHandles)
+                      std::shared_ptr<SFiles> pFiles, std::vector<HANDLE>* pDeleteOnCloseHandles)
 {
 	// Copy all files to secure temp and verify hashes
 	for (auto I = pFiles->Map.begin(); I != pFiles->Map.end(); ++I) {
@@ -369,13 +369,14 @@ bool CopyToSecureTemp(const std::wstring& src_dir, const std::wstring& secure_di
 		if (!CopyFileW(src.c_str(), dest.c_str(), FALSE))
 			return false;
 
-		// Hash file and get handle with FILE_DELETE_ON_CLOSE in one atomic operation
-		// This eliminates TOCTOU window between hashing and opening with delete-on-close
+		// Hash file and optionally get handle with FILE_DELETE_ON_CLOSE
+		// When pDeleteOnCloseHandles is provided, this eliminates TOCTOU window between hashing and opening
 		// Handle allows read/execute but prevents writing
 		ULONG hashSize;
 		PVOID hash = NULL;
 		HANDLE hFile = INVALID_HANDLE_VALUE;
-		if (!NT_SUCCESS(MyHashFileEx((wchar_t*)dest.c_str(), &hash, &hashSize, FILE_DELETE_ON_CLOSE, &hFile))) {
+		ULONG createOptions = pDeleteOnCloseHandles ? FILE_DELETE_ON_CLOSE : 0;
+		if (!NT_SUCCESS(MyHashFileEx((wchar_t*)dest.c_str(), &hash, &hashSize, createOptions, &hFile))) {
 			DeleteFileW(dest.c_str());
 			return false;
 		}
@@ -385,25 +386,35 @@ bool CopyToSecureTemp(const std::wstring& src_dir, const std::wstring& secure_di
 
 		if (I->second->Hash != computedHash) {
 			// Tampering detected - hash mismatch
-			CloseHandle(hFile); // This will auto-delete the file
+			CloseHandle(hFile); // Will auto-delete if pDeleteOnCloseHandles
+			if (!pDeleteOnCloseHandles)
+				DeleteFileW(dest.c_str());
 			return false;
 		}
 
-		deleteOnCloseHandles.push_back(hFile);
+		if (pDeleteOnCloseHandles)
+			pDeleteOnCloseHandles->push_back(hFile);
+		else
+			CloseHandle(hFile); // Close handle, file remains for execution
 	}
 
 	return true;
 }
 
-void CloseSecureTemp(std::vector<HANDLE>& deleteOnCloseHandles, const std::wstring& secure_dir)
+void CloseSecureTemp(std::vector<HANDLE>* pDeleteOnCloseHandles, const std::wstring& secure_dir)
 {
-	// Close all delete-on-close handles - files are automatically deleted
-	for (auto h : deleteOnCloseHandles)
-		CloseHandle(h);
-	deleteOnCloseHandles.clear();
+	if (pDeleteOnCloseHandles && !pDeleteOnCloseHandles->empty()) {
+		// Close all delete-on-close handles - files are automatically deleted
+		for (auto h : *pDeleteOnCloseHandles)
+			CloseHandle(h);
+		pDeleteOnCloseHandles->clear();
 
-	// Remove empty secure temp directory
-	RemoveDirectoryW(secure_dir.c_str());
+		// Remove empty secure temp directory
+		RemoveDirectoryW(secure_dir.c_str());
+	} else {
+		// No delete-on-close handles - manually delete files and directory
+		DeleteDirectoryRecursively(secure_dir, L"", true);
+	}
 }
 
 //void CleanupSecureTempFolders()
@@ -796,8 +807,8 @@ int ApplyUpdate(std::wstring base_dir, std::wstring temp_dir, std::shared_ptr<SF
 
 	// Copy all pending files to secure temp with hash verification
 	std::vector<HANDLE> deleteOnCloseHandles;
-	if (!CopyToSecureTemp(temp_dir, secure_dir, pNewFiles, deleteOnCloseHandles)) {
-		CloseSecureTemp(deleteOnCloseHandles, secure_dir);
+	if (!CopyToSecureTemp(temp_dir, secure_dir, pNewFiles, &deleteOnCloseHandles)) {
+		CloseSecureTemp(&deleteOnCloseHandles, secure_dir);
 		std::wcout << L"Failed to secure update files - possible tampering detected" << std::endl;
 		return ERROR_INTERNAL;
 	}
@@ -837,7 +848,7 @@ int ApplyUpdate(std::wstring base_dir, std::wstring temp_dir, std::shared_ptr<SF
 	//std::wstring dest = base_dir + L"\\" _T(UPDATE_FILE);
 	//MoveFileExW(src.c_str(), dest.c_str(), MOVEFILE_REPLACE_EXISTING | MOVEFILE_COPY_ALLOWED);
 
-	CloseSecureTemp(deleteOnCloseHandles, secure_dir);
+	CloseSecureTemp(&deleteOnCloseHandles, secure_dir);
 	return Count;
 }
 
@@ -1083,9 +1094,9 @@ int InstallAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& temp_dir, c
 		for (auto I = pAddon->Map.begin(); I != pAddon->Map.end(); ++I)
 			I->second->State = SFile::ePending;
 
-		std::vector<HANDLE> deleteOnCloseHandles;
-		if (!CopyToSecureTemp(temp_dir + L"\\" + pAddon->Id, secure_dir, pAddon, deleteOnCloseHandles)) {
-			CloseSecureTemp(deleteOnCloseHandles, secure_base);
+		// Pass NULL - don't use FILE_DELETE_ON_CLOSE as CreateProcessW can't open files with pending delete
+		if (!CopyToSecureTemp(temp_dir + L"\\" + pAddon->Id, secure_dir, pAddon, NULL)) {
+			CloseSecureTemp(NULL, secure_base);
 			std::wcout << L"Failed to secure addon files - possible tampering detected" << std::endl;
 			return ERROR_BAD_ADDON2;
 		}
@@ -1112,6 +1123,10 @@ int InstallAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& temp_dir, c
 		STARTUPINFO si = { sizeof(si), 0 };
 		PROCESS_INFORMATION pi = { 0 };
 		std::wstring cmdLine = secure_dir + L"\\" + pAddon->Installer;
+		// .cmd and .bat files need to be run through cmd.exe
+		std::wstring ext = pAddon->Installer.length() > 4 ? pAddon->Installer.substr(pAddon->Installer.length() - 4) : L"";
+		if (_wcsicmp(ext.c_str(), L".cmd") == 0 || _wcsicmp(ext.c_str(), L".bat") == 0)
+			cmdLine = L"cmd.exe /c \"" + cmdLine + L"\"";
 		if (CreateProcessW(NULL, (wchar_t*)cmdLine.c_str(), NULL, NULL, FALSE, CREATE_UNICODE_ENVIRONMENT, modifiedEnvironment, NULL, &si, &pi))
 		{
 			while (WaitForSingleObject(pi.hProcess, 1000) == WAIT_TIMEOUT);
@@ -1129,7 +1144,7 @@ int InstallAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& temp_dir, c
 				ret = ERROR_BAD_ADDON2; // it means the installation failed
 		}
 
-		CloseSecureTemp(deleteOnCloseHandles, secure_base);
+		//CloseSecureTemp(NULL, secure_base);
 		return ret;
 	}
 

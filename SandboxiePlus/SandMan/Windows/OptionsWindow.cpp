@@ -1145,6 +1145,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.treeForced->header()->moveSection(2, 1);
 	ui.treeForced->header()->moveSection(3, 2);
 	ui.treeForced->header()->moveSection(1, 3);
+	ui.treeForced->setSortingEnabled(true);
+	ui.treeForced->sortByColumn(2, Qt::AscendingOrder);
 	ui.treeForced->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed | QAbstractItemView::SelectedClicked);
 
 	ui.treeBreakout->setColumnWidth(0, 130);
@@ -1157,6 +1159,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.treeBreakout->header()->moveSection(3, 2);
 	ui.treeBreakout->header()->moveSection(4, 3);
 	ui.treeBreakout->header()->moveSection(1, 4);
+	ui.treeBreakout->setSortingEnabled(true);
+	ui.treeBreakout->sortByColumn(2, Qt::AscendingOrder);
 	ui.treeBreakout->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed | QAbstractItemView::SelectedClicked);
 	//
 
@@ -1316,42 +1320,16 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		}
 	};
 
-	auto getLogicalOrderByVisual = [](QTreeWidget* tree) {
-		QList<int> order;
-		if (!tree || !tree->header())
-			return order;
-
-		QHeaderView* header = tree->header();
-		for (int visual = 0; visual < tree->columnCount(); ++visual) {
-			int logical = header->logicalIndex(visual);
-			if (logical >= 0)
-				order << logical;
-		}
-
-		return order;
-	};
-
 	const char* migrationKey = "OptionsWindow/RuleExtensionsColumnOrderMigrated_v1";
 	if (!theConf->GetBool(migrationKey, false)) {
-		bool migrated = false;
-		const bool hasForcedColumns = !theConf->GetBlob("OptionsWindow/" + ui.treeForced->objectName() + "_Columns").isEmpty();
-		const bool hasBreakoutColumns = !theConf->GetBlob("OptionsWindow/" + ui.treeBreakout->objectName() + "_Columns").isEmpty();
+		enforceColumnOrder(ui.treeForced, QList<int>() << 0 << 2 << 3 << 1);
+		enforceColumnOrder(ui.treeBreakout, QList<int>() << 0 << 2 << 3 << 4 << 1);
 
-		// Migrate if there is no saved state (clean config) or legacy default order.
-		if (!hasForcedColumns || getLogicalOrderByVisual(ui.treeForced) == (QList<int>() << 0 << 1 << 2 << 3)) {
-			enforceColumnOrder(ui.treeForced, QList<int>() << 0 << 2 << 3 << 1);
-			migrated = true;
-		}
+		ui.treeForced->sortByColumn(2, Qt::AscendingOrder);
+		ui.treeBreakout->sortByColumn(2, Qt::AscendingOrder);
 
-		if (!hasBreakoutColumns || getLogicalOrderByVisual(ui.treeBreakout) == (QList<int>() << 0 << 1 << 2 << 3 << 4)) {
-			enforceColumnOrder(ui.treeBreakout, QList<int>() << 0 << 2 << 3 << 4 << 1);
-			migrated = true;
-		}
-
-		if (migrated) {
-			theConf->SetBlob("OptionsWindow/" + ui.treeForced->objectName() + "_Columns", ui.treeForced->header()->saveState());
-			theConf->SetBlob("OptionsWindow/" + ui.treeBreakout->objectName() + "_Columns", ui.treeBreakout->header()->saveState());
-		}
+		theConf->SetBlob("OptionsWindow/" + ui.treeForced->objectName() + "_Columns", ui.treeForced->header()->saveState());
+		theConf->SetBlob("OptionsWindow/" + ui.treeBreakout->objectName() + "_Columns", ui.treeBreakout->header()->saveState());
 
 		theConf->SetValue(migrationKey, true);
 	}

@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.7 / 5.72.7] - 2026-05-??
+## [1.17.7 / 5.72.7] - 2026-06-??
 
 ### Added
 - added short-name fallback cache and heuristics [#5404](https://github.com/sandboxie-plus/Sandboxie/pull/5404)

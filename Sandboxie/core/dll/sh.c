@@ -389,9 +389,12 @@ static BOOLEAN SH32_ShouldIgnoreBreakout(void)
 }
 
 
-_FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *createdImage, const WCHAR *launchPath)
+_FX BOOL SH32_BreakoutDocumentEx(const WCHAR* path, ULONG len, const WCHAR *createdImage, const WCHAR *launchPath, ULONG *fallbackFlags)
 {
     BOOLEAN use_rule_extensions;
+
+    if (fallbackFlags)
+        *fallbackFlags = 0;
 
     if (SH32_ShouldIgnoreBreakout())
         return FALSE;
@@ -414,7 +417,7 @@ _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *create
 
     // With rule extensions enabled, always consult UserServer so image-scoped
     // BreakoutDocument rules and priority/TargetBox extensions follow one path.
-    // UserServer returns fallback=1 when no breakout match applies.
+    // UserServer returns fallback flags when no breakout launch applies.
 
     {
 
@@ -464,15 +467,22 @@ _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *create
             return FALSE;
         }
 
-        // rpl[1] is the fallback flag: non-zero means the service could not open
+        // rpl[1] contains fallback flags: non-zero means the service could not open
         // the document (e.g., target box invalid) and the DLL should fall back to
         // letting the normal path handle it (opens in source box).
-        BOOL fallback = (rpl[1] != 0);
+        ULONG fallback = rpl[1];
+        if (fallbackFlags)
+            *fallbackFlags = fallback;
         Dll_Free(rpl);
-        return !fallback;
+        return (fallback == 0);
     }
 
     //return FALSE;
+}
+
+_FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *createdImage, const WCHAR *launchPath)
+{
+    return SH32_BreakoutDocumentEx(path, len, createdImage, launchPath, NULL);
 }
 
 

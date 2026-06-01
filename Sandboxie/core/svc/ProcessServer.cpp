@@ -664,11 +664,10 @@ static void ProcessServer_GetBreakoutState(
                     current_priority = breakout_folder_priority;
                 }
 
-                if (breakout_document_has_priority != current_has_priority) {
-                    if (breakout_document_has_priority)
-                        breakout_winner = BREAKOUT_WIN_DOCUMENT;
-                }
-                else if (breakout_document_has_priority && breakout_document_priority < current_priority)
+                if (ProgramControl_IsPrimaryPreferredByPriority(
+                        breakout_document_has_priority ? breakout_document_priority : -1,
+                        current_has_priority ? current_priority : -1,
+                        1))
                     breakout_winner = BREAKOUT_WIN_DOCUMENT;
             }
         }

@@ -28,6 +28,7 @@
 #include "common/win32_ntddk.h"
 #include "advapi.h"
 #include "core/svc/ServiceWire.h"
+#include "core/svc/UserWire.h"
 #include "core/drv/api_defs.h"
 #include "msgs/msgs.h"
 #include "common/str_util.h"
@@ -1542,14 +1543,17 @@ _FX BOOL Proc_CreateProcessInternalW(
     // Keep legacy behavior when extensions are disabled (path pre-check gate),
     // and use unified UserServer arbitration when extensions are enabled.
     if (!ignore_breakout && breakout_rules_enabled && doc_start && doc_len > 0 && (use_rule_extensions || has_breakout_document_arg)) {
-        if (SH32_BreakoutDocument(doc_start, doc_len, created_image, lpApplicationName)) {
+        ULONG fallback_flags = 0;
+        if (SH32_BreakoutDocumentEx(doc_start, doc_len, created_image, lpApplicationName, &fallback_flags)) {
             ok = TRUE;
             err = 0;
             goto finish;
         }
-        // UserServer no-match/fallback must not suppress explicit executable
-        // breakout flow. For explicit executable launches, continue to
-        //  *UNBOXED* arbitration below.
+        if (fallback_flags & USER_DOCUMENT_FALLBACK_DENY_BREAKOUT)
+            bd_fallback = TRUE;
+        // UserServer no-match/fallback normally must not suppress explicit
+        // executable breakout flow. Host-missing document fallback is final:
+        // the document exists only in the source box, so do not try *UNBOXED*.
         if (!has_explicit_executable)
             bd_fallback = TRUE;
     }
@@ -3700,4 +3704,3 @@ _FX void Proc_RestartProcessOutOfPcaJob(void)
 
     ExitProcess(0);
 }
-

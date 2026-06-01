@@ -1021,6 +1021,9 @@ ULONG UserServer::StartWorker(ULONG session_id)
 
 static SBIE_POLICY_DECISION UserServer_ResolveDocumentPolicy(
     BOOLEAN breakout_has_target,
+    int breakout_process_match_input,
+    int breakout_folder_match_input,
+    int breakout_document_match_input,
     int force_process_match_input,
     int force_folder_match_input,
     BOOLEAN force_has_priority,
@@ -1034,29 +1037,29 @@ static SBIE_POLICY_DECISION UserServer_ResolveDocumentPolicy(
     memzero(&matches, sizeof(matches));
     memzero(&in, sizeof(in));
 
-    // force_process_match_input: set by caller based on whether the caller's image
-    // (the document handler that will be re-launched) matches any ForceProcess rule.
-    // force_folder_match_input: set by caller using the scope-aware ForceFolder check
-    // (UserServer_GetForceFolderPriority) so image-scoped rules are respected.
+    // force_process_match_input: set by caller based on whether the effective
+    // launch image matches any ForceProcess rule.
+    // force_folder_match_input: set by caller using the effective launch image
+    // scope so image-scoped rules are respected.
     matches.force_process_match = force_process_match_input;
     matches.force_folder_match = force_folder_match_input;
     matches.force_children_match = 0;
-    matches.breakout_process_match = 0;
-    matches.breakout_folder_match = 0;
-    matches.breakout_document_match = 1;
+    matches.breakout_process_match = breakout_process_match_input;
+    matches.breakout_folder_match = breakout_folder_match_input;
+    matches.breakout_document_match = breakout_document_match_input;
     matches.breakout_has_target = breakout_has_target ? 1 : 0;
 
     in.context_kind = SBIE_CTX_SANDBOXED_DOCUMENT_OPEN;
     in.caller_forced_by_children = 0;
     in.source_equals_candidate_box = 1;
 
-    // Legacy default for BreakoutDocument (1.17.x): breakout wins when matched.
-    // Priority-aware behavior overrides this default; equal-priority ties fall back
-    // to this same legacy ordering.
+    // Legacy default for BreakoutDocument (1.17.x): document breakout wins when
+    // matched. Handler-only BreakoutProcess/BreakoutFolder follows process-start
+    // priority behavior.
     return SbiePolicy_ResolveWithPriorities(
         &in,
         &matches,
-        TRUE,
+        breakout_document_match_input ? TRUE : FALSE,
         force_has_priority ? 1 : 0,
         force_priority,
         breakout_has_priority ? 1 : 0,
@@ -1517,10 +1520,6 @@ ULONG UserServer::OpenFile(WorkerArgs *args)
 //---------------------------------------------------------------------------
 
 
-// Fallback flag written to rpl_buf[1]: non-zero tells the DLL to fall back to
-// opening the document in the source box instead of treating the call as handled.
-#define USER_DOCUMENT_FALLBACK_TO_SOURCE 1
-
 ULONG UserServer::OpenDocument(WorkerArgs *args)
 {
     USER_SHELL_EXEC_REQ *req = (USER_SHELL_EXEC_REQ *)args->req_buf;
@@ -1540,7 +1539,7 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
         launchPath = UserServer_GetReqStringByOffset(req, args->req_len, req->LaunchPathOffset);
     effectiveLaunchPath = UserServer_GetValidatedLaunchPath(launchPath, createdImage);
 
-    // Always send two ULONGs: rpl_buf[0] = status, rpl_buf[1] = fallback flag.
+    // Always send two ULONGs: rpl_buf[0] = status, rpl_buf[1] = fallback flags.
     args->rpl_len = 2 * sizeof(ULONG);
     ((ULONG*)args->rpl_buf)[1] = 0;
 
@@ -1645,17 +1644,9 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
                 BOXNAME_COUNT);
         }
 
-        // Evaluate BreakoutDocument using caller/created/handler scopes. If nothing
-        // matches, fall back to normal source-box handling instead of surfacing
-        // SBIE2203 from an ACCESS_DENIED reply.
-        if (!bd_match) {
-            ((ULONG*)args->rpl_buf)[1] = USER_DOCUMENT_FALLBACK_TO_SOURCE;
-            return STATUS_SUCCESS;
-        }
-
         // ForceFolder: check if document's directory matches any ForceFolder rule.
         // Capture the match result for use as force_folder_match (scope-aware).
-        BOOLEAN ff_match = UserServer_GetForceFolderPriority(boxname, image, path_buff, path_len, &ff_priority);
+        BOOLEAN ff_match = UserServer_GetForceFolderPriority(boxname, policyImage, path_buff, path_len, &ff_priority);
 
         // ForceProcess/BreakoutProcess target the effective launch image.
         ULONG policyPathLen = (policyPath && policyPath[0]) ? (ULONG)wcslen(policyPath) : 0;
@@ -1679,13 +1670,13 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
                 ULONG handlerDirLen = (ULONG)(policySlash - policyPath);
                 bf_match = UserServer_GetBreakoutFolderPriority(
                     boxname,
-                    image,
+                    policyImage,
                     policyPath,
                     handlerDirLen,
                     &bf_priority);
                 bf_has_target = UserServer_GetBreakoutFolderTarget(
                     boxname,
-                    image,
+                    policyImage,
                     policyPath,
                     handlerDirLen,
                     bf_targetBox,
@@ -1728,13 +1719,18 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
             breakout_pf_targetBox,
             BOXNAME_COUNT);
 
+        if (!bd_match && !breakout_pf_match) {
+            ((ULONG*)args->rpl_buf)[1] = USER_DOCUMENT_FALLBACK_TO_SOURCE;
+            return STATUS_SUCCESS;
+        }
+
         // Arbitrate within the breakout side: BreakoutDocument vs the winning
         // process-start breakout rule (BreakoutProcess or BreakoutFolder).
         // No explicit priority (= -1) loses to any explicit priority (>= 0).
         // On equal priority, BreakoutDocument wins. Both unset priorities are
         // treated as an equal-priority tie.
-        BOOLEAN bd_wins = TRUE;
-        if (breakout_pf_match)
+        BOOLEAN bd_wins = bd_match ? TRUE : FALSE;
+        if (bd_match && breakout_pf_match)
             bd_wins = ProgramControl_IsPrimaryPreferredByPriority(bd_priority, breakout_pf_priority, 1) ? TRUE : FALSE;
 
         // The effective breakout priority for comparison against force rules.
@@ -1767,11 +1763,14 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
 
         // Default: breakout wins only when TargetBox is explicitly specified.
         // For BREAKOUT_UNBOXED (no TargetBox), ForceProcess/ForceFolder dominates
-        // unless BreakoutDocument has an explicit lower Priority=N to override it.
+        // unless breakout has an explicit lower Priority=N to override it.
         // has_target_effective and breakout_winner_priority reflect the breakout-side
         // winner across BreakoutDocument, BreakoutProcess, and BreakoutFolder.
         SBIE_POLICY_DECISION decision = UserServer_ResolveDocumentPolicy(
             has_target_effective,
+            bp_match ? 1 : 0,
+            bf_match ? 1 : 0,
+            bd_match ? 1 : 0,
             fp_match ? 1 : 0,        // force_process_match: handler image vs ForceProcess rules
             ff_match ? 1 : 0,        // force_folder_match: scope-aware result from GetForceFolderPriority
             force_has_priority,
@@ -1791,7 +1790,7 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
         // For box-only files (missing on host), breakout launch from the service
         // cannot resolve the document path. Fall back to source-box handling.
         if (UserServer_ShouldFallbackToSourceOnHostMissingPath(path_buff)) {
-            ((ULONG*)args->rpl_buf)[1] = USER_DOCUMENT_FALLBACK_TO_SOURCE;
+            ((ULONG*)args->rpl_buf)[1] = USER_DOCUMENT_FALLBACK_TO_SOURCE | USER_DOCUMENT_FALLBACK_DENY_BREAKOUT;
             return STATUS_SUCCESS;
         }
 
@@ -1935,4 +1934,3 @@ ULONG UserServer::GetProcessPathList(ULONG path_code,
 //
 //    return ret;
 //}
-

@@ -3203,8 +3203,8 @@ _FX BOX *Process_CheckForceProcess(
             Process_GetMatchedBreakoutPriority(box->box, name, folder_scope_name, path, &breakout_has_priority, &breakout_priority);
 
             // Also check BreakoutDocument rules against the document argument.
-            // Track whether BreakoutDocument won the priority contest so its
-            // TargetBox is only applied when it has the higher priority.
+            // Track whether BreakoutDocument won or tied the priority contest
+            // so its TargetBox owns this document-open path.
             BOOLEAN bd_contributed_priority = FALSE;
             if (docPath && *docPath) {
                 BOOLEAN bd_matched = FALSE;
@@ -3323,8 +3323,8 @@ _FX BOX *Process_CheckForceProcess(
             Process_GetMatchedBreakoutPriority(box->box, name, folder_scope_name, path, &breakout_has_priority, &breakout_priority);
 
             // Also check BreakoutDocument rules against the document argument.
-            // Track whether BreakoutDocument won the priority contest so its
-            // TargetBox is only applied when it has the higher priority.
+            // Track whether BreakoutDocument won or tied the priority contest
+            // so its TargetBox owns this document-open path.
             BOOLEAN bd_contributed_priority = FALSE;
             if (docPath && *docPath) {
                 BOOLEAN bd_matched = FALSE;
@@ -3364,10 +3364,9 @@ _FX BOX *Process_CheckForceProcess(
                 breakout_priority) ? TRUE : FALSE;
 
             if (effective_prioritize_breakout) {
-                has_target_override = Process_GetMatchedBreakoutTarget(box->box, name, folder_scope_name, path, target_box, BOXNAME_COUNT);
-                // Check BreakoutDocument for a target box only when it won
-                // the priority contest against BreakoutProcess rules.
-                if (!has_target_override && bd_contributed_priority && docPath && *docPath)
+                if (bd_contributed_priority && docPath && *docPath) {
+                    // BreakoutDocument won or tied the priority contest, so it owns
+                    // target resolution for this document-open path.
                     has_target_override = Process_GetBreakoutDocumentTargetBest(
                         box->box,
                         folder_scope_name,
@@ -3375,6 +3374,9 @@ _FX BOX *Process_CheckForceProcess(
                         docPath,
                         target_box,
                         BOXNAME_COUNT);
+                } else {
+                    has_target_override = Process_GetMatchedBreakoutTarget(box->box, name, folder_scope_name, path, target_box, BOXNAME_COUNT);
+                }
             }
 
             if (has_target_override) {

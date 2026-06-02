@@ -1875,6 +1875,42 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                                     }
                                 }
 
+                                if (!have_force_winner && BoxNameOrModelPid == 0 && source_use_rule_extensions) {
+                                    BOOLEAN source_breakout_has_target = FALSE;
+                                    WCHAR source_target_box[BOXNAME_COUNT] = { 0 };
+
+                                    ProcessServer_GetBreakoutState(
+                                        SourceBox,
+                                        CallerPid,
+                                        lpProgram + 1,
+                                        folderScopeImage,
+                                        lpApplicationName,
+                                        (ULONG)(lpProgram - lpApplicationName),
+                                        docPath,
+                                        docPathLen,
+                                        &host_path_known,
+                                        &host_path_result,
+                                        NULL,
+                                        NULL,
+                                        NULL,
+                                        &source_breakout_has_target,
+                                        source_target_box,
+                                        BOXNAME_COUNT,
+                                        NULL,
+                                        NULL);
+
+                                    if (source_breakout_has_target) {
+                                        if (!NT_SUCCESS(ProcessServer_IsBoxEnabledCached(source_target_box, sid, session_id, &box_enabled_cache)) ||
+                                                _wcsicmp(SourceBox, source_target_box) == 0) {
+                                            explicit_target_invalid = true;
+                                        }
+                                        else {
+                                            BoxNameOrModelPid = (LONG_PTR)boxname;
+                                            wcscpy(boxname, source_target_box);
+                                        }
+                                    }
+                                }
+
                                 if (have_force_winner) {
                                     if (winner_source_equals) {
 

@@ -26,6 +26,7 @@ struct SettingInfo {
 	QString description;
 	QMap<QString, QString> localizedDescriptions;
 	QString requirements;
+	QStringList completionItems;
 };
 
 class CIniHighlighter : public QSyntaxHighlighter
@@ -67,6 +68,7 @@ public:
 	static QString FindCaseCorrectedKey(const QString& wrongKey);
 	static bool IsValidKey(const QString& keyName);
 	static bool IsKeyHiddenFromPopup(const QString& keyName);
+	static bool ShouldHideCompletionCandidate(const QString& inputKey, const QString& candidateKey, char context);
 
 	static QHash<QString, QString> hideConfRules; // setting -> action
 	static QHash<QString, QString> hideConfExclusions; // setting -> action

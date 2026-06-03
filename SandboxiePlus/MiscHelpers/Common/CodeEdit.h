@@ -33,8 +33,8 @@ public:
 	const QFont& GetFont() const;
 
 	void SetCaseCorrectionCallback(std::function<QString(const QString&)> callback);
-	void SetCompletionFilterCallback(std::function<bool(const QString&)> callback);
-	void SetCaseCorrectionFilterCallback(std::function<bool(const QString&)> callback);
+	void SetCompletionFilterCallback(std::function<bool(const QString&, const QString&)> callback);
+	void SetCaseCorrectionFilterCallback(std::function<bool(const QString&, const QString&)> callback);
 	void SetPopupTooltipCallback(std::function<QString(const QString&)> tooltipCallback);
 
 	// Static autocompletion mode control (similar to tooltip mode)
@@ -168,9 +168,9 @@ private:
 	bool m_caseCorrectionInProgress;
 	bool m_completionInsertInProgress;
 
-	std::function<bool(const QString&)> m_completionFilterCallback;
-	std::function<bool(const QString&)> m_caseCorrectionFilterCallback;
-	bool ShouldHideKeyFromCompletion(const QString& keyName) const;
+	std::function<bool(const QString&, const QString&)> m_completionFilterCallback;
+	std::function<bool(const QString&, const QString&)> m_caseCorrectionFilterCallback;
+	bool ShouldHideKeyFromCompletion(const QString& keyName, const QString& activeInput = QString()) const;
 
 	std::function<QString(const QString&)> m_tooltipCallback;
 	

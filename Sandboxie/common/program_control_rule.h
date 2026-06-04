@@ -29,6 +29,9 @@
 #endif
 #include "my_version.h"
 
+#define PROGRAM_CONTROL_LONG_MAX 2147483647L
+#define PROGRAM_CONTROL_PRIORITY_MAX 9999L
+
 typedef int (*BreakoutMatchImageFn)(const WCHAR *pattern, const WCHAR *imageName, void *context);
 typedef void (*BreakoutAdjustRuleFn)(WCHAR *value, void *context);
 
@@ -263,9 +266,17 @@ static __inline int ProgramControl_ParseLong(const WCHAR *value, long *outValue)
         return 0;
 
     while (*value) {
+        long digit;
         if (*value < L'0' || *value > L'9')
             return 0;
-        result = (result * 10) + (long)(*value - L'0');
+        digit = (long)(*value - L'0');
+
+        if (result > PROGRAM_CONTROL_LONG_MAX / 10)
+            return 0;
+        if (result == PROGRAM_CONTROL_LONG_MAX / 10 && digit > (PROGRAM_CONTROL_LONG_MAX % 10))
+            return 0;
+
+        result = (result * 10) + digit;
         ++value;
     }
 
@@ -295,9 +306,17 @@ static __inline int ProgramControl_ParseLongSegment(const WCHAR *value, size_t v
 
     while (i < valueLen) {
         WCHAR ch = value[i];
+        long digit;
         if (ch < L'0' || ch > L'9')
             return 0;
-        result = (result * 10) + (long)(ch - L'0');
+        digit = (long)(ch - L'0');
+
+        if (result > PROGRAM_CONTROL_LONG_MAX / 10)
+            return 0;
+        if (result == PROGRAM_CONTROL_LONG_MAX / 10 && digit > (PROGRAM_CONTROL_LONG_MAX % 10))
+            return 0;
+
+        result = (result * 10) + digit;
         ++i;
     }
 
@@ -495,9 +514,9 @@ static __inline int ProgramControl_ParseRuleExtensionsInPlace(
             }
             else if (_wcsicmp(token, L"Priority") == 0) {
                 long prio = -1;
-                // User-configured Priority must be >= 0. Negative values are invalid.
+                // User-configured Priority must be 0..9999. Negative values are invalid.
                 // Keep -1 reserved as the internal "unspecified" sentinel.
-                if (ProgramControl_ParseLong(eq + 1, &prio) && prio >= 0) {
+                if (ProgramControl_ParseLong(eq + 1, &prio) && prio >= 0 && prio <= PROGRAM_CONTROL_PRIORITY_MAX) {
                     outRule->has_priority = 1;
                     outRule->priority = prio;
                 }

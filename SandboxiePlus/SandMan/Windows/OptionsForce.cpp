@@ -20,6 +20,7 @@ const int kRuleRecursiveColumn = 3;
 const int kRuleTargetBoxColumn = 4;
 const int kRuleOriginalRuleRole = Qt::UserRole + 10;
 const int kRuleActualTypeRole = Qt::UserRole + 11;
+const qlonglong kRulePriorityMax = 9999;
 
 struct RuleExtensionsUi
 {
@@ -90,6 +91,20 @@ static bool ParseLongValue(const QString& value, qlonglong* out)
 		return false;
 
 	*out = parsed;
+	return true;
+}
+
+static bool ParseRulePriorityValue(const QString& value, qlonglong* out)
+{
+	qlonglong parsed = -1;
+	if (!ParseLongValue(value, &parsed))
+		return false;
+
+	if (parsed < 0 || parsed > kRulePriorityMax)
+		return false;
+
+	if (out)
+		*out = parsed;
 	return true;
 }
 
@@ -483,8 +498,11 @@ static RuleExtensionsUi ParseRuleExtensionsForUi(const QString& rule)
 
 		if (key.compare("TargetBox", Qt::CaseInsensitive) == 0 && !value.isEmpty())
 			out.targetBox = value;
-		else if (key.compare("Priority", Qt::CaseInsensitive) == 0 && !value.isEmpty())
-			out.priority = value;
+		else if (key.compare("Priority", Qt::CaseInsensitive) == 0 && !value.isEmpty()) {
+			qlonglong priority = -1;
+			if (ParseRulePriorityValue(value, &priority))
+				out.priority = QString::number(priority);
+		}
 		else if (key.compare("Recursive", Qt::CaseInsensitive) == 0) {
 			if (value.isEmpty())
 				out.recursive = "y";
@@ -502,8 +520,10 @@ static void ApplyRuleExtensionsToItem(QTreeWidgetItem* pItem, bool breakoutTree,
 		return;
 
 	if (RuleTypeSupportsPriority(type)) {
-		pItem->setData(kRulePriorityColumn, Qt::UserRole, ext.priority);
-		pItem->setText(kRulePriorityColumn, FormatRuleDisplayValue(showValues, true, ext.priority));
+		qlonglong priority = -1;
+		QString priorityText = ParseRulePriorityValue(ext.priority, &priority) ? QString::number(priority) : QString();
+		pItem->setData(kRulePriorityColumn, Qt::UserRole, priorityText);
+		pItem->setText(kRulePriorityColumn, FormatRuleDisplayValue(showValues, true, priorityText));
 	}
 	else {
 		pItem->setData(kRulePriorityColumn, Qt::UserRole, QString());
@@ -590,7 +610,7 @@ static QString BuildRuleWithExtensionsFromItem(QTreeWidgetItem* pItem, bool brea
 		QString priority = pItem->data(kRulePriorityColumn, Qt::UserRole).toString().trimmed();
 		if (!priority.isEmpty() && priority != "-1") {
 			qlonglong value = -1;
-			if (ParseLongValue(priority, &value) && value >= 0)
+			if (ParseRulePriorityValue(priority, &value))
 				keptTokens.append("Priority=" + QString::number(value));
 		}
 	}

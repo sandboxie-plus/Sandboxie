@@ -19,6 +19,25 @@
 #include <QRegularExpressionValidator>
 #include <QStandardItemModel>
 
+static const int kRulePriorityMax = 9999;
+
+static bool IsValidRulePriorityValue(int value)
+{
+	return value >= 0 && value <= kRulePriorityMax;
+}
+
+static bool ParseRulePriorityValue(const QString& text, int* outValue)
+{
+	bool ok = false;
+	int value = text.trimmed().toInt(&ok);
+	if (!ok || !IsValidRulePriorityValue(value))
+		return false;
+
+	if (outValue)
+		*outValue = value;
+	return true;
+}
+
 static bool ParseRecursiveUiSpec(const QString& rawValue, QString* pDepthValue, bool* pAnchorFromLast, bool* pHasExplicitAnchor)
 {
 	QString value = rawValue.trimmed();
@@ -427,13 +446,13 @@ public:
 			for (int i = 0; i <= 99; ++i)
 				pBox->addItem(QString::number(i), QString::number(i));
 
-			QRegularExpression rx("^(?:-1|[0-9]+)$");
+			QRegularExpression rx("^(?:-1|[0-9]{1,4})$");
 			pBox->lineEdit()->setValidator(new QRegularExpressionValidator(rx, pBox));
 
 			QMap<int, QStringList> usedPrioritySources = m_pOptions->GetUsedRulePrioritySources(pItem);
 			QList<int> customPriorityValues;
 			for (auto it = usedPrioritySources.constBegin(); it != usedPrioritySources.constEnd(); ++it) {
-				if (it.key() > 99)
+				if (it.key() > 99 && it.key() <= kRulePriorityMax)
 					customPriorityValues.append(it.key());
 			}
 			std::sort(customPriorityValues.begin(), customPriorityValues.end());
@@ -573,7 +592,7 @@ public:
 				else {
 					bool ok = false;
 					qlonglong customValue = value.toLongLong(&ok);
-					if (ok && customValue >= 0 && pBox->findData(value) < 0)
+					if (ok && customValue >= 0 && customValue <= kRulePriorityMax && pBox->findData(value) < 0)
 						pBox->addItem(value, value);
 				}
 			}
@@ -630,6 +649,10 @@ public:
 			if (m_Column == 3) {
 				value = NormalizeRecursiveUiValue(value);
 			}
+			else if (m_Column == 2) {
+				int priority = -1;
+				value = ParseRulePriorityValue(value, &priority) ? QString::number(priority) : "-1";
+			}
 
 			// Empty value already signals no TargetBox extension
 
@@ -664,8 +687,10 @@ public:
 			return;
 
 		QString value = pEdit->text().trimmed();
-		if (m_Column == 2 && value.isEmpty())
-			value = "-1";
+		if (m_Column == 2) {
+			int priority = -1;
+			value = ParseRulePriorityValue(value, &priority) ? QString::number(priority) : "-1";
+		}
 		bool prev = m_pTree->blockSignals(true);
 		pItem->setText(index.column(), value);
 		m_pTree->blockSignals(prev);
@@ -2020,9 +2045,8 @@ QMap<int, QStringList> COptionsWindow::GetUsedRulePrioritySources(const QTreeWid
 				continue;
 
 			QString valueStr = part.mid(9).trimmed();
-			bool ok = false;
-			int value = valueStr.toInt(&ok);
-			if (!ok || value < 0)
+			int value = -1;
+			if (!ParseRulePriorityValue(valueStr, &value))
 				continue;
 
 			*outValue = value;
@@ -2063,9 +2087,8 @@ QMap<int, QStringList> COptionsWindow::GetUsedRulePrioritySources(const QTreeWid
 			if (text.isEmpty())
 				continue;
 
-			bool ok = false;
-			int value = text.toInt(&ok);
-			if (!ok || value < 0)
+			int value = -1;
+			if (!ParseRulePriorityValue(text, &value))
 				continue;
 
 			const QString state = (pItem->checkState(0) == Qt::Checked) ? tr("enabled") : tr("disabled");

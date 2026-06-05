@@ -197,6 +197,7 @@ void CBoxTransferDialog::LoadMultiArchiveContents(const QList<SImportBoxInfo>& b
 		pItem->setData(0, Qt::UserRole, box.ArchiveName); // original archive name
 		pItem->setData(0, Qt::UserRole + 1, box.SourceFile); // source file path
 		pItem->setData(0, Qt::UserRole + 2, box.Password); // password for this archive
+		pItem->setData(0, Qt::UserRole + 3, box.ImageSize); // image size for conflict detection
 
 		// Show source file name (not full path)
 		QString sourceFileName = Split2(box.SourceFile, "/", true).second;
@@ -300,6 +301,7 @@ QList<CBoxTransferDialog::SImportEntry> CBoxTransferDialog::GetImportEntries() c
 			entry.ImportName = pItem->text(1);
 			entry.SourceFile = pItem->data(0, Qt::UserRole + 1).toString();
 			entry.Password = pItem->data(0, Qt::UserRole + 2).toString();
+			entry.ImageSize = pItem->data(0, Qt::UserRole + 3).toULongLong();
 			entries.append(entry);
 		}
 	}
@@ -841,9 +843,10 @@ static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 struct SArchiveInfo {
 	QString Path;
 	QString Password;
+	quint64 ImageSize = 0;
 	QStringList BoxNames;
-	bool HasGlobalConfig;
-	bool IsSingleBox;
+	bool HasGlobalConfig = false;
+	bool IsSingleBox = false;
 };
 
 static bool ScanArchive(QWidget* parent, const QString& path, SArchiveInfo& info)
@@ -870,6 +873,7 @@ static bool ScanArchive(QWidget* parent, const QString& path, SArchiveInfo& info
 				continue;
 			}
 			info.Password = window.GetPassword();
+			info.ImageSize = window.GetImageSize();
 			break;
 		}
 	}
@@ -965,6 +969,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 			boxInfo.ArchiveName = boxName;
 			boxInfo.SourceFile = info.Path;
 			boxInfo.Password = info.Password;
+			boxInfo.ImageSize = info.ImageSize;
 			allBoxes.append(boxInfo);
 		}
 	}
@@ -1027,8 +1032,21 @@ QStringList ImportMultiBoxes(QWidget* parent)
 		}
 
 		CSandBoxPtr pBox = theAPI->GetBoxByName(entry.ImportName);
-		if (pBox)
+		if (pBox) {
+			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+
+			if (!entry.Password.isEmpty())
+			{
+				Status = pBoxEx->ImBoxCreate(entry.ImageSize / 1024, entry.Password);
+				if (Status.IsError()) {
+					Results.append(Status);
+					continue;
+				}
+				Status = pBoxEx->ImBoxMount(entry.Password, true, true);
+			}
+
 			boxRoots.insert(entry.ImportName, pBox->GetFileRoot());
+		}
 		validEntries.append(entry);
 	}
 

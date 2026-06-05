@@ -388,6 +388,67 @@ static BOOLEAN SH32_ShouldIgnoreBreakout(void)
     return FALSE;
 }
 
+static BOOLEAN SH32_TokenHasExecutableExtension(const WCHAR* token, ULONG token_len)
+{
+    const WCHAR* ext;
+
+    if (!token || token_len < 4)
+        return FALSE;
+
+    ext = token + token_len - 4;
+    return (_wcsnicmp(ext, L".exe", 4) == 0 ||
+            _wcsnicmp(ext, L".com", 4) == 0 ||
+            _wcsnicmp(ext, L".bat", 4) == 0 ||
+            _wcsnicmp(ext, L".cmd", 4) == 0) ? TRUE : FALSE;
+}
+
+static BOOLEAN SH32_ShouldSkipDocumentBreakoutPrecheck(const WCHAR* lpFile, const WCHAR* lpParameters)
+{
+    const WCHAR* token;
+    const WCHAR* token_end;
+    const WCHAR* args;
+    BOOLEAN has_args = FALSE;
+    ULONG token_len;
+
+    if (!lpFile || !*lpFile)
+        return FALSE;
+
+    token = lpFile;
+    while (*token == L' ' || *token == L'\t')
+        ++token;
+
+    if (*token == L'"') {
+        ++token;
+        token_end = wcschr(token, L'"');
+        if (!token_end)
+            return FALSE;
+
+        args = token_end + 1;
+        while (*args == L' ' || *args == L'\t')
+            ++args;
+        has_args = (*args != L'\0') ? TRUE : FALSE;
+    }
+    else {
+        token_end = token;
+        while (*token_end && *token_end != L' ' && *token_end != L'\t')
+            ++token_end;
+
+        args = token_end;
+        while (*args == L' ' || *args == L'\t')
+            ++args;
+        has_args = (*args != L'\0') ? TRUE : FALSE;
+    }
+
+    if (lpParameters && *lpParameters)
+        has_args = TRUE;
+
+    if (!has_args)
+        return FALSE;
+
+    token_len = (ULONG)(token_end - token);
+    return SH32_TokenHasExecutableExtension(token, token_len);
+}
+
 
 _FX BOOL SH32_BreakoutDocumentEx(const WCHAR* path, ULONG len, const WCHAR *createdImage, const WCHAR *launchPath, ULONG *fallbackFlags)
 {
@@ -508,7 +569,8 @@ _FX BOOL SH32_ShellExecuteExW(SHELLEXECUTEINFOW *lpExecInfo)
 
     if (lpExecInfo->lpFile) {
 
-        if (SH32_BreakoutDocument(lpExecInfo->lpFile, wcslen(lpExecInfo->lpFile), NULL, NULL))
+        if (!SH32_ShouldSkipDocumentBreakoutPrecheck(lpExecInfo->lpFile, lpExecInfo->lpParameters) &&
+                SH32_BreakoutDocument(lpExecInfo->lpFile, wcslen(lpExecInfo->lpFile), NULL, NULL))
             return TRUE;
     }
 
@@ -4040,5 +4102,3 @@ _FX void SH32_IShellWindows_Hook(REFCLSID rclsid, REFIID riid, void *pUnknown)
 
     SH32_ComRelease(pIsw);
 }
-
-

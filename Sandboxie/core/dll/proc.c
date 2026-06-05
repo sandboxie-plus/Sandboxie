@@ -152,6 +152,9 @@ static BOOLEAN Proc_CheckBreakoutProcessInList(
 static BOOLEAN Proc_CheckBreakoutFolderInList(
     const WCHAR *appPath, const WCHAR *boxname, BOOLEAN allowTargeted);
 
+static BOOLEAN Proc_CheckBreakoutDocumentInList(
+    const WCHAR *docPath, ULONG docPathLen, const WCHAR *imageName, const WCHAR *boxname);
+
 static BOOLEAN Proc_IsBreakoutCandidate(
     const WCHAR *appPath, const WCHAR *boxname, BOOLEAN allowTargeted);
 
@@ -178,6 +181,8 @@ static int Proc_BreakoutMatchImage(const WCHAR *pattern, const WCHAR *imageName,
 static void Proc_AdjustBreakoutProcessRule(WCHAR *value, void *context);
 
 static void Proc_AdjustBreakoutFolderRule(WCHAR *value, void *context);
+
+static void Proc_AdjustBreakoutDocumentRule(WCHAR *value, void *context);
 
 //static BOOLEAN Proc_IsProcessRunning(const WCHAR *ImageToFind);
 
@@ -876,6 +881,13 @@ static void Proc_AdjustBreakoutFolderRule(WCHAR *value, void *context)
         SbieDll_TranslateNtToDosPath(value);
 }
 
+static void Proc_AdjustBreakoutDocumentRule(WCHAR *value, void *context)
+{
+    (void)context;
+    if (value && *value != L'*')
+        SbieDll_TranslateNtToDosPath(value);
+}
+
 static BOOLEAN Proc_IsBreakoutCandidate(
     const WCHAR *appPath, const WCHAR *boxname, BOOLEAN allowTargeted)
 {
@@ -890,6 +902,36 @@ static BOOLEAN Proc_IsBreakoutCandidate(
 
     return (Proc_CheckBreakoutProcessInList(lpProgram + 1, appPath, boxname, allowTargeted)
         || Proc_CheckBreakoutFolderInList(appPath, boxname, allowTargeted));
+}
+
+static BOOLEAN Proc_CheckBreakoutDocumentInList(
+    const WCHAR *docPath, ULONG docPathLen, const WCHAR *imageName, const WCHAR *boxname)
+{
+    BOOLEAN use_rule_extensions;
+
+    if (!docPath || !*docPath || !imageName || !*imageName)
+        return FALSE;
+
+    use_rule_extensions = SbieApi_QueryConfBool(boxname, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
+
+    return ProgramControl_FindDocumentSettingMatch(
+        boxname,
+        L"BreakoutDocument",
+        imageName,
+        docPath,
+        docPathLen,
+        1,
+        use_rule_extensions ? 1 : 0,
+        Proc_BreakoutMatchImage,
+        NULL,
+        Proc_AdjustBreakoutDocumentRule,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        NULL,
+        NULL,
+        NULL) ? TRUE : FALSE;
 }
 
 static BOOLEAN Proc_ShouldIgnoreBreakout(void)
@@ -1507,6 +1549,7 @@ _FX BOOL Proc_CreateProcessInternalW(
     const WCHAR *doc_start = NULL;
     ULONG doc_len = 0;
     const WCHAR *created_image = NULL;
+    WCHAR created_image_buf[96] = { 0 };
     if (lpCommandLine)
         lpArguments = SbieDll_FindArgumentEnd(lpCommandLine);
 
@@ -1532,17 +1575,71 @@ _FX BOOL Proc_CreateProcessInternalW(
             const WCHAR *slash = wcsrchr(lpApplicationName, L'\\');
             created_image = (slash && slash[1]) ? (slash + 1) : lpApplicationName;
         }
+        else if (lpCommandLine && *lpCommandLine) {
+            const WCHAR *exe = lpCommandLine;
+            const WCHAR *exe_end = NULL;
+            const WCHAR *exe_base;
+            size_t exe_base_len;
+
+            while (*exe == L' ' || *exe == L'\t')
+                ++exe;
+
+            if (*exe == L'\"') {
+                ++exe;
+                exe_end = wcschr(exe, L'\"');
+                if (!exe_end)
+                    exe_end = wcschr(exe, L'\0');
+            }
+            else {
+                exe_end = exe;
+                while (*exe_end && *exe_end != L' ' && *exe_end != L'\t')
+                    ++exe_end;
+            }
+
+            exe_base = exe_end;
+            while (exe_base > exe && exe_base[-1] != L'\\' && exe_base[-1] != L'/')
+                --exe_base;
+
+            exe_base_len = (size_t)(exe_end - exe_base);
+            if (exe_base_len >= ARRAYSIZE(created_image_buf))
+                exe_base_len = ARRAYSIZE(created_image_buf) - 1;
+
+            if (exe_base_len > 0) {
+                wmemcpy(created_image_buf, exe_base, exe_base_len);
+                created_image_buf[exe_base_len] = L'\0';
+                created_image = created_image_buf;
+            }
+        }
 
         if (breakout_rules_enabled && doc_len > 0 &&
-            SbieDll_CheckPatternInList(doc_start, doc_len, NULL, L"BreakoutDocument"))
-            has_breakout_document_arg = TRUE;
+            doc_start[0] != L'-' && doc_start[0] != L'/') {
+            if (!use_rule_extensions) {
+                if (SbieDll_CheckPatternInList(doc_start, doc_len, NULL, L"BreakoutDocument"))
+                    has_breakout_document_arg = TRUE;
+            }
+            else if (created_image && Dll_BoxName) {
+                WCHAR *doc_match_path = Dll_Alloc((doc_len + 1) * sizeof(WCHAR));
+                if (doc_match_path) {
+                    wmemcpy(doc_match_path, doc_start, doc_len);
+                    doc_match_path[doc_len] = L'\0';
+
+                    if (Proc_CheckBreakoutDocumentInList(doc_match_path, doc_len, created_image, Dll_BoxName))
+                        has_breakout_document_arg = TRUE;
+
+                    Dll_Free(doc_match_path);
+                }
+            }
+        }
 
     }
 
     // Evaluate BreakoutDocument before breakout-candidate checks as well.
-    // Keep legacy behavior when extensions are disabled (path pre-check gate),
-    // and use unified UserServer arbitration when extensions are enabled.
-    if (!ignore_breakout && breakout_rules_enabled && doc_start && doc_len > 0 && (use_rule_extensions || has_breakout_document_arg)) {
+    // Shell-style document opens still use unified UserServer arbitration when
+    // extensions are enabled. Explicit executable launches enter this path only
+    // when the first argument matches a BreakoutDocument rule, otherwise normal
+    // options or operands would be misinterpreted as documents.
+    if (!ignore_breakout && breakout_rules_enabled && doc_start && doc_len > 0 &&
+            ((!has_explicit_executable && use_rule_extensions) || has_breakout_document_arg)) {
         ULONG fallback_flags = 0;
         if (SH32_BreakoutDocumentEx(doc_start, doc_len, created_image, lpApplicationName, &fallback_flags)) {
             ok = TRUE;

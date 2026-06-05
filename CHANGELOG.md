@@ -118,9 +118,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - keeps border frames and labels out of screenshots and screen recordings; defaults to `CoverBoxedWindows`
 - added border label width and taskbar clipping options
   - configurable via `BorderColor` label width and `BorderExcludeTaskbar`
+- added `CustomProcessCommandLine` rules to inject or remove command-line arguments for matching sandboxed processes using `Image`, `ProcessGroup`, and `SpecialImage` selectors
+  - Example: `CustomProcessCommandLine=Image=chrome.exe;Action=Insert;Params=--disable-background-networking`
 - added `UseFakeShellDispatch` option to provide synthetic `IShellDispatch` fallback (may fix some WebView2 issues)
   - can be disabled per process via `UseFakeShellDispatch=process,n`
 - added `Template_OnScreenKeyboard` (Windows 11) to fix On-Screen Keyboard freezes when used with sandboxed programs
+- added Delete V3 file/registry tracking (`UseFileDeleteV3`, `UseRegDeleteV3`) with the new `_v3.dat` + journal format, full escaping, and SandMan version selector support for empty boxes
+  - added Delete V3 tuning settings for journal/refresh/compaction behavior: `FileDeleteV3JournalMaxSizeKB`, `FileDeleteV3JournalMaxLines`, `FileDeleteV3JournalKeepOpenMs`, `FileDeleteV3RefreshDebounceMs`, `FileDeleteV3CompactionBusyWritesPerSec`, `FileDeleteV3CompactionBusyHoldMs`, `RegDeleteV3JournalMaxSizeKB`, `RegDeleteV3JournalMaxLines`, `RegDeleteV3JournalKeepOpenMs`, `RegDeleteV3RefreshDebounceMs`, `RegDeleteV3CompactionBusyWritesPerSec`, `RegDeleteV3CompactionBusyHoldMs`
 
 ### Changed
 - reduced constant GUI CPU usage by caching custom `BoxIcon` resolution in the sandbox model instead of reloading icon resources on refresh

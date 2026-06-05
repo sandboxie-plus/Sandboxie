@@ -2,6 +2,50 @@
 本项目的所有重要更改将在此文件中记录。
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
+## [1.17.7 / 5.72.7] - 2026-05-??
+
+### 变更
+- 禁用“编辑 ini 配置节”中的富文本接受功能 [baa6968](https://github.com/sandboxie-plus/Sandboxie/commit/baa6968420e0ebd6b4cd93821cf019fcd0e0fc35)
+
+### 修复
+- 修复 VMware Workstation Pro 26H1 的 QueryDosDevice 崩溃问题 [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
+
+
+## [1.17.7 / 5.72.7] - 2026-05-??
+
+### 修复
+- 修复 VMware 在沙箱内运行时的崩溃问题，该问题由 NtQueryDirectoryObject 钩子返回未以空字符结尾的字符串，以及 OBJECT_DIRECTORY_INFORMATION 结构中存在未初始化的填充字节导致，从而使 QueryDosDeviceW 在 wcscmp 中崩溃 [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
+
+
+## [1.17.6 / 5.72.6] - 2026-05-17
+
+### 新增
+- 当提权至管理员权限运行时，会在主窗口标题中新增“(Administrator)”标识
+
+### 变更
+- 改进沙盒导入/导出行为 [#5362](https://github.com/sandboxie-plus/Sandboxie/issues/5362)
+- 更改导出/导入格式，改为将沙盒配置保存为带有 `[BoxName]` 节标题的 `BoxName.ini`，而不是 `BoxName/BoxConfig.ini`
+  - 为保持向后兼容，导入功能同时支持旧格式和新格式
+  - 新格式与便携沙盒 1:1 兼容，可直接解压导出的归档并将其中的沙盒作为便携沙盒添加
+
+### 修复
+- 修复安全问题 ID-40：APC 注入漏洞
+- 修复使用自定义标题栏的应用程序（如 Delphi VCL）引起 DWM 过高占用 CPU 的问题
+
+
+## [1.17.5 / 5.72.5] - 2026-05-02
+
+### 新增
+- 新增针对 SBIE2205 OpenDesktop 请求默认桌面时的问题的解决方法
+
+### 修复
+- 修复 Epic Games 无法启动的问题 [#5281](https://github.com/sandboxie-plus/Sandboxie/issues/5281) [#5303](https://github.com/sandboxie-plus/Sandboxie/issues/5303) [#5344](https://github.com/sandboxie-plus/Sandboxie/pull/5344)
+- 修复自 1.17.3 起重命名沙盒失败并提示“The parameter is incorrect”的问题，该问题由新的 CIniFile::AddValue 中 ContainsCRLF 检查拒绝多行节内容导致
+- 修复沙盒成功重命名后，在 UI 界面中无法重新选择已重命名沙盒的问题
+- 修复在 `OpenWinClass=*` 下沙盒应用托盘图标不显示的问题；现通过代理 `Shell_NotifyIcon` 解决，可使用 `UseShellNotifyIconProxy` 禁用（默认启用，支持 `process` 和 `!process` 选择器）
+- 修复对 WS_EX_TOPMOST 扩展样式的跟踪，检测置顶状态变化，并根据情况使用合适的 HWND_TOPMOST 或 HWND_TOP 排序，确保最顶层状态变化时边框可见性和 Z 轴顺序正确 [#5358](https://github.com/sandboxie-plus/Sandboxie/issues/5358)
+
+
 ## [1.17.4 / 5.72.4] - 2026-04-12
 
 ### 新增
@@ -60,18 +104,18 @@
 - 修复了复制后的沙箱未保留原有的沙箱分组归属问题
 - 修复了在分组下双击空路径/命令行导致崩溃的问题 [#5253](https://github.com/sandboxie-plus/Sandboxie/pull/5253)
 - 修复了精简托盘沙箱列表对于沙箱名称过长的裁切问题，现根据字体度量为每项精确计算宽度，并可在任意 DPI 正确缩放 [#5254](https://github.com/sandboxie-plus/Sandboxie/pull/5254)
-- 修复了 `SbieDll` 中 WOW64 注册表视图在开启相对键时的继承问题，父级 `KEY_WOW64_32KEY/KEY_WOW64_64KEY` 语义跨 `NtOpenKey`/`NtCreateKey` 保持一致 [#5171](https://github.com/sandboxie-plus/Sandboxie/issue/7171) [#5244](https://github.com/sandboxie-plus/Sandboxie/pull/5244)
+- 修复了 `SbieDll` 中 WOW64 注册表视图在开启相对键时的继承问题，父级 `KEY_WOW64_32KEY/KEY_WOW64_64KEY` 语义跨 `NtOpenKey`/`NtCreateKey` 保持一致 [#5171](https://github.com/sandboxie-plus/Sandboxie/issues/5171) [#5244](https://github.com/sandboxie-plus/Sandboxie/pull/5244)
 - 修复了在 `ScanStartMenu` 中的句柄泄漏：`IShellLinkW` 和 `IPersistFile` COM 接口在 `ResolveShortcut` 中未释放，导致每个被扫描的 `.lnk` 快捷方式均常驻句柄（文件、注册表、图标）；现以 `CComPtr` 替换原始指针确保各类退出路径均能调用 `Release()`
 - 修复 `ClosedClsid` 与 `ClosedRT` 设置的解析逻辑 [#5263](https://github.com/sandboxie-plus/Sandboxie/pull/5263)
-- 修复安全问题 ID-32：EditPassword 哈希熵丢失，新设置的密码将使用加盐 SHA256 并 base64 编码
+- 修复安全问题 ID-32：EditPassword 哈希熵丢失，新设置的密码将使用加盐 SHA-256 并以 Base64 编码
   - 注：此修复仅对新设置的密码生效，现有密码仍为弱加密
-- 修复本地拒绝服务（DoS）漏洞，可被沙箱进程利用，CVE-2026-32603（由 sammy12342 报告）
-- 修复 Sandboxie-Plus 通过 INI CRLF 注入绕过 EditAdminOnly 的问题（由 sammy12342 报告）
-- 修复 GetRawInputDeviceInfoSlave 相关问题（由 sammy12342 报告）
-- 修复 RunSbieCtrl 相关问题（由 Yanchon918s 报告）
-- 修复 ProcessServer 处理器中的名称校验（由 Yanchon918s 报告）
-- 修复 NamedPipeServer 参数校验（由 Yanchon918s）
-- 修复更新程序的文件完整性问题（由 sammy12342 报告）
+- 修复安全问题 ID-33：可被沙箱进程利用的本地拒绝服务（DoS）漏洞 CVE-2026-32603（由 sammy12342 报告）
+- 修复安全问题 ID-34：Sandboxie-Plus 通过 INI CRLF 注入绕过 EditAdminOnly 的问题 CVE-2026-34458（由 sammy12342 报告）
+- 修复安全问题 ID-35：GetRawInputDeviceInfoSlave 相关问题 CVE-2026-34459（由 sammy12342 报告）
+- 修复安全问题 ID-36：RunSbieCtrl 相关问题 CVE-2026-34461（由 Yanchon918s 报告）
+- 修复安全问题 ID-37：ProcessServer 处理器中的名称校验问题 CVE-2026-34462（由 Yanchon918s 报告）
+- 修复安全问题 ID-38：NamedPipeServer 参数校验问题 CVE-2026-34464（由 Yanchon918s 报告）
+- 修复安全问题 ID-39：通过 UpdUtil 附加组件安装中的 TOCTOU 实现本地权限提升 CVE-2026-34596（由 sammy12342 报告）
 
 
 ## [1.17.2 / 5.72.2] - 2026-02-18
@@ -134,8 +178,24 @@
 
 ## [1.16.9 / 5.71.9] - 2026-01-02
 
+### 新增
+- 新增书面挪威语翻译 [#5141](https://github.com/sandboxie-plus/Sandboxie/issues/5141)（感谢 divinity76）
+- 用户界面：高亮上次使用的沙盒 [#5054](https://github.com/sandboxie-plus/Sandboxie/issues/5054)
+
+### 变更
+- 在默认 COM 模板中新增 `ClosedClsid={9BA05972-F6A8-11CF-A442-00A0C90A8F39}`，用于阻止 ShellWindows
+
 ### 修复
 - 修复与 Thunderbird 146 的不兼容问题
+- 修复未启用“较低机密性模板”时，机密沙盒中没有声音的问题
+- 修复代理测试器的问题（在非英文 Windows 上会因 ping.exe 本地化而失败）
+- 修复 WinMerge 因注册表读取问题持续冻结的问题 [#5122](https://github.com/sandboxie-plus/Sandboxie/issues/5122)
+- 修复在 Sandboxie 下运行 Firefox 会导致事件查看器中出现 AppModel-Runtime 错误的问题 [#5135](https://github.com/sandboxie-plus/Sandboxie/issues/5135)
+- 修复 Tor Browser 标签页在最高安全级别下崩溃的问题 [#5116](https://github.com/sandboxie-plus/Sandboxie/issues/5116)
+- 修复 Chrome Portable 窗口工具提示卡住的问题 [#5051](https://github.com/sandboxie-plus/Sandboxie/issues/5051)
+- 修复 Windows Server 2022 上高负载 GPU 进程创建期间 SbieDrv.sys 中的蓝屏死机（0x50）问题 [#5149](https://github.com/sandboxie-plus/Sandboxie/issues/5149)
+- 修复 OfficeClickToRun.exe 总是崩溃，导致 WINWORD.EXE 无法正常工作的问题 [#5153](https://github.com/sandboxie-plus/Sandboxie/issues/5153)
+- 修复卸载/删除仅安装在沙盒环境中的软件时长时间卡顿的问题 [#5028](https://github.com/sandboxie-plus/Sandboxie/issues/5028)
 
 
 
@@ -384,7 +444,7 @@
 - 修复了删除内容消息框是否应始终在最上方的问题 [#4673](https://github.com/sandboxie-plus/Sandboxie/issues/4673)
 
 
-## [1.15.9 / 5.70.9] - 2025-03-??
+## [1.15.9 / 5.70.9] - 2025-04-02
 
 ### 新增
 - 复制沙箱，并从 UI 中获取内容 [#4542](https://github.com/sandboxie-plus/Sandboxie/issues/4542)

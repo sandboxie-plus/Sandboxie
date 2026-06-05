@@ -25,6 +25,7 @@ public:
 		QString ArchiveName;    // Original name in archive
 		QString SourceFile;     // Source archive file path
 		QString Password;       // Password for this archive (if encrypted)
+		quint64 ImageSize = 0;	// Size of the box image (for conflict detection)
 	};
 	void LoadMultiArchiveContents(const QList<SImportBoxInfo>& boxes, bool hasGlobalConfig);
 
@@ -41,6 +42,7 @@ public:
 		QString ImportName;     // Name to import as
 		QString SourceFile;     // Source archive file path
 		QString Password;       // Password for this archive
+		quint64 ImageSize = 0;	// Size of the box image (for conflict detection)
 	};
 	QList<SImportEntry> GetImportEntries() const;
 

@@ -191,7 +191,8 @@ static BOOLEAN Process_GetBreakoutDocumentPriority(
 static BOOLEAN Process_GetBreakoutDocumentTarget(
     BOX *box, const WCHAR *scopeName, const WCHAR *docPath,
     WCHAR *outTarget, ULONG outTargetCch,
-    BOOLEAN *outHasPriority, LONG *outPriority);
+    BOOLEAN *outHasTarget, BOOLEAN *outHasPriority, LONG *outPriority,
+    ULONG *outLevel);
 
 static void Process_GetBreakoutDocumentPriorityBest(
     BOX *box,
@@ -2924,13 +2925,16 @@ static BOOLEAN Process_GetBreakoutDocumentPriority(
 static BOOLEAN Process_GetBreakoutDocumentTarget(
     BOX *box, const WCHAR *scopeName, const WCHAR *docPath,
     WCHAR *outTarget, ULONG outTargetCch,
-    BOOLEAN *outHasPriority, LONG *outPriority)
+    BOOLEAN *outHasTarget, BOOLEAN *outHasPriority, LONG *outPriority,
+    ULONG *outLevel)
 {
     const WCHAR *value;
     ULONG index;
     BOOLEAN hasMatch = FALSE;
+    BOOLEAN bestHasTarget = FALSE;
     BOOLEAN bestHasPriority = FALSE;
     LONG bestPriority = -1;
+    ULONG bestLevel = (ULONG)-1;
     BOOLEAN use_breakout_document_extensions;
 
     if (!outTarget || outTargetCch == 0)
@@ -2945,16 +2949,21 @@ static BOOLEAN Process_GetBreakoutDocumentTarget(
     use_breakout_document_extensions = Process_UseRuleExtensions(box->name, L"BreakoutDocument");
 
     outTarget[0] = L'\0';
+    if (outHasTarget)
+        *outHasTarget = FALSE;
     if (outHasPriority)
         *outHasPriority = FALSE;
     if (outPriority)
         *outPriority = -1;
+    if (outLevel)
+        *outLevel = (ULONG)-1;
 
     index = 0;
     while (1) {
         WCHAR *ruleCopy;
         WCHAR *rule;
         SBIE_NORMALIZED_RULE normalized;
+        ULONG level = (ULONG)-1;
 
         value = Conf_Get(box->name, L"BreakoutDocument", index);
         if (!value)
@@ -2966,8 +2975,10 @@ static BOOLEAN Process_GetBreakoutDocumentTarget(
             continue;
 
         rule = scopeName
-            ? ProgramControl_MatchImageScopeAndGetValue(ruleCopy, scopeName, Process_BreakoutMatchImage, box)
+            ? ProgramControl_MatchImageScopeAndGetValueEx(ruleCopy, scopeName, Process_BreakoutMatchImage, box, &level)
             : ruleCopy;
+        if (!scopeName)
+            level = 2;
         if (!rule) {
             Mem_FreeString(ruleCopy);
             continue;
@@ -2978,23 +2989,27 @@ static BOOLEAN Process_GetBreakoutDocumentTarget(
             continue;
         }
 
-        if (!normalized.has_target_box || !normalized.target_box || !*normalized.target_box) {
-            Mem_FreeString(ruleCopy);
-            continue;
-        }
-
         if (Process_MatchBreakoutDocumentRule(box, normalized.base_rule, docPath)) {
-                if (ProgramControl_ShouldReplacePriorityWinner(
+            if (ProgramControl_ShouldReplaceTargetMatch(
                     hasMatch ? 1 : 0,
                     bestHasPriority ? 1 : 0,
                     bestPriority,
+                    bestLevel,
                     normalized.has_priority ? 1 : 0,
-                    normalized.priority)) {
-                wcsncpy(outTarget, normalized.target_box, outTargetCch - 1);
-                outTarget[outTargetCch - 1] = L'\0';
+                    normalized.priority,
+                    level)) {
                 hasMatch = TRUE;
+                bestHasTarget = (normalized.has_target_box && normalized.target_box && *normalized.target_box) ? TRUE : FALSE;
                 bestHasPriority = normalized.has_priority ? TRUE : FALSE;
-                bestPriority = normalized.priority;
+                bestPriority = normalized.has_priority ? normalized.priority : -1;
+                bestLevel = level;
+                if (bestHasTarget) {
+                    wcsncpy(outTarget, normalized.target_box, outTargetCch - 1);
+                    outTarget[outTargetCch - 1] = L'\0';
+                }
+                else {
+                    outTarget[0] = L'\0';
+                }
             }
         }
 
@@ -3002,10 +3017,14 @@ static BOOLEAN Process_GetBreakoutDocumentTarget(
     }
 
     if (hasMatch) {
+        if (outHasTarget)
+            *outHasTarget = bestHasTarget;
         if (outHasPriority)
             *outHasPriority = bestHasPriority;
         if (outPriority)
             *outPriority = bestHasPriority ? bestPriority : -1;
+        if (outLevel)
+            *outLevel = bestLevel;
     }
 
     return hasMatch;
@@ -3077,8 +3096,10 @@ static BOOLEAN Process_GetBreakoutDocumentTargetBest(
 {
     WCHAR bestTarget[BOXNAME_COUNT] = { 0 };
     BOOLEAN hasBest = FALSE;
+    BOOLEAN bestHasTarget = FALSE;
     BOOLEAN bestHasPriority = FALSE;
     LONG bestPriority = -1;
+    ULONG bestLevel = (ULONG)-1;
 
     if (!outTarget || outTargetCch == 0)
         return FALSE;
@@ -3089,49 +3110,68 @@ static BOOLEAN Process_GetBreakoutDocumentTargetBest(
         return FALSE;
 
     if (primaryScopeName && *primaryScopeName) {
+        BOOLEAN hasTarget1 = FALSE;
         BOOLEAN hasPriority1 = FALSE;
         LONG priority1 = -1;
+        ULONG level1 = (ULONG)-1;
         hasBest = Process_GetBreakoutDocumentTarget(
             box,
             primaryScopeName,
             docPath,
             bestTarget,
             BOXNAME_COUNT,
+            &hasTarget1,
             &hasPriority1,
-            &priority1);
+            &priority1,
+            &level1);
+        bestHasTarget = hasTarget1;
         bestHasPriority = hasPriority1;
         bestPriority = priority1;
+        bestLevel = level1;
     }
 
     if (secondaryScopeName && *secondaryScopeName &&
         (!primaryScopeName || _wcsicmp(primaryScopeName, secondaryScopeName) != 0)) {
         WCHAR target2[BOXNAME_COUNT] = { 0 };
+        BOOLEAN hasTarget2 = FALSE;
         BOOLEAN hasPriority2 = FALSE;
         LONG priority2 = -1;
+        ULONG level2 = (ULONG)-1;
         BOOLEAN has2 = Process_GetBreakoutDocumentTarget(
             box,
             secondaryScopeName,
             docPath,
             target2,
             BOXNAME_COUNT,
+            &hasTarget2,
             &hasPriority2,
-            &priority2);
+            &priority2,
+            &level2);
 
-        if (has2 && ProgramControl_ShouldReplacePriorityWinner(
+        if (has2 && ProgramControl_ShouldReplaceTargetMatch(
             hasBest ? 1 : 0,
             bestHasPriority ? 1 : 0,
             bestPriority,
+            bestLevel,
             hasPriority2 ? 1 : 0,
-            priority2)) {
+            priority2,
+            level2)) {
             hasBest = TRUE;
+            bestHasTarget = hasTarget2;
             bestHasPriority = hasPriority2;
             bestPriority = priority2;
-            wcsncpy(bestTarget, target2, BOXNAME_COUNT - 1);
-            bestTarget[BOXNAME_COUNT - 1] = L'\0';
+            bestLevel = level2;
+            if (hasTarget2) {
+                wcsncpy(bestTarget, target2, BOXNAME_COUNT - 1);
+                bestTarget[BOXNAME_COUNT - 1] = L'\0';
+            }
+            else {
+                bestTarget[0] = L'\0';
+            }
         }
     }
 
-    if (hasBest) {
+    if (hasBest && bestHasTarget) {
         wcsncpy(outTarget, bestTarget, outTargetCch - 1);
         outTarget[outTargetCch - 1] = L'\0';
         return TRUE;

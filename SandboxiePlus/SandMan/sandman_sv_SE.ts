@@ -604,7 +604,7 @@ utökas till 512-bitar med tillämpandet av Leet (L337) talmodifikationer, och �
         <translation>Tom</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="247"/>
+        <location filename="BoxTransfer.cpp" line="248"/>
         <source>Exists!</source>
         <translation>Existerar!</translation>
     </message>
@@ -613,101 +613,101 @@ utökas till 512-bitar med tillämpandet av Leet (L337) talmodifikationer, och �
         <translation type="vanished">Välj filnamn</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="585"/>
+        <location filename="BoxTransfer.cpp" line="587"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>7-Zip arkiv (*.7z);;Zip arkiv (*.zip)</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="568"/>
-        <location filename="BoxTransfer.cpp" line="578"/>
-        <location filename="BoxTransfer.cpp" line="591"/>
+        <location filename="BoxTransfer.cpp" line="570"/>
+        <location filename="BoxTransfer.cpp" line="580"/>
+        <location filename="BoxTransfer.cpp" line="593"/>
         <source>Exporting: %1</source>
         <translation>Exporterar: %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="251"/>
+        <location filename="BoxTransfer.cpp" line="252"/>
         <source>Duplicate!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="429"/>
-        <location filename="BoxTransfer.cpp" line="931"/>
+        <location filename="BoxTransfer.cpp" line="431"/>
+        <location filename="BoxTransfer.cpp" line="935"/>
         <source>7-Zip library is not available.</source>
         <translation>7-Zip bibliotek är inte tillgängligt.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="444"/>
+        <location filename="BoxTransfer.cpp" line="446"/>
         <source>Cannot export: Sandbox has running processes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="449"/>
+        <location filename="BoxTransfer.cpp" line="451"/>
         <source>Cannot export: Sandbox is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="468"/>
+        <location filename="BoxTransfer.cpp" line="470"/>
         <source>Nothing selected for export.</source>
         <translation>Inget valt för export.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="473"/>
+        <location filename="BoxTransfer.cpp" line="475"/>
         <source>No boxes selected for separate file export.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="515"/>
+        <location filename="BoxTransfer.cpp" line="517"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
         <translation>Sandlåda %1 har körandes processer. Skippa det?</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="549"/>
+        <location filename="BoxTransfer.cpp" line="551"/>
         <source>Select Export Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="583"/>
+        <location filename="BoxTransfer.cpp" line="585"/>
         <source>Export Sandbox</source>
         <translation type="unfinished">Exportera sandlåda</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="863"/>
+        <location filename="BoxTransfer.cpp" line="866"/>
         <source>Password for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="878"/>
+        <location filename="BoxTransfer.cpp" line="882"/>
         <source>Failed to open archive (%1): %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="936"/>
+        <location filename="BoxTransfer.cpp" line="940"/>
         <source>Select Archives</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="937"/>
+        <location filename="BoxTransfer.cpp" line="941"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="973"/>
+        <location filename="BoxTransfer.cpp" line="978"/>
         <source>The selected archives do not contain any sandbox data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="999"/>
+        <location filename="BoxTransfer.cpp" line="1004"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1065"/>
-        <location filename="BoxTransfer.cpp" line="1073"/>
+        <location filename="BoxTransfer.cpp" line="1083"/>
+        <location filename="BoxTransfer.cpp" line="1091"/>
         <source>Importing: %1</source>
         <translation>Importerar: %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="869"/>
+        <location filename="BoxTransfer.cpp" line="872"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>Lyckades inte öppna arkiv, fel lösenord?</translation>
     </message>
@@ -720,12 +720,12 @@ utökas till 512-bitar med tillämpandet av Leet (L337) talmodifikationer, och �
         <translation type="vanished">Arkivet innehåller inga sandlådedata.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="987"/>
+        <location filename="BoxTransfer.cpp" line="992"/>
         <source>Nothing selected for import.</source>
         <translation>Inget valt för import.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1014"/>
+        <location filename="BoxTransfer.cpp" line="1019"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
         <translation>Sandlåda &apos;%1&apos; existerar redan. Dess konfiguration kommer bli överskriven. Fortsätta?</translation>
     </message>

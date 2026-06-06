@@ -611,7 +611,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <translation>空白</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="247"/>
+        <location filename="BoxTransfer.cpp" line="248"/>
         <source>Exists!</source>
         <translation>已存在!</translation>
     </message>
@@ -620,101 +620,101 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <translation type="vanished">選擇檔名</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="585"/>
+        <location filename="BoxTransfer.cpp" line="587"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>7-Zip 封存檔 (*.7z);;Zip 封存檔 (*.zip)</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="568"/>
-        <location filename="BoxTransfer.cpp" line="578"/>
-        <location filename="BoxTransfer.cpp" line="591"/>
+        <location filename="BoxTransfer.cpp" line="570"/>
+        <location filename="BoxTransfer.cpp" line="580"/>
+        <location filename="BoxTransfer.cpp" line="593"/>
         <source>Exporting: %1</source>
         <translation>正在匯出: %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="251"/>
+        <location filename="BoxTransfer.cpp" line="252"/>
         <source>Duplicate!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="429"/>
-        <location filename="BoxTransfer.cpp" line="931"/>
+        <location filename="BoxTransfer.cpp" line="431"/>
+        <location filename="BoxTransfer.cpp" line="935"/>
         <source>7-Zip library is not available.</source>
         <translation>7-Zip 程式館不可用。</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="444"/>
+        <location filename="BoxTransfer.cpp" line="446"/>
         <source>Cannot export: Sandbox has running processes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="449"/>
+        <location filename="BoxTransfer.cpp" line="451"/>
         <source>Cannot export: Sandbox is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="468"/>
+        <location filename="BoxTransfer.cpp" line="470"/>
         <source>Nothing selected for export.</source>
         <translation>未選取匯出內容。</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="473"/>
+        <location filename="BoxTransfer.cpp" line="475"/>
         <source>No boxes selected for separate file export.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="515"/>
+        <location filename="BoxTransfer.cpp" line="517"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
         <translation>沙箱「%1」有運作中處理程序。是否跳過？</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="549"/>
+        <location filename="BoxTransfer.cpp" line="551"/>
         <source>Select Export Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="583"/>
+        <location filename="BoxTransfer.cpp" line="585"/>
         <source>Export Sandbox</source>
         <translation type="unfinished">匯出沙箱</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="863"/>
+        <location filename="BoxTransfer.cpp" line="866"/>
         <source>Password for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="878"/>
+        <location filename="BoxTransfer.cpp" line="882"/>
         <source>Failed to open archive (%1): %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="936"/>
+        <location filename="BoxTransfer.cpp" line="940"/>
         <source>Select Archives</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="937"/>
+        <location filename="BoxTransfer.cpp" line="941"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="973"/>
+        <location filename="BoxTransfer.cpp" line="978"/>
         <source>The selected archives do not contain any sandbox data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="999"/>
+        <location filename="BoxTransfer.cpp" line="1004"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1065"/>
-        <location filename="BoxTransfer.cpp" line="1073"/>
+        <location filename="BoxTransfer.cpp" line="1083"/>
+        <location filename="BoxTransfer.cpp" line="1091"/>
         <source>Importing: %1</source>
         <translation>正在匯入: %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="869"/>
+        <location filename="BoxTransfer.cpp" line="872"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>開啟封存檔失敗，密碼是否有誤？</translation>
     </message>
@@ -727,12 +727,12 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <translation type="vanished">此封存檔不包含任何沙箱資料。</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="987"/>
+        <location filename="BoxTransfer.cpp" line="992"/>
         <source>Nothing selected for import.</source>
         <translation>未選取匯入內容。</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1014"/>
+        <location filename="BoxTransfer.cpp" line="1019"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
         <translation>沙箱「%1」已存在。它的設定組態將會被覆蓋。是否繼續？</translation>
     </message>

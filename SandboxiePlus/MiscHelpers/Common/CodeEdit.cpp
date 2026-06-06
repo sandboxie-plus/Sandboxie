@@ -1264,7 +1264,8 @@ void CCodeEdit::UpdateCompletionModel(const QStringList& candidates)
 	QStringListModel* model = qobject_cast<QStringListModel*>(m_pCompleter->model());
 	// Rebuild the base model if a temporary fuzzy model is active.
 	if (model && model == m_tempFuzzyModel) {
-		// Stop tracking the temporary model before replacing it.
+		// Free the temporary model and force a full base model rebuild below.
+		delete m_tempFuzzyModel;
 		m_tempFuzzyModel = nullptr;
 		model = nullptr;
 	}

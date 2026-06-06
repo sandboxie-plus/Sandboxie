@@ -722,7 +722,9 @@ void CEditorSettingsWindow::SetRowEnabled(int row, bool enabled)
 	}
 }
 
-// Update dependency chain: Consent → AutoCompletion → FuzzyMatching
+// Update dependency chain: Consent -> AutoCompletion -> FuzzyMatching
+//
+// IniTooltips and PopupTooltips share a load-time default but remain independent.
 void CEditorSettingsWindow::UpdateDependencies()
 {
 	// Index 3: AutoCompletionConsent
@@ -734,6 +736,9 @@ void CEditorSettingsWindow::UpdateDependencies()
 	
 	// Update the previous consent state for next time
 	m_previousConsentState = consentEnabled;
+	
+	// Avoid redundant dependency updates while changing the checkbox.
+	chkEnableAutoCompletion->blockSignals(true);
 	
 	// If consent is disabled, disable AutoCompletion and set it to unchecked
 	if (!consentEnabled) {
@@ -747,6 +752,11 @@ void CEditorSettingsWindow::UpdateDependencies()
 		}
 		SetRowEnabled(4, true); // Enable AutoCompletion row
 	}
+	
+	chkEnableAutoCompletion->blockSignals(false);
+	
+	// Refresh highlighting because the change signal was blocked.
+	OnSettingChanged();
 	
 	// Recalculate autoCompletionEnabled AFTER potentially changing it above
 	bool autoCompletionEnabled = (chkEnableAutoCompletion->checkState() != Qt::Unchecked);

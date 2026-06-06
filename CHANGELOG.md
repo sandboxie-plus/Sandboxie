@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.7 / 5.72.7] - 2026-05-??
+## [1.17.7 / 5.72.7] - 2026-06-??
 
 ### Changed
 - disabled rich text acceptance in 'Edit ini Section' [baa6968](https://github.com/sandboxie-plus/Sandboxie/commit/baa6968420e0ebd6b4cd93821cf019fcd0e0fc35)
@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed addon setup not working introduced in a recent build
 - fixed Starting from version 1.17.4, using the 'Sandbox with Data Protection' type box causes PowerShell to wait indefinitely, while there is no such bug with other types. [#5408](https://github.com/sandboxie-plus/Sandboxie/issues/5408)
 - fixed Importing encrypted box no longer creates encrypted image in v1.17.6 [#5399](https://github.com/sandboxie-plus/Sandboxie/issues/5399)
+- fixed EditorSettings fuzzy matching not applied, showing few/no completion entries, and table cell highlighting not updating
 
 
 

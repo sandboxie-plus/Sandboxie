@@ -1689,11 +1689,8 @@ void COptionsWindow::OnEditorSettings()
 		
 		// Apply settings that don't have UI checkboxes in OptionsWindow
 		// These are managed via EditorSettings only
-		if (editorWindow.HasResetOccurred()) {
-			// If any reset occurred, update these settings from config
-			bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
-			m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
-		}
+		bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
+		m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
 		
 		// Always update autocompletion list regardless of reset status
 		UpdateAutoCompletion();

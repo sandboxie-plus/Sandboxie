@@ -1179,7 +1179,7 @@ Error: %1</source>
     <name>CCodeEdit</name>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1041"/>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2198"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2218"/>
         <source>Find</source>
         <translation>찾기</translation>
     </message>
@@ -1194,12 +1194,12 @@ Error: %1</source>
         <translation>이동</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1497"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1510"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
         <translation>%1을 의미하셨나요? (Ctrl+R 키를 눌러 교체하세요)</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2198"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2218"/>
         <source>F3: Find Next
 + Shift: Backward
 + Ctrl: Case Sensitively
@@ -1214,7 +1214,7 @@ Find String:</source>
 찾을 문자열:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2224"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2244"/>
         <source>Go to Line:</source>
         <translation>줄로 가기:</translation>
     </message>
@@ -3410,17 +3410,17 @@ Please select a folder which contains this file.</source>
         <translation>프로그램 입력:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1833"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1830"/>
         <source>Autocomplete Consent Required</source>
         <translation>자동 완성 동의 필요</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1835"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1832"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>자동 완성 기능을 사용하려면 사용자의 동의가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1837"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1834"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -3434,32 +3434,32 @@ Choose autocomplete mode:
 입력하는 동안 %1: 입력하는 동안 제안 사항을 자동으로 완료합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1845"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1842"/>
         <source>Manual</source>
         <translation>수동</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1846"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1843"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>%1로 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1848"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1845"/>
         <source>While Typing</source>
         <translation>타이핑하는 동안</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1849"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1846"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>입력하는 동안 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1852"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1849"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>자동 완성 제안을 비활성화합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1851"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1848"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>

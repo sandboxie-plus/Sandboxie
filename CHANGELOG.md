@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.17.7 / 5.72.7] - 2026-06-??
 
+### Added
+- added a Global Settings checkbox for `ForceBoxDocs` under Program Control > Force Process Options
+
 ### Changed
 - disabled rich text acceptance in 'Edit ini Section' [baa6968](https://github.com/sandboxie-plus/Sandboxie/commit/baa6968420e0ebd6b4cd93821cf019fcd0e0fc35)
 - extended completion system with context-aware filtering, improved INI key resolution, regex updates, and tooltip placement enhancements [6db2a04](https://github.com/sandboxie-plus/Sandboxie/commit/6db2a04f805b49a049b309212bfa8e3a8497ad99)

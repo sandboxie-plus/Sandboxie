@@ -2940,7 +2940,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
+               <item row="3" column="0">
                 <spacer name="verticalSpacer_22">
                  <property name="orientation">
                   <enum>Qt::Orientation::Vertical</enum>
@@ -2952,6 +2952,16 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkForceBoxDocs">
+                 <property name="toolTip">
+                  <string>Force programs opening files from a sandbox to run in that sandbox.</string>
+                 </property>
+                 <property name="text">
+                  <string>Force programs opening boxed files into their sandbox</string>
+                 </property>
+                </widget>
                </item>
                <item row="0" column="0" colspan="2">
                 <widget class="QCheckBox" name="chkSandboxMoTW">

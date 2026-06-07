@@ -1109,6 +1109,10 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 					delete m_tempFuzzyModel;
 					m_tempFuzzyModel = nullptr;
 				}
+				// Replacing a completer-owned base model deletes it.
+				// Clear the pointer so it can be recreated later.
+				if (m_pCompleter->model() == m_baseModel)
+					m_baseModel = nullptr;
 				m_tempFuzzyModel = new QStringListModel(popupCandidates, this);
 				m_pCompleter->setModel(m_tempFuzzyModel);
 			}
@@ -1258,6 +1262,13 @@ void CCodeEdit::UpdateCompletionModel(const QStringList& candidates)
 	ClearTokenCache();
 
 	QStringListModel* model = qobject_cast<QStringListModel*>(m_pCompleter->model());
+	// Rebuild the base model if a temporary fuzzy model is active.
+	if (model && model == m_tempFuzzyModel) {
+		// Free the temporary model and force a full base model rebuild below.
+		delete m_tempFuzzyModel;
+		m_tempFuzzyModel = nullptr;
+		model = nullptr;
+	}
 	if (model) {
 		if (model->stringList() == filteredCandidates)
 			return; // No change, skip update
@@ -1267,6 +1278,8 @@ void CCodeEdit::UpdateCompletionModel(const QStringList& candidates)
 		model = new QStringListModel(filteredCandidates, m_pCompleter);
 		m_pCompleter->setModel(model);
 	}
+	// Keep the restorable base model in sync.
+	m_baseModel = model;
 
 	// Adjust popup width based on visible candidates only
 	if (m_pCompleter && m_pCompleter->popup()) {
@@ -1899,8 +1912,13 @@ bool CCodeEdit::HandleManualCompletionTrigger(QKeyEvent* keyEvent)
 					delete m_tempFuzzyModel;
 					m_tempFuzzyModel = nullptr;
 				}
+				// Replacing a completer-owned base model deletes it.
+				// Clear the pointer so it can be recreated later.
+				if (m_pCompleter->model() == m_baseModel)
+					m_baseModel = nullptr;
 				m_tempFuzzyModel = new QStringListModel(fuzzy, this);
 				m_pCompleter->setModel(m_tempFuzzyModel);
+				m_pCompleter->setCompletionPrefix(QString());
 
 				ShowCompletionPopup(/*resetScroll=*/true);
 				return true;
@@ -1926,6 +1944,8 @@ bool CCodeEdit::HandleManualCompletionTrigger(QKeyEvent* keyEvent)
 					delete m_tempFuzzyModel;
 					m_tempFuzzyModel = nullptr;
 				}
+				if (m_pCompleter->model() == m_baseModel)
+					m_baseModel = nullptr;
 				m_tempFuzzyModel = new QStringListModel(popupCandidates, this);
 				m_pCompleter->setModel(m_tempFuzzyModel);
 			}
@@ -2674,8 +2694,14 @@ QStringList CCodeEdit::ApplyFuzzyModelForPrefix(const QString& prefix)
 		delete m_tempFuzzyModel;
 		m_tempFuzzyModel = nullptr;
 	}
+	// Replacing a completer-owned base model deletes it.
+	// Clear the pointer so it can be recreated later.
+	if (m_pCompleter->model() == m_baseModel)
+		m_baseModel = nullptr;
 	m_tempFuzzyModel = new QStringListModel(fuzzy, this);
 	m_pCompleter->setModel(m_tempFuzzyModel);
+	// Prevent a stale prefix from filtering the ranked fuzzy results again.
+	m_pCompleter->setCompletionPrefix(QString());
 	return fuzzy;
 }
 
@@ -2685,11 +2711,16 @@ void CCodeEdit::RestoreBaseCompletionModel()
 	if (!m_pCompleter)
 		return;
 
-	// If a temp fuzzy model is active, remove it and restore base model
+	// If a temp fuzzy model is active, restore the base model.
 	if (m_tempFuzzyModel) {
-		m_pCompleter->setModel(m_baseModel);
-		delete m_tempFuzzyModel;
+		QStringListModel* stale = m_tempFuzzyModel;
 		m_tempFuzzyModel = nullptr;
+		// Recreate a base model deleted when the temporary model was installed.
+		if (!m_baseModel) {
+			m_baseModel = new QStringListModel(m_visibleCandidates, m_pCompleter);
+		}
+		m_pCompleter->setModel(m_baseModel);
+		delete stale;
 	}
 }
 
@@ -2760,6 +2791,8 @@ int CCodeEdit::GetMinFuzzyPrefixLength()
 
 void CCodeEdit::SetFuzzyMatchingEnabled(bool bEnabled)
 {
+	if (s_fuzzyMatchingEnabled == bEnabled)
+		return;
 	s_fuzzyMatchingEnabled = bEnabled;
 }
 

@@ -129,7 +129,7 @@ public:
 
 	// Mount Manager
 	virtual SB_STATUS		ImBoxCreate(CSandBox* pBox, quint64 uSizeKb, const QString& Password = QString());
-	virtual SB_STATUS		ImBoxMount(CSandBox* pBox, const QString& Password = QString(), bool bProtect = false, bool bAutoUnmount = false);
+	virtual SB_STATUS		ImBoxMount(CSandBox* pBox, const QString& Password = QString(), int iProtect = 0, bool bAutoUnmount = false);
 	virtual SB_STATUS		ImBoxUnmount(CSandBox* pBox);
 	virtual SB_RESULT(QStringList) ImBoxEnum();
 	virtual SB_RESULT(QVariantMap) ImBoxQuery(const QString& Root = QString());

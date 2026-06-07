@@ -8,6 +8,7 @@
 #include "Windows/BoxImageWindow.h"
 #include "Windows/ExtractDialog.h"
 #include "../MiscHelpers/Common/Finder.h"
+#include "Helpers/WinAdmin.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -346,7 +347,8 @@ void CBoxTransferDialog::SetFilter(const QRegularExpression& Exp, int iOptions, 
 
 static void ExportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QString& exportPath,
 	const QStringList& boxNames, const QMap<QString, QString>& boxRoots, const QMap<QString, QString>& boxConfigs,
-	bool exportGlobalConfig, const QString& globalConfig, const QVariantMap& params)
+	bool exportGlobalConfig, const QString& globalConfig, const QVariantMap& params,
+	const QStringList& boxesToUnmount)
 {
 	CArchive Archive(exportPath);
 
@@ -422,6 +424,20 @@ static void ExportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 			Status = SB_ERR((ESbieMsgCodes)SBX_7zCreateFailed);
 	}
 
+	// Unmount boxes that we mounted for this export
+	if (!boxesToUnmount.isEmpty()) {
+		QMetaObject::invokeMethod(theGUI, [boxesToUnmount]() {
+			for (const QString& boxName : boxesToUnmount) {
+				CSandBoxPtr pBox = theAPI->GetBoxByName(boxName);
+				if (pBox) {
+					auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+					if (pBoxEx)
+						pBoxEx->ImBoxUnmount();
+				}
+			}
+		}, Qt::QueuedConnection);
+	}
+
 	pProgress->Finish(Status);
 }
 
@@ -444,11 +460,6 @@ void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
 
 		if (theAPI->HasProcesses(pBoxEx->GetName())) {
 			QMessageBox::warning(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("Cannot export: Sandbox has running processes."));
-			return;
-		}
-
-		if (!pBoxEx->IsInitialized()) {
-			QMessageBox::warning(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("Cannot export: Sandbox is empty."));
 			return;
 		}
 
@@ -509,6 +520,7 @@ void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
 	QStringList validBoxes;
 	QMap<QString, QString> boxRoots;
 	QMap<QString, QString> boxConfigs;
+	QStringList boxesToUnmount; // Track boxes we mount so we can unmount them after export
 
 	for (const QString& boxName : selectedBoxes) {
 		// Check running processes (skip for single box - already checked above)
@@ -525,6 +537,49 @@ void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
 
 		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 		if (!pBoxEx) continue;
+
+		// Handle encrypted boxes - ensure they are mounted before export
+		if (pBoxEx->UseImageFile()) {
+			bool wasAlreadyMounted = !pBoxEx->GetMountRoot().isEmpty();
+			bool needsMount = !wasAlreadyMounted;
+			bool needsRemount = wasAlreadyMounted && !IsElevated();
+
+			if (needsMount || needsRemount) {
+				// Need to prompt for password to mount or remount
+				CBoxImageWindow window(CBoxImageWindow::eMount, parent);
+				window.setWindowTitle(CBoxTransferDialog::tr("Mount '%1' for Export").arg(boxName));
+				if (theGUI->SafeExec(&window) != QDialog::Accepted) {
+					int ret = QMessageBox::warning(parent, "Sandboxie-Plus",
+						CBoxTransferDialog::tr("Encrypted sandbox '%1' is not mounted. Skip it?").arg(boxName),
+						QMessageBox::Yes | QMessageBox::Cancel);
+					if (ret == QMessageBox::Cancel) return;
+					continue; // Skip this box
+				}
+
+				// Unmount first if already mounted (remount case)
+				if (needsRemount) {
+					SB_STATUS Status = pBoxEx->ImBoxUnmount();
+					if (Status.IsError()) {
+						QMessageBox::warning(parent, "Sandboxie-Plus",
+							CBoxTransferDialog::tr("Failed to unmount '%1' for remounting.").arg(boxName));
+						continue;
+					}
+				}
+
+				// Mount with appropriate protection level
+				// iProtect=2 means don't require admin privileges (admin_only=0)
+				SB_STATUS Status = pBoxEx->ImBoxMount(window.GetPassword(), IsElevated() ? 1 : 2, true);
+				if (Status.IsError()) {
+					QMessageBox::warning(parent, "Sandboxie-Plus",
+						CBoxTransferDialog::tr("Failed to mount encrypted sandbox '%1'.").arg(boxName));
+					continue;
+				}
+
+				// Only unmount after export if the box wasn't mounted before we started
+				if (needsMount)
+					boxesToUnmount.append(boxName);
+			}
+		}
 
 		if (!pBoxEx->IsInitialized()) {
 			// Empty box - still export the config but warn
@@ -565,8 +620,13 @@ void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
 			QMap<QString, QString> singleBoxConfigs;
 			singleBoxConfigs.insert(boxName, boxConfigs.value(boxName));
 
+			// Only include this box in unmount list if we mounted it
+			QStringList singleBoxUnmount;
+			if (boxesToUnmount.contains(boxName))
+				singleBoxUnmount.append(boxName);
+
 			CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-			QtConcurrent::run(ExportMultiBoxesAsync, pProgress, boxPath, singleBox, singleBoxRoots, singleBoxConfigs, false, QString(), vParams);
+			QtConcurrent::run(ExportMultiBoxesAsync, pProgress, boxPath, singleBox, singleBoxRoots, singleBoxConfigs, false, QString(), vParams, singleBoxUnmount);
 			theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Exporting: %1").arg(boxPath));
 		}
 
@@ -576,7 +636,7 @@ void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
 			QStringList emptyBoxes;
 
 			CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-			QtConcurrent::run(ExportMultiBoxesAsync, pProgress, globalPath, emptyBoxes, QMap<QString, QString>(), QMap<QString, QString>(), true, globalConfig, vParams);
+			QtConcurrent::run(ExportMultiBoxesAsync, pProgress, globalPath, emptyBoxes, QMap<QString, QString>(), QMap<QString, QString>(), true, globalConfig, vParams, QStringList());
 			theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Exporting: %1").arg(globalPath));
 		}
 	} else {
@@ -589,7 +649,7 @@ void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
 			return;
 
 		CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-		QtConcurrent::run(ExportMultiBoxesAsync, pProgress, Path, validBoxes, boxRoots, boxConfigs, exportGlobalConfig, globalConfig, vParams);
+		QtConcurrent::run(ExportMultiBoxesAsync, pProgress, Path, validBoxes, boxRoots, boxConfigs, exportGlobalConfig, globalConfig, vParams, boxesToUnmount);
 		theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Exporting: %1").arg(Path));
 	}
 }
@@ -642,7 +702,7 @@ static QString ExtractIniSection(const QString& iniContent, const QString& secti
 
 static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QString& importPath, const QString& password,
 	const QMap<QString, QString>& boxNameMapping, const QMap<QString, QString>& boxRoots,
-	bool importGlobalConfig)
+	bool importGlobalConfig, const QStringList& boxesToUnmount)
 {
 	CArchive Archive(importPath);
 
@@ -836,6 +896,20 @@ static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 			QFile::remove(entry.TempPath);
 	}
 
+	// Unmount boxes that we mounted for this import
+	if (!boxesToUnmount.isEmpty()) {
+		QMetaObject::invokeMethod(theGUI, [boxesToUnmount]() {
+			for (const QString& boxName : boxesToUnmount) {
+				CSandBoxPtr pBox = theAPI->GetBoxByName(boxName);
+				if (pBox) {
+					auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+					if (pBoxEx)
+						pBoxEx->ImBoxUnmount();
+				}
+			}
+		}, Qt::QueuedConnection);
+	}
+
 	pProgress->Finish(Status);
 }
 
@@ -1010,6 +1084,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 	QMap<QString, QString> boxRoots;
 	QList<SB_STATUS> Results;
 	QList<CBoxTransferDialog::SImportEntry> validEntries;
+	QStringList boxesToUnmount; // Track boxes we mount so we can unmount them after import
 
 	for (const auto& entry : importEntries) {
 		// Check if box already exists
@@ -1042,7 +1117,9 @@ QStringList ImportMultiBoxes(QWidget* parent)
 					Results.append(Status);
 					continue;
 				}
-				Status = pBoxEx->ImBoxMount(entry.Password, true, true);
+				Status = pBoxEx->ImBoxMount(entry.Password, IsElevated() ? 1 : 2, true);
+				if (!Status.IsError())
+					boxesToUnmount.append(entry.ImportName);
 			}
 
 			boxRoots.insert(entry.ImportName, pBox->GetFileRoot());
@@ -1068,18 +1145,22 @@ QStringList ImportMultiBoxes(QWidget* parent)
 
 		// Build mapping for this file
 		QMap<QString, QString> boxNameMapping;
+		QStringList fileBoxesToUnmount;
 		QString password;
 		for (const auto& entry : entries) {
 			boxNameMapping.insert(entry.ArchiveName, entry.ImportName);
 			password = entry.Password; // Same password for all entries from same file
 			importedNames.append(entry.ImportName);
+			// Only include boxes that we mounted
+			if (boxesToUnmount.contains(entry.ImportName))
+				fileBoxesToUnmount.append(entry.ImportName);
 		}
 
 		// Check if this file contains global config and should import it
 		bool importGlobalForThisFile = importGlobalConfig && (sourceFile == globalConfigSourceFile);
 
 		CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, sourceFile, password, boxNameMapping, boxRoots, importGlobalForThisFile);
+		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, sourceFile, password, boxNameMapping, boxRoots, importGlobalForThisFile, fileBoxesToUnmount);
 		theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Importing: %1").arg(sourceFile));
 	}
 
@@ -1087,7 +1168,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 	if (importGlobalConfig && !entriesByFile.contains(globalConfigSourceFile)) {
 		QMap<QString, QString> emptyMapping;
 		CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, globalConfigSourceFile, globalConfigPassword, emptyMapping, QMap<QString, QString>(), true);
+		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, globalConfigSourceFile, globalConfigPassword, emptyMapping, QMap<QString, QString>(), true, QStringList());
 		theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Importing: %1").arg(globalConfigSourceFile));
 	}
 

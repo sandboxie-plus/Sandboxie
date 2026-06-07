@@ -292,6 +292,23 @@ void DeleteHistoryItem(
 
 
 //---------------------------------------------------------------------------
+// PrepareIgnoreBreakout
+//---------------------------------------------------------------------------
+
+
+void PrepareIgnoreBreakout(HWND hwnd)
+{
+    HWND ctrl = GetDlgItem(hwnd, IDIGNOREBREAKOUT);
+    if (ctrl) {
+        SetWindowText(ctrl, SbieDll_FormatMessage0(MSG_3418));
+        SendMessage(ctrl, BM_SETCHECK,
+            ignore_breakout_on_this_program ? BST_CHECKED : BST_UNCHECKED, 0);
+        ShowWindow(ctrl, SW_SHOW);
+    }
+}
+
+
+//---------------------------------------------------------------------------
 // PrepareRunAsAdmin
 //---------------------------------------------------------------------------
 
@@ -351,6 +368,7 @@ void PrepareRunAsAdmin(HWND hwnd, const WCHAR *BoxName, BOOLEAN JustAdmin)
         ctrl = GetDlgItem(hwnd, IDRUNADMIN);
         if (ctrl) {
 
+            SetWindowText(ctrl, SbieDll_FormatMessage0(MSG_3414));
             SendMessage(ctrl, BM_SETCHECK,
                 run_elevated_2 ? BST_CHECKED : BST_UNCHECKED, 0);
             EnableWindow(ctrl, (! disable_button));
@@ -409,13 +427,6 @@ void PrepareRunAsAdmin(HWND hwnd, const WCHAR *BoxName, BOOLEAN JustAdmin)
         ShowWindow(ctrl, SW_SHOW);
     }
 
-    ctrl = GetDlgItem(hwnd, IDIGNOREBREAKOUT);
-    if (ctrl) {
-        SetWindowText(ctrl, L"Ignore Breakout");
-        SendMessage(ctrl, BM_SETCHECK,
-            ignore_breakout_on_this_program ? BST_CHECKED : BST_UNCHECKED, 0);
-        ShowWindow(ctrl, SW_SHOW);
-    }
 }
 
 
@@ -632,11 +643,16 @@ INT_PTR RunDialogProc(
             // run as admin
             //
 
-            ignore_breakout_on_this_program = TRUE;
-
             PrepareRunAsAdmin(hwnd, NULL, FALSE);
 
             AddToolTipForRunAsAdmin(hwnd, hwndToolTip);
+
+            //
+            // ignore breakout
+            //
+
+            ignore_breakout_on_this_program = TRUE;
+            PrepareIgnoreBreakout(hwnd);
 
             //
             // end dialog initialization

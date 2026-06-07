@@ -2665,7 +2665,7 @@ SB_STATUS CSbieAPI::ImBoxCreate(CSandBox* pBox, quint64 uSizeKb, const QString& 
 	return SB_OK;
 }
 
-SB_STATUS CSbieAPI::ImBoxMount(CSandBox* pBox, const QString& Password, bool bProtect, bool bAutoUnmount)
+SB_STATUS CSbieAPI::ImBoxMount(CSandBox* pBox, const QString& Password, int iProtect, bool bAutoUnmount)
 {
 	std::wstring root = pBox->GetRegRoot().toStdWString();
 	if(root.length() >= MAX_REG_ROOT_LEN)
@@ -2683,8 +2683,8 @@ SB_STATUS CSbieAPI::ImBoxMount(CSandBox* pBox, const QString& Password, bool bPr
 	req->h.length = req_len;
 	req->h.msgid = MSGID_IMBOX_MOUNT;
 	wcscpy(req->password, password.c_str());
-	req->protect_root = bProtect;
-	req->admin_only = pBox->GetBool("ProtectAdminOnly", true, true, true);
+	req->protect_root = iProtect != 0;
+	req->admin_only = iProtect == 2 ? 0 : pBox->GetBool("ProtectAdminOnly", true, true, true);
 	req->auto_unmount = bAutoUnmount;
 	wcscpy(req->reg_root, root.c_str());
 	wcscpy(req->file_root, file_root.c_str());

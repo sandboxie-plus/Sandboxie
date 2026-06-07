@@ -193,7 +193,11 @@ SB_PROGRESS CAddonManager::InstallAddon(const QString& Id)
 	Params.append("/agent_arch:" + GetAppArch());
 	Params.append("/framework:" + GetFramework());
 	Params.append("/step:apply");
+#ifndef _DEBUG
 	Params.append("/embedded");
+#else
+	Params.append("/pause");
+#endif
 	Params.append("/temp:" + theGUI->m_pUpdater->GetUpdateDir().replace("/", "\\"));
 
 	pAddon->pProgress = CSbieProgressPtr(new CSbieProgress());

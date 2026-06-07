@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Importing encrypted box no longer creates encrypted image in v1.17.6 [#5399](https://github.com/sandboxie-plus/Sandboxie/issues/5399)
 - fixed EditorSettings fuzzy matching not applied, showing few/no completion entries, and table cell highlighting not updating
 - fixed Error enumerating and deleting folder. [#5406](https://github.com/sandboxie-plus/Sandboxie/issues/5406)
+- fixed black box import/export when 'ProtectAdminOnly=y' (default) and SandMan does not run as admin
 
 
 

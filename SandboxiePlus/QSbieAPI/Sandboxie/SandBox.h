@@ -82,7 +82,7 @@ public:
 
 	// Mount Manager
 	virtual SB_STATUS				ImBoxCreate(quint64 uSizeKb, const QString& Password = QString());
-	virtual SB_STATUS				ImBoxMount(const QString& Password = QString(), bool bProtect = false, bool bAutoUnmount = false);
+	virtual SB_STATUS				ImBoxMount(const QString& Password = QString(), int iProtect = 0, bool bAutoUnmount = false);
 	virtual SB_STATUS				ImBoxUnmount();
 
 	virtual bool					IsPortable() const { return !m_PortablePath.isEmpty(); }

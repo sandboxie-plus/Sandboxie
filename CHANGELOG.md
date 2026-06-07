@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.7 / 5.72.7] - 2026-06-??
+## [1.17.7 / 5.72.7] - 2026-06-07
 
 ### Added
 - added a Global Settings checkbox for `ForceBoxDocs` under Program Control > Force Process Options

@@ -357,8 +357,8 @@ _FX NTSTATUS File_NtQueryDirectoryFile(
     // create (or find) a FILE_MERGE structure to serve the request
     //
 
-    if (! ReturnSingleEntry)
-        RestartScan = FALSE;
+    //if (! ReturnSingleEntry) // performance obtimization breaks correctness for some edge cases
+    //    RestartScan = FALSE;
 
     status = File_Merge(
         FileHandle, TruePath, CopyPath, RestartScan, &file_mask, &merge);

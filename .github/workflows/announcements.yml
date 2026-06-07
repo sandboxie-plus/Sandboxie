@@ -5,6 +5,11 @@ on:
     types: [published]
 
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Latest release tag to keep open'
+        required: true
+        type: string
 
 jobs:
   lock-announcements:
@@ -20,7 +25,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           CATEGORY_NAME: Announcements
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.release_tag }}
           MAX_TO_LOCK: "20"
         shell: bash
         run: |

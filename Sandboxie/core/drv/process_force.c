@@ -3589,6 +3589,7 @@ _FX BOOLEAN Process_IsBreakoutProcess(
     BOX *box, const WCHAR *ImagePath)
 {
     NTSTATUS status;
+    LIST BreakoutFolder;
     LIST BreakoutProcess;
     WCHAR *ImagePath2 = L"";
     ULONG ImagePath2_len;
@@ -3615,9 +3616,6 @@ _FX BOOLEAN Process_IsBreakoutProcess(
         return FALSE;
     }
 
-    if (!Process_AreBreakoutRulesEnabled(box->name))
-        goto finish;
-
     //
     // never break out a program from the Sandboxie home directory
     //
@@ -3633,19 +3631,34 @@ _FX BOOLEAN Process_IsBreakoutProcess(
     // init breakout presets
     //
 
+    List_Init(&BreakoutFolder);
     List_Init(&BreakoutProcess);
 
     Conf_AdjustUseCount(TRUE);
 
-    Process_AddForceFolders(&BreakoutProcess, L"BreakoutProcess", box, box->name);
+    Process_AddForceFolders(&BreakoutFolder, L"BreakoutFolder", box, box->name);
+
+    Process_AddForceProcesses(&BreakoutProcess, L"BreakoutProcess", box->name);
         
     Conf_AdjustUseCount(FALSE);
 
-    IsBreakout = Process_CheckBreakoutProcessList(box, &BreakoutProcess, ImageName, ImagePath2);
-    if (!IsBreakout)
-        IsBreakout = Process_FindMatchingBreakoutFolderRule(box, ImageName, ImagePath2, FALSE, NULL, 0);
+    IsBreakout = Process_CheckForceProcessList(box, &BreakoutProcess, ImageName);
+    if (!IsBreakout) {
+        const WCHAR *ptr;
+        ULONG prefix_len;
 
-    Process_DeleteForceDataFolders(&BreakoutProcess);
+        ptr = wcsrchr(ImagePath2, L'\\');
+        if (ptr && ptr[1])
+            prefix_len = (ULONG)(ptr - ImagePath2);
+        else
+            prefix_len = 0;
+
+        if (prefix_len > 0)
+            IsBreakout = Process_CheckForceFolderList(box, &BreakoutFolder, prefix_len, ImagePath2);
+    }
+
+    Process_DeleteForceDataFolders(&BreakoutFolder);
+    Process_DeleteForceDataProcesses(&BreakoutProcess);
 
 finish:
     Mem_Free(ImagePath2, ImagePath2_len);

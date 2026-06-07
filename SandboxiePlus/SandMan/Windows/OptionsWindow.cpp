@@ -1180,7 +1180,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.treeBreakout->setColumnWidth(1, 280);
 	ui.treeBreakout->setColumnWidth(2, 90);
 	ui.treeBreakout->setColumnWidth(3, 90);
-	ui.treeBreakout->setColumnWidth(4, 200);
+	ui.treeBreakout->setColumnWidth(4, 120);
 	ui.treeBreakout->header()->setSectionsMovable(true);
 	ui.treeBreakout->header()->moveSection(2, 1);
 	ui.treeBreakout->header()->moveSection(3, 2);
@@ -2570,11 +2570,8 @@ void COptionsWindow::OnEditorSettings()
 		
 		// Apply settings that don't have UI checkboxes in OptionsWindow
 		// These are managed via EditorSettings only
-		if (editorWindow.HasResetOccurred()) {
-			// If any reset occurred, update these settings from config
-			bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
-			m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
-		}
+		bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
+		m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
 		
 		// Always update autocompletion list regardless of reset status
 		UpdateAutoCompletion();

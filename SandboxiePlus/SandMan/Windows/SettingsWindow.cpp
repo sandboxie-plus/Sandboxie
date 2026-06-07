@@ -720,6 +720,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.chkSandboxMoTW, SIGNAL(stateChanged(int)), this, SLOT(OnMoTWChange()));
 	connect(ui.cmbMoTWSandbox, SIGNAL(currentIndexChanged(int)), this, SLOT(OnMoTWChange()));
+	connect(ui.chkForceBoxDocs, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkUseForceBreakoutRuleExtensions, SIGNAL(clicked(bool)), this, SLOT(OnRuleExtensionsGlobalToggled(bool)));
 
 	// USB
@@ -1599,6 +1600,7 @@ void CSettingsWindow::LoadSettings()
 
 		QString MoTWBox = theAPI->GetGlobalSettings()->GetText("MarkOfTheWebBox", "Web_Box");
 		ui.chkSandboxMoTW->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceMarkOfTheWeb", false));
+		ui.chkForceBoxDocs->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceBoxDocs", false));
 		ui.chkUseForceBreakoutRuleExtensions->setChecked(theAPI->GetGlobalSettings()->GetBool("UseForceBreakoutRuleExtensions", false));
 		QString USBBox = theAPI->GetGlobalSettings()->GetText("UsbSandbox", "USB_Box");
 		ui.chkSandboxUsb->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceUsbDrives", false));
@@ -1676,6 +1678,7 @@ void CSettingsWindow::LoadSettings()
 		ui.btnAddWarnProg->setEnabled(false);
 		ui.btnDelWarnProg->setEnabled(false);
 		ui.chkSandboxMoTW->setEnabled(false);
+		ui.chkForceBoxDocs->setEnabled(false);
 		ui.chkUseForceBreakoutRuleExtensions->setEnabled(false);
 		ui.cmbMoTWSandbox->setEnabled(false);
 		ui.chkSandboxUsb->setEnabled(false);
@@ -2266,6 +2269,7 @@ void CSettingsWindow::SaveSettings()
 			}
 
 			WriteAdvancedCheck(ui.chkSandboxMoTW, "ForceMarkOfTheWeb", "y", "");
+			WriteAdvancedCheck(ui.chkForceBoxDocs, "ForceBoxDocs", "y", "");
 			WriteAdvancedCheck(ui.chkUseForceBreakoutRuleExtensions, "UseForceBreakoutRuleExtensions", "y", "");
 
 			QString MoTWSandbox = ui.cmbMoTWSandbox->currentData().toString();
@@ -3814,11 +3818,8 @@ void CSettingsWindow::OnEditorSettings()
 		
 		// Apply settings that don't have UI checkboxes in SettingsWindow
 		// These are managed via EditorSettings only
-		if (editorWindow.HasResetOccurred()) {
-			// If any reset occurred, update these settings from config
-			bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
-			m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
-		}
+		bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
+		m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
 		
 		// Always update autocompletion list regardless of reset status
 		UpdateAutoCompletion();

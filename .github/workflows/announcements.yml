@@ -276,8 +276,9 @@ jobs:
             number="$(jq -r '.number' <<<"$discussion")"
             title="$(jq -r '.title' <<<"$discussion")"
             url="$(jq -r '.url' <<<"$discussion")"
+            locked="$(jq -r '.locked' <<<"$discussion")"
 
-            echo "Locking discussion #${number}: ${title}"
+            echo "Closing discussion #${number}: ${title}"
             echo " URL: ${url}"
             echo " Reason: OUTDATED"
 
@@ -287,12 +288,20 @@ jobs:
               -f query="$CLOSE_MUTATION" \
               >/dev/null
 
+            echo " → Closed ✓"
+
+          if [[ "$locked" == "false" ]]; then
+            echo "Locking discussion #${number}: ${title}"
+
             gh api graphql \
               -f id="$id" \
               -f query="$LOCK_MUTATION" \
               >/dev/null
 
-            echo " → Closed and locked ✓"
+            echo " → Locked ✓"
+          else
+            echo " → Already locked, skipping lock"
+          fi
 
             locked_count=$((locked_count + 1))
           done

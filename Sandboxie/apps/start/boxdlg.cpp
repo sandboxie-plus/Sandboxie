@@ -36,8 +36,10 @@
 
 
 void PrepareRunAsAdmin(HWND hwnd, const WCHAR *BoxName, BOOLEAN JustAdmin);
+void PrepareIgnoreBreakout(HWND hwnd);
 void AddToolTipForRunAsAdmin(HWND hDialog, HWND hwndToolTip);
 void ClickRunAsAdmin(HWND hwnd);
+void ClickIgnoreBreakout(HWND hwnd);
 void Adjust_Window_Height(HWND hwnd);
 
 
@@ -57,6 +59,7 @@ static int dfp_index = LB_ERR;
 BOOL boxdlg_run_outside_sandbox = FALSE;
 
 extern BOOL disable_force_on_this_program;
+extern BOOL ignore_breakout_on_this_program;
 
 extern BOOLEAN layout_rtl;
 
@@ -616,7 +619,14 @@ INT_PTR BoxDialogProc(
             // run as admin
             //
 
-            PrepareRunAsAdmin(hwnd, NULL, FALSE);
+            PrepareRunAsAdmin(hwnd, NULL, TRUE);
+
+            //
+            // ignore breakout
+            //
+
+            ignore_breakout_on_this_program = TRUE;
+            PrepareIgnoreBreakout(hwnd);
 
             //
             // subclass listbox
@@ -759,6 +769,10 @@ INT_PTR BoxDialogProc(
             } else if (LOWORD(wParam) == IDRUNADMIN) {
 
                 ClickRunAsAdmin(hwnd);
+
+            } else if (LOWORD(wParam) == IDIGNOREBREAKOUT) {
+
+                ClickIgnoreBreakout(hwnd);
             }
 
             break;
@@ -775,7 +789,9 @@ INT_PTR BoxDialogProc(
 
 void Adjust_Window_Height(HWND hwnd)
 {
-    static int ControlIDs[] = { IDRUNADMIN, IDOK, IDCANCEL, 0 };
+    static int ControlIDs[] = {
+        IDRUNADMIN, IDIGNOREBREAKOUT, IDOK, IDCANCEL, 0
+    };
     HWND hlist, hctrl;
     int item_height;
     int num_items;

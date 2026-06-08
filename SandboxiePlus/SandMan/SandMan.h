@@ -251,6 +251,8 @@ private slots:
 	void				OnBoxAssistant();
 	void				OnDisableForce();
 	void				OnDisableForce2();
+	void				OnDisableBreakout();
+	void				OnDisableBreakout2();
 	void				OnDisablePopUp();
 	void				OnMaintenance();
 
@@ -378,6 +380,8 @@ private:
 	QAction*			m_pWndFinder;
 	QAction*			m_pDisableForce;
 	QAction*			m_pDisableForce2;
+	QAction*			m_pDisableBreakout;
+	QAction*			m_pDisableBreakout2;
 	QAction*			m_pDisableRecovery;
 	QAction*			m_pDisableMessages;
 	QAction*			m_pDismissUpdate;

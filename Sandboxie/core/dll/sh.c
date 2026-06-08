@@ -370,11 +370,118 @@ _FX WCHAR *SH32_AdjustPath(WCHAR *src, WCHAR **pArgs)
 //---------------------------------------------------------------------------
 
 
-_FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len)
+static BOOLEAN SH32_ShouldIgnoreBreakout(void)
 {
-    if (SbieDll_CheckPatternInList(path, len, NULL, L"BreakoutDocument")) {
+    WCHAR value[16];
+    DWORD len = GetEnvironmentVariable(L"SBIE_RUN_SANDBOXED_IGNORE_BREAKOUT", value, ARRAYSIZE(value));
 
-        NTSTATUS status;
+    if (len == 0 || len >= ARRAYSIZE(value))
+        return FALSE;
+
+    if (value[0] == L'1')
+        return TRUE;
+    if (_wcsicmp(value, L"y") == 0 ||
+        _wcsicmp(value, L"yes") == 0 ||
+        _wcsicmp(value, L"true") == 0)
+        return TRUE;
+
+    return FALSE;
+}
+
+static BOOLEAN SH32_TokenHasExecutableExtension(const WCHAR* token, ULONG token_len)
+{
+    const WCHAR* ext;
+
+    if (!token || token_len < 4)
+        return FALSE;
+
+    ext = token + token_len - 4;
+    return (_wcsnicmp(ext, L".exe", 4) == 0 ||
+            _wcsnicmp(ext, L".com", 4) == 0 ||
+            _wcsnicmp(ext, L".bat", 4) == 0 ||
+            _wcsnicmp(ext, L".cmd", 4) == 0) ? TRUE : FALSE;
+}
+
+static BOOLEAN SH32_ShouldSkipDocumentBreakoutPrecheck(const WCHAR* lpFile, const WCHAR* lpParameters)
+{
+    const WCHAR* token;
+    const WCHAR* token_end;
+    const WCHAR* args;
+    BOOLEAN has_args = FALSE;
+    ULONG token_len;
+
+    if (!lpFile || !*lpFile)
+        return FALSE;
+
+    token = lpFile;
+    while (*token == L' ' || *token == L'\t')
+        ++token;
+
+    if (*token == L'"') {
+        ++token;
+        token_end = wcschr(token, L'"');
+        if (!token_end)
+            return FALSE;
+
+        args = token_end + 1;
+        while (*args == L' ' || *args == L'\t')
+            ++args;
+        has_args = (*args != L'\0') ? TRUE : FALSE;
+    }
+    else {
+        token_end = token;
+        while (*token_end && *token_end != L' ' && *token_end != L'\t')
+            ++token_end;
+
+        args = token_end;
+        while (*args == L' ' || *args == L'\t')
+            ++args;
+        has_args = (*args != L'\0') ? TRUE : FALSE;
+    }
+
+    if (lpParameters && *lpParameters)
+        has_args = TRUE;
+
+    if (!has_args)
+        return FALSE;
+
+    token_len = (ULONG)(token_end - token);
+    return SH32_TokenHasExecutableExtension(token, token_len);
+}
+
+
+_FX BOOL SH32_BreakoutDocumentEx(const WCHAR* path, ULONG len, const WCHAR *createdImage, const WCHAR *launchPath, ULONG *fallbackFlags)
+{
+    BOOLEAN use_rule_extensions;
+
+    if (fallbackFlags)
+        *fallbackFlags = 0;
+
+    if (SH32_ShouldIgnoreBreakout())
+        return FALSE;
+
+    if (SbieApi_QueryConfBool(NULL, L"DisableBreakoutRules", FALSE))
+        return FALSE;
+
+    // Strip outer quotes if present (e.g. ShellExecuteEx lpFile can arrive quoted).
+    if (len >= 2 && path[0] == L'"' && path[len - 1] == L'"') {
+        path++;
+        len -= 2;
+    }
+
+    use_rule_extensions = SbieApi_QueryConfBool(NULL, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
+
+    // Backward compatibility: with rule extensions disabled, keep the legacy
+    // local pre-check and only call UserServer when the base path rule matches.
+    if (!use_rule_extensions && !SbieDll_CheckPatternInList(path, len, NULL, L"BreakoutDocument"))
+        return FALSE;
+
+    // With rule extensions enabled, always consult UserServer so image-scoped
+    // BreakoutDocument rules and priority/TargetBox extensions follow one path.
+    // UserServer returns fallback flags when no breakout launch applies.
+
+    {
+
         static WCHAR* _QueueName = NULL;
 
         if (!_QueueName) {
@@ -383,33 +490,60 @@ _FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len)
         }
 
         ULONG path_len = (len + 1) * sizeof(WCHAR);
-        ULONG req_len = sizeof(USER_SHELL_EXEC_REQ) + path_len;
+        ULONG image_len = (createdImage && *createdImage) ? ((ULONG)wcslen(createdImage) + 1) * sizeof(WCHAR) : 0;
+        ULONG launch_len = (launchPath && *launchPath) ? ((ULONG)wcslen(launchPath) + 1) * sizeof(WCHAR) : 0;
+        ULONG req_len = sizeof(USER_SHELL_EXEC_REQ) + path_len + image_len + launch_len;
         ULONG path_pos = sizeof(USER_SHELL_EXEC_REQ);
+        ULONG image_pos = path_pos + path_len;
+        ULONG launch_pos = image_pos + image_len;
 
         USER_SHELL_EXEC_REQ* req = (USER_SHELL_EXEC_REQ*)Dll_AllocTemp(req_len);
 
-        WCHAR* path_buff = ((UCHAR*)req) + path_pos;
-        memcpy(path_buff, path, path_len);
+        WCHAR* path_buff = (WCHAR*)((UCHAR*)req + path_pos);
+        wmemcpy(path_buff, path, len);
+        path_buff[len] = L'\0';
 
         req->msgid = USER_SHELL_EXEC;
-
         req->FileNameOffset = path_pos;
-
-        ULONG* rpl = SbieDll_CallProxySvr(_QueueName, req, req_len, sizeof(*rpl), 100);
-        if (!rpl)
-            status = STATUS_INTERNAL_ERROR;
-        else {
-            status = rpl[0];
-
-            Dll_Free(rpl);
+        req->ImageNameOffset = 0;
+        req->LaunchPathOffset = 0;
+        if (image_len) {
+            WCHAR *img_buff = (WCHAR*)((UCHAR*)req + image_pos);
+            wmemcpy(img_buff, createdImage, image_len / sizeof(WCHAR));
+            req->ImageNameOffset = image_pos;
         }
+        if (launch_len) {
+            WCHAR *launch_buff = (WCHAR*)((UCHAR*)req + launch_pos);
+            wmemcpy(launch_buff, launchPath, launch_len / sizeof(WCHAR));
+            req->LaunchPathOffset = launch_pos;
+        }
+
+        ULONG* rpl = SbieDll_CallProxySvr(_QueueName, req, req_len, 2 * sizeof(*rpl), 100);
 
         Dll_Free(req);
 
-        return TRUE;
+        if (!rpl) {
+            // Service communication failed (SBIE2203 already logged).
+            // Fall back to normal document open in source box.
+            return FALSE;
+        }
+
+        // rpl[1] contains fallback flags: non-zero means the service could not open
+        // the document (e.g., target box invalid) and the DLL should fall back to
+        // letting the normal path handle it (opens in source box).
+        ULONG fallback = rpl[1];
+        if (fallbackFlags)
+            *fallbackFlags = fallback;
+        Dll_Free(rpl);
+        return (fallback == 0);
     }
 
-    return FALSE;
+    //return FALSE;
+}
+
+_FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len, const WCHAR *createdImage, const WCHAR *launchPath)
+{
+    return SH32_BreakoutDocumentEx(path, len, createdImage, launchPath, NULL);
 }
 
 
@@ -435,7 +569,8 @@ _FX BOOL SH32_ShellExecuteExW(SHELLEXECUTEINFOW *lpExecInfo)
 
     if (lpExecInfo->lpFile) {
 
-        if (SH32_BreakoutDocument(lpExecInfo->lpFile, wcslen(lpExecInfo->lpFile)))
+        if (!SH32_ShouldSkipDocumentBreakoutPrecheck(lpExecInfo->lpFile, lpExecInfo->lpParameters) &&
+                SH32_BreakoutDocument(lpExecInfo->lpFile, wcslen(lpExecInfo->lpFile), NULL, NULL))
             return TRUE;
     }
 
@@ -806,6 +941,8 @@ _FX BOOL SH32_Shell_NotifyIconW(
     }
 
     if (Gui_OpenAllWinClasses && Gui_UseProxyService
+        // Image selectors for this setting are resolved via
+        // Config_MatchImageAndGetValue, including '!image' negation.
         && Config_GetSettingsForImageName_bool(SH32_UseShellNotifyIconProxy, TRUE)) {
 
         //
@@ -3965,5 +4102,3 @@ _FX void SH32_IShellWindows_Hook(REFCLSID rclsid, REFIID riid, void *pUnknown)
 
     SH32_ComRelease(pIsw);
 }
-
-

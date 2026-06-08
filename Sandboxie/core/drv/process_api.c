@@ -59,6 +59,8 @@ _FX NTSTATUS Process_Api_Start(PROCESS *proc, ULONG64 *parms)
     BOX *box = NULL;
     PEPROCESS ProcessObject = NULL;
     NTSTATUS status;
+    BOOLEAN model_forced_process = FALSE;
+    BOOLEAN model_forced_by_children = FALSE;
 
     //
     // already sandboxed?
@@ -92,8 +94,11 @@ _FX NTSTATUS Process_Api_Start(PROCESS *proc, ULONG64 *parms)
         KIRQL irql;
 
         proc2 = Process_Find((HANDLE)(-user_box_parm), &irql);
-        if (proc2 && !proc2->terminated)
+        if (proc2 && !proc2->terminated) {
+            model_forced_process = proc2->forced_process;
+            model_forced_by_children = proc2->forced_by_children;
             box = Box_Clone(Driver_Pool, proc2->box);
+        }
 
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
@@ -185,6 +190,21 @@ _FX NTSTATUS Process_Api_Start(PROCESS *proc, ULONG64 *parms)
                                 user_pid_parm, Api_ServiceProcessId, Api_ServiceProcessId, NULL, 0, box)) {
 
                 status = STATUS_INTERNAL_ERROR;
+            } else if (user_box_parm < 0 && (model_forced_process || model_forced_by_children)) {
+
+                PROCESS *new_proc;
+                KIRQL irql2;
+
+                new_proc = Process_Find(user_pid_parm, &irql2);
+                if (new_proc && !new_proc->terminated) {
+                    if (model_forced_process)
+                        new_proc->forced_process = TRUE;
+                    if (model_forced_by_children)
+                        new_proc->forced_by_children = TRUE;
+                }
+
+                ExReleaseResourceLite(Process_ListLock);
+                KeLowerIrql(irql2);
             }
 
             box = NULL;         // freed by Process_NotifyProcess_Create
@@ -373,6 +393,8 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
                 if (proc->forced_process)
                     flags |= SBIE_FLAG_FORCED_PROCESS;
+                if (proc->forced_by_children)
+                    flags |= SBIE_FLAG_FORCED_CHILD_PROCESS;
                 if (proc->is_start_exe)
                     flags |= SBIE_FLAG_PROCESS_IS_START_EXE;
                 if (proc->parent_was_start_exe)

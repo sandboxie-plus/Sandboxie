@@ -36,6 +36,13 @@ enum {
     USER_MAX_REQUEST_CODE
 };
 
+enum {
+
+    // rpl_buf[1] flags for USER_SHELL_EXEC.
+    USER_DOCUMENT_FALLBACK_TO_SOURCE = 0x00000001,
+    USER_DOCUMENT_FALLBACK_DENY_BREAKOUT = 0x00000002
+};
+
 
 //---------------------------------------------------------------------------
 // Open File
@@ -81,6 +88,8 @@ struct tagUSER_SHELL_EXEC_REQ
     ULONG msgid;
     
     ULONG FileNameOffset;
+    ULONG ImageNameOffset; // optional created-process image name, 0 when absent
+    ULONG LaunchPathOffset; // optional full executable path, 0 when absent
 };
 
 

@@ -213,6 +213,7 @@ void CSandMan::CreateTrayMenu()
 	m_pTrayMenu->addAction(m_pDisableForce2);
 	if(m_pDisableRecovery) m_pTrayMenu->addAction(m_pDisableRecovery);
 	if(m_pDisableMessages) m_pTrayMenu->addAction(m_pDisableMessages);
+	if(m_pDisableBreakout2) m_pTrayMenu->addAction(m_pDisableBreakout2);
 	m_pDismissUpdate = m_pTrayMenu->addAction(tr("Dismiss Update Notification"), this, SLOT(OnDismissUpdate()));
 	m_pDismissUpdate->setCheckable(true);
 	m_pDismissUpdate->setVisible(false);
@@ -493,7 +494,7 @@ double CSandMan__GetBoxOrder(const QMap<QString, QStringList>& Groups, const QSt
 	return 1000000000;
 }
 
-// Builds the rich status tooltip shown on sandbox items — matches the format used in the main sandbox tree view.
+// Builds the rich status tooltip shown on sandbox items, matches the format used in the main sandbox tree view.
 static QString CSandMan__BuildBoxTooltip(const CSandBoxPlus* pBoxEx)
 {
 	if (!pBoxEx)
@@ -737,7 +738,7 @@ void CSandMan::OnBoxMenuHover(QAction* action)
 		action->setMenu(pMenu);
 	}
 
-	// Show rich tooltip manually — QAction+submenu combos don't auto-show Qt tooltips
+	// Show rich tooltip manually, QAction+submenu combos don't auto-show Qt tooltips
 	QString statusTip = action->toolTip();
 	QString fallbackTip = action->property("tray_fallback_tip").toString();
 	QString tipToShow;
@@ -957,7 +958,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					// Ensure the tree widget paints icons at the same size we measure
 					m_pTrayBoxes->setIconSize(QSize(iconSize, iconSize));
 					int indent = m_pTrayBoxes->indentation();
-					// Gap between icon and text, and right margin — scale proportionally with DPI
+					// Gap between icon and text, and right margin, scale proportionally with DPI
 					int spacing = qRound(4 * dpiScale);
 					int maxItemWidth = 0;
 					for (QTreeWidgetItemIterator it(m_pTrayBoxes, QTreeWidgetItemIterator::All); *it; ++it) {

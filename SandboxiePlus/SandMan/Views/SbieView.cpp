@@ -260,6 +260,8 @@ void CSbieView::CreateMenu()
 		m_pMenuPresetsRecovery->setCheckable(true);
 		m_pMenuPresetsForce = m_pMenuPresets->addAction(tr("Disable Force Rules"), this, SLOT(OnSandBoxAction()));
 		m_pMenuPresetsForce->setCheckable(true);
+		m_pMenuPresetsBreakout = m_pMenuPresets->addAction(tr("Disable Breakout Rules"), this, SLOT(OnSandBoxAction()));
+		m_pMenuPresetsBreakout->setCheckable(true);
 	
 	m_pMenuTools = m_pMenuBox->addMenu(CSandMan::GetIcon("Maintenance"), tr("Sandbox Tools"));
 		m_pMenuBrowseNT = m_pMenuTools->addAction(CSandMan::GetIcon("Objects"), tr("Browse NT Namespace"), this, SLOT(OnSandBoxAction()));
@@ -708,6 +710,7 @@ bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBox
 			m_pMenuPresetsShares->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasSharesAccess());
 			m_pMenuPresetsRecovery->setChecked(pBox && pBox->GetBool("AutoRecover", false));
 			m_pMenuPresetsForce->setChecked(pBox && pBox->GetBool("DisableForceRules", false));
+			m_pMenuPresetsBreakout->setChecked(pBox && pBox->GetBool("DisableBreakoutRules", false));
 		}
 	}
 
@@ -1528,6 +1531,8 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		m_pMenuPresetsRecovery->setChecked(SandBoxes.first()->SetBoolSafe("AutoRecover", m_pMenuPresetsRecovery->isChecked()));
 	else if (Action == m_pMenuPresetsForce)
 		m_pMenuPresetsForce->setChecked(SandBoxes.first()->SetBoolSafe("DisableForceRules", m_pMenuPresetsForce->isChecked()));
+	else if (Action == m_pMenuPresetsBreakout)
+		m_pMenuPresetsBreakout->setChecked(SandBoxes.first()->SetBoolSafe("DisableBreakoutRules", m_pMenuPresetsBreakout->isChecked()));
 	else if (Action == m_pMenuOptions)
 		ShowOptions(SandBoxes.first());
 	else if (Action == m_pMenuBrowse)

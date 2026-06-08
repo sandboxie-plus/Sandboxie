@@ -26,7 +26,6 @@ jobs:
           REPO: ${{ github.repository }}
           CATEGORY_NAME: Announcements
           RELEASE_TAG: ${{ github.event.release.tag_name || inputs.release_tag }}
-          MAX_TO_LOCK: "20"
         shell: bash
         run: |
           set -euo pipefail
@@ -39,15 +38,10 @@ jobs:
             exit 1
           fi
 
-          if ! [[ "${MAX_TO_LOCK}" =~ ^[0-9]+$ ]] || [[ "${MAX_TO_LOCK}" -lt 1 ]]; then
-            echo "MAX_TO_LOCK must be a positive integer, got: ${MAX_TO_LOCK}" >&2
-            exit 1
-          fi
-
           echo "Repository: ${owner}/${repo}"
           echo "Category: ${CATEGORY_NAME}"
           echo "Release tag to keep unlocked: ${release_tag}"
-          echo "Maximum old discussions to lock this run: ${MAX_TO_LOCK}"
+          echo "Locking all old release announcements"
 
           read -r -d '' CATEGORY_QUERY <<'EOF' || true
           query($owner: String!, $repo: String!) {
@@ -87,6 +81,7 @@ jobs:
                   title
                   url
                   createdAt
+                  closed
                   locked
                   category {
                     id
@@ -189,13 +184,16 @@ jobs:
               jq -c '
                 [
                   .[]
-                  | select(.title | test("(^|[^0-9A-Za-z])v[0-9]+\\.[0-9]+\\.[0-9]+([^0-9A-Za-z]|$)"; "i"))
+                  | select(.title | test("v[0-9]+\\.[0-9]+\\.[0-9]+"; "i"))
                 ]
               ' <<<"$discussions_json"
             )"
 
             release_like_count="$(jq 'length' <<<"$release_like_discussions")"
-            echo "Found ${release_like_count} release-like discussion(s) in category ${CATEGORY_NAME}"
+            echo "Found ${release_like_count} outdated release(s) in category ${CATEGORY_NAME}"
+
+            # echo "Debug: release-like discussions JSON:"
+            # echo "$release_like_discussions" | jq '.'
 
             if [[ "$release_like_count" -eq 0 ]]; then
               echo "No release-like discussions found."
@@ -244,20 +242,17 @@ jobs:
             [
               .[]
               | select(.id != $keep_id)
-              | select(.locked == false and .closed == false)
+              | select(.closed != true)
             ]
             | length
           ' <<<"$release_like_discussions")"
 
           echo "Found ${candidate_count} old unlocked release announcement(s) eligible for locking in total."
-          echo "Will lock up to ${MAX_TO_LOCK} in this run."
 
           mapfile -t to_lock < <(
-            jq -c --arg keep_id "$keep_id" --arg max_to_lock "$MAX_TO_LOCK" '
-              ($max_to_lock | tonumber) as $limit
-              | sort_by(.createdAt) | reverse
-              | map(select(.id != $keep_id and .locked == false and .closed == false))
-              | .[0:$limit]
+            jq -c --arg keep_id "$keep_id" '
+              sort_by(.createdAt) | reverse
+              | map(select(.id != $keep_id and .closed != true))
               | .[]
             ' <<<"$release_like_discussions"
           )
@@ -277,34 +272,60 @@ jobs:
             number="$(jq -r '.number' <<<"$discussion")"
             title="$(jq -r '.title' <<<"$discussion")"
             url="$(jq -r '.url' <<<"$discussion")"
+            closed="$(jq -r '.closed' <<<"$discussion")"
             locked="$(jq -r '.locked' <<<"$discussion")"
 
-            echo "Closing discussion #${number}: ${title}"
-            echo " URL: ${url}"
-            echo " Reason: OUTDATED"
+            current_state="$(
+              gh api graphql \
+                -f id="$id" \
+                -f query='
+                  query($id: ID!) {
+                    node(id: $id) {
+                      ... on Discussion {
+                        closed
+                        locked
+                      }
+                    }
+                  }
+                ' \
+                --jq '.node'
+            )"
 
-            gh api graphql \
-              -f id="$id" \
-              -f reason="OUTDATED" \
-              -f query="$CLOSE_MUTATION" \
-              >/dev/null
+            closed_current="$(echo "$current_state" | jq -r '.closed')"
+            locked_current="$(echo "$current_state" | jq -r '.locked')"
 
-            echo " → Closed ✓"
+            actions_made=""
 
-          if [[ "$locked" == "false" ]]; then
-            echo "Locking discussion #${number}: ${title}"
+            if [[ "$closed_current" != "true" ]]; then
+              echo "Closing discussion #${number}: ${title}"
+              echo " URL: ${url}"
+              echo " Reason: OUTDATED"
 
-            gh api graphql \
-              -f id="$id" \
-              -f query="$LOCK_MUTATION" \
-              >/dev/null
+              gh api graphql \
+                -f id="$id" \
+                -f reason="OUTDATED" \
+                -f query="$CLOSE_MUTATION" \
+                >/dev/null
 
-            echo " → Locked ✓"
-          else
-            echo " → Already locked, skipping lock"
-          fi
+              echo " → Closed ✓"
+              actions_made="${actions_made}closed "
+            fi
 
-            closed_and_locked_count=$((closed_and_locked_count + 1))
+            if [[ "$locked_current" != "true" ]]; then
+              echo "Locking discussion #${number}: ${title}"
+
+              gh api graphql \
+                -f id="$id" \
+                -f query="$LOCK_MUTATION" \
+                >/dev/null
+
+              echo " → Locked ✓"
+              actions_made="${actions_made}locked "
+            fi
+
+            if [[ -n "$actions_made" ]]; then
+              closed_and_locked_count=$((closed_and_locked_count + 1))
+            fi
           done
 
           remaining_count=$((candidate_count - closed_and_locked_count))
@@ -312,8 +333,4 @@ jobs:
           echo "Done. Closed and locked ${closed_and_locked_count} previous release announcement(s)."
           echo "Backlog remaining: ${remaining_count} old unlocked release announcement(s)."
 
-          if [[ "${remaining_count}" -gt 0 ]]; then
-            echo "Run again to continue reducing the backlog."
-          else
-            echo "Backlog status: clear."
-          fi
+          echo "Backlog status: clear."

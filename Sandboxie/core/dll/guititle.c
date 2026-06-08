@@ -44,6 +44,8 @@ static int Gui_GetWindowTextA(
 
 BOOLEAN Gui_DisableTitle = FALSE;
 
+static BOOLEAN Gui_DisableCustomTitleOpt = FALSE;
+
 const WCHAR *Gui_TitleSuffixW = TITLE_SUFFIX_W;
 static ULONG Gui_TitleSuffixW_len = 0;
 
@@ -98,6 +100,15 @@ _FX BOOLEAN Gui_InitTitle(HMODULE module)
 
     Gui_TitleSuffixW_len = wcslen(Gui_TitleSuffixW);
     Gui_TitleSuffixA_len = strlen(Gui_TitleSuffixA);
+
+    //
+    // check if user wants to disable the custom titlebar optimization
+    // (i.e. allow [#] markers on VCL/Qt/Electron custom titlebar windows)
+    //
+
+    SbieDll_GetSettingsForName(NULL, Dll_ImageName, L"DisableCustomTitleOpt", buf, sizeof(buf), NULL);
+    if (*buf == L'y' || *buf == L'Y')
+        Gui_DisableCustomTitleOpt = TRUE;
 
     //
     // hook functions
@@ -160,19 +171,25 @@ _FX BOOLEAN Gui_ShouldCreateTitle(HWND hWnd)
             // the top of the window, the application is rendering its own
             // titlebar (e.g., VCL TCustomTitleBarPanel, Qt, Electron, etc.)
             // and modifying the title causes excessive repainting.
+            // Set DisableCustomTitleOpt=y to allow [#] markers on
+            // custom titlebar windows.
             //
 
-            RECT windowRect;
-            POINT clientOrigin = {0, 0};
-            if (__sys_GetWindowRect(hWnd, &windowRect) &&
-                __sys_ClientToScreen(hWnd, &clientOrigin)) {
+            if (! Gui_DisableCustomTitleOpt) {
 
-                int titleBarHeight = clientOrigin.y - windowRect.top;
+                RECT windowRect;
+                POINT clientOrigin = {0, 0};
+                if (__sys_GetWindowRect(hWnd, &windowRect) &&
+                    __sys_ClientToScreen(hWnd, &clientOrigin)) {
 
-                // Standard titlebar is typically 20-40 pixels. If the gap is
-                // less than 10 pixels, it's a custom titlebar - skip modification.
-                if (titleBarHeight < 10)
-                    return FALSE;
+                    int titleBarHeight = clientOrigin.y - windowRect.top;
+
+                    // Standard titlebar is typically 20-40 pixels. If the gap
+                    // is less than 10 pixels, it's a custom titlebar - skip
+                    // modification.
+                    if (titleBarHeight < 10)
+                        return FALSE;
+                }
             }
 
             // $Workaround$ - 3rd party fix

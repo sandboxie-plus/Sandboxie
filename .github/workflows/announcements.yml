@@ -2,7 +2,7 @@ name: Lock previous announcement(s)
 
 on:
   release:
-    types: [published]
+    types: [released]
 
   workflow_dispatch:
     inputs:

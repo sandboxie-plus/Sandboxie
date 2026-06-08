@@ -20,7 +20,7 @@ jobs:
       discussions: write
 
     steps:
-      - name: Waiting for release tag...
+      - name: Waiting for release tag
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -97,6 +97,18 @@ jobs:
                   hasNextPage
                   endCursor
                 }
+              }
+            }
+          }
+          EOF
+
+          read -r -d '' CLOSE_MUTATION <<'EOF' || true
+          mutation($id: ID!, $reason: DiscussionCloseReason) {
+            closeDiscussion(input: {discussionId: $id, reason: $reason}) {
+              discussion {
+                closed
+                closedAt
+                stateReason
               }
             }
           }
@@ -232,7 +244,6 @@ jobs:
             [
               .[]
               | select(.id != $keep_id)
-              | select(.locked == false)
             ]
             | length
           ' <<<"$release_like_discussions")"
@@ -244,7 +255,7 @@ jobs:
             jq -c --arg keep_id "$keep_id" --arg max_to_lock "$MAX_TO_LOCK" '
               ($max_to_lock | tonumber) as $limit
               | sort_by(.createdAt)
-              | map(select(.id != $keep_id and .locked == false))
+              | map(select(.id != $keep_id))
               | .[0:$limit]
               | .[]
             ' <<<"$release_like_discussions"
@@ -268,18 +279,27 @@ jobs:
 
             echo "Locking discussion #${number}: ${title}"
             echo " URL: ${url}"
+            echo " Reason: OUTDATED"
+
+            gh api graphql \
+              -f id="$id" \
+              -f reason="OUTDATED" \
+              -f query="$CLOSE_MUTATION" \
+              >/dev/null
 
             gh api graphql \
               -f id="$id" \
               -f query="$LOCK_MUTATION" \
               >/dev/null
 
+            echo " → Closed and locked ✓"
+
             locked_count=$((locked_count + 1))
           done
 
           remaining_count=$((candidate_count - locked_count))
 
-          echo "Done. Locked ${locked_count} previous release announcement(s)."
+          echo "Done. Closed and locked ${locked_count} previous release announcement(s)."
           echo "Backlog remaining: ${remaining_count} old unlocked release announcement(s)."
 
           if [[ "${remaining_count}" -gt 0 ]]; then

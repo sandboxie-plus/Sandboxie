@@ -244,6 +244,7 @@ jobs:
             [
               .[]
               | select(.id != $keep_id)
+              | select(.locked == false and .closed == false)
             ]
             | length
           ' <<<"$release_like_discussions")"
@@ -254,8 +255,8 @@ jobs:
           mapfile -t to_lock < <(
             jq -c --arg keep_id "$keep_id" --arg max_to_lock "$MAX_TO_LOCK" '
               ($max_to_lock | tonumber) as $limit
-              | sort_by(.createdAt)
-              | map(select(.id != $keep_id))
+              | sort_by(.createdAt) | reverse
+              | map(select(.id != $keep_id and .locked == false and .closed == false))
               | .[0:$limit]
               | .[]
             ' <<<"$release_like_discussions"
@@ -269,15 +270,16 @@ jobs:
             exit 0
           fi
 
-          locked_count=0
+          closed_and_locked_count=0
 
           for discussion in "${to_lock[@]}"; do
             id="$(jq -r '.id' <<<"$discussion")"
             number="$(jq -r '.number' <<<"$discussion")"
             title="$(jq -r '.title' <<<"$discussion")"
             url="$(jq -r '.url' <<<"$discussion")"
+            locked="$(jq -r '.locked' <<<"$discussion")"
 
-            echo "Locking discussion #${number}: ${title}"
+            echo "Closing discussion #${number}: ${title}"
             echo " URL: ${url}"
             echo " Reason: OUTDATED"
 
@@ -287,19 +289,27 @@ jobs:
               -f query="$CLOSE_MUTATION" \
               >/dev/null
 
+            echo " → Closed ✓"
+
+          if [[ "$locked" == "false" ]]; then
+            echo "Locking discussion #${number}: ${title}"
+
             gh api graphql \
               -f id="$id" \
               -f query="$LOCK_MUTATION" \
               >/dev/null
 
-            echo " → Closed and locked ✓"
+            echo " → Locked ✓"
+          else
+            echo " → Already locked, skipping lock"
+          fi
 
-            locked_count=$((locked_count + 1))
+            closed_and_locked_count=$((closed_and_locked_count + 1))
           done
 
-          remaining_count=$((candidate_count - locked_count))
+          remaining_count=$((candidate_count - closed_and_locked_count))
 
-          echo "Done. Closed and locked ${locked_count} previous release announcement(s)."
+          echo "Done. Closed and locked ${closed_and_locked_count} previous release announcement(s)."
           echo "Backlog remaining: ${remaining_count} old unlocked release announcement(s)."
 
           if [[ "${remaining_count}" -gt 0 ]]; then

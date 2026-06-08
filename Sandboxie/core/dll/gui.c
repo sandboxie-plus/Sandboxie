@@ -1655,7 +1655,7 @@ _FX VOID Gui_ProtectScreen(HWND hWnd)
 // Gui_WindowProcW
 //---------------------------------------------------------------------------
 
-
+static HWND Gui_PreviousActiveWindow = NULL;
 _FX LRESULT Gui_WindowProcW(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -1680,6 +1680,19 @@ _FX LRESULT Gui_WindowProcW(
 	{
 		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
 			return TRUE;
+	}
+
+	//if (uMsg == WM_KILLFOCUS) {
+	//	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
+	//		return FALSE;
+	//}
+	if (uMsg == WM_ACTIVATE) {
+		if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
+			if (wParam == WA_INACTIVE)
+				return 0;
+			else {
+				Gui_PreviousActiveWindow = (HWND)hWnd;
+			}
 	}
 
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldW_Atom);
@@ -1742,6 +1755,18 @@ _FX LRESULT Gui_WindowProcA(
 	{
 		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
 			return TRUE;
+	}
+	//if (uMsg == WM_KILLFOCUS) {
+	//	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
+	//		return FALSE;
+	//}
+	if (uMsg == WM_ACTIVATE) {
+		if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
+			if (wParam == WA_INACTIVE)
+				return 0;
+			else {
+				Gui_PreviousActiveWindow = (HWND)hWnd;
+			}
 	}
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);
     lResult = __sys_CallWindowProcA(wndproc, hWnd, uMsg, wParam, new_lParam);

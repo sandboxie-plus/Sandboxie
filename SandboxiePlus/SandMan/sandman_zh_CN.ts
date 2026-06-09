@@ -607,22 +607,22 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="550"/>
         <source>Mount &apos;%1&apos; for Export</source>
-        <translation type="unfinished"></translation>
+        <translation>挂载用于导出的 &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="553"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>加密沙箱&apos;%1&apos;尚未挂载。是否跳过？</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="564"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
-        <translation type="unfinished"></translation>
+        <translation>重新挂载时卸载&apos;%1&apos;失败。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="574"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>挂载加密沙箱&apos;%1&apos;失败。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="606"/>
@@ -12968,12 +12968,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2959"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>强制程序从沙箱中打开文件时在该沙箱内运行。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2962"/>
         <source>Force programs opening boxed files into their sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>强制程序打开已沙箱化的文件时进入其所属沙箱运行</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2969"/>

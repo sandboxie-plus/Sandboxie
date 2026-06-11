@@ -471,22 +471,22 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="BoxTransfer.cpp" line="550"/>
         <source>Mount &apos;%1&apos; for Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Einhängen von &apos;%1&apos; für den Export</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="553"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die verschlüsselte Sandbox &apos;%1&apos; ist nicht eingehängt. Überspringen?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="564"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Aushängen von &apos;%1&apos; zum erneuten Einhängen ist fehlgeschlagen.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="574"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Einhängen der verschlüsselten Sandbox &apos;%1&apos; ist fehlgeschlagen.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="647"/>
@@ -515,10 +515,6 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
         <location filename="BoxTransfer.cpp" line="462"/>
         <source>Cannot export: Sandbox has running processes.</source>
         <translation>Exportieren nicht möglich: Sandbox hat laufende Prozesse.</translation>
-    </message>
-    <message>
-        <source>Cannot export: Sandbox is empty.</source>
-        <translation type="vanished">Exportieren nicht möglich: Sandbox ist leer.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="481"/>
@@ -4401,7 +4397,7 @@ Fehler: %1</translation>
     <message>
         <location filename="SandMan.cpp" line="4521"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
-        <translation>Der Inhalt einer nicht angeschlossenen Sandbox kann nicht gelöscht werden</translation>
+        <translation>Der Inhalt einer ausgehängten Sandbox kann nicht gelöscht werden</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4523"/>
@@ -11534,12 +11530,12 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2959"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzwingt, dass Programme, die Dateien aus einer Sandbox öffnen, in derselben Sandbox ausgeführt werden.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2962"/>
         <source>Force programs opening boxed files into their sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwinge Programme, die sandgeboxte Dateien öffnen, in deren Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2969"/>

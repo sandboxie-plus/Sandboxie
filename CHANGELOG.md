@@ -7,6 +7,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.17.8 / 5.72.8] - 2026-06-??
+
+### Added
+- added `DisableCustomTitleOpt=[process,][y|n]` to allow `[#]` sandboxie title markers on custom-titlebar windows (Delphi VCL, Qt, Electron) that were previously skipped to prevent DWM repaint CPU loops [#5387](https://github.com/sandboxie-plus/Sandboxie/issues/5387)
+
+
+
 ## [1.17.7 / 5.72.7] - 2026-06-07
 
 ### Added

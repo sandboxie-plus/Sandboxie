@@ -1290,6 +1290,35 @@ void CBoxBorder::TimerProc()
 		if (!hrgnBorder)
 			return; // GDI region combination failed; leave border as-is for this tick
 
+		// Apply BorderExcludeTaskbar clipping, matching the all-mode path.
+		// Skip when the window is topmost: topmost windows sit above the taskbar, so
+		// clipping the border region would misalign it with the window edge.
+		{
+			bool globalBorderExcludeTaskbar = m_Api->GetGlobalSettings()->GetBool("BorderExcludeTaskbar", true);
+			bool excludeTaskbar = pProcessBox ? pProcessBox->GetBool("BorderExcludeTaskbar", globalBorderExcludeTaskbar) : globalBorderExcludeTaskbar;
+			if (excludeTaskbar && !(ExStyle & WS_EX_TOPMOST))
+			{
+				HRGN hrgnTaskbar = CreateRectRgn(0, 0, 0, 0);
+				if (hrgnTaskbar)
+				{
+					MergeTaskbarOcclusionIntoCoveredRegion(hrgnTaskbar);
+					// Convert from screen coordinates to window-relative coordinates.
+					OffsetRgn(hrgnTaskbar, -windowRect.left, -windowRect.top);
+					if (CombineRgn(hrgnBorder, hrgnBorder, hrgnTaskbar, RGN_DIFF) == ERROR)
+					{
+						DeleteObject(hrgnTaskbar);
+						DeleteObject(hrgnBorder);
+						hrgnBorder = NULL;
+					}
+					else
+						DeleteObject(hrgnTaskbar);
+				}
+			}
+		}
+
+		if (!hrgnBorder)
+			return; // taskbar clipping region combination failed; leave border as-is for this tick
+
 		// Position and show the border window.
 		// Keep SWP_NOZORDER during stable focus mode so we don't permanently fight other
 		// always-on-top overlays.  Temporarily re-raise only for a short click/focus
@@ -1688,6 +1717,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		HashMix64(sceneHash, (ULONGLONG)(LONG_PTR)wnd.rect.bottom);
 		HashMix64(sceneHash, (ULONGLONG)(ULONG_PTR)wnd.pBox);
 		HashMix64(sceneHash, (ULONGLONG)wnd.zOrder);
+		HashMix64(sceneHash, (ULONGLONG)((wnd.exStyle & WS_EX_TOPMOST) ? 1ULL : 0ULL)); // topmost flips affect clipping/z-order decisions
 		if (wnd.pBox)
 		{
 			const SAllStyle& style = getAllStyleForBox(wnd.pBox);
@@ -1844,6 +1874,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				HashMix64(perWindowHash, (ULONGLONG)(style.labelOnly ? 1ULL : 0ULL));
 				HashMixWString(perWindowHash, style.boxName);
 				HashMix64(perWindowHash, rollingCoverageHash);
+				HashMix64(perWindowHash, (ULONGLONG)((wnd.exStyle & WS_EX_TOPMOST) ? 1ULL : 0ULL)); // force rebuild when topmost changes
 				HashMix64(perWindowHash, (ULONGLONG)(applyCaptureAffinity ? 1ULL : 0ULL)); // cover state change invalidates skip-rebuild
 				HashMix64(perWindowHash, (ULONGLONG)(excludeTaskbar ? 1ULL : 0ULL)); // per-box taskbar exclusion setting
 
@@ -1871,7 +1902,9 @@ void CBoxBorder::DrawAllSandboxedBorders()
 					// Build effective clip region: hrgnCovered plus taskbar areas if BorderExcludeTaskbar is set for this box.
 					HRGN hrgnEffective = hrgnCovered;
 					bool hrgnEffectiveOwned = false;
-					if (excludeTaskbar && hrgnTaskbar)
+					// Skip clipping when the window is topmost: it sits above the taskbar,
+					// so subtracting the taskbar region would misalign the border.
+					if (excludeTaskbar && hrgnTaskbar && !(wnd.exStyle & WS_EX_TOPMOST))
 					{
 						HRGN hrgnTemp = CreateRectRgn(0, 0, 0, 0);
 						if (hrgnTemp)

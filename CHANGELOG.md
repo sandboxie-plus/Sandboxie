@@ -7,13 +7,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.8 / 5.72.8] - 2026-06-??
+## [1.17.8 / 5.72.8] - 2026-06-14
 
 ### Added
 - added `DisableCustomTitleOpt=[process,][y|n]` to allow `[#]` sandboxie title markers on custom-titlebar windows (Delphi VCL, Qt, Electron) that were previously skipped to prevent DWM repaint CPU loops [#5387](https://github.com/sandboxie-plus/Sandboxie/issues/5387)
 
 ### Changed
-- updated bundled ImDisk driver to 3.0.1 [#5419](https://github.com/sandboxie-plus/Sandboxie/issues/5419)
+- updated bundled ImDisk driver to 3.0.2 [#5419](https://github.com/sandboxie-plus/Sandboxie/issues/5419)
 
 ### Fixed
 - fix Suppress logs for expected non-user SIDs [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)

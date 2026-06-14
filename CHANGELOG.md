@@ -12,9 +12,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added `DisableCustomTitleOpt=[process,][y|n]` to allow `[#]` sandboxie title markers on custom-titlebar windows (Delphi VCL, Qt, Electron) that were previously skipped to prevent DWM repaint CPU loops [#5387](https://github.com/sandboxie-plus/Sandboxie/issues/5387)
 
+### Changed
+- updated bundled ImDisk driver to 3.0.1 [#5419](https://github.com/sandboxie-plus/Sandboxie/issues/5419)
+
 ### Fixed
 - fix Suppress logs for expected non-user SIDs [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
 - SbieSvc.exe: SBIE2218/2219 error when run program as administrator [#5417](https://github.com/sandboxie-plus/Sandboxie/issues/5417)
+- fixed explorer.exe crashes in Application Compartment when Huorong Security is installed [#5423](https://github.com/sandboxie-plus/Sandboxie/issues/5423)
+
 
 
 

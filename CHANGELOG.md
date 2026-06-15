@@ -12,21 +12,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.17.8 / 5.72.8] - 2026-06-14
 
 ### Added
-- added `DisableCustomTitleOpt=[process,][y|n]` to allow `[#]` sandboxie title markers on custom-titlebar windows (Delphi VCL, Qt, Electron) that were previously skipped to prevent DWM repaint CPU loops [#5387](https://github.com/sandboxie-plus/Sandboxie/issues/5387)
+- added `DisableCustomTitleOpt=[process,][y|n]` to allow `[#]` Sandboxie title markers on windows with custom title bars (Delphi VCL, Qt, Electron) that were previously skipped to prevent DWM repaint CPU loops [#5387](https://github.com/sandboxie-plus/Sandboxie/issues/5387)
 
 ### Changed
 - updated bundled ImDisk driver to 3.0.2 [#5419](https://github.com/sandboxie-plus/Sandboxie/issues/5419)
 
 ### Fixed
-- fix Suppress logs for expected non-user SIDs [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
-- SbieSvc.exe: SBIE2218/2219 error when run program as administrator [#5417](https://github.com/sandboxie-plus/Sandboxie/issues/5417)
+- fixed suppress logs for expected non-user SIDs [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
+- fixed SbieSvc.exe SBIE2218/2219 error when run program as administrator [#5417](https://github.com/sandboxie-plus/Sandboxie/issues/5417)
 - fixed explorer.exe crashes in Application Compartment when Huorong Security is installed [#5423](https://github.com/sandboxie-plus/Sandboxie/issues/5423)
-
-
 
 
 
@@ -41,14 +38,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed crash in VMware when running inside sandbox caused by NtQueryDirectoryObject hook returning non-null-terminated strings and uninitialized padding bytes in OBJECT_DIRECTORY_INFORMATION structures, which caused QueryDosDeviceW to crash in wcscmp [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
-- Add short-name fallback cache and heuristics [#5404](https://github.com/sandboxie-plus/Sandboxie/pull/5404)
+- added short-name fallback cache and heuristics [#5404](https://github.com/sandboxie-plus/Sandboxie/pull/5404)
 - fixed addon setup not working introduced in a recent build
-- fixed Starting from version 1.17.4, using the 'Sandbox with Data Protection' type box causes PowerShell to wait indefinitely, while there is no such bug with other types. [#5408](https://github.com/sandboxie-plus/Sandboxie/issues/5408)
-- fixed Importing encrypted box no longer creates encrypted image in v1.17.6 [#5399](https://github.com/sandboxie-plus/Sandboxie/issues/5399)
+- fixed starting from version 1.17.4, using the 'Sandbox with Data Protection' type box causes PowerShell to wait indefinitely, while there is no such bug with other types [#5408](https://github.com/sandboxie-plus/Sandboxie/issues/5408)
+- fixed importing encrypted box no longer creates encrypted image in v1.17.6 [#5399](https://github.com/sandboxie-plus/Sandboxie/issues/5399)
 - fixed EditorSettings fuzzy matching not applied, showing few/no completion entries, and table cell highlighting not updating
-- fixed Error enumerating and deleting folder. [#5406](https://github.com/sandboxie-plus/Sandboxie/issues/5406)
+- fixed error enumerating and deleting folder [#5406](https://github.com/sandboxie-plus/Sandboxie/issues/5406)
 - fixed black box import/export when 'ProtectAdminOnly=y' (default) and SandMan does not run as admin
-
 
 
 
@@ -65,7 +61,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - FIXED SECURITY ISSUE ID-40: issue with APC injection vulnerability
-- fixed high CPU usage caused by DWM with applications using custom title bars (e.g., Delphi VCL)
+- fixed high CPU usage caused by DWM with applications using custom title bars (e.g. Delphi VCL)
 
 
 
@@ -282,7 +278,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.16.5 / 5.71.5] - 2025-11-04
 
 ### Added
-- Enhanced INI Editor: Major improvements to the "Edit INI Section" dialog.
+- Enhanced INI Editor: Major improvements to the "Edit ini Section" dialog.
   - Dedicated Editor Settings: A new "Editor Settings" window for configuring all INI editor behaviour.
   - Setting Validation: INI keys are now visually validated against `SbieSettings.ini` to catch configuration errors. (1.16.2)
   - Contextual Tooltips: Tooltips for INI keys with metadata sourced from `SbieSettings.ini`, and configurable verbosity levels. (1.16.2, 1.16.4)

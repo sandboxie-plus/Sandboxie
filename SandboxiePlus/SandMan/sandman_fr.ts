@@ -596,22 +596,22 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="BoxTransfer.cpp" line="550"/>
         <source>Mount &apos;%1&apos; for Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Monter « %1 » pour l&apos;exportation</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="553"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Le bac chiffré « %1 » n&apos;est pas monté. L&apos;ignorer ?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="564"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec du démontage de « %1 » pour le remontage.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="574"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec du montage du bac chiffré « %1 ».</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="606"/>
@@ -6162,7 +6162,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation> faux admin</translation>
+        <translation> (Faux administrateur)</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -12577,17 +12577,17 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2931"/>
         <source>Force Process Options</source>
-        <translation>Forcer les options de processus</translation>
+        <translation>Options de forçage des processus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2959"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Force les programmes qui ouvrent des fichiers se trouvant dans un bac à s&apos;exécuter dans ce même bac.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2962"/>
         <source>Force programs opening boxed files into their sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer les programmes ouvrant les fichiers d&apos;un bac à s&apos;exécuter dans ce bac</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2969"/>
@@ -12597,7 +12597,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2989"/>
         <source>Sandbox for MoTW marked files</source>
-        <translation>Bac à sable pour les fichiers avec une marque du web</translation>
+        <translation>Bac à utiliser pour les fichiers avec une marque du web :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3008"/>

@@ -43,7 +43,7 @@ static BOOLEAN Box_InitPaths(POOL *pool, BOX *box);
 
 static BOOLEAN Box_ExpandString(
     BOX *box, const WCHAR *model, const WCHAR *suffix,
-    WCHAR **path, ULONG *path_len);
+    WCHAR **path, ULONG *path_len, BOOLEAN *suppress_log);
 
 
 //---------------------------------------------------------------------------
@@ -284,6 +284,7 @@ _FX BOOLEAN Box_InitPaths(POOL *pool, BOX *box)
     const WCHAR *value;
     WCHAR suffix[80];
     BOOLEAN ok;
+    BOOLEAN suppress_file_root_log = FALSE;
     WCHAR *ptr1;
     WCHAR KeyPath[256];
 
@@ -310,12 +311,14 @@ _FX BOOLEAN Box_InitPaths(POOL *pool, BOX *box)
         value = _FileRootPath_Default;
 
     ok = Box_ExpandString(
-        box, value, suffix, &box->file_path, &box->file_path_len);
+        box, value, suffix, &box->file_path, &box->file_path_len,
+        &suppress_file_root_log);
     if (! ok) {
 
-        Log_Status_Ex_Session(
-            MSG_BOX_CREATE, 0x21, STATUS_UNSUCCESSFUL,
-            box->name, box->session_id);
+        if (! suppress_file_root_log)
+            Log_Status_Ex_Session(
+                MSG_BOX_CREATE, 0x21, STATUS_UNSUCCESSFUL,
+                box->name, box->session_id);
         return FALSE;
     }
 
@@ -323,8 +326,8 @@ _FX BOOLEAN Box_InitPaths(POOL *pool, BOX *box)
     // get the key paths
     //
 
-    ok = Box_ExpandString(box, L"%SystemTemp%", L"", &box->system_temp_path, &box->system_temp_path_len);
-    ok = Box_ExpandString(box, L"%DefaultSpoolDirectory%", L"", &box->spooler_directory, &box->spooler_directory_len);
+    ok = Box_ExpandString(box, L"%SystemTemp%", L"", &box->system_temp_path, &box->system_temp_path_len, NULL);
+    ok = Box_ExpandString(box, L"%DefaultSpoolDirectory%", L"", &box->spooler_directory, &box->spooler_directory_len, NULL);
 
     if (!ok) {
 
@@ -337,7 +340,7 @@ _FX BOOLEAN Box_InitPaths(POOL *pool, BOX *box)
     // sometimes we get here without a user temp var being set.  Check first to avoid an error popup.
     RtlStringCbPrintfW(KeyPath, sizeof(KeyPath), L"\\REGISTRY\\USER\\%.184s\\Environment", box->sid);
     if (DoesRegValueExist(RTL_REGISTRY_ABSOLUTE, KeyPath, L"temp"))
-        Box_ExpandString(box, L"%temp%", L"", &box->user_temp_path, &box->user_temp_path_len);
+        Box_ExpandString(box, L"%temp%", L"", &box->user_temp_path, &box->user_temp_path_len, NULL);
 
     suffix[0] = L'\0';
 
@@ -346,7 +349,7 @@ _FX BOOLEAN Box_InitPaths(POOL *pool, BOX *box)
         value = _KeyRootPath_Default;
 
     ok = Box_ExpandString(
-        box, value, suffix, &box->key_path, &box->key_path_len);
+        box, value, suffix, &box->key_path, &box->key_path_len, NULL);
     if (! ok) {
 
         Log_Status_Ex_Session(
@@ -366,7 +369,7 @@ _FX BOOLEAN Box_InitPaths(POOL *pool, BOX *box)
         value = _IpcRootPath_Default;
 
     ok = Box_ExpandString(
-        box, value, suffix, &box->ipc_path, &box->ipc_path_len);
+        box, value, suffix, &box->ipc_path, &box->ipc_path_len, NULL);
     if (! ok) {
 
         Log_Status_Ex_Session(
@@ -411,13 +414,16 @@ _FX BOOLEAN Box_InitPaths(POOL *pool, BOX *box)
 
 _FX BOOLEAN Box_ExpandString(
     BOX *box, const WCHAR *model, const WCHAR *suffix,
-    WCHAR **path, ULONG *path_len)
+    WCHAR **path, ULONG *path_len, BOOLEAN *suppress_log)
 {
     WCHAR *value1, *value2, *ptr;
     ULONG suffix_len, len;
     BOOLEAN ok = FALSE;
 
-    value1 = Conf_Expand(box->expand_args, model, NULL);
+    if (suppress_log)
+        *suppress_log = FALSE;
+
+    value1 = Conf_ExpandEx(box->expand_args, model, NULL, suppress_log);
     if (! value1)
         return FALSE;
 

@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.17.9 / 5.72.9] - 2026-06-15
+
+### Changed
+- updated bundled ImDisk driver to 3.0.3
+
+
 
 
 ## [1.17.8 / 5.72.8] - 2026-06-14

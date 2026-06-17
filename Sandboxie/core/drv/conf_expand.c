@@ -299,9 +299,9 @@ _FX BOOLEAN Conf_IsExpectedNonUserSid(CONF_EXPAND_ARGS *args)
     // These virtual identities normally have no ProfileList or HKCU data.
     // Sessions 0 and 1 continue to log for safety.
     //
-    //   S-1-5-96-0-* - UMDF driver host virtual identities
+    //   S-1-5-96-0-* - Usermode Font Driver Host / UMFD host virtual identities
     //                 (e.g. fontdrvhost.exe / Font Driver Host\UMFD-x)
-    //   S-1-5-90-0-* - Window Manager / DWM virtual identities
+    //   S-1-5-90-0-* - Desktop Window Manager / DWM virtual identities
     //                 (e.g. dwm.exe / Window Manager\DWM-x)
     //
 
@@ -809,8 +809,25 @@ _FX WCHAR *Conf_Expand(
     CONF_EXPAND_ARGS *args, const WCHAR *model_value,
     const WCHAR *setting_name)
 {
+    return Conf_ExpandEx(args, model_value, setting_name, NULL);
+}
+
+
+//---------------------------------------------------------------------------
+// Conf_ExpandEx
+//---------------------------------------------------------------------------
+
+
+_FX WCHAR *Conf_ExpandEx(
+    CONF_EXPAND_ARGS *args, const WCHAR *model_value,
+    const WCHAR *setting_name, BOOLEAN *out_suppress_log)
+{
     BOOLEAN suppress_log;
     WCHAR *new_value = Conf_Expand_2(args, model_value, &suppress_log);
+
+    if (out_suppress_log)
+        *out_suppress_log = suppress_log;
+
     if (! new_value) {
 
         WCHAR *text;

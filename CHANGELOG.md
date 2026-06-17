@@ -5,17 +5,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.18.0 / 5.73.0] - 2026-06-??
+
+### Fixed
+- fixed expected non-user SID profile and shell lookup noise by suppressing matching SBIE1406/SBIE1412 and derivative SBIE1204 FileRootPath messages [#5427](https://github.com/sandboxie-plus/Sandboxie/pull/5427)
+
+
+
 ## [1.17.9 / 5.72.9] - 2026-06-15
 
 ### Changed
 - updated bundled ImDisk driver to 3.0.3
-
-
-
-## [1.17.9 / 5.72.9] - 2026-06-??
-
-### Fixed
-- fixed expected non-user SID profile and shell lookup noise by suppressing matching SBIE1406/SBIE1412 and derivative SBIE1204 FileRootPath messages [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
 
 
 

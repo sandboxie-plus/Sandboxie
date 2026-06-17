@@ -17,6 +17,7 @@ void COptionsWindow::LoadRecoveryList()
 	LoadRecoveryListTmpl();
 
 	ui.chkAutoRecovery->setChecked(m_pBox->GetBool("AutoRecover", false));
+	ui.chkUseIgnoreForQuick->setChecked(m_pBox->GetBool("UseAutoRecoverIgnoreForQuick", true));
 	ui.treeRecIgnore->clear();
 	foreach(const QString& Value, m_pBox->GetTextList("AutoRecoverIgnore", m_Template))
 		AddRecIgnoreEntry(Value);
@@ -108,6 +109,7 @@ void COptionsWindow::SaveRecoveryList()
 	WriteTextList("RecoverFolder", RecoverFolder);
 
 	WriteAdvancedCheck(ui.chkAutoRecovery, "AutoRecover", "y", "");
+	WriteAdvancedCheck(ui.chkUseIgnoreForQuick, "UseAutoRecoverIgnoreForQuick", "", "n");
 
 	QStringList AutoRecoverIgnore;
 	for (int i = 0; i < ui.treeRecIgnore->topLevelItemCount(); i++)

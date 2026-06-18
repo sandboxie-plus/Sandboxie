@@ -1008,9 +1008,9 @@ void CSandMan::CreateOldMenus()
 		m_pDisableForce2 = new QAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"));
 		m_pDisableForce2->setCheckable(true);
 		connect(m_pDisableForce2, SIGNAL(triggered()), this, SLOT(OnDisableForce2()));
-		m_pDisableBreakout = m_pMenuFile->addAction(CSandMan::GetIcon("PauseForce"), tr("Disable Breakout Rules"), this, SLOT(OnDisableBreakout()));
+		m_pDisableBreakout = m_pMenuFile->addAction(CSandMan::GetIcon("DisableBreakout"), tr("Disable Breakout Rules"), this, SLOT(OnDisableBreakout()));
 		m_pDisableBreakout->setCheckable(true);
-		m_pDisableBreakout2 = new QAction(CSandMan::GetIcon("PauseForce"), tr("Disable Breakout Rules"));
+		m_pDisableBreakout2 = new QAction(CSandMan::GetIcon("DisableBreakout"), tr("Disable Breakout Rules"));
 		m_pDisableBreakout2->setCheckable(true);
 		connect(m_pDisableBreakout2, SIGNAL(triggered()), this, SLOT(OnDisableBreakout2()));
 		//m_pDisableRecovery = m_pMenuFile->addAction(tr("Disable File Recovery"));

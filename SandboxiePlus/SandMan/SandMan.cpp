@@ -43,6 +43,7 @@
 #include "AddonManager.h"
 #include "Windows/PopUpWindow.h"
 #include "CustomStyles.h"
+#include <QElapsedTimer>
 #include <QScreen>
 
 CSbiePlusAPI* theAPI = NULL;
@@ -450,6 +451,9 @@ CSandMan::CSandMan(QWidget *parent)
 	QDesktopServices::setUrlHandler("sbie", this, "OpenUrl");
 
 	m_StartMenuUpdatePending = false;
+	m_MessageLogPlainItemModeUntil = 0;
+	m_MessageLogFlushPending = false;
+	m_FlushingMessageLog = false;
 
 	m_ThemeUpdatePending = false;
 	m_DefaultStyle = QApplication::style()->objectName();
@@ -1596,9 +1600,15 @@ void CSandMan::CreateView(int iViewMode)
 
 		m_pMessageLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
 		m_pMessageLog->GetView()->setSortingEnabled(false);
+		m_pMessageLog->GetView()->setVerticalScrollMode(QAbstractItemView::ScrollPerItem);
+		connect(m_pMessageLog->GetTree(), SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnMessageLogDblClick(QTreeWidgetItem*, int)));
 
 		m_pLogTabs->addTab(m_pMessageLog, tr("Sbie Messages"));
 
+		m_PendingMessageLog.clear();
+		m_MessageLogPlainItemModeUntil = 0;
+		m_MessageLogFlushPending = false;
+		m_FlushingMessageLog = false;
 		foreach(const SSbieMsg & Msg, m_MessageLog) {
 			QString Link, Message = FormatSbieMessage(Msg.MsgCode, Msg.MsgData, Msg.ProcessName, &Link);
 			AddLogMessage(Msg.TimeStamp, Message, Link);
@@ -3267,55 +3277,157 @@ void CSandMan::AddLogMessage(const QString& Message)
 
 void CSandMan::AddLogMessage(const QDateTime& TimeStamp, const QString& Message, const QString& Link)
 {
+	if (!m_pMessageLog)
+		return;
+
+	if (!m_PendingMessageLog.isEmpty() && m_PendingMessageLog.last().Message == Message) {
+		m_PendingMessageLog.last().Count++;
+		return;
+	}
+
+	SPendingMessageLogEntry Entry;
+	Entry.TimeStamp = TimeStamp;
+	Entry.Message = Message;
+	Entry.Link = Link;
+	Entry.Count = 1;
+	m_PendingMessageLog.append(Entry);
+	ScheduleMessageLogFlush();
+}
+
+void CSandMan::ScheduleMessageLogFlush()
+{
+	if (m_MessageLogFlushPending)
+		return;
+
+	m_MessageLogFlushPending = true;
+	QTimer::singleShot(10, this, SLOT(OnFlushMessageLog()));
+}
+
+void CSandMan::OnFlushMessageLog()
+{
+	m_MessageLogFlushPending = false;
+
+	if (m_FlushingMessageLog)
+		return;
+
+	if (m_PendingMessageLog.isEmpty())
+		return;
+
+	if (!m_pMessageLog) {
+		m_PendingMessageLog.clear();
+		m_MessageLogPlainItemModeUntil = 0;
+		return;
+	}
+
+	m_FlushingMessageLog = true;
+
+	QTreeWidget* pTree = m_pMessageLog->GetTree();
+	const bool UpdatesEnabled = pTree->updatesEnabled();
+	const bool ScrollToBottom = m_pMessageLog->GetView()->verticalScrollBar()->value() == m_pMessageLog->GetView()->verticalScrollBar()->maximum();
+	pTree->setUpdatesEnabled(false);
+
+	const qint64 MaxFlushTimeNs = 8 * 1000 * 1000;
+	const int MinMessagesPerFlush = 25;
+	const int MaxMessagesPerFlush = 500;
+	QElapsedTimer FlushTimer;
+	FlushTimer.start();
+
+	int ProcessedCount = 0;
+	while (!m_PendingMessageLog.isEmpty())
+	{
+		SPendingMessageLogEntry Entry = m_PendingMessageLog.takeFirst();
+		AddLogMessageNow(Entry.TimeStamp, Entry.Message, Entry.Link, Entry.Count);
+		ProcessedCount++;
+
+		if (ProcessedCount >= MaxMessagesPerFlush)
+			break;
+		if (ProcessedCount >= MinMessagesPerFlush && FlushTimer.nsecsElapsed() >= MaxFlushTimeNs)
+			break;
+	}
+
+	pTree->setUpdatesEnabled(UpdatesEnabled);
+	if (ScrollToBottom)
+		m_pMessageLog->GetView()->verticalScrollBar()->setValue(m_pMessageLog->GetView()->verticalScrollBar()->maximum());
+
+	m_FlushingMessageLog = false;
+
+	if (!m_PendingMessageLog.isEmpty())
+		ScheduleMessageLogFlush();
+}
+
+void CSandMan::AddLogMessageNow(const QDateTime& TimeStamp, const QString& Message, const QString& Link, int Count)
+{
 	QRegularExpression tagExp("<[^>]*>");
 	QString TextMessage = Message;
 	TextMessage.remove(tagExp);
+
+#ifndef _DEBUG
+	const int PlainItemBacklogThreshold = 25;
+	const qint64 PlainItemModeMs = 2000;
+	const qint64 NowMs = QDateTime::currentMSecsSinceEpoch();
+	if (m_PendingMessageLog.count() + 1 >= PlainItemBacklogThreshold)
+		m_MessageLogPlainItemModeUntil = NowMs + PlainItemModeMs;
+
+	const bool UsePlainItem = NowMs < m_MessageLogPlainItemModeUntil;
+#endif
 
 	int last = m_pMessageLog->GetTree()->topLevelItemCount();
 	if (last > 0) {
 		QTreeWidgetItem* pItem = m_pMessageLog->GetTree()->topLevelItem(last-1);
 		if (pItem->data(1, Qt::UserRole).toString() == Message) {
-			int Count = pItem->data(0, Qt::UserRole).toInt();
-			if (Count == 0)
-				Count = 1;
-			Count++;
-			pItem->setData(0, Qt::UserRole, Count);
-#ifdef _DEBUG
-			pItem->setText(1, TextMessage + tr(" (%1)").arg(Count));
-#else
-			QLabel* pLabel = (QLabel*)m_pMessageLog->GetTree()->itemWidget(pItem, 1);
-			if(pLabel)
-				pLabel->setText(Message + tr(" (%1)").arg(Count));
-			else
-				pItem->setText(1, Message + tr(" (%1)").arg(Count));
+			int TotalCount = pItem->data(0, Qt::UserRole).toInt();
+			if (TotalCount == 0)
+				TotalCount = 1;
+			TotalCount += Count;
+			pItem->setData(0, Qt::UserRole, TotalCount);
+			pItem->setText(1, TextMessage + tr(" (%1)").arg(TotalCount));
+#ifndef _DEBUG
+			QLabel* pLabel = qobject_cast<QLabel*>(m_pMessageLog->GetTree()->itemWidget(pItem, 1));
+			if (pLabel)
+				pLabel->setText(Message + tr(" (%1)").arg(TotalCount));
 #endif
 			return;
 		}
 	}
 
+	QString DisplayTextMessage = Count > 1 ? TextMessage + tr(" (%1)").arg(Count) : TextMessage;
+#ifndef _DEBUG
+	QString DisplayMessage = Count > 1 ? Message + tr(" (%1)").arg(Count) : Message;
+#endif
+
 	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Message
 	pItem->setText(0, TimeStamp.toString("dd.MM.yyyy hh:mm:ss.zzz"));
 	//pItem->setToolTip(0, TimeStamp.toString("dd.MM.yyyy hh:mm:ss.zzz"));
 	pItem->setData(1, Qt::UserRole, Message);
+	pItem->setData(1, Qt::UserRole + 1, Link);
+	if (!Link.isEmpty())
+		pItem->setToolTip(1, Link);
+	if (Count > 1)
+		pItem->setData(0, Qt::UserRole, Count);
 	m_pMessageLog->GetTree()->addTopLevelItem(pItem);
-#ifdef _DEBUG
-	pItem->setText(1, TextMessage);
-#else
-	if (!Link.isEmpty()) {
-		QLabel* pLabel = new QLabel(Message);
+
+#ifndef _DEBUG
+	if (!UsePlainItem && !Link.isEmpty()) {
+		QLabel* pLabel = new QLabel(DisplayMessage);
 		pLabel->setContentsMargins(3, 0, 0, 0);
 		pLabel->setAutoFillBackground(true);
 		pLabel->setToolTip(Link);
 		connect(pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 		m_pMessageLog->GetTree()->setItemWidget(pItem, 1, pLabel);
-
-		pItem->setText(1, TextMessage);
 	}
-	else
-		pItem->setText(1, Message);
 #endif
 
-	m_pMessageLog->GetView()->verticalScrollBar()->setValue(m_pMessageLog->GetView()->verticalScrollBar()->maximum());
+	pItem->setText(1, DisplayTextMessage);
+}
+
+void CSandMan::OnMessageLogDblClick(QTreeWidgetItem* pItem, int Column)
+{
+	if (!pItem || Column != 1)
+		return;
+
+	QString Link = pItem->data(1, Qt::UserRole + 1).toString();
+	if (!Link.isEmpty())
+		OpenUrl(Link);
 }
 
 QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData, QString ProcessName, QString* pLink)
@@ -4040,6 +4152,10 @@ void CSandMan::OnCleanUp()
 {
 	if (sender() == m_pCleanUpMsgLog || sender() == m_pCleanUpButton) {
 		m_MessageLog.clear();
+		m_PendingMessageLog.clear();
+		m_MessageLogPlainItemModeUntil = 0;
+		m_MessageLogFlushPending = false;
+		m_FlushingMessageLog = false;
 		if (m_pMessageLog) m_pMessageLog->GetTree()->clear();
 	}
 

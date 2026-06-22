@@ -22,7 +22,7 @@
 //
 //---------------------------------------------------------------------------
 
-#include "common/recovery_wildcard.h"
+#include "common/pattern.h"
 
 
 //---------------------------------------------------------------------------
@@ -36,13 +36,10 @@ static void File_InitRecoverList(
     const WCHAR *setting, LIST *list, BOOLEAN MustBeValidPath,
     WCHAR *buf, ULONG buf_len);
 
-static int File_WildcardMatchWholeI(
-    const WCHAR *pattern, const WCHAR *text, BOOLEAN relative,
-    UCHAR *rows, SIZE_T rows_size);
-static int File_WildcardCharEqualI(WCHAR pattern_ch, WCHAR text_ch);
-static int File_WildcardMatchI(
-    const WCHAR *pattern, const WCHAR *text,
-    UCHAR *rows, SIZE_T rows_size);
+static BOOLEAN File_HasWildcard(const WCHAR *path);
+static BOOLEAN File_IsFullPathPattern(const WCHAR *path);
+static BOOLEAN File_MatchRecoverPatternCandidate(
+    PATTERN *pattern, BOOLEAN full_path, const WCHAR *text);
 static BOOLEAN File_IsPathSeparator(WCHAR ch);
 static SIZE_T File_GetRelativeMatchStart(const WCHAR *text);
 static const WCHAR *File_GetNetworkAliasCandidate(const WCHAR *text);
@@ -78,6 +75,8 @@ static CRITICAL_SECTION File_RecHandles_CritSec;
 
 static BOOLEAN File_MsoDllLoaded = FALSE;
 
+extern POOL* Dll_Pool;
+
 //---------------------------------------------------------------------------
 // Structures and Types
 //---------------------------------------------------------------------------
@@ -88,6 +87,9 @@ typedef struct _FILE_RECOVER_FOLDER {
     LIST_ELEM list_elem;
     ULONG ticks;            // for File_RecPaths
     ULONG path_len;
+    PATTERN *pattern;
+    BOOLEAN has_wildcard;
+    BOOLEAN full_path;
     WCHAR path[1];
 
 } FILE_RECOVER_FOLDER;
@@ -211,6 +213,10 @@ _FX void File_InitRecoverList(
 
                 wcscpy(fold->path, TruePath);
                 fold->path_len = wcslen(fold->path);
+                fold->has_wildcard = File_HasWildcard(fold->path);
+                fold->full_path = File_IsFullPathPattern(fold->path);
+                fold->pattern = fold->has_wildcard
+                    ? Pattern_Create(Dll_Pool, fold->path, TRUE, 0) : NULL;
 
                 List_Insert_After(list, NULL, fold);
             }
@@ -223,8 +229,20 @@ _FX void File_InitRecoverList(
 
 
 //---------------------------------------------------------------------------
-// File_WildcardMatchWholeI
+// File_HasWildcard
 //---------------------------------------------------------------------------
+
+
+static BOOLEAN File_HasWildcard(const WCHAR *path)
+{
+    return path && (wcschr(path, L'*') || wcschr(path, L'?'));
+}
+
+
+static BOOLEAN File_IsFullPathPattern(const WCHAR *path)
+{
+    return path && (path[0] == L'\\' || (path[0] && path[1] == L':'));
+}
 
 
 static BOOLEAN File_IsPathSeparator(WCHAR ch)
@@ -330,62 +348,71 @@ static const WCHAR *File_GetNetworkAliasCandidate(const WCHAR *text)
 }
 
 
-static BOOLEAN File_MatchRecoverWildcardCandidate(
-    const WCHAR *pattern, const WCHAR *text,
-    UCHAR **rows, SIZE_T *rows_size, BOOLEAN *overflow)
+static BOOLEAN File_MatchRecoverPatternText(
+    PATTERN *pattern, const WCHAR *text, SIZE_T text_len)
+{
+    WCHAR *text_lwr;
+    BOOLEAN match;
+
+    if (! pattern || ! text)
+        return FALSE;
+
+    if (text_len > (SIZE_T)((ULONG)-1) / sizeof(WCHAR) - 1 ||
+            text_len > 0x7fffffff)
+        return FALSE;
+
+    text_lwr = Dll_AllocTemp((ULONG)((text_len + 1) * sizeof(WCHAR)));
+    if (! text_lwr)
+        return FALSE;
+
+    wmemcpy(text_lwr, text, text_len);
+    text_lwr[text_len] = L'\0';
+    _wcslwr(text_lwr);
+
+    match = Pattern_Match(pattern, text_lwr, (int)text_len);
+
+    Dll_Free(text_lwr);
+    return match;
+}
+
+
+static BOOLEAN File_MatchPatternCandidate(
+    PATTERN *pattern, BOOLEAN full_path, const WCHAR *text)
 {
     SIZE_T text_len;
     SIZE_T match_start;
-    SIZE_T required_size;
-    SIZE_T end;
-    BOOLEAN full_path;
 
     if (! text)
         return FALSE;
 
     text_len = wcslen(text);
-    if (text_len > ((((SIZE_T)-1) / 2) - 1)) {
-        if (*rows) {
-            Dll_Free(*rows);
-            *rows = NULL;
-        }
-        *overflow = TRUE;
-        return FALSE;
-    }
-
-    required_size = (text_len + 1) * 2;
-    if (required_size > *rows_size || ! *rows) {
-        if (*rows) {
-            Dll_Free(*rows);
-            *rows = NULL;
-        }
-        *rows_size = required_size;
-        if (*rows_size > (SIZE_T)((ULONG)-1)) {
-            *overflow = TRUE;
-            return FALSE;
-        }
-        *rows = Dll_AllocTemp((ULONG)*rows_size);
-    }
-
-    if (! *rows)
-        return FALSE;
-
-    full_path = pattern[0] == L'\\' ||
-        (pattern[0] && pattern[1] == L':');
     match_start = full_path ? 0 : File_GetRelativeMatchStart(text);
 
-    if (Sbie_WildcardMatchWholeCoreW(
-            pattern, text, text_len, match_start,
-            (unsigned char *)*rows, *rows_size,
-            File_WildcardCharEqualI))
+    return File_MatchRecoverPatternText(
+        pattern, text + match_start, text_len - match_start);
+}
+
+
+static BOOLEAN File_MatchRecoverPatternCandidate(
+    PATTERN *pattern, BOOLEAN full_path, const WCHAR *text)
+{
+    SIZE_T text_len;
+    SIZE_T match_start;
+    SIZE_T end;
+
+    if (! text)
+        return FALSE;
+
+    if (File_MatchPatternCandidate(pattern, full_path, text))
         return TRUE;
+
+    text_len = wcslen(text);
+    match_start = full_path ? 0 : File_GetRelativeMatchStart(text);
 
     for (end = text_len; end > match_start; --end) {
         if (File_IsPathSeparator(text[end]) &&
-                Sbie_WildcardMatchWholeCoreW(
-                    pattern, text, end, match_start,
-                    (unsigned char *)*rows, *rows_size,
-                    File_WildcardCharEqualI))
+                File_MatchRecoverPatternText(
+                    pattern, text + match_start, end - match_start))
             return TRUE;
     }
 
@@ -407,59 +434,30 @@ static BOOLEAN File_IsPathInRecoverFolderList(
         // recover folder pattern, including files below the folder
         //
 
-        if (wcschr(fold->path, L'*') || wcschr(fold->path, L'?')) {
+        if (fold->has_wildcard) {
 
-            UCHAR *WildcardRows = NULL;
-            SIZE_T WildcardRowsSize = 0;
-            BOOLEAN WildcardOverflow = FALSE;
             const WCHAR *TrueAlias;
 
-            if (File_MatchRecoverWildcardCandidate(
-                    fold->path, TruePath, &WildcardRows,
-                    &WildcardRowsSize, &WildcardOverflow)) {
-                Dll_Free(WildcardRows);
+            if (File_MatchRecoverPatternCandidate(
+                    fold->pattern, fold->full_path, TruePath))
                 return TRUE;
-            }
 
-            if (WildcardOverflow)
-                goto next_fold;
-
-            if (File_MatchRecoverWildcardCandidate(
-                    fold->path, DosPath, &WildcardRows,
-                    &WildcardRowsSize, &WildcardOverflow)) {
-                Dll_Free(WildcardRows);
+            if (File_MatchRecoverPatternCandidate(
+                    fold->pattern, fold->full_path, DosPath))
                 return TRUE;
-            }
-
-            if (WildcardOverflow)
-                goto next_fold;
 
             TrueAlias = File_GetNetworkAliasCandidate(TruePath);
-            if (File_MatchRecoverWildcardCandidate(
-                    fold->path, TrueAlias, &WildcardRows,
-                    &WildcardRowsSize, &WildcardOverflow)) {
-                Dll_Free(WildcardRows);
+            if (File_MatchRecoverPatternCandidate(
+                    fold->pattern, fold->full_path, TrueAlias))
                 return TRUE;
-            }
-
-            if (WildcardOverflow)
-                goto next_fold;
 
             if (DosPath) {
                 const WCHAR *DosAlias =
                     File_GetNetworkAliasCandidate(DosPath);
-                if (File_MatchRecoverWildcardCandidate(
-                        fold->path, DosAlias, &WildcardRows,
-                        &WildcardRowsSize, &WildcardOverflow)) {
-                    Dll_Free(WildcardRows);
+                if (File_MatchRecoverPatternCandidate(
+                        fold->pattern, fold->full_path, DosAlias))
                     return TRUE;
-                }
             }
-
-            if (WildcardOverflow)
-                goto next_fold;
-
-            Dll_Free(WildcardRows);
 
         } else {
 
@@ -498,60 +496,10 @@ static BOOLEAN File_IsPathInRecoverFolderList(
             }
         }
 
-next_fold:
         fold = List_Next(fold);
     }
 
     return FALSE;
-}
-
-
-static int File_WildcardMatchWholeI(
-    const WCHAR *pattern, const WCHAR *text, BOOLEAN relative,
-    UCHAR *rows, SIZE_T rows_size)
-{
-    SIZE_T text_len;
-    SIZE_T match_start;
-
-    text_len = wcslen(text);
-    if (relative) {
-        match_start = File_GetRelativeMatchStart(text);
-    } else {
-        match_start = 0;
-    }
-
-    return Sbie_WildcardMatchWholeCoreW(
-        pattern, text, text_len, match_start,
-        (unsigned char *)rows, rows_size,
-        File_WildcardCharEqualI);
-}
-
-
-static int File_WildcardCharEqualI(WCHAR pattern_ch, WCHAR text_ch)
-{
-    return Dll_NlsStrCmp(&pattern_ch, &text_ch, 1) == 0;
-}
-
-
-//---------------------------------------------------------------------------
-// File_WildcardMatchI
-//---------------------------------------------------------------------------
-
-
-static int File_WildcardMatchI(
-    const WCHAR *pattern, const WCHAR *text,
-    UCHAR *rows, SIZE_T rows_size)
-{
-    BOOLEAN full_path;
-
-    if (! pattern || ! text)
-        return 0;
-
-    full_path = pattern[0] == L'\\' ||
-        (pattern[0] && pattern[1] == L':');
-
-    return File_WildcardMatchWholeI(
-        pattern, text, ! full_path, rows, rows_size);
 }
 
 
@@ -601,8 +549,6 @@ _FX BOOLEAN File_IsRecoverable(
     const WCHAR *TruePathAlias = NULL;
     const WCHAR *DosPathAlias = NULL;
     BOOLEAN DosPathTried = FALSE;
-    UCHAR *WildcardRows = NULL;
-    SIZE_T WildcardRowsSize = 0;
 
     //
     // if we have a path that looks like
@@ -702,27 +648,16 @@ _FX BOOLEAN File_IsRecoverable(
         // wildcard matcher; otherwise keep the fast literal path
         //
 
-        if (wcschr(fold->path, L'*') || wcschr(fold->path, L'?')) {
+        if (fold->has_wildcard) {
 
-            if (! WildcardRows) {
-                WildcardRowsSize = ((SIZE_T)TruePath_len + 1) * 2;
-                if (WildcardRowsSize > (SIZE_T)((ULONG)-1)) {
-                    ok = FALSE;
-                    goto finish;
-                }
-                WildcardRows = Dll_AllocTemp((ULONG)WildcardRowsSize);
-            }
-
-            if (File_WildcardMatchI(
-                    fold->path, TruePath,
-                    WildcardRows, WildcardRowsSize)) {
+            if (File_MatchPatternCandidate(
+                    fold->pattern, fold->full_path, TruePath)) {
                 ok = FALSE;
                 break;
             }
 
-            if (TruePathAlias && File_WildcardMatchI(
-                    fold->path, TruePathAlias,
-                    WildcardRows, WildcardRowsSize)) {
+            if (File_MatchPatternCandidate(
+                    fold->pattern, fold->full_path, TruePathAlias)) {
                 ok = FALSE;
                 break;
             }
@@ -739,32 +674,18 @@ _FX BOOLEAN File_IsRecoverable(
                     } else {
                         DosPathAlias =
                             File_GetNetworkAliasCandidate(DosPath);
-                        SIZE_T rows_size =
-                            (wcslen(DosPath) + 1) * 2;
-                        if (rows_size > WildcardRowsSize) {
-                            Dll_Free(WildcardRows);
-                            WildcardRowsSize = rows_size;
-                            if (WildcardRowsSize > (SIZE_T)((ULONG)-1)) {
-                                ok = FALSE;
-                                goto finish;
-                            }
-                            WildcardRows =
-                                Dll_AllocTemp((ULONG)WildcardRowsSize);
-                        }
                     }
                 }
             }
 
-            if (DosPath && File_WildcardMatchI(
-                    fold->path, DosPath,
-                    WildcardRows, WildcardRowsSize)) {
+            if (File_MatchPatternCandidate(
+                    fold->pattern, fold->full_path, DosPath)) {
                 ok = FALSE;
                 break;
             }
 
-            if (DosPathAlias && File_WildcardMatchI(
-                    fold->path, DosPathAlias,
-                    WildcardRows, WildcardRowsSize)) {
+            if (File_MatchPatternCandidate(
+                    fold->pattern, fold->full_path, DosPathAlias)) {
                 ok = FALSE;
                 break;
             }
@@ -787,8 +708,6 @@ _FX BOOLEAN File_IsRecoverable(
 
 finish:
 
-    if (WildcardRows)
-        Dll_Free(WildcardRows);
     if (DosPath)
         Dll_Free(DosPath);
     if (TruePath != save_TruePath)
@@ -916,6 +835,9 @@ _FX void File_NotifyRecover(HANDLE FileHandle, void* CloseParams)
             rec = Dll_Alloc(length);
 
             rec->ticks = GetTickCount();
+            rec->pattern = NULL;
+            rec->has_wildcard = FALSE;
+            rec->full_path = FALSE;
 
             wcscpy(rec->path, TruePath);
             rec->path_len = TruePath_len;

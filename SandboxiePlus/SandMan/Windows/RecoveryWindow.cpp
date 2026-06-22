@@ -5,7 +5,6 @@
 #include "../MiscHelpers/Common/TreeItemModel.h"
 #include "../MiscHelpers/Common/Common.h"
 #include "SettingsWindow.h"
-#include "../../../Sandboxie/common/recovery_wildcard.h"
 
 
 #if defined(Q_OS_WIN)
@@ -16,6 +15,92 @@
 
 
 namespace {
+
+typedef int (*RECOVERY_WILDCARD_CHAR_EQUAL_FN)(wchar_t patternChar, wchar_t textChar);
+
+bool RecoveryWildcardIsPathSeparator(wchar_t ch)
+{
+	return ch == L'\\' || ch == L'/';
+}
+
+bool RecoveryWildcardMatchWholeCore(
+	const wchar_t* pattern, const wchar_t* text,
+	size_t textLen, size_t matchStart,
+	unsigned char* rows, size_t rowsSize,
+	RECOVERY_WILDCARD_CHAR_EQUAL_FN charEqual)
+{
+	size_t index;
+	size_t rowSize;
+	size_t requiredSize;
+	unsigned char* previous;
+	unsigned char* current;
+	unsigned char* swap;
+	wchar_t token;
+
+	if (!pattern || !text || !rows || !charEqual)
+		return false;
+
+	if (textLen > ((((size_t)-1) / 2) - 1))
+		return false;
+
+	rowSize = textLen + 1;
+	requiredSize = rowSize * 2;
+	if (rowsSize < requiredSize)
+		return false;
+
+	if (matchStart > textLen)
+		return false;
+
+	previous = rows;
+	current = rows + rowSize;
+
+	memset(rows, 0, requiredSize);
+	previous[matchStart] = 1;
+	for (index = matchStart + 1; index <= textLen; ++index) {
+		if (RecoveryWildcardIsPathSeparator(text[index - 1]))
+			previous[index] = 1;
+	}
+
+	while (*pattern) {
+		memset(current, 0, rowSize);
+		token = *pattern++;
+
+		if (token == L'*' && *pattern == L'*') {
+			++pattern;
+			for (index = 1; index <= textLen; ++index) {
+				if (!RecoveryWildcardIsPathSeparator(text[index - 1])) {
+					if (previous[index - 1])
+						current[index] = 1;
+					else
+						current[index] = current[index - 1];
+				}
+			}
+			for (index = 1; index < textLen; ++index) {
+				if (!RecoveryWildcardIsPathSeparator(text[index]))
+					current[index] = 0;
+			}
+
+		} else if (token == L'*') {
+			current[0] = previous[0];
+			for (index = 1; index <= textLen; ++index)
+				current[index] = previous[index] || current[index - 1];
+
+		} else {
+			for (index = 1; index <= textLen; ++index) {
+				if ((token == L'?' &&
+						!RecoveryWildcardIsPathSeparator(text[index - 1])) ||
+						charEqual(token, text[index - 1]))
+					current[index] = previous[index - 1];
+			}
+		}
+
+		swap = previous;
+		previous = current;
+		current = swap;
+	}
+
+	return previous[textLen] != 0;
+}
 
 // Device prefix constants -- keep in sync with file_recovery.c globals:
 //   File_Redirector        L"\\Device\\LanmanRedirector\\"
@@ -224,7 +309,7 @@ bool WildcardMatchWhole(const QString& pattern, const QString& text, bool relati
 	const WCHAR* patternText = reinterpret_cast<const WCHAR*>(pattern.utf16());
 	const WCHAR* candidateText = reinterpret_cast<const WCHAR*>(text.utf16());
 
-	return Sbie_WildcardMatchWholeCoreW(
+	return RecoveryWildcardMatchWholeCore(
 		patternText,
 		candidateText,
 		textLen,

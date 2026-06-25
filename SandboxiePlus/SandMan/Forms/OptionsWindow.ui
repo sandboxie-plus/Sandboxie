@@ -4413,6 +4413,19 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </widget>
                </item>
+               <item row="7" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkUseIgnoreForQuick">
+                 <property name="text">
+                  <string>Use the above exclusion list to hide matching files from the Quick Recovery window</string>
+                 </property>
+                 <property name="toolTip">
+                  <string>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
             </layout>
@@ -6503,6 +6516,7 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>btnAddRecIgnoreExt</tabstop>
   <tabstop>chkShowRecIgnoreTmpl</tabstop>
   <tabstop>btnDelRecIgnore</tabstop>
+  <tabstop>chkUseIgnoreForQuick</tabstop>
   <tabstop>tabsOther</tabstop>
   <tabstop>chkNoPanic</tabstop>
   <tabstop>chkPreferExternalManifest</tabstop>

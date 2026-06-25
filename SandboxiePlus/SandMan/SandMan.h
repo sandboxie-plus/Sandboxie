@@ -140,6 +140,8 @@ protected:
 	static void			CheckFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QStringList &Files, const QStringList& Checkers);
 
 	void				AddLogMessage(const QDateTime& TimeStamp, const QString& Message, const QString& Link = QString());
+	void				AddLogMessageNow(const QDateTime& TimeStamp, const QString& Message, const QString& Link, int Count);
+	void				ScheduleMessageLogFlush();
 
 	QIcon				GetTrayIcon(bool isConnected = true, bool bSun = false);
 	QString				GetTrayText(bool isConnected = true);
@@ -179,6 +181,17 @@ protected:
 		QString ProcessName;
 	};
 	QVector<SSbieMsg>	m_MessageLog;
+
+	struct SPendingMessageLogEntry {
+		QDateTime TimeStamp;
+		QString Message;
+		QString Link;
+		int Count;
+	};
+	QList<SPendingMessageLogEntry> m_PendingMessageLog;
+	qint64				m_MessageLogPlainItemModeUntil;
+	bool				m_MessageLogFlushPending;
+	bool				m_FlushingMessageLog;
 
 public slots:
 	void				OnBoxSelected();
@@ -290,6 +303,8 @@ private slots:
 
 	void				AddLogMessage(const QString& Message);
 	void				AddFileRecovered(const QString& BoxName, const QString& FilePath);
+	void				OnFlushMessageLog();
+	void				OnMessageLogDblClick(QTreeWidgetItem* pItem, int Column);
 
 	void				commitData(QSessionManager& manager);
 

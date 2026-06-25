@@ -3100,6 +3100,39 @@ _FX NTSTATUS Proc_NtQueryInformationProcess(
                 RtlInitUnicodeString((UNICODE_STRING*)ProcessInformation, TruePath);    // return non-sandboxed path so caller can't tell he's sandboxed.
         }
     }
+    else if ((ProcessInformationClass == ProcessImageFileNameWin32) && (NT_SUCCESS(status))) {
+        if (ProcessInformation) {
+            UNICODE_STRING *ImageName = (UNICODE_STRING*)ProcessInformation;
+            ULONG nameLen = ImageName->Length / sizeof(WCHAR);
+
+            if (Dll_BoxFileDosPath && Dll_BoxFileDosPathLen
+                && ImageName->Buffer
+                && nameLen >= Dll_BoxFileDosPathLen
+                && _wcsnicmp(ImageName->Buffer, Dll_BoxFileDosPath, Dll_BoxFileDosPathLen) == 0)
+            {
+                WCHAR *BoxedPath = Dll_AllocTemp((nameLen + 1) * sizeof(WCHAR));
+                if (BoxedPath) {
+                    WCHAR *TruePath;
+
+                    wmemcpy(BoxedPath, ImageName->Buffer, nameLen);
+                    BoxedPath[nameLen] = L'\0';
+
+                    TruePath = File_GetTruePathForBoxedPath(BoxedPath, TRUE);
+                    if (TruePath) {
+                        ULONG trueLen = wcslen(TruePath);
+                        THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+                        WCHAR *ImagePath = Dll_GetTlsNameBuffer(
+                            TlsData, TRUE_NAME_BUFFER, (trueLen + 1) * sizeof(WCHAR));
+                        wmemcpy(ImagePath, TruePath, trueLen + 1);
+                        RtlInitUnicodeString(ImageName, ImagePath);
+                        Dll_Free(TruePath);
+                    }
+
+                    Dll_Free(BoxedPath);
+                }
+            }
+        }
+    }
 
 	/*if (ProcessInformationClass == ProcessImageFileName && ProcessInformation != NULL) {
 

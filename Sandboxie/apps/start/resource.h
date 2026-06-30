@@ -29,6 +29,7 @@
 #define IDRUNDLGTEXT2                   106
 #define RUN_DIALOG                      10000
 #define IDRUNADMIN                      107
+#define IDIGNOREBREAKOUT                109
 
 #define IDBOXLIST                       1002
 #define BOX_DIALOG                      10002

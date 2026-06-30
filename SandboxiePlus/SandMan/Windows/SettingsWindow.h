@@ -127,6 +127,7 @@ private slots:
 	void OnDelWarnProg();
 
 	void OnMoTWChange();
+	void OnRuleExtensionsGlobalToggled(bool checked);
 	void OnVolumeChanged();
 	void UpdateDrives();
 

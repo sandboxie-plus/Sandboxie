@@ -96,6 +96,7 @@ BOOL run_elevated_2 = FALSE;
 BOOL fake_admin = FALSE;
 BOOL disable_force_on_this_program = FALSE;
 BOOL force_children_on_this_program = FALSE;
+BOOL ignore_breakout_on_this_program = FALSE;
 BOOL auto_select_default_box = FALSE;
 WCHAR *StartMenuSectionName = NULL;
 BOOL run_silent = FALSE;
@@ -416,6 +417,7 @@ BOOL Parse_Command_Line(void)
     static const WCHAR *_silent           = L"_silent";
     static const WCHAR *_phase            = L"_phase";
     static const WCHAR *disable_force     = L"disable_force";
+    static const WCHAR *ignore_breakout   = L"ignore_breakout";
 
     PWSTR tmp;
 
@@ -746,6 +748,18 @@ BOOL Parse_Command_Line(void)
             cmd = Eat_String(cmd);
 
             force_children_on_this_program = TRUE;
+
+            //
+            // Command line switch /ignore_breakout or /ibp
+            //
+
+            } else if (_wcsnicmp(cmd, ignore_breakout, 15) == 0 ||
+                   _wcsnicmp(cmd, L"ibp",           3) == 0) {
+
+                cmd = Eat_String(cmd);
+
+                ignore_breakout_on_this_program = TRUE;
+                SetEnvironmentVariable(L"SBIE_RUN_SANDBOXED_IGNORE_BREAKOUT", L"1");
 
         //
         // Command line switch /hide_window
@@ -1850,6 +1864,11 @@ int Program_Start(void)
     if(ChildWrkDir)
         SetCurrentDirectory(ChildWrkDir);
 
+    if (ignore_breakout_on_this_program)
+        SetEnvironmentVariable(L"SBIE_RUN_SANDBOXED_IGNORE_BREAKOUT", L"1");
+    else
+        SetEnvironmentVariable(L"SBIE_RUN_SANDBOXED_IGNORE_BREAKOUT", NULL);
+
     //
     // service programs expect to be started by CreateProcess, and may not
     // expect modifications to the command line by ShellExecuteEx.
@@ -2451,6 +2470,10 @@ ULONG RestartInSandbox(void)
     }
     if (wait_for_process) {
         wcscpy(ptr, L"/wait ");
+        ptr = cmd + wcslen(cmd);
+    }
+    if (ignore_breakout_on_this_program) {
+        wcscpy(ptr, L"/ignore_breakout ");
         ptr = cmd + wcslen(cmd);
     }
     wcscpy(ptr, ChildCmdLine);

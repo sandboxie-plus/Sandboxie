@@ -34,6 +34,35 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.18.0 / 5.73.0] - 2026-06-??
+
+### Added
+- added `UseForceBreakoutRuleExtensions=[y|n]` (default disabled) for extension parsing in `ForceProcess`, `ForceFolder`, `ForceChildren`, `BreakoutProcess`, `BreakoutFolder`, and `BreakoutDocument`
+- added `|Priority=`, `|Recursive=`, and `|TargetBox=` metadata support for Force/Breakout rules when extensions are enabled
+- added `|TargetBox=<BoxName>` routing for `BreakoutProcess`, `BreakoutFolder`, and `BreakoutDocument`
+- added `DisableBreakoutRules=[y|n]` to disable breakout rule families (`BreakoutProcess`, `BreakoutFolder`, `BreakoutDocument`) per box, with SandMan toggles in presets, tray menu, and box options
+- added `BreakoutUseTargetDir` (global and `process,value` forms) to use the target directory as breakout CWD
+- added path-pattern matching for `BreakoutProcess` alongside image-name matching
+  - warning: avoid broad wildcard rules such as `*`, `*.exe`, or `C:\*.exe`; use a specific directory prefix whenever possible
+- added runtime breakout bypass controls: Start.exe `/ignore_breakout` (`/ibp`), `SBIE_RUN_SANDBOXED_IGNORE_BREAKOUT=1`, and SandMan "Ignore Breakout"
+
+### Changed
+- changed force-vs-breakout arbitration to use explicit `Priority` (lower value wins) while keeping legacy defaults when priorities are not set
+  - process starts remain force-first by default
+  - document opens remain breakout-first by default
+- changed breakout winner selection across `BreakoutProcess`, `BreakoutFolder`, and `BreakoutDocument`; `TargetBox` is taken from the winning breakout rule
+- changed invalid or unavailable `TargetBox` handling to fall back to normal boxed creation (process start) or source-box handling (document open)
+- changed `BreakoutProcess` evaluation to require host-path validation and ignore broad wildcard-only non-path rules
+- changed `BreakoutFolder` matching with trailing-backslash normalization, improved wildcard handling, and `Recursive` depth limits
+- changed `ForceChildren` lineage handling across descendants and model-pid/PCA restart paths, including ancestor-chain checks in service arbitration
+- changed DLL/service breakout handoff so targeted candidates are included and final arbitration/retargeting is resolved service-side
+- changed `UseForceBreakoutRuleExtensions=n`/unset semantics to consistently preserve pre-1.18-style behavior by ignoring `Priority`, `Recursive`, and `TargetBox` metadata
+
+### Fixed
+- fixed Sandboxie breakout argument rewriting dropping quotes around translated document paths, causing unquoted file path arguments (with spaces) to not be recognized correctly by applications
+
+
+
 ## [1.17.7 / 5.72.7] - 2026-06-07
 
 ### Added

@@ -24,6 +24,7 @@
 #include "dll.h"
 #include "common/pool.h"
 #include "common/pattern.h"
+#include "common/program_control_rule.h"
 #include "core/svc/SbieIniWire.h"
 
 //---------------------------------------------------------------------------
@@ -38,6 +39,14 @@
 
 extern POOL* Dll_Pool;
 extern POOL* Dll_PoolTemp;
+
+static BOOLEAN Config_UseRuleExtensions(const WCHAR* boxname, const WCHAR* setting)
+{
+    if (!ProgramControl_IsRuleExtensionSetting(setting))
+        return TRUE;
+
+    return SbieApi_QueryConfBool(boxname, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
+}
 
 //---------------------------------------------------------------------------
 // Config_MatchImage
@@ -311,6 +320,10 @@ _FX BOOLEAN SbieDll_GetSettingsForName_bool(
 _FX BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, LIST* list, BOOLEAN dos)
 {
     WCHAR conf_buf[2048];
+    const BOOLEAN breakout_folder_setting = (_wcsicmp(setting, L"BreakoutFolder") == 0);
+    const BOOLEAN force_folder_setting = (_wcsicmp(setting, L"ForceFolder") == 0);
+    const BOOLEAN extension_setting = ProgramControl_IsRuleExtensionSetting(setting) ? TRUE : FALSE;
+    const BOOLEAN use_rule_extensions = Config_UseRuleExtensions(boxname, setting);
 
     PATTERN* pat;
 
@@ -327,6 +340,22 @@ _FX BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, L
         WCHAR* value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, &level);
         if (value)
         {
+            if (extension_setting) {
+                SBIE_NORMALIZED_RULE normalized;
+                if (!ProgramControl_ParseRuleExtensionsInPlace(value, &normalized, use_rule_extensions ? 1 : 0))
+                    continue;
+                value = normalized.base_rule;
+            }
+
+            if (breakout_folder_setting || force_folder_setting) {
+                // Trim trailing backslashes so patterns like "C:\path\" match "C:\path".
+                // ForceFolder dir lengths in ProcessServer/UserServer exclude the trailing
+                // backslash; the pattern must match that form to avoid a length mismatch.
+                size_t val_len = wcslen(value);
+                while (val_len > 0 && value[val_len - 1] == L'\\')
+                    value[--val_len] = L'\0';
+            }
+
             if (dos && *value != L'*')
                 SbieDll_TranslateNtToDosPath(value);
 
@@ -617,12 +646,27 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_GetStringsForStringList(const WCHAR* string, con
 
 BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting)
 {
-    WCHAR buf[66];
+    WCHAR buf[CONF_LINE_LEN];
+    const BOOLEAN extension_setting = (
+        ProgramControl_IsRuleExtensionSetting(setting) &&
+        _wcsicmp(setting, L"BreakoutFolder") != 0 &&
+        _wcsicmp(setting, L"BreakoutDocument") != 0 &&
+        _wcsicmp(setting, L"ForceFolder") != 0) ? TRUE : FALSE;
+    const BOOLEAN use_rule_extensions = Config_UseRuleExtensions(boxname, setting);
     ULONG index = 0;
     while (1) {
-        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
+        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, sizeof(buf) - sizeof(WCHAR));
         ++index;
         if (NT_SUCCESS(status)) {
+            if (extension_setting) {
+                SBIE_NORMALIZED_RULE normalized;
+                if (!ProgramControl_ParseRuleExtensionsInPlace(buf, &normalized, use_rule_extensions ? 1 : 0))
+                    continue;
+                if (_wcsicmp(normalized.base_rule, string) == 0)
+                    return TRUE;
+                continue;
+            }
+
             if (_wcsicmp(buf, string) == 0) {
                 return TRUE;
             }
@@ -641,10 +685,10 @@ BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, con
 
 BOOLEAN SbieDll_CheckStringInListA(const char* string, const WCHAR* boxname, const WCHAR* setting)
 {
-    WCHAR buf[66];
+    WCHAR buf[CONF_LINE_LEN];
     ULONG index = 0;
     while (1) {
-        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
+        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, sizeof(buf) - sizeof(WCHAR));
         ++index;
         if (NT_SUCCESS(status)) {
             WCHAR* ptr = buf;

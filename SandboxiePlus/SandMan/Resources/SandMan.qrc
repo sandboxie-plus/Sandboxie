@@ -219,6 +219,7 @@
         <file>Actions/Stack.png</file>
         <file>Actions/Warning.png</file>
         <file>Actions/PauseForce.png</file>
+        <file>Actions/DisableBreakout.png</file>
         <file>Actions/DisableMessagePopup.png</file>
         <file>Actions/DisableRecovery.png</file>
         <file>Actions/Plugin.png</file>

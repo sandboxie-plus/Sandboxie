@@ -12,6 +12,222 @@
 #include "Helpers/TabOrder.h"
 #include "../MiscHelpers/Common/CodeEdit.h"
 #include "Helpers/IniHighlighter.h"
+#include <climits>
+#include <algorithm>
+#include <QIntValidator>
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
+#include <QStandardItemModel>
+
+static const int kRulePriorityMax = 9999;
+
+static bool IsValidRulePriorityValue(int value)
+{
+	return value >= 0 && value <= kRulePriorityMax;
+}
+
+static bool ParseRulePriorityValue(const QString& text, int* outValue)
+{
+	bool ok = false;
+	int value = text.trimmed().toInt(&ok);
+	if (!ok || !IsValidRulePriorityValue(value))
+		return false;
+
+	if (outValue)
+		*outValue = value;
+	return true;
+}
+
+static bool ParseRecursiveUiSpec(const QString& rawValue, QString* pDepthValue, bool* pAnchorFromLast, bool* pHasExplicitAnchor)
+{
+	QString value = rawValue.trimmed();
+	QString depthValue;
+	bool anchorFromLast = true;
+	bool hasExplicitAnchor = false;
+
+	if (value.isEmpty() || value == "-")
+		return false;
+
+	int anchorPos = value.indexOf(';');
+	if (anchorPos >= 0) {
+		depthValue = value.left(anchorPos).trimmed();
+		QString anchorValue = value.mid(anchorPos + 1).trimmed().toLower();
+		if (depthValue.isEmpty())
+			return false;
+		if (anchorValue == "first") {
+			anchorFromLast = false;
+			hasExplicitAnchor = true;
+		}
+		else if (anchorValue == "last") {
+			anchorFromLast = true;
+			hasExplicitAnchor = true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		depthValue = value;
+	}
+
+	QString lower = depthValue.toLower();
+	QString normalizedDepth;
+	if (lower == "*" || lower == "y" || lower == "yes" || lower == "true")
+		normalizedDepth = "y";
+	else if (lower == "n" || lower == "no" || lower == "false" || lower == "0")
+		normalizedDepth = "n";
+	else {
+		int rangePos = depthValue.indexOf('-');
+		if (rangePos > 0 && rangePos + 1 < depthValue.length()) {
+			QString left = depthValue.left(rangePos).trimmed();
+			QString right = depthValue.mid(rangePos + 1).trimmed();
+			bool minOk = false;
+			bool maxOk = false;
+			int minDepth = left.toInt(&minOk);
+			int maxDepth = right.toInt(&maxOk);
+			if (!minOk || !maxOk || minDepth < 0 || maxDepth < minDepth)
+				return false;
+			normalizedDepth = QString::number(minDepth) + "-" + QString::number(maxDepth);
+		}
+		else {
+			bool ok = false;
+			int depth = depthValue.toInt(&ok);
+			if (!ok || depth < 0)
+				return false;
+			normalizedDepth = QString::number(depth);
+		}
+	}
+
+	if (pDepthValue)
+		*pDepthValue = normalizedDepth;
+	if (pAnchorFromLast)
+		*pAnchorFromLast = anchorFromLast;
+	if (pHasExplicitAnchor)
+		*pHasExplicitAnchor = hasExplicitAnchor;
+	return true;
+}
+
+static QString NormalizeRecursiveUiValue(const QString& rawValue)
+{
+	QString depthValue;
+	bool anchorFromLast = true;
+	bool hasExplicitAnchor = false;
+
+	if (!ParseRecursiveUiSpec(rawValue, &depthValue, &anchorFromLast, &hasExplicitAnchor))
+		return QString();
+
+	return hasExplicitAnchor ? (depthValue + ";" + (anchorFromLast ? "last" : "first")) : depthValue;
+}
+
+static bool GetWildcardAnchorForRule(const QString& baseRule, bool anchorFromLast, QString* pAnchor, QChar* pWildcardChar = nullptr)
+{
+	QString rule = baseRule.trimmed();
+	if (rule.isEmpty())
+		return false;
+
+	int lastSlash = -1;
+	int anchorSlash = -1;
+	int wildcardPos = -1;
+	QChar wildcardChar;
+	for (int i = 0; i < rule.length(); ++i) {
+		QChar ch = rule[i];
+		if (ch == '\\' || ch == '/') {
+			lastSlash = i;
+		}
+		else if (ch == '*' || ch == '?') {
+			wildcardPos = i;
+			wildcardChar = ch;
+			anchorSlash = lastSlash;
+			if (!anchorFromLast)
+				break;
+		}
+	}
+
+	if (wildcardPos < 0 || anchorSlash < 0)
+		return false;
+
+	if (pAnchor)
+		*pAnchor = rule.left(anchorSlash + 1).trimmed();
+	if (pWildcardChar)
+		*pWildcardChar = wildcardChar;
+
+	return true;
+}
+
+static QString RecursiveDisplayTextForValue(const QString& value)
+{
+	QString normalized = NormalizeRecursiveUiValue(value);
+	QString depthValue;
+	bool anchorFromLast = true;
+	bool hasExplicitAnchor = false;
+	QString display;
+
+	if (normalized.isEmpty() || !ParseRecursiveUiSpec(normalized, &depthValue, &anchorFromLast, &hasExplicitAnchor))
+		return value;
+
+	QString lower = depthValue.toLower();
+	if (lower == "n")
+		display = QObject::tr("no (0)");
+	else if (lower == "y")
+		display = QObject::tr("yes (unlimited)");
+	else if (depthValue.contains('-'))
+		display = QObject::tr("depth %1").arg(depthValue);
+	else
+		display = QObject::tr("depth %1").arg(depthValue);
+
+	if (hasExplicitAnchor)
+		display += QObject::tr(" (%1)").arg(anchorFromLast ? QObject::tr("last") : QObject::tr("first"));
+
+	return display;
+}
+
+static QString BuildRecursiveOptionTooltip(const QString& optionValue, const QString& baseRule)
+{
+	QString normalized = NormalizeRecursiveUiValue(optionValue);
+	QString depthValue;
+	bool anchorFromLast = true;
+	bool hasExplicitAnchor = false;
+	QString tip;
+	QString trimmedRule = baseRule.trimmed();
+
+	if (optionValue.trimmed() == "-")
+		return QObject::tr("No explicit recursion mode.");
+
+	if (normalized.isEmpty() || !ParseRecursiveUiSpec(normalized, &depthValue, &anchorFromLast, &hasExplicitAnchor))
+		return QString();
+
+	if (depthValue == "n")
+		tip = QObject::tr("No recursion, only the matched folder.");
+	else if (depthValue == "y")
+		tip = QObject::tr("Unlimited recursion from the wildcard anchor.");
+	else if (depthValue.contains('-')) {
+		QStringList parts = depthValue.split('-', Qt::KeepEmptyParts);
+		if (parts.size() == 2)
+			tip = QObject::tr("Include subfolder levels from %1 to %2 (inclusive) from the wildcard anchor.").arg(parts[0].trimmed(), parts[1].trimmed());
+	}
+	else
+		tip = QObject::tr("Include up to %1 subfolder level(s) from the wildcard anchor.").arg(depthValue);
+
+	QString anchor;
+	QChar wildcardChar;
+	bool hasWildcardAnchor = GetWildcardAnchorForRule(baseRule, anchorFromLast, &anchor, &wildcardChar);
+	QString anchorMode = anchorFromLast ? QObject::tr("last") : QObject::tr("first");
+	if (hasWildcardAnchor)
+		tip += (tip.isEmpty() ? QString() : QString("\n")) + QObject::tr("Wildcard anchor (%1 wildcard): %2 (anchor folder depth is 0)").arg(anchorMode, anchor);
+	else
+		tip += (tip.isEmpty() ? QString() : QString("\n")) + QObject::tr("Wildcard anchor: not applicable (exact path, no '*' or '?').");
+
+	if (hasExplicitAnchor)
+		tip += QString("\n") + QObject::tr("Explicit anchor mode: %1").arg(anchorMode);
+
+	if (hasWildcardAnchor)
+		tip += QString("\n") + QObject::tr("Wildcard operator: %1").arg(QString(wildcardChar));
+
+	if (trimmedRule.endsWith("\\*") || trimmedRule.endsWith("/*"))
+		tip += (tip.isEmpty() ? QString() : QString("\n")) + QObject::tr("Rule ends with '\\*': matching starts beyond the anchor folder, so the anchor folder itself is not matched. This is legacy behavior.");
+
+	return tip;
+}
 
 
 class NoEditDelegate : public QStyledItemDelegate {
@@ -152,6 +368,353 @@ protected:
 	QTreeWidget* m_pTree;
 	int m_Column;
 	bool m_Group;
+};
+
+class RuleExtensionsDelegate : public QStyledItemDelegate {
+public:
+	RuleExtensionsDelegate(COptionsWindow* pOptions, QTreeWidget* pTree, bool bBreakoutTree, int column, QObject* parent = 0)
+		: QStyledItemDelegate(parent)
+	{
+		m_pOptions = pOptions;
+		m_pTree = pTree;
+		m_BreakoutTree = bBreakoutTree;
+		m_Column = column;
+	}
+
+	virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const {
+		Q_UNUSED(option);
+
+		QTreeWidgetItem* pItem = ((QTreeWidgetHacker*)m_pTree)->itemFromIndex(index);
+		if (!pItem)
+			return NULL;
+
+		if (!m_pOptions->IsRuleExtensionsEnabled())
+			return NULL;
+
+		int type = pItem->data(0, Qt::UserRole).toInt();
+		if (type == COptionsWindow::eTemplate || !SupportsColumn(type))
+			return NULL;
+
+		auto connectEditable = [](QComboBox* combo) {
+			if (!combo || !combo->lineEdit())
+				return;
+
+			combo->setInsertPolicy(QComboBox::NoInsert);
+
+			connect(combo->lineEdit(), &QLineEdit::textEdited, [combo](const QString& text){
+				combo->setProperty("value", text.trimmed());
+			});
+			connect(combo, &QComboBox::editTextChanged, [combo](const QString& text){
+				combo->setProperty("value", text.trimmed());
+			});
+			connect(combo->lineEdit(), &QLineEdit::returnPressed, [combo](){
+				combo->setProperty("value", combo->lineEdit()->text().trimmed());
+			});
+			connect(combo, qOverload<int>(&QComboBox::currentIndexChanged), [combo](int idx){
+				if (idx >= 0)
+					combo->setProperty("value", combo->itemData(idx).toString().trimmed());
+			});
+		};
+
+		auto setupWideDropdown = [](QComboBox* combo) {
+			if (!combo)
+				return;
+
+			combo->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+			if (combo->view())
+				combo->view()->setTextElideMode(Qt::ElideNone);
+
+			QFontMetrics fm(combo->font());
+			int maxTextWidth = 0;
+			for (int i = 0; i < combo->count(); ++i)
+				maxTextWidth = qMax(maxTextWidth, fm.horizontalAdvance(combo->itemText(i)));
+
+			const int padding = fm.horizontalAdvance(QStringLiteral("WWWW"));
+			const int viewPadding = fm.horizontalAdvance(QStringLiteral("WW"));
+			const int minWidth = qMax(combo->minimumSizeHint().width(), maxTextWidth + padding);
+
+			combo->setMinimumWidth(minWidth);
+			if (combo->view())
+				combo->view()->setMinimumWidth(minWidth + viewPadding);
+		};
+
+		if (m_Column == 2) {
+			QComboBox* pBox = new QComboBox(parent);
+			pBox->setEditable(true);
+			pBox->addItem(tr("Not set"), "-1");
+			pBox->setItemData(0, tr("no explicit priority"), Qt::ToolTipRole);
+			for (int i = 0; i <= 99; ++i)
+				pBox->addItem(QString::number(i), QString::number(i));
+
+			QRegularExpression rx("^(?:-1|[0-9]{1,4})$");
+			pBox->lineEdit()->setValidator(new QRegularExpressionValidator(rx, pBox));
+
+			QMap<int, QStringList> usedPrioritySources = m_pOptions->GetUsedRulePrioritySources(pItem);
+			QList<int> customPriorityValues;
+			for (auto it = usedPrioritySources.constBegin(); it != usedPrioritySources.constEnd(); ++it) {
+				if (it.key() > 99 && it.key() <= kRulePriorityMax)
+					customPriorityValues.append(it.key());
+			}
+			std::sort(customPriorityValues.begin(), customPriorityValues.end());
+			for (int value : customPriorityValues) {
+				QString valueText = QString::number(value);
+				if (pBox->findData(valueText) < 0)
+					pBox->addItem(valueText, valueText);
+			}
+
+			QStandardItemModel* pModel = qobject_cast<QStandardItemModel*>(pBox->model());
+			if (pModel) {
+				for (int row = 0; row < pModel->rowCount(); ++row) {
+					QStandardItem* pEntry = pModel->item(row);
+					if (!pEntry)
+						continue;
+
+					bool ok = false;
+					int value = pEntry->data(Qt::UserRole).toString().toInt(&ok);
+					if (!ok || value < 0)
+						continue;
+
+					if (usedPrioritySources.contains(value)) {
+						if (!pEntry->text().contains(tr("(in use)"), Qt::CaseInsensitive))
+							pEntry->setText(tr("%1 (in use)").arg(pEntry->text()));
+						pEntry->setEnabled(false);
+						QStringList sources = usedPrioritySources.value(value);
+						if (!sources.isEmpty())
+							pEntry->setToolTip(tr("Used by:\n%1").arg(sources.join("\n")));
+					}
+				}
+			}
+
+			setupWideDropdown(pBox);
+			connectEditable(pBox);
+			return pBox;
+		}
+
+		if (m_Column == 3) {
+			QComboBox* pBox = new QComboBox(parent);
+			pBox->setEditable(true);
+			setupWideDropdown(pBox);
+			pBox->addItem(tr("Not set"), "-");
+			pBox->setItemData(0, tr("unlimited"), Qt::ToolTipRole);
+			pBox->addItem(RecursiveDisplayTextForValue("n"), "n");
+			pBox->setItemData(1, tr("No recursion, only the matched folder."), Qt::ToolTipRole);
+			pBox->addItem(RecursiveDisplayTextForValue("y"), "y");
+			pBox->setItemData(2, tr("Unlimited recursion from the wildcard anchor."), Qt::ToolTipRole);
+			for (int i = 1; i <= 9; ++i) {
+				pBox->addItem(RecursiveDisplayTextForValue(QString::number(i)), QString::number(i));
+				pBox->setItemData(pBox->count() - 1, tr("Include up to %1 subfolder level(s) from the wildcard anchor.").arg(i), Qt::ToolTipRole);
+			}
+			const QStringList rangePresets = { "1-2", "1-3", "1-5", "2-4", "2-2" };
+			for (const QString& preset : rangePresets) {
+				if (pBox->findData(preset) < 0)
+					pBox->addItem(RecursiveDisplayTextForValue(preset), preset);
+			}
+
+			QSet<QString> usedRecursiveValues = m_pOptions->GetUsedRuleRecursiveValues(pItem);
+			QStringList customRecursiveValues = usedRecursiveValues.values();
+			std::sort(customRecursiveValues.begin(), customRecursiveValues.end(), [](const QString& left, const QString& right) {
+				return left.compare(right, Qt::CaseInsensitive) < 0;
+			});
+			for (const QString& valueText : customRecursiveValues) {
+				if (valueText.isEmpty())
+					continue;
+				if (pBox->findData(valueText) < 0)
+					pBox->addItem(RecursiveDisplayTextForValue(valueText), valueText);
+			}
+
+			setupWideDropdown(pBox);
+			QRegularExpression rx("^(?:-|[yYnN]|[0-9]+(?:\\s*-\\s*[0-9]+)?)(?:\\s*;\\s*(?:[Ff][Ii][Rr][Ss][Tt]|[Ll][Aa][Ss][Tt]))?$");
+			pBox->lineEdit()->setValidator(new QRegularExpressionValidator(rx, pBox));
+			connect(pBox, qOverload<int>(&QComboBox::currentIndexChanged), [pBox](int idx){
+				if (idx < 0)
+					return;
+				QString raw = pBox->itemData(idx).toString().trimmed();
+				if (!raw.isEmpty())
+					pBox->setEditText(raw);
+			});
+			connectEditable(pBox);
+			return pBox;
+		}
+
+		if (m_Column == 4) {
+			QComboBox* pBox = new QComboBox(parent);
+			pBox->setEditable(true);
+			setupWideDropdown(pBox);
+			pBox->addItem(tr("Not set"), "");
+			pBox->setItemData(0, tr("unsandboxed"), Qt::ToolTipRole);
+			QMap<QString, CSandBoxPtr> allBoxes = theAPI->GetAllBoxes();
+			for (auto it = allBoxes.constBegin(); it != allBoxes.constEnd(); ++it) {
+				if (!it.value() || !it.value()->IsEnabled())
+					continue;
+				QString boxName = it.value()->GetName();
+				if (boxName.isEmpty())
+					continue;
+				pBox->addItem(boxName, boxName);
+			}
+			setupWideDropdown(pBox);
+			connectEditable(pBox);
+			return pBox;
+		}
+
+		return new QLineEdit(parent);
+	}
+
+	virtual void setEditorData(QWidget* editor, const QModelIndex& index) const {
+		QComboBox* pBox = qobject_cast<QComboBox*>(editor);
+		if (pBox) {
+			QTreeWidgetItem* pItem = ((QTreeWidgetHacker*)m_pTree)->itemFromIndex(index);
+			if (!pItem)
+				return;
+
+			QString value = pItem->data(index.column(), Qt::UserRole).toString().trimmed();
+			if (m_Column == 3) {
+				value = NormalizeRecursiveUiValue(value);
+				if (value.isEmpty())
+					value = "-";
+			}
+
+			if (m_Column == 3) {
+				QString baseRule = pItem->data(1, Qt::UserRole).toString();
+				for (int row = 0; row < pBox->count(); ++row) {
+					QString optionValue = pBox->itemData(row).toString();
+					QString tip = BuildRecursiveOptionTooltip(optionValue, baseRule);
+					if (!tip.isEmpty())
+						pBox->setItemData(row, tip, Qt::ToolTipRole);
+				}
+			}
+
+			// If a persisted value is outside preset ranges, expose it in the dropdown list.
+			if (m_Column == 2 || m_Column == 3) {
+				if (m_Column == 3) {
+					if (!value.isEmpty() && pBox->findData(value) < 0)
+						pBox->addItem(RecursiveDisplayTextForValue(value), value);
+				}
+				else {
+					bool ok = false;
+					qlonglong customValue = value.toLongLong(&ok);
+					if (ok && customValue >= 0 && customValue <= kRulePriorityMax && pBox->findData(value) < 0)
+						pBox->addItem(value, value);
+				}
+			}
+
+			// Empty value for TargetBox is normal (no extension)
+			pBox->setProperty("value", value);
+
+			int idx = pBox->findData(value);
+			pBox->setCurrentIndex(idx);
+			if (m_Column == 2 || m_Column == 3)
+				pBox->setEditText(value);
+			else if (idx == -1)
+				pBox->setCurrentText(value);
+			return;
+		}
+
+		QLineEdit* pEdit = qobject_cast<QLineEdit*>(editor);
+		if (!pEdit)
+			return;
+
+		QTreeWidgetItem* pItem = ((QTreeWidgetHacker*)m_pTree)->itemFromIndex(index);
+		if (!pItem)
+			return;
+
+		pEdit->setText(pItem->data(index.column(), Qt::UserRole).toString());
+	}
+
+	virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const {
+		Q_UNUSED(model);
+
+		QTreeWidgetItem* pItem = ((QTreeWidgetHacker*)m_pTree)->itemFromIndex(index);
+		QComboBox* pBox = qobject_cast<QComboBox*>(editor);
+		if (pItem && pBox) {
+			QString value = pBox->property("value").toString().trimmed();
+			QString typedValue = pBox->currentText().trimmed();
+			int idx = pBox->currentIndex();
+			if (idx >= 0) {
+				QString itemText = pBox->itemText(idx).trimmed();
+				if (!typedValue.isEmpty() && typedValue.compare(itemText, Qt::CaseSensitive) != 0) {
+					value = typedValue;
+				}
+				else {
+					QVariant itemData = pBox->itemData(idx);
+					QString itemValue = itemData.toString().trimmed();
+					if (itemData.isValid() && (m_Column == 4 || !itemValue.isEmpty()))
+						value = itemValue;
+					else if (value.isEmpty())
+						value = typedValue;
+				}
+			}
+			else if (value.isEmpty())
+				value = typedValue;
+
+			if (m_Column == 3) {
+				value = NormalizeRecursiveUiValue(value);
+			}
+			else if (m_Column == 2) {
+				int priority = -1;
+				value = ParseRulePriorityValue(value, &priority) ? QString::number(priority) : "-1";
+			}
+
+			// Empty value already signals no TargetBox extension
+
+			QString displayValue = value;
+			if (m_Column == 3) {
+				displayValue = RecursiveDisplayTextForValue(value);
+			}
+
+			bool prev = m_pTree->blockSignals(true);
+			pItem->setText(index.column(), displayValue);
+			m_pTree->blockSignals(prev);
+			pItem->setData(index.column(), Qt::UserRole, value);
+
+			if (m_Column == 2) {
+				if (value.isEmpty() || value == "-1")
+					pItem->setToolTip(index.column(), tr("No explicit priority."));
+				else
+					pItem->setToolTip(index.column(), tr("Priority: %1").arg(value));
+			}
+			else if (m_Column == 3) {
+				QString baseRule = pItem->data(1, Qt::UserRole).toString();
+				pItem->setToolTip(index.column(), BuildRecursiveOptionTooltip(value, baseRule));
+			}
+			else if (m_Column == 4) {
+				pItem->setToolTip(index.column(), value);
+			}
+			return;
+		}
+
+		QLineEdit* pEdit = qobject_cast<QLineEdit*>(editor);
+		if (!pItem || !pEdit)
+			return;
+
+		QString value = pEdit->text().trimmed();
+		if (m_Column == 2) {
+			int priority = -1;
+			value = ParseRulePriorityValue(value, &priority) ? QString::number(priority) : "-1";
+		}
+		bool prev = m_pTree->blockSignals(true);
+		pItem->setText(index.column(), value);
+		m_pTree->blockSignals(prev);
+		pItem->setData(index.column(), Qt::UserRole, value);
+	}
+
+private:
+	bool SupportsColumn(int type) const {
+		if (m_Column == 2)
+			return (type == COptionsWindow::eProcess || type == COptionsWindow::ePath || type == COptionsWindow::eText || type == COptionsWindow::eParent);
+
+		if (m_Column == 3)
+			return (type == COptionsWindow::ePath);
+
+		if (m_Column == 4)
+			return (m_BreakoutTree && (type == COptionsWindow::eProcess || type == COptionsWindow::ePath || type == COptionsWindow::eText));
+
+		return false;
+	}
+
+	COptionsWindow* m_pOptions;
+	QTreeWidget* m_pTree;
+	bool m_BreakoutTree;
+	int m_Column;
 };
 
 
@@ -553,6 +1116,11 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	//
 
 	// Force
+	ui.treeForced->setColumnCount(4);
+	ui.treeForced->setHeaderLabels(QStringList() << tr("Type") << tr("Name") << tr("Priority") << tr("Recursive"));
+	ui.treeBreakout->setColumnCount(5);
+	ui.treeBreakout->setHeaderLabels(QStringList() << tr("Type") << tr("Name") << tr("Priority") << tr("Recursive") << tr("Target Box"));
+
 	connect(ui.btnForceProg, SIGNAL(clicked(bool)), this, SLOT(OnForceProg()));
 	QMenu* pFileBtnMenu = new QMenu(ui.btnForceProg);
 	pFileBtnMenu->addAction(tr("Browse for File"), this, SLOT(OnForceBrowseProg()));
@@ -571,6 +1139,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	//ui.treeForced->setEditTriggers(QAbstractItemView::DoubleClicked);
 	ui.treeForced->setItemDelegateForColumn(0, new NoEditDelegate(this));
 	ui.treeForced->setItemDelegateForColumn(1, new ProgramsDelegate(this, ui.treeForced, -1, this));
+	ui.treeForced->setItemDelegateForColumn(2, new RuleExtensionsDelegate(this, ui.treeForced, false, 2, this));
+	ui.treeForced->setItemDelegateForColumn(3, new RuleExtensionsDelegate(this, ui.treeForced, false, 3, this));
 	connect(ui.treeForced, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnForcedChanged(QTreeWidgetItem *, int)));
 	connect(ui.chkDisableForced, SIGNAL(clicked(bool)), this, SLOT(OnForcedChanged()));
 
@@ -583,10 +1153,42 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.btnBreakoutDoc, SIGNAL(clicked(bool)), this, SLOT(OnBreakoutDoc()));
 	connect(ui.btnDelBreakout, SIGNAL(clicked(bool)), this, SLOT(OnDelBreakout()));
 	connect(ui.chkShowBreakoutTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowBreakoutTmpl()));
+	connect(ui.chkDisableBreakout, SIGNAL(clicked(bool)), this, SLOT(OnForcedChanged()));
+	connect(ui.chkBreakoutUseTargetDir, SIGNAL(clicked(bool)), this, SLOT(OnForcedChanged()));
+	connect(ui.chkUseForceBreakoutRuleExtensions, SIGNAL(stateChanged(int)), this, SLOT(OnRuleExtensionsToggled(int)));
 	//ui.treeBreakout->setEditTriggers(QAbstractItemView::DoubleClicked);
 	ui.treeBreakout->setItemDelegateForColumn(0, new NoEditDelegate(this));
 	ui.treeBreakout->setItemDelegateForColumn(1, new ProgramsDelegate(this, ui.treeBreakout, -1, this));
+	ui.treeBreakout->setItemDelegateForColumn(2, new RuleExtensionsDelegate(this, ui.treeBreakout, true, 2, this));
+	ui.treeBreakout->setItemDelegateForColumn(3, new RuleExtensionsDelegate(this, ui.treeBreakout, true, 3, this));
+	ui.treeBreakout->setItemDelegateForColumn(4, new RuleExtensionsDelegate(this, ui.treeBreakout, true, 4, this));
 	connect(ui.treeBreakout, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnBreakoutChanged(QTreeWidgetItem *, int)));
+
+	ui.treeForced->setColumnWidth(0, 130);
+	ui.treeForced->setColumnWidth(1, 280);
+	ui.treeForced->setColumnWidth(2, 90);
+	ui.treeForced->setColumnWidth(3, 90);
+	ui.treeForced->header()->setSectionsMovable(true);
+	ui.treeForced->header()->moveSection(2, 1);
+	ui.treeForced->header()->moveSection(3, 2);
+	ui.treeForced->header()->moveSection(1, 3);
+	ui.treeForced->setSortingEnabled(true);
+	ui.treeForced->sortByColumn(2, Qt::AscendingOrder);
+	ui.treeForced->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed | QAbstractItemView::SelectedClicked);
+
+	ui.treeBreakout->setColumnWidth(0, 130);
+	ui.treeBreakout->setColumnWidth(1, 280);
+	ui.treeBreakout->setColumnWidth(2, 90);
+	ui.treeBreakout->setColumnWidth(3, 90);
+	ui.treeBreakout->setColumnWidth(4, 120);
+	ui.treeBreakout->header()->setSectionsMovable(true);
+	ui.treeBreakout->header()->moveSection(2, 1);
+	ui.treeBreakout->header()->moveSection(3, 2);
+	ui.treeBreakout->header()->moveSection(4, 3);
+	ui.treeBreakout->header()->moveSection(1, 4);
+	ui.treeBreakout->setSortingEnabled(true);
+	ui.treeBreakout->sortByColumn(2, Qt::AscendingOrder);
+	ui.treeBreakout->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed | QAbstractItemView::SelectedClicked);
 	//
 
 	// Stop
@@ -727,6 +1329,36 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		QByteArray Columns = theConf->GetBlob("OptionsWindow/" + pTree->objectName() + "_Columns");
 		if (!Columns.isEmpty()) 
 			pTree->header()->restoreState(Columns);
+	}
+
+	auto enforceColumnOrder = [](QTreeWidget* tree, const QList<int>& desiredLogicalOrder) {
+		if (!tree || !tree->header())
+			return;
+
+		QHeaderView* header = tree->header();
+		for (int visual = 0; visual < desiredLogicalOrder.size(); ++visual) {
+			int logical = desiredLogicalOrder[visual];
+			if (logical < 0 || logical >= tree->columnCount())
+				continue;
+
+			int currentVisual = header->visualIndex(logical);
+			if (currentVisual >= 0 && currentVisual != visual)
+				header->moveSection(currentVisual, visual);
+		}
+	};
+
+	const char* migrationKey = "OptionsWindow/RuleExtensionsColumnOrderMigrated_v1";
+	if (!theConf->GetBool(migrationKey, false)) {
+		enforceColumnOrder(ui.treeForced, QList<int>() << 0 << 2 << 3 << 1);
+		enforceColumnOrder(ui.treeBreakout, QList<int>() << 0 << 2 << 3 << 4 << 1);
+
+		ui.treeForced->sortByColumn(2, Qt::AscendingOrder);
+		ui.treeBreakout->sortByColumn(2, Qt::AscendingOrder);
+
+		theConf->SetBlob("OptionsWindow/" + ui.treeForced->objectName() + "_Columns", ui.treeForced->header()->saveState());
+		theConf->SetBlob("OptionsWindow/" + ui.treeBreakout->objectName() + "_Columns", ui.treeBreakout->header()->saveState());
+
+		theConf->SetValue(migrationKey, true);
 	}
 
 	if (theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false) && !IsAdminUser())
@@ -1382,6 +2014,255 @@ void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int
 	else if(bList)
 		m_Programs.insert(Program);
 	pItem->setText(Column, Program + Suffix);
+}
+
+bool COptionsWindow::IsRuleExtensionsEnabled() const
+{
+	Qt::CheckState state = ui.chkUseForceBreakoutRuleExtensions->checkState();
+	if (state == Qt::Checked)
+		return true;
+	if (state == Qt::Unchecked)
+		return false;
+	return m_pBox->GetBool("UseForceBreakoutRuleExtensions", false, true, true);
+}
+
+QSet<int> COptionsWindow::GetUsedRulePriorities(const QTreeWidgetItem* pExclude) const
+{
+	QSet<int> used;
+	QMap<int, QStringList> sources = GetUsedRulePrioritySources(pExclude);
+	for (auto it = sources.constBegin(); it != sources.constEnd(); ++it)
+		used.insert(it.key());
+	return used;
+}
+
+QMap<int, QStringList> COptionsWindow::GetUsedRulePrioritySources(const QTreeWidgetItem* pExclude) const
+{
+	QMap<int, QSet<QString>> sourceMap;
+
+	auto parsePriorityFromRule = [](const QString& rule, int* outValue) {
+		QStringList parts = rule.split("|", Qt::KeepEmptyParts);
+		for (int i = 1; i < parts.size(); ++i) {
+			const QString& part = parts[i].trimmed();
+			if (!part.startsWith("Priority=", Qt::CaseInsensitive))
+				continue;
+
+			QString valueStr = part.mid(9).trimmed();
+			int value = -1;
+			if (!ParseRulePriorityValue(valueStr, &value))
+				continue;
+
+			*outValue = value;
+			return true;
+		}
+		return false;
+	};
+
+	auto settingKind = [&](const QString& settingName) {
+		return settingName.startsWith("Force", Qt::CaseInsensitive) ? tr("force") : tr("breakout");
+	};
+
+	auto settingState = [&](const QString& settingName) {
+		return settingName.endsWith("Disabled", Qt::CaseInsensitive) ? tr("disabled") : tr("enabled");
+	};
+
+	auto addSource = [&](int priority, const QString& source) {
+		sourceMap[priority].insert(source);
+	};
+
+	auto collectTree = [&](QTreeWidget* pTree, const QString& kind) {
+		if (!pTree)
+			return;
+
+		for (int i = 0; i < pTree->topLevelItemCount(); ++i) {
+			QTreeWidgetItem* pItem = pTree->topLevelItem(i);
+			if (!pItem || pItem == pExclude)
+				continue;
+
+			int type = pItem->data(0, Qt::UserRole).toInt();
+			if (type == eTemplate)
+				continue;
+
+			if (type != eProcess && type != ePath && type != eText && type != eParent)
+				continue;
+
+			QString text = pItem->data(2, Qt::UserRole).toString().trimmed();
+			if (text.isEmpty())
+				continue;
+
+			int value = -1;
+			if (!ParseRulePriorityValue(text, &value))
+				continue;
+
+			const QString state = (pItem->checkState(0) == Qt::Checked) ? tr("enabled") : tr("disabled");
+			addSource(value, tr("box, %1, %2").arg(kind, state));
+		}
+	};
+
+	auto collectRuleList = [&](const QStringList& rules, const QString& sourceLabel) {
+		for (const QString& rule : rules) {
+			int value = -1;
+			if (parsePriorityFromRule(rule, &value))
+				addSource(value, sourceLabel);
+		}
+	};
+
+	const QStringList settings = {
+		"ForceProcess", "ForceProcessDisabled",
+		"ForceChildren", "ForceChildrenDisabled",
+		"ForceFolder", "ForceFolderDisabled",
+		"BreakoutProcess", "BreakoutProcessDisabled",
+		"BreakoutFolder", "BreakoutFolderDisabled",
+		"BreakoutDocument", "BreakoutDocumentDisabled"
+	};
+
+	const QStringList crossBoxRuleSettings = {
+		"ForceProcess", "ForceProcessDisabled",
+		"ForceChildren", "ForceChildrenDisabled",
+		"ForceFolder", "ForceFolderDisabled",
+		"BreakoutProcess", "BreakoutProcessDisabled",
+		"BreakoutFolder", "BreakoutFolderDisabled",
+		"BreakoutDocument", "BreakoutDocumentDisabled"
+	};
+
+	collectTree(ui.treeForced, tr("force"));
+	collectTree(ui.treeBreakout, tr("breakout"));
+
+	for (const QString& setting : settings) {
+		collectRuleList(
+			m_pBox->GetTextList(setting, m_Template),
+			tr("box, %1, %2").arg(settingKind(setting), settingState(setting)));
+	}
+
+	QSharedPointer<CSbieIni> pGlobalSettings = m_pBox->GetAPI()->GetGlobalSettings();
+	if (pGlobalSettings) {
+		for (const QString& setting : settings) {
+			collectRuleList(
+				pGlobalSettings->GetTextList(setting, false),
+				tr("global, %1, %2").arg(settingKind(setting), settingState(setting)));
+		}
+	}
+
+	foreach(const QString& Template, m_pBox->GetTemplates()) {
+		if (Template.compare("GlobalSettings", Qt::CaseInsensitive) == 0)
+			continue;
+
+		for (const QString& setting : settings) {
+			collectRuleList(
+				m_pBox->GetTextListTmpl(setting, Template),
+				tr("template %1, %2, %3").arg(Template, settingKind(setting), settingState(setting)));
+		}
+	}
+
+	// Include rule priorities from other enabled boxes so cross-box conflicts are shown as unavailable.
+	if (!m_Template) {
+		QMap<QString, CSandBoxPtr> allBoxes = m_pBox->GetAPI()->GetAllBoxes();
+		QString currentBoxName = m_pBox->GetName();
+
+		for (auto it = allBoxes.constBegin(); it != allBoxes.constEnd(); ++it) {
+			const CSandBoxPtr& pOtherBox = it.value();
+			if (!pOtherBox || !pOtherBox->IsEnabled())
+				continue;
+
+			QString otherBoxName = pOtherBox->GetName();
+			if (otherBoxName.isEmpty() || otherBoxName.compare(currentBoxName, Qt::CaseInsensitive) == 0)
+				continue;
+
+			for (const QString& setting : crossBoxRuleSettings) {
+				collectRuleList(
+					pOtherBox->GetTextList(setting, false),
+					tr("box %1, %2, %3").arg(otherBoxName, settingKind(setting), settingState(setting)));
+			}
+		}
+	}
+
+	QMap<int, QStringList> result;
+	for (auto it = sourceMap.constBegin(); it != sourceMap.constEnd(); ++it) {
+		QStringList sourceList = it.value().values();
+		sourceList.sort(Qt::CaseInsensitive);
+		result.insert(it.key(), sourceList);
+	}
+
+	return result;
+}
+
+QSet<QString> COptionsWindow::GetUsedRuleRecursiveValues(const QTreeWidgetItem* pExclude) const
+{
+	QSet<QString> used;
+
+	auto addRecursive = [&](const QString& text) {
+		QString value = NormalizeRecursiveUiValue(text);
+		if (!value.isEmpty())
+			used.insert(value);
+	};
+
+	auto collectTree = [&](QTreeWidget* pTree) {
+		if (!pTree)
+			return;
+
+		for (int i = 0; i < pTree->topLevelItemCount(); ++i) {
+			QTreeWidgetItem* pItem = pTree->topLevelItem(i);
+			if (!pItem || pItem == pExclude)
+				continue;
+
+			int type = pItem->data(0, Qt::UserRole).toInt();
+			if (type == eTemplate)
+				continue;
+
+			if (type != eProcess && type != ePath && type != eText && type != eParent)
+				continue;
+
+			QString text = pItem->data(3, Qt::UserRole).toString().trimmed();
+			if (text.isEmpty())
+				continue;
+
+			addRecursive(text);
+		}
+	};
+
+	auto collectRuleList = [&](const QStringList& rules) {
+		for (const QString& rule : rules) {
+			QStringList parts = rule.split("|", Qt::KeepEmptyParts);
+			for (int i = 1; i < parts.size(); ++i) {
+				const QString part = parts[i].trimmed();
+				if (!part.startsWith("Recursive=", Qt::CaseInsensitive))
+					continue;
+
+				addRecursive(part.mid(10));
+				break;
+			}
+		}
+	};
+
+	const QStringList settings = {
+		"ForceProcess", "ForceProcessDisabled",
+		"ForceChildren", "ForceChildrenDisabled",
+		"ForceFolder", "ForceFolderDisabled",
+		"BreakoutProcess", "BreakoutProcessDisabled",
+		"BreakoutFolder", "BreakoutFolderDisabled",
+		"BreakoutDocument", "BreakoutDocumentDisabled"
+	};
+
+	collectTree(ui.treeForced);
+	collectTree(ui.treeBreakout);
+
+	for (const QString& setting : settings)
+		collectRuleList(m_pBox->GetTextList(setting, m_Template));
+
+	QSharedPointer<CSbieIni> pGlobalSettings = m_pBox->GetAPI()->GetGlobalSettings();
+	if (pGlobalSettings) {
+		for (const QString& setting : settings)
+			collectRuleList(pGlobalSettings->GetTextList(setting, false));
+	}
+
+	foreach(const QString& Template, m_pBox->GetTemplates()) {
+		if (Template.compare("GlobalSettings", Qt::CaseInsensitive) == 0)
+			continue;
+
+		for (const QString& setting : settings)
+			collectRuleList(m_pBox->GetTextListTmpl(setting, Template));
+	}
+
+	return used;
 }
 
 QString COptionsWindow::SelectProgram(bool bOrGroup)

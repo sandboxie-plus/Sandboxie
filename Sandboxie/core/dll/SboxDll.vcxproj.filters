@@ -372,6 +372,9 @@
     <ClInclude Include="..\..\common\my_xeb.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\program_control_rule.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

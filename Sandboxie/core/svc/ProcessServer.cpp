@@ -85,13 +85,17 @@ static void ProcessServer_AdjustBreakoutFolderRule(WCHAR* value, void* context)
         SbieDll_TranslateNtToDosPath(value);
 }
 
-static bool ProcessServer_GetBreakoutProcessTarget(
+static bool ProcessServer_GetBreakoutProcessMatch(
     const WCHAR* boxname, const WCHAR* imageName, const WCHAR* appPath, ULONG appPathLen,
     WCHAR* outTarget, size_t outTargetCch,
+    BOOLEAN* outHasTarget,
     BOOLEAN* outHasPriority, LONG* outPriority)
 {
     int hasTarget = 0;
     const BOOLEAN use_rule_extensions = ProcessServer_UseRuleExtensions(boxname);
+
+    if (outHasTarget)
+        *outHasTarget = FALSE;
 
     if (!ProgramControl_FindProcessSettingMatch(
         boxname, L"BreakoutProcess", imageName, appPath, appPathLen,
@@ -100,8 +104,10 @@ static bool ProcessServer_GetBreakoutProcessTarget(
         return false;
     }
 
-    // Only report explicit target when TargetBox=... is present on the winning rule.
-    return hasTarget ? true : false;
+    if (outHasTarget)
+        *outHasTarget = hasTarget ? TRUE : FALSE;
+
+    return true;
 }
 
 static bool ProcessServer_GetBreakoutProcessPriority(
@@ -112,29 +118,16 @@ static bool ProcessServer_GetBreakoutProcessPriority(
     BOOLEAN* outHasPriority,
     LONG* outPriority)
 {
-    int hasTarget = 0;
-    const BOOLEAN use_rule_extensions = ProcessServer_UseRuleExtensions(boxname);
-
-    if (outHasPriority)
-        *outHasPriority = FALSE;
-    if (outPriority)
-        *outPriority = -1;
-
-    return ProgramControl_FindProcessSettingMatch(
+    return ProcessServer_GetBreakoutProcessMatch(
         boxname,
-        L"BreakoutProcess",
         imageName,
         appPath,
         appPathLen,
-        1,
-        use_rule_extensions ? 1 : 0,
-        NULL,
-        NULL,
         NULL,
         0,
-        &hasTarget,
+        NULL,
         outHasPriority,
-        outPriority) ? true : false;
+        outPriority);
 }
 
 static bool ProcessServer_GetBreakoutFolderTarget(
@@ -446,6 +439,7 @@ static void ProcessServer_GetBreakoutState(
     LONG* outBreakoutPriority)
 {
     const BOOLEAN use_rule_extensions = ProcessServer_UseRuleExtensions(boxname);
+    const ULONG launchPathLen = (ULONG)wcslen(launchPath);
     BOOLEAN breakout_process = FALSE;
     BOOLEAN breakout_folder = FALSE;
     BOOLEAN breakout_document = FALSE;
@@ -484,7 +478,7 @@ static void ProcessServer_GetBreakoutState(
         boxname,
         launchImageName,
         launchPath,
-        (ULONG)wcslen(launchPath),
+        launchPathLen,
         use_rule_extensions ? 1 : 0,
         NULL,
         0,
@@ -514,24 +508,18 @@ static void ProcessServer_GetBreakoutState(
         ProcessServer_AdjustBreakoutFolderRule,
         NULL) ? TRUE : FALSE;
 
-    if (breakout_process)
-        ProcessServer_GetBreakoutProcessPriority(
+    if (breakout_process) {
+        breakout_process = ProcessServer_GetBreakoutProcessMatch(
             boxname,
             launchImageName,
             launchPath,
-            (ULONG)wcslen(launchPath),
-            &breakout_process_has_priority,
-            &breakout_process_priority);
-    if (breakout_process)
-        breakout_process_has_target = ProcessServer_GetBreakoutProcessTarget(
-            boxname,
-            launchImageName,
-            launchPath,
-            (ULONG)wcslen(launchPath),
+            launchPathLen,
             breakout_process_target,
             BOXNAME_COUNT,
-            NULL,
-            NULL) ? TRUE : FALSE;
+            &breakout_process_has_target,
+            &breakout_process_has_priority,
+            &breakout_process_priority) ? TRUE : FALSE;
+    }
 
     if (breakout_folder)
         ProcessServer_GetBreakoutFolderPriority(boxname, folderScopeImage, launchPath, launchDirLen, &breakout_folder_has_priority, &breakout_folder_priority);

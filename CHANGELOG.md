@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed expected non-user SID profile and shell lookup noise by suppressing matching SBIE1406/SBIE1412 and derivative SBIE1204 FileRootPath messages [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
 - fixed NT device path (`\Device\LanmanRedirector\...`) shown in popup notification instead of UNC form, causing garbled display and wrong recovery target [#711](https://github.com/sandboxie-plus/Sandboxie/issues/711)
 - fixed "Close until all programs stop" permanently suspending recovery when clicked while no processes are running
+- fixed SandMan Immediate Recovery blinking without showing the recovery window when the new-file event path and scanned recovery path differed only by casing, such as `downloads` vs `Downloads`
 - improved SandMan responsiveness during Sbie message and notification floods by batching UI updates and reducing expensive per-row rendering
 
 

@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.10 / 5.72.10] - 2026-06-??
+## [1.17.10 / 5.72.10] - 2026-07-04
 
 ### Added
 - added wildcard support for `RecoverFolder` and `AutoRecoverIgnore` patterns (`*`, `?`, `**`), matching across NT, DOS, and network-alias path forms in both DLL and SandMan [#3761](https://github.com/sandboxie-plus/Sandboxie/issues/3761) [#5318](https://github.com/sandboxie-plus/Sandboxie/issues/5318)

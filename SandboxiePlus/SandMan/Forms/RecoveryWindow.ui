@@ -196,6 +196,7 @@
   <tabstop>btnRefresh</tabstop>
   <tabstop>btnAddFolder</tabstop>
   <tabstop>chkShowAll</tabstop>
+  <tabstop>chkShowIgnored</tabstop>
   <tabstop>btnDeleteAll</tabstop>
   <tabstop>btnClose</tabstop>
  </tabstops>

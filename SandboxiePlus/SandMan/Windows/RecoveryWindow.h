@@ -93,6 +93,7 @@ protected:
 
 	QMap<QVariant, QVariantMap> m_FileMap;
 	QSet<QString> m_NewFiles;
+	QMap<QString, QString> m_NewFilePaths;
 	QMap<QString, QString> m_NewFileBoxPaths;
 
 	QStringList m_RecoveryFolders;

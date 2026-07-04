@@ -141,6 +141,12 @@ QString NormalizePath(QString path)
 	return path;
 }
 
+QString NormalizeLookupPath(QString path)
+{
+	path = NormalizePath(path);
+	return path.toCaseFolded();
+}
+
 QString PathFileName(QString path)
 {
 	path = NormalizePath(path);
@@ -216,6 +222,19 @@ int RelativeMatchStart(const QString& path)
 	while (start < path.length() && path.at(start) == ';')
 		start = SkipPathComponents(path, start, 1);
 	return SkipPathComponents(path, start, 2);
+}
+
+bool FileMapContainsDiskPath(const QMap<QVariant, QVariantMap>& fileMap,
+	const QString& diskPath)
+{
+	const QString lookupPath = NormalizeLookupPath(diskPath);
+	for (auto it = fileMap.constBegin(); it != fileMap.constEnd(); ++it) {
+		if (!it.key().canConvert<QString>())
+			continue;
+		if (NormalizeLookupPath(it.key().toString()) == lookupPath)
+			return true;
+	}
+	return false;
 }
 
 QString NormalizeIgnorePattern(QString pattern)
@@ -690,9 +709,11 @@ void CRecoveryWindow::AddFile(const QString& FilePath, const QString& BoxPath)
 	if (RealFilePath.isEmpty())
 		RealFilePath = FilePath;
 
-	m_NewFiles.insert(RealFilePath);
+	const QString lookupPath = NormalizeLookupPath(RealFilePath);
+	m_NewFiles.insert(lookupPath);
+	m_NewFilePaths.insert(lookupPath, RealFilePath);
 	if (!BoxPath.isEmpty())
-		m_NewFileBoxPaths.insert(RealFilePath, BoxPath);
+		m_NewFileBoxPaths.insert(lookupPath, BoxPath);
 
 	if (m_FileMap.isEmpty()) {
 		const bool hadSignalsBlocked = ui.chkShowAll->blockSignals(true);
@@ -801,11 +822,12 @@ int CRecoveryWindow::FindFiles()
 		if (m_bImmediate &&
 			ui.chkShowAll->checkState() == Qt::PartiallyChecked) {
 			foreach (const QString& path, m_NewFiles) {
-				if (m_FileMap.contains(path))
+				const QString diskPath = m_NewFilePaths.value(path);
+				if (FileMapContainsDiskPath(m_FileMap, diskPath))
 					continue;
 				const QString boxPath = m_NewFileBoxPaths.value(path);
 				if (!boxPath.isEmpty() &&
-					AddFileToModel(m_FileMap, m_IconProvider, path, boxPath)) {
+					AddFileToModel(m_FileMap, m_IconProvider, diskPath, boxPath)) {
 					++Count;
 					++UnfilteredCount;
 				}
@@ -1110,7 +1132,7 @@ QPair<int, quint64>	CRecoveryWindow::FindFiles(const QString& BoxedFolder,
 			}
 
 			if (m_bImmediate && ui.chkShowAll->checkState() == Qt::PartiallyChecked &&
-				!m_NewFiles.contains(RealPath))
+				!m_NewFiles.contains(NormalizeLookupPath(RealPath)))
 				continue;
 
 			Count++;

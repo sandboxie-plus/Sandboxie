@@ -61,8 +61,8 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool
 
 	CRecoveryWindow* pRecoveryWnd = pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, false, this);
 	connect(this, SIGNAL(Closed()), pBoxEx->m_pRecoveryWnd, SLOT(close()));
-	pBoxEx->m_pRecoveryWnd->FindFiles();
-	if (pBoxEx->m_pRecoveryWnd->GetUnfilteredFileCount() == 0 && bCloseEmpty) {
+	const int visibleFileCount = pBoxEx->m_pRecoveryWnd->FindFiles();
+	if (visibleFileCount == 0 && bCloseEmpty) {
 		delete pBoxEx->m_pRecoveryWnd;
 		pBoxEx->m_pRecoveryWnd = NULL;
 		return true;

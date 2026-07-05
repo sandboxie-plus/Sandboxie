@@ -2495,13 +2495,13 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsAccess.cpp" line="380"/>
         <location filename="Windows/OptionsForce.cpp" line="307"/>
         <location filename="Windows/OptionsForce.cpp" line="318"/>
-        <location filename="Windows/OptionsRecovery.cpp" line="128"/>
-        <location filename="Windows/OptionsRecovery.cpp" line="139"/>
+        <location filename="Windows/OptionsRecovery.cpp" line="130"/>
+        <location filename="Windows/OptionsRecovery.cpp" line="141"/>
         <source>Select Directory</source>
         <translation>Sélectionner le répertoire</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1381"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1382"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="984"/>
@@ -2517,8 +2517,8 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Tous les programmes</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1379"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1397"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1380"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1398"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="688"/>
@@ -3218,7 +3218,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="vanished">Exclusion</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsRecovery.cpp" line="150"/>
+        <location filename="Windows/OptionsRecovery.cpp" line="152"/>
         <source>Please enter a file extension to be excluded</source>
         <translation>Veuillez saisir une extension de fichier à exclure</translation>
     </message>
@@ -3347,63 +3347,63 @@ Veuillez choisir un dossier contenant ce fichier.</translation>
         <translation>Groupement</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="649"/>
+        <location filename="Windows/OptionsWindow.cpp" line="650"/>
         <source>Add %1 Template</source>
         <translation>Ajouter un modèle pour : %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="772"/>
+        <location filename="Windows/OptionsWindow.cpp" line="773"/>
         <source>Search for options</source>
         <oldsource>Search for Options</oldsource>
         <translation>Rechercher dans les options</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1057"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1058"/>
         <source>Box: %1</source>
         <translation>Bac : %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1058"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1059"/>
         <source>Template: %1</source>
         <translation>Modèle : %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1059"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1060"/>
         <source>Global: %1</source>
         <translation>Global : %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1060"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1061"/>
         <source>Default: %1</source>
         <translation>Par défaut : %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1277"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1278"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Ce bac a été supprimé, par conséquent la configuration ne peut pas être enregistrée.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1341"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1342"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Certaines modifications n&apos;ont pas encore été enregistrées ; voulez-vous vraiment fermer cette fenêtre d&apos;options ?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1390"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1391"/>
         <source>Enter program:</source>
         <translation>Saisir le programme :</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1830"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1831"/>
         <source>Autocomplete Consent Required</source>
         <translation>Consentement de saisie automatique nécessaire</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1832"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1833"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>La fonction de saisie automatique a besoin de votre autorisation pour continuer.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1834"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1835"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -3416,32 +3416,32 @@ Choisir le mode de saisie automatique :
 %1 Lors de la frappe : Suggestions de saisie automatique lors de la saisie.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1842"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1843"/>
         <source>Manual</source>
         <translation>Manuel</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1843"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1844"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>Déclenche les suggestions de saisie automatique avec %1.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1845"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1846"/>
         <source>While Typing</source>
         <translation>Lors de la frappe</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1846"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1847"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>Déclenche les suggestions de saisie automatique lors de la frappe.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1849"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1850"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>Conserve les suggestions de saisie automatique désactivées.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1848"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1849"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
@@ -3643,7 +3643,7 @@ Voulez-vous activer la saisie semi-automatique ?</translation>
 <context>
     <name>CPopUpWindow</name>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="24"/>
+        <location filename="Windows/PopUpWindow.cpp" line="28"/>
         <source>Sandboxie-Plus Notifications</source>
         <translation>Sandboxie-Plus - Notifications</translation>
     </message>
@@ -3652,49 +3652,49 @@ Voulez-vous activer la saisie semi-automatique ?</translation>
         <translation type="vanished">PID %1</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="208"/>
+        <location filename="Windows/PopUpWindow.cpp" line="315"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
         <translation>Voulez-vous autoriser le spouleur d&apos;impression à écrire hors du bac pour %1 (%2) ?</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="323"/>
+        <location filename="Windows/PopUpWindow.cpp" line="497"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
         <translation>Voulez-vous autoriser %4 (%5) à copier un fichier volumineux (%1) dans le bac %2 ?
 Nom du fichier : %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="329"/>
+        <location filename="Windows/PopUpWindow.cpp" line="503"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
         <translation>Voulez-vous autoriser %1 (%2) à accéder à Internet ?
 Chemin complet : %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="388"/>
+        <location filename="Windows/PopUpWindow.cpp" line="565"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
         <translation>%1 est éligible pour une récupération rapide à partir de %2.
 Le fichier a été écrit par : %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="390"/>
+        <location filename="Windows/PopUpWindow.cpp" line="567"/>
         <source>an UNKNOWN process.</source>
         <translation>un processus INCONNU.</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="390"/>
+        <location filename="Windows/PopUpWindow.cpp" line="567"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="474"/>
-        <location filename="Windows/PopUpWindow.cpp" line="475"/>
+        <location filename="Windows/PopUpWindow.cpp" line="657"/>
+        <location filename="Windows/PopUpWindow.cpp" line="658"/>
         <source>UNKNOWN</source>
         <translation>INCONNU</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="481"/>
+        <location filename="Windows/PopUpWindow.cpp" line="664"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
         <translation>Migration du fichier volumineux %1 dans le bac %2 ; encore %3.
@@ -3704,22 +3704,22 @@ Chemin complet : %4</translation>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="325"/>
+        <location filename="SandManRecovery.cpp" line="336"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Journal de récupération</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="336"/>
+        <location filename="SandManRecovery.cpp" line="347"/>
         <source>Time|Box Name|File Path</source>
         <translation>Heure|Nom du bac|Chemin du fichier</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="338"/>
+        <location filename="SandManRecovery.cpp" line="349"/>
         <source>Cleanup Recovery Log</source>
         <translation>Purger le journal de récupération</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="348"/>
+        <location filename="SandManRecovery.cpp" line="359"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>Les fichiers suivants ont récemment été récupérés et sortis d&apos;un bac.</translation>
@@ -3728,89 +3728,94 @@ Chemin complet : %4</translation>
 <context>
     <name>CRecoveryWindow</name>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="46"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="441"/>
         <source>%1 - File Recovery</source>
         <translation>%1 - Récupération de fichiers</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="70"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="474"/>
         <source>File Name</source>
         <translation>Nom du fichier</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="71"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="475"/>
         <source>File Size</source>
         <translation>Taille du fichier</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="72"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="476"/>
         <source>Full Path</source>
         <translation>Chemin complet</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="106"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="511"/>
         <source>Remember target selection</source>
         <translation>Se souvenir de l&apos;emplacement</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="112"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="517"/>
         <source>Delete everything, including all snapshots</source>
         <translation>Tout supprimer, y compris les sauvegardes (snapshots)</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="138"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="555"/>
         <source>Original location</source>
         <translation>Emplacement d&apos;origine</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="139"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="556"/>
         <source>Browse for location</source>
         <translation>Naviguer vers un emplacement</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="140"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="557"/>
         <source>Clear folder list</source>
         <translation>Effacer la liste des dossiers</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="180"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="201"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="554"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="597"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="619"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="1253"/>
         <source>Select Directory</source>
         <translation>Sélectionner le répertoire</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="246"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="664"/>
         <source>No Files selected!</source>
         <translation>Aucun fichier sélectionné !</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="250"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="668"/>
         <source>Do you really want to delete %1 selected files?</source>
         <translation>Voulez-vous vraiment supprimer le ou les %1 fichiers sélectionnés ?</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="278"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="725"/>
         <source>Close until all programs stop in this box</source>
         <translation>Fermer jusqu&apos;à ce que tous les programmes de ce bac soient arrêtés</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="279"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="726"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation>Fermer et désactiver la récupération immédiate pour ce bac</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="299"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="782"/>
         <source>There are %1 new files available to recover.</source>
         <translation>Nouveaux fichiers disponibles pour une récupération : %1</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="584"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="932"/>
+        <source>%1 file(s) hidden by AutoRecoverIgnore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/RecoveryWindow.cpp" line="1283"/>
         <source>Recovering File(s)...</source>
         <translation>Récupération du ou des fichiers...</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="590"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="1289"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>Il y a %1 fichier(s) et %2 dossier(s) dans le bac, occupant %3 d&apos;espace disque.</translation>
     </message>
@@ -3987,22 +3992,22 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="4950"/>
+        <location filename="SandMan.cpp" line="5066"/>
         <source>Waiting for folder: %1</source>
         <translation>Dossier en attente : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4951"/>
+        <location filename="SandMan.cpp" line="5067"/>
         <source>Deleting folder: %1</source>
         <translation>Suppression du dossier : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4952"/>
+        <location filename="SandMan.cpp" line="5068"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Fusion des dossiers : %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4953"/>
+        <location filename="SandMan.cpp" line="5069"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Finalisation de la fusion des instantanés...</translation>
     </message>
@@ -4105,8 +4110,8 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
 <context>
     <name>CSandMan</name>
     <message>
-        <location filename="SandMan.cpp" line="514"/>
-        <location filename="SandMan.cpp" line="2815"/>
+        <location filename="SandMan.cpp" line="518"/>
+        <location filename="SandMan.cpp" line="2825"/>
         <source>Sandboxie-Plus v%1</source>
         <translation>Sandboxie-Plus v%1</translation>
     </message>
@@ -4119,83 +4124,83 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
         <translation type="vanished">&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;Une nouvelle version de Sandboxie-Plus est disponible&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1421"/>
+        <location filename="SandMan.cpp" line="1425"/>
         <source>Click to download update</source>
         <translation>Appuyer pour télécharger la mise à jour</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1510"/>
+        <location filename="SandMan.cpp" line="1514"/>
         <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
         <translation>Bacs : %1 (Actifs : %2)  |  Processus : %3  |  Mémoire : %4</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2025"/>
-        <location filename="SandMan.cpp" line="2041"/>
+        <location filename="SandMan.cpp" line="2035"/>
+        <location filename="SandMan.cpp" line="2051"/>
         <source>User canceled this operation.</source>
         <translation>L&apos;utilisateur a annulé cette opération.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2244"/>
+        <location filename="SandMan.cpp" line="2254"/>
         <source>No Force Process</source>
         <translation>Pas de processus forcé</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2317"/>
+        <location filename="SandMan.cpp" line="2327"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
         <translation>Certains modèles de compatibilité sont manquants :&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Ils ont probablement été supprimés ; voulez-vous les supprimer de tous les bacs ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2635"/>
+        <location filename="SandMan.cpp" line="2645"/>
         <source>Removed Shortcut: %1</source>
         <translation>Raccourci supprimé : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2724"/>
+        <location filename="SandMan.cpp" line="2734"/>
         <source>Updated Shortcut to: %1</source>
         <translation>Raccourci vers %1 mis à jour</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2726"/>
+        <location filename="SandMan.cpp" line="2736"/>
         <source>Added Shortcut to: %1</source>
         <translation>Raccourci vers %1 ajouté</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2758"/>
+        <location filename="SandMan.cpp" line="2768"/>
         <source>Executing OnBoxTerminate: %1</source>
         <translation>Exécution d&apos;OnBoxTerminate: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2803"/>
+        <location filename="SandMan.cpp" line="2813"/>
         <source>Auto removing sandbox %1</source>
         <translation>Suppression automatique du bac %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2827"/>
+        <location filename="SandMan.cpp" line="2837"/>
         <source>%1 Directory: %2</source>
         <translation>Répertoire d&apos;%1 : %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2827"/>
+        <location filename="SandMan.cpp" line="2837"/>
         <source>Application</source>
         <translation>application</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2827"/>
+        <location filename="SandMan.cpp" line="2837"/>
         <source>Installation</source>
         <translation>installation</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2893"/>
+        <location filename="SandMan.cpp" line="2903"/>
         <source> for Personal use</source>
         <translation> pour un usage personnel</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2895"/>
+        <location filename="SandMan.cpp" line="2905"/>
         <source>   -   for Non-Commercial use ONLY</source>
         <translation>   -   pour un usage non commercial UNIQUEMENT</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2960"/>
+        <location filename="SandMan.cpp" line="2970"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
@@ -4204,22 +4209,22 @@ Please check if there is an update for sandboxie.</oldsource>
 Veuillez vérifier s&apos;il y a une mise à jour pour Sandboxie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2969"/>
+        <location filename="SandMan.cpp" line="2979"/>
         <source>Don&apos;t show this message again for the current build.</source>
         <translation>Ne plus afficher ce message pour la version actuelle.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2976"/>
+        <location filename="SandMan.cpp" line="2986"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
         <translation>Votre version de Windows %1 excède les capacités de prise en charge actuellement connues de votre version de Sandboxie. Par conséquent, Sandboxie essaiera d&apos;utiliser les derniers offsets connus, ce qui peut entrainer une instabilité du système.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2987"/>
+        <location filename="SandMan.cpp" line="2997"/>
         <source>Do you want the setup wizard to be omitted?</source>
         <translation>Voulez-vous ignorer l&apos;assistant d&apos;installation ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2994"/>
+        <location filename="SandMan.cpp" line="3004"/>
         <source>Sandman did not finish enumerating installed windows updates last time, it probably hangs.
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
@@ -4228,12 +4233,12 @@ Do you want to disable Windows Updates scanning from the the software compatibil
 Voulez-vous désactiver l&apos;analyse des mises à jour Windows lors de la détection de compatibilité des logiciels ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3198"/>
+        <location filename="SandMan.cpp" line="3208"/>
         <source>Failed to configure hotkey %1, error: %2</source>
         <translation>Échec de configuration du raccourci %1 ; erreur : %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3621"/>
+        <location filename="SandMan.cpp" line="3733"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>La période d&apos;évaluation a expiré !!!</translation>
@@ -4256,17 +4261,17 @@ Voulez-vous désactiver l&apos;analyse des mises à jour Windows lors de la dét
         <translation type="vanished">Importation : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3798"/>
+        <location filename="SandMan.cpp" line="3910"/>
         <source>No Recovery</source>
         <translation>Pas de récupération</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3804"/>
+        <location filename="SandMan.cpp" line="3916"/>
         <source>No Messages</source>
         <translation>Pas de message</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4276"/>
+        <location filename="SandMan.cpp" line="4392"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -4275,62 +4280,62 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera annulée la prochaine fois que Sandboxie sera mis à jour.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4525"/>
+        <location filename="SandMan.cpp" line="4641"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>Importation/Exportation non disponible ; 7z.dll n&apos;a pas pu être chargé</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4526"/>
+        <location filename="SandMan.cpp" line="4642"/>
         <source>Failed to create the box archive</source>
         <translation>Échec de création de l&apos;archive du bac</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4527"/>
+        <location filename="SandMan.cpp" line="4643"/>
         <source>Failed to open the 7z archive</source>
         <translation>Échec d&apos;ouverture de l&apos;archive 7z</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4528"/>
+        <location filename="SandMan.cpp" line="4644"/>
         <source>Failed to unpack the box archive</source>
         <translation>Échec de décompression de l&apos;archive du bac</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4529"/>
+        <location filename="SandMan.cpp" line="4645"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>Le fichier 7z choisi n&apos;est PAS une archive de bac</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4795"/>
+        <location filename="SandMan.cpp" line="4911"/>
         <source>Reset Columns</source>
         <translation>Réinitialiser les colonnes</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4796"/>
+        <location filename="SandMan.cpp" line="4912"/>
         <source>Copy Cell</source>
         <translation>Copier la cellule</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4797"/>
+        <location filename="SandMan.cpp" line="4913"/>
         <source>Copy Row</source>
         <translation>Copier la rangée</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4798"/>
+        <location filename="SandMan.cpp" line="4914"/>
         <source>Copy Panel</source>
         <translation>Copier le tableau</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1591"/>
+        <location filename="SandMan.cpp" line="1595"/>
         <source>Time|Message</source>
         <translation>Heure|Message</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1600"/>
+        <location filename="SandMan.cpp" line="1606"/>
         <source>Sbie Messages</source>
         <translation>Messages de Sbie</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1612"/>
+        <location filename="SandMan.cpp" line="1622"/>
         <source>Trace Log</source>
         <translation>Journal de suivi</translation>
     </message>
@@ -4344,26 +4349,26 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <translation type="vanished">Désactiver les programmes forcés</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="837"/>
-        <location filename="SandMan.cpp" line="1069"/>
+        <location filename="SandMan.cpp" line="841"/>
+        <location filename="SandMan.cpp" line="1073"/>
         <source>&amp;Sandbox</source>
         <translation>&amp;Bacs à sable</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="838"/>
-        <location filename="SandMan.cpp" line="1340"/>
-        <location filename="SandMan.cpp" line="1341"/>
+        <location filename="SandMan.cpp" line="842"/>
+        <location filename="SandMan.cpp" line="1344"/>
+        <location filename="SandMan.cpp" line="1345"/>
         <source>Create New Box</source>
         <translation>Créer un nouveau bac</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="839"/>
+        <location filename="SandMan.cpp" line="843"/>
         <source>Create Box Group</source>
         <translation>Créer un groupe de bacs</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="847"/>
-        <location filename="SandMan.cpp" line="997"/>
+        <location filename="SandMan.cpp" line="851"/>
+        <location filename="SandMan.cpp" line="1001"/>
         <source>Terminate All Processes</source>
         <translation>Arrêter tous les processus</translation>
     </message>
@@ -4372,198 +4377,198 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <translation type="vanished">Chercheur de fenêtre</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="953"/>
+        <location filename="SandMan.cpp" line="957"/>
         <source>Disable File Recovery</source>
         <translation>Désactiver la récupération de fichiers</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="956"/>
+        <location filename="SandMan.cpp" line="960"/>
         <source>Disable Message Popup</source>
         <oldsource>Disable Message PopUp</oldsource>
         <translation>Désactiver la fenêtre surgissante des messages</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="763"/>
+        <location filename="SandMan.cpp" line="767"/>
         <source>&amp;Maintenance</source>
         <translation>&amp;Maintenance</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="517"/>
+        <location filename="SandMan.cpp" line="521"/>
         <source> (Administrator)</source>
         <translation> (Administrateur)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="764"/>
+        <location filename="SandMan.cpp" line="768"/>
         <source>Connect</source>
         <translation>Connexion</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="765"/>
+        <location filename="SandMan.cpp" line="769"/>
         <source>Disconnect</source>
         <translation>Déconnexion</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="767"/>
+        <location filename="SandMan.cpp" line="771"/>
         <source>Stop All</source>
         <translation>Arrêter tous</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="768"/>
+        <location filename="SandMan.cpp" line="772"/>
         <source>&amp;Advanced</source>
         <translation>&amp;Avancé</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="769"/>
+        <location filename="SandMan.cpp" line="773"/>
         <source>Install Driver</source>
         <translation>Installer le pilote</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="770"/>
+        <location filename="SandMan.cpp" line="774"/>
         <source>Start Driver</source>
         <translation>Démarrer le pilote</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="771"/>
+        <location filename="SandMan.cpp" line="775"/>
         <source>Stop Driver</source>
         <translation>Arrêter le pilote</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="772"/>
+        <location filename="SandMan.cpp" line="776"/>
         <source>Uninstall Driver</source>
         <translation>Désinstaller le pilote</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="774"/>
+        <location filename="SandMan.cpp" line="778"/>
         <source>Install Service</source>
         <translation>Installer le service</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="775"/>
+        <location filename="SandMan.cpp" line="779"/>
         <source>Start Service</source>
         <translation>Démarrer le service</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="776"/>
+        <location filename="SandMan.cpp" line="780"/>
         <source>Stop Service</source>
         <translation>Arrêter le service</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="777"/>
+        <location filename="SandMan.cpp" line="781"/>
         <source>Uninstall Service</source>
         <translation>Désinstaller le service</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="794"/>
+        <location filename="SandMan.cpp" line="798"/>
         <source>Setup Wizard</source>
         <translation>Assistant d&apos;installation</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="797"/>
+        <location filename="SandMan.cpp" line="801"/>
         <source>Uninstall All</source>
         <translation>Tout désinstaller</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="840"/>
+        <location filename="SandMan.cpp" line="844"/>
         <source>Import Boxes</source>
         <translation>Importer des bacs</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="842"/>
+        <location filename="SandMan.cpp" line="846"/>
         <source>Export Boxes</source>
         <translation>Exporter des bacs</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="876"/>
-        <location filename="SandMan.cpp" line="1038"/>
+        <location filename="SandMan.cpp" line="880"/>
+        <location filename="SandMan.cpp" line="1042"/>
         <source>Exit</source>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="879"/>
-        <location filename="SandMan.cpp" line="1040"/>
+        <location filename="SandMan.cpp" line="883"/>
+        <location filename="SandMan.cpp" line="1044"/>
         <source>&amp;View</source>
         <translation>&amp;Affichage</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="803"/>
+        <location filename="SandMan.cpp" line="807"/>
         <source>Simple View</source>
         <translation>Affichage simple</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="804"/>
+        <location filename="SandMan.cpp" line="808"/>
         <source>Advanced View</source>
         <translation>Affichage avancé</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="809"/>
+        <location filename="SandMan.cpp" line="813"/>
         <source>Always on Top</source>
         <translation>Toujours au-dessus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="886"/>
+        <location filename="SandMan.cpp" line="890"/>
         <source>Show Hidden Boxes</source>
         <translation>Afficher les bacs masqués</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="888"/>
+        <location filename="SandMan.cpp" line="892"/>
         <source>Show All Sessions</source>
         <translation>Afficher toutes les sessions</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="905"/>
+        <location filename="SandMan.cpp" line="909"/>
         <source>Refresh View</source>
         <translation>Actualiser l&apos;affichage</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="911"/>
+        <location filename="SandMan.cpp" line="915"/>
         <source>Clean Up</source>
         <translation>Purge</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="912"/>
+        <location filename="SandMan.cpp" line="916"/>
         <source>Cleanup Processes</source>
         <translation>Purger les processus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="914"/>
+        <location filename="SandMan.cpp" line="918"/>
         <source>Cleanup Message Log</source>
         <translation>Purger le journal des messages</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="915"/>
+        <location filename="SandMan.cpp" line="919"/>
         <source>Cleanup Trace Log</source>
         <translation>Purger le journal de traçage</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="916"/>
+        <location filename="SandMan.cpp" line="920"/>
         <source>Cleanup Recovery Log</source>
         <translation>Purger le journal de récupération</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="918"/>
+        <location filename="SandMan.cpp" line="922"/>
         <source>Keep terminated</source>
         <translation>Geler les processus arrêtés</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="943"/>
+        <location filename="SandMan.cpp" line="947"/>
         <source>&amp;Options</source>
         <translation>&amp;Options</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="944"/>
-        <location filename="SandMan.cpp" line="1093"/>
+        <location filename="SandMan.cpp" line="948"/>
+        <location filename="SandMan.cpp" line="1097"/>
         <source>Global Settings</source>
         <translation>Paramètres généraux</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="978"/>
-        <location filename="SandMan.cpp" line="1103"/>
+        <location filename="SandMan.cpp" line="982"/>
+        <location filename="SandMan.cpp" line="1107"/>
         <source>Reset all hidden messages</source>
         <translation>Réinitialiser tous les messages masqués</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="979"/>
-        <location filename="SandMan.cpp" line="1104"/>
+        <location filename="SandMan.cpp" line="983"/>
+        <location filename="SandMan.cpp" line="1108"/>
         <source>Reset all GUI options</source>
         <translation>Réinitialiser toutes les options d&apos;interface</translation>
     </message>
@@ -4576,17 +4581,17 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <translation type="vanished">Recharger le fichier .ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="936"/>
+        <location filename="SandMan.cpp" line="940"/>
         <source>Trace Logging</source>
         <translation>Journalisation du traçage</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="805"/>
+        <location filename="SandMan.cpp" line="809"/>
         <source>Vintage View (like SbieCtrl)</source>
         <translation>Affichage rétro (comme SbieCtrl)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="815"/>
+        <location filename="SandMan.cpp" line="819"/>
         <source>&amp;Help</source>
         <translation>&amp;Aide</translation>
     </message>
@@ -4596,49 +4601,49 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <translation type="vanished">Soutenir Sandboxie-Plus avec un don</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="825"/>
+        <location filename="SandMan.cpp" line="829"/>
         <source>Visit Support Forum</source>
         <translation>Visiter le forum d&apos;assistance</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="824"/>
+        <location filename="SandMan.cpp" line="828"/>
         <source>Online Documentation</source>
         <translation>Documentation en ligne</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="512"/>
-        <location filename="SandMan.cpp" line="2813"/>
+        <location filename="SandMan.cpp" line="516"/>
+        <location filename="SandMan.cpp" line="2823"/>
         <source>Sandboxie-Plus Insider [%1]</source>
         <translation>Initié Sandboxie-Plus [%1]</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="782"/>
+        <location filename="SandMan.cpp" line="786"/>
         <source>Virtual Disks</source>
         <translation>Disques virtuels</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="822"/>
+        <location filename="SandMan.cpp" line="826"/>
         <source>Contribute to Sandboxie-Plus</source>
         <translation>Contribuer à Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="823"/>
+        <location filename="SandMan.cpp" line="827"/>
         <source>Troubleshooting Wizard</source>
         <translation>Assistant de dépannage</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="827"/>
+        <location filename="SandMan.cpp" line="831"/>
         <source>Check for Updates</source>
         <translation>Vérifier les mises à jour</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="829"/>
+        <location filename="SandMan.cpp" line="833"/>
         <source>About the Qt Framework</source>
         <translation>À propos de l&apos;environnement Qt</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="830"/>
-        <location filename="SandMan.cpp" line="4888"/>
+        <location filename="SandMan.cpp" line="834"/>
+        <location filename="SandMan.cpp" line="5004"/>
         <source>About Sandboxie-Plus</source>
         <translation>À propos de Sandboxie-Plus</translation>
     </message>
@@ -4647,97 +4652,97 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <translation type="vanished">Importer un bac</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="845"/>
-        <location filename="SandMan.cpp" line="995"/>
+        <location filename="SandMan.cpp" line="849"/>
+        <location filename="SandMan.cpp" line="999"/>
         <source>Run Sandboxed</source>
         <translation>Exécuter dans un bac à sable</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="846"/>
-        <location filename="SandMan.cpp" line="996"/>
+        <location filename="SandMan.cpp" line="850"/>
+        <location filename="SandMan.cpp" line="1000"/>
         <source>Suspend All Processes</source>
         <translation>Suspendre tous les processus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="848"/>
-        <location filename="SandMan.cpp" line="998"/>
+        <location filename="SandMan.cpp" line="852"/>
+        <location filename="SandMan.cpp" line="1002"/>
         <source>Lock All Encrypted Boxes</source>
         <translation>Verrouiller tous les bacs chiffrés</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="850"/>
-        <location filename="SandMan.cpp" line="1011"/>
+        <location filename="SandMan.cpp" line="854"/>
+        <location filename="SandMan.cpp" line="1015"/>
         <source>Is Window Sandboxed?</source>
         <oldsource>Is Window Sandboxed</oldsource>
         <translation>La fenêtre est-elle dans un bac à sable ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="874"/>
-        <location filename="SandMan.cpp" line="1036"/>
+        <location filename="SandMan.cpp" line="878"/>
+        <location filename="SandMan.cpp" line="1040"/>
         <source>Restart As Admin</source>
         <translation>Redémarrer en tant qu&apos;administrateur</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="897"/>
+        <location filename="SandMan.cpp" line="901"/>
         <source>Show File Panel</source>
         <translation>Afficher le panneau des fichiers</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="921"/>
+        <location filename="SandMan.cpp" line="925"/>
         <source>Auto Expand Tree</source>
         <translation>Développer automatiquement l&apos;arborescence</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="966"/>
-        <location filename="SandMan.cpp" line="1111"/>
-        <location filename="SandMan.cpp" line="1356"/>
-        <location filename="SandMan.cpp" line="1357"/>
+        <location filename="SandMan.cpp" line="970"/>
+        <location filename="SandMan.cpp" line="1115"/>
+        <location filename="SandMan.cpp" line="1360"/>
+        <location filename="SandMan.cpp" line="1361"/>
         <source>Edit Sandboxie.ini</source>
         <translation>Éditer Sandboxie.ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="969"/>
+        <location filename="SandMan.cpp" line="973"/>
         <source>Edit Templates.ini</source>
         <translation>Éditer Templates.ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="971"/>
+        <location filename="SandMan.cpp" line="975"/>
         <source>Edit Sandboxie-Plus.ini</source>
         <translation>Éditer Sandboxie-Plus.ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="975"/>
-        <location filename="SandMan.cpp" line="1114"/>
+        <location filename="SandMan.cpp" line="979"/>
+        <location filename="SandMan.cpp" line="1118"/>
         <source>Reload configuration</source>
         <translation>Recharger la configuration</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="994"/>
+        <location filename="SandMan.cpp" line="998"/>
         <source>&amp;File</source>
         <translation>&amp;Fichier</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1012"/>
+        <location filename="SandMan.cpp" line="1016"/>
         <source>Resource Access Monitor</source>
         <translation>Moniteur d&apos;accès aux ressources</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1046"/>
+        <location filename="SandMan.cpp" line="1050"/>
         <source>Programs</source>
         <translation>Programmes</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1047"/>
+        <location filename="SandMan.cpp" line="1051"/>
         <source>Files and Folders</source>
         <translation>Fichiers et dossiers</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1074"/>
+        <location filename="SandMan.cpp" line="1078"/>
         <source>Create New Sandbox</source>
         <translation>Créer un nouveau bac</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1075"/>
+        <location filename="SandMan.cpp" line="1079"/>
         <source>Create New Group</source>
         <translation>Créer un nouveau groupe</translation>
     </message>
@@ -4746,111 +4751,111 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <translation type="vanished">Importer un bac</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1081"/>
+        <location filename="SandMan.cpp" line="1085"/>
         <source>Set Container Folder</source>
         <translation>Définir le répertoire conteneur</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1084"/>
+        <location filename="SandMan.cpp" line="1088"/>
         <source>Set Layout and Groups</source>
         <translation>Définir la disposition et les groupes</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1086"/>
+        <location filename="SandMan.cpp" line="1090"/>
         <source>Reveal Hidden Boxes</source>
         <translation>Révéler les bacs masqués</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1092"/>
+        <location filename="SandMan.cpp" line="1096"/>
         <source>&amp;Configure</source>
         <translation>&amp;Configuration</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1096"/>
+        <location filename="SandMan.cpp" line="1100"/>
         <source>Program Alerts</source>
         <translation>Alertes concernant les programmes</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1098"/>
+        <location filename="SandMan.cpp" line="1102"/>
         <source>Windows Shell Integration</source>
         <translation>Intégration à l&apos;interface système de Windows</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1100"/>
+        <location filename="SandMan.cpp" line="1104"/>
         <source>Software Compatibility</source>
         <translation>Compatibilité logicielle</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1109"/>
+        <location filename="SandMan.cpp" line="1113"/>
         <source>Lock Configuration</source>
         <translation>Protection de la configuration</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1128"/>
+        <location filename="SandMan.cpp" line="1132"/>
         <source>Sandbox %1</source>
         <translation>Bac à sable %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1171"/>
+        <location filename="SandMan.cpp" line="1175"/>
         <source>New-Box Menu</source>
         <translation>Menu de nouveau bac</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1182"/>
-        <location filename="SandMan.cpp" line="1328"/>
-        <location filename="SandMan.cpp" line="1329"/>
+        <location filename="SandMan.cpp" line="1186"/>
+        <location filename="SandMan.cpp" line="1332"/>
+        <location filename="SandMan.cpp" line="1333"/>
         <source>Cleanup</source>
         <translation>Purge</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1191"/>
+        <location filename="SandMan.cpp" line="1195"/>
         <source>Edit-ini Menu</source>
         <translation>Menu d&apos;édition .ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1237"/>
+        <location filename="SandMan.cpp" line="1241"/>
         <source>Toolbar Items</source>
         <translation>Éléments de barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1239"/>
+        <location filename="SandMan.cpp" line="1243"/>
         <source>Reset Toolbar</source>
         <translation>Réinitialiser la barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1922"/>
+        <location filename="SandMan.cpp" line="1932"/>
         <source>This box will be &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;encrypted&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;access to sandboxed processes will be guarded&lt;/a&gt;.</source>
         <translation>Ce bac sera &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;chiffré&lt;/a&gt; et &lt;a href=&quot;sbie://docs/black-box&quot;&gt;l&apos;accès aux processus du bac sera surveillé&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1999"/>
-        <location filename="SandMan.cpp" line="2030"/>
+        <location filename="SandMan.cpp" line="2009"/>
+        <location filename="SandMan.cpp" line="2040"/>
         <source>Which box you want to add in?</source>
         <translation>Quel bac voulez-vous ajouter ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1999"/>
-        <location filename="SandMan.cpp" line="2030"/>
+        <location filename="SandMan.cpp" line="2009"/>
+        <location filename="SandMan.cpp" line="2040"/>
         <source>Type the box name which you are going to set:</source>
         <translation>Saisir le nom de bac que vous allez définir :</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2016"/>
-        <location filename="SandMan.cpp" line="2021"/>
-        <location filename="SandMan.cpp" line="2025"/>
-        <location filename="SandMan.cpp" line="2037"/>
-        <location filename="SandMan.cpp" line="2041"/>
+        <location filename="SandMan.cpp" line="2026"/>
+        <location filename="SandMan.cpp" line="2031"/>
+        <location filename="SandMan.cpp" line="2035"/>
+        <location filename="SandMan.cpp" line="2047"/>
+        <location filename="SandMan.cpp" line="2051"/>
         <source>Sandboxie-Plus Warning</source>
         <translation>Avertissement de Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2016"/>
+        <location filename="SandMan.cpp" line="2026"/>
         <source>The value is not an existing directory or executable.</source>
         <translation>La valeur n&apos;est ni un répertoire existant ni un exécutable.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2021"/>
-        <location filename="SandMan.cpp" line="2037"/>
+        <location filename="SandMan.cpp" line="2031"/>
+        <location filename="SandMan.cpp" line="2047"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
         <translation>Vous avez saisi un mauvais nom de bac ! Rien n&apos;a été modifié.</translation>
     </message>
@@ -4863,32 +4868,32 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <translation type="vanished">L&apos;utilisateur a annulé cette opération.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2404"/>
+        <location filename="SandMan.cpp" line="2414"/>
         <source>USB sandbox not found; creating: %1</source>
         <translation>Bac à sable USB introuvable ; création : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3481"/>
+        <location filename="SandMan.cpp" line="3593"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
         <translation>&lt;br /&gt;Vous devez être de niveau « Grand contributeur Patreon » ou plus pour débloquer cette fonction.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4857"/>
+        <location filename="SandMan.cpp" line="4973"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
         <translation>&lt;h3&gt;À propos de Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4865"/>
+        <location filename="SandMan.cpp" line="4981"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
         <translation>Cette copie de Sandboxie-Plus est attestée pour : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4867"/>
+        <location filename="SandMan.cpp" line="4983"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
         <translation>Sandboxie-Plus est gratuit pour une utilisation personnelle et non commerciale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4871"/>
+        <location filename="SandMan.cpp" line="4987"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus est la poursuite en code source ouvert de Sandboxie.&lt;br /&gt;Visitez &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; pour plus d&apos;informations.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Fonctions : %3&lt;br /&gt;&lt;br /&gt;Installation : %1&lt;br /&gt;SbieDrv.sys : %4&lt;br /&gt; SbieSvc.exe : %5&lt;br /&gt; SbieDll.dll : %6&lt;br /&gt;&lt;br /&gt;Icônes provenant de &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
@@ -4903,150 +4908,151 @@ Veuillez vérifier s&apos;il y a une mise à jour pour Sandboxie.</translation>
         <translation type="vanished">Votre version de Windows excède les capacités de prise en charge de votre version de Sandboxie. Par conséquent, Sandboxie essaiera d&apos;utiliser les derniers offsets connus, ce qui peut entrainer une instabilité du système.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3284"/>
-        <location filename="SandMan.cpp" line="3288"/>
-        <location filename="SandMan.cpp" line="3290"/>
+        <location filename="SandMan.cpp" line="3383"/>
+        <location filename="SandMan.cpp" line="3387"/>
+        <location filename="SandMan.cpp" line="3393"/>
+        <location filename="SandMan.cpp" line="3395"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3377"/>
+        <location filename="SandMan.cpp" line="3489"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
         <translation>Le bac %1 est configuré pour utiliser des fonctions disponibles exclusivement aux adhérents au projet.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3382"/>
+        <location filename="SandMan.cpp" line="3494"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>Le bac %1 est configuré pour utiliser des fonctions qui nécessitent un certificat d&apos;adhérent &lt;b&gt;avancé&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3384"/>
-        <location filename="SandMan.cpp" line="3483"/>
+        <location filename="SandMan.cpp" line="3496"/>
+        <location filename="SandMan.cpp" line="3595"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Mettez à jour votre certificat&lt;/a&gt; afin de débloquer les fonctions avancées.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3479"/>
+        <location filename="SandMan.cpp" line="3591"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>La fonction choisie nécessite un certificat d&apos;adhérent &lt;b&gt;avancé&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3493"/>
+        <location filename="SandMan.cpp" line="3605"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>La fonction choisie est uniquement disponible aux adhérents au projet.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Devenez un adhérent au projet&lt;/a&gt;, et recevez un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3539"/>
+        <location filename="SandMan.cpp" line="3651"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
         <translation>Le certificat que vous essayez d&apos;utiliser a été bloqué, ce qui veut dire qu&apos;il a été invalidé pour une bonne raison. Toute tentative de l&apos;utiliser constitue une violation de ses conditions d&apos;utilisation !</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3551"/>
+        <location filename="SandMan.cpp" line="3663"/>
         <source>The Certificate Signature is invalid!</source>
         <translation>La signature du certificat est invalide !</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3552"/>
+        <location filename="SandMan.cpp" line="3664"/>
         <source>The Certificate is not suitable for this product.</source>
         <translation>Le certificat ne convient pas à ce produit.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3553"/>
+        <location filename="SandMan.cpp" line="3665"/>
         <source>The Certificate is node locked.</source>
         <translation>Le certificat est verrouillé par nœud.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3557"/>
+        <location filename="SandMan.cpp" line="3669"/>
         <source>The support certificate is not valid.
 Error: %1</source>
         <translation>Le certificat d&apos;adhérent est invalide.
 Erreur : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3733"/>
-        <location filename="SandMan.cpp" line="3758"/>
+        <location filename="SandMan.cpp" line="3845"/>
+        <location filename="SandMan.cpp" line="3870"/>
         <source>Don&apos;t ask in future</source>
         <translation>Ne plus demander</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3757"/>
+        <location filename="SandMan.cpp" line="3869"/>
         <source>Do you want to terminate all processes in encrypted sandboxes, and unmount them?</source>
         <translation>Voulez-vous arrêter tous les processus dans les bacs à sable chiffrés, puis démonter ces derniers ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3860"/>
+        <location filename="SandMan.cpp" line="3972"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation>&lt;b&gt;ERREUR :&lt;/b&gt; Le gestionnaire de Sandboxie (SandMan.exe) n&apos;a pas une signature valide (SandMan.exe.sig). Veuillez télécharger une version fiable depuis la &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;page de téléchargement officielle&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4502"/>
+        <location filename="SandMan.cpp" line="4618"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation>Tous les processus d&apos;un bac doivent être arrêtés avant qu&apos;il puisse être renommé.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4506"/>
+        <location filename="SandMan.cpp" line="4622"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Échec du déplacement de l&apos;image du bac « %1 » vers « %2 »</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4521"/>
+        <location filename="SandMan.cpp" line="4637"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
         <translation>Le contenu d&apos;un bac non monté ne peut pas être supprimé</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4523"/>
+        <location filename="SandMan.cpp" line="4639"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4530"/>
+        <location filename="SandMan.cpp" line="4646"/>
         <source>Failed to copy directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Échec de copie du répertoire « %1 » vers « %2 »</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4628"/>
+        <location filename="SandMan.cpp" line="4744"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
         <translation>Voulez-vous ouvrir %1 dans un navigateur web dans un bac ou en dehors ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4632"/>
+        <location filename="SandMan.cpp" line="4748"/>
         <source>Sandboxed</source>
         <translation>Dans un bac à sable</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4633"/>
+        <location filename="SandMan.cpp" line="4749"/>
         <source>Unsandboxed</source>
         <translation>Hors de tout bac à sable</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4799"/>
+        <location filename="SandMan.cpp" line="4915"/>
         <source>Case Sensitive</source>
         <translation>Sensible à la casse</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4800"/>
+        <location filename="SandMan.cpp" line="4916"/>
         <source>RegExp</source>
         <translation>Regex</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4801"/>
+        <location filename="SandMan.cpp" line="4917"/>
         <source>Highlight</source>
         <translation>Surligner</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4802"/>
+        <location filename="SandMan.cpp" line="4918"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4803"/>
+        <location filename="SandMan.cpp" line="4919"/>
         <source>&amp;Find ...</source>
         <translation>&amp;Rechercher...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4804"/>
+        <location filename="SandMan.cpp" line="4920"/>
         <source>All columns</source>
         <translation>Toutes les colonnes</translation>
     </message>
@@ -5059,59 +5065,59 @@ Erreur : %1</translation>
         <translation type="vanished">Appuyer pour installer la mise à jour</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1431"/>
+        <location filename="SandMan.cpp" line="1435"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Soutenez Sandboxie-Plus sur Patreon&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1432"/>
+        <location filename="SandMan.cpp" line="1436"/>
         <source>Click to open web browser</source>
         <translation>Appuyer pour ouvrir le navigateur web</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1622"/>
+        <location filename="SandMan.cpp" line="1632"/>
         <source>Time|Box Name|File Path</source>
         <translation>Heure|Nom du bac|Chemin du fichier</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="940"/>
-        <location filename="SandMan.cpp" line="1051"/>
-        <location filename="SandMan.cpp" line="1632"/>
+        <location filename="SandMan.cpp" line="944"/>
+        <location filename="SandMan.cpp" line="1055"/>
+        <location filename="SandMan.cpp" line="1642"/>
         <source>Recovery Log</source>
         <translation>Journal de récupération</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1076"/>
+        <location filename="SandMan.cpp" line="1080"/>
         <source>Import Sandboxes</source>
         <translation>Importer des bacs</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1078"/>
+        <location filename="SandMan.cpp" line="1082"/>
         <source>Export Sandboxes</source>
         <translation>Exporter des bacs</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1413"/>
+        <location filename="SandMan.cpp" line="1417"/>
         <source>Click to run installer</source>
         <translation>Appuyer pour lancer l&apos;installeur</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1417"/>
+        <location filename="SandMan.cpp" line="1421"/>
         <source>Click to apply update</source>
         <translation>Appuyer pour appliquer la mise à jour</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1420"/>
+        <location filename="SandMan.cpp" line="1424"/>
         <source>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update v%1 available&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;Une nouvelle mise à jour de Sandboxie-Plus (v%1) est disponible&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1701"/>
+        <location filename="SandMan.cpp" line="1711"/>
         <source>Do you want to close Sandboxie Manager?</source>
         <translation>Voulez-vous quitter le gestionnaire de Sandboxie ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1718"/>
+        <location filename="SandMan.cpp" line="1728"/>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
@@ -5120,34 +5126,34 @@ Do you want to do the clean up?</source>
 Voulez-vous faire la purge ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1719"/>
-        <location filename="SandMan.cpp" line="2319"/>
-        <location filename="SandMan.cpp" line="2854"/>
-        <location filename="SandMan.cpp" line="3823"/>
-        <location filename="SandMan.cpp" line="4278"/>
-        <location filename="SandMan.cpp" line="4294"/>
+        <location filename="SandMan.cpp" line="1729"/>
+        <location filename="SandMan.cpp" line="2329"/>
+        <location filename="SandMan.cpp" line="2864"/>
+        <location filename="SandMan.cpp" line="3935"/>
+        <location filename="SandMan.cpp" line="4394"/>
+        <location filename="SandMan.cpp" line="4410"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Ne plus afficher ce message</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1911"/>
+        <location filename="SandMan.cpp" line="1921"/>
         <source>This box provides &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;enhanced security isolation&lt;/a&gt;, it is suitable to test untrusted software.</source>
         <oldsource>This box provides enhanced security isolation, it is suitable to test untrusted software.</oldsource>
         <translation>Ce bac apporte &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;une isolation de sécurité renforcée&lt;/a&gt; qui convient au test de logiciels non fiables.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1915"/>
+        <location filename="SandMan.cpp" line="1925"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
         <translation>Ce bac apporte une isolation standard et convient à l&apos;exécution de vos logiciels avec une sécurité accrue.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1919"/>
+        <location filename="SandMan.cpp" line="1929"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
         <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
         <translation>Ce bac n&apos;impose pas d&apos;isolation, il est destiné à &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;contenir les applications&lt;/a&gt; pour la virtualisation des logiciels uniquement.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1927"/>
+        <location filename="SandMan.cpp" line="1937"/>
         <source>&lt;br /&gt;&lt;br /&gt;This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</source>
         <oldsource>
 
@@ -5155,7 +5161,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>&lt;br /&gt;&lt;br /&gt;Ce bac &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;empêche l&apos;accès à tous les emplacements contenant les données de l&apos;utilisateur&lt;/a&gt;, sauf si spécifiquement autorisé dans les options d&apos;accès aux ressources.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2097"/>
+        <location filename="SandMan.cpp" line="2107"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
         <translation>Opération inconnue &apos;%1&apos; demandée via la ligne de commande</translation>
     </message>
@@ -5232,17 +5238,17 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2528"/>
+        <location filename="SandMan.cpp" line="2538"/>
         <source>Executing OnBoxDelete: %1</source>
         <translation>Exécution de OnBoxDelete : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2553"/>
+        <location filename="SandMan.cpp" line="2563"/>
         <source>Auto Deleting %1 Content</source>
         <translation>Suppression automatisée du contenu de %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2791"/>
+        <location filename="SandMan.cpp" line="2801"/>
         <source>Auto deleting content of %1</source>
         <translation>Suppression automatisée du contenu de %1</translation>
     </message>
@@ -5251,19 +5257,19 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation type="vanished">Supression automatisée du contenu de %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3959"/>
-        <location filename="SandMan.cpp" line="3961"/>
-        <location filename="SandMan.cpp" line="4554"/>
+        <location filename="SandMan.cpp" line="4071"/>
+        <location filename="SandMan.cpp" line="4073"/>
+        <location filename="SandMan.cpp" line="4670"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - Erreur</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3959"/>
+        <location filename="SandMan.cpp" line="4071"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>Échec de l&apos;arrêt de tous les composants de Sandboxie</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3961"/>
+        <location filename="SandMan.cpp" line="4073"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>Impossible de démarrer les composants requis de Sandboxie</translation>
     </message>
@@ -5280,25 +5286,25 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation type="vanished">Voulez-vous vérifier s&apos;il existe une nouvelle version de Sandboxie-Plus ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="491"/>
+        <location filename="SandMan.cpp" line="495"/>
         <source>WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.</source>
         <translation>ATTENTION : Impossible d&apos;écrire dans Sandboxie-Plus.ini dans %1, les réglages ne seront pas sauvegardés.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="947"/>
-        <location filename="SandMan.cpp" line="949"/>
-        <location filename="SandMan.cpp" line="999"/>
-        <location filename="SandMan.cpp" line="1001"/>
+        <location filename="SandMan.cpp" line="951"/>
+        <location filename="SandMan.cpp" line="953"/>
+        <location filename="SandMan.cpp" line="1003"/>
+        <location filename="SandMan.cpp" line="1005"/>
         <source>Pause Forcing Programs</source>
         <translation>Suspension du forçage des programmes</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1412"/>
+        <location filename="SandMan.cpp" line="1416"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release %1 ready&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;Une nouvelle version de Sandboxie-Plus (%1) est prête&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1416"/>
+        <location filename="SandMan.cpp" line="1420"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update %1 ready&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;Une nouvelle mise à jour de Sandboxie-Plus (%1) est prête&lt;/a&gt;</translation>
     </message>
@@ -5307,7 +5313,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation type="vanished">Certains modèles de compatibilité (%1) sont manquants, probablement supprimés, voulez-vous les supprimer de tous les bacs ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2347"/>
+        <location filename="SandMan.cpp" line="2357"/>
         <source>Cleaned up removed templates...</source>
         <translation>Purge des modèles supprimés...</translation>
     </message>
@@ -5324,7 +5330,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation type="vanished">Configuration chargée : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2830"/>
+        <location filename="SandMan.cpp" line="2840"/>
         <source>Data Directory: %1</source>
         <translation>Dossier des données : %1</translation>
     </message>
@@ -5333,7 +5339,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation type="vanished">   -   Portable</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2851"/>
+        <location filename="SandMan.cpp" line="2861"/>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
@@ -5342,27 +5348,27 @@ No will choose: %2</source>
 « Non » choisira : %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3783"/>
+        <location filename="SandMan.cpp" line="3895"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>Veuillez saisir la durée (en secondes) de suspension du forçage des programmes.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3626"/>
+        <location filename="SandMan.cpp" line="3738"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>Le certificat d&apos;adhérent n&apos;est pas valide pour cette version, veuillez obtenir un certificat à jour</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3629"/>
+        <location filename="SandMan.cpp" line="3741"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <translation>Ce certificat d&apos;adhérent a expiré%1, veuillez obtenir un certificat à jour</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3630"/>
+        <location filename="SandMan.cpp" line="3742"/>
         <source>, but it remains valid for the current build</source>
         <translation>, mais il reste valide pour la version actuelle</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3632"/>
+        <location filename="SandMan.cpp" line="3744"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>Le certificat d&apos;adhérent expirera dans %1 jour(s), veuillez obtenir un certificat mis à jour</translation>
     </message>
@@ -5383,30 +5389,30 @@ No will choose: %2</source>
         <translation type="vanished">Le certificat d&apos;adhérent est expiré</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2923"/>
+        <location filename="SandMan.cpp" line="2933"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>Bac à sable par défaut non trouvé ; création : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3004"/>
+        <location filename="SandMan.cpp" line="3014"/>
         <source>   -   NOT connected</source>
         <translation>   - NON connecté</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3395"/>
+        <location filename="SandMan.cpp" line="3507"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>Le programme %1 lancé dans le bac %2 sera arrêté dans 5 minutes car le bac a été configuré pour utiliser des fonctions uniquement disponibles aux adhérents du projet.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3397"/>
+        <location filename="SandMan.cpp" line="3509"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>Le bac %1 est configuré pour utiliser des fonctions uniquement disponibles aux adhérents du projet ; ces réglages seront donc ignorés.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3378"/>
-        <location filename="SandMan.cpp" line="3386"/>
-        <location filename="SandMan.cpp" line="3398"/>
-        <location filename="SandMan.cpp" line="3485"/>
+        <location filename="SandMan.cpp" line="3490"/>
+        <location filename="SandMan.cpp" line="3498"/>
+        <location filename="SandMan.cpp" line="3510"/>
+        <location filename="SandMan.cpp" line="3597"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Devenez un adhérent du projet&lt;/a&gt;, et recevez un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;.</translation>
     </message>
@@ -5423,34 +5429,34 @@ No will choose: %2</source>
         <translation type="vanished">%1 (%2) : </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3496"/>
+        <location filename="SandMan.cpp" line="3608"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>La fonction sélectionnée n&apos;est disponible qu&apos;aux adhérents au projet. Les processus lancés dans un bac avec cette fonction activée sans certificat d&apos;adhérent seront arrêtés après 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Devenez un adhérent du projet&lt;/a&gt;, et recevez un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="221"/>
+        <location filename="SandManRecovery.cpp" line="232"/>
         <source>Recovering file %1 to %2</source>
         <translation>Récupération du fichier %1 vers %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="233"/>
+        <location filename="SandManRecovery.cpp" line="244"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>Le fichier %1 existe déjà, voulez-vous l&apos;écraser ?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="198"/>
-        <location filename="SandManRecovery.cpp" line="234"/>
+        <location filename="SandManRecovery.cpp" line="209"/>
+        <location filename="SandManRecovery.cpp" line="245"/>
         <source>Do this for all files!</source>
         <translation>Faire ceci pour tous les fichiers !</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="124"/>
-        <location filename="SandManRecovery.cpp" line="178"/>
+        <location filename="SandManRecovery.cpp" line="135"/>
+        <location filename="SandManRecovery.cpp" line="189"/>
         <source>Checking file %1</source>
         <translation>Vérification du fichier %1</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="132"/>
+        <location filename="SandManRecovery.cpp" line="143"/>
         <source>The file %1 failed a security check!
 
 %2</source>
@@ -5462,12 +5468,12 @@ No will choose: %2</source>
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="140"/>
+        <location filename="SandManRecovery.cpp" line="151"/>
         <source>All files passed the checks</source>
         <translation>Tous les fichiers ont passé les vérifications</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="197"/>
+        <location filename="SandManRecovery.cpp" line="208"/>
         <source>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</source>
@@ -5479,29 +5485,29 @@ No will choose: %2</source>
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="262"/>
+        <location filename="SandManRecovery.cpp" line="273"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Échec de la récupération de certains fichiers : 
 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3675"/>
+        <location filename="SandMan.cpp" line="3787"/>
         <source>Only Administrators can change the config.</source>
         <translation>Seuls les administrateurs peuvent modifier la configuration.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3685"/>
+        <location filename="SandMan.cpp" line="3797"/>
         <source>Please enter the configuration password.</source>
         <translation>Veuillez saisir le mot de passe de la configuration.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3693"/>
+        <location filename="SandMan.cpp" line="3805"/>
         <source>Login Failed: %1</source>
         <translation>Échec de la connexion : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3732"/>
+        <location filename="SandMan.cpp" line="3844"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>Voulez-vous arrêter tous les processus dans tous les bacs à sable ?</translation>
     </message>
@@ -5514,92 +5520,92 @@ No will choose: %2</source>
         <translation type="vanished">Veuillez saisir la durée de désactivation du forçage des programmes.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3822"/>
+        <location filename="SandMan.cpp" line="3934"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus a été démarré en mode portable et doit maintenant créer les services nécessaires. Cela demandera des privilèges d&apos;administrateur.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3856"/>
+        <location filename="SandMan.cpp" line="3968"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>ATTENTION : Un autre agent (probablement SbieCtrl.exe) gère déjà cette session de Sandboxie, veuillez le fermer d&apos;abord et vous reconnecter pour prendre le contrôle.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3963"/>
+        <location filename="SandMan.cpp" line="4075"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>Échec de l&apos;opération de maintenance (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3968"/>
+        <location filename="SandMan.cpp" line="4080"/>
         <source>Maintenance operation completed</source>
         <translation>Opération de maintenance terminée</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3988"/>
+        <location filename="SandMan.cpp" line="4100"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>Exécution de l&apos;opération de maintenance, veuillez patienter...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4119"/>
+        <location filename="SandMan.cpp" line="4235"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>Dans l&apos;interface de la version Plus, cette fonction a été intégrée à l&apos;affichage principal de la liste des bacs à sable.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4120"/>
+        <location filename="SandMan.cpp" line="4236"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>En utilisant le menu contextuel Bac/Groupe, vous pouvez déplacer les bacs et les groupes vers d&apos;autres groupes. Vous pouvez également utiliser le glisser-déposer pour déplacer les éléments. Alternativement, vous pouvez aussi utiliser les touches fléchées tout en maintenant ALT enfoncée pour déplacer les éléments vers le haut ou le bas au sein de leur groupe.&lt;br /&gt;Vous pouvez créer de nouveaux bacs et groupes depuis le menu du bac.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4188"/>
+        <location filename="SandMan.cpp" line="4304"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>Voulez-vous également réinitialiser les messages masqués des bacs (oui), ou seulement tous les messages du journal (non) ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4292"/>
+        <location filename="SandMan.cpp" line="4408"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>Les modifications seront appliquées automatiquement à chaque fois que le fichier sera enregistré.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4293"/>
+        <location filename="SandMan.cpp" line="4409"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>Les modifications seront appliquées automatiquement dès que l&apos;éditeur sera fermé.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4356"/>
+        <location filename="SandMan.cpp" line="4472"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>La configuration de Sandboxie a été rechargée</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4483"/>
+        <location filename="SandMan.cpp" line="4599"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>Statut de l&apos;erreur : 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4484"/>
+        <location filename="SandMan.cpp" line="4600"/>
         <source>Unknown</source>
         <translation>Inconnu</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4500"/>
+        <location filename="SandMan.cpp" line="4616"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>Tous les processus du bac doivent être arrêtés pour que son contenu puisse être supprimé.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4509"/>
+        <location filename="SandMan.cpp" line="4625"/>
         <source>Failed to copy box data files</source>
         <translation>Échec de la copie des fichiers de données du bac</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4514"/>
+        <location filename="SandMan.cpp" line="4630"/>
         <source>Failed to remove old box data files</source>
         <translation>Échec de la suppression des fichiers de données de l&apos;ancien bac</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4520"/>
+        <location filename="SandMan.cpp" line="4636"/>
         <source>The operation was canceled by the user</source>
         <translation>L&apos;opération a été annulée par l&apos;utilisateur</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4532"/>
+        <location filename="SandMan.cpp" line="4648"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>Code erreur inconnu : 0x%1</translation>
     </message>
@@ -5637,77 +5643,77 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="vanished">Statut d&apos;erreur : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4486"/>
+        <location filename="SandMan.cpp" line="4602"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Les droits d&apos;administrateur sont nécessaires pour cette opération.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4487"/>
+        <location filename="SandMan.cpp" line="4603"/>
         <source>Failed to execute: %1</source>
         <translation>Échec de l&apos;exécution : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4488"/>
+        <location filename="SandMan.cpp" line="4604"/>
         <source>Failed to connect to the driver</source>
         <translation>Échec de la connexion au pilote</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4489"/>
+        <location filename="SandMan.cpp" line="4605"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>Échec de la communication avec le service Sandboxie : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4490"/>
+        <location filename="SandMan.cpp" line="4606"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>Une version (%1) de Sandboxie incompatible a été trouvée. Versions compatibles : %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4491"/>
+        <location filename="SandMan.cpp" line="4607"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>Impossible de trouver le chemin d&apos;installation de Sandboxie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4492"/>
+        <location filename="SandMan.cpp" line="4608"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>Échec de la copie de la configuration du bac %1 : %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4493"/>
+        <location filename="SandMan.cpp" line="4609"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>Un bac du nom de %1 existe déjà</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4494"/>
+        <location filename="SandMan.cpp" line="4610"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>Échec de la suppression du bac %1 : %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4495"/>
+        <location filename="SandMan.cpp" line="4611"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>Le nom du bac ne peut pas comporter plus de 32 caractères.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4496"/>
+        <location filename="SandMan.cpp" line="4612"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>Le nom du bac ne peut pas être un nom de périphérique.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4497"/>
+        <location filename="SandMan.cpp" line="4613"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>Le nom du bac ne peut contenir que des lettres, des chiffres et des traits de soulignement qui seront affichés comme des espaces.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4498"/>
+        <location filename="SandMan.cpp" line="4614"/>
         <source>Failed to terminate all processes</source>
         <translation>Échec de l&apos;arrêt de tous les processus.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4499"/>
+        <location filename="SandMan.cpp" line="4615"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>La protection contre la suppression est activée pour ce bac.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4501"/>
+        <location filename="SandMan.cpp" line="4617"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>Erreur lors de la suppression du dossier du bac : %1</translation>
     </message>
@@ -5716,22 +5722,22 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="vanished">Un bac à sable doit être vidé avant de pouvoir être renommé.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4504"/>
+        <location filename="SandMan.cpp" line="4620"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>Un bac doit être vidé avant de pouvoir être supprimé.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4505"/>
+        <location filename="SandMan.cpp" line="4621"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Impossible de déplacer le dossier « %1 » vers « %2 »</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4507"/>
+        <location filename="SandMan.cpp" line="4623"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>Cette opération d’instantané ne peut pas être effectuée lorsque des processus sont encore en cours dans le bac.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4508"/>
+        <location filename="SandMan.cpp" line="4624"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>Impossible de créer un répertoire pour le nouvel instantané</translation>
     </message>
@@ -5744,32 +5750,32 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="vanished">Dossier d&apos;installation : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2828"/>
+        <location filename="SandMan.cpp" line="2838"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
         <translation>Version de Sandboxie-Plus : %1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2829"/>
+        <location filename="SandMan.cpp" line="2839"/>
         <source>Current Config: %1</source>
         <translation>Configuration actuelle : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4510"/>
+        <location filename="SandMan.cpp" line="4626"/>
         <source>Snapshot not found</source>
         <translation>Instantané introuvable</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4511"/>
+        <location filename="SandMan.cpp" line="4627"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>Erreur de fusion des répertoires de l&apos;instantané « %1 » avec « %2 », l&apos;instantané n&apos;a pas été entièrement fusionné.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4512"/>
+        <location filename="SandMan.cpp" line="4628"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>Impossible de supprimer l&apos;ancien répertoire de l&apos;instantané « %1 »</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4513"/>
+        <location filename="SandMan.cpp" line="4629"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Impossible de supprimer un instantané qui est partagé par plusieurs autres instantanés</translation>
     </message>
@@ -5778,27 +5784,27 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="vanished">Impossible de supprimer l&apos;ancienne base de données</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4515"/>
+        <location filename="SandMan.cpp" line="4631"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>Vous n&apos;êtes pas autorisé à mettre à jour la configuration dans la section « %1 »</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4516"/>
+        <location filename="SandMan.cpp" line="4632"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>Échec de la définition du paramètre de configuration %1 dans la section %2 : %3</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4517"/>
+        <location filename="SandMan.cpp" line="4633"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>Impossible de créer un instantané d&apos;un bac vide.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4518"/>
+        <location filename="SandMan.cpp" line="4634"/>
         <source>A sandbox with that name already exists</source>
         <translation>Un bac portant ce nom existe déjà</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4519"/>
+        <location filename="SandMan.cpp" line="4635"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>Le mot de passe de la configuration ne doit pas comporter plus de 64 caractères</translation>
     </message>
@@ -5807,7 +5813,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="vanished">Statut d&apos;erreur inconnu : %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4556"/>
+        <location filename="SandMan.cpp" line="4672"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>L&apos;opération a échoué pour %1 objet.</translation>
     </message>
@@ -5816,7 +5822,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="vanished">Voulez-vous ouvrir %1 dans un navigateur web dans le bac à sable (oui) ou en dehors (non) ?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4629"/>
+        <location filename="SandMan.cpp" line="4745"/>
         <source>Remember choice for later.</source>
         <translation>Mémoriser ce choix pour plus tard.</translation>
     </message>
@@ -9281,10 +9287,10 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
         <location filename="Forms/OptionsWindow.ui" line="3650"/>
         <location filename="Forms/OptionsWindow.ui" line="4274"/>
         <location filename="Forms/OptionsWindow.ui" line="4390"/>
-        <location filename="Forms/OptionsWindow.ui" line="4602"/>
-        <location filename="Forms/OptionsWindow.ui" line="5765"/>
-        <location filename="Forms/OptionsWindow.ui" line="5924"/>
-        <location filename="Forms/OptionsWindow.ui" line="6010"/>
+        <location filename="Forms/OptionsWindow.ui" line="4615"/>
+        <location filename="Forms/OptionsWindow.ui" line="5778"/>
+        <location filename="Forms/OptionsWindow.ui" line="5937"/>
+        <location filename="Forms/OptionsWindow.ui" line="6023"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
@@ -9318,11 +9324,11 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
         <location filename="Forms/OptionsWindow.ui" line="3944"/>
         <location filename="Forms/OptionsWindow.ui" line="4312"/>
         <location filename="Forms/OptionsWindow.ui" line="4398"/>
-        <location filename="Forms/OptionsWindow.ui" line="4737"/>
-        <location filename="Forms/OptionsWindow.ui" line="4826"/>
-        <location filename="Forms/OptionsWindow.ui" line="5167"/>
-        <location filename="Forms/OptionsWindow.ui" line="5362"/>
-        <location filename="Forms/OptionsWindow.ui" line="5834"/>
+        <location filename="Forms/OptionsWindow.ui" line="4750"/>
+        <location filename="Forms/OptionsWindow.ui" line="4839"/>
+        <location filename="Forms/OptionsWindow.ui" line="5180"/>
+        <location filename="Forms/OptionsWindow.ui" line="5375"/>
+        <location filename="Forms/OptionsWindow.ui" line="5847"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
@@ -9343,7 +9349,7 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
         <location filename="Forms/OptionsWindow.ui" line="3180"/>
         <location filename="Forms/OptionsWindow.ui" line="3300"/>
         <location filename="Forms/OptionsWindow.ui" line="3374"/>
-        <location filename="Forms/OptionsWindow.ui" line="5770"/>
+        <location filename="Forms/OptionsWindow.ui" line="5783"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
@@ -9412,9 +9418,9 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
         <location filename="Forms/OptionsWindow.ui" line="3822"/>
         <location filename="Forms/OptionsWindow.ui" line="4305"/>
         <location filename="Forms/OptionsWindow.ui" line="4412"/>
-        <location filename="Forms/OptionsWindow.ui" line="4773"/>
-        <location filename="Forms/OptionsWindow.ui" line="5006"/>
-        <location filename="Forms/OptionsWindow.ui" line="5077"/>
+        <location filename="Forms/OptionsWindow.ui" line="4786"/>
+        <location filename="Forms/OptionsWindow.ui" line="5019"/>
+        <location filename="Forms/OptionsWindow.ui" line="5090"/>
         <source>Show Templates</source>
         <translation>Afficher les modèles</translation>
     </message>
@@ -9682,7 +9688,7 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
         <location filename="Forms/OptionsWindow.ui" line="3794"/>
         <location filename="Forms/OptionsWindow.ui" line="3899"/>
         <location filename="Forms/OptionsWindow.ui" line="4028"/>
-        <location filename="Forms/OptionsWindow.ui" line="4760"/>
+        <location filename="Forms/OptionsWindow.ui" line="4773"/>
         <source>Program</source>
         <translation>Programme</translation>
     </message>
@@ -9968,17 +9974,27 @@ Pour définir un processus, utiliser « $:programme.exe » comme chemin.</transl
         <translation>Classe Wnd</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4470"/>
+        <location filename="Forms/OptionsWindow.ui" line="4419"/>
+        <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="4422"/>
+        <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="4483"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
         <translation>Redémarrer les processus forcés qui ont été lancés au sein d&apos;un objet de travail de l&apos;assistant de compatibilité des programmes</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4548"/>
+        <location filename="Forms/OptionsWindow.ui" line="4561"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
         <translation>Utiliser la méthode heuristique pour identifier les processus basés sur Electron/Chromium</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6145"/>
+        <location filename="Forms/OptionsWindow.ui" line="6158"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
@@ -10029,7 +10045,7 @@ Pour définir un processus, utiliser « $:programme.exe » comme chemin.</transl
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6213"/>
+        <location filename="Forms/OptionsWindow.ui" line="6226"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -10095,27 +10111,27 @@ Pour définir un processus, utiliser « $:programme.exe » comme chemin.</transl
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6236"/>
+        <location filename="Forms/OptionsWindow.ui" line="6249"/>
         <source>Complete</source>
         <translation>Compléter</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6289"/>
+        <location filename="Forms/OptionsWindow.ui" line="6302"/>
         <source>Editor settings</source>
         <translation>Paramètres de l&apos;éditeur</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6292"/>
+        <location filename="Forms/OptionsWindow.ui" line="6305"/>
         <source>⚙</source>
         <translation>⚙</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6163"/>
+        <location filename="Forms/OptionsWindow.ui" line="6176"/>
         <source>Tooltips</source>
         <translation>Infobulles</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6246"/>
+        <location filename="Forms/OptionsWindow.ui" line="6259"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
@@ -10161,7 +10177,7 @@ Pour définir un processus, utiliser « $:programme.exe » comme chemin.</transl
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6263"/>
+        <location filename="Forms/OptionsWindow.ui" line="6276"/>
         <source>Validate</source>
         <translation>Valider</translation>
     </message>
@@ -10209,7 +10225,7 @@ Pour définir un processus, utiliser « $:programme.exe » comme chemin.</transl
         <location filename="Forms/OptionsWindow.ui" line="724"/>
         <location filename="Forms/OptionsWindow.ui" line="1660"/>
         <location filename="Forms/OptionsWindow.ui" line="3799"/>
-        <location filename="Forms/OptionsWindow.ui" line="4913"/>
+        <location filename="Forms/OptionsWindow.ui" line="4926"/>
         <source>Action</source>
         <translation>Action</translation>
     </message>
@@ -10338,12 +10354,12 @@ Pour l&apos;accès aux fichiers, vous pouvez utiliser « Toujours direct » pour
         <translation>Lorsque la fonction de récupération rapide est invoquée, les dossiers suivants sont contrôlés pour vérifier la présence de contenu dans le bac. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4682"/>
+        <location filename="Forms/OptionsWindow.ui" line="4695"/>
         <source>Advanced Options</source>
         <translation>Options avancées</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4698"/>
+        <location filename="Forms/OptionsWindow.ui" line="4711"/>
         <source>Miscellaneous</source>
         <translation>Divers</translation>
     </message>
@@ -10365,7 +10381,7 @@ Pour l&apos;accès aux fichiers, vous pouvez utiliser « Toujours direct » pour
         <location filename="Forms/OptionsWindow.ui" line="1888"/>
         <location filename="Forms/OptionsWindow.ui" line="2028"/>
         <location filename="Forms/OptionsWindow.ui" line="2084"/>
-        <location filename="Forms/OptionsWindow.ui" line="4585"/>
+        <location filename="Forms/OptionsWindow.ui" line="4598"/>
         <source>Protect the sandbox integrity itself</source>
         <translation>Protège la propre intégrité du bac</translation>
     </message>
@@ -10390,7 +10406,7 @@ Pour l&apos;accès aux fichiers, vous pouvez utiliser « Toujours direct » pour
         <translation type="vanished">Isolation du bac à sable</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4463"/>
+        <location filename="Forms/OptionsWindow.ui" line="4476"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
         <translation>Forcer l&apos;utilisation de fichiers Manifest factices personnalisés (ancien comportement)</translation>
     </message>
@@ -10459,8 +10475,8 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
         <translation>Autoriser uniquement les processus privilégiés à accéder au gestionnaire des services</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4442"/>
-        <location filename="Forms/OptionsWindow.ui" line="4456"/>
+        <location filename="Forms/OptionsWindow.ui" line="4455"/>
+        <location filename="Forms/OptionsWindow.ui" line="4469"/>
         <source>Compatibility</source>
         <translation>Compatibilité</translation>
     </message>
@@ -10478,7 +10494,7 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
         <translation type="vanished">Isolation COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4477"/>
+        <location filename="Forms/OptionsWindow.ui" line="4490"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>Émuler une Station Windows depuis un bac pour tous les processus</translation>
     </message>
@@ -10493,7 +10509,7 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
         <translation>Autoriser l&apos;utilisation d&apos;objets de travail imbriqués (fonctionne sur Windows 8 et plus)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4541"/>
+        <location filename="Forms/OptionsWindow.ui" line="4554"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation>Désactiver l&apos;utilisation de RpcMgmtSetComTimeout par défaut (cela peut résoudre des problèmes de compatibilité)</translation>
     </message>
@@ -10573,41 +10589,41 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
         <translation type="vanished">Ici, vous pouvez spécifier une liste de commandes qui sont exécutées chaque fois que le bac à sable est initialement rempli.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4796"/>
+        <location filename="Forms/OptionsWindow.ui" line="4809"/>
         <source>Triggers</source>
         <translation>Déclencheurs</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4908"/>
+        <location filename="Forms/OptionsWindow.ui" line="4921"/>
         <source>Event</source>
         <translation>Évènements</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4858"/>
-        <location filename="Forms/OptionsWindow.ui" line="4999"/>
-        <location filename="Forms/OptionsWindow.ui" line="5044"/>
-        <location filename="Forms/OptionsWindow.ui" line="5063"/>
+        <location filename="Forms/OptionsWindow.ui" line="4871"/>
+        <location filename="Forms/OptionsWindow.ui" line="5012"/>
+        <location filename="Forms/OptionsWindow.ui" line="5057"/>
+        <location filename="Forms/OptionsWindow.ui" line="5076"/>
         <source>Run Command</source>
         <translation>Lancer une commande</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5025"/>
+        <location filename="Forms/OptionsWindow.ui" line="5038"/>
         <source>Start Service</source>
         <translation>Démarrer un service</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4971"/>
+        <location filename="Forms/OptionsWindow.ui" line="4984"/>
         <source>These events are executed each time a box is started</source>
         <translation>Ces évènements sont exécutés à chaque fois qu&apos;un bac est démarré.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4974"/>
+        <location filename="Forms/OptionsWindow.ui" line="4987"/>
         <source>On Box Start</source>
         <translation>Au démarrage du bac</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4833"/>
-        <location filename="Forms/OptionsWindow.ui" line="4891"/>
+        <location filename="Forms/OptionsWindow.ui" line="4846"/>
+        <location filename="Forms/OptionsWindow.ui" line="4904"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
         <translation>Ces commandes sont lancées HORS DU BAC juste avant que le contenu du bac soit supprimé.</translation>
     </message>
@@ -10616,17 +10632,17 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
         <translation type="vanished">À la suppression</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4865"/>
+        <location filename="Forms/OptionsWindow.ui" line="4878"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
         <translation>Ces commandes sont exécutées lorsqu&apos;un bac est initialisé. Pour les lancer à nouveau, le contenu du bac doit être supprimé.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4868"/>
+        <location filename="Forms/OptionsWindow.ui" line="4881"/>
         <source>On Box Init</source>
         <translation>À l&apos;initialisation du bac</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4939"/>
+        <location filename="Forms/OptionsWindow.ui" line="4952"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation>Vous pouvez spécifier ici des actions à exécuter automatiquement lors de divers évènements.</translation>
     </message>
@@ -10635,37 +10651,37 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
         <translation type="vanished">Masquage des processus</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5174"/>
+        <location filename="Forms/OptionsWindow.ui" line="5187"/>
         <source>Add Process</source>
         <translation>Ajouter un processus</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5137"/>
+        <location filename="Forms/OptionsWindow.ui" line="5150"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>Masque les processus de l&apos;hôte des processus s&apos;exécutant dans le bac.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4507"/>
+        <location filename="Forms/OptionsWindow.ui" line="4520"/>
         <source>Restart force process before they begin to execute</source>
         <translation>Redémarrer les processus forcés avant qu&apos;ils commencent à s&apos;exécuter</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5160"/>
+        <location filename="Forms/OptionsWindow.ui" line="5173"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>Ne pas permettre aux processus d&apos;un bac de voir les processus en cours d&apos;exécution dans d&apos;autres bacs</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5314"/>
+        <location filename="Forms/OptionsWindow.ui" line="5327"/>
         <source>Users</source>
         <translation>Utilisateurs</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5332"/>
+        <location filename="Forms/OptionsWindow.ui" line="5345"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>Restreindre le moniteur d&apos;accès aux ressources aux administrateurs uniquement</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5339"/>
+        <location filename="Forms/OptionsWindow.ui" line="5352"/>
         <source>Add User</source>
         <translation>Ajouter un utilisateur</translation>
     </message>
@@ -10674,7 +10690,7 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
         <translation type="vanished">Supprimer l&apos;utilisateur</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5369"/>
+        <location filename="Forms/OptionsWindow.ui" line="5382"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
@@ -10683,7 +10699,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 Remarque : Les paramètres Programmes forcés et Dossiers forcés d&apos;un bac ne s&apos;appliquent pas aux comptes utilisateurs qui ne peuvent pas utiliser le bac.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5382"/>
+        <location filename="Forms/OptionsWindow.ui" line="5395"/>
         <source>Tracing</source>
         <translation>Traçage</translation>
     </message>
@@ -10693,22 +10709,22 @@ Remarque : Les paramètres Programmes forcés et Dossiers forcés d&apos;un bac 
         <translation type="vanished">Tracer les appels API (nécessite que LogAPI soit installé dans le répertoire de Sandboxie)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5511"/>
+        <location filename="Forms/OptionsWindow.ui" line="5524"/>
         <source>Pipe Trace</source>
         <translation>Tracer les Pipes</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5565"/>
+        <location filename="Forms/OptionsWindow.ui" line="5578"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translation>Enregistrer toutes les SetError dans le journal de traçage (crée beaucoup de sorties)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5471"/>
+        <location filename="Forms/OptionsWindow.ui" line="5484"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>Enregistrer la sortie de débogage dans le journal de traçage</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5532"/>
+        <location filename="Forms/OptionsWindow.ui" line="5545"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -10731,42 +10747,42 @@ au lieu de « * ».</translation>
         <translation type="vanished">Tracer les appels système Ntdll (crée beaucoup de sorties)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5525"/>
+        <location filename="Forms/OptionsWindow.ui" line="5538"/>
         <source>File Trace</source>
         <translation>Tracer les fichiers</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5390"/>
+        <location filename="Forms/OptionsWindow.ui" line="5403"/>
         <source>Disable Resource Access Monitor</source>
         <translation>Désactiver le moniteur d&apos;accès aux ressources</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5397"/>
+        <location filename="Forms/OptionsWindow.ui" line="5410"/>
         <source>IPC Trace</source>
         <translation>Tracer IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5431"/>
+        <location filename="Forms/OptionsWindow.ui" line="5444"/>
         <source>GUI Trace</source>
         <translation>Tracer l&apos;interface graphique</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5491"/>
+        <location filename="Forms/OptionsWindow.ui" line="5504"/>
         <source>Resource Access Monitor</source>
         <translation>Moniteur d&apos;accès aux ressources</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5444"/>
+        <location filename="Forms/OptionsWindow.ui" line="5457"/>
         <source>Access Tracing</source>
         <translation>Traçage des accès</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5478"/>
+        <location filename="Forms/OptionsWindow.ui" line="5491"/>
         <source>COM Class Trace</source>
         <translation>Tracer les classes COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5572"/>
+        <location filename="Forms/OptionsWindow.ui" line="5585"/>
         <source>Key Trace</source>
         <translation>Tracer les clés</translation>
     </message>
@@ -10861,7 +10877,7 @@ Partiellement coché : Aucun groupe ne sera ajouté au jeton nouvellement créé
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3683"/>
-        <location filename="Forms/OptionsWindow.ui" line="5451"/>
+        <location filename="Forms/OptionsWindow.ui" line="5464"/>
         <source>Network Firewall</source>
         <translation>Pare-feu réseau</translation>
     </message>
@@ -10957,12 +10973,12 @@ Partiellement coché : Aucun groupe ne sera ajouté au jeton nouvellement créé
         <translation>Limite de mémoire d&apos;un processus unique :</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4926"/>
+        <location filename="Forms/OptionsWindow.ui" line="4939"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
         <translation>Ces commandes s&apos;exécutent HORS DU BAC après que tous les processus dans le bac se soient arrêtés.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5117"/>
+        <location filename="Forms/OptionsWindow.ui" line="5130"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
         <translation>Ne pas autoriser les processus dans un bac à voir les processus qui s&apos;exécutent hors de tout bac</translation>
     </message>
@@ -10977,27 +10993,27 @@ Partiellement coché : Aucun groupe ne sera ajouté au jeton nouvellement créé
         <translation type="vanished">Certains programmes lisent les détails du système en se servant de WMI (Windows Management Instrumentation — une base de données incluse avec Windows) au lieu d&apos;utiliser des méthodes normales. Par exemple, « tasklist.exe » peut obtenir la liste complète des processus même si « Masquer les propres processus de Sandboxie de la liste des tâches » est activé. Activez cette option pour empêcher ce comportement.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5579"/>
+        <location filename="Forms/OptionsWindow.ui" line="5592"/>
         <source>API call Trace (traces all SBIE hooks)</source>
         <translation>Tracer les appels API (trace tous les crochets SBIE)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5595"/>
+        <location filename="Forms/OptionsWindow.ui" line="5608"/>
         <source>Debug</source>
         <translation>Débogage</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5644"/>
+        <location filename="Forms/OptionsWindow.ui" line="5657"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>ATTENTION, ces options peuvent désactiver les garanties de sécurité de base et briser la sécurité du bac !!!</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5654"/>
+        <location filename="Forms/OptionsWindow.ui" line="5667"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>Ces options sont destinées à déboguer les problèmes de compatibilité, veuillez ne pas les utiliser en production. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5792"/>
+        <location filename="Forms/OptionsWindow.ui" line="5805"/>
         <source>App Templates</source>
         <translation>Modèles d&apos;applications</translation>
     </message>
@@ -11006,22 +11022,22 @@ Partiellement coché : Aucun groupe ne sera ajouté au jeton nouvellement créé
         <translation type="vanished">Modèles de compatibilité</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5870"/>
+        <location filename="Forms/OptionsWindow.ui" line="5883"/>
         <source>Filter Categories</source>
         <translation>Filtre des catégories :</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5860"/>
+        <location filename="Forms/OptionsWindow.ui" line="5873"/>
         <source>Text Filter</source>
         <translation>Filtre de texte :</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5853"/>
+        <location filename="Forms/OptionsWindow.ui" line="5866"/>
         <source>Add Template</source>
         <translation>Ajouter un modèle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5902"/>
+        <location filename="Forms/OptionsWindow.ui" line="5915"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>Cette liste contient un grand nombre de modèles améliorant la compatibilité du bac.</translation>
     </message>
@@ -11030,17 +11046,17 @@ Partiellement coché : Aucun groupe ne sera ajouté au jeton nouvellement créé
         <translation type="vanished">Supprimer le modèle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5919"/>
+        <location filename="Forms/OptionsWindow.ui" line="5932"/>
         <source>Category</source>
         <translation>Catégorie</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5964"/>
+        <location filename="Forms/OptionsWindow.ui" line="5977"/>
         <source>Template Folders</source>
         <translation>Dossiers des modèles</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5984"/>
+        <location filename="Forms/OptionsWindow.ui" line="5997"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -11049,24 +11065,24 @@ Please note that this values are currently user specific and saved globally for 
 Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisateur et enregistrées globalement pour tous les bacs.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4765"/>
-        <location filename="Forms/OptionsWindow.ui" line="5775"/>
-        <location filename="Forms/OptionsWindow.ui" line="6015"/>
+        <location filename="Forms/OptionsWindow.ui" line="4778"/>
+        <location filename="Forms/OptionsWindow.ui" line="5788"/>
+        <location filename="Forms/OptionsWindow.ui" line="6028"/>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6026"/>
+        <location filename="Forms/OptionsWindow.ui" line="6039"/>
         <source>Accessibility</source>
         <translation>Accessibilité</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6122"/>
+        <location filename="Forms/OptionsWindow.ui" line="6135"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>Pour compenser la perte de protection, veuillez consulter la page d&apos;Abandon des droits dans le groupe de paramètres Restrictions.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6046"/>
+        <location filename="Forms/OptionsWindow.ui" line="6059"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>Lecteurs d&apos;écran : JAWS, NVDA, Window-Eyes, System Access</translation>
     </message>
@@ -11159,33 +11175,33 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
         <translation>Isolation d&apos;accès</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4588"/>
+        <location filename="Forms/OptionsWindow.ui" line="4601"/>
         <source>Image Protection</source>
         <translation>Protection d&apos;image</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4626"/>
+        <location filename="Forms/OptionsWindow.ui" line="4639"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
         <translation>Émettre un message 1305 lorsqu&apos;un programme essaye de charger une DLL depuis un bac</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4619"/>
+        <location filename="Forms/OptionsWindow.ui" line="4632"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
         <translation>Empêcher les programmes dans un bac installé sur l&apos;hôte de charger des DLL depuis le bac</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4558"/>
+        <location filename="Forms/OptionsWindow.ui" line="4571"/>
         <source>Dlls &amp;&amp; Extensions</source>
         <translation>DLL &amp;&amp; extensions</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4607"/>
+        <location filename="Forms/OptionsWindow.ui" line="4620"/>
         <source>Description</source>
         <translation>Description</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4615"/>
+        <location filename="Forms/OptionsWindow.ui" line="4628"/>
         <source>Sandboxie&apos;s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. &apos;ClosedFilePath=!iexplore.exe,C:Users*&apos; will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the &quot;Access policies&quot; page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
@@ -11194,7 +11210,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
 Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du bac de créer une copie renommée d&apos;eux-mêmes et d&apos;accéder aux ressources protégées. Un autre vecteur d&apos;exploit est l&apos;injection d&apos;une bibliothèque dans un processus autorisé afin d&apos;accéder à tout ce qu&apos;il est autorisé d&apos;accéder. En utilisant la Protection d&apos;Image de l&apos;Hôte, cela peut être empêché en bloquant les applications (installées sur l&apos;hôte) lancées dans un bac de charger des bibliothèques depuis le bac lui-même.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4639"/>
+        <location filename="Forms/OptionsWindow.ui" line="4652"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
         <translation>Les fonctions de Sandboxie peuvent être améliorées en utilisant des DLL optionnelles qui peuvent être chargées dans chaque processus d&apos;un bac lors de leur démarrage par SbieDll.dll. Le gestionnaire de modules dans les paramètres généraux offre quelques extensions utiles ; une fois installées, celles-ci peuvent être activées ici pour le bac actuel.</translation>
@@ -11259,27 +11275,27 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <translation>Récupération immédiate</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4426"/>
+        <location filename="Forms/OptionsWindow.ui" line="4439"/>
         <source>Various Options</source>
         <translation>Divers</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4521"/>
+        <location filename="Forms/OptionsWindow.ui" line="4534"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
         <translation>Appliquer le palliatif ElevateCreateProcess (ancien comportement)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4514"/>
+        <location filename="Forms/OptionsWindow.ui" line="4527"/>
         <source>Use desktop object workaround for all processes</source>
         <translation>Utiliser le palliatif d&apos;objet de bureau pour tous les processus</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4497"/>
+        <location filename="Forms/OptionsWindow.ui" line="4510"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
         <translation>Lorsque le raccourci général est utilisé 3 fois rapidement et successivement, cette exception sera ignorée.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4500"/>
+        <location filename="Forms/OptionsWindow.ui" line="4513"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
         <translation>Empêcher ce bac d&apos;être arrêté lorsque « Arrêter tous les processus » est invoqué</translation>
     </message>
@@ -11288,33 +11304,33 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <translation type="vanished">Cette commande s&apos;exécute après que tous les processus dans le bac à sable se soient arrêtés.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4929"/>
+        <location filename="Forms/OptionsWindow.ui" line="4942"/>
         <source>On Box Terminate</source>
         <translation>Lors de l&apos;arrêt du bac</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4996"/>
+        <location filename="Forms/OptionsWindow.ui" line="5009"/>
         <source>This command will be run before the box content will be deleted</source>
         <translation>Cette commande sera exécutée avant que le contenu du bac ne soit supprimé.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4836"/>
+        <location filename="Forms/OptionsWindow.ui" line="4849"/>
         <source>On File Recovery</source>
         <translation>Lors de la récupération de fichiers</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4961"/>
+        <location filename="Forms/OptionsWindow.ui" line="4974"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
         <translation>Cette commande sera exécutée avant qu&apos;un fichier ne soit récupéré et le chemin du fichier sera transmis en tant que premier argument ; si cette commande retourne autre chose que « 0 », la récupération sera bloquée.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4964"/>
+        <location filename="Forms/OptionsWindow.ui" line="4977"/>
         <source>Run File Checker</source>
         <translation>Exécuter la vérification de fichiers</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4894"/>
+        <location filename="Forms/OptionsWindow.ui" line="4907"/>
         <source>On Delete Content</source>
         <translation>Lors de la suppression de contenu</translation>
     </message>
@@ -11325,7 +11341,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1655"/>
-        <location filename="Forms/OptionsWindow.ui" line="5104"/>
+        <location filename="Forms/OptionsWindow.ui" line="5117"/>
         <source>Process</source>
         <translation>Processus</translation>
     </message>
@@ -11334,71 +11350,71 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <translation type="vanished">Bloquer également l&apos;accès en lecture des processus de ce bac à sable</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4730"/>
+        <location filename="Forms/OptionsWindow.ui" line="4743"/>
         <source>Add Option</source>
         <translation>Ajouter une option</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4744"/>
+        <location filename="Forms/OptionsWindow.ui" line="4757"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <translation>Ici, vous pouvez configurer des options en fonction des processus, pour améliorer la compatibilité et/ou personnaliser le comportement de mise en bac.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4755"/>
+        <location filename="Forms/OptionsWindow.ui" line="4768"/>
         <source>Option</source>
         <translation>Option</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5198"/>
+        <location filename="Forms/OptionsWindow.ui" line="5211"/>
         <source>Privacy</source>
         <translation>Confidentialité</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5207"/>
+        <location filename="Forms/OptionsWindow.ui" line="5220"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
         <translation>Masquer les informations du microgiciel</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5084"/>
+        <location filename="Forms/OptionsWindow.ui" line="5097"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
         <translation>Certains programmes lisent les détails du système en se servant de WMI (une base de données incluse avec Windows) au lieu d&apos;utiliser des méthodes normales. Par exemple, « tasklist.exe » peut ainsi obtenir la liste complète des processus même si « Masquer les propres processus de Sandboxie de la liste des tâches » est activé. Utilisez cette option pour empêcher ce comportement.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5087"/>
+        <location filename="Forms/OptionsWindow.ui" line="5100"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
         <translation>Empêcher les processus d&apos;un bac d&apos;accéder aux détails du système en se servant de WMI (voir la bulle d&apos;aide pour plus d&apos;information)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5130"/>
+        <location filename="Forms/OptionsWindow.ui" line="5143"/>
         <source>Process Hiding</source>
         <translation>Masquage des processus</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5274"/>
+        <location filename="Forms/OptionsWindow.ui" line="5287"/>
         <source>Use a custom Locale/LangID</source>
         <translation>Utiliser une langue/LangID personnalisée</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5267"/>
+        <location filename="Forms/OptionsWindow.ui" line="5280"/>
         <source>Data Protection</source>
         <translation>Protection des données</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5241"/>
+        <location filename="Forms/OptionsWindow.ui" line="5254"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
         <translation>Copier la table du microgiciel actuel dans « HKCU\System\SbieCustom »</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5244"/>
+        <location filename="Forms/OptionsWindow.ui" line="5257"/>
         <source>Dump FW Tables</source>
         <translation>Copier la table du microgiciel</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5214"/>
+        <location filename="Forms/OptionsWindow.ui" line="5227"/>
         <source>Hide Disk Serial Number</source>
         <translation>Masquer le numéro de série du lecteur</translation>
     </message>
@@ -11438,108 +11454,108 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <translation>000.000.000.000</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5071"/>
+        <location filename="Forms/OptionsWindow.ui" line="5084"/>
         <source>Processes</source>
         <translation>Processus</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5181"/>
+        <location filename="Forms/OptionsWindow.ui" line="5194"/>
         <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
         <translation>Cette option masque le chemin de registre « *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\* », ce qui permet à un logiciel installé sur l&apos;hôte d&apos;être réinstallé dans le bac. Cependant, elle ne masque pas les fichiers ni les dossiers spécifiques au logiciel. Si l&apos;installeur rencontre encore des problèmes, vous devrez définir des entrées WriteFilePath personnalisées pour masquer les fichiers appropriés sur le disque.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5184"/>
+        <location filename="Forms/OptionsWindow.ui" line="5197"/>
         <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
         <translation>Masquer la clé de désinstallation du logiciel installé sur l&apos;hôte (voir la bulle d&apos;aide)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5221"/>
+        <location filename="Forms/OptionsWindow.ui" line="5234"/>
         <source>Obfuscate known unique identifiers in the registry</source>
         <translation>Dissimuler les identifiants uniques connus dans le registre</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5254"/>
+        <location filename="Forms/OptionsWindow.ui" line="5267"/>
         <source>Hide Network Adapter MAC Address</source>
         <translation>Masquer l&apos;adresse MAC de l&apos;adaptateur réseau</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5404"/>
+        <location filename="Forms/OptionsWindow.ui" line="5417"/>
         <source>DNS Request Logging</source>
         <oldsource>Dns Request Logging</oldsource>
         <translation>Enregistrer les requêtes DNS dans le journal</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5424"/>
+        <location filename="Forms/OptionsWindow.ui" line="5437"/>
         <source>Trace function hooking by SbieDll</source>
         <translation>Hooking de la fonction de traçage grâce à SbieDll</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5518"/>
+        <location filename="Forms/OptionsWindow.ui" line="5531"/>
         <source>Syscall Trace (creates a lot of output)</source>
         <translation>Tracer les appels système (crée beaucoup de sorties)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5620"/>
+        <location filename="Forms/OptionsWindow.ui" line="5633"/>
         <source>Debug Options</source>
         <translation>Options de débogage</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5696"/>
+        <location filename="Forms/OptionsWindow.ui" line="5709"/>
         <source>Config Dump</source>
         <translation>Cliché de configuration</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5727"/>
+        <location filename="Forms/OptionsWindow.ui" line="5740"/>
         <source>No Templates</source>
         <translation>Aucun modèle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5737"/>
+        <location filename="Forms/OptionsWindow.ui" line="5750"/>
         <source>No Global</source>
         <translation>Aucun global</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5747"/>
+        <location filename="Forms/OptionsWindow.ui" line="5760"/>
         <source>No Expand</source>
         <translation>Pas d&apos;expansion</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5757"/>
+        <location filename="Forms/OptionsWindow.ui" line="5770"/>
         <source>Refresh</source>
         <translation>Actualiser</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5802"/>
+        <location filename="Forms/OptionsWindow.ui" line="5815"/>
         <source>Templates</source>
         <translation>Modèles</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5938"/>
+        <location filename="Forms/OptionsWindow.ui" line="5951"/>
         <source>Open Template</source>
         <translation>Ouvrir le modèle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6086"/>
+        <location filename="Forms/OptionsWindow.ui" line="6099"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>Les paramètres suivants permettent l&apos;utilisation de Sandboxie en combinaison avec un logiciel d&apos;accessibilité.  Veuillez noter que certaines mesures de protection de Sandboxie sont nécessairement perdues lorsque ces paramètres sont en vigueur.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6139"/>
+        <location filename="Forms/OptionsWindow.ui" line="6152"/>
         <source>Edit ini Section</source>
         <translation>Édition de la section ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6173"/>
+        <location filename="Forms/OptionsWindow.ui" line="6186"/>
         <source>Edit ini</source>
         <translation>Éditer l&apos;ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6199"/>
+        <location filename="Forms/OptionsWindow.ui" line="6212"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6276"/>
+        <location filename="Forms/OptionsWindow.ui" line="6289"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
@@ -11592,27 +11608,27 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="4940"/>
+        <location filename="SandMan.cpp" line="5056"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4941"/>
+        <location filename="SandMan.cpp" line="5057"/>
         <source>Apply</source>
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4942"/>
+        <location filename="SandMan.cpp" line="5058"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4943"/>
+        <location filename="SandMan.cpp" line="5059"/>
         <source>&amp;Yes</source>
         <translation>&amp;Oui</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4944"/>
+        <location filename="SandMan.cpp" line="5060"/>
         <source>&amp;No</source>
         <translation>&amp;Non</translation>
     </message>
@@ -11625,12 +11641,17 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <translation>DismissSandboxiePlus - Récupération</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="145"/>
+        <location filename="Forms/RecoveryWindow.ui" line="120"/>
+        <source>Show Ignored Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/RecoveryWindow.ui" line="139"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="167"/>
+        <location filename="Forms/RecoveryWindow.ui" line="161"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
@@ -11668,12 +11689,12 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <translation type="vanished">Supprimer tout</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="174"/>
+        <location filename="Forms/RecoveryWindow.ui" line="168"/>
         <source>Show All Files</source>
         <translation>Afficher tous les fichiers</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="187"/>
+        <location filename="Forms/RecoveryWindow.ui" line="181"/>
         <source>TextLabel</source>
         <translatorcomment>Texte générique, celui-ci n’est pas à traduire.</translatorcomment>
         <translation></translation>

@@ -1679,6 +1679,19 @@ finish:
     }*/
 
     //
+    // emit the trace message before freeing the work areas: lpApplicationName
+    // and lpCommandLine may alias TlsData->proc_image_path / proc_command_line,
+    // which are freed below. Reading them afterwards is a use-after-free that
+    // access-violates for long command lines (large freed blocks get unmapped).
+    //
+
+    {
+        WCHAR msg[1024];
+        Sbie_snwprintf(msg, 1024, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
+    }
+
+    //
     // free work areas and return
     //
 
@@ -1699,12 +1712,6 @@ finish:
     if (TlsData->proc_command_line) {
         Dll_Free(TlsData->proc_command_line);
         TlsData->proc_command_line = NULL;
-    }
-
-    {
-        WCHAR msg[1024];
-        Sbie_snwprintf(msg, 1024, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
-        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
     }
 
     SetLastError(err);

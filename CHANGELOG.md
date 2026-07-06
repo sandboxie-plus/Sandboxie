@@ -13,6 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added wildcard support for `RecoverFolder` and `AutoRecoverIgnore` patterns (`*`, `?`, `**`), matching across NT, DOS, and network-alias path forms in both DLL and SandMan [#3761](https://github.com/sandboxie-plus/Sandboxie/issues/3761) [#5318](https://github.com/sandboxie-plus/Sandboxie/issues/5318)
 - added `UseAutoRecoverIgnoreForQuick=[y|n]` to apply `AutoRecoverIgnore` patterns to the Quick Recovery window (default: enabled) [#5278](https://github.com/sandboxie-plus/Sandboxie/issues/5278)
 
+### Changed
+- changed SandMan auto-delete recovery to reuse an already open recovery dialog as the delete decision dialog, regardless of filter state, instead of closing it or silently continuing with box deletion
+
 ### Fixed
 - fixed expected non-user SID profile and shell lookup noise by suppressing matching SBIE1406/SBIE1412 and derivative SBIE1204 FileRootPath messages [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
 - fixed NT device path (`\Device\LanmanRedirector\...`) shown in popup notification instead of UNC form, causing garbled display and wrong recovery target [#711](https://github.com/sandboxie-plus/Sandboxie/issues/711)

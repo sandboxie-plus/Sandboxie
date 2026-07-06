@@ -56,6 +56,14 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool
 	if (pBoxEx->m_pRecoveryWnd != NULL) {
 		if (pBoxEx->m_pRecoveryWnd->IsDeleteDialog())
 			return false;
+		if (bCloseEmpty) {
+			CRecoveryWindow* pRecoveryWnd = pBoxEx->m_pRecoveryWnd;
+			pRecoveryWnd->FindFiles();
+			if (SafeExec(pRecoveryWnd) != 1)
+				return false;
+			DeleteSnapshots = pRecoveryWnd->IsDeleteSnapshots();
+			return true;
+		}
 		pBoxEx->m_pRecoveryWnd->close();
 	}
 

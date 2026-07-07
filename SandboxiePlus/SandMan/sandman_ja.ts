@@ -3335,22 +3335,22 @@ Full path: %4</source>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="336"/>
+        <location filename="SandManRecovery.cpp" line="344"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - 復元ログ</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="347"/>
+        <location filename="SandManRecovery.cpp" line="355"/>
         <source>Time|Box Name|File Path</source>
         <translation>日時|ボックス名|ファイルパス</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="349"/>
+        <location filename="SandManRecovery.cpp" line="357"/>
         <source>Cleanup Recovery Log</source>
         <translation>復元ログを消去</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="359"/>
+        <location filename="SandManRecovery.cpp" line="367"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <translation>以下のファイルは最近復元され、サンドボックスから移動されました。</translation>
     </message>
@@ -5164,13 +5164,13 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="135"/>
-        <location filename="SandManRecovery.cpp" line="189"/>
+        <location filename="SandManRecovery.cpp" line="143"/>
+        <location filename="SandManRecovery.cpp" line="197"/>
         <source>Checking file %1</source>
         <translation>ファイル %1 を確認中</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="143"/>
+        <location filename="SandManRecovery.cpp" line="151"/>
         <source>The file %1 failed a security check!
 
 %2</source>
@@ -5179,12 +5179,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="151"/>
+        <location filename="SandManRecovery.cpp" line="159"/>
         <source>All files passed the checks</source>
         <translation>全てのファイルがチェックに合格しました</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="208"/>
+        <location filename="SandManRecovery.cpp" line="216"/>
         <source>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</source>
@@ -5193,23 +5193,23 @@ This file is part of Sandboxie and all change done to it will be reverted next t
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="209"/>
-        <location filename="SandManRecovery.cpp" line="245"/>
+        <location filename="SandManRecovery.cpp" line="217"/>
+        <location filename="SandManRecovery.cpp" line="253"/>
         <source>Do this for all files!</source>
         <translation>全てのファイルにこれを適用する！</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="232"/>
+        <location filename="SandManRecovery.cpp" line="240"/>
         <source>Recovering file %1 to %2</source>
         <translation>ファイル %1 を %2 へ復元中</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="244"/>
+        <location filename="SandManRecovery.cpp" line="252"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>ファイル %1 は既に存在します。上書きしますか？</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="273"/>
+        <location filename="SandManRecovery.cpp" line="281"/>
         <source>Failed to recover some files: 
 </source>
         <translation>いくつかのファイルの復元に失敗しました: 

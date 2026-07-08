@@ -1,20 +1,71 @@
 # 更新日志
-本项目的所有重要更改将在此文件中记录。
+本项目的所有重要更改均将记录在此文件中。
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
-## [1.17.7 / 5.72.7] - 2026-05-??
+
+
+
+
+
+## [1.17.10 / 5.72.10] - 2026-07-04
+
+### 新增
+- 为 `RecoverFolder` 和 `AutoRecoverIgnore` 模式（`*`, `?`, `**`）添加了通配符支持，可在 DLL 和 SandMan 中跨 NT、DOS 和网络别名路径形式进行匹配 [#3761](https://github.com/sandboxie-plus/Sandboxie/issues/3761) [#5318](https://github.com/sandboxie-plus/Sandboxie/issues/5318)
+- 添加了 `UseAutoRecoverIgnoreForQuick=[y|n]`，用于将 `AutoRecoverIgnore` 模式应用于快速恢复窗口（默认：启用） [#5278](https://github.com/sandboxie-plus/Sandboxie/issues/5278)
 
 ### 变更
-- 禁用“编辑 ini 配置节”中的富文本接受功能 [baa6968](https://github.com/sandboxie-plus/Sandboxie/commit/baa6968420e0ebd6b4cd93821cf019fcd0e0fc35)
+- 更改了 SandMan 的自动删除恢复逻辑：重新使用已打开的恢复对话框作为删除确认对话框（无论过滤状态如何），而不是关闭它或静默继续执行沙盒删除
 
 ### 修复
-- 修复 VMware Workstation Pro 26H1 的 QueryDosDevice 崩溃问题 [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
+- 修复了预期非用户 SID 配置文件和外壳查找噪音问题，通过抑制匹配的 SBIE1406/SBIE1412 及派生的 SBIE1204 FileRootPath 消息来实现 [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
+- 修复了在弹出通知中显示 NT 设备路径（`\Device\LanmanRedirector\...`）而非 UNC 格式的问题，该问题会导致显示乱码和错误的恢复目标 [#711](https://github.com/sandboxie-plus/Sandboxie/issues/711)
+- 修复了在没有进程运行时点击“关闭直到所有程序停止”会永久暂停恢复的问题
+- 修复了当新文件事件路径和扫描的恢复路径仅大小写不同（例如 `downloads` 和 `Downloads`）时，SandMan 即时恢复闪烁但不显示恢复窗口的问题
+- 在 Sbie 消息和通知大量涌入期间，通过批量更新 UI 和减少昂贵的逐行渲染，提高了 SandMan 的响应速度
 
 
-## [1.17.7 / 5.72.7] - 2026-05-??
+
+## [1.17.9 / 5.72.9] - 2026-06-15
+
+### 变更
+- 更新了内置的 ImDisk 驱动程序至 3.0.3
+
+
+
+## [1.17.8 / 5.72.8] - 2026-06-14
+
+### 新增
+- 添加了 `DisableCustomTitleOpt=[process,][y|n]`，允许在具有自定义标题栏（Delphi VCL、Qt、Electron）的窗口上显示 `[#]` Sandboxie 标题标记，之前为了防止 DWM 重绘导致 CPU 占用循环而跳过了这些窗口 [#5387](https://github.com/sandboxie-plus/Sandboxie/issues/5387)
+
+### 变更
+- 更新了内置的 ImDisk 驱动程序至 3.0.2 [#5419](https://github.com/sandboxie-plus/Sandboxie/issues/5419)
 
 ### 修复
-- 修复 VMware 在沙箱内运行时的崩溃问题，该问题由 NtQueryDirectoryObject 钩子返回未以空字符结尾的字符串，以及 OBJECT_DIRECTORY_INFORMATION 结构中存在未初始化的填充字节导致，从而使 QueryDosDeviceW 在 wcscmp 中崩溃 [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
+- 修复了针对预期非用户 SID 抑制日志的问题 [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
+- 修复了以管理员身份运行程序时 SbieSvc.exe 出现 SBIE2218/2219 错误的问题 [#5417](https://github.com/sandboxie-plus/Sandboxie/issues/5417)
+- 修复了安装火绒安全软件后，explorer.exe 在应用程序隔离箱（Application Compartment）中崩溃的问题 [#5423](https://github.com/sandboxie-plus/Sandboxie/issues/5423)
+
+
+
+## [1.17.7 / 5.72.7] - 2026-06-07
+
+### 新增
+- 在“程序控制 > 强制进程选项”（Program Control > Force Process Options）下添加了 `ForceBoxDocs` 的全局设置复选框
+
+### 变更
+- 禁用了“编辑 ini 节”（Edit ini Section）中的富文本接受功能 [baa6968](https://github.com/sandboxie-plus/Sandboxie/commit/baa6968420e0ebd6b4cd93821cf019fcd0e0fc35)
+- 扩展了补全系统，增加了上下文感知过滤，改进了 INI 键解析，更新了正则表达式，并增强了工具提示位置布局 [6db2a04](https://github.com/sandboxie-plus/Sandboxie/commit/6db2a04f805b49a049b309212bfa8e3a8497ad99)
+
+### 修复
+- 修复了在沙盒内运行时 VMware 崩溃的问题，该问题由 NtQueryDirectoryObject 钩子返回非空终止字符串及 OBJECT_DIRECTORY_INFORMATION 结构中存在未初始化的填充字节导致，进而引发 QueryDosDeviceW 在 wcscmp 中崩溃 [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
+- 添加了短名称回退缓存和启发式算法 [#5404](https://github.com/sandboxie-plus/Sandboxie/pull/5404)
+- 修复了在近期版本中引入的附加组件设置（addon setup）无法工作的问题
+- 修复了从 1.17.4 版本开始，使用“带数据保护的沙盒”（Sandbox with Data Protection）类型会导致 PowerShell 无限期等待的问题，而其他类型则没有此错误 [#5408](https://github.com/sandboxie-plus/Sandboxie/issues/5408)
+- 修复了在 v1.17.6 版本中导入加密沙盒不再创建加密镜像的问题 [#5399](https://github.com/sandboxie-plus/Sandboxie/issues/5399)
+- 修复了 EditorSettings 未应用模糊匹配，导致显示很少或没有补全条目，以及表格单元格高亮未更新的问题
+- 修复了枚举和删除文件夹时的错误 [#5406](https://github.com/sandboxie-plus/Sandboxie/issues/5406)
+- 修复了当 'ProtectAdminOnly=y'（默认值）且 SandMan 未以管理员身份运行时，黑盒导入/导出的问题
+
 
 
 ## [1.17.6 / 5.72.6] - 2026-05-17
@@ -33,6 +84,7 @@
 - 修复使用自定义标题栏的应用程序（如 Delphi VCL）引起 DWM 过高占用 CPU 的问题
 
 
+
 ## [1.17.5 / 5.72.5] - 2026-05-02
 
 ### 新增
@@ -44,6 +96,7 @@
 - 修复沙盒成功重命名后，在 UI 界面中无法重新选择已重命名沙盒的问题
 - 修复在 `OpenWinClass=*` 下沙盒应用托盘图标不显示的问题；现通过代理 `Shell_NotifyIcon` 解决，可使用 `UseShellNotifyIconProxy` 禁用（默认启用，支持 `process` 和 `!process` 选择器）
 - 修复对 WS_EX_TOPMOST 扩展样式的跟踪，检测置顶状态变化，并根据情况使用合适的 HWND_TOPMOST 或 HWND_TOP 排序，确保最顶层状态变化时边框可见性和 Z 轴顺序正确 [#5358](https://github.com/sandboxie-plus/Sandboxie/issues/5358)
+
 
 
 ## [1.17.4 / 5.72.4] - 2026-04-12
@@ -68,6 +121,7 @@
 
 ### 移除
 - 移除了已弃用的 'UseElectronWorkaround=y' 选项
+
 
 
 ## [1.17.3 / 5.72.3] - 2026-03-29
@@ -116,6 +170,7 @@
 - 修复安全问题 ID-37：ProcessServer 处理器中的名称校验问题 CVE-2026-34462（由 Yanchon918s 报告）
 - 修复安全问题 ID-38：NamedPipeServer 参数校验问题 CVE-2026-34464（由 Yanchon918s 报告）
 - 修复安全问题 ID-39：通过 UpdUtil 附加组件安装中的 TOCTOU 实现本地权限提升 CVE-2026-34596（由 sammy12342 报告）
+
 
 
 ## [1.17.2 / 5.72.2] - 2026-02-18

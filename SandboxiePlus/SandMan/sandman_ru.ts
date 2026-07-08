@@ -16,7 +16,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="157"/>
         <source>Protect Box Root from access by unsandboxed processes</source>
-        <translation>Защитить кореневую папку песочницы от доступа процессов вне песочницы</translation>
+        <translation>Защитить корневую папку песочницы от доступа процессов вне песочницы</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="103"/>
@@ -105,12 +105,12 @@
     <message>
         <location filename="AddonManager.cpp" line="251"/>
         <source>Updater failed to perform add-on operation</source>
-        <translation>Программе обновления не удалось выполнить операцию допонения</translation>
+        <translation>Программе обновления не удалось выполнить операцию дополнения</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="253"/>
         <source>Updater failed to perform add-on operation, error: %1</source>
-        <translation>Программе обновления не удалось выполнить операцию допонения, ошибка: %1</translation>
+        <translation>Программе обновления не удалось выполнить операцию дополнения, ошибка: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="169"/>
@@ -2042,7 +2042,7 @@ Do you still want to update?</source>
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
         <translation>Новых обновлений не найдено, у вас установлена последняя версия Sandboxie-Plus.
 
-Примечание: Найденное обновлениие часто отстает от версии доступной на GitHub, чтобы гарантировать, что предлагаются только проверенные обновления.</translation>
+Примечание: Найденное обновление часто отстает от версии доступной на GitHub, чтобы гарантировать, что предлагаются только проверенные обновления.</translation>
     </message>
 </context>
 <context>
@@ -2371,7 +2371,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="1170"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="1174"/>
         <source>Run Command</source>
-        <translation>Выполнить комманду</translation>
+        <translation>Выполнить команду</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1158"/>
@@ -2645,7 +2645,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="382"/>
         <source>Indeterminate</source>
-        <translation>Неопределено</translation>
+        <translation>Неопределенно</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="402"/>
@@ -3745,7 +3745,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="1606"/>
         <source>Sbie Messages</source>
-        <translation>Cообщения sbie</translation>
+        <translation>Сообщения sbie</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1622"/>
@@ -5474,7 +5474,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation> поддельный Aдминистратор</translation>
+        <translation> поддельный Администратор</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -6129,7 +6129,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1913"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
-        <translation>Cтартовое меню Sandboxie теперь будет отображено. Выберите приложение из меню, и Sandboxie создаст новый ярлык на вашем реальном рабочем столе, который вы можете использовать для вызова выбранного приложения под контролем Sandboxie.</translation>
+        <translation>Стартовое меню Sandboxie теперь будет отображено. Выберите приложение из меню, и Sandboxie создаст новый ярлык на вашем реальном рабочем столе, который вы можете использовать для вызова выбранного приложения под контролем Sandboxie.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1968"/>
@@ -7143,7 +7143,7 @@ Before sending, you can review the logs in the main window.</source>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="840"/>
         <source>Attach Crash Dumps</source>
-        <translation>Прикрепть аварийные дампы</translation>
+        <translation>Прикрепить аварийные дампы</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="841"/>
@@ -8806,7 +8806,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="410"/>
         <source>Partially checked means prevent box removal but not content deletion.</source>
-        <translation>Частично отмеченно означает предотвращение удаления песочницы, но не удаление содержимого.</translation>
+        <translation>Частично отмечено означает предотвращение удаления песочницы, но не удаление содержимого.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="776"/>
@@ -9153,8 +9153,8 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         Отображает подробные всплывающие подсказки при наведении курсора на настройки.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Режимы:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Отмеченно&lt;/span&gt;: Полная информация (версии, синтаксис, описание и т. д.)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Частично отмеченно&lt;/span&gt;: Только основная информация&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Отмечено&lt;/span&gt;: Полная информация (версии, синтаксис, описание и т. д.)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Частично отмечено&lt;/span&gt;: Только основная информация&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Помощники синтаксиса:&lt;/b&gt;&lt;br&gt;
         • &lt;i&gt;Вертикальная черта&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Разделяет альтернативные значения&lt;br&gt;
@@ -9199,8 +9199,8 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; покажет запрос на коррекцию регистра&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Режимы:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Отмеченно&lt;/span&gt;: Автозаполнение + Коррекция регистра&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Частично отмеченно&lt;/span&gt;: Только ручная &lt;code&gt;Ctrl+R&lt;/code&gt; коррекция&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Отмечено&lt;/span&gt;: Автозаполнение + Коррекция регистра&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Частично отмечено&lt;/span&gt;: Только ручная &lt;code&gt;Ctrl+R&lt;/code&gt; коррекция&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Навигация:&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Перемещение по всплывающему окну&lt;br&gt;
@@ -9761,7 +9761,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <location filename="Forms/OptionsWindow.ui" line="5057"/>
         <location filename="Forms/OptionsWindow.ui" line="5076"/>
         <source>Run Command</source>
-        <translation>Выполнить комманду</translation>
+        <translation>Выполнить команду</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5038"/>

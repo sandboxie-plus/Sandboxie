@@ -657,22 +657,22 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="550"/>
         <source>Mount &apos;%1&apos; for Export</source>
-        <translation type="unfinished"></translation>
+        <translation>내보내기를 위해 &apos;%1&apos; 마운트</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="553"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>암호화된 샌드박스 &apos;%1&apos;이 마운트되지 않았습니다. 건너뛰시겠습니까?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="564"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;을 마운트 해제하고 다시 마운트하는 데 실패했습니다.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="574"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>암호화된 샌드박스 &apos;%1&apos;을 마운트하는 데 실패했습니다.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="606"/>
@@ -3851,7 +3851,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="932"/>
         <source>%1 file(s) hidden by AutoRecoverIgnore</source>
-        <translation type="unfinished"></translation>
+        <translation>AutoRecoverIgnore에 의해 숨겨진 파일 %1개</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="1283"/>
@@ -6539,26 +6539,28 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="638"/>
         <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
 </source>
-        <translatorcomment>    CPU: %1  |  메모리: %2  |  전용 바이트: %3</translatorcomment>
-        <translation>    CPU: %1  |  Memory: %2  |  Private Bytes: %3</translation>
+        <translation>CPU: %1  |  메모리: %2  |  전용 바이트: %3</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="641"/>
         <source>    Sandbox: %1
 </source>
-        <translation>    샌드박스: %1</translation>
+        <translation>    샌드박스: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="643"/>
         <source>    Image: %1
 </source>
-        <translation>    이미지: %1</translation>
+        <translation>    이미지: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="646"/>
         <source>    Start Time: %1
 </source>
-        <translation>    시작 시간: %1</translation>
+        <translation>    시작 시간: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1113"/>
@@ -10405,12 +10407,12 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4419"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
-        <translation type="unfinished"></translation>
+        <translation>위의 제외 목록을 사용하여 빠른 복구 창에서 일치하는 파일 숨기기</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4422"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
-        <translation type="unfinished"></translation>
+        <translation>복구 창에서 &quot;모두 표시&quot; 확인란을 선택 해제해야 합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4483"/>
@@ -11536,7 +11538,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>Show Ignored Files</source>
-        <translation type="unfinished"></translation>
+        <translation>무시된 파일 표시</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
@@ -12366,12 +12368,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2959"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스에서 파일을 여는 프로그램이 해당 샌드박스에서 실행되도록 강제합니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2962"/>
         <source>Force programs opening boxed files into their sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>프로그램이 박스 파일을 샌드박스에 강제로 열기</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2969"/>

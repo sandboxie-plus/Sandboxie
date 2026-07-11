@@ -596,6 +596,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkColorIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkOverlayIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkHideCore, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkHighlightPendingChanges, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbGrouping, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbNonMainLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
@@ -1078,6 +1079,7 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 		static bool m_bRightButtonPressed = false;
 
 		if (event->type() == QEvent::FocusIn && ui.txtCertificate->property("hidden").toBool())	{
+			QSignalBlocker Blocker(ui.txtCertificate);
 			ui.txtCertificate->setProperty("hidden", false);
 			ui.txtCertificate->setPlainText(g_Certificate);
 			ui.txtCertificate->setProperty("modified", false);
@@ -1087,6 +1089,7 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 		}
 		else if (event->type() == QEvent::FocusOut && !ui.txtCertificate->property("hidden").toBool()) {
 			if (!ui.txtCertificate->property("modified").toBool() && !m_bRightButtonPressed) {
+				QSignalBlocker Blocker(ui.txtCertificate);
 				ui.txtCertificate->setProperty("hidden", true);
 				int Pos = g_Certificate.indexOf("HWID:");
 				if (Pos == -1)
@@ -1379,6 +1382,11 @@ void CSettingsWindow::LoadSettings()
 	ui.chkColorIcons->setChecked(theConf->GetBool("Options/ColorBoxIcons", false));
 	ui.chkOverlayIcons->setChecked(theConf->GetBool("Options/UseOverlayIcons", true));
 	ui.chkHideCore->setChecked(theConf->GetBool("Options/HideSbieProcesses", false));
+	int iHighlightPendingChanges = theConf->GetInt("Options/HighlightPendingChanges", 2);
+	ui.chkHighlightPendingChanges->setCheckState(CSettingsWindow__Int2Chk(iHighlightPendingChanges));
+	if (iHighlightPendingChanges == 2)
+		iHighlightPendingChanges = theConf->GetInt("Options/ViewMode", 1) != 2 ? 1 : 0;
+	m_PendingChanges.SetEnabled(iHighlightPendingChanges != 0, m_pTree);
 	ui.cmbGrouping->setCurrentIndex(theConf->GetInt("Options/BoxGroupHandling", 0));
 	
 
@@ -1734,6 +1742,10 @@ void CSettingsWindow::LoadSettings()
 
 	//ui.chkUpdateTemplates->setEnabled(g_CertInfo.active && !g_CertInfo.expired);
 	ui.chkUpdateIssues->setEnabled(g_CertInfo.active && !g_CertInfo.expired);
+	m_PendingChanges.CaptureItemBaselines(m_pTree);
+	m_PendingChanges.CaptureCheckboxBaselines();
+	m_PendingChanges.CaptureRadioButtonBaselines();
+	m_PendingChanges.CaptureValueBaselines();
 }
 
 void CSettingsWindow::OnRamDiskChange()
@@ -1957,6 +1969,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/ColorBoxIcons", ui.chkColorIcons->isChecked());
 	theConf->SetValue("Options/UseOverlayIcons", ui.chkOverlayIcons->isChecked());
 	theConf->SetValue("Options/HideSbieProcesses", ui.chkHideCore->isChecked());
+	theConf->SetValue("Options/HighlightPendingChanges", CSettingsWindow__Chk2Int(ui.chkHighlightPendingChanges->checkState()));
 	theConf->SetValue("Options/BoxGroupHandling", ui.cmbGrouping->currentIndex());
 
 	CIniHighlighter::ClearLanguageCache();
@@ -2372,6 +2385,7 @@ void CSettingsWindow::OnOptChanged()
 
 	if (m_HoldChange)
 		return;
+	m_PendingChanges.Update(sender(), m_pTree);
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
 }
 
@@ -2531,6 +2545,7 @@ void CSettingsWindow::OnCompat()
 	}
 
 	m_CompatLoaded = 1;
+	m_PendingChanges.CaptureItemBaselines(m_pTree, ui.treeCompat);
 	if(bNew)
 		OnCompatChanged();
 
@@ -2800,6 +2815,8 @@ void CSettingsWindow::LoadTemplates()
 		pItem->setText(0, Title);
 		ui.treeTemplates->addTopLevelItem(pItem);
 	}
+
+	m_PendingChanges.CaptureItemBaselines(m_pTree, ui.treeTemplates);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3122,6 +3139,8 @@ void CSettingsWindow::InitSupport()
 	connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 
 	m_CertChanged = false;
+	m_PendingChanges.ExcludeValue(ui.txtCertificate);
+	m_PendingChanges.ExcludeValue(ui.txtSerial);
 	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
 	ui.txtCertificate->installEventFilter(this);
 	connect(ui.txtSerial, SIGNAL(textChanged(const QString&)), this, SLOT(KeyChanged()));
@@ -3215,7 +3234,9 @@ void CSettingsWindow::UpdateCert()
 		int datePos = truncatedCert.indexOf("DATE:");
 		if (namePos != -1 && datePos != -1 && datePos > namePos)
 			truncatedCert = truncatedCert.mid(0, namePos + 5) + " ...\n" + truncatedCert.mid(datePos);
+		QSignalBlocker Blocker(ui.txtCertificate);
 		ui.txtCertificate->setPlainText(truncatedCert);
+		ui.txtCertificate->setProperty("modified", false);
 		//ui.lblSupport->setVisible(false);
 
 		QString ReNewUrl = "https://sandboxie-plus.com/go.php?to=sbie-renew-cert";

@@ -306,6 +306,9 @@
     <ClInclude Include="CustomStyles.h">
       <Filter>SandMan</Filter>
     </ClInclude>
+    <ClInclude Include="Windows\PendingChanges.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
     <ClInclude Include="Helpers\TabOrder.h">
       <Filter>Helpers</Filter>
     </ClInclude>

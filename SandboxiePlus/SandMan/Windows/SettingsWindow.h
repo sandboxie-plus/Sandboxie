@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QMap>
 #include "ui_SettingsWindow.h"
+#include "PendingChanges.h"
 #include "../../MiscHelpers/Common/SettingsWidgets.h"
 
 void FixTriStateBoxPallete(QWidget* pWidget);
@@ -201,6 +202,7 @@ protected:
 
 	bool	m_bRebuildUI;
 	bool	m_HoldChange;
+	CPendingChanges m_PendingChanges{this, &m_HoldChange, -1, true};
 	bool	m_SkipSaveOnToggle; // Skip saving to config when applying reset settings
 	int 	m_CompatLoaded;
 	QString m_NewPassword;

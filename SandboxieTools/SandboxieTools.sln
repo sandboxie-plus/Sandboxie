@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UpdUtil", "UpdUtil\UpdUtil.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImBox", "ImBox\ImBox.vcxproj", "{96BCA164-BCD0-4839-B9FE-DA7E557481DB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MiniDump", "MiniDump\MiniDump.vcxproj", "{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -40,6 +42,18 @@ Global
 		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Release|x64.Build.0 = Release|x64
 		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Release|x86.ActiveCfg = Release|Win32
 		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Release|x86.Build.0 = Release|Win32
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Debug|ARM64.Build.0 = Debug|ARM64
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Debug|x64.ActiveCfg = Debug|x64
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Debug|x64.Build.0 = Debug|x64
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Debug|x86.ActiveCfg = Debug|Win32
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Debug|x86.Build.0 = Debug|Win32
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Release|ARM64.ActiveCfg = Release|ARM64
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Release|ARM64.Build.0 = Release|ARM64
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Release|x64.ActiveCfg = Release|x64
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Release|x64.Build.0 = Release|x64
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Release|x86.ActiveCfg = Release|Win32
+		{A3B5C8D1-2E4F-6A7B-9C0D-1E2F3A4B5C6D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

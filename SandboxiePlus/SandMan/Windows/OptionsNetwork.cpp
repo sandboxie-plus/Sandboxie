@@ -323,6 +323,8 @@ void COptionsWindow::LoadBlockINet()
 	ui.chkBlockDns->setChecked(m_BoxTemplates.contains("BlockDNS"));
 	ui.chkBlockSamba->setChecked(m_BoxTemplates.contains("BlockPorts"));
 
+	m_PendingChanges.CaptureItemBaselines(m_pTree, ui.treeINet);
+
 	m_HoldChange = holdChange;
 	m_INetBlockChanged = false;
 }

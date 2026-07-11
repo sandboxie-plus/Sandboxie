@@ -1678,13 +1678,6 @@ finish:
         hook NtQueryInformationProcess if env var SBIE_OVERRIDE_PARENT_PID exists
     }*/
 
-    //
-    // emit the trace message before freeing the work areas: lpApplicationName
-    // and lpCommandLine may alias TlsData->proc_image_path / proc_command_line,
-    // which are freed below. Reading them afterwards is a use-after-free that
-    // access-violates for long command lines (large freed blocks get unmapped).
-    //
-
     {
         WCHAR msg[1024];
         Sbie_snwprintf(msg, 1024, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
@@ -2792,7 +2785,7 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
     //
     //    for (WCHAR** MatchDir = MatchDirs; (*MatchDir)[0] != L'\0'; MatchDir++) {
     //
-    //        if (wcsstr(path2, *MatchDir)) {
+    //        if (wcsistr(path2, *MatchDir)) {
     //
     //            IsUpdate = TRUE;
     //            break;

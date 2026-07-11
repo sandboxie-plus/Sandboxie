@@ -8,6 +8,7 @@
 #include <windows.h>
 #include "./Windows/SettingsWindow.h"
 #include "./Wizards/SetupWizard.h"
+#include "./Helpers/MiniDumpFilter.h"
 
 CSettings* theConf = NULL;
 
@@ -50,9 +51,13 @@ int main(int argc, char *argv[])
 	// use a shared setting location when used in a business environment for easier administration
 	theConf = new CSettings(ConfDir, "Sandboxie-Plus", "Xanasoft");
 
-#ifndef _DEBUG
-	InitMiniDumpWriter(QString("SandMan-v%1").arg(CSandMan::GetVersion()).toStdWString().c_str() , QString(theConf->GetConfigDir()).replace("/", "\\").toStdWString().c_str());
-#endif
+
+
+	if (!IsDebuggerAttached()) {
+		MiniDumpFilter_Init(NULL, QString("SandMan-v%1").arg(CSandMan::GetVersion()).toStdWString().c_str(), MDF_TYPE_TRIAGE, NULL);
+	}
+	//DebugBreak();
+
 
 	// this must be done before we create QApplication
 	int DPI = theConf->GetInt("Options/DPIScaling", 1);

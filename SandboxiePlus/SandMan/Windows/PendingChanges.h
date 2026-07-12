@@ -2,16 +2,21 @@
 
 #include <QAbstractItemModel>
 #include <QAbstractItemView>
+#include <QAbstractButton>
 #include <QBrush>
+#include <QCheckBox>
 #include <QComboBox>
 #include <QDoubleSpinBox>
 #include <QKeySequenceEdit>
 #include <QLineEdit>
 #include <QPlainTextEdit>
+#include <QProxyStyle>
+#include <QStyleFactory>
 #include <QRadioButton>
 #include <QSignalBlocker>
 #include <QSpinBox>
 #include <QStyle>
+#include <QStyleOptionButton>
 #include <QStyleOptionComboBox>
 #include <QStylePainter>
 #include <QTimer>
@@ -46,6 +51,69 @@ protected:
 		Painter.fillRect(EditRect, pCombo->property("pending_value_combo_color").value<QColor>());
 		pCombo->style()->drawControl(QStyle::CE_ComboBoxLabel, &Option, &Painter, pCombo);
 		return true;
+	}
+};
+
+class CPendingButtonPaintFilter : public QObject
+{
+public:
+	CPendingButtonPaintFilter(QWidget* pButton)
+		: QObject(pButton)
+	{
+	}
+
+protected:
+	bool eventFilter(QObject* pObject, QEvent* pEvent) override
+	{
+		QWidget* pButton = qobject_cast<QWidget*>(pObject);
+		if (!pButton || pEvent->type() != QEvent::Paint || !pButton->property("pending_button_color").isValid())
+			return QObject::eventFilter(pObject, pEvent);
+		QAbstractButton* pAbstractButton = qobject_cast<QAbstractButton*>(pButton);
+		if (!pAbstractButton)
+			return QObject::eventFilter(pObject, pEvent);
+
+		QStyleOptionButton Option;
+		Option.initFrom(pButton);
+		Option.text = pAbstractButton->text();
+		QStyle::SubElement Element;
+		bool bCheckBox;
+		if (QCheckBox* pCheck = qobject_cast<QCheckBox*>(pButton)) {
+			bCheckBox = true;
+			Option.state |= pCheck->checkState() == Qt::PartiallyChecked ? QStyle::State_NoChange
+				: pCheck->isChecked() ? QStyle::State_On : QStyle::State_Off;
+			Element = QStyle::SE_CheckBoxContents;
+		}
+		else if (QRadioButton* pRadio = qobject_cast<QRadioButton*>(pButton)) {
+			bCheckBox = false;
+			Option.state |= pRadio->isChecked() ? QStyle::State_On : QStyle::State_Off;
+			Element = QStyle::SE_RadioButtonContents;
+		}
+		else
+			return QObject::eventFilter(pObject, pEvent);
+
+		QStylePainter Painter(pButton);
+		Painter.fillRect(pButton->style()->subElementRect(Element, &Option, pButton), pButton->property("pending_button_color").value<QColor>());
+		pButton->style()->drawControl(bCheckBox ? QStyle::CE_CheckBox : QStyle::CE_RadioButton, &Option, &Painter, pButton);
+		return true;
+	}
+};
+
+class CPendingEditorStyle : public QProxyStyle
+{
+public:
+	CPendingEditorStyle(QStyle* pBase)
+		: QProxyStyle(pBase)
+	{
+	}
+
+	void drawPrimitive(PrimitiveElement Element, const QStyleOption* pOption, QPainter* pPainter, const QWidget* pWidget = nullptr) const override
+	{
+		QProxyStyle::drawPrimitive(Element, pOption, pPainter, pWidget);
+		if (Element == PE_PanelLineEdit && pWidget && pWidget->property("pending_editor_color").isValid()) {
+			QRect Rect = pOption ? pOption->rect : pWidget->rect();
+			Rect.adjust(1, 1, -1, -1);
+			pPainter->fillRect(Rect, pWidget->property("pending_editor_color").value<QColor>());
+		}
 	}
 };
 
@@ -88,6 +156,10 @@ public:
 		foreach(QCheckBox* pCheck, m_pRoot->findChildren<QCheckBox*>()) {
 			SetCheckboxHighlight(pCheck, false);
 			pCheck->setProperty(CheckboxBaselineProperty, (int)pCheck->checkState());
+			if (!pCheck->property(CheckboxPaintFilterProperty).toBool()) {
+				pCheck->setProperty(CheckboxPaintFilterProperty, true);
+				pCheck->installEventFilter(new CPendingButtonPaintFilter(pCheck));
+			}
 		}
 	}
 
@@ -101,6 +173,10 @@ public:
 	{
 		SetRadioButtonHighlight(pRadio, false);
 		pRadio->setProperty(RadioBaselineProperty, pRadio->isChecked());
+		if (!pRadio->property(RadioPaintFilterProperty).toBool()) {
+			pRadio->setProperty(RadioPaintFilterProperty, true);
+			pRadio->installEventFilter(new CPendingButtonPaintFilter(pRadio));
+		}
 		if (!pRadio->property(RadioConnectionProperty).toBool()) {
 			pRadio->setProperty(RadioConnectionProperty, true);
 			connect(pRadio, &QRadioButton::toggled, this, [this](bool) {
@@ -248,9 +324,11 @@ private:
 	static constexpr const char* CheckboxBaselineProperty = "pending_checkbox_baseline";
 	static constexpr const char* CheckboxPaletteProperty = "pending_checkbox_palette";
 	static constexpr const char* CheckboxAutoFillProperty = "pending_checkbox_auto_fill";
+	static constexpr const char* CheckboxPaintFilterProperty = "pending_checkbox_paint_filter";
 	static constexpr const char* RadioBaselineProperty = "pending_radio_baseline";
 	static constexpr const char* RadioPaletteProperty = "pending_radio_palette";
 	static constexpr const char* RadioAutoFillProperty = "pending_radio_auto_fill";
+	static constexpr const char* RadioPaintFilterProperty = "pending_radio_paint_filter";
 	static constexpr const char* RadioConnectionProperty = "pending_radio_connection";
 	static constexpr const char* ValueBaselineProperty = "pending_value_baseline";
 	static constexpr const char* ValuePaletteProperty = "pending_value_palette";
@@ -260,7 +338,10 @@ private:
 	static constexpr const char* ValueViewportPaletteProperty = "pending_value_viewport_palette";
 	static constexpr const char* ValueViewportBaseColorProperty = "pending_value_viewport_base_color";
 	static constexpr const char* ValueLineEditAutoFillProperty = "pending_value_line_edit_auto_fill";
-	static constexpr const char* ValueLineEditStyleProperty = "pending_value_line_edit_style";
+	static constexpr const char* ValueSpinBoxLineEditAutoFillProperty = "pending_value_spin_box_line_edit_auto_fill";
+	static constexpr const char* ValueTextViewportAutoFillProperty = "pending_value_text_viewport_auto_fill";
+	static constexpr const char* ValueTextViewportStyleProperty = "pending_value_text_viewport_style";
+	static constexpr const char* ValueEditorStyleProperty = "pending_value_editor_style";
 	static constexpr const char* ValueConnectionProperty = "pending_value_connection";
 	static constexpr const char* ValueComboBackgroundsProperty = "pending_value_combo_backgrounds";
 	static constexpr const char* ValueComboSnapshotProperty = "pending_value_combo_snapshot";
@@ -270,6 +351,36 @@ private:
 
 	bool IsHoldingChanges() const { return m_pHoldChange && *m_pHoldChange; }
 	static bool IsValueExcluded(const QWidget* pControl) { return pControl->property(ValueExcludedProperty).toBool(); }
+	static QString GetStyleKey(const QStyle* pStyle)
+	{
+		if (!pStyle)
+			return QString();
+		QString ClassName = pStyle->metaObject()->className();
+		if (ClassName.contains("Windows11", Qt::CaseInsensitive))
+			return "windows11";
+		if (ClassName.contains("WindowsVista", Qt::CaseInsensitive))
+			return "windowsvista";
+		if (ClassName.contains("Windows", Qt::CaseInsensitive))
+			return "windows";
+		if (ClassName.contains("Fusion", Qt::CaseInsensitive))
+			return "fusion";
+		if (QProxyStyle* pProxy = qobject_cast<QProxyStyle*>(const_cast<QStyle*>(pStyle)))
+			return GetStyleKey(pProxy->baseStyle());
+		return QString();
+	}
+
+	static void InstallEditorStyle(QLineEdit* pLineEdit)
+	{
+		if (pLineEdit->property(ValueEditorStyleProperty).toBool())
+			return;
+		QStyle* pBase = QStyleFactory::create(GetStyleKey(pLineEdit->style()));
+		if (!pBase)
+			return;
+		CPendingEditorStyle* pStyle = new CPendingEditorStyle(pBase);
+		pStyle->setParent(pLineEdit);
+		pLineEdit->setStyle(pStyle);
+		pLineEdit->setProperty(ValueEditorStyleProperty, true);
+	}
 	static bool IsComboLineEdit(const QLineEdit* pLineEdit)
 	{
 		for (const QWidget* pParent = pLineEdit->parentWidget(); pParent; pParent = pParent->parentWidget()) {
@@ -424,12 +535,18 @@ private:
 			Palette.setColor(QPalette::Inactive, QPalette::Window, Color);
 			pCheck->setPalette(Palette);
 			pCheck->setAutoFillBackground(true);
+			pCheck->setProperty("pending_button_color", Color);
+			pCheck->update();
 		}
 		else if (pCheck->property(CheckboxPaletteProperty).isValid()) {
-			pCheck->setPalette(pCheck->property(CheckboxPaletteProperty).value<QPalette>());
+			pCheck->setPalette(QPalette());
 			pCheck->setAutoFillBackground(pCheck->property(CheckboxAutoFillProperty).toBool());
 			pCheck->setProperty(CheckboxPaletteProperty, QVariant());
 			pCheck->setProperty(CheckboxAutoFillProperty, QVariant());
+			pCheck->setProperty("pending_button_color", QVariant());
+			pCheck->style()->unpolish(pCheck);
+			pCheck->style()->polish(pCheck);
+			pCheck->update();
 		}
 	}
 
@@ -454,12 +571,18 @@ private:
 			Palette.setColor(QPalette::Inactive, QPalette::Window, Color);
 			pRadio->setPalette(Palette);
 			pRadio->setAutoFillBackground(true);
+			pRadio->setProperty("pending_button_color", Color);
+			pRadio->update();
 		}
 		else if (pRadio->property(RadioPaletteProperty).isValid()) {
-			pRadio->setPalette(pRadio->property(RadioPaletteProperty).value<QPalette>());
+			pRadio->setPalette(QPalette());
 			pRadio->setAutoFillBackground(pRadio->property(RadioAutoFillProperty).toBool());
 			pRadio->setProperty(RadioPaletteProperty, QVariant());
 			pRadio->setProperty(RadioAutoFillProperty, QVariant());
+			pRadio->setProperty("pending_button_color", QVariant());
+			pRadio->style()->unpolish(pRadio);
+			pRadio->style()->polish(pRadio);
+			pRadio->update();
 		}
 	}
 
@@ -518,9 +641,20 @@ private:
 					pCombo->setProperty(ValueViewportPaletteProperty, QVariant::fromValue(pCombo->view()->viewport()->palette()));
 					pCombo->setProperty(ValueViewportBaseColorProperty, pCombo->view()->viewport()->palette().color(QPalette::Active, QPalette::Base));
 					if (pCombo->isEditable() && pCombo->lineEdit()) {
+						InstallEditorStyle(pCombo->lineEdit());
 						pCombo->setProperty(ValueLineEditAutoFillProperty, pCombo->lineEdit()->autoFillBackground());
-						pCombo->setProperty(ValueLineEditStyleProperty, pCombo->lineEdit()->styleSheet());
 					}
+				}
+				else if (QAbstractSpinBox* pSpinBox = qobject_cast<QAbstractSpinBox*>(pControl)) {
+					if (QLineEdit* pLineEdit = pSpinBox->findChild<QLineEdit*>()) {
+						InstallEditorStyle(pLineEdit);
+						pSpinBox->setProperty(ValueSpinBoxLineEditAutoFillProperty, pLineEdit->autoFillBackground());
+					}
+				}
+				else if (QPlainTextEdit* pTextEdit = qobject_cast<QPlainTextEdit*>(pControl)) {
+					QWidget* pViewport = pTextEdit->viewport();
+					pTextEdit->setProperty(ValueTextViewportAutoFillProperty, pViewport->autoFillBackground());
+					pTextEdit->setProperty(ValueTextViewportStyleProperty, pViewport->styleSheet());
 				}
 			}
 			QPalette Palette = pControl->palette();
@@ -533,16 +667,21 @@ private:
 			pControl->setPalette(Palette);
 			pControl->setAutoFillBackground(true);
 			if (QComboBox* pCombo = qobject_cast<QComboBox*>(pControl)) {
-				if (!pCombo->isEditable())
+				if (!pCombo->isEditable()) {
 					pCombo->setProperty(ValueComboColorProperty, ButtonColor);
+					pCombo->setStyleSheet(pControl->property(ValueStyleProperty).toString()
+						+ "\nbackground-color: " + BaseColor.name() + ";");
+				}
 				else if (QLineEdit* pLineEdit = pCombo->lineEdit()) {
 					QPalette LineEditPalette = pLineEdit->palette();
 					LineEditPalette.setColor(QPalette::Active, QPalette::Base, BaseColor);
 					LineEditPalette.setColor(QPalette::Inactive, QPalette::Base, BaseColor);
 					pLineEdit->setPalette(LineEditPalette);
+					pLineEdit->setProperty("pending_editor_color", BaseColor);
 					pLineEdit->setAutoFillBackground(true);
-					pLineEdit->setStyleSheet(pCombo->property(ValueLineEditStyleProperty).toString()
-						+ "\nQLineEdit { background-color: " + BaseColor.name() + "; }");
+					pLineEdit->style()->unpolish(pLineEdit);
+					pLineEdit->style()->polish(pLineEdit);
+					pLineEdit->update();
 				}
 				pCombo->view()->setPalette(pCombo->property(ValueViewPaletteProperty).value<QPalette>());
 				QPalette ViewportPalette = pCombo->property(ValueViewportPaletteProperty).value<QPalette>();
@@ -557,11 +696,62 @@ private:
 				pControl->setStyleSheet(pControl->property(ValueStyleProperty).toString()
 					+ "\nQKeySequenceEdit, QKeySequenceEdit QLineEdit { background-color: " + BaseColor.name() + "; }");
 			}
+			else if (QPlainTextEdit* pTextEdit = qobject_cast<QPlainTextEdit*>(pControl)) {
+				QWidget* pViewport = pTextEdit->viewport();
+				QPalette ViewportPalette = pViewport->palette();
+				ViewportPalette.setColor(QPalette::Active, QPalette::Base, BaseColor);
+				ViewportPalette.setColor(QPalette::Inactive, QPalette::Base, BaseColor);
+				pViewport->setPalette(ViewportPalette);
+				pViewport->setAutoFillBackground(true);
+				pViewport->setStyleSheet(pTextEdit->property(ValueTextViewportStyleProperty).toString()
+					+ "\nQWidget { background-color: " + BaseColor.name() + "; }");
+				pViewport->style()->unpolish(pViewport);
+				pViewport->style()->polish(pViewport);
+				pViewport->update();
+			}
+			else if (QAbstractSpinBox* pSpinBox = qobject_cast<QAbstractSpinBox*>(pControl)) {
+				if (QLineEdit* pLineEdit = pSpinBox->findChild<QLineEdit*>()) {
+					QPalette LineEditPalette = pLineEdit->palette();
+					LineEditPalette.setColor(QPalette::Active, QPalette::Base, BaseColor);
+					LineEditPalette.setColor(QPalette::Inactive, QPalette::Base, BaseColor);
+					pLineEdit->setPalette(LineEditPalette);
+					pLineEdit->setProperty("pending_editor_color", BaseColor);
+					pLineEdit->setAutoFillBackground(true);
+					pLineEdit->style()->unpolish(pLineEdit);
+					pLineEdit->style()->polish(pLineEdit);
+					pLineEdit->update();
+				}
+			}
+			else {
+				pControl->setStyleSheet(pControl->property(ValueStyleProperty).toString()
+					+ "\nbackground-color: " + BaseColor.name() + ";");
+			}
 		}
 		else if (pControl->property(ValuePaletteProperty).isValid()) {
 			pControl->setStyleSheet(pControl->property(ValueStyleProperty).toString());
 			pControl->setPalette(pControl->property(ValuePaletteProperty).value<QPalette>());
 			pControl->setAutoFillBackground(pControl->property(ValueAutoFillProperty).toBool());
+			if (QAbstractSpinBox* pSpinBox = qobject_cast<QAbstractSpinBox*>(pControl)) {
+				if (QLineEdit* pLineEdit = pSpinBox->findChild<QLineEdit*>()) {
+					pLineEdit->setProperty("pending_editor_color", QVariant());
+					pLineEdit->setPalette(QPalette());
+					pLineEdit->setAutoFillBackground(pSpinBox->property(ValueSpinBoxLineEditAutoFillProperty).toBool());
+					pLineEdit->style()->unpolish(pLineEdit);
+					pLineEdit->style()->polish(pLineEdit);
+					pLineEdit->update();
+				}
+			}
+			if (QPlainTextEdit* pTextEdit = qobject_cast<QPlainTextEdit*>(pControl)) {
+				QWidget* pViewport = pTextEdit->viewport();
+				const QString StyleSheet = pTextEdit->property(ValueTextViewportStyleProperty).toString();
+				pViewport->setStyleSheet(QString());
+				pViewport->setPalette(QPalette());
+				pViewport->setAutoFillBackground(pTextEdit->property(ValueTextViewportAutoFillProperty).toBool());
+				pViewport->setStyleSheet(StyleSheet);
+				pViewport->style()->unpolish(pViewport);
+				pViewport->style()->polish(pViewport);
+				pViewport->update();
+			}
 			if (QComboBox* pCombo = qobject_cast<QComboBox*>(pControl)) {
 				if (pCombo->isEditable())
 					pCombo->setPalette(QPalette());
@@ -571,11 +761,9 @@ private:
 				pCombo->view()->viewport()->setPalette(pCombo->property(ValueViewportPaletteProperty).value<QPalette>());
 				if (pCombo->isEditable() && pCombo->lineEdit()) {
 					QLineEdit* pLineEdit = pCombo->lineEdit();
-					const QString StyleSheet = pCombo->property(ValueLineEditStyleProperty).toString();
-					pLineEdit->setStyleSheet(QString());
+					pLineEdit->setProperty("pending_editor_color", QVariant());
 					pLineEdit->setPalette(QPalette());
 					pLineEdit->setAutoFillBackground(pCombo->property(ValueLineEditAutoFillProperty).toBool());
-					pLineEdit->setStyleSheet(StyleSheet);
 					pLineEdit->style()->unpolish(pLineEdit);
 					pLineEdit->style()->polish(pLineEdit);
 					pLineEdit->update();
@@ -592,7 +780,9 @@ private:
 			pControl->setProperty(ValueViewportPaletteProperty, QVariant());
 			pControl->setProperty(ValueViewportBaseColorProperty, QVariant());
 			pControl->setProperty(ValueLineEditAutoFillProperty, QVariant());
-			pControl->setProperty(ValueLineEditStyleProperty, QVariant());
+			pControl->setProperty(ValueSpinBoxLineEditAutoFillProperty, QVariant());
+			pControl->setProperty(ValueTextViewportAutoFillProperty, QVariant());
+			pControl->setProperty(ValueTextViewportStyleProperty, QVariant());
 		}
 	}
 

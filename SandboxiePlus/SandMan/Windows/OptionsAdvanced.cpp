@@ -1018,6 +1018,7 @@ void COptionsWindow::OnAddOption()
 	QString Name = progDialog.value(); 
 
 	AddOptionEntry(Name, "", "");
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnDelOption()

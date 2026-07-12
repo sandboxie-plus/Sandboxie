@@ -109,17 +109,8 @@ void COptionsWindow::ShowTemplates()
 {
 	ui.treeTemplates->clear();
 
-	QString CategoryFilter = ui.cmbCategories->currentData().toString();
-	QString TextFilter = ui.txtTemplates->text();
-
 	for (QMultiMap<QString, QPair<QString, QString>>::iterator I = m_AllTemplates.begin(); I != m_AllTemplates.end(); ++I)
 	{
-		if (!CategoryFilter.isEmpty() && I.key().compare(CategoryFilter, Qt::CaseInsensitive) != 0)
-			continue;
-
-		if (I.value().second.indexOf(TextFilter, 0, Qt::CaseInsensitive) == -1)
-			continue;
-
 		if (I.key().isEmpty())
 			continue; // don't show templates without a category (these are usually deprecated templates)
 
@@ -140,7 +131,20 @@ void COptionsWindow::ShowTemplates()
 		ui.treeTemplates->addTopLevelItem(pItem);
 	}
 
+	FilterTemplates();
 	ShowFolders();
+}
+
+void COptionsWindow::FilterTemplates()
+{
+	QString CategoryFilter = ui.cmbCategories->currentData().toString();
+	QString TextFilter = ui.txtTemplates->text();
+	for (int i = 0; i < ui.treeTemplates->topLevelItemCount(); i++) {
+		QTreeWidgetItem* pItem = ui.treeTemplates->topLevelItem(i);
+		bool Visible = (CategoryFilter.isEmpty() || pItem->data(0, Qt::UserRole).toString().compare(CategoryFilter, Qt::CaseInsensitive) == 0)
+			&& pItem->text(1).indexOf(TextFilter, 0, Qt::CaseInsensitive) != -1;
+		pItem->setHidden(!Visible);
+	}
 }
 
 void COptionsWindow::OnTemplateClicked(QTreeWidgetItem* pItem, int Column)

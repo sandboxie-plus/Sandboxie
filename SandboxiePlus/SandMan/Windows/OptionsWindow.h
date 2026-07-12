@@ -243,7 +243,7 @@ private slots:
 	void OnDelUser();
 	//
 
-	void OnFilterTemplates()		{ ShowTemplates(); }
+	void OnFilterTemplates()		{ FilterTemplates(); }
 	void OnTemplateClicked(QTreeWidgetItem* pItem, int Column);
 	void OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAddTemplates();
@@ -561,6 +561,7 @@ protected:
 
 	void LoadTemplates();
 	void ShowTemplates();
+	void FilterTemplates();
 	void SaveTemplates();
 	void SetTemplate(const QString& Template, bool bEnabled);
 

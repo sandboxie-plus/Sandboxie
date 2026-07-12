@@ -6,7 +6,7 @@
 *
 */
 
-  message = tr('Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.');
+  message = tr('Viber is not compatible with the standard isolation yellow type Sandbox. However, it is known to work in a Green (App Compartment) type sandbox.');
 
   invoke("SBIECONF");
   if(typeof boxName === 'undefined') boxName = "";

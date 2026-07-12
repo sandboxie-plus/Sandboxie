@@ -396,7 +396,7 @@ _FX BOOLEAN Crypt_Init(HMODULE module)
     // in app mode we have our original token so no need to hook this
     //
 
-    if (Dll_CompartmentMode) 
+    if (Ipc_OpenCOM && Dll_CompartmentMode) 
         return TRUE;
 
     //

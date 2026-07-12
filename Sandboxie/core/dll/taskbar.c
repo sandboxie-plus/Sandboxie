@@ -1096,7 +1096,8 @@ _FX BOOL SHCore_IsOS(DWORD dwOS)
     // (see pref_hash_calculator.cc - returns VALID if IsEnterpriseDevice()).
     //
 
-    if (dwOS == 28 /*OS_DOMAINMEMBER*/ && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) {
+	extern BOOL Dll_UseChromeSecurePreferencesHack;
+    if (dwOS == 28 /*OS_DOMAINMEMBER*/ && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && Dll_UseChromeSecurePreferencesHack) {
 		//SbieApi_Log(2325, L"SHCore_IsOS: Chrome detected, returning TRUE for OS_DOMAINMEMBER");
         return TRUE;
     }

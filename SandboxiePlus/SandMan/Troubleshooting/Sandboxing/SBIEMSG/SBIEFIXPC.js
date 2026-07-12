@@ -29,7 +29,7 @@ function try_fix_PC_SRP()
   let ret = system.execute('cmd.exe', command, {elevate: true});
 
   if(ret.error)
-    wizard.setResult(false, 'Failed to execute recured command: ' + ret.error);
+    wizard.setResult(false, 'Failed to execute required command: ' + ret.error);
   else
     wizard.setResult(true);
 }

@@ -400,7 +400,8 @@ _FX HRESULT UserEnv_CreateAppContainerProfile(
 //
 //_FX BOOL UserEnv_GetProfileType(DWORD* pdwFlags) 
 //{
-//    if (pdwFlags) {
+//    extern BOOLEAN Dll_UseChromeSecurePreferencesHack;
+//    if (pdwFlags && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && Dll_UseChromeSecurePreferencesHack) {
 //		SbieApi_Log(2325, L"UserEnv_GetProfileType called, returning PT_ROAMING");
 //        *pdwFlags = PT_ROAMING;
 //    }

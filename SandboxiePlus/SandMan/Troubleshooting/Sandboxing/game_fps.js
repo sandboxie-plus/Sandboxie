@@ -33,7 +33,7 @@ box.start();
       { id: 'yes', name: tr('Yes'), type: 'radio' },
       { id: 'no', name: tr('No'), type: 'radio' },
   ];
-  let ret = wizard.showForm(form, tr('The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.', boxName));
+  let ret = wizard.showForm(form, tr('The options have been applied. Please try out your game in %1 and indicate if the issue has been resolved.', boxName));
   if (ret['yes'] == true) {
       wizard.setResult(true);
   }

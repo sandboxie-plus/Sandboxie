@@ -29,7 +29,7 @@ if(res === false) {
   if (typeof sbieMsg !== 'undefined')
     message += tr('The full message text is: %1<br />', sbieMsg);
   
-  message += tr('Visit out <a href="%1">online-documentation</a> to learn more about this, and other sbie messages.', docLink);
+  message += tr('Visit our <a href="%1">online documentation</a> to learn more about this and other SBIE messages.', docLink);
   message += '<br /><br />';
   message += tr('Would you like to collect some logs to help us resolve the issue.');
 

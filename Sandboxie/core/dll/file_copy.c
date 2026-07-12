@@ -608,7 +608,7 @@ _FX NTSTATUS File_MigrateFile(
 
         BOOLEAN chrome_prefs_handled = FALSE;
 
-        if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && file_size < (16 * 1024 * 1024)) {
+        if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && Dll_UseChromeSecurePreferencesHack && file_size < (16 * 1024 * 1024)) {
 
             const WCHAR *filename = wcsrchr(TruePath, L'\\');
             if (filename && _wcsicmp(filename, L"\\Secure Preferences") == 0) {

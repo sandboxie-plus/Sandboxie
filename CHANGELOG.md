@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.10 / 5.72.10] - 2026-07-04
+## [1.18.0 / 5.73.0] - 2026-07-12
 
 ### Added
 - added wildcard support for `RecoverFolder` and `AutoRecoverIgnore` patterns (`*`, `?`, `**`), matching across NT, DOS, and network-alias path forms in both DLL and SandMan [#3761](https://github.com/sandboxie-plus/Sandboxie/issues/3761) [#5318](https://github.com/sandboxie-plus/Sandboxie/issues/5318)
@@ -23,11 +23,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed "Close until all programs stop" permanently suspending recovery when clicked while no processes are running
 - fixed SandMan Immediate Recovery blinking without showing the recovery window when the new-file event path and scanned recovery path differed only by casing, such as `downloads` vs `Downloads`
 - improved SandMan responsiveness during Sbie message and notification floods by batching UI updates and reducing expensive per-row rendering
-- added workaround to chrome settings reset [#5184](https://github.com/sandboxie-plus/Sandboxie/issues/5184) [#5286](https://github.com/sandboxie-plus/Sandboxie/issues/5286) [#5180](https://github.com/sandboxie-plus/Sandboxie/issues/5180)
+- added workaround to chrome settings reset, it can be disabled with 'UseChromeSecurePreferencesHack=n' [#5184](https://github.com/sandboxie-plus/Sandboxie/issues/5184) [#5286](https://github.com/sandboxie-plus/Sandboxie/issues/5286) [#5180](https://github.com/sandboxie-plus/Sandboxie/issues/5180)
   - this is more of a hack than an elegant solution, we make IsOS(OS_DOMAINMEMBER) return true and when accessign the host's "Secure Preferences" force a migration into the sandbox and remove all "*_encrypted_hash" entries
-  - note: this only works for settings and extensions host credentials, cookies, passwords, etc remain unaccessible... from within the sandbox
+  - note: this only works for settings and extensions host credentials, cookies, passwords, etc. remain unaccessible... from within the sandbox
   - if this is requires a manual workaround is required reg add "HKLM\Software\Policies\Google\Chrome" /v ApplicationBoundEncryptionEnabled /t REG_DWORD /d 0 /f
   - adapted for MS Edge, SOFTWARE\Policies\Microsoft\Edge, Brave, etc...
+- fixed issue with DPAPI when running services as system in sandbox, this allows to access with chrome host credentials, cookies, passwords, etc. when sandboxed
+  - this requires to enable the elevation service to be sandboxed 'SandboxService=GoogleChromeElevationService' as system 'RunServicesAsSystem=y' and opening the SAM endpoint 'OpenSamEndpoint=y'
+  - there is also a convinient template 'Template=Chromium_Elevation'
+  - note: each crome derivative has a different service name like: MicrosoftEdgeElevationService, MicrosoftEdgeDevElevationService, MicrosoftCopilotElevationService, GoogleChromeElevationService, GoogleChromeDevElevationService, BraveElevationService
+
 
 
 ## [1.17.9 / 5.72.9] - 2026-06-15

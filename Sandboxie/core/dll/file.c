@@ -494,6 +494,7 @@ static volatile LONG File_ShortNameFallbackParentMissingCacheNext = 0;
 
 static CRITICAL_SECTION *File_ShortNameFallbackCache_CritSec = NULL;
 
+BOOLEAN Dll_UseChromeSecurePreferencesHack = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -3987,7 +3988,7 @@ ReparseLoop:
             // settings/extensions to be reset.
             //
 
-            if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME &&
+            if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && Dll_UseChromeSecurePreferencesHack &&
                     (DesiredAccess & FILE_DENIED_ACCESS) == 0) {
 
                 const WCHAR *filename = wcsrchr(TruePath, L'\\');

@@ -28,6 +28,7 @@
 
 #include <objbase.h>
 #include <userenv.h>
+#include <sddl.h>
 #include "core/dll/sbiedll.h"
 #include "misc.h"
 
@@ -693,6 +694,53 @@ void *ComServer::LockSlave(HANDLE idProcess, ULONG msgid)
                     idProcess, u.s.boxname, NULL, u.s.sid, &session_id);
     if (rc != 0)
         return NULL;
+
+    //
+    // SbieApi_QueryProcess returns the SID of the user who started the sandbox,
+    // but we need the actual SID of the process token for proper DPAPI routing.
+    // For example, elevation_service.exe runs as SYSTEM but the box was started
+    // by a normal user - we need to route its DPAPI calls to a SYSTEM slave.
+    //
+    // Token priority:
+    // 1. 'itok' - impersonation token (if thread is impersonating a user)
+    // 2. 'ptok' - original primary token (stored before token isolation)
+    // 3. Actual process token (for app compartment boxes without token isolation)
+    //
+
+    HANDLE TokenHandle = NULL;
+    ULONG idThread = PipeServer::GetCallerThreadId();
+
+    // Try impersonation token first (for cases like elevation_service impersonating user)
+    TokenHandle = (HANDLE)SbieApi_QueryProcessInfoEx(idProcess, 'itok', idThread);
+
+    // Fall back to primary token
+    if (!TokenHandle)
+        TokenHandle = (HANDLE)SbieApi_QueryProcessInfo(idProcess, 'ptok');
+
+    // Fall back to actual process token (app compartment boxes)
+    if (!TokenHandle) {
+        HANDLE ProcessHandle = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (ULONG)(ULONG_PTR)idProcess);
+        if (ProcessHandle) {
+            NtOpenProcessToken(ProcessHandle, TOKEN_QUERY, &TokenHandle);
+            CloseHandle(ProcessHandle);
+        }
+    }
+
+    if (TokenHandle) {
+        ULONG returnLength;
+        BYTE tokenUserBuff[0x80] = { 0 };
+        if (NT_SUCCESS(NtQueryInformationToken(TokenHandle, TokenUser,
+                tokenUserBuff, sizeof(tokenUserBuff), &returnLength))) {
+            PSID pSid = ((PTOKEN_USER)tokenUserBuff)->User.Sid;
+            WCHAR *pSidStr = NULL;
+            if (ConvertSidToStringSidW(pSid, &pSidStr)) {
+                wcsncpy(u.s.sid, pSidStr, 95);
+                u.s.sid[95] = L'\0';
+                LocalFree(pSidStr);
+            }
+        }
+        CloseHandle(TokenHandle);
+    }
 
     //
     // identify 32-bit or 64-bit process

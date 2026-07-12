@@ -5289,7 +5289,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
         <translation>Sandboxie-Plus - ablakkereső</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="210"/>
+        <location filename="main.cpp" line="215"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>A Sandboxie kezelő nem futhatható izolált módban!</translation>
     </message>

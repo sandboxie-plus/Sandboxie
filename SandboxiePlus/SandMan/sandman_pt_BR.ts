@@ -5768,7 +5768,7 @@ Do you want to disable Windows Updates scanning from the the software compatibil
         <translation>Sandboxie-Plus - Localizador de Janela</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="210"/>
+        <location filename="main.cpp" line="215"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>O Sandboxie Manager não pode ser executado com caixa de areia!</translation>
     </message>

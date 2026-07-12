@@ -12,6 +12,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added wildcard support for `RecoverFolder` and `AutoRecoverIgnore` patterns (`*`, `?`, `**`), matching across NT, DOS, and network-alias path forms in both DLL and SandMan [#3761](https://github.com/sandboxie-plus/Sandboxie/issues/3761) [#5318](https://github.com/sandboxie-plus/Sandboxie/issues/5318)
 - added `UseAutoRecoverIgnoreForQuick=[y|n]` to apply `AutoRecoverIgnore` patterns to the Quick Recovery window (default: enabled) [#5278](https://github.com/sandboxie-plus/Sandboxie/issues/5278)
+- added pending-change highlighting to SandMan Options and Settings dialogs; it indicates unapplied changes and not controls whose changes take effect immediately
+  - `Options/HighlightPendingChanges` (default: enabled), configurable in Global Settings > Interface Config > User Interface
 
 ### Changed
 - reworked the crash dump menchanism

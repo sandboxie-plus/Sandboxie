@@ -811,6 +811,7 @@ void COptionsWindow::OnOptChanged()
 {
 	if (m_HoldChange)
 		return;
+	m_PendingChanges.Update(sender(), m_pTree);
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
 }
 
@@ -1079,8 +1080,13 @@ void COptionsWindow::WriteGlobalCheck(QCheckBox* pCheck, const QString& Setting,
 void COptionsWindow::LoadConfig()
 {
 	m_ConfigDirty = false;
+	m_StartRadioBaselineLoaded = false;
 
 	m_HoldChange = true;
+	int iHighlightPendingChanges = theConf->GetInt("Options/HighlightPendingChanges", 2);
+	if (iHighlightPendingChanges == 2)
+		iHighlightPendingChanges = theConf->GetInt("Options/ViewMode", 1) != 2 ? 1 : 0;
+	m_PendingChanges.SetEnabled(iHighlightPendingChanges != 0, m_pTree);
 
 	LoadTemplates();
 
@@ -1111,6 +1117,10 @@ void COptionsWindow::LoadConfig()
 
 	// Update autocompletion after all settings are loaded
 	UpdateAutoCompletion();
+	m_PendingChanges.CaptureItemBaselines(m_pTree);
+	m_PendingChanges.CaptureCheckboxBaselines();
+	m_PendingChanges.CaptureRadioButtonBaselines();
+	m_PendingChanges.CaptureValueBaselines();
 
 	m_HoldChange = false;
 }
@@ -1453,6 +1463,13 @@ void COptionsWindow::UpdateCurrentTab()
 		CopyGroupToList("<StartRunAccessDisabled>", ui.treeStart, true);
 
 		OnRestrictStart();
+		m_PendingChanges.CaptureItemBaselines(m_pTree, ui.treeStart);
+		if (!m_StartRadioBaselineLoaded) {
+			m_PendingChanges.CaptureRadioButtonBaseline(ui.radStartAll);
+			m_PendingChanges.CaptureRadioButtonBaseline(ui.radStartExcept);
+			m_PendingChanges.CaptureRadioButtonBaseline(ui.radStartSelected);
+			m_StartRadioBaselineLoaded = true;
+		}
 	}
 	else if (m_pCurrentTab == ui.tabInternet || m_pCurrentTab == ui.tabINet || m_pCurrentTab == ui.tabNetConfig)
 	{

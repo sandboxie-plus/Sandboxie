@@ -974,6 +974,8 @@ void COptionsWindow::SaveOptionList()
 void COptionsWindow::AddOptionEntry(const QString& Name, QString Program, const QString& Value, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	if (!Template.isEmpty())
+		pItem->setData(0, COptionsWindow::PendingItemTemplateRole, true);
 
 	pItem->setText(0, Name + (Template.isEmpty() ? "" : " (" + Template + ")"));
 	pItem->setData(0, Qt::UserRole, !Template.isEmpty() ? "" : Name);
@@ -1016,6 +1018,7 @@ void COptionsWindow::OnAddOption()
 	QString Name = progDialog.value(); 
 
 	AddOptionEntry(Name, "", "");
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnDelOption()

@@ -3978,6 +3978,26 @@ ReparseLoop:
             // let the system work on the true file
             //
 
+            //
+            // $Workaround$ - 3rd party fix - Chrome-Fix
+            // Chrome's Secure Preferences file must be migrated even on
+            // read-only access, so we can strip the encrypted hash entries.
+            // Without this, Chrome reads the original file with encrypted
+            // hashes that can't be validated in the sandbox, causing
+            // settings/extensions to be reset.
+            //
+
+            if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME &&
+                    (DesiredAccess & FILE_DENIED_ACCESS) == 0) {
+
+                const WCHAR *filename = wcsrchr(TruePath, L'\\');
+                if (filename && _wcsicmp(filename, L"\\Secure Preferences") == 0) {
+
+                    // Force write access to trigger migration path
+                    DesiredAccess |= FILE_GENERIC_WRITE;
+                }
+            }
+
             if ((DesiredAccess & FILE_DENIED_ACCESS) == 0) {
 
                 if (TruePathColon)

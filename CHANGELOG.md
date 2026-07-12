@@ -23,7 +23,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed "Close until all programs stop" permanently suspending recovery when clicked while no processes are running
 - fixed SandMan Immediate Recovery blinking without showing the recovery window when the new-file event path and scanned recovery path differed only by casing, such as `downloads` vs `Downloads`
 - improved SandMan responsiveness during Sbie message and notification floods by batching UI updates and reducing expensive per-row rendering
-
+- added workaround to chrome settings reset [#5184](https://github.com/sandboxie-plus/Sandboxie/issues/5184) [#5286](https://github.com/sandboxie-plus/Sandboxie/issues/5286) [#5180](https://github.com/sandboxie-plus/Sandboxie/issues/5180)
+  - this is more of a hack than an elegant solution, we make IsOS(OS_DOMAINMEMBER) return true and when accessign the host's "Secure Preferences" force a migration into the sandbox and remove all "*_encrypted_hash" entries
+  - note: this only works for settings and extensions host credentials, cookies, passwords, etc remain unaccessible... from within the sandbox
+  - if this is requires a manual workaround is required reg add "HKLM\Software\Policies\Google\Chrome" /v ApplicationBoundEncryptionEnabled /t REG_DWORD /d 0 /f
+  - adapted for MS Edge, SOFTWARE\Policies\Microsoft\Edge, Brave, etc...
 
 
 ## [1.17.9 / 5.72.9] - 2026-06-15

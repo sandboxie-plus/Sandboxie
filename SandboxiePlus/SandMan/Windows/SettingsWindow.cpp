@@ -173,6 +173,13 @@ Qt::CheckState CSettingsWindow__Int2Chk(int state)
 	}
 }
 
+static bool CSettingsWindow__IsPendingHighlightEnabled(Qt::CheckState state)
+{
+	if (state == Qt::PartiallyChecked)
+		return theConf->GetInt("Options/ViewMode", 1) != 2;
+	return state == Qt::Checked;
+}
+
 quint32 g_FeatureFlags = 0;
 
 QByteArray g_Certificate;
@@ -1382,11 +1389,8 @@ void CSettingsWindow::LoadSettings()
 	ui.chkColorIcons->setChecked(theConf->GetBool("Options/ColorBoxIcons", false));
 	ui.chkOverlayIcons->setChecked(theConf->GetBool("Options/UseOverlayIcons", true));
 	ui.chkHideCore->setChecked(theConf->GetBool("Options/HideSbieProcesses", false));
-	int iHighlightPendingChanges = theConf->GetInt("Options/HighlightPendingChanges", 2);
-	ui.chkHighlightPendingChanges->setCheckState(CSettingsWindow__Int2Chk(iHighlightPendingChanges));
-	if (iHighlightPendingChanges == 2)
-		iHighlightPendingChanges = theConf->GetInt("Options/ViewMode", 1) != 2 ? 1 : 0;
-	m_PendingChanges.SetEnabled(iHighlightPendingChanges != 0, m_pTree);
+	ui.chkHighlightPendingChanges->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/HighlightPendingChanges", 2)));
+	m_PendingChanges.SetEnabled(CSettingsWindow__IsPendingHighlightEnabled(ui.chkHighlightPendingChanges->checkState()), m_pTree);
 	ui.cmbGrouping->setCurrentIndex(theConf->GetInt("Options/BoxGroupHandling", 0));
 	
 
@@ -2383,9 +2387,16 @@ void CSettingsWindow::OnOptChanged()
 	item = model->item(3);
 	item->setFlags((ui.cmbSysTray->currentIndex() != 0) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
 
+	if (sender() == ui.chkHighlightPendingChanges) {
+		m_PendingChanges.SetEnabled(CSettingsWindow__IsPendingHighlightEnabled(ui.chkHighlightPendingChanges->checkState()), m_pTree);
+		if (!m_HoldChange)
+			m_PendingChanges.UpdateAll(m_pTree);
+	}
+	else if (!m_HoldChange)
+		m_PendingChanges.Update(sender(), m_pTree);
+
 	if (m_HoldChange)
 		return;
-	m_PendingChanges.Update(sender(), m_pTree);
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
 }
 
@@ -2422,6 +2433,7 @@ void CSettingsWindow::OnLoadAddon()
 		connect(pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 		ui.treeAddons->setItemWidget(pItem, 3, pLabel);
 	}
+	m_PendingChanges.CaptureItemBaselines(m_pTree, ui.treeAddons);
 }
 
 void CSettingsWindow::OnInstallAddon()

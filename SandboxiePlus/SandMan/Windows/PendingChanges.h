@@ -318,18 +318,28 @@ public:
 		UpdateValueHighlights();
 	}
 
+	void UpdateAll(QTreeWidget* pExcludedTree)
+	{
+		if (!m_bEnabled)
+			return;
+
+		UpdateItemHighlights(pExcludedTree);
+		UpdateCheckboxHighlights();
+		UpdateRadioButtonHighlights();
+		UpdateValueHighlights(true);
+	}
+
 private:
 	enum EItemState { eNone, eAdded, eEdited };
 	enum { ItemBaselineRole = Qt::UserRole + 110, ItemStateRole = Qt::UserRole + 111, ItemBackgroundRole = Qt::UserRole + 112 };
 	static constexpr const char* CheckboxBaselineProperty = "pending_checkbox_baseline";
-	static constexpr const char* CheckboxPaletteProperty = "pending_checkbox_palette";
-	static constexpr const char* CheckboxAutoFillProperty = "pending_checkbox_auto_fill";
 	static constexpr const char* CheckboxPaintFilterProperty = "pending_checkbox_paint_filter";
 	static constexpr const char* RadioBaselineProperty = "pending_radio_baseline";
-	static constexpr const char* RadioPaletteProperty = "pending_radio_palette";
-	static constexpr const char* RadioAutoFillProperty = "pending_radio_auto_fill";
 	static constexpr const char* RadioPaintFilterProperty = "pending_radio_paint_filter";
 	static constexpr const char* RadioConnectionProperty = "pending_radio_connection";
+	static constexpr const char* ButtonPaletteProperty = "pending_button_palette";
+	static constexpr const char* ButtonAutoFillProperty = "pending_button_auto_fill";
+	static constexpr const char* ButtonColorProperty = "pending_button_color";
 	static constexpr const char* ValueBaselineProperty = "pending_value_baseline";
 	static constexpr const char* ValuePaletteProperty = "pending_value_palette";
 	static constexpr const char* ValueAutoFillProperty = "pending_value_auto_fill";
@@ -524,30 +534,7 @@ private:
 
 	void SetCheckboxHighlight(QCheckBox* pCheck, bool bPending)
 	{
-		if (bPending) {
-			if (!pCheck->property(CheckboxPaletteProperty).isValid()) {
-				pCheck->setProperty(CheckboxPaletteProperty, QVariant::fromValue(pCheck->palette()));
-				pCheck->setProperty(CheckboxAutoFillProperty, pCheck->autoFillBackground());
-			}
-			QPalette Palette = pCheck->palette();
-			QColor Color = PendingColor(Palette, QPalette::Window);
-			Palette.setColor(QPalette::Active, QPalette::Window, Color);
-			Palette.setColor(QPalette::Inactive, QPalette::Window, Color);
-			pCheck->setPalette(Palette);
-			pCheck->setAutoFillBackground(true);
-			pCheck->setProperty("pending_button_color", Color);
-			pCheck->update();
-		}
-		else if (pCheck->property(CheckboxPaletteProperty).isValid()) {
-			pCheck->setPalette(QPalette());
-			pCheck->setAutoFillBackground(pCheck->property(CheckboxAutoFillProperty).toBool());
-			pCheck->setProperty(CheckboxPaletteProperty, QVariant());
-			pCheck->setProperty(CheckboxAutoFillProperty, QVariant());
-			pCheck->setProperty("pending_button_color", QVariant());
-			pCheck->style()->unpolish(pCheck);
-			pCheck->style()->polish(pCheck);
-			pCheck->update();
-		}
+		SetButtonHighlight(pCheck, bPending);
 	}
 
 	void UpdateCheckboxHighlight(QObject* pSource)
@@ -558,32 +545,18 @@ private:
 			SetCheckboxHighlight(pCheck, Baseline.toInt() != (int)pCheck->checkState());
 	}
 
+	void UpdateCheckboxHighlights()
+	{
+		foreach(QCheckBox* pCheck, m_pRoot->findChildren<QCheckBox*>()) {
+			QVariant Baseline = pCheck->property(CheckboxBaselineProperty);
+			if (Baseline.isValid())
+				SetCheckboxHighlight(pCheck, Baseline.toInt() != (int)pCheck->checkState());
+		}
+	}
+
 	void SetRadioButtonHighlight(QRadioButton* pRadio, bool bPending)
 	{
-		if (bPending) {
-			if (!pRadio->property(RadioPaletteProperty).isValid()) {
-				pRadio->setProperty(RadioPaletteProperty, QVariant::fromValue(pRadio->palette()));
-				pRadio->setProperty(RadioAutoFillProperty, pRadio->autoFillBackground());
-			}
-			QPalette Palette = pRadio->palette();
-			QColor Color = PendingColor(Palette, QPalette::Window);
-			Palette.setColor(QPalette::Active, QPalette::Window, Color);
-			Palette.setColor(QPalette::Inactive, QPalette::Window, Color);
-			pRadio->setPalette(Palette);
-			pRadio->setAutoFillBackground(true);
-			pRadio->setProperty("pending_button_color", Color);
-			pRadio->update();
-		}
-		else if (pRadio->property(RadioPaletteProperty).isValid()) {
-			pRadio->setPalette(QPalette());
-			pRadio->setAutoFillBackground(pRadio->property(RadioAutoFillProperty).toBool());
-			pRadio->setProperty(RadioPaletteProperty, QVariant());
-			pRadio->setProperty(RadioAutoFillProperty, QVariant());
-			pRadio->setProperty("pending_button_color", QVariant());
-			pRadio->style()->unpolish(pRadio);
-			pRadio->style()->polish(pRadio);
-			pRadio->update();
-		}
+		SetButtonHighlight(pRadio, bPending);
 	}
 
 	void UpdateRadioButtonHighlights()
@@ -669,8 +642,6 @@ private:
 			if (QComboBox* pCombo = qobject_cast<QComboBox*>(pControl)) {
 				if (!pCombo->isEditable()) {
 					pCombo->setProperty(ValueComboColorProperty, ButtonColor);
-					pCombo->setStyleSheet(pControl->property(ValueStyleProperty).toString()
-						+ "\nbackground-color: " + BaseColor.name() + ";");
 				}
 				else if (QLineEdit* pLineEdit = pCombo->lineEdit()) {
 					QPalette LineEditPalette = pLineEdit->palette();
@@ -829,19 +800,52 @@ private:
 		}
 	}
 
-	void UpdateValueHighlights()
+	void UpdateValueHighlights(bool bAll = false)
 	{
 		foreach(QComboBox* pCombo, m_pRoot->findChildren<QComboBox*>())
-			if (!IsValueExcluded(pCombo) && pCombo->property(ValuePaletteProperty).isValid()) UpdateValueHighlight(pCombo);
+			if (!IsValueExcluded(pCombo) && (bAll || pCombo->property(ValuePaletteProperty).isValid())) UpdateValueHighlight(pCombo);
 		foreach(QAbstractSpinBox* pSpinBox, m_pRoot->findChildren<QAbstractSpinBox*>())
-			if (!IsValueExcluded(pSpinBox) && pSpinBox->property(ValuePaletteProperty).isValid()) UpdateValueHighlight(pSpinBox);
+			if (!IsValueExcluded(pSpinBox) && (bAll || pSpinBox->property(ValuePaletteProperty).isValid())) UpdateValueHighlight(pSpinBox);
 		foreach(QLineEdit* pLineEdit, m_pRoot->findChildren<QLineEdit*>())
-			if (!IsComboLineEdit(pLineEdit) && !IsValueExcluded(pLineEdit) && pLineEdit->property(ValuePaletteProperty).isValid()) UpdateValueHighlight(pLineEdit);
+			if (!IsComboLineEdit(pLineEdit) && !IsValueExcluded(pLineEdit) && (bAll || pLineEdit->property(ValuePaletteProperty).isValid())) UpdateValueHighlight(pLineEdit);
 		foreach(QPlainTextEdit* pTextEdit, m_pRoot->findChildren<QPlainTextEdit*>())
-			if (!IsValueExcluded(pTextEdit) && pTextEdit->property(ValuePaletteProperty).isValid()) UpdateValueHighlight(pTextEdit);
+			if (!IsValueExcluded(pTextEdit) && (bAll || pTextEdit->property(ValuePaletteProperty).isValid())) UpdateValueHighlight(pTextEdit);
 		if (m_bTrackKeySequences)
 			foreach(QKeySequenceEdit* pKeyEdit, m_pRoot->findChildren<QKeySequenceEdit*>())
-				if (!IsValueExcluded(pKeyEdit) && pKeyEdit->property(ValuePaletteProperty).isValid()) UpdateValueHighlight(pKeyEdit);
+				if (!IsValueExcluded(pKeyEdit) && (bAll || pKeyEdit->property(ValuePaletteProperty).isValid())) UpdateValueHighlight(pKeyEdit);
+	}
+
+	void SetButtonHighlight(QAbstractButton* pButton, bool bPending)
+	{
+		if (bPending) {
+			QPalette BasePalette = pButton->palette();
+			if (!pButton->property(ButtonPaletteProperty).isValid()) {
+				pButton->setProperty(ButtonPaletteProperty, QVariant::fromValue(BasePalette));
+				pButton->setProperty(ButtonAutoFillProperty, pButton->autoFillBackground());
+			}
+			else {
+				BasePalette = pButton->property(ButtonPaletteProperty).value<QPalette>();
+			}
+
+			QPalette Palette = BasePalette;
+			QColor Color = PendingColor(BasePalette, QPalette::Window);
+			Palette.setColor(QPalette::Active, QPalette::Window, Color);
+			Palette.setColor(QPalette::Inactive, QPalette::Window, Color);
+			pButton->setPalette(Palette);
+			pButton->setAutoFillBackground(true);
+			pButton->setProperty(ButtonColorProperty, Color);
+			pButton->update();
+		}
+		else if (pButton->property(ButtonPaletteProperty).isValid()) {
+			pButton->setPalette(pButton->property(ButtonPaletteProperty).value<QPalette>());
+			pButton->setAutoFillBackground(pButton->property(ButtonAutoFillProperty).toBool());
+			pButton->setProperty(ButtonPaletteProperty, QVariant());
+			pButton->setProperty(ButtonAutoFillProperty, QVariant());
+			pButton->setProperty(ButtonColorProperty, QVariant());
+			pButton->style()->unpolish(pButton);
+			pButton->style()->polish(pButton);
+			pButton->update();
+		}
 	}
 
 	QWidget* m_pRoot;

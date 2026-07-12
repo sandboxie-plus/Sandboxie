@@ -5296,7 +5296,7 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
         <translation>Sandboxie-Plus - Pencari Jendela</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="210"/>
+        <location filename="main.cpp" line="215"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie Manager tidak dapat dijalankan di dalam sandbox!</translation>
     </message>

@@ -5286,7 +5286,7 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
         <translation>Sandboxie-Plus - Vindue Finder</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="210"/>
+        <location filename="main.cpp" line="215"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie Manager kan ikke kjøres sandkasse!</translation>
     </message>

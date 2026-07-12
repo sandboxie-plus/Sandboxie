@@ -5201,7 +5201,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation></translation>
     </message>
     <message>
-        <location filename="main.cpp" line="210"/>
+        <location filename="main.cpp" line="215"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation></translation>
     </message>

@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - changed SandMan auto-delete recovery to reuse an already open recovery dialog as the delete decision dialog, regardless of filter state, instead of closing it or silently continuing with box deletion
 
 ### Fixed
+- fixed Win32 process image path queries returning sandboxed paths, which could reveal that a process was running sandboxed [#5437](https://github.com/sandboxie-plus/Sandboxie/pull/5437)
 - fixed expected non-user SID profile and shell lookup noise by suppressing matching SBIE1406/SBIE1412 and derivative SBIE1204 FileRootPath messages [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
 - fixed NT device path (`\Device\LanmanRedirector\...`) shown in popup notification instead of UNC form, causing garbled display and wrong recovery target [#711](https://github.com/sandboxie-plus/Sandboxie/issues/711)
 - fixed "Close until all programs stop" permanently suspending recovery when clicked while no processes are running

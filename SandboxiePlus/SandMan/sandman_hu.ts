@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="hu_HU"> 
+<TS version="2.1" language="hu_HU">
 <context>
     <name>BoxImageWindow</name>
     <message>
@@ -478,7 +478,7 @@ Ez a hosszúság körülbelül 384 bites entrópiát tesz lehetővé egy valódi
     </message>
     <message>
         <source>Select file name</source>
-        <translation>Fájlnév kiválasztása</translation>
+        <translation type="vanished">Fájlnév kiválasztása</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="647"/>
@@ -531,7 +531,7 @@ Ez a hosszúság körülbelül 384 bites entrópiát tesz lehetővé egy valódi
     <message>
         <location filename="BoxTransfer.cpp" line="553"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
-        <translation>A titkosított sandbox ('%1') nincs csatolva. Kihagyja?</translation>
+        <translation>A titkosított sandbox (&apos;%1&apos;) nincs csatolva. Kihagyja?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="564"/>
@@ -596,7 +596,7 @@ Ez a hosszúság körülbelül 384 bites entrópiát tesz lehetővé egy valódi
     </message>
     <message>
         <source>Failed to open archive (%1)!</source>
-        <translation>Nem sikerült megnyitni az archívumot (%1)!</translation>
+        <translation type="vanished">Nem sikerült megnyitni az archívumot (%1)!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1066"/>
@@ -1607,19 +1607,19 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
     <message>
         <source>Advanced</source>
-        <translation>Speciális</translation>
+        <translation type="vanished">Speciális</translation>
     </message>
     <message>
         <source>Debug</source>
-        <translation>Hibakeresés</translation>
+        <translation type="vanished">Hibakeresés</translation>
     </message>
     <message>
         <source>Program Control</source>
-        <translation>Programvezérlés</translation>
+        <translation type="vanished">Programvezérlés</translation>
     </message>
     <message>
         <source>Resource Access</source>
-        <translation>Erőforrás hozzáférés</translation>
+        <translation type="vanished">Erőforrás hozzáférés</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1675"/>
@@ -2235,39 +2235,39 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="380"/>
-        <location filename="Windows/OptionsForce.cpp" line="307"/>
-        <location filename="Windows/OptionsForce.cpp" line="318"/>
+        <location filename="Windows/OptionsForce.cpp" line="311"/>
+        <location filename="Windows/OptionsForce.cpp" line="322"/>
         <location filename="Windows/OptionsRecovery.cpp" line="130"/>
         <location filename="Windows/OptionsRecovery.cpp" line="141"/>
         <source>Select Directory</source>
         <translation>Könyvtár kiválasztása</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1382"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1392"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="984"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1058"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="986"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1061"/>
         <location filename="Windows/OptionsGeneral.cpp" line="683"/>
         <location filename="Windows/OptionsGeneral.cpp" line="779"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="639"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="733"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="846"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="1050"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="1289"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="641"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="735"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="848"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="1052"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="1291"/>
         <source>All Programs</source>
         <translation>Minden program</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1380"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1398"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1390"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1408"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="688"/>
         <location filename="Windows/OptionsGeneral.cpp" line="783"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="356"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="644"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="737"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="358"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="646"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="739"/>
         <source>Group: %1</source>
         <translation>Csoport: %1</translation>
     </message>
@@ -2298,11 +2298,11 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="628"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1034"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1037"/>
         <location filename="Windows/OptionsGeneral.cpp" line="750"/>
-        <location filename="Windows/OptionsGrouping.cpp" line="234"/>
-        <location filename="Windows/OptionsGrouping.cpp" line="258"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="712"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="236"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="260"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="714"/>
         <source>Template values can not be edited.</source>
         <translation>A sablonértékek nem szerkeszthetők.</translation>
     </message>
@@ -2397,161 +2397,161 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
         <translation>%</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1005"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1007"/>
         <source>Add special option:</source>
         <translation>Speciális opció hozzáadása:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1153"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1157"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1156"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1160"/>
         <source>On Start</source>
         <translation>Indításkor</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1154"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1162"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1166"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1170"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1174"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1157"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1165"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1169"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1173"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1177"/>
         <source>Run Command</source>
         <translation>Parancs futtatása</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1158"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1161"/>
         <source>Start Service</source>
         <translation>Szolgáltatás indítása</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1161"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1164"/>
         <source>On Init</source>
         <translation>Inicializáskor</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1165"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1168"/>
         <source>On File Recovery</source>
         <translation>Fájl helyreállításakor</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1169"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1172"/>
         <source>On Delete Content</source>
         <translation>Tartalom törlésekor</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1173"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1176"/>
         <source>On Terminate</source>
         <translation>Leállításkor</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1187"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1207"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1217"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1227"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1237"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1190"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1210"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1220"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1230"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1240"/>
         <source>Please enter the command line to be executed</source>
         <translation>Kérjük, írja be a végrehajtandó parancssort</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1271"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1274"/>
         <source>Please enter a program file name to allow access to this sandbox</source>
         <translation>Kérjük, adjon meg egy programfájlnevet, hogy engedélyezze a hozzáférést ehhez a homokozóhoz</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1282"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1285"/>
         <source>Please enter a program file name to deny access to this sandbox</source>
         <translation>Kérjük, adjon meg egy programfájlnevet, hogy letiltsa a hozzáférést ehhez a homokozóhoz</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1362"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1365"/>
         <source>Deny</source>
         <translation>Tagadás</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1465"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1468"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1520"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1523"/>
         <source>Global</source>
         <translation>Globális</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1521"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1524"/>
         <source>Template</source>
         <translation>Sablon</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1572"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1575"/>
         <source>Failed to retrieve firmware table information.</source>
         <translation>Nem sikerült lekérni a firmware-táblázat adatait.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1580"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1583"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
         <translation>A firmware-tábla sikeresen mentve a gazdagép-nyilvántartásba: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;átmásolhatja a homokozó-nyilvántartásba, hogy minden egyes homokozóhoz más-más értéket kapjon.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="131"/>
-        <location filename="Windows/OptionsForce.cpp" line="149"/>
+        <location filename="Windows/OptionsForce.cpp" line="133"/>
+        <location filename="Windows/OptionsForce.cpp" line="153"/>
         <source>Process</source>
         <translation>Folyamat</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="132"/>
-        <location filename="Windows/OptionsForce.cpp" line="150"/>
+        <location filename="Windows/OptionsForce.cpp" line="134"/>
+        <location filename="Windows/OptionsForce.cpp" line="154"/>
         <source>Folder</source>
         <translation>Mappa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="133"/>
+        <location filename="Windows/OptionsForce.cpp" line="135"/>
         <source>Children</source>
         <translation>Gyermek folyamatok</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="151"/>
+        <location filename="Windows/OptionsForce.cpp" line="155"/>
         <source>Document</source>
         <translation>Dokumentum</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="265"/>
-        <location filename="Windows/OptionsForce.cpp" line="276"/>
-        <location filename="Windows/OptionsForce.cpp" line="296"/>
+        <location filename="Windows/OptionsForce.cpp" line="269"/>
+        <location filename="Windows/OptionsForce.cpp" line="280"/>
+        <location filename="Windows/OptionsForce.cpp" line="300"/>
         <source>Select Executable File</source>
         <translation>Futtatható fájl kiválasztása</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="265"/>
-        <location filename="Windows/OptionsForce.cpp" line="276"/>
-        <location filename="Windows/OptionsForce.cpp" line="296"/>
+        <location filename="Windows/OptionsForce.cpp" line="269"/>
+        <location filename="Windows/OptionsForce.cpp" line="280"/>
+        <location filename="Windows/OptionsForce.cpp" line="300"/>
         <source>Executable Files (*.exe)</source>
         <translation>Futtatható fájlok (*.exe)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="327"/>
+        <location filename="Windows/OptionsForce.cpp" line="331"/>
         <source>Select Document Directory</source>
         <translation>Dokumentumkönyvtár kiválasztása</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="331"/>
+        <location filename="Windows/OptionsForce.cpp" line="335"/>
         <source>Please enter Document File Extension.</source>
         <translation>Kérjük, adja meg a dokumentumfájl kiterjesztését.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="341"/>
+        <location filename="Windows/OptionsForce.cpp" line="345"/>
         <source>For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets.</source>
         <oldsource>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</oldsource>
         <translation>Biztonsági okokból nem lehet teljesen helyettesítő karakteres &apos;BreakoutDocument&apos; előbeállításokat létrehozni.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="351"/>
+        <location filename="Windows/OptionsForce.cpp" line="355"/>
         <source>For security reasons the specified extension %1 should not be broken out.</source>
         <translation>Biztonsági okokból a megadott %1 kiterjesztést nem szabad kitörni.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="408"/>
+        <location filename="Windows/OptionsForce.cpp" line="412"/>
         <source>Forcing the specified entry will most likely break Windows, are you sure you want to proceed?</source>
         <oldsource>Forcing the specified folder will most likely break Windows, are you sure you want to proceed?</oldsource>
-        <translation>A megadott bejegyzés kényszerítése nagy valószínűséggel tönkreteszi a Windows rendszert. Biztosan folytatja?</translation>		
+        <translation>A megadott bejegyzés kényszerítése nagy valószínűséggel tönkreteszi a Windows rendszert. Biztosan folytatja?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
@@ -2586,7 +2586,7 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
     </message>
     <message>
         <source>Always show</source>
-        <translation>Mindig látható</translation>
+        <translation type="vanished">Mindig látható</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="68"/>
@@ -2787,7 +2787,7 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
         <translation>Képfejléc visszaállítva</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1197"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1200"/>
         <source>Please enter a service identifier</source>
         <translation>Kérjük, adja meg a szolgáltatás azonosítót</translation>
     </message>
@@ -2808,36 +2808,36 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
         <translation>Kérjük, adjon meg egy parancsot</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGrouping.cpp" line="141"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="143"/>
         <source>Please enter a name for the new group</source>
         <translation>Kérjük, adja meg az új csoport nevét</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGrouping.cpp" line="229"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="231"/>
         <source>Please select group first.</source>
         <translation>Kérjük, először válasszon csoportot.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="55"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="767"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="769"/>
         <source>Any</source>
         <translation>Bármilyen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="56"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="768"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="770"/>
         <source>TCP</source>
         <translation>TCP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="57"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="769"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="771"/>
         <source>UDP</source>
         <translation>UDP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="58"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="770"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="772"/>
         <source>ICMP</source>
         <translation>ICMP</translation>
     </message>
@@ -2862,55 +2862,55 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
         <translation>Letiltás a hálózati eszközökhöz való hozzáférés megtagadásával</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="939"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="941"/>
         <source>Please enter a domain to be filtered</source>
         <translation>Kérjük, adjon meg egy szűrni kívánt domaint</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="969"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="971"/>
         <source>Yes</source>
         <translation>Igen</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="970"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="972"/>
         <source>No</source>
         <translation>Nem</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="994"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="996"/>
         <source>Please enter IP and Port.</source>
         <translation>Kérjük, adja meg az IP-címet és a portot.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="1176"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="1178"/>
         <source>Entry %1 : IP or Port cannot be empty</source>
         <oldsource> entry: IP or Port cannot be empty</oldsource>
         <translation> %1 bejegyzés: az IP vagy a Port nem lehet üres</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1362"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="334"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="753"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1365"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="336"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="755"/>
         <source>Allow</source>
         <translation>Engedélyezés</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="335"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="337"/>
         <source>Block (WFP)</source>
         <translation>Letiltás (WFP)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="336"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="338"/>
         <source>Block (NDev)</source>
         <translation>Letiltás (NDev)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="444"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="446"/>
         <source>A non empty program name is required.</source>
         <translation>Egy nem üres programnév szükséges.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="754"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="756"/>
         <source>Block</source>
         <translation>Letiltás</translation>
     </message>
@@ -2975,32 +2975,32 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
         <translation>Torrent kliens</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="151"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="155"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
         <translation>Ez a sablon globálisan engedélyezett. A konfiguráláshoz használja a globális beállításokat.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="187"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="191"/>
         <source>Please enter the template identifier</source>
         <translation>Kérjük, adja meg a sablon azonosítóját</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="195"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="199"/>
         <source>Error: %1</source>
         <translation>Hiba: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="229"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="233"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Biztosan törli a kiválasztott helyi sablon(oka)t?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="235"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="239"/>
         <source>Only local templates can be removed!</source>
         <translation>Csak helyi sablonokat lehet eltávolítani!</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="290"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="294"/>
         <source>An alternate location for &apos;%1&apos;
 should contain the following file:
 
@@ -3042,52 +3042,52 @@ Kérjük, válasszon egy mappát, amely ezt a fájlt tartalmazza.</translation>
         <translation>Opciók keresése</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1058"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1059"/>
         <source>Box: %1</source>
         <translation>Homokozó: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1059"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1060"/>
         <source>Template: %1</source>
         <translation>Sablon: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1060"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1061"/>
         <source>Global: %1</source>
         <translation>Global: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1061"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1062"/>
         <source>Default: %1</source>
         <translation>Alapértelmezett: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1278"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1288"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Ezt a homokozót törölték, ezért a konfiguráció nem menthető.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1342"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1352"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Néhány módosítás még nem került mentésre. Biztosan bezárja ezt a beállítási ablakot?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1391"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1401"/>
         <source>Enter program:</source>
         <translation>Programm megadása:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1831"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1848"/>
         <source>Autocomplete Consent Required</source>
         <translation>Automatikus kiegészítés hozzájárulása szükséges</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1833"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1850"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>Az automatikus kiegészítés funkció folytatásához az Ön hozzájárulása szükséges</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1835"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1852"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -3100,32 +3100,32 @@ Automatikus kiegészítési mód kiválasztása:
 %1 gépelés közben: javaslatok automatikus kiegészítése gépelés közben.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1843"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1860"/>
         <source>Manual</source>
         <translation>Manuális</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1844"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1861"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>Automatikus kiegészítési javaslatokat indít el a következővel: %1.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1846"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
         <source>While Typing</source>
         <translation>Beírás közben</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1847"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1864"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>Automatikus kiegészítési javaslatokat indít gépelés közben.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1850"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1867"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>Az automatikus kiegészítési javaslatokat letiltva tartja.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1849"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1866"/>
         <source>Cancel</source>
         <translation>Mégse</translation>
     </message>
@@ -3525,7 +3525,7 @@ Teljes útvonal: %4</translation>
         <location filename="Wizards/BoxAssistant.cpp" line="728"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
         <oldsource>Somethign failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</oldsource>
-         <translation>Valami belső hiba történt, ez a hibaelhárítási eljárás nem folytatható. Hibajelentés elküldéséhez kattintson a &quot;Tovább&quot; gombra.</translation>
+        <translation>Valami belső hiba történt, ez a hibaelhárítási eljárás nem folytatható. Hibajelentés elküldéséhez kattintson a &quot;Tovább&quot; gombra.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="729"/>
@@ -4305,7 +4305,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     </message>
     <message>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation>Néhány kompabilitási sablon (%1) hiányzik, feltehetően törlésre kerültek. Eltávolítja őket minden homokozóbl?</translation>
+        <translation type="vanished">Néhány kompabilitási sablon (%1) hiányzik, feltehetően törlésre kerültek. Eltávolítja őket minden homokozóbl?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2357"/>
@@ -4531,7 +4531,7 @@ Nem választás: %2</translation>
     </message>
     <message>
         <source>Import Box</source>
-        <translation>Homokozó importálása</translation>
+        <translation type="vanished">Homokozó importálása</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="849"/>
@@ -4613,7 +4613,7 @@ Nem választás: %2</translation>
     </message>
     <message>
         <source>Import Sandbox</source>
-        <translation>Homokozó importálása</translation>
+        <translation type="vanished">Homokozó importálása</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1085"/>
@@ -5564,7 +5564,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <source> (%1)</source>
-        <translation> (%1)</translation>
+        <translation type="vanished"> (%1)</translation>
     </message>
 </context>
 <context>
@@ -5923,7 +5923,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <source>Import Box</source>
-        <translation>Homokozó importálása</translation>
+        <translation type="vanished">Homokozó importálása</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="196"/>
@@ -5966,7 +5966,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <source>Export Box</source>
-        <translation>Homokozó exportálása</translation>
+        <translation type="vanished">Homokozó exportálása</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="275"/>
@@ -6098,15 +6098,15 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <source>Failed to open archive, wrong password?</source>
-        <translation>Nem sikerült megnyitni az archívumot. Rossz jelszó?</translation>
+        <translation type="vanished">Nem sikerült megnyitni az archívumot. Rossz jelszó?</translation>
     </message>
     <message>
         <source>Failed to open archive (%1)!</source>
-        <translation>Nem sikerült megnyitni az archívumot (%1) !</translation>
+        <translation type="vanished">Nem sikerült megnyitni az archívumot (%1) !</translation>
     </message>
     <message>
         <source>Importing: %1</source>
-        <translation>Importálás: %1</translation>
+        <translation type="vanished">Importálás: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1407"/>
@@ -6140,7 +6140,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation>FIGYELEM: a megnyitott rendszerleíróadatbázis-szerkesztő nincs a homokozóban. Legyen óvatos, és csak az előre kiválasztott homokozó helyeken végezzen változtatásokat.</translation>
+        <translation type="vanished">FIGYELEM: a megnyitott rendszerleíróadatbázis-szerkesztő nincs a homokozóban. Legyen óvatos, és csak az előre kiválasztott homokozó helyeken végezzen változtatásokat.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1581"/>
@@ -6175,11 +6175,11 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <source>Select file name</source>
-        <translation>Fájlnév kiválasztása</translation>
+        <translation type="vanished">Fájlnév kiválasztása</translation>
     </message>
     <message>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation>7-zip archívum (*.7z);;Zip archívum (*.zip)</translation>
+        <translation type="vanished">7-zip archívum (*.7z);;Zip archívum (*.zip)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1447"/>
@@ -6209,24 +6209,24 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <source>Exporting: %1</source>
-        <translation>Exportálás: %1</translation>
+        <translation type="vanished">Exportálás: %1</translation>
     </message>
     <message>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation>Kérjük, adja meg a homokozó új nevét.</translation>
+        <translation type="vanished">Kérjük, adja meg a homokozó új nevét.</translation>
     </message>
     <message>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation>Kérjük, adjon meg egy új aliast a homokozó számára.</translation>
+        <translation type="vanished">Kérjük, adjon meg egy új aliast a homokozó számára.</translation>
     </message>
     <message>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
-        <translation>A beírt név érvénytelen, beállítja helyette aliasként?</translation>
+        <translation type="vanished">A beírt név érvénytelen, beállítja helyette aliasként?</translation>
     </message>
     <message>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation>Biztos benne, hogy eltávolítja a kiválasztott homokozó(ka)t?&lt;br /&gt;&lt;br /&gt;Figyelem: a homokozó tartalma is törlődik!</translation>
+        <translation type="vanished">Biztos benne, hogy eltávolítja a kiválasztott homokozó(ka)t?&lt;br /&gt;&lt;br /&gt;Figyelem: a homokozó tartalma is törlődik!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1836"/>
@@ -6235,7 +6235,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation>Törli a kijelölt homokozó tartalmát?</translation>
+        <translation type="vanished">Törli a kijelölt homokozó tartalmát?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1853"/>
@@ -6245,7 +6245,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation>Az összes kiválasztott homokozó tartalmát is törli?</translation>
+        <translation type="vanished">Az összes kiválasztott homokozó tartalmát is törli?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1897"/>
@@ -6332,417 +6332,417 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
 <context>
     <name>CSettingsWindow</name>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="198"/>
+        <location filename="Windows/SettingsWindow.cpp" line="205"/>
         <source>Sandboxie Plus - Global Settings</source>
         <oldsource>Sandboxie Plus - Settings</oldsource>
         <translation>Sandboxie-Plus - általános beállítások</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="300"/>
+        <location filename="Windows/SettingsWindow.cpp" line="307"/>
         <source>Auto Detection</source>
         <translation>Automatikus érzékelés</translation>
     </message>
     <message>
         <source>No Translation</source>
-        <translation>Nincs fordítás</translation>
+        <translation type="vanished">Nincs fordítás</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="320"/>
-        <location filename="Windows/SettingsWindow.cpp" line="324"/>
+        <location filename="Windows/SettingsWindow.cpp" line="327"/>
+        <location filename="Windows/SettingsWindow.cpp" line="331"/>
         <source>Don&apos;t integrate links</source>
         <translation>Ne integráljon linkeket</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="321"/>
-        <location filename="Windows/SettingsWindow.cpp" line="325"/>
+        <location filename="Windows/SettingsWindow.cpp" line="328"/>
+        <location filename="Windows/SettingsWindow.cpp" line="332"/>
         <source>As sub group</source>
         <translation>Alcsoportként</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="322"/>
-        <location filename="Windows/SettingsWindow.cpp" line="326"/>
+        <location filename="Windows/SettingsWindow.cpp" line="329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="333"/>
         <source>Fully integrate</source>
         <translation>Teljes integrálás</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="328"/>
+        <location filename="Windows/SettingsWindow.cpp" line="335"/>
         <source>Don&apos;t show any icon</source>
         <oldsource>Don&apos;t integrate links</oldsource>
         <translation>Ne jelenjen meg ikon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="336"/>
         <source>Show Plus icon</source>
         <translation>Plus ikon megjelenítése</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="337"/>
         <source>Show Classic icon</source>
         <translation>Klasszikus ikon megjelenítése</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="332"/>
+        <location filename="Windows/SettingsWindow.cpp" line="339"/>
         <source>All Boxes</source>
         <translation>Minden homokozó</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="333"/>
+        <location filename="Windows/SettingsWindow.cpp" line="340"/>
         <source>Active + Pinned</source>
         <translation>Aktív + kitűzött</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="334"/>
+        <location filename="Windows/SettingsWindow.cpp" line="341"/>
         <source>Pinned Only</source>
         <translation>Csak a kitűzött</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="338"/>
+        <location filename="Windows/SettingsWindow.cpp" line="345"/>
         <source>Close to Tray</source>
         <translation>Bezárás a tálcára</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="339"/>
+        <location filename="Windows/SettingsWindow.cpp" line="346"/>
         <source>Prompt before Close</source>
         <translation>Kérdés bezárás előtt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="347"/>
         <source>Close</source>
         <translation>Bezárás</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="348"/>
         <source>Hide (Run invisible in Background)</source>
         <translation>Elrejtés (futtatás a háttérben láthatatlanul)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="430"/>
+        <location filename="Windows/SettingsWindow.cpp" line="437"/>
         <source>None</source>
         <translation>Nincs</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="431"/>
+        <location filename="Windows/SettingsWindow.cpp" line="438"/>
         <source>Native</source>
         <translation>Natív</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="432"/>
+        <location filename="Windows/SettingsWindow.cpp" line="439"/>
         <source>Qt</source>
         <translation>Qt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="434"/>
+        <location filename="Windows/SettingsWindow.cpp" line="441"/>
         <source>Every Day</source>
         <translation>Minden nap</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="435"/>
+        <location filename="Windows/SettingsWindow.cpp" line="442"/>
         <source>Every Week</source>
         <translation>Hetente</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="436"/>
+        <location filename="Windows/SettingsWindow.cpp" line="443"/>
         <source>Every 2 Weeks</source>
         <translation>2 naponta</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="444"/>
         <source>Every 30 days</source>
         <translation>30 naponta</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="439"/>
+        <location filename="Windows/SettingsWindow.cpp" line="446"/>
         <source>Ignore</source>
         <translation>Figyelmen kívül hagyás</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="451"/>
+        <location filename="Windows/SettingsWindow.cpp" line="458"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
         <translation>%1</translation>
     </message>
     <message>
         <source>HwId: %1</source>
-        <translation>HwId: %1</translation>
+        <translation type="vanished">HwId: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="931"/>
+        <location filename="Windows/SettingsWindow.cpp" line="939"/>
         <source>Search for settings</source>
         <translation>Keresés a beállításokban</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1305"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1306"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1315"/>
         <location filename="Windows/SettingsWindow.cpp" line="1316"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1326"/>
         <source>Run &amp;Sandboxed</source>
         <translation>Izolált módú futtatá&amp;s</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1753"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1769"/>
         <source>kilobytes (%1)</source>
         <translation>KB (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1841"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1857"/>
         <source>Volume not attached</source>
         <translation>Kötet nincs csatolva</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3230"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3263"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Ez a támogatói tanúsítvány lejárt, kérjük, &lt;a href=&quot;%1&quot;&gt;szerezzen be egy frissített tanúsítványt&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3310"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1/%2 kiértékelő tanúsítványt használt. Több ingyenes tanúsítvány nem generálható.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3312"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3345"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Kérjen ingyenes értékelő tanúsítványt&lt;/a&gt; és %1 napig élvezheti az összes prémium szolgáltatást.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3243"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3276"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>Ez a támogatói tanúsítvány &lt;font color=&apos;red&apos;&gt;%1 nap múlva lejár&lt;/font&gt;, kérjük, &lt;;a href=&quot;%2&quot;&gt;szerezzen be egy frissített tanúsítványt&lt;/a&gt;.</translation>
     </message>
     <message>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
-        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;A jelenlegi build Plus funkciói engedélyezve maradnak&lt;/font&gt;, de már nem férhet hozzá a Sandboxie-Live szolgáltatásokhoz, beleértve a kompatibilitási frissítéseket és a hibaelhárítási adatbázist.</translation>
+        <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;A jelenlegi build Plus funkciói engedélyezve maradnak&lt;/font&gt;, de már nem férhet hozzá a Sandboxie-Live szolgáltatásokhoz, beleértve a kompatibilitási frissítéseket és a hibaelhárítási adatbázist.</translation>
     </message>
     <message>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>Ez a támogatói tanúsítvány &lt;font color=&apos;red&apos;&gt;%1 nap múlva lejár&lt;/font&gt;. Kérjük, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;szerezzen be egy frissített tanúsítványt&lt;/a&gt;.</translation>
+        <translation type="vanished">Ez a támogatói tanúsítvány &lt;font color=&apos;red&apos;&gt;%1 nap múlva lejár&lt;/font&gt;. Kérjük, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;szerezzen be egy frissített tanúsítványt&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3278"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3311"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>Lejár: %1 nap múlva</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3282"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3315"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>; a jogosult Patreon-tagok mindig lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;szerezhetnek frissített tanúsítványt&lt;/a&gt; a xanasoft.com oldalról</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3294"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3327"/>
         <source>Options: %1</source>
         <translation>Opciók: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3297"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3330"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>Javított biztonság/adatvédelem &amp; alkalmazáshomokozók (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3297"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3298"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3299"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3300"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3332"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3333"/>
         <source>Enabled</source>
         <translation>Engedélyezva</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="363"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3297"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3298"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3299"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3300"/>
+        <location filename="Windows/SettingsWindow.cpp" line="370"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3332"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3333"/>
         <source>Disabled</source>
         <translation>Letiltva</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="335"/>
-        <location filename="Windows/SettingsWindow.cpp" line="573"/>
+        <location filename="Windows/SettingsWindow.cpp" line="342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="580"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="343"/>
         <source>Shift</source>
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="350"/>
         <source>Same as main</source>
         <translation>Ugyanaz, mint a fő</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="344"/>
+        <location filename="Windows/SettingsWindow.cpp" line="351"/>
         <source>Keep current monitor</source>
         <translation>Aktuális monitor megtartása</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="345"/>
+        <location filename="Windows/SettingsWindow.cpp" line="352"/>
         <source>Active monitor</source>
         <translation>Aktív monitor</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="346"/>
+        <location filename="Windows/SettingsWindow.cpp" line="353"/>
         <source>Primary monitor</source>
         <translation>Elsődleges monitor</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="402"/>
+        <location filename="Windows/SettingsWindow.cpp" line="409"/>
         <source>Unknown Display</source>
         <translation>Ismeretlen kijelző</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="404"/>
+        <location filename="Windows/SettingsWindow.cpp" line="411"/>
         <source>Display %1: %2</source>
         <translation>Kijelző %1: %2 </translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="413"/>
         <source> (Primary)</source>
         <translation>(elsődleges)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="574"/>
+        <location filename="Windows/SettingsWindow.cpp" line="581"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
         <translation>Háromállapotú viselkedés: nincs ellenőrizve = soha, részben ellenőrizve = csak amíg %1 le van tartva (alapértelmezett), ellenőrizve = mindig.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3298"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3331"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>Titkosított homokozók (EBox)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3299"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3332"/>
         <source>Network Interception (NetI): %1</source>
         <translation>Hálózati elfogás (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3300"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3333"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Sandboxie asztal (Desk): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3364"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>Ez nem úgy néz ki, mint egy Sandboxie-Plus sorozatszám.&lt;br /&gt;Ha egy tanúsítványból próbálta megadni az UpdateKey kulcsot vagy az aláírást, és ez nem helyes, írja be a teljes tanúsítványt a szövegmezőbe helyett.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3338"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3371"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>Olyan funkció frissítési kulcsát próbálja használni, hogy nem adott meg egy már meglévő támogatói tanúsítványt. Kérjük, vegye figyelembe, hogy ehhez a kulcstípushoz (&lt;b&gt;ahogyan a webhelyen félkövéren szerepel&lt;/b) érvényes támogatói tanúsítvánnyal kell rendelkeznie; nélküle használhatatlan.&lt;br /&gt;Ha a speciális funkciókat szeretné használni, be kell szereznie egy szabványos tanúsítványt és a szolgáltatásfrissítési kulcsot is a speciális funkciók feloldásához.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3377"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>Megújítási kulcsot próbál használni anélkül, hogy korábban már létező támogatói tanúsítványt adott volna meg. Kérjük, vegye figyelembe, hogy ehhez a kulcstípushoz (&lt;b&gt;ahogyan a webhelyen félkövéren szerepel&lt;/b) érvényes támogatói tanúsítvánnyal kell rendelkeznie; egy nélkül használhatatlan.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3349"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3382"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Ha nem olvasta el a termékleírást, és véletlenül kapta meg ezt a kulcsot, kérjük, vegye fel velünk a kapcsolatot e-mailben (amely a webhelyünkön található) a probléma megoldása érdekében. &lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3380"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3413"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus – ÉRTÉKELÉSI bizonyítvány beszerzése</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3380"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3413"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>Kérjük, adja meg e-mail címét, hogy ingyenes %1 napos kiértékelő tanúsítványt kapjon, amelyet a(z) %2 címre állít ki, és az aktuális hardverhez zárolva lesz.
 Minden egyedi hardverazonosítóhoz legfeljebb %3 kiértékelő tanúsítványt kérhet.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3439"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>Hiba a tanúsítvány lekérésekor: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3439"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>Ismeretlen hiba (valószínűleg hálózati probléma)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3461"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3494"/>
         <source>Contributor</source>
         <translation>Közreműködő</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3463"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3496"/>
         <source>Eternal</source>
         <translation>Élettartam</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3465"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3498"/>
         <source>Developer</source>
         <translation>Fejlesztő</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3467"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3500"/>
         <source>Business</source>
         <translation>Üzleti</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3469"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3502"/>
         <source>Personal</source>
         <translation>Személyes</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3471"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3504"/>
         <source>Great Patreon</source>
         <translation>Great Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3473"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3506"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3475"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3508"/>
         <source>Family</source>
         <translation>Családi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3479"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3512"/>
         <source>Evaluation</source>
         <translation>Értékelés</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3481"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3514"/>
         <source>Type %1</source>
         <translation>%1 típus</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3511"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3544"/>
         <source>Advanced</source>
         <translation>Speciális</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3513"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3546"/>
         <source>Advanced (L)</source>
         <translation>Speciális (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3515"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3548"/>
         <source>Max Level</source>
         <translation>Max. színt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3517"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3550"/>
         <source>Level %1</source>
         <translation>Színt %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3670"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3703"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>Az automatikus kiegészítés funkció folytatásához az Ön hozzájárulása szükséges.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3672"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3705"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -6754,384 +6754,384 @@ Automatikus kiegészítés mód választása:
 %1 Manuális: automatikus kiegészítés javaslatok ezzel: %2.
 %1 Gépelés közben: automatikus kiegészítés beírás közben.</translation>
     </message>
-    <message>	 	
-        <location filename="Windows/SettingsWindow.cpp" line="3680"/>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="3713"/>
         <source>Manual</source>
         <translation>Manuális</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3681"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3714"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>Automatikus kiegészítéseket indít el a következővel: %1.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3683"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3716"/>
         <source>While Typing</source>
         <translation>Beírás közben</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3684"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3717"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>Automatikus kiegészítési javaslatokat indít gépelés közben.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3687"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3720"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>Az automatikus kiegészítési javaslatokat letiltva tartja.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3686"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3719"/>
         <source>Cancel</source>
         <translation>Mégse</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1869"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1885"/>
         <source>Supporter certificate required for access</source>
         <translation>Támogatói tanúsítvány szükséges a hozzáféréshez</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1886"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1902"/>
         <source>Supporter certificate required for automation</source>
         <translation>Támogatói tanúsítvány szükséges az automatizáláshoz</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3556"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3589"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Ez a tanúsítvány sajnos nem érvényes a jelenlegi buildre, új tanúsítványt kell beszereznie, vagy váltani kell egy korábbi buildre.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3558"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3591"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Bár ez a tanúsítvány lejárt, a jelenleg telepített verzióra a plus funkciók továbbra is engedélyezve maradnak. A továbbiakban azonban nem fog hozzáférni a Sandboxie-Live szolgáltatásokhoz, beleértve a kompatibilitási frissítéseket és az online hibaelhárítási adatbázist.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3560"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3593"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Ez a tanúsítvány sajnos lejárt. Új tanúsítványt kell beszereznie</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1337"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <source>Sandboxed Web Browser</source>
         <translation>Izolált webböngésző</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="440"/>
-        <location filename="Windows/SettingsWindow.cpp" line="445"/>
+        <location filename="Windows/SettingsWindow.cpp" line="447"/>
+        <location filename="Windows/SettingsWindow.cpp" line="452"/>
         <source>Notify</source>
         <translation>Értesítés</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="441"/>
-        <location filename="Windows/SettingsWindow.cpp" line="446"/>
+        <location filename="Windows/SettingsWindow.cpp" line="448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="453"/>
         <source>Download &amp; Notify</source>
         <translation>Letöltés és értesítés</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="442"/>
-        <location filename="Windows/SettingsWindow.cpp" line="447"/>
+        <location filename="Windows/SettingsWindow.cpp" line="449"/>
+        <location filename="Windows/SettingsWindow.cpp" line="454"/>
         <source>Download &amp; Install</source>
         <translation>Letöltés és telepítés</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="629"/>
+        <location filename="Windows/SettingsWindow.cpp" line="637"/>
         <source>Browse for Program</source>
         <translation>Program keresése</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="749"/>
+        <location filename="Windows/SettingsWindow.cpp" line="757"/>
         <source>Add %1 Template</source>
         <translation>%1 sablon hozzáadása</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3145"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3154"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3176"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3185"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3150"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3181"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(másolás)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3163"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3194"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation>Sandboxie-Plus verzíó: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="614"/>
-        <location filename="Windows/SettingsWindow.cpp" line="795"/>
+        <location filename="Windows/SettingsWindow.cpp" line="622"/>
+        <location filename="Windows/SettingsWindow.cpp" line="803"/>
         <source>Select font</source>
         <translation>Betűtípus kiválasztása</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="616"/>
-        <location filename="Windows/SettingsWindow.cpp" line="797"/>
+        <location filename="Windows/SettingsWindow.cpp" line="624"/>
+        <location filename="Windows/SettingsWindow.cpp" line="805"/>
         <source>Reset font</source>
         <translation>Betűtípus visszaállítása</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="945"/>
+        <location filename="Windows/SettingsWindow.cpp" line="953"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1186"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1196"/>
         <source>Please enter message</source>
         <translation>Kérjük, adja meg az üzenetet</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1218"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1228"/>
         <source>Select Program</source>
         <translation>Program kiválasztása</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1218"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1228"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Futtatható fájlok (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1222"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1238"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1232"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1248"/>
         <source>Please enter a menu title</source>
         <translation>Kérjük, adja meg a menü címét</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1234"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1244"/>
         <source>Please enter a command</source>
         <translation>Kérjük, adjon meg egy parancsot</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3235"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3268"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;A jelenlegi buildben a Plus funkciók továbbra is engedélyezve maradnak&lt;/font&gt;, de a Sandboxie-Live szolgáltatásokhoz, beleértve a kompatibilitási frissítéseket és az online hibaelhárítási adatbázist, már nem férhet hozzá.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3313"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3346"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>Hardverazonosítónként legfeljebb %2 alkalommal kérhet ingyenes %1 napos kiértékelő tanúsítványt.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3233"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3266"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;A plus funkciók %1 napon belül le lesznek tiltva.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3142"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3173"/>
         <source>Click to reveal</source>
         <translation>Kattintás a felfedéshez</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3143"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3174"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
         <translation>Kattintás az elrejtéshez</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3237"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3270"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;A plus funkciók már nincsenek engedélyezve.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3280"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3313"/>
         <source>Expired: %1 days ago</source>
         <translation>Lejárt: %1 napja</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3364"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3392"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3621"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3397"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3425"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3654"/>
         <source>Retrieving certificate...</source>
         <translation>Tanúsítvány lehívása...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3477"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3510"/>
         <source>Home</source>
         <translation>Home</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2003"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2020"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Futtatás &amp;homokozón kívül</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2011"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2028"/>
         <source>Set Force in Sandbox</source>
         <translation>Kényszerítés a homokozóba</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2020"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2037"/>
         <source>Set Open Path in Sandbox</source>
         <translation>Útvonal megnyitása a homokozóban</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3539"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3572"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Ez nem úgy néz ki, mint egy tanúsítvány. Kérjük, adja meg a teljes tanúsítványt, ne csak egy részét.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3564"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3597"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>Az értékelési tanúsítvány sikeresen alkalmazásra került. Élvezze az ingyenes próbaidőszakot!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3567"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3600"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Köszönjük, hogy támogatja a Sandboxie-Plus fejlesztését.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3569"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3602"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>Ez egy ideiglenes Patreon tanúsítvány, amely 3 hónapig érvényes. Amint lejár, online beszerezhet egy új tanúsítványt, amely a teljes időtartamra érvényes lesz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3607"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3640"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>A Sandboxie-Plus támogatói tanúsítványhoz kötelező biztonsági frissítés szükséges. Letölti most a frissített tanúsítványt?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3608"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3641"/>
         <source>Auto update in future</source>
         <translation>Automatikus frissítés a jövőben</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2390"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2415"/>
         <source>Update Available</source>
         <translation>Frissítés érhető el</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="426"/>
+        <location filename="Windows/SettingsWindow.cpp" line="433"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
         <translation>Előző állapot megjegyzése</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="427"/>
+        <location filename="Windows/SettingsWindow.cpp" line="434"/>
         <source>Expand all groups</source>
         <translation>Összes csoport kibontása</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="428"/>
+        <location filename="Windows/SettingsWindow.cpp" line="435"/>
         <source>Collapse all groups</source>
         <translation>Összes csoport összecsukása</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2392"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2417"/>
         <source>Installed</source>
         <translation>Telepítve</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2397"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2422"/>
         <source>by %1</source>
         <translation>%1 szerint</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2405"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2430"/>
         <source>(info website)</source>
         <translation>(info weboldal)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2432"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2458"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Ez a kiegészítő kötelező, és nem távolítható el.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2441"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2652"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2467"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2679"/>
         <source>Select Directory</source>
         <translation>Könyvtár kiválasztása</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2473"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2499"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Ellenőrzés most&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2542"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2569"/>
         <source>Select Portable Box ini</source>
         <translation>Hordozható homokozó ini kiválasztása</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2542"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2552"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2569"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2579"/>
         <source>Ini Files (*.ini)</source>
         <translation>Ini fájlok (*.ini)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2552"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2579"/>
         <source>Save new Portable Box ini</source>
         <translation>Új hordozható homokozó ini mentése</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2557"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2584"/>
         <source>File already exists, please select a different file name.</source>
         <translation>A fájl már létezik. Kérjük, válasszon másik fájlnevet.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2563"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2590"/>
         <source>Invalid box name</source>
         <translation>Érvénytelen homokozó név</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2584"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2611"/>
         <source>Select Root Folder</source>
         <translation>Gyökérmappa kiválasztása</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2612"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2639"/>
         <source>Please enter the new configuration password.</source>
         <translation>Az új konfigurációs jelszó megadása.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2616"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2643"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Kérjük, adja meg újra a konfigurációs jelszót.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2621"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2648"/>
         <source>Passwords did not match, please retry.</source>
         <translation>A jelszavak nem egyeznek. Kérjük, próbálja meg újra.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2633"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2660"/>
         <source>Process</source>
         <translation>Folyamatok</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2633"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2660"/>
         <source>Folder</source>
         <translation>Mappa</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2643"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2670"/>
         <source>Please enter a program file name</source>
         <translation>Egy program nevének megadása</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2711"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2738"/>
         <source>Please enter the template identifier</source>
         <translation>Kérjük, adja meg a sablon azonosítóját</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2719"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2746"/>
         <source>Error: %1</source>
         <translation>Hiba: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2751"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2778"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Valóban törli a kiválasztott helyi sablon(oka)t?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3668"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3701"/>
         <source>Autocomplete Consent Required</source>
         <translation>Automatikus kiegészítés hozzájárulása szükséges</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3071"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3100"/>
         <source>%1 (Current)</source>
         <translation>%1 (jelenlegi)</translation>
     </message>
@@ -7410,7 +7410,7 @@ This Sandbox will be saved to: %1</source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
 This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
-<translation>A homokozó tartalmát a rendszer ELVETI, amikor bezárja, és a homokozó eltávolításra kerül.</translation>
+        <translation>A homokozó tartalmát a rendszer ELVETI, amikor bezárja, és a homokozó eltávolításra kerül.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1078"/>
@@ -7432,7 +7432,7 @@ Processes in this box will not be able to access the internet or the local netwo
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
-       <translation>Ez a homokozó az MSIServer (*.msi telepítő szolgáltatás) rendszerjogkivonattal fog futni, ez javítja a kompatibilitást, de csökkenti a biztonsági elszigeteltséget.</translation>
+        <translation>Ez a homokozó az MSIServer (*.msi telepítő szolgáltatás) rendszerjogkivonattal fog futni, ez javítja a kompatibilitást, de csökkenti a biztonsági elszigeteltséget.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1084"/>
@@ -7505,7 +7505,7 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
         <location filename="Windows/SupportDialog.cpp" line="182"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
         <oldsource>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt;.</oldsource>
-      <translation>&lt;u&gt;A kereskedelmi célú Sandboxie próbaidőn túli használatához&lt;/u&gt;, egy érvényes &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;támogatói tanúsítvány szükséges&lt;/a&gt;.</translation>
+        <translation>&lt;u&gt;A kereskedelmi célú Sandboxie próbaidőn túli használatához&lt;/u&gt;, egy érvényes &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;támogatói tanúsítvány szükséges&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="189"/>
@@ -10768,42 +10768,42 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>* a részlegesen bejelölt jelölőnégyzet a viselkedést a nézetmódban határozza meg.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2372"/>
+        <location filename="Forms/SettingsWindow.ui" line="2382"/>
         <source>Advanced Config</source>
         <translation>Speciális konfiguráció</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2492"/>
+        <location filename="Forms/SettingsWindow.ui" line="2502"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>Kernel módú objektumszűrés engedélyezése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2512"/>
+        <location filename="Forms/SettingsWindow.ui" line="2522"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>Homokozó &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;fájlrendszer-gyökér&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2779"/>
+        <location filename="Forms/SettingsWindow.ui" line="2789"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>Jelszó törlése, ha a főablak rejtve van</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2589"/>
+        <location filename="Forms/SettingsWindow.ui" line="2599"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>Homokozó &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC-gyökér&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2445"/>
+        <location filename="Forms/SettingsWindow.ui" line="2455"/>
         <source>Sandbox default</source>
         <translation>Alapértelmezett homokozó</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2812"/>
+        <location filename="Forms/SettingsWindow.ui" line="2822"/>
         <source>Config protection</source>
         <translation>Konfiguráció védelem</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2611"/>
+        <location filename="Forms/SettingsWindow.ui" line="2621"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -10879,219 +10879,219 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>A Sandboxie saját folyamatainak elrejtése a feladatlistából</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1193"/>
-        <location filename="Forms/SettingsWindow.ui" line="1223"/>
+        <location filename="Forms/SettingsWindow.ui" line="1203"/>
+        <location filename="Forms/SettingsWindow.ui" line="1233"/>
         <source>Interface Options</source>
         <oldsource>Display Options</oldsource>
         <translation>Interfész beállításai</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1264"/>
+        <location filename="Forms/SettingsWindow.ui" line="1274"/>
         <source>Ini Editor Font</source>
         <translation>Ini szerkesztő betűtípus</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1353"/>
+        <location filename="Forms/SettingsWindow.ui" line="1363"/>
         <source>Graphic Options</source>
         <translation>Grafikai beállítások</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1296"/>
+        <location filename="Forms/SettingsWindow.ui" line="1306"/>
         <source>Select font</source>
         <translation>Betűtípus kiválasztása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1306"/>
+        <location filename="Forms/SettingsWindow.ui" line="1316"/>
         <source>Reset font</source>
         <translation>Betűtípus visszaállítása</translation>
     </message>
     <message>
         <source>Ini Options</source>
-        <translation>Ini opciók</translation>
+        <translation type="vanished">Ini opciók</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1399"/>
-        <location filename="Forms/SettingsWindow.ui" line="1462"/>
+        <location filename="Forms/SettingsWindow.ui" line="1409"/>
+        <location filename="Forms/SettingsWindow.ui" line="1472"/>
         <source>#</source>
         <translation>#</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1251"/>
+        <location filename="Forms/SettingsWindow.ui" line="1261"/>
         <source>External Ini Editor</source>
         <translation>Külső ini szerkesztő</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1669"/>
+        <location filename="Forms/SettingsWindow.ui" line="1679"/>
         <source>Add-Ons Manager</source>
         <translation>Bővítmény kezelő</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1679"/>
+        <location filename="Forms/SettingsWindow.ui" line="1689"/>
         <source>Optional Add-Ons</source>
         <translation>Opcionális bővítmények</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1687"/>
+        <location filename="Forms/SettingsWindow.ui" line="1697"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
         <translation>A Sandboxie-Plus számos lehetőséget kínál, és a bővítmények széles skáláját támogatja. Ezen az oldalon konfigurálhatja a kiegészítők, beépülő modulok és más harmadik féltől származó összetevők integrációját. Az opcionális összetevők letölthetők az internetről, és bizonyos telepítésekhez rendszergazdai jogosultságokra lehet szükség.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1723"/>
+        <location filename="Forms/SettingsWindow.ui" line="1733"/>
         <source>Status</source>
         <translation>Állapot</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1728"/>
+        <location filename="Forms/SettingsWindow.ui" line="1738"/>
         <source>Version</source>
         <translation>Verzió</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1733"/>
+        <location filename="Forms/SettingsWindow.ui" line="1743"/>
         <source>Description</source>
         <translation>Leírás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1741"/>
+        <location filename="Forms/SettingsWindow.ui" line="1751"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update add-on list now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://addons&quot;&gt;Bővítménylista frissítése most&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1751"/>
+        <location filename="Forms/SettingsWindow.ui" line="1761"/>
         <source>Install</source>
         <translation>Telepítés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1761"/>
+        <location filename="Forms/SettingsWindow.ui" line="1771"/>
         <source>Add-On Configuration</source>
         <translation>Bővítmény konfiguráció</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1769"/>
+        <location filename="Forms/SettingsWindow.ui" line="1779"/>
         <source>Enable Ram Disk creation</source>
         <translation>RAM lemez létrehozásának engedélyezése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1776"/>
+        <location filename="Forms/SettingsWindow.ui" line="1786"/>
         <source>kilobytes</source>
         <translation>KB</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1829"/>
+        <location filename="Forms/SettingsWindow.ui" line="1839"/>
         <source>Disk Image Support</source>
         <translation>Lemezkép támogatás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1846"/>
+        <location filename="Forms/SettingsWindow.ui" line="1856"/>
         <source>RAM Limit</source>
         <translation>RAM korlát</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1813"/>
+        <location filename="Forms/SettingsWindow.ui" line="1823"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
         <translation>&lt;a href=&quot;addon://ImDisk &quot;&gt;ImDisk&lt;/a&gt; illesztőprogram telepítése a &quot;Ram lemez&quot; és &quot;Lemezkép&quot; támogatás engedélyezéséhez.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1899"/>
+        <location filename="Forms/SettingsWindow.ui" line="1909"/>
         <source>Sandboxie Support</source>
         <translation>Sandboxie támogatás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1988"/>
+        <location filename="Forms/SettingsWindow.ui" line="1998"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Ez a támogatói tanúsítvány lejárt, kérjük, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;szerezzen frissített tanúsítványt&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2055"/>
+        <location filename="Forms/SettingsWindow.ui" line="2065"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>A Sandboxie-Plus projekt támogatói &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;támogatói tanúsítványt&lt;/a&gt; kaphatnak. Ez olyan, mint egy licenckulcs, de a nyílt forráskódú szoftvereket használó fantasztikus emberek számára. :-)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1936"/>
+        <location filename="Forms/SettingsWindow.ui" line="1946"/>
         <source>Get</source>
         <translation>Beszerzés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2078"/>
+        <location filename="Forms/SettingsWindow.ui" line="2088"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
         <translation>Tanúsítvány lekérése/frissítése/megújítása sorozatszám használatával</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2023"/>
+        <location filename="Forms/SettingsWindow.ui" line="2033"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
         <translation>A Sandboxie naprakészen tartása a Windows folyamatos kiadásaival és az összes webböngészővel kompatibilis, véget nem érő törekvés. Támogathatja a fejlesztést úgy, hogy közvetlenül hozzájárul a projekthez: &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;, jelezve, hogy vásárol &lt; ;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;szurkolói tanúsítványt&lt;/a&gt;, és patronus lesz &lt;a href=&quot; https://sandboxie-plus.com/go.php?to=patreon&quot;&gt; Patreon előfizetéssel&lt;/a&gt;, vagy egy &lt;a href=&quot;https://sandboxie-plus.com/go oldalon. php?to=donate&quot;&gt;PayPal adománnyal&lt;/a&gt;.&lt;br /&gt;. Az Ön támogatása létfontosságú szerepet játszik a Sandboxie fejlesztésében és karbantartásában.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1922"/>
+        <location filename="Forms/SettingsWindow.ui" line="1932"/>
         <source>SBIE_-_____-_____-_____-_____</source>
         <translation>SBIE_-_____-_____-_____-_____</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2088"/>
+        <location filename="Forms/SettingsWindow.ui" line="2098"/>
         <source>Eval Cert</source>
         <translation>Tanúsítvány kiértékelése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2184"/>
+        <location filename="Forms/SettingsWindow.ui" line="2194"/>
         <source>Update Settings</source>
         <translation>Beállítások frissítése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2341"/>
+        <location filename="Forms/SettingsWindow.ui" line="2351"/>
         <source>Update Check Interval</source>
         <translation>Frissítés ellenőrzés intervalluma</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2390"/>
+        <location filename="Forms/SettingsWindow.ui" line="2400"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>Homokozó &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;Registry-gyökér&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2582"/>
+        <location filename="Forms/SettingsWindow.ui" line="2592"/>
         <source>Sandboxing features</source>
         <translation>Homokozó funkciók</translation>
     </message>
     <message>
         <source>Sandboxie.ini Presets</source>
-        <translation>Sandboxie.ini előbeállítások</translation>
+        <translation type="vanished">Sandboxie.ini előbeállítások</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2654"/>
+        <location filename="Forms/SettingsWindow.ui" line="2664"/>
         <source>Change Password</source>
         <translation>Jelszó módosítása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2681"/>
+        <location filename="Forms/SettingsWindow.ui" line="2691"/>
         <source>Password must be entered in order to make changes</source>
         <translation>Jelszómódosításhoz meg kell adni a jelszót</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2661"/>
+        <location filename="Forms/SettingsWindow.ui" line="2671"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>Csak a rendszergazda felhasználói fiókok végezhetnek módosításokat</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2786"/>
+        <location filename="Forms/SettingsWindow.ui" line="2796"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>Sandboxie.ini fájl változásainak figyelése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3080"/>
+        <location filename="Forms/SettingsWindow.ui" line="3090"/>
         <source>App Templates</source>
         <translation>Program sablonok</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3090"/>
+        <location filename="Forms/SettingsWindow.ui" line="3100"/>
         <source>App Compatibility</source>
         <translation>Program kompabilitás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2720"/>
+        <location filename="Forms/SettingsWindow.ui" line="2730"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
         <translation>Csak a rendszergazda felhasználói fiókok használhatják a &quot;Kényszerített programok szüneteltetése&quot; parancsot</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2528"/>
+        <location filename="Forms/SettingsWindow.ui" line="2538"/>
         <source>Portable root folder</source>
         <translation>Hordozható gyökés mappa</translation>
     </message>
@@ -11111,12 +11111,12 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Ikon megjelenítése a rendszertálcán:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2555"/>
+        <location filename="Forms/SettingsWindow.ui" line="2565"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>Windows szűrő platform használata a hálózati elérés korlátozásához</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2545"/>
+        <location filename="Forms/SettingsWindow.ui" line="2555"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
         <translation>A kiválasztott Win32k rendszerhívások összekapcsolása a GPU-gyorsítás engedélyezéséhez (szükséges a Chrome, a Firefox és egyebek számára)</translation>
@@ -11148,17 +11148,17 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Oldalfa használata a homokozó beállításaiban a beágyazott lapok helyett *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1161"/>
+        <location filename="Forms/SettingsWindow.ui" line="1171"/>
         <source>Use large icons in box list *</source>
         <translation>Nagy ikonok használata a homokozólistában *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1231"/>
+        <location filename="Forms/SettingsWindow.ui" line="1241"/>
         <source>High DPI Scaling</source>
         <translation>Magas DPI-skálázás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1171"/>
+        <location filename="Forms/SettingsWindow.ui" line="1181"/>
         <source>Don&apos;t show icons in menus *</source>
         <translation>Ne jelenjenek meg ikonok a menükben *</translation>
     </message>
@@ -11168,12 +11168,12 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Sötét téma használata</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1386"/>
+        <location filename="Forms/SettingsWindow.ui" line="1396"/>
         <source>Font Scaling</source>
         <translation>Betűméretezés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1422"/>
+        <location filename="Forms/SettingsWindow.ui" line="1432"/>
         <source>(Restart required)</source>
         <translation>(újraindítás szükséges)</translation>
     </message>
@@ -11189,12 +11189,12 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>&quot;Pizza&quot; háttér megjelenítése a homokozólistában *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1244"/>
+        <location filename="Forms/SettingsWindow.ui" line="1254"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1154"/>
+        <location filename="Forms/SettingsWindow.ui" line="1164"/>
         <source>Alternate row background in lists</source>
         <translation>Alternatív sorháttér a listákban</translation>
     </message>
@@ -11205,45 +11205,45 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="922"/>
-        <location filename="Forms/SettingsWindow.ui" line="1718"/>
-        <location filename="Forms/SettingsWindow.ui" line="2908"/>
-        <location filename="Forms/SettingsWindow.ui" line="3121"/>
-        <location filename="Forms/SettingsWindow.ui" line="3281"/>
+        <location filename="Forms/SettingsWindow.ui" line="1728"/>
+        <location filename="Forms/SettingsWindow.ui" line="2918"/>
+        <location filename="Forms/SettingsWindow.ui" line="3131"/>
+        <location filename="Forms/SettingsWindow.ui" line="3291"/>
         <source>Name</source>
         <translation>Név</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2913"/>
+        <location filename="Forms/SettingsWindow.ui" line="2923"/>
         <source>Path</source>
         <translation>Útvonal</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2872"/>
+        <location filename="Forms/SettingsWindow.ui" line="2882"/>
         <source>Remove Program</source>
         <translation>Program eltávolítása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2893"/>
+        <location filename="Forms/SettingsWindow.ui" line="2903"/>
         <source>Add Program</source>
         <translation>Program hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2862"/>
+        <location filename="Forms/SettingsWindow.ui" line="2872"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>Amikor a következő programok bármelyike elindul bármely homokozón kívül, a Sandboxie kiadja az SBIE1301 üzenetet.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2886"/>
+        <location filename="Forms/SettingsWindow.ui" line="2896"/>
         <source>Add Folder</source>
         <translation>Mappa hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2842"/>
+        <location filename="Forms/SettingsWindow.ui" line="2852"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>Akadályozza meg, hogy a felsorolt programok elinduljanak ezen a rendszeren</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2900"/>
+        <location filename="Forms/SettingsWindow.ui" line="2910"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>1308-as üzenet kiadása, ha a program nem indul el</translation>
     </message>
@@ -11278,27 +11278,27 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Integrálás a gazdagép Start menüjébe</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1200"/>
+        <location filename="Forms/SettingsWindow.ui" line="1210"/>
         <source>Use new config dialog layout *</source>
         <translation>Új konfigurációs párbeszédpanel-elrendezés használata *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2824"/>
+        <location filename="Forms/SettingsWindow.ui" line="2834"/>
         <source>Program Control</source>
         <translation>Programvezérlés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2834"/>
+        <location filename="Forms/SettingsWindow.ui" line="2844"/>
         <source>Program Alerts</source>
         <translation>Programfigyelmeztetések</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2879"/>
+        <location filename="Forms/SettingsWindow.ui" line="2889"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>1301-es üzenetet küld, ha a kényszerített folyamatok le vannak tiltva</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2382"/>
+        <location filename="Forms/SettingsWindow.ui" line="2392"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>Sandboxie konfiguráció</translation>
@@ -11335,8 +11335,8 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1027"/>
-        <location filename="Forms/SettingsWindow.ui" line="1697"/>
-        <location filename="Forms/SettingsWindow.ui" line="3301"/>
+        <location filename="Forms/SettingsWindow.ui" line="1707"/>
+        <location filename="Forms/SettingsWindow.ui" line="3311"/>
         <source>Remove</source>
         <translation>Eltávolítás</translation>
     </message>
@@ -11403,42 +11403,42 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Kicsinyítés a tálcára</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1442"/>
+        <location filename="Forms/SettingsWindow.ui" line="1452"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
         <translation>SandMan ablakok elrejtése a képernyőrögzítés elől (a felhasználói felület újraindítása szükséges)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1793"/>
+        <location filename="Forms/SettingsWindow.ui" line="1803"/>
         <source>Assign drive letter to Ram Disk</source>
         <translation>Meghajtóbetűjel hozzárendelése a Ram lemezhez</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1872"/>
+        <location filename="Forms/SettingsWindow.ui" line="1882"/>
         <source>When a Ram Disk is already mounted you need to unmount it for this option to take effect.</source>
         <translation>Ha egy Ram lemez csatolva van, le kell választani, hogy ez az opció érvénybe lépjen.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1875"/>
+        <location filename="Forms/SettingsWindow.ui" line="1885"/>
         <source>* takes effect on disk creation</source>
         <translation>* lemezkészítéskor lép érvénybe</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1889"/>
+        <location filename="Forms/SettingsWindow.ui" line="1899"/>
         <source>Support &amp;&amp; Updates</source>
         <translation>Támogatás és frissítések</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1975"/>
+        <location filename="Forms/SettingsWindow.ui" line="1985"/>
         <source>Cert Options</source>
         <translation>Tanúsítványbeállítások</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2004"/>
+        <location filename="Forms/SettingsWindow.ui" line="2014"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Tanúsítvány használati útmutató&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1949"/>
+        <location filename="Forms/SettingsWindow.ui" line="1959"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
         <translation>HwId: 00000000-0000-0000-0000-000000000000</translation>
     </message>
@@ -11463,90 +11463,90 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Váltás tesztkörnyezetben működő asztalra dupla kattintással</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1435"/>
+        <location filename="Forms/SettingsWindow.ui" line="1445"/>
         <source>Ini Editor Options</source>
         <translation>Ini szerkesztő beállításai</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2114"/>
+        <location filename="Forms/SettingsWindow.ui" line="2124"/>
         <source>Cert Info</source>
         <translation>Tanúsítvány info</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2130"/>
+        <location filename="Forms/SettingsWindow.ui" line="2140"/>
         <source>Sandboxie-Plus Version: 0.0.0</source>
         <translation>Sandboxie-Plus verzió: 0.0.0</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2140"/>
+        <location filename="Forms/SettingsWindow.ui" line="2150"/>
         <source>Sandboxie Updater</source>
         <translation>Sandboxie frissítő</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2171"/>
+        <location filename="Forms/SettingsWindow.ui" line="2181"/>
         <source>Keep add-on list up to date</source>
         <translation>Tartsa naprakészen a kiegészítők listáját</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2228"/>
+        <location filename="Forms/SettingsWindow.ui" line="2238"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Az Insider csatorna korai hozzáférést biztosít az új funkciókhoz és hibajavításokhoz, amelyek végül megjelennek a nyilvánosság számára, valamint a stabil csatorna összes lényeges fejlesztéséhez.
 Az előnézeti csatornától eltérően ez nem tartalmaz teszteletlen, potenciálisan feltörő vagy kísérleti változtatásokat, amelyek esetleg nem állnak készen a szélesebb körű felhasználásr.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2232"/>
+        <location filename="Forms/SettingsWindow.ui" line="2242"/>
         <source>Search in the Insider channel</source>
         <translation>Keresés az Insider csatornán</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2262"/>
+        <location filename="Forms/SettingsWindow.ui" line="2272"/>
         <source>New full installers from the selected release channel.</source>
         <translation>Új teljes telepítők a kiválasztott kiadási csatornáról.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2265"/>
+        <location filename="Forms/SettingsWindow.ui" line="2275"/>
         <source>Full Upgrades</source>
         <translation>Teljes telepítők</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2275"/>
+        <location filename="Forms/SettingsWindow.ui" line="2285"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
         <translation>Időnként ellenőrizze az új Sandboxie-Plus verziókat</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2285"/>
+        <location filename="Forms/SettingsWindow.ui" line="2295"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>További információ: &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider csatorna&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2305"/>
+        <location filename="Forms/SettingsWindow.ui" line="2315"/>
         <source>Keep Troubleshooting scripts up to date</source>
         <translation>A hibaelhárítási szkriptek naprakészen tartása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2499"/>
+        <location filename="Forms/SettingsWindow.ui" line="2509"/>
         <source>Default sandbox:</source>
         <translation>Alapértelmezett homokozó:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2569"/>
+        <location filename="Forms/SettingsWindow.ui" line="2579"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>Anonim token helyett Sandboxie bejelentkezés használata</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2406"/>
+        <location filename="Forms/SettingsWindow.ui" line="2416"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
         <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
         <translation>&quot;Homokozó\minden homokozós&quot; csoport hozzáadása a homokozó tokenhez</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2535"/>
+        <location filename="Forms/SettingsWindow.ui" line="2545"/>
         <source>This feature protects the sandbox by restricting access, preventing other users from accessing the folder. Ensure the root folder path contains the %USER% macro so that each user gets a dedicated sandbox folder.</source>
         <translation>Ez a funkció a hozzáférés korlátozásával védi a homokozót, megakadályozva, hogy más felhasználók hozzáférjenek a mappához. Győződjön meg arról, hogy a gyökérmappa elérési útja tartalmazza a %USER% makrót, hogy minden felhasználó kapjon egy dedikált homokozó mappát.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2538"/>
+        <location filename="Forms/SettingsWindow.ui" line="2548"/>
         <source>Restrict box root folder access to the the user whom created that sandbox</source>
         <translation>A fiók gyökérmappája hozzáférésének korlátozása arra a felhasználóra, aki létrehozta a homokozót</translation>
     </message>
@@ -11596,190 +11596,195 @@ Az előnézeti csatornától eltérően ez nem tartalmaz teszteletlen, potenciá
         <translation>Homokozó állapotának megjelenítése eszköztippként a tálcalistában</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1213"/>
+        <location filename="Forms/SettingsWindow.ui" line="1154"/>
+        <source>Highlight unapplied changes in Options and Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1223"/>
         <source>Group state on start</source>
         <translation>Csoportállapot indításkor</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1449"/>
+        <location filename="Forms/SettingsWindow.ui" line="1459"/>
         <source>UI Font</source>
         <translation>UI betűtípus</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1471"/>
+        <location filename="Forms/SettingsWindow.ui" line="1481"/>
         <source>Select Font</source>
         <translation>Betűtípus kiválasztása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1481"/>
+        <location filename="Forms/SettingsWindow.ui" line="1491"/>
         <source>Reset Font</source>
         <translation>Betűtípus visszaállítása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1509"/>
+        <location filename="Forms/SettingsWindow.ui" line="1519"/>
         <source>Window Options</source>
         <translation>Ablakbeállítások</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1520"/>
+        <location filename="Forms/SettingsWindow.ui" line="1530"/>
         <source>Support Dialog:</source>
         <translation>Támogatási párbeszédpanel:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1533"/>
+        <location filename="Forms/SettingsWindow.ui" line="1543"/>
         <source>File Recovery:</source>
         <translation>Fájlhelyreállítás:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1546"/>
+        <location filename="Forms/SettingsWindow.ui" line="1556"/>
         <source>Fallback:</source>
         <translation>Tartalék:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1591"/>
+        <location filename="Forms/SettingsWindow.ui" line="1601"/>
         <source>Non-main:</source>
         <translation>Nem főablak</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1607"/>
+        <location filename="Forms/SettingsWindow.ui" line="1617"/>
         <source>Hint: Specific window settings override non-main settings. Fallback is used when the target monitor cannot be used; when disabled, each window falls back to its default current-monitor behavior.</source>
         <translation>Tipp: az adott ablakbeállítások felülírják a nem fő beállításokat. Tartalék beállítást akkor használunk, ha a célmonitor nem használható; Ha letiltva van, minden ablak visszaáll az alapértelmezett aktuális monitor viselkedésére.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1629"/>
+        <location filename="Forms/SettingsWindow.ui" line="1639"/>
         <source>Window Locations</source>
         <translation>Ablakok helye</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1636"/>
+        <location filename="Forms/SettingsWindow.ui" line="1646"/>
         <source>Notifications:</source>
         <translation>Értesítések:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1649"/>
+        <location filename="Forms/SettingsWindow.ui" line="1659"/>
         <source>Main:</source>
         <translation>Fő ablak:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2631"/>
+        <location filename="Forms/SettingsWindow.ui" line="2641"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
         <translation>A Sandboxie saját továbbfejlesztett UAC promptjának használata (ajánlott)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2641"/>
+        <location filename="Forms/SettingsWindow.ui" line="2651"/>
         <source>Sandboxie.ini</source>
         <translation>Sandboxie.ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2674"/>
+        <location filename="Forms/SettingsWindow.ui" line="2684"/>
         <source>Add Portable Box</source>
         <translation>Hordozható homokozó hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2704"/>
+        <location filename="Forms/SettingsWindow.ui" line="2714"/>
         <source>Remove Entry</source>
         <translation>Bejegyzés eltávolítása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2712"/>
+        <location filename="Forms/SettingsWindow.ui" line="2722"/>
         <source>Import Path</source>
         <translation>Útvonal importálása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2799"/>
+        <location filename="Forms/SettingsWindow.ui" line="2809"/>
         <source>Sandbox Configuration</source>
         <translation>Homokozó konfiguráció</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2746"/>
+        <location filename="Forms/SettingsWindow.ui" line="2756"/>
         <source>Create Portable Box</source>
         <translation>Hordozható homokozó létrehozása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2688"/>
+        <location filename="Forms/SettingsWindow.ui" line="2698"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
         <translation>&lt;b&gt;A konfigurációvédelem csak a Sandboxie.ini fájlra vonatkozik, a hordozható homokozó konfigurációját nem védik az alábbi mechanizmusok&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2647"/>
+        <location filename="Forms/SettingsWindow.ui" line="2657"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
         <translation>Az alábbi listában elérési utakat adhat hozzá a hordozható homokozók konfigurációs fájljaihoz</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2772"/>
+        <location filename="Forms/SettingsWindow.ui" line="2782"/>
         <source>Add Portable Root</source>
         <translation>Hordozható gyökér hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2921"/>
+        <location filename="Forms/SettingsWindow.ui" line="2931"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
         <translation>1321-es hibaüzenet jelenik meg, ha egy folyamatot homokozóba kényszerítettek</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2931"/>
+        <location filename="Forms/SettingsWindow.ui" line="2941"/>
         <source>Force Process Options</source>
         <translation>Folyamatbeállítások kényszerítése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2959"/>
+        <location filename="Forms/SettingsWindow.ui" line="2969"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
         <translation>Kényszeríti a programokat, hogy a homokozóból nyissanak meg fájlokat, hogy abban a homokozóban fussanak.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2962"/>
+        <location filename="Forms/SettingsWindow.ui" line="2972"/>
         <source>Force programs opening boxed files into their sandbox</source>
         <translation>Kényszeríti a programokat, hogy a homokozós fájlokat a saját homokozójukban nyissák meg</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2969"/>
+        <location filename="Forms/SettingsWindow.ui" line="2979"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
         <translation>A Web védjegyével ellátott fájlok kényszerítése egy homokozóba</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2989"/>
+        <location filename="Forms/SettingsWindow.ui" line="2999"/>
         <source>Sandbox for MoTW marked files</source>
         <translation>Homokozó MoTW jelölésű fájlok részére</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3008"/>
+        <location filename="Forms/SettingsWindow.ui" line="3018"/>
         <source>USB Drive Sandboxing</source>
         <translation>USB lemez homokozóba</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3024"/>
+        <location filename="Forms/SettingsWindow.ui" line="3034"/>
         <source>Volume</source>
         <translation>Kötet</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3029"/>
+        <location filename="Forms/SettingsWindow.ui" line="3039"/>
         <source>Information</source>
         <translation>Információ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3037"/>
+        <location filename="Forms/SettingsWindow.ui" line="3047"/>
         <source>Sandbox for USB drives:</source>
         <translation>Homokozó USB lemezhez</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3053"/>
+        <location filename="Forms/SettingsWindow.ui" line="3063"/>
         <source>Automatically sandbox all attached USB drives</source>
         <translation>Automatikusan homokozóba helyezi az összes csatlakoztatott USB-meghajtót</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3110"/>
+        <location filename="Forms/SettingsWindow.ui" line="3120"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
         <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
         <translation>&lt;a href=&quot;sbie://templates&quot;&gt;kompatibilitási sablonok frissítése most&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3166"/>
+        <location filename="Forms/SettingsWindow.ui" line="3176"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>A jövőben ne ellenőrizze a szoftverek kompatibilitását</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3341"/>
+        <location filename="Forms/SettingsWindow.ui" line="3351"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
@@ -11814,7 +11819,7 @@ Az előnézeti csatornától eltérően ez nem tartalmaz teszteletlen, potenciá
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3389"/>
+        <location filename="Forms/SettingsWindow.ui" line="3399"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -11880,77 +11885,77 @@ Az előnézeti csatornától eltérően ez nem tartalmaz teszteletlen, potenciá
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3412"/>
+        <location filename="Forms/SettingsWindow.ui" line="3422"/>
         <source>Complete</source>
         <translation>Befejezett</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3478"/>
+        <location filename="Forms/SettingsWindow.ui" line="3488"/>
         <source>Editor settings</source>
         <translation>Szerkesztő beállítások</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3481"/>
+        <location filename="Forms/SettingsWindow.ui" line="3491"/>
         <source>⚙</source>
         <translation>⚙</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3359"/>
+        <location filename="Forms/SettingsWindow.ui" line="3369"/>
         <source>Tooltips</source>
         <translation>Eszköztippek</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3462"/>
+        <location filename="Forms/SettingsWindow.ui" line="3472"/>
         <source>Validate</source>
         <translation>Érvényesítés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3146"/>
+        <location filename="Forms/SettingsWindow.ui" line="3156"/>
         <source>Enable</source>
         <translation>Engedélyezés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3129"/>
+        <location filename="Forms/SettingsWindow.ui" line="3139"/>
         <source>Disable</source>
         <translation>Tiltás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3136"/>
+        <location filename="Forms/SettingsWindow.ui" line="3146"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>A Sandboxie a következő szoftveralkalmazásokat észlelte a rendszerben. A konfigurációs beállítások alkalmazásához kattintson az OK gombra, ami javítja az ezen alkalmazásokkal való kompatibilitást. Ezek a konfigurációs beállítások érvényesek lesznek minden meglévő homokozóban és minden új homokozóban.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3189"/>
+        <location filename="Forms/SettingsWindow.ui" line="3199"/>
         <source>Local Templates</source>
         <translation>Helyi sablonok</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3257"/>
+        <location filename="Forms/SettingsWindow.ui" line="3267"/>
         <source>Add Template</source>
         <translation>Sablon hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3225"/>
+        <location filename="Forms/SettingsWindow.ui" line="3235"/>
         <source>Text Filter</source>
         <translation>Szöveg szűrő</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3235"/>
+        <location filename="Forms/SettingsWindow.ui" line="3245"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation>Ez a lista a felhasználók által létrehozott egyéni sablonokat tartalmazza a homokozó beállításokhoz</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3270"/>
+        <location filename="Forms/SettingsWindow.ui" line="3280"/>
         <source>Open Template</source>
         <translation>Sablon megnyitása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3328"/>
+        <location filename="Forms/SettingsWindow.ui" line="3338"/>
         <source>Edit ini Section</source>
         <translation>Ini konfiguráció szerkesztése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3445"/>
+        <location filename="Forms/SettingsWindow.ui" line="3455"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
@@ -11996,58 +12001,58 @@ Az előnézeti csatornától eltérően ez nem tartalmaz teszteletlen, potenciá
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3425"/>
+        <location filename="Forms/SettingsWindow.ui" line="3435"/>
         <source>Save</source>
         <translation>Mentés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3379"/>
+        <location filename="Forms/SettingsWindow.ui" line="3389"/>
         <source>Edit ini</source>
         <translation>Ini szerkesztése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3372"/>
+        <location filename="Forms/SettingsWindow.ui" line="3382"/>
         <source>Cancel</source>
         <translation>Mégse</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2208"/>
+        <location filename="Forms/SettingsWindow.ui" line="2218"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
         <translation>Növekményes frissítések</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2205"/>
+        <location filename="Forms/SettingsWindow.ui" line="2215"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>Gyorsjavítás a telepített verzióhoz, a templates.ini és a fordítások frissítései.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2218"/>
+        <location filename="Forms/SettingsWindow.ui" line="2228"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Az előnézeti csatorna a legújabb GitHub-előzetes kiadásokat tartalmazza.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2312"/>
+        <location filename="Forms/SettingsWindow.ui" line="2322"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>A stabil csatorna tartalmazza a legújabb stabil GitHub-kiadásokat.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2315"/>
+        <location filename="Forms/SettingsWindow.ui" line="2325"/>
         <source>Search in the Stable channel</source>
         <translation>Keresés a stabil csatornán</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2221"/>
+        <location filename="Forms/SettingsWindow.ui" line="2231"/>
         <source>Search in the Preview channel</source>
         <translation>Keresés az előnézeti csatornában</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1929"/>
+        <location filename="Forms/SettingsWindow.ui" line="1939"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
         <translation>A jövőben ne értesítsen a tanúsítvány lejártáról</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2071"/>
+        <location filename="Forms/SettingsWindow.ui" line="2081"/>
         <source>Enter the support certificate here</source>
         <translation>Itt adja meg a támogatói tanúsítványt</translation>
     </message>

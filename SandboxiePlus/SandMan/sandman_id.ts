@@ -2230,39 +2230,39 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="380"/>
-        <location filename="Windows/OptionsForce.cpp" line="307"/>
-        <location filename="Windows/OptionsForce.cpp" line="318"/>
+        <location filename="Windows/OptionsForce.cpp" line="311"/>
+        <location filename="Windows/OptionsForce.cpp" line="322"/>
         <location filename="Windows/OptionsRecovery.cpp" line="130"/>
         <location filename="Windows/OptionsRecovery.cpp" line="141"/>
         <source>Select Directory</source>
         <translation>Pilih Direktori</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1382"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1392"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="984"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1058"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="986"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1061"/>
         <location filename="Windows/OptionsGeneral.cpp" line="683"/>
         <location filename="Windows/OptionsGeneral.cpp" line="779"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="639"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="733"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="846"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="1050"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="1289"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="641"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="735"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="848"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="1052"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="1291"/>
         <source>All Programs</source>
         <translation>Semua Program</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1380"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1398"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1390"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1408"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="688"/>
         <location filename="Windows/OptionsGeneral.cpp" line="783"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="356"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="644"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="737"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="358"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="646"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="739"/>
         <source>Group: %1</source>
         <translation>Grup: %1</translation>
     </message>
@@ -2293,11 +2293,11 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="628"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1034"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1037"/>
         <location filename="Windows/OptionsGeneral.cpp" line="750"/>
-        <location filename="Windows/OptionsGrouping.cpp" line="234"/>
-        <location filename="Windows/OptionsGrouping.cpp" line="258"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="712"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="236"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="260"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="714"/>
         <source>Template values can not be edited.</source>
         <translation>Nilai template tidak dapat diedit.</translation>
     </message>
@@ -2392,158 +2392,158 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1005"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1007"/>
         <source>Add special option:</source>
         <translation>Tambahkan opsi khusus:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1153"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1157"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1156"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1160"/>
         <source>On Start</source>
         <translation>Saat Mulai</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1154"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1162"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1166"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1170"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1174"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1157"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1165"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1169"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1173"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1177"/>
         <source>Run Command</source>
         <translation>Jalankan Perintah</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1158"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1161"/>
         <source>Start Service</source>
         <translation>Mulai Layanan</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1161"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1164"/>
         <source>On Init</source>
         <translation>Saat Inisialisasi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1165"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1168"/>
         <source>On File Recovery</source>
         <translation>Saat Pemulihan Berkas</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1169"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1172"/>
         <source>On Delete Content</source>
         <translation>Saat Menghapus Konten</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1173"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1176"/>
         <source>On Terminate</source>
         <translation>Saat Dihentikan</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1187"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1207"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1217"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1227"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1237"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1190"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1210"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1220"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1230"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1240"/>
         <source>Please enter the command line to be executed</source>
         <translation>Silakan masukkan baris perintah yang akan dijalankan</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1271"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1274"/>
         <source>Please enter a program file name to allow access to this sandbox</source>
         <translation>Silakan masukkan nama file program untuk mengizinkan akses ke kotak pasir ini</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1282"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1285"/>
         <source>Please enter a program file name to deny access to this sandbox</source>
         <translation>Harap masukkan nama file program untuk menolak akses ke kotak pasir ini</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1362"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1365"/>
         <source>Deny</source>
         <translation>Tolak</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1465"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1468"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1520"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1523"/>
         <source>Global</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1521"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1524"/>
         <source>Template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1572"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1575"/>
         <source>Failed to retrieve firmware table information.</source>
         <translation>Gagal mengambil informasi tabel firmware.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1580"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1583"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
         <translation>Tabel firmware berhasil disimpan ke registri host: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;Anda dapat menyalinnya ke registri sandbox untuk memiliki nilai yang berbeda di setiap kotak.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="131"/>
-        <location filename="Windows/OptionsForce.cpp" line="149"/>
+        <location filename="Windows/OptionsForce.cpp" line="133"/>
+        <location filename="Windows/OptionsForce.cpp" line="153"/>
         <source>Process</source>
         <translation>Proses</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="132"/>
-        <location filename="Windows/OptionsForce.cpp" line="150"/>
+        <location filename="Windows/OptionsForce.cpp" line="134"/>
+        <location filename="Windows/OptionsForce.cpp" line="154"/>
         <source>Folder</source>
         <translation>Folder</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="133"/>
+        <location filename="Windows/OptionsForce.cpp" line="135"/>
         <source>Children</source>
         <translation>Anak</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="151"/>
+        <location filename="Windows/OptionsForce.cpp" line="155"/>
         <source>Document</source>
         <translation>Dokumen</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="265"/>
-        <location filename="Windows/OptionsForce.cpp" line="276"/>
-        <location filename="Windows/OptionsForce.cpp" line="296"/>
+        <location filename="Windows/OptionsForce.cpp" line="269"/>
+        <location filename="Windows/OptionsForce.cpp" line="280"/>
+        <location filename="Windows/OptionsForce.cpp" line="300"/>
         <source>Select Executable File</source>
         <translation>Pilih Berkas Eksekusi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="265"/>
-        <location filename="Windows/OptionsForce.cpp" line="276"/>
-        <location filename="Windows/OptionsForce.cpp" line="296"/>
+        <location filename="Windows/OptionsForce.cpp" line="269"/>
+        <location filename="Windows/OptionsForce.cpp" line="280"/>
+        <location filename="Windows/OptionsForce.cpp" line="300"/>
         <source>Executable Files (*.exe)</source>
         <translation>Berkas Eksekusi (*.exe)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="327"/>
+        <location filename="Windows/OptionsForce.cpp" line="331"/>
         <source>Select Document Directory</source>
         <translation>Pilih Direktori Dokumen</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="331"/>
+        <location filename="Windows/OptionsForce.cpp" line="335"/>
         <source>Please enter Document File Extension.</source>
         <translation>Silakan masukkan Ekstensi File Dokumen.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="341"/>
+        <location filename="Windows/OptionsForce.cpp" line="345"/>
         <source>For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets.</source>
         <oldsource>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</oldsource>
         <translation>Demi alasan keamanan, tidak diizinkan membuat preset BreakoutDocument dengan wildcard sepenuhnya.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="351"/>
+        <location filename="Windows/OptionsForce.cpp" line="355"/>
         <source>For security reasons the specified extension %1 should not be broken out.</source>
         <translation>Demi alasan keamanan, ekstensi %1 yang ditentukan sebaiknya tidak dibuka.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="408"/>
+        <location filename="Windows/OptionsForce.cpp" line="412"/>
         <source>Forcing the specified entry will most likely break Windows, are you sure you want to proceed?</source>
         <oldsource>Forcing the specified folder will most likely break Windows, are you sure you want to proceed?</oldsource>
         <translation>Memaksakan entri yang ditentukan kemungkinan besar akan merusak Windows, apakah Anda yakin ingin melanjutkan?</translation>
@@ -2782,7 +2782,7 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <translation>Header Citra Dipulihkan</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1197"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1200"/>
         <source>Please enter a service identifier</source>
         <translation>Silakan masukkan pengenal layanan</translation>
     </message>
@@ -2803,36 +2803,36 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <translation>Silakan masukkan perintah</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGrouping.cpp" line="141"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="143"/>
         <source>Please enter a name for the new group</source>
         <translation>Silakan masukkan nama untuk grup baru</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGrouping.cpp" line="229"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="231"/>
         <source>Please select group first.</source>
         <translation>Silakan pilih grup terlebih dahulu.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="55"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="767"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="769"/>
         <source>Any</source>
         <translation>Apa saja</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="56"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="768"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="770"/>
         <source>TCP</source>
         <translation></translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="57"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="769"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="771"/>
         <source>UDP</source>
         <translation></translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="58"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="770"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="772"/>
         <source>ICMP</source>
         <translation></translation>
     </message>
@@ -2857,27 +2857,27 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <translation>Blokir dengan menolak akses ke perangkat jaringan</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="939"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="941"/>
         <source>Please enter a domain to be filtered</source>
         <translation>Silakan masukkan domain yang akan difilter</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="969"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="971"/>
         <source>Yes</source>
         <translation>Ya</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="970"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="972"/>
         <source>No</source>
         <translation>Tidak</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="994"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="996"/>
         <source>Please enter IP and Port.</source>
         <translation>Silakan masukkan IP dan Port.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="1176"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="1178"/>
         <source>Entry %1 : IP or Port cannot be empty</source>
         <oldsource> entry: IP or Port cannot be empty</oldsource>
         <translation type="unfinished"> entri: IP atau Port tidak boleh kosong</translation>
@@ -2887,29 +2887,29 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <translation type="vanished"> entri: Alamat harus berupa IP, bukan nama host</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1362"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="334"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="753"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1365"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="336"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="755"/>
         <source>Allow</source>
         <translation>Izinkan</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="335"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="337"/>
         <source>Block (WFP)</source>
         <translation>Blokir (WFP)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="336"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="338"/>
         <source>Block (NDev)</source>
         <translation>Blokir (NDev)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="444"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="446"/>
         <source>A non empty program name is required.</source>
         <translation>Nama program tidak boleh kosong.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="754"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="756"/>
         <source>Block</source>
         <translation>Blokir</translation>
     </message>
@@ -2974,32 +2974,32 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <translation>Klien Torrent</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="151"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="155"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
         <translation>Template ini diaktifkan secara global. Untuk mengonfigurasinya, gunakan opsi global.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="187"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="191"/>
         <source>Please enter the template identifier</source>
         <translation>Silakan masukkan pengenal template</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="195"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="199"/>
         <source>Error: %1</source>
         <translation>Kesalahan: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="229"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="233"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Apakah Anda benar-benar ingin menghapus template lokal yang dipilih?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="235"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="239"/>
         <source>Only local templates can be removed!</source>
         <translation>Hanya template lokal yang dapat dihapus!</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="290"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="294"/>
         <source>An alternate location for &apos;%1&apos;
 should contain the following file:
 
@@ -3041,52 +3041,52 @@ Silakan pilih folder yang berisi file ini.</translation>
         <translation>Cari opsi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1058"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1059"/>
         <source>Box: %1</source>
         <translation>Kotak: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1059"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1060"/>
         <source>Template: %1</source>
         <translation>Template: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1060"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1061"/>
         <source>Global: %1</source>
         <translation>Global: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1061"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1062"/>
         <source>Default: %1</source>
         <translation>Default: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1278"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1288"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Sandbox ini telah dihapus sehingga konfigurasi tidak dapat disimpan.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1342"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1352"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Beberapa perubahan belum disimpan, apakah Anda ingin melanjutkan?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1391"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1401"/>
         <source>Enter program:</source>
         <translation>Masukkan program:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1831"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1848"/>
         <source>Autocomplete Consent Required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1833"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1850"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1835"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1852"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -3095,32 +3095,32 @@ Choose autocomplete mode:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1843"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1860"/>
         <source>Manual</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1844"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1861"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1846"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
         <source>While Typing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1847"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1864"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1850"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1867"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1849"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1866"/>
         <source>Cancel</source>
         <translation type="unfinished">Batal</translation>
     </message>
@@ -6305,218 +6305,218 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
 <context>
     <name>CSettingsWindow</name>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="198"/>
+        <location filename="Windows/SettingsWindow.cpp" line="205"/>
         <source>Sandboxie Plus - Global Settings</source>
         <oldsource>Sandboxie Plus - Settings</oldsource>
         <translation>Sandboxie Plus - Pengaturan Global</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="300"/>
+        <location filename="Windows/SettingsWindow.cpp" line="307"/>
         <source>Auto Detection</source>
         <translation>Deteksi Otomatis</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="320"/>
-        <location filename="Windows/SettingsWindow.cpp" line="324"/>
+        <location filename="Windows/SettingsWindow.cpp" line="327"/>
+        <location filename="Windows/SettingsWindow.cpp" line="331"/>
         <source>Don&apos;t integrate links</source>
         <translation>Jangan integrasikan tautan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="321"/>
-        <location filename="Windows/SettingsWindow.cpp" line="325"/>
+        <location filename="Windows/SettingsWindow.cpp" line="328"/>
+        <location filename="Windows/SettingsWindow.cpp" line="332"/>
         <source>As sub group</source>
         <translation>Sebagai sub grup</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="322"/>
-        <location filename="Windows/SettingsWindow.cpp" line="326"/>
+        <location filename="Windows/SettingsWindow.cpp" line="329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="333"/>
         <source>Fully integrate</source>
         <translation>Integrasi sepenuhnya</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="328"/>
+        <location filename="Windows/SettingsWindow.cpp" line="335"/>
         <source>Don&apos;t show any icon</source>
         <oldsource>Don&apos;t integrate links</oldsource>
         <translation>Jangan tampilkan ikon apa pun</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="336"/>
         <source>Show Plus icon</source>
         <translation>Tampilkan ikon Plus</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="337"/>
         <source>Show Classic icon</source>
         <translation>Tampilkan ikon Klasik</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="332"/>
+        <location filename="Windows/SettingsWindow.cpp" line="339"/>
         <source>All Boxes</source>
         <translation>Semua Box</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="333"/>
+        <location filename="Windows/SettingsWindow.cpp" line="340"/>
         <source>Active + Pinned</source>
         <translation>Aktif + Disematkan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="334"/>
+        <location filename="Windows/SettingsWindow.cpp" line="341"/>
         <source>Pinned Only</source>
         <translation>Hanya yang Disematkan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="338"/>
+        <location filename="Windows/SettingsWindow.cpp" line="345"/>
         <source>Close to Tray</source>
         <translation>Tutup ke Tray</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="339"/>
+        <location filename="Windows/SettingsWindow.cpp" line="346"/>
         <source>Prompt before Close</source>
         <translation>Konfirmasi sebelum Menutup</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="347"/>
         <source>Close</source>
         <translation>Tutup</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="348"/>
         <source>Hide (Run invisible in Background)</source>
         <translation>Sembunyikan (Jalankan secara tak terlihat di Latar Belakang)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="426"/>
+        <location filename="Windows/SettingsWindow.cpp" line="433"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="427"/>
+        <location filename="Windows/SettingsWindow.cpp" line="434"/>
         <source>Expand all groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="428"/>
+        <location filename="Windows/SettingsWindow.cpp" line="435"/>
         <source>Collapse all groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="430"/>
+        <location filename="Windows/SettingsWindow.cpp" line="437"/>
         <source>None</source>
         <translation>Tidak Ada</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="431"/>
+        <location filename="Windows/SettingsWindow.cpp" line="438"/>
         <source>Native</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="432"/>
+        <location filename="Windows/SettingsWindow.cpp" line="439"/>
         <source>Qt</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="434"/>
+        <location filename="Windows/SettingsWindow.cpp" line="441"/>
         <source>Every Day</source>
         <translation>Setiap Hari</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="435"/>
+        <location filename="Windows/SettingsWindow.cpp" line="442"/>
         <source>Every Week</source>
         <translation>Setiap Minggu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="436"/>
+        <location filename="Windows/SettingsWindow.cpp" line="443"/>
         <source>Every 2 Weeks</source>
         <translation>Setiap 2 Minggu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="444"/>
         <source>Every 30 days</source>
         <translation>Setiap 30 hari</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="439"/>
+        <location filename="Windows/SettingsWindow.cpp" line="446"/>
         <source>Ignore</source>
         <translation>Abaikan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="451"/>
+        <location filename="Windows/SettingsWindow.cpp" line="458"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3668"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3701"/>
         <source>Autocomplete Consent Required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3145"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3154"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3176"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3185"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3150"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3181"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3163"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3194"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="931"/>
+        <location filename="Windows/SettingsWindow.cpp" line="939"/>
         <source>Search for settings</source>
         <translation>Cari pengaturan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1305"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1306"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1315"/>
         <location filename="Windows/SettingsWindow.cpp" line="1316"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1326"/>
         <source>Run &amp;Sandboxed</source>
         <translation>Jalankan &amp;Dalam Sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1753"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1769"/>
         <source>kilobytes (%1)</source>
         <translation>kilobyte (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1841"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1857"/>
         <source>Volume not attached</source>
         <translation>Volume tidak terpasang</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3230"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3263"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Sertifikat pendukung ini telah kedaluwarsa, silakan &lt;a href=&quot;%1&quot;&gt;dapatkan sertifikat yang diperbarui&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3310"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Anda telah menggunakan %1/%2 sertifikat evaluasi. Tidak ada sertifikat gratis lagi yang dapat dibuat.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3312"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3345"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Dapatkan sertifikat evaluasi gratis&lt;/a&gt; dan nikmati semua fitur premium selama %1 hari.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3243"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3276"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>Sertifikat pendukung ini akan &lt;font color=&apos;red&apos;&gt;kedaluwarsa dalam %1 hari&lt;/font&gt;, silakan &lt;a href=&quot;%2&quot;&gt;dapatkan sertifikat yang diperbarui&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3142"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3173"/>
         <source>Click to reveal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3143"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3174"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
@@ -6527,232 +6527,232 @@ Right-click to copy</oldsource>
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Untuk build saat ini, fitur Plus tetap diaktifkan&lt;/font&gt;, tetapi Anda tidak lagi memiliki akses ke layanan Sandboxie-Live, termasuk pembaruan kompatibilitas dan basis data pemecahan masalah.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3278"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3311"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>Kedaluwarsa dalam: %1 hari</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3282"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3315"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>; Patreon yang memenuhi syarat selalu dapat &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;mendapatkan sertifikat terbaru&lt;/a&gt; dari xanasoft.com</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3294"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3327"/>
         <source>Options: %1</source>
         <translation>Opsi: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3297"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3330"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>Keamanan/Privasi Ditingkatkan &amp; App Boxes (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3297"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3298"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3299"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3300"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3332"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3333"/>
         <source>Enabled</source>
         <translation>Diaktifkan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="363"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3297"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3298"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3299"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3300"/>
+        <location filename="Windows/SettingsWindow.cpp" line="370"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3332"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3333"/>
         <source>Disabled</source>
         <translation>Dinonaktifkan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="335"/>
-        <location filename="Windows/SettingsWindow.cpp" line="573"/>
+        <location filename="Windows/SettingsWindow.cpp" line="342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="580"/>
         <source>Ctrl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="343"/>
         <source>Shift</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="350"/>
         <source>Same as main</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="344"/>
+        <location filename="Windows/SettingsWindow.cpp" line="351"/>
         <source>Keep current monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="345"/>
+        <location filename="Windows/SettingsWindow.cpp" line="352"/>
         <source>Active monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="346"/>
+        <location filename="Windows/SettingsWindow.cpp" line="353"/>
         <source>Primary monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="402"/>
+        <location filename="Windows/SettingsWindow.cpp" line="409"/>
         <source>Unknown Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="404"/>
+        <location filename="Windows/SettingsWindow.cpp" line="411"/>
         <source>Display %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="413"/>
         <source> (Primary)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="574"/>
+        <location filename="Windows/SettingsWindow.cpp" line="581"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3298"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3331"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>Sandbox Terenkripsi (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3299"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3332"/>
         <source>Network Interception (NetI): %1</source>
         <translation>Intersepsi Jaringan (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3300"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3333"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Desktop Sandboxie (Meja): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3364"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>Ini tidak tampak seperti Nomor Seri Sandboxie-Plus.&lt;br /&gt;Jika Anda mencoba memasukkan UpdateKey atau Tanda Tangan dari suatu sertifikat, itu tidak benar, silakan masukkan seluruh sertifikat ke dalam area teks di atas.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3338"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3371"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>Anda mencoba menggunakan fitur Upgrade-Key tanpa memasukkan sertifikat pendukung yang sudah ada sebelumnya. Harap perhatikan bahwa jenis kunci ini (&lt;b&gt;seperti yang dinyatakan dengan jelas dalam huruf tebal di situs web&lt;/b) mengharuskan Anda memiliki sertifikat pendukung yang valid dan sudah ada sebelumnya; tidak ada gunanya tanpa sertifikat tersebut.&lt;br /&gt;Jika Anda ingin menggunakan fitur-fitur tingkat lanjut, Anda perlu memperoleh sertifikat standar dan kunci upgrade fitur untuk membuka fungsionalitas tingkat lanjut.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3377"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>Anda mencoba menggunakan Renew-Key tanpa memasukkan sertifikat pendukung yang sudah ada sebelumnya. Harap perhatikan bahwa jenis kunci ini (&lt;b&gt;seperti yang dinyatakan dengan jelas dalam huruf tebal di situs web&lt;/b) mengharuskan Anda memiliki sertifikat pendukung yang valid dan sudah ada sebelumnya; tidak ada gunanya jika tidak ada sertifikat pendukung.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3349"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3382"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Jika Anda belum membaca deskripsi produk dan mendapatkan kunci ini secara tidak sengaja, silakan hubungi kami melalui email (yang tertera di situs web kami) untuk menyelesaikan masalah ini.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3380"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3413"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - Dapatkan Sertifikat EVALUASI</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3380"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3413"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>Silakan masukkan alamat email Anda untuk menerima sertifikat evaluasi gratis selama %1 hari, yang akan diterbitkan untuk %2 dan dikunci ke perangkat keras saat ini.
 Anda dapat meminta hingga %3 sertifikat evaluasi untuk setiap ID perangkat keras yang unik.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3439"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>Kesalahan mengambil sertifikat: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3439"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>Kesalahan Tidak Diketahui (mungkin masalah jaringan)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3461"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3494"/>
         <source>Contributor</source>
         <translation>Kontributor</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3463"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3496"/>
         <source>Eternal</source>
         <translation>Abadi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3465"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3498"/>
         <source>Developer</source>
         <translation>Pengembang</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3467"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3500"/>
         <source>Business</source>
         <translation>Bisnis</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3469"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3502"/>
         <source>Personal</source>
         <translation>Pribadi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3471"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3504"/>
         <source>Great Patreon</source>
         <translation>Patreon Hebat</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3473"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3506"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3475"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3508"/>
         <source>Family</source>
         <translation>Keluarga</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3479"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3512"/>
         <source>Evaluation</source>
         <translation>Evaluasi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3481"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3514"/>
         <source>Type %1</source>
         <translation>Ketik %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3511"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3544"/>
         <source>Advanced</source>
         <translation>Lanjutan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3513"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3546"/>
         <source>Advanced (L)</source>
         <translation>Lanjutan (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3515"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3548"/>
         <source>Max Level</source>
         <translation>Tingkat Maksimal</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3517"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3550"/>
         <source>Level %1</source>
         <translation>Tingkat %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3670"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3703"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3672"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3705"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -6761,335 +6761,335 @@ Choose autocomplete mode:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3680"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3713"/>
         <source>Manual</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3681"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3714"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3683"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3716"/>
         <source>While Typing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3684"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3717"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3687"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3720"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3686"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3719"/>
         <source>Cancel</source>
         <translation type="unfinished">Batal</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1869"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1885"/>
         <source>Supporter certificate required for access</source>
         <translation>Sertifikat pendukung diperlukan untuk akses</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1886"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1902"/>
         <source>Supporter certificate required for automation</source>
         <translation>Sertifikat pendukung diperlukan untuk otomatisasi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3556"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3589"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Sertifikat ini sayangnya tidak berlaku untuk build saat ini, Anda perlu mendapatkan sertifikat baru atau menurunkan ke build sebelumnya.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3558"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3591"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Meskipun sertifikat ini telah kedaluwarsa, untuk versi yang saat ini terinstal, fitur-fiturnya tetap aktif. Akan tetapi, Anda tidak akan lagi memiliki akses ke layanan Sandboxie-Live, termasuk pembaruan kompatibilitas dan basis data pemecahan masalah daring.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3560"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3593"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Sertifikat ini sayangnya telah kedaluwarsa, Anda perlu mendapatkan sertifikat baru.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1337"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <source>Sandboxed Web Browser</source>
         <translation>Peramban Web dalam Sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="440"/>
-        <location filename="Windows/SettingsWindow.cpp" line="445"/>
+        <location filename="Windows/SettingsWindow.cpp" line="447"/>
+        <location filename="Windows/SettingsWindow.cpp" line="452"/>
         <source>Notify</source>
         <translation>Notifikasi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="441"/>
-        <location filename="Windows/SettingsWindow.cpp" line="446"/>
+        <location filename="Windows/SettingsWindow.cpp" line="448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="453"/>
         <source>Download &amp; Notify</source>
         <translation>Unduh &amp; Beri Notifikasi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="442"/>
-        <location filename="Windows/SettingsWindow.cpp" line="447"/>
+        <location filename="Windows/SettingsWindow.cpp" line="449"/>
+        <location filename="Windows/SettingsWindow.cpp" line="454"/>
         <source>Download &amp; Install</source>
         <translation>Unduh &amp; Instal</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="629"/>
+        <location filename="Windows/SettingsWindow.cpp" line="637"/>
         <source>Browse for Program</source>
         <translation>Cari Program</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="749"/>
+        <location filename="Windows/SettingsWindow.cpp" line="757"/>
         <source>Add %1 Template</source>
         <translation>Tambahkan Template %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="614"/>
-        <location filename="Windows/SettingsWindow.cpp" line="795"/>
+        <location filename="Windows/SettingsWindow.cpp" line="622"/>
+        <location filename="Windows/SettingsWindow.cpp" line="803"/>
         <source>Select font</source>
         <translation>Pilih font</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="616"/>
-        <location filename="Windows/SettingsWindow.cpp" line="797"/>
+        <location filename="Windows/SettingsWindow.cpp" line="624"/>
+        <location filename="Windows/SettingsWindow.cpp" line="805"/>
         <source>Reset font</source>
         <translation>Atur ulang font</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="945"/>
+        <location filename="Windows/SettingsWindow.cpp" line="953"/>
         <source>%0, %1 pt</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1186"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1196"/>
         <source>Please enter message</source>
         <translation>Silakan masukkan pesan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1218"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1228"/>
         <source>Select Program</source>
         <translation>Pilih Program</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1218"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1228"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>File Eksekusi (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1222"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1238"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1232"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1248"/>
         <source>Please enter a menu title</source>
         <translation>Silakan masukkan judul menu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1234"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1244"/>
         <source>Please enter a command</source>
         <translation>Silakan masukkan perintah</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3235"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3268"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3313"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3346"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>Anda dapat meminta sertifikat evaluasi %1 hari gratis hingga %2 kali per ID perangkat keras.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3233"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3266"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Fitur Plus akan dinonaktifkan dalam %1 hari.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3237"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3270"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Fitur Plus tidak lagi diaktifkan.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3280"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3313"/>
         <source>Expired: %1 days ago</source>
         <translation>Kedaluwarsa: %1 hari yang lalu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3364"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3392"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3621"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3397"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3425"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3654"/>
         <source>Retrieving certificate...</source>
         <translation>Mengambil sertifikat...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3477"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3510"/>
         <source>Home</source>
         <translation>Beranda</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2003"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2020"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Jalankan &amp;Tanpa Sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2011"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2028"/>
         <source>Set Force in Sandbox</source>
         <translation>Atur Paksa di Sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2020"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2037"/>
         <source>Set Open Path in Sandbox</source>
         <translation>Atur Jalur Terbuka di Sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3539"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3572"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Ini tidak terlihat seperti sertifikat. Silakan masukkan seluruh sertifikat, bukan hanya sebagian.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3564"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3597"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>Sertifikat evaluasi telah berhasil diterapkan. Nikmati uji coba gratis Anda!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3567"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3600"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Terima kasih telah mendukung pengembangan Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3569"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3602"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
 Ini adalah sertifikat Patreon sementara, berlaku selama 3 bulan. Setelah mendekati masa kedaluwarsa, Anda dapat memperoleh sertifikat baru secara online yang akan berlaku untuk jangka waktu penuh.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3607"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3640"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>Pembaruan keamanan wajib untuk Sertifikat Pendukung Sandboxie-Plus Anda diperlukan. Apakah Anda ingin mengunduh sertifikat yang diperbarui sekarang?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3608"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3641"/>
         <source>Auto update in future</source>
         <translation>Pembaruan otomatis di masa depan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2390"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2415"/>
         <source>Update Available</source>
         <translation>Pembaruan Tersedia</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2392"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2417"/>
         <source>Installed</source>
         <translation>Terpasang</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2397"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2422"/>
         <source>by %1</source>
         <translation>oleh %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2405"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2430"/>
         <source>(info website)</source>
         <translation>(situs web info)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2432"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2458"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Add-on ini wajib dan tidak dapat dihapus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2441"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2652"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2467"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2679"/>
         <source>Select Directory</source>
         <translation>Pilih Direktori</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2473"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2499"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Periksa Sekarang&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2542"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2569"/>
         <source>Select Portable Box ini</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2542"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2552"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2569"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2579"/>
         <source>Ini Files (*.ini)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2552"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2579"/>
         <source>Save new Portable Box ini</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2557"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2584"/>
         <source>File already exists, please select a different file name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2563"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2590"/>
         <source>Invalid box name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2584"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2611"/>
         <source>Select Root Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2612"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2639"/>
         <source>Please enter the new configuration password.</source>
         <translation>Silakan masukkan kata sandi konfigurasi baru.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2616"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2643"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Silakan masukkan kembali kata sandi konfigurasi baru.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2621"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2648"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Kata sandi tidak cocok, silakan coba lagi.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2633"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2660"/>
         <source>Process</source>
         <translation>Proses</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2633"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2660"/>
         <source>Folder</source>
         <translation>Folder</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2643"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2670"/>
         <source>Please enter a program file name</source>
         <translation>Silakan masukkan nama file program</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2711"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2738"/>
         <source>Please enter the template identifier</source>
         <translation>Silakan masukkan pengenal template</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2719"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2746"/>
         <source>Error: %1</source>
         <translation>Kesalahan: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2751"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2778"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Apakah Anda benar-benar ingin menghapus template lokal yang dipilih?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3071"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3100"/>
         <source>%1 (Current)</source>
         <translation>%1 (Saat Ini)</translation>
     </message>
@@ -10682,42 +10682,42 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation>* kotak centang yang dicentang sebagian akan membiarkan perilaku ditentukan oleh mode tampilan.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2372"/>
+        <location filename="Forms/SettingsWindow.ui" line="2382"/>
         <source>Advanced Config</source>
         <translation>Konfigurasi Lanjutan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2492"/>
+        <location filename="Forms/SettingsWindow.ui" line="2502"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>Aktifkan Pemfilteran Objek Mode Kernel</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2512"/>
+        <location filename="Forms/SettingsWindow.ui" line="2522"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;root sistem berkas&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2779"/>
+        <location filename="Forms/SettingsWindow.ui" line="2789"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>Hapus kata sandi ketika jendela utama tersembunyi</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2589"/>
+        <location filename="Forms/SettingsWindow.ui" line="2599"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;root ipc&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2445"/>
+        <location filename="Forms/SettingsWindow.ui" line="2455"/>
         <source>Sandbox default</source>
         <translation>Sandbox default</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2812"/>
+        <location filename="Forms/SettingsWindow.ui" line="2822"/>
         <source>Config protection</source>
         <translation>Perlindungan konfigurasi</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2611"/>
+        <location filename="Forms/SettingsWindow.ui" line="2621"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -10793,29 +10793,29 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation>Sembunyikan proses milik Sandboxie dari daftar tugas</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1193"/>
-        <location filename="Forms/SettingsWindow.ui" line="1223"/>
+        <location filename="Forms/SettingsWindow.ui" line="1203"/>
+        <location filename="Forms/SettingsWindow.ui" line="1233"/>
         <source>Interface Options</source>
         <oldsource>Display Options</oldsource>
         <translation>Opsi Antarmuka</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1264"/>
+        <location filename="Forms/SettingsWindow.ui" line="1274"/>
         <source>Ini Editor Font</source>
         <translation>Font Editor Ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1353"/>
+        <location filename="Forms/SettingsWindow.ui" line="1363"/>
         <source>Graphic Options</source>
         <translation>Opsi Grafik</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1296"/>
+        <location filename="Forms/SettingsWindow.ui" line="1306"/>
         <source>Select font</source>
         <translation>Pilih font</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1306"/>
+        <location filename="Forms/SettingsWindow.ui" line="1316"/>
         <source>Reset font</source>
         <translation>Atur ulang font</translation>
     </message>
@@ -10824,143 +10824,143 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation type="vanished">Opsi Ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1399"/>
-        <location filename="Forms/SettingsWindow.ui" line="1462"/>
+        <location filename="Forms/SettingsWindow.ui" line="1409"/>
+        <location filename="Forms/SettingsWindow.ui" line="1472"/>
         <source>#</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1251"/>
+        <location filename="Forms/SettingsWindow.ui" line="1261"/>
         <source>External Ini Editor</source>
         <translation>Editor Ini Eksternal</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1669"/>
+        <location filename="Forms/SettingsWindow.ui" line="1679"/>
         <source>Add-Ons Manager</source>
         <translation>Pengelola Add-On</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1679"/>
+        <location filename="Forms/SettingsWindow.ui" line="1689"/>
         <source>Optional Add-Ons</source>
         <translation>Add-On Opsional</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1687"/>
+        <location filename="Forms/SettingsWindow.ui" line="1697"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
         <translation>Sandboxie-Plus menawarkan berbagai opsi dan mendukung berbagai ekstensi. Di halaman ini, Anda dapat mengkonfigurasi integrasi add-on, plugin, dan komponen pihak ketiga lainnya. Komponen opsional dapat diunduh dari web, dan beberapa instalasi mungkin memerlukan hak akses administrator.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1723"/>
+        <location filename="Forms/SettingsWindow.ui" line="1733"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1728"/>
+        <location filename="Forms/SettingsWindow.ui" line="1738"/>
         <source>Version</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1733"/>
+        <location filename="Forms/SettingsWindow.ui" line="1743"/>
         <source>Description</source>
         <translation>Deskripsi</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1741"/>
+        <location filename="Forms/SettingsWindow.ui" line="1751"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update add-on list now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://addons&quot;&gt;perbarui daftar add-on sekarang&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1751"/>
+        <location filename="Forms/SettingsWindow.ui" line="1761"/>
         <source>Install</source>
         <translation>Instal</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1761"/>
+        <location filename="Forms/SettingsWindow.ui" line="1771"/>
         <source>Add-On Configuration</source>
         <translation>Konfigurasi Add-On</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1769"/>
+        <location filename="Forms/SettingsWindow.ui" line="1779"/>
         <source>Enable Ram Disk creation</source>
         <translation>Aktifkan pembuatan Disk RAM</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1776"/>
+        <location filename="Forms/SettingsWindow.ui" line="1786"/>
         <source>kilobytes</source>
         <translation>kilobyte</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1829"/>
+        <location filename="Forms/SettingsWindow.ui" line="1839"/>
         <source>Disk Image Support</source>
         <translation>Dukungan Image Disk</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1846"/>
+        <location filename="Forms/SettingsWindow.ui" line="1856"/>
         <source>RAM Limit</source>
         <translation>Batas RAM</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1813"/>
+        <location filename="Forms/SettingsWindow.ui" line="1823"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
         <translation>&lt;a href=&quot;addon://ImDisk&quot;&gt;Instal ImDisk&lt;/a&gt; driver untuk mengaktifkan dukungan Disk RAM dan Image Disk.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1899"/>
+        <location filename="Forms/SettingsWindow.ui" line="1909"/>
         <source>Sandboxie Support</source>
         <translation>Dukungan Sandboxie</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1988"/>
+        <location filename="Forms/SettingsWindow.ui" line="1998"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Sertifikat pendukung ini telah kedaluwarsa, silakan &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;dapatkan sertifikat yang diperbarui&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2055"/>
+        <location filename="Forms/SettingsWindow.ui" line="2065"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>Pendukung proyek Sandboxie-Plus dapat menerima &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;sertifikat pendukung&lt;/a&gt;. Ini seperti kunci lisensi tetapi untuk orang-orang hebat yang menggunakan perangkat lunak sumber terbuka. :-)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1936"/>
+        <location filename="Forms/SettingsWindow.ui" line="1946"/>
         <source>Get</source>
         <translation>Dapatkan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2078"/>
+        <location filename="Forms/SettingsWindow.ui" line="2088"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
         <translation>Ambil/Tingkatkan/Perbarui sertifikat menggunakan Nomor Seri</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2023"/>
+        <location filename="Forms/SettingsWindow.ui" line="2033"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
         <translation>Menjaga Sandboxie tetap up to date dengan rilis berkelanjutan Windows dan kompatibel dengan semua browser web adalah upaya yang tak ada habisnya. Anda dapat mendukung pengembangan dengan &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;berkontribusi langsung ke proyek&lt;/a&gt;, menunjukkan dukungan Anda dengan &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;membeli sertifikat pendukung&lt;/a&gt;, menjadi patron dengan &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;berlangganan di Patreon&lt;/a&gt;, atau melalui &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;donasi PayPal&lt;/a&gt;.&lt;br /&gt;Dukungan Anda memainkan peran vital dalam kemajuan dan pemeliharaan Sandboxie.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1922"/>
+        <location filename="Forms/SettingsWindow.ui" line="1932"/>
         <source>SBIE_-_____-_____-_____-_____</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2088"/>
+        <location filename="Forms/SettingsWindow.ui" line="2098"/>
         <source>Eval Cert</source>
         <translation>Evaluasi Sertifikat</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2184"/>
+        <location filename="Forms/SettingsWindow.ui" line="2194"/>
         <source>Update Settings</source>
         <translation>Pengaturan Pembaruan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2341"/>
+        <location filename="Forms/SettingsWindow.ui" line="2351"/>
         <source>Update Check Interval</source>
         <translation>Interval Pemeriksaan Pembaruan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2390"/>
+        <location filename="Forms/SettingsWindow.ui" line="2400"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;root registri&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2582"/>
+        <location filename="Forms/SettingsWindow.ui" line="2592"/>
         <source>Sandboxing features</source>
         <translation>Fitur Sandboxing</translation>
     </message>
@@ -10969,43 +10969,43 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation type="vanished">Preset Sandboxie.ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2654"/>
+        <location filename="Forms/SettingsWindow.ui" line="2664"/>
         <source>Change Password</source>
         <translation>Ubah Kata Sandi</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2681"/>
+        <location filename="Forms/SettingsWindow.ui" line="2691"/>
         <source>Password must be entered in order to make changes</source>
         <translation>Kata sandi harus dimasukkan untuk melakukan perubahan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2661"/>
+        <location filename="Forms/SettingsWindow.ui" line="2671"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>Hanya akun pengguna Administrator yang dapat membuat perubahan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2786"/>
+        <location filename="Forms/SettingsWindow.ui" line="2796"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>Pantau perubahan pada Sandboxie.ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3080"/>
+        <location filename="Forms/SettingsWindow.ui" line="3090"/>
         <source>App Templates</source>
         <translation>Template Aplikasi</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3090"/>
+        <location filename="Forms/SettingsWindow.ui" line="3100"/>
         <source>App Compatibility</source>
         <translation>Kompatibilitas Aplikasi</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2720"/>
+        <location filename="Forms/SettingsWindow.ui" line="2730"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
         <translation>Hanya akun pengguna Administrator yang dapat menggunakan perintah Jeda Pemaksaan Program</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2528"/>
+        <location filename="Forms/SettingsWindow.ui" line="2538"/>
         <source>Portable root folder</source>
         <translation>Folder root portabel</translation>
     </message>
@@ -11025,12 +11025,12 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation>Tampilkan Ikon di Systray:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2555"/>
+        <location filename="Forms/SettingsWindow.ui" line="2565"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>Gunakan Windows Filtering Platform untuk membatasi akses jaringan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2545"/>
+        <location filename="Forms/SettingsWindow.ui" line="2555"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
         <translation type="unfinished">Kaitkan panggilan sistem Win32k yang dipilih untuk mengaktifkan akselerasi GPU (eksperimental)</translation>
@@ -11062,17 +11062,17 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation>Gunakan Pohon Halaman di Opsi Kotak, bukan Tab Bersarang *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1161"/>
+        <location filename="Forms/SettingsWindow.ui" line="1171"/>
         <source>Use large icons in box list *</source>
         <translation>Gunakan ikon besar di daftar kotak *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1231"/>
+        <location filename="Forms/SettingsWindow.ui" line="1241"/>
         <source>High DPI Scaling</source>
         <translation>Penskalaan DPI Tinggi</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1171"/>
+        <location filename="Forms/SettingsWindow.ui" line="1181"/>
         <source>Don&apos;t show icons in menus *</source>
         <translation>Jangan tampilkan ikon di menu *</translation>
     </message>
@@ -11082,12 +11082,12 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation>Gunakan Tema Gelap</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1386"/>
+        <location filename="Forms/SettingsWindow.ui" line="1396"/>
         <source>Font Scaling</source>
         <translation>Penskalaan Font</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1422"/>
+        <location filename="Forms/SettingsWindow.ui" line="1432"/>
         <source>(Restart required)</source>
         <translation>(Perlu dimulai ulang)</translation>
     </message>
@@ -11103,12 +11103,12 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation>Tampilkan Latar Belakang &quot;Pizza&quot; di daftar kotak *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1244"/>
+        <location filename="Forms/SettingsWindow.ui" line="1254"/>
         <source>%</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1154"/>
+        <location filename="Forms/SettingsWindow.ui" line="1164"/>
         <source>Alternate row background in lists</source>
         <translation>Latar belakang baris bergantian dalam daftar</translation>
     </message>
@@ -11119,45 +11119,45 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="922"/>
-        <location filename="Forms/SettingsWindow.ui" line="1718"/>
-        <location filename="Forms/SettingsWindow.ui" line="2908"/>
-        <location filename="Forms/SettingsWindow.ui" line="3121"/>
-        <location filename="Forms/SettingsWindow.ui" line="3281"/>
+        <location filename="Forms/SettingsWindow.ui" line="1728"/>
+        <location filename="Forms/SettingsWindow.ui" line="2918"/>
+        <location filename="Forms/SettingsWindow.ui" line="3131"/>
+        <location filename="Forms/SettingsWindow.ui" line="3291"/>
         <source>Name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2913"/>
+        <location filename="Forms/SettingsWindow.ui" line="2923"/>
         <source>Path</source>
         <translation>Jalur</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2872"/>
+        <location filename="Forms/SettingsWindow.ui" line="2882"/>
         <source>Remove Program</source>
         <translation>Hapus Program</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2893"/>
+        <location filename="Forms/SettingsWindow.ui" line="2903"/>
         <source>Add Program</source>
         <translation>Tambah Program</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2862"/>
+        <location filename="Forms/SettingsWindow.ui" line="2872"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>Ketika salah satu program berikut dijalankan di luar sandbox mana pun, Sandboxie akan mengeluarkan pesan SBIE1301.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2886"/>
+        <location filename="Forms/SettingsWindow.ui" line="2896"/>
         <source>Add Folder</source>
         <translation>Tambah Folder</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2842"/>
+        <location filename="Forms/SettingsWindow.ui" line="2852"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>Cegah program yang terdaftar untuk dijalankan pada sistem ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2900"/>
+        <location filename="Forms/SettingsWindow.ui" line="2910"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>Keluarkan pesan 1308 ketika program gagal dimulai</translation>
     </message>
@@ -11192,27 +11192,27 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation>Integrasikan dengan Menu Start Host</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1200"/>
+        <location filename="Forms/SettingsWindow.ui" line="1210"/>
         <source>Use new config dialog layout *</source>
         <translation>Gunakan tata letak dialog konfigurasi baru *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2824"/>
+        <location filename="Forms/SettingsWindow.ui" line="2834"/>
         <source>Program Control</source>
         <translation>Kontrol Program</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2834"/>
+        <location filename="Forms/SettingsWindow.ui" line="2844"/>
         <source>Program Alerts</source>
         <translation>Peringatan Program</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2879"/>
+        <location filename="Forms/SettingsWindow.ui" line="2889"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>Keluarkan pesan 1301 ketika proses yang dipaksa telah dinonaktifkan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2382"/>
+        <location filename="Forms/SettingsWindow.ui" line="2392"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>Konfigurasi Sandboxie</translation>
@@ -11249,8 +11249,8 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1027"/>
-        <location filename="Forms/SettingsWindow.ui" line="1697"/>
-        <location filename="Forms/SettingsWindow.ui" line="3301"/>
+        <location filename="Forms/SettingsWindow.ui" line="1707"/>
+        <location filename="Forms/SettingsWindow.ui" line="3311"/>
         <source>Remove</source>
         <translation>Hapus</translation>
     </message>
@@ -11317,42 +11317,42 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation>Minimalkan ke tray</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1442"/>
+        <location filename="Forms/SettingsWindow.ui" line="1452"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
         <translation>Sembunyikan jendela SandMan dari tangkapan layar (perlu restart UI)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1793"/>
+        <location filename="Forms/SettingsWindow.ui" line="1803"/>
         <source>Assign drive letter to Ram Disk</source>
         <translation>Tetapkan huruf drive untuk Disk RAM</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1872"/>
+        <location filename="Forms/SettingsWindow.ui" line="1882"/>
         <source>When a Ram Disk is already mounted you need to unmount it for this option to take effect.</source>
         <translation>Jika Ram Disk sudah terpasang, Anda perlu melepasnya agar opsi ini berlaku.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1875"/>
+        <location filename="Forms/SettingsWindow.ui" line="1885"/>
         <source>* takes effect on disk creation</source>
         <translation>* berlaku saat pembuatan disk</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1889"/>
+        <location filename="Forms/SettingsWindow.ui" line="1899"/>
         <source>Support &amp;&amp; Updates</source>
         <translation>Dukungan &amp;&amp; Pembaruan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1975"/>
+        <location filename="Forms/SettingsWindow.ui" line="1985"/>
         <source>Cert Options</source>
         <translation>Opsi Sertifikat</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2004"/>
+        <location filename="Forms/SettingsWindow.ui" line="2014"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Panduan penggunaan sertifikat&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1949"/>
+        <location filename="Forms/SettingsWindow.ui" line="1959"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
         <translation></translation>
     </message>
@@ -11377,90 +11377,90 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation>Beralih ke desktop sandbox dengan klik ganda</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1435"/>
+        <location filename="Forms/SettingsWindow.ui" line="1445"/>
         <source>Ini Editor Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2114"/>
+        <location filename="Forms/SettingsWindow.ui" line="2124"/>
         <source>Cert Info</source>
         <translation>Info Sertifikat</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2130"/>
+        <location filename="Forms/SettingsWindow.ui" line="2140"/>
         <source>Sandboxie-Plus Version: 0.0.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2140"/>
+        <location filename="Forms/SettingsWindow.ui" line="2150"/>
         <source>Sandboxie Updater</source>
         <translation>Pembaruan Sandboxie</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2171"/>
+        <location filename="Forms/SettingsWindow.ui" line="2181"/>
         <source>Keep add-on list up to date</source>
         <translation>Jaga daftar add-on tetap terbarui</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2228"/>
+        <location filename="Forms/SettingsWindow.ui" line="2238"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Saluran Insider menawarkan akses awal ke fitur-fitur baru dan perbaikan bug yang pada akhirnya akan dirilis ke publik, serta semua peningkatan yang relevan dari saluran stabil.
 Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang belum teruji, berpotensi merusak, atau eksperimental yang mungkin belum siap untuk penggunaan yang lebih luas.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2232"/>
+        <location filename="Forms/SettingsWindow.ui" line="2242"/>
         <source>Search in the Insider channel</source>
         <translation>Cari di saluran Insider</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2262"/>
+        <location filename="Forms/SettingsWindow.ui" line="2272"/>
         <source>New full installers from the selected release channel.</source>
         <translation>Penginstal penuh baru dari saluran rilis yang dipilih.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2265"/>
+        <location filename="Forms/SettingsWindow.ui" line="2275"/>
         <source>Full Upgrades</source>
         <translation>Peningkatan Penuh</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2275"/>
+        <location filename="Forms/SettingsWindow.ui" line="2285"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
         <translation>Periksa secara berkala versi Sandboxie-Plus yang baru</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2285"/>
+        <location filename="Forms/SettingsWindow.ui" line="2295"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>Selengkapnya tentang &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Saluran Insider&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2305"/>
+        <location filename="Forms/SettingsWindow.ui" line="2315"/>
         <source>Keep Troubleshooting scripts up to date</source>
         <translation>Jaga skrip Pemecahan Masalah tetap terbarui</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2499"/>
+        <location filename="Forms/SettingsWindow.ui" line="2509"/>
         <source>Default sandbox:</source>
         <translation>Sandbox default:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2569"/>
+        <location filename="Forms/SettingsWindow.ui" line="2579"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>Gunakan login Sandboxie alih-alih token anonim</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2406"/>
+        <location filename="Forms/SettingsWindow.ui" line="2416"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
         <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
         <translation type="unfinished">Tambah grup &quot;Sandboxie\Semua Sandbox&quot; ke token sandbox (eksperimental)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2535"/>
+        <location filename="Forms/SettingsWindow.ui" line="2545"/>
         <source>This feature protects the sandbox by restricting access, preventing other users from accessing the folder. Ensure the root folder path contains the %USER% macro so that each user gets a dedicated sandbox folder.</source>
         <translation>Fitur ini melindungi sandbox dengan membatasi akses, mencegah pengguna lain mengakses folder tersebut. Pastikan jalur folder root berisi makro %USER% sehingga setiap pengguna mendapatkan folder sandbox khusus.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2538"/>
+        <location filename="Forms/SettingsWindow.ui" line="2548"/>
         <source>Restrict box root folder access to the the user whom created that sandbox</source>
         <translation>Batasi akses folder root kotak hanya untuk pengguna yang membuat sandbox tersebut</translation>
     </message>
@@ -11510,190 +11510,195 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1213"/>
+        <location filename="Forms/SettingsWindow.ui" line="1154"/>
+        <source>Highlight unapplied changes in Options and Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1223"/>
         <source>Group state on start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1449"/>
+        <location filename="Forms/SettingsWindow.ui" line="1459"/>
         <source>UI Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1471"/>
+        <location filename="Forms/SettingsWindow.ui" line="1481"/>
         <source>Select Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1481"/>
+        <location filename="Forms/SettingsWindow.ui" line="1491"/>
         <source>Reset Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1509"/>
+        <location filename="Forms/SettingsWindow.ui" line="1519"/>
         <source>Window Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1520"/>
+        <location filename="Forms/SettingsWindow.ui" line="1530"/>
         <source>Support Dialog:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1533"/>
+        <location filename="Forms/SettingsWindow.ui" line="1543"/>
         <source>File Recovery:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1546"/>
+        <location filename="Forms/SettingsWindow.ui" line="1556"/>
         <source>Fallback:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1591"/>
+        <location filename="Forms/SettingsWindow.ui" line="1601"/>
         <source>Non-main:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1607"/>
+        <location filename="Forms/SettingsWindow.ui" line="1617"/>
         <source>Hint: Specific window settings override non-main settings. Fallback is used when the target monitor cannot be used; when disabled, each window falls back to its default current-monitor behavior.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1629"/>
+        <location filename="Forms/SettingsWindow.ui" line="1639"/>
         <source>Window Locations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1636"/>
+        <location filename="Forms/SettingsWindow.ui" line="1646"/>
         <source>Notifications:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1649"/>
+        <location filename="Forms/SettingsWindow.ui" line="1659"/>
         <source>Main:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2631"/>
+        <location filename="Forms/SettingsWindow.ui" line="2641"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2641"/>
+        <location filename="Forms/SettingsWindow.ui" line="2651"/>
         <source>Sandboxie.ini</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2674"/>
+        <location filename="Forms/SettingsWindow.ui" line="2684"/>
         <source>Add Portable Box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2704"/>
+        <location filename="Forms/SettingsWindow.ui" line="2714"/>
         <source>Remove Entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2712"/>
+        <location filename="Forms/SettingsWindow.ui" line="2722"/>
         <source>Import Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2799"/>
+        <location filename="Forms/SettingsWindow.ui" line="2809"/>
         <source>Sandbox Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2746"/>
+        <location filename="Forms/SettingsWindow.ui" line="2756"/>
         <source>Create Portable Box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2688"/>
+        <location filename="Forms/SettingsWindow.ui" line="2698"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2647"/>
+        <location filename="Forms/SettingsWindow.ui" line="2657"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2772"/>
+        <location filename="Forms/SettingsWindow.ui" line="2782"/>
         <source>Add Portable Root</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2921"/>
+        <location filename="Forms/SettingsWindow.ui" line="2931"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
         <translation>Keluarkan pesan 1321 ketika proses telah dipaksa masuk ke sandbox</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2931"/>
+        <location filename="Forms/SettingsWindow.ui" line="2941"/>
         <source>Force Process Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2959"/>
+        <location filename="Forms/SettingsWindow.ui" line="2969"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2962"/>
+        <location filename="Forms/SettingsWindow.ui" line="2972"/>
         <source>Force programs opening boxed files into their sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2969"/>
+        <location filename="Forms/SettingsWindow.ui" line="2979"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2989"/>
+        <location filename="Forms/SettingsWindow.ui" line="2999"/>
         <source>Sandbox for MoTW marked files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3008"/>
+        <location filename="Forms/SettingsWindow.ui" line="3018"/>
         <source>USB Drive Sandboxing</source>
         <translation>Sandbox USB Drive</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3024"/>
+        <location filename="Forms/SettingsWindow.ui" line="3034"/>
         <source>Volume</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3029"/>
+        <location filename="Forms/SettingsWindow.ui" line="3039"/>
         <source>Information</source>
         <translation>Informasi</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3037"/>
+        <location filename="Forms/SettingsWindow.ui" line="3047"/>
         <source>Sandbox for USB drives:</source>
         <translation>Sandbox untuk drive USB:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3053"/>
+        <location filename="Forms/SettingsWindow.ui" line="3063"/>
         <source>Automatically sandbox all attached USB drives</source>
         <translation>Otomatis sandbox semua drive USB yang terpasang</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3110"/>
+        <location filename="Forms/SettingsWindow.ui" line="3120"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
         <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
         <translation>&lt;a href=&quot;sbie://templates&quot;&gt;perbarui template kompatibilitas sekarang&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3166"/>
+        <location filename="Forms/SettingsWindow.ui" line="3176"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>Di masa depan, jangan periksa kompatibilitas perangkat lunak</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3341"/>
+        <location filename="Forms/SettingsWindow.ui" line="3351"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
@@ -11713,7 +11718,7 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3389"/>
+        <location filename="Forms/SettingsWindow.ui" line="3399"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -11759,77 +11764,77 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3412"/>
+        <location filename="Forms/SettingsWindow.ui" line="3422"/>
         <source>Complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3478"/>
+        <location filename="Forms/SettingsWindow.ui" line="3488"/>
         <source>Editor settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3481"/>
+        <location filename="Forms/SettingsWindow.ui" line="3491"/>
         <source>⚙</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3359"/>
+        <location filename="Forms/SettingsWindow.ui" line="3369"/>
         <source>Tooltips</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3462"/>
+        <location filename="Forms/SettingsWindow.ui" line="3472"/>
         <source>Validate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3146"/>
+        <location filename="Forms/SettingsWindow.ui" line="3156"/>
         <source>Enable</source>
         <translation>Aktifkan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3129"/>
+        <location filename="Forms/SettingsWindow.ui" line="3139"/>
         <source>Disable</source>
         <translation>Nonaktifkan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3136"/>
+        <location filename="Forms/SettingsWindow.ui" line="3146"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>Sandboxie telah mendeteksi aplikasi perangkat lunak berikut di sistem Anda. Klik OK untuk menerapkan pengaturan konfigurasi, yang akan meningkatkan kompatibilitas dengan aplikasi ini. Pengaturan konfigurasi ini akan berpengaruh pada semua sandbox yang ada dan sandbox baru.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3189"/>
+        <location filename="Forms/SettingsWindow.ui" line="3199"/>
         <source>Local Templates</source>
         <translation>Template Lokal</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3257"/>
+        <location filename="Forms/SettingsWindow.ui" line="3267"/>
         <source>Add Template</source>
         <translation>Tambah Template</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3225"/>
+        <location filename="Forms/SettingsWindow.ui" line="3235"/>
         <source>Text Filter</source>
         <translation>Filter Teks</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3235"/>
+        <location filename="Forms/SettingsWindow.ui" line="3245"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation>Daftar ini berisi template khusus buatan pengguna untuk opsi sandbox</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3270"/>
+        <location filename="Forms/SettingsWindow.ui" line="3280"/>
         <source>Open Template</source>
         <translation>Buka Template</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3328"/>
+        <location filename="Forms/SettingsWindow.ui" line="3338"/>
         <source>Edit ini Section</source>
         <translation>Edit Bagian ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3445"/>
+        <location filename="Forms/SettingsWindow.ui" line="3455"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
@@ -11861,58 +11866,58 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3425"/>
+        <location filename="Forms/SettingsWindow.ui" line="3435"/>
         <source>Save</source>
         <translation>Simpan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3379"/>
+        <location filename="Forms/SettingsWindow.ui" line="3389"/>
         <source>Edit ini</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3372"/>
+        <location filename="Forms/SettingsWindow.ui" line="3382"/>
         <source>Cancel</source>
         <translation>Batal</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2208"/>
+        <location filename="Forms/SettingsWindow.ui" line="2218"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
         <translation>Pembaruan Bertahap</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2205"/>
+        <location filename="Forms/SettingsWindow.ui" line="2215"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>Hotpatch untuk versi yang diinstal, pembaruan untuk Templates.ini dan terjemahan.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2218"/>
+        <location filename="Forms/SettingsWindow.ui" line="2228"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Saluran pratinjau berisi pra-rilis GitHub terkini.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2312"/>
+        <location filename="Forms/SettingsWindow.ui" line="2322"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>Saluran stabil berisi rilis GitHub stabil terkini.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2315"/>
+        <location filename="Forms/SettingsWindow.ui" line="2325"/>
         <source>Search in the Stable channel</source>
         <translation>Cari di saluran Stabil</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2221"/>
+        <location filename="Forms/SettingsWindow.ui" line="2231"/>
         <source>Search in the Preview channel</source>
         <translation>Cari di saluran Pratinjau</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1929"/>
+        <location filename="Forms/SettingsWindow.ui" line="1939"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
         <translation>Di masa depan, jangan beritahu tentang kedaluwarsa sertifikat</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2071"/>
+        <location filename="Forms/SettingsWindow.ui" line="2081"/>
         <source>Enter the support certificate here</source>
         <translation>Masukkan sertifikat dukungan di sini</translation>
     </message>

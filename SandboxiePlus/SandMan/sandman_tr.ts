@@ -416,12 +416,12 @@ Leet (L337) Konuşma değişikliklerinin uygulanmasıyla 512 bit&apos;e çıkar 
     <message>
         <location filename="BoxTransfer.cpp" line="84"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaynak</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="94"/>
         <source>Export Global Configuration</source>
-        <translation>Genel Ayarları Dışa Aktar</translation>
+        <translation>Genel Ayarları dışa aktar</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="94"/>
@@ -431,7 +431,7 @@ Leet (L337) Konuşma değişikliklerinin uygulanmasıyla 512 bit&apos;e çıkar 
     <message>
         <location filename="BoxTransfer.cpp" line="99"/>
         <source>Export each box to its own file</source>
-        <translation type="unfinished"></translation>
+        <translation>Her bir alan ayrı dosyaya aktarılsın</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="104"/>
@@ -482,7 +482,7 @@ Leet (L337) Konuşma değişikliklerinin uygulanmasıyla 512 bit&apos;e çıkar 
     <message>
         <location filename="BoxTransfer.cpp" line="253"/>
         <source>Duplicate!</source>
-        <translation type="unfinished"></translation>
+        <translation>Çift!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="447"/>
@@ -493,7 +493,7 @@ Leet (L337) Konuşma değişikliklerinin uygulanmasıyla 512 bit&apos;e çıkar 
     <message>
         <location filename="BoxTransfer.cpp" line="462"/>
         <source>Cannot export: Sandbox has running processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dışa aktarılamıyor: Korumalı alanda çalışan işlemler var.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="481"/>
@@ -503,72 +503,72 @@ Leet (L337) Konuşma değişikliklerinin uygulanmasıyla 512 bit&apos;e çıkar 
     <message>
         <location filename="BoxTransfer.cpp" line="486"/>
         <source>No boxes selected for separate file export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayrı dosyaya aktarım için hiçbir alan seçilmedi.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="529"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
-        <translation>&apos;%1&apos; numaralı korumalı alanda çalışan işlemler var. Atlansın mı?</translation>
+        <translation>&apos;%1&apos; korumalı alanında çalışan işlemler var. Atlansın mı?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="550"/>
         <source>Mount &apos;%1&apos; for Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Dışa Aktarım için &apos;%1&apos; Alanını Bağlayın</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="553"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Şifrelenmiş &apos;%1&apos; korumalı alanına bağlanılamadı. Atlansın mı?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="564"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; alanına yeniden bağlanılabilmesi için bağlantısının kesilmesi başarısız oldu.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="574"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Şifrelenmiş &apos;%1&apos; korumalı alanına bağlanılamadı.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="606"/>
         <source>Select Export Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Dışa Aktarma Klasörünü Seçin</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="645"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished">Korumalı Alanı Dışa Aktar</translation>
+        <translation>Korumalı Alanı Dışa Aktar</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="940"/>
         <source>Password for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 için parola</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="956"/>
         <source>Failed to open archive (%1): %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Arşiv açılamadı (%1): %2</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1014"/>
         <source>Select Archives</source>
-        <translation type="unfinished"></translation>
+        <translation>Arşivleri Seçin</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1015"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip Arşivi (*.7z);;Zip Arşivi (*.zip);;Tüm Arşivler (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1052"/>
         <source>The selected archives do not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçilen arşivler herhangi bir korumalı alan verisi içermemektedir.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1078"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aynı ada sahip (&apos;%1&apos;) birden fazla alanı içe aktaramazsınız. Lütfen önce adlarını değiştirin.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1164"/>
@@ -597,7 +597,7 @@ Leet (L337) Konuşma değişikliklerinin uygulanmasıyla 512 bit&apos;e çıkar 
     <message>
         <location filename="BoxTransfer.cpp" line="1094"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
-        <translation>&apos;%1&apos; numaralı korumalı alan zaten mevcut. Yapılandırmanın üzerine yazılacak. Devam edilsin mi?</translation>
+        <translation>&apos;%1&apos; korumalı alan zaten mevcut. Yapılandırmanın üzerine yazılacak. Devam edilsin mi?</translation>
     </message>
 </context>
 <context>
@@ -2998,7 +2998,7 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="833"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1007"/>
@@ -3387,7 +3387,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="932"/>
         <source>%1 file(s) hidden by AutoRecoverIgnore</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dosya AutoRecoverIgnore tarafından gizlendi</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="1283"/>
@@ -4095,7 +4095,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="4632"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
-        <translation>%2: %3 bölümünde %1 yapılandırma parametresi ayarlanamadı</translation>
+        <translation>%2 bölümündeki %1 yapılandırma ayarı ayarlanamadı: %3</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="982"/>
@@ -4181,7 +4181,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="521"/>
         <source> (Administrator)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Yönetici)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="844"/>
@@ -4211,7 +4211,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="1514"/>
         <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanlar: %1 (%2 etkin) | İşlemler: %3 | Bellek: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2031"/>
@@ -5264,17 +5264,17 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Models/SbieModel.cpp" line="840"/>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation>CPU</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="841"/>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Bellek</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="842"/>
         <source>Private Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Özel Baytlar</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="843"/>
@@ -6039,25 +6039,29 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <location filename="Views/SbieView.cpp" line="638"/>
         <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">    CPU: %1 | Bellek: %2 | Özel Baytlar: %3
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="641"/>
         <source>    Sandbox: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Korumalı Alan : %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="643"/>
         <source>    Image: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Görüntü: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="646"/>
         <source>    Start Time: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Başlangıç Zamanı: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1113"/>
@@ -9190,17 +9194,17 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1835"/>
         <source>Total CPU Rate Limit (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Toplam CPU Hız Sınırı (%):</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1851"/>
         <source>Leave it blank to disable the setting (1-100)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayarı devre dışı bırakmak için boş bırakın (1-100)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1861"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1921"/>
@@ -9346,12 +9350,12 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4419"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
-        <translation type="unfinished"></translation>
+        <translation>Yukarıdaki hariç tutma listesini kullanarak eşleşen dosyaları Hızlı Kurtarma penceresinden gizleyebilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4422"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurtarma penceresinde &quot;Tüm Dosyaları Göster&quot; onay kutusunun işaretlenmemiş olması gerekir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4483"/>
@@ -10320,7 +10324,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>Show Ignored Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Yok Sayılanları Göster</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
@@ -11356,7 +11360,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1154"/>
         <source>Highlight unapplied changes in Options and Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçenekler ve Ayarlar penceresindeki uygulanmamış değişiklikleri vurgula</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1223"/>
@@ -11437,7 +11441,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2684"/>
         <source>Add Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Taşınabilir Alan Ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2714"/>
@@ -11501,12 +11505,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2969"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alan yolundan dosya açan programları o korumalı alanda çalışmaya zorlar.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2972"/>
         <source>Force programs opening boxed files into their sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Programları korumalı alan yolunun ait olduğu alanda çalışmaya zorla</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2979"/>

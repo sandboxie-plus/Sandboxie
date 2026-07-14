@@ -1,10 +1,15 @@
 ﻿{
-"Description Text...": "Leírás szövege...",
+"Address and resolve active problems": "Az aktív problémák kezelése és megoldása",
 "Fix current issues": "Jelenlegi problémák javítása",
+"Troubleshoot sandbox isolation issues": "A homokozó elszigetelésével kapcsolatos problémák elhárítása",
 "Fix issues with sandboxing": "A homokozóval kapcsolatos problémák kijavítása",
+"Fix app compatibility problems": "Alkalmazás-kompatibilitási problémák megoldása",
 "An Application does not work properly when sandboxed": "Egy alkalmazás nem működik megfelelően homokozóban",
+"Resolve browser-specific problems": "Böngészőspecifikus problémák megoldása",
 "Issues with a web browser": "Böngészővel kapcsolatos problémák",
+"Clean up and maintain sandboxes": "Tisztítsa meg és tartsa karban a homokozókat",
 "Perform Sandbox maintenance": "Homokozó karbantartás elvégzése",
+"Fix interface and shell integration": "Javítsa ki az interfész és a shell integrációt",
 "Fix issues with the UI or Shell": "Felhasználói felülettel vagy a Shell-lel kapcsolatos problémák megoldása",
 
 "Yes": "Igen",
@@ -12,7 +17,7 @@
 "\nPlease note that this required preset works only with a valid supporter certificate!": "\nFelhívjuk figyelmét, hogy ez a szükséges előbeállítás csak érvényes támogatói tanúsítvánnyal működik!",
 
 "App compatibility checker": "Alkalmazás-kompatibilitás-ellenőrző",
-"This script check which app compatibility templates needs to be enabled": "Ez a szkript ellenőrzi, hogy mely alkalmazáskompatibilitási sablonokat kell engedélyezni",
+"This script checks which app compatibility templates need to be enabled": "Ez a szkript ellenőrzi, hogy mely alkalmazáskompatibilitási sablonokat kell engedélyezni",
 "Loaded %1 templates": "%1 sablon betöltve",
 
 "Browser shortcut is missing from the desktop": "A böngésző parancsikonja hiányzik az asztalról",
@@ -25,17 +30,23 @@
 "Select Browser Path": "Böngésző útvonal kiválasztása",
 
 "Explorer Context Menu extension does not work": "Az Intéző helyi menü kiterjesztése nem működik",
-"This procedure will re install the shell integration": "Ez az eljárás újratelepíti a shell-integrációt",
+"This procedure will reinstall the shell integration": "Ez az eljárás újratelepíti a shell-integrációt",
 "Add Run Sandboxed": "'Izolált futtatás' hozzáadása",
 "Add Run Unsandboxed": "'Futtatás homokozón kívül' hozzáadása",
 "Install legacy shell extensions": "Régebbi shell-bővítmények telepítése",
 "Select which shell options should be reinstalled": "Válassza ki, hogy mely shell-beállításokat telepíti újra",
 
+"Extensions or Credentials are disappearing": "A bővítmények vagy a hitelesítő adatok eltűnnek",
+"Web Browser Extensions are being reset, or login credentials are forgotten": "A webböngésző-bővítmények visszaállítása folyamatban van, vagy a bejelentkezési adatok elfelejtődtek",
+"Select which box to fix.": "Válassza ki a javítandó mezőt.",
+"The options have been applied. Please test your browser in %1 and indicate if the issue has been resolved.": "A lehetőségeket alkalmazták. Kérjük, tesztelje böngészőjét az %1-ben, és jelezze, hogy a probléma megoldódott-e.",
+"Chrome elevation service fix not successful": "A Chrome emelési szolgáltatás javítása nem sikerült",
+
 "Low FPS in sandboxed games": "Alacsony FPS homokozós játékokban",
 "This procedure will optimize the box settings for gaming": "Ez az eljárás optimalizálja a homokozó beállításait a játékhoz",
 "Select which box to optimize.": "Az optimizálandó homokozó kiválasztása.",
 "To apply recommended settings press NEXT. \n": "Az ajánlott beállítások alkalmazásához nyomja meg a KÖVETKEZŐ gombot. \n",
-"The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.": "A beállításokat alkalmazásra kerültek. Kérjük, próbálja ki a játékot itt: %1, és jelezze, ha a probléma megoldódott.",
+"The options have been applied. Please try out your game in %1 and indicate if the issue has been resolved.": "A beállításokat alkalmazásra kerültek. Kérjük, próbálja ki a játékot itt: %1, és jelezze, ha a probléma megoldódott.",
 "FPS optimization not successful": "Az FPS optimizálása nem sikerült",
 
 "Failed to install application into a sandbox": "Nem sikerült telepíteni az alkalmazást a homokozóba",
@@ -50,10 +61,10 @@
 "no mitigation worked": "nincs hatáscsökkentés",
 
 "Webcam or Sound does not work when sandboxed": "A webkamera vagy a hang nem működik a homokozóban",
-"It helps troubleshoot webcam and audio issues in the sandbox": "Segít a webkamera- és hangproblémák elhárításában a homokozóban",
+"This procedure enables webcam and sound support on Windows 11": "Ez az eljárás engedélyezi a webkamera- és hangtámogatást Windows 11-en",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "A webkamera támogatásának engedélyezéséhez a Windows 11 rendszeren csökkenteni kell az elkülönítési szintet. \nHa folytatni szeretné, nyomja meg a 'KÖVETKEZŐ' gombot, és válassza ki a módosítani kívánt homokozót. \n",
 "Select which box to turn into a reduced isolation app compartment box.": "Válassza ki, hogy melyik homokozót alakítja át csökkentett izolációjú alkalmazásrekeszes homokozóvá.",
-"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "Az átalakítás befejeződött. Kérjük, tesztelje a webkamerát itt: %1, és jelezze, hogy a probléma megoldódott-e.",
+"The mitigation has been applied. Please try out the webcam in %1 and indicate if the issue has been resolved.": "Az átalakítás befejeződött. Kérjük, tesztelje a webkamerát itt: %1, és jelezze, hogy a probléma megoldódott-e.",
 "Webcam mitigation not successful": "A webkamera hatáscsökkentése nem sikerült",
 
 "Select affected sandbox": "Érintett homokozó kiválasztása",
@@ -85,15 +96,21 @@
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "A DACL-ek beállítása megtörtént. Kérjük, próbálja meg újra futtatni az alkalmazást, és jelezze, ha a probléma megoldódott.",
 "DACLs fix did not resolve the issue": "A DACL-javítás nem oldotta meg a problémát",
 
+"SBIE2189: Application is likely chromium based": "SBIE2189: Az alkalmazás valószínűleg króm alapú",
+"Application is likely chromium based but its image type is not set to chrome": "Az alkalmazás valószínűleg króm alapú, de a képtípusa nincs krómra állítva",
+"The Process \"%1\" is likely chromium based but its image type is not set to chrome, it is likely to fail. Do you want to set its ImageType setting to chrome for this box?": "Az \"%1\" folyamat valószínűleg króm alapú, de a képtípusa nincs krómra állítva, valószínűleg meghiúsul. Szeretné ennek a doboznak az ImageType beállítását chrome-ra állítani?",
+"Yes, add \"%1\" to Sandboxie.ini": "Igen, adja hozzá az \"%1\" elemet a Sandboxie.ini-hez",
+"No, report application to sbie devs": "Nem, jelentse az alkalmazást a sbie fejlesztőknek",
+
 "SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: Nem lehet elindítani egy adott homokozó szolgáltatást",
 "Sandboxie failed to start a service in the sandbox": "A Sandboxie-nak nem sikerült elindítania a szolgáltatást a homokozóban",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Az üzenet azt jelzi, hogy a Sandboxie nem tudta elindítani a SandboxieRpcSs vagy SandboxieDcomLaunch segédprogramok egyikét. Az üzenetben szereplő név lehet rpcss vagy dcomlaunch.\n\nHibajelentést küldhet a következő oldalon, hogy segítsen nekünk a probléma elemzésében.",
 
-"SBIE2224: Sandboxed program has crashed":"SBIE2224: Sandboxed program has crashed",
-"A Sandboxed program has crashed":"A Sandboxed program has crashed",
-"The Process '%1' crashed":"The Process '%1' crashed",
-"This program is known to work in a Green (App Compartment) type sandbox.":"This program is known to work in a Green (App Compartment) type sandbox.",
-"There is no known workaround for this process. Do you want to report this issue?":"There is no known workaround for this process. Do you want to report this issue?",
+"SBIE2224: Sandboxed program has crashed": "SBIE2224: Egy sandboxolt program összeomlott",
+"A Sandboxed program has crashed": "Egy sandboxolt program összeomlott",
+"The Process '%1' crashed": "A(z) '%1' folyamat összeomlott",
+"This program is known to work in a Green (App Compartment) type sandbox.": "Ez a program ismerten működik egy Green (App Compartment) típusú sandboxban.",
+"There is no known workaround for this process. Do you want to report this issue?": "Nincs ismert kerülőmegoldás ehhez a folyamathoz. Szeretné jelenteni ezt a problémát?",
 
 "SBIE2313: Could not execute specific process": "SBIE2313: adott folyamat nem hajtható végre",
 "Sandboxie failed to start a process in the sandbox": "A Sandboxie-nak nem sikerült elindítania egy folyamatot a homokozóban",
@@ -120,16 +137,16 @@
 "Please enter the SBIEMSG ID you have encountered.": "Kérjük, adja meg a talált SBIEMSG azonosítót.",
 "There is no automated troubleshooting available for SBIE%1 yet.<br />": "Az SBIE%1 számára még nem áll rendelkezésre automatikus hibaelhárítás.<br />",
 "The full message text is: %1<br />": "Az üzenet teljes szövege: %1<br />",
-"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Látogassa meg az <a href=\"%1\">online dokumentációt</a>, ha többet szeretne megtudni erről és más sbie-üzenetekről.",
+"Visit our <a href=\"%1\">online documentation</a> to learn more about this and other SBIE messages.": "Látogassa meg az <a href=\"%1\">online dokumentációt</a>, ha többet szeretne megtudni erről és más sbie-üzenetekről.",
 "Would you like to collect some logs to help us resolve the issue.": "Összegyűjt néhány naplót a probléma megoldásához.",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "Most futtassa újra az alkalmazást a Sbie üzenet elindításához.<br /><br />",
 "Press NEXT when you are done collecting logs.": "Nyomja meg a 'KÖVETKEZŐ' gombot, ha végzett a naplók összegyűjtésével.",
 
-"Unknown application crashed":"Unknown application crashed",
-"An Unknown application crashed":"An Unknown application crashed",
-"Do you want to report this issue?":"Do you want to report this issue?",
+"Unknown application crashed": "Egy ismeretlen alkalmazás összeomlott",
+"An Unknown application crashed": "Egy ismeretlen alkalmazás összeomlott",
+"Do you want to report this issue?": "Szeretné jelenteni ezt a problémát?",
 
-"Viber crashes on startup":"Viber crashes on startup",
-"The Viber messenger crashes on startup":"The Viber messenger crashes on startup",
-"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.":"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox."
+"Viber crashes on startup": "A Viber összeomlik indításkor",
+"The Viber messenger crashes on startup": "A Viber üzenetküldő indításkor összeomlik",
+"Viber is not compatible with the standard isolation yellow type Sandbox. However, it is known to work in a Green (App Compartment) type sandbox.": "A Viber nem kompatibilis a szabványos izolációjú sárga típusú sandboxszal. Ugyanakkor ismerten működik egy Green (App Compartment) típusú sandboxban."
 }

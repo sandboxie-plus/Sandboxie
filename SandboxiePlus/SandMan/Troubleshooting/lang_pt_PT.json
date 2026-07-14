@@ -1,10 +1,15 @@
 ﻿{
-"Description Text...": "Texto de Descrição...",
+"Address and resolve active problems": "Abordar e resolver problemas ativos",
 "Fix current issues": "Corrigir problemas actuais",
+"Troubleshoot sandbox isolation issues": "Solucionar problemas de isolamento de sandbox",
 "Fix issues with sandboxing": "Corrigir problemas com sandbox",
+"Fix app compatibility problems": "Corrija problemas de compatibilidade de aplicativos",
 "An Application does not work properly when sandboxed": "Uma aplicação não funciona corretamente quando está no sandbox",
+"Resolve browser-specific problems": "Resolva problemas específicos do navegador",
 "Issues with a web browser": "Problemas com um navegador web",
+"Clean up and maintain sandboxes": "Limpar e manter sandboxes",
 "Perform Sandbox maintenance": "Rode a manutenção do Sandbox",
+"Fix interface and shell integration": "Corrigir integração de interface e shell",
 "Fix issues with the UI or Shell": "Corrigir problemas com a IU ou Shell",
 
 "Yes": "Sim",
@@ -12,7 +17,7 @@
 "\nPlease note that this required preset works only with a valid supporter certificate!": "\nObserve que esta predefinição obrigatória funciona apenas com um certificado de apoiador válido!",
 
 "App compatibility checker": "Checar a compatibilidade de aplicações",
-"This script check which app compatibility templates needs to be enabled": "Este script checa quais modelos de compatibilidade de aplicações precisam ser activados",
+"This script checks which app compatibility templates need to be enabled": "Este script checa quais modelos de compatibilidade de aplicações precisam ser activados",
 "Loaded %1 templates": "Lendo %1 modelos",
 
 "Browser shortcut is missing from the desktop": "O atalho do navegador está faltando na área de trabalho",
@@ -25,17 +30,23 @@
 "Select Browser Path": "Seleccione a Localização do Navegador",
 
 "Explorer Context Menu extension does not work": "A extensão do Menu de Contexto do Explorer não funciona",
-"This procedure will re install the shell integration": "Este procedimento irá reinstalar a integração do shell",
+"This procedure will reinstall the shell integration": "Este procedimento irá reinstalar a integração do shell",
 "Add Run Sandboxed": "Adicione Rodar na Caixa de Areia",
 "Add Run Unsandboxed": "Adicione Rodar Fora da Caixa",
 "Install legacy shell extensions": "Instalar extensões de shell herdadas",
 "Select which shell options should be reinstalled": "Seleccione quais opções de shell devem ser reinstaladas",
 
+"Extensions or Credentials are disappearing": "Extensões ou credenciais estão desaparecendo",
+"Web Browser Extensions are being reset, or login credentials are forgotten": "As extensões do navegador da Web estão sendo redefinidas ou as credenciais de login foram esquecidas",
+"Select which box to fix.": "Selecione qual caixa corrigir.",
+"The options have been applied. Please test your browser in %1 and indicate if the issue has been resolved.": "As opções foram aplicadas. Teste seu navegador em %1 e indique se o problema foi resolvido.",
+"Chrome elevation service fix not successful": "A correção do serviço de elevação do Chrome não foi bem-sucedida",
+
 "Low FPS in sandboxed games": "Baixo FPS em jogos no sandbox",
 "This procedure will optimize the box settings for gaming": "Este procedimento otimizará as definições da caixa para jogos",
 "Select which box to optimize.": "Seleccione qual caixa otimizar.",
 "To apply recommended settings press NEXT. \n": "Para aplicar as definições recomendadas, prima SEGUINTE. \n",
-"The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.": "As opções foram aplicadas. Experimente seu jogo em %1 e indique se o problema foi resolvido.",
+"The options have been applied. Please try out your game in %1 and indicate if the issue has been resolved.": "As opções foram aplicadas. Experimente seu jogo em %1 e indique se o problema foi resolvido.",
 "FPS optimization not successful": "Otimização de FPS não foi bem-sucedida",
 
 "Failed to install application into a sandbox": "Falha ao instalar uma aplicação no sandbox",
@@ -50,10 +61,10 @@
 "no mitigation worked": "nenhuma mitigação funcionou",
 
 "Webcam or Sound does not work when sandboxed": "Webcam ou som não funcionam no sandbox",
-"It helps troubleshoot webcam and audio issues in the sandbox": "Ajuda a solucionar problemas de webcam e áudio no sandbox",
+"This procedure enables webcam and sound support on Windows 11": "Este procedimento ativa o suporte para webcam e som no Windows 11",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Para habilitar o suporte a webcam no Windows 11, o nível de isolamento deve ser reduzido. \nSe você quiser continuar, prima PRÓXIMO e seleccione uma sandbox para modificar. \n",
 "Select which box to turn into a reduced isolation app compartment box.": "Seleccione qual caixa transformar em uma caixa de compartimento de aplicação com isolamento reduzido.",
-"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "A mitigação foi aplicada. Experimente a webcam em %1 e indique se o problema foi resolvido.",
+"The mitigation has been applied. Please try out the webcam in %1 and indicate if the issue has been resolved.": "A mitigação foi aplicada. Experimente a webcam em %1 e indique se o problema foi resolvido.",
 "Webcam mitigation not successful": "A mitigação da webcam não foi bem-sucedida",
 
 "Select affected sandbox": "Seleccione a caixa afetada",
@@ -85,15 +96,21 @@
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "As DACLs foram ajustadas, tente rodar sua aplicação novamente e indique se o problema foi resolvido.",
 "DACLs fix did not resolve the issue": "A correção de DACLs não resolveu o problema",
 
+"SBIE2189: Application is likely chromium based": "SBIE2189: O aplicativo provavelmente é baseado em cromo",
+"Application is likely chromium based but its image type is not set to chrome": "O aplicativo provavelmente é baseado em cromo, mas seu tipo de imagem não está definido como cromo",
+"The Process \"%1\" is likely chromium based but its image type is not set to chrome, it is likely to fail. Do you want to set its ImageType setting to chrome for this box?": "O processo \"%1\" provavelmente é baseado em cromo, mas seu tipo de imagem não está definido como cromo, é provável que falhe. Deseja definir a configuração ImageType como chrome para esta caixa?",
+"Yes, add \"%1\" to Sandboxie.ini": "Sim, adicione \"%1\" ao Sandboxie.ini",
+"No, report application to sbie devs": "Não, reporte o aplicativo aos desenvolvedores sbie",
+
 "SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: Não é possível iniciar um serviço específico na caixa de areia",
 "Sandboxie failed to start a service in the sandbox": "Sandboxie falhou ao iniciar um serviço na caixa",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "A mensagem indica que o Sandboxie não conseguiu iniciar um dos programas auxiliares SandboxieRpcSs ou SandboxieDcomLaunch. O nome indicado na mensagem pode ser rpcss ou dcomlaunch.\n\nVocê pode enviar um relatório de problema na próxima página para nos ajudar a analisar o problema.",
 
-"SBIE2224: Sandboxed program has crashed":"SBIE2224: Sandboxed program has crashed",
-"A Sandboxed program has crashed":"A Sandboxed program has crashed",
-"The Process '%1' crashed":"The Process '%1' crashed",
-"This program is known to work in a Green (App Compartment) type sandbox.":"This program is known to work in a Green (App Compartment) type sandbox.",
-"There is no known workaround for this process. Do you want to report this issue?":"There is no known workaround for this process. Do you want to report this issue?",
+"SBIE2224: Sandboxed program has crashed": "SBIE2224: Um programa em sandbox falhou",
+"A Sandboxed program has crashed": "Um programa em sandbox falhou",
+"The Process '%1' crashed": "O processo '%1' falhou",
+"This program is known to work in a Green (App Compartment) type sandbox.": "Sabe-se que este programa funciona numa sandbox do tipo Green (App Compartment).",
+"There is no known workaround for this process. Do you want to report this issue?": "Não existe nenhuma solução alternativa conhecida para este processo. Pretende comunicar este problema?",
 
 "SBIE2313: Could not execute specific process": "SBIE2313: Não foi possível rodar o processo específico",
 "Sandboxie failed to start a process in the sandbox": "Sandboxie não conseguiu iniciar um processo no sandbox",
@@ -120,16 +137,16 @@
 "Please enter the SBIEMSG ID you have encountered.": "Por favor, introduza o ID do SBIEMSG que você encontrou.",
 "There is no automated troubleshooting available for SBIE%1 yet.<br />": "Ainda não há solução de problemas automatizada disponível para SBIE%1.<br />",
 "The full message text is: %1<br />": "O texto completo da mensagem é: %1<br />",
-"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Visite <a href=\"%1\">documentação-online</a> para saber mais acerca disto e outras mensagens do sbie.",
+"Visit our <a href=\"%1\">online documentation</a> to learn more about this and other SBIE messages.": "Visite <a href=\"%1\">documentação-online</a> para saber mais acerca disto e outras mensagens do sbie.",
 "Would you like to collect some logs to help us resolve the issue.": "Você gostaria de coletar alguns registros para nos ajudar a resolver o problema?",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "Agora rode sua aplicação novamente para acionar a mensagem Sbie.<br /><br />",
 "Press NEXT when you are done collecting logs.": "Prima SEGUINTE quando terminar de coletar os logs.",
 
-"Unknown application crashed":"Unknown application crashed",
-"An Unknown application crashed":"An Unknown application crashed",
-"Do you want to report this issue?":"Do you want to report this issue?",
+"Unknown application crashed": "Uma aplicação desconhecida falhou",
+"An Unknown application crashed": "Uma aplicação desconhecida falhou",
+"Do you want to report this issue?": "Pretende comunicar este problema?",
 
-"Viber crashes on startup":"Viber crashes on startup",
-"The Viber messenger crashes on startup":"The Viber messenger crashes on startup",
-"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.":"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox."
+"Viber crashes on startup": "O Viber falha ao iniciar",
+"The Viber messenger crashes on startup": "O mensageiro Viber falha ao iniciar",
+"Viber is not compatible with the standard isolation yellow type Sandbox. However, it is known to work in a Green (App Compartment) type sandbox.": "O Viber não é compatível com a sandbox padrão do tipo amarelo com isolamento. No entanto, sabe-se que funciona numa sandbox do tipo Green (App Compartment)."
 }

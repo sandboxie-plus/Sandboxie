@@ -1,10 +1,15 @@
 ﻿{
-"Description Text...": "请选择最适合你目前问题的解释说明...",
+"Address and resolve active problems": "解决并解决当前存在的问题",
 "Fix current issues": "解决当前的问题",
+"Troubleshoot sandbox isolation issues": "解决沙箱隔离问题",
 "Fix issues with sandboxing": "解决沙箱/应用沙箱化时的问题",
+"Fix app compatibility problems": "修复应用兼容性问题",
 "An Application does not work properly when sandboxed": "应用程序在沙箱内时无法正常工作",
+"Resolve browser-specific problems": "解决特定于浏览器的问题",
 "Issues with a web browser": "网络浏览器问题",
+"Clean up and maintain sandboxes": "清理和维护沙箱",
 "Perform Sandbox maintenance": "执行沙箱的维护操作",
+"Fix interface and shell integration": "修复接口和 shell 集成",
 "Fix issues with the UI or Shell": "解决 用户界面（UI） 或 Windows 资源管理器（Shell） 问题",
 
 "Yes": "是",
@@ -12,7 +17,7 @@
 "\nPlease note that this required preset works only with a valid supporter certificate!": "\n请注意，此必需的预设仅适用于有效的支持者证书！",
 
 "App compatibility checker": "应用程序兼容性检查器",
-"This script check which app compatibility templates needs to be enabled": "此检查步骤需要启用有问题应用的兼容性模板",
+"This script checks which app compatibility templates need to be enabled": "此检查步骤需要启用有问题应用的兼容性模板",
 "Loaded %1 templates": "已加载 %1 个模板",
 
 "Browser shortcut is missing from the desktop": "桌面上缺少沙箱中浏览器的快捷方式",
@@ -25,17 +30,23 @@
 "Select Browser Path": "选择浏览器路径",
 
 "Explorer Context Menu extension does not work": "Windows 资源管理器上/下文菜单的扩展选项（例如按钮/右键菜单）不工作",
-"This procedure will re install the shell integration": "此步骤将重新安装 Windows 资源管理器（Shell） 集成项",
+"This procedure will reinstall the shell integration": "此步骤将重新安装 Windows 资源管理器（Shell） 集成项",
 "Add Run Sandboxed": "安装沙箱内的",
 "Add Run Unsandboxed": "安装沙箱外的",
 "Install legacy shell extensions": "安装旧的 Windows 资源管理器（Shell） 扩展",
 "Select which shell options should be reinstalled": "选择应重新安装的 Windows 资源管理器（Shell） 选项",
 
+"Extensions or Credentials are disappearing": "扩展或凭证正在消失",
+"Web Browser Extensions are being reset, or login credentials are forgotten": "Web 浏览器扩展正在重置，或忘记了登录凭据",
+"Select which box to fix.": "选择要修复的框。",
+"The options have been applied. Please test your browser in %1 and indicate if the issue has been resolved.": "选项已被应用。请在 %1 中测试您的浏览器并指出问题是否已解决。",
+"Chrome elevation service fix not successful": "Chrome 海拔服务修复不成功",
+
 "Low FPS in sandboxed games": "降低沙箱中游戏的 FPS",
 "This procedure will optimize the box settings for gaming": "此流程将对沙箱的设置为游戏进行优化",
 "Select which box to optimize.": "选择哪个沙箱进行优化。",
 "To apply recommended settings press NEXT. \n": "按 下一步 来应用建议的设置。 \n",
-"The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.": "此选项已被应用，请在 %1 尝试你的游戏，并指出问题是否被解决。",
+"The options have been applied. Please try out your game in %1 and indicate if the issue has been resolved.": "此选项已被应用，请在 %1 尝试你的游戏，并指出问题是否被解决。",
 "FPS optimization not successful": "FPS 优化未成功",
 
 "Failed to install application into a sandbox": "无法将应用程序安装到沙箱中",
@@ -50,10 +61,10 @@
 "no mitigation worked": "没有解决措施起作用",
 
 "Webcam or Sound does not work when sandboxed": "网络摄像头或声音在沙箱中无法使用/不能播放",
-"It helps troubleshoot webcam and audio issues in the sandbox": "它帮助排除在沙箱中网络摄像头和声音的故障",
+"This procedure enables webcam and sound support on Windows 11": "此过程将在 Windows 11 上启用摄像头和声音支持",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "要在 Windows 11 上启用网络摄像头支持，必须降低隔离级别。\n如果要继续，请按 下一步 并选择要修改的沙箱。\n",
 "Select which box to turn into a reduced isolation app compartment box.": "选择将哪个沙箱转换为降低的隔离级别的沙箱。",
-"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "已应用解决措施，请试用 %1 中的网络摄像头，并指示问题是否已解决。",
+"The mitigation has been applied. Please try out the webcam in %1 and indicate if the issue has been resolved.": "已应用解决措施，请试用 %1 中的网络摄像头，并指示问题是否已解决。",
 "Webcam mitigation not successful": "网络摄像头解决措施不成功",
 
 "Select affected sandbox": "选择受影响的沙箱",
@@ -85,17 +96,21 @@
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "“DACL 条目” 已调整，请尝试再次运行应用程序，并在稍后关注/指示问题是否已解决。",
 "DACLs fix did not resolve the issue": "“DACL 条目修复” 未解决问题",
 
+"SBIE2189: Application is likely chromium based": "SBIE2189：应用程序可能基于铬",
+"Application is likely chromium based but its image type is not set to chrome": "应用程序可能是基于铬的，但其图像类型未设置为铬",
+"The Process \"%1\" is likely chromium based but its image type is not set to chrome, it is likely to fail. Do you want to set its ImageType setting to chrome for this box?": "进程“%1”可能是基于铬的，但其图像类型未设置为铬，它可能会失败。您想将此框的 ImageType 设置为 chrome 吗？",
+"Yes, add \"%1\" to Sandboxie.ini": "是的，将“%1”添加到 Sandboxie.ini",
+"No, report application to sbie devs": "否，向 sbie 开发人员报告申请",
+
 "SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: 无法启动特定的沙箱化服务。",
 "Sandboxie failed to start a service in the sandbox": "Sandboxie 无法在沙箱中启动服务",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "该消息指示 Sandboxie 无法启动帮助程序 SandboxieRpcSs 或 SandboxieDcomLaunch 之一。消息中记下的名称可为 rpcss 或 dcomlaunch。\n\n您可以在下一页上提交问题报告，以帮助我们分析问题。",
 
-"SBIE2224: Sandboxed program has crashed":"SBIE2224：沙箱内程序已崩溃",
-"A Sandboxed program has crashed":"沙箱中的程序已崩溃",
-"The Process '%1' crashed":"进程 '%1' 已崩溃",
-"This program is known to work in a Green (App Compartment) type sandbox.":"该程序可在绿色（应用隔离）型沙箱中正常运行。",
-"There is no known workaround for this process. Do you want to report this issue?":"该进程暂无已知解决方案。是否要报告此问题？",
-
-"No, report application to sbie devs":"不，向 Sandboxie 开发者报告此问题",
+"SBIE2224: Sandboxed program has crashed": "SBIE2224：沙箱内程序已崩溃",
+"A Sandboxed program has crashed": "沙箱中的程序已崩溃",
+"The Process '%1' crashed": "进程 '%1' 已崩溃",
+"This program is known to work in a Green (App Compartment) type sandbox.": "该程序可在绿色（应用隔离）型沙箱中正常运行。",
+"There is no known workaround for this process. Do you want to report this issue?": "该进程暂无已知解决方案。是否要报告此问题？",
 
 "SBIE2313: Could not execute specific process": "SBIE2313: 无法运行一个特定的进程",
 "Sandboxie failed to start a process in the sandbox": "Sandboxie 在沙箱中启动进程失败",
@@ -122,16 +137,16 @@
 "Please enter the SBIEMSG ID you have encountered.": "请输入您遇到的 SBIEMSG ID。",
 "There is no automated troubleshooting available for SBIE%1 yet.<br />": "SBIE%1 暂时还没有可用的自动故障排除方法。<br />",
 "The full message text is: %1<br />": "完整的消息文本是: %1<br />",
-"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "访问 <a href=\"%1\">在线文档</a> to 了解更多关于此信息，以及其他 Sbie 信息。",
+"Visit our <a href=\"%1\">online documentation</a> to learn more about this and other SBIE messages.": "访问 <a href=\"%1\">在线文档</a> to 了解更多关于此信息，以及其他 Sbie 信息。",
 "Would you like to collect some logs to help us resolve the issue.": "是否要收集一些日志来帮助我们解决问题？",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "现在，请再次运行您的应用程序以触发 SBIE 消息。<br /><br />",
 "Press NEXT when you are done collecting logs.": "完成日志收集后按 下一步 。",
 
-"Unknown application crashed":"未知的应用程序已崩溃",
-"An Unknown application crashed":"一个未知的应用程序已崩溃",
-"Do you want to report this issue?":"你要报告此问题吗？",
+"Unknown application crashed": "未知的应用程序已崩溃",
+"An Unknown application crashed": "一个未知的应用程序已崩溃",
+"Do you want to report this issue?": "你要报告此问题吗？",
 
-"Viber crashes on startup":"Viber 在启动时崩溃",
-"The Viber messenger crashes on startup":"Viber即时通讯软件在启动时崩溃了",
-"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.":"Viber 与标准隔离的黄色沙箱不兼容。但是在绿色（应用隔离）的沙箱中正常运行。"
+"Viber crashes on startup": "Viber 在启动时崩溃",
+"The Viber messenger crashes on startup": "Viber即时通讯软件在启动时崩溃了",
+"Viber is not compatible with the standard isolation yellow type Sandbox. However, it is known to work in a Green (App Compartment) type sandbox.": "Viber 与标准隔离的黄色沙箱不兼容。但是在绿色（应用隔离）的沙箱中正常运行。"
 }

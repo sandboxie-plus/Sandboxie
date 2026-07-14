@@ -64,7 +64,7 @@
 "It helps troubleshoot webcam and audio issues in the sandbox": "Es hilft bei der Behebung von Webcam- und Audioproblemen in der Sandbox",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Um die Webcam-Unterstützung unter Windows 11 zu aktivieren, muss der Isolationslevel reduziert werden. \nWenn Sie fortfahren möchten, drücken Sie bitte auf WEITER und wählen eine Sandbox zur Modifikation aus. \n",
 "Select which box to turn into a reduced isolation app compartment box.": "Wählen Sie aus, welche Box in eine Applikationsunterteilungsbox mit reduzierter Isolation umgewandelt werden soll.",
-"The mitigation has been applied. Please try out the web cam in %1 and indicate if the issue has been resolved.": "Die Problementschärfung wurde angewandt, bitte probieren Sie die Webcam in %1 aus und geben Sie an, ob das Problem behoben wurde.",
+"The mitigation has been applied. Please try out the web cam in %1 and indicate if the issue has been resolved.": "Die Problementschärfung wurde angewandt. Bitte probieren Sie die Webcam in %1 aus und geben Sie an, ob das Problem behoben wurde.",
 "Webcam mitigation not successful": "Problementschärfung für Webcam war nicht erfolgreich",
 
 "Select affected sandbox": "Betroffene Sandbox auswählen",

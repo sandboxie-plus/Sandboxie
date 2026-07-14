@@ -16,24 +16,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - `Options/HighlightPendingChanges` (default: enabled), configurable in Global Settings > Interface Config > User Interface
 
 ### Changed
-- reworked the crash dump menchanism
+- reworked the crash dump mechanism
 - changed SandMan auto-delete recovery to reuse an already open recovery dialog as the delete decision dialog, regardless of filter state, instead of closing it or silently continuing with box deletion
 
 ### Fixed
+- fixed Win32 process image path queries returning sandboxed paths, which could reveal that a process was running sandboxed [#5437](https://github.com/sandboxie-plus/Sandboxie/pull/5437)
 - fixed expected non-user SID profile and shell lookup noise by suppressing matching SBIE1406/SBIE1412 and derivative SBIE1204 FileRootPath messages [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
 - fixed NT device path (`\Device\LanmanRedirector\...`) shown in popup notification instead of UNC form, causing garbled display and wrong recovery target [#711](https://github.com/sandboxie-plus/Sandboxie/issues/711)
 - fixed "Close until all programs stop" permanently suspending recovery when clicked while no processes are running
-- fixed SandMan Immediate Recovery blinking without showing the recovery window when the new-file event path and scanned recovery path differed only by casing, such as `downloads` vs `Downloads`
-- improved SandMan responsiveness during Sbie message and notification floods by batching UI updates and reducing expensive per-row rendering
-- added workaround to chrome settings reset, it can be disabled with 'UseChromeSecurePreferencesHack=n' [#5184](https://github.com/sandboxie-plus/Sandboxie/issues/5184) [#5286](https://github.com/sandboxie-plus/Sandboxie/issues/5286) [#5180](https://github.com/sandboxie-plus/Sandboxie/issues/5180)
-  - this is more of a hack than an elegant solution, we make IsOS(OS_DOMAINMEMBER) return true and when accessign the host's "Secure Preferences" force a migration into the sandbox and remove all "*_encrypted_hash" entries
-  - note: this only works for settings and extensions host credentials, cookies, passwords, etc. remain unaccessible... from within the sandbox
-  - if this is requires a manual workaround is required reg add "HKLM\Software\Policies\Google\Chrome" /v ApplicationBoundEncryptionEnabled /t REG_DWORD /d 0 /f
-  - adapted for MS Edge, SOFTWARE\Policies\Microsoft\Edge, Brave, etc...
-- fixed issue with DPAPI when running services as system in sandbox, this allows to access with chrome host credentials, cookies, passwords, etc. when sandboxed
+- fixed SandMan Immediate Recovery blinking without showing the recovery window when the new-file event path and scanned recovery path differed only by casing, such as `downloads` vs. `Downloads`
+- improved SandMan responsiveness during SBIE message and notification floods by batching UI updates and reducing expensive per-row rendering
+- added workaround to Chrome settings reset, it can be disabled with 'UseChromeSecurePreferencesHack=n' [#5184](https://github.com/sandboxie-plus/Sandboxie/issues/5184) [#5286](https://github.com/sandboxie-plus/Sandboxie/issues/5286) [#5180](https://github.com/sandboxie-plus/Sandboxie/issues/5180)
+  - this is more of a hack than an elegant solution, we make IsOS(OS_DOMAINMEMBER) return true and when accessing the host's "Secure Preferences" force a migration into the sandbox and remove all "*_encrypted_hash" entries
+  - Note: this only works for settings and extensions; host credentials, cookies, passwords, etc. remain inaccessible from within the sandbox
+  - if this is required, a manual workaround is required: `reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v ApplicationBoundEncryptionEnabled /t REG_DWORD /d 0 /f`
+  - adapt for MS Edge (`SOFTWARE\Policies\Microsoft\Edge`), Brave, etc.
+- fixed issue with DPAPI when running services as system in sandbox, this allows to access with Chrome host credentials, cookies, passwords, etc. when sandboxed
   - this requires to enable the elevation service to be sandboxed 'SandboxService=GoogleChromeElevationService' as system 'RunServicesAsSystem=y' and opening the SAM endpoint 'OpenSamEndpoint=y'
-  - there is also a convinient template 'Template=Chromium_Elevation'
-  - note: each crome derivative has a different service name like: MicrosoftEdgeElevationService, MicrosoftEdgeDevElevationService, MicrosoftCopilotElevationService, GoogleChromeElevationService, GoogleChromeDevElevationService, BraveElevationService
+  - there is also a convenient template 'Template=Chromium_Elevation'
+  - Note: each Chromium derivative has a different service name, like: MicrosoftEdgeElevationService, MicrosoftEdgeDevElevationService, MicrosoftCopilotElevationService, GoogleChromeElevationService, GoogleChromeDevElevationService, BraveElevationService
 
 
 

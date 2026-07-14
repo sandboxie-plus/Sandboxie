@@ -11416,7 +11416,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1154"/>
         <source>Highlight unapplied changes in Options and Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Hebe noch nicht angewendete Änderungen bei Optionen und Einstellungen hervor</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1223"/>

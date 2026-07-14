@@ -85,7 +85,7 @@ bool ServiceServer::CanCallerDoElevation(
             // by SandboxieRpcSs.exe allow it to be started
             //
 
-            if (DropRights && SbieDll_CheckStringInList(ServiceName, boxname, L"StartService"))
+            if (DropRights && (SbieDll_CheckStringInList(ServiceName, boxname, L"StartService") || SbieDll_CheckStringInList(ServiceName, boxname, L"RunServiceAsSystem")))
                 DropRights = false;
 
             //
@@ -309,16 +309,24 @@ int ServiceServer::RunServiceAsSystem(const WCHAR* svcname, const WCHAR* boxname
     if (svcname && _wcsicmp(svcname, L"MSIServer") == 0 && SbieApi_QueryConfBool(boxname, L"MsiInstallerExemptions", FALSE))
         return 2;
 
-    // legacy behaviour option
-    if (SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE)) 
-        return 1;
-    
-    if (!svcname)
-        return 0;
+    // check custom exception list - exceptions bypass also drop rights
+    if (svcname && SbieDll_CheckStringInList(svcname, boxname, L"RunServiceAsSystem")) {
+        return 2;
+    }
 
-    // check exception list
-    return SbieDll_CheckStringInList(svcname, boxname, L"RunServiceAsSystem") ? 1 : 0;
+    // legacy behaviour option
+    if (SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE)) {
+
+        // with drop rights ensure CryptSvc can still run at least as user
+        if (svcname && _wcsicmp(svcname, L"CryptSvc") == 0 && CheckDropRights(boxname, NULL))
+            return 0;
+
+        return 1;
+    }
+    
+    return 0;
 }
+
 
 
 //---------------------------------------------------------------------------

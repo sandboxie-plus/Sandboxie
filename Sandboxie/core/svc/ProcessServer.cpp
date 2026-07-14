@@ -263,6 +263,8 @@ MSG_HEADER *ProcessServer::KillAllHandler(MSG_HEADER *msg)
     if (req->h.length < sizeof(PROCESS_KILL_ALL_REQ))
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);
 
+    req->boxname[ARRAYSIZE(req->boxname) - 1] = L'\0';
+
     TargetSessionId = req->session_id;
     wcscpy(TargetBoxName, req->boxname);
     if (! TargetBoxName[0])
@@ -512,6 +514,8 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
     PROCESS_RUN_SANDBOXED_REQ *req = (PROCESS_RUN_SANDBOXED_REQ *)msg;
     if (req->h.length < sizeof(PROCESS_RUN_SANDBOXED_REQ))
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+
+    req->boxname[ARRAYSIZE(req->boxname) - 1] = L'\0';
 
     WCHAR *cmd = RunSandboxedCopyString(&req->h, req->cmd_ofs, req->cmd_len);
     WCHAR *dir = RunSandboxedCopyString(&req->h, req->dir_ofs, req->dir_len);
@@ -2206,6 +2210,8 @@ MSG_HEADER *ProcessServer::SuspendAllHandler(MSG_HEADER *msg)
     PROCESS_SUSPEND_RESUME_ALL_REQ *req = (PROCESS_SUSPEND_RESUME_ALL_REQ *)msg;
     if (req->h.length < sizeof(PROCESS_SUSPEND_RESUME_ALL_REQ))
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+
+    req->boxname[ARRAYSIZE(req->boxname) - 1] = L'\0';
 
     TargetSessionId = req->session_id;
     wcscpy(TargetBoxName, req->boxname);

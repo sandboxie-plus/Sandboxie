@@ -3220,7 +3220,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsRecovery.cpp" line="152"/>
         <source>Please enter a file extension to be excluded</source>
-        <translation>Veuillez saisir une extension de fichier à exclure</translation>
+        <translation>Veuillez saisir une extension de fichier à exclure.</translation>
     </message>
     <message>
         <source>Lingerer</source>
@@ -3807,7 +3807,7 @@ Chemin complet : %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="932"/>
         <source>%1 file(s) hidden by AutoRecoverIgnore</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers masqués par AutoRecoverIgnore : %1</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="1283"/>
@@ -9976,12 +9976,12 @@ Pour définir un processus, utiliser « $:programme.exe » comme chemin.</transl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4419"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser la liste d&apos;exclusion ci-dessus pour masquer les fichiers correspondants de la fenêtre de récupération rapide</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4422"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nécessite que la case « Afficher tous les fichiers » soit décochée dans la fenêtre de récupération.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4483"/>
@@ -10341,7 +10341,7 @@ Pour l&apos;accès aux fichiers, vous pouvez utiliser « Toujours direct » pour
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4366"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
-        <translation>Activer l&apos;invite de récupération immédiate pour pouvoir récupérer les fichiers dès leur création</translation>
+        <translation>Activer l&apos;invite de récupération immédiate (permet de récupérer les fichiers dès leur création)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4349"/>
@@ -11638,12 +11638,12 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="32"/>
         <source>SandboxiePlus - Recovery</source>
-        <translation>DismissSandboxiePlus - Récupération</translation>
+        <translation>SandboxiePlus - Récupération</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>Show Ignored Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les fichiers ignorés</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
@@ -12873,7 +12873,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1113"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation>* Une case partiellement cochée laissera le comportement être déterminé par le mode « Affichage ».</translation>
+        <translation>* Une case partiellement cochée laissera le comportement être déterminé par le mode d&apos;affichage.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1254"/>

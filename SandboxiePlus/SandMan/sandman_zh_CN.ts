@@ -572,7 +572,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="253"/>
         <source>Duplicate!</source>
-        <translation></translation>
+        <translation>重复！</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="447"/>
@@ -11867,7 +11867,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1154"/>
         <source>Highlight unapplied changes in Options and Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>在选项和设置中高亮显示尚未应用的更改</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1223"/>

@@ -29,6 +29,11 @@ struct SettingInfo {
 	QStringList completionItems;
 };
 
+struct DisabledSettingRule {
+	QString enabledKey;
+	QString actions;
+};
+
 class CIniHighlighter : public QSyntaxHighlighter
 {
     Q_OBJECT
@@ -48,11 +53,11 @@ public:
 	void applyUserIniOverrides(const QString& masterVersion, const QString& userIniPath);
 	void setCurrentVersion(const QString& version);
 
-	static QString BuildPopupTooltip(const QString& settingName, bool basic);
-	static QString BuildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize = 2048, bool preferDescriptionFirst = true);
-	static QString GetBasicSettingTooltip(const QString& settingName);
-	static QString GetSettingTooltip(const QString& settingName);
-	static QString GetSettingTooltipForPopup(const QString& settingName);
+	static QString BuildPopupTooltip(const QString& settingName, bool basic, const QString& settingValue = QString());
+	static QString BuildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize = 2048, bool preferDescriptionFirst = true, const QString& settingValue = QString());
+	static QString GetBasicSettingTooltip(const QString& settingName, const QString& settingValue = QString());
+	static QString GetSettingTooltip(const QString& settingName, const QString& settingValue = QString());
+	static QString GetSettingTooltipForPopup(const QString& settingName, const QString& settingValue = QString());
 	static bool IsSettingsLoaded() { return settingsLoaded; }
 	static bool IsCommentLine(const QString& line);
 
@@ -65,6 +70,8 @@ public:
 
 	// Autocompletion support
 	static QStringList GetCompletionCandidates();
+	static QString GetCompletionInsertionText(const QString& candidateKey);
+	static QString GetCompletionMatchText(const QString& candidateKey);
 	static QString FindCaseCorrectedKey(const QString& wrongKey);
 	static bool IsValidKey(const QString& keyName);
 	static bool IsKeyHiddenFromPopup(const QString& keyName);
@@ -73,6 +80,9 @@ public:
 	static QHash<QString, QString> hideConfRules; // setting -> action
 	static QHash<QString, QString> hideConfExclusions; // setting -> action
 	static QMutex hideConfMutex;
+	static QHash<QString, DisabledSettingRule> disabledSettings;
+	static QHash<int, QString> disabledActionDescriptions;
+	static QHash<int, QMap<QString, QString>> localizedDisabledActionDescriptions;
 
 	static bool IsKeyHiddenFromContext(const QString& keyName, char context);
 	static bool IsValidTooltipContext(const QString& hoveredText);
@@ -142,11 +152,20 @@ private:
 	static QMutex tooltipCacheMutex;
 	static TooltipMode s_tooltipMode;
 	static QMutex s_tooltipModeMutex;
+	static QHash<QString, SettingInfo> templateMetadata;
 
 	static QVersionNumber getCurrentVersion();
 	static QString normalizeLanguage(const QString& language);
 	static QString sanitizeHtmlInput(const QString& input);
 	static bool isValidForTooltip(const QString& settingName);
+	static QString makeTooltipCacheKey(const QString& prefix, const QString& settingName, const QString& settingValue);
+	static QString buildPopupTooltipCore(const QString& settingName, bool basic, const QString& settingValue);
+	static QString buildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize, bool preferDescriptionFirst, const QString& settingValue);
+	static bool findDisabledSettingRule(const QString& settingName, DisabledSettingRule& rule);
+	static void ensureDisabledSettingAliases();
+	static SettingInfo resolveSettingInfo(const QString& settingName, const QString& settingValue);
+	static void mergeMissingSettingInfo(SettingInfo& target, const SettingInfo& fallback);
+	static void prependDisabledActionDescription(SettingInfo& info, const DisabledSettingRule& rule);
 	
 	static QString sanitizeVersion(const QString& versionString, bool useDefaultOnInvalid = false);
 	static QString mergeHtmlStyles(const QString& baseStyle, const QString& additionalStyle);
@@ -273,6 +292,8 @@ private:
     static QString getOrSetTooltipCache(const QString& cacheKey, const std::function<QString()>& generator);
 
 	static void parseHideConfRules(const QString& value, QHash<QString, QString>& rules);
+	static void parseDisabledSettingsRules(const QString& value);
+	static void parseDisabledActionDescription(const QString& key, const QString& value);
 	static bool matchesWildcard(const QString& pattern, const QString& text);
 	static QString convertWildcardToRegex(const QString& wildcard);
 

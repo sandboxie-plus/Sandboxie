@@ -24,6 +24,7 @@ public:
 
 	void SetCompleter(QCompleter* completer);
 	QCompleter* GetCompleter() const { return m_pCompleter; }
+	QTextEdit* GetTextEdit() const { return m_pSourceCode; }
 	void UpdateCompletionModel(const QStringList& candidates);
 
 	void SetCode(const QString& code) { m_pSourceCode->setPlainText(code); }
@@ -34,6 +35,8 @@ public:
 
 	void SetCaseCorrectionCallback(std::function<QString(const QString&)> callback);
 	void SetCompletionFilterCallback(std::function<bool(const QString&, const QString&)> callback);
+	void SetCompletionInsertionCallback(std::function<QString(const QString&)> callback);
+	void SetCompletionMatchTextCallback(std::function<QString(const QString&)> callback);
 	void SetCaseCorrectionFilterCallback(std::function<bool(const QString&, const QString&)> callback);
 	void SetPopupTooltipCallback(std::function<QString(const QString&)> tooltipCallback);
 
@@ -130,6 +133,7 @@ protected:
 	QString GetWordUnderCursor() const;
 	QString GetWordBeforeCursor() const;
 	QString GetKeyFromCurrentLine() const;
+	QStringList BuildFuzzyMatchesForCompletion(const QStringList& candidates, const QString& prefix) const;
 	void ShowCaseCorrection(const QString& wrongWord, const QString& correctWord);
 	void OnInsertCompletion(const QString& completion);
 
@@ -169,6 +173,8 @@ private:
 	bool m_completionInsertInProgress;
 
 	std::function<bool(const QString&, const QString&)> m_completionFilterCallback;
+	std::function<QString(const QString&)> m_completionInsertionCallback;
+	std::function<QString(const QString&)> m_completionMatchTextCallback;
 	std::function<bool(const QString&, const QString&)> m_caseCorrectionFilterCallback;
 	bool ShouldHideKeyFromCompletion(const QString& keyName, const QString& activeInput = QString()) const;
 

@@ -752,14 +752,21 @@ QString CIniHighlighter::mergeHtmlStyles(const QString& baseStyle, const QString
 	if (additionalStyle.isEmpty()) {
 		return baseStyle;
 	}
-	
-	if (baseStyle.contains(HtmlAttribs::STYLE_START)) {
-		QString result = baseStyle;
-		// Remove the closing quote and add the additional style
-		return result.replace(HtmlAttribs::STYLE_START, additionalStyle.mid(0, additionalStyle.length() - 1) % HtmlAttribs::SEPARATOR);
-	} else {
-		return baseStyle % " " % additionalStyle;
+
+	QString additionalCss = additionalStyle.trimmed();
+	if (additionalCss.startsWith(HtmlAttribs::STYLE_START)) {
+		additionalCss.remove(0, HtmlAttribs::STYLE_START.length());
+		if (additionalCss.endsWith('\''))
+			additionalCss.chop(1);
 	}
+
+	if (baseStyle.contains(HtmlAttribs::STYLE_START)) {
+		const int closingQuote = baseStyle.lastIndexOf('\'');
+		if (closingQuote >= 0)
+			return baseStyle.left(closingQuote) % additionalCss % baseStyle.mid(closingQuote);
+	}
+
+	return baseStyle % " " % additionalStyle;
 }
 
 void CIniHighlighter::setCurrentVersion(const QString& version)
@@ -874,6 +881,37 @@ static void ParseTooltipColorOverride(const QString& key, const QString& value)
 			CIniHighlighter::s_tooltipTextColorLight = parts[1].trimmed();
 		}
 	}
+}
+
+static QString ResolveTooltipStyleColor(const QString& colorValue)
+{
+	const QString trimmedColor = colorValue.trimmed();
+	if (trimmedColor.isEmpty())
+		return QString();
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	const QStringList themedColors = trimmedColor.split(',', Qt::KeepEmptyParts);
+#else
+	const QStringList themedColors = trimmedColor.split(',', QString::KeepEmptyParts);
+#endif
+	if (themedColors.size() != 2)
+		return trimmedColor;
+
+	const QString darkColor = themedColors.value(0).trimmed();
+	const QString lightColor = themedColors.value(1).trimmed();
+	bool darkMode;
+	const int darkSetting = theConf->GetInt("Options/UseDarkTheme", 2);
+	if (darkSetting == 2) {
+		QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", QSettings::NativeFormat);
+		darkMode = (settings.value("AppsUseLightTheme").toInt() == 0);
+	}
+	else {
+		darkMode = (darkSetting == 1);
+	}
+
+	if (darkMode)
+		return darkColor.isEmpty() ? lightColor : darkColor;
+	return lightColor.isEmpty() ? darkColor : lightColor;
 }
 
 // Load settings from SbieSettings.ini
@@ -1328,12 +1366,18 @@ void CIniHighlighter::appendGenericTooltipRow(QString& tooltip, const QString& l
 
 void CIniHighlighter::appendMultiLineTooltipRow(QString& tooltip, const QString& label, 
 	const QStringList& lines, const QString& labelStyle, const QString& valuePrefix,
-	const QString& settingName, bool applySpecialFormatting)
+	const QString& settingName, bool applySpecialFormatting, const TooltipCellStyles& cellStyles)
 {
 	if (lines.isEmpty()) return;
 	
-	tooltip += HtmlTags::TR_TD_START % labelStyle % HtmlAttribs::STYLE_TOP 
-		% HtmlTags::TAG_CLOSE % label % HtmlTags::TD_END % HtmlTags::TD_TAG;
+	const QString valueStyle = cellStyles.right.toHtmlStyle();
+	const QString valueCellTag = valueStyle.isEmpty()
+		? HtmlTags::TD_TAG
+		: HtmlTags::TD_START % valueStyle % HtmlTags::TAG_CLOSE;
+	const QString rowLabelStyle = mergeHtmlStyles(labelStyle, HtmlAttribs::STYLE_TOP);
+
+	tooltip += HtmlTags::TR_TD_START % rowLabelStyle
+		% HtmlTags::TAG_CLOSE % label % HtmlTags::TD_END % valueCellTag;
 	
 	for (int i = 0; i < lines.size(); ++i) {
 		QString processedLine = processTextLineOptimized(lines[i], settingName);
@@ -1393,20 +1437,21 @@ void CIniHighlighter::appendMultiLineTooltipRow(QString& tooltip, const QString&
 }
 
 // Helper to generate a table row for syntax or description
-void CIniHighlighter::appendTableRowForContent(QString& tooltip, const QString& label, const QString& content, const QString& labelStyle, const QString& valuePrefix, const QString& settingName, bool isSyntax)
+void CIniHighlighter::appendTableRowForContent(QString& tooltip, const QString& label, const QString& content, const QString& labelStyle, const QString& valuePrefix, const QString& settingName, bool isSyntax, const QString& styleKey)
 {
     if (content.isEmpty())
         return;
         
     QStringList lines = content.split('\n');
     // Use genericStyles for label and value cell if defined
-    QString rowType = isSyntax ? "Syntax" : "Description";
+    QString rowType = styleKey.isEmpty() ? (isSyntax ? "Syntax" : "Description") : styleKey;
     TooltipCellStyles styles = getGenericStyles(rowType);
     
     QString styledLabelStyle = mergeHtmlStyles(labelStyle, styles.left.toHtmlStyle());
     
     // Use the unified multi-line tooltip row method
-    appendMultiLineTooltipRow(tooltip, label, lines, styledLabelStyle, valuePrefix, settingName, isSyntax);
+	appendMultiLineTooltipRow(tooltip, label, lines, styledLabelStyle, valuePrefix, settingName,
+		isSyntax, styleKey.isEmpty() ? TooltipCellStyles{} : styles);
 }
 
 QString CIniHighlighter::processTextLineOptimized(const QString& text, const QString& settingName)
@@ -1929,7 +1974,7 @@ void CIniHighlighter::processMappingsOptimized(QString& tooltip, const SettingIn
 
 	// Process context mappings with action fallback
 	if (!info.context.isEmpty()) {
-		auto effectiveMappings = getEffectiveMappingsWithActionFallback(contextData, currentLang);
+		auto effectiveMappings = getDisplayableContextMappings(currentLang);
 		processKeywordMappings<KeywordInfo<KeywordType::Context>>(
 			info.context, effectiveMappings, contextLabel,
 			labelStyle, HtmlTags::VALUE_PREFIX, contextData.tooltipStyle, tooltip);
@@ -1976,6 +2021,56 @@ void CIniHighlighter::processMappingsOptimized(QString& tooltip, const SettingIn
 			}
 		}
 	}
+}
+
+QString CIniHighlighter::getContextWarningTemplate(const QString& currentLang)
+{
+	auto effectiveMappings = getEffectiveMappingsWithActionFallback(contextData, currentLang);
+	for (const auto& mapping : effectiveMappings) {
+		if (mapping.keyword.compare(QStringLiteral("w"), Qt::CaseInsensitive) == 0)
+			return mapping.displayName;
+	}
+	return QString();
+}
+
+CIniHighlighter::KeywordMappings<CIniHighlighter::KeywordType::Context> CIniHighlighter::getDisplayableContextMappings(const QString& currentLang)
+{
+	auto effectiveMappings = getEffectiveMappingsWithActionFallback(contextData, currentLang);
+	KeywordMappings<KeywordType::Context> displayableMappings;
+	for (const auto& mapping : effectiveMappings) {
+		if (mapping.keyword.compare(QStringLiteral("w"), Qt::CaseInsensitive) != 0)
+			displayableMappings.append(mapping);
+	}
+	return displayableMappings;
+}
+
+QString CIniHighlighter::buildContextWarning(const SettingInfo& info, char currentContext, const QString& currentLang)
+{
+	if (currentContext == '\0' || info.context.isEmpty())
+		return QString();
+
+	const QChar contextId = QLatin1Char(currentContext);
+	if (info.context.contains(QString(contextId), Qt::CaseInsensitive))
+		return QString();
+
+	const auto displayableMappings = getDisplayableContextMappings(currentLang);
+	QString currentLabel;
+	for (const auto& mapping : displayableMappings) {
+		if (mapping.keyword.compare(QString(contextId), Qt::CaseInsensitive) == 0) {
+			currentLabel = mapping.displayName;
+			break;
+		}
+	}
+
+	const QStringList expectedLabels = getVisibleLabelsWithActionHiding<KeywordInfo<KeywordType::Context>>(info.context, displayableMappings);
+	if (currentLabel.isEmpty() || expectedLabels.isEmpty())
+		return QString();
+
+	const QString warningTemplate = getContextWarningTemplate(currentLang);
+	if (warningTemplate.isEmpty())
+		return QString();
+
+	return warningTemplate.arg(expectedLabels.join(QStringLiteral(" + ")), currentLabel);
 }
 
 QTextCharFormat CIniHighlighter::determineKeyFormat(const SettingInfo& info, const QVersionNumber& currentVersion,
@@ -2141,9 +2236,9 @@ QString CIniHighlighter::sanitizeHtmlInput(const QString& input)
 	return sanitized;
 }
 
-QString CIniHighlighter::makeTooltipCacheKey(const QString& prefix, const QString& settingName, const QString& settingValue)
+QString CIniHighlighter::makeTooltipCacheKey(const QString& prefix, const QString& settingName, const QString& settingValue, char currentContext)
 {
-	return prefix + QChar(0x1f) + settingName + QChar(0x1f) + settingValue;
+	return prefix + QChar(0x1f) + settingName + QChar(0x1f) + settingValue + QChar(0x1f) + QString::number(static_cast<unsigned char>(currentContext));
 }
 
 bool CIniHighlighter::findDisabledSettingRule(const QString& settingName, DisabledSettingRule& rule)
@@ -2414,26 +2509,26 @@ bool CIniHighlighter::isValidForTooltip(const QString& settingName)
 	return resolveCustomCompletionValue(normalizedSettingName, customCompletionRules, validSettings, nullptr, nullptr);
 }
 
-QString CIniHighlighter::GetBasicSettingTooltip(const QString& settingName, const QString& settingValue)
+QString CIniHighlighter::GetBasicSettingTooltip(const QString& settingName, const QString& settingValue, char currentContext)
 {
 	TooltipMode mode = GetTooltipMode();
 	if (mode == TooltipMode::Disabled) {
 		return QString();
 	}
 	if (mode == TooltipMode::FullTooltip) {
-		return GetSettingTooltip(settingName, settingValue);
+		return GetSettingTooltip(settingName, settingValue, currentContext);
 	}
 	if (!isValidForTooltip(settingName))
 		return QString();
 
-	const QString cacheKey = makeTooltipCacheKey(QStringLiteral("basic"), settingName, settingValue);
+	const QString cacheKey = makeTooltipCacheKey(QStringLiteral("basic"), settingName, settingValue, currentContext);
 	// basic tooltip: only version rows + description (or syntax if description missing) with special-case logic
 	return getOrSetTooltipCache(cacheKey, [=]() {
-		return buildTooltipCore(settingName, /*includeMappings=*/false, /*includeContent=*/false, /*reserveSize=*/1024, /*preferDescriptionFirst=*/true, settingValue);
+		return buildTooltipCore(settingName, /*includeMappings=*/false, /*includeContent=*/false, /*reserveSize=*/1024, /*preferDescriptionFirst=*/true, settingValue, currentContext);
 		});
 }
 
-QString CIniHighlighter::GetSettingTooltip(const QString& settingName, const QString& settingValue)
+QString CIniHighlighter::GetSettingTooltip(const QString& settingName, const QString& settingValue, char currentContext)
 {
 	TooltipMode mode = GetTooltipMode();
 
@@ -2441,45 +2536,45 @@ QString CIniHighlighter::GetSettingTooltip(const QString& settingName, const QSt
 	// to be able to show helpful content. Use the popup-specific generator
 	// as a fallback in that case.
 	if (mode == TooltipMode::Disabled) {
-		return GetSettingTooltipForPopup(settingName, settingValue);
+		return GetSettingTooltipForPopup(settingName, settingValue, currentContext);
 	}
 
 	if (mode == TooltipMode::BasicInfo) {
-		return GetBasicSettingTooltip(settingName, settingValue);
+		return GetBasicSettingTooltip(settingName, settingValue, currentContext);
 	}
 
 	if (!isValidForTooltip(settingName))
 		return QString();
 
 	// full tooltip: include mappings + full content
-	const QString cacheKey = makeTooltipCacheKey(QStringLiteral("full"), settingName, settingValue);
+	const QString cacheKey = makeTooltipCacheKey(QStringLiteral("full"), settingName, settingValue, currentContext);
 	return getOrSetTooltipCache(cacheKey, [=]() {
-		return buildTooltipCore(settingName, /*includeMappings=*/true, /*includeContent=*/true, /*reserveSize=*/2048, /*preferDescriptionFirst=*/true, settingValue);
+		return buildTooltipCore(settingName, /*includeMappings=*/true, /*includeContent=*/true, /*reserveSize=*/2048, /*preferDescriptionFirst=*/true, settingValue, currentContext);
 		});
 }
 
 // Helper to build popup tooltip content for Basic or Full popup modes.
-QString CIniHighlighter::BuildPopupTooltip(const QString& settingName, bool basic, const QString& settingValue)
+QString CIniHighlighter::BuildPopupTooltip(const QString& settingName, bool basic, const QString& settingValue, char currentContext)
 {
 	// Popup basic == same semantics as hover basic (selective version rows + description/syntax)
 	// Popup full == full tooltip (mappings + content)
 	if (!isValidForTooltip(settingName))
 		return QString();
 
-	return buildPopupTooltipCore(settingName, basic, settingValue);
+	return buildPopupTooltipCore(settingName, basic, settingValue, currentContext);
 }
 
-QString CIniHighlighter::buildPopupTooltipCore(const QString& settingName, bool basic, const QString& settingValue)
+QString CIniHighlighter::buildPopupTooltipCore(const QString& settingName, bool basic, const QString& settingValue, char currentContext)
 {
 	if (basic) {
-		return buildTooltipCore(settingName, /*includeMappings=*/false, /*includeContent=*/false, /*reserveSize=*/1024, /*preferDescriptionFirst=*/true, settingValue);
+		return buildTooltipCore(settingName, /*includeMappings=*/false, /*includeContent=*/false, /*reserveSize=*/1024, /*preferDescriptionFirst=*/true, settingValue, currentContext);
 	}
 	else {
-		return buildTooltipCore(settingName, /*includeMappings=*/true, /*includeContent=*/true, /*reserveSize=*/2048, /*preferDescriptionFirst=*/true, settingValue);
+		return buildTooltipCore(settingName, /*includeMappings=*/true, /*includeContent=*/true, /*reserveSize=*/2048, /*preferDescriptionFirst=*/true, settingValue, currentContext);
 	}
 }
 
-QString CIniHighlighter::GetSettingTooltipForPopup(const QString& settingName, const QString& settingValue)
+QString CIniHighlighter::GetSettingTooltipForPopup(const QString& settingName, const QString& settingValue, char currentContext)
 {
 	// Determine configured modes
 	int iniMode = theConf->GetInt("Options/EnableIniTooltips", static_cast<int>(GetTooltipMode()));
@@ -2495,28 +2590,28 @@ QString CIniHighlighter::GetSettingTooltipForPopup(const QString& settingName, c
 
 	// Basic popup tooltip
 	if (popupMode == Qt::PartiallyChecked) {
-		const QString cacheKey = makeTooltipCacheKey(QStringLiteral("popup_basic"), settingName, settingValue);
+		const QString cacheKey = makeTooltipCacheKey(QStringLiteral("popup_basic"), settingName, settingValue, currentContext);
 		return getOrSetTooltipCache(cacheKey, [=]() {
-			return buildPopupTooltipCore(settingName, /*basic=*/true, settingValue);
+			return buildPopupTooltipCore(settingName, /*basic=*/true, settingValue, currentContext);
 			});
 	}
 
 	// Full popup tooltip
-	const QString cacheKey = makeTooltipCacheKey(QStringLiteral("popup"), settingName, settingValue);
+	const QString cacheKey = makeTooltipCacheKey(QStringLiteral("popup"), settingName, settingValue, currentContext);
 	return getOrSetTooltipCache(cacheKey, [=]() {
-		return buildPopupTooltipCore(settingName, /*basic=*/false, settingValue);
+		return buildPopupTooltipCore(settingName, /*basic=*/false, settingValue, currentContext);
 		});
 }
 
-QString CIniHighlighter::BuildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize, bool preferDescriptionFirst, const QString& settingValue)
+QString CIniHighlighter::BuildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize, bool preferDescriptionFirst, const QString& settingValue, char currentContext)
 {
 	if (!isValidForTooltip(settingName))
 		return QString();
 
-	return buildTooltipCore(settingName, includeMappings, includeContent, reserveSize, preferDescriptionFirst, settingValue);
+	return buildTooltipCore(settingName, includeMappings, includeContent, reserveSize, preferDescriptionFirst, settingValue, currentContext);
 }
 
-QString CIniHighlighter::buildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize, bool preferDescriptionFirst, const QString& settingValue)
+QString CIniHighlighter::buildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize, bool preferDescriptionFirst, const QString& settingValue, char currentContext)
 {
 	const QString normalizedSettingName = settingName.trimmed();
 	const TooltipThemeCache& themeCache = getTooltipThemeCache();
@@ -2599,6 +2694,10 @@ QString CIniHighlighter::buildTooltipCore(const QString& settingName, bool inclu
 			processMappingsOptimized(tooltip, info, currentLang, themeCache.labelStyle);
 		processContentOptimized(tooltip, info, currentLang, contentSettingName, themeCache.labelStyle);
 	}
+
+	const QString contextWarning = buildContextWarning(info, currentContext, currentLang);
+	if (!contextWarning.isEmpty())
+		appendTableRowForContent(tooltip, tr("Attention"), contextWarning, themeCache.labelStyle, HtmlTags::VALUE_PREFIX, contentSettingName, false, QStringLiteral("ContextAttention"));
 
 	tooltip += HtmlTags::TABLE_END % HtmlTags::HTML_END;
 	return tooltip;
@@ -3058,7 +3157,9 @@ bool CIniHighlighter::IsKeyHiddenFromContext(const QString& keyName, char contex
 QString CIniHighlighter::TooltipStyle::toHtmlStyle() const {
 	QStringList styles;
 	if (!color.isEmpty()) {
-		styles << HtmlAttribs::COLOR_VAR.arg(color);
+		const QString resolvedColor = ResolveTooltipStyleColor(color);
+		if (!resolvedColor.isEmpty())
+			styles << HtmlAttribs::COLOR_VAR.arg(resolvedColor);
 	}
 	if (bold) {
 		styles << HtmlAttribs::STYLE_BOLD;

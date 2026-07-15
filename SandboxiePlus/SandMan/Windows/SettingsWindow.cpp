@@ -878,7 +878,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 			|| CIniHighlighter::ShouldHideCompletionCandidate(inputKey, keyName, 'c');
 		});
 	m_pCodeEdit->SetPopupTooltipCallback([](const QString& keyName) -> QString {
-		return CIniHighlighter::GetSettingTooltipForPopup(keyName);
+		return CIniHighlighter::GetSettingTooltipForPopup(keyName, QString(), 'g');
 		});
 	
 	// Update completion model with current settings if auto completion is enabled
@@ -1156,7 +1156,7 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 
 				if (CIniHighlighter::IsSettingsLoaded()) {
 					const QString settingValue = currentLine.mid(equalsPos + 1).trimmed();
-					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue);
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, 'g');
 					if (!tooltipText.isEmpty()) {
 						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
 						return true;
@@ -1199,7 +1199,7 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 						settingName.chop(1);
 					const int equalsIndex = currentLine.indexOf('=');
 					const QString settingValue = equalsIndex >= 0 ? currentLine.mid(equalsIndex + 1).trimmed() : QString();
-					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue);
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, 'g');
 					if (!tooltipText.isEmpty()) {
 						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
 						return true;

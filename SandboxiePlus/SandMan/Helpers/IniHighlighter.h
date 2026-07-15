@@ -53,11 +53,11 @@ public:
 	void applyUserIniOverrides(const QString& masterVersion, const QString& userIniPath);
 	void setCurrentVersion(const QString& version);
 
-	static QString BuildPopupTooltip(const QString& settingName, bool basic, const QString& settingValue = QString());
-	static QString BuildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize = 2048, bool preferDescriptionFirst = true, const QString& settingValue = QString());
-	static QString GetBasicSettingTooltip(const QString& settingName, const QString& settingValue = QString());
-	static QString GetSettingTooltip(const QString& settingName, const QString& settingValue = QString());
-	static QString GetSettingTooltipForPopup(const QString& settingName, const QString& settingValue = QString());
+	static QString BuildPopupTooltip(const QString& settingName, bool basic, const QString& settingValue = QString(), char currentContext = '\0');
+	static QString BuildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize = 2048, bool preferDescriptionFirst = true, const QString& settingValue = QString(), char currentContext = '\0');
+	static QString GetBasicSettingTooltip(const QString& settingName, const QString& settingValue = QString(), char currentContext = '\0');
+	static QString GetSettingTooltip(const QString& settingName, const QString& settingValue = QString(), char currentContext = '\0');
+	static QString GetSettingTooltipForPopup(const QString& settingName, const QString& settingValue = QString(), char currentContext = '\0');
 	static bool IsSettingsLoaded() { return settingsLoaded; }
 	static bool IsCommentLine(const QString& line);
 
@@ -158,9 +158,9 @@ private:
 	static QString normalizeLanguage(const QString& language);
 	static QString sanitizeHtmlInput(const QString& input);
 	static bool isValidForTooltip(const QString& settingName);
-	static QString makeTooltipCacheKey(const QString& prefix, const QString& settingName, const QString& settingValue);
-	static QString buildPopupTooltipCore(const QString& settingName, bool basic, const QString& settingValue);
-	static QString buildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize, bool preferDescriptionFirst, const QString& settingValue);
+	static QString makeTooltipCacheKey(const QString& prefix, const QString& settingName, const QString& settingValue, char currentContext);
+	static QString buildPopupTooltipCore(const QString& settingName, bool basic, const QString& settingValue, char currentContext);
+	static QString buildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize, bool preferDescriptionFirst, const QString& settingValue, char currentContext);
 	static bool findDisabledSettingRule(const QString& settingName, DisabledSettingRule& rule);
 	static void ensureDisabledSettingAliases();
 	static SettingInfo resolveSettingInfo(const QString& settingName, const QString& settingValue);
@@ -262,6 +262,9 @@ private:
 	template<KeywordType Type>
 	static KeywordMappings<Type> getEffectiveMappingsWithActionFallback(
 		const KeywordGroup<Type>& data, const QString& currentLang);
+	static QString buildContextWarning(const SettingInfo& info, char currentContext, const QString& currentLang);
+	static QString getContextWarningTemplate(const QString& currentLang);
+	static KeywordMappings<KeywordType::Context> getDisplayableContextMappings(const QString& currentLang);
 
 	template<typename KeywordInfoType>
 	static void processKeywordMappings(
@@ -285,9 +288,10 @@ private:
 	
 	static void appendMultiLineTooltipRow(QString& tooltip, const QString& label, 
 		const QStringList& lines, const QString& labelStyle, const QString& valuePrefix,
-		const QString& settingName, bool applySpecialFormatting = false);
+		const QString& settingName, bool applySpecialFormatting = false,
+		const TooltipCellStyles& cellStyles = TooltipCellStyles{});
 
-    static void appendTableRowForContent(QString& tooltip, const QString& label, const QString& content, const QString& labelStyle, const QString& valuePrefix, const QString& settingName, bool isSyntax);
+	static void appendTableRowForContent(QString& tooltip, const QString& label, const QString& content, const QString& labelStyle, const QString& valuePrefix, const QString& settingName, bool isSyntax, const QString& styleKey = QString());
 
     static QString getOrSetTooltipCache(const QString& cacheKey, const std::function<QString()>& generator);
 

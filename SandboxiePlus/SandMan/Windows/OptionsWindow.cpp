@@ -492,8 +492,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		return CIniHighlighter::IsKeyHiddenFromContext(keyName, 'c')
 			|| CIniHighlighter::ShouldHideCompletionCandidate(inputKey, keyName, 'c');
 		});
-	m_pCodeEdit->SetPopupTooltipCallback([](const QString& keyName) -> QString {
-		return CIniHighlighter::GetSettingTooltipForPopup(keyName);
+	const char currentContext = m_Template ? 't' : 's';
+	m_pCodeEdit->SetPopupTooltipCallback([currentContext](const QString& keyName) -> QString {
+		return CIniHighlighter::GetSettingTooltipForPopup(keyName, QString(), currentContext);
 		});
 	
 	// Update completion model with current settings if auto completion is enabled
@@ -955,6 +956,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		// Check if tooltips are completely disabled
 		if (CIniHighlighter::GetTooltipMode() == CIniHighlighter::TooltipMode::Disabled)
 			return false;
+		const char currentContext = m_Template ? 't' : 's';
 
 		QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
 
@@ -986,7 +988,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 
 				if (CIniHighlighter::IsSettingsLoaded()) {
 					const QString settingValue = currentLine.mid(equalsPos + 1).trimmed();
-					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue);
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, currentContext);
 					if (!tooltipText.isEmpty()) {
 						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
 						return true;
@@ -1029,7 +1031,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 						settingName.chop(1);
 					const int equalsIndex = currentLine.indexOf('=');
 					const QString settingValue = equalsIndex >= 0 ? currentLine.mid(equalsIndex + 1).trimmed() : QString();
-					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue);
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, currentContext);
 					if (!tooltipText.isEmpty()) {
 						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
 						return true;

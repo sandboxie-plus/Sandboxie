@@ -806,9 +806,10 @@ int ApplyUpdate(std::wstring base_dir, std::wstring temp_dir, std::shared_ptr<SF
 	CreateDirectoryW(secure_dir.c_str(), NULL);
 
 	// Copy all pending files to secure temp with hash verification
-	std::vector<HANDLE> deleteOnCloseHandles;
-	if (!CopyToSecureTemp(temp_dir, secure_dir, pNewFiles, &deleteOnCloseHandles)) {
-		CloseSecureTemp(&deleteOnCloseHandles, secure_dir);
+	//std::vector<HANDLE> deleteOnCloseHandles;
+	//if (!CopyToSecureTemp(temp_dir, secure_dir, pNewFiles, &deleteOnCloseHandles)) {
+		//CloseSecureTemp(&deleteOnCloseHandles, secure_dir);
+	if (!CopyToSecureTemp(temp_dir, secure_dir, pNewFiles, NULL)) {
 		std::wcout << L"Failed to secure update files - possible tampering detected" << std::endl;
 		return ERROR_INTERNAL;
 	}
@@ -848,7 +849,7 @@ int ApplyUpdate(std::wstring base_dir, std::wstring temp_dir, std::shared_ptr<SF
 	//std::wstring dest = base_dir + L"\\" _T(UPDATE_FILE);
 	//MoveFileExW(src.c_str(), dest.c_str(), MOVEFILE_REPLACE_EXISTING | MOVEFILE_COPY_ALLOWED);
 
-	CloseSecureTemp(&deleteOnCloseHandles, secure_dir);
+	//CloseSecureTemp(&deleteOnCloseHandles, secure_dir);
 	return Count;
 }
 

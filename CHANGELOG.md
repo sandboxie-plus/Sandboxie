@@ -5,6 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.18.1 / 5.73.1] - 2026-07-??
+
+### Changed
+- updated Chromium_Elevation template now using specifig 'RunServiceAsSystem=...' instead of 'RunServicesAsSystem=y' and added more service names
+
+### Fixed
+- fixed incremental update mechanism fails to copy new files
+- fixed 'RunServiceAsSystem=...' conflicts with 'UseSecurityMode=y'
+- fixed 'cryptsvc' failing with 'RunServicesAsSystem=y'
+
+
+
 
 
 ## [1.18.0 / 5.73.0] - 2026-07-12

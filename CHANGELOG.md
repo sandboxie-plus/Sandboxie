@@ -14,8 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed incremental update mechanism fails to copy new files
 - fixed 'RunServiceAsSystem=...' conflicts with 'UseSecurityMode=y'
 - fixed 'cryptsvc' failing with 'RunServicesAsSystem=y'
-
-
+- fixed SOCKS5 proxy password authentication failures caused by unsafe encrypted credential decoding, invalid credential length handling, locale-dependent encoding, and partial socket sends
 
 
 

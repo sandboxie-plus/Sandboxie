@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC
- * Copyright 2020-2025 David Xanatos, xanasoft.com
+ * Copyright 2020-2026 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -323,8 +323,8 @@ struct NETPROXY_RULE {
     SOCKADDR_IN6_LH WSA_ProxyAddr6;
 
     BOOLEAN auth;
-    WCHAR   login[255];
-    WCHAR   pass[255];
+    WCHAR   login[256];
+    WCHAR   pass[256];
 
     rbtree_t ip_map;
 };
@@ -1897,6 +1897,78 @@ void NetFw_RuleAddIpRange(rbtree_t* tree, IP_ADDRESS* IpBegin, IP_ADDRESS* IpEnd
 
 const WCHAR* wcsnchr(const WCHAR* str, size_t max, WCHAR ch);
 
+static BOOLEAN WSA_DecryptProxyPassword(WCHAR password[256], const WCHAR* encoded, ULONG encoded_len)
+{
+    WCHAR* encoded_copy = NULL;
+    SBIE_INI_RC4_CRYPT_REQ* req = NULL;
+    SBIE_INI_RC4_CRYPT_RPL* rpl = NULL;
+    BOOLEAN ok = FALSE;
+
+    if (encoded_len == 0 || (encoded_len % 4) != 0)
+        goto cleanup;
+
+    for (ULONG i = 0; i < encoded_len; ++i) {
+        WCHAR ch = encoded[i];
+        if (ch == L'=') {
+            if (i < encoded_len - 2 || (i == encoded_len - 2 && encoded[i + 1] != L'='))
+                goto cleanup;
+        }
+        else if (!((ch >= L'0' && ch <= L'9') ||
+                   (ch >= L'A' && ch <= L'Z') ||
+                   (ch >= L'a' && ch <= L'z') || ch == L'+' || ch == L'/')) {
+            goto cleanup;
+        }
+    }
+
+    encoded_copy = Dll_Alloc(((SIZE_T)encoded_len + 1) * sizeof(WCHAR));
+    if (!encoded_copy)
+        goto cleanup;
+    wmemcpy(encoded_copy, encoded, encoded_len);
+    encoded_copy[encoded_len] = L'\0';
+
+    SIZE_T decoded_len = b64_decoded_size(encoded_copy);
+    if (decoded_len == 0 || decoded_len > 255 * sizeof(WCHAR) ||
+            (decoded_len % sizeof(WCHAR)) != 0)
+        goto cleanup;
+
+    ULONG req_len = sizeof(SBIE_INI_RC4_CRYPT_REQ) + (ULONG)decoded_len;
+    req = Dll_Alloc(req_len);
+    if (!req)
+        goto cleanup;
+    memset(req, 0, req_len);
+
+    req->h.length = req_len;
+    req->h.msgid = MSGID_SBIE_INI_RC4_CRYPT;
+    req->value_len = (ULONG)decoded_len;
+    if (!b64_decode(encoded_copy, req->value, decoded_len))
+        goto cleanup;
+
+    rpl = (SBIE_INI_RC4_CRYPT_RPL*)SbieDll_CallServer(&req->h);
+    if (!rpl || !NT_SUCCESS(rpl->h.status) ||
+            rpl->h.length < sizeof(SBIE_INI_RC4_CRYPT_RPL) ||
+            rpl->value_len > rpl->h.length - sizeof(SBIE_INI_RC4_CRYPT_RPL) ||
+            rpl->value_len != decoded_len ||
+            (rpl->value_len % sizeof(WCHAR)) != 0)
+        goto cleanup;
+
+    ULONG password_len = rpl->value_len / sizeof(WCHAR);
+    if (password_len > 255)
+        goto cleanup;
+
+    wmemcpy(password, rpl->value, password_len);
+    password[password_len] = L'\0';
+    ok = TRUE;
+
+cleanup:
+    if (rpl)
+        Dll_Free(rpl);
+    if (req)
+        Dll_Free(req);
+    if (encoded_copy)
+        Dll_Free(encoded_copy);
+    return ok;
+}
+
 BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
 {
     // NetworkUseProxy=explorer.exe,Address=198.98.55.77;Port=40000;Auth=No;Login=l2sxbnjqR5JJAAoCnA;Password=12OxyLTW9nma5HbNjC
@@ -2001,6 +2073,7 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
         if (login_len > 255)
             return FALSE;
         wmemcpy(proxy->login, login_value, login_len);
+        proxy->login[login_len] = L'\0';
     }
 
     WCHAR* pass_value;
@@ -2014,32 +2087,8 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
     }
     else {
         ok = SbieDll_FindTagValuePtr(found_value, L"EncryptedPW", &pass_value, &pass_len, L'=', L';');
-        if (ok) {
-
-            SBIE_INI_RC4_CRYPT_REQ req;
-            SBIE_INI_RC4_CRYPT_RPL *rpl;
-
-            pass_value[pass_len] = L'\0';
-
-            req.h.length = sizeof(SBIE_INI_RC4_CRYPT_REQ) + 255;
-            req.h.msgid = MSGID_SBIE_INI_RC4_CRYPT;
-            req.value_len = b64_decoded_size(pass_value);
-            b64_decode(pass_value, req.value, req.value_len);
-
-            pass_value[pass_len] = L'\0';
-
-            rpl = (SBIE_INI_RC4_CRYPT_RPL *)SbieDll_CallServer(&req.h);
-            if (rpl){
-
-                pass_len = rpl->value_len / sizeof(wchar_t);
-                if (pass_len > 255)
-                    return FALSE;
-                wmemcpy(proxy->pass, rpl->value, pass_len);
-                proxy->pass[pass_len] = L'\0';
-
-                Dll_Free(rpl);
-            }
-        }
+        if (ok && !WSA_DecryptProxyPassword(proxy->pass, pass_value, pass_len))
+            return FALSE;
     }
 
     return TRUE;

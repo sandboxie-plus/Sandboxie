@@ -36,22 +36,22 @@
 	      <desktop4:Extension Category="windows.fileExplorerContextMenus">
 		      <desktop4:FileExplorerContextMenus>
 		       <desktop5:ItemType Type="Directory">
-		        <desktop5:Verb Id="BowPad" Clsid="EA3E972D-62C7-4309-8F15-883263041E99" />
+		        <desktop5:Verb Id="ExploreSandboxed" Clsid="EA3E972D-62C7-4309-8F15-883263041E99" />
 		       </desktop5:ItemType>
 		       <desktop5:ItemType Type="Directory\Background">
-		        <desktop5:Verb Id="BowPad" Clsid="EA3E972D-62C7-4309-8F15-883263041E99" />
+		        <desktop5:Verb Id="ExploreSandboxed" Clsid="EA3E972D-62C7-4309-8F15-883263041E99" />
 		       </desktop5:ItemType>
 		       <desktop5:ItemType Type="*">
-		        <desktop5:Verb Id="BowPad" Clsid="3FD2D9EE-DAF9-404A-9B7E-13B2DCD63950" />
+		        <desktop5:Verb Id="OpenSandboxed" Clsid="3FD2D9EE-DAF9-404A-9B7E-13B2DCD63950" />
 		       </desktop5:ItemType>
 		      </desktop4:FileExplorerContextMenus>
 	      </desktop4:Extension>
 	      <com:Extension Category="windows.comServer">
 		      <com:ComServer>
-		       <com:SurrogateServer  DisplayName="BowPad Context Menu Handler">
+		       <com:SurrogateServer  DisplayName="Sandboxie Context Menu Handler">
 		        <com:Class Id="EA3E972D-62C7-4309-8F15-883263041E99" Path="SbieShellExt.dll" ThreadingModel="STA"/>
 		       </com:SurrogateServer>
-			   <com:SurrogateServer  DisplayName="BowPad Context Menu Handler">
+			   <com:SurrogateServer  DisplayName="Sandboxie Context Menu Handler">
 				<com:Class Id="3FD2D9EE-DAF9-404A-9B7E-13B2DCD63950" Path="SbieShellExt.dll" ThreadingModel="STA"/>
 			   </com:SurrogateServer>
 		      </com:ComServer>

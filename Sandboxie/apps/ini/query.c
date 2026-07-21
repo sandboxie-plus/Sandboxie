@@ -97,7 +97,7 @@ void DoListSettings(void)
 
 void DoQuerySetting(void)
 {
-    WCHAR value[512];
+    WCHAR value[CONF_LINE_LEN + 1];
 
     ULONG index = CONF_GET_NO_TEMPLS;
     BOOL expand = CmdIs(L"queryex");
@@ -109,7 +109,7 @@ void DoQuerySetting(void)
     while (1) {
 
         ULONG status = SbieApi_QueryConf(
-            CmdVerb(1), CmdVerb(2), index, value, sizeof(WCHAR) * 510);
+            CmdVerb(1), CmdVerb(2), index, value, sizeof(value));
 
         if (status != 0)
             break;

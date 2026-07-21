@@ -420,7 +420,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="84"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Источник</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="94"/>
@@ -435,7 +435,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="99"/>
         <source>Export each box to its own file</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать каждую песочницу в отдельный файл</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="104"/>
@@ -486,7 +486,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="253"/>
         <source>Duplicate!</source>
-        <translation type="unfinished"></translation>
+        <translation>Дубликат!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="447"/>
@@ -497,7 +497,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="462"/>
         <source>Cannot export: Sandbox has running processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось экспортировать: в песочнице выполняются процессы.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="481"/>
@@ -507,7 +507,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="486"/>
         <source>No boxes selected for separate file export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не выбраны песочницы для экспорта в отдельные файлы.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="529"/>
@@ -517,62 +517,62 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="550"/>
         <source>Mount &apos;%1&apos; for Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Подключить "%1" для экспорта</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="553"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Зашифрованная песочница "%1"не подключена. Пропустить её?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="564"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось отключить "%1" для повторного подключения.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="574"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось подключить зашифрованную песочницу "%1".</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="606"/>
         <source>Select Export Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите папку для экспорта</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="645"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished">Экспорт песочницы</translation>
+        <translation>Экспорт песочницы</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="940"/>
         <source>Password for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль для "%1"</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="956"/>
         <source>Failed to open archive (%1): %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть архив (%1): %2</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1014"/>
         <source>Select Archives</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите архивы</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1015"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>Архив 7-Zip (*.7z);;ZIP-архив (*.zip);;Все архивы (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1052"/>
         <source>The selected archives do not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранные архивы не содержат данных песочницы.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1078"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно импортировать несколько песочниц с одинаковым именем "%1". Сначала переименуйте их.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1164"/>
@@ -2351,7 +2351,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="833"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1007"/>
@@ -2590,12 +2590,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>
         <source>Always show (focused window only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Всегда показывать (только для активного окна)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Show for all windows in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать для всех окон этой песочницы</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
@@ -3430,7 +3430,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="932"/>
         <source>%1 file(s) hidden by AutoRecoverIgnore</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 файл(ов) скрыто параметром AutoRecoverIgnore</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="1283"/>
@@ -3448,17 +3448,17 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="17"/>
         <source>Sandboxie-Plus - Rename Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Переименование песочницы</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="23"/>
         <source>When enabled, alias display is disabled for this sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если этот параметр включён, отображение псевдонима для этой песочницы будет отключено.</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="24"/>
         <source>Hide alias input in this dialog. This preference is remembered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть поле ввода псевдонима в этом диалоговом окне. Этот параметр будет сохранён.</translation>
     </message>
 </context>
 <context>
@@ -4182,57 +4182,58 @@ No will choose: %2</source>
     <message>
         <location filename="SandManTray.cpp" line="302"/>
         <source>No pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет закреплённых песочниц для отображения.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="304"/>
         <source>No active or pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет активных или закреплённых песочниц для отображения.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="305"/>
         <source>No sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет песочниц для отображения.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="508"/>
         <source>    Alias: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Псевдоним: %1
+</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="509"/>
         <source>    File root: %1
 </source>
-        <translation type="unfinished">    Корень файла: %1
+        <translation>    Корень файла: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="510"/>
         <source>    Registry root: %1
 </source>
-        <translation type="unfinished">    Корень реестра: %1
+        <translation>    Корень реестра: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="511"/>
         <source>    IPC root: %1
 </source>
-        <translation type="unfinished">    Корень IPC: %1
+        <translation>    Корень IPC: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="513"/>
         <source>    Disk root: %1
 </source>
-        <translation type="unfinished">    Корень диска: %1
+        <translation>    Корень диска: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="514"/>
         <source>Options:
     </source>
-        <translation type="unfinished">Опции:
+        <translation>Опции:
     </translation>
     </message>
     <message>
@@ -4612,7 +4613,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="521"/>
         <source> (Administrator)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Администратор)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="786"/>
@@ -4725,7 +4726,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1514"/>
         <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочницы: %1 (%2 активных)  |  Процессы: %3  |  Память: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1932"/>
@@ -5262,17 +5263,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Models/SbieModel.cpp" line="840"/>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation>ЦП</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="841"/>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Память</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="842"/>
         <source>Private Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Частные байты</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="843"/>
@@ -5971,25 +5972,29 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="638"/>
         <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    CPU: %1  |  Память: %2  |  Частная память: %3
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="641"/>
         <source>    Sandbox: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Песочница: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="643"/>
         <source>    Image: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Изображение: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="646"/>
         <source>    Start Time: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Время запуска: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1113"/>
@@ -6258,12 +6263,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="342"/>
         <location filename="Windows/SettingsWindow.cpp" line="580"/>
         <source>Ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="343"/>
         <source>Shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="345"/>
@@ -6288,37 +6293,37 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="350"/>
         <source>Same as main</source>
-        <translation type="unfinished"></translation>
+        <translation>Как в основном окне</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="351"/>
         <source>Keep current monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Оставить на текущем мониторе</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="352"/>
         <source>Active monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Активный монитор</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="353"/>
         <source>Primary monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Основной монитор</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="409"/>
         <source>Unknown Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный монитор</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="411"/>
         <source>Display %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Монитор %1: %2</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="413"/>
         <source> (Primary)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Основной)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="433"/>
@@ -6383,7 +6388,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="581"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Трёхпозиционный режим: не установлен - никогда, частично установлен - только при удержании %1 (по умолчанию), установлен - всегда.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="939"/>
@@ -8870,12 +8875,12 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="366"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если флажок установлен, цветная рамка будет скрыта, а вместо неё будет отображаться только имя или псевдоним песочницы. Требуется включить отображение метки.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="369"/>
         <source>Label only</source>
-        <translation type="unfinished"></translation>
+        <translation>Только метка</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="912"/>
@@ -8913,17 +8918,17 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1835"/>
         <source>Total CPU Rate Limit (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Общий лимит использования ЦП (%):</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1851"/>
         <source>Leave it blank to disable the setting (1-100)</source>
-        <translation type="unfinished"></translation>
+        <translation>Оставьте поле пустым, чтобы отключить это ограничение (1–100)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1861"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1921"/>
@@ -9113,12 +9118,12 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4419"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать приведённый выше список исключений, чтобы скрыть совпадающие файлы в окне быстрого восстановления</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4422"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Работает только при снятом флажке "Показать всё" в окне восстановления.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4483"/>
@@ -9128,7 +9133,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4561"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать эвристический анализ для определения процессов на основе Electron/Chromium</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6158"/>
@@ -10094,7 +10099,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="151"/>
         <source>Sandboxed window label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Метка окна в песочнице:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4079"/>
@@ -10244,17 +10249,17 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Windows/SettingsWindow.cpp" line="87"/>
         <location filename="Windows/SettingsWindow.cpp" line="89"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="87"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>по умолчанию</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="89"/>
         <source>fallback</source>
-        <translation type="unfinished"></translation>
+        <translation>резервный</translation>
     </message>
 </context>
 <context>
@@ -10325,7 +10330,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>Show Ignored Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать игнорируемые файлы</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
@@ -10348,27 +10353,27 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="20"/>
         <source>Rename Sandbox</source>
-        <translation type="unfinished">Переименовать песочницу</translation>
+        <translation>Переименовать песочницу</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="31"/>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation type="unfinished">Введите новое имя для песочницы.</translation>
+        <translation>Введите новое имя для песочницы.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="38"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="unfinished">Введите новый псевдоним для песочницы.</translation>
+        <translation>Введите новый псевдоним для песочницы.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="52"/>
         <source>Disable alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить псевдоним</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="59"/>
         <source>Hide alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть псевдоним</translation>
     </message>
 </context>
 <context>
@@ -11299,32 +11304,32 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="844"/>
         <source>Show custom box icons in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать пользовательские значки песочниц в списке трея</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="851"/>
         <source>Show overlay icons for boxes in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать значки-накладки для песочниц в списке трея</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="858"/>
         <source>Show box alias name instead of box name in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать псевдоним песочницы вместо её имени в списке трея</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="865"/>
         <source>Maximum displayed characters for compact tray aliases. Ignored when alias display is disabled (name limit is fixed to 32).</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальное количество отображаемых символов для компактных псевдонимов в трее. Не используется, если отображение псевдонимов отключено (для имени ограничение составляет 32 символа).</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="884"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while Ctrl is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Трёхпозиционный режим: не установлен - никогда, частично установлен - только при удержании Ctrl (по умолчанию), установлен - всегда.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="887"/>
         <source>Show sandbox status as tooltip in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать состояние песочницы во всплывающей подсказке в списке трея</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1154"/>
@@ -11354,47 +11359,47 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1519"/>
         <source>Window Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры окна</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1530"/>
         <source>Support Dialog:</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалог поддержки:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1543"/>
         <source>File Recovery:</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановление файлов:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1556"/>
         <source>Fallback:</source>
-        <translation type="unfinished"></translation>
+        <translation>Резервный вариант:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1601"/>
         <source>Non-main:</source>
-        <translation type="unfinished"></translation>
+        <translation>Неосновные окна:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1617"/>
         <source>Hint: Specific window settings override non-main settings. Fallback is used when the target monitor cannot be used; when disabled, each window falls back to its default current-monitor behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>Подсказка: настройки отдельных окон имеют приоритет над настройками неосновных окон. Резервный вариант используется, если целевой монитор недоступен. Если он отключён, для каждого окна будет использоваться поведение по умолчанию - открытие на текущем мониторе.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1639"/>
         <source>Window Locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Расположение окон</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1646"/>
         <source>Notifications:</source>
-        <translation type="unfinished"></translation>
+        <translation>Уведомления:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1659"/>
         <source>Main:</source>
-        <translation type="unfinished"></translation>
+        <translation>Главное окно:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2641"/>
@@ -11409,7 +11414,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2684"/>
         <source>Add Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить переносную песочницу</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2714"/>
@@ -11463,12 +11468,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2969"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Принудительно запускать в песочнице программы, открывающие файлы из этой песочницы.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2972"/>
         <source>Force programs opening boxed files into their sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Принудительно запускать в песочнице программы, открывающие файлы из песочницы</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2979"/>

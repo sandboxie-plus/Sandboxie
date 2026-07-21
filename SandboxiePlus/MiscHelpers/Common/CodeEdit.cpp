@@ -3,6 +3,8 @@
 #include <QStyledItemDelegate>
 #include <QGuiApplication>
 #include <QScreen>
+#include <QTextDocument>
+#include <QtMath>
 
 
 #define TAB_SPACES "   "
@@ -25,7 +27,8 @@ public:
 		: QStyledItemDelegate(parent), m_tooltipCallback(tooltipCallback) {
 	}
 
-	static QPoint ComputePopupTooltipPosition(const QAbstractItemView* view, const QModelIndex& index, const QPoint& fallbackGlobalPos)
+	static QPoint ComputePopupTooltipPosition(const QAbstractItemView* view, const QModelIndex& index,
+		const QPoint& fallbackGlobalPos, const QString& tooltipText)
 	{
 		if (!view || !index.isValid())
 			return fallbackGlobalPos;
@@ -41,19 +44,42 @@ public:
 		const QRect available = screen ? screen->availableGeometry() : QRect();
 
 		const int margin = 8;
-		const QPoint rightPos = view->mapToGlobal(QPoint(itemRect.right() + margin, itemRect.top()));
-		if (!available.isValid() || (rightPos.x() + 320 <= available.right()))
-			return rightPos;
+		QTextDocument document;
+		document.setDefaultFont(view->font());
+		document.setHtml(tooltipText);
+		const QSize tooltipSize = QSize(
+			qMax(240, qCeil(document.size().width()) + 16),
+			qMax(32, qCeil(document.size().height()) + 16));
+		auto clampCoordinate = [](int value, int minimum, int maximum) {
+			return maximum >= minimum ? qBound(minimum, value, maximum) : minimum;
+		};
+		const int itemY = view->mapToGlobal(QPoint(0, itemRect.top())).y();
+		const int tooltipY = available.isValid()
+			? clampCoordinate(itemY, available.top(), available.bottom() - tooltipSize.height() + 1)
+			: itemY;
 
-		const QPoint leftPos = view->mapToGlobal(QPoint(itemRect.left() - margin, itemRect.top()));
-		if (!available.isValid() || (leftPos.x() - 320 >= available.left()))
-			return leftPos;
+		const int rightX = popupGlobalRect.right() + 1 + margin;
+		if (!available.isValid() || rightX + tooltipSize.width() <= available.right() + 1) {
+			return QPoint(rightX, tooltipY);
+		}
 
-		// Last fallback: keep tooltip outside popup vertically to avoid drawing over it.
-		int y = popupGlobalRect.bottom() + margin;
-		if (available.isValid() && y > available.bottom())
-			y = popupGlobalRect.top() - margin;
-		return QPoint(popupGlobalRect.left(), y);
+		const int leftX = popupGlobalRect.left() - margin - tooltipSize.width();
+		if (!available.isValid() || leftX >= available.left()) {
+			return QPoint(leftX, tooltipY);
+		}
+
+		// If neither side has enough room, place the tooltip wholly above or below
+		// the popup rather than allowing it to cover the popup entries.
+		const int belowY = popupGlobalRect.bottom() + 1 + margin;
+		const int aboveY = popupGlobalRect.top() - margin - tooltipSize.height();
+		const int belowRoom = available.isValid() ? available.bottom() - belowY + 1 : INT_MAX;
+		const int aboveRoom = available.isValid() ? aboveY + tooltipSize.height() - available.top() : INT_MAX;
+		const int y = belowRoom >= aboveRoom ? belowY : aboveY;
+		const int x = available.isValid()
+			? clampCoordinate(popupGlobalRect.left(), available.left(),
+				available.right() - tooltipSize.width() + 1)
+			: popupGlobalRect.left();
+		return QPoint(x, y);
 	}
 
 	bool helpEvent(QHelpEvent* event, QAbstractItemView* view,
@@ -68,7 +94,7 @@ public:
 				// Use the callback instead of direct CIniHighlighter call
 				QString tooltipText = m_tooltipCallback(completionText);
 				if (!tooltipText.isEmpty()) {
-					const QPoint tooltipPos = ComputePopupTooltipPosition(view, index, event->globalPos());
+					const QPoint tooltipPos = ComputePopupTooltipPosition(view, index, event->globalPos(), tooltipText);
 					QToolTip::showText(tooltipPos, tooltipText, view);
 					return true;
 				}
@@ -544,6 +570,7 @@ namespace {
 		// Entry: descriptor used by BuildFuzzyMatches to score and sort candidate strings.
 		// Fields:
 		//   text       - the original candidate string.
+		//   lowerText  - cached lowercase candidate used by ranking and diagnostics.
 		//   dist       - pseudo-distance (0 = exact startsWith or substring, >0 = edit/subsequence distance).
 		//                Lower is better; used as the primary sort key in the default branch.
 		//   pos        - earliest match start index inside the candidate (smaller = earlier = better).
@@ -561,7 +588,7 @@ namespace {
 		//  - distanceFirst (default): order by dist, hasSubstr, tokenScore, coverage, matchedLen, pos, len, text.
 		//
 		// The GetSortKeyDescription debug helper prints which branch was used and the numeric tuple.
-		struct Entry { QString text; int dist; int pos; int len; bool hasSubstr; int matchedLen; int tokenScore; int coverage; };
+		struct Entry { QString text; QString lowerText; int dist; int pos; int len; bool hasSubstr; int matchedLen; int tokenScore; int coverage; };
 		std::vector<Entry> matches;
 		matches.reserve(candidates.size());
 
@@ -604,7 +631,11 @@ namespace {
 		//  - tokenScore is deliberately kept orthogonal to 'dist' so the canonical sort key can decide
 		//    when token evidence should outrank raw edit-distance/substr matches.
 		auto TokenMatchScore = [&](const QString& cand, const QString& prefLower) -> int {
-			QStringList tokens = SplitIntoTokensCached(cand);
+			const QStringList tokens = SplitIntoTokensCached(cand);
+			QStringList lowerTokens;
+			lowerTokens.reserve(tokens.size());
+			for (const QString& token : tokens)
+				lowerTokens.append(token.toLower());
 
 			int prefLen = prefLower.length();
 			int candLenTotal = cand.length();
@@ -616,8 +647,7 @@ namespace {
 
 			int nonExactBest = 0;
 			if (coverageRatio >= kNonExactMinCoverage) {
-				for (const QString& t : tokens) {
-					QString tl = t.toLower();
+				for (const QString& tl : lowerTokens) {
 					if (tl.startsWith(prefLower)) nonExactBest = std::max(nonExactBest, 60);
 					if (tl.endsWith(prefLower)) nonExactBest = std::max(nonExactBest, 50);
 					if (tl.contains(prefLower)) nonExactBest = std::max(nonExactBest, 40);
@@ -625,8 +655,7 @@ namespace {
 
 				// fuzzy token match using centralized threshold
 				if (nonExactBest == 0) {
-					for (const QString& t : tokens) {
-						QString tl = t.toLower();
+					for (const QString& tl : lowerTokens) {
 						int d = MinDistanceToCandidateSubstrings(prefLower, tl, 1);
 						if (d <= kTokenFuzzyMaxDist) {
 							nonExactBest = std::max(nonExactBest, 60);
@@ -639,7 +668,7 @@ namespace {
 			// single-token fuzzy boost
 			int tokenCount = static_cast<int>(tokens.size());
 			if (tokenCount == 1 && prefLen >= 2) {
-				QString single = tokens[0].toLower();
+				const QString& single = lowerTokens[0];
 				int d = MinDistanceToCandidateSubstrings(prefLower, single, 1);
 				if (d <= kTokenFuzzyMaxDist) {
 					return std::max(nonExactBest, kSingleTokenFuzzyBoost);
@@ -650,8 +679,7 @@ namespace {
 			int exactScore = 0;
 			if (tokenCount >= 2) {
 				int per = std::max(1, kTotalExactBoost / tokenCount);
-				for (const QString& t : tokens) {
-					QString tl = t.toLower();
+				for (const QString& tl : lowerTokens) {
 					int tokenLen = tl.length();
 					if (tl == prefLower) {
 						exactScore += per;
@@ -740,7 +768,7 @@ namespace {
 					-e.matchedLen,
 					e.pos,
 					e.len,
-					e.text.toLower()
+					e.lowerText
 				);
 			}
 			if (e.tokenScore >= kStrongTokenThreshold) {
@@ -752,7 +780,7 @@ namespace {
 					-e.matchedLen,
 					e.pos,
 					e.len,
-					e.text.toLower()
+					e.lowerText
 				);
 			}
 			if (e.coverage <= lowCoverageThreshold && e.tokenScore > 0) {
@@ -764,7 +792,7 @@ namespace {
 					-e.matchedLen,
 					e.pos,
 					e.len,
-					e.text.toLower()
+					e.lowerText
 				);
 			}
 			return std::make_tuple(
@@ -775,7 +803,7 @@ namespace {
 				-e.matchedLen,
 				e.pos,
 				e.len,
-				e.text.toLower()
+				e.lowerText
 			);
 			};
 
@@ -798,7 +826,7 @@ namespace {
 				int matchedLen = pLen;
 				int tokenScore = TokenMatchScore(cand, pref);
 				int coverage = computeCoverage(matchedLen, candLen);
-				matches.push_back(Entry{ cand, 0, 0, candLen, true, matchedLen, tokenScore, coverage });
+				matches.push_back(Entry{ cand, candLower, 0, 0, candLen, true, matchedLen, tokenScore, coverage });
 				continue;
 			}
 
@@ -821,10 +849,10 @@ namespace {
 					int coverage = computeCoverage(matchedLen, candLen);
 
 					if (atBoundary) {
-						matches.push_back(Entry{ cand, 0, subPos, candLen, true, matchedLen, tokenScore, coverage });
+						matches.push_back(Entry{ cand, candLower, 0, subPos, candLen, true, matchedLen, tokenScore, coverage });
 					}
 					else {
-						matches.push_back(Entry{ cand, 1, subPos, candLen, false, matchedLen, tokenScore, coverage });
+						matches.push_back(Entry{ cand, candLower, 1, subPos, candLen, false, matchedLen, tokenScore, coverage });
 					}
 					continue;
 				}
@@ -832,7 +860,7 @@ namespace {
 
 			// Empty prefix -> include all
 			if (pref.isEmpty()) {
-				matches.push_back(Entry{ cand, 0, 0, candLen, false, 0, 0, 0 });
+				matches.push_back(Entry{ cand, candLower, 0, 0, candLen, false, 0, 0, 0 });
 				continue;
 			}
 
@@ -855,7 +883,7 @@ namespace {
 					else if (pos <= 6) tokenScore += kSubseqBoostPos6;
 				}
 
-				matches.push_back(Entry{ cand, score, pos, candLen, false, matchedLen, tokenScore, coverage });
+				matches.push_back(Entry{ cand, candLower, score, pos, candLen, false, matchedLen, tokenScore, coverage });
 				continue;
 			}
 
@@ -875,7 +903,7 @@ namespace {
 				matchedLen = std::max(matchedLen, lcs);
 				int tokenScore = TokenMatchScore(cand, pref);
 				int coverage = computeCoverage(matchedLen, candLen);
-				matches.push_back(Entry{ cand, d, pos, candLen, false, matchedLen, tokenScore, coverage });
+				matches.push_back(Entry{ cand, candLower, d, pos, candLen, false, matchedLen, tokenScore, coverage });
 				continue;
 			}
 
@@ -888,7 +916,7 @@ namespace {
 				matchedLen = std::max(matchedLen, lcs);
 				int tokenScore = TokenMatchScore(cand, pref);
 				int coverage = computeCoverage(matchedLen, candLen);
-				matches.push_back(Entry{ cand, d, pos, candLen, false, matchedLen, tokenScore, coverage });
+				matches.push_back(Entry{ cand, candLower, d, pos, candLen, false, matchedLen, tokenScore, coverage });
 				continue;
 			}
 		}
@@ -931,25 +959,25 @@ namespace {
 							mode = "shortPrefix";
 							keyStr = QString("(%1,%2,%3,%4,%5,%6,%7,%8)")
 								.arg(-e.tokenScore).arg(e.dist).arg(hasSubstrKey).arg(-e.coverage)
-								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.text.toLower());
+								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.lowerText);
 						}
 						else if (e.tokenScore >= kStrongTokenThreshold) {
 							mode = "strongToken";
 							keyStr = QString("(%1,%2,%3,%4,%5,%6,%7,%8)")
 								.arg(-e.tokenScore).arg(e.dist).arg(hasSubstrKey).arg(-e.coverage)
-								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.text.toLower());
+								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.lowerText);
 						}
 						else if (e.coverage <= lowCoverageThreshold && e.tokenScore > 0) {
 							mode = "lowCoverageToken";
 							keyStr = QString("(%1,%2,%3,%4,%5,%6,%7,%8)")
 								.arg(-e.tokenScore).arg(e.dist).arg(hasSubstrKey).arg(-e.coverage)
-								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.text.toLower());
+								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.lowerText);
 						}
 						else {
 							mode = "distanceFirst";
 							keyStr = QString("(%1,%2,%3,%4,%5,%6,%7,%8)")
 								.arg(e.dist).arg(hasSubstrKey).arg(-e.tokenScore).arg(-e.coverage)
-								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.text.toLower());
+								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.lowerText);
 						}
 
 						return QString("%1 %2").arg(mode, keyStr);
@@ -1523,6 +1551,16 @@ void CCodeEdit::SetCompletionFilterCallback(std::function<bool(const QString&, c
 	m_completionFilterCallback = std::move(callback);
 }
 
+void CCodeEdit::SetCompletionInsertionCallback(std::function<QString(const QString&)> callback)
+{
+	m_completionInsertionCallback = std::move(callback);
+}
+
+void CCodeEdit::SetCompletionMatchTextCallback(std::function<QString(const QString&)> callback)
+{
+	m_completionMatchTextCallback = std::move(callback);
+}
+
 void CCodeEdit::SetPopupTooltipCallback(std::function<QString(const QString&)> tooltipCallback)
 {
 	m_tooltipCallback = std::move(tooltipCallback);
@@ -1594,7 +1632,7 @@ void CCodeEdit::HandleCaseCorrection(const QString& word, bool wasPopupVisible)
 
 		if (!all.isEmpty()) {
 			// BuildFuzzyMatches returns sorted candidates by fuzzy distance.
-			QStringList fuzzy = BuildFuzzyMatches(all, NormalizePrefixForFuzzy(word));
+			QStringList fuzzy = BuildFuzzyMatchesForCompletion(all, NormalizePrefixForFuzzy(word));
 
 			if (!fuzzy.isEmpty()) {
 				// Validate top fuzzy candidate with a small distance threshold before proposing it.
@@ -1896,7 +1934,7 @@ bool CCodeEdit::HandleManualCompletionTrigger(QKeyEvent* keyEvent)
 			}
 
 			// Build fuzzy matches (fuzzy-ranked)
-			QStringList fuzzy = BuildFuzzyMatches(popupCandidates, fuzzyPrefix);
+			QStringList fuzzy = BuildFuzzyMatchesForCompletion(popupCandidates, fuzzyPrefix);
 
 			// Preserve fuzzy ranking when the user has typed a prefix.
 			// Only present an alphabetical list for the "show all" case (empty fuzzyPrefix).
@@ -2124,6 +2162,10 @@ void CCodeEdit::OnInsertCompletion(const QString& completion)
 	if (!m_pCompleter)
 		return;
 
+	const QString insertionText = m_completionInsertionCallback
+		? m_completionInsertionCallback(completion)
+		: completion;
+
 	// Only allow completion if cursor is in key position (left of '=')
 	CursorContext context = GetCursorContext();
 	if (!IsInKeyPosition(context)) {
@@ -2156,7 +2198,7 @@ void CCodeEdit::OnInsertCompletion(const QString& completion)
 			cursor.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, equalsPos);
 
 			// Replace with the completion (no extra = needed since it exists)
-			cursor.insertText(completion);
+			cursor.insertText(insertionText);
 			m_pSourceCode->setTextCursor(cursor);
 
 			ConsolidateEqualsSignsAfterCursor(cursor, false);
@@ -2180,13 +2222,13 @@ void CCodeEdit::OnInsertCompletion(const QString& completion)
 	cursor.movePosition(QTextCursor::StartOfLine);
 	cursor.setPosition(context.block.position() + boundaries.end, QTextCursor::KeepAnchor);
 
-	if (hasEqualsAfter) {
+	if (hasEqualsAfter || insertionText.contains(QLatin1Char('='))) {
 		// There's already an = sign after the word, so just replace with completion
-		cursor.insertText(completion);
+		cursor.insertText(insertionText);
 	}
 	else {
 		// No equals sign after, so add one
-		cursor.insertText(completion + "=");
+		cursor.insertText(insertionText + "=");
 	}
 
 	m_pSourceCode->setTextCursor(cursor);
@@ -2653,6 +2695,39 @@ void CCodeEdit::OnCursorPositionChanged()
 	}
 }
 
+QStringList CCodeEdit::BuildFuzzyMatchesForCompletion(const QStringList& candidates, const QString& prefix) const
+{
+	if (!m_completionMatchTextCallback)
+		return BuildFuzzyMatches(candidates, prefix);
+
+	QStringList matchCandidates;
+	QHash<QString, QString> originalByMatch;
+	QSet<QString> seenMatches;
+	seenMatches.reserve(candidates.size());
+	for (const QString& candidate : candidates) {
+		const QString matchText = m_completionMatchTextCallback(candidate);
+		if (matchText.isEmpty())
+			continue;
+
+		const QString normalizedMatch = matchText.toCaseFolded();
+		if (seenMatches.contains(normalizedMatch))
+			continue;
+
+		seenMatches.insert(normalizedMatch);
+		matchCandidates.append(matchText);
+		originalByMatch.insert(normalizedMatch, candidate);
+	}
+
+	const QString matchPrefix = m_completionMatchTextCallback(prefix);
+	const QStringList fuzzyMatches = BuildFuzzyMatches(matchCandidates, matchPrefix);
+	QStringList result;
+	result.reserve(fuzzyMatches.size());
+	for (const QString& match : fuzzyMatches)
+		result.append(originalByMatch.value(match.toCaseFolded(), match));
+
+	return result;
+}
+
 // Helper: apply a fuzzy-model for the given prefix and return the fuzzy result list.
 // This creates a temporary QStringListModel (owned by 'this') and assigns it to the completer.
 QStringList CCodeEdit::ApplyFuzzyModelForPrefix(const QString& prefix)
@@ -2687,7 +2762,7 @@ QStringList CCodeEdit::ApplyFuzzyModelForPrefix(const QString& prefix)
 		popupCandidates.swap(filtered);
 	}
 
-	QStringList fuzzy = BuildFuzzyMatches(popupCandidates, usePrefix);
+	QStringList fuzzy = BuildFuzzyMatchesForCompletion(popupCandidates, usePrefix);
 
 	// Create temporary model parented to this so we can control its lifetime
 	if (m_tempFuzzyModel) {
@@ -2736,9 +2811,16 @@ bool CCodeEdit::IsKeyAvailableConsideringFuzzy(const QString& key, const QString
 
 	// Build candidate set: include both visible and case-correction candidates (unique)
 	QStringList all = m_visibleCandidates;
+	QSet<QString> seenCandidates;
+	seenCandidates.reserve(all.size() + m_caseCorrectionCandidates.size());
+	for (const QString& candidate : all)
+		seenCandidates.insert(candidate.toCaseFolded());
 	for (const QString& c : m_caseCorrectionCandidates) {
-		if (!all.contains(c, Qt::CaseInsensitive))
-			all.append(c);
+		const QString normalizedCandidate = c.toCaseFolded();
+		if (seenCandidates.contains(normalizedCandidate))
+			continue;
+		seenCandidates.insert(normalizedCandidate);
+		all.append(c);
 	}
 
 	if (all.isEmpty())
@@ -2757,7 +2839,7 @@ bool CCodeEdit::IsKeyAvailableConsideringFuzzy(const QString& key, const QString
 	if (all.isEmpty())
 		return false;
 
-	QStringList fuzzy = BuildFuzzyMatches(all, NormalizePrefixForFuzzy(wordForFuzzy));
+	QStringList fuzzy = BuildFuzzyMatchesForCompletion(all, NormalizePrefixForFuzzy(wordForFuzzy));
 	for (const QString& f : fuzzy) {
 		if (f.compare(key, Qt::CaseInsensitive) == 0)
 			return true;
@@ -2845,7 +2927,8 @@ void CCodeEdit::ShowPopupTooltipForCurrentItem()
 			QPoint globalPos = CompletionItemDelegate::ComputePopupTooltipPosition(
 				m_pCompleter->popup(),
 				currentIndex,
-				m_pCompleter->popup()->mapToGlobal(m_pCompleter->popup()->visualRect(currentIndex).bottomRight()));
+				m_pCompleter->popup()->mapToGlobal(m_pCompleter->popup()->visualRect(currentIndex).bottomRight()),
+				tooltipText);
 
 			// Show the tooltip
 			QToolTip::showText(globalPos, tooltipText, m_pCompleter->popup());

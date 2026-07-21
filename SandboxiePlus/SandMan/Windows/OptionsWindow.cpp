@@ -478,7 +478,13 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	m_pCodeEdit->SetCompletionFilterCallback([](const QString& keyName, const QString& inputKey) -> bool {
 		return CIniHighlighter::IsKeyHiddenFromPopup(keyName)
 			|| CIniHighlighter::ShouldHideCompletionCandidate(inputKey, keyName, 'p');
-		});
+	});
+	m_pCodeEdit->SetCompletionInsertionCallback([](const QString& candidateKey) -> QString {
+		return CIniHighlighter::GetCompletionInsertionText(candidateKey);
+	});
+	m_pCodeEdit->SetCompletionMatchTextCallback([](const QString& candidateKey) -> QString {
+		return CIniHighlighter::GetCompletionMatchText(candidateKey);
+	});
 	m_pCodeEdit->SetCaseCorrectionCallback([](const QString& wrongKey) -> QString {
 		return CIniHighlighter::FindCaseCorrectedKey(wrongKey);
 		});
@@ -486,8 +492,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		return CIniHighlighter::IsKeyHiddenFromContext(keyName, 'c')
 			|| CIniHighlighter::ShouldHideCompletionCandidate(inputKey, keyName, 'c');
 		});
-	m_pCodeEdit->SetPopupTooltipCallback([](const QString& keyName) -> QString {
-		return CIniHighlighter::GetSettingTooltipForPopup(keyName);
+	const char currentContext = m_Template ? 't' : 's';
+	m_pCodeEdit->SetPopupTooltipCallback([currentContext](const QString& keyName) -> QString {
+		return CIniHighlighter::GetSettingTooltipForPopup(keyName, QString(), currentContext);
 		});
 	
 	// Update completion model with current settings if auto completion is enabled
@@ -949,11 +956,12 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		// Check if tooltips are completely disabled
 		if (CIniHighlighter::GetTooltipMode() == CIniHighlighter::TooltipMode::Disabled)
 			return false;
+		const char currentContext = m_Template ? 't' : 's';
 
 		QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
 
 		// Find the text edit widget inside CCodeEdit
-		QTextEdit* pTextEdit = m_pCodeEdit->findChild<QTextEdit*>();
+		QTextEdit* pTextEdit = m_pCodeEdit->GetTextEdit();
 		if (pTextEdit) {
 			// Convert mouse position to text cursor position
 			QPoint pos = pTextEdit->viewport()->mapFrom(m_pCodeEdit, helpEvent->pos());
@@ -967,10 +975,26 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 			if (CIniHighlighter::IsCommentLine(currentLine))
 				return false;
 
-			// Check if we're on the value side of the equals sign (after the =)
+			// Template values can identify specialized template metadata.
 			int equalsPos = currentLine.indexOf('=');
 			if (equalsPos >= 0 && (cursor.position() - block.position()) > equalsPos) {
-				// We're in the value part, don't show tooltip
+				const QString settingName = currentLine.left(equalsPos).trimmed();
+				const bool isTemplateValue = settingName.compare("Template", Qt::CaseInsensitive) == 0
+					|| settingName.compare("TemplateReject", Qt::CaseInsensitive) == 0;
+				if (!isTemplateValue || !CIniHighlighter::IsValidTooltipContext(currentLine.left(equalsPos + 1))) {
+					QToolTip::hideText();
+					return false;
+				}
+
+				if (CIniHighlighter::IsSettingsLoaded()) {
+					const QString settingValue = currentLine.mid(equalsPos + 1).trimmed();
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, currentContext);
+					if (!tooltipText.isEmpty()) {
+						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
+						return true;
+					}
+				}
+
 				QToolTip::hideText();
 				return false;
 			}
@@ -1005,7 +1029,9 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 					QString settingName = currentLine.mid(startPos, endPos - startPos);
 					if (settingName.endsWith('='))
 						settingName.chop(1);
-					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName);
+					const int equalsIndex = currentLine.indexOf('=');
+					const QString settingValue = equalsIndex >= 0 ? currentLine.mid(equalsIndex + 1).trimmed() : QString();
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, currentContext);
 					if (!tooltipText.isEmpty()) {
 						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
 						return true;
@@ -1547,10 +1573,11 @@ void COptionsWindow::OnIniValidationToggled(int state)
 		m_pIniHighlighter = nullptr;
 	}
 
-	QTextEdit* pTextEdit = m_pCodeEdit->findChild<QTextEdit*>();
+	QTextEdit* pTextEdit = m_pCodeEdit->GetTextEdit();
 	if (pTextEdit) {
 		m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, pTextEdit->document(), m_IniValidationEnabled);
 		m_pIniHighlighter->rehighlight();
+		UpdateAutoCompletion();
 	}
 
 	m_HoldChange = false;

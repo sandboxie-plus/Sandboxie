@@ -1604,7 +1604,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2700"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtung</translation>
     </message>
 </context>
 <context>

@@ -33,6 +33,8 @@ static BOOLEAN File_InitFileMigration(void);
 
 static BOOLEAN File_Chrome_RemoveEncryptedHashes(char *buffer, ULONGLONG *size);
 
+static BOOLEAN File_CopyNewerMatches(const WCHAR *TruePath);
+
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -48,6 +50,7 @@ typedef enum { // Note: thisorder defines the config priority
 } ENUM_COPY_MODES;
 
 static LIST File_MigrationOptions[NUM_COPY_MODES];
+static LIST File_CopyNewerOptions;
 
 static BOOLEAN File_MigrationDenyWrite = FALSE;
 
@@ -64,10 +67,12 @@ _FX BOOLEAN File_InitFileMigration(void)
 {
     for(ULONG i=0; i < NUM_COPY_MODES; i++)
         List_Init(&File_MigrationOptions[i]);
+    List_Init(&File_CopyNewerOptions);
 
     Config_InitPatternList(NULL, L"CopyEmpty", &File_MigrationOptions[FILE_COPY_EMPTY], FALSE);
     Config_InitPatternList(NULL, L"CopyAlways", &File_MigrationOptions[FILE_COPY_CONTENT], FALSE);
     Config_InitPatternList(NULL, L"DontCopy", &File_MigrationOptions[FILE_DONT_COPY], FALSE);
+    Config_InitPatternList(NULL, L"CopyNewer", &File_CopyNewerOptions, FALSE);
 
     File_MigrationDenyWrite = Config_GetSettingsForImageName_bool(L"CopyBlockDenyWrite", FALSE);
 
@@ -76,6 +81,152 @@ _FX BOOLEAN File_InitFileMigration(void)
     File_NotifyNoCopy = SbieApi_QueryConfBool(NULL, L"NotifyNoCopy", FALSE);
 
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// File_CopyNewerMatches
+//---------------------------------------------------------------------------
+
+
+static _FX BOOLEAN File_CopyNewerMatches(const WCHAR *TruePath)
+{
+    ULONG path_len = (wcslen(TruePath) + 1) * sizeof(WCHAR);
+    WCHAR *path_lwr = Dll_AllocTemp(path_len);
+    if (!path_lwr)
+        return FALSE;
+
+    memcpy(path_lwr, TruePath, path_len);
+    _wcslwr(path_lwr);
+    path_len = wcslen(path_lwr);
+
+    PATTERN *pat = List_Head(&File_CopyNewerOptions);
+    while (pat) {
+        if (Pattern_Match(pat, path_lwr, path_len)) {
+            Dll_Free(path_lwr);
+            return TRUE;
+        }
+        pat = List_Next(pat);
+    }
+
+    Dll_Free(path_lwr);
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// File_RefreshNewerCopy
+//---------------------------------------------------------------------------
+
+
+static _FX BOOLEAN File_RefreshNewerCopy(
+    const WCHAR *TruePath, const WCHAR *CopyPath)
+{
+    FILE_NETWORK_OPEN_INFORMATION true_info, copy_info;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    IO_STATUS_BLOCK IoStatusBlock;
+    SECURITY_ATTRIBUTES sa;
+    SECURITY_DESCRIPTOR sd;
+    WCHAR *mutex_name, *temp_path;
+    HANDLE mutex, temp_handle;
+    NTSTATUS status;
+    ULONG i;
+
+    if (!File_CopyNewerMatches(TruePath))
+        return FALSE;
+
+    // The mutex is deliberately box-wide.  It keeps simultaneous applications
+    // from replacing two matching files at the same time, while a zero wait
+    // leaves the current boxed version usable when another refresh is active.
+    mutex_name = Dll_AllocTemp((wcslen(Dll_BoxName) + 32) * sizeof(WCHAR));
+    if (!mutex_name)
+        return FALSE;
+    Sbie_snwprintf(mutex_name, wcslen(Dll_BoxName) + 32,
+        L"Sandboxie_CopyNewer_%s", Dll_BoxName);
+
+    RtlCreateSecurityDescriptor(&sd, SECURITY_DESCRIPTOR_REVISION);
+    RtlSetDaclSecurityDescriptor(&sd, TRUE, NULL, FALSE);
+    memzero(&sa, sizeof(sa));
+    sa.nLength = sizeof(sa);
+    sa.lpSecurityDescriptor = &sd;
+    sa.bInheritHandle = FALSE;
+    mutex = CreateMutex(&sa, FALSE, mutex_name);
+    Dll_Free(mutex_name);
+    if (!mutex)
+        return FALSE;
+    if (WaitForSingleObject(mutex, 0) != WAIT_OBJECT_0) {
+        CloseHandle(mutex);
+        return FALSE;
+    }
+
+    InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+    RtlInitUnicodeString(&objname, TruePath);
+    status = __sys_NtQueryFullAttributesFile
+        ? __sys_NtQueryFullAttributesFile(&objattrs, &true_info)
+        : NtQueryFullAttributesFile(&objattrs, &true_info);
+    if (NT_SUCCESS(status)) {
+        RtlInitUnicodeString(&objname, CopyPath);
+        status = __sys_NtQueryFullAttributesFile
+            ? __sys_NtQueryFullAttributesFile(&objattrs, &copy_info)
+            : NtQueryFullAttributesFile(&objattrs, &copy_info);
+    }
+
+    if (!NT_SUCCESS(status) ||
+            true_info.LastWriteTime.QuadPart <= copy_info.LastWriteTime.QuadPart) {
+        ReleaseMutex(mutex);
+        CloseHandle(mutex);
+        return FALSE;
+    }
+
+    temp_path = Dll_AllocTemp((wcslen(CopyPath) + 32) * sizeof(WCHAR));
+    if (!temp_path) {
+        ReleaseMutex(mutex);
+        CloseHandle(mutex);
+        return FALSE;
+    }
+
+    status = STATUS_OBJECT_NAME_COLLISION;
+    for (i = 0; i != 4 && status == STATUS_OBJECT_NAME_COLLISION; ++i) {
+        Sbie_snwprintf(temp_path, wcslen(CopyPath) + 32,
+            L"%s.CopyNewer.%08X", CopyPath, GetTickCount() + i);
+        status = File_MigrateFile(TruePath, temp_path, FALSE, TRUE);
+    }
+
+    if (NT_SUCCESS(status)) {
+        RtlInitUnicodeString(&objname, temp_path);
+        status = __sys_NtCreateFile(&temp_handle, DELETE | SYNCHRONIZE,
+            &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
+            FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE,
+            NULL, 0);
+        if (NT_SUCCESS(status)) {
+            ULONG name_len = wcslen(CopyPath) * sizeof(WCHAR);
+            ULONG info_len = sizeof(FILE_RENAME_INFORMATION) + name_len;
+            FILE_RENAME_INFORMATION *info = Dll_AllocTemp(info_len);
+            if (!info)
+                status = STATUS_INSUFFICIENT_RESOURCES;
+            else {
+                memzero(info, info_len);
+                info->ReplaceIfExists = TRUE;
+                info->FileNameLength = name_len;
+                memcpy(info->FileName, CopyPath, name_len);
+                status = __sys_NtSetInformationFile(temp_handle, &IoStatusBlock,
+                    info, info_len, FileRenameInformation);
+                Dll_Free(info);
+            }
+            NtClose(temp_handle);
+        }
+    }
+
+    if (!NT_SUCCESS(status)) {
+        RtlInitUnicodeString(&objname, temp_path);
+        __sys_NtDeleteFile(&objattrs);
+    }
+
+    Dll_Free(temp_path);
+    ReleaseMutex(mutex);
+    CloseHandle(mutex);
+    return NT_SUCCESS(status);
 }
 
 

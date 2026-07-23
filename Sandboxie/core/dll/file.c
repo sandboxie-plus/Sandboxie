@@ -274,6 +274,9 @@ static NTSTATUS File_MigrateFile(
     const WCHAR *TruePath, const WCHAR *CopyPath,
     BOOLEAN IsWritePath, BOOLEAN WithContents);
 
+static BOOLEAN File_RefreshNewerCopy(
+    const WCHAR *TruePath, const WCHAR *CopyPath);
+
 static NTSTATUS File_MigrateJunction(
     const WCHAR *TruePath, const WCHAR *CopyPath,
     BOOLEAN IsWritePath);
@@ -4099,6 +4102,15 @@ ReparseLoop:
 
     if (! NT_SUCCESS(status))
         __leave;
+
+    // CopyNewer refreshes an existing regular sandbox copy before it is
+    // opened.  A failed or deferred refresh intentionally leaves the current
+    // copy available to the application.
+    if (HaveCopyFile && (FileType & TYPE_FILE) &&
+            (CreateDisposition == FILE_OPEN || CreateDisposition == FILE_OPEN_IF) &&
+            PATH_NOT_WRITE(mp_flags) && !(FileType & TYPE_DELETED)) {
+        File_RefreshNewerCopy(TruePath, CopyPath);
+    }
 
     //
     // check creation parameters again, now that we know the file type

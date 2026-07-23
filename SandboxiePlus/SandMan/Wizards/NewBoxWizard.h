@@ -7,6 +7,7 @@ QT_BEGIN_NAMESPACE
 class QCheckBox;
 class QLabel;
 class QLineEdit;
+class QListWidget;
 class QRadioButton;
 QT_END_NAMESPACE
 
@@ -97,8 +98,17 @@ public:
     void initializePage() override;
     bool validatePage() override;
 
+    QStringList GetNormalFilePaths() const { return m_NormalFilePaths; }
+
+private slots:
+    void OnAddNormalPath();
+    void OnRemoveNormalPath();
+
 private:
     QComboBox* m_pBoxLocation;
+    QListWidget* m_pNormalPaths;
+    QLineEdit* m_pNormalPathInput;
+    QStringList m_NormalFilePaths;
 };
 
 

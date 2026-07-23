@@ -6,6 +6,7 @@
 #include "../SandMan.h"
 #include "Helpers/WinAdmin.h"
 #include <QButtonGroup>
+#include <QListWidget>
 #include "../QSbieAPI/SbieUtils.h"
 #include "../Views/SbieView.h"
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
@@ -281,6 +282,14 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 
             if (!Password.isEmpty())
                 pBox->ImBoxCreate(ImageSize / 1024, Password);
+
+            {
+                CFilesPage* pFilesPage = (CFilesPage*)page(Page_Files);
+                if (pFilesPage) {
+                    for (const QString& path : pFilesPage->GetNormalFilePaths())
+                        pBox->AppendText("NormalFilePath", path);
+                }
+            }
 
             if (field("boxVersion").toInt() == 1) {
                 if (theConf->GetBool("Options/WarnDeleteV2", true)) {
@@ -665,6 +674,38 @@ CFilesPage::CFilesPage(QWidget *parent)
     layout->addWidget(pAutoRecover, row++, 1, 1, 3);
     registerField("autoRecover", pAutoRecover);
 
+    // Normal File Paths
+    QLabel* pNormalLabel = new QLabel(tr("Exempt File Paths"), this);
+    QFont fntNormal = pNormalLabel->font();
+    fntNormal.setBold(true);
+    pNormalLabel->setFont(fntNormal);
+    layout->addWidget(pNormalLabel, row++, 0);
+
+    m_pNormalPaths = new QListWidget();
+    m_pNormalPaths->setMaximumHeight(100);
+    layout->addWidget(m_pNormalPaths, row++, 1, 1, 3);
+
+    QHBoxLayout* pNormalLayout = new QHBoxLayout();
+    pNormalLayout->setContentsMargins(0,0,0,0);
+    m_pNormalPathInput = new QLineEdit();
+    m_pNormalPathInput->setPlaceholderText(tr("Enter file or folder path..."));
+    pNormalLayout->addWidget(m_pNormalPathInput);
+    QPushButton* pBrowseBtn = new QPushButton("...");
+    pBrowseBtn->setMaximumWidth(25);
+    connect(pBrowseBtn, &QPushButton::clicked, [this]() {
+        QString FilePath = QFileDialog::getOpenFileName(this, tr("Select File"));
+        if (!FilePath.isEmpty())
+            this->m_pNormalPathInput->setText(FilePath.replace("/", "\\"));
+    });
+    pNormalLayout->addWidget(pBrowseBtn);
+    QPushButton* pAddBtn = new QPushButton(tr("Add"));
+    connect(pAddBtn, &QPushButton::clicked, this, &CFilesPage::OnAddNormalPath);
+    pNormalLayout->addWidget(pAddBtn);
+    QPushButton* pRemoveBtn = new QPushButton(tr("Remove"));
+    connect(pRemoveBtn, &QPushButton::clicked, this, &CFilesPage::OnRemoveNormalPath);
+    pNormalLayout->addWidget(pRemoveBtn);
+    layout->addLayout(pNormalLayout, row++, 1, 1, 3);
+
 
     setLayout(layout);
 
@@ -728,6 +769,25 @@ bool CFilesPage::validatePage()
         wizard()->setField("boxLocation", Location);
     }
     return true;
+}
+
+void CFilesPage::OnAddNormalPath()
+{
+    QString path = m_pNormalPathInput->text().trimmed();
+    if (path.isEmpty()) return;
+    path.replace("/", "\\");
+    m_pNormalPaths->addItem(path);
+    m_NormalFilePaths.append(path);
+    m_pNormalPathInput->clear();
+}
+
+void CFilesPage::OnRemoveNormalPath()
+{
+    int row = m_pNormalPaths->currentRow();
+    if (row >= 0) {
+        m_NormalFilePaths.removeAt(row);
+        delete m_pNormalPaths->takeItem(row);
+    }
 }
 
 
@@ -1085,6 +1145,17 @@ void CSummaryPage::initializePage()
     if(field("boxToken").toBool())
         m_pSummary->append(tr("\nProcesses in this box will be running with a custom process token indicating the sandbox they belong to."));
 
+    {
+        CFilesPage* pFilesPage = (CFilesPage*)((CNewBoxWizard*)wizard())->page(CNewBoxWizard::Page_Files);
+        if (pFilesPage) {
+            QStringList paths = pFilesPage->GetNormalFilePaths();
+            if (!paths.isEmpty()) {
+                m_pSummary->append(tr("\nThe following file paths will be excluded from virtualization:"));
+                for (const QString& path : paths)
+                    m_pSummary->append(tr("  %1").arg(path));
+            }
+        }
+    }
 
     m_pSetDefault->setVisible(((CNewBoxWizard*)wizard())->m_bAdvanced);
 }

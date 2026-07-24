@@ -6,7 +6,6 @@
 #include "../SandMan.h"
 #include "Helpers/WinAdmin.h"
 #include <QButtonGroup>
-#include <QListWidget>
 #include "../QSbieAPI/SbieUtils.h"
 #include "../Views/SbieView.h"
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
@@ -286,8 +285,8 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             {
                 CFilesPage* pFilesPage = (CFilesPage*)page(Page_Files);
                 if (pFilesPage) {
-                    for (const QString& path : pFilesPage->GetNormalFilePaths())
-                        pBox->AppendText("NormalFilePath", path);
+                    for (const auto& entry : pFilesPage->GetFilePathEntries())
+                        pBox->AppendText(entry.second, entry.first);
                 }
             }
 
@@ -674,22 +673,24 @@ CFilesPage::CFilesPage(QWidget *parent)
     layout->addWidget(pAutoRecover, row++, 1, 1, 3);
     registerField("autoRecover", pAutoRecover);
 
-    // Normal File Paths
-    QLabel* pNormalLabel = new QLabel(tr("Exempt File Paths"), this);
+    // Preconfigured File Control Paths
+    QLabel* pNormalLabel = new QLabel(tr("Preconfigured File Control Paths"), this);
     QFont fntNormal = pNormalLabel->font();
     fntNormal.setBold(true);
     pNormalLabel->setFont(fntNormal);
     layout->addWidget(pNormalLabel, row++, 0);
 
-    m_pNormalPaths = new QListWidget();
-    m_pNormalPaths->setMaximumHeight(100);
+    m_pNormalPaths = new QTreeWidget();
+    m_pNormalPaths->setHeaderLabels({ tr("Path"), tr("Type") });
+    m_pNormalPaths->setMaximumHeight(120);
+    m_pNormalPaths->setRootIsDecorated(false);
     layout->addWidget(m_pNormalPaths, row++, 1, 1, 3);
 
     QHBoxLayout* pNormalLayout = new QHBoxLayout();
     pNormalLayout->setContentsMargins(0,0,0,0);
     m_pNormalPathInput = new QLineEdit();
     m_pNormalPathInput->setPlaceholderText(tr("Enter file or folder path..."));
-    pNormalLayout->addWidget(m_pNormalPathInput);
+    pNormalLayout->addWidget(m_pNormalPathInput, 1);
     QPushButton* pBrowseBtn = new QPushButton("...");
     pBrowseBtn->setMaximumWidth(25);
     connect(pBrowseBtn, &QPushButton::clicked, [this]() {
@@ -698,6 +699,12 @@ CFilesPage::CFilesPage(QWidget *parent)
             this->m_pNormalPathInput->setText(FilePath.replace("/", "\\"));
     });
     pNormalLayout->addWidget(pBrowseBtn);
+    m_pTypeCombo = new QComboBox();
+    m_pTypeCombo->addItem("Block", "BlockFilePath");
+    m_pTypeCombo->addItem("Normal", "NormalFilePath");
+    m_pTypeCombo->addItem("Write", "WriteFilePath");
+    m_pTypeCombo->addItem("Read", "ReadFilePath");
+    pNormalLayout->addWidget(m_pTypeCombo);
     QPushButton* pAddBtn = new QPushButton(tr("Add"));
     connect(pAddBtn, &QPushButton::clicked, this, &CFilesPage::OnAddNormalPath);
     pNormalLayout->addWidget(pAddBtn);
@@ -771,22 +778,36 @@ bool CFilesPage::validatePage()
     return true;
 }
 
+QList<QPair<QString, QString>> CFilesPage::GetFilePathEntries() const
+{
+    QList<QPair<QString, QString>> entries;
+    for (int i = 0; i < m_pNormalPaths->topLevelItemCount(); i++) {
+        QTreeWidgetItem* pItem = m_pNormalPaths->topLevelItem(i);
+        entries.append(qMakePair(pItem->text(0), pItem->data(1, Qt::UserRole).toString()));
+    }
+    return entries;
+}
+
 void CFilesPage::OnAddNormalPath()
 {
     QString path = m_pNormalPathInput->text().trimmed();
     if (path.isEmpty()) return;
     path.replace("/", "\\");
-    m_pNormalPaths->addItem(path);
-    m_NormalFilePaths.append(path);
+    QString configKey = m_pTypeCombo->currentData().toString();
+    QString typeName = m_pTypeCombo->currentText();
+    QTreeWidgetItem* pItem = new QTreeWidgetItem();
+    pItem->setText(0, path);
+    pItem->setText(1, typeName);
+    pItem->setData(1, Qt::UserRole, configKey);
+    m_pNormalPaths->addTopLevelItem(pItem);
     m_pNormalPathInput->clear();
 }
 
 void CFilesPage::OnRemoveNormalPath()
 {
-    int row = m_pNormalPaths->currentRow();
-    if (row >= 0) {
-        m_NormalFilePaths.removeAt(row);
-        delete m_pNormalPaths->takeItem(row);
+    QTreeWidgetItem* pItem = m_pNormalPaths->currentItem();
+    if (pItem) {
+        delete m_pNormalPaths->takeTopLevelItem(m_pNormalPaths->indexOfTopLevelItem(pItem));
     }
 }
 
@@ -1148,11 +1169,11 @@ void CSummaryPage::initializePage()
     {
         CFilesPage* pFilesPage = (CFilesPage*)((CNewBoxWizard*)wizard())->page(CNewBoxWizard::Page_Files);
         if (pFilesPage) {
-            QStringList paths = pFilesPage->GetNormalFilePaths();
-            if (!paths.isEmpty()) {
-                m_pSummary->append(tr("\nThe following file paths will be excluded from virtualization:"));
-                for (const QString& path : paths)
-                    m_pSummary->append(tr("  %1").arg(path));
+            auto entries = pFilesPage->GetFilePathEntries();
+            if (!entries.isEmpty()) {
+                m_pSummary->append(tr("\nPreconfigured file control paths:"));
+                for (const auto& entry : entries)
+                    m_pSummary->append(tr("  [%1] %2").arg(entry.second, entry.first));
             }
         }
     }

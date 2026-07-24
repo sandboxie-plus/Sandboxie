@@ -282,6 +282,14 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             if (!Password.isEmpty())
                 pBox->ImBoxCreate(ImageSize / 1024, Password);
 
+            {
+                CFilesPage* pFilesPage = (CFilesPage*)page(Page_Files);
+                if (pFilesPage) {
+                    for (const auto& entry : pFilesPage->GetFilePathEntries())
+                        pBox->AppendText(entry.second, entry.first);
+                }
+            }
+
             if (field("boxVersion").toInt() == 1) {
                 if (theConf->GetBool("Options/WarnDeleteV2", true)) {
                     bool State = false;
@@ -665,6 +673,46 @@ CFilesPage::CFilesPage(QWidget *parent)
     layout->addWidget(pAutoRecover, row++, 1, 1, 3);
     registerField("autoRecover", pAutoRecover);
 
+    // File Access Control
+    QLabel* pNormalLabel = new QLabel(tr("File Access Control"), this);
+    QFont fntNormal = pNormalLabel->font();
+    fntNormal.setBold(true);
+    pNormalLabel->setFont(fntNormal);
+    layout->addWidget(pNormalLabel, row++, 0);
+
+    m_pNormalPaths = new QTreeWidget();
+    m_pNormalPaths->setHeaderLabels({ tr("Path"), tr("Type") });
+    m_pNormalPaths->setMaximumHeight(120);
+    m_pNormalPaths->setRootIsDecorated(false);
+    layout->addWidget(m_pNormalPaths, row++, 1, 1, 3);
+
+    QHBoxLayout* pNormalLayout = new QHBoxLayout();
+    pNormalLayout->setContentsMargins(0,0,0,0);
+    m_pNormalPathInput = new QLineEdit();
+    m_pNormalPathInput->setPlaceholderText(tr("Enter file or folder path..."));
+    pNormalLayout->addWidget(m_pNormalPathInput, 1);
+    QPushButton* pBrowseBtn = new QPushButton("...");
+    pBrowseBtn->setMaximumWidth(25);
+    connect(pBrowseBtn, &QPushButton::clicked, [this]() {
+        QString FilePath = QFileDialog::getOpenFileName(this, tr("Select File"));
+        if (!FilePath.isEmpty())
+            this->m_pNormalPathInput->setText(FilePath.replace("/", "\\"));
+    });
+    pNormalLayout->addWidget(pBrowseBtn);
+    m_pTypeCombo = new QComboBox();
+    m_pTypeCombo->addItem("Closed", "ClosedFilePath");
+    m_pTypeCombo->addItem("Normal", "NormalFilePath");
+    m_pTypeCombo->addItem("Write", "WriteFilePath");
+    m_pTypeCombo->addItem("Read", "ReadFilePath");
+    pNormalLayout->addWidget(m_pTypeCombo);
+    QPushButton* pAddBtn = new QPushButton(tr("Add"));
+    connect(pAddBtn, &QPushButton::clicked, this, &CFilesPage::OnAddNormalPath);
+    pNormalLayout->addWidget(pAddBtn);
+    QPushButton* pRemoveBtn = new QPushButton(tr("Remove"));
+    connect(pRemoveBtn, &QPushButton::clicked, this, &CFilesPage::OnRemoveNormalPath);
+    pNormalLayout->addWidget(pRemoveBtn);
+    layout->addLayout(pNormalLayout, row++, 1, 1, 3);
+
 
     setLayout(layout);
 
@@ -728,6 +776,39 @@ bool CFilesPage::validatePage()
         wizard()->setField("boxLocation", Location);
     }
     return true;
+}
+
+QList<QPair<QString, QString>> CFilesPage::GetFilePathEntries() const
+{
+    QList<QPair<QString, QString>> entries;
+    for (int i = 0; i < m_pNormalPaths->topLevelItemCount(); i++) {
+        QTreeWidgetItem* pItem = m_pNormalPaths->topLevelItem(i);
+        entries.append(qMakePair(pItem->text(0), pItem->data(1, Qt::UserRole).toString()));
+    }
+    return entries;
+}
+
+void CFilesPage::OnAddNormalPath()
+{
+    QString path = m_pNormalPathInput->text().trimmed();
+    if (path.isEmpty()) return;
+    path.replace("/", "\\");
+    QString configKey = m_pTypeCombo->currentData().toString();
+    QString typeName = m_pTypeCombo->currentText();
+    QTreeWidgetItem* pItem = new QTreeWidgetItem();
+    pItem->setText(0, path);
+    pItem->setText(1, typeName);
+    pItem->setData(1, Qt::UserRole, configKey);
+    m_pNormalPaths->addTopLevelItem(pItem);
+    m_pNormalPathInput->clear();
+}
+
+void CFilesPage::OnRemoveNormalPath()
+{
+    QTreeWidgetItem* pItem = m_pNormalPaths->currentItem();
+    if (pItem) {
+        delete m_pNormalPaths->takeTopLevelItem(m_pNormalPaths->indexOfTopLevelItem(pItem));
+    }
 }
 
 
@@ -1085,6 +1166,17 @@ void CSummaryPage::initializePage()
     if(field("boxToken").toBool())
         m_pSummary->append(tr("\nProcesses in this box will be running with a custom process token indicating the sandbox they belong to."));
 
+    {
+        CFilesPage* pFilesPage = (CFilesPage*)((CNewBoxWizard*)wizard())->page(CNewBoxWizard::Page_Files);
+        if (pFilesPage) {
+            auto entries = pFilesPage->GetFilePathEntries();
+            if (!entries.isEmpty()) {
+                m_pSummary->append(tr("\nFile Access Control:"));
+                for (const auto& entry : entries)
+                    m_pSummary->append(tr("  [%1] %2").arg(entry.second, entry.first));
+            }
+        }
+    }
 
     m_pSetDefault->setVisible(((CNewBoxWizard*)wizard())->m_bAdvanced);
 }

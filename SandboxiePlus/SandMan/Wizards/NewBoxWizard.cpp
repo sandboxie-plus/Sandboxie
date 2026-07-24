@@ -700,7 +700,7 @@ CFilesPage::CFilesPage(QWidget *parent)
     });
     pNormalLayout->addWidget(pBrowseBtn);
     m_pTypeCombo = new QComboBox();
-    m_pTypeCombo->addItem("Block", "BlockFilePath");
+    m_pTypeCombo->addItem("Closed", "ClosedFilePath");
     m_pTypeCombo->addItem("Normal", "NormalFilePath");
     m_pTypeCombo->addItem("Write", "WriteFilePath");
     m_pTypeCombo->addItem("Read", "ReadFilePath");

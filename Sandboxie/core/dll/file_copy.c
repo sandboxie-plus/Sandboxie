@@ -35,6 +35,8 @@ static BOOLEAN File_Chrome_RemoveEncryptedHashes(char *buffer, ULONGLONG *size);
 
 static BOOLEAN File_CopyNewerMatches(const WCHAR *TruePath);
 
+static ULONG File_CopyNewerHashPath(const WCHAR *CopyPath);
+
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -115,6 +117,27 @@ static _FX BOOLEAN File_CopyNewerMatches(const WCHAR *TruePath)
 
 
 //---------------------------------------------------------------------------
+// File_CopyNewerHashPath
+//---------------------------------------------------------------------------
+
+
+static _FX ULONG File_CopyNewerHashPath(const WCHAR *CopyPath)
+{
+    ULONG hash = 2166136261UL;
+
+    while (*CopyPath) {
+        WCHAR c = *CopyPath++;
+        if (c >= L'A' && c <= L'Z')
+            c |= 0x20;
+        hash ^= (ULONG)(USHORT)c;
+        hash *= 16777619UL;
+    }
+
+    return hash;
+}
+
+
+//---------------------------------------------------------------------------
 // File_RefreshNewerCopy
 //---------------------------------------------------------------------------
 
@@ -130,6 +153,7 @@ static _FX BOOLEAN File_RefreshNewerCopy(
     HANDLE mutex, temp_handle;
     NTSTATUS status;
     ULONG i;
+    DWORD wait_result;
 
     if (!File_CopyNewerMatches(TruePath))
         return FALSE;
@@ -141,13 +165,15 @@ static _FX BOOLEAN File_RefreshNewerCopy(
     if (!mutex_name)
         return FALSE;
     Sbie_snwprintf(mutex_name, wcslen(Dll_BoxName) + 32,
-        L"Sandboxie_CopyNewer_%s", Dll_BoxName);
+        L"Sandboxie_CopyNewer_%s_%08X", Dll_BoxName,
+        File_CopyNewerHashPath(CopyPath));
 
     mutex = CreateMutex(NULL, FALSE, mutex_name);
     Dll_Free(mutex_name);
     if (!mutex)
         return FALSE;
-    if (WaitForSingleObject(mutex, 0) != WAIT_OBJECT_0) {
+    wait_result = WaitForSingleObject(mutex, 0);
+    if (wait_result != WAIT_OBJECT_0 && wait_result != WAIT_ABANDONED) {
         CloseHandle(mutex);
         return FALSE;
     }

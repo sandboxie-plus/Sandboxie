@@ -673,8 +673,8 @@ CFilesPage::CFilesPage(QWidget *parent)
     layout->addWidget(pAutoRecover, row++, 1, 1, 3);
     registerField("autoRecover", pAutoRecover);
 
-    // Preconfigured File Control Paths
-    QLabel* pNormalLabel = new QLabel(tr("Preconfigured File Control Paths"), this);
+    // File Access Control
+    QLabel* pNormalLabel = new QLabel(tr("File Access Control"), this);
     QFont fntNormal = pNormalLabel->font();
     fntNormal.setBold(true);
     pNormalLabel->setFont(fntNormal);
@@ -1171,7 +1171,7 @@ void CSummaryPage::initializePage()
         if (pFilesPage) {
             auto entries = pFilesPage->GetFilePathEntries();
             if (!entries.isEmpty()) {
-                m_pSummary->append(tr("\nPreconfigured file control paths:"));
+                m_pSummary->append(tr("\nFile Access Control:"));
                 for (const auto& entry : entries)
                     m_pSummary->append(tr("  [%1] %2").arg(entry.second, entry.first));
             }

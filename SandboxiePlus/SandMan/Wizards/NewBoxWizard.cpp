@@ -363,7 +363,10 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
         layout->addWidget(m_pAlias, row++, 1, 1, 2);
         m_pAlias->setFocus();
 
-        QString guidName = QUuid::createUuid().toString(QUuid::WithoutBraces).replace("-", "");
+        QString guidName;
+        do {
+            guidName = QUuid::createUuid().toString(QUuid::WithoutBraces).replace("-", "");
+        } while (!theAPI->GetBoxByName(guidName).isNull());
         m_pBoxName = new QLineEdit();
         m_pBoxName->setText(guidName);
         m_pBoxName->setVisible(false);
@@ -1098,6 +1101,9 @@ int CSummaryPage::nextId() const
 void CSummaryPage::initializePage()
 {
     m_pSummary->setText(theGUI->GetBoxDescription(wizard()->field("boxType").toInt()));
+
+    if (((CNewBoxWizard*)wizard())->m_bUseRandomName)
+        m_pSummary->append(tr("\nThe actual sandbox name is: %1").arg(wizard()->field("boxName").toString()));
 
     QString Location = field("boxLocation").toString();
     if (Location.isEmpty())

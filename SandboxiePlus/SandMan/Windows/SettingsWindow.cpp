@@ -523,6 +523,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkRecoveryTop, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 
 	connect(ui.chkUseW11Style, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkRandomGuidName, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	QOperatingSystemVersion current = QOperatingSystemVersion::current();
 	ui.chkUseW11Style->setEnabled(current.majorVersion() == 10 && current.microVersion() >= 22000); // Windows 10 22000+ (Windows 11)
 	//
@@ -1543,6 +1544,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkSingleShow->setChecked(theConf->GetBool("Options/TraySingleClick", false));
 
 	ui.chkUseW11Style->setChecked(theConf->GetBool("Options/UseW11Style", false));
+	ui.chkRandomGuidName->setChecked(theConf->GetBool("Options/UseRandomBoxName", false));
 
 	OnLoadAddon();
 
@@ -2149,6 +2151,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/TraySingleClick", ui.chkSingleShow->isChecked());
 
 	theConf->SetValue("Options/UseW11Style", ui.chkUseW11Style->isChecked());
+	theConf->SetValue("Options/UseRandomBoxName", ui.chkRandomGuidName->isChecked());
 
 	if (theAPI->IsConnected())
 	{

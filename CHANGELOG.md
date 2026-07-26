@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to use GUIDs as box name [5485](https://github.com/sandboxie-plus/Sandboxie/pull/5485)
 
 ### Changed
-- updated Chromium_Elevation template now using specifig 'RunServiceAsSystem=...' instead of 'RunServicesAsSystem=y' and added more service names
+- updated Chromium_Elevation template now using specific 'RunServiceAsSystem=...' instead of 'RunServicesAsSystem=y' and added more service names
 - improved SandMan INI setting validation and auto-completion with disabled-setting aliases, localized descriptions, context-aware warnings, and template-specific metadata and tooltips
 
 ### Fixed

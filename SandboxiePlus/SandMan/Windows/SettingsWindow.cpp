@@ -79,6 +79,7 @@ static int CGetDisplayNumberForScreen(QScreen* screen)
 
 static constexpr int c_MonitorLabelBaseRole = Qt::UserRole + 100;
 static constexpr int c_MonitorLabelDefaultRole = Qt::UserRole + 101;
+
 static QString CBuildMonitorOptionLabel(const QString& baseLabel, bool isDefault, bool isFallback)
 {
 	QString label = baseLabel;

@@ -370,6 +370,16 @@
                  </property>
                 </widget>
                </item>
+               <item row="1" column="10" colspan="3">
+                <widget class="QCheckBox" name="chkBorderInsideMaximized">
+                 <property name="toolTip">
+                  <string>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</string>
+                 </property>
+                 <property name="text">
+                  <string>Inside when maximized or snapped</string>
+                 </property>
+                </widget>
+               </item>
                <item row="8" column="3" colspan="6">
                 <widget class="QComboBox" name="cmbBoxType"/>
                </item>
@@ -6329,6 +6339,7 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>tabs</tabstop>
   <tabstop>tabsGeneral</tabstop>
   <tabstop>cmbBoxIndicator</tabstop>
+  <tabstop>chkBorderInsideMaximized</tabstop>
   <tabstop>cmbBoxBorder</tabstop>
   <tabstop>chkShowForRun</tabstop>
   <tabstop>chkPinToTray</tabstop>

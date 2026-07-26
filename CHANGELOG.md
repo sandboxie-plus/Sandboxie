@@ -4,13 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.18.2/ 5.73.2] - 2026-08-??
+
+### Added
+- added outside sandboxed-window border modes (`onoutside`, `ttloutside`, and `alloutside`) in SandMan; these draw the configured border outside the application frame, while the new `BorderInsideMaximized=y` setting (enabled by default) moves the border and label inside maximized or snapped windows so they remain visible
+
+
 
 ## [1.18.1 / 5.73.1] - 2026-07-26
 
 ### Added
 - added `CopyNewer` file migration rules to refresh an existing sandbox copy from a newer host file, with SandMan rule editing support; it only applies to matching existing regular boxed files on normal opens, intentionally replacing their contents only when the host file has a newer last-write time
   - it does not apply to initial migration, directories, write-only paths, deleted files, or create/overwrite operations
-- Added option to use GUIDs as box name [5485](https://github.com/sandboxie-plus/Sandboxie/pull/5485)
+- added option to use GUIDs as box name [5485](https://github.com/sandboxie-plus/Sandboxie/pull/5485)
 
 ### Changed
 - updated Chromium_Elevation template now using specifig 'RunServiceAsSystem=...' instead of 'RunServicesAsSystem=y' and added more service names
@@ -87,7 +93,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - extended completion system with context-aware filtering, improved INI key resolution, regex updates, and tooltip placement enhancements [6db2a04](https://github.com/sandboxie-plus/Sandboxie/commit/6db2a04f805b49a049b309212bfa8e3a8497ad99)
 
 ### Fixed
-- fixed crash witch sandboxed VMware caused by NtQueryDirectoryObject hook returning non-null-terminated strings and uninitialised padding bytes in OBJECT_DIRECTORY_INFORMATION structures, which caused QueryDosDeviceW to crash in wcscmp [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
+- fixed crash which sandboxed VMware caused by NtQueryDirectoryObject hook returning non-null-terminated strings and uninitialised padding bytes in OBJECT_DIRECTORY_INFORMATION structures, which caused QueryDosDeviceW to crash in wcscmp [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
 - added short-name fallback cache and heuristics [#5404](https://github.com/sandboxie-plus/Sandboxie/pull/5404)
 - fixed add-on setup not working, introduced in a recent build
 - fixed bug causing Powershell to wait infinitely only in Sandboxes with Data Protection, starting with version 1.17.4 [#5408](https://github.com/sandboxie-plus/Sandboxie/issues/5408)

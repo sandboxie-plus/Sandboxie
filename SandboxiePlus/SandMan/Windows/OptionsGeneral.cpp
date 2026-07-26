@@ -63,6 +63,10 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxBorder->addItem(tr("Show only when title is in focus"), "ttl");
 	ui.cmbBoxBorder->addItem(tr("Always show (focused window only)"), "on");
 	ui.cmbBoxBorder->addItem(tr("Show for all windows in this box"), "all");
+	QString outsideSuffix = tr(" (outside)");
+	ui.cmbBoxBorder->addItem(tr("Show only when title is in focus") + outsideSuffix, "ttloutside");
+	ui.cmbBoxBorder->addItem(tr("Always show (focused window only)") + outsideSuffix, "onoutside");
+	ui.cmbBoxBorder->addItem(tr("Show for all windows in this box") + outsideSuffix, "alloutside");
 
 
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
@@ -166,6 +170,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.spinBorderAlpha, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.spinLabelWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkBorderLabelOnly, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkBorderInsideMaximized, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkShowForRun, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkPinToTray, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
@@ -275,8 +280,15 @@ void COptionsWindow::LoadGeneral()
 	bool borderLabelOnly = false;
 	{
 		QString rawMode = BorderCfg.size() >= 2 ? BorderCfg[1].toLower() : "on";
+		bool borderOutside = rawMode.endsWith("outside");
+		if (borderOutside)
+			rawMode.chop(7);
 		borderLabelOnly = rawMode.endsWith("lbl");
+		if (borderLabelOnly)
+			borderOutside = false;
 		QString baseMode = borderLabelOnly ? rawMode.left(rawMode.length() - 3) : rawMode;
+		if (borderOutside)
+			baseMode += "outside";
 		if (baseMode.isEmpty()) baseMode = "on";
 		int idx = ui.cmbBoxBorder->findData(baseMode);
 		if (idx < 0) idx = ui.cmbBoxBorder->findData("on");
@@ -301,6 +313,7 @@ void COptionsWindow::LoadGeneral()
 	// Set after cmbBoxBorderText is loaded: OnGeneralChanged (fired by spinners) reads
 	// cmbBoxBorderText to decide whether to uncheck, so we must apply this value last.
 	ui.chkBorderLabelOnly->setChecked(borderLabelOnly);
+	ui.chkBorderInsideMaximized->setChecked(m_pBox->GetBool("BorderInsideMaximized", true));
 
 	// Optional per-label width values (legacy config falls back to border values).
 	int labelWidth = BorderCfg.count() >= 6 ? BorderCfg[5].toInt() : BorderWidth;
@@ -458,14 +471,24 @@ void COptionsWindow::SaveGeneral()
 	BorderCfg.append(QString("#%1%2%3").arg(m_BorderColor.blue(), 2, 16, QChar('0')).arg(m_BorderColor.green(), 2, 16, QChar('0')).arg(m_BorderColor.red(), 2, 16, QChar('0')));
 	{
 		QString baseMode = ui.cmbBoxBorder->currentData().toString();
+		bool borderOutside = baseMode.endsWith("outside");
+		if (borderOutside)
+			baseMode.chop(7);
 		bool labelOnly = ui.chkBorderLabelOnly->isChecked() && baseMode != "off";
-		BorderCfg.append(labelOnly ? baseMode + "lbl" : baseMode);
+		if (labelOnly)
+			borderOutside = false;
+		if (labelOnly)
+			baseMode += "lbl";
+		if (borderOutside)
+			baseMode += "outside";
+		BorderCfg.append(baseMode);
 	}
 	BorderCfg.append(QString::number(ui.spinBorderWidth->value()));
 	BorderCfg.append(QString::number(ui.spinBorderAlpha->value())); // Get alpha from spinner
 	BorderCfg.append(ui.cmbBoxBorderText->currentData().toString());
 	BorderCfg.append(QString::number(ui.spinLabelWidth->value()));
 	WriteText("BorderColor", BorderCfg.join(","));
+	WriteAdvancedCheck(ui.chkBorderInsideMaximized, "BorderInsideMaximized", "", "n");
 
 	if(m_pUseIcon->isChecked())
 		WriteText("BoxIcon", m_BoxIcon);
@@ -896,7 +919,9 @@ void COptionsWindow::OnGeneralChanged()
 	// (label-only with no label = nothing to show)
 	bool borderActive = ui.cmbBoxBorder->currentData().toString() != "off";
 	bool labelEnabled = ui.cmbBoxBorderText->currentData().toString() != "no";
+	bool borderOutside = ui.cmbBoxBorder->currentData().toString().endsWith("outside");
 	ui.chkBorderLabelOnly->setEnabled(borderActive && labelEnabled);
+	ui.chkBorderInsideMaximized->setEnabled(borderOutside);
 	if (!borderActive || !labelEnabled)
 		ui.chkBorderLabelOnly->setChecked(false);
 

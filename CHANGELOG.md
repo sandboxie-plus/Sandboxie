@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed SandMan File Panel column widths resetting when switching between boxes [#5473](https://github.com/sandboxie-plus/Sandboxie/issues/5473)
+- fixed SandMan Box Groups collapsing during refreshes, restarts, and sandbox moves despite remembered group state [#5477](https://github.com/sandboxie-plus/Sandboxie/issues/5477)
 
 
 

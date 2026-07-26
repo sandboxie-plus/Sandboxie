@@ -353,7 +353,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     layout->addItem(new QSpacerItem(0, 3), row++, 0);
 
     m_pAlias = nullptr;
-    bool bUseRandomName = ((CNewBoxWizard*)wizard())->m_bUseRandomName;
+    bool bUseRandomName = theConf->GetBool("Options/UseRandomBoxName", false);
     if (bUseRandomName)
     {
         layout->addWidget(new QLabel(tr("Alias:")), row++, 0);

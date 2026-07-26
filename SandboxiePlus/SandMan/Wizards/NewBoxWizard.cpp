@@ -117,6 +117,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             portableIniPath = portableDir + "\\" + BoxName + ".ini";
         }
 
+        // Create the external .ini file skeleton
         QFile file(portableIniPath);
         if (!file.open(QFile::WriteOnly))
             return SB_ERR(SB_Generic);
@@ -128,7 +129,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         file.write("Enabled=y\n");
         file.close();
 
-        theAPI->SbieIniSet(BoxName, "IniLocation", portableIniPath);
+        // Add ImportBox only – no [BoxName] in Sandboxie.ini, so no collision
         theAPI->GetGlobalSettings()->AppendText("ImportBox", portableIniPath);
         theAPI->ReloadConfig();
         theAPI->ReloadBoxes();
@@ -268,12 +269,10 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 		    pBox->SetText("BorderColor", QString("#%1%2%3").arg(qBlue(rgb), 2, 16, QChar('0')).arg(qGreen(rgb), 2, 16, QChar('0')).arg(qRed(rgb), 2, 16, QChar('0')) + ",ttl");
 
 
-            if (!bPortable) {
-                QString Location = field("boxLocation").toString();
-                if (!Location.isEmpty()) {
-                    pBox->SetText("FileRootPath", Location);
-                    theAPI->UpdateBoxPaths(pBox.data());
-                }
+            QString Location = field("boxLocation").toString();
+            if (!Location.isEmpty()) {
+                pBox->SetText("FileRootPath", Location);
+                theAPI->UpdateBoxPaths(pBox.data());
             }
 
             if (field("boxVersion").toInt() == 1) {
@@ -487,7 +486,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     registerField("blackBox", pBlackBox);
     connect(pBlackBox, SIGNAL(toggled(bool)), this, SLOT(OnBoxTypChanged()));
 
-    QCheckBox* pPortable = new QCheckBox(tr("Create portable sandbox (configuration in external .ini file)"));
+    QCheckBox* pPortable = new QCheckBox(tr("Create portable sandbox"));
     pPortable->setToolTip(tr("A portable sandbox stores its configuration in a separate .ini file, allowing it to be easily moved, backed up, or shared. "
         "The sandbox data and configuration will be placed together in a directory of your choice."));
     layout->addWidget(pPortable, row, 1, 1, 2);
@@ -1125,13 +1124,14 @@ void CSummaryPage::initializePage()
 {
     m_pSummary->setText(theGUI->GetBoxDescription(wizard()->field("boxType").toInt()));
 
+    if (field("portableBox").toBool()) {
+        m_pSummary->append(tr("\nPortable sandbox: configuration will be stored in an external .ini file."));
+    }
+
     QString Location = field("boxLocation").toString();
     if (Location.isEmpty())
         Location = ((CNewBoxWizard*)wizard())->GetDefaultLocation();
     m_pSummary->append(tr("\nThis Sandbox will be saved to: %1").arg(Location));
-
-    if (field("portableBox").toBool())
-        m_pSummary->append(tr("\nPortable sandbox: configuration will be stored in an external .ini file."));
 
     if (field("autoRemove").toBool()) 
         m_pSummary->append(tr("\nThis box's content will be DISCARDED when it's closed, and the box will be removed."));

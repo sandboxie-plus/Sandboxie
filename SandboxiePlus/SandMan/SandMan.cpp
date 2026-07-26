@@ -4198,10 +4198,8 @@ void CSandMan::OnAutoExpand()
 {
 	theConf->SetValue("Options/AutoExpandTree", m_pAutoExpand->isChecked());
 
-	if (m_pAutoExpand->isChecked())
-		m_pBoxView->GetTree()->expandAll();
-	else
-		m_pBoxView->GetTree()->collapseAll();
+	m_pBoxView->SetAutoExpand(m_pAutoExpand->isChecked(),
+		theConf->GetBool("Options/LegacyAutoExpandTree", false));
 }
 
 void CSandMan::OnSettings()

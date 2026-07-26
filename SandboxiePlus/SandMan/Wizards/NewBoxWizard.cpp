@@ -119,7 +119,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 
         QFile file(portableIniPath);
         if (!file.open(QFile::WriteOnly))
-            return SB_ERR(STATUS_UNSUCCESSFUL);
+            return SB_ERR(SB_Generic);
         file.write("#\n");
         file.write("# Portable sandbox configuration file\n");
         file.write("#\n");
@@ -135,7 +135,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 
         pBox = theAPI->GetBoxByName(BoxName);
         if (!pBox)
-            return SB_ERR(STATUS_UNSUCCESSFUL);
+            return SB_ERR(SB_Generic);
 
         Status = SB_OK;
     }

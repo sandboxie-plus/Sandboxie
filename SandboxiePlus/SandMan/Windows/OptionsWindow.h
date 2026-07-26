@@ -299,6 +299,7 @@ public:
 		eCopyAlways,
 		eDontCopy,
 		eCopyEmpty,
+		eCopyNewer,
 	};
 
 	enum ENetWfAction

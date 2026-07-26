@@ -7,8 +7,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.18.1 / 5.73.1] - 2026-07-??
 
+### Added
+- added `CopyNewer` file migration rules to refresh an existing sandbox copy from a newer host file, with SandMan rule editing support; it only applies to matching existing regular boxed files on normal opens, intentionally replacing their contents only when the host file has a newer last-write time
+  - it does not apply to initial migration, directories, write-only paths, deleted files, or create/overwrite operations
+
 ### Changed
 - updated Chromium_Elevation template now using specifig 'RunServiceAsSystem=...' instead of 'RunServicesAsSystem=y' and added more service names
+- improved SandMan INI setting validation and auto-completion with disabled-setting aliases, localized descriptions, context-aware warnings, and template-specific metadata and tooltips
 
 ### Fixed
 - fixed incremental update mechanism fails to copy new files

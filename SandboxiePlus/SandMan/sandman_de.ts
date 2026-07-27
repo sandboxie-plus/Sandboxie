@@ -613,7 +613,7 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="359"/>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="377"/>
@@ -2316,7 +2316,7 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
         <source> (outside)</source>
-        <translation type="unfinished"></translation>
+        <translation> (außen)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="78"/>
@@ -2405,7 +2405,7 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
         <location filename="Windows/OptionsGeneral.cpp" line="687"/>
         <location filename="Windows/OptionsGeneral.cpp" line="794"/>
         <source>Copy newer</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuere kopieren</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1313"/>
@@ -7249,7 +7249,8 @@ Versuchen Sie die Übermittlung ohne die angehängten Protokolle.</translation>
         <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
         <source>
 The actual sandbox name is: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Der eigentliche Sandboxname ist: %1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1112"/>
@@ -8022,7 +8023,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/OptionsWindow.ui" line="222"/>
         <source>Sandboxed window border:</source>
-        <translation>Fensterrahmen innerhalb der Sandbox:</translation>
+        <translation>Rahmen des Sandboxfensters:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="175"/>
@@ -9148,12 +9149,12 @@ Dies wird gemacht, um bösartige Prozesse innerhalb der Sandbox daran zu hindern
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn ein äußerer Rahmen durch den Bildschirmrand abgeschnitten werden würde, wird dieser stattdessen innerhalb von maximierten oder angedockten Fenstern angezeigt.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="379"/>
         <source>Inside when maximized or snapped</source>
-        <translation type="unfinished"></translation>
+        <translation>Innen, wenn maximiert oder angedockt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1435"/>
@@ -11416,7 +11417,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="71"/>
         <source>Use random GUID as sandbox name when creating new boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende beim Erstellen neuer Boxen eine zufällige GUID als Sandboxnamen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="281"/>

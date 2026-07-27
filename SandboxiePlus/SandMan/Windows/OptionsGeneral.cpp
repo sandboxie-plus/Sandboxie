@@ -425,6 +425,7 @@ void COptionsWindow::LoadGeneral()
 	else
 		ui.chkProtectBox->setCheckState(Qt::Unchecked);
 	ui.chkAutoEmpty->setChecked(m_pBox->GetBool("AutoDelete", false));
+	ui.chkAutoSnapCapture->setChecked(m_pBox->GetBool("AutoSnapCapture", false));
 
 	ui.chkRawDiskRead->setChecked(m_pBox->GetBool("AllowRawDiskRead", false));
 	ui.chkRawDiskNotify->setChecked(m_pBox->GetBool("NotifyDirectDiskAccess", false));
@@ -576,6 +577,7 @@ void COptionsWindow::SaveGeneral()
 		m_pBox->DelValue("NeverRemove");
 	}
 	WriteAdvancedCheck(ui.chkAutoEmpty, "AutoDelete", "y", "");
+	WriteAdvancedCheck(ui.chkAutoSnapCapture, "AutoSnapCapture", "y", "");
 
 	WriteAdvancedCheck(ui.chkRawDiskRead, "AllowRawDiskRead", "y", "");
 	WriteAdvancedCheck(ui.chkRawDiskNotify, "NotifyDirectDiskAccess", "y", "");

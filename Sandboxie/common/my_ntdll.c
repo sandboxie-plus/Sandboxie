@@ -37,8 +37,8 @@ typedef long NTSTATUS;
 // Alternatively we could link all the required functions dynamically from InitMyNtDll
 //
 
-int(*P_vsnwprintf)(wchar_t *_Buffer, size_t Count, const wchar_t * const, va_list Args) = NULL;
-int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args) = NULL;
+int(__cdecl *P_vsnwprintf)(wchar_t *_Buffer, size_t Count, const wchar_t * const, va_list Args) = NULL;
+int(__cdecl *P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args) = NULL;
 
 void InitMyNtDll(HMODULE Ntdll)
 {

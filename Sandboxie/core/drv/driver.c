@@ -832,6 +832,14 @@ _FX void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject)
 {
     Driver_Unloading = TRUE;
 
+    // Make sure notify callbacks bail out immediately during unload.
+    Process_ReadyToSandbox = FALSE;
+    KeMemoryBarrier();
+
+    // Unregister process/image notify callbacks before tearing down
+    // subsystems that may be touched from process create/delete paths.
+    Process_Unload(FALSE);
+
     //
     // unload just the hooks, in case this is a partial unload
     //
@@ -843,7 +851,6 @@ _FX void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject)
     File_Unload();
     Obj_Unload();
     Thread_Unload();
-    Process_Unload(FALSE);
 
     //
     // if this is a full unload, then we can now unload everything else

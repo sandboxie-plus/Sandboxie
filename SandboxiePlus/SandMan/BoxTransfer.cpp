@@ -8,6 +8,7 @@
 #include "Windows/BoxImageWindow.h"
 #include "Windows/ExtractDialog.h"
 #include "../MiscHelpers/Common/Finder.h"
+#include "Helpers/WinAdmin.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -22,7 +23,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// QFileX helper - same as in SbiePlusAPI.cpp
+// QFileXProgress helper for archive operations with progress reporting
 //
 class QFileXProgress : public QFile {
 public:
@@ -80,8 +81,8 @@ CBoxTransferDialog::CBoxTransferDialog(EMode mode, QWidget* parent)
 		m_pBoxTree->setHeaderLabels(QStringList() << tr("Box Name") << tr("Status"));
 		m_pBoxTree->setColumnCount(2);
 	} else {
-		m_pBoxTree->setHeaderLabels(QStringList() << tr("Archive Box Name") << tr("Import As") << tr("Conflict"));
-		m_pBoxTree->setColumnCount(3);
+		m_pBoxTree->setHeaderLabels(QStringList() << tr("Archive Box Name") << tr("Import As") << tr("Source") << tr("Conflict"));
+		m_pBoxTree->setColumnCount(4);
 	}
 	m_pBoxTree->header()->setStretchLastSection(true);
 	m_pBoxTree->setRootIsDecorated(false);
@@ -92,6 +93,12 @@ CBoxTransferDialog::CBoxTransferDialog(EMode mode, QWidget* parent)
 
 	m_pGlobalConfig = new QCheckBox(mode == eExport ? tr("Export Global Configuration") : tr("Import Global Configuration"), this);
 	pLayout->addWidget(m_pGlobalConfig);
+
+	m_pSeparateFiles = nullptr;
+	if (mode == eExport) {
+		m_pSeparateFiles = new QCheckBox(tr("Export each box to its own file"), this);
+		pLayout->addWidget(m_pSeparateFiles);
+	}
 
 	QHBoxLayout* pButtonRow = new QHBoxLayout();
 	m_pSelectAll = new QPushButton(tr("Select All"), this);
@@ -174,24 +181,89 @@ void CBoxTransferDialog::LoadArchiveContents(const QStringList& boxNames, bool h
 	UpdateConflictIndicators();
 }
 
+void CBoxTransferDialog::LoadMultiArchiveContents(const QList<SImportBoxInfo>& boxes, bool hasGlobalConfig)
+{
+	m_pGlobalConfig->setEnabled(hasGlobalConfig);
+	if (hasGlobalConfig)
+		m_pGlobalConfig->setChecked(true);
+	else
+		m_pGlobalConfig->setChecked(false);
+
+	for (const SImportBoxInfo& box : boxes) {
+		QTreeWidgetItem* pItem = new QTreeWidgetItem();
+		pItem->setFlags(pItem->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsEditable);
+		pItem->setCheckState(0, Qt::Checked);
+		pItem->setText(0, box.ArchiveName);
+		pItem->setText(1, box.ArchiveName); // default "Import As" = same name
+		pItem->setData(0, Qt::UserRole, box.ArchiveName); // original archive name
+		pItem->setData(0, Qt::UserRole + 1, box.SourceFile); // source file path
+		pItem->setData(0, Qt::UserRole + 2, box.Password); // password for this archive
+		pItem->setData(0, Qt::UserRole + 3, box.ImageSize); // image size for conflict detection
+
+		// Show source file name (not full path)
+		QString sourceFileName = Split2(box.SourceFile, "/", true).second;
+		if (sourceFileName.isEmpty())
+			sourceFileName = Split2(box.SourceFile, "\\", true).second;
+		pItem->setText(2, sourceFileName);
+
+		// Try to set icon if a box with this name already exists
+		CSandBoxPtr pExisting = theAPI->GetBoxByName(box.ArchiveName);
+		if (!pExisting.isNull()) {
+			auto pBoxEx = pExisting.objectCast<CSandBoxPlus>();
+			if (pBoxEx)
+				pItem->setIcon(0, theGUI->GetBoxIcon(pBoxEx->GetType(), false));
+		}
+
+		m_pBoxTree->addTopLevelItem(pItem);
+	}
+	m_pBoxTree->resizeColumnToContents(0);
+	m_pBoxTree->resizeColumnToContents(2);
+
+	UpdateConflictIndicators();
+}
+
 void CBoxTransferDialog::UpdateConflictIndicators()
 {
 	if (m_Mode != eImport) return;
 
+	// First pass: collect all import names that are checked to detect duplicates
+	QMap<QString, int> importNameCounts;
+	for (int i = 0; i < m_pBoxTree->topLevelItemCount(); i++) {
+		QTreeWidgetItem* pItem = m_pBoxTree->topLevelItem(i);
+		if (pItem->checkState(0) == Qt::Checked) {
+			QString importName = pItem->text(1);
+			importNameCounts[importName]++;
+		}
+	}
+
+	// Second pass: set conflict indicators
 	for (int i = 0; i < m_pBoxTree->topLevelItemCount(); i++) {
 		QTreeWidgetItem* pItem = m_pBoxTree->topLevelItem(i);
 		QString importName = pItem->text(1);
+
+		QStringList conflicts;
+
+		// Check if box already exists on the system
 		CSandBoxPtr pExisting = theAPI->GetBoxByName(importName);
 		if (!pExisting.isNull())
-			pItem->setText(2, tr("Exists!"));
-		else
-			pItem->setText(2, "");
+			conflicts.append(tr("Exists!"));
+
+		// Check if there are duplicate import names among checked items
+		if (pItem->checkState(0) == Qt::Checked && importNameCounts.value(importName) > 1)
+			conflicts.append(tr("Duplicate!"));
+
+		pItem->setText(3, conflicts.join(" "));
 	}
 }
 
 bool CBoxTransferDialog::ExportGlobalConfig() const
 {
 	return m_pGlobalConfig->isChecked();
+}
+
+bool CBoxTransferDialog::ExportSeparateFiles() const
+{
+	return m_pSeparateFiles && m_pSeparateFiles->isChecked();
 }
 
 QStringList CBoxTransferDialog::GetSelectedBoxes() const
@@ -219,21 +291,41 @@ QMap<QString, QString> CBoxTransferDialog::GetBoxNameMapping() const
 	return mapping;
 }
 
+QList<CBoxTransferDialog::SImportEntry> CBoxTransferDialog::GetImportEntries() const
+{
+	QList<SImportEntry> entries;
+	for (int i = 0; i < m_pBoxTree->topLevelItemCount(); i++) {
+		QTreeWidgetItem* pItem = m_pBoxTree->topLevelItem(i);
+		if (pItem->checkState(0) == Qt::Checked) {
+			SImportEntry entry;
+			entry.ArchiveName = pItem->data(0, Qt::UserRole).toString();
+			entry.ImportName = pItem->text(1);
+			entry.SourceFile = pItem->data(0, Qt::UserRole + 1).toString();
+			entry.Password = pItem->data(0, Qt::UserRole + 2).toString();
+			entry.ImageSize = pItem->data(0, Qt::UserRole + 3).toULongLong();
+			entries.append(entry);
+		}
+	}
+	return entries;
+}
+
 void CBoxTransferDialog::OnSelectAll()
 {
 	for (int i = 0; i < m_pBoxTree->topLevelItemCount(); i++)
 		m_pBoxTree->topLevelItem(i)->setCheckState(0, Qt::Checked);
+	UpdateConflictIndicators();
 }
 
 void CBoxTransferDialog::OnSelectNone()
 {
 	for (int i = 0; i < m_pBoxTree->topLevelItemCount(); i++)
 		m_pBoxTree->topLevelItem(i)->setCheckState(0, Qt::Unchecked);
+	UpdateConflictIndicators();
 }
 
 void CBoxTransferDialog::OnItemChanged(QTreeWidgetItem* item, int column)
 {
-	if (m_Mode == eImport && column == 1)
+	if (m_Mode == eImport && (column == 0 || column == 1))
 		UpdateConflictIndicators();
 }
 
@@ -255,7 +347,8 @@ void CBoxTransferDialog::SetFilter(const QRegularExpression& Exp, int iOptions, 
 
 static void ExportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QString& exportPath,
 	const QStringList& boxNames, const QMap<QString, QString>& boxRoots, const QMap<QString, QString>& boxConfigs,
-	bool exportGlobalConfig, const QString& globalConfig, const QVariantMap& params)
+	bool exportGlobalConfig, const QString& globalConfig, const QVariantMap& params,
+	const QStringList& boxesToUnmount)
 {
 	CArchive Archive(exportPath);
 
@@ -283,13 +376,14 @@ static void ExportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 		QString rootPath = boxRoots.value(boxName);
 		QString configSection = boxConfigs.value(boxName);
 
-		// Write BoxConfig.ini to box root temporarily, then add to archive
+		// Write box config as BoxName.ini with [BoxName] section header
 		QTemporaryFile* pConfigFile = new QTemporaryFile();
 		pConfigFile->open();
+		pConfigFile->write(("[" + boxName + "]\n").toUtf8());
 		pConfigFile->write(configSection.toUtf8());
 		pConfigFile->close();
 
-		int ConfigIndex = Archive.AddFile(boxName + "/BoxConfig.ini");
+		int ConfigIndex = Archive.AddFile(boxName + ".ini");
 		if (ConfigIndex != -1)
 			Files.insert(ConfigIndex, pConfigFile);
 		else
@@ -330,34 +424,21 @@ static void ExportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 			Status = SB_ERR((ESbieMsgCodes)SBX_7zCreateFailed);
 	}
 
-	pProgress->Finish(Status);
-}
-
-static void ExportSingleBox(QWidget* parent, const CSandBoxPtr& pBox)
-{
-	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-
-	CCompressDialog optWnd(parent);
-	if (pBoxEx->UseImageFile())
-		optWnd.SetMustEncrypt();
-	if (theGUI->SafeExec(&optWnd) != QDialog::Accepted)
-		return;
-
-	QString Password;
-	if (optWnd.UseEncryption()) {
-		CBoxImageWindow pwWnd(CBoxImageWindow::eExport, parent);
-		if (theGUI->SafeExec(&pwWnd) != QDialog::Accepted)
-			return;
-		Password = pwWnd.GetPassword();
+	// Unmount boxes that we mounted for this export
+	if (!boxesToUnmount.isEmpty()) {
+		QMetaObject::invokeMethod(theGUI, [boxesToUnmount]() {
+			for (const QString& boxName : boxesToUnmount) {
+				CSandBoxPtr pBox = theAPI->GetBoxByName(boxName);
+				if (pBox) {
+					auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+					if (pBoxEx)
+						pBoxEx->ImBoxUnmount();
+				}
+			}
+		}, Qt::QueuedConnection);
 	}
 
-	QString Path = QFileDialog::getSaveFileName(parent, CBoxTransferDialog::tr("Select file name"), pBox->GetName() + optWnd.GetFormat(), CBoxTransferDialog::tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
-	if (Path.isEmpty())
-		return;
-
-	SB_PROGRESS Status = pBoxEx->ExportBox(Path, Password, optWnd.GetLevel(), optWnd.MakeSolid());
-	if (Status.GetStatus() == OP_ASYNC)
-		theGUI->AddAsyncOp(Status.GetValue(), false, CBoxTransferDialog::tr("Exporting: %1").arg(Path));
+	pProgress->Finish(Status);
 }
 
 void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
@@ -367,27 +448,62 @@ void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
 		return;
 	}
 
+	QStringList selectedBoxes;
+	bool exportGlobalConfig = false;
+	bool exportSeparateFiles = false;
+	bool mustEncrypt = false;
+
+	// For single box, skip selection dialog
 	if (SandBoxes.size() == 1) {
-		ExportSingleBox(parent, SandBoxes.first());
-		return;
+		auto pBoxEx = SandBoxes.first().objectCast<CSandBoxPlus>();
+		if (!pBoxEx) return;
+
+		if (theAPI->HasProcesses(pBoxEx->GetName())) {
+			QMessageBox::warning(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("Cannot export: Sandbox has running processes."));
+			return;
+		}
+
+		selectedBoxes.append(pBoxEx->GetName());
+		mustEncrypt = pBoxEx->UseImageFile();
 	}
+	else {
+		// 1. Show selection dialog for multiple boxes
+		CBoxTransferDialog dlg(CBoxTransferDialog::eExport, parent);
+		dlg.PopulateExportList(SandBoxes);
+		if (theGUI->SafeExec(&dlg) != QDialog::Accepted)
+			return;
 
-	// 1. Show selection dialog
-	CBoxTransferDialog dlg(CBoxTransferDialog::eExport, parent);
-	dlg.PopulateExportList(SandBoxes);
-	if (theGUI->SafeExec(&dlg) != QDialog::Accepted)
-		return;
+		selectedBoxes = dlg.GetSelectedBoxes();
+		exportGlobalConfig = dlg.ExportGlobalConfig();
+		exportSeparateFiles = dlg.ExportSeparateFiles();
 
-	QStringList selectedBoxes = dlg.GetSelectedBoxes();
-	bool exportGlobalConfig = dlg.ExportGlobalConfig();
+		if (selectedBoxes.isEmpty() && !exportGlobalConfig) {
+			QMessageBox::information(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("Nothing selected for export."));
+			return;
+		}
 
-	if (selectedBoxes.isEmpty() && !exportGlobalConfig) {
-		QMessageBox::information(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("Nothing selected for export."));
-		return;
+		if (exportSeparateFiles && selectedBoxes.isEmpty()) {
+			QMessageBox::information(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("No boxes selected for separate file export."));
+			return;
+		}
+
+		// Check if any selected box requires encryption
+		for (const QString& boxName : selectedBoxes) {
+			CSandBoxPtr pBox = theAPI->GetBoxByName(boxName);
+			if (pBox) {
+				auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+				if (pBoxEx && pBoxEx->UseImageFile()) {
+					mustEncrypt = true;
+					break;
+				}
+			}
+		}
 	}
 
 	// 2. Compression options
 	CCompressDialog compDlg(parent);
+	if (mustEncrypt)
+		compDlg.SetMustEncrypt();
 	if (theGUI->SafeExec(&compDlg) != QDialog::Accepted)
 		return;
 
@@ -400,21 +516,15 @@ void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
 		Password = pwWnd.GetPassword();
 	}
 
-	// 4. Save file dialog
-	QString Path = QFileDialog::getSaveFileName(parent, CBoxTransferDialog::tr("Export Sandboxes"),
-		"SandboxExport" + compDlg.GetFormat(),
-		CBoxTransferDialog::tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
-	if (Path.isEmpty())
-		return;
-
-	// 5. Pre-collect data on main thread
+	// 4. Pre-collect data on main thread
 	QStringList validBoxes;
 	QMap<QString, QString> boxRoots;
 	QMap<QString, QString> boxConfigs;
+	QStringList boxesToUnmount; // Track boxes we mount so we can unmount them after export
 
 	for (const QString& boxName : selectedBoxes) {
-		// Check running processes
-		if (theAPI->HasProcesses(boxName)) {
+		// Check running processes (skip for single box - already checked above)
+		if (SandBoxes.size() > 1 && theAPI->HasProcesses(boxName)) {
 			int ret = QMessageBox::warning(parent, "Sandboxie-Plus",
 				CBoxTransferDialog::tr("Sandbox '%1' has running processes. Skip it?").arg(boxName),
 				QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
@@ -427,6 +537,49 @@ void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
 
 		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 		if (!pBoxEx) continue;
+
+		// Handle encrypted boxes - ensure they are mounted before export
+		if (pBoxEx->UseImageFile()) {
+			bool wasAlreadyMounted = !pBoxEx->GetMountRoot().isEmpty();
+			bool needsMount = !wasAlreadyMounted;
+			bool needsRemount = wasAlreadyMounted && !IsElevated();
+
+			if (needsMount || needsRemount) {
+				// Need to prompt for password to mount or remount
+				CBoxImageWindow window(CBoxImageWindow::eMount, parent);
+				window.setWindowTitle(CBoxTransferDialog::tr("Mount '%1' for Export").arg(boxName));
+				if (theGUI->SafeExec(&window) != QDialog::Accepted) {
+					int ret = QMessageBox::warning(parent, "Sandboxie-Plus",
+						CBoxTransferDialog::tr("Encrypted sandbox '%1' is not mounted. Skip it?").arg(boxName),
+						QMessageBox::Yes | QMessageBox::Cancel);
+					if (ret == QMessageBox::Cancel) return;
+					continue; // Skip this box
+				}
+
+				// Unmount first if already mounted (remount case)
+				if (needsRemount) {
+					SB_STATUS Status = pBoxEx->ImBoxUnmount();
+					if (Status.IsError()) {
+						QMessageBox::warning(parent, "Sandboxie-Plus",
+							CBoxTransferDialog::tr("Failed to unmount '%1' for remounting.").arg(boxName));
+						continue;
+					}
+				}
+
+				// Mount with appropriate protection level
+				// iProtect=2 means don't require admin privileges (admin_only=0)
+				SB_STATUS Status = pBoxEx->ImBoxMount(window.GetPassword(), IsElevated() ? 1 : 2, true);
+				if (Status.IsError()) {
+					QMessageBox::warning(parent, "Sandboxie-Plus",
+						CBoxTransferDialog::tr("Failed to mount encrypted sandbox '%1'.").arg(boxName));
+					continue;
+				}
+
+				// Only unmount after export if the box wasn't mounted before we started
+				if (needsMount)
+					boxesToUnmount.append(boxName);
+			}
+		}
 
 		if (!pBoxEx->IsInitialized()) {
 			// Empty box - still export the config but warn
@@ -441,16 +594,64 @@ void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
 	if (exportGlobalConfig)
 		globalConfig = theAPI->SbieIniGetEx("GlobalSettings", "");
 
-	// 6. Launch async
+	// 5. File/folder dialog and export
 	QVariantMap vParams;
 	if (!Password.isEmpty())
 		vParams["password"] = Password;
 	vParams["level"] = compDlg.GetLevel();
 	vParams["solid"] = compDlg.MakeSolid();
 
-	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QtConcurrent::run(ExportMultiBoxesAsync, pProgress, Path, validBoxes, boxRoots, boxConfigs, exportGlobalConfig, globalConfig, vParams);
-	theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Exporting: %1").arg(Path));
+	if (exportSeparateFiles) {
+		// Folder picker for separate files export
+		QString FolderPath = QFileDialog::getExistingDirectory(parent, CBoxTransferDialog::tr("Select Export Folder"));
+		if (FolderPath.isEmpty())
+			return;
+
+		// Export each box to its own file
+		for (const QString& boxName : validBoxes) {
+			QString boxPath = FolderPath + "/" + boxName + ".7z";
+
+			QStringList singleBox;
+			singleBox.append(boxName);
+
+			QMap<QString, QString> singleBoxRoots;
+			singleBoxRoots.insert(boxName, boxRoots.value(boxName));
+
+			QMap<QString, QString> singleBoxConfigs;
+			singleBoxConfigs.insert(boxName, boxConfigs.value(boxName));
+
+			// Only include this box in unmount list if we mounted it
+			QStringList singleBoxUnmount;
+			if (boxesToUnmount.contains(boxName))
+				singleBoxUnmount.append(boxName);
+
+			CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+			QtConcurrent::run(ExportMultiBoxesAsync, pProgress, boxPath, singleBox, singleBoxRoots, singleBoxConfigs, false, QString(), vParams, singleBoxUnmount);
+			theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Exporting: %1").arg(boxPath));
+		}
+
+		// Export global config separately if requested
+		if (exportGlobalConfig && !globalConfig.isEmpty()) {
+			QString globalPath = FolderPath + "/GlobalConfig.7z";
+			QStringList emptyBoxes;
+
+			CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+			QtConcurrent::run(ExportMultiBoxesAsync, pProgress, globalPath, emptyBoxes, QMap<QString, QString>(), QMap<QString, QString>(), true, globalConfig, vParams, QStringList());
+			theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Exporting: %1").arg(globalPath));
+		}
+	} else {
+		// Single archive export
+		QString defaultName = (validBoxes.size() == 1) ? validBoxes.first() : "SandboxExport";
+		QString Path = QFileDialog::getSaveFileName(parent, CBoxTransferDialog::tr("Export Sandbox"),
+			defaultName + compDlg.GetFormat(),
+			CBoxTransferDialog::tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
+		if (Path.isEmpty())
+			return;
+
+		CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+		QtConcurrent::run(ExportMultiBoxesAsync, pProgress, Path, validBoxes, boxRoots, boxConfigs, exportGlobalConfig, globalConfig, vParams, boxesToUnmount);
+		theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Exporting: %1").arg(Path));
+	}
 }
 
 
@@ -458,9 +659,50 @@ void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes)
 // Import
 //
 
+// Helper function to extract section content from INI data
+// Returns the content of the specified section without the [section] header
+// If no section header is found, returns the entire content (for old format compatibility)
+static QString ExtractIniSection(const QString& iniContent, const QString& sectionName)
+{
+	QString content = iniContent;
+
+	// Look for the section header [sectionName]
+	QRegularExpression sectionRegex("^\\s*\\[" + QRegularExpression::escape(sectionName) + "\\]\\s*$",
+		QRegularExpression::MultilineOption | QRegularExpression::CaseInsensitiveOption);
+	QRegularExpressionMatch match = sectionRegex.match(content);
+
+	if (!match.hasMatch()) {
+		// No section header found - check if content starts with any section header
+		QRegularExpression anySectionRegex("^\\s*\\[.*\\]\\s*$", QRegularExpression::MultilineOption);
+		if (!anySectionRegex.match(content).hasMatch()) {
+			// No section headers at all - return content as-is (old format)
+			return content;
+		}
+		// Has section headers but not the one we want - return empty
+		return QString();
+	}
+
+	// Found the section - extract content after it until next section or end
+	int sectionStart = match.capturedEnd();
+
+	// Find the next section header (if any)
+	QRegularExpression nextSectionRegex("^\\s*\\[.*\\]\\s*$", QRegularExpression::MultilineOption);
+	QRegularExpressionMatch nextMatch = nextSectionRegex.match(content, sectionStart);
+
+	int sectionEnd = nextMatch.hasMatch() ? nextMatch.capturedStart() : content.length();
+
+	QString sectionContent = content.mid(sectionStart, sectionEnd - sectionStart).trimmed();
+
+	// Add trailing newline if content is not empty
+	if (!sectionContent.isEmpty() && !sectionContent.endsWith('\n'))
+		sectionContent += '\n';
+
+	return sectionContent;
+}
+
 static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QString& importPath, const QString& password,
 	const QMap<QString, QString>& boxNameMapping, const QMap<QString, QString>& boxRoots,
-	bool importGlobalConfig)
+	bool importGlobalConfig, const QStringList& boxesToUnmount)
 {
 	CArchive Archive(importPath);
 
@@ -477,12 +719,35 @@ static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 	// Collect config data to apply after extraction
 	struct SConfigEntry {
 		int ArcIndex;
-		QString BoxName;
+		QString ArchiveBoxName;  // Original box name in archive (for section extraction)
+		QString TargetBoxName;   // Target box name for import
 		QString TempPath;
 	};
 	QList<SConfigEntry> configEntries;
 	int globalConfigIndex = -1;
 	QString globalConfigTempPath;
+
+	// First pass: detect if this is a single-box archive (has root-level BoxConfig.ini)
+	bool isSingleBoxArchive = false;
+	for (int i = 0; i < Archive.FileCount(); i++) {
+		int ArcIndex = Archive.FindByIndex(i);
+		QString FilePath = Archive.FileProperty(ArcIndex, "Path").toString();
+		FilePath.replace("\\", "/");
+		if (FilePath == "BoxConfig.ini") {
+			isSingleBoxArchive = true;
+			break;
+		}
+	}
+
+	// For single-box archives, get the target box name from the mapping
+	QString singleBoxArchiveName;
+	QString singleBoxTargetName;
+	QString singleBoxRoot;
+	if (isSingleBoxArchive && boxNameMapping.size() == 1) {
+		singleBoxArchiveName = boxNameMapping.firstKey();
+		singleBoxTargetName = boxNameMapping.first();
+		singleBoxRoot = boxRoots.value(singleBoxTargetName);
+	}
 
 	for (int i = 0; i < Archive.FileCount(); i++) {
 		int ArcIndex = Archive.FindByIndex(i);
@@ -501,32 +766,70 @@ static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 			continue;
 		}
 
-		// Parse boxName/relative path
-		int sep = FilePath.indexOf('/');
-		if (sep <= 0) continue;
-
-		QString archiveBoxName = FilePath.left(sep);
-		QString relPath = FilePath.mid(sep + 1);
-
-		if (!boxNameMapping.contains(archiveBoxName))
-			continue;
-
-		QString newBoxName = boxNameMapping.value(archiveBoxName);
-		QString boxRoot = boxRoots.value(newBoxName);
-		if (boxRoot.isEmpty()) continue;
-
-		if (relPath == "BoxConfig.ini") {
-			// Extract config to temp, apply later
-			QString TempPath = QDir::tempPath() + "/SbiePlus_BoxConfig_" + newBoxName + "_" + QString::number(QCoreApplication::applicationPid()) + ".ini";
-			SConfigEntry entry;
-			entry.ArcIndex = ArcIndex;
-			entry.BoxName = newBoxName;
-			entry.TempPath = TempPath;
-			configEntries.append(entry);
-			Files.insert(ArcIndex, new QFileXProgress(TempPath, pProgress, &Archive));
+		if (isSingleBoxArchive && !singleBoxRoot.isEmpty()) {
+			// Single-box archive: files are at root level
+			if (FilePath == "BoxConfig.ini") {
+				// Extract config to temp, apply later (old format - no section header)
+				QString TempPath = QDir::tempPath() + "/SbiePlus_BoxConfig_" + singleBoxTargetName + "_" + QString::number(QCoreApplication::applicationPid()) + ".ini";
+				SConfigEntry entry;
+				entry.ArcIndex = ArcIndex;
+				entry.ArchiveBoxName = singleBoxArchiveName;
+				entry.TargetBoxName = singleBoxTargetName;
+				entry.TempPath = TempPath;
+				configEntries.append(entry);
+				Files.insert(ArcIndex, new QFileXProgress(TempPath, pProgress, &Archive));
+			} else {
+				// Regular file - extract to box root
+				Files.insert(ArcIndex, new QFileXProgress(CArchive::PrepareExtraction(FilePath, singleBoxRoot + "\\"), pProgress, &Archive));
+			}
 		} else {
-			// Regular file - extract to box root
-			Files.insert(ArcIndex, new QFileXProgress(CArchive::PrepareExtraction(relPath, boxRoot + "\\"), pProgress, &Archive));
+			// Multi-box archive: check for new format (BoxName.ini) or old format (BoxName/...)
+			int sep = FilePath.indexOf('/');
+
+			// Check for new format: BoxName.ini at root level
+			if (sep <= 0 && FilePath.endsWith(".ini", Qt::CaseInsensitive)) {
+				QString archiveBoxName = FilePath.left(FilePath.length() - 4); // Remove .ini
+				if (!boxNameMapping.contains(archiveBoxName))
+					continue;
+
+				QString newBoxName = boxNameMapping.value(archiveBoxName);
+				QString TempPath = QDir::tempPath() + "/SbiePlus_BoxConfig_" + newBoxName + "_" + QString::number(QCoreApplication::applicationPid()) + ".ini";
+				SConfigEntry entry;
+				entry.ArcIndex = ArcIndex;
+				entry.ArchiveBoxName = archiveBoxName;
+				entry.TargetBoxName = newBoxName;
+				entry.TempPath = TempPath;
+				configEntries.append(entry);
+				Files.insert(ArcIndex, new QFileXProgress(TempPath, pProgress, &Archive));
+				continue;
+			}
+
+			if (sep <= 0) continue;
+
+			QString archiveBoxName = FilePath.left(sep);
+			QString relPath = FilePath.mid(sep + 1);
+
+			if (!boxNameMapping.contains(archiveBoxName))
+				continue;
+
+			QString newBoxName = boxNameMapping.value(archiveBoxName);
+			QString boxRoot = boxRoots.value(newBoxName);
+			if (boxRoot.isEmpty()) continue;
+
+			if (relPath == "BoxConfig.ini") {
+				// Old format: Extract config to temp, apply later
+				QString TempPath = QDir::tempPath() + "/SbiePlus_BoxConfig_" + newBoxName + "_" + QString::number(QCoreApplication::applicationPid()) + ".ini";
+				SConfigEntry entry;
+				entry.ArcIndex = ArcIndex;
+				entry.ArchiveBoxName = archiveBoxName;
+				entry.TargetBoxName = newBoxName;
+				entry.TempPath = TempPath;
+				configEntries.append(entry);
+				Files.insert(ArcIndex, new QFileXProgress(TempPath, pProgress, &Archive));
+			} else {
+				// Regular file - extract to box root
+				Files.insert(ArcIndex, new QFileXProgress(CArchive::PrepareExtraction(relPath, boxRoot + "\\"), pProgress, &Archive));
+			}
 		}
 	}
 
@@ -553,20 +856,37 @@ static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 		for (const SConfigEntry& entry : configEntries) {
 			QFile File(entry.TempPath);
 			if (File.open(QFile::ReadOnly)) {
-				QString configContent = QString::fromUtf8(File.readAll());
+				QString rawContent = QString::fromUtf8(File.readAll());
 				File.close();
 
-				// Replace box name in section header if renamed
-				// The section header is typically [BoxName] on the first line
-				// We need to handle the case where the archive box name differs from the new name
-				// SbieIniSetSection takes the section name separately, so we just need to pass the content
+				// Extract section content - handles both old format (no section header)
+				// and new format (with [BoxName] section header)
+				QString configContent = ExtractIniSection(rawContent, entry.ArchiveBoxName);
+
+				// Remove FileRootPath= entries as the path should be determined by the new box location
+				configContent.remove(QRegularExpression("(?m)^FileRootPath=.*$\\n?"));
 
 				QMetaObject::invokeMethod(theAPI, "SbieIniSetSection", Qt::BlockingQueuedConnection,
-					Q_ARG(QString, entry.BoxName),
+					Q_ARG(QString, entry.TargetBoxName),
 					Q_ARG(QString, configContent)
 				);
 			}
 			File.remove();
+		}
+
+		// Update imported boxes on main thread
+		for (const QString& newBoxName : boxNameMapping.values()) {
+			QMetaObject::invokeMethod(theGUI, [newBoxName]() {
+				CSandBoxPtr pBox = theAPI->GetBoxByName(newBoxName);
+				if (pBox) {
+					auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+					if (pBoxEx) {
+						pBoxEx->UpdateSize();
+						if (theConf->GetBool("Options/ScanStartMenu", true))
+							pBoxEx->ScanStartMenu();
+					}
+				}
+			}, Qt::QueuedConnection);
 		}
 	} else {
 		// Clean up temp files on error
@@ -576,108 +896,77 @@ static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 			QFile::remove(entry.TempPath);
 	}
 
+	// Unmount boxes that we mounted for this import
+	if (!boxesToUnmount.isEmpty()) {
+		QMetaObject::invokeMethod(theGUI, [boxesToUnmount]() {
+			for (const QString& boxName : boxesToUnmount) {
+				CSandBoxPtr pBox = theAPI->GetBoxByName(boxName);
+				if (pBox) {
+					auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+					if (pBoxEx)
+						pBoxEx->ImBoxUnmount();
+				}
+			}
+		}, Qt::QueuedConnection);
+	}
+
 	pProgress->Finish(Status);
 }
 
-static void ImportSingleBox(QWidget* parent, const QString& Path, const QString& Password, quint64 ImageSize)
-{
-	StrPair PathName = Split2(Path, "/", true);
-	StrPair NameEx = Split2(PathName.second, ".", true);
-	QString Name = NameEx.first;
-
-	CExtractDialog optWnd(Name, parent);
-	if (!Password.isEmpty())
-		optWnd.ShowNoCrypt();
-	if (theGUI->SafeExec(&optWnd) != QDialog::Accepted)
-		return;
-	Name = optWnd.GetName();
-	QString BoxRoot = optWnd.GetRoot();
-
-	CSandBoxPtr pBox;
-	SB_PROGRESS Status = theAPI->CreateBox(Name);
-	if (!Status.IsError()) {
-		pBox = theAPI->GetBoxByName(Name);
-		if (pBox) {
-			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-
-			if (!BoxRoot.isEmpty())
-				pBox->SetFileRoot(BoxRoot);
-
-			if (!Password.isEmpty() && !optWnd.IsNoCrypt()) {
-				Status = pBoxEx->ImBoxCreate(ImageSize / 1024, Password);
-				if (!Status.IsError())
-					Status = pBoxEx->ImBoxMount(Password, true, true);
-			}
-
-			if (!Status.IsError())
-				Status = pBoxEx->ImportBox(Path, Password);
-
-			// always overwrite restored FileRootPath
-			pBox->SetText("FileRootPath", BoxRoot);
-		}
-	}
-
-	if (Status.GetStatus() == OP_ASYNC) {
-		Status = theGUI->AddAsyncOp(Status.GetValue(), true, CBoxTransferDialog::tr("Importing: %1").arg(Path));
-		if (Status.IsError()) {
-			theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
-			pBox->RemoveBox();
-		}
-	}
-	else
-		theGUI->CheckResults(QList<SB_STATUS>() << Status, parent);
-}
-
-QStringList ImportMultiBoxes(QWidget* parent)
-{
-	if (!CArchive::IsInit()) {
-		QMessageBox::critical(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("7-Zip library is not available."));
-		return QStringList();
-	}
-
-	// 1. Pick archive
-	QString Path = QFileDialog::getOpenFileName(parent, CBoxTransferDialog::tr("Select file name"),
-		"", CBoxTransferDialog::tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
-	if (Path.isEmpty())
-		return QStringList();
-
-	// 2. Open and handle password
+// Helper structure for scanning archive contents
+struct SArchiveInfo {
+	QString Path;
 	QString Password;
 	quint64 ImageSize = 0;
-	CArchive Archive(Path);
+	QStringList BoxNames;
+	bool HasGlobalConfig = false;
+	bool IsSingleBox = false;
+};
+
+static bool ScanArchive(QWidget* parent, const QString& path, SArchiveInfo& info)
+{
+	info.Path = path;
+	info.Password.clear();
+	info.BoxNames.clear();
+	info.HasGlobalConfig = false;
+	info.IsSingleBox = false;
+
+	CArchive Archive(path);
 	int Ret = Archive.Open();
+
 	if (Ret == ERR_7Z_PASSWORD_REQUIRED) {
 		for (;;) {
 			CBoxImageWindow window(CBoxImageWindow::eImport, parent);
+			window.setWindowTitle(CBoxTransferDialog::tr("Password for %1").arg(Split2(path, "/", true).second));
 			if (theGUI->SafeExec(&window) != QDialog::Accepted)
-				return QStringList();
+				return false;
 			Archive.SetPassword(window.GetPassword());
 			Ret = Archive.Open();
 			if (Ret != ERR_7Z_OK) {
 				QMessageBox::critical(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("Failed to open archive, wrong password?"));
 				continue;
 			}
-			Password = window.GetPassword();
-			ImageSize = window.GetImageSize();
+			info.Password = window.GetPassword();
+			info.ImageSize = window.GetImageSize();
 			break;
 		}
 	}
+
 	if (Ret != ERR_7Z_OK) {
-		QMessageBox::critical(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("Failed to open archive (%1)!").arg(Ret));
-		return QStringList();
+		QMessageBox::critical(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("Failed to open archive (%1): %2").arg(path).arg(Ret));
+		return false;
 	}
 
-	// 3. Scan archive index to detect format
 	QSet<QString> boxNamesSet;
-	bool hasGlobalConfig = false;
 	bool hasSingleBoxConfig = false;
+
 	for (int i = 0; i < Archive.FileCount(); i++) {
 		int ArcIndex = Archive.FindByIndex(i);
 		QString FilePath = Archive.FileProperty(ArcIndex, "Path").toString();
 		FilePath.replace("\\", "/");
 
 		if (FilePath == "GlobalConfig.ini") {
-			hasGlobalConfig = true;
+			info.HasGlobalConfig = true;
 			continue;
 		}
 
@@ -688,87 +977,200 @@ QStringList ImportMultiBoxes(QWidget* parent)
 
 		int sep = FilePath.indexOf('/');
 		if (sep > 0) {
+			// Old format: BoxName/... - extract box name from folder
 			boxNamesSet.insert(FilePath.left(sep));
+		} else if (FilePath.endsWith(".ini", Qt::CaseInsensitive) && FilePath != "GlobalConfig.ini") {
+			// New format: BoxName.ini at root level - extract box name from filename
+			QString boxName = FilePath.left(FilePath.length() - 4);
+			boxNamesSet.insert(boxName);
 		}
 	}
 	Archive.Close();
 
-	// 4. Detect format: root-level BoxConfig.ini means single-box archive
-	//    Multi-box exports place configs under boxName/BoxConfig.ini, never at root
 	if (hasSingleBoxConfig) {
-		ImportSingleBox(parent, Path, Password, ImageSize);
+		// Single-box archive (legacy format): derive box name from archive file name
+		info.IsSingleBox = true;
+		StrPair PathName = Split2(path, "/", true);
+		if (PathName.second.isEmpty())
+			PathName = Split2(path, "\\", true);
+		StrPair NameEx = Split2(PathName.second, ".", true);
+		info.BoxNames.append(NameEx.first);
+	} else {
+		info.BoxNames = boxNamesSet.values();
+		info.BoxNames.sort(Qt::CaseInsensitive);
+	}
+
+	return true;
+}
+
+QStringList ImportMultiBoxes(QWidget* parent)
+{
+	if (!CArchive::IsInit()) {
+		QMessageBox::critical(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("7-Zip library is not available."));
 		return QStringList();
 	}
 
-	QStringList boxNames = boxNamesSet.values();
-	boxNames.sort(Qt::CaseInsensitive);
+	// 1. Pick archives (multiple selection)
+	QStringList Paths = QFileDialog::getOpenFileNames(parent, CBoxTransferDialog::tr("Select Archives"),
+		"", CBoxTransferDialog::tr("7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)"));
+	if (Paths.isEmpty())
+		return QStringList();
 
-	if (boxNames.isEmpty() && !hasGlobalConfig) {
-		QMessageBox::information(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("The archive does not contain any sandbox data."));
+	// 2. Scan all archives and collect box info
+	QList<SArchiveInfo> archiveInfos;
+	QList<CBoxTransferDialog::SImportBoxInfo> allBoxes;
+	bool hasAnyGlobalConfig = false;
+	QString globalConfigSourceFile;
+	QString globalConfigPassword;
+
+	for (const QString& path : Paths) {
+		SArchiveInfo info;
+		if (!ScanArchive(parent, path, info))
+			continue; // User cancelled password or archive failed to open
+
+		archiveInfos.append(info);
+
+		// Track global config (only use from first archive that has it)
+		if (info.HasGlobalConfig && !hasAnyGlobalConfig) {
+			hasAnyGlobalConfig = true;
+			globalConfigSourceFile = info.Path;
+			globalConfigPassword = info.Password;
+		}
+
+		// Add boxes to the list
+		for (const QString& boxName : info.BoxNames) {
+			CBoxTransferDialog::SImportBoxInfo boxInfo;
+			boxInfo.ArchiveName = boxName;
+			boxInfo.SourceFile = info.Path;
+			boxInfo.Password = info.Password;
+			boxInfo.ImageSize = info.ImageSize;
+			allBoxes.append(boxInfo);
+		}
+	}
+
+	if (allBoxes.isEmpty() && !hasAnyGlobalConfig) {
+		QMessageBox::information(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("The selected archives do not contain any sandbox data."));
 		return QStringList();
 	}
 
-	// 5. Show selection dialog (multi-box path)
+	// 3. Show selection dialog with all boxes from all files
 	CBoxTransferDialog dlg(CBoxTransferDialog::eImport, parent);
-	dlg.LoadArchiveContents(boxNames, hasGlobalConfig);
+	dlg.LoadMultiArchiveContents(allBoxes, hasAnyGlobalConfig);
 	if (theGUI->SafeExec(&dlg) != QDialog::Accepted)
 		return QStringList();
 
-	QMap<QString, QString> boxNameMapping = dlg.GetBoxNameMapping();
-	bool importGlobalConfig = dlg.ExportGlobalConfig(); // same getter works for import
+	QList<CBoxTransferDialog::SImportEntry> importEntries = dlg.GetImportEntries();
+	bool importGlobalConfig = dlg.ExportGlobalConfig();
 
-	if (boxNameMapping.isEmpty() && !importGlobalConfig) {
+	if (importEntries.isEmpty() && !importGlobalConfig) {
 		QMessageBox::information(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("Nothing selected for import."));
 		return QStringList();
 	}
 
-	// 6. Create boxes on main thread
-	QMap<QString, QString> boxRoots;
-	QList<SB_STATUS> Results;
-	QStringList keysToRemove;
+	// 4. Check for duplicate import names
+	QMap<QString, int> importNameCounts;
+	for (const auto& entry : importEntries)
+		importNameCounts[entry.ImportName]++;
 
-	for (auto I = boxNameMapping.constBegin(); I != boxNameMapping.constEnd(); ++I) {
-		QString newName = I.value();
-
-		// Check if box already exists
-		CSandBoxPtr pExisting = theAPI->GetBoxByName(newName);
-		if (!pExisting.isNull()) {
-			int ret = QMessageBox::warning(parent, "Sandboxie-Plus",
-				CBoxTransferDialog::tr("Sandbox '%1' already exists. Its configuration will be overwritten. Continue?").arg(newName),
-				QMessageBox::Yes | QMessageBox::No);
-			if (ret != QMessageBox::Yes) {
-				keysToRemove.append(I.key());
-				continue;
-			}
-			boxRoots.insert(newName, pExisting->GetFileRoot());
-			continue;
+	for (auto it = importNameCounts.constBegin(); it != importNameCounts.constEnd(); ++it) {
+		if (it.value() > 1) {
+			QMessageBox::warning(parent, "Sandboxie-Plus",
+				CBoxTransferDialog::tr("Cannot import multiple boxes with the same name '%1'. Please rename them first.").arg(it.key()));
+			return QStringList();
 		}
-
-		SB_STATUS Status = theAPI->CreateBox(newName);
-		if (Status.IsError()) {
-			Results.append(Status);
-			keysToRemove.append(I.key());
-			continue;
-		}
-
-		CSandBoxPtr pBox = theAPI->GetBoxByName(newName);
-		if (pBox)
-			boxRoots.insert(newName, pBox->GetFileRoot());
 	}
 
-	for (const QString& key : keysToRemove)
-		boxNameMapping.remove(key);
+	// 5. Create boxes on main thread
+	QMap<QString, QString> boxRoots;
+	QList<SB_STATUS> Results;
+	QList<CBoxTransferDialog::SImportEntry> validEntries;
+	QStringList boxesToUnmount; // Track boxes we mount so we can unmount them after import
+
+	for (const auto& entry : importEntries) {
+		// Check if box already exists
+		CSandBoxPtr pExisting = theAPI->GetBoxByName(entry.ImportName);
+		if (!pExisting.isNull()) {
+			int ret = QMessageBox::warning(parent, "Sandboxie-Plus",
+				CBoxTransferDialog::tr("Sandbox '%1' already exists. Its configuration will be overwritten. Continue?").arg(entry.ImportName),
+				QMessageBox::Yes | QMessageBox::No);
+			if (ret != QMessageBox::Yes)
+				continue;
+			boxRoots.insert(entry.ImportName, pExisting->GetFileRoot());
+			validEntries.append(entry);
+			continue;
+		}
+
+		SB_STATUS Status = theAPI->CreateBox(entry.ImportName);
+		if (Status.IsError()) {
+			Results.append(Status);
+			continue;
+		}
+
+		CSandBoxPtr pBox = theAPI->GetBoxByName(entry.ImportName);
+		if (pBox) {
+			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+
+			if (!entry.Password.isEmpty())
+			{
+				Status = pBoxEx->ImBoxCreate(entry.ImageSize / 1024, entry.Password);
+				if (Status.IsError()) {
+					Results.append(Status);
+					continue;
+				}
+				Status = pBoxEx->ImBoxMount(entry.Password, IsElevated() ? 1 : 2, true);
+				if (!Status.IsError())
+					boxesToUnmount.append(entry.ImportName);
+			}
+
+			boxRoots.insert(entry.ImportName, pBox->GetFileRoot());
+		}
+		validEntries.append(entry);
+	}
 
 	if (!Results.isEmpty())
 		theGUI->CheckResults(Results, parent);
 
-	if (boxNameMapping.isEmpty() && !importGlobalConfig)
+	if (validEntries.isEmpty() && !importGlobalConfig)
 		return QStringList();
 
-	// 7. Launch async import
-	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QtConcurrent::run(ImportMultiBoxesAsync, pProgress, Path, Password, boxNameMapping, boxRoots, importGlobalConfig);
-	theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Importing: %1").arg(Path));
+	// 6. Group entries by source file and launch async imports
+	QMap<QString, QList<CBoxTransferDialog::SImportEntry>> entriesByFile;
+	for (const auto& entry : validEntries)
+		entriesByFile[entry.SourceFile].append(entry);
 
-	return boxNameMapping.values();
+	QStringList importedNames;
+	for (auto it = entriesByFile.constBegin(); it != entriesByFile.constEnd(); ++it) {
+		QString sourceFile = it.key();
+		const QList<CBoxTransferDialog::SImportEntry>& entries = it.value();
+
+		// Build mapping for this file
+		QMap<QString, QString> boxNameMapping;
+		QStringList fileBoxesToUnmount;
+		QString password;
+		for (const auto& entry : entries) {
+			boxNameMapping.insert(entry.ArchiveName, entry.ImportName);
+			password = entry.Password; // Same password for all entries from same file
+			importedNames.append(entry.ImportName);
+			// Only include boxes that we mounted
+			if (boxesToUnmount.contains(entry.ImportName))
+				fileBoxesToUnmount.append(entry.ImportName);
+		}
+
+		// Check if this file contains global config and should import it
+		bool importGlobalForThisFile = importGlobalConfig && (sourceFile == globalConfigSourceFile);
+
+		CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, sourceFile, password, boxNameMapping, boxRoots, importGlobalForThisFile, fileBoxesToUnmount);
+		theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Importing: %1").arg(sourceFile));
+	}
+
+	// Handle global config from a file with no boxes selected
+	if (importGlobalConfig && !entriesByFile.contains(globalConfigSourceFile)) {
+		QMap<QString, QString> emptyMapping;
+		CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, globalConfigSourceFile, globalConfigPassword, emptyMapping, QMap<QString, QString>(), true, QStringList());
+		theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Importing: %1").arg(globalConfigSourceFile));
+	}
+
+	return importedNames;
 }

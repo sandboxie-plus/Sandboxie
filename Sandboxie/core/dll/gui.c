@@ -893,10 +893,10 @@ _FX BOOL DisallowWin32kSystemCallsIsOn()
 
 extern P_NtSetInformationThread __sys_NtSetInformationThread;
 
+HDESK Gui_ProcessDesktop = NULL;
+
 _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
 {
-    static HDESK _ProcessDesktop = NULL;
-
     RTL_USER_PROCESS_PARAMETERS *ProcessParms;
     ULONG_PTR rc = 0;
     ULONG errlvl = 0;
@@ -910,7 +910,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
     // process is already connected to window station, connect to desktop
     //
 
-    if (_ProcessDesktop)
+    if (Gui_ProcessDesktop)
         goto ConnectThread;
 
     //
@@ -973,7 +973,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
         else {
 
             if (SbieApi_QueryConfBool(NULL, L"OpenWndStation", FALSE))
-                _ProcessDesktop = (HDESK)-1;
+                Gui_ProcessDesktop = (HDESK)-1;
             else {
 
                 //
@@ -1111,7 +1111,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
 
                     }
                     else
-                        _ProcessDesktop = (HDESK)rpl->hdesk;
+                        Gui_ProcessDesktop = (HDESK)rpl->hdesk;
 
                     //
                     // restore the original contents of the DesktopName field
@@ -1142,9 +1142,9 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
 
 ConnectThread:
 
-    if (errlvl == 0 && _ProcessDesktop != (HDESK)-1) {
+    if (errlvl == 0 && Gui_ProcessDesktop != (HDESK)-1) {
 
-        if (! __sys_SetThreadDesktop(_ProcessDesktop)) {
+        if (! __sys_SetThreadDesktop(Gui_ProcessDesktop)) {
             errlvl = 6;
             rc = GetLastError();
         }

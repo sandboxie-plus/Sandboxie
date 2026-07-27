@@ -31,6 +31,15 @@ typedef long NTSTATUS;
 #include "ini.h"
 #include "bom.c"
 
+static bool ContainsCRLF(const WCHAR* str)
+{
+    for (const WCHAR* p = str; *p != L'\0'; ++p) {
+        if (*p == L'\r' || *p == L'\n')
+            return true;
+    }
+    return false;
+}
+
 CIniFile::CIniFile()
 {
 	m_Encoding = 0;
@@ -179,6 +188,10 @@ NTSTATUS CIniFile::GetValue(const WCHAR* section, const WCHAR* setting, std::wst
 
 NTSTATUS CIniFile::SetValue(const WCHAR* section, const WCHAR* setting, const WCHAR* value, ULONG value_len)
 {
+    // Reject setting names containing CR or LF
+    if (ContainsCRLF(setting))
+        return STATUS_INVALID_PARAMETER;
+
 	if (value_len == -1)
 		value_len = (ULONG)wcslen(value);
     BOOLEAN have_value = (value_len != 0);
@@ -264,6 +277,10 @@ NTSTATUS CIniFile::SetValue(const WCHAR* section, const WCHAR* setting, const WC
 
 NTSTATUS CIniFile::AddValue(const WCHAR* section, const WCHAR* setting, const WCHAR* value, bool bInsert)
 {
+    // Reject setting names and values containing CR or LF
+    if (ContainsCRLF(setting) || ContainsCRLF(value))
+        return STATUS_INVALID_PARAMETER;
+
     //
     // Get the relevant ini section object
     //

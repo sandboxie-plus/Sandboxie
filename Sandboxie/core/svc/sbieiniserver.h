@@ -89,6 +89,10 @@ protected:
 
     bool HashPassword(const WCHAR *Password, WCHAR *Hash41);
 
+    bool GenerateSalt(UCHAR Salt[16]);
+
+    bool HashPassword2(const WCHAR *Password, const UCHAR Salt[16], UCHAR Hash[32]);
+
     MSG_HEADER *RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
 
     MSG_HEADER *SetDatFile(MSG_HEADER *msg, HANDLE idProcess);

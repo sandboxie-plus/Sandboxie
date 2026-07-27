@@ -2,9 +2,13 @@
 #include "PopUpWindow.h"
 #include <windows.h>
 #include <QWindow>
+#include <QElapsedTimer>
+#include <QScrollBar>
+#include <QTimer>
 #include "../MiscHelpers/Common/Common.h"
 #include "../MiscHelpers/Common/Settings.h"
 #include "../SbiePlusAPI.h"
+#include "RecoveryWindow.h"
 
 bool CPopUpWindow__DarkMode = false;
 
@@ -30,9 +34,11 @@ CPopUpWindow::CPopUpWindow(QWidget* parent) : QMainWindow(parent)
 	//setWindowFlags(Qt::Tool);
 
 	ui.table->verticalHeader()->hide();
+	ui.table->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	ui.table->horizontalHeader()->hide();
 	ui.table->setColumnCount(1);
 	ui.table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui.table->setVerticalScrollMode(QAbstractItemView::ScrollPerItem);
 
 	m_pActionCopy = new QAction();
 	connect(m_pActionCopy, SIGNAL(triggered(bool)), this, SLOT(OnCopy()));
@@ -41,6 +47,8 @@ CPopUpWindow::CPopUpWindow(QWidget* parent) : QMainWindow(parent)
 	this->addAction(m_pActionCopy);
 
 	m_iTopMost = 0;
+	m_EntryFlushPending = false;
+	m_FlushingPendingEntries = false;
 	SetWindowPos((HWND)this->winId(), 0, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
 	
 	m_uTimerID = startTimer(1000);
@@ -51,24 +59,105 @@ CPopUpWindow::CPopUpWindow(QWidget* parent) : QMainWindow(parent)
 CPopUpWindow::~CPopUpWindow()
 {
 	killTimer(m_uTimerID);
+	foreach(CPopUpEntry* pPendingEntry, m_PendingEntries)
+		delete pPendingEntry;
+	m_PendingEntries.clear();
 
 	theConf->SetBlob("PopUpWindow/Window_Geometry", saveGeometry());
 }
 
 void CPopUpWindow::AddEntry(CPopUpEntry* pEntry)
 {
-	int RowCounter = ui.table->rowCount();
-	ui.table->insertRow(RowCounter);
-	ui.table->setCellWidget(RowCounter, 0, pEntry);
-	ui.table->verticalHeader()->setSectionResizeMode(RowCounter, QHeaderView::ResizeToContents);
+	CPopUpMessage* pNewMessage = qobject_cast<CPopUpMessage*>(pEntry);
+	if (pNewMessage && !m_PendingEntries.isEmpty()) {
+		CPopUpMessage* pLastMessage = qobject_cast<CPopUpMessage*>(m_PendingEntries.last());
+		if (pLastMessage && pLastMessage->GetMsgString() == pNewMessage->GetMsgString()) {
+			pLastMessage->Repeat();
+			delete pEntry;
+			return;
+		}
+	}
 
-	ui.table->scrollToBottom();
-	
+	m_PendingEntries.append(pEntry);
+	SchedulePendingEntriesFlush();
+}
+
+void CPopUpWindow::SchedulePendingEntriesFlush()
+{
+	if (m_EntryFlushPending)
+		return;
+
+	m_EntryFlushPending = true;
+	QTimer::singleShot(10, this, SLOT(OnFlushPendingEntries()));
+}
+
+void CPopUpWindow::OnFlushPendingEntries()
+{
+	m_EntryFlushPending = false;
+
+	if (m_FlushingPendingEntries)
+		return;
+
+	if (m_PendingEntries.isEmpty())
+		return;
+
+	m_FlushingPendingEntries = true;
+
+	const bool UpdatesEnabled = ui.table->updatesEnabled();
+	const bool ScrollToBottom = ui.table->verticalScrollBar()->value() == ui.table->verticalScrollBar()->maximum();
+	ui.table->setUpdatesEnabled(false);
+
+	int RowCounter = ui.table->rowCount();
+	const qint64 MaxFlushTimeNs = 8 * 1000 * 1000;
+	const int MinEntriesPerFlush = 10;
+	const int MaxEntriesPerFlush = 100;
+	const int MaxCandidateCount = qMin(m_PendingEntries.count(), MaxEntriesPerFlush);
+	QElapsedTimer FlushTimer;
+	FlushTimer.start();
+
+	ui.table->setRowCount(RowCounter + MaxCandidateCount);
+
+	int ProcessedCount = 0;
+	while (ProcessedCount < MaxCandidateCount)
+	{
+		CPopUpEntry* pEntry = m_PendingEntries.takeFirst();
+		int Row = RowCounter + ProcessedCount;
+		ui.table->setCellWidget(Row, 0, pEntry);
+		ui.table->setRowHeight(Row, qMax(ui.table->verticalHeader()->defaultSectionSize(), pEntry->sizeHint().height()));
+		ProcessedCount++;
+
+		if (ProcessedCount >= MaxEntriesPerFlush)
+			break;
+		if (ProcessedCount >= MinEntriesPerFlush && FlushTimer.nsecsElapsed() >= MaxFlushTimeNs)
+			break;
+	}
+
+	if (ProcessedCount < MaxCandidateCount)
+		ui.table->setRowCount(RowCounter + ProcessedCount);
+
+	ui.table->setUpdatesEnabled(UpdatesEnabled);
+	if (ScrollToBottom)
+		ui.table->scrollToBottom();
+
 	Show();
+
+	m_FlushingPendingEntries = false;
+
+	if (!m_PendingEntries.isEmpty())
+		SchedulePendingEntriesFlush();
 }
 
 void CPopUpWindow::RemoveEntry(CPopUpEntry* pEntry)
 {
+	int PendingIndex = m_PendingEntries.indexOf(pEntry);
+	if (PendingIndex != -1) {
+		m_PendingEntries.removeAt(PendingIndex);
+		pEntry->deleteLater();
+		if (ui.table->rowCount() == 0 && m_PendingEntries.isEmpty())
+			this->hide();
+		return;
+	}
+
 	for (int i = 0; i < ui.table->rowCount(); i++)
 	{
 		CPopUpEntry* pCurEntry = qobject_cast<CPopUpEntry*>(ui.table->cellWidget(i, 0));
@@ -78,13 +167,16 @@ void CPopUpWindow::RemoveEntry(CPopUpEntry* pEntry)
 		}
 	}
 
-	if (ui.table->rowCount() == 0)
+	if (ui.table->rowCount() == 0 && m_PendingEntries.isEmpty())
 		this->hide();
 }
 
 void CPopUpWindow::Show()
 {
 	Poke();
+
+	if (this->isVisible())
+		return;
 
 	QScreen *screen = this->windowHandle()->screen();
 	QRect scrRect = screen->availableGeometry();
@@ -117,6 +209,18 @@ void CPopUpWindow::Poke()
 
 void CPopUpWindow::closeEvent(QCloseEvent *e)
 {
+	foreach(CPopUpEntry* pPendingEntry, m_PendingEntries)
+	{
+		CPopUpPrompt* pEntry = qobject_cast<CPopUpPrompt*>(pPendingEntry);
+		if (pEntry)
+			SendPromptResult(pEntry, 0);
+	}
+	foreach(CPopUpEntry* pPendingEntry, m_PendingEntries)
+		delete pPendingEntry;
+	m_PendingEntries.clear();
+	m_EntryFlushPending = false;
+	m_FlushingPendingEntries = false;
+
 	for (int i = 0; i < ui.table->rowCount(); i++)
 	{
 		CPopUpPrompt* pEntry = qobject_cast<CPopUpPrompt*>(ui.table->cellWidget(i, 0));
@@ -186,13 +290,16 @@ void CPopUpWindow::AddLogMessage(quint32 MsgCode, const QStringList& MsgData, qu
 	QString Message = theGUI->FormatSbieMessage(MsgCode, MsgData, ProcessName);
 	QString Link = theGUI->MakeSbieMsgLink(MsgCode, MsgData, ProcessName);
 
-	int RowCounter = ui.table->rowCount();
-	if (RowCounter > 0) {
-		CPopUpMessage* pEntry = qobject_cast<CPopUpMessage*>(ui.table->cellWidget(RowCounter-1, 0));
-		if (pEntry && pEntry->GetMsgString() == Message) {
-			pEntry->Repeat();
-			return;
-		}
+	CPopUpMessage* pExistingEntry = FindMessageEntry(Message);
+	if (pExistingEntry) {
+		pExistingEntry->Repeat();
+		return;
+	}
+
+	const int MaxPopupMessages = 1000;
+	while (CountPopupMessages() >= MaxPopupMessages) {
+		if (!RemoveOldestPopupMessage())
+			break;
 	}
 
 	CPopUpMessage* pEntry = new CPopUpMessage(Message, Link, MsgCode, MsgData, ProcessName, BoxName, this);
@@ -277,8 +384,14 @@ void CPopUpWindow::OnHideMessage()
 		if (pEntry && IsMessageHidden(pEntry->GetMsgCode(), pEntry->GetMsgData()))
 			ui.table->removeRow(i--);
 	}
+	for (int i = 0; i < m_PendingEntries.count(); i++)
+	{
+		CPopUpMessage* pEntry = qobject_cast<CPopUpMessage*>(m_PendingEntries[i]);
+		if (pEntry && IsMessageHidden(pEntry->GetMsgCode(), pEntry->GetMsgData()))
+			m_PendingEntries.takeAt(i--)->deleteLater();
+	}
 
-	if(ui.table->rowCount() == 0)
+	if (ui.table->rowCount() == 0 && m_PendingEntries.isEmpty())
 		this->hide();
 }
 
@@ -296,6 +409,67 @@ bool CPopUpWindow::IsMessageHidden(quint32 MsgCode, const QStringList& MsgData)
 		if(MsgData.size() >= 2 && exp.match(MsgData[1]).hasMatch())
 			return true;
 	}
+	return false;
+}
+
+CPopUpMessage* CPopUpWindow::FindMessageEntry(const QString& Message)
+{
+	const int MaxDuplicateLookupEntries = 200;
+	int LookupCount = 0;
+
+	for (int i = m_PendingEntries.count() - 1; i >= 0 && LookupCount < MaxDuplicateLookupEntries; i--, LookupCount++)
+	{
+		CPopUpMessage* pEntry = qobject_cast<CPopUpMessage*>(m_PendingEntries[i]);
+		if (pEntry && pEntry->GetMsgString() == Message)
+			return pEntry;
+	}
+
+	for (int i = ui.table->rowCount() - 1; i >= 0 && LookupCount < MaxDuplicateLookupEntries; i--, LookupCount++)
+	{
+		CPopUpMessage* pEntry = qobject_cast<CPopUpMessage*>(ui.table->cellWidget(i, 0));
+		if (pEntry && pEntry->GetMsgString() == Message)
+			return pEntry;
+	}
+
+	return NULL;
+}
+
+int CPopUpWindow::CountPopupMessages() const
+{
+	int Count = 0;
+	for (int i = 0; i < m_PendingEntries.count(); i++)
+	{
+		if (qobject_cast<CPopUpMessage*>(m_PendingEntries[i]))
+			Count++;
+	}
+
+	for (int i = 0; i < ui.table->rowCount(); i++)
+	{
+		if (qobject_cast<CPopUpMessage*>(ui.table->cellWidget(i, 0)))
+			Count++;
+	}
+
+	return Count;
+}
+
+bool CPopUpWindow::RemoveOldestPopupMessage()
+{
+	for (int i = 0; i < ui.table->rowCount(); i++)
+	{
+		if (qobject_cast<CPopUpMessage*>(ui.table->cellWidget(i, 0))) {
+			ui.table->removeRow(i);
+			return true;
+		}
+	}
+
+	for (int i = 0; i < m_PendingEntries.count(); i++)
+	{
+		if (qobject_cast<CPopUpMessage*>(m_PendingEntries[i])) {
+			m_PendingEntries.takeAt(i)->deleteLater();
+			return true;
+		}
+	}
+
 	return false;
 }
 
@@ -383,6 +557,9 @@ void CPopUpWindow::SendPromptResult(CPopUpPrompt* pEntry, int retval)
 
 void CPopUpWindow::AddFileToRecover(const QString& FilePath, QString BoxPath, const CSandBoxPtr& pBox, quint32 ProcessId)
 {
+	if (CRecoveryWindow::IsFileIgnored(pBox, FilePath, BoxPath))
+		return;
+
 	CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
 
 	QString Message = tr("%1 is eligible for quick recovery from %2.\nThe file was written by: %3")
@@ -392,7 +569,7 @@ void CPopUpWindow::AddFileToRecover(const QString& FilePath, QString BoxPath, co
 	if (BoxPath.isEmpty()) // legacy case, no BoxName, no support for driver serial numbers
 		BoxPath = theAPI->GetBoxedPath(pBox->GetName(), FilePath);
 
-	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, theAPI->GetBoxedPath(pBox.data(), FilePath), pBox->GetName(), this);
+	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, BoxPath, pBox->GetName(), this);
 
 	QStringList RecoverTargets = theAPI->GetUserSettings()->GetTextList("SbieCtrl_RecoverTarget", true);
 	pEntry->m_pTarget->insertItems(pEntry->m_pTarget->count()-1, RecoverTargets);
@@ -425,8 +602,14 @@ void CPopUpWindow::OnDismiss(int iFlag)
 			if (pCurEntry && pCurEntry->m_BoxName == pEntry->m_BoxName)
 				ui.table->removeRow(i--);
 		}
+		for (int i = 0; i < m_PendingEntries.count(); i++)
+		{
+			CPopUpRecovery* pCurEntry = qobject_cast<CPopUpRecovery*>(m_PendingEntries[i]);
+			if (pCurEntry && pCurEntry->m_BoxName == pEntry->m_BoxName)
+				m_PendingEntries.takeAt(i--)->deleteLater();
+		}
 
-		if (ui.table->rowCount() == 0)
+		if (ui.table->rowCount() == 0 && m_PendingEntries.isEmpty())
 			this->hide();
 	}
 }
@@ -489,6 +672,17 @@ void CPopUpWindow::ShowProgress(quint32 MsgCode, const QStringList& MsgData, qui
 		if (pCurEntry && pCurEntry->m_ID == FilePath) {
 			pEntry = pCurEntry;
 			break;
+		}
+	}
+	if (!pEntry)
+	{
+		for (int i = 0; i < m_PendingEntries.count(); i++)
+		{
+			CPopUpProgress* pCurEntry = qobject_cast<CPopUpProgress*>(m_PendingEntries[i]);
+			if (pCurEntry && pCurEntry->m_ID == FilePath) {
+				pEntry = pCurEntry;
+				break;
+			}
 		}
 	}
 

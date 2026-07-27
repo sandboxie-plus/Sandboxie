@@ -51,11 +51,15 @@ static NTSTATUS Conf_Expand_RegValue(
 static NTSTATUS Conf_Expand_Template(
     CONF_EXPAND_ARGS *args, const WCHAR *varname, WCHAR *varvalue);
 
+static BOOLEAN Conf_IsExpectedNonUserSid(CONF_EXPAND_ARGS *args);
+
 static WCHAR *Conf_Expand_Helper(
-    CONF_EXPAND_ARGS *args, const WCHAR *model_value, WCHAR *varvalue);
+    CONF_EXPAND_ARGS *args, const WCHAR *model_value, WCHAR *varvalue,
+    BOOLEAN *suppress_log);
 
 static WCHAR *Conf_Expand_2(
-    CONF_EXPAND_ARGS *args, const WCHAR *model_value);
+    CONF_EXPAND_ARGS *args, const WCHAR *model_value,
+    BOOLEAN *suppress_log);
 
 
 //---------------------------------------------------------------------------
@@ -285,12 +289,49 @@ _FX NTSTATUS Conf_Expand_Template(
 
 
 //---------------------------------------------------------------------------
+// Conf_IsExpectedNonUserSid
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Conf_IsExpectedNonUserSid(CONF_EXPAND_ARGS *args)
+{
+    //
+    // These virtual identities normally have no ProfileList or HKCU data.
+    // Sessions 0 and 1 continue to log for safety.
+    //
+    //   S-1-5-96-0-* - Usermode Font Driver Host / UMFD host virtual identities
+    //                 (e.g. fontdrvhost.exe / Font Driver Host\UMFD-x)
+    //   S-1-5-90-0-* - Desktop Window Manager / DWM virtual identities
+    //                 (e.g. dwm.exe / Window Manager\DWM-x)
+    //
+
+    if (! args->sid)
+        return FALSE;
+
+    if (! args->session)
+        return FALSE;
+
+    if (*args->session < 2)
+        return FALSE;
+
+    if (_wcsnicmp(args->sid, L"S-1-5-96-0-", 11) == 0)
+        return TRUE;
+
+    if (_wcsnicmp(args->sid, L"S-1-5-90-0-", 11) == 0)
+        return TRUE;
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
 // Conf_Expand_Helper
 //---------------------------------------------------------------------------
 
 
 _FX WCHAR *Conf_Expand_Helper(
-    CONF_EXPAND_ARGS *args, const WCHAR *model_value, WCHAR *varvalue)
+    CONF_EXPAND_ARGS *args, const WCHAR *model_value, WCHAR *varvalue,
+    BOOLEAN *suppress_log)
 {
     static const WCHAR *_Registry_User = L"\\REGISTRY\\USER\\%SID%";
     static const WCHAR *_Windows =
@@ -320,6 +361,10 @@ _FX WCHAR *Conf_Expand_Helper(
     WCHAR varname[66];
     ULONG len;
     WCHAR *buf, *ptr;
+    BOOLEAN user_profile_lookup;
+
+    *suppress_log = FALSE;
+    user_profile_lookup = FALSE;
 
     //
     // if string begins with HKEY_, translate the user-mode registry prefix
@@ -493,6 +538,9 @@ _FX WCHAR *Conf_Expand_Helper(
 
         ULONG KeyNameLen = (wcslen(args->sid) + 32) * sizeof(WCHAR);
         WCHAR *KeyName = Mem_Alloc(args->pool, KeyNameLen);
+
+        user_profile_lookup = TRUE;
+
         if (! KeyName)
             status = STATUS_INSUFFICIENT_RESOURCES;
         else {
@@ -558,6 +606,8 @@ _FX WCHAR *Conf_Expand_Helper(
                _wcsicmp(varname, _homepath) == 0 ||
                _wcsicmp(varname, _homeshare) == 0) {
 
+        user_profile_lookup = TRUE;
+
         status = Conf_Expand_RegValue(args,
             RTL_REGISTRY_USER, _VolatileEnvironment, varname, varvalue);
 
@@ -568,10 +618,13 @@ _FX WCHAR *Conf_Expand_Helper(
     } else if (_wcsicmp(varname, _temp) == 0 ||
                _wcsicmp(varname, _tmp) == 0) {
 
+        user_profile_lookup = TRUE;
+
         status = Conf_Expand_RegValue(args,
             RTL_REGISTRY_USER, _Environment, _temp, varvalue);
 
-        if (status != STATUS_SUCCESS) {
+        if (status == STATUS_OBJECT_NAME_NOT_FOUND ||
+            status == STATUS_OBJECT_PATH_NOT_FOUND) {
 
             status = Conf_Expand_RegValue(args,
                 RTL_REGISTRY_USER, _Environment, _tmp, varvalue);
@@ -602,6 +655,8 @@ _FX WCHAR *Conf_Expand_Helper(
         static const WCHAR *Shell_Folders_Key =
             L"Software\\Microsoft\\Windows\\CurrentVersion\\"
             L"Explorer\\Shell Folders";
+
+        user_profile_lookup = TRUE;
 
         //
         // according to TechNet, User Shell Folders take precedence
@@ -639,7 +694,16 @@ _FX WCHAR *Conf_Expand_Helper(
     }
 
     if (! NT_SUCCESS(status)) {
-        Log_Status_Ex(MSG_CONF_EXPAND, 0, status, varname);
+        if (user_profile_lookup &&
+            (status == STATUS_OBJECT_NAME_NOT_FOUND ||
+             status == STATUS_OBJECT_PATH_NOT_FOUND) &&
+            Conf_IsExpectedNonUserSid(args)) {
+
+            *suppress_log = TRUE;
+
+        } else
+            Log_Status_Ex(MSG_CONF_EXPAND, 0, status, varname);
+
         return NULL;                // variable expansion failed
     }
 
@@ -679,12 +743,16 @@ _FX WCHAR *Conf_Expand_Helper(
 //---------------------------------------------------------------------------
 
 
-_FX WCHAR *Conf_Expand_2(CONF_EXPAND_ARGS *args, const WCHAR *model_value)
+_FX WCHAR *Conf_Expand_2(
+    CONF_EXPAND_ARGS *args, const WCHAR *model_value,
+    BOOLEAN *suppress_log)
 {
     WCHAR *old_value;
     WCHAR *new_value;
     WCHAR *Conf_Expand_Buffer;
     int retries;
+
+    *suppress_log = FALSE;
 
     Conf_Expand_Buffer = ExAllocatePoolWithTag(PagedPool, PAGE_SIZE, tzuk);
     if (! Conf_Expand_Buffer) {
@@ -704,7 +772,8 @@ _FX WCHAR *Conf_Expand_2(CONF_EXPAND_ARGS *args, const WCHAR *model_value)
         }
 
         old_value = new_value;
-        new_value = Conf_Expand_Helper(args, old_value, Conf_Expand_Buffer);
+        new_value = Conf_Expand_Helper(
+            args, old_value, Conf_Expand_Buffer, suppress_log);
         //DbgPrint("CONF TRANSLATION:\n");
         //DbgPrint("    %S\n", old_value);
         //DbgPrint("INTO             \n");
@@ -740,7 +809,25 @@ _FX WCHAR *Conf_Expand(
     CONF_EXPAND_ARGS *args, const WCHAR *model_value,
     const WCHAR *setting_name)
 {
-    WCHAR *new_value = Conf_Expand_2(args, model_value);
+    return Conf_ExpandEx(args, model_value, setting_name, NULL);
+}
+
+
+//---------------------------------------------------------------------------
+// Conf_ExpandEx
+//---------------------------------------------------------------------------
+
+
+_FX WCHAR *Conf_ExpandEx(
+    CONF_EXPAND_ARGS *args, const WCHAR *model_value,
+    const WCHAR *setting_name, BOOLEAN *out_suppress_log)
+{
+    BOOLEAN suppress_log;
+    WCHAR *new_value = Conf_Expand_2(args, model_value, &suppress_log);
+
+    if (out_suppress_log)
+        *out_suppress_log = suppress_log;
+
     if (! new_value) {
 
         WCHAR *text;
@@ -762,7 +849,8 @@ _FX WCHAR *Conf_Expand(
             }
             wcscat(text, model_value);
 
-            Log_Msg1(MSG_CONF_SOURCE_TEXT, text);
+            if (! suppress_log)
+                Log_Msg1(MSG_CONF_SOURCE_TEXT, text);
 
             Mem_Free(text, len);
         }

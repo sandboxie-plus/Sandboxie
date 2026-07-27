@@ -105,6 +105,10 @@ WCHAR *Conf_Expand(
     CONF_EXPAND_ARGS *args, const WCHAR *model_value,
     const WCHAR *setting_name);
 
+WCHAR *Conf_ExpandEx(
+    CONF_EXPAND_ARGS *args, const WCHAR *model_value,
+    const WCHAR *setting_name, BOOLEAN *out_suppress_log);
+
 
 //---------------------------------------------------------------------------
 // Private Functions

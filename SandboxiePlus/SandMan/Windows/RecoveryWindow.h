@@ -41,6 +41,9 @@ public:
 
 	bool		IsDeleteDialog() const;
 	bool		IsDeleteSnapshots() { return m_DeleteSnapshots; }
+	int			GetUnfilteredFileCount() const { return m_UnfilteredFileCount; }
+
+	static bool	IsFileIgnored(const CSandBoxPtr& pBox, const QString& diskPath, const QString& boxedPath);
 
 	virtual void accept() {}
 	virtual void reject() { this->close(); }
@@ -57,6 +60,7 @@ public slots:
 
 private slots:
 	void		OnAddFolder();
+	void		OnShowAllChanged(int state);
 	void		OnRecover();
 	void		OnDelete();
 	void		OnTargetChanged();
@@ -69,9 +73,12 @@ private slots:
 protected:
 	void		closeEvent(QCloseEvent *e);
 
-	int			FindFiles(const QString& Folder);
-	int			FindBoxFiles(const QString& Folder);
-	QPair<int, quint64> FindFiles(const QString& BoxedFolder, const QString& RealFolder, const QString& Name, const QString& ParentID = QString());
+	int			FindFiles(const QString& Folder, int* pUnfilteredCount = NULL);
+	int			FindBoxFiles(const QString& Folder, int* pUnfilteredCount = NULL, bool bWildcardOnly = false);
+	int			FindWildcardRecoverFiles(int* pUnfilteredCount = NULL);
+	QPair<int, quint64> FindFiles(const QString& BoxedFolder, const QString& RealFolder,
+		const QString& NtFolder, const QString& Name, const QString& ParentID = QString(),
+		int* pUnfilteredCount = NULL, bool bWildcardOnly = false);
 
 	struct SRecItem {
 		QString FullPath;
@@ -86,8 +93,12 @@ protected:
 
 	QMap<QVariant, QVariantMap> m_FileMap;
 	QSet<QString> m_NewFiles;
+	QMap<QString, QString> m_NewFilePaths;
+	QMap<QString, QString> m_NewFileBoxPaths;
 
 	QStringList m_RecoveryFolders;
+	QMap<QString, QString> m_RecoveryNtFolders;
+	QStringList m_WildcardRecoverFolders;
 
 	CRecoveryCounter* m_pCounter;
 
@@ -96,6 +107,34 @@ protected:
 	bool m_bReloadPending;
 	bool m_DeleteSnapshots;
 	bool m_bImmediate;
+	int m_UnfilteredFileCount;
+	int m_IgnoredFileCount;
+
+	bool m_UseIgnoreForQuick;
+	struct SIgnorePattern {
+		QString Pattern;
+		QString NtPattern;
+		QString DosPattern;
+		QString BoxedPattern;
+		bool HasWildcard = false;
+		bool FullPath = false;
+	};
+	QList<SIgnorePattern> m_AutoRecoverIgnorePatterns;
+	QVector<quint8> m_IgnoreMatchScratch;
+	bool m_IgnorePatternsBuilt;
+
+	static QList<SIgnorePattern> LoadIgnorePatterns(const CSandBoxPtr& pBox);
+	static bool MatchIgnorePatterns(const QList<SIgnorePattern>& patterns,
+		const QString& diskPath, const QString& ntPath,
+		const QString& boxedPath, QVector<quint8>& scratch);
+	void ReloadIgnoreSettings();
+	void BuildIgnorePatterns();
+	void UpdateShowIgnoredState();
+	bool ShouldFilterIgnoredFiles() const;
+	bool IsInWildcardRecoverFolders(const QString& diskPath, const QString& ntPath,
+		const QString& boxedPath);
+	bool IsExcludedByIgnorePatterns(const QString& diskPath, const QString& ntPath,
+		const QString& boxedPath);
 
 private:
 	Ui::RecoveryWindow ui;

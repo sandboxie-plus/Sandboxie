@@ -866,13 +866,14 @@ _FX NTSTATUS KphValidateCertificate()
         if (CertDbg) DbgPrint("Sbie Build date: %02d.%02d.%d\n", timeFiled.Day, timeFiled.Month, timeFiled.Year);
     }
 
-    LARGE_INTEGER SystemTime;
-    LARGE_INTEGER LocalTime;
-    KeQuerySystemTime(&SystemTime);
-    ExSystemTimeToLocalTime(&SystemTime, &LocalTime);
+    LARGE_INTEGER UtcTime;
+    //LARGE_INTEGER LocalTime;
+    KeQuerySystemTime(&UtcTime);
+    //ExSystemTimeToLocalTime(&UtcTime, &LocalTime);
     if (CertDbg) {
-        RtlTimeToTimeFields(&LocalTime, &timeFiled);
-        DbgPrint("Sbie Current time: %02d:%02d:%02d %02d.%02d.%d\n"
+        //RtlTimeToTimeFields(&LocalTime, &timeFiled);
+        RtlTimeToTimeFields(&UtcTime, &timeFiled);
+        DbgPrint("Sbie Current UTC time: %02d:%02d:%02d %02d.%02d.%d\n"
             , timeFiled.Hour, timeFiled.Minute, timeFiled.Second, timeFiled.Day, timeFiled.Month, timeFiled.Year);
     }
 
@@ -1042,9 +1043,9 @@ _FX NTSTATUS KphValidateCertificate()
     else if (expiration_date.QuadPart != -1) 
     {
         // check if this certificate is expired
-        if (expiration_date.QuadPart < LocalTime.QuadPart)
+        if (expiration_date.QuadPart < UtcTime.QuadPart)
             Verify_CertInfo.expired = 1;
-        Verify_CertInfo.expirers_in_sec = (ULONG)((expiration_date.QuadPart - LocalTime.QuadPart) / 10000000ll); // 100ns steps -> 1sec
+        Verify_CertInfo.expirers_in_sec = (ULONG)((expiration_date.QuadPart - UtcTime.QuadPart) / 10000000ll); // 100ns steps -> 1sec
 
         // check if a non subscription type certificate is valid for the current build
         if (!isSubscription && expiration_date.QuadPart < BuildDate.QuadPart)
@@ -1055,7 +1056,7 @@ _FX NTSTATUS KphValidateCertificate()
     if (isSubscription ? Verify_CertInfo.expired : Verify_CertInfo.outdated) 
     {
         if (!CERT_IS_TYPE(Verify_CertInfo, eCertEvaluation)) { // non eval certs get 1 month extra
-            if (expiration_date.QuadPart + KphGetDateInterval(0, 1, 0) >= LocalTime.QuadPart)
+            if (expiration_date.QuadPart + KphGetDateInterval(0, 1, 0) >= UtcTime.QuadPart)
                 Verify_CertInfo.grace_period = 1;
         }
 
@@ -1078,9 +1079,9 @@ _FX NTSTATUS KphValidateCertificate()
 
     if (Verify_CertInfo.lock_req && !bNoCR && Verify_CertInfo.type != eCertEternal && Verify_CertInfo.type != eCertContributor) {
         // Check if a refresh of the cert is required
-        if (check_date.QuadPart + KphGetDateInterval(0, 4, 0) < LocalTime.QuadPart || !Verify_CertInfo.locked)
+        if (check_date.QuadPart + KphGetDateInterval(0, 4, 0) < UtcTime.QuadPart || !Verify_CertInfo.locked)
             Verify_CertInfo.active = 0;
-        else if (check_date.QuadPart + KphGetDateInterval(0, 3, 0) < LocalTime.QuadPart)
+        else if (check_date.QuadPart + KphGetDateInterval(0, 3, 0) < UtcTime.QuadPart)
             Verify_CertInfo.grace_period = 1;
     }
 

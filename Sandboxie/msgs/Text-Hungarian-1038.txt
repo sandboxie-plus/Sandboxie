@@ -2908,7 +2908,7 @@ A blokkolt TCP/IP portok alapértelmezett listája
 .
 
 4294;txt;01
-Engedélyezi a programok számára a jump list menük frissítését a Windows 7 tálcáján
+Engedélyezi a programok számára a jump list menük frissítését a Windows tálcáján
 .
 
 #----------------------------------------------------------------------------

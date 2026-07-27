@@ -350,7 +350,7 @@ static HANDLE Proc_LastCreatedProcessHandle = NULL;
 
 static BOOL     g_boolWasWerFaultLastProcess = FALSE;
 
-BOOL            Dll_ElectronWorkaround = FALSE;
+//BOOL            Dll_ElectronWorkaround = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -366,7 +366,7 @@ _FX BOOLEAN Proc_Init(void)
     ANSI_STRING ansi;
     NTSTATUS status;
 
-    Dll_ElectronWorkaround = Config_GetSettingsForImageName_bool(L"UseElectronWorkaround", FALSE);
+    //Dll_ElectronWorkaround = Config_GetSettingsForImageName_bool(L"UseElectronWorkaround", FALSE);
 
     //
     // abort if we should not hook any process creation functions
@@ -639,7 +639,7 @@ _FX BOOL Proc_UpdateProcThreadAttribute(
 		}
 	}
 
-    if (!Dll_CompartmentMode) // see UserEnv_CreateAppContainerProfile
+    if (!Config_GetSettingsForImageName_bool(L"FakeAppContainerToken", Dll_CompartmentMode ? FALSE : TRUE)) // see UserEnv_CreateAppContainerProfile
     if (Attribute == 0x00020009) //PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES
     {
         SECURITY_CAPABILITIES* sc = lpValue;
@@ -781,6 +781,29 @@ _FX const WCHAR* SbieDll_FindArgumentEnd(const WCHAR* arguments)
 
 
 //---------------------------------------------------------------------------
+// Proc_IsLikelyElectronProcess
+//---------------------------------------------------------------------------
+
+
+BOOLEAN Proc_IsLikelyElectronProcess(const WCHAR *cmd)
+{
+    int score = 0;
+
+    if (wcsstr(cmd, L"--type=") != NULL) score++;
+    if (wcsstr(cmd, L"--user-data-dir=") != NULL) score++;
+    if (wcsstr(cmd, L"--mojo-platform-channel-handle=") != NULL) score++;
+    if (wcsstr(cmd, L"--field-trial-handle=") != NULL) score++;
+    if (wcsstr(cmd, L"--utility-sub-type=") != NULL) score++;
+    if (wcsstr(cmd, L"--gpu-preferences=") != NULL) score++;
+    if (wcsstr(cmd, L"--enable-features=") != NULL) score++;
+    if (wcsstr(cmd, L"--disable-features=") != NULL) score++;
+    if (wcsstr(cmd, L"--app-user-model-id=") != NULL) score++;
+
+    /* require multiple Chromium/Electron indicators */
+    return score >= 2;
+}
+
+//---------------------------------------------------------------------------
 // Proc_CreateProcessInternalW
 //---------------------------------------------------------------------------
 
@@ -884,29 +907,40 @@ _FX BOOL Proc_CreateProcessInternalW(
     {
         // $Workaround$ - 3rd party fix
         
-        //
-        // Electron based applications which work like Chrome seem to fail with HW acceleration, even when 
-        // they get the same treatment as Chrome and Chromium derivatives.
-        // Hack: by adding a parameter to the gpu renderer process, we can fix the issue.
-        //
-
-        // $Workaround$ - 3rd party fix
-        if ((Dll_ImageType == DLL_IMAGE_UNSPECIFIED/* || Dll_ImageType == DLL_IMAGE_ELECTRON*/) && Dll_ElectronWorkaround)
+        if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED/* || Dll_ImageType == DLL_IMAGE_ELECTRON*/)
         {
             if (lpApplicationName && lpCommandLine)
             {
-                WCHAR* backslash = wcsrchr(lpApplicationName, L'\\');
-                if ((backslash && _wcsicmp(backslash + 1, Dll_ImageName) == 0)
-                    && wcsistr(lpCommandLine, L" --type=gpu-process")
-                    && !wcsistr(lpCommandLine, L" --use-gl=swiftshader-webgl")) {
+                WCHAR* name = wcsrchr(lpApplicationName, L'\\');
 
-                    lpAlteredCommandLine = Dll_Alloc((wcslen(lpCommandLine) + 32 + 1) * sizeof(WCHAR));
-
-                    wcscpy(lpAlteredCommandLine, lpCommandLine);
-                    wcscat(lpAlteredCommandLine, L" --use-gl=swiftshader-webgl");
-
-                    lpCommandLine = lpAlteredCommandLine;
+                if (Proc_IsLikelyElectronProcess(lpCommandLine))
+                {
+                    const WCHAR* strings[] = { (name && *name) ? name + 1 : L"unnamed", lpApplicationName, NULL };
+                    SbieApi_LogMsgExt(-1, 2189, strings);
                 }
+
+
+                //
+                // Electron based applications which work like Chrome seem to fail with HW acceleration, even when 
+                // they get the same treatment as Chrome and Chromium derivatives.
+                // Hack: by adding a parameter to the gpu renderer process, we can fix the issue.
+                //
+
+                // $Workaround$ - 3rd party fix
+                //if (Dll_ElectronWorkaround)
+                //{
+                //    if ((name && _wcsicmp(name + 1, Dll_ImageName) == 0)
+                //        && wcsistr(lpCommandLine, L" --type=gpu-process")
+                //        && !wcsistr(lpCommandLine, L" --use-gl=swiftshader-webgl")) {
+
+                //        lpAlteredCommandLine = Dll_Alloc((wcslen(lpCommandLine) + 32 + 1) * sizeof(WCHAR));
+
+                //        wcscpy(lpAlteredCommandLine, lpCommandLine);
+                //        wcscat(lpAlteredCommandLine, L" --use-gl=swiftshader-webgl");
+
+                //        lpCommandLine = lpAlteredCommandLine;
+                //    }
+                //}
             }
         }
 
@@ -1644,6 +1678,12 @@ finish:
         hook NtQueryInformationProcess if env var SBIE_OVERRIDE_PARENT_PID exists
     }*/
 
+    {
+        WCHAR msg[1024];
+        Sbie_snwprintf(msg, 1024, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
+    }
+
     //
     // free work areas and return
     //
@@ -1665,12 +1705,6 @@ finish:
     if (TlsData->proc_command_line) {
         Dll_Free(TlsData->proc_command_line);
         TlsData->proc_command_line = NULL;
-    }
-
-    {
-        WCHAR msg[1024];
-        Sbie_snwprintf(msg, 1024, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
-        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
     }
 
     SetLastError(err);
@@ -2751,7 +2785,7 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
     //
     //    for (WCHAR** MatchDir = MatchDirs; (*MatchDir)[0] != L'\0'; MatchDir++) {
     //
-    //        if (wcsstr(path2, *MatchDir)) {
+    //        if (wcsistr(path2, *MatchDir)) {
     //
     //            IsUpdate = TRUE;
     //            break;
@@ -3064,6 +3098,39 @@ _FX NTSTATUS Proc_NtQueryInformationProcess(
             WCHAR *TruePath, *CopyPath;
             if (NT_SUCCESS(File_GetName(NULL, (UNICODE_STRING*)ProcessInformation, &TruePath, &CopyPath, NULL)))
                 RtlInitUnicodeString((UNICODE_STRING*)ProcessInformation, TruePath);    // return non-sandboxed path so caller can't tell he's sandboxed.
+        }
+    }
+    else if ((ProcessInformationClass == ProcessImageFileNameWin32) && (NT_SUCCESS(status))) {
+        if (ProcessInformation) {
+            UNICODE_STRING *ImageName = (UNICODE_STRING*)ProcessInformation;
+            ULONG nameLen = ImageName->Length / sizeof(WCHAR);
+
+            if (Dll_BoxFileDosPath && Dll_BoxFileDosPathLen
+                && ImageName->Buffer
+                && nameLen >= Dll_BoxFileDosPathLen
+                && _wcsnicmp(ImageName->Buffer, Dll_BoxFileDosPath, Dll_BoxFileDosPathLen) == 0)
+            {
+                WCHAR *BoxedPath = Dll_AllocTemp((nameLen + 1) * sizeof(WCHAR));
+                if (BoxedPath) {
+                    WCHAR *TruePath;
+
+                    wmemcpy(BoxedPath, ImageName->Buffer, nameLen);
+                    BoxedPath[nameLen] = L'\0';
+
+                    TruePath = File_GetTruePathForBoxedPath(BoxedPath, TRUE);
+                    if (TruePath) {
+                        ULONG trueLen = wcslen(TruePath);
+                        THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+                        WCHAR *ImagePath = Dll_GetTlsNameBuffer(
+                            TlsData, TRUE_NAME_BUFFER, (trueLen + 1) * sizeof(WCHAR));
+                        wmemcpy(ImagePath, TruePath, trueLen + 1);
+                        RtlInitUnicodeString(ImageName, ImagePath);
+                        Dll_Free(TruePath);
+                    }
+
+                    Dll_Free(BoxedPath);
+                }
+            }
         }
     }
 

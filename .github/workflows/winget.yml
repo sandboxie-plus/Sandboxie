@@ -10,6 +10,8 @@ jobs:
   # Trigger upstream sync in sandboxie-plus/winget-pkgs (non-default branch)
   sync-upstream-winget-pkgs:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Trigger winget-pkgs sync workflow on upstream_sync branch
         env:
@@ -28,6 +30,8 @@ jobs:
   publish-plus:
     needs: sync-upstream-winget-pkgs
     runs-on: windows-latest # action can only be run on Windows
+    permissions:
+      contents: read
     steps:
       - name: Check Sandboxie-Plus version
         id: check_plus
@@ -58,6 +62,8 @@ jobs:
   publish-classic:
     needs: sync-upstream-winget-pkgs
     runs-on: windows-latest
+    permissions:
+      contents: read
     steps:
       - name: Check Sandboxie-Classic version
         id: check_classic

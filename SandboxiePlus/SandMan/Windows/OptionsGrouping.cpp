@@ -57,6 +57,7 @@ void COptionsWindow::LoadGroupsTmpl(bool bUpdate)
 				
 
 				QTreeWidgetItem* pItem = new QTreeWidgetItem();
+				pItem->setData(0, COptionsWindow::PendingItemTemplateRole, true);
 				if (GroupName.length() > 2)
 					GroupName = GroupName.mid(1, GroupName.length() - 2);
 				pItem->setText(0, GroupName + " (" + Template + ")");
@@ -65,6 +66,7 @@ void COptionsWindow::LoadGroupsTmpl(bool bUpdate)
 					if (Entries[i].isEmpty())
 						continue;
 					QTreeWidgetItem* pSubItem = new QTreeWidgetItem();
+					pSubItem->setData(0, COptionsWindow::PendingItemTemplateRole, true);
 					SetProgramItem(Entries[i], pSubItem, 0);
 					pItem->addChild(pSubItem);
 				}

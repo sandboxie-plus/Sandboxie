@@ -29,6 +29,10 @@
 #include "common/map.h"
 #include "wsa_defs.h"
 
+#ifndef WC_ERR_INVALID_CHARS
+#define WC_ERR_INVALID_CHARS        0x00000080
+#endif
+
 
 #define SOCKS_VERSION               0x05
 #define SOCKS_SUBVERSION            0x01
@@ -56,6 +60,7 @@
 #define SOCKS_RESPONSE_MAX_SIZE     512
 #define SOCKS_REQUEST_MAX_SIZE      264
 #define SOCKS_AUTH_MAX_SIZE         255
+#define SOCKS_AUTH_BUFFER_SIZE      (SOCKS_AUTH_MAX_SIZE + 1)
 
 #define HOST_NAME_MAX               256
 #define INET_ADDRSTRLEN             16
@@ -81,15 +86,52 @@ extern HASH_MAP     DNS_LookupMap;
 // socks5_handshake
 //---------------------------------------------------------------------------
 
+static BOOLEAN socks5_send_all(SOCKET s, const char* buf, size_t size)
+{
+    while (size > 0) {
+        int sent = __sys_send(s, buf, (int)size, 0);
+        if (sent <= 0)
+            return FALSE;
+        buf += sent;
+        size -= sent;
+    }
+    return TRUE;
+}
 
-_FX BOOLEAN socks5_handshake(SOCKET s, BOOLEAN auth, WCHAR login[SOCKS_AUTH_MAX_SIZE], WCHAR pass[SOCKS_AUTH_MAX_SIZE])
+static BOOLEAN socks5_encode_credential(const WCHAR* value, char encoded[SOCKS_AUTH_MAX_SIZE], size_t* encoded_len)
+{
+    size_t value_len = wcslen(value);
+    if (value_len == 0) {
+        *encoded_len = 0;
+        return TRUE;
+    }
+
+    UINT code_page = GetACP();
+    DWORD flags = code_page == CP_UTF8 ? WC_ERR_INVALID_CHARS : WC_NO_BEST_FIT_CHARS;
+    BOOL used_default = FALSE;
+    LPBOOL used_default_ptr = code_page == CP_UTF8 ? NULL : &used_default;
+    int length = WideCharToMultiByte(code_page, flags, value, (int)value_len,
+        NULL, 0, NULL, used_default_ptr);
+    if (length <= 0 || length > SOCKS_AUTH_MAX_SIZE || used_default)
+        return FALSE;
+
+    used_default = FALSE;
+    if (WideCharToMultiByte(code_page, flags, value, (int)value_len,
+            encoded, length, NULL, used_default_ptr) != length || used_default)
+        return FALSE;
+
+    *encoded_len = (size_t)length;
+    return TRUE;
+}
+
+_FX BOOLEAN socks5_handshake(SOCKET s, BOOLEAN auth, WCHAR login[SOCKS_AUTH_BUFFER_SIZE], WCHAR pass[SOCKS_AUTH_BUFFER_SIZE])
 {
     char req[4] = { SOCKS_VERSION, 1 + auth, SOCKS_NO_AUTHENTICATION, 0 };
 
     if (auth) 
         req[3] = SOCKS_USERNAME_PASSWORD;
 
-    if (__sys_send(s, req, (3 + auth), 0) != (3 + auth))
+    if (!socks5_send_all(s, req, 3 + auth))
         goto on_error;
 
     char res[2];
@@ -111,8 +153,13 @@ _FX BOOLEAN socks5_handshake(SOCKET s, BOOLEAN auth, WCHAR login[SOCKS_AUTH_MAX_
         }
         char l[SOCKS_AUTH_MAX_SIZE];
         char p[SOCKS_AUTH_MAX_SIZE];
-        size_t login_len = wcstombs(l, login, SOCKS_AUTH_MAX_SIZE);
-        size_t pass_len = wcstombs(p, pass, SOCKS_AUTH_MAX_SIZE);
+        size_t login_len;
+        size_t pass_len;
+        if (!socks5_encode_credential(login, l, &login_len) ||
+                !socks5_encode_credential(pass, p, &pass_len)) {
+            SbieApi_Log(2360, L"SOCKS credentials cannot be encoded within the 255-byte limit");
+            goto on_error;
+        }
 
         size_t auth_buf_len = 1 + 1 + login_len + 1 + pass_len;
         char* auth_buf = Dll_AllocTemp(auth_buf_len);
@@ -130,7 +177,7 @@ _FX BOOLEAN socks5_handshake(SOCKET s, BOOLEAN auth, WCHAR login[SOCKS_AUTH_MAX_
         memcpy(auth_buf + offset, p, pass_len);
         offset += pass_len;
 
-        if (__sys_send(s, auth_buf, auth_buf_len , 0) != auth_buf_len) {
+        if (!socks5_send_all(s, auth_buf, auth_buf_len)) {
             Dll_Free(auth_buf);
             goto on_error;
         }
@@ -167,7 +214,7 @@ on_error:
 
 static char socks5_request_send(SOCKET s, char* buf, size_t size)
 {
-    if (__sys_send(s, buf, size, 0) != size)
+    if (!socks5_send_all(s, buf, size))
         return SOCKS_GENERAL_FAILURE;
 
     char res[SOCKS_RESPONSE_MAX_SIZE] = { 0 };
@@ -331,8 +378,8 @@ typedef struct {
         SOCKADDR_IN6_LH proxy6;
     };
     BOOLEAN auth;
-    WCHAR login[SOCKS_AUTH_MAX_SIZE];
-    WCHAR pass[SOCKS_AUTH_MAX_SIZE];
+    WCHAR login[SOCKS_AUTH_BUFFER_SIZE];
+    WCHAR pass[SOCKS_AUTH_BUFFER_SIZE];
 } RELAY_CONFIG,* PRELAY_CONFIG;
 
 
@@ -453,7 +500,7 @@ DWORD WINAPI proxy_handle_relay(LPVOID param)
 // start_socks5_relay
 //---------------------------------------------------------------------------
 
-USHORT start_socks5_relay(const SOCKADDR* addr, const SOCKADDR* proxy, BOOLEAN auth, WCHAR login[SOCKS_AUTH_MAX_SIZE], WCHAR pass[SOCKS_AUTH_MAX_SIZE])
+USHORT start_socks5_relay(const SOCKADDR* addr, const SOCKADDR* proxy, BOOLEAN auth, WCHAR login[SOCKS_AUTH_BUFFER_SIZE], WCHAR pass[SOCKS_AUTH_BUFFER_SIZE])
 {
     PRELAY_CONFIG relay_config = Dll_Alloc(sizeof(RELAY_CONFIG));
     if (!relay_config)
@@ -475,8 +522,8 @@ USHORT start_socks5_relay(const SOCKADDR* addr, const SOCKADDR* proxy, BOOLEAN a
 
     relay_config->auth = auth;
     if (auth) {
-        wcscpy_s(relay_config->login, SOCKS_AUTH_MAX_SIZE, login);
-        wcscpy_s(relay_config->pass, SOCKS_AUTH_MAX_SIZE, pass);
+        wcscpy_s(relay_config->login, SOCKS_AUTH_BUFFER_SIZE, login);
+        wcscpy_s(relay_config->pass, SOCKS_AUTH_BUFFER_SIZE, pass);
     }
 
     relay_config->listen_sock = __sys_socket(addr->sa_family, SOCK_STREAM, IPPROTO_TCP);

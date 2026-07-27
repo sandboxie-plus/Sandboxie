@@ -220,6 +220,11 @@ void CSbieIni::SetTextMap(const QString& Setting, const QMap<QString, QStringLis
 	QStringList Mapping;
 	foreach(const QString& Group, Map.keys())
 	{
+		if (Map[Group].isEmpty()) {
+			Mapping.append(Group + ":");
+			continue;
+		}
+
 		QString CurrentLine;
 		foreach(const QString & Name, Map[Group]) {
 			if (Setting.length() + 1 + Group.length() + 1 + CurrentLine.length() + 1 + Name.length() >= CONF_LINE_LEN) { // limit line length
@@ -242,7 +247,16 @@ QMap<QString, QStringList> CSbieIni::GetTextMap(const QString& Setting)
 	QMap<QString, QStringList> Map;
 	foreach(const QString &CurrentLine, GetTextList(Setting, false)) {
 		int pos = CurrentLine.lastIndexOf(":");
-		Map[pos == -1 ? "" : CurrentLine.left(pos)].append(CurrentLine.mid(pos+1).split(","));
+		QString Group = (pos == -1) ? "" : CurrentLine.left(pos);
+		QString Payload = CurrentLine.mid(pos + 1);
+
+		if (Payload.isEmpty()) {
+			if (!Map.contains(Group))
+				Map.insert(Group, QStringList());
+			continue;
+		}
+
+		Map[Group].append(Payload.split(",", Qt::SkipEmptyParts));
 	}
 	return Map;
 }
@@ -345,7 +359,7 @@ SB_STATUS CSbieIni::RenameSection(const QString& NewName, bool deleteOld) // Not
 
 do_write:
 	// Write the entire raw section to preserve comments and order
-	Status = SbieIniSet(NewName, "", RawSection, eIniInsert, true);
+	Status = SbieIniSet(NewName, "", RawSection, eIniUpdate, true);
 	if (Status.IsError())
 		return Status;
 

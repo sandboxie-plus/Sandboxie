@@ -31,6 +31,12 @@ static void File_InitCopyLimit(void);
 
 static BOOLEAN File_InitFileMigration(void);
 
+static BOOLEAN File_Chrome_RemoveEncryptedHashes(char *buffer, ULONGLONG *size);
+
+static BOOLEAN File_CopyNewerMatches(const WCHAR *TruePath);
+
+static ULONG File_CopyNewerHashPath(const WCHAR *CopyPath);
+
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -46,6 +52,7 @@ typedef enum { // Note: thisorder defines the config priority
 } ENUM_COPY_MODES;
 
 static LIST File_MigrationOptions[NUM_COPY_MODES];
+static LIST File_CopyNewerOptions;
 
 static BOOLEAN File_MigrationDenyWrite = FALSE;
 
@@ -62,10 +69,12 @@ _FX BOOLEAN File_InitFileMigration(void)
 {
     for(ULONG i=0; i < NUM_COPY_MODES; i++)
         List_Init(&File_MigrationOptions[i]);
+    List_Init(&File_CopyNewerOptions);
 
     Config_InitPatternList(NULL, L"CopyEmpty", &File_MigrationOptions[FILE_COPY_EMPTY], FALSE);
     Config_InitPatternList(NULL, L"CopyAlways", &File_MigrationOptions[FILE_COPY_CONTENT], FALSE);
     Config_InitPatternList(NULL, L"DontCopy", &File_MigrationOptions[FILE_DONT_COPY], FALSE);
+    Config_InitPatternList(NULL, L"CopyNewer", &File_CopyNewerOptions, FALSE);
 
     File_MigrationDenyWrite = Config_GetSettingsForImageName_bool(L"CopyBlockDenyWrite", FALSE);
 
@@ -74,6 +83,168 @@ _FX BOOLEAN File_InitFileMigration(void)
     File_NotifyNoCopy = SbieApi_QueryConfBool(NULL, L"NotifyNoCopy", FALSE);
 
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// File_CopyNewerMatches
+//---------------------------------------------------------------------------
+
+
+static _FX BOOLEAN File_CopyNewerMatches(const WCHAR *TruePath)
+{
+    ULONG path_len = (wcslen(TruePath) + 1) * sizeof(WCHAR);
+    WCHAR *path_lwr = Dll_AllocTemp(path_len);
+    if (!path_lwr)
+        return FALSE;
+
+    memcpy(path_lwr, TruePath, path_len);
+    _wcslwr(path_lwr);
+    path_len = wcslen(path_lwr);
+
+    PATTERN *pat = List_Head(&File_CopyNewerOptions);
+    while (pat) {
+        if (Pattern_Match(pat, path_lwr, path_len)) {
+            Dll_Free(path_lwr);
+            return TRUE;
+        }
+        pat = List_Next(pat);
+    }
+
+    Dll_Free(path_lwr);
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// File_CopyNewerHashPath
+//---------------------------------------------------------------------------
+
+
+static _FX ULONG File_CopyNewerHashPath(const WCHAR *CopyPath)
+{
+    ULONG hash = 2166136261UL;
+
+    while (*CopyPath) {
+        WCHAR c = *CopyPath++;
+        if (c >= L'A' && c <= L'Z')
+            c |= 0x20;
+        hash ^= (ULONG)(USHORT)c;
+        hash *= 16777619UL;
+    }
+
+    return hash;
+}
+
+
+//---------------------------------------------------------------------------
+// File_RefreshNewerCopy
+//---------------------------------------------------------------------------
+
+
+static _FX BOOLEAN File_RefreshNewerCopy(
+    const WCHAR *TruePath, const WCHAR *CopyPath)
+{
+    FILE_NETWORK_OPEN_INFORMATION true_info, copy_info;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    IO_STATUS_BLOCK IoStatusBlock;
+    WCHAR *mutex_name, *temp_path;
+    HANDLE mutex, temp_handle;
+    NTSTATUS status;
+    ULONG i;
+    DWORD wait_result;
+
+    if (!File_CopyNewerMatches(TruePath))
+        return FALSE;
+
+    // The mutex is deliberately box-wide.  It keeps simultaneous applications
+    // from replacing two matching files at the same time, while a zero wait
+    // leaves the current boxed version usable when another refresh is active.
+    mutex_name = Dll_AllocTemp((wcslen(Dll_BoxName) + 32) * sizeof(WCHAR));
+    if (!mutex_name)
+        return FALSE;
+    Sbie_snwprintf(mutex_name, wcslen(Dll_BoxName) + 32,
+        L"Sandboxie_CopyNewer_%s_%08X", Dll_BoxName,
+        File_CopyNewerHashPath(CopyPath));
+
+    mutex = CreateMutex(NULL, FALSE, mutex_name);
+    Dll_Free(mutex_name);
+    if (!mutex)
+        return FALSE;
+    wait_result = WaitForSingleObject(mutex, 0);
+    if (wait_result != WAIT_OBJECT_0 && wait_result != WAIT_ABANDONED) {
+        CloseHandle(mutex);
+        return FALSE;
+    }
+
+    InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+    RtlInitUnicodeString(&objname, TruePath);
+    status = __sys_NtQueryFullAttributesFile
+        ? __sys_NtQueryFullAttributesFile(&objattrs, &true_info)
+        : NtQueryFullAttributesFile(&objattrs, &true_info);
+    if (NT_SUCCESS(status)) {
+        RtlInitUnicodeString(&objname, CopyPath);
+        status = __sys_NtQueryFullAttributesFile
+            ? __sys_NtQueryFullAttributesFile(&objattrs, &copy_info)
+            : NtQueryFullAttributesFile(&objattrs, &copy_info);
+    }
+
+    if (!NT_SUCCESS(status) ||
+            true_info.LastWriteTime.QuadPart <= copy_info.LastWriteTime.QuadPart) {
+        ReleaseMutex(mutex);
+        CloseHandle(mutex);
+        return FALSE;
+    }
+
+    temp_path = Dll_AllocTemp((wcslen(CopyPath) + 32) * sizeof(WCHAR));
+    if (!temp_path) {
+        ReleaseMutex(mutex);
+        CloseHandle(mutex);
+        return FALSE;
+    }
+
+    status = STATUS_OBJECT_NAME_COLLISION;
+    for (i = 0; i != 4 && status == STATUS_OBJECT_NAME_COLLISION; ++i) {
+        Sbie_snwprintf(temp_path, wcslen(CopyPath) + 32,
+            L"%s.CopyNewer.%08X", CopyPath, GetTickCount() + i);
+        status = File_MigrateFile(TruePath, temp_path, FALSE, TRUE);
+    }
+
+    if (NT_SUCCESS(status)) {
+        RtlInitUnicodeString(&objname, temp_path);
+        status = __sys_NtCreateFile(&temp_handle, DELETE | SYNCHRONIZE,
+            &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
+            FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE,
+            NULL, 0);
+        if (NT_SUCCESS(status)) {
+            ULONG name_len = wcslen(CopyPath) * sizeof(WCHAR);
+            ULONG info_len = sizeof(FILE_RENAME_INFORMATION) + name_len;
+            FILE_RENAME_INFORMATION *info = Dll_AllocTemp(info_len);
+            if (!info)
+                status = STATUS_INSUFFICIENT_RESOURCES;
+            else {
+                memzero(info, info_len);
+                info->ReplaceIfExists = TRUE;
+                info->FileNameLength = name_len;
+                memcpy(info->FileName, CopyPath, name_len);
+                status = __sys_NtSetInformationFile(temp_handle, &IoStatusBlock,
+                    info, info_len, FileRenameInformation);
+                Dll_Free(info);
+            }
+            NtClose(temp_handle);
+        }
+    }
+
+    if (!NT_SUCCESS(status)) {
+        RtlInitUnicodeString(&objname, temp_path);
+        __sys_NtDeleteFile(&objattrs);
+    }
+
+    Dll_Free(temp_path);
+    ReleaseMutex(mutex);
+    CloseHandle(mutex);
+    return NT_SUCCESS(status);
 }
 
 
@@ -245,6 +416,204 @@ _FX void File_InitCopyLimit(void)
 
 
 //---------------------------------------------------------------------------
+// File_Chrome_RemoveEncryptedHashes
+//---------------------------------------------------------------------------
+
+
+//
+// Removes all JSON key-value pairs where the key ends with "_encrypted_hash"
+// from Chrome's Secure Preferences file. This is needed because Chrome uses
+// encrypted preference hashes (protected by App-Bound Encryption) which cannot
+// be decrypted in the sandbox. If these hashes are present, Chrome's preference
+// validation fails and settings/extensions get reset.
+//
+// By stripping these entries, Chrome falls back to legacy MAC validation,
+// which can be bypassed via the IsOS hook (enterprise device detection).
+//
+static _FX BOOLEAN File_Chrome_RemoveEncryptedHashes(char *buffer, ULONGLONG *size)
+{
+    const char *suffix = "_encrypted_hash\"";
+    ULONG suffix_len = 16;  // strlen("_encrypted_hash\"")
+    char *read_ptr = buffer;
+    char *write_ptr = buffer;
+    char *end = buffer + *size;
+    BOOLEAN modified = FALSE;
+
+    while (read_ptr < end) {
+
+        //
+        // Look for the suffix pattern
+        //
+
+        char *found = NULL;
+        for (char *p = read_ptr; p <= end - suffix_len; p++) {
+            if (memcmp(p, suffix, suffix_len) == 0) {
+                found = p;
+                break;
+            }
+        }
+
+        if (!found) {
+            // No more matches, copy the rest
+            if (write_ptr != read_ptr) {
+                ULONGLONG remaining = end - read_ptr;
+                memmove(write_ptr, read_ptr, (SIZE_T)remaining);
+                write_ptr += remaining;
+            } else {
+                write_ptr = end;
+            }
+            break;
+        }
+
+        //
+        // Find the start of this key (search backwards for opening quote)
+        //
+
+        char *key_start = found;
+        while (key_start > buffer && *(key_start - 1) != '"') {
+            key_start--;
+        }
+        if (key_start > buffer) {
+            key_start--;  // Include the opening quote
+        }
+
+        //
+        // Find preceding comma or opening brace, skip whitespace
+        //
+
+        char *entry_start = key_start;
+        while (entry_start > buffer) {
+            char c = *(entry_start - 1);
+            if (c == ' ' || c == '\t' || c == '\r' || c == '\n') {
+                entry_start--;
+            } else if (c == ',') {
+                entry_start--;  // Include the comma
+                break;
+            } else if (c == '{') {
+                break;  // Don't include opening brace
+            } else {
+                break;
+            }
+        }
+
+        //
+        // Find the end of the value (after the colon)
+        // The value could be a string, number, or nested object/array
+        //
+
+        char *value_start = found + suffix_len;  // After _encrypted_hash"
+
+        // Skip whitespace and colon
+        while (value_start < end && (*value_start == ' ' || *value_start == '\t' ||
+               *value_start == '\r' || *value_start == '\n' || *value_start == ':')) {
+            value_start++;
+        }
+
+        char *value_end = value_start;
+
+        if (value_start < end) {
+            if (*value_start == '"') {
+                // String value - find closing quote (handle escapes)
+                value_end = value_start + 1;
+                while (value_end < end) {
+                    if (*value_end == '\\' && value_end + 1 < end) {
+                        value_end += 2;  // Skip escaped char
+                    } else if (*value_end == '"') {
+                        value_end++;
+                        break;
+                    } else {
+                        value_end++;
+                    }
+                }
+            } else if (*value_start == '{') {
+                // Object value - find matching closing brace
+                int depth = 1;
+                value_end = value_start + 1;
+                while (value_end < end && depth > 0) {
+                    if (*value_end == '{') depth++;
+                    else if (*value_end == '}') depth--;
+                    else if (*value_end == '"') {
+                        // Skip strings to avoid counting braces inside strings
+                        value_end++;
+                        while (value_end < end) {
+                            if (*value_end == '\\' && value_end + 1 < end) {
+                                value_end += 2;
+                            } else if (*value_end == '"') {
+                                break;
+                            } else {
+                                value_end++;
+                            }
+                        }
+                    }
+                    value_end++;
+                }
+            } else if (*value_start == '[') {
+                // Array value - find matching closing bracket
+                int depth = 1;
+                value_end = value_start + 1;
+                while (value_end < end && depth > 0) {
+                    if (*value_end == '[') depth++;
+                    else if (*value_end == ']') depth--;
+                    else if (*value_end == '"') {
+                        value_end++;
+                        while (value_end < end) {
+                            if (*value_end == '\\' && value_end + 1 < end) {
+                                value_end += 2;
+                            } else if (*value_end == '"') {
+                                break;
+                            } else {
+                                value_end++;
+                            }
+                        }
+                    }
+                    value_end++;
+                }
+            } else {
+                // Number, true, false, null - find end (comma, brace, or bracket)
+                while (value_end < end && *value_end != ',' && *value_end != '}' &&
+                       *value_end != ']' && *value_end != '\r' && *value_end != '\n') {
+                    value_end++;
+                }
+            }
+        }
+
+        //
+        // Handle trailing comma if we didn't consume a leading one
+        // and there's a trailing comma before next key or closing brace
+        //
+
+        char *skip_end = value_end;
+        if (entry_start == key_start || (entry_start > buffer && *entry_start != ',')) {
+            // We didn't consume a leading comma, check for trailing
+            char *p = value_end;
+            while (p < end && (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n')) {
+                p++;
+            }
+            if (p < end && *p == ',') {
+                skip_end = p + 1;
+            }
+        }
+
+        //
+        // Copy everything before this entry
+        //
+
+        ULONGLONG copy_len = entry_start - read_ptr;
+        if (copy_len > 0 && write_ptr != read_ptr) {
+            memmove(write_ptr, read_ptr, (SIZE_T)copy_len);
+        }
+        write_ptr += copy_len;
+
+        read_ptr = skip_end;
+        modified = TRUE;
+    }
+
+    *size = write_ptr - buffer;
+    return modified;
+}
+
+
+//---------------------------------------------------------------------------
 // File_MigrateFile
 //---------------------------------------------------------------------------
 
@@ -399,6 +768,85 @@ _FX NTSTATUS File_MigrateFile(
 
     if (file_size) {
 
+        //
+        // $Workaround$ - 3rd party fix - Chrome-Fix
+        // Special handling for Chrome's Secure Preferences file:
+        // Strip encrypted hash entries to allow legacy MAC validation fallback.
+        // This enables the IsOS enterprise bypass hook to work.
+        //
+
+        BOOLEAN chrome_prefs_handled = FALSE;
+
+        if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && Dll_UseChromeSecurePreferencesHack && file_size < (16 * 1024 * 1024)) {
+
+            const WCHAR *filename = wcsrchr(TruePath, L'\\');
+            if (filename && _wcsicmp(filename, L"\\Secure Preferences") == 0) {
+
+                //
+                // Read the entire file into memory
+                //
+
+                char *file_buffer = Dll_AllocTemp((ULONG)file_size + 1);
+                if (file_buffer) {
+
+                    ULONGLONG bytes_read = 0;
+                    ULONGLONG remaining = file_size;
+                    status = STATUS_SUCCESS;
+
+                    while (remaining > 0 && NT_SUCCESS(status)) {
+                        ULONG to_read = (remaining > 0x100000) ? 0x100000 : (ULONG)remaining;
+                        status = NtReadFile(
+                            TrueHandle, NULL, NULL, NULL, &IoStatusBlock,
+                            file_buffer + bytes_read, to_read, NULL, NULL);
+                        if (NT_SUCCESS(status)) {
+                            bytes_read += IoStatusBlock.Information;
+                            remaining -= IoStatusBlock.Information;
+                        }
+                    }
+
+                    if (NT_SUCCESS(status)) {
+
+                        ULONGLONG new_size = bytes_read;
+                        file_buffer[bytes_read] = '\0';
+
+                        //
+                        // Remove _encrypted_hash entries from the JSON
+                        //
+
+                        File_Chrome_RemoveEncryptedHashes(file_buffer, &new_size);
+
+                        //
+                        // Write the (possibly modified) content
+                        //
+
+                        ULONGLONG bytes_written = 0;
+                        remaining = new_size;
+
+                        while (remaining > 0 && NT_SUCCESS(status)) {
+                            ULONG to_write = (remaining > 0x100000) ? 0x100000 : (ULONG)remaining;
+                            status = NtWriteFile(
+                                CopyHandle, NULL, NULL, NULL, &IoStatusBlock,
+                                file_buffer + bytes_written, to_write, NULL, NULL);
+                            if (NT_SUCCESS(status)) {
+                                bytes_written += IoStatusBlock.Information;
+                                remaining -= IoStatusBlock.Information;
+                            }
+                        }
+
+                        chrome_prefs_handled = TRUE;
+                    }
+
+                    Dll_Free(file_buffer);
+                }
+            }
+        }
+
+        //
+        // Normal file copy path
+        //
+
+        if (!chrome_prefs_handled) {
+
         ULONG Next_Status = GetTickCount() + 3000; // wait 3 seconds
 
         void* buffer = Dll_AllocTemp(PAGE_SIZE);
@@ -442,6 +890,8 @@ _FX NTSTATUS File_MigrateFile(
 
         if (buffer)
             Dll_Free(buffer);
+
+        } // end if (!chrome_prefs_handled)
     }
 
     //

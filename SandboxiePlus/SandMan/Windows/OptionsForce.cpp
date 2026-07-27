@@ -124,6 +124,8 @@ void COptionsWindow::LoadBreakoutTmpl(bool bUpdate)
 void COptionsWindow::AddForcedEntry(const QString& Name, int type, bool disabled, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	if (!Template.isEmpty())
+		pItem->setData(0, COptionsWindow::PendingItemTemplateRole, true);
 	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
 	QString Type;
 	switch (type)
@@ -142,6 +144,8 @@ void COptionsWindow::AddForcedEntry(const QString& Name, int type, bool disabled
 void COptionsWindow::AddBreakoutEntry(const QString& Name, int type, bool disabled, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	if (!Template.isEmpty())
+		pItem->setData(0, COptionsWindow::PendingItemTemplateRole, true);
 	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
 	QString Type;
 	switch (type)

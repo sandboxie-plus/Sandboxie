@@ -73,7 +73,8 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 			"You must now purchase a valid certificate, as the usage of the free version has been restricted.");
 
 		CSupportDialog dialog(Message, true);
-		if(dialog.exec() == QDialog::Rejected)
+		int ret = theGUI ? theGUI->SafeExec(&dialog) : dialog.exec();
+		if(ret == QDialog::Rejected)
 			PostQuitMessage(0);
 		return true;
 	}
@@ -208,7 +209,8 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 	theAPI->SetSecureParam("LastReminder", &LastReminder, sizeof(LastReminder));
 
 	CSupportDialog dialog(Message, NoGo, Wait);
-	return dialog.exec() != QDialog::Rejected;
+	int ret = theGUI ? theGUI->SafeExec(&dialog) : dialog.exec();
+	return ret != QDialog::Rejected;
 }
 
 CSupportDialog::CSupportDialog(const QString& Message, bool NoGo, int Wait, QWidget *parent)

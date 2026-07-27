@@ -48,6 +48,8 @@ static HRESULT UserEnv_CreateAppContainerProfile(
     DWORD               dwCapabilityCount,
     PSID                *ppSidAppContainerSid);
 
+//static BOOL UserEnv_GetProfileType(DWORD* pdwFlags);
+
 //---------------------------------------------------------------------------
 
 
@@ -71,6 +73,7 @@ typedef BOOL(*P_CreateAppContainerProfile)(
     DWORD               dwCapabilityCount,
     PSID                *ppSidAppContainerSid);
 
+//typedef BOOL (*P_GetProfileType)(DWORD* pdwFlags);
 
 //---------------------------------------------------------------------------
 
@@ -84,6 +87,8 @@ static P_GetVersionExW              __sys_GetVersionExW             = NULL;
 static P_GetVersionExA              __sys_GetVersionExA             = NULL;
 
 static P_CreateAppContainerProfile  __sys_CreateAppContainerProfile = NULL;
+
+//static P_GetProfileType             __sys_GetProfileType            = NULL;
 
 static DWORD UserEnv_dwBuildNumber = 0;
 
@@ -130,7 +135,8 @@ _FX BOOLEAN UserEnv_Init(HMODULE module)
     void *RegisterGPNotification;
     void *UnregisterGPNotification;
     void *GetAppliedGPOList;
-    void* CreateAppContainerProfile;
+    void *CreateAppContainerProfile;
+    //void *GetProfileType;
 
     if (module == Dll_KernelBase) {
 
@@ -158,6 +164,14 @@ _FX BOOLEAN UserEnv_Init(HMODULE module)
 
         SBIEDLL_HOOK(UserEnv_,RegisterGPNotification);
         SBIEDLL_HOOK(UserEnv_,UnregisterGPNotification);
+
+        //
+        // $Workaround$ - 3rd party fix - Chrome-Fix
+        // GetProfileType -> PT_ROAMING chrome disables ABE
+        //
+        //
+        //GetProfileType = GetProcAddress(module, "GetProfileType");
+        //SBIEDLL_HOOK(UserEnv_, GetProfileType);
     }
 
     if (!Dll_CompartmentMode) // see Proc_UpdateProcThreadAttribute
@@ -373,3 +387,23 @@ _FX HRESULT UserEnv_CreateAppContainerProfile(
     *ppSidAppContainer = sid;
     return S_OK;
 }
+
+
+//---------------------------------------------------------------------------
+// UserEnv_GetProfileType
+//---------------------------------------------------------------------------
+//
+//#define PT_TEMPORARY                 0x00000001      // A profile has been allocated that will be deleted at logoff.
+//#define PT_ROAMING                   0x00000002      // The loaded profile is a roaming profile.
+//#define PT_MANDATORY                 0x00000004      // The loaded profile is mandatory.
+//#define PT_ROAMING_PREEXISTING       0x00000008      // The loaded roaming profile is not a brand new one - it was obtained from roamed location
+//
+//_FX BOOL UserEnv_GetProfileType(DWORD* pdwFlags) 
+//{
+//    extern BOOLEAN Dll_UseChromeSecurePreferencesHack;
+//    if (pdwFlags && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && Dll_UseChromeSecurePreferencesHack) {
+//		SbieApi_Log(2325, L"UserEnv_GetProfileType called, returning PT_ROAMING");
+//        *pdwFlags = PT_ROAMING;
+//    }
+//    return TRUE;
+//}

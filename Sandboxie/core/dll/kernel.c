@@ -267,7 +267,7 @@ _FX BOOLEAN Kernel_Init()
 		SBIEDLL_HOOK(Kernel_, GetSystemDefaultLangID);
 	}
 
-	if (SbieApi_QueryConfBool(NULL, L"HideDiskSerialNumber", FALSE)) {
+	if (Config_GetSettingsForImageName_bool(L"HideDiskSerialNumber", FALSE)) {
 
 		InitializeCriticalSection(&Kernel_DiskSN_CritSec);
 		map_init(&Kernel_DiskSN, Dll_Pool);

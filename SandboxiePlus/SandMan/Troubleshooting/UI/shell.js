@@ -2,7 +2,7 @@
 *	group: ui
 *	class: ui
 * name: Explorer Context Menu extension does not work
-* description: This procedure will re install the shell integration
+* description: This procedure will reinstall the shell integration
 *
 */
 

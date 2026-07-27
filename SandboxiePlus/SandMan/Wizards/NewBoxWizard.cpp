@@ -12,6 +12,7 @@
 #include "../Windows/BoxImageWindow.h"
 #include "../AddonManager.h"
 #include <QElapsedTimer>
+#include <QUuid>
 
 
 CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
@@ -24,6 +25,7 @@ CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
     setPage(Page_Summary, new CSummaryPage);
 
     m_bAdvanced = theConf->GetBool("Options/AdvancedBoxWizard", false);
+    m_bUseRandomName = theConf->GetBool("Options/UseRandomBoxName", false);
 
     setWizardStyle(ModernStyle);
     //setOption(HaveHelpButton, true);
@@ -97,6 +99,13 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 	if (!Status.IsError())
 	{
 		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+
+        if (m_bUseRandomName)
+        {
+            QString alias = field("boxNameAlias").toString().trimmed();
+            if (!alias.isEmpty())
+                pBox->SetText("BoxAlias", alias);
+        }
 
         // SharedTemplate
         QElapsedTimer timer;
@@ -343,14 +352,38 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
 
     layout->addItem(new QSpacerItem(0, 3), row++, 0);
 
-    layout->addWidget(new QLabel(tr("Enter box name:")), row++, 0);
+    m_pAlias = nullptr;
+    bool bUseRandomName = theConf->GetBool("Options/UseRandomBoxName", false);
+    if (bUseRandomName)
+    {
+        layout->addWidget(new QLabel(tr("Alias:")), row++, 0);
 
-    m_pBoxName = new QLineEdit();
-    m_pBoxName->setMaxLength(32); // BOXNAME_COUNT
-    m_pBoxName->setText(theAPI->MkNewName("New Box"));
-    m_pBoxName->setFocus();
-    layout->addWidget(m_pBoxName, row++, 1, 1, 2);
+        m_pAlias = new QLineEdit();
+        m_pAlias->setMaxLength(38); // BOXNAME_COUNT
+        m_pAlias->setText(theAPI->MkNewName("New Box"));
+        layout->addWidget(m_pAlias, row++, 1, 1, 2);
+        m_pAlias->setFocus();
+
+        QString guidName;
+        do {
+            guidName = QUuid::createUuid().toString(QUuid::WithoutBraces).replace("-", "");
+        } while (!theAPI->GetBoxByName(guidName).isNull());
+        m_pBoxName = new QLineEdit();
+        m_pBoxName->setText(guidName);
+        m_pBoxName->setVisible(false);
+    }
+    else
+    {
+        layout->addWidget(new QLabel(tr("Enter box name:")), row++, 0);
+
+        m_pBoxName = new QLineEdit();
+        m_pBoxName->setMaxLength(38); // BOXNAME_COUNT
+        m_pBoxName->setText(theAPI->MkNewName("New Box"));
+        m_pBoxName->setFocus();
+        layout->addWidget(m_pBoxName, row++, 1, 1, 2);
+    }
     registerField("boxName", m_pBoxName);
+    registerField("boxNameAlias", m_pAlias ? m_pAlias : m_pBoxName);
 
 
     /*QLabel* pMore = new QLabel(tr("<a href=\"more\">More Types</a>"));
@@ -530,6 +563,8 @@ void CBoxTypePage::OnAdvanced()
     if (m_bInstant)
     {
         QString BoxName = m_pBoxName->text();
+        QString Alias;
+        if (m_pAlias) Alias = m_pAlias->text();
 #ifdef USE_COMBO
         int BoxType = m_pBoxType->currentIndex();
 #endif
@@ -537,6 +572,7 @@ void CBoxTypePage::OnAdvanced()
         wizard()->restart();
 
         m_pBoxName->setText(BoxName);
+        if (m_pAlias) m_pAlias->setText(Alias);
 #ifdef USE_COMBO
         m_pBoxType->setCurrentIndex(BoxType);
 #endif
@@ -1066,6 +1102,9 @@ int CSummaryPage::nextId() const
 void CSummaryPage::initializePage()
 {
     m_pSummary->setText(theGUI->GetBoxDescription(wizard()->field("boxType").toInt()));
+
+    if (((CNewBoxWizard*)wizard())->m_bUseRandomName)
+        m_pSummary->append(tr("\nThe actual sandbox name is: %1").arg(wizard()->field("boxName").toString()));
 
     QString Location = field("boxLocation").toString();
     if (Location.isEmpty())

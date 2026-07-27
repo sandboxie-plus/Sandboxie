@@ -18,7 +18,7 @@ if (typeof boxName === 'undefined' || !boxName) {
 
 let message = tr('The Process \'%1\' crashed', processName.toLowerCase());
 
-// Known to run to in a green box
+// Known to run in a green box
 if(processName.toLowerCase() === "viber.exe"){
 
   message += '\n\n' + tr('This program is known to work in a Green (App Compartment) type sandbox.');

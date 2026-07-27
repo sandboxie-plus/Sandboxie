@@ -98,6 +98,7 @@ typedef struct _WFP_PROCESS {
 	BOOLEAN LogTraffic;
 	BOOLEAN BlockInternet;
 	BOOLEAN BlockPrivateNet;
+	BOOLEAN BlockLoopback;
 	LIST NetFwRules;
 
 } WFP_PROCESS;
@@ -699,7 +700,7 @@ BOOLEAN WFP_isPrivateNet(const IP_ADDRESS* ip)
 		// 192.168.0.0/16
 		if ((ipv4_host & 0xFFFF0000) == 0xC0A80000)
 			return TRUE;
-		// Á´Â·±¾µØ 169.254.0.0/16
+		// ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ 169.254.0.0/16
 		if ((ipv4_host & 0xFFFF0000) == 0xA9FE0000)
 			return TRUE;
 		return FALSE;
@@ -762,6 +763,7 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 	BOOLEAN LogTraffic = FALSE;
 	BOOLEAN BlockInternet = FALSE;
 	BOOLEAN BlockPrivateNet = FALSE;
+	BOOLEAN BlockLoopback = FALSE;
 	LIST NewNetFwRules, OldNetFwRules;
 	
 	List_Init(&NewNetFwRules);
@@ -785,6 +787,8 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 		}
 		BlockPrivateNet = Process_GetConf_bool(proc, L"BlockPrivateNet", FALSE);
 
+		
+		BlockLoopback = Process_GetConf_bool(proc, L"BlockLocalLoop", FALSE);
 	}
 
 #ifdef _WIN64
@@ -799,6 +803,7 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 		wfp_proc->LogTraffic = LogTraffic;
 		wfp_proc->BlockInternet = BlockInternet;
 		wfp_proc->BlockPrivateNet = BlockPrivateNet;
+		wfp_proc->BlockLoopback = BlockLoopback;
 
 		if (ok) {
 			memcpy(&OldNetFwRules, &wfp_proc->NetFwRules, sizeof(LIST));
@@ -851,6 +856,39 @@ void WFP_DeleteProcess(PROCESS* proc)
 		WFP_Free(NULL, wfp_proc);
 	}
 }
+
+//---------------------------------------------------------------------------
+// WFP_isLoopback
+//---------------------------------------------------------------------------
+
+BOOLEAN WFP_isLoopback(const IP_ADDRESS* ip)
+{
+	// Check IPv6 ::1
+	int allzero = TRUE;
+	for (int i = 0; i < 15; i++) {
+		if (ip->Data[i] != 0) {
+			allzero = FALSE;
+			break;
+		}
+	}
+	if (allzero && ip->Data[15] == 1) {
+		return TRUE;
+	}
+
+	// Check IPv4-mapped IPv6 ::FFFF:127.0.0.1
+	if (ip->Data32[0] == 0 &&
+		ip->Data32[1] == 0 &&
+		ip->Data32[2] == 0xFFFF0000 &&
+		((ip->Data32[3] & 0xFF000000) == 0x7F000000)) // 127.x.x.x
+	{
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+
+
 
 //---------------------------------------------------------------------------
 // WFP_classify
@@ -920,6 +958,9 @@ void WFP_classify(
 		BOOLEAN block = FALSE;
 		BOOLEAN private = FALSE;
 		BOOLEAN isprivate = FALSE;
+		BOOLEAN noloop = FALSE;
+		BOOLEAN isloopback = FALSE;
+
 
 		KIRQL irql; 
 		WFP_PROCESS* wfp_proc;
@@ -936,6 +977,11 @@ void WFP_classify(
 
 			log = wfp_proc->LogTraffic;
 			block = wfp_proc->BlockInternet;
+			noloop = wfp_proc->BlockLoopback;
+			isloopback = WFP_isLoopback(&remote_ip);
+			if (isloopback && noloop) {
+				block = TRUE;
+			}
 
 			private = wfp_proc->BlockPrivateNet;
 			isprivate = WFP_isPrivateNet(&remote_ip);

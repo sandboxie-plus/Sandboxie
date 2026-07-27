@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2026 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@
 #include "core/drv/api_defs.h"
 #include "common/my_version.h"
 #include <stdlib.h>
+#include <shellapi.h>
 #include <sddl.h>
 #include <aclapi.h>
 #include <dde.h>
@@ -787,6 +788,7 @@ bool GuiServer::CreateQueueSlave(const WCHAR *cmdline)
     m_SlaveFuncs[GUI_GET_CLIPBOARD_METAFILE] = &GuiServer::GetClipboardMetaFileSlave;
     m_SlaveFuncs[GUI_SEND_POST_MESSAGE]     = &GuiServer::SendPostMessageSlave;
     m_SlaveFuncs[GUI_SEND_COPYDATA]         = &GuiServer::SendCopyDataSlave;
+    m_SlaveFuncs[GUI_SHELL_NOTIFY_ICON]     = &GuiServer::ShellNotifyIconSlave;
     m_SlaveFuncs[GUI_CLIP_CURSOR]           = &GuiServer::ClipCursorSlave;
     m_SlaveFuncs[GUI_SET_FOREGROUND_WINDOW] = &GuiServer::SetForegroundWindowSlave;
     m_SlaveFuncs[GUI_MONITOR_FROM_WINDOW]   = &GuiServer::MonitorFromWindowSlave;
@@ -940,6 +942,23 @@ bool GuiServer::QueueCallbackSlave2(void)
 // GetJobObjectForAssign
 //---------------------------------------------------------------------------
 
+#ifndef JOB_OBJECT_CPU_RATE_CONTROL_ENABLE
+#define JOB_OBJECT_CPU_RATE_CONTROL_ENABLE 0x1
+#define JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP 0x4
+#define JobObjectCpuRateControlInformation (JOBOBJECTINFOCLASS)15
+
+typedef struct _JOBOBJECT_CPU_RATE_CONTROL_INFORMATION {
+    ULONG ControlFlags;
+    union {
+        ULONG CpuRate;
+        ULONG Weight;
+        struct {
+            USHORT MinRate;
+            USHORT MaxRate;
+        } DUMMYSTRUCTNAME;
+    } DUMMYUNIONNAME;
+} JOBOBJECT_CPU_RATE_CONTROL_INFORMATION;
+#endif
 
 HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
 {
@@ -1121,6 +1140,16 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
 						jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_PROCESS_MEMORY;
 					}
 					ok = SetInformationJobObject(hJobObject, JobObjectExtendedLimitInformation, &jobELInfo, sizeof(jobELInfo));
+                }
+
+                if (ok) {
+                    ULONG CpuRateLimit = SbieApi_QueryConfNumber(boxname, L"CpuRateLimit", 0);
+                    if (CpuRateLimit > 0 && CpuRateLimit <= 100) {
+                        JOBOBJECT_CPU_RATE_CONTROL_INFORMATION cpuRateInfo = {0};
+                        cpuRateInfo.ControlFlags = JOB_OBJECT_CPU_RATE_CONTROL_ENABLE | JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP;
+                        cpuRateInfo.CpuRate = CpuRateLimit * 100; // 1% = 100
+                        SetInformationJobObject(hJobObject, JobObjectCpuRateControlInformation, &cpuRateInfo, sizeof(cpuRateInfo));
+                    }
                 }
 
                 if (! ok) {
@@ -3097,6 +3126,85 @@ ULONG GuiServer::SendCopyDataSlave(SlaveArgs *args)
 
 
 //---------------------------------------------------------------------------
+// ShellNotifyIconSlave
+//---------------------------------------------------------------------------
+
+
+ULONG GuiServer::ShellNotifyIconSlave(SlaveArgs *args)
+{
+    GUI_SHELL_NOTIFY_ICON_REQ *req = (GUI_SHELL_NOTIFY_ICON_REQ *)args->req_buf;
+    GUI_SHELL_NOTIFY_ICON_RPL *rpl = (GUI_SHELL_NOTIFY_ICON_RPL *)args->rpl_buf;
+
+    if (args->req_len < sizeof(GUI_SHELL_NOTIFY_ICON_REQ))
+        return STATUS_INFO_LENGTH_MISMATCH;
+
+    //
+    // resolve Shell_NotifyIconW dynamically to avoid a static shell32 dependency
+    //
+
+    typedef BOOL (WINAPI *P_Shell_NotifyIconW)(DWORD, PNOTIFYICONDATAW);
+    static P_Shell_NotifyIconW fnShellNotifyIconW = NULL;
+    if (!fnShellNotifyIconW) {
+        HMODULE hShell32 = GetModuleHandleW(L"shell32.dll");
+        if (!hShell32)
+            hShell32 = LoadLibraryW(L"shell32.dll");
+        if (hShell32)
+            fnShellNotifyIconW = (P_Shell_NotifyIconW)GetProcAddress(hShell32, "Shell_NotifyIconW");
+    }
+
+    if (!fnShellNotifyIconW) {
+        rpl->error  = ERROR_PROC_NOT_FOUND;
+        rpl->result = 0;
+        args->rpl_len = sizeof(*rpl);
+        return STATUS_SUCCESS;
+    }
+
+    //
+    // reconstruct NOTIFYICONDATAW from the platform-neutral wire format
+    //
+
+    NOTIFYICONDATAW nid;
+    memset(&nid, 0, sizeof(nid));
+    nid.cbSize = req->cbSize;
+    if (nid.cbSize < (DWORD)NOTIFYICONDATAW_V1_SIZE)
+        nid.cbSize = (DWORD)NOTIFYICONDATAW_V1_SIZE;
+#if (NTDDI_VERSION >= NTDDI_VISTA)
+    if (nid.cbSize > (DWORD)sizeof(nid))
+        nid.cbSize = (DWORD)sizeof(nid);
+#else
+    if (nid.cbSize > (DWORD)NOTIFYICONDATAW_V2_SIZE)
+        nid.cbSize = (DWORD)NOTIFYICONDATAW_V2_SIZE;
+#endif
+    nid.hWnd             = (HWND)(ULONG_PTR)req->hWnd;
+    nid.uID              = req->uID;
+    nid.uFlags           = req->uFlags;
+    nid.uCallbackMessage = req->uCallbackMessage;
+    nid.hIcon            = (HICON)(ULONG_PTR)req->hIcon;
+    wmemcpy(nid.szTip, req->szTip, ARRAYSIZE(nid.szTip) - 1);
+    nid.szTip[ARRAYSIZE(nid.szTip) - 1] = L'\0';
+    nid.dwState          = req->dwState;
+    nid.dwStateMask      = req->dwStateMask;
+    wmemcpy(nid.szInfo, req->szInfo, ARRAYSIZE(nid.szInfo) - 1);
+    nid.szInfo[ARRAYSIZE(nid.szInfo) - 1] = L'\0';
+    nid.uVersion         = req->uVersion;
+    wmemcpy(nid.szInfoTitle, req->szInfoTitle, ARRAYSIZE(nid.szInfoTitle) - 1);
+    nid.szInfoTitle[ARRAYSIZE(nid.szInfoTitle) - 1] = L'\0';
+    nid.dwInfoFlags      = req->dwInfoFlags;
+    nid.guidItem         = req->guidItem;
+#if (NTDDI_VERSION >= NTDDI_VISTA)
+    nid.hBalloonIcon     = (HICON)(ULONG_PTR)req->hBalloonIcon;
+#endif
+
+    BOOL result = fnShellNotifyIconW(req->dwMessage, &nid);
+
+    rpl->error  = GetLastError();
+    rpl->result = result ? 1 : 0;
+    args->rpl_len = sizeof(*rpl);
+    return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
 // ClipCursorSlave
 //---------------------------------------------------------------------------
 
@@ -3550,6 +3658,15 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
         }
     }
 
+    ULONG max_data = MAX_RPL_BUF_SIZE - sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
+    if (lenData > max_data)
+        return STATUS_INVALID_PARAMETER;
+
+    if (reqData && lenData > 0) {
+        if (args->req_len < sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ) + lenData)
+            return STATUS_INFO_LENGTH_MISMATCH;
+    }
+
     SetLastError(ERROR_SUCCESS);
     if (req->unicode) {
         rpl->retval = GetRawInputDeviceInfoW((HANDLE)req->hDevice, req->uiCommand, reqData, &req->cbSize);
@@ -3569,7 +3686,9 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
     else
         rpl->hasData = FALSE;
 
-    args->rpl_len = args->req_len;
+    args->rpl_len = sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
+    if (lenData)
+        args->rpl_len += lenData;
 
     return STATUS_SUCCESS;
 }
@@ -3579,9 +3698,12 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
 // WndHookNotifySlave
 //---------------------------------------------------------------------------
 
+typedef DWORD (*P_GetProcessIdOfThread)(HANDLE Thread);
 
 ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
 {
+    static P_GetProcessIdOfThread pGetProcessIdOfThread = (P_GetProcessIdOfThread)GetProcAddress(_Kernel32, "GetProcessIdOfThread");
+
     GUI_WND_HOOK_NOTIFY_REQ *req = (GUI_WND_HOOK_NOTIFY_REQ *)args->req_buf;
     GUI_WND_HOOK_NOTIFY_RPL *rpl = (GUI_WND_HOOK_NOTIFY_RPL *)args->rpl_buf;
 
@@ -3598,6 +3720,10 @@ ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
         HANDLE hThread = OpenThread(THREAD_SET_CONTEXT, FALSE, (DWORD)whk->hthread);
 		if (hThread)
 		{
+            DWORD ownerPid = pGetProcessIdOfThread ? pGetProcessIdOfThread(hThread) : -1;
+            if (ownerPid != args->pid)
+                rpl->status = STATUS_ACCESS_DENIED;
+            else
 #ifdef _WIN64
             if (whk->isWoW64)
             {
@@ -3616,11 +3742,15 @@ ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
                 if(!pNtQueueApcThread)
                     pNtQueueApcThread = (PNT_QUEUE_APC_THREAD)GetProcAddress(_Ntdll, "NtQueueApcThread");
 
-		        pNtQueueApcThread(hThread, ApcRoutine, (PVOID)whk->hthread , NULL, NULL);
+		        if (NT_SUCCESS(pNtQueueApcThread(hThread, ApcRoutine, (PVOID)whk->hthread , NULL, NULL)))
+                    rpl->status = STATUS_SUCCESS;
             }
             else
 #endif _WIN64
-			    QueueUserAPC((PAPCFUNC)whk->hproc, hThread, (ULONG_PTR)req->threadid);
+            {
+                if(QueueUserAPC((PAPCFUNC)whk->hproc, hThread, (ULONG_PTR)req->threadid))
+                    rpl->status = STATUS_SUCCESS;
+            }
 
 			CloseHandle(hThread);
 
@@ -3640,8 +3770,6 @@ ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
 
     LeaveCriticalSection(&m_SlavesLock);
 
-    rpl->status = STATUS_SUCCESS;
-
     args->rpl_len = sizeof(GUI_WND_HOOK_NOTIFY_RPL);
     
     return STATUS_SUCCESS;
@@ -3654,6 +3782,8 @@ ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
 
 ULONG GuiServer::WndHookRegisterSlave(SlaveArgs* args)
 {
+    static P_GetProcessIdOfThread pGetProcessIdOfThread = (P_GetProcessIdOfThread)GetProcAddress(_Kernel32, "GetProcessIdOfThread");
+
     GUI_WND_HOOK_REGISTER_REQ* req = (GUI_WND_HOOK_REGISTER_REQ*)args->req_buf;
     GUI_WND_HOOK_REGISTER_RPL* rpl = (GUI_WND_HOOK_REGISTER_RPL*)args->rpl_buf;
 
@@ -3673,6 +3803,15 @@ ULONG GuiServer::WndHookRegisterSlave(SlaveArgs* args)
     
     if (req->hthread && req->hproc) // register
     {
+        // Validate thread ownership - reject if hthread is not in the caller's process
+        HANDLE hThread = OpenThread(THREAD_QUERY_LIMITED_INFORMATION, FALSE, req->hthread);
+        if (!hThread) 
+            return STATUS_UNSUCCESSFUL;
+        DWORD ownerPid = pGetProcessIdOfThread ? pGetProcessIdOfThread(hThread) : -1;
+        CloseHandle(hThread);
+        if (ownerPid != args->pid)
+            return STATUS_ACCESS_DENIED;
+
         if (!whk) // add if not already added
         {
             whk = (WND_HOOK *)HeapAlloc(GetProcessHeap(), 0, sizeof(WND_HOOK));

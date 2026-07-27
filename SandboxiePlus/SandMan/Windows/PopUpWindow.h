@@ -471,6 +471,7 @@ private slots:
 	virtual void		OnDismissProgress(bool bHide);
 
 	virtual void		OnCopy();
+	virtual void		OnFlushPendingEntries();
 
 protected:
 	virtual void		closeEvent(QCloseEvent *e);
@@ -483,6 +484,10 @@ protected:
 	virtual bool		IsMessageHidden(quint32 MsgCode, const QStringList& MsgData);
 
 	virtual void		SendPromptResult(CPopUpPrompt* pEntry, int retval);
+	void				SchedulePendingEntriesFlush();
+	CPopUpMessage*		FindMessageEntry(const QString& Message);
+	int					CountPopupMessages() const;
+	bool				RemoveOldestPopupMessage();
 
 	QMultiMap<quint32, QString> m_HiddenMessages;
 	bool				m_HideAllMessages;
@@ -492,5 +497,8 @@ private:
 	QAction*			m_pActionCopy;
 	int					m_uTimerID;
 	int					m_iTopMost;
+	bool				m_EntryFlushPending;
+	bool				m_FlushingPendingEntries;
+	QList<CPopUpEntry*>	m_PendingEntries;
 	Ui::PopUpWindow ui;
 };

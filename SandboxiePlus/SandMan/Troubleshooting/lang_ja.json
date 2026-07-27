@@ -1,10 +1,15 @@
 ﻿{
-"Description Text...": "説明テキスト...",
+"Address and resolve active problems": "現在進行中の問題に対処して解決する",
 "Fix current issues": "現在の問題を修正",
+"Troubleshoot sandbox isolation issues": "サンドボックス分離の問題のトラブルシューティング",
 "Fix issues with sandboxing": "サンドボックスに関する問題を修正",
+"Fix app compatibility problems": "アプリの互換性の問題を修正する",
 "An Application does not work properly when sandboxed": "サンドボックス内でアプリケーションが正常に動作しない",
+"Resolve browser-specific problems": "ブラウザ固有の問題を解決する",
 "Issues with a web browser": "Webブラウザに関する問題",
+"Clean up and maintain sandboxes": "サンドボックスのクリーンアップとメンテナンス",
 "Perform Sandbox maintenance": "サンドボックスのメンテナンスを実行",
+"Fix interface and shell integration": "インターフェースとシェルの統合を修正",
 "Fix issues with the UI or Shell": "UIまたはシェルに関する問題を修正",
 
 "Yes": "はい",
@@ -12,7 +17,7 @@
 "\nPlease note that this required preset works only with a valid supporter certificate!": "\nこの必須プリセットは、有効なサポーター証明書がある場合にのみ機能することにご注意ください！",
 
 "App compatibility checker": "アプリ互換性チェッカー",
-"This script check which app compatibility templates needs to be enabled": "このスクリプトは、どのアプリ互換性テンプレートを有効にする必要があるかを確認します",
+"This script checks which app compatibility templates need to be enabled": "このスクリプトは、どのアプリ互換性テンプレートを有効にする必要があるかを確認します",
 "Loaded %1 templates": "%1 個のテンプレートを読み込みました",
 
 "Browser shortcut is missing from the desktop": "デスクトップにブラウザのショートカットがありません",
@@ -25,17 +30,23 @@
 "Select Browser Path": "ブラウザのパスを選択",
 
 "Explorer Context Menu extension does not work": "エクスプローラーのコンテキストメニュー拡張機能が動作しません",
-"This procedure will re install the shell integration": "この手順により、シェル統合が再インストールされます",
+"This procedure will reinstall the shell integration": "この手順により、シェル統合が再インストールされます",
 "Add Run Sandboxed": "「サンドボックス内で実行」を追加",
 "Add Run Unsandboxed": "「サンドボックス化せずに実行」を追加",
 "Install legacy shell extensions": "レガシーシェル拡張機能をインストール",
 "Select which shell options should be reinstalled": "再インストールするシェルオプションを選択してください",
 
+"Extensions or Credentials are disappearing": "拡張機能または認証情報が失われる",
+"Web Browser Extensions are being reset, or login credentials are forgotten": "Web ブラウザ拡張機能がリセットされているか、ログイン資格情報が忘れられています",
+"Select which box to fix.": "修正するボックスを選択します。",
+"The options have been applied. Please test your browser in %1 and indicate if the issue has been resolved.": "オプションが適用されました。 %1 でブラウザをテストし、問題が解決したかどうかを示してください。",
+"Chrome elevation service fix not successful": "Chrome 昇格サービスの修正が失敗する",
+
 "Low FPS in sandboxed games": "サンドボックス化したゲームでFPSが低い",
 "This procedure will optimize the box settings for gaming": "この手順により、ゲーム用にボックス設定が最適化されます",
 "Select which box to optimize.": "最適化するボックスを選択してください。",
 "To apply recommended settings press NEXT. \n": "推奨設定を適用するには、「次へ」を押してください。\n",
-"The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.": "オプションが適用されました。%1 でゲームを試し、問題が解決したかどうかをお知らせください。",
+"The options have been applied. Please try out your game in %1 and indicate if the issue has been resolved.": "オプションが適用されました。%1 でゲームを試し、問題が解決したかどうかをお知らせください。",
 "FPS optimization not successful": "FPSの最適化に成功しませんでした",
 
 "Failed to install application into a sandbox": "サンドボックスへのアプリケーションのインストールに失敗しました",
@@ -50,10 +61,10 @@
 "no mitigation worked": "どの緩和策も効果がありませんでした",
 
 "Webcam or Sound does not work when sandboxed": "サンドボックス内でウェブカメラまたはサウンドが動作しません",
-"It helps troubleshoot webcam and audio issues in the sandbox": "サンドボックス内でのウェブカメラとオーディオの問題のトラブルシューティングに役立ちます",
+"This procedure enables webcam and sound support on Windows 11": "この手順では、Windows 11 でウェブカメラとサウンドのサポートを有効にします",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Windows 11でウェブカメラのサポートを有効にするには、分離レベルを下げる必要があります。\n続行する場合は、「次へ」を押して変更するサンドボックスを選択してください。\n",
 "Select which box to turn into a reduced isolation app compartment box.": "低分離レベルのアプリ区画にするボックスを選択してください。",
-"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "緩和策が適用されました。%1 でウェブカメラを試し、問題が解決したかどうかをお知らせください。",
+"The mitigation has been applied. Please try out the webcam in %1 and indicate if the issue has been resolved.": "緩和策が適用されました。%1 でウェブカメラを試し、問題が解決したかどうかをお知らせください。",
 "Webcam mitigation not successful": "ウェブカメラの緩和策は成功しませんでした",
 
 "Select affected sandbox": "影響を受けるサンドボックスを選択",
@@ -84,6 +95,12 @@
 "Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Chromeやアプリコンテナーを使用する他のソフトウェアでSbieDll.dllの読み込みに失敗する場合、多くはSandboxieのホームディレクトリのDACLエントリが無効であることが原因です。この緩和策はそれらを修正します。このため、kmdutil.exeに付与する必要がある管理者権限のプロンプトが表示されます。",
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "DACLが調整されました。アプリケーションを再度実行し、問題が解決したかどうかをお知らせください。",
 "DACLs fix did not resolve the issue": "DACLの修正では問題が解決しませんでした",
+
+"SBIE2189: Application is likely chromium based": "SBIE2189: アプリケーションはクロムベースである可能性があります",
+"Application is likely chromium based but its image type is not set to chrome": "アプリケーションはおそらくクロムベースですが、イメージタイプがクロムに​​設定されていません",
+"The Process \"%1\" is likely chromium based but its image type is not set to chrome, it is likely to fail. Do you want to set its ImageType setting to chrome for this box?": "プロセス「%1」はクロムベースである可能性がありますが、そのイメージタイプがクロムに​​設定されていないため、失敗する可能性があります。このボックスの ImageType 設定を chrome に設定しますか?",
+"Yes, add \"%1\" to Sandboxie.ini": "はい、「%1」をSandboxie.iniに追加します",
+"No, report application to sbie devs": "いいえ、アプリケーションを sbie 開発者に報告してください",
 
 "SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: 特定のサンドボックス化されたサービスを開始できません",
 "Sandboxie failed to start a service in the sandbox": "Sandboxieはサンドボックス内のサービスの開始に失敗しました",
@@ -120,7 +137,7 @@
 "Please enter the SBIEMSG ID you have encountered.": "表示されたSBIEMSG IDを入力してください。",
 "There is no automated troubleshooting available for SBIE%1 yet.<br />": "SBIE%1 には、まだ利用可能な自動トラブルシューティングがありません。<br />",
 "The full message text is: %1<br />": "完全なメッセージテキストは次のとおりです: %1<br />",
-"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "これや他のSBIEメッセージの詳細については、<a href=\"%1\">オンラインドキュメント</a>をご覧ください。",
+"Visit our <a href=\"%1\">online documentation</a> to learn more about this and other SBIE messages.": "これや他のSBIEメッセージの詳細については、<a href=\"%1\">オンラインドキュメント</a>をご覧ください。",
 "Would you like to collect some logs to help us resolve the issue.": "問題解決に役立てるため、ログを収集しますか？",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "それでは、アプリケーションを再度実行して、SBIEメッセージを発生させてください。<br /><br />",
 "Press NEXT when you are done collecting logs.": "ログの収集が完了したら、「次へ」を押してください。",
@@ -131,5 +148,5 @@
 
 "Viber crashes on startup": "起動時にViberがクラッシュします",
 "The Viber messenger crashes on startup": "Viberメッセンジャーが起動時にクラッシュします",
-"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.": "Viberは、標準的な分離であるイエロータイプのサンドボックスと互換性がありません。ただし、グリーン（アプリコンパートメント）タイプのサンドボックスで動作することが知られています。"
+"Viber is not compatible with the standard isolation yellow type Sandbox. However, it is known to work in a Green (App Compartment) type sandbox.": "Viberは、標準的な分離であるイエロータイプのサンドボックスと互換性がありません。ただし、グリーン（アプリコンパートメント）タイプのサンドボックスで動作することが知られています。"
 }

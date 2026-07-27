@@ -2893,7 +2893,7 @@ Senarai standar pangkalan TCP/IP terhalang
 .
 
 4294;txt;01
-Izinkan program-program untuk memutakhirkan senarai lompat dalam batang tugas Windows 7
+Izinkan program-program untuk memutakhirkan senarai lompat dalam batang tugas Windows
 .
 
 #----------------------------------------------------------------------------

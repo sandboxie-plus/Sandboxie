@@ -1,10 +1,15 @@
-{
-"Description Text...": "Opis tekstu...",
+﻿{
+"Address and resolve active problems": "Adresuj i rozwiązuj aktywne problemy",
 "Fix current issues": "Napraw bieżące problemy",
+"Troubleshoot sandbox isolation issues": "Rozwiązywanie problemów z izolacją piaskownicy",
 "Fix issues with sandboxing": "Napraw problemy związane z izolacją w pudełku (sandboxing)",
+"Fix app compatibility problems": "Napraw problemy ze zgodnością aplikacji",
 "An Application does not work properly when sandboxed": "Aplikacja nie działa poprawnie, gdy jest uruchamiana w pudełku (sandboxie)",
+"Resolve browser-specific problems": "Rozwiązywanie problemów specyficznych dla przeglądarki",
 "Issues with a web browser": "Problemy z przeglądarką internetową",
+"Clean up and maintain sandboxes": "Czyść i konserwuj piaskownice",
 "Perform Sandbox maintenance": "Wykonaj konserwację pudełka (sandboxa)",
+"Fix interface and shell integration": "Napraw integrację interfejsu i powłoki",
 "Fix issues with the UI or Shell": "Napraw problemy z interfejsem użytkownika lub powłoką",
 
 "Yes": "Tak",
@@ -12,7 +17,7 @@
 "\nPlease note that this required preset works only with a valid supporter certificate!": "\nProszę zauważyć, że ten wymagany zestaw ustawień działa tylko z ważnym certyfikatem wspierającego!",
 
 "App compatibility checker": "Sprawdzacz kompatybilności aplikacji",
-"This script check which app compatibility templates needs to be enabled": "Ten skrypt sprawdza, które szablony kompatybilności aplikacji należy włączyć",
+"This script checks which app compatibility templates need to be enabled": "Ten skrypt sprawdza, które szablony kompatybilności aplikacji należy włączyć",
 "Loaded %1 templates": "Załadowano %1 szablonów",
 
 "Browser shortcut is missing from the desktop": "Skrót do przeglądarki brakuje na pulpicie",
@@ -25,17 +30,23 @@
 "Select Browser Path": "Wybierz ścieżkę do przeglądarki",
 
 "Explorer Context Menu extension does not work": "Rozszerzenie menu kontekstowego Eksploratora Windows nie działa",
-"This procedure will re install the shell integration": "Ta procedura ponownie zainstaluje integrację z powłoką",
+"This procedure will reinstall the shell integration": "Ta procedura ponownie zainstaluje integrację z powłoką",
 "Add Run Sandboxed": "Dodaj \"Uruchom w pudełku (sandboxie)\"",
 "Add Run Unsandboxed": "Dodaj \"Uruchom poza pudełkiem (sandboxem)\"",
 "Install legacy shell extensions": "Zainstaluj starsze rozszerzenia powłoki",
 "Select which shell options should be reinstalled": "Wybierz, które opcje powłoki powinny zostać ponownie zainstalowane",
 
+"Extensions or Credentials are disappearing": "Znikają rozszerzenia lub dane uwierzytelniające",
+"Web Browser Extensions are being reset, or login credentials are forgotten": "Trwa resetowanie rozszerzeń przeglądarki internetowej lub zapomniano o danych logowania",
+"Select which box to fix.": "Wybierz, które pudełko chcesz naprawić.",
+"The options have been applied. Please test your browser in %1 and indicate if the issue has been resolved.": "Opcje zostały zastosowane. Proszę przetestować swoją przeglądarkę w %1 i wskazać, czy problem został rozwiązany.",
+"Chrome elevation service fix not successful": "Naprawa usługi podniesienia poziomu przeglądarki Chrome nie powiodła się",
+
 "Low FPS in sandboxed games": "Niska liczba klatek na sekundę (FPS) w grach uruchomionych w pudełku (sandboxie)",
 "This procedure will optimize the box settings for gaming": "Ta procedura zoptymalizuje ustawienia pudełka (sandboxa) pod kątem gier",
 "Select which box to optimize.": "Wybierz, które pudełko (sandbox) chcesz zoptymalizować.",
 "To apply recommended settings press NEXT. \n": "Aby zastosować zalecane ustawienia, naciśnij DALEJ. \n",
-"The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.": "Zastosowano opcje. Proszę spróbować uruchomić grę w %1 i wskazać, czy problem został rozwiązany.",
+"The options have been applied. Please try out your game in %1 and indicate if the issue has been resolved.": "Zastosowano opcje. Proszę spróbować uruchomić grę w %1 i wskazać, czy problem został rozwiązany.",
 "FPS optimization not successful": "Optymalizacja liczby klatek na sekundę (FPS) nie powiodła się",
 
 "Failed to install application into a sandbox": "Nie udało się zainstalować aplikacji w pudełku (sandboxie)",
@@ -50,10 +61,10 @@
 "no mitigation worked": "Żadne środki zaradcze nie zadziałały",
 
 "Webcam or Sound does not work when sandboxed": "Kamiera internetowa lub dźwięk nie działają, gdy aplikacja jest uruchamiana w pudełku (sandboxie)",
-"It helps troubleshoot webcam and audio issues in the sandbox": "Pomaga rozwiązywać problemy związane z kamerą internetową i dźwiękiem w pudełku (sandboxie)",
+"This procedure enables webcam and sound support on Windows 11": "Ta procedura włącza obsługę kamery internetowej i dźwięku w systemie Windows 11",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Aby włączyć obsługę kamery internetowej w systemie Windows 11, należy obniżyć poziom izolacji. \nJeśli chcesz kontynuować, naciśnij DALEJ i wybierz pudełko (sandbox), które chcesz zmodyfikować. \n",
 "Select which box to turn into a reduced isolation app compartment box.": "Wybierz, które pudełko (sandbox) chcesz przekształcić w pudełko o zmniejszonym poziomie izolacji dla aplikacji.",
-"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "Zastosowano środki zaradcze. Proszę spróbować użyć kamery internetowej w %1 i wskazać, czy problem został rozwiązany.",
+"The mitigation has been applied. Please try out the webcam in %1 and indicate if the issue has been resolved.": "Zastosowano środki zaradcze. Proszę spróbować użyć kamery internetowej w %1 i wskazać, czy problem został rozwiązany.",
 "Webcam mitigation not successful": "Środki zaradcze dotyczące kamery internetowej nie powiodły się",
 
 "Select affected sandbox": "Wybierz dotknięte pudełko (sandbox)",
@@ -84,6 +95,12 @@
 "Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Niepowodzenia w ładowaniu SbieDll.dll, które mogą wystąpić w Chrome lub innym oprogramowaniu wykorzystującym kontenery aplikacji, często są spowodowane nieprawidłowymi wpisami w listach kontroli dostępu (DACL) dla folderu głównego Sandboxie. Ta procedura naprawi te problemy, dlatego poprosi o uprawnienia administratora dla programu kmdutil.exe.",
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "Zostały dostosowane listy kontroli dostępu (DACL). Proszę spróbować ponownie uruchomić aplikację i wskazać, czy problem został rozwiązany.",
 "DACLs fix did not resolve the issue": "Naprawa list kontroli dostępu (DACL) nie rozwiązała problemu",
+
+"SBIE2189: Application is likely chromium based": "SBIE2189: Aplikacja prawdopodobnie zawiera chrom",
+"Application is likely chromium based but its image type is not set to chrome": "Aplikacja jest prawdopodobnie oparta na chromie, ale jej typ obrazu nie jest ustawiony na Chrome",
+"The Process \"%1\" is likely chromium based but its image type is not set to chrome, it is likely to fail. Do you want to set its ImageType setting to chrome for this box?": "Proces „%1” prawdopodobnie opiera się na chromie, ale jego typ obrazu nie jest ustawiony na chromowany, prawdopodobnie zakończy się niepowodzeniem. Czy chcesz ustawić dla tego okna ustawienie ImageType na Chrome?",
+"Yes, add \"%1\" to Sandboxie.ini": "Tak, dodaj „%1” do Sandboxie.ini",
+"No, report application to sbie devs": "Nie, zgłoś aplikację deweloperom Sbie",
 
 "SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: Nie można uruchomić określonej usługi uruchomionej w pudełku (sandboxie)",
 "Sandboxie failed to start a service in the sandbox": "Sandboxie nie udało się uruchomić usługi w pudełku (sandboxie)",
@@ -120,16 +137,16 @@
 "Please enter the SBIEMSG ID you have encountered.": "Proszę wprowadzić identyfikator SBIEMSG, który otrzymałeś.",
 "There is no automated troubleshooting available for SBIE%1 yet.<br />": "Nie ma jeszcze automatycznego rozwiązywania problemów dla SBIE%1.<br />",
 "The full message text is: %1<br />": "Pełny tekst wiadomości to: %1<br />",
-"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Odwiedź naszą <a href=\"%1\">online-documentation</a>, aby dowiedzieć się więcej o tym i innych naszych wiadomościach.",
+"Visit our <a href=\"%1\">online documentation</a> to learn more about this and other SBIE messages.": "Odwiedź naszą <a href=\"%1\">online-documentation</a>, aby dowiedzieć się więcej o tym i innych naszych wiadomościach.",
 "Would you like to collect some logs to help us resolve the issue.": "Czy chcesz zebrać niektóre logi, aby pomóc nam rozwiązać problem?",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "Teraz uruchom ponownie swoją aplikację, aby wywołać komunikat Sbie.<br /><br />",
 "Press NEXT when you are done collecting logs.": "Naciśnij DALEJ, gdy zakończysz zbieranie logów.",
 
-"Unknown application crashed":"Nieznana aplikacja się zawiesiła",
-"An Unknown application crashed":"Nieznana aplikacja się zawiesiła",
-"Do you want to report this issue?":"Czy chcesz zgłosić ten problem?",
+"Unknown application crashed": "Nieznana aplikacja się zawiesiła",
+"An Unknown application crashed": "Nieznana aplikacja się zawiesiła",
+"Do you want to report this issue?": "Czy chcesz zgłosić ten problem?",
 
-"Viber crashes on startup":"Viber zawiesza się podczas uruchamiania",
-"The Viber messenger crashes on startup":"Aplikacja Viber Messenger zawiesza się podczas uruchamiania",
-"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.": "Viber nie jest kompatybilny ze standardowym izolowanym środowiskiem typu żółtego (Sandbox). Jest jednak znane, że działa w środowisku typu zielonego (App Compartment)."
+"Viber crashes on startup": "Viber zawiesza się podczas uruchamiania",
+"The Viber messenger crashes on startup": "Aplikacja Viber Messenger zawiesza się podczas uruchamiania",
+"Viber is not compatible with the standard isolation yellow type Sandbox. However, it is known to work in a Green (App Compartment) type sandbox.": "Viber nie jest kompatybilny ze standardowym izolowanym środowiskiem typu żółtego (Sandbox). Jest jednak znane, że działa w środowisku typu zielonego (App Compartment)."
 }

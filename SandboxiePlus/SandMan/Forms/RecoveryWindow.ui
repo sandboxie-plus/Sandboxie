@@ -114,19 +114,13 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="3">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
+      <item row="6" column="3">
+       <widget class="QCheckBox" name="chkShowIgnored">
+        <property name="text">
+         <string>Show Ignored Files</string>
+        </property>
+       </widget>
+      </item>
        <item row="4" column="5">
         <widget class="QToolButton" name="btnDelete">
          <property name="sizePolicy">
@@ -202,6 +196,7 @@
   <tabstop>btnRefresh</tabstop>
   <tabstop>btnAddFolder</tabstop>
   <tabstop>chkShowAll</tabstop>
+  <tabstop>chkShowIgnored</tabstop>
   <tabstop>btnDeleteAll</tabstop>
   <tabstop>btnClose</tabstop>
  </tabstops>

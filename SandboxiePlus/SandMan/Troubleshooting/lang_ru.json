@@ -1,10 +1,15 @@
 ﻿{
-"Description Text...": "Текст описания...",
+"Address and resolve active problems": "Обращайтесь и решайте активные проблемы",
 "Fix current issues": "Устранение текущих проблем",
+"Troubleshoot sandbox isolation issues": "Устранение проблем с изоляцией песочницы",
 "Fix issues with sandboxing": "Устранение проблем с песочницей",
+"Fix app compatibility problems": "Устранение проблем совместимости приложений",
 "An Application does not work properly when sandboxed": "Приложение не работает должным образом в песочнице",
+"Resolve browser-specific problems": "Решение проблем, связанных с браузером",
 "Issues with a web browser": "Проблемы с веб-браузером",
+"Clean up and maintain sandboxes": "Очистка и обслуживание песочниц",
 "Perform Sandbox maintenance": "Выполнить обслуживание песочницы",
+"Fix interface and shell integration": "Исправление интеграции интерфейса и оболочки.",
 "Fix issues with the UI or Shell": "Устранение проблем с интерфейсом или оболочкой",
 
 "Yes": "Да",
@@ -12,7 +17,7 @@
 "\nPlease note that this required preset works only with a valid supporter certificate!": "\nОбратите внимание, что этот обязательный пресет работает только при наличии действующего сертификата сторонника!",
 
 "App compatibility checker": "Проверка совместимости приложений",
-"This script check which app compatibility templates needs to be enabled": "Этот скрипт проверяет, какие шаблоны совместимости приложений должны быть включены",
+"This script checks which app compatibility templates need to be enabled": "Этот скрипт проверяет, какие шаблоны совместимости приложений должны быть включены",
 "Loaded %1 templates": "Загружено %1 шаблонов",
 
 "Browser shortcut is missing from the desktop": "Ярлык браузера отсутствует на рабочем столе",
@@ -25,17 +30,23 @@
 "Select Browser Path": "Выберите путь к браузеру",
 
 "Explorer Context Menu extension does not work": "Расширение контекстного меню Проводника не работает",
-"This procedure will re install the shell integration": "Эта процедура переустановит интеграцию оболочки",
+"This procedure will reinstall the shell integration": "Эта процедура переустановит интеграцию оболочки",
 "Add Run Sandboxed": "Добавить Запуск в песочнице",
 "Add Run Unsandboxed": "Добавить Запуск вне песочницы",
 "Install legacy shell extensions": "Установить устаревшие расширения оболочки",
 "Select which shell options should be reinstalled": "Выберите, какие параметры оболочки должны быть переустановлены",
 
+"Extensions or Credentials are disappearing": "Расширения или учетные данные исчезают",
+"Web Browser Extensions are being reset, or login credentials are forgotten": "Расширения веб-браузера сбрасываются, или учетные данные для входа забыты.",
+"Select which box to fix.": "Выберите, какой ящик нужно исправить.",
+"The options have been applied. Please test your browser in %1 and indicate if the issue has been resolved.": "Варианты применены. Пожалуйста, проверьте свой браузер в %1 и укажите, решена ли проблема.",
+"Chrome elevation service fix not successful": "Исправление службы повышения прав Chrome не удалось",
+
 "Low FPS in sandboxed games": "Низкий FPS в играх в песочнице",
 "This procedure will optimize the box settings for gaming": "Эта процедура оптимизирует настройки песочницы для игр",
 "Select which box to optimize.": "Выберите, какую песочницу оптимизировать.",
 "To apply recommended settings press NEXT. \n": "Чтобы применить рекомендуемые настройки, нажмите ДАЛЕЕ. \n",
-"The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.": "Настройки применены, пожалуйста, попробуйте вашу игру в %1 и укажите, решена ли проблема.",
+"The options have been applied. Please try out your game in %1 and indicate if the issue has been resolved.": "Настройки применены, пожалуйста, попробуйте вашу игру в %1 и укажите, решена ли проблема.",
 "FPS optimization not successful": "Оптимизация FPS не удалась",
 
 "Failed to install application into a sandbox": "Не удалось установить приложение в песочницу",
@@ -50,10 +61,10 @@
 "no mitigation worked": "не сработало",
 
 "Webcam or Sound does not work when sandboxed": "Веб-камера или звук не работают в песочнице",
-"It helps troubleshoot webcam and audio issues in the sandbox": "Это помогает устранить проблемы с веб-камерой и звуком в песочнице",
+"This procedure enables webcam and sound support on Windows 11": "Эта процедура включает поддержку веб-камеры и звука в Windows 11",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Для включения поддержки веб-камеры в Windows 11 необходимо снизить уровень изоляции. \nЕсли хотите продолжить, нажмите ДАЛЕЕ и выберите песочницу для изменения. \n",
 "Select which box to turn into a reduced isolation app compartment box.": "Выберите песочницу для преобразования в песочницу с пониженным уровнем изоляции.",
-"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "Меры применены, пожалуйста, попробуйте веб-камеру в %1 и укажите, решена ли проблема.",
+"The mitigation has been applied. Please try out the webcam in %1 and indicate if the issue has been resolved.": "Меры применены, пожалуйста, попробуйте веб-камеру в %1 и укажите, решена ли проблема.",
 "Webcam mitigation not successful": "Меры по веб-камере не помогли",
 
 "Select affected sandbox": "Выберите затронутую песочницу",
@@ -85,15 +96,21 @@
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "DACLs были скорректированы, попробуйте снова запустить ваше приложение и укажите, решена ли проблема.",
 "DACLs fix did not resolve the issue": "Исправление DACLs не решило проблему",
 
+"SBIE2189: Application is likely chromium based": "SBIE2189: Приложение, скорее всего, основано на Chrome.",
+"Application is likely chromium based but its image type is not set to chrome": "Приложение, скорее всего, основано на Chrome, но его тип изображения не установлен на Chrome.",
+"The Process \"%1\" is likely chromium based but its image type is not set to chrome, it is likely to fail. Do you want to set its ImageType setting to chrome for this box?": "Процесс «%1», скорее всего, основан на хроме, но для него не установлен тип изображения «chrome», и он, скорее всего, завершится сбоем. Вы хотите установить для этого поля параметр ImageType на chrome?",
+"Yes, add \"%1\" to Sandboxie.ini": "Да, добавьте «%1» в Sandboxie.ini.",
+"No, report application to sbie devs": "Нет, сообщить о приложении разработчикам",
+
 "SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: Не удалось запустить определенную службу в песочнице",
 "Sandboxie failed to start a service in the sandbox": "Sandboxie не удалось запустить службу в песочнице",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Сообщение указывает, что Sandboxie не удалось запустить одну из вспомогательных программ SandboxieRpcSs или SandboxieDcomLaunch. Имя, указанное в сообщении, может быть rpcss или dcomlaunch.\n\nВы можете отправить отчет о проблеме на следующей странице, чтобы мы могли проанализировать проблему.",
 
-"SBIE2224: Sandboxed program has crashed":"SBIE2224: Sandboxed program has crashed",
-"A Sandboxed program has crashed":"A Sandboxed program has crashed",
-"The Process '%1' crashed":"The Process '%1' crashed",
-"This program is known to work in a Green (App Compartment) type sandbox.":"This program is known to work in a Green (App Compartment) type sandbox.",
-"There is no known workaround for this process. Do you want to report this issue?":"There is no known workaround for this process. Do you want to report this issue?",
+"SBIE2224: Sandboxed program has crashed": "SBIE2224: Изолированная программа аварийно завершилась",
+"A Sandboxed program has crashed": "Изолированная программа аварийно завершилась",
+"The Process '%1' crashed": "Процесс '%1' аварийно завершился",
+"This program is known to work in a Green (App Compartment) type sandbox.": "Известно, что эта программа работает в песочнице типа Green (App Compartment).",
+"There is no known workaround for this process. Do you want to report this issue?": "Для этого процесса нет известного обходного решения. Хотите сообщить об этой проблеме?",
 
 "SBIE2313: Could not execute specific process": "SBIE2313: Не удалось запустить определенный процесс",
 "Sandboxie failed to start a process in the sandbox": "Sandboxie не удалось запустить процесс в песочнице",
@@ -120,16 +137,16 @@
 "Please enter the SBIEMSG ID you have encountered.": "Пожалуйста, введите идентификатор SBIEMSG, с которым вы столкнулись.",
 "There is no automated troubleshooting available for SBIE%1 yet.<br />": "Автоматизированное устранение неполадок для SBIE%1 пока недоступно.<br />",
 "The full message text is: %1<br />": "Полный текст сообщения: %1<br />",
-"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Посетите нашу <a href=\"%1\">онлайн-документацию</a>, чтобы узнать больше об этом и других сообщениях sbie.",
+"Visit our <a href=\"%1\">online documentation</a> to learn more about this and other SBIE messages.": "Посетите нашу <a href=\"%1\">онлайн-документацию</a>, чтобы узнать больше об этом и других сообщениях sbie.",
 "Would you like to collect some logs to help us resolve the issue.": "Хотите собрать логи, чтобы помочь нам решить проблему?",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "Теперь, пожалуйста, снова запустите ваше приложение, чтобы сгенерировать сообщение Sbie.<br /><br />",
 "Press NEXT when you are done collecting logs.": "Нажмите ДАЛЕЕ после завершения сбора логов.",
 
-"Unknown application crashed":"Unknown application crashed",
-"An Unknown application crashed":"An Unknown application crashed",
-"Do you want to report this issue?":"Do you want to report this issue?",
+"Unknown application crashed": "Неизвестное приложение аварийно завершилось",
+"An Unknown application crashed": "Неизвестное приложение аварийно завершилось",
+"Do you want to report this issue?": "Хотите сообщить об этой проблеме?",
 
-"Viber crashes on startup":"Viber crashes on startup",
-"The Viber messenger crashes on startup":"The Viber messenger crashes on startup",
-"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.":"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox."
+"Viber crashes on startup": "Viber аварийно завершается при запуске",
+"The Viber messenger crashes on startup": "Мессенджер Viber аварийно завершается при запуске",
+"Viber is not compatible with the standard isolation yellow type Sandbox. However, it is known to work in a Green (App Compartment) type sandbox.": "Viber несовместим со стандартной изолированной песочницей жёлтого типа. Однако известно, что он работает в песочнице типа Green (App Compartment)."
 }

@@ -27,11 +27,13 @@ HEADERS += ./stdafx.h \
     ./Helpers/ReadDirectoryChangesPrivate.h \
     ./Helpers/TabOrder.h \
     ./Helpers/IniHighlighter.h \
+    ./Helpers/MiniDumpFilter.h \
     ./Windows/RecoveryWindow.h \
     ./Windows/PopUpWindow.h \
     ./Windows/SnapshotsWindow.h \
     ./Windows/SettingsWindow.h \
     ./Windows/OptionsWindow.h \
+    ./Windows/PendingChanges.h \
     ./Windows/EditorSettingsWindow.h \
     ./Windows/SelectBoxWindow.h \
     ./Windows/SupportDialog.h \
@@ -85,6 +87,7 @@ SOURCES += ./main.cpp \
     ./Helpers/IniHighlighter.cpp \
     ./Helpers/WindowFromPointEx.cpp \
     ./Helpers/TabOrder.cpp \
+    ./Helpers/MiniDumpFilter.cpp \
     ./Windows/OptionsWindow.cpp \
     ./Windows/EditorSettingsWindow.cpp \
     ./Windows/PopUpWindow.cpp \
@@ -131,6 +134,7 @@ TRANSLATIONS += sandman_ar.ts \
     sandman_en.ts \
     sandman_es.ts \
     sandman_fr.ts \
+    sandman_hi.ts \
     sandman_hu.ts \
     sandman_it.ts \
     sandman_ja.ts \

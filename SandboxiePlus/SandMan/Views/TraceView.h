@@ -87,6 +87,7 @@ public slots:
 	void				OnShowStack();
 
 private slots:
+	void				SelectProcess(quint64 PID);
 	void				UpdateFilters();
 	void				OnFilterChanged();
 

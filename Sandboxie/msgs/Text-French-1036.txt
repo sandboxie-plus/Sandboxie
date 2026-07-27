@@ -3169,7 +3169,7 @@ La liste par défaut des ports TCP/UDP bloqués
 .
 
 4294;txt;01
-Autoriser à mettre à jour les « jump lists » dans la barre des tâches de Windows 7.
+Autoriser à mettre à jour les « jump lists » dans la barre des tâches de Windows.
 .
 
 4295;txt;01

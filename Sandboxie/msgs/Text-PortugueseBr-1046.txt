@@ -3036,7 +3036,7 @@ Lista padrão de portas TCP/IP bloqueadas
 .
 
 4294;txt;01
-Permitir que os programas atualizem listas de atalhos na barra de tarefas do Windows 7
+Permitir que os programas atualizem listas de atalhos na barra de tarefas do Windows
 .
 
 4295;txt;01

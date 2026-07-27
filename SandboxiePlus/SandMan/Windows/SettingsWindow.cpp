@@ -22,10 +22,93 @@
 #include "Helpers/IniHighlighter.h"
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
 #include <QFileIconProvider>
+#include <QRegularExpression>
+#include <QScreen>
+#include <QSet>
 
 
 #include <windows.h>
 #include <shellapi.h>
+
+static int CGetWindowsMonitorNumber(const QString& screenName)
+{
+	int markerPos = screenName.lastIndexOf("DISPLAY", -1, Qt::CaseInsensitive);
+	if (markerPos < 0)
+		return -1;
+
+	QString tail = screenName.mid(markerPos + 7);
+	if (tail.isEmpty())
+		return -1;
+
+	int digitCount = 0;
+	while (digitCount < tail.length() && tail[digitCount].isDigit())
+		digitCount++;
+	if (digitCount == 0)
+		return -1;
+
+	bool ok = false;
+	int number = tail.left(digitCount).toInt(&ok);
+	return ok ? number : -1;
+}
+
+static int CGetDisplayNumberForScreen(QScreen* screen)
+{
+	if (!screen)
+		return -1;
+
+	QRect geometry = screen->geometry();
+	QPoint center = geometry.center();
+	POINT point = { center.x(), center.y() };
+	HMONITOR monitor = MonitorFromPoint(point, MONITOR_DEFAULTTONEAREST);
+	if (!monitor)
+		return -1;
+
+	MONITORINFOEXW monitorInfo;
+	memset(&monitorInfo, 0, sizeof(monitorInfo));
+	monitorInfo.cbSize = sizeof(monitorInfo);
+	if (!GetMonitorInfoW(monitor, &monitorInfo))
+		return -1;
+
+	QString deviceName = QString::fromWCharArray(monitorInfo.szDevice);
+	int displayNumber = CGetWindowsMonitorNumber(deviceName);
+	if (displayNumber > 0)
+		return displayNumber;
+
+	return -1;
+}
+
+static constexpr int c_MonitorLabelBaseRole = Qt::UserRole + 100;
+static constexpr int c_MonitorLabelDefaultRole = Qt::UserRole + 101;
+
+static QString CBuildMonitorOptionLabel(const QString& baseLabel, bool isDefault, bool isFallback)
+{
+	QString label = baseLabel;
+	if (isDefault)
+		label = QObject::tr("%1 (%2)").arg(label, QObject::tr("default"));
+	if (isFallback)
+		label = QObject::tr("%1 (%2)").arg(label, QObject::tr("fallback"));
+	return label;
+}
+
+static void CAddMonitorComboItem(QComboBox* pCombo, const QString& baseLabel, int value, bool isDefault = false)
+{
+	pCombo->addItem(CBuildMonitorOptionLabel(baseLabel, isDefault, false), value);
+	int idx = pCombo->count() - 1;
+	pCombo->setItemData(idx, baseLabel, c_MonitorLabelBaseRole);
+	pCombo->setItemData(idx, isDefault, c_MonitorLabelDefaultRole);
+}
+
+static void CUpdateMonitorComboFallbackLabel(QComboBox* pCombo, int fallbackIndex, bool markFallback)
+{
+	for (int i = 0; i < pCombo->count(); i++) {
+		QString baseLabel = pCombo->itemData(i, c_MonitorLabelBaseRole).toString();
+		if (baseLabel.isEmpty())
+			baseLabel = pCombo->itemText(i);
+		bool isDefault = pCombo->itemData(i, c_MonitorLabelDefaultRole).toBool();
+		bool isFallback = markFallback && i == fallbackIndex;
+		pCombo->setItemText(i, CBuildMonitorOptionLabel(baseLabel, isDefault, isFallback));
+	}
+}
 
 
 void FixTriStateBoxPallete(QWidget* pWidget)
@@ -88,6 +171,13 @@ Qt::CheckState CSettingsWindow__Int2Chk(int state)
 	default:
 	case 2: return Qt::PartiallyChecked;
 	}
+}
+
+static bool CSettingsWindow__IsPendingHighlightEnabled(Qt::CheckState state)
+{
+	if (state == Qt::PartiallyChecked)
+		return theConf->GetInt("Options/ViewMode", 1) != 2;
+	return state == Qt::Checked;
 }
 
 quint32 g_FeatureFlags = 0;
@@ -249,11 +339,96 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbTrayBoxes->addItem(tr("All Boxes"));
 	ui.cmbTrayBoxes->addItem(tr("Active + Pinned"));
 	ui.cmbTrayBoxes->addItem(tr("Pinned Only"));
+	ui.cmbTrayStatusTipModifier->addItem(tr("Ctrl"), "Ctrl");
+	ui.cmbTrayStatusTipModifier->addItem(tr("Shift"), "Shift");
 
 	ui.cmbOnClose->addItem(tr("Close to Tray"), "ToTray");
 	ui.cmbOnClose->addItem(tr("Prompt before Close"), "Prompt");
 	ui.cmbOnClose->addItem(tr("Close"), "Close");
 	ui.cmbOnClose->addItem(tr("Hide (Run invisible in Background)"), "Hide");
+
+	const QString sameAsMainLabel = tr("Same as main");
+	const QString keepCurrentLabel = tr("Keep current monitor");
+	const QString activeMonitorLabel = tr("Active monitor");
+	const QString primaryMonitorLabel = tr("Primary monitor");
+
+	auto addWindowMonitorOptions = [&](QComboBox* pCombo, bool includeSameAsMain)
+	{
+		if (includeSameAsMain)
+			CAddMonitorComboItem(pCombo, sameAsMainLabel, -2);
+		CAddMonitorComboItem(pCombo, keepCurrentLabel, -1, true);
+		CAddMonitorComboItem(pCombo, activeMonitorLabel, -3);
+		CAddMonitorComboItem(pCombo, primaryMonitorLabel, 0);
+	};
+
+	addWindowMonitorOptions(ui.cmbLaunchMonitor, false);
+	addWindowMonitorOptions(ui.cmbNonMainLaunchMonitor, true);
+	addWindowMonitorOptions(ui.cmbRecoveryLaunchMonitor, true);
+	addWindowMonitorOptions(ui.cmbNotificationLaunchMonitor, true);
+	addWindowMonitorOptions(ui.cmbSupportDialogLaunchMonitor, true);
+
+	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, tr("Disabled"), -4);
+	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, sameAsMainLabel, -2);
+	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, activeMonitorLabel, -3, true);
+	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, primaryMonitorLabel, 0);
+
+	QList<QScreen*> screens = QGuiApplication::screens();
+	QList<int> windowsDisplayIds;
+	for (int i = 0; i < screens.count(); i++) {
+		int displayId = CGetDisplayNumberForScreen(screens[i]);
+		if (displayId > 0 && !windowsDisplayIds.contains(displayId))
+			windowsDisplayIds.append(displayId);
+	}
+	std::sort(windowsDisplayIds.begin(), windowsDisplayIds.end());
+
+	struct SDisplayEntry {
+		int labelNumber;
+		int monitorSettingData;
+		QString label;
+	};
+
+	QList<SDisplayEntry> displayEntries;
+	int fallbackLabelNumber = windowsDisplayIds.count() + 1;
+	for (int i = 0; i < screens.count(); i++) {
+		QScreen* screen = screens[i];
+		int displayId = CGetDisplayNumberForScreen(screen);
+
+		int displayLabelNumber = -1;
+		if (displayId > 0) {
+			int labelIndex = windowsDisplayIds.indexOf(displayId);
+			if (labelIndex >= 0)
+				displayLabelNumber = labelIndex + 1;
+		}
+		if (displayLabelNumber < 1)
+			displayLabelNumber = fallbackLabelNumber++;
+
+		QString displayName = screen->model().trimmed();
+		if (displayName.isEmpty())
+			displayName = screen->name();
+		if (displayName.isEmpty())
+			displayName = tr("Unknown Display");
+
+		QString label = tr("Display %1: %2").arg(displayLabelNumber).arg(displayName);
+		if (screen == QGuiApplication::primaryScreen())
+			label += tr(" (Primary)");
+
+		int monitorSettingData = (displayId > 0) ? displayId : (i + 1);
+		displayEntries.append({ displayLabelNumber, monitorSettingData, label });
+	}
+
+	std::sort(displayEntries.begin(), displayEntries.end(), [](const SDisplayEntry& left, const SDisplayEntry& right) {
+		if (left.labelNumber != right.labelNumber)
+			return left.labelNumber < right.labelNumber;
+		return left.label < right.label;
+	});
+
+	for (const SDisplayEntry& entry : displayEntries) {
+		CAddMonitorComboItem(ui.cmbLaunchMonitor, entry.label, entry.monitorSettingData);
+		CAddMonitorComboItem(ui.cmbNonMainLaunchMonitor, entry.label, entry.monitorSettingData);
+		CAddMonitorComboItem(ui.cmbRecoveryLaunchMonitor, entry.label, entry.monitorSettingData);
+		CAddMonitorComboItem(ui.cmbNotificationLaunchMonitor, entry.label, entry.monitorSettingData);
+		CAddMonitorComboItem(ui.cmbSupportDialogLaunchMonitor, entry.label, entry.monitorSettingData);
+	}
 
 	ui.cmbGrouping->addItem(tr("Remember previous state"), 0);
 	ui.cmbGrouping->addItem(tr("Expand all groups"), 1);
@@ -349,6 +524,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkRecoveryTop, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 
 	connect(ui.chkUseW11Style, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkRandomGuidName, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	QOperatingSystemVersion current = QOperatingSystemVersion::current();
 	ui.chkUseW11Style->setEnabled(current.majorVersion() == 10 && current.microVersion() >= 22000); // Windows 10 22000+ (Windows 11)
 	//
@@ -385,6 +561,34 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkBoxOpsNotify, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkMinimize, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkSingleShow, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkTrayIcons, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkTrayOverlayIcons, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkTrayUseAlias, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.spnTrayAliasChars, SIGNAL(valueChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkTrayStatusTip, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbTrayStatusTipModifier, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	auto updateTrayAliasCharsUi = [this]() {
+		ui.spnTrayAliasChars->setEnabled(ui.chkTrayUseAlias->isChecked());
+	};
+	connect(ui.chkTrayUseAlias, &QCheckBox::stateChanged, this, [updateTrayAliasCharsUi](int) {
+		updateTrayAliasCharsUi();
+	});
+	updateTrayAliasCharsUi();
+	ui.chkTrayStatusTip->setTristate(true);
+	auto updateTrayStatusTipUi = [this]() {
+		QString modText = ui.cmbTrayStatusTipModifier->currentText();
+		if (modText.isEmpty())
+			modText = tr("Ctrl");
+		ui.chkTrayStatusTip->setToolTip(tr("Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.").arg(modText));
+		ui.cmbTrayStatusTipModifier->setEnabled(ui.chkTrayStatusTip->checkState() == Qt::PartiallyChecked);
+	};
+	connect(ui.cmbTrayStatusTipModifier, &QComboBox::currentTextChanged, this, [updateTrayStatusTipUi](const QString&) {
+		updateTrayStatusTipUi();
+	});
+	connect(ui.chkTrayStatusTip, &QCheckBox::stateChanged, this, [updateTrayStatusTipUi](int) {
+		updateTrayStatusTipUi();
+	});
+	updateTrayStatusTipUi();
 	//
 
 	// Interface Config
@@ -400,7 +604,14 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkColorIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkOverlayIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkHideCore, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkHighlightPendingChanges, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbGrouping, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbNonMainLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbRecoveryLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbNotificationLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbSupportDialogLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbFallbackActiveMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 
 
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
@@ -518,6 +729,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.chkSandboxMoTW, SIGNAL(stateChanged(int)), this, SLOT(OnMoTWChange()));
 	connect(ui.cmbMoTWSandbox, SIGNAL(currentIndexChanged(int)), this, SLOT(OnMoTWChange()));
+	connect(ui.chkForceBoxDocs, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 
 	// USB
 	connect(ui.chkSandboxUsb, SIGNAL(stateChanged(int)), this, SLOT(OnVolumeChanged()));
@@ -641,7 +853,6 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	QCompleter* completer = new QCompleter(this);
 	completer->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
 	completer->setFilterMode(Qt::MatchContains);
-	m_pCodeEdit->SetCompleter(CCodeEdit::GetAutoCompletionMode() != CCodeEdit::AutoCompletionMode::Disabled ? completer : nullptr);
 
 	// Set completer based on mode
 	if (CCodeEdit::GetAutoCompletionMode() != CCodeEdit::AutoCompletionMode::Disabled) {
@@ -651,17 +862,25 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		m_pCodeEdit->SetCompleter(nullptr);
 	}
 	
-	m_pCodeEdit->SetCompletionFilterCallback([](const QString& keyName) -> bool {
-		return CIniHighlighter::IsKeyHiddenFromPopup(keyName);
-		});
+	m_pCodeEdit->SetCompletionFilterCallback([](const QString& keyName, const QString& inputKey) -> bool {
+		return CIniHighlighter::IsKeyHiddenFromPopup(keyName)
+			|| CIniHighlighter::ShouldHideCompletionCandidate(inputKey, keyName, 'p');
+	});
+	m_pCodeEdit->SetCompletionInsertionCallback([](const QString& candidateKey) -> QString {
+		return CIniHighlighter::GetCompletionInsertionText(candidateKey);
+	});
+	m_pCodeEdit->SetCompletionMatchTextCallback([](const QString& candidateKey) -> QString {
+		return CIniHighlighter::GetCompletionMatchText(candidateKey);
+	});
 	m_pCodeEdit->SetCaseCorrectionCallback([](const QString& wrongKey) -> QString {
 		return CIniHighlighter::FindCaseCorrectedKey(wrongKey);
 		});
-	m_pCodeEdit->SetCaseCorrectionFilterCallback([](const QString& keyName) -> bool {
-		return CIniHighlighter::IsKeyHiddenFromContext(keyName, 'c');
+	m_pCodeEdit->SetCaseCorrectionFilterCallback([](const QString& keyName, const QString& inputKey) -> bool {
+		return CIniHighlighter::IsKeyHiddenFromContext(keyName, 'c')
+			|| CIniHighlighter::ShouldHideCompletionCandidate(inputKey, keyName, 'c');
 		});
 	m_pCodeEdit->SetPopupTooltipCallback([](const QString& keyName) -> QString {
-		return CIniHighlighter::GetSettingTooltipForPopup(keyName);
+		return CIniHighlighter::GetSettingTooltipForPopup(keyName, QString(), 'g');
 		});
 	
 	// Update completion model with current settings if auto completion is enabled
@@ -842,8 +1061,7 @@ void CSettingsWindow::showTab(const QString& Name, bool bExclusive, bool bExec)
 	}
 
 	if (bExec)
-		this->exec();
-		//theGUI->SafeExec(this);
+		theGUI->SafeExec(this);
 	else
 		CSandMan::SafeShow(this);
 }
@@ -874,6 +1092,7 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 		static bool m_bRightButtonPressed = false;
 
 		if (event->type() == QEvent::FocusIn && ui.txtCertificate->property("hidden").toBool())	{
+			QSignalBlocker Blocker(ui.txtCertificate);
 			ui.txtCertificate->setProperty("hidden", false);
 			ui.txtCertificate->setPlainText(g_Certificate);
 			ui.txtCertificate->setProperty("modified", false);
@@ -883,6 +1102,7 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 		}
 		else if (event->type() == QEvent::FocusOut && !ui.txtCertificate->property("hidden").toBool()) {
 			if (!ui.txtCertificate->property("modified").toBool() && !m_bRightButtonPressed) {
+				QSignalBlocker Blocker(ui.txtCertificate);
 				ui.txtCertificate->setProperty("hidden", true);
 				int Pos = g_Certificate.indexOf("HWID:");
 				if (Pos == -1)
@@ -911,7 +1131,7 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 		QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
 
 		// Find the text edit widget inside CCodeEdit
-		QTextEdit* pTextEdit = m_pCodeEdit->findChild<QTextEdit*>();
+		QTextEdit* pTextEdit = m_pCodeEdit->GetTextEdit();
 		if (pTextEdit) {
 			// Convert mouse position to text cursor position
 			QPoint pos = pTextEdit->viewport()->mapFrom(m_pCodeEdit, helpEvent->pos());
@@ -925,10 +1145,26 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 			if (CIniHighlighter::IsCommentLine(currentLine))
 				return false;
 
-			// Check if we're on the value side of the equals sign (after the =)
+			// Template values can identify specialized template metadata.
 			int equalsPos = currentLine.indexOf('=');
 			if (equalsPos >= 0 && (cursor.position() - block.position()) > equalsPos) {
-				// We're in the value part, don't show tooltip
+				const QString settingName = currentLine.left(equalsPos).trimmed();
+				const bool isTemplateValue = settingName.compare("Template", Qt::CaseInsensitive) == 0
+					|| settingName.compare("TemplateReject", Qt::CaseInsensitive) == 0;
+				if (!isTemplateValue || !CIniHighlighter::IsValidTooltipContext(currentLine.left(equalsPos + 1))) {
+					QToolTip::hideText();
+					return false;
+				}
+
+				if (CIniHighlighter::IsSettingsLoaded()) {
+					const QString settingValue = currentLine.mid(equalsPos + 1).trimmed();
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, 'g');
+					if (!tooltipText.isEmpty()) {
+						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
+						return true;
+					}
+				}
+
 				QToolTip::hideText();
 				return false;
 			}
@@ -963,7 +1199,9 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 					QString settingName = currentLine.mid(startPos, endPos - startPos);
 					if (settingName.endsWith('='))
 						settingName.chop(1);
-					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName);
+					const int equalsIndex = currentLine.indexOf('=');
+					const QString settingValue = equalsIndex >= 0 ? currentLine.mid(equalsIndex + 1).trimmed() : QString();
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, 'g');
 					if (!tooltipText.isEmpty()) {
 						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
 						return true;
@@ -1175,6 +1413,8 @@ void CSettingsWindow::LoadSettings()
 	ui.chkColorIcons->setChecked(theConf->GetBool("Options/ColorBoxIcons", false));
 	ui.chkOverlayIcons->setChecked(theConf->GetBool("Options/UseOverlayIcons", true));
 	ui.chkHideCore->setChecked(theConf->GetBool("Options/HideSbieProcesses", false));
+	ui.chkHighlightPendingChanges->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/HighlightPendingChanges", 2)));
+	m_PendingChanges.SetEnabled(CSettingsWindow__IsPendingHighlightEnabled(ui.chkHighlightPendingChanges->checkState()), m_pTree);
 	ui.cmbGrouping->setCurrentIndex(theConf->GetInt("Options/BoxGroupHandling", 0));
 	
 
@@ -1228,12 +1468,84 @@ void CSettingsWindow::LoadSettings()
 	ui.cmbSysTray->setCurrentIndex(theConf->GetInt("Options/SysTrayIcon", 1));
 	ui.cmbTrayBoxes->setCurrentIndex(theConf->GetInt("Options/SysTrayFilter", 0));
 	ui.chkCompactTray->setChecked(theConf->GetBool("Options/CompactTray", false));
+	ui.chkTrayIcons->setChecked(theConf->GetBool("Options/TrayIcons", true));
+	ui.chkTrayOverlayIcons->setChecked(theConf->GetBool("Options/TrayOverlayIcons", true));
+	ui.chkTrayUseAlias->setChecked(theConf->GetBool("Options/TrayUseAlias", true));
+	int iTrayAliasChars = theConf->GetInt("Options/TrayAliasMaxChars", 64);
+	if (iTrayAliasChars < 32 || iTrayAliasChars > 256)
+		iTrayAliasChars = 64;
+	ui.spnTrayAliasChars->setValue(iTrayAliasChars);
+	ui.spnTrayAliasChars->setEnabled(ui.chkTrayUseAlias->isChecked());
+	// 0=never, 1=Ctrl key (default, partial-checked), 2=always
+	int iTrayStatusTip = theConf->GetInt("Options/TrayStatusTip", 1);
+	if (iTrayStatusTip < 0 || iTrayStatusTip > 2)
+		iTrayStatusTip = 1;
+	ui.chkTrayStatusTip->setCheckState(Qt::CheckState(iTrayStatusTip));
+	QString trayStatusTipModifier = theConf->GetString("Options/TrayStatusTipModifier", "Ctrl");
+	int trayStatusTipModifierIndex = ui.cmbTrayStatusTipModifier->findData(trayStatusTipModifier);
+	if (trayStatusTipModifierIndex < 0)
+		trayStatusTipModifierIndex = ui.cmbTrayStatusTipModifier->findData("Ctrl");
+	ui.cmbTrayStatusTipModifier->setCurrentIndex(trayStatusTipModifierIndex);
+	ui.cmbTrayStatusTipModifier->setEnabled(ui.chkTrayStatusTip->checkState() == Qt::PartiallyChecked);
 	ui.chkBoxOpsNotify->setChecked(theConf->GetBool("Options/AutoBoxOpsNotify", false));
 	ui.cmbOnClose->setCurrentIndex(ui.cmbOnClose->findData(theConf->GetString("Options/OnClose", "ToTray")));
 	ui.chkMinimize->setChecked(theConf->GetBool("Options/MinimizeToTray", false));
+	m_WindowMonitorRawSettings.clear();
+	m_WindowMonitorResolvedFallback.clear();
+
+	int mainMonitorSetting = theConf->GetInt("Options/WindowTargetMonitor", -1);
+	int nonMainMonitorSetting = theConf->GetInt("Options/NonMainWindowTargetMonitor", -1);
+	int recoveryMonitorSetting = theConf->GetInt("Options/RecoveryWindowTargetMonitor", nonMainMonitorSetting);
+	int notificationMonitorSetting = theConf->GetInt("Options/NotificationWindowTargetMonitor", nonMainMonitorSetting);
+	int supportDialogMonitorSetting = theConf->GetInt("Options/SupportDialogWindowTargetMonitor", nonMainMonitorSetting);
+	int fallbackSetting = theConf->GetInt("Options/WindowMonitorFallback", -3);
+	if (fallbackSetting != -4 && fallbackSetting != -2 && fallbackSetting != -3 && fallbackSetting != 0)
+		fallbackSetting = -3;
+	int mainFallbackSetting = (fallbackSetting == 0 || fallbackSetting == -3) ? fallbackSetting : -1;
+	int nonMainFallbackSetting = fallbackSetting == -4 ? -1 : fallbackSetting;
+
+	QList<QScreen*> screens = QGuiApplication::screens();
+	auto loadMonitorSetting = [&](QComboBox* pCombo, int rawSetting, int fallbackValue, const QString& settingName)
+	{
+		int monitorIndex = pCombo->findData(rawSetting);
+		if (monitorIndex < 0 && rawSetting > 0 && rawSetting <= screens.count()) {
+			int migratedDisplayNumber = CGetDisplayNumberForScreen(screens[rawSetting - 1]);
+			if (migratedDisplayNumber > 0)
+				monitorIndex = pCombo->findData(migratedDisplayNumber);
+		}
+
+		bool unresolvedSetting = monitorIndex < 0;
+		if (unresolvedSetting)
+			monitorIndex = pCombo->findData(fallbackValue);
+		if (monitorIndex < 0)
+			monitorIndex = 0;
+
+		CUpdateMonitorComboFallbackLabel(pCombo, monitorIndex, unresolvedSetting);
+		pCombo->setCurrentIndex(monitorIndex);
+
+		m_WindowMonitorRawSettings.insert(settingName, rawSetting);
+		if (unresolvedSetting)
+			m_WindowMonitorResolvedFallback.insert(settingName, pCombo->itemData(monitorIndex).toInt());
+		else
+			m_WindowMonitorResolvedFallback.remove(settingName);
+	};
+
+	loadMonitorSetting(ui.cmbLaunchMonitor, mainMonitorSetting, mainFallbackSetting, "Options/WindowTargetMonitor");
+	loadMonitorSetting(ui.cmbNonMainLaunchMonitor, nonMainMonitorSetting, nonMainFallbackSetting, "Options/NonMainWindowTargetMonitor");
+	loadMonitorSetting(ui.cmbRecoveryLaunchMonitor, recoveryMonitorSetting, nonMainFallbackSetting, "Options/RecoveryWindowTargetMonitor");
+	loadMonitorSetting(ui.cmbNotificationLaunchMonitor, notificationMonitorSetting, nonMainFallbackSetting, "Options/NotificationWindowTargetMonitor");
+	loadMonitorSetting(ui.cmbSupportDialogLaunchMonitor, supportDialogMonitorSetting, nonMainFallbackSetting, "Options/SupportDialogWindowTargetMonitor");
+
+	int fallbackIndex = ui.cmbFallbackActiveMonitor->findData(fallbackSetting);
+	if (fallbackIndex < 0)
+		fallbackIndex = ui.cmbFallbackActiveMonitor->findData(-3);
+	if (fallbackIndex < 0)
+		fallbackIndex = 0;
+	ui.cmbFallbackActiveMonitor->setCurrentIndex(fallbackIndex);
 	ui.chkSingleShow->setChecked(theConf->GetBool("Options/TraySingleClick", false));
 
 	ui.chkUseW11Style->setChecked(theConf->GetBool("Options/UseW11Style", false));
+	ui.chkRandomGuidName->setChecked(theConf->GetBool("Options/UseRandomBoxName", false));
 
 	OnLoadAddon();
 
@@ -1324,6 +1636,7 @@ void CSettingsWindow::LoadSettings()
 
 		QString MoTWBox = theAPI->GetGlobalSettings()->GetText("MarkOfTheWebBox", "Web_Box");
 		ui.chkSandboxMoTW->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceMarkOfTheWeb", false));
+		ui.chkForceBoxDocs->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceBoxDocs", false));
 		QString USBBox = theAPI->GetGlobalSettings()->GetText("UsbSandbox", "USB_Box");
 		ui.chkSandboxUsb->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceUsbDrives", false));
 
@@ -1400,6 +1713,7 @@ void CSettingsWindow::LoadSettings()
 		ui.btnAddWarnProg->setEnabled(false);
 		ui.btnDelWarnProg->setEnabled(false);
 		ui.chkSandboxMoTW->setEnabled(false);
+		ui.chkForceBoxDocs->setEnabled(false);
 		ui.cmbMoTWSandbox->setEnabled(false);
 		ui.chkSandboxUsb->setEnabled(false);
 		ui.cmbUsbSandbox->setEnabled(false);
@@ -1457,6 +1771,10 @@ void CSettingsWindow::LoadSettings()
 
 	//ui.chkUpdateTemplates->setEnabled(g_CertInfo.active && !g_CertInfo.expired);
 	ui.chkUpdateIssues->setEnabled(g_CertInfo.active && !g_CertInfo.expired);
+	m_PendingChanges.CaptureItemBaselines(m_pTree);
+	m_PendingChanges.CaptureCheckboxBaselines();
+	m_PendingChanges.CaptureRadioButtonBaselines();
+	m_PendingChanges.CaptureValueBaselines();
 }
 
 void CSettingsWindow::OnRamDiskChange()
@@ -1680,6 +1998,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/ColorBoxIcons", ui.chkColorIcons->isChecked());
 	theConf->SetValue("Options/UseOverlayIcons", ui.chkOverlayIcons->isChecked());
 	theConf->SetValue("Options/HideSbieProcesses", ui.chkHideCore->isChecked());
+	theConf->SetValue("Options/HighlightPendingChanges", CSettingsWindow__Chk2Int(ui.chkHighlightPendingChanges->checkState()));
 	theConf->SetValue("Options/BoxGroupHandling", ui.cmbGrouping->currentIndex());
 
 	CIniHighlighter::ClearLanguageCache();
@@ -1799,12 +2118,41 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());
 	theConf->SetValue("Options/SysTrayFilter", ui.cmbTrayBoxes->currentIndex());
 	theConf->SetValue("Options/CompactTray", ui.chkCompactTray->isChecked());
+	theConf->SetValue("Options/TrayIcons", ui.chkTrayIcons->isChecked());
+	theConf->SetValue("Options/TrayOverlayIcons", ui.chkTrayOverlayIcons->isChecked());
+	theConf->SetValue("Options/TrayUseAlias", ui.chkTrayUseAlias->isChecked());
+	theConf->SetValue("Options/TrayAliasMaxChars", ui.spnTrayAliasChars->value());
+	theConf->SetValue("Options/TrayStatusTip", (int)ui.chkTrayStatusTip->checkState());
+	theConf->SetValue("Options/TrayStatusTipModifier", ui.cmbTrayStatusTipModifier->currentData());
 	theConf->SetValue("Options/AutoBoxOpsNotify", ui.chkBoxOpsNotify->isChecked());
 	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 	theConf->SetValue("Options/MinimizeToTray", ui.chkMinimize->isChecked());
+	auto getPersistedMonitorSetting = [&](QComboBox* pCombo, const QString& settingName)
+	{
+		int selectedValue = pCombo->currentData().toInt();
+		if (m_WindowMonitorResolvedFallback.contains(settingName) && m_WindowMonitorRawSettings.contains(settingName)) {
+			int autoResolvedFallbackValue = m_WindowMonitorResolvedFallback.value(settingName);
+			if (selectedValue == autoResolvedFallbackValue)
+				return m_WindowMonitorRawSettings.value(settingName);
+		}
+		return selectedValue;
+	};
+
+	int mainMonitorSetting = getPersistedMonitorSetting(ui.cmbLaunchMonitor, "Options/WindowTargetMonitor");
+	int nonMainMonitorSetting = getPersistedMonitorSetting(ui.cmbNonMainLaunchMonitor, "Options/NonMainWindowTargetMonitor");
+	int recoveryMonitorSetting = getPersistedMonitorSetting(ui.cmbRecoveryLaunchMonitor, "Options/RecoveryWindowTargetMonitor");
+	int notificationMonitorSetting = getPersistedMonitorSetting(ui.cmbNotificationLaunchMonitor, "Options/NotificationWindowTargetMonitor");
+	int supportDialogMonitorSetting = getPersistedMonitorSetting(ui.cmbSupportDialogLaunchMonitor, "Options/SupportDialogWindowTargetMonitor");
+	theConf->SetValue("Options/WindowTargetMonitor", mainMonitorSetting);
+	theConf->SetValue("Options/NonMainWindowTargetMonitor", nonMainMonitorSetting);
+	theConf->SetValue("Options/RecoveryWindowTargetMonitor", recoveryMonitorSetting);
+	theConf->SetValue("Options/NotificationWindowTargetMonitor", notificationMonitorSetting);
+	theConf->SetValue("Options/SupportDialogWindowTargetMonitor", supportDialogMonitorSetting);
+	theConf->SetValue("Options/WindowMonitorFallback", ui.cmbFallbackActiveMonitor->currentData().toInt());
 	theConf->SetValue("Options/TraySingleClick", ui.chkSingleShow->isChecked());
 
 	theConf->SetValue("Options/UseW11Style", ui.chkUseW11Style->isChecked());
+	theConf->SetValue("Options/UseRandomBoxName", ui.chkRandomGuidName->isChecked());
 
 	if (theAPI->IsConnected())
 	{
@@ -1928,6 +2276,7 @@ void CSettingsWindow::SaveSettings()
 			}
 
 			WriteAdvancedCheck(ui.chkSandboxMoTW, "ForceMarkOfTheWeb", "y", "");
+			WriteAdvancedCheck(ui.chkForceBoxDocs, "ForceBoxDocs", "y", "");
 
 			QString MoTWSandbox = ui.cmbMoTWSandbox->currentData().toString();
 			SB_STATUS Status = theAPI->ValidateName(MoTWSandbox);
@@ -2064,6 +2413,14 @@ void CSettingsWindow::OnOptChanged()
 	item = model->item(3);
 	item->setFlags((ui.cmbSysTray->currentIndex() != 0) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
 
+	if (sender() == ui.chkHighlightPendingChanges) {
+		m_PendingChanges.SetEnabled(CSettingsWindow__IsPendingHighlightEnabled(ui.chkHighlightPendingChanges->checkState()), m_pTree);
+		if (!m_HoldChange)
+			m_PendingChanges.UpdateAll(m_pTree);
+	}
+	else if (!m_HoldChange)
+		m_PendingChanges.Update(sender(), m_pTree);
+
 	if (m_HoldChange)
 		return;
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
@@ -2102,6 +2459,7 @@ void CSettingsWindow::OnLoadAddon()
 		connect(pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 		ui.treeAddons->setItemWidget(pItem, 3, pLabel);
 	}
+	m_PendingChanges.CaptureItemBaselines(m_pTree, ui.treeAddons);
 }
 
 void CSettingsWindow::OnInstallAddon()
@@ -2225,6 +2583,7 @@ void CSettingsWindow::OnCompat()
 	}
 
 	m_CompatLoaded = 1;
+	m_PendingChanges.CaptureItemBaselines(m_pTree, ui.treeCompat);
 	if(bNew)
 		OnCompatChanged();
 
@@ -2494,6 +2853,8 @@ void CSettingsWindow::LoadTemplates()
 		pItem->setText(0, Title);
 		ui.treeTemplates->addTopLevelItem(pItem);
 	}
+
+	m_PendingChanges.CaptureItemBaselines(m_pTree, ui.treeTemplates);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2546,10 +2907,11 @@ void CSettingsWindow::OnIniValidationToggled(int state)
 	}
 
 	// Attach new highlighter to the code editor's document
-	QTextEdit* pTextEdit = m_pCodeEdit->findChild<QTextEdit*>();
+	QTextEdit* pTextEdit = m_pCodeEdit->GetTextEdit();
 	if (pTextEdit) {
 		m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, pTextEdit->document(), m_IniValidationEnabled);
 		m_pIniHighlighter->rehighlight();
+		UpdateAutoCompletion();
 	}
 
 	m_HoldChange = false;
@@ -2816,6 +3178,8 @@ void CSettingsWindow::InitSupport()
 	connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 
 	m_CertChanged = false;
+	m_PendingChanges.ExcludeValue(ui.txtCertificate);
+	m_PendingChanges.ExcludeValue(ui.txtSerial);
 	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
 	ui.txtCertificate->installEventFilter(this);
 	connect(ui.txtSerial, SIGNAL(textChanged(const QString&)), this, SLOT(KeyChanged()));
@@ -2889,6 +3253,7 @@ void CSettingsWindow::LoadCertificate(QString CertPath)
 	}
 }
 
+#define GET_DAYS_FROM_SEC(sec) (((sec) + (60*60*24 - 1)) / (60*60*24))
 
 void CSettingsWindow::UpdateCert()
 {
@@ -2908,7 +3273,9 @@ void CSettingsWindow::UpdateCert()
 		int datePos = truncatedCert.indexOf("DATE:");
 		if (namePos != -1 && datePos != -1 && datePos > namePos)
 			truncatedCert = truncatedCert.mid(0, namePos + 5) + " ...\n" + truncatedCert.mid(datePos);
+		QSignalBlocker Blocker(ui.txtCertificate);
 		ui.txtCertificate->setPlainText(truncatedCert);
+		ui.txtCertificate->setProperty("modified", false);
 		//ui.lblSupport->setVisible(false);
 
 		QString ReNewUrl = "https://sandboxie-plus.com/go.php?to=sbie-renew-cert";
@@ -2923,7 +3290,7 @@ void CSettingsWindow::UpdateCert()
 			QString infoMsg = tr("This supporter certificate has expired, please <a href=\"%1\">get an updated certificate</a>.").arg(ReNewUrl);
 			if (g_CertInfo.active) {
 				if (g_CertInfo.grace_period)
-					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg((g_CertInfo.expirers_in_sec + 30*60*60*24) / (60*60*24)));
+					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg(GET_DAYS_FROM_SEC(g_CertInfo.expirers_in_sec + 30*60*60*24)));
 				else if (!g_CertInfo.outdated) // must be an expiren medium or large cert on an old build
 					infoMsg.append(tr("<br /><font color='red'>For the current build Plus features remain enabled</font>, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database."));
 			} else
@@ -2933,7 +3300,7 @@ void CSettingsWindow::UpdateCert()
 		}
 		else {
 			if (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30)) {
-				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"%2\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60*60*24)).arg(ReNewUrl));
+				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"%2\">get an updated certificate</a>.").arg(GET_DAYS_FROM_SEC(g_CertInfo.expirers_in_sec)).arg(ReNewUrl));
 				ui.lblCertExp->setVisible(true);
 			}
 			/*#ifdef _DEBUG
@@ -2968,9 +3335,9 @@ void CSettingsWindow::UpdateCert()
 
 		QString ExpInfo;
 		if(g_CertInfo.expirers_in_sec > 0)
-			ExpInfo = tr("Expires in: %1 days").arg(g_CertInfo.expirers_in_sec / (60*60*24));
+			ExpInfo = tr("Expires in: %1 days").arg(GET_DAYS_FROM_SEC(g_CertInfo.expirers_in_sec));
 		else if(g_CertInfo.expirers_in_sec < 0)
-			ExpInfo = tr("Expired: %1 days ago").arg(-g_CertInfo.expirers_in_sec / (60*60*24));
+			ExpInfo = tr("Expired: %1 days ago").arg(GET_DAYS_FROM_SEC(-g_CertInfo.expirers_in_sec));
 		if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
 			ExpInfo += tr("; eligible Patreons can always <a href=\"https://xanasoft.com/get-supporter-certificate/\">obtain an updated certificate</a> from xanasoft.com");
 		ui.lblCert->setText(ExpInfo);
@@ -3474,11 +3841,8 @@ void CSettingsWindow::OnEditorSettings()
 		
 		// Apply settings that don't have UI checkboxes in SettingsWindow
 		// These are managed via EditorSettings only
-		if (editorWindow.HasResetOccurred()) {
-			// If any reset occurred, update these settings from config
-			bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
-			m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
-		}
+		bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
+		m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
 		
 		// Always update autocompletion list regardless of reset status
 		UpdateAutoCompletion();

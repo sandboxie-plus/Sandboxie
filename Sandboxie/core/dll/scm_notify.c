@@ -79,6 +79,9 @@ static DWORD Scm_NotifyServiceStatusChangeW(
 static DWORD Scm_NotifyServiceStatusChangeA(
     SC_HANDLE hService, DWORD dwNotifyMask, void *pNotifyBuffer);
 
+static DWORD Scm_WaitServiceState(
+    SC_HANDLE hService, DWORD dwNotify, DWORD dwTimeout, HANDLE hCancelEvent);
+
 static void Scm_Notify_CloseHandle(SC_HANDLE hService);
 
 static ULONG Scm_Notify_ThreadProc(void *lpParameter);
@@ -392,4 +395,173 @@ _FX void Scm_Notify_ApcProc(ULONG_PTR data)
     }
 
     LeaveCriticalSection(Scm_Notify_CritSec);
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_WaitServiceState
+//---------------------------------------------------------------------------
+
+
+_FX DWORD Scm_WaitServiceState(
+    SC_HANDLE hService, DWORD dwNotify, DWORD dwTimeout, HANDLE hCancelEvent)
+{
+    SERVICE_QUERY_RPL *rpl;
+    DWORD dwStartTick;
+    DWORD dwElapsed;
+    DWORD dwWaitResult;
+    DWORD dwState;
+    HANDLE hEvents[1];
+    DWORD nEventCount;
+
+    //
+    // validate the service handle
+    //
+
+    if (! Scm_GetHandleName(hService)) {
+        SetLastError(ERROR_INVALID_HANDLE);
+        return 0;
+    }
+
+    //
+    // record the start time for timeout calculation
+    //
+
+    dwStartTick = GetTickCount();
+
+    //
+    // set up event array for WaitForMultipleObjects
+    //
+
+    nEventCount = 0;
+    if (hCancelEvent) {
+        hEvents[0] = hCancelEvent;
+        nEventCount = 1;
+    }
+
+    //
+    // polling loop to wait for the service state
+    //
+
+    while (1) {
+
+        //
+        // query the current service status
+        //
+
+        rpl = (SERVICE_QUERY_RPL *)Scm_QueryServiceByHandle(hService, TRUE, 0);
+
+        if (rpl && rpl->h.status == 0) {
+
+            SERVICE_STATUS_PROCESS *ss = &rpl->service_status;
+
+            //
+            // convert dwCurrentState to notification mask
+            //
+
+            dwState = 0;
+            if (ss->dwCurrentState == SERVICE_STOPPED)
+                dwState = SERVICE_NOTIFY_STOPPED;
+            else if (ss->dwCurrentState == SERVICE_START_PENDING)
+                dwState = SERVICE_NOTIFY_START_PENDING;
+            else if (ss->dwCurrentState == SERVICE_STOP_PENDING)
+                dwState = SERVICE_NOTIFY_STOP_PENDING;
+            else if (ss->dwCurrentState == SERVICE_RUNNING)
+                dwState = SERVICE_NOTIFY_RUNNING;
+            else if (ss->dwCurrentState == SERVICE_CONTINUE_PENDING)
+                dwState = SERVICE_NOTIFY_CONTINUE_PENDING;
+            else if (ss->dwCurrentState == SERVICE_PAUSE_PENDING)
+                dwState = SERVICE_NOTIFY_PAUSE_PENDING;
+            else if (ss->dwCurrentState == SERVICE_PAUSED)
+                dwState = SERVICE_NOTIFY_PAUSED;
+
+            Dll_Free(rpl);
+
+            //
+            // check if the current state matches the requested state(s)
+            // on success, return the state that was reached
+            //
+
+            if (dwNotify & dwState) {
+                SetLastError(ERROR_SUCCESS);
+                return ss->dwCurrentState;
+            }
+
+        } else {
+
+            DWORD err = GetLastError();
+            if (rpl)
+                Dll_Free(rpl);
+
+            //
+            // if we can't query the service, return 0 and set error
+            //
+
+            SetLastError(err ? err : ERROR_SERVICE_DOES_NOT_EXIST);
+            return 0;
+        }
+
+        //
+        // check if timeout has elapsed
+        //
+
+        if (dwTimeout != INFINITE) {
+
+            dwElapsed = GetTickCount() - dwStartTick;
+
+            if (dwElapsed >= dwTimeout) {
+                SetLastError(ERROR_TIMEOUT);
+                return 0;
+            }
+        }
+
+        //
+        // wait for a short interval or until the cancel event is signaled
+        // use a polling interval of 250ms
+        //
+
+        if (nEventCount > 0) {
+
+            DWORD dwWaitTime = 250;
+
+            //
+            // if we have a timeout, don't wait longer than the remaining time
+            //
+
+            if (dwTimeout != INFINITE) {
+                DWORD dwRemaining = dwTimeout - dwElapsed;
+                if (dwWaitTime > dwRemaining)
+                    dwWaitTime = dwRemaining;
+            }
+
+            dwWaitResult = WaitForMultipleObjects(
+                                nEventCount, hEvents, FALSE, dwWaitTime);
+
+            if (dwWaitResult == WAIT_OBJECT_0) {
+                //
+                // cancel event was signaled
+                //
+                SetLastError(ERROR_CANCELLED);
+                return 0;
+            }
+
+        } else {
+
+            //
+            // no cancel event, just sleep
+            //
+
+            DWORD dwSleepTime = 250;
+
+            if (dwTimeout != INFINITE) {
+                DWORD dwRemaining = dwTimeout - (GetTickCount() - dwStartTick);
+                if (dwSleepTime > dwRemaining)
+                    dwSleepTime = dwRemaining;
+                if (dwSleepTime == 0)
+                    dwSleepTime = 1;
+            }
+
+            Sleep(dwSleepTime);
+        }
+    }
 }

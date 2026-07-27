@@ -2995,7 +2995,7 @@ Lista predeterminada de puertos TCP/IP bloqueados
 .
 
 4294;txt;01
-Permitir a los programas actualizar las Jump Lists en la barra de tareas de Windows 7
+Permitir a los programas actualizar las Jump Lists en la barra de tareas de Windows
 .
 
 #----------------------------------------------------------------------------

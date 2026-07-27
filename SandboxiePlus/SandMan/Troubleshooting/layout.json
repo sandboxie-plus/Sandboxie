@@ -1,7 +1,7 @@
 {
     "entries": [
         {
-            "description": "Description Text...",
+            "description": "Address and resolve active problems",
             "group": "root",
             "icon": "Warning",
             "id": "current",
@@ -9,7 +9,7 @@
             "type": "group"
         },
         {
-            "description": "Description Text...",
+            "description": "Troubleshoot sandbox isolation issues",
             "group": "root",
             "icon": "Sandbox",
             "id": "sandboxing",
@@ -18,7 +18,7 @@
             "class": "sandboxing"
         },
         {
-            "description": "Description Text...",
+            "description": "Fix app compatibility problems",
             "group": "sandboxing",
             "id": "apps",
             "name": "An Application does not work properly when sandboxed",
@@ -34,7 +34,7 @@
             "bold": true
         },
         {
-            "description": "Description Text...",
+            "description": "Resolve browser-specific problems",
             "group": "sandboxing",
             "id": "browser",
             "name": "Issues with a web browser",
@@ -42,7 +42,7 @@
             "class": "sandboxing"
         },
         {
-            "description": "Description Text...",
+            "description": "Clean up and maintain sandboxes",
             "group": "root",
             "icon": "Maintenance",
             "id": "maintenance",
@@ -50,7 +50,7 @@
             "type": "group"
         },
         {
-            "description": "Description Text...",
+            "description": "Fix interface and shell integration",
             "group": "root",
             "icon": "Interface",
             "id": "ui",

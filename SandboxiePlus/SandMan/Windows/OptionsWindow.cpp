@@ -475,17 +475,26 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		m_pCodeEdit->SetCompleter(nullptr);
 	}
 
-	m_pCodeEdit->SetCompletionFilterCallback([](const QString& keyName) -> bool {
-		return CIniHighlighter::IsKeyHiddenFromPopup(keyName);
-		});
+	m_pCodeEdit->SetCompletionFilterCallback([](const QString& keyName, const QString& inputKey) -> bool {
+		return CIniHighlighter::IsKeyHiddenFromPopup(keyName)
+			|| CIniHighlighter::ShouldHideCompletionCandidate(inputKey, keyName, 'p');
+	});
+	m_pCodeEdit->SetCompletionInsertionCallback([](const QString& candidateKey) -> QString {
+		return CIniHighlighter::GetCompletionInsertionText(candidateKey);
+	});
+	m_pCodeEdit->SetCompletionMatchTextCallback([](const QString& candidateKey) -> QString {
+		return CIniHighlighter::GetCompletionMatchText(candidateKey);
+	});
 	m_pCodeEdit->SetCaseCorrectionCallback([](const QString& wrongKey) -> QString {
 		return CIniHighlighter::FindCaseCorrectedKey(wrongKey);
 		});
-	m_pCodeEdit->SetCaseCorrectionFilterCallback([](const QString& keyName) -> bool {
-		return CIniHighlighter::IsKeyHiddenFromContext(keyName, 'c');
+	m_pCodeEdit->SetCaseCorrectionFilterCallback([](const QString& keyName, const QString& inputKey) -> bool {
+		return CIniHighlighter::IsKeyHiddenFromContext(keyName, 'c')
+			|| CIniHighlighter::ShouldHideCompletionCandidate(inputKey, keyName, 'c');
 		});
-	m_pCodeEdit->SetPopupTooltipCallback([](const QString& keyName) -> QString {
-		return CIniHighlighter::GetSettingTooltipForPopup(keyName);
+	const char currentContext = m_Template ? 't' : 's';
+	m_pCodeEdit->SetPopupTooltipCallback([currentContext](const QString& keyName) -> QString {
+		return CIniHighlighter::GetSettingTooltipForPopup(keyName, QString(), currentContext);
 		});
 	
 	// Update completion model with current settings if auto completion is enabled
@@ -624,6 +633,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	// Recovery
 	connect(ui.chkAutoRecovery, SIGNAL(clicked(bool)), this, SLOT(OnRecoveryChanged()));
+	connect(ui.chkUseIgnoreForQuick, SIGNAL(clicked(bool)), this, SLOT(OnRecoveryChanged()));
 	connect(ui.btnAddRecovery, SIGNAL(clicked(bool)), this, SLOT(OnAddRecFolder()));
 	connect(ui.btnDelRecovery, SIGNAL(clicked(bool)), this, SLOT(OnDelRecEntry()));
 	connect(ui.btnAddRecIgnore, SIGNAL(clicked(bool)), this, SLOT(OnAddRecIgnore()));
@@ -692,15 +702,31 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 	
 	ui.treeCopy->viewport()->installEventFilter(this);
+	ui.treeRun->viewport()->installEventFilter(this);
+	ui.treeGroups->viewport()->installEventFilter(this);
+	ui.treeForced->viewport()->installEventFilter(this);
+	ui.treeBreakout->viewport()->installEventFilter(this);
+	ui.treeStop->viewport()->installEventFilter(this);
+	ui.treeLeader->viewport()->installEventFilter(this);
+	ui.treeStart->viewport()->installEventFilter(this);
 	ui.treeINet->viewport()->installEventFilter(this);
 	ui.treeNetFw->viewport()->installEventFilter(this);
+	ui.treeDns->viewport()->installEventFilter(this);
+	ui.treeProxy->viewport()->installEventFilter(this);
 	ui.treeFiles->viewport()->installEventFilter(this);
 	ui.treeKeys->viewport()->installEventFilter(this);
 	ui.treeIPC->viewport()->installEventFilter(this);
 	ui.treeWnd->viewport()->installEventFilter(this);
 	ui.treeCOM->viewport()->installEventFilter(this);
+	ui.treeRecovery->viewport()->installEventFilter(this);
+	ui.treeRecIgnore->viewport()->installEventFilter(this);
 	//ui.treeAccess->viewport()->installEventFilter(this);
 	if(ui.treeOptions) ui.treeOptions->viewport()->installEventFilter(this);
+	ui.treeTriggers->viewport()->installEventFilter(this);
+	ui.treeHideProc->viewport()->installEventFilter(this);
+	ui.treeHostProc->viewport()->installEventFilter(this);
+	ui.lstUsers->viewport()->installEventFilter(this);
+	ui.treeTemplates->viewport()->installEventFilter(this);
 	this->installEventFilter(this); // prevent enter from closing the dialog
 
 	restoreGeometry(theConf->GetBlob("OptionsWindow/Window_Geometry"));
@@ -792,6 +818,7 @@ void COptionsWindow::OnOptChanged()
 {
 	if (m_HoldChange)
 		return;
+	m_PendingChanges.Update(sender(), m_pTree);
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
 }
 
@@ -811,6 +838,10 @@ void COptionsWindow::closeEvent(QCloseEvent *e)
 
 bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 {
+	auto isTreeViewport = [source](QAbstractItemView* view) {
+		return view && source == view->viewport();
+	};
+
 	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape 
 		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier
 		&& source == m_pCodeEdit)
@@ -843,8 +874,48 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		CloseNetFwEdit(true);
 		CloseAccessEdit(true);
 		CloseOptionEdit(true);
-        CloseNetProxyEdit(true);
+		CloseNetProxyEdit(true);
 		return true; // cancel event
+	}
+
+	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Delete
+		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+	{
+		CloseCopyEdit(true);
+		CloseINetEdit(true);
+		CloseNetFwEdit(true);
+		CloseAccessEdit(true);
+		CloseOptionEdit(true);
+		CloseNetProxyEdit(true);
+
+		if (isTreeViewport(ui.treeCopy))				OnDelCopyRule();
+		else if (isTreeViewport(ui.treeRun))			OnDelCommand();
+		else if (isTreeViewport(ui.treeGroups))		OnDelProg();
+		else if (isTreeViewport(ui.treeForced))		OnDelForce();
+		else if (isTreeViewport(ui.treeBreakout))		OnDelBreakout();
+		else if (isTreeViewport(ui.treeStop))			OnDelStopProg();
+		else if (isTreeViewport(ui.treeLeader))		OnDelLeader();
+		else if (isTreeViewport(ui.treeStart))		OnDelStartProg();
+		else if (isTreeViewport(ui.treeINet))			OnDelINetProg();
+		else if (isTreeViewport(ui.treeNetFw))		OnDelNetFwRule();
+		else if (isTreeViewport(ui.treeDns))			OnDelDnsFilter();
+		else if (isTreeViewport(ui.treeProxy))		OnDelNetProxy();
+		else if (isTreeViewport(ui.treeFiles))		OnDelFile();
+		else if (isTreeViewport(ui.treeKeys))			OnDelKey();
+		else if (isTreeViewport(ui.treeIPC))			OnDelIPC();
+		else if (isTreeViewport(ui.treeWnd))			OnDelWnd();
+		else if (isTreeViewport(ui.treeCOM))			OnDelCOM();
+		else if (isTreeViewport(ui.treeRecovery))		OnDelRecEntry();
+		else if (isTreeViewport(ui.treeRecIgnore))	OnDelRecIgnoreEntry();
+		else if (ui.treeOptions && isTreeViewport(ui.treeOptions)) OnDelOption();
+		else if (isTreeViewport(ui.treeTriggers))		OnDelAuto();
+		else if (isTreeViewport(ui.treeHideProc))		OnDelProcess();
+		else if (isTreeViewport(ui.treeHostProc))		OnDelHostProcess();
+		else if (isTreeViewport(ui.lstUsers))			OnDelUser();
+		else if (isTreeViewport(ui.treeTemplates))	OnDelTemplates();
+		else return QDialog::eventFilter(source, event);
+
+		return true;
 	}
 	
 	if (source == ui.treeCopy->viewport() && event->type() == QEvent::MouseButtonPress)
@@ -885,11 +956,12 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		// Check if tooltips are completely disabled
 		if (CIniHighlighter::GetTooltipMode() == CIniHighlighter::TooltipMode::Disabled)
 			return false;
+		const char currentContext = m_Template ? 't' : 's';
 
 		QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
 
 		// Find the text edit widget inside CCodeEdit
-		QTextEdit* pTextEdit = m_pCodeEdit->findChild<QTextEdit*>();
+		QTextEdit* pTextEdit = m_pCodeEdit->GetTextEdit();
 		if (pTextEdit) {
 			// Convert mouse position to text cursor position
 			QPoint pos = pTextEdit->viewport()->mapFrom(m_pCodeEdit, helpEvent->pos());
@@ -903,10 +975,26 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 			if (CIniHighlighter::IsCommentLine(currentLine))
 				return false;
 
-			// Check if we're on the value side of the equals sign (after the =)
+			// Template values can identify specialized template metadata.
 			int equalsPos = currentLine.indexOf('=');
 			if (equalsPos >= 0 && (cursor.position() - block.position()) > equalsPos) {
-				// We're in the value part, don't show tooltip
+				const QString settingName = currentLine.left(equalsPos).trimmed();
+				const bool isTemplateValue = settingName.compare("Template", Qt::CaseInsensitive) == 0
+					|| settingName.compare("TemplateReject", Qt::CaseInsensitive) == 0;
+				if (!isTemplateValue || !CIniHighlighter::IsValidTooltipContext(currentLine.left(equalsPos + 1))) {
+					QToolTip::hideText();
+					return false;
+				}
+
+				if (CIniHighlighter::IsSettingsLoaded()) {
+					const QString settingValue = currentLine.mid(equalsPos + 1).trimmed();
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, currentContext);
+					if (!tooltipText.isEmpty()) {
+						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
+						return true;
+					}
+				}
+
 				QToolTip::hideText();
 				return false;
 			}
@@ -941,7 +1029,9 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 					QString settingName = currentLine.mid(startPos, endPos - startPos);
 					if (settingName.endsWith('='))
 						settingName.chop(1);
-					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName);
+					const int equalsIndex = currentLine.indexOf('=');
+					const QString settingValue = equalsIndex >= 0 ? currentLine.mid(equalsIndex + 1).trimmed() : QString();
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, currentContext);
 					if (!tooltipText.isEmpty()) {
 						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
 						return true;
@@ -1016,8 +1106,13 @@ void COptionsWindow::WriteGlobalCheck(QCheckBox* pCheck, const QString& Setting,
 void COptionsWindow::LoadConfig()
 {
 	m_ConfigDirty = false;
+	m_StartRadioBaselineLoaded = false;
 
 	m_HoldChange = true;
+	int iHighlightPendingChanges = theConf->GetInt("Options/HighlightPendingChanges", 2);
+	if (iHighlightPendingChanges == 2)
+		iHighlightPendingChanges = theConf->GetInt("Options/ViewMode", 1) != 2 ? 1 : 0;
+	m_PendingChanges.SetEnabled(iHighlightPendingChanges != 0, m_pTree);
 
 	LoadTemplates();
 
@@ -1048,6 +1143,10 @@ void COptionsWindow::LoadConfig()
 
 	// Update autocompletion after all settings are loaded
 	UpdateAutoCompletion();
+	m_PendingChanges.CaptureItemBaselines(m_pTree);
+	m_PendingChanges.CaptureCheckboxBaselines();
+	m_PendingChanges.CaptureRadioButtonBaselines();
+	m_PendingChanges.CaptureValueBaselines();
 
 	m_HoldChange = false;
 }
@@ -1341,7 +1440,7 @@ QString COptionsWindow::SelectProgram(bool bOrGroup)
 
 	progDialog.setValue("");
 
-	if (!progDialog.exec())
+	if (theGUI->SafeExec(&progDialog) != QDialog::Accepted)
 		return QString();
 
 	// Note: pressing enter adds the value to the combo list !
@@ -1390,6 +1489,13 @@ void COptionsWindow::UpdateCurrentTab()
 		CopyGroupToList("<StartRunAccessDisabled>", ui.treeStart, true);
 
 		OnRestrictStart();
+		m_PendingChanges.CaptureItemBaselines(m_pTree, ui.treeStart);
+		if (!m_StartRadioBaselineLoaded) {
+			m_PendingChanges.CaptureRadioButtonBaseline(ui.radStartAll);
+			m_PendingChanges.CaptureRadioButtonBaseline(ui.radStartExcept);
+			m_PendingChanges.CaptureRadioButtonBaseline(ui.radStartSelected);
+			m_StartRadioBaselineLoaded = true;
+		}
 	}
 	else if (m_pCurrentTab == ui.tabInternet || m_pCurrentTab == ui.tabINet || m_pCurrentTab == ui.tabNetConfig)
 	{
@@ -1467,10 +1573,11 @@ void COptionsWindow::OnIniValidationToggled(int state)
 		m_pIniHighlighter = nullptr;
 	}
 
-	QTextEdit* pTextEdit = m_pCodeEdit->findChild<QTextEdit*>();
+	QTextEdit* pTextEdit = m_pCodeEdit->GetTextEdit();
 	if (pTextEdit) {
 		m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, pTextEdit->document(), m_IniValidationEnabled);
 		m_pIniHighlighter->rehighlight();
+		UpdateAutoCompletion();
 	}
 
 	m_HoldChange = false;
@@ -1557,7 +1664,7 @@ void COptionsWindow::OnAutoCompletionToggled(int state)
 void COptionsWindow::OnEditorSettings()
 {
 	CEditorSettingsWindow editorWindow(this);
-	if (editorWindow.exec() == QDialog::Accepted) {
+	if (theGUI->SafeExec(&editorWindow) == QDialog::Accepted) {
 		// Settings were saved by the dialog, now update the current UI to reflect changes
 		bool previousConsent = m_AutoCompletionConsent;
 		LoadCompletionConsent();
@@ -1627,11 +1734,8 @@ void COptionsWindow::OnEditorSettings()
 		
 		// Apply settings that don't have UI checkboxes in OptionsWindow
 		// These are managed via EditorSettings only
-		if (editorWindow.HasResetOccurred()) {
-			// If any reset occurred, update these settings from config
-			bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
-			m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
-		}
+		bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
+		m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
 		
 		// Always update autocompletion list regardless of reset status
 		UpdateAutoCompletion();

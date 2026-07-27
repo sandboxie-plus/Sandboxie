@@ -131,6 +131,37 @@ static WCHAR *File_GetName_TranslateSymlinks(
 static WCHAR *File_GetName_ExpandShortNames(
     THREAD_DATA *TlsData, WCHAR *Path);
 
+static BOOLEAN File_IsLikelyShortNameComponent(
+    const WCHAR *Component, ULONG ComponentLen);
+
+static BOOLEAN File_ShortNameFallbackCacheLookup(
+    const void *SnapshotKey,
+    const WCHAR *ParentPath,
+    const WCHAR *ShortComponent,
+    ULONG ShortComponentLen,
+    PFILE_BOTH_DIRECTORY_INFORMATION info,
+    ULONG info_size,
+    NTSTATUS *CachedStatus);
+
+static void File_ShortNameFallbackCacheStore(
+    const void *SnapshotKey,
+    const WCHAR *ParentPath,
+    const WCHAR *ShortComponent,
+    ULONG ShortComponentLen,
+    NTSTATUS status,
+    PFILE_BOTH_DIRECTORY_INFORMATION info,
+    ULONG info_size);
+
+static BOOLEAN File_ShortNameFallbackParentMissingLookup(
+    const void *SnapshotKey,
+    const WCHAR *ParentPath);
+
+static void File_ShortNameFallbackParentMissingStore(
+    const void *SnapshotKey,
+    const WCHAR *ParentPath);
+
+static BOOLEAN File_EnsureShortNameFallbackCacheLock(void);
+
 static BOOLEAN File_GetName_ConvertLinks(
     THREAD_DATA *TlsData, WCHAR **OutTruePath, BOOLEAN ConvertWow64Link);
 
@@ -242,6 +273,9 @@ static NTSTATUS File_CreatePath(WCHAR *TruePath, WCHAR *CopyPath);
 static NTSTATUS File_MigrateFile(
     const WCHAR *TruePath, const WCHAR *CopyPath,
     BOOLEAN IsWritePath, BOOLEAN WithContents);
+
+static BOOLEAN File_RefreshNewerCopy(
+    const WCHAR *TruePath, const WCHAR *CopyPath);
 
 static NTSTATUS File_MigrateJunction(
     const WCHAR *TruePath, const WCHAR *CopyPath,
@@ -435,6 +469,35 @@ BOOLEAN File_Delete_v2 = FALSE;
 static WCHAR *File_AltBoxPath = NULL;
 static ULONG File_AltBoxPathLen = 0;
 
+#define FILE_SHORTNAME_FALLBACK_CACHE_SIZE   32
+#define FILE_SHORTNAME_CACHE_PARENT_MAX      MAX_PATH
+
+typedef struct _FILE_SHORTNAME_FALLBACK_CACHE_ENTRY {
+    ULONG_PTR SnapshotKey;
+    WCHAR ParentPath[FILE_SHORTNAME_CACHE_PARENT_MAX + 1];
+    WCHAR ShortComponent[13];
+    WCHAR LongName[FILE_SHORTNAME_CACHE_PARENT_MAX + 1];
+    NTSTATUS Status;
+    BOOLEAN Valid;
+} FILE_SHORTNAME_FALLBACK_CACHE_ENTRY;
+
+typedef struct _FILE_SHORTNAME_PARENT_MISSING_CACHE_ENTRY {
+    ULONG_PTR SnapshotKey;
+    WCHAR ParentPath[FILE_SHORTNAME_CACHE_PARENT_MAX + 1];
+    BOOLEAN Valid;
+} FILE_SHORTNAME_PARENT_MISSING_CACHE_ENTRY;
+
+static FILE_SHORTNAME_FALLBACK_CACHE_ENTRY
+    File_ShortNameFallbackCache[FILE_SHORTNAME_FALLBACK_CACHE_SIZE];
+static volatile LONG File_ShortNameFallbackCacheNext = 0;
+
+static FILE_SHORTNAME_PARENT_MISSING_CACHE_ENTRY
+    File_ShortNameFallbackParentMissingCache[FILE_SHORTNAME_FALLBACK_CACHE_SIZE];
+static volatile LONG File_ShortNameFallbackParentMissingCacheNext = 0;
+
+static CRITICAL_SECTION *File_ShortNameFallbackCache_CritSec = NULL;
+
+BOOLEAN Dll_UseChromeSecurePreferencesHack = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -1728,8 +1791,10 @@ _FX NTSTATUS File_GetName_ExpandShortNames2(
 	WCHAR *Path, ULONG index, ULONG backslash_index, PFILE_BOTH_DIRECTORY_INFORMATION info, const ULONG info_size, FILE_SNAPSHOT* Cur_Snapshot)
 {
 	NTSTATUS status;
+    NTSTATUS status2;
 
 	UNICODE_STRING uni;
+    UNICODE_STRING dir_uni;
 	OBJECT_ATTRIBUTES ObjAttrs;
 	HANDLE handle;
 	IO_STATUS_BLOCK IoStatusBlock;
@@ -1809,6 +1874,100 @@ _FX NTSTATUS File_GetName_ExpandShortNames2(
 
 	NtClose(handle);
 
+    if ((status == STATUS_NO_SUCH_FILE || status == STATUS_OBJECT_NAME_NOT_FOUND) &&
+        !File_FindBoxPrefix(Path))
+    {
+        const void *snapshot_key = Cur_Snapshot;
+        WCHAR *true_parent = Dll_AllocTemp((backslash_index + 2) * sizeof(WCHAR));
+        ULONG short_len = index - backslash_index - 1;
+        WCHAR *short_component = Path + backslash_index + 1;
+        NTSTATUS cached_status = STATUS_SUCCESS;
+        wmemcpy(true_parent, Path, backslash_index + 1);
+        true_parent[backslash_index + 1] = L'\0';
+
+        if (File_ShortNameFallbackCacheLookup(
+                snapshot_key, true_parent, short_component, short_len,
+                info, info_size, &cached_status)) {
+            status = cached_status;
+            Dll_Free(true_parent);
+            Path[index] = save_char;
+            return status;
+        }
+
+        if (File_ShortNameFallbackParentMissingLookup(snapshot_key, true_parent)) {
+            File_ShortNameFallbackCacheStore(
+                snapshot_key, true_parent, short_component, short_len,
+                status, info, info_size);
+
+            Dll_Free(true_parent);
+            Path[index] = save_char;
+            return status;
+        }
+
+        WCHAR *copy_parent = NULL;
+        status2 = File_GetCopyPath(true_parent, &copy_parent);
+
+        if (!NT_SUCCESS(status2)) {
+            if (status2 == STATUS_NO_SUCH_FILE ||
+                status2 == STATUS_OBJECT_NAME_NOT_FOUND ||
+                status2 == STATUS_OBJECT_PATH_NOT_FOUND) {
+                File_ShortNameFallbackParentMissingStore(snapshot_key, true_parent);
+            }
+
+            File_ShortNameFallbackCacheStore(
+                snapshot_key, true_parent, short_component, short_len,
+                status, info, info_size);
+
+            Dll_Free(true_parent);
+            Path[index] = save_char;
+            return status;
+        }
+
+        if (NT_SUCCESS(status2) && copy_parent) {
+
+            WCHAR *copy_tmpl = File_MakeSnapshotPath(Cur_Snapshot, copy_parent);
+            dir_uni.Buffer = copy_tmpl ? copy_tmpl : copy_parent;
+            dir_uni.Length = wcslen(dir_uni.Buffer) * sizeof(WCHAR);
+            dir_uni.MaximumLength = dir_uni.Length + sizeof(WCHAR);
+
+            InitializeObjectAttributes(
+                &ObjAttrs, &dir_uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+            status2 = __sys_NtCreateFile(
+                &handle,
+                GENERIC_READ | SYNCHRONIZE,
+                &ObjAttrs,
+                &IoStatusBlock,
+                NULL,
+                0,
+                FILE_SHARE_VALID_FLAGS,
+                FILE_OPEN,
+                FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT,
+                NULL,
+                0);
+
+            if (NT_SUCCESS(status2)) {
+                status2 = __sys_NtQueryDirectoryFile(
+                    handle,
+                    NULL, NULL, NULL,
+                    &IoStatusBlock,
+                    info, info_size, FileBothDirectoryInformation,
+                    TRUE, &uni, FALSE);
+
+                NtClose(handle);
+
+                if (NT_SUCCESS(status2))
+                    status = status2;
+            }
+        }
+
+        File_ShortNameFallbackCacheStore(
+            snapshot_key, true_parent, short_component, short_len,
+            status, info, info_size);
+
+        Dll_Free(true_parent);
+    }
+
 	Path[index] = save_char;        // restore original path
 
 	return status;
@@ -1842,10 +2001,12 @@ _FX WCHAR *File_GetName_ExpandShortNames(
         // scan path string until a tilde (~) is found, but also keep
         // the position of the last backslash character before the tilde.
 
-        ULONG backslash_index;
+        ULONG backslash_index = 0;
         ULONG dot_count;
         ULONG len;
         WCHAR *copy;
+        ULONG component_start;
+        ULONG component_len;
 
         for (; Path[index] != L'\0' && Path[index] != L'~'; ++index)
             if (Path[index] == L'\\')
@@ -1871,7 +2032,14 @@ _FX WCHAR *File_GetName_ExpandShortNames(
         // if more than one dot found, or path component is longer than
         // 12 characters (for the 8.3 format), it's not a short name
 
-        if (dot_count > 1 || (index - backslash_index - 1) > 12)
+        component_start = backslash_index + 1;
+        component_len = index - component_start;
+
+        if (dot_count > 1 || component_len > 12)
+            continue;
+
+        // Avoid expensive fallback logic unless the token is likely a real 8.3 name.
+        if (!File_IsLikelyShortNameComponent(Path + component_start, component_len))
             continue;
 
         // otherwise open the directory containing the short name component
@@ -1947,6 +2115,283 @@ _FX WCHAR *File_GetName_ExpandShortNames(
         Dll_Free(info);
 
     return Path;
+}
+
+
+//---------------------------------------------------------------------------
+// File_IsLikelyShortNameComponent
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN File_IsLikelyShortNameComponent(
+    const WCHAR *Component, ULONG ComponentLen)
+{
+    ULONG i;
+    ULONG tilde_pos = (ULONG)-1;
+
+    if (!Component || ComponentLen < 3 || ComponentLen > 12)
+        return FALSE;
+
+    for (i = 0; i < ComponentLen; ++i) {
+        if (Component[i] == L'~') {
+            tilde_pos = i;
+            break;
+        }
+    }
+
+    if (tilde_pos == (ULONG)-1 || tilde_pos == 0 || tilde_pos + 1 >= ComponentLen)
+        return FALSE;
+
+    if (!iswdigit(Component[tilde_pos + 1]))
+        return FALSE;
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// File_ShortNameFallbackCacheLookup
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN File_ShortNameFallbackCacheLookup(
+    const void *SnapshotKey,
+    const WCHAR *ParentPath,
+    const WCHAR *ShortComponent,
+    ULONG ShortComponentLen,
+    PFILE_BOTH_DIRECTORY_INFORMATION info,
+    ULONG info_size,
+    NTSTATUS *CachedStatus)
+{
+    ULONG i;
+    BOOLEAN found = FALSE;
+    const ULONG file_name_offset = (ULONG)FIELD_OFFSET(FILE_BOTH_DIRECTORY_INFORMATION, FileName);
+
+    if (!ParentPath || !ShortComponent || !CachedStatus)
+        return FALSE;
+
+    if (wcslen(ParentPath) > FILE_SHORTNAME_CACHE_PARENT_MAX ||
+        ShortComponentLen == 0 || ShortComponentLen > 12)
+        return FALSE;
+
+    if (!File_EnsureShortNameFallbackCacheLock())
+        return FALSE;
+
+    EnterCriticalSection(File_ShortNameFallbackCache_CritSec);
+
+    for (i = 0; i < FILE_SHORTNAME_FALLBACK_CACHE_SIZE; ++i) {
+        FILE_SHORTNAME_FALLBACK_CACHE_ENTRY *entry = &File_ShortNameFallbackCache[i];
+        if (!entry->Valid)
+            continue;
+
+        if (entry->SnapshotKey != (ULONG_PTR)SnapshotKey)
+            continue;
+
+        if (_wcsicmp(entry->ParentPath, ParentPath) != 0)
+            continue;
+
+        if (_wcsnicmp(entry->ShortComponent, ShortComponent, ShortComponentLen) != 0 ||
+            entry->ShortComponent[ShortComponentLen] != L'\0')
+            continue;
+
+        *CachedStatus = entry->Status;
+
+        if (NT_SUCCESS(entry->Status)) {
+            ULONG name_chars = (ULONG)wcslen(entry->LongName);
+            ULONG max_chars;
+
+            if (info_size < file_name_offset)
+                goto done;
+
+            max_chars = (info_size - file_name_offset) / sizeof(WCHAR);
+
+            if (!info || name_chars + 1 > max_chars)
+                goto done;
+
+            info->FileNameLength = name_chars * sizeof(WCHAR);
+            wmemcpy(info->FileName, entry->LongName, name_chars + 1);
+        }
+
+        found = TRUE;
+        break;
+    }
+
+done:
+    LeaveCriticalSection(File_ShortNameFallbackCache_CritSec);
+
+    if (found)
+        return TRUE;
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// File_ShortNameFallbackCacheStore
+//---------------------------------------------------------------------------
+
+
+_FX void File_ShortNameFallbackCacheStore(
+    const void *SnapshotKey,
+    const WCHAR *ParentPath,
+    const WCHAR *ShortComponent,
+    ULONG ShortComponentLen,
+    NTSTATUS status,
+    PFILE_BOTH_DIRECTORY_INFORMATION info,
+    ULONG info_size)
+{
+    FILE_SHORTNAME_FALLBACK_CACHE_ENTRY *entry;
+    ULONG slot;
+    ULONG name_chars;
+    const ULONG long_name_capacity = FILE_SHORTNAME_CACHE_PARENT_MAX + 1;
+    const ULONG file_name_offset = (ULONG)FIELD_OFFSET(FILE_BOTH_DIRECTORY_INFORMATION, FileName);
+
+    if (!ParentPath || !ShortComponent)
+        return;
+
+    if (wcslen(ParentPath) > FILE_SHORTNAME_CACHE_PARENT_MAX ||
+        ShortComponentLen == 0 || ShortComponentLen > 12)
+        return;
+
+    if (NT_SUCCESS(status) && !info)
+        return;
+
+    if (NT_SUCCESS(status) && info) {
+        name_chars = info->FileNameLength / sizeof(WCHAR);
+        if (name_chars == 0 || name_chars >= long_name_capacity ||
+            info_size < file_name_offset ||
+            info->FileNameLength > info_size - file_name_offset) {
+            return;
+        }
+    }
+
+    if (!File_EnsureShortNameFallbackCacheLock())
+        return;
+
+    EnterCriticalSection(File_ShortNameFallbackCache_CritSec);
+
+    slot = (ULONG)InterlockedIncrement(&File_ShortNameFallbackCacheNext);
+    entry = &File_ShortNameFallbackCache[slot % FILE_SHORTNAME_FALLBACK_CACHE_SIZE];
+
+    entry->SnapshotKey = (ULONG_PTR)SnapshotKey;
+    wcscpy(entry->ParentPath, ParentPath);
+    wmemcpy(entry->ShortComponent, ShortComponent, ShortComponentLen);
+    entry->ShortComponent[ShortComponentLen] = L'\0';
+
+    if (NT_SUCCESS(status) && info) {
+        wmemcpy(entry->LongName, info->FileName, name_chars);
+        entry->LongName[name_chars] = L'\0';
+        entry->Status = STATUS_SUCCESS;
+    } else {
+        entry->LongName[0] = L'\0';
+        entry->Status = status;
+    }
+
+    entry->Valid = TRUE;
+
+    LeaveCriticalSection(File_ShortNameFallbackCache_CritSec);
+}
+
+
+//---------------------------------------------------------------------------
+// File_ShortNameFallbackParentMissingLookup
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN File_ShortNameFallbackParentMissingLookup(
+    const void *SnapshotKey,
+    const WCHAR *ParentPath)
+{
+    ULONG i;
+
+    if (!ParentPath || wcslen(ParentPath) > FILE_SHORTNAME_CACHE_PARENT_MAX)
+        return FALSE;
+
+    if (!File_EnsureShortNameFallbackCacheLock())
+        return FALSE;
+
+    EnterCriticalSection(File_ShortNameFallbackCache_CritSec);
+
+    for (i = 0; i < FILE_SHORTNAME_FALLBACK_CACHE_SIZE; ++i) {
+        FILE_SHORTNAME_PARENT_MISSING_CACHE_ENTRY *entry =
+            &File_ShortNameFallbackParentMissingCache[i];
+
+        if (!entry->Valid)
+            continue;
+
+        if (entry->SnapshotKey != (ULONG_PTR)SnapshotKey)
+            continue;
+
+        if (_wcsicmp(entry->ParentPath, ParentPath) == 0)
+        {
+            LeaveCriticalSection(File_ShortNameFallbackCache_CritSec);
+            return TRUE;
+        }
+    }
+
+    LeaveCriticalSection(File_ShortNameFallbackCache_CritSec);
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// File_ShortNameFallbackParentMissingStore
+//---------------------------------------------------------------------------
+
+
+_FX void File_ShortNameFallbackParentMissingStore(
+    const void *SnapshotKey,
+    const WCHAR *ParentPath)
+{
+    FILE_SHORTNAME_PARENT_MISSING_CACHE_ENTRY *entry;
+    ULONG slot;
+
+    if (!ParentPath || wcslen(ParentPath) > FILE_SHORTNAME_CACHE_PARENT_MAX)
+        return;
+
+    if (!File_EnsureShortNameFallbackCacheLock())
+        return;
+
+    EnterCriticalSection(File_ShortNameFallbackCache_CritSec);
+
+    slot = (ULONG)InterlockedIncrement(&File_ShortNameFallbackParentMissingCacheNext);
+    entry = &File_ShortNameFallbackParentMissingCache[slot % FILE_SHORTNAME_FALLBACK_CACHE_SIZE];
+
+    entry->SnapshotKey = (ULONG_PTR)SnapshotKey;
+    wcscpy(entry->ParentPath, ParentPath);
+    entry->Valid = TRUE;
+
+    LeaveCriticalSection(File_ShortNameFallbackCache_CritSec);
+}
+
+
+//---------------------------------------------------------------------------
+// File_EnsureShortNameFallbackCacheLock
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN File_EnsureShortNameFallbackCacheLock(void)
+{
+    CRITICAL_SECTION *critsec;
+
+    critsec = File_ShortNameFallbackCache_CritSec;
+    if (!critsec) {
+        critsec = Dll_Alloc(sizeof(CRITICAL_SECTION));
+        if (!critsec)
+            return FALSE;
+
+        InitializeCriticalSectionAndSpinCount(critsec, 1000);
+
+        if (InterlockedCompareExchangePointer(
+                (PVOID *)&File_ShortNameFallbackCache_CritSec,
+                critsec, NULL) != NULL) {
+            DeleteCriticalSection(critsec);
+            Dll_Free(critsec);
+        }
+    }
+
+    return TRUE;
 }
 
 
@@ -3537,6 +3982,26 @@ ReparseLoop:
             // let the system work on the true file
             //
 
+            //
+            // $Workaround$ - 3rd party fix - Chrome-Fix
+            // Chrome's Secure Preferences file must be migrated even on
+            // read-only access, so we can strip the encrypted hash entries.
+            // Without this, Chrome reads the original file with encrypted
+            // hashes that can't be validated in the sandbox, causing
+            // settings/extensions to be reset.
+            //
+
+            if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && Dll_UseChromeSecurePreferencesHack &&
+                    (DesiredAccess & FILE_DENIED_ACCESS) == 0) {
+
+                const WCHAR *filename = wcsrchr(TruePath, L'\\');
+                if (filename && _wcsicmp(filename, L"\\Secure Preferences") == 0) {
+
+                    // Force write access to trigger migration path
+                    DesiredAccess |= FILE_GENERIC_WRITE;
+                }
+            }
+
             if ((DesiredAccess & FILE_DENIED_ACCESS) == 0) {
 
                 if (TruePathColon)
@@ -3637,6 +4102,15 @@ ReparseLoop:
 
     if (! NT_SUCCESS(status))
         __leave;
+
+    // CopyNewer refreshes an existing regular sandbox copy before it is
+    // opened.  A failed or deferred refresh intentionally leaves the current
+    // copy available to the application.
+    if (HaveCopyFile && (FileType & TYPE_FILE) &&
+            (CreateDisposition == FILE_OPEN || CreateDisposition == FILE_OPEN_IF) &&
+            PATH_NOT_WRITE(mp_flags) && !(FileType & TYPE_DELETED)) {
+        File_RefreshNewerCopy(TruePath, CopyPath);
+    }
 
     //
     // check creation parameters again, now that we know the file type

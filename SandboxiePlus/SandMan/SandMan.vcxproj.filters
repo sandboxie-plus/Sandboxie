@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -174,6 +174,9 @@
     <ClCompile Include="Helpers\WinHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers\MiniDumpFilter.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
     <ClCompile Include="Wizards\NewBoxWizard.cpp">
       <Filter>Wizards</Filter>
     </ClCompile>
@@ -240,6 +243,7 @@
     <ClCompile Include="Views\TraceView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
+
     <ClCompile Include="Windows\OptionsWindow.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
@@ -290,6 +294,9 @@
     <ClInclude Include="Helpers\WinHelper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Helpers\MiniDumpFilter.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
     <ClInclude Include="Helpers\StorageInfo.h">
       <Filter>Helpers</Filter>
     </ClInclude>
@@ -298,6 +305,9 @@
     </ClInclude>
     <ClInclude Include="CustomStyles.h">
       <Filter>SandMan</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\PendingChanges.h">
+      <Filter>Windows</Filter>
     </ClInclude>
     <ClInclude Include="Helpers\TabOrder.h">
       <Filter>Helpers</Filter>
@@ -337,6 +347,7 @@
     <QtMoc Include="Views\TraceView.h">
       <Filter>Views</Filter>
     </QtMoc>
+
     <QtMoc Include="Windows\SelectBoxWindow.h">
       <Filter>Windows</Filter>
     </QtMoc>
@@ -493,6 +504,9 @@
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_fr.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_hi.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_pt_BR.ts">

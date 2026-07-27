@@ -1,0 +1,121 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+#include "winres.h"
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_CRASHDUMP           ICON                    "crashdump.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "Xanasoft.com"
+            VALUE "FileDescription", "Xanasoft Crash Dump Utility"
+            VALUE "FileVersion", "1.0.0.0"
+            VALUE "InternalName", "MiniDump.exe"
+            VALUE "LegalCopyright", "Copyright (C) 2026 by David Xanatos (xanasoft.com)"
+            VALUE "OriginalFilename", "MiniDump.exe"
+            VALUE "ProductName", "Xanasoft Crash Dump Utility"
+            VALUE "ProductVersion", "1.0.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CRASHDUMP DIALOGEX 0, 0, 350, 200
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Crash Dump"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    ICON            "",IDC_ICON_WARNING,12,10,21,20
+    LTEXT           "The application has crashed. A crash dump can be saved for debugging purposes.",IDC_STATIC_INFO,40,12,298,18
+    CONTROL         "Submit crash dump to developer",IDC_CHECK_SUBMIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,38,140,10
+    LTEXT           "Comment (optional):",IDC_STATIC,12,52,80,8
+    EDITTEXT        IDC_EDIT_COMMENT,12,62,326,56,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_DISABLED
+    LTEXT           "Dump type:",IDC_STATIC_TYPE,12,128,42,8
+    COMBOBOX        IDC_COMBO_TYPE,56,126,282,60,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Save dump file:",IDC_CHECK_SAVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,148,64,10
+    EDITTEXT        IDC_EDIT_PATH,78,146,232,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BTN_BROWSE,314,146,24,14
+    DEFPUSHBUTTON   "OK",IDOK,228,178,54,14
+    PUSHBUTTON      "Cancel",IDCANCEL,286,178,52,14
+END
+
+IDD_PROCESSLIST DIALOGEX 0, 0, 400, 300
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+CAPTION "Process Dump Utility"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Select a process to create a memory dump:",IDC_STATIC,12,10,200,8
+    CONTROL         "",IDC_LIST_PROCESSES,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | WS_BORDER | WS_TABSTOP,12,22,376,220
+    LTEXT           "Dump type:",IDC_STATIC_TYPE,12,252,42,8
+    COMBOBOX        IDC_COMBO_TYPE,56,250,150,60,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Refresh",IDC_BTN_REFRESH,270,248,58,14
+    DEFPUSHBUTTON   "Create Dump",IDC_BTN_DUMP,332,248,56,14
+    PUSHBUTTON      "Close",IDCANCEL,332,278,56,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_CRASHDUMP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 333
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////

@@ -13,6 +13,8 @@ jobs:
     if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: write
 
     steps:
       - name: Install Qt 5 packages
@@ -22,7 +24,7 @@ jobs:
           sudo apt-get install --no-install-recommends qtbase5-dev qttools5-dev-tools
 
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Sync Sbie Plus language strings (.ts files)
         id: check
@@ -75,14 +77,16 @@ jobs:
     if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
     runs-on: windows-2022
     timeout-minutes: 15
+    permissions:
+      contents: write
 
     steps:
 
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup msbuild
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
 
       - name: Build Sandboxie x86
         # This step is needed to compile Parse.vcxproj

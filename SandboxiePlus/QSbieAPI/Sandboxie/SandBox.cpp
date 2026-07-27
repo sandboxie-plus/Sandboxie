@@ -833,9 +833,9 @@ SB_STATUS CSandBox::ImBoxCreate(quint64 uSizeKb, const QString& Password)
 	return m_pAPI->ImBoxCreate(this, uSizeKb, Password);
 }
 
-SB_STATUS CSandBox::ImBoxMount(const QString& Password, bool bProtect, bool bAutoUnmount)
+SB_STATUS CSandBox::ImBoxMount(const QString& Password, int iProtect, bool bAutoUnmount)
 {
-	return m_pAPI->ImBoxMount(this, Password, bProtect, bAutoUnmount);
+	return m_pAPI->ImBoxMount(this, Password, iProtect, bAutoUnmount);
 }
 
 SB_STATUS CSandBox::ImBoxUnmount()

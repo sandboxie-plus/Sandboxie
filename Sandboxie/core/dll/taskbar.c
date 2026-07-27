@@ -100,6 +100,8 @@ static HRESULT Taskbar_IPropertyStore_SetValue(
 static HRESULT Taskbar_IPropertyStore_Commit(IPropertyStore *This);
 
 
+static BOOL SHCore_IsOS(DWORD dwOS);
+
 //---------------------------------------------------------------------------
 
 
@@ -119,6 +121,8 @@ typedef void *(*P_CoTaskMemAlloc)(ULONG cb);
 
 typedef void (*P_CoTaskMemFree)(void *pv);
 
+typedef BOOL (*P_IsOS)(DWORD dwOS);
+
 
 //---------------------------------------------------------------------------
 
@@ -134,6 +138,8 @@ static P_SHGetPropertyStoreForWindow
 
 extern P_CoTaskMemAlloc __sys_CoTaskMemAlloc;           // from com.c
 
+
+static P_IsOS           __sys_IsOS = NULL;
 
 //---------------------------------------------------------------------------
 // Variables
@@ -278,6 +284,11 @@ _FX BOOLEAN Taskbar_SHCore_Init(HMODULE module)
 
     if (Dll_OsBuild >= 8400) {
         Taskbar_Init_2(module);
+    }
+
+    void* IsOS = GetProcAddress(module, "IsOS");
+    if (IsOS) {
+		SBIEDLL_HOOK(SHCore_, IsOS);
     }
 
     return TRUE;
@@ -1068,4 +1079,28 @@ _FX HRESULT Taskbar_IPropertyStore_Commit(IPropertyStore *This)
     IPropertyStore *pReal = (IPropertyStore *)pThis->pReal;
 
     return pReal->lpVtbl->Commit(pReal);
+}
+
+
+//---------------------------------------------------------------------------
+// Taskbar_IPropertyStore_Commit
+//---------------------------------------------------------------------------
+
+
+_FX BOOL SHCore_IsOS(DWORD dwOS)
+{
+    //
+    // $Workaround$ - 3rd party fix - Chrome-Fix
+    // Chrome uses IsOS(OS_DOMAINMEMBER) to detect enterprise/domain-joined devices.
+    // On enterprise devices, Chrome skips HMAC validation of Secure Preferences
+    // (see pref_hash_calculator.cc - returns VALID if IsEnterpriseDevice()).
+    //
+
+	extern BOOLEAN Dll_UseChromeSecurePreferencesHack;
+    if (dwOS == 28 /*OS_DOMAINMEMBER*/ && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && Dll_UseChromeSecurePreferencesHack) {
+		//SbieApi_Log(2325, L"SHCore_IsOS: Chrome detected, returning TRUE for OS_DOMAINMEMBER");
+        return TRUE;
+    }
+
+    return __sys_IsOS(dwOS);
 }

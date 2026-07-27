@@ -147,7 +147,7 @@ CTraceTree::~CTraceTree()
 	theConf->SetBlob("MainWindow/TraceSplitter", m_pSplitter->saveState());
 }
 
-void CTraceTree::SetFilter(const QRegularExpression& Exp, int iOptions, int Column) 
+void CTraceTree::SetFilter(const QRegularExpression& Exp, int iOptions, int /*Column*/) 
 {
 	QString ExpStr = Exp.pattern();
 	bool bReset = m_bHighLight != ((iOptions & CFinder::eHighLight) != 0) || (!m_bHighLight && m_FilterExp != ExpStr);
@@ -161,7 +161,7 @@ void CTraceTree::SetFilter(const QRegularExpression& Exp, int iOptions, int Colu
 		emit FilterChanged();
 }
 
-void CTraceTree::ItemSelection(const QItemSelection& selected, const QItemSelection& deselected)
+void CTraceTree::ItemSelection(const QItemSelection& /*selected*/, const QItemSelection& /*deselected*/)
 {
 	QItemSelectionModel* selectionModel = m_pTreeList->selectionModel();
 	QItemSelection selection = selectionModel->selection();
@@ -626,6 +626,12 @@ void CTraceView::OnObjTree()
 	//m_pTrace->GetTree()->expandAll();
 
 	theConf->SetValue("Options/UseObjectTree", m_pObjectTree->isChecked());
+}
+
+void CTraceView::SelectProcess(quint64 PID)
+{
+	int Index = m_pTracePid->findData(PID);
+	m_pTracePid->setItemCheckState(Index, m_pTracePid->itemCheckState(Index) == Qt::Checked ? Qt::Unchecked : Qt::Checked);
 }
 
 void CTraceView::UpdateFilters()

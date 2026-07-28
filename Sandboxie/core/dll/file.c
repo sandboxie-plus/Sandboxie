@@ -7299,7 +7299,12 @@ _FX NTSTATUS File_NtSetInformationFile(
     } else if (FileInformationClass == FileDispositionInformation ||
                 FileInformationClass == FileDispositionInformationEx) {
 
-        if (Length < sizeof(FILE_DISPOSITION_INFORMATION))
+        ULONG disposition_length =
+            FileInformationClass == FileDispositionInformationEx
+            ? sizeof(FILE_DISPOSITION_INFORMATION_EX)
+            : sizeof(FILE_DISPOSITION_INFORMATION);
+
+        if (Length < disposition_length)
             status = STATUS_INFO_LENGTH_MISMATCH;
         else
             status = File_SetDisposition(

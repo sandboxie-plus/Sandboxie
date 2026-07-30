@@ -2788,6 +2788,14 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 		pBox->UpdateTextList("Template", list, FALSE);
 	}
 
+	if (pBox->GetBool("AutoSnapCapture", false))
+	{
+		QString SnapName = tr("Auto-Snap %1").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd HH-mm-ss"));
+		pBox->TakeSnapshot(SnapName);
+		if (theConf->GetBool("Options/AutoBoxOpsNotify", false))
+			OnLogMessage(tr("Auto capturing snapshot for %1").arg(pBox->GetName()), true);
+	}
+
 	if (!pBox->GetBool("NeverDelete", false))
 	{
 		if (pBox->GetBool("AutoDelete", false))

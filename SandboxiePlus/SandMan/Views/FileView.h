@@ -111,6 +111,8 @@ protected:
 	CSandBoxPtr			m_pBox;
 
 private:
+	static QSet<CFileView*>	s_Instances;
+
 	QGridLayout*		m_pMainLayout;
 	QTreeViewEx*		m_pTreeView;
 	QFileSystemModel*	m_pFileModel;

@@ -406,6 +406,7 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT___(SetParent);
     GUI_IMPORT___(GetFocus);
     GUI_IMPORT___(GetForegroundWindow);
+    GUI_IMPORT___(GetActiveWindow);
     GUI_IMPORT___(IsWindow);
     GUI_IMPORT___(IsWindowEnabled);
     GUI_IMPORT___(IsWindowVisible);
@@ -1641,7 +1642,7 @@ _FX VOID Gui_ProtectScreen(HWND hWnd)
 // Gui_WindowProcW
 //---------------------------------------------------------------------------
 
-static HWND Gui_PreviousActiveWindow = NULL;
+extern HWND Gui_PreviousActiveWindow;
 _FX LRESULT Gui_WindowProcW(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -1672,13 +1673,15 @@ _FX LRESULT Gui_WindowProcW(
 	//	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
 	//		return FALSE;
 	//}
-	if (uMsg == WM_ACTIVATE) {
-		if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
-			if (wParam == WA_INACTIVE)
-				return 0;
-			else {
-				Gui_PreviousActiveWindow = (HWND)hWnd;
-			}
+	if (uMsg == WM_ACTIVATE && SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE)) {
+		switch (LOWORD(wParam)) {
+		case WA_INACTIVE:
+			return 0;
+		case WA_ACTIVE:
+		case WA_CLICKACTIVE:
+			Gui_PreviousActiveWindow = hWnd;
+			break;
+		}
 	}
 
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldW_Atom);
@@ -1746,13 +1749,15 @@ _FX LRESULT Gui_WindowProcA(
 	//	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
 	//		return FALSE;
 	//}
-	if (uMsg == WM_ACTIVATE) {
-		if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
-			if (wParam == WA_INACTIVE)
-				return 0;
-			else {
-				Gui_PreviousActiveWindow = (HWND)hWnd;
-			}
+	if (uMsg == WM_ACTIVATE && SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE)) {
+		switch (LOWORD(wParam)) {
+		case WA_INACTIVE:
+			return 0;
+		case WA_ACTIVE:
+		case WA_CLICKACTIVE:
+			Gui_PreviousActiveWindow = hWnd;
+			break;
+		}
 	}
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);
     lResult = __sys_CallWindowProcA(wndproc, hWnd, uMsg, wParam, new_lParam);

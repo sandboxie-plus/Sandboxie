@@ -467,7 +467,7 @@ typedef BOOL (*P_SwitchDesktop)(HDESK hDesktop);
 typedef BOOL (*P_UserHandleGrantAccess)(
     HANDLE hUserHandle, HANDLE hJob, BOOL bGrant);
 
-typedef HWND (*P_GetActiveWindow)();
+typedef HWND (*P_GetActiveWindow)(void);
 
 //---------------------------------------------------------------------------
 

@@ -59,9 +59,9 @@ static BOOL Gui_BlockInput(BOOL fBlockIt);
 
 static UINT Gui_SendInput(ULONG nInputs, LPINPUT pInputs, ULONG cbInput);
 
-static HWND Gui_GetActiveWindow();
+static HWND Gui_GetActiveWindow(void);
 
-static HWND Gui_GetForegroundWindow();
+static HWND Gui_GetForegroundWindow(void);
 
 static HDESK Gui_OpenInputDesktop(
     DWORD dwFlags, BOOL fInherit, ACCESS_MASK dwDesiredAccess);

@@ -63,6 +63,16 @@ static HWND Gui_GetActiveWindow(void);
 
 static HWND Gui_GetForegroundWindow(void);
 
+static void CALLBACK Gui_WinEventHookProc(
+    HWINEVENTHOOK hWinEventHook, DWORD event, HWND hwnd,
+    LONG idObject, LONG idChild, DWORD idEventThread, DWORD dwmsEventTime);
+
+static HWINEVENTHOOK Gui_SetWinEventHook(
+    UINT eventMin, UINT eventMax, HMODULE hmodWinEventProc,
+    WINEVENTPROC pfnWinEventProc, DWORD idProcess, DWORD idThread, DWORD dwFlags);
+
+static BOOL Gui_UnhookWinEvent(HWINEVENTHOOK hWinEventHook);
+
 static HDESK Gui_OpenInputDesktop(
     DWORD dwFlags, BOOL fInherit, ACCESS_MASK dwDesiredAccess);
 
@@ -178,6 +188,19 @@ static HANDLE Gui_DummyInputDesktopHandle = NULL;
 
        BOOLEAN Gui_DontAllowCoverTaskbar = FALSE;
 
+       BOOLEAN Gui_AlwaysActive = FALSE;
+
+typedef struct _GUI_WIN_EVENT_HOOK {
+
+    LIST_ELEM list_elem;
+    HWINEVENTHOOK hHook;
+    WINEVENTPROC origProc;
+
+} GUI_WIN_EVENT_HOOK;
+
+static CRITICAL_SECTION Gui_WinEventHooksCritSec;
+static LIST Gui_WinEventHooks;
+
 
 //---------------------------------------------------------------------------
 // Gui_InitMisc
@@ -213,9 +236,18 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
         SBIEDLL_HOOK_GUI(SwitchToThisWindow);
         SBIEDLL_HOOK_GUI(SetActiveWindow);
 
-		if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE)) {
+		if (Gui_AlwaysActive) {
+			InitializeCriticalSection(&Gui_WinEventHooksCritSec);
+			List_Init(&Gui_WinEventHooks);
+
 			SBIEDLL_HOOK_GUI(GetForegroundWindow);
 			SBIEDLL_HOOK_GUI(GetActiveWindow);
+			// SetWinEventHook is hooked so we can proxy the callback and
+			// filter out events that would reveal the boxed window is not
+			// really active; a pre-existing hook on the export is chained
+			// by SbieDll_Hook automatically
+			SBIEDLL_HOOK_GUI(SetWinEventHook);
+			SBIEDLL_HOOK_GUI(UnhookWinEvent);
 		}
 		
         if (Gui_UseBlockCapture) {
@@ -1723,14 +1755,130 @@ _FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt)
 HWND Gui_PreviousActiveWindow = NULL;
 static HWND Gui_GetActiveWindow(void)
 {
-	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE) && Gui_PreviousActiveWindow)
+	if (Gui_AlwaysActive && Gui_PreviousActiveWindow)
 		return Gui_PreviousActiveWindow;
 	return __sys_GetActiveWindow();
 }
 
 static HWND Gui_GetForegroundWindow(void)
 {
-	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE) && Gui_PreviousActiveWindow)
+	if (Gui_AlwaysActive && Gui_PreviousActiveWindow)
 		return Gui_PreviousActiveWindow;
 	return __sys_GetForegroundWindow();
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_SetWinEventHook
+//---------------------------------------------------------------------------
+
+
+static HWINEVENTHOOK Gui_SetWinEventHook(
+    UINT eventMin, UINT eventMax, HMODULE hmodWinEventProc,
+    WINEVENTPROC pfnWinEventProc, DWORD idProcess, DWORD idThread, DWORD dwFlags)
+{
+    WINEVENTPROC proc = pfnWinEventProc;
+
+    //
+    // use a proxy callback as the first stage handler:  inside the proxy we
+    // filter out events that would reveal that a boxed window lost activation
+    // and forward the rest to the original callback.  if the callback was
+    // already wrapped (e.g. re-registration), pass it through unchanged.
+    // note that if the SetWinEventHook export itself was already hooked by
+    // another component, SbieDll_Hook already chained to it when the hook
+    // was installed in Gui_InitMisc
+    //
+
+    if (Gui_AlwaysActive && pfnWinEventProc && pfnWinEventProc != Gui_WinEventHookProc)
+        proc = Gui_WinEventHookProc;
+
+    HWINEVENTHOOK hHook = __sys_SetWinEventHook(
+        eventMin, eventMax, hmodWinEventProc, proc, idProcess, idThread, dwFlags);
+
+    if (hHook && proc != pfnWinEventProc) {
+
+        GUI_WIN_EVENT_HOOK *ghk = Dll_Alloc(sizeof(GUI_WIN_EVENT_HOOK));
+        if (ghk) {
+            ghk->hHook = hHook;
+            ghk->origProc = pfnWinEventProc;
+            EnterCriticalSection(&Gui_WinEventHooksCritSec);
+            List_Insert_After(&Gui_WinEventHooks, NULL, ghk);
+            LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+        }
+    }
+
+    return hHook;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_UnhookWinEvent
+//---------------------------------------------------------------------------
+
+
+static BOOL Gui_UnhookWinEvent(HWINEVENTHOOK hWinEventHook)
+{
+    GUI_WIN_EVENT_HOOK *ghk;
+
+    EnterCriticalSection(&Gui_WinEventHooksCritSec);
+    for (ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
+            ghk; ghk = (GUI_WIN_EVENT_HOOK *)ghk->list_elem.next) {
+        if (ghk->hHook == hWinEventHook) {
+            List_Remove(&Gui_WinEventHooks, ghk);
+            Dll_Free(ghk);
+            break;
+        }
+    }
+    LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+
+    return __sys_UnhookWinEvent(hWinEventHook);
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_WinEventHookProc
+//---------------------------------------------------------------------------
+
+
+static void CALLBACK Gui_WinEventHookProc(
+    HWINEVENTHOOK hWinEventHook, DWORD event, HWND hwnd,
+    LONG idObject, LONG idChild, DWORD idEventThread, DWORD dwmsEventTime)
+{
+    WINEVENTPROC origProc = NULL;
+    GUI_WIN_EVENT_HOOK *ghk;
+    BOOLEAN bFilter = FALSE;
+
+    EnterCriticalSection(&Gui_WinEventHooksCritSec);
+    for (ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
+            ghk; ghk = (GUI_WIN_EVENT_HOOK *)ghk->list_elem.next) {
+        if (ghk->hHook == hWinEventHook) {
+            origProc = ghk->origProc;
+            break;
+        }
+    }
+    LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+
+    if (! origProc)
+        return;
+
+    //
+    // under AlwaysActive, filter out events that would reveal that the
+    // boxed window is not actually the active/foreground window
+    //
+
+    if (Gui_AlwaysActive && Gui_PreviousActiveWindow &&
+            hwnd && hwnd != Gui_PreviousActiveWindow) {
+        switch (event) {
+        case EVENT_SYSTEM_FOREGROUND:
+        case EVENT_SYSTEM_ACTIVATETOPWINDOW:
+        case EVENT_SYSTEM_SWITCHSTART:
+        case EVENT_SYSTEM_SWITCHEND:
+        case EVENT_OBJECT_FOCUS:
+            bFilter = TRUE;
+            break;
+        }
+    }
+
+    if (! bFilter)
+        origProc(hWinEventHook, event, hwnd, idObject, idChild, idEventThread, dwmsEventTime);
 }

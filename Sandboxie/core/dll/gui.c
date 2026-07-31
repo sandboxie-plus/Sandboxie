@@ -378,6 +378,8 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     if (Gui_UseBlockCapture)
         Gdi_InitDCCache();
 
+    Gui_AlwaysActive = SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE);
+
     if (! Gdi_InitZero(module))       // only if Gdi_Init was not called yet
         return FALSE;
 
@@ -407,6 +409,8 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT___(GetFocus);
     GUI_IMPORT___(GetForegroundWindow);
     GUI_IMPORT___(GetActiveWindow);
+    GUI_IMPORT___(SetWinEventHook);
+    GUI_IMPORT___(UnhookWinEvent);
     GUI_IMPORT___(IsWindow);
     GUI_IMPORT___(IsWindowEnabled);
     GUI_IMPORT___(IsWindowVisible);
@@ -1673,7 +1677,7 @@ _FX LRESULT Gui_WindowProcW(
 	//	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
 	//		return FALSE;
 	//}
-	if (uMsg == WM_ACTIVATE && SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE)) {
+	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
 		switch (LOWORD(wParam)) {
 		case WA_INACTIVE:
 			return 0;
@@ -1749,7 +1753,7 @@ _FX LRESULT Gui_WindowProcA(
 	//	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
 	//		return FALSE;
 	//}
-	if (uMsg == WM_ACTIVATE && SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE)) {
+	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
 		switch (LOWORD(wParam)) {
 		case WA_INACTIVE:
 			return 0;

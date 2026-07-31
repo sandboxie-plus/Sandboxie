@@ -469,6 +469,12 @@ typedef BOOL (*P_UserHandleGrantAccess)(
 
 typedef HWND (*P_GetActiveWindow)(void);
 
+typedef HWINEVENTHOOK (*P_SetWinEventHook)(
+    UINT eventMin, UINT eventMax, HMODULE hmodWinEventProc,
+    WINEVENTPROC pfnWinEventProc, DWORD idProcess, DWORD idThread, DWORD dwFlags);
+
+typedef BOOL (*P_UnhookWinEvent)(HWINEVENTHOOK hWinEventHook);
+
 //---------------------------------------------------------------------------
 
 typedef HMONITOR (*P_MonitorFromWindow)(HWND hWnd, DWORD dwFlags);
@@ -511,6 +517,8 @@ extern BOOLEAN Gui_UseBlockCapture;
 
 extern BOOLEAN Gui_BlockInterferenceControl;
 extern BOOLEAN Gui_DontAllowCoverTaskbar;
+
+extern BOOLEAN Gui_AlwaysActive;
 
 extern BOOLEAN Gui_UseProxyService;
 
@@ -637,6 +645,9 @@ GUI_SYS_VAR(GetForegroundWindow)
 GUI_SYS_VAR(SetForegroundWindow)
 
 GUI_SYS_VAR(GetActiveWindow)
+
+GUI_SYS_VAR(SetWinEventHook)
+GUI_SYS_VAR(UnhookWinEvent)
 
 GUI_SYS_VAR(MonitorFromWindow)
 GUI_SYS_VAR_2(DdeInitialize)

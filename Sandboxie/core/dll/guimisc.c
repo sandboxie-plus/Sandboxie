@@ -1778,6 +1778,7 @@ static HWINEVENTHOOK Gui_SetWinEventHook(
     WINEVENTPROC pfnWinEventProc, DWORD idProcess, DWORD idThread, DWORD dwFlags)
 {
     WINEVENTPROC proc = pfnWinEventProc;
+    GUI_WIN_EVENT_HOOK *ghk = NULL;
 
     //
     // use a proxy callback as the first stage handler:  inside the proxy we
@@ -1789,23 +1790,32 @@ static HWINEVENTHOOK Gui_SetWinEventHook(
     // was installed in Gui_InitMisc
     //
 
-    if (Gui_AlwaysActive && pfnWinEventProc && pfnWinEventProc != Gui_WinEventHookProc)
-        proc = Gui_WinEventHookProc;
+    if (Gui_AlwaysActive && pfnWinEventProc && pfnWinEventProc != Gui_WinEventHookProc) {
+
+        //
+        // allocate the tracking entry before installing the proxy:  if the
+        // allocation fails, install the hook with the original callback so
+        // that no events are silently dropped
+        //
+
+        ghk = Dll_Alloc(sizeof(GUI_WIN_EVENT_HOOK));
+        if (ghk)
+            proc = Gui_WinEventHookProc;
+    }
 
     HWINEVENTHOOK hHook = __sys_SetWinEventHook(
         eventMin, eventMax, hmodWinEventProc, proc, idProcess, idThread, dwFlags);
 
-    if (hHook && proc != pfnWinEventProc) {
+    if (hHook && ghk) {
 
-        GUI_WIN_EVENT_HOOK *ghk = Dll_Alloc(sizeof(GUI_WIN_EVENT_HOOK));
-        if (ghk) {
-            ghk->hHook = hHook;
-            ghk->origProc = pfnWinEventProc;
-            EnterCriticalSection(&Gui_WinEventHooksCritSec);
-            List_Insert_After(&Gui_WinEventHooks, NULL, ghk);
-            LeaveCriticalSection(&Gui_WinEventHooksCritSec);
-        }
+        ghk->hHook = hHook;
+        ghk->origProc = pfnWinEventProc;
+        EnterCriticalSection(&Gui_WinEventHooksCritSec);
+        List_Insert_After(&Gui_WinEventHooks, NULL, ghk);
+        LeaveCriticalSection(&Gui_WinEventHooksCritSec);
     }
+    else if (ghk)
+        Dll_Free(ghk);
 
     return hHook;
 }

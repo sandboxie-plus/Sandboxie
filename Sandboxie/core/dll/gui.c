@@ -1688,6 +1688,9 @@ _FX LRESULT Gui_WindowProcW(
 		}
 	}
 
+	if (uMsg == WM_NCDESTROY && Gui_AlwaysActive && hWnd == Gui_PreviousActiveWindow)
+		Gui_PreviousActiveWindow = NULL;
+
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldW_Atom);
     if (DLL_IMAGE_OFFICE_EXCEL == Dll_ImageType) {
 
@@ -1763,6 +1766,9 @@ _FX LRESULT Gui_WindowProcA(
 			break;
 		}
 	}
+
+	if (uMsg == WM_NCDESTROY && Gui_AlwaysActive && hWnd == Gui_PreviousActiveWindow)
+		Gui_PreviousActiveWindow = NULL;
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);
     lResult = __sys_CallWindowProcA(wndproc, hWnd, uMsg, wParam, new_lParam);
 

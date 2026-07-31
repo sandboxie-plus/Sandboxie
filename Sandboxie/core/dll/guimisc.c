@@ -1870,7 +1870,6 @@ static void CALLBACK Gui_WinEventHookProc(
             hwnd && hwnd != Gui_PreviousActiveWindow) {
         switch (event) {
         case EVENT_SYSTEM_FOREGROUND:
-        case EVENT_SYSTEM_ACTIVATETOPWINDOW:
         case EVENT_SYSTEM_SWITCHSTART:
         case EVENT_SYSTEM_SWITCHEND:
         case EVENT_OBJECT_FOCUS:

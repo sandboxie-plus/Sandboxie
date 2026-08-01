@@ -1755,14 +1755,22 @@ _FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt)
 HWND Gui_PreviousActiveWindow = NULL;
 static HWND Gui_GetActiveWindow(void)
 {
-	if (Gui_AlwaysActive && Gui_PreviousActiveWindow)
-		return Gui_PreviousActiveWindow;
+	//
+	// GetActiveWindow is per-thread, so track the previous active window
+	// in the calling thread's TLS data rather than a process-global value
+	//
+
+	if (Gui_AlwaysActive) {
+		THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+		if (TlsData && TlsData->gui_active_window && __sys_IsWindow(TlsData->gui_active_window))
+			return TlsData->gui_active_window;
+	}
 	return __sys_GetActiveWindow();
 }
 
 static HWND Gui_GetForegroundWindow(void)
 {
-	if (Gui_AlwaysActive && Gui_PreviousActiveWindow)
+	if (Gui_AlwaysActive && Gui_PreviousActiveWindow && __sys_IsWindow(Gui_PreviousActiveWindow))
 		return Gui_PreviousActiveWindow;
 	return __sys_GetForegroundWindow();
 }

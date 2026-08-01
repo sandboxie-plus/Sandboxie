@@ -1646,7 +1646,6 @@ _FX VOID Gui_ProtectScreen(HWND hWnd)
 // Gui_WindowProcW
 //---------------------------------------------------------------------------
 
-extern HWND Gui_PreviousActiveWindow;
 _FX LRESULT Gui_WindowProcW(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -1673,23 +1672,40 @@ _FX LRESULT Gui_WindowProcW(
 			return TRUE;
 	}
 
-	//if (uMsg == WM_KILLFOCUS) {
-	//	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
-	//		return FALSE;
-	//}
 	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
 		switch (LOWORD(wParam)) {
 		case WA_INACTIVE:
+			//
+			// allow normal intra-process activation; suppress deactivation
+			// only when activation moves to a window outside this process
+			//
+			if (lParam) {
+				DWORD pid = 0;
+				if (__sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)
+					break;
+			}
 			return 0;
 		case WA_ACTIVE:
 		case WA_CLICKACTIVE:
 			Gui_PreviousActiveWindow = hWnd;
+			{
+				THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+				if (threadData)
+					threadData->gui_active_window = hWnd;
+			}
 			break;
 		}
 	}
 
-	if (uMsg == WM_NCDESTROY && Gui_AlwaysActive && hWnd == Gui_PreviousActiveWindow)
-		Gui_PreviousActiveWindow = NULL;
+	if (uMsg == WM_NCDESTROY && Gui_AlwaysActive) {
+		if (hWnd == Gui_PreviousActiveWindow)
+			Gui_PreviousActiveWindow = NULL;
+		{
+			THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+			if (threadData && hWnd == threadData->gui_active_window)
+				threadData->gui_active_window = NULL;
+		}
+	}
 
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldW_Atom);
     if (DLL_IMAGE_OFFICE_EXCEL == Dll_ImageType) {
@@ -1752,23 +1768,40 @@ _FX LRESULT Gui_WindowProcA(
 		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
 			return TRUE;
 	}
-	//if (uMsg == WM_KILLFOCUS) {
-	//	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
-	//		return FALSE;
-	//}
 	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
 		switch (LOWORD(wParam)) {
 		case WA_INACTIVE:
+			//
+			// allow normal intra-process activation; suppress deactivation
+			// only when activation moves to a window outside this process
+			//
+			if (lParam) {
+				DWORD pid = 0;
+				if (__sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)
+					break;
+			}
 			return 0;
 		case WA_ACTIVE:
 		case WA_CLICKACTIVE:
 			Gui_PreviousActiveWindow = hWnd;
+			{
+				THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+				if (threadData)
+					threadData->gui_active_window = hWnd;
+			}
 			break;
 		}
 	}
 
-	if (uMsg == WM_NCDESTROY && Gui_AlwaysActive && hWnd == Gui_PreviousActiveWindow)
-		Gui_PreviousActiveWindow = NULL;
+	if (uMsg == WM_NCDESTROY && Gui_AlwaysActive) {
+		if (hWnd == Gui_PreviousActiveWindow)
+			Gui_PreviousActiveWindow = NULL;
+		{
+			THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+			if (threadData && hWnd == threadData->gui_active_window)
+				threadData->gui_active_window = NULL;
+		}
+	}
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);
     lResult = __sys_CallWindowProcA(wndproc, hWnd, uMsg, wParam, new_lParam);
 

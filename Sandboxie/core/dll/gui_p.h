@@ -520,6 +520,8 @@ extern BOOLEAN Gui_DontAllowCoverTaskbar;
 
 extern BOOLEAN Gui_AlwaysActive;
 
+extern HWND Gui_PreviousActiveWindow;
+
 extern BOOLEAN Gui_UseProxyService;
 
 extern BOOLEAN Gui_DisableTitle;

@@ -9647,7 +9647,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3479"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
-        <translation>Застосувати правила Close...=!<програма>,... також до всіх бінарних файлів у пісочниці.</translation>
+        <translation>Застосувати правила Close...=!&lt;програма&gt;,... також до всіх бінарних файлів у пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3578"/>

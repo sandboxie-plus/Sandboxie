@@ -1674,13 +1674,13 @@ _FX LRESULT Gui_WindowProcW(
 
 	if (uMsg == WM_SETFOCUS && Gui_AlwaysActive) {
 		//
-		// cache the most recently focused top-level window handle
+		// cache the most recently focused window handle
 		//
-		if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
+		//if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
 			THREAD_DATA *threadData = Dll_GetTlsData(NULL);
 			if (threadData)
 				threadData->gui_focus_window = hWnd;
-		}
+		//}
 	}
 
 	if (uMsg == WM_KILLFOCUS && Gui_AlwaysActive) {

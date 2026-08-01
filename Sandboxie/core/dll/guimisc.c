@@ -1786,7 +1786,7 @@ static HWND Gui_GetFocus(void)
 
 	//
 	// the calling thread currently has no keyboard focus; under AlwaysActive
-	// return the most recently focused top-level window instead, provided it
+	// return the most recently focused window instead, provided it
 	// is still valid (otherwise fall back to NULL)
 	//
 

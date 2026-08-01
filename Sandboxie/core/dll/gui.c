@@ -1672,14 +1672,32 @@ _FX LRESULT Gui_WindowProcW(
 			return TRUE;
 	}
 
+	if (uMsg == WM_SETFOCUS && Gui_AlwaysActive) {
+		//
+		// cache the most recently focused top-level window handle
+		//
+		if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
+			THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+			if (threadData)
+				threadData->gui_focus_window = hWnd;
+		}
+	}
+
 	if (uMsg == WM_KILLFOCUS && Gui_AlwaysActive) {
 		//
-		// suppress focus loss only when the focus moves to a top-level
-		// window; allow normal intra-window focus changes between child
-		// windows to proceed
+		// suppress focus loss only when the message receiver is a top-level
+		// window and the focus moves outside the current process (or to no
+		// window at all); intra-process focus changes are allowed
 		//
-		if (wParam && !(__sys_GetWindowLongW((HWND)wParam, GWL_STYLE) & WS_CHILD))
-			return 0;
+		if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
+			if (! wParam) {
+				return 0;
+			} else {
+				DWORD pid = 0;
+				if (! (__sys_GetWindowThreadProcessId((HWND)wParam, &pid) && pid == Dll_ProcessId))
+					return 0;
+			}
+		}
 	}
 
 	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
@@ -1714,6 +1732,8 @@ _FX LRESULT Gui_WindowProcW(
 			THREAD_DATA *threadData = Dll_GetTlsData(NULL);
 			if (threadData && hWnd == threadData->gui_active_window)
 				threadData->gui_active_window = NULL;
+			if (threadData && hWnd == threadData->gui_focus_window)
+				threadData->gui_focus_window = NULL;
 		}
 	}
 
@@ -1778,14 +1798,32 @@ _FX LRESULT Gui_WindowProcA(
 		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
 			return TRUE;
 	}
+	if (uMsg == WM_SETFOCUS && Gui_AlwaysActive) {
+		//
+		// cache the most recently focused top-level window handle
+		//
+		if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
+			THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+			if (threadData)
+				threadData->gui_focus_window = hWnd;
+		}
+	}
+
 	if (uMsg == WM_KILLFOCUS && Gui_AlwaysActive) {
 		//
-		// suppress focus loss only when the focus moves to a top-level
-		// window; allow normal intra-window focus changes between child
-		// windows to proceed
+		// suppress focus loss only when the message receiver is a top-level
+		// window and the focus moves outside the current process (or to no
+		// window at all); intra-process focus changes are allowed
 		//
-		if (wParam && !(__sys_GetWindowLongW((HWND)wParam, GWL_STYLE) & WS_CHILD))
-			return 0;
+		if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
+			if (! wParam) {
+				return 0;
+			} else {
+				DWORD pid = 0;
+				if (! (__sys_GetWindowThreadProcessId((HWND)wParam, &pid) && pid == Dll_ProcessId))
+					return 0;
+			}
+		}
 	}
 
 	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
@@ -1820,6 +1858,8 @@ _FX LRESULT Gui_WindowProcA(
 			THREAD_DATA *threadData = Dll_GetTlsData(NULL);
 			if (threadData && hWnd == threadData->gui_active_window)
 				threadData->gui_active_window = NULL;
+			if (threadData && hWnd == threadData->gui_focus_window)
+				threadData->gui_focus_window = NULL;
 		}
 	}
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);

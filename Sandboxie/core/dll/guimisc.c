@@ -63,6 +63,8 @@ static HWND Gui_GetActiveWindow(void);
 
 static HWND Gui_GetForegroundWindow(void);
 
+static HWND Gui_GetFocus(void);
+
 static void CALLBACK Gui_WinEventHookProc(
     HWINEVENTHOOK hWinEventHook, DWORD event, HWND hwnd,
     LONG idObject, LONG idChild, DWORD idEventThread, DWORD dwmsEventTime);
@@ -242,6 +244,7 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 
 			SBIEDLL_HOOK_GUI(GetForegroundWindow);
 			SBIEDLL_HOOK_GUI(GetActiveWindow);
+			SBIEDLL_HOOK_GUI(GetFocus);
 			// SetWinEventHook is hooked so we can proxy the callback and
 			// filter out events that would reveal the boxed window is not
 			// really active; a pre-existing hook on the export is chained
@@ -1773,6 +1776,26 @@ static HWND Gui_GetForegroundWindow(void)
 	if (Gui_AlwaysActive && Gui_PreviousActiveWindow && __sys_IsWindow(Gui_PreviousActiveWindow))
 		return Gui_PreviousActiveWindow;
 	return __sys_GetForegroundWindow();
+}
+
+static HWND Gui_GetFocus(void)
+{
+	HWND hwnd = __sys_GetFocus();
+	if (hwnd)
+		return hwnd;
+
+	//
+	// the calling thread currently has no keyboard focus; under AlwaysActive
+	// return the most recently focused top-level window instead, provided it
+	// is still valid (otherwise fall back to NULL)
+	//
+
+	if (Gui_AlwaysActive) {
+		THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+		if (TlsData && TlsData->gui_focus_window && __sys_IsWindow(TlsData->gui_focus_window))
+			return TlsData->gui_focus_window;
+	}
+	return NULL;
 }
 
 

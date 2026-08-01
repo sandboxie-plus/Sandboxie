@@ -226,6 +226,8 @@ typedef struct _THREAD_DATA {
 
     HWND            gui_active_window;
 
+    HWND            gui_focus_window;
+
     //
     // sbieapi:  SbieSvc port handle
     //

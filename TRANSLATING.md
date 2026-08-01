@@ -37,10 +37,10 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Polish|Yes|Yes - Apr 16, 2025|Yes - Jul 15, 2026|Yes - Apr 16, 2025|
 |Portuguese|Yes|Yes - Feb 2, 2025|Yes - Jul 15, 2026|Yes - 2024|
 |PortugueseBr|Yes - Feb 14, 2023|Yes - Feb 3, 2025|Yes - Jul 15, 2026|Yes - 2024|
-|Russian|Yes - Aug 26, 2024|Yes - Aug 26, 2024|Yes - Jul 15, 2026|Yes - 2024|
+|Russian|Yes - Aug 1, 2026|Yes - Aug 1, 2026|Yes - Aug 1, 2026|Yes - Aug 1, 2026|
 |Slovak|Yes|No|No|No|
 |Spanish|Yes|Yes - Jan 18, 2025|Yes - Jul 15, 2026|Yes - 2024|
 |Swedish|Yes - Aug 10, 2022|Yes - Apr 25, 2024|Yes - Jul 15, 2026|Yes - Mar 30, 2025|
 |Turkish|Yes - Apr 12, 2026|Yes - Jul 13, 2026|Yes - Jul 15, 2026|Yes - Apr 16, 2025|
-|Ukrainian|Yes - Jul 26, 2022|Yes - Jul 26, 2022|Yes - Jul 15, 2026|Yes - 2024|
+|Ukrainian|Yes - Aug 1, 2026|Yes - Aug 1, 2026|Yes - Aug 1, 2026|Yes - Aug 1, 2026|
 |Vietnamese|No|Yes - Nov 7, 2022|Yes - Jul 15, 2026|Yes - 2024|

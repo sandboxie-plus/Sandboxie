@@ -61,7 +61,7 @@
 "no mitigation worked": "не сработало",
 
 "Webcam or Sound does not work when sandboxed": "Веб-камера или звук не работают в песочнице",
-"This procedure enables webcam and sound support on Windows 11": "Эта процедура включает поддержку веб-камеры и звука в Windows 11",
+"This procedure enables webcam and sound support on Windows 11": "Помогает устранить проблемы с веб-камерой и звуком в песочнице",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Для включения поддержки веб-камеры в Windows 11 необходимо снизить уровень изоляции. \nЕсли хотите продолжить, нажмите ДАЛЕЕ и выберите песочницу для изменения. \n",
 "Select which box to turn into a reduced isolation app compartment box.": "Выберите песочницу для преобразования в песочницу с пониженным уровнем изоляции.",
 "The mitigation has been applied. Please try out the webcam in %1 and indicate if the issue has been resolved.": "Меры применены, пожалуйста, попробуйте веб-камеру в %1 и укажите, решена ли проблема.",

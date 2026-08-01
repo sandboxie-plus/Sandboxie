@@ -688,6 +688,8 @@ extern  P_ExitWindowsEx             __sys_ExitWindowsEx;
 
 extern  P_EndTask                   __sys_EndTask;
 
+extern  P_GetFocus                  __sys_GetFocus;
+
 extern  P_ConsoleControl            __sys_ConsoleControl;
 
 extern  P_SwapMouseButton           __sys_SwapMouseButton;

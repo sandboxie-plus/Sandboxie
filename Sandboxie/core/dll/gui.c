@@ -1672,6 +1672,16 @@ _FX LRESULT Gui_WindowProcW(
 			return TRUE;
 	}
 
+	if (uMsg == WM_KILLFOCUS && Gui_AlwaysActive) {
+		//
+		// suppress focus loss only when the focus moves to a top-level
+		// window; allow normal intra-window focus changes between child
+		// windows to proceed
+		//
+		if (wParam && !(__sys_GetWindowLongW((HWND)wParam, GWL_STYLE) & WS_CHILD))
+			return 0;
+	}
+
 	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
 		switch (LOWORD(wParam)) {
 		case WA_INACTIVE:
@@ -1768,6 +1778,16 @@ _FX LRESULT Gui_WindowProcA(
 		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
 			return TRUE;
 	}
+	if (uMsg == WM_KILLFOCUS && Gui_AlwaysActive) {
+		//
+		// suppress focus loss only when the focus moves to a top-level
+		// window; allow normal intra-window focus changes between child
+		// windows to proceed
+		//
+		if (wParam && !(__sys_GetWindowLongW((HWND)wParam, GWL_STYLE) & WS_CHILD))
+			return 0;
+	}
+
 	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
 		switch (LOWORD(wParam)) {
 		case WA_INACTIVE:

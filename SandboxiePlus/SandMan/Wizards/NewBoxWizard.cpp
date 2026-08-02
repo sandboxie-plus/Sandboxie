@@ -1194,14 +1194,9 @@ void CSummaryPage::initializePage()
             Location = ((CNewBoxWizard*)wizard())->GetDefaultLocation();
         m_pSummary->append(tr("\nThis Sandbox will be saved to: %1").arg(Location));
     }
-    }
+
     if (((CNewBoxWizard*)wizard())->m_bUseRandomName)
         m_pSummary->append(tr("\nThe actual sandbox name is: %1").arg(wizard()->field("boxName").toString()));
-
-    QString Location = field("boxLocation").toString();
-    if (Location.isEmpty())
-        Location = ((CNewBoxWizard*)wizard())->GetDefaultLocation();
-    m_pSummary->append(tr("\nThis Sandbox will be saved to: %1").arg(Location));
 
     if (field("autoRemove").toBool()) 
         m_pSummary->append(tr("\nThis box's content will be DISCARDED when it's closed, and the box will be removed."));

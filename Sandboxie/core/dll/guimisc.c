@@ -1852,7 +1852,8 @@ static HWINEVENTHOOK Gui_SetWinEventHook(
     // was installed in Gui_InitMisc
     //
 
-    if (Gui_AlwaysActive && pfnWinEventProc && pfnWinEventProc != Gui_WinEventHookProc) {
+    if (Gui_AlwaysActive && (dwFlags & WINEVENT_INCONTEXT) == 0 &&
+            pfnWinEventProc && pfnWinEventProc != Gui_WinEventHookProc) {
 
         //
         // allocate the tracking entry before installing the proxy:  if the

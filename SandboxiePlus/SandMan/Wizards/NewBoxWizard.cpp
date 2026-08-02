@@ -12,6 +12,7 @@
 #include "../Windows/BoxImageWindow.h"
 #include "../AddonManager.h"
 #include <QElapsedTimer>
+#include "../../../Sandboxie/core/drv/api_flags.h"
 
 
 CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
@@ -113,7 +114,9 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         }
         else {
             QString Location = field("boxLocation").toString();
-            portableDir = theAPI->Nt2DosPath(Location.isEmpty() ? GetDefaultLocation() : Location);
+            QString portablePath = Location.isEmpty() ? GetDefaultLocation() : Location;
+            portableDir = theAPI->Nt2DosPath(ExpandPathVariables(portablePath, BoxName));
+            QDir().mkpath(portableDir);
             portableIniPath = portableDir + "\\" + BoxName + ".ini";
         }
 
@@ -358,6 +361,29 @@ QString CNewBoxWizard::GetDefaultLocation()
     // HACK HACK: globally %SANDBOX% evaluates to GlobalSettings
     DefaultPath.replace("\\GlobalSettings", "\\" + field("boxName").toString().replace(" ", "_"));
     return theAPI->Nt2DosPath(DefaultPath);
+}
+
+static QString ExpandPathVariables(const QString& Path, const QString& BoxName)
+{
+    QString Value2 = Path;
+    QRegularExpression rx("%([\\{\\}\\-a-zA-Z0-9 ]+)%");
+    for (int pos = 0; ; ) {
+        auto result = rx.match(Path, pos);
+        if (!result.hasMatch())
+            break;
+        pos = result.capturedStart();
+        QString var = result.captured(1);
+        QString val;
+        if (var.compare("SbieHome", Qt::CaseInsensitive) == 0)
+            val = theAPI->GetSbiePath();
+        else if (var.compare("BoxName", Qt::CaseInsensitive) == 0)
+            val = BoxName;
+        else
+            val = theAPI->SbieIniGet(BoxName, "%" + var + "%", CONF_JUST_EXPAND);
+        Value2.replace("%" + var + "%", val);
+        pos += result.capturedLength();
+    }
+    return Value2;
 }
 
 
@@ -1126,12 +1152,12 @@ void CSummaryPage::initializePage()
 
     if (field("portableBox").toBool()) {
         m_pSummary->append(tr("\nPortable sandbox: configuration will be stored in an external .ini file."));
+    } else {
+        QString Location = field("boxLocation").toString();
+        if (Location.isEmpty())
+            Location = ((CNewBoxWizard*)wizard())->GetDefaultLocation();
+        m_pSummary->append(tr("\nThis Sandbox will be saved to: %1").arg(Location));
     }
-
-    QString Location = field("boxLocation").toString();
-    if (Location.isEmpty())
-        Location = ((CNewBoxWizard*)wizard())->GetDefaultLocation();
-    m_pSummary->append(tr("\nThis Sandbox will be saved to: %1").arg(Location));
 
     if (field("autoRemove").toBool()) 
         m_pSummary->append(tr("\nThis box's content will be DISCARDED when it's closed, and the box will be removed."));

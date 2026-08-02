@@ -558,8 +558,10 @@ void CSbieView::Refresh()
 				if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
 					CBoxedProcessPtr pProcess = m_pSbieModel->GetProcess(ModelIndex);
 					QString Key = GetProcessExpandKey(pProcess);
-					bool bExpand = bAutoExpand && !bLegacyAutoExpand;
-					if (!bExpand)
+					bool bExpand;
+					if (bAutoExpand && !bLegacyAutoExpand)
+						bExpand = !m_AutoExpandCollapsed.contains(GetExpandStateKey(ModelIndex));
+					else
 						bExpand = m_ProcessExpandState.contains(Key)
 							? m_ProcessExpandState.value(Key) : bAutoExpand;
 					if (bExpand) {
@@ -581,7 +583,10 @@ void CSbieView::Refresh()
 					else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
 						Name = m_pSbieModel->GetSandBox(ModelIndex)->GetName();
 
-					if ((bAutoExpand && !bLegacyAutoExpand) || !m_Collapsed.contains(Name)) {
+					bool bExpand = bAutoExpand && !bLegacyAutoExpand
+						? !m_AutoExpandCollapsed.contains(GetExpandStateKey(ModelIndex))
+						: !m_Collapsed.contains(Name);
+					if (bExpand) {
 						m_HoldExpand = true;
 						m_pSbieTree->expand(m_pSortProxy->mapFromSource(ModelIndex));
 						m_HoldExpand = false;
@@ -2726,11 +2731,21 @@ void CSbieView::ShowOptions(const QString& Name)
 
 void CSbieView::ChangeExpand(const QModelIndex& index, bool bExpand)
 {
-	if (m_HoldExpand || (theGUI->IsAutoExpand()
-	 && !theConf->GetBool("Options/LegacyAutoExpandTree", false)))
+	if (m_HoldExpand)
 		return;
 
 	QModelIndex ModelIndex = m_pSortProxy->mapToSource(index);
+	if (theGUI->IsAutoExpand()
+	 && !theConf->GetBool("Options/LegacyAutoExpandTree", false)) {
+		QString Key = GetExpandStateKey(ModelIndex);
+		if (!Key.isEmpty()) {
+			if (bExpand)
+				m_AutoExpandCollapsed.remove(Key);
+			else
+				m_AutoExpandCollapsed.insert(Key);
+		}
+		return;
+	}
 
 	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
 		QString Key = GetProcessExpandKey(m_pSbieModel->GetProcess(ModelIndex));
@@ -2762,6 +2777,8 @@ void CSbieView::ChangeExpand(const QModelIndex& index, bool bExpand)
 
 void CSbieView::SetAutoExpand(bool bExpand, bool bLegacy)
 {
+	m_AutoExpandCollapsed.clear();
+
 	if (bLegacy) {
 		if (bExpand)
 			m_pSbieTree->expandAll();
@@ -2774,18 +2791,20 @@ void CSbieView::SetAutoExpand(bool bExpand, bool bLegacy)
 	if (bExpand)
 		m_pSbieTree->expandAll();
 	else
-		RestoreExpandState();
+		ApplyExpandState(false);
 	m_HoldExpand = false;
 }
 
-void CSbieView::RestoreExpandState(const QModelIndex& Parent)
+void CSbieView::ApplyExpandState(bool bAutoExpand, const QModelIndex& Parent)
 {
 	for (int Row = 0; Row < m_pSortProxy->rowCount(Parent); ++Row) {
 		QModelIndex Index = m_pSortProxy->index(Row, 0, Parent);
 		QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
 
-		bool bExpand = false;
-		if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
+		bool bExpand;
+		if (bAutoExpand)
+			bExpand = !m_AutoExpandCollapsed.contains(GetExpandStateKey(ModelIndex));
+		else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
 			QString Key = GetProcessExpandKey(m_pSbieModel->GetProcess(ModelIndex));
 			bExpand = m_ProcessExpandState.value(Key, false);
 		}
@@ -2799,8 +2818,21 @@ void CSbieView::RestoreExpandState(const QModelIndex& Parent)
 		}
 
 		m_pSbieTree->setExpanded(Index, bExpand);
-		RestoreExpandState(Index);
+		ApplyExpandState(bAutoExpand, Index);
 	}
+}
+
+QString CSbieView::GetExpandStateKey(const QModelIndex& ModelIndex) const
+{
+	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
+		QString Key = GetProcessExpandKey(m_pSbieModel->GetProcess(ModelIndex));
+		return Key.isEmpty() ? QString() : "p|" + Key;
+	}
+	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
+		return "g|" + m_pSbieModel->GetID(ModelIndex).toString();
+	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
+		return "b|" + m_pSbieModel->GetSandBox(ModelIndex)->GetName();
+	return QString();
 }
 
 QString CSbieView::GetProcessExpandKey(const CBoxedProcessPtr& pProcess) const
@@ -2843,6 +2875,12 @@ void CSbieView::CleanupProcessExpandState()
 				LiveProcesses.insert(Key);
 		}
 	}
+	for (auto I = m_AutoExpandCollapsed.begin(); I != m_AutoExpandCollapsed.end();) {
+		if (I->startsWith("p|") && !LiveProcesses.contains(I->mid(2)))
+			I = m_AutoExpandCollapsed.erase(I);
+		else
+			++I;
+	}
 
 	bool Changed = false;
 	for (auto I = m_ProcessExpandState.begin(); I != m_ProcessExpandState.end();) {
@@ -2861,10 +2899,7 @@ void CSbieView::UpdateColapsed()
 {
 	if (!theConf->GetBool("Options/LegacyAutoExpandTree", false)) {
 		m_HoldExpand = true;
-		if (theGUI->IsAutoExpand())
-			m_pSbieTree->expandAll();
-		else
-			RestoreExpandState();
+		ApplyExpandState(theGUI->IsAutoExpand());
 		m_HoldExpand = false;
 		return;
 	}

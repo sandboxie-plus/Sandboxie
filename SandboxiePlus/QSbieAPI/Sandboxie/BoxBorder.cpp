@@ -30,6 +30,7 @@
 
 typedef HRESULT(WINAPI *P_DwmIsCompositionEnabled)(BOOL *enabled);
 typedef HRESULT(WINAPI *P_DwmGetWindowAttribute)(HWND hWnd, DWORD dwAttribute, void *pvAttribute, DWORD cbAttribute);
+typedef BOOL(WINAPI *P_IsWindowArranged)(HWND hWnd);
 
 // DWMWA_CLOAKED (14) is defined in <dwmapi.h> (SDK 8.1+) but we load dwmapi.dll dynamically
 // so we don't include that header.  Define it ourselves if the SDK didn't already provide it.
@@ -59,6 +60,7 @@ struct SBoxBorderWnd
 	int labelWidth;
 	int labelHeight;
 	int labelPadding;
+	bool outside;
 	std::vector<RECT> labelRects; // Label positions (one per window for per-box, one for main)
 	ULONGLONG sceneHash;   // per-box hash at last render; used to skip rebuilding unchanged boxes
 	bool affinityEnabled;  // last value passed to SetWindowDisplayAffinity; avoids redundant calls
@@ -123,6 +125,7 @@ struct SBoxBorder
 
 	P_DwmIsCompositionEnabled DwmIsCompositionEnabled;
 	P_DwmGetWindowAttribute DwmGetWindowAttribute;
+	P_IsWindowArranged IsWindowArranged;
 
 	// Main border window for in-focus mode
 	SBoxBorderWnd MainBorder;
@@ -167,6 +170,11 @@ static inline int NextAdaptiveIntervalMs(int currentMs)
 static inline bool RectEquals(const RECT& a, const RECT& b)
 {
 	return a.left == b.left && a.top == b.top && a.right == b.right && a.bottom == b.bottom;
+}
+
+static bool IsWindowMaximizedOrArranged(SBoxBorder* m, HWND hWnd)
+{
+	return IsZoomed(hWnd) || (m->IsWindowArranged && m->IsWindowArranged(hWnd));
 }
 
 static bool RectVectorEquals(const std::vector<RECT>& a, const std::vector<RECT>& b)
@@ -218,6 +226,7 @@ static void InitializeBorderWindowData(SBoxBorderWnd& bwnd)
 	bwnd.labelWidth = 0;
 	bwnd.labelHeight = 0;
 	bwnd.labelPadding = 8;
+	bwnd.outside = false;
 	bwnd.labelRects.clear();
 	bwnd.sceneHash = 0;
 	bwnd.affinityEnabled = false;
@@ -420,6 +429,24 @@ static bool ShouldDrawBorderForWindow(HWND hWnd, const RECT& rect, ULONG style, 
 	return true;
 }
 
+static bool IsTransientToolWindow(ULONG style, ULONG exStyle)
+{
+	return (exStyle & WS_EX_TOOLWINDOW) && !(style & WS_CAPTION);
+}
+
+static bool IsTransientPopupWindow(HWND hWnd, ULONG style, ULONG exStyle)
+{
+	WCHAR className[64] = { 0 };
+	GetClassNameW(hWnd, className, 64);
+	return wcscmp(className, L"#32768") == 0 ||
+		wcscmp(className, L"ComboLBox") == 0 ||
+		wcscmp(className, L"tooltips_class32") == 0 ||
+		wcscmp(className, L"SysShadow") == 0 ||
+		wcscmp(className, L"DropDown") == 0 ||
+		IsTransientToolWindow(style, exStyle) ||
+		((exStyle & WS_EX_NOACTIVATE) && (style & WS_POPUP) && !(style & WS_CAPTION));
+}
+
 // Adjusts a window rect to stay within desktop bounds and applies taskbar workaround
 // rect: the original window rect
 // monitor: monitor info from ShouldDrawBorderForWindow
@@ -540,6 +567,62 @@ static void MergeTaskbarOcclusionIntoCoveredRegion(HRGN hrgnCovered)
 	STaskbarOcclusionBuildCtx ctx = {};
 	ctx.hrgnCovered = hrgnCovered;
 	EnumDisplayMonitors(NULL, NULL, BuildTaskbarOcclusionEnumProc, reinterpret_cast<LPARAM>(&ctx));
+}
+
+// Keep the topmost border from painting through windows above its target.
+static bool ClipBorderToWindowsAbove(SBoxBorder* m, HWND targetWnd, const RECT& borderWindowRect, HRGN hrgnBorder)
+{
+	HRGN hrgnCovered = CreateRectRgn(0, 0, 0, 0);
+	if (!hrgnCovered)
+		return false;
+
+	for (HWND hWnd = GetTopWindow(NULL); hWnd && hWnd != targetWnd; hWnd = GetNextWindow(hWnd, GW_HWNDNEXT))
+	{
+		if (!IsWindowVisible(hWnd) || IsIconic(hWnd))
+			continue;
+		if (m->DwmGetWindowAttribute) {
+			DWORD cloaked = 0;
+			if (SUCCEEDED(m->DwmGetWindowAttribute(hWnd, DWMWA_CLOAKED, &cloaked, sizeof(cloaked))) && cloaked)
+				continue;
+		}
+
+		WCHAR className[64] = { 0 };
+		if (GetClassNameW(hWnd, className, 64) && wcscmp(className, Sandboxie_WindowClassName) == 0)
+			continue;
+		ULONG style = GetWindowLong(hWnd, GWL_STYLE);
+		ULONG exStyle = GetWindowLong(hWnd, GWL_EXSTYLE);
+		if (IsTransientPopupWindow(hWnd, style, exStyle))
+			continue;
+
+		RECT rect = { 0, 0, 0, 0 };
+		bool gotRect = false;
+		if (m->DwmIsCompositionEnabled && m->DwmGetWindowAttribute) {
+			BOOL enabled = FALSE;
+			if (SUCCEEDED(m->DwmIsCompositionEnabled(&enabled)) && enabled) {
+				const ULONG DWMWA_EXTENDED_FRAME_BOUNDS = 9;
+				gotRect = SUCCEEDED(m->DwmGetWindowAttribute(hWnd, DWMWA_EXTENDED_FRAME_BOUNDS, &rect, sizeof(rect)));
+			}
+		}
+		if (!gotRect)
+			gotRect = GetWindowRect(hWnd, &rect) != FALSE;
+		if (gotRect && rect.right > rect.left && rect.bottom > rect.top)
+		{
+			HRGN hrgnWindow = CreateRectRgn(rect.left, rect.top, rect.right, rect.bottom);
+			if (!hrgnWindow || CombineRgn(hrgnCovered, hrgnCovered, hrgnWindow, RGN_OR) == ERROR)
+			{
+				if (hrgnWindow)
+					DeleteObject(hrgnWindow);
+				DeleteObject(hrgnCovered);
+				return false;
+			}
+			DeleteObject(hrgnWindow);
+		}
+	}
+
+	OffsetRgn(hrgnCovered, -borderWindowRect.left, -borderWindowRect.top);
+	bool success = CombineRgn(hrgnBorder, hrgnBorder, hrgnCovered, RGN_DIFF) != ERROR;
+	DeleteObject(hrgnCovered);
+	return success;
 }
 
 LRESULT CALLBACK CBoxBorder__WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -742,6 +825,13 @@ void CBoxBorder::ThreadFunc()
 		}
 	}
 
+	// IsWindowArranged is available starting with Windows 10 version 1903 and has
+	// no import library, so resolve it dynamically to preserve Windows 7 support.
+	m->IsWindowArranged = nullptr;
+	HMODULE user32 = GetModuleHandleW(L"user32.dll");
+	if (user32)
+		m->IsWindowArranged = (P_IsWindowArranged)GetProcAddress(user32, "IsWindowArranged");
+
 	WNDCLASSEXW wc;
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS | CS_GLOBALCLASS;
@@ -816,7 +906,7 @@ void CBoxBorder::ThreadFunc()
 	}
 }
 
-static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, int& alpha, EBorderMode& mode, int& labelMode, int& labelWidth)
+static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, int& alpha, EBorderMode& mode, int& labelMode, int& labelWidth, bool& outside)
 {
 	// Default values
 	color = RGB(255, 255, 0);
@@ -825,6 +915,7 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 	mode = eBorderNormal;
 	labelMode = 1; // Default to inside
 	labelWidth = 0;
+	outside = false;
 
 	if (!pBox)
 		return false;
@@ -842,6 +933,10 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 
 	if (BorderCfg.count() >= 2) {
 		QString StrMode = BorderCfg.at(1);
+		if (StrMode.endsWith("outside", Qt::CaseInsensitive)) {
+			outside = true;
+			StrMode.chop(7);
+		}
 		if (StrMode.compare("off", Qt::CaseInsensitive) == 0) {
 			mode = eBorderOff;
 			return false; // Border disabled for this box
@@ -858,6 +953,8 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 			mode = eBorderLabelOnly;
 		// else default is eBorderNormal
 	}
+	if (mode == eBorderLabelOnly || mode == eBorderTitleOnlyLabelOnly || mode == eBorderAllWindowsLabelOnly)
+		outside = false;
 
 	if (BorderCfg.count() >= 3) {
 		width = BorderCfg.at(2).toInt();
@@ -1096,18 +1193,35 @@ void CBoxBorder::TimerProc()
 	CSandBoxPtr pProcessBox = m_Api->GetBoxByProcessId(pid);
 	bool coverBoxedWindows = pProcessBox && IsCoverBoxedWindowsEnabled(m, pProcessBox.data(), now);
 	bool hideBordersFromCapture = pProcessBox ? pProcessBox->GetBool("HideBordersFromCapture", coverBoxedWindows, true) : coverBoxedWindows;
+	if (pProcessBox && IsTransientToolWindow(Style, ExStyle))
+	{
+		m->ActiveWnd = NULL;
+		m->ActivePid = 0;
+		HideBorderWindow(m->MainBorder);
+		return;
+	}
 
 	// Get border settings for the focused window's box
 	COLORREF boxColor;
 	int boxWidth, boxAlpha, boxLabelMode, boxLabelWidth;
 	EBorderMode boxMode = eBorderOff;
+	bool boxOutside = false;
 	if (pProcessBox)
-		GetBoxBorderSettings(pProcessBox.data(), boxColor, boxWidth, boxAlpha, boxMode, boxLabelMode, boxLabelWidth);
+		GetBoxBorderSettings(pProcessBox.data(), boxColor, boxWidth, boxAlpha, boxMode, boxLabelMode, boxLabelWidth, boxOutside);
+	bool insideMaximizedOrArranged = boxOutside && IsWindowMaximizedOrArranged(m, hWnd) &&
+		pProcessBox->GetBool("BorderInsideMaximized", true);
+	if (insideMaximizedOrArranged) {
+		boxOutside = false;
+		if (boxLabelMode != 0)
+			boxLabelMode = 1;
+	}
 
-	if (m->pCurrentBox != pProcessBox.data() || m->CachedFocusBoxMode != boxMode)
+	bool outsideChanged = m->MainBorder.outside != boxOutside;
+	if (m->pCurrentBox != pProcessBox.data() || m->CachedFocusBoxMode != boxMode || outsideChanged)
 	{
 		m->pCurrentBox = pProcessBox.data();
 		m->CachedFocusBoxMode = boxMode;
+		m->MainBorder.outside = boxOutside;
 		// Force full re-evaluation: reset cached position so the border is redrawn
 		m->ActiveWnd = NULL;
 		m->ActivePid = 0;
@@ -1224,11 +1338,15 @@ void CBoxBorder::TimerProc()
 		int rectHeight = adjustedRect.bottom - adjustedRect.top;
 
 		// Calculate window rect (may extend upward for outside label mode)
-		RECT windowRect = adjustedRect;
+		RECT frameRect = adjustedRect;
 		int labelOffset = 0;
+		if (m->MainBorder.outside) {
+			InflateRect(&frameRect, m->MainBorder.width, m->MainBorder.width);
+		}
+		RECT windowRect = frameRect;
 		if (m->MainBorder.labelMode == -1 && m->MainBorder.labelHeight > 0) {
 			windowRect.top -= m->MainBorder.labelHeight;
-			labelOffset = m->MainBorder.labelHeight;
+			labelOffset += m->MainBorder.labelHeight;
 		}
 
 		// For label-only modes with no label configured, nothing to show
@@ -1244,7 +1362,9 @@ void CBoxBorder::TimerProc()
 		if (isLabelOnlyMode) {
 			hrgnBorder = CreateRectRgn(0, 0, 0, 0); // No frame; only the label rect will be added below
 		} else {
-			RECT frameRect = { 0, labelOffset, rectWidth, labelOffset + rectHeight };
+			int frameWidth = rectWidth + (m->MainBorder.outside ? m->MainBorder.width * 2 : 0);
+			int frameHeight = rectHeight + (m->MainBorder.outside ? m->MainBorder.width * 2 : 0);
+			RECT frameRect = { 0, labelOffset, frameWidth, labelOffset + frameHeight };
 			hrgnBorder = CreateBorderRegion(&frameRect, m->MainBorder.width);
 		}
 
@@ -1262,7 +1382,8 @@ void CBoxBorder::TimerProc()
 			// Calculate label rect in screen coordinates using shared helper
 			// In label-only modes there is no border frame, so don't offset by border width
 			int lblBorderWidth = isLabelOnlyMode ? 0 : m->MainBorder.width;
-			RECT labelRectScr = CalculateLabelRect(adjustedRect, lblBorderWidth, m->MainBorder.labelWidth, m->MainBorder.labelHeight, m->MainBorder.labelMode);
+			const RECT& labelAnchor = m->MainBorder.outside ? frameRect : adjustedRect;
+			RECT labelRectScr = CalculateLabelRect(labelAnchor, lblBorderWidth, m->MainBorder.labelWidth, m->MainBorder.labelHeight, m->MainBorder.labelMode);
 
 			// Convert to window-relative coordinates
 			RECT labelRect;
@@ -1318,6 +1439,12 @@ void CBoxBorder::TimerProc()
 
 		if (!hrgnBorder)
 			return; // taskbar clipping region combination failed; leave border as-is for this tick
+
+		if (!ClipBorderToWindowsAbove(m, hWnd, windowRect, hrgnBorder))
+		{
+			DeleteObject(hrgnBorder);
+			return;
+		}
 
 		// Position and show the border window.
 		// Keep SWP_NOZORDER during stable focus mode so we don't permanently fight other
@@ -1500,6 +1627,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 	{
 		bool enabled;
 		bool labelOnly;
+		bool outside;
 		COLORREF color;
 		int width;
 		int alpha;
@@ -1574,19 +1702,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 					WCHAR className[64] = { 0 };
 					GetClassNameW(hWnd, className, 64);
 
-					if (wcscmp(className, L"#32768") == 0 ||
-						wcscmp(className, L"ComboLBox") == 0 ||
-						wcscmp(className, L"tooltips_class32") == 0 ||
-						wcscmp(className, L"SysShadow") == 0 ||
-						wcscmp(className, L"DropDown") == 0)
-					{
-						isTransientPopup = true;
-					}
-
-					if ((ExStyle & WS_EX_TOOLWINDOW) && !(Style & WS_CAPTION))
-						isTransientPopup = true;
-
-					if ((ExStyle & WS_EX_NOACTIVATE) && (Style & WS_POPUP) && !(Style & WS_CAPTION))
+					if (IsTransientPopupWindow(hWnd, Style, ExStyle))
 						isTransientPopup = true;
 
 					bool isSystemDialog = (wcscmp(className, L"#32770") == 0);
@@ -1682,7 +1798,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		if (pBox)
 		{
 			EBorderMode mode = eBorderOff;
-			if (GetBoxBorderSettings(pBox, style.color, style.width, style.alpha, mode, style.labelMode, style.labelWidth) &&
+			if (GetBoxBorderSettings(pBox, style.color, style.width, style.alpha, mode, style.labelMode, style.labelWidth, style.outside) &&
 				(mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
 			{
 				style.enabled = true;
@@ -1696,6 +1812,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				HashMix64(settingsHash, (ULONGLONG)style.labelMode);
 				HashMix64(settingsHash, (ULONGLONG)style.labelWidth);
 				HashMix64(settingsHash, (ULONGLONG)style.labelOnly);
+				HashMix64(settingsHash, (ULONGLONG)style.outside);
 				HashMixWString(settingsHash, style.boxName);
 			}
 		}
@@ -1802,6 +1919,10 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			bool coverForAffinity = IsCoverBoxedWindowsEnabled(m, wnd.pBox, nowEnum);
 			bool applyCaptureAffinity = wnd.pBox->GetBool("HideBordersFromCapture", coverForAffinity, true);
 			bool excludeTaskbar = wnd.pBox->GetBool("BorderExcludeTaskbar", globalBorderExcludeTaskbar);
+			bool insideMaximizedOrArranged = style.outside && IsWindowMaximizedOrArranged(m, wnd.hWnd) &&
+				wnd.pBox->GetBool("BorderInsideMaximized", true);
+			bool effectiveOutside = style.outside && !insideMaximizedOrArranged;
+			int effectiveLabelMode = insideMaximizedOrArranged && style.labelMode != 0 ? 1 : style.labelMode;
 			enabledWindowCount++;
 			activeTargets.insert(wnd.hWnd);
 			bool overlayAvailable = true;
@@ -1869,18 +1990,19 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				HashMix64(perWindowHash, (ULONGLONG)style.color);
 				HashMix64(perWindowHash, (ULONGLONG)style.width);
 				HashMix64(perWindowHash, (ULONGLONG)style.alpha);
-				HashMix64(perWindowHash, (ULONGLONG)style.labelMode);
+				HashMix64(perWindowHash, (ULONGLONG)effectiveLabelMode);
 				HashMix64(perWindowHash, (ULONGLONG)style.labelWidth);
 				HashMix64(perWindowHash, (ULONGLONG)(style.labelOnly ? 1ULL : 0ULL));
+				HashMix64(perWindowHash, (ULONGLONG)(effectiveOutside ? 1ULL : 0ULL));
 				HashMixWString(perWindowHash, style.boxName);
 				HashMix64(perWindowHash, rollingCoverageHash);
 				HashMix64(perWindowHash, (ULONGLONG)((wnd.exStyle & WS_EX_TOPMOST) ? 1ULL : 0ULL)); // force rebuild when topmost changes
 				HashMix64(perWindowHash, (ULONGLONG)(applyCaptureAffinity ? 1ULL : 0ULL)); // cover state change invalidates skip-rebuild
 				HashMix64(perWindowHash, (ULONGLONG)(excludeTaskbar ? 1ULL : 0ULL)); // per-box taskbar exclusion setting
 
-				bool fontDirty = (bwnd.boxName != style.boxName || bwnd.labelMode != style.labelMode || bwnd.labelBorderWidth != style.labelWidth);
+				bool fontDirty = (bwnd.boxName != style.boxName || bwnd.labelMode != effectiveLabelMode || bwnd.labelBorderWidth != style.labelWidth);
 				bwnd.boxName = style.boxName;
-				bwnd.labelMode = style.labelMode;
+				bwnd.labelMode = effectiveLabelMode;
 				bwnd.width = style.width;
 				bwnd.labelBorderWidth = style.labelWidth;
 
@@ -1895,7 +2017,10 @@ void CBoxBorder::DrawAllSandboxedBorders()
 					if (wnd.monitorInfo.cbSize != 0)
 						adjustedRect = AdjustRectToDesktop(wnd.rect, wnd.monitorInfo, style.width);
 
-					RECT boundingRect = adjustedRect;
+					RECT frameRect = adjustedRect;
+					if (effectiveOutside)
+						InflateRect(&frameRect, style.width, style.width);
+					RECT boundingRect = frameRect;
 					if (bwnd.labelMode == -1 && bwnd.labelHeight > 0)
 						boundingRect.top -= bwnd.labelHeight;
 
@@ -1927,7 +2052,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 						// Border frame contribution (disabled in label-only mode), clipped by coverage above.
 						if (!style.labelOnly)
 						{
-							HRGN hrgnFrame = CreateBorderRegion(&adjustedRect, style.width);
+							HRGN hrgnFrame = CreateBorderRegion(&frameRect, style.width);
 							if (hrgnFrame)
 							{
 								if (CombineRgn(hrgnFrame, hrgnFrame, hrgnEffective, RGN_DIFF) == ERROR)
@@ -1949,7 +2074,8 @@ void CBoxBorder::DrawAllSandboxedBorders()
 							hasDrawableContent = true;
 							// One label per overlay (since this is now per-target-window mode).
 							int lblBorderWidth = style.labelOnly ? 0 : style.width;
-							RECT labelRectScr = CalculateLabelRect(adjustedRect, lblBorderWidth, bwnd.labelWidth, bwnd.labelHeight, bwnd.labelMode);
+							const RECT& labelAnchor = effectiveOutside ? frameRect : adjustedRect;
+							RECT labelRectScr = CalculateLabelRect(labelAnchor, lblBorderWidth, bwnd.labelWidth, bwnd.labelHeight, bwnd.labelMode);
 
 							HRGN hrgnLabel = CreateRectRgn(labelRectScr.left, labelRectScr.top, labelRectScr.right, labelRectScr.bottom);
 							if (hrgnLabel)
@@ -2137,9 +2263,10 @@ bool CBoxBorder::CheckGlobalAllBordersMode()
 
 		COLORREF color;
 		int width, alpha, labelMode, labelWidth;
+		bool outside;
 		EBorderMode mode;
 
-		if (GetBoxBorderSettings(pBox, color, width, alpha, mode, labelMode, labelWidth) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
+		if (GetBoxBorderSettings(pBox, color, width, alpha, mode, labelMode, labelWidth, outside) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
 			return true;
 	}
 

@@ -545,19 +545,20 @@ void CSbieView::Refresh()
 
 	QList<QVariant> Added = m_pSbieModel->Sync(theAPI->GetAllBoxes(), m_Groups, theGUI->IsShowHidden());
 
-	if (/*m_pSbieModel->IsTree() &&*/ theGUI->IsAutoExpand())
-	{
+	if (!Added.isEmpty())
 		QTimer::singleShot(10, this, [this, Added]() {
 			foreach(const QVariant ID, Added) {
 
 				QModelIndex ModelIndex = m_pSbieModel->FindIndex(ID);
 
 				if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
-					m_HoldExpand = true;
-					m_pSbieTree->expand(m_pSortProxy->mapFromSource(ModelIndex));
-					m_HoldExpand = false;
+					if (theGUI->IsAutoExpand()) {
+						m_HoldExpand = true;
+						m_pSbieTree->expand(m_pSortProxy->mapFromSource(ModelIndex));
+						m_HoldExpand = false;
+					}
 				}
-				else 
+				else
 				{
 					QString Name;
 					if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
@@ -573,7 +574,6 @@ void CSbieView::Refresh()
 				}
 			}
 		});
-	}
 
 	// add new boxes to the default group
 

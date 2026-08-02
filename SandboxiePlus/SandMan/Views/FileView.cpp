@@ -305,11 +305,14 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
             }
         }, Qt::QueuedConnection);
 
+    }
+    m_pTreeView->setModel(m_pProxyModel);
+
+    if (!Root.isEmpty()) {
         QByteArray Columns = theConf->GetBlob("MainWindow/FileTree_Columns");
 	    if (!Columns.isEmpty())
 		    m_pTreeView->header()->restoreState(Columns);
     }
-    m_pTreeView->setModel(m_pProxyModel);
 
     if (!Root.isEmpty())
     {

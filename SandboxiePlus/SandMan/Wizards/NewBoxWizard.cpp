@@ -16,6 +16,9 @@
 #include <QUuid>
 
 
+static QString ExpandPathVariables(const QString& Path, const QString& BoxName);
+
+
 CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
     : QWizard(parent)
 {

@@ -1714,6 +1714,16 @@ _FX LRESULT Gui_WindowProcW(
 		}
 	}
 
+	if (uMsg == WM_ACTIVATEAPP && Gui_AlwaysActive) {
+		//
+		// WM_ACTIVATEAPP is only sent when activation moves to a window of a
+		// different application; under AlwaysActive suppress the deactivation
+		// notification so the boxed app keeps appearing active
+		//
+		if (! wParam)
+			return 0;
+	}
+
 	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
 		switch (LOWORD(wParam)) {
 		case WA_INACTIVE:
@@ -1859,6 +1869,16 @@ _FX LRESULT Gui_WindowProcA(
 			if (! wParam)
 				return TRUE;
 		}
+	}
+
+	if (uMsg == WM_ACTIVATEAPP && Gui_AlwaysActive) {
+		//
+		// WM_ACTIVATEAPP is only sent when activation moves to a window of a
+		// different application; under AlwaysActive suppress the deactivation
+		// notification so the boxed app keeps appearing active
+		//
+		if (! wParam)
+			return 0;
 	}
 
 	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {

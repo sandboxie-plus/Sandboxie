@@ -1704,14 +1704,12 @@ _FX LRESULT Gui_WindowProcW(
 	if (uMsg == WM_NCACTIVATE && Gui_AlwaysActive) {
 		//
 		// keep the always-active window's caption looking active when it is
-		// being deactivated; the flag is set by the preceding WM_ACTIVATE
+		// being deactivated.  WM_NCACTIVATE may be delivered before
+		// WM_ACTIVATE, so decide directly from the always-active window
+		// state instead of relying on a flag set by WM_ACTIVATE
 		//
-		THREAD_DATA *threadData = Dll_GetTlsData(NULL);
-		if (threadData && threadData->gui_nc_activate_suppress) {
-			threadData->gui_nc_activate_suppress = FALSE;
-			if (! wParam)
-				return TRUE;
-		}
+		if (! wParam && hWnd == Gui_PreviousActiveWindow)
+			return TRUE;
 	}
 
 	if (uMsg == WM_ACTIVATEAPP && Gui_AlwaysActive) {
@@ -1733,14 +1731,11 @@ _FX LRESULT Gui_WindowProcW(
 			//
 			{
 				BOOLEAN bSuppress = TRUE;
-				THREAD_DATA *threadData = Dll_GetTlsData(NULL);
 				if (lParam) {
 					DWORD pid = 0;
 					if (__sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)
 						bSuppress = FALSE;
 				}
-				if (threadData)
-					threadData->gui_nc_activate_suppress = bSuppress;
 				if (bSuppress)
 					return 0;
 			}
@@ -1861,14 +1856,12 @@ _FX LRESULT Gui_WindowProcA(
 	if (uMsg == WM_NCACTIVATE && Gui_AlwaysActive) {
 		//
 		// keep the always-active window's caption looking active when it is
-		// being deactivated; the flag is set by the preceding WM_ACTIVATE
+		// being deactivated.  WM_NCACTIVATE may be delivered before
+		// WM_ACTIVATE, so decide directly from the always-active window
+		// state instead of relying on a flag set by WM_ACTIVATE
 		//
-		THREAD_DATA *threadData = Dll_GetTlsData(NULL);
-		if (threadData && threadData->gui_nc_activate_suppress) {
-			threadData->gui_nc_activate_suppress = FALSE;
-			if (! wParam)
-				return TRUE;
-		}
+		if (! wParam && hWnd == Gui_PreviousActiveWindow)
+			return TRUE;
 	}
 
 	if (uMsg == WM_ACTIVATEAPP && Gui_AlwaysActive) {
@@ -1890,14 +1883,11 @@ _FX LRESULT Gui_WindowProcA(
 			//
 			{
 				BOOLEAN bSuppress = TRUE;
-				THREAD_DATA *threadData = Dll_GetTlsData(NULL);
 				if (lParam) {
 					DWORD pid = 0;
 					if (__sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)
 						bSuppress = FALSE;
 				}
-				if (threadData)
-					threadData->gui_nc_activate_suppress = bSuppress;
 				if (bSuppress)
 					return 0;
 			}

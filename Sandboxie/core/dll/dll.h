@@ -228,8 +228,6 @@ typedef struct _THREAD_DATA {
 
     HWND            gui_focus_window;
 
-    BOOLEAN         gui_nc_activate_suppress;
-
     //
     // sbieapi:  SbieSvc port handle
     //

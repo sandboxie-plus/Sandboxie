@@ -475,6 +475,8 @@ typedef HWINEVENTHOOK (*P_SetWinEventHook)(
 
 typedef BOOL (*P_UnhookWinEvent)(HWINEVENTHOOK hWinEventHook);
 
+typedef BOOL (*P_GetGUIThreadInfo)(DWORD idThread, LPGUITHREADINFO lpgui);
+
 //---------------------------------------------------------------------------
 
 typedef HMONITOR (*P_MonitorFromWindow)(HWND hWnd, DWORD dwFlags);
@@ -650,6 +652,8 @@ GUI_SYS_VAR(GetActiveWindow)
 
 GUI_SYS_VAR(SetWinEventHook)
 GUI_SYS_VAR(UnhookWinEvent)
+
+GUI_SYS_VAR(GetGUIThreadInfo)
 
 GUI_SYS_VAR(MonitorFromWindow)
 GUI_SYS_VAR_2(DdeInitialize)

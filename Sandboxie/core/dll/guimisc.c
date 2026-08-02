@@ -65,6 +65,8 @@ static HWND Gui_GetForegroundWindow(void);
 
 static HWND Gui_GetFocus(void);
 
+static BOOL Gui_GetGUIThreadInfo(DWORD idThread, LPGUITHREADINFO lpgui);
+
 static void CALLBACK Gui_WinEventHookProc(
     HWINEVENTHOOK hWinEventHook, DWORD event, HWND hwnd,
     LONG idObject, LONG idChild, DWORD idEventThread, DWORD dwmsEventTime);
@@ -245,6 +247,7 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 			SBIEDLL_HOOK_GUI(GetForegroundWindow);
 			SBIEDLL_HOOK_GUI(GetActiveWindow);
 			SBIEDLL_HOOK_GUI(GetFocus);
+			SBIEDLL_HOOK_GUI(GetGUIThreadInfo);
 			// SetWinEventHook is hooked so we can proxy the callback and
 			// filter out events that would reveal the boxed window is not
 			// really active; a pre-existing hook on the export is chained
@@ -1796,6 +1799,34 @@ static HWND Gui_GetFocus(void)
 			return TlsData->gui_focus_window;
 	}
 	return NULL;
+}
+
+static BOOL Gui_GetGUIThreadInfo(DWORD idThread, LPGUITHREADINFO lpgui)
+{
+	//
+	// an idThread of 0 queries the foreground thread; under AlwaysActive
+	// that would reveal that the boxed window is not actually foreground,
+	// so substitute the thread that owns the always-active window instead
+	//
+
+	if (Gui_AlwaysActive && idThread == 0 && lpgui) {
+
+		HWND hwnd = NULL;
+
+		THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+		if (TlsData && TlsData->gui_active_window && __sys_IsWindow(TlsData->gui_active_window))
+			hwnd = TlsData->gui_active_window;
+		else if (Gui_PreviousActiveWindow && __sys_IsWindow(Gui_PreviousActiveWindow))
+			hwnd = Gui_PreviousActiveWindow;
+
+		if (hwnd) {
+			ULONG tid = __sys_GetWindowThreadProcessId(hwnd, NULL);
+			if (tid)
+				idThread = tid;
+		}
+	}
+
+	return __sys_GetGUIThreadInfo(idThread, lpgui);
 }
 
 

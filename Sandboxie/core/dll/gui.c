@@ -411,6 +411,7 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT___(GetActiveWindow);
     GUI_IMPORT___(SetWinEventHook);
     GUI_IMPORT___(UnhookWinEvent);
+    GUI_IMPORT___(GetGUIThreadInfo);
     GUI_IMPORT___(IsWindow);
     GUI_IMPORT___(IsWindowEnabled);
     GUI_IMPORT___(IsWindowVisible);
@@ -1700,6 +1701,19 @@ _FX LRESULT Gui_WindowProcW(
 		}
 	}
 
+	if (uMsg == WM_NCACTIVATE && Gui_AlwaysActive) {
+		//
+		// keep the always-active window's caption looking active when it is
+		// being deactivated; the flag is set by the preceding WM_ACTIVATE
+		//
+		THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+		if (threadData && threadData->gui_nc_activate_suppress) {
+			threadData->gui_nc_activate_suppress = FALSE;
+			if (! wParam)
+				return TRUE;
+		}
+	}
+
 	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
 		switch (LOWORD(wParam)) {
 		case WA_INACTIVE:
@@ -1707,12 +1721,20 @@ _FX LRESULT Gui_WindowProcW(
 			// allow normal intra-process activation; suppress deactivation
 			// only when activation moves to a window outside this process
 			//
-			if (lParam) {
-				DWORD pid = 0;
-				if (__sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)
-					break;
+			{
+				BOOLEAN bSuppress = TRUE;
+				THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+				if (lParam) {
+					DWORD pid = 0;
+					if (__sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)
+						bSuppress = FALSE;
+				}
+				if (threadData)
+					threadData->gui_nc_activate_suppress = bSuppress;
+				if (bSuppress)
+					return 0;
 			}
-			return 0;
+			break;
 		case WA_ACTIVE:
 		case WA_CLICKACTIVE:
 			Gui_PreviousActiveWindow = hWnd;
@@ -1826,6 +1848,19 @@ _FX LRESULT Gui_WindowProcA(
 		}
 	}
 
+	if (uMsg == WM_NCACTIVATE && Gui_AlwaysActive) {
+		//
+		// keep the always-active window's caption looking active when it is
+		// being deactivated; the flag is set by the preceding WM_ACTIVATE
+		//
+		THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+		if (threadData && threadData->gui_nc_activate_suppress) {
+			threadData->gui_nc_activate_suppress = FALSE;
+			if (! wParam)
+				return TRUE;
+		}
+	}
+
 	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
 		switch (LOWORD(wParam)) {
 		case WA_INACTIVE:
@@ -1833,12 +1868,20 @@ _FX LRESULT Gui_WindowProcA(
 			// allow normal intra-process activation; suppress deactivation
 			// only when activation moves to a window outside this process
 			//
-			if (lParam) {
-				DWORD pid = 0;
-				if (__sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)
-					break;
+			{
+				BOOLEAN bSuppress = TRUE;
+				THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+				if (lParam) {
+					DWORD pid = 0;
+					if (__sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)
+						bSuppress = FALSE;
+				}
+				if (threadData)
+					threadData->gui_nc_activate_suppress = bSuppress;
+				if (bSuppress)
+					return 0;
 			}
-			return 0;
+			break;
 		case WA_ACTIVE:
 		case WA_CLICKACTIVE:
 			Gui_PreviousActiveWindow = hWnd;

@@ -35,6 +35,7 @@ protected:
     SB_STATUS TryToCreateBox();
 
     bool m_bAdvanced;
+    bool m_bUseRandomName;
 };
 
 
@@ -75,6 +76,7 @@ private:
     QLabel*         m_pInfoLabel;
 #endif
     QLineEdit*      m_pBoxName;
+    QLineEdit*      m_pAlias;
     QButtonGroup*   m_TypeGroup;
     QCheckBox*      m_pAdvanced;
 

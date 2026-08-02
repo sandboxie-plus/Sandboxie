@@ -11,6 +11,7 @@ public:
 	~CFinder();
 
 	QAbstractButton*	GetToggleButton();
+	void				SetCloseButtonAtEnd(bool AtEnd);
 
 	void				SetTree(QTreeView* pTree);
 	void				SetModel(QAbstractItemModel* pModel) { m_pModel = pModel; }
@@ -94,6 +95,7 @@ private:
 	QAbstractButton*	m_pExpandAll;
 	QAbstractButton*	m_pCollapseAll;
 	QProgressBar*		m_pProgressBar;
+	QWidget*			m_pCloseSpacer;
 
 	QRegularExpression	m_RegExp;
 	bool				m_bAlwaysRaw;

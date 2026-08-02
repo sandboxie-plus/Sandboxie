@@ -123,9 +123,9 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 	m_pSearchLayout->addWidget(m_pCollapseAll);
 	connect(m_pCollapseAll, SIGNAL(clicked()), this, SLOT(OnCollapseAll()));
 
-	QWidget* pSpacer = new QWidget();
-	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	m_pSearchLayout->addWidget(pSpacer);
+	m_pCloseSpacer = new QWidget();
+	m_pCloseSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	m_pSearchLayout->addWidget(m_pCloseSpacer);
 
 	m_pProgressBar = new QProgressBar(this);
 	m_pProgressBar->setMaximumWidth(150);
@@ -186,6 +186,11 @@ QAbstractButton* CFinder::GetToggleButton()
 		connect(m_pBtnSearch, SIGNAL(clicked(bool)), this, SLOT(OnToggle(bool)));
 	}
 	return m_pBtnSearch;
+}
+
+void CFinder::SetCloseButtonAtEnd(bool AtEnd)
+{
+	m_pCloseSpacer->setVisible(AtEnd);
 }
 
 void CFinder::SetTree(QTreeView* pTree) 

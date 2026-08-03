@@ -1677,11 +1677,9 @@ _FX LRESULT Gui_WindowProcW(
 		//
 		// cache the most recently focused window handle
 		//
-		//if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
-			THREAD_DATA *threadData = Dll_GetTlsData(NULL);
-			if (threadData)
-				threadData->gui_focus_window = hWnd;
-		//}
+		THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+		if (threadData)
+			threadData->gui_focus_window = hWnd;
 	}
 
 	if (uMsg == WM_KILLFOCUS && Gui_AlwaysActive) {
@@ -1829,11 +1827,9 @@ _FX LRESULT Gui_WindowProcA(
 		//
 		// cache the most recently focused window handle
 		//
-		//if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
-			THREAD_DATA *threadData = Dll_GetTlsData(NULL);
-			if (threadData)
-				threadData->gui_focus_window = hWnd;
-		//}
+		THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+		if (threadData)
+			threadData->gui_focus_window = hWnd;
 	}
 
 	if (uMsg == WM_KILLFOCUS && Gui_AlwaysActive) {

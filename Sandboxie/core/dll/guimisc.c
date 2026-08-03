@@ -1975,18 +1975,26 @@ static void CALLBACK Gui_WinEventHookProc(
         return;
 
     //
-    // under AlwaysActive, filter out events that would reveal that the
-    // boxed window is not actually the active/foreground window
+    // under AlwaysActive, filter out activation/focus events that would
+    // reveal that the boxed window is not actually the active/foreground
+    // window.  Only events whose window belongs to a different process are
+    // filtered; intra-process focus changes (e.g. EVENT_OBJECT_FOCUS on a
+    // child window) must be passed through to the original callback
     //
 
-    if (Gui_AlwaysActive && Gui_PreviousActiveWindow &&
-            hwnd && hwnd != Gui_PreviousActiveWindow) {
+    if (Gui_AlwaysActive && Gui_PreviousActiveWindow && hwnd) {
+
+        DWORD pid = 0;
+        BOOLEAN bExternal = (__sys_GetWindowThreadProcessId(hwnd, &pid)
+                             && pid != Dll_ProcessId);
+
         switch (event) {
         case EVENT_SYSTEM_FOREGROUND:
         case EVENT_SYSTEM_SWITCHSTART:
         case EVENT_SYSTEM_SWITCHEND:
         case EVENT_OBJECT_FOCUS:
-            bFilter = TRUE;
+            if (bExternal)
+                bFilter = TRUE;
             break;
         }
     }

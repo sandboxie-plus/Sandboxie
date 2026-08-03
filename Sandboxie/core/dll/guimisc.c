@@ -1803,10 +1803,15 @@ static HWND Gui_GetFocus(void)
 
 static BOOL Gui_GetGUIThreadInfo(DWORD idThread, LPGUITHREADINFO lpgui)
 {
+	BOOLEAN bSubstitute = FALSE;
+	BOOL ret;
+
 	//
-	// an idThread of 0 queries the foreground thread; under AlwaysActive
-	// that would reveal that the boxed window is not actually foreground,
-	// so substitute the thread that owns the always-active window instead
+	// an idThread of 0 queries the foreground thread; under AlwaysActive the
+	// boxed thread is not really foreground, so the real call reports no
+	// active window and leaks the deactivation.  Query the boxed thread's
+	// own info instead and overwrite the reported active/focus windows with
+	// the always-active window
 	//
 
 	if (Gui_AlwaysActive && idThread == 0 && lpgui) {
@@ -1821,12 +1826,37 @@ static BOOL Gui_GetGUIThreadInfo(DWORD idThread, LPGUITHREADINFO lpgui)
 
 		if (hwnd) {
 			ULONG tid = __sys_GetWindowThreadProcessId(hwnd, NULL);
-			if (tid)
+			if (tid) {
 				idThread = tid;
+				bSubstitute = TRUE;
+			}
 		}
 	}
 
-	return __sys_GetGUIThreadInfo(idThread, lpgui);
+	ret = __sys_GetGUIThreadInfo(idThread, lpgui);
+
+	if (bSubstitute && ret && lpgui) {
+
+		THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+		HWND hwndActive = NULL;
+		HWND hwndFocus = NULL;
+
+		if (TlsData && TlsData->gui_active_window && __sys_IsWindow(TlsData->gui_active_window))
+			hwndActive = TlsData->gui_active_window;
+		else if (Gui_PreviousActiveWindow && __sys_IsWindow(Gui_PreviousActiveWindow))
+			hwndActive = Gui_PreviousActiveWindow;
+
+		if (TlsData && TlsData->gui_focus_window && __sys_IsWindow(TlsData->gui_focus_window))
+			hwndFocus = TlsData->gui_focus_window;
+
+		if (hwndActive) {
+			lpgui->hwndActive = hwndActive;
+			lpgui->hwndFocus = hwndFocus ? hwndFocus : hwndActive;
+			lpgui->dwFlags |= GUI_FOREGROUND;
+		}
+	}
+
+	return ret;
 }
 
 

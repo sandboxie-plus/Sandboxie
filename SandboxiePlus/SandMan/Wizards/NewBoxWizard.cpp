@@ -16,7 +16,38 @@
 #include <QUuid>
 
 
-static QString ExpandPathVariables(const QString& Path, const QString& BoxName);
+static QString ExpandPathVariables(const QString& Path, const QString& BoxName)
+{
+    QString Value2 = Path;
+    QRegularExpression rx("%([\\{\\}\\-a-zA-Z0-9 ]+)%");
+    for (int pos = 0; ; ) {
+        auto result = rx.match(Path, pos);
+        if (!result.hasMatch())
+            break;
+        pos = result.capturedStart();
+        QString var = result.captured(1);
+        QString val;
+        if (var.compare("SbieHome", Qt::CaseInsensitive) == 0)
+            val = theAPI->GetSbiePath();
+        else if (var.compare("BoxName", Qt::CaseInsensitive) == 0 || var.compare("SANDBOX", Qt::CaseInsensitive) == 0)
+            val = BoxName;
+        else if (var.compare("USER", Qt::CaseInsensitive) == 0 || var.compare("SESSION", Qt::CaseInsensitive) == 0)
+            val = theAPI->SbieIniGet(BoxName, "%" + var + "%", CONF_JUST_EXPAND); // non-path Sandboxie vars
+        else
+            val = qEnvironmentVariable(var.toUtf8().constData()); // OS env vars in DOS form
+        Value2.replace("%" + var + "%", val);
+        pos += result.capturedLength();
+    }
+    return Value2;
+}
+
+static QString DosizePath(const QString& Path)
+{
+    QString p = Path;
+    if (p.left(4) == "\\??\\")
+        p = p.mid(4);
+    return theAPI->Nt2DosPath(p);
+}
 
 
 CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
@@ -119,8 +150,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         }
         else {
             QString Location = field("boxLocation").toString();
-            QString portablePath = Location.isEmpty() ? GetDefaultLocation() : Location;
-            portableDir = theAPI->Nt2DosPath(ExpandPathVariables(portablePath, BoxName));
+            portableDir = Location.isEmpty() ? GetDefaultLocation() : DosizePath(ExpandPathVariables(Location, BoxName));
             QDir().mkpath(portableDir);
             portableIniPath = portableDir + "\\" + BoxName + ".ini";
         }
@@ -285,7 +315,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 
 
             QString Location = field("boxLocation").toString();
-            if (!Location.isEmpty()) {
+            if (!bPortable && !Location.isEmpty()) {
                 pBox->SetText("FileRootPath", Location);
                 theAPI->UpdateBoxPaths(pBox.data());
             }
@@ -369,33 +399,8 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 
 QString CNewBoxWizard::GetDefaultLocation()
 {
-    QString DefaultPath = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%", false, false);
-    // HACK HACK: globally %SANDBOX% evaluates to GlobalSettings
-    DefaultPath.replace("\\GlobalSettings", "\\" + field("boxName").toString().replace(" ", "_"));
-    return theAPI->Nt2DosPath(DefaultPath);
-}
-
-static QString ExpandPathVariables(const QString& Path, const QString& BoxName)
-{
-    QString Value2 = Path;
-    QRegularExpression rx("%([\\{\\}\\-a-zA-Z0-9 ]+)%");
-    for (int pos = 0; ; ) {
-        auto result = rx.match(Path, pos);
-        if (!result.hasMatch())
-            break;
-        pos = result.capturedStart();
-        QString var = result.captured(1);
-        QString val;
-        if (var.compare("SbieHome", Qt::CaseInsensitive) == 0)
-            val = theAPI->GetSbiePath();
-        else if (var.compare("BoxName", Qt::CaseInsensitive) == 0)
-            val = BoxName;
-        else
-            val = theAPI->SbieIniGet(BoxName, "%" + var + "%", CONF_JUST_EXPAND);
-        Value2.replace("%" + var + "%", val);
-        pos += result.capturedLength();
-    }
-    return Value2;
+    QString DefaultPath = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%", false, true);
+    return DosizePath(ExpandPathVariables(DefaultPath, field("boxName").toString().replace(" ", "_")));
 }
 
 

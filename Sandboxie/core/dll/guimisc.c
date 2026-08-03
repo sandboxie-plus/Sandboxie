@@ -1852,7 +1852,6 @@ static BOOL Gui_GetGUIThreadInfo(DWORD idThread, LPGUITHREADINFO lpgui)
 		if (hwndActive) {
 			lpgui->hwndActive = hwndActive;
 			lpgui->hwndFocus = hwndFocus ? hwndFocus : hwndActive;
-			lpgui->dwFlags |= GUI_FOREGROUND;
 		}
 	}
 

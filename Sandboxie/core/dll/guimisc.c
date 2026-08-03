@@ -1921,6 +1921,17 @@ static HWINEVENTHOOK Gui_SetWinEventHook(
 static BOOL Gui_UnhookWinEvent(HWINEVENTHOOK hWinEventHook)
 {
     GUI_WIN_EVENT_HOOK *ghk;
+    BOOL bRet;
+
+    //
+    // unhook first; only drop the tracking entry once the system hook is
+    // really gone, otherwise a failed unhook would leave a live hook with no
+    // mapping and its callbacks would be silently dropped
+    //
+
+    bRet = __sys_UnhookWinEvent(hWinEventHook);
+    if (! bRet)
+        return bRet;
 
     EnterCriticalSection(&Gui_WinEventHooksCritSec);
     for (ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
@@ -1933,7 +1944,7 @@ static BOOL Gui_UnhookWinEvent(HWINEVENTHOOK hWinEventHook)
     }
     LeaveCriticalSection(&Gui_WinEventHooksCritSec);
 
-    return __sys_UnhookWinEvent(hWinEventHook);
+    return bRet;
 }
 
 

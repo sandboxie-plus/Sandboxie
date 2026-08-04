@@ -33,6 +33,11 @@ typedef struct _FILE_JUNCTION_ENTRY {
     WCHAR *dst;                 // real (target) path, in DOS form
     ULONG dst_len;              // in characters, excluding NULL
 
+    WCHAR *src_nt;              // virtual (source) path, in NT device form
+    ULONG src_nt_len;           // in characters, excluding NULL
+    WCHAR *dst_nt;              // real (target) path, in NT device form
+    ULONG dst_nt_len;           // in characters, excluding NULL
+
 } FILE_JUNCTION_ENTRY;
 
 
@@ -107,6 +112,17 @@ static WCHAR *File_Junction_TrimString(WCHAR *str, ULONG *len)
 
 
 //---------------------------------------------------------------------------
+// File_Junction_IsDosPath
+//---------------------------------------------------------------------------
+
+
+static BOOLEAN File_Junction_IsDosPath(const WCHAR *Path, ULONG PathLen)
+{
+    return PathLen >= 3 && Path[1] == L':';
+}
+
+
+//---------------------------------------------------------------------------
 // File_Junction_FindForward
 //---------------------------------------------------------------------------
 
@@ -116,24 +132,39 @@ static FILE_JUNCTION_ENTRY *File_Junction_FindForward(
 {
     ULONG i;
     ULONG best_len = 0;
+    BOOLEAN dos = File_Junction_IsDosPath(Path, PathLen);
     FILE_JUNCTION_ENTRY *best = NULL;
     FILE_JUNCTION_ENTRY *entry;
 
     for (i = 0; i < File_JunctionCount; ++i) {
 
+        const WCHAR *src;
+        ULONG src_len;
+
         entry = &File_JunctionEntries[i];
 
-        if (entry->src_len > PathLen)
+        if (dos) {
+            src = entry->src;
+            src_len = entry->src_len;
+        }
+        else {
+            src = entry->src_nt;
+            src_len = entry->src_nt_len;
+        }
+
+        if (! src)
             continue;
-        if (entry->src_len < best_len)
+        if (src_len > PathLen)
             continue;
-        if (! File_Junction_IsBoundary(Path, entry->src_len))
+        if (src_len < best_len)
             continue;
-        if (_wcsnicmp(Path, entry->src, entry->src_len) != 0)
+        if (! File_Junction_IsBoundary(Path, src_len))
+            continue;
+        if (_wcsnicmp(Path, src, src_len) != 0)
             continue;
 
         best = entry;
-        best_len = entry->src_len;
+        best_len = src_len;
     }
 
     return best;
@@ -150,27 +181,39 @@ static FILE_JUNCTION_ENTRY *File_Junction_FindReverse(
 {
     ULONG i;
     ULONG best_len = 0;
+    BOOLEAN dos = File_Junction_IsDosPath(Path, PathLen);
     FILE_JUNCTION_ENTRY *best = NULL;
     FILE_JUNCTION_ENTRY *entry;
 
-    if (PathLen < 3 || Path[1] != L':')
-        return NULL;
-
     for (i = 0; i < File_JunctionCount; ++i) {
+
+        const WCHAR *dst;
+        ULONG dst_len;
 
         entry = &File_JunctionEntries[i];
 
-        if (entry->dst_len > PathLen)
+        if (dos) {
+            dst = entry->dst;
+            dst_len = entry->dst_len;
+        }
+        else {
+            dst = entry->dst_nt;
+            dst_len = entry->dst_nt_len;
+        }
+
+        if (! dst)
             continue;
-        if (entry->dst_len < best_len)
+        if (dst_len > PathLen)
             continue;
-        if (! File_Junction_IsBoundary(Path, entry->dst_len))
+        if (dst_len < best_len)
             continue;
-        if (_wcsnicmp(Path, entry->dst, entry->dst_len) != 0)
+        if (! File_Junction_IsBoundary(Path, dst_len))
+            continue;
+        if (_wcsnicmp(Path, dst, dst_len) != 0)
             continue;
 
         best = entry;
-        best_len = entry->dst_len;
+        best_len = dst_len;
     }
 
     return best;
@@ -219,7 +262,8 @@ _FX ULONG File_Junction_GetPolicyVersion(void)
 
 _FX BOOLEAN File_Junction_IsHomePath(const WCHAR *Path, ULONG PathLen)
 {
-    const WCHAR *home = Dll_HomeDosPath;
+    const WCHAR *home = File_Junction_IsDosPath(Path, PathLen)
+                            ? Dll_HomeDosPath : Dll_HomeNtPath;
     ULONG home_len;
 
     if (! home)
@@ -263,6 +307,8 @@ _FX void File_InitJunctions(void)
         for (index = 0; index < File_JunctionCount; ++index) {
             Dll_Free(File_JunctionEntries[index].src);
             Dll_Free(File_JunctionEntries[index].dst);
+            Dll_Free(File_JunctionEntries[index].src_nt);
+            Dll_Free(File_JunctionEntries[index].dst_nt);
         }
 
         Dll_Free(File_JunctionEntries);
@@ -357,6 +403,43 @@ _FX void File_InitJunctions(void)
         wmemcpy(entry->dst, dst, dst_len + 1);
         entry->src_len = src_len;
         entry->dst_len = dst_len;
+
+        //
+        // also record the NT device form of the paths, because the
+        // junction mapping in File_GetName operates on NT device paths
+        // while process creation checks may pass DOS paths.  if a path
+        // can't be converted (for example an unknown drive letter) the
+        // NT form is left NULL and only the DOS form matches.
+        //
+
+        entry->src_nt = NULL;
+        entry->dst_nt = NULL;
+        entry->src_nt_len = 0;
+        entry->dst_nt_len = 0;
+
+        {
+            WCHAR *src_nt = File_TranslateDosToNtPath(entry->src);
+            if (src_nt) {
+                ULONG src_nt_len = wcslen(src_nt);
+                entry->src_nt = Dll_Alloc((src_nt_len + 1) * sizeof(WCHAR));
+                if (entry->src_nt) {
+                    wmemcpy(entry->src_nt, src_nt, src_nt_len + 1);
+                    entry->src_nt_len = src_nt_len;
+                }
+                Dll_Free(src_nt);
+            }
+
+            WCHAR *dst_nt = File_TranslateDosToNtPath(entry->dst);
+            if (dst_nt) {
+                ULONG dst_nt_len = wcslen(dst_nt);
+                entry->dst_nt = Dll_Alloc((dst_nt_len + 1) * sizeof(WCHAR));
+                if (entry->dst_nt) {
+                    wmemcpy(entry->dst_nt, dst_nt, dst_nt_len + 1);
+                    entry->dst_nt_len = dst_nt_len;
+                }
+                Dll_Free(dst_nt);
+            }
+        }
     }
 }
 
@@ -369,6 +452,9 @@ _FX void File_InitJunctions(void)
 _FX WCHAR *File_ApplyJunctionMap(THREAD_DATA *TlsData, WCHAR *TruePath)
 {
     FILE_JUNCTION_ENTRY *best;
+    BOOLEAN dos;
+    const WCHAR *src, *dst;
+    ULONG src_len, dst_len;
     ULONG TruePath_len;
     ULONG NewPath_len;
     WCHAR *NewPath;
@@ -379,13 +465,27 @@ _FX WCHAR *File_ApplyJunctionMap(THREAD_DATA *TlsData, WCHAR *TruePath)
     if (! best)
         return TruePath;
 
-    NewPath_len = best->dst_len + (TruePath_len - best->src_len);
+    dos = File_Junction_IsDosPath(TruePath, TruePath_len);
+    if (dos) {
+        src = best->src;
+        src_len = best->src_len;
+        dst = best->dst;
+        dst_len = best->dst_len;
+    }
+    else {
+        src = best->src_nt;
+        src_len = best->src_nt_len;
+        dst = best->dst_nt;
+        dst_len = best->dst_nt_len;
+    }
+
+    NewPath_len = dst_len + (TruePath_len - src_len);
 
     NewPath = Dll_AllocTemp((NewPath_len + 1) * sizeof(WCHAR));
 
-    wmemmove(NewPath + best->dst_len, TruePath + best->src_len,
-                NewPath_len - best->dst_len + 1);
-    wmemcpy(NewPath, best->dst, best->dst_len);
+    wmemmove(NewPath + dst_len, TruePath + src_len,
+                NewPath_len - dst_len + 1);
+    wmemcpy(NewPath, dst, dst_len);
 
     return NewPath;
 }
@@ -400,6 +500,9 @@ _FX WCHAR *File_ApplyJunctionMapReverse(
     THREAD_DATA *TlsData, WCHAR *Path, ULONG Path_len)
 {
     FILE_JUNCTION_ENTRY *best;
+    BOOLEAN dos;
+    const WCHAR *src, *dst;
+    ULONG src_len, dst_len;
     ULONG NewPath_len;
     WCHAR *NewPath;
 
@@ -407,13 +510,27 @@ _FX WCHAR *File_ApplyJunctionMapReverse(
     if (! best)
         return NULL;
 
-    NewPath_len = best->src_len + (Path_len - best->dst_len);
+    dos = File_Junction_IsDosPath(Path, Path_len);
+    if (dos) {
+        src = best->src;
+        src_len = best->src_len;
+        dst = best->dst;
+        dst_len = best->dst_len;
+    }
+    else {
+        src = best->src_nt;
+        src_len = best->src_nt_len;
+        dst = best->dst_nt;
+        dst_len = best->dst_nt_len;
+    }
+
+    NewPath_len = src_len + (Path_len - dst_len);
 
     NewPath = Dll_AllocTemp((NewPath_len + 1) * sizeof(WCHAR));
 
-    wmemmove(NewPath + best->src_len, Path + best->dst_len,
-                NewPath_len - best->src_len + 1);
-    wmemcpy(NewPath, best->src, best->src_len);
+    wmemmove(NewPath + src_len, Path + dst_len,
+                NewPath_len - src_len + 1);
+    wmemcpy(NewPath, src, src_len);
 
     return NewPath;
 }
@@ -428,19 +545,36 @@ _FX ULONG File_ApplyJunctionMapReverseInPlace(
     WCHAR *Path, ULONG Path_len, ULONG MaxLen)
 {
     FILE_JUNCTION_ENTRY *best;
+    BOOLEAN dos;
+    const WCHAR *src, *dst;
+    ULONG src_len, dst_len;
     ULONG NewPath_len;
 
     best = File_Junction_FindReverse(Path, Path_len);
     if (! best)
         return 0;
 
-    NewPath_len = best->src_len + (Path_len - best->dst_len);
+    dos = File_Junction_IsDosPath(Path, Path_len);
+    if (dos) {
+        src = best->src;
+        src_len = best->src_len;
+        dst = best->dst;
+        dst_len = best->dst_len;
+    }
+    else {
+        src = best->src_nt;
+        src_len = best->src_nt_len;
+        dst = best->dst_nt;
+        dst_len = best->dst_nt_len;
+    }
+
+    NewPath_len = src_len + (Path_len - dst_len);
     if (NewPath_len + 1 > MaxLen)
         return 0;
 
-    memmove(Path + best->src_len, Path + best->dst_len,
-                (Path_len - best->dst_len + 1) * sizeof(WCHAR));
-    wmemcpy(Path, best->src, best->src_len);
+    memmove(Path + src_len, Path + dst_len,
+                (Path_len - dst_len + 1) * sizeof(WCHAR));
+    wmemcpy(Path, src, src_len);
 
     return NewPath_len;
 }

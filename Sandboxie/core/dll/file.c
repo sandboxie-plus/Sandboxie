@@ -1553,7 +1553,10 @@ check_sandbox_prefix:
     // the forward mapping applies to any resolved true path, including
     // paths derived from a file handle (objname_len == 0), so that a
     // directory handle opened at a junction source path enumerates the
-    // junction target consistently with the way path opens are mapped
+    // junction target consistently with the way path opens are mapped.
+    // note that the junction entries are matched in both DOS form and
+    // NT device form, since the true path at this point is an NT
+    // device path while process creation checks may pass DOS paths
     //
 
     if (TruePath && ! File_Junction_IsHomePath(TruePath, wcslen(TruePath))) {

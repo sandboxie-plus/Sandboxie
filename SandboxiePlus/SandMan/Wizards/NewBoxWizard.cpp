@@ -173,8 +173,14 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         theAPI->ReloadBoxes();
 
         pBox = theAPI->GetBoxByName(BoxName);
-        if (!pBox)
+        if (!pBox) {
+            QStringList Imports = theAPI->GetGlobalSettings()->GetTextList("ImportBox", false);
+            Imports.removeAll(portableIniPath);
+            theAPI->GetGlobalSettings()->UpdateTextList("ImportBox", Imports, false);
+            theAPI->ReloadConfig();
+            QFile::remove(portableIniPath);
             return SB_ERR(SB_Generic);
+        }
 
         Status = SB_OK;
     }

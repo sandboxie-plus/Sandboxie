@@ -168,7 +168,11 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         file.close();
 
         // Add ImportBox only – no [BoxName] in Sandboxie.ini, so no collision
-        theAPI->GetGlobalSettings()->AppendText("ImportBox", portableIniPath);
+        SB_STATUS importStatus = theAPI->GetGlobalSettings()->AppendText("ImportBox", portableIniPath);
+        if (importStatus.IsError()) {
+            QFile::remove(portableIniPath);
+            return importStatus;
+        }
         theAPI->ReloadConfig();
         theAPI->ReloadBoxes();
 

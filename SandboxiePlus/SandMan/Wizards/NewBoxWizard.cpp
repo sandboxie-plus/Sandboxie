@@ -33,8 +33,11 @@ static QString ExpandPathVariables(const QString& Path, const QString& BoxName)
             val = BoxName;
         else if (var.compare("USER", Qt::CaseInsensitive) == 0 || var.compare("SESSION", Qt::CaseInsensitive) == 0)
             val = theAPI->SbieIniGet(BoxName, "%" + var + "%", CONF_JUST_EXPAND); // non-path Sandboxie vars
-        else
+        else {
             val = qEnvironmentVariable(var.toUtf8().constData()); // OS env vars in DOS form
+            if (val.isEmpty())
+                val = theAPI->SbieIniGet(BoxName, "%" + var + "%", CONF_JUST_EXPAND); // Sandboxie-specific tokens (e.g. %Sid%, %{...}%)
+        }
         Value2.replace("%" + var + "%", val);
         pos += result.capturedLength();
     }

@@ -1,7 +1,9 @@
-echo %*
-IF "%~3" == "" ( set "ghSsl_repo=openssl-builds" ) ELSE ( set "ghSsl_repo=%~3" )
-IF "%~2" == "" ( set "ghSsl_user=xanasoft" ) ELSE ( set "ghSsl_user=%~2" )
-IF "%~1" == "" ( set "openssl_version=3.3.1" ) ELSE ( set "openssl_version=%~1" )
+call "%~dp0..\Installer\buildVariables.cmd" %*
+
+REM echo %*
+REM IF "%~3" == "" ( set "ghSsl_repo=openssl-builds" ) ELSE ( set "ghSsl_repo=%~3" )
+REM IF "%~2" == "" ( set "ghSsl_user=xanasoft" ) ELSE ( set "ghSsl_user=%~2" )
+REM IF "%~1" == "" ( set "openssl_version=3.4.0" ) ELSE ( set "openssl_version=%~1" )
 
 set "openssl_version_underscore=%openssl_version:.=_%"
 

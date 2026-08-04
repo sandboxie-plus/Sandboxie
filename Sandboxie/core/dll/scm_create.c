@@ -989,11 +989,11 @@ _FX ULONG Scm_StartBoxedService2(const WCHAR *name, SERVICE_QUERY_RPL *qrpl)
         _wcsicmp(name, _wuauserv) == 0       ||
         _wcsicmp(name, Scm_CryptSvc) == 0) {
 
-        PROCESS_INFORMATION pi;
+        //PROCESS_INFORMATION pi;
         STARTUPINFO si;
 
         const WCHAR *ProcessName;
-        BOOLEAN use_sbiesvc = TRUE;
+        //BOOLEAN use_sbiesvc = TRUE;
 
         if (_wcsicmp(name, _bits) == 0) {
             ProcessName = SandboxieBITS;
@@ -1004,11 +1004,11 @@ _FX ULONG Scm_StartBoxedService2(const WCHAR *name, SERVICE_QUERY_RPL *qrpl)
         }
         else if (_wcsicmp(name, Scm_CryptSvc) == 0) {
             ProcessName = SandboxieCrypto;
-            use_sbiesvc = FALSE;
+            //use_sbiesvc = FALSE;
         } else
             ProcessName = NULL;
 
-        if (! use_sbiesvc) {
+        /*if (! use_sbiesvc) {
 
             memzero(&si, sizeof(STARTUPINFO));
             si.cb = sizeof(STARTUPINFO);
@@ -1021,7 +1021,7 @@ _FX ULONG Scm_StartBoxedService2(const WCHAR *name, SERVICE_QUERY_RPL *qrpl)
             CloseHandle(pi.hProcess);
 
             return ERROR_SUCCESS;
-        }
+        }*/
 
         si.lpReserved = NULL;
         if (SbieDll_RunFromHome(ProcessName, NULL, &si, NULL)) {

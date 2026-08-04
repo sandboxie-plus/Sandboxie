@@ -115,9 +115,9 @@ public:
 	/// ReadDirectoryChangesW call for the given directory with the given flags.
 	/// </para>
 	/// </remarks>
-	void AddDirectory( LPCTSTR wszDirectory, BOOL bWatchSubtree, DWORD dwNotifyFilter, DWORD dwBufferSize=16384 );
+	void AddDirectory( LPCWSTR wszDirectory, BOOL bWatchSubtree, DWORD dwNotifyFilter, DWORD dwBufferSize=16384 );
 
-	void DetachDirectory( LPCTSTR wszDirectory );
+	void DetachDirectory( LPCWSTR wszDirectory );
 
 	virtual void Notify( const std::wstring& strDirectory ) {}
 

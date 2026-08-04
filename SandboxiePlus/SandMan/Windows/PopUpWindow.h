@@ -123,6 +123,7 @@ public:
 		m_pLabel = new QLabel(Message);
 		m_pLabel->setToolTip(Message);
 		m_pLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
+		connect(m_pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 		m_pMainLayout->addWidget(m_pLabel, 0, 0, 1, 5);
 
 		m_pRemember = new QCheckBox(tr("Remember for this process"));
@@ -470,6 +471,7 @@ private slots:
 	virtual void		OnDismissProgress(bool bHide);
 
 	virtual void		OnCopy();
+	virtual void		OnFlushPendingEntries();
 
 protected:
 	virtual void		closeEvent(QCloseEvent *e);
@@ -482,6 +484,10 @@ protected:
 	virtual bool		IsMessageHidden(quint32 MsgCode, const QStringList& MsgData);
 
 	virtual void		SendPromptResult(CPopUpPrompt* pEntry, int retval);
+	void				SchedulePendingEntriesFlush();
+	CPopUpMessage*		FindMessageEntry(const QString& Message);
+	int					CountPopupMessages() const;
+	bool				RemoveOldestPopupMessage();
 
 	QMultiMap<quint32, QString> m_HiddenMessages;
 	bool				m_HideAllMessages;
@@ -491,5 +497,8 @@ private:
 	QAction*			m_pActionCopy;
 	int					m_uTimerID;
 	int					m_iTopMost;
+	bool				m_EntryFlushPending;
+	bool				m_FlushingPendingEntries;
+	QList<CPopUpEntry*>	m_PendingEntries;
 	Ui::PopUpWindow ui;
 };

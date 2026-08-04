@@ -77,10 +77,10 @@ void COptionsWindow::LoadTemplates()
 
 void COptionsWindow::SetTemplate(const QString& Template, bool bEnabled)
 {
-	if(bEnabled)
-		m_BoxTemplates.append(Template);
-	else
+	if(!bEnabled)
 		m_BoxTemplates.removeAll(Template);
+	else if(!m_BoxTemplates.contains(Template))
+		m_BoxTemplates.append(Template);
 	m_TemplatesChanged = true; 
 	OnOptChanged();
 }
@@ -109,17 +109,8 @@ void COptionsWindow::ShowTemplates()
 {
 	ui.treeTemplates->clear();
 
-	QString CategoryFilter = ui.cmbCategories->currentData().toString();
-	QString TextFilter = ui.txtTemplates->text();
-
 	for (QMultiMap<QString, QPair<QString, QString>>::iterator I = m_AllTemplates.begin(); I != m_AllTemplates.end(); ++I)
 	{
-		if (!CategoryFilter.isEmpty() && I.key().compare(CategoryFilter, Qt::CaseInsensitive) != 0)
-			continue;
-
-		if (I.value().second.indexOf(TextFilter, 0, Qt::CaseInsensitive) == -1)
-			continue;
-
 		if (I.key().isEmpty())
 			continue; // don't show templates without a category (these are usually deprecated templates)
 
@@ -140,7 +131,20 @@ void COptionsWindow::ShowTemplates()
 		ui.treeTemplates->addTopLevelItem(pItem);
 	}
 
+	FilterTemplates();
 	ShowFolders();
+}
+
+void COptionsWindow::FilterTemplates()
+{
+	QString CategoryFilter = ui.cmbCategories->currentData().toString();
+	QString TextFilter = ui.txtTemplates->text();
+	for (int i = 0; i < ui.treeTemplates->topLevelItemCount(); i++) {
+		QTreeWidgetItem* pItem = ui.treeTemplates->topLevelItem(i);
+		bool Visible = (CategoryFilter.isEmpty() || pItem->data(0, Qt::UserRole).toString().compare(CategoryFilter, Qt::CaseInsensitive) == 0)
+			&& pItem->text(1).indexOf(TextFilter, 0, Qt::CaseInsensitive) != -1;
+		pItem->setHidden(!Visible);
+	}
 }
 
 void COptionsWindow::OnTemplateClicked(QTreeWidgetItem* pItem, int Column)
@@ -177,7 +181,7 @@ void COptionsWindow::OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column)
 	COptionsWindow OptionsWindow(pTemplate, pItem->text(1));
 	QPoint ParentPos = mapToGlobal(rect().topLeft());
 	OptionsWindow.move(ParentPos.x() + 30, ParentPos.y() + 10);
-	OptionsWindow.exec();
+	theGUI->SafeExec(&OptionsWindow);
 
 	// todo update name if it changed
 }
@@ -202,7 +206,7 @@ void COptionsWindow::OnAddTemplates()
 	pTemplate->SetText("Tmpl.Class", "Local");
 
 	COptionsWindow OptionsWindow(pTemplate, Value);
-	OptionsWindow.exec();
+	theGUI->SafeExec(&OptionsWindow);
 
 	LoadTemplates();
 }
@@ -257,10 +261,10 @@ void COptionsWindow::LoadFolders()
 	{
 		QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + Name, m_pBox->GetAPI()));
 
-		QList<QPair<QString, QString>> AllValues = pTemplate->GetIniSection(NULL, true);
-		for (QList<QPair<QString, QString>>::const_iterator I = AllValues.begin(); I != AllValues.end(); ++I)
+		QList<CSbieIni::SbieIniValue> AllValues = pTemplate->GetIniSection(NULL, true);
+		for (QList<CSbieIni::SbieIniValue>::const_iterator I = AllValues.begin(); I != AllValues.end(); ++I)
 		{
-			QString Value = I->second;
+			QString Value = I->Value;
 
 			int begin = Value.indexOf("%Tmpl.");
 			if (begin == -1) continue;

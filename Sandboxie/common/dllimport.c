@@ -198,7 +198,7 @@ DWORD64 FindImagePosition(DWORD rva, void* pNTHeader, DWORD64 imageBase)
 	return rva - delta;
 }
 
-DWORD64 FindDllExport2(P_NtReadVirtualMemory64 ReadDll, HANDLE hProcess, DWORD64 DllBase, IMAGE_DATA_DIRECTORY *dir0, const char* ProcName, void* pNTHeader)
+static DWORD64 FindDllExport2(P_NtReadVirtualMemory64 ReadDll, HANDLE hProcess, DWORD64 DllBase, IMAGE_DATA_DIRECTORY *dir0, const char* ProcName, void* pNTHeader)
 {
 	NTSTATUS status;
 	BYTE* buffer;
@@ -418,7 +418,7 @@ NTSTATUS __stdcall ReadLocalMemory(
 	return 0;
 }
 
-DWORD64 FindDllExport(DWORD64 DllBase, const char* ProcName)
+DWORD64 FindDllExportInMem(DWORD64 DllBase, const char* ProcName)
 {
 	return FindDllExport_impl(ReadLocalMemory, NULL, DllBase, ProcName);
 }

@@ -35,7 +35,11 @@ public:
     virtual bool isRelativePath() const;
     virtual FileFlags fileFlags(FileFlags type = FileInfoAll) const;
     virtual QString fileName(FileName file = DefaultName) const;
-    virtual QDateTime fileTime(FileTime time) const;
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
+	virtual QDateTime fileTime(FileTime time) const;
+#else
+    virtual QDateTime fileTime(QFile::FileTime time) const;
+#endif
     virtual void setFileName(const QString& file);
     bool atEnd() const;
 
@@ -45,7 +49,11 @@ public:
 
     bool isOpened() const;
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
     QAbstractFileEngine::Iterator* beginEntryList(QDir::Filters filters, const QStringList& filterNames);
+#else
+    IteratorUniquePtr beginEntryList(const QString &path, QDirListing::IteratorFlags filters, const QStringList &filterNames) override;
+#endif
 
     QFile::FileError error() const;
     QString errorString() const;
@@ -82,7 +90,11 @@ public:
     bool IsOpen()       { return m_pArchive != NULL; }
     QString Prefix()    { return m_Scheme; }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 8, 0)
     QAbstractFileEngine* create(const QString& filename) const;
+#else
+    std::unique_ptr<QAbstractFileEngine> create(const QString& filename) const;
+#endif
 
 private:
     QString         m_Scheme;

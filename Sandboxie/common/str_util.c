@@ -182,3 +182,17 @@ BOOLEAN SbieDll_FindTagValue(const WCHAR* string, const WCHAR* tag_name, WCHAR* 
     wcsncpy_s(value, value_size / sizeof(WCHAR), value_ptr, value_len);
     return TRUE;
 }
+
+wchar_t* wcsistr(const wchar_t* str, const wchar_t* what) 
+{
+    if (!*what) return (wchar_t*)str;
+
+    size_t what_len = wcslen(what);
+
+    for (; *str; str++) {
+        if (_wcsnicmp(str, what, what_len) == 0) {
+            return (wchar_t*)str;
+        }
+    }
+    return NULL;
+}

@@ -23,14 +23,14 @@
 
 // mess with a dummy installation when debugging
 
-#undef VERSION_MJR
+/*#undef VERSION_MJR
 #define VERSION_MJR		1
 #undef VERSION_MIN
-#define VERSION_MIN 	9
+#define VERSION_MIN 	11
 #undef VERSION_REV
-#define VERSION_REV 	7
+#define VERSION_REV 	4
 #undef VERSION_UPD
-#define VERSION_UPD 	0
+#define VERSION_UPD 	0*/
 
 #define DUMMY_PATH "C:\\Projects\\Sandboxie\\SandboxieTools\\x64\\Debug\\Test"
 #endif
@@ -108,21 +108,21 @@ SB_PROGRESS COnlineUpdater::GetUpdates(QObject* receiver, const char* member, co
 #endif
 	Query.addQueryItem("system", "windows-" + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture());
 	Query.addQueryItem("language", QLocale::system().name());
+#ifdef _DEBUG
+	Query.addQueryItem("debug", "1");
+#endif
 
 	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
 	//if (UpdateKey.isEmpty())
 	//	UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
 	//if (UpdateKey.isEmpty())
 	//	UpdateKey = "00000000000000000000000000000000";
-	if (!UpdateKey.isEmpty())
-		UpdateKey += "-";
-
+	Query.addQueryItem("update_key", UpdateKey);
+	
 	quint64 RandID = COnlineUpdater::GetRandID();
 	quint32 Hash = theAPI->GetUserSettings()->GetName().mid(13).toInt(NULL, 16);
-	quint64 HashID = RandID ^ (quint64((Hash & 0xFFFF) ^ ((Hash >> 16) & 0xFFFF)) << 48); // fold the hash in half and xor it with the first 16 bit of RandID
-
-	UpdateKey += QString::number(HashID, 16).rightJustified(16, '0').toUpper();
-	Query.addQueryItem("update_key", UpdateKey);
+	QString HashKey = QString::number(Hash, 16).rightJustified(8, '0').toUpper() + "-" + QString::number(RandID, 16).rightJustified(16, '0').toUpper();
+	Query.addQueryItem("hash_key", HashKey);
 
 	if (Params.contains("channel")) 
 		Query.addQueryItem("channel", Params["channel"].toString());
@@ -153,13 +153,79 @@ SB_PROGRESS COnlineUpdater::GetUpdates(QObject* receiver, const char* member, co
 
 void CGetUpdatesJob::Finish(QNetworkReply* pReply)
 {
-	QByteArray Reply = pReply->readAll();
+	QVariantMap Data;
+
+	auto err = pReply->error();
+	if (err != QNetworkReply::NoError) 
+	{
+		//m_pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater Error: %1").arg(err), err));
+		Data["error"] = true;
+		Data["errorMsg"] = tr("%1").arg(err);
+	}
+	else
+	{
+		QByteArray Reply = pReply->readAll();
+
+		Data = QJsonDocument::fromJson(Reply).toVariant().toMap();
+
+		if (Data.contains("cbl"))
+		{
+			QVariantMap CertBL = Data["cbl"].toMap();
+			QByteArray BlockList0 = CertBL["list"].toByteArray();
+			QByteArray BlockListSig0 = QByteArray::fromHex(CertBL["sig"].toByteArray());
+
+			if (theAPI->TestSignature(BlockList0, BlockListSig0))
+			{
+				std::string BlockList;
+				BlockList.resize(qMax(0x10000, BlockList0.size()), 0); // 64 kb should be enough
+				static quint32 BlockListLen = 0;
+				if (BlockListLen == 0) {
+					SB_STATUS Status = theAPI->GetSecureParam("CertBlockList", (void*)BlockList.c_str(), BlockList.size(), &BlockListLen, true);
+					//BlockList.resize(BlockListLen);
+					if (Status.IsError()) // error
+						BlockListLen = 0;
+				}
+
+				if (BlockListLen < BlockList0.size())
+				{
+					theAPI->SetSecureParam("CertBlockList", BlockList0, BlockList0.size());
+					theAPI->SetSecureParam("CertBlockListSig", BlockListSig0, BlockListSig0.size());
+					BlockListLen = BlockList0.size();
+					//BlockList = BlockList0;
+
+					theGUI->ReloadCert();
+				}
+			}
+			else
+			{
+				Q_ASSERT(0);
+			}
+		}
+
+		time_t CurrentDate = QDateTime::currentDateTimeUtc().toSecsSinceEpoch();
+		theAPI->SetSecureParam("LastUpdate", &CurrentDate, sizeof(CurrentDate));
+
+		QString LabelMsg = Data["labelMsg"].toString();
+		theConf->SetValue("Updater/LabelMessage", LabelMsg);
+	}
 
 	m_pProgress->Finish(SB_OK);
 
-	QVariantMap Data = QJsonDocument::fromJson(Reply).toVariant().toMap();
-
 	emit UpdateData(Data, m_Params);
+}
+
+QDateTime COnlineUpdater::GetLastUpdateDate()
+{
+	time_t UpdateDate = 0;
+	theAPI->GetSecureParam("LastUpdate", &UpdateDate, sizeof(UpdateDate));
+
+	time_t CurrentDate = QDateTime::currentDateTimeUtc().toSecsSinceEpoch();
+	if (UpdateDate > CurrentDate) { // can't be in the future
+		UpdateDate = 0;
+		theAPI->SetSecureParam("LastUpdate", &UpdateDate, sizeof(UpdateDate));
+	}
+
+	return QDateTime::fromSecsSinceEpoch(UpdateDate);
 }
 
 SB_PROGRESS COnlineUpdater::DownloadFile(const QString& Url, QObject* receiver, const char* member, const QVariantMap& Params)
@@ -210,28 +276,70 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 	QString UpdateKey = Params["key"].toString();
 
 	QUrlQuery Query;
+
+	bool bHwId = false;
 	if (!Serial.isEmpty()) {
 		Query.addQueryItem("SN", Serial);
-		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'N') {
-			wchar_t uuid_str[40];
-			theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str));
-			Query.addQueryItem("HwId", QString::fromWCharArray(uuid_str));
-		}
+		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'N')
+			bHwId = true;
 	}
+
 	if(!UpdateKey.isEmpty())
 		Query.addQueryItem("UpdateKey", UpdateKey);
+
+	quint64 RandID = COnlineUpdater::GetRandID();
+	quint32 Hash = theAPI->GetUserSettings()->GetName().mid(13).toInt(NULL, 16);
+	QString HashKey = QString::number(Hash, 16).rightJustified(8, '0').toUpper() + "-" + QString::number(RandID, 16).rightJustified(16, '0').toUpper();
+	Query.addQueryItem("HashKey", HashKey);
+
+	if (Serial.isEmpty() && Params.contains("Name")) { // Request eval Key
+		Query.addQueryItem("Name", Params["Name"].toString()); // for cert
+		Query.addQueryItem("eMail", Params["eMail"].toString());
+		bHwId = true;
+	}
+
+	if (IsLockRequired()) {
+		Query.addQueryItem("LR", "1");
+		bHwId = true;
+	}
+
+	if (bHwId) {
+		wchar_t uuid_str[40];
+		theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str));
+		Query.addQueryItem("HwId", QString::fromWCharArray(uuid_str));
+	}
 
 #ifdef _DEBUG
 	QString Test = Query.toString();
 #endif
 
-	QUrl Url("https://sandboxie-plus.com/get_cert.php");
+	QUrl Url("https://sandboxie-plus.com/get_cert.php?");
 	Url.setQuery(Query);
 
 	CUpdatesJob* pJob = new CGetCertJob(Params, this);
 	StartJob(pJob, Url);
 	QObject::connect(pJob, SIGNAL(Certificate(const QByteArray&, const QVariantMap&)), receiver, member, Qt::QueuedConnection);
 	return SB_PROGRESS(OP_ASYNC, pJob->m_pProgress);
+}
+
+extern "C" NTSTATUS NTAPI NtQueryInstallUILanguage(LANGID* LanguageId);
+
+bool COnlineUpdater::IsLockRequired()
+{
+	if (theConf->GetBool("Debug/LockedRegion", false))
+		return true;
+
+	if (g_CertInfo.lock_req)
+		return true;
+
+	LANGID LangID = 0;
+	if ((NtQueryInstallUILanguage(&LangID) == 0) && (LangID == 0x0804))
+		return true;
+
+	if (theGUI->m_LanguageId == 0x0804)
+		return true;
+
+	return false;
 }
 
 void CGetCertJob::Finish(QNetworkReply* pReply)
@@ -349,13 +457,18 @@ bool COnlineUpdater::ShowCertWarningIfNeeded()
 
 void COnlineUpdater::Process() 
 {
+	int UpdateInterval = theConf->GetInt("Options/UpdateInterval", UPDATE_INTERVAL); // in seconds
+	QDateTime CurretnDate = QDateTime::currentDateTime();
+	time_t NextUpdateCheck = theConf->GetUInt64("Options/NextCheckForUpdates", 0);
+	if (NextUpdateCheck == 0 || NextUpdateCheck > CurretnDate.addDays(31).toSecsSinceEpoch()) { // no check made yet or invalid value
+		NextUpdateCheck = CurretnDate.addSecs(UpdateInterval).toSecsSinceEpoch();
+		theConf->SetValue("Options/NextCheckForUpdates", NextUpdateCheck);
+	}
+
 	int iCheckUpdates = theConf->GetInt("Options/CheckForUpdates", 2);
 	if (iCheckUpdates != 0)
 	{
-		time_t NextUpdateCheck = theConf->GetUInt64("Options/NextCheckForUpdates", 0);
-		if (NextUpdateCheck == 0) // no check made yet
-			theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toSecsSinceEpoch());
-		else if(QDateTime::currentDateTime().toSecsSinceEpoch() >= NextUpdateCheck)
+		if(CurretnDate.toSecsSinceEpoch() >= NextUpdateCheck)
 		{
 			if (iCheckUpdates == 2)
 			{
@@ -368,14 +481,35 @@ void COnlineUpdater::Process()
 			}
 
 			if (iCheckUpdates == 0) // no clicked on prompt
-				theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toSecsSinceEpoch());
+				theConf->SetValue("Options/NextCheckForUpdates", CurretnDate.addSecs(UpdateInterval).toSecsSinceEpoch());
 			else
 			{
 				// schedule next check in 12 h in case this one fails
-				theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addSecs(12 * 60 * 60).toSecsSinceEpoch());
+				theConf->SetValue("Options/NextCheckForUpdates", CurretnDate.addSecs(12 * 60 * 60).toSecsSinceEpoch());
 				
 				CheckForUpdates(false);
 			}
+		}
+	}
+	else if (g_CertInfo.active)
+	{
+		QDateTime LastUpdateDate = COnlineUpdater::GetLastUpdateDate();
+		int DaysSinceUpdate = LastUpdateDate.daysTo(CurretnDate);
+		if (DaysSinceUpdate > 90 && CurretnDate.toSecsSinceEpoch() >= NextUpdateCheck && m_JobQueue.isEmpty())
+		{
+			bool bCheck = true;
+			if (theConf->GetInt("Options/AutoUpdateTemplates", -1) != 1)
+			{
+				bool State = false;
+				if (CCheckableMessageBox::question(theGUI, "Sandboxie-Plus", tr("To ensure optimal compatibility with your software, Sandboxie needs to update its compatibility templates. Do you want to proceed?")
+					, tr("Enable auto template updates"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::No)
+					bCheck = false;
+				if (State)
+					theConf->SetValue("Options/AutoUpdateTemplates", 1);
+			}
+			theConf->SetValue("Options/NextCheckForUpdates", CurretnDate.addSecs(UpdateInterval).toSecsSinceEpoch());
+			if (bCheck)
+				UpdateTemplates();
 		}
 	}
 
@@ -389,7 +523,7 @@ void COnlineUpdater::Process()
 		if (theAPI->IsConnected() && theAPI->GetAllProcesses().isEmpty())
 		{
 			if (m_CheckMode == ePendingUpdate)
-				ApplyUpdate(true);
+				ApplyUpdate(eFull, true);
 			else if (m_CheckMode == ePendingInstall)
 				RunInstaller(true);
 			m_CheckMode = eInit;
@@ -450,6 +584,9 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 	if (bAuto) {
 		int UpdateInterval = theConf->GetInt("Options/UpdateInterval", UPDATE_INTERVAL); // in seconds
 		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addSecs(UpdateInterval).toSecsSinceEpoch());
+#ifdef _DEBUG
+		theGUI->AddLogMessage(tr("Update Check completed, no new updates"));
+#endif
 	}
 	else if (bNothing)  {
 		QMessageBox::information(theGUI, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date.\n"
@@ -542,12 +679,12 @@ bool COnlineUpdater::HandleUpdate()
 
 				if ((bCanApplyUpdate || (m_CheckMode == eAuto && OnNewUpdate == "download")) || AskDownload(Update, true))
 				{
-					if (DownloadUpdate(Update, m_CheckMode == eManual))
+					if (DownloadUpdate(Update, eFull, m_CheckMode == eManual))
 						return true;
 				}
 			}
 			else if (m_CheckMode == eManual) {
-				if (ApplyUpdate(false))
+				if (ApplyUpdate(eFull, false))
 					return true;
 			}
 			else if (bCanApplyUpdate)
@@ -697,7 +834,7 @@ COnlineUpdater::EUpdateScope COnlineUpdater::ScanUpdateFiles(const QVariantMap& 
 	return Scope;
 }
 
-bool COnlineUpdater::DownloadUpdate(const QVariantMap& Update, bool bAndApply)
+bool COnlineUpdater::DownloadUpdate(const QVariantMap& Update, EUpdateScope Scope, bool bAndApply)
 {
 	QJsonDocument doc(QJsonValue::fromVariant(Update).toObject());			
 	WriteStringToFile(GetUpdateDir(true) + "/" UPDATE_FILE, doc.toJson());
@@ -708,6 +845,10 @@ bool COnlineUpdater::DownloadUpdate(const QVariantMap& Update, bool bAndApply)
 	Params.append("update");
 	Params.append("sandboxie-plus");
 	Params.append("/step:prepare");
+	if(Scope == eTmpl)
+		Params.append("/scope:tmpl");
+	else if(Scope == eMeta)
+		Params.append("/scope:meta");
 	Params.append("/embedded");
 	Params.append("/temp:" + GetUpdateDir().replace("/", "\\"));
 #ifdef DUMMY_PATH
@@ -716,6 +857,7 @@ bool COnlineUpdater::DownloadUpdate(const QVariantMap& Update, bool bAndApply)
 
 	m_pUpdaterUtil = new QProcess(this);
 	m_pUpdaterUtil->setProperty("apply", bAndApply);
+	m_pUpdaterUtil->setProperty("tmpl", Scope == eTmpl);
 	m_pUpdaterUtil->setProperty("version", MakeVersionStr(Update));
 	m_pUpdaterUtil->setProgram(QApplication::applicationDirPath() + "/UpdUtil.exe");
 	m_pUpdaterUtil->setArguments(Params);
@@ -779,6 +921,7 @@ void COnlineUpdater::OnPrepareFinished(int exitCode, QProcess::ExitStatus exitSt
 		return;
 	}
 	bool bAndApply = pProcess->property("apply").toBool();
+	bool bTmplOnly = pProcess->property("tmpl").toBool();
 	QString VersionStr = pProcess->property("version").toString();
 
 	m_pUpdaterUtil->deleteLater();
@@ -798,7 +941,7 @@ void COnlineUpdater::OnPrepareFinished(int exitCode, QProcess::ExitStatus exitSt
 	theConf->SetValue("Updater/UpdateVersion", VersionStr);
 
 	if (bAndApply)
-		ApplyUpdate(false);
+		ApplyUpdate(bTmplOnly ? eTmpl : eFull, false);
 	else 
 	{
 		HandleUpdate();
@@ -806,27 +949,30 @@ void COnlineUpdater::OnPrepareFinished(int exitCode, QProcess::ExitStatus exitSt
 	}
 }
 
-bool COnlineUpdater::ApplyUpdate(bool bSilent)
+bool COnlineUpdater::ApplyUpdate(EUpdateScope Scope, bool bSilent)
 {
-	if (!ShowCertWarningIfNeeded())
-		return false;
-
-	if (!bSilent)
+	if (Scope != eTmpl)
 	{
-		QString Message = tr("<p>Updates for Sandboxie-Plus have been downloaded.</p><p>Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.</p>");
-		int Ret = QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::Cancel, theGUI).exec();
-		if (Ret == QMessageBox::Cancel) {
-			theConf->DelValue("Updater/UpdateVersion");
-			theGUI->UpdateLabel();
-		}
-		if (Ret != QMessageBox::Yes)
+		if (!ShowCertWarningIfNeeded())
 			return false;
-	}
 
-	QVariantMap Update = QJsonDocument::fromJson(ReadFileAsString(GetUpdateDir() + "/" UPDATE_FILE).toUtf8()).toVariant().toMap();
-	EUpdateScope Scope =  ScanUpdateFiles(Update);
-	if (Scope == eNone)
-		return true; // nothing to do
+		if (!bSilent)
+		{
+			QString Message = tr("<p>Updates for Sandboxie-Plus have been downloaded.</p><p>Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.</p>");
+			int Ret = QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::Cancel, theGUI).exec();
+			if (Ret == QMessageBox::Cancel) {
+				theConf->DelValue("Updater/UpdateVersion");
+				theGUI->UpdateLabel();
+			}
+			if (Ret != QMessageBox::Yes)
+				return false;
+		}
+
+		QVariantMap Update = QJsonDocument::fromJson(ReadFileAsString(GetUpdateDir() + "/" UPDATE_FILE).toUtf8()).toVariant().toMap();
+		Scope = ScanUpdateFiles(Update);
+		if (Scope == eNone)
+			return true; // nothing to do
+	}
 
 	if(Scope != eMeta)
 		theAPI->TerminateAll();
@@ -835,7 +981,9 @@ bool COnlineUpdater::ApplyUpdate(bool bSilent)
 	Params.append("update");
 	Params.append("sandboxie-plus");
 	Params.append("/step:apply");
-	if(Scope == eMeta)
+	if(Scope == eTmpl)
+		Params.append("/scope:tmpl");
+	else if(Scope == eMeta)
 		Params.append("/scope:meta");
 	else
 		Params.append("/restart");
@@ -855,7 +1003,7 @@ bool COnlineUpdater::ApplyUpdate(bool bSilent)
 	if (!status.IsError()) {
 		if(bSilent)
 			theConf->DelValue("Updater/UpdateVersion");
-		if (Scope == eMeta)
+		if (Scope == eTmpl || Scope == eMeta)
 			theAPI->ReloadConfig();
 		else if (Scope == eFull)
 			QApplication::quit();
@@ -982,6 +1130,49 @@ bool COnlineUpdater::RunInstaller(bool bSilent)
 	return false;
 }
 
+void COnlineUpdater::UpdateTemplates()
+{
+	QVariantMap Params;
+    SB_PROGRESS Status = GetUpdates(this, SLOT(OnUpdateDataTmpl(const QVariantMap&, const QVariantMap&)), Params);
+	//if (Status.GetStatus() == OP_ASYNC) {
+	//	theGUI->AddAsyncOp(Status.GetValue());
+	//	Status.GetValue()->ShowMessage(tr("Checking for updates..."));
+	//}
+}
+
+void COnlineUpdater::OnUpdateDataTmpl(const QVariantMap& Data, const QVariantMap& Params)
+{
+	QVariantMap Release = Data["release"].toMap();
+
+	QByteArray TemplatesHash;
+	foreach(const QVariant vFile, Release["files"].toList()) {
+		QVariantMap File = vFile.toMap();
+		if (File["path"].toString() == "Templates.ini")
+			TemplatesHash = QByteArray::fromHex(File["hash"].toByteArray());
+	}
+	if (TemplatesHash.isEmpty())
+		return; // fine not found
+
+	QString AppDir = QApplication::applicationDirPath();
+#ifdef DUMMY_PATH
+	AppDir = DUMMY_PATH;
+#endif
+
+	QCryptographicHash qHash(QCryptographicHash::Sha256);
+	QFile qFile(QApplication::applicationDirPath() + "\\Templates.ini");
+	if (qFile.open(QFile::ReadOnly)) {
+		qHash.addData(&qFile);
+		qFile.close();
+	}
+	if (qHash.result() == TemplatesHash)
+		return; // no update
+
+	if (QMessageBox::question(theGUI, "Sandboxie-Plus", tr("There is a new Templates.ini available, do you want to download it?"), QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes)
+		return;
+
+	DownloadUpdate(Release, eTmpl, true);
+}
+
 bool COnlineUpdater::RunInstaller2(const QString& FilePath, bool bSilent)
 {
 	if (bSilent && !theGUI->IsFullyPortable()) 
@@ -1030,8 +1221,20 @@ bool COnlineUpdater::HandleUserMessage(const QVariantMap& Data)
 
 			CCheckableMessageBox mb(theGUI);
 			mb.setWindowTitle("Sandboxie-Plus");
-			QIcon ico(QLatin1String(":/SandMan.png"));
-			mb.setIconPixmap(ico.pixmap(64, 64));
+			
+			QByteArray MsgIcon = QByteArray::fromBase64(Data["msgIcon"].toByteArray());
+			if (!MsgIcon.isEmpty())
+			{
+				QPixmap pixmap;
+				pixmap.loadFromData(MsgIcon, "PNG");
+				mb.setIconPixmap(pixmap);
+			}
+			else
+			{
+				QIcon ico(QLatin1String(":/SandMan.png"));
+				mb.setIconPixmap(ico.pixmap(64, 64));
+			}
+			
 			//mb.setTextFormat(Qt::RichText);
 			mb.setText(UserMsg);
 			mb.setCheckBoxText(tr("Don't show this announcement in the future."));

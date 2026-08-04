@@ -78,6 +78,9 @@
     <ClCompile Include="DriverAssistSid.cpp">
       <Filter>DriverAssist</Filter>
     </ClCompile>
+    <ClCompile Include="UserServer.cpp">
+      <Filter>UserProxy</Filter>
+    </ClCompile>
     <ClCompile Include="MountManager.cpp">
       <Filter>MountManager</Filter>
     </ClCompile>
@@ -88,6 +91,9 @@
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\str_util.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\bom.c">
       <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -156,6 +162,12 @@
     <ClInclude Include="..\..\common\ini.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="UserServer.h">
+      <Filter>UserProxy</Filter>
+    </ClInclude>
+    <ClInclude Include="UserWire.h">
+      <Filter>UserProxy</Filter>
+    </ClInclude>
     <ClInclude Include="MountManagerWire.h">
       <Filter>MountManager</Filter>
     </ClInclude>
@@ -181,6 +193,9 @@
     </Filter>
     <Filter Include="NetProxy">
       <UniqueIdentifier>{64abb84f-3356-45fc-a1ee-bbce8eaa90cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserProxy">
+      <UniqueIdentifier>{692bb770-d67d-4095-9339-f6117d62a9a3}</UniqueIdentifier>
     </Filter>
     <Filter Include="MountManager">
       <UniqueIdentifier>{4c490d1f-52cb-4e6b-be53-6b120e0d271a}</UniqueIdentifier>

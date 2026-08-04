@@ -3,7 +3,7 @@
 *	class: sandboxing
 * os_builds: 22000-99000
 * name: Webcam or Sound does not work when sandboxed
-* description: Description Text...
+* description: This procedure enables webcam and sound support on Windows 11
 *
 */
 
@@ -37,7 +37,7 @@ box.start();
       { id: 'yes', name: tr('Yes'), type: 'radio' },
       { id: 'no', name: tr('No'), type: 'radio' },
   ];
-  let ret = wizard.showForm(form, tr('The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.', boxName));
+  let ret = wizard.showForm(form, tr('The mitigation has been applied. Please try out the webcam in %1 and indicate if the issue has been resolved.', boxName));
   if (ret['yes'] == true) {
       wizard.setResult(true);
   }

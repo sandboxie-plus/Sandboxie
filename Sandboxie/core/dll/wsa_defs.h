@@ -23,6 +23,17 @@
 // Prototypes
 //---------------------------------------------------------------------------
 
+typedef int (*P_WSAStartup)(
+    WORD wVersionRequested,
+    void* lpWSAData);
+    
+typedef int (*P_WSACleanup)(void);
+
+typedef int (*P_socket)(
+  int af,
+  int type,
+  int protocol);
+
 typedef int (*P_WSAIoctl)(
     SOCKET                             s,
     DWORD                              dwIoControlCode,
@@ -38,6 +49,13 @@ typedef int (*P_ioctlsocket)(
     SOCKET  s,
     long    cmd,
     ULONG*  argp);
+
+typedef int (*P_select)(
+    int nfds,
+    void *readfds,
+    void *writefds,
+    void *exceptfds,
+    const void *timeout);
 
 typedef int (*P_WSAAsyncSelect)(
     SOCKET  s,
@@ -83,6 +101,15 @@ typedef int (*P_bind)(
     const void     *name,
     int            namelen);
 
+typedef int (*P_getsockname)(
+    SOCKET         s,
+    const void     *name,
+    int            *namelen);
+
+typedef int (*P_WSAFDIsSet)(
+  SOCKET unnamedParam1,
+  void *unnamedParam2);
+
 typedef int (*P_connect)(
     SOCKET         s,
     const void     *name,
@@ -105,6 +132,10 @@ typedef int (*P_ConnectEx) (
     DWORD           dwSendDataLength,
     LPDWORD         lpdwBytesSent,
     LPOVERLAPPED    lpOverlapped);
+
+typedef int (*P_listen)(
+    SOCKET         s,
+    int            backlog);
 
 typedef SOCKET (*P_accept)(
     SOCKET   s,
@@ -275,10 +306,20 @@ typedef int (*P_GetAddrInfoW)(
     const ADDRINFOW *pHints,
     PADDRINFOW      *ppResult);
 
+typedef void (*P_FreeAddrInfoW)(
+    PADDRINFOW      pAddrInfo);
+
 typedef PCSTR (*P_inet_ntop)(
     int            family,
     const void     *pAddr,
     PSTR           pStringBuf,
     size_t         StringBufSize);
+
+typedef ULONG (*P_GetAdaptersAddresses)(
+    ULONG Family,
+    ULONG Flags,
+    PVOID Reserved,
+    void* AdapterAddresses,
+    PULONG SizePointer);
 
 #endif _WSA_DEFS_H

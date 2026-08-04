@@ -78,6 +78,7 @@ public:
 
 	bool				IsShowHidden() { return m_pShowHidden && m_pShowHidden->isChecked(); }
 	bool				KeepTerminated();
+	bool				IsAutoExpand() { return m_pAutoExpand && m_pAutoExpand->isChecked(); }
 	bool				ShowAllSessions() { return m_pShowAllSessions && m_pShowAllSessions->isChecked(); }
 	bool				IsSilentMode();
 	bool				IsDisableRecovery() {return IsSilentMode() || m_pDisableRecovery && m_pDisableRecovery->isChecked();}
@@ -95,6 +96,8 @@ public:
 	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, CSbieAPI::EStartFlags Flags = CSbieAPI::eStartDefault, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
 	SB_STATUS			ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount = false);
 
+	void				OpenSettings(const QString& Tab = QString());
+
 	void				EditIni(const QString& IniPath, bool bPlus = false);
 
 	void				UpdateDrives();
@@ -106,7 +109,8 @@ public:
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
 	QIcon				IconAddOverlay(const QIcon& Icon, const QString& Name, int Size = 24);
 	QString				GetBoxDescription(int boxType);
-
+	
+	bool				SetCertificate(const QByteArray& Certificate);
 	bool				CheckCertificate(QWidget* pWidget, int iType = 0);
 
 	bool				IsAlwaysOnTop() const;
@@ -115,7 +119,6 @@ public:
 	void				UpdateTitleTheme(const HWND& hwnd);
 
 	SB_STATUS			ReloadCert(QWidget* pWidget = NULL);
-	void				UpdateCertState();
 
 	void				SaveMessageLog(QIODevice* pFile);
 
@@ -137,6 +140,8 @@ protected:
 	static void			CheckFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QStringList &Files, const QStringList& Checkers);
 
 	void				AddLogMessage(const QDateTime& TimeStamp, const QString& Message, const QString& Link = QString());
+	void				AddLogMessageNow(const QDateTime& TimeStamp, const QString& Message, const QString& Link, int Count);
+	void				ScheduleMessageLogFlush();
 
 	QIcon				GetTrayIcon(bool isConnected = true, bool bSun = false);
 	QString				GetTrayText(bool isConnected = true);
@@ -163,19 +168,6 @@ protected:
 
 	QMap<QString, QSet<QString>> m_MissingTemplates;
 
-	enum EBoxColors
-	{
-		eYellow = 0,
-		eRed,
-		eGreen,
-		eBlue,
-		eCyan,
-		eMagenta,
-		eOrang,
-		eWhite,
-		eMaxColor
-	};
-
 	QMap<int, QRgb> m_BoxColors;
 
 	class UGlobalHotkeys* m_pHotkeyManager;
@@ -189,6 +181,17 @@ protected:
 		QString ProcessName;
 	};
 	QVector<SSbieMsg>	m_MessageLog;
+
+	struct SPendingMessageLogEntry {
+		QDateTime TimeStamp;
+		QString Message;
+		QString Link;
+		int Count;
+	};
+	QList<SPendingMessageLogEntry> m_PendingMessageLog;
+	qint64				m_MessageLogPlainItemModeUntil;
+	bool				m_MessageLogFlushPending;
+	bool				m_FlushingMessageLog;
 
 public slots:
 	void				OnBoxSelected();
@@ -206,7 +209,7 @@ public slots:
 	void				OnFileRecovered(const QString& BoxName, const QString& FilePath, const QString& BoxPath);
 
 	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool bCloseEmpty = false);
-	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
+	class CRecoveryWindow* ShowRecovery(const CSandBoxPtr& pBox);
 
 	void				TryFix(quint32 MsgCode, const QStringList& MsgData, const QString& ProcessName, const QString& BoxName);
 
@@ -226,6 +229,7 @@ public slots:
 	void				OnCancelAsync();
 
 	void				OnBoxAdded(const CSandBoxPtr& pBox);
+	void				OnBoxOpened(const CSandBoxPtr& pBox);
 	void				OnBoxClosed(const CSandBoxPtr& pBox);
 	void				OnBoxCleaned(CSandBoxPlus* pBoxEx);
 
@@ -233,7 +237,7 @@ public slots:
 
 
 	void				OpenUrl(const QString& url) { OpenUrl(QUrl(url)); }
-	void				OpenUrl(const QUrl& url);
+	void				OpenUrl(QUrl url);
 
 	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton, int type, QWidget* pParent);
 	void				ShowMessage(const QString& message, int type);
@@ -269,6 +273,7 @@ private slots:
 	void				OnRefresh();
 	void				OnCleanUp();
 	void				OnProcView();
+	void				OnAutoExpand();
 	void				OnRecoveryLog();
 
 	void				OnSettings();
@@ -294,8 +299,12 @@ private slots:
 	void				SetUITheme();
 	void				SetTitleTheme(const HWND& hwnd);
 
+    void				OnCertData(const QByteArray& Certificate, const QVariantMap& Params);
+
 	void				AddLogMessage(const QString& Message);
 	void				AddFileRecovered(const QString& BoxName, const QString& FilePath);
+	void				OnFlushMessageLog();
+	void				OnMessageLogDblClick(QTreeWidgetItem* pItem, int Column);
 
 	void				commitData(QSessionManager& manager);
 
@@ -344,13 +353,14 @@ private:
 
 	// per 1.9.3 menu. no whitespace!
 	const QStringList	DefaultToolBarItems = QString(
-						  "Settings,KeepTerminated,CleanUpMenu,BrowseFiles,EditIni,EnableMonitor"
+						  "ReloadIni,EditIniMenu,Settings,RunBoxed,NewBoxMenu,EnableMonitor,TerminateAll,CleanUpMenu,BrowseFiles,KeepTerminated"
 						).split(',');
 
 	QWidget*			m_pMainWidget;
 	QVBoxLayout*		m_pMainLayout;
 
 	QToolBar*			m_pToolBar;
+	QMenu*				m_pToolBarContextMenu;
 	QSplitter*			m_pPanelSplitter;
 	QSplitter*			m_pLogSplitter;
 
@@ -375,7 +385,8 @@ private:
 	QAction*			m_pRunBoxed;
 	QAction*			m_pNewBox;
 	QAction*			m_pNewGroup;
-	QAction*			m_pImportBox;
+	QAction*			m_pImportBoxes;
+	QAction*			m_pExportBoxes;
 	QAction*			m_pPauseAll;
 	QAction*			m_pEmptyAll;
 	QAction*			m_pLockAll;
@@ -419,6 +430,7 @@ private:
 	QToolButton*		m_pEditIniButton;
 	//QToolButton*		m_pEditButton;
 	QAction*			m_pKeepTerminated;
+	QAction*			m_pAutoExpand;
 	QAction*			m_pShowAllSessions;
 	QAction*			m_pArrangeGroups;
 
@@ -452,6 +464,8 @@ private:
 	QLabel*				m_pDisabledRecovery;
 	QLabel*				m_pDisabledMessages;
 	QLabel*				m_pRamDiskInfo;
+	QLabel*				m_pSummaryInfo;
+	int					m_iRefreshTick;
 
 	// for old menu
 	QMenu*				m_pSandbox;
@@ -462,6 +476,7 @@ private:
 	QWidgetAction*		m_pTrayList;
 	QTreeWidget*		m_pTrayBoxes;
 	int					m_iTrayPos;
+
 	//QMenu*				m_pBoxMenu;
 	bool				m_bIconEmpty;
 	int					m_iIconDisabled;
@@ -478,7 +493,10 @@ private:
 	CPopUpWindow*		m_pPopUpWindow;
 
 	bool				m_StartMenuUpdatePending;
-
+	quint64				m_LastCheckInternetMs;
+	bool				m_bHasInternet;
+public:
+	QMap<QString, QPair<QString, QIcon>> m_TrayIconCache; // boxName -> (configKey, icon)
 	bool				m_ThemeUpdatePending;
 	QString				m_DefaultStyle;
 	QPalette			m_DefaultPalett;
@@ -489,7 +507,6 @@ private:
 	void				LoadLanguage(const QString& Lang, const QString& Module, int Index);
 	QTranslator			m_Translator[2];
 
-public:
 	class COnlineUpdater*m_pUpdater;
 
 	QString				m_Language;
@@ -538,6 +555,30 @@ class CTreeItemDelegate2 : public CTreeItemDelegate
 		size.setHeight(32);
 		return size;
 	}
+};
+
+class CTrayBoxesItemDelegate : public QStyledItemDelegate
+{
+	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+	{
+		QSize size = QStyledItemDelegate::sizeHint(option, index);
+		size.setHeight(qMax(size.height(), 20));
+		return size;
+	}
+
+	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+	{
+		QStyleOptionViewItem opt(option);
+		opt.displayAlignment = Qt::AlignLeft | Qt::AlignVCenter;
+		if ((opt.state & QStyle::State_MouseOver) != 0)
+			opt.state |= QStyle::State_Selected;
+		else if ((opt.state & QStyle::State_HasFocus) != 0 && m_Hold)
+			opt.state |= QStyle::State_Selected;
+		opt.state &= ~QStyle::State_HasFocus;
+		QStyledItemDelegate::paint(painter, opt, index);
+	}
+public:
+	static bool m_Hold;
 };
 
 extern CSandMan* theGUI;

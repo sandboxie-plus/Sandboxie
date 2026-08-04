@@ -98,6 +98,7 @@ BOOL WINAPI MyImDiskCliValidateDriveLetterTarget(LPCWSTR DriveLetter, LPCWSTR Va
 struct SImDiskIO
 {
 	std::wstring Mount;
+    UINT Number;
 	std::wstring Format;
 	std::wstring Params;
 	HANDLE hImDisk;
@@ -105,14 +106,15 @@ struct SImDiskIO
     std::wstring Proxy;
     HANDLE hEvent;
     HANDLE hMapping;
-    WCHAR* pSection;
+    SSection* pSection;
 };
 
-CImDiskIO::CImDiskIO(CAbstractIO* pIO, const std::wstring& Mount, const std::wstring& Format, const std::wstring& Params)
+CImDiskIO::CImDiskIO(CAbstractIO* pIO, const std::wstring& Mount, UINT Number, const std::wstring& Format, const std::wstring& Params)
 {
 	m = new SImDiskIO;
 
 	m->Mount = Mount;
+    m->Number = Number;
 	m->Format = Format;
 	m->Params = Params;
 	m->hImDisk = INVALID_HANDLE_VALUE;
@@ -146,7 +148,7 @@ void CImDiskIO::SetMountEvent(HANDLE hEvent)
     if (m) m->hEvent = hEvent;
 }
 
-void CImDiskIO::SetMountSection(HANDLE hMapping, WCHAR* pSection)
+void CImDiskIO::SetMountSection(HANDLE hMapping, SSection* pSection)
 {
     if (m) m->hMapping = hMapping;
     if (m) m->pSection = pSection;
@@ -256,7 +258,7 @@ DWORD WINAPI CImDiskIO_Thread(LPVOID lpThreadParameter)
 	}
 
     if (m->pSection) {
-        wmemcpy(m->pSection, Device.c_str(), Device.length() + 1);
+        wmemcpy(m->pSection->out.mount, Device.c_str(), Device.length() + 1);
         UnmapViewOfFile(m->pSection);
     }
     if(m->hMapping) 
@@ -314,6 +316,7 @@ int CImDiskIO::DoComm()
 	PROCESS_INFORMATION pi;
 	std::wstring cmd = L"imdisk -a -t proxy -o shm -f " + m->Proxy;
 	if (!m->Mount.empty()) cmd += L" -m \"" + m->Mount + L"\"";
+    if (m->Number) cmd += L" -u \"" + std::to_wstring(m->Number) + L"\"";
 	if (!m->Params.empty())cmd += L" " + m->Params;
 	if (!CreateProcess(NULL, (WCHAR*)cmd.c_str(), NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi)) {
 		DbgPrint(L"Failed to run imdisk.exe.\n");

@@ -149,6 +149,23 @@ QStringList SplitStr(const QString& String, QString Separator)
 	return List;
 }
 
+bool PathStartsWith(const QString& Path, const QString& Start)
+{
+	if (Start.isEmpty())
+		return false;
+	int Length = Start.length();
+	if (Start[Length - 1] == '\\' || Start[Length - 1] == '/')
+		Length--;
+	if (Path.startsWith(Start.left(Length), Qt::CaseInsensitive))
+	{
+		if (Path.length() == Length)
+			return true;
+		if (Path[Length] == '\\' || Path[Length] == '/')
+			return true;
+	}
+	return false;
+}
+
 TArguments GetArguments(const QString& Arguments, QChar Separator, QChar Assigner, QString* First, bool bLowerKeys, bool bReadEsc)
 {
 	TArguments ArgumentList;
@@ -589,6 +606,39 @@ void SetPaleteTexture(QPalette& palette, QPalette::ColorRole role, const QImage&
 		palette.setBrush(QPalette::ColorGroup(i), role, brush);
 	}
 }
+
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+bool operator < (const QVariant& l, const QVariant& r)
+{
+	auto lt = l.type();
+	//auto lv = l.isValid();
+	//auto ln = l.isNull();
+	auto rt = r.type();
+	//auto rv = r.isValid();
+	//auto rn = r.isNull();
+	if(lt != rt)
+		return lt < rt;
+	if (lt == QVariant::List)
+	{
+		auto lList = l.toList();
+		auto rList = r.toList();
+		if (lList.size() != rList.size())
+			return lList.size() < rList.size();
+		for (int i = 0; i < lList.size(); i++)
+		{
+			if (lList[i] < rList[i])
+				return true;
+			if (rList[i] < lList[i])
+				return false;
+		}
+		return false;
+	}
+	auto ret = QVariant::compare(l, r);
+	Q_ASSERT(ret != QPartialOrdering::Unordered);
+	return ret == QPartialOrdering::Less;
+}
+#endif
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // 

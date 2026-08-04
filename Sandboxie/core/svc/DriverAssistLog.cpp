@@ -69,29 +69,33 @@ bool GetUserNameFromProcess(DWORD pid, WCHAR* user, DWORD userSize, WCHAR* domai
 //---------------------------------------------------------------------------
 
 
-void DriverAssist::LogMessage()
+void DriverAssist::LogMessage(void *_msg)
 {
+    ULONG data = _msg ? *(ULONG*)_msg : 0;
+
+    bool LogMessageEvents = (data & 0x01) != 0;
+
     EnterCriticalSection(&m_LogMessage_CritSec);
 
-    ULONG m_workItemLen = 4096;
-    void *m_workItemBuf = NULL;
+    ULONG m_MessageLen = 4096;
+    void *m_MessageBuf = NULL;
 
     while (1) {
 
-        m_workItemBuf = HeapAlloc(GetProcessHeap(), 0, m_workItemLen);
-        if (! m_workItemBuf)
+        m_MessageBuf = HeapAlloc(GetProcessHeap(), 0, m_MessageLen);
+        if (! m_MessageBuf)
             break;
 
-        ULONG len = m_workItemLen;
+        ULONG len = m_MessageLen;
 		ULONG message_number = m_last_message_number;
 		ULONG code = -1;
 		ULONG pid = 0;
-		ULONG status = SbieApi_GetMessage(&message_number, -1, &code, &pid, (wchar_t*)m_workItemBuf, len);
+		ULONG status = SbieApi_GetMessage(&message_number, -1, &code, &pid, (wchar_t*)m_MessageBuf, len);
 
         if (status == STATUS_BUFFER_TOO_SMALL) {
-            HeapFree(GetProcessHeap(), 0, m_workItemBuf);
-            m_workItemBuf = NULL;
-            m_workItemLen += 4096;
+            HeapFree(GetProcessHeap(), 0, m_MessageBuf);
+            m_MessageBuf = NULL;
+            m_MessageLen += 4096;
             continue;
         }
 
@@ -111,14 +115,21 @@ void DriverAssist::LogMessage()
 		    continue;
 
         //
-        // Add to log
+        // Add to event log
         //
 
-		LogMessage_Single(code, (wchar_t*)m_workItemBuf, pid);
+        if (LogMessageEvents)
+            LogMessage_Event(code, (wchar_t*)m_MessageBuf, pid);
+
+        //
+        // Add to log file
+        //
+
+		LogMessage_Single(code, (wchar_t*)m_MessageBuf, pid);
     }
 
-    if (m_workItemBuf)
-        HeapFree(GetProcessHeap(), 0, m_workItemBuf);
+    if (m_MessageBuf)
+        HeapFree(GetProcessHeap(), 0, m_MessageBuf);
 
     LeaveCriticalSection(&m_LogMessage_CritSec);
 }

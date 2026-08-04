@@ -44,6 +44,64 @@ void CPathEdit::Browse()
 }
 
 ///////////////////////////////////////////////////
+//
+
+void FixComboBoxEditing(QComboBox* pBox)
+{
+	QObject::connect(pBox->lineEdit(), &QLineEdit::textEdited, [pBox](const QString& text){
+		if (pBox->currentIndex() != -1) {
+			int pos = pBox->lineEdit()->cursorPosition();
+			pBox->setCurrentIndex(-1);
+			pBox->setCurrentText(text);
+			pBox->lineEdit()->setCursorPosition(pos);
+		}
+	});
+}
+
+void SetComboBoxValue(QComboBox* pBox, const QVariant& Value)
+{
+	int Pos = pBox->findData(Value);
+	pBox->setCurrentIndex(Pos);
+	if (Pos == -1)
+		pBox->setCurrentText(Value.toString());
+}
+
+QVariant GetComboBoxValue(QComboBox* pBox)
+{
+	int Pos = pBox->currentIndex();
+	if (Pos != -1)
+		return pBox->currentData();
+	return pBox->currentText();
+}
+
+void AddColoredComboBoxEntry(QComboBox* pBox, const QString& Text, const QColor& Color, const QVariant& Data)
+{
+	pBox->addItem(Text, Data);
+	if(Color.isValid())
+		qobject_cast<QStandardItemModel *>(pBox->model())->item(pBox->count() - 1)->setBackground(QBrush(Color));
+	else
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+		qobject_cast<QStandardItemModel *>(pBox->model())->item(pBox->count() - 1)->setBackground(pBox->palette().background());
+#else
+		qobject_cast<QStandardItemModel *>(pBox->model())->item(pBox->count() - 1)->setBackground(pBox->palette().window());
+#endif
+}
+
+void ColorComboBox(QComboBox* pBox)
+{
+	auto pLambda = [pBox]() {
+		auto pModel = qobject_cast<QStandardItemModel *>(pBox->model());
+		if (auto pItem = pModel->item(pBox->currentIndex())) {
+			auto pal = pBox->palette();
+			pal.setColor(QPalette::Button, pItem->background().color());
+			pBox->setPalette(pal);
+		}
+	};
+	QObject::connect(pBox, &QComboBox::currentTextChanged, pLambda);
+	pLambda();
+}
+
+///////////////////////////////////////////////////
 // CProxyEdit
 
 CProxyEdit::CProxyEdit(QWidget *parent)
@@ -120,7 +178,7 @@ QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
 	pLayout->addLayout(m_pStack, 0, 1, 2, 1);
 
 	for (int i = 0, k = 0; i < pTabWidget->count(); i++, k++) {
-		QTreeWidgetItem* pItem = new QTreeWidgetItem(QStringList() << pTabWidget->tabText(i));
+		QTreeWidgetItem* pItem = new QTreeWidgetItem(QStringList() << pTabWidget->tabText(i).replace("&&", "&"));
 		m_pTree->addTopLevelItem(pItem);
 		//pItem->setData(1, Qt::UserRole, k);
 		pItem->setData(1, Qt::UserRole, m_pStack->count());
@@ -136,7 +194,7 @@ QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
 			//pItem->setFlags(pItem->flags() & ~Qt::ItemIsSelectable);
 			pItem->setData(0, Qt::UserRole, m_pStack->count()); // take the first tab for the parent entry
 			for (int j = 0; j < pSubTabs->count(); j++) {
-				QTreeWidgetItem* pSubItem = new QTreeWidgetItem(QStringList() << pSubTabs->tabText(j));
+				QTreeWidgetItem* pSubItem = new QTreeWidgetItem(QStringList() << pSubTabs->tabText(j).replace("&&", "&"));
 				pItem->addChild(pSubItem);
 				pSubItem->setData(0, Qt::UserRole, m_pStack->count());
 				pSubItem->setIcon(0, pSubTabs->tabIcon(j));

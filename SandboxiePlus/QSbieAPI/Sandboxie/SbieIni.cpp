@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020-2023 David Xanatos, xanasoft.com
+ * Copyright 2020-2025 David Xanatos, xanasoft.com
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -32,6 +32,8 @@ CSbieIni::CSbieIni(const QString& Section, class CSbieAPI* pAPI, QObject* parent
 	m_Name = Section;
 	m_pAPI = pAPI;
 	m_RefreshOnChange = true;
+
+	m_IsVirtual = GetBool("IsVirtual", false, false, false, true);
 }
 
 CSbieIni::~CSbieIni()
@@ -42,7 +44,7 @@ SB_STATUS CSbieIni::SetText(const QString& Setting, const QString& Value)
 {
 	if (GetText(Setting) == Value)
 		return SB_OK;
-	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniUpdate, m_RefreshOnChange);
+	return SbieIniSet(m_Name, Setting, Value, eIniUpdate, m_RefreshOnChange);
 }
 
 SB_STATUS CSbieIni::SetNum(const QString& Setting, int Value)
@@ -74,44 +76,50 @@ SB_STATUS CSbieIni::SetBoolSafe(const QString& Setting, bool Value)
 			DelValue(Setting, CurValue);
 	}
 	if(bAdd)
-		return InsertText(Setting, StrValue);
+		return AppendText(Setting, StrValue);
 	return SB_OK;
 }
 
-QString CSbieIni::GetText(const QString& Setting, const QString& Default, bool bWithGlobal, bool bNoExpand, bool withTemplates) const
+QString CSbieIni::GetText(const QString& Setting, const QString& Default, bool bWithGlobal, bool bNoExpand, bool withTemplates, bool getProperty) const
 {
 	int flags = (bWithGlobal ? 0 : CONF_GET_NO_GLOBAL);
 	if (!withTemplates)
 		flags |= CONF_GET_NO_TEMPLS;
 	if (bNoExpand)
 		flags |= CONF_GET_NO_EXPAND;
+	if (getProperty)
+		flags |= CONF_GET_PROPERTY;
 
-	QString Value = m_pAPI->SbieIniGet(m_Name, Setting, flags);
+	QString Value = SbieIniGet(m_Name, Setting, flags);
 	if (Value.isNull()) Value = Default;
 	return Value;
 }
 
-int CSbieIni::GetNum(const QString& Setting, int Default, bool bWithGlobal, bool withTemplates) const
+int CSbieIni::GetNum(const QString& Setting, int Default, bool bWithGlobal, bool withTemplates, bool getProperty) const
 {
-	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates, getProperty);
 	bool ok;
 	int Value = StrValue.toInt(&ok);
 	if (!ok) return Default;
 	return Value;
 }
 
-__int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default, bool bWithGlobal, bool withTemplates) const
+__int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default, bool bWithGlobal, bool withTemplates, bool getProperty) const
 {
-	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates, getProperty);
 	bool ok;
 	__int64 Value = StrValue.toLongLong(&ok);
 	if (!ok) return Default;
 	return Value;
 }
 
-bool CSbieIni::GetBool(const QString& Setting, bool Default, bool bWithGlobal, bool withTemplates) const
+bool CSbieIni::GetBool(const QString& Setting, bool Default, bool bWithGlobal, bool withTemplates, bool getProperty) const
 {
-	QStringList Values = GetTextList(Setting, withTemplates, false, bWithGlobal);
+	QStringList Values;
+	if (getProperty)
+		Values << GetText(Setting, QString(), false, true, false, true); // when querying properties bWithGlobal and bWithTempaltes are ignored
+	else
+		Values = GetTextList(Setting, withTemplates, false, bWithGlobal);
 	foreach(const QString &StrValue, Values) {
 		if (StrValue.contains(","))
 			continue;
@@ -135,7 +143,7 @@ QStringList CSbieIni::GetTextList(const QString &Setting, bool withTemplates, bo
 
 	for (int index = 0; ; index++)
 	{
-		QString Value = m_pAPI->SbieIniGet(m_Name, Setting, index | flags);
+		QString Value = SbieIniGet(m_Name, Setting, index | flags);
 		if (Value.isNull())
 			break;
 		TextList.append(Value);
@@ -168,7 +176,7 @@ QStringList CSbieIni::GetTemplates() const
 
 	for (int tmpl_index = 0; ; tmpl_index++)
 	{
-		QString TmplName = m_pAPI->SbieIniGet(m_Name, "Template", tmpl_index | CONF_GET_NO_TEMPLS);
+		QString TmplName = SbieIniGet(m_Name, "Template", tmpl_index | CONF_GET_NO_TEMPLS);
 		if (TmplName.isNull())
 			break;
 		Templates.append(TmplName);
@@ -183,7 +191,7 @@ QStringList CSbieIni::GetTextListTmpl(const QString &Setting, const QString& Tem
 
 	for (int index = 0; ; index++)
 	{
-		QString Value = m_pAPI->SbieIniGet((Template != "GlobalSettings") ? "Template_" + Template : Template, Setting, index | CONF_GET_NO_GLOBAL | CONF_GET_NO_EXPAND);
+		QString Value = SbieIniGet((Template != "GlobalSettings") ? "Template_" + Template : Template, Setting, index | CONF_GET_NO_GLOBAL | CONF_GET_NO_EXPAND);
 		if (Value.isNull())
 			break;
 		TextList.append(Value);
@@ -194,17 +202,17 @@ QStringList CSbieIni::GetTextListTmpl(const QString &Setting, const QString& Tem
 
 SB_STATUS CSbieIni::InsertText(const QString& Setting, const QString& Value)
 {
-	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniInsert, m_RefreshOnChange);
+	return SbieIniSet(m_Name, Setting, Value, eIniInsert, m_RefreshOnChange);
 }
 
 SB_STATUS CSbieIni::AppendText(const QString& Setting, const QString& Value)
 {
-	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniAppend, m_RefreshOnChange);
+	return SbieIniSet(m_Name, Setting, Value, eIniAppend, m_RefreshOnChange);
 }
 
 SB_STATUS CSbieIni::DelValue(const QString& Setting, const QString& Value)
 {
-	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniDelete, m_RefreshOnChange);
+	return SbieIniSet(m_Name, Setting, Value, eIniDelete, m_RefreshOnChange);
 }
 
 void CSbieIni::SetTextMap(const QString& Setting, const QMap<QString, QStringList> Map)
@@ -212,6 +220,11 @@ void CSbieIni::SetTextMap(const QString& Setting, const QMap<QString, QStringLis
 	QStringList Mapping;
 	foreach(const QString& Group, Map.keys())
 	{
+		if (Map[Group].isEmpty()) {
+			Mapping.append(Group + ":");
+			continue;
+		}
+
 		QString CurrentLine;
 		foreach(const QString & Name, Map[Group]) {
 			if (Setting.length() + 1 + Group.length() + 1 + CurrentLine.length() + 1 + Name.length() >= CONF_LINE_LEN) { // limit line length
@@ -234,33 +247,39 @@ QMap<QString, QStringList> CSbieIni::GetTextMap(const QString& Setting)
 	QMap<QString, QStringList> Map;
 	foreach(const QString &CurrentLine, GetTextList(Setting, false)) {
 		int pos = CurrentLine.lastIndexOf(":");
-		Map[pos == -1 ? "" : CurrentLine.left(pos)].append(CurrentLine.mid(pos+1).split(","));
+		QString Group = (pos == -1) ? "" : CurrentLine.left(pos);
+		QString Payload = CurrentLine.mid(pos + 1);
+
+		if (Payload.isEmpty()) {
+			if (!Map.contains(Group))
+				Map.insert(Group, QStringList());
+			continue;
+		}
+
+		Map[Group].append(Payload.split(",", Qt::SkipEmptyParts));
 	}
 	return Map;
 }
 
-QList<QPair<QString, QString>> CSbieIni::GetIniSection(qint32* pStatus, bool withTemplates) const
+QList<CSbieIni::SbieIniValue> CSbieIni::GetIniSection(qint32* pStatus, bool withTemplates, bool withGlobals, bool noExpand) const
 {
 	qint32 status = STATUS_SUCCESS;
 
-	int flags = CONF_GET_NO_EXPAND;
+	int uFlags = 0;
+	if (noExpand)
+		uFlags |= CONF_GET_NO_EXPAND;
+	if (!withGlobals)
+		uFlags |= CONF_GET_NO_GLOBAL;
 	if (!withTemplates)
-		flags |= CONF_GET_NO_TEMPLS;
+		uFlags |= CONF_GET_NO_TEMPLS;
 
-	QList<QPair<QString, QString>> Settings;
-	for (int setting_index = 0; ; setting_index++)
+	QSet<QString> Names;
+
+	if (withGlobals)
 	{
-		QString setting_name = m_pAPI->SbieIniGet(m_Name, "", setting_index | flags, &status);
-		if (status == STATUS_RESOURCE_NAME_NOT_FOUND) {
-			status = STATUS_SUCCESS;
-			break;
-		}
-		if (status != STATUS_SUCCESS)
-			break;
-
-		for (int value_index = 0; ; value_index++)
+		for (int Index = 0; ; Index++)
 		{
-			QString setting_value = m_pAPI->SbieIniGet(m_Name, setting_name, value_index | CONF_GET_NO_GLOBAL | flags, &status);
+			QString Name = SbieIniGet("GlobalSettings", "", Index | uFlags, &status);
 			if (status == STATUS_RESOURCE_NAME_NOT_FOUND) {
 				status = STATUS_SUCCESS;
 				break;
@@ -268,7 +287,38 @@ QList<QPair<QString, QString>> CSbieIni::GetIniSection(qint32* pStatus, bool wit
 			if (status != STATUS_SUCCESS)
 				break;
 
-			Settings.append(qMakePair(setting_name, setting_value));
+			Names.insert(Name);
+		}
+	}
+
+	for (int Index = 0; ; Index++)
+	{
+		QString Name = SbieIniGet(m_Name, "", Index | uFlags, &status);
+		if (status == STATUS_RESOURCE_NAME_NOT_FOUND) {
+			status = STATUS_SUCCESS;
+			break;
+		}
+		if (status != STATUS_SUCCESS)
+			break;
+
+		Names.insert(Name);
+	}
+
+	QList<CSbieIni::SbieIniValue> Settings;
+	foreach(const QString& Name, Names)
+	{
+		for (int Index = 0; ; Index++)
+		{
+			quint32 Type = 0;
+			QString setting_value = SbieIniGet(m_Name, Name, Index | uFlags, &status, &Type);
+			if (status == STATUS_RESOURCE_NAME_NOT_FOUND) {
+				status = STATUS_SUCCESS;
+				break;
+			}
+			if (status != STATUS_SUCCESS)
+				break;
+
+			Settings.append(SbieIniValue{ Name, Type, setting_value });
 		}
 
 		if (status != STATUS_SUCCESS)
@@ -287,18 +337,20 @@ SB_STATUS CSbieIni::RenameSection(const QString& NewName, bool deleteOld) // Not
 		return SB_ERR();
 	bool SameName = (bool)(NewName.compare(m_Name, Qt::CaseInsensitive) == 0);
 
-	// Get all Settings
-	QList<QPair<QString, QString>> Settings = GetIniSection(&status);
-	if (status != STATUS_SUCCESS)
-		return SB_ERR(SB_FailedCopyConf, QVariantList() << m_Name << (quint32)status, status);
-
 	// check if such a box already exists
 	if (!SameName)
 	{
-		m_pAPI->SbieIniGet(NewName, "", CONF_GET_NO_EXPAND, &status);
+		SbieIniGet(NewName, "", CONF_GET_NO_EXPAND, &status);
 		if (status != STATUS_RESOURCE_NAME_NOT_FOUND)
 			return SB_ERR(SB_AlreadyExists, QVariantList() << NewName);
 	}
+
+	// Get raw section content to preserve comments and order (like Duplicate Box does)
+	QString RawSection = SbieIniGetEx(m_Name, "");
+	if (RawSection.isEmpty())
+		return SB_ERR(SB_FailedCopyConf, QVariantList() << m_Name << "Empty section");
+
+	SB_STATUS Status;
 
 	// if the name is the same we first delete than write, 
 	// else we first write and than delete, for safety reasons
@@ -306,19 +358,16 @@ SB_STATUS CSbieIni::RenameSection(const QString& NewName, bool deleteOld) // Not
 		goto do_delete;
 
 do_write:
-	// Apply all Settings
-	for (QList<QPair<QString, QString>>::iterator I = Settings.begin(); I != Settings.end(); ++I)
-	{
-		SB_STATUS Status = m_pAPI->SbieIniSet(NewName, I->first, I->second, CSbieAPI::eIniInsert, true);
-		if (Status.IsError())
-			return Status;
-	}
+	// Write the entire raw section to preserve comments and order
+	Status = SbieIniSet(NewName, "", RawSection, eIniUpdate, true);
+	if (Status.IsError())
+		return Status;
 
 do_delete:
 	// Delete ini section
 	if (deleteOld)
 	{
-		SB_STATUS Status = m_pAPI->SbieIniSet(m_Name, "*", "", CSbieAPI::eIniUpdate, true);
+		Status = SbieIniSet(m_Name, "*", "", eIniUpdate, true);
 		if (Status.IsError())
 			return SB_ERR(SB_DeleteFailed, QVariantList() << m_Name << (quint32)Status.GetStatus(), Status.GetStatus());
 		deleteOld = false;
@@ -328,7 +377,7 @@ do_delete:
 	}
 
 	if (m_RefreshOnChange)
-		m_pAPI->CommitIniChanges();
+		CommitIniChanges();
 
 	m_Name = NewName;
 
@@ -337,5 +386,27 @@ do_delete:
 
 SB_STATUS CSbieIni::RemoveSection()
 {
-	return m_pAPI->SbieIniSet(m_Name, "*", "", CSbieAPI::eIniUpdate, m_RefreshOnChange);
+	return SbieIniSet(m_Name, "*", "", eIniUpdate, m_RefreshOnChange);
+}
+
+void CSbieIni::CommitIniChanges()
+{
+	m_pAPI->CommitIniChanges();
+}
+
+SB_STATUS CSbieIni::SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode, bool bRefresh)
+{
+	if(m_IsVirtual)
+		return m_pAPI->SbieIniSetDrv(Section, Setting, Value, Mode);
+	return m_pAPI->SbieIniSet(Section, Setting, Value, Mode, bRefresh);
+}
+
+QString CSbieIni::SbieIniGet(const QString& Section, const QString& Setting, quint32 Index, qint32* ErrCode, quint32* pType) const
+{
+	return m_pAPI->SbieIniGet(Section, Setting, Index, ErrCode, pType);
+}
+
+QString CSbieIni::SbieIniGetEx(const QString& Section, const QString& Setting) const
+{
+	return m_pAPI->SbieIniGetEx(Section, Setting);
 }

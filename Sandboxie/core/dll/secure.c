@@ -208,7 +208,7 @@ static P_NtAccessCheck                  __sys_NtAccessCheck = NULL;
 static P_NtQuerySecurityAttributesToken __sys_NtQuerySecurityAttributesToken = NULL;
 static P_NtQueryInformationToken        __sys_NtQueryInformationToken = NULL;
 static P_NtAccessCheckByTypeResultList  __sys_NtAccessCheckByTypeResultList = NULL;
-static P_NtOpenThreadToken          __sys_NtOpenThreadToken = NULL;
+       P_NtOpenThreadToken          __sys_NtOpenThreadToken = NULL;
        P_RtlEqualSid                __sys_RtlEqualSid = NULL;
 static P_NtSetInformationToken      __sys_NtSetInformationToken     = NULL;
 static P_NtAdjustPrivilegesToken    __sys_NtAdjustPrivilegesToken   = NULL;
@@ -230,6 +230,8 @@ PSECURITY_DESCRIPTOR Secure_EveryoneSD = NULL;
 BOOLEAN Secure_ShouldFakeRunningAsAdmin = FALSE;
 BOOLEAN Secure_IsInternetExplorerTabProcess = FALSE;
 BOOLEAN Secure_Is_IE_NtQueryInformationToken = FALSE;
+
+BOOLEAN Secure_CopyACLs = FALSE;
 
 BOOLEAN Secure_FakeAdmin = FALSE;
 
@@ -255,7 +257,20 @@ void Secure_InitSecurityDescriptors(void)
 
     PACL MyAcl;
     P_RtlAddMandatoryAce pRtlAddMandatoryAce;
-
+    
+    static UCHAR SystemLogonSid[12] = {
+	    1,                                      // Revision
+	    1,                                      // SubAuthorityCount
+	    0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+	    SECURITY_LOCAL_SYSTEM_RID,0,0,0         // SubAuthority
+    };
+    static UCHAR AdministratorsSid[16] = {
+        1,                                      // Revision
+        2,                                      // SubAuthorityCount
+        0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+        0x20, 0, 0, 0,                          // SubAuthority 1 - SECURITY_BUILTIN_DOMAIN_RID
+        0x20, 2, 0, 0                           // SubAuthority 2 - DOMAIN_ALIAS_RID_ADMINS
+    };
     static UCHAR AuthenticatedUsersSid[12] = {
         1,                                      // Revision
         1,                                      // SubAuthorityCount
@@ -303,8 +318,15 @@ void Secure_InitSecurityDescriptors(void)
     // build Normal Security Descriptor used for files, keys, etc
     //
 
-    MyAllocAndInitACL(MyAcl, 256);
-    MyAddAccessAllowedAce(MyAcl, &AuthenticatedUsersSid);
+    if (SbieApi_QueryConfBool(NULL, L"LockBoxToUser", FALSE)) {
+        MyAllocAndInitACL(MyAcl, 512);
+        MyAddAccessAllowedAce(MyAcl, &SystemLogonSid);
+        MyAddAccessAllowedAce(MyAcl, &AdministratorsSid);
+    }
+    else {
+        MyAllocAndInitACL(MyAcl, 256);
+        MyAddAccessAllowedAce(MyAcl, &AuthenticatedUsersSid);
+    }
 
     if (Dll_SidString) {
         UserSid = Dll_SidStringToSid(Dll_SidString);
@@ -411,13 +433,14 @@ _FX BOOLEAN Secure_Init(void)
 
     SBIEDLL_HOOK(Ldr_, RtlEqualSid);
 
+    Secure_CopyACLs = SbieApi_QueryConfBool(NULL, L"UseOriginalACLs", FALSE);
+
     //
     // install hooks to fake administrator privileges
     // note: when running as the built in administrator we should always act as if we have admin rights
     //
 
-    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin())
-        && (_wcsicmp(Dll_ImageName, L"msedge.exe") != 0); // never for msedge.exe
+    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin() || (Dll_ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0);
 
 
     void* NtAccessCheckByType = GetProcAddress(Dll_Ntdll, "NtAccessCheckByType");
@@ -720,13 +743,22 @@ _FX NTSTATUS Secure_NtDuplicateObject(
     // if we are successful, then make sure the handle gets closed
     //
 
-    status = __sys_NtDuplicateObject(
-        SourceProcessHandle, SourceHandle, TargetProcessHandle, TargetHandle,
-        DesiredAccess, HandleAttributes, Options & ~DUPLICATE_CLOSE_SOURCE);
+    if (TargetProcessHandle == NULL) {
+            
+        status = __sys_NtDuplicateObject(
+            SourceProcessHandle, SourceHandle, TargetProcessHandle, TargetHandle,
+            DesiredAccess, HandleAttributes, Options);
+
+    } else {
+        
+        status = __sys_NtDuplicateObject(
+            SourceProcessHandle, SourceHandle, TargetProcessHandle, TargetHandle,
+            DesiredAccess, HandleAttributes, Options & ~DUPLICATE_CLOSE_SOURCE);
+    }
 
     if (NT_SUCCESS(status)) {
 
-        if (Options & DUPLICATE_CLOSE_SOURCE) {
+        if (TargetProcessHandle != NULL && (Options & DUPLICATE_CLOSE_SOURCE)) {
 
             //
             // issue NtDuplicateObject again with no TargetProcessHandle
@@ -734,7 +766,7 @@ _FX NTSTATUS Secure_NtDuplicateObject(
             //
 
             __sys_NtDuplicateObject(
-                SourceProcessHandle, SourceHandle, NULL, NULL,
+                SourceProcessHandle, SourceHandle, NULL, 0,
                 DesiredAccess, HandleAttributes, DUPLICATE_CLOSE_SOURCE);
         }
 
@@ -753,7 +785,7 @@ _FX NTSTATUS Secure_NtDuplicateObject(
             }
 
             if (SourceHandle)
-                Key_NtClose(SourceHandle, NULL);
+                Key_NtClose(SourceHandle, NULL); // clear cached state for reg keys
         }
 
     //

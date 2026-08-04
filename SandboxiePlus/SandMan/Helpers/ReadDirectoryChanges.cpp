@@ -76,7 +76,7 @@ void CReadDirectoryChanges::Terminate()
 	}
 }
 
-void CReadDirectoryChanges::AddDirectory( LPCTSTR szDirectory, BOOL bWatchSubtree, DWORD dwNotifyFilter, DWORD dwBufferSize )
+void CReadDirectoryChanges::AddDirectory(LPCWSTR szDirectory, BOOL bWatchSubtree, DWORD dwNotifyFilter, DWORD dwBufferSize )
 {
 	if (!m_hThread)
 		Init();
@@ -85,7 +85,7 @@ void CReadDirectoryChanges::AddDirectory( LPCTSTR szDirectory, BOOL bWatchSubtre
 	QueueUserAPC(CReadChangesServer::AddDirectoryProc, m_hThread, (ULONG_PTR)pRequest);
 }
 
-void CReadDirectoryChanges::DetachDirectory( LPCTSTR szDirectory )
+void CReadDirectoryChanges::DetachDirectory(LPCWSTR szDirectory )
 {
 	if (!m_hThread)
 		Init();

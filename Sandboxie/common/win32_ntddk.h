@@ -158,6 +158,12 @@ typedef struct _UNICODE_STRING64 {
     __declspec(align(8)) unsigned __int64 Buffer;
 } UNICODE_STRING64;
 
+typedef struct _ANSI_STRING64 {
+    USHORT Length;
+    USHORT MaximumLength;
+    __declspec(align(8)) unsigned __int64 Buffer;
+} ANSI_STRING64;
+
 //---------------------------------------------------------------------------
 
 #define OBJ_INHERIT             0x00000002L
@@ -189,6 +195,60 @@ typedef CONST OBJECT_ATTRIBUTES *PCOBJECT_ATTRIBUTES;
     (p)->SecurityDescriptor = s;                        \
     (p)->SecurityQualityOfService = NULL;               \
     }
+
+NTSYSAPI BOOLEAN WINAPI RtlValidSecurityDescriptor(
+  PSECURITY_DESCRIPTOR SecurityDescriptor
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlGetControlSecurityDescriptor(
+  PSECURITY_DESCRIPTOR pSecurityDescriptor,
+  PSECURITY_DESCRIPTOR_CONTROL pControl,
+  LPDWORD lpdwRevision
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlMakeSelfRelativeSD(
+  PSECURITY_DESCRIPTOR pAbsoluteSecurityDescriptor,
+  PSECURITY_DESCRIPTOR pSelfRelativeSecurityDescriptor,
+  LPDWORD lpdwBufferLength
+);
+
+NTSYSAPI ULONG WINAPI RtlLengthSecurityDescriptor(
+  PSECURITY_DESCRIPTOR SecurityDescriptor
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlAbsoluteToSelfRelativeSD(
+  PSECURITY_DESCRIPTOR AbsoluteSecurityDescriptor,
+  PSECURITY_DESCRIPTOR SelfRelativeSecurityDescriptor,
+  PULONG               BufferLength
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlSelfRelativeToAbsoluteSD(
+  PSECURITY_DESCRIPTOR SelfRelativeSecurityDescriptor,
+  PSECURITY_DESCRIPTOR AbsoluteSecurityDescriptor,
+  PULONG               AbsoluteSecurityDescriptorSize,
+  PACL                 Dacl,
+  PULONG               DaclSize,
+  PACL                 Sacl,
+  PULONG               SaclSize,
+  PSID                 Owner,
+  PULONG               OwnerSize,
+  PSID                 PrimaryGroup,
+  PULONG               PrimaryGroupSize
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlGetAce(
+  PACL  Acl,
+  ULONG AceIndex,
+  PVOID *Ace
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlAddAce(
+  PACL  Acl,
+  ULONG AceRevision,
+  ULONG StartingAceIndex,
+  PVOID AceList,
+  ULONG AceListLength
+);
 
 //---------------------------------------------------------------------------
 
@@ -771,6 +831,15 @@ NtQueryInformationFile(
     IN ULONG                        Length,
     IN FILE_INFORMATION_CLASS       FileInformationClass
 );
+
+/*__declspec(dllimport) NTSTATUS __stdcall
+NtQueryInformationByName(
+    _In_ POBJECT_ATTRIBUTES ObjectAttributes,
+    _Out_ PIO_STATUS_BLOCK IoStatusBlock,
+    _Out_writes_bytes_(Length) PVOID FileInformation,
+    _In_ ULONG Length,
+    _In_ FILE_INFORMATION_CLASS FileInformationClass
+);*/
 
 __declspec(dllimport) NTSTATUS __stdcall
 NtQueryAttributesFile(
@@ -2111,6 +2180,38 @@ __declspec(dllimport) NTSTATUS __stdcall NtOpenEvent(
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes);
 
+__declspec(dllimport) NTSTATUS __stdcall NtCreateEventPair(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
+__declspec(dllimport) NTSTATUS __stdcall NtOpenEventPair(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+  
+__declspec(dllimport) NTSTATUS __stdcall NtCreateKeyedEvent(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN ULONG Flags);
+
+__declspec(dllimport) NTSTATUS __stdcall NtOpenKeyedEvent(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+  
+__declspec(dllimport) NTSTATUS __stdcall NtCreateTimer(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN TIMER_TYPE TimerType);
+
+__declspec(dllimport) NTSTATUS __stdcall NtOpenTimer(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
 __declspec(dllimport) NTSTATUS __stdcall NtCreateMutant(
     OUT PHANDLE MutantHandle,
     IN  ACCESS_MASK DesiredAccess,
@@ -2159,6 +2260,103 @@ __declspec(dllimport) NTSTATUS __stdcall NtMapViewOfSection(
     IN  ULONG InheritDisposition,
     IN  ULONG AllocationType,
     IN  ULONG Protect);
+
+
+typedef enum _SECTION_INFORMATION_CLASS
+{
+    SectionBasicInformation, // q; SECTION_BASIC_INFORMATION
+    SectionImageInformation, // q; SECTION_IMAGE_INFORMATION
+    SectionRelocationInformation, // q; PVOID RelocationAddress // name:wow64:whNtQuerySection_SectionRelocationInformation // since WIN7
+    SectionOriginalBaseInformation, // PVOID BaseAddress
+    SectionInternalImageInformation, // SECTION_INTERNAL_IMAGE_INFORMATION // since REDSTONE2
+    MaxSectionInfoClass
+} SECTION_INFORMATION_CLASS;
+
+typedef struct _SECTION_BASIC_INFORMATION
+{
+    PVOID BaseAddress;
+    ULONG AllocationAttributes;
+    LARGE_INTEGER MaximumSize;
+} SECTION_BASIC_INFORMATION, *PSECTION_BASIC_INFORMATION;
+
+// symbols
+typedef struct _SECTION_IMAGE_INFORMATION
+{
+    PVOID TransferAddress;
+    ULONG ZeroBits;
+    SIZE_T MaximumStackSize;
+    SIZE_T CommittedStackSize;
+    ULONG SubSystemType;
+    union
+    {
+        struct
+        {
+            USHORT SubSystemMinorVersion;
+            USHORT SubSystemMajorVersion;
+        };
+        ULONG SubSystemVersion;
+    };
+    union
+    {
+        struct
+        {
+            USHORT MajorOperatingSystemVersion;
+            USHORT MinorOperatingSystemVersion;
+        };
+        ULONG OperatingSystemVersion;
+    };
+    USHORT ImageCharacteristics;
+    USHORT DllCharacteristics;
+    USHORT Machine;
+    BOOLEAN ImageContainsCode;
+    union
+    {
+        UCHAR ImageFlags;
+        struct
+        {
+            UCHAR ComPlusNativeReady : 1;
+            UCHAR ComPlusILOnly : 1;
+            UCHAR ImageDynamicallyRelocated : 1;
+            UCHAR ImageMappedFlat : 1;
+            UCHAR BaseBelow4gb : 1;
+            UCHAR ComPlusPrefer32bit : 1;
+            UCHAR Reserved : 2;
+        };
+    };
+    ULONG LoaderFlags;
+    ULONG ImageFileSize;
+    ULONG CheckSum;
+} SECTION_IMAGE_INFORMATION, *PSECTION_IMAGE_INFORMATION;
+
+// symbols
+typedef struct _SECTION_INTERNAL_IMAGE_INFORMATION
+{
+    SECTION_IMAGE_INFORMATION SectionInformation;
+    union
+    {
+        ULONG ExtendedFlags;
+        struct
+        {
+            ULONG ImageExportSuppressionEnabled : 1;
+            ULONG ImageCetShadowStacksReady : 1; // 20H1
+            ULONG ImageXfgEnabled : 1; // 20H2
+            ULONG ImageCetShadowStacksStrictMode : 1;
+            ULONG ImageCetSetContextIpValidationRelaxedMode : 1;
+            ULONG ImageCetDynamicApisAllowInProc : 1;
+            ULONG ImageCetDowngradeReserved1 : 1;
+            ULONG ImageCetDowngradeReserved2 : 1;
+            ULONG Reserved : 24;
+        };
+    };
+} SECTION_INTERNAL_IMAGE_INFORMATION, *PSECTION_INTERNAL_IMAGE_INFORMATION;
+
+NTSYSCALLAPI NTSTATUS NTAPI NtQuerySection(
+    _In_ HANDLE SectionHandle,
+    _In_ SECTION_INFORMATION_CLASS SectionInformationClass,
+    _Out_writes_bytes_(SectionInformationLength) PVOID SectionInformation,
+    _In_ SIZE_T SectionInformationLength,
+    _Out_opt_ PSIZE_T ReturnLength
+);
 
 __declspec(dllimport) NTSTATUS __stdcall NtNotifyChangeDirectoryFile(
     IN  HANDLE FileHandle,
@@ -2331,6 +2529,7 @@ __declspec(dllimport) NTSTATUS RtlGetGroupSecurityDescriptor(
 );
 
 __declspec(dllimport) BOOLEAN NTAPI RtlEqualSid(PSID Sid1, PSID Sid2);
+__declspec(dllimport) ULONG NTAPI RtlLengthSid(PSID Sid);
 __declspec(dllimport) PVOID NTAPI RtlFreeSid(PSID Sid);
 
 //---------------------------------------------------------------------------
@@ -2597,6 +2796,11 @@ typedef BOOL (*P_DefineDosDevice)(
     ULONG Flags,
     void *DeviceName,
     void *TargetPath);
+
+typedef ULONG (*P_QueryDosDevice)(
+    const WCHAR *DeviceName,
+    WCHAR *TargetPath,
+    ULONG Max);
 
 typedef HMODULE (*P_LoadLibraryEx)(
     const void *lpFileName, HANDLE hFile, DWORD dwFlags);

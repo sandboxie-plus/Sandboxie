@@ -68,13 +68,13 @@ static BOOLEAN Dll_MemTrace = FALSE;
 _FX BOOLEAN Dll_InitMem(void)
 {
     if (! Dll_Pool) {
-        Dll_Pool = Pool_Create();
+        Dll_Pool = Pool_CreateTagged(tzuk);
         if (! Dll_Pool)
             return FALSE;
     }
 
     if (! Dll_PoolTemp) {
-        Dll_PoolTemp = Pool_Create();
+        Dll_PoolTemp = Pool_CreateTagged(tzuk);
         if (! Dll_PoolTemp)
             return FALSE;
     }
@@ -291,6 +291,11 @@ _FX void Dll_FreeTlsData(void)
         data = TlsGetValue(Dll_TlsIndex);
     if (! data)
         return;
+
+    if (data->PortHandle) {
+        NtClose(data->PortHandle);
+        data->PortHandle = NULL;
+	}
 
     TlsSetValue(Dll_TlsIndex, NULL);
 

@@ -1,7 +1,9 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <QMap>
 #include "ui_SettingsWindow.h"
+#include "PendingChanges.h"
 #include "../../MiscHelpers/Common/SettingsWidgets.h"
 
 void FixTriStateBoxPallete(QWidget* pWidget);
@@ -52,12 +54,20 @@ public:
 	static bool AddBrowserIcon();
 
 	static bool ApplyCertificate(const QByteArray &Certificate, QWidget* widget);
-
 	static void LoadCertificate(QString CertPath = QString());
+	static bool	TryRefreshCert(QWidget* parent, QObject* receiver, const char* member);
+	static bool	CertRefreshRequired();
 
 	static QString GetCertType();
 	static QColor GetCertColor();
 	static QString GetCertLevel();
+
+	static void StartEval(QWidget* parent, QObject* receiver, const char* member);
+
+	void LoadCompletionConsent();
+	void SaveCompletionConsent();
+	QString localizedCompletionShortcut();
+	int ShowConsentDialog(); // Returns: 0=Unchecked, 1=PartiallyChecked(Basic), 2=Checked(Full)
 
 signals:
 	void OptionsChanged(bool bRebuildUI = false);
@@ -67,7 +77,7 @@ public slots:
 	void ok();
 	void apply();
 
-	void showTab(const QString& Name, bool bExclusive = false);
+	void showTab(const QString& Name, bool bExclusive = false, bool bExec = false);
 
 private slots:
 	void OnTab();
@@ -102,6 +112,13 @@ private slots:
 
 	void OnRamDiskChange();
 
+	void OnImportBox();
+	void OnMakeBox();
+	void OnAddRoot();
+	void OnRemoveBox();
+
+	void OnImportChanged() { m_ImportChanged = true; OnOptChanged(); }
+
 	void OnProtectionChange();
 	void OnSetPassword();
 
@@ -110,6 +127,7 @@ private slots:
 	void OnAddWarnFolder();
 	void OnDelWarnProg();
 
+	void OnMoTWChange();
 	void OnVolumeChanged();
 	void UpdateDrives();
 
@@ -127,6 +145,10 @@ private slots:
 
 	void SetIniEdit(bool bEnable);
 	void OnEditIni();
+	void OnEditorSettings();
+	void OnIniValidationToggled(int state);
+	void OnTooltipToggled(int state);
+	void OnAutoCompletionToggled(int state);
 	void OnSaveIni();
 	void OnIniChanged();
 	void OnCancelEdit();
@@ -139,6 +161,7 @@ private slots:
 	void OnCertData(const QByteArray& Certificate, const QVariantMap& Params);
 	void ApplyCert();
 	void UpdateUpdater();
+	void OnStartEval();
 
 	void GetUpdates();
 	void OnUpdateData(const QVariantMap& Data, const QVariantMap& Params);
@@ -148,6 +171,9 @@ private slots:
 
 	void OnSelectIniEditFont();
 	void OnResetIniEditFont();
+
+	void OnSelectUiFont();
+	void OnResetUiFont();
 
 protected:
 	void closeEvent(QCloseEvent *e);
@@ -169,8 +195,15 @@ protected:
 	void	SaveIniSection();
 	void    ApplyIniEditFont();
 
+	// Autocompletion support
+	void UpdateAutoCompletion();
+
+	void	InitSupport();
+
 	bool	m_bRebuildUI;
 	bool	m_HoldChange;
+	CPendingChanges m_PendingChanges{this, &m_HoldChange, -1, true};
+	bool	m_SkipSaveOnToggle; // Skip saving to config when applying reset settings
 	int 	m_CompatLoaded;
 	QString m_NewPassword;
 	bool	m_MessagesChanged;
@@ -179,6 +212,7 @@ protected:
 	bool	m_CompatChanged;
 	bool	m_RunChanged;
 	bool	m_SkipUACChanged;
+	bool	m_ImportChanged;
 	bool	m_ProtectionChanged;
 	bool	m_GeneralChanged;
 	bool	m_FeaturesChanged;
@@ -192,6 +226,14 @@ private:
 	void WriteTextList(const QString& Setting, const QStringList& List);
 
 	Ui::SettingsWindow ui;
+
+	class CCodeEdit* m_pCodeEdit = nullptr;
+	class CIniHighlighter* m_pIniHighlighter = nullptr;
+
+	bool m_IniValidationEnabled = true;
+	bool m_AutoCompletionConsent;
+	QMap<QString, int> m_WindowMonitorRawSettings;
+	QMap<QString, int> m_WindowMonitorResolvedFallback;
 };
 
 QVariantMap GetRunEntry(const QString& sEntry);
@@ -208,3 +250,6 @@ extern QByteArray g_Certificate;
 #include "..\..\Sandboxie\core\drv\verify.h"
 
 extern SCertInfo g_CertInfo;
+
+#define EVAL_MAX 3		// for UI only actual limits enforced on server
+#define EVAL_DAYS 10	

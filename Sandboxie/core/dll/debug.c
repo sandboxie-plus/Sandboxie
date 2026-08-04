@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include "../../common/my_xeb.h"
 #include "debug.h"
-
+#include "../../common/str_util.h"
 
 //---------------------------------------------------------------------------
 // Debug_Wait
@@ -44,7 +44,7 @@ _FX void Debug_Wait()
         NTSTATUS status = SbieApi_QueryConfAsIs(NULL, L"WaitForDebuggerCmdLine", index, buf, 64 * sizeof(WCHAR));
         ++index;
         if (NT_SUCCESS(status)) {
-            if (wcsstr(CmdLine, buf) != 0) {
+            if (wcsistr(CmdLine, buf) != 0) {
                 Found = TRUE;
             }
         }
@@ -344,7 +344,7 @@ ALIGNED void Debug_RtlSetLastWin32Error(ULONG err)
 
 ALIGNED void Debug_OutputDebugStringW(const WCHAR *str)
 {
-    if (wcsstr(str, TEXT(BREAK_STRING))) {
+    if (wcsistr(str, TEXT(BREAK_STRING))) {
         __sys_OutputDebugStringW(L"***** BREAK STRING *****\n");
         while (! IsDebuggerPresent())
             Sleep(500);
@@ -487,7 +487,7 @@ void DbgPrint(const char* format, ...)
     
     char tmp1[510];
 
-    extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
+    extern int(__cdecl *P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
     P_vsnprintf(tmp1, sizeof(tmp1), format, va_args);
 
     OutputDebugStringA(tmp1);
@@ -510,7 +510,7 @@ void DbgTrace(const char* format, ...)
     char tmp1[510];
     WCHAR tmp2[510];
 
-    extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
+    extern int(__cdecl *P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
     P_vsnprintf(tmp1, sizeof(tmp1), format, va_args);
 
     Sbie_snwprintf((WCHAR *)tmp2, sizeof(tmp2)/sizeof(WCHAR), L"%S", tmp1);

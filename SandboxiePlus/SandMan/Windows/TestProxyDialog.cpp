@@ -179,8 +179,8 @@ void CTestProxyDialog::RunTest2LoadPage(const QNetworkProxy& proxy, bool& failed
 		if (elapsed >= m_TestTimeout && !reply->isFinished()) reply->abort();
 		if (m_TestShouldCancel.loadAcquire())
 		{
-			loop.quit();
 			timer.stop();
+			loop.quit();
 		}
 	});
 
@@ -196,8 +196,8 @@ void CTestProxyDialog::RunTest2LoadPage(const QNetworkProxy& proxy, bool& failed
 			QString error = reply->error() == QNetworkReply::OperationCanceledError ? tr("Timeout") : reply->errorString();
 			emit emitTestMessage(tr("[%1] Failed to load web page: %2.").arg(time).arg(error));
 		}
-		loop.quit();
 		timer.stop();
+		loop.quit();
 	});
 
 	timer.start();
@@ -237,24 +237,32 @@ void CTestProxyDialog::RunTest3(bool& failed, int& progress, int segment)
 	time = QTime::currentTime().toString("hh:mm:ss");
 	if (pingProc->exitStatus() == QProcess::NormalExit && pingProc->exitCode() == 0)
 	{
-		QRegularExpression re("Average = (\\d+)ms");
-		if (re.match(pingOutput).hasMatch())
+		QRegularExpression re(" = (\\d+)ms");
+		QRegularExpressionMatchIterator it = re.globalMatch(pingOutput);
+
+		QVector<int> values;
+		while (it.hasNext()) {
+			QRegularExpressionMatch m = it.next();
+			values.append(m.captured(1).toInt());
+		}
+
+		if (!values.isEmpty())
 		{
-			int elapsed = re.match(pingOutput).captured(1).toInt();
+			int elapsed = values.last(); // last (3rd) is average
 			emit emitUpdateProgress(progress += segment);
 			emit emitTestMessage(tr("[%1] Latency through proxy server: %2ms.").arg(time).arg(elapsed));
 			emit emitTestMessage(tr("[%1] Test passed.").arg(time));
 		}
 		else
 		{
-			failed = true;
+			//failed = true;
 			emit emitTestMessage(tr("[%1] Failed to get proxy server latency: Request timeout.").arg(time));
 			emit emitTestMessage(tr("[%1] Test failed.").arg(time));
 		}
 	}
 	else
 	{
-		failed = true;
+		//failed = true;
 		emit emitTestMessage(tr("[%1] Failed to get proxy server latency.").arg(time));
 		emit emitTestMessage(tr("[%1] Test failed.").arg(time));
 	}

@@ -130,13 +130,32 @@ BOOL ProcessServer::KillProcess(ULONG ProcessId)
 {
     ULONG LastError = 0;
     BOOL ok = FALSE;
-    HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, ProcessId);
+    HANDLE hProcess = OpenProcess(PROCESS_TERMINATE | PROCESS_QUERY_LIMITED_INFORMATION, FALSE, ProcessId);
     if (! hProcess)
         LastError = GetLastError() * 10000;
     else {
-        ok = TerminateProcess(hProcess, DBG_TERMINATE_PROCESS);
-        if (! ok)
-            LastError = GetLastError();
+
+        //
+        // Before terminating any process, check if still its a sandboxed process as PID's get reused,
+        // but not as long as a handle is open, hence checking after OpenProcess remains valid until CloseHandle
+        // 
+        // also check if process was marked as critical process
+        //
+
+        if (!SbieApi_QueryProcessInfo((HANDLE)(ULONG_PTR)ProcessId, 0))
+            ok = TRUE;
+        else {
+
+            NTSTATUS status;
+            ULONG breakOnTermination;
+            status = NtQueryInformationProcess(hProcess, ProcessBreakOnTermination, &breakOnTermination, sizeof(ULONG), NULL);
+            if (NT_SUCCESS(status) && !breakOnTermination) {
+
+                ok = TerminateProcess(hProcess, DBG_TERMINATE_PROCESS);
+                if (!ok)
+                    LastError = GetLastError();
+            }
+        }
         CloseHandle(hProcess);
     }
 
@@ -244,6 +263,8 @@ MSG_HEADER *ProcessServer::KillAllHandler(MSG_HEADER *msg)
     if (req->h.length < sizeof(PROCESS_KILL_ALL_REQ))
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);
 
+    req->boxname[ARRAYSIZE(req->boxname) - 1] = L'\0';
+
     TargetSessionId = req->session_id;
     wcscpy(TargetBoxName, req->boxname);
     if (! TargetBoxName[0])
@@ -269,8 +290,8 @@ MSG_HEADER *ProcessServer::KillAllHandler(MSG_HEADER *msg)
 
     if (status != STATUS_INVALID_CID) // if this is true the caller is boxed, should be rpcss
         TerminateJob = FALSE; // if rpcss requests box termination, don't use the job method, fix-me: we get some stuck request in the queue
-    else
-        TerminateJob = !SbieApi_QueryConfBool(TargetBoxName, L"NoAddProcessToJob", FALSE);
+    else if (!SbieApi_QueryConfBool(TargetBoxName, L"NoAddProcessToJob", FALSE) && !SbieApi_QueryConfBool(TargetBoxName, L"NoSecurityIsolation", FALSE))
+        TerminateJob = SbieApi_QueryConfBool(TargetBoxName, L"TerminateJobObject", FALSE);
 
     //
     // match session id and box name
@@ -493,6 +514,8 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
     PROCESS_RUN_SANDBOXED_REQ *req = (PROCESS_RUN_SANDBOXED_REQ *)msg;
     if (req->h.length < sizeof(PROCESS_RUN_SANDBOXED_REQ))
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+
+    req->boxname[ARRAYSIZE(req->boxname) - 1] = L'\0';
 
     WCHAR *cmd = RunSandboxedCopyString(&req->h, req->cmd_ofs, req->cmd_len);
     WCHAR *dir = RunSandboxedCopyString(&req->h, req->dir_ofs, req->dir_len);
@@ -855,19 +878,34 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
     if (CallerInSandbox) {
 
-        if ((wcscmp(cmd, L"*RPCSS*") == 0 /* || wcscmp(cmd, L"*DCOM*") == 0 */) 
-          && ProcessServer__RunRpcssAsSystem(boxname, CompartmentMode)) {
+        if ((wcscmp(cmd, L"*RPCSS*") == 0 /* || wcscmp(cmd, L"*DCOM*") == 0 */)) {
             
-            //
-            // use our system token
-            //
+            if (ProcessServer__RunRpcssAsSystem(boxname, CompartmentMode)) {
 
-            ok = OpenProcessToken(
-                        GetCurrentProcess(), TOKEN_RIGHTS, &OldTokenHandle);
+                //
+                // use our system token
+                //
+
+                ok = OpenProcessToken(
+                    GetCurrentProcess(), TOKEN_RIGHTS, &OldTokenHandle);
+
+                ShouldAdjustDacl = true;
+            }
+            else {
+
+                //
+                // use the session token
+                //
+
+                ULONG SessionId = PipeServer::GetCallerSessionId();
+
+                ok = WTSQueryUserToken(SessionId, &OldTokenHandle);
+
+                ShouldAdjustSessionId = false;
+            }
+
             if (! ok)
                 return NULL;
-
-            ShouldAdjustDacl = true;
 
         }
         else
@@ -1194,6 +1232,13 @@ BOOL ProcessServer::RunSandboxedStartProcess(
     BOOL ok = TRUE;
     bool CmdAltered = false;
     bool StartProgramInSandbox = true;
+    bool FakeAdmin = false;
+
+    if (crflags & CREATE_SECURE_PROCESS)
+    {
+        FakeAdmin = true;
+        crflags &= ~CREATE_SECURE_PROCESS;
+    }
 
     //
     // create the new process in the target session using the token handle
@@ -1310,7 +1355,12 @@ BOOL ProcessServer::RunSandboxedStartProcess(
 
         if (ok && StartProgramInSandbox) {
 
-            LONG rc = SbieApi_Call(API_START_PROCESS, 2,
+            LONG rc;
+            if(FakeAdmin)
+                rc = SbieApi_Call(API_START_PROCESS, 3,
+                                      (ULONG_PTR)BoxNameOrModelPid, (ULONG_PTR)pi->dwProcessId, TRUE);
+            else
+                rc = SbieApi_Call(API_START_PROCESS, 2,
                                       (ULONG_PTR)BoxNameOrModelPid, (ULONG_PTR)pi->dwProcessId);
             if (rc != 0) {
 
@@ -1877,7 +1927,8 @@ MSG_HEADER *ProcessServer::ProcInfoHandler(MSG_HEADER *msg)
 				IsSystem : 1,
 				IsRestricted : 1,
 				IsAppContainer : 1,
-				Spare : 27;
+				IsFakeAdmin : 1,
+				Spare : 26;
 		};
 	} Info;
     Info.Flags = 0;
@@ -1897,6 +1948,7 @@ MSG_HEADER *ProcessServer::ProcInfoHandler(MSG_HEADER *msg)
 	    if(IsWow64Process(ProcessHandle, &isTargetWow64Process))
 	        Info.IsWoW64 = isTargetWow64Process;
 
+        // check original token
 	    HANDLE TokenHandle = (HANDLE)SbieApi_QueryProcessInfo((HANDLE)req->dwProcessId, 'ptok');
 	    if (!TokenHandle) // app compartment type box
 		    NtOpenProcessToken(ProcessHandle, TOKEN_QUERY, &TokenHandle);
@@ -1929,6 +1981,40 @@ MSG_HEADER *ProcessServer::ProcInfoHandler(MSG_HEADER *msg)
 
 		    CloseHandle(TokenHandle);
 	    }
+
+        ULONG64 ProcessFlags = SbieApi_QueryProcessInfo((HANDLE)req->dwProcessId, 0);
+        if ((ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0)
+            Info.IsFakeAdmin = 1;
+
+        // check sandboxed token
+        /*TokenHandle = (HANDLE)SbieApi_QueryProcessInfo((HANDLE)req->dwProcessId, 'ptok');
+	    NtOpenProcessToken(ProcessHandle, TOKEN_QUERY, &TokenHandle);
+        if (TokenHandle)
+	    {
+		    ULONG returnLength;
+
+            // Check SID group memberships
+            extern UCHAR SandboxieAdminSid[16];
+            NTSTATUS status = NtQueryInformationToken(TokenHandle, TokenGroups, nullptr, 0, &returnLength);
+            if (status == STATUS_BUFFER_TOO_SMALL || status == STATUS_BUFFER_OVERFLOW) {
+                PTOKEN_GROUPS tokenGroups = (PTOKEN_GROUPS)HeapAlloc(GetProcessHeap(), 0, returnLength);
+                if (tokenGroups) {
+                    status = NtQueryInformationToken(TokenHandle, TokenGroups, tokenGroups, returnLength, &returnLength);
+                    if (NT_SUCCESS(status)) {
+                        for (DWORD i = 0; i < tokenGroups->GroupCount; ++i) {
+                            PSID sid = tokenGroups->Groups[i].Sid;
+                            if (sid && IsValidSid(sid) && EqualSid(sid, (PSID)SandboxieAdminSid) && (tokenGroups->Groups[i].Attributes & SE_GROUP_ENABLED)) {
+                                Info.IsFakeAdmin = 1;
+                                break;
+                            }
+                        }
+                    }
+                    HeapFree(GetProcessHeap(), 0, tokenGroups);
+                }
+            }
+
+		    CloseHandle(TokenHandle);
+	    }*/
     }
 
     if (req->dwInfoClasses & SBIE_PROCESS_EXEC_INFO)
@@ -2124,6 +2210,8 @@ MSG_HEADER *ProcessServer::SuspendAllHandler(MSG_HEADER *msg)
     PROCESS_SUSPEND_RESUME_ALL_REQ *req = (PROCESS_SUSPEND_RESUME_ALL_REQ *)msg;
     if (req->h.length < sizeof(PROCESS_SUSPEND_RESUME_ALL_REQ))
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+
+    req->boxname[ARRAYSIZE(req->boxname) - 1] = L'\0';
 
     TargetSessionId = req->session_id;
     wcscpy(TargetBoxName, req->boxname);

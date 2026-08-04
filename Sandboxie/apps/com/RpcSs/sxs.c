@@ -95,7 +95,7 @@ ULONG Sxs_Thread(void *arg);
 static void Sxs_Request(
     UCHAR *data, ULONG data_len, UCHAR **rsp_data, ULONG *rsp_len);
 
-static void Sxs_Generate(UCHAR *buf, HANDLE *hSection);
+static void Sxs_Generate(UCHAR *buf, ULONG buf_len, HANDLE *hSection);
 
 static IUnknown *Sxs_CreateStreamFromBuffer(UCHAR *Text);
 
@@ -333,7 +333,7 @@ _FX void Sxs_Request(
     UCHAR *data, ULONG data_len, UCHAR **rsp_data, ULONG *rsp_len)
 {
     HANDLE hSection = NULL;
-    Sxs_Generate(data, &hSection);
+    Sxs_Generate(data, data_len, &hSection);
 
     if (hSection == (HANDLE)(ULONG_PTR)-1) {
 
@@ -383,11 +383,15 @@ _FX void Sxs_Request(
 //---------------------------------------------------------------------------
 
 
-_FX void Sxs_Generate(UCHAR *buf, HANDLE *hSection)
+_FX void Sxs_Generate(UCHAR *buf, ULONG buf_len, HANDLE *hSection)
 {
     ULONG *ptr4;
     WCHAR *ptr2;
     UCHAR *ptr1;
+    UCHAR *buf_end;
+    SIZE_T remaining_w;
+    SIZE_T remaining_b;
+    SIZE_T slen;
 
     ULONG ArchId;
     ULONG LangId;
@@ -404,6 +408,16 @@ _FX void Sxs_Generate(UCHAR *buf, HANDLE *hSection)
 
     *hSection = NULL;
 
+    //
+    // minimum header size: signature ULONG + pad ULONG + ArchId ULONG
+    // + LangId ULONG = 16 bytes
+    //
+
+    if (buf_len < 16)
+        return;
+
+    buf_end = buf + buf_len;
+
     ptr4 = (ULONG *)buf;
     if (*ptr4 != 'xobs')        // signature
         return;
@@ -417,37 +431,57 @@ _FX void Sxs_Generate(UCHAR *buf, HANDLE *hSection)
     ++ptr4;                     // skip ULONG
 
     ptr2 = (WCHAR *)ptr4;
-    if (wcslen(ptr2) > 64)
+
+    remaining_w = ((SIZE_T)(buf_end - (UCHAR *)ptr2)) / sizeof(WCHAR);
+    slen = wcsnlen(ptr2, remaining_w);
+    if (slen >= remaining_w || slen > 64)
         return;
     LangNames = ptr2;
-    ptr2 += wcslen(ptr2) + 1;
+    ptr2 += slen + 1;
 
-    if (wcslen(ptr2) > 1024)
+    remaining_w = ((SIZE_T)(buf_end - (UCHAR *)ptr2)) / sizeof(WCHAR);
+    slen = wcsnlen(ptr2, remaining_w);
+    if (slen >= remaining_w || slen > 1024)
         return;
     lpDirectory = ptr2;
-    ptr2 += wcslen(ptr2) + 1;
+    ptr2 += slen + 1;
 
-    if (wcslen(ptr2) > 1024)
+    remaining_w = ((SIZE_T)(buf_end - (UCHAR *)ptr2)) / sizeof(WCHAR);
+    slen = wcsnlen(ptr2, remaining_w);
+    if (slen >= remaining_w || slen > 1024)
         return;
     lpSourcePath = ptr2;
-    ptr2 += wcslen(ptr2) + 1;
+    ptr2 += slen + 1;
 
-    if (wcslen(ptr2) > 1024)
+    remaining_w = ((SIZE_T)(buf_end - (UCHAR *)ptr2)) / sizeof(WCHAR);
+    slen = wcsnlen(ptr2, remaining_w);
+    if (slen >= remaining_w || slen > 1024)
         return;
     lpConfigPath = ptr2;
-    ptr2 += wcslen(ptr2) + 1;
+    ptr2 += slen + 1;
 
     ptr1 = (UCHAR *)ptr2;
-    if (strlen(ptr1) > SXS_TEXT_LEN)
+
+    if (ptr1 >= buf_end)
+        return;
+    remaining_b = (SIZE_T)(buf_end - ptr1);
+    slen = strnlen(ptr1, remaining_b);
+    if (slen >= remaining_b || slen > SXS_TEXT_LEN)
         return;
     lpManifestText = ptr1;
-    ptr1 += strlen(ptr1) + 1;
+    ptr1 += slen + 1;
 
-    if (strlen(ptr1) > SXS_TEXT_LEN)
+    if (ptr1 >= buf_end)
+        return;
+    remaining_b = (SIZE_T)(buf_end - ptr1);
+    slen = strnlen(ptr1, remaining_b);
+    if (slen >= remaining_b || slen > SXS_TEXT_LEN)
         return;
     lpConfigText = ptr1;
-    ptr1 += strlen(ptr1) + 1;
+    ptr1 += slen + 1;
 
+    if (ptr1 >= buf_end)
+        return;
     if (*ptr1 != '*')
         return;
 

@@ -87,6 +87,9 @@ static BOOL Scm_CloseServiceHandle(SC_HANDLE hSCObject);
 static ULONG_PTR Scm_SubscribeServiceChangeNotifications(
     ULONG_PTR Unknown1, ULONG_PTR Unknown2, ULONG_PTR Unknown3,
     ULONG_PTR Unknown4, ULONG_PTR Unknown5);
+
+static DWORD Scm_WaitServiceState(
+    SC_HANDLE hService, DWORD dwNotify, DWORD dwTimeout, HANDLE hCancelEvent);
 	
 
 //---------------------------------------------------------------------------
@@ -179,6 +182,9 @@ typedef BOOL (*P_SetServiceObjectSecurity)(
 typedef ULONG_PTR (*P_SubscribeServiceChangeNotifications)(
     ULONG_PTR Unknown1, ULONG_PTR Unknown2, ULONG_PTR Unknown3,
     ULONG_PTR Unknown4, ULONG_PTR Unknown5); // ret 14h
+
+typedef DWORD (*P_WaitServiceState)(
+    SC_HANDLE hService, DWORD dwNotify, DWORD dwTimeout, HANDLE hCancelEvent);
 
 
 //---------------------------------------------------------------------------
@@ -301,6 +307,7 @@ static P_SetServiceObjectSecurity
 
 static P_SubscribeServiceChangeNotifications
                             __sys_SubscribeServiceChangeNotifications = NULL;
+static P_WaitServiceState   __sys_WaitServiceState = NULL;
 
 //---------------------------------------------------------------------------
 
@@ -370,7 +377,7 @@ static P_CloseEventLog          __sys_CloseEventLog             = NULL;
 
 
 static const WCHAR *Scm_ServicesKeyPath =
-    L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\";
+    L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services";
 
 static const WCHAR *Scm_MsiServer     = L"MSIServer";
        const WCHAR *Scm_CryptSvc      = L"cryptsvc";
@@ -704,6 +711,13 @@ BOOLEAN SecHost_Init(HMODULE module)
 
         SCM_IMPORT_W8___(SubscribeServiceChangeNotifications);
         SBIEDLL_HOOK_SCM(SubscribeServiceChangeNotifications);
+
+        //
+        // on Windows 8, hook sechost!WaitServiceState
+        //
+
+        SCM_IMPORT_W8___(WaitServiceState);
+        SBIEDLL_HOOK_SCM(WaitServiceState);
 
         //
         // on Windows 8, the cred functions have been moved from advapi32.dll to sechost.dll
@@ -1300,6 +1314,7 @@ _FX HANDLE Scm_OpenKeyForService(const WCHAR *ServiceName, BOOLEAN ForWrite)
     ULONG error;
 
     wcscpy(keyname, Scm_ServicesKeyPath);
+    wcscat(keyname, L"\\");
     wcscat(keyname, ServiceName);
     RtlInitUnicodeString(&objname, keyname);
 
@@ -1358,8 +1373,10 @@ _FX void Scm_DiscardKeyCache(const WCHAR *ServiceName)
 {
     WCHAR *keyname = Dll_AllocTemp(sizeof(WCHAR) * 256);
     wcscpy(keyname, Scm_ServicesKeyPath);
+    Key_UpdateMergeByPath(keyname, FALSE, FALSE);
+    wcscat(keyname, L"\\");
     wcscat(keyname, ServiceName);
-    Key_DiscardMergeByPath(keyname, TRUE);
+    Key_UpdateMergeByPath(keyname, FALSE, FALSE);
     Dll_Free(keyname);
 }
 

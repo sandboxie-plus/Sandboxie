@@ -44,6 +44,8 @@ static int Gui_GetWindowTextA(
 
 BOOLEAN Gui_DisableTitle = FALSE;
 
+static BOOLEAN Gui_DisableCustomTitleOpt = FALSE;
+
 const WCHAR *Gui_TitleSuffixW = TITLE_SUFFIX_W;
 static ULONG Gui_TitleSuffixW_len = 0;
 
@@ -71,13 +73,21 @@ _FX BOOLEAN Gui_InitTitle(HMODULE module)
     SbieDll_GetSettingsForName(NULL, Dll_ImageName, L"BoxNameTitle", buf, sizeof(buf), NULL);
     if (*buf == L'y' || *buf == L'Y') { // indicator + box name
 
+        const WCHAR* BoxName = Dll_BoxName;
+
+        NTSTATUS status;
+		WCHAR BoxAlias[MAX_PATH];
+		status = SbieApi_QueryConfAsIs(NULL, L"BoxAlias", 0, BoxAlias, ARRAYSIZE(BoxAlias));
+        if (NT_SUCCESS(status) && *BoxAlias)
+            BoxName = BoxAlias;
+
         UNICODE_STRING uni;
 
-        Gui_BoxNameTitleLen = wcslen(Dll_BoxName) + 3;
+        Gui_BoxNameTitleLen = wcslen(BoxName) + 3;
         Gui_BoxNameTitleW =
             Dll_Alloc((Gui_BoxNameTitleLen + 3) * sizeof(WCHAR));
         Gui_BoxNameTitleW[0] = Gui_TitleSuffixW[1];         // L'['
-        wcscpy(&Gui_BoxNameTitleW[1], Dll_BoxName);
+        wcscpy(&Gui_BoxNameTitleW[1], BoxName);
         wcscat(Gui_BoxNameTitleW, &Gui_TitleSuffixW[3]);    // L"]"
         wcscat(Gui_BoxNameTitleW, L" ");
 
@@ -90,6 +100,15 @@ _FX BOOLEAN Gui_InitTitle(HMODULE module)
 
     Gui_TitleSuffixW_len = wcslen(Gui_TitleSuffixW);
     Gui_TitleSuffixA_len = strlen(Gui_TitleSuffixA);
+
+    //
+    // check if user wants to disable the custom titlebar optimization
+    // (i.e. allow [#] markers on VCL/Qt/Electron custom titlebar windows)
+    //
+
+    SbieDll_GetSettingsForName(NULL, Dll_ImageName, L"DisableCustomTitleOpt", buf, sizeof(buf), NULL);
+    if (*buf == L'y' || *buf == L'Y')
+        Gui_DisableCustomTitleOpt = TRUE;
 
     //
     // hook functions
@@ -147,6 +166,33 @@ _FX BOOLEAN Gui_ShouldCreateTitle(HWND hWnd)
         ULONG style = (ULONG)__sys_GetWindowLongW(hWnd, GWL_STYLE);
         if ((style & WS_CAPTION) == WS_CAPTION) {
 
+            //
+            // Check for custom titlebar - if the client area extends close to
+            // the top of the window, the application is rendering its own
+            // titlebar (e.g., VCL TCustomTitleBarPanel, Qt, Electron, etc.)
+            // and modifying the title causes excessive repainting.
+            // Set DisableCustomTitleOpt=y to allow [#] markers on
+            // custom titlebar windows.
+            //
+
+            if (! Gui_DisableCustomTitleOpt) {
+
+                RECT windowRect;
+                POINT clientOrigin = {0, 0};
+                if (__sys_GetWindowRect(hWnd, &windowRect) &&
+                    __sys_ClientToScreen(hWnd, &clientOrigin)) {
+
+                    int titleBarHeight = clientOrigin.y - windowRect.top;
+
+                    // Standard titlebar is typically 20-40 pixels. If the gap
+                    // is less than 10 pixels, it's a custom titlebar - skip
+                    // modification.
+                    if (titleBarHeight < 10)
+                        return FALSE;
+                }
+            }
+
+            // $Workaround$ - 3rd party fix
             WCHAR clsnm[256];
             UINT nChars = __sys_RealGetWindowClassW(hWnd, clsnm, sizeof(clsnm) - 1);
 

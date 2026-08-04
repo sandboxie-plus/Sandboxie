@@ -11,6 +11,8 @@
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
 #include "../Windows/BoxImageWindow.h"
 #include "../AddonManager.h"
+#include <QElapsedTimer>
+#include <QUuid>
 
 
 CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
@@ -23,6 +25,7 @@ CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
     setPage(Page_Summary, new CSummaryPage);
 
     m_bAdvanced = theConf->GetBool("Options/AdvancedBoxWizard", false);
+    m_bUseRandomName = theConf->GetBool("Options/UseRandomBoxName", false);
 
     setWizardStyle(ModernStyle);
     //setOption(HaveHelpButton, true);
@@ -97,15 +100,28 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 	{
 		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
 
+        if (m_bUseRandomName)
+        {
+            QString alias = field("boxNameAlias").toString().trimmed();
+            if (!alias.isEmpty())
+                pBox->SetText("BoxAlias", alias);
+        }
+
         // SharedTemplate
         QElapsedTimer timer;
         timer.start();
-        const QString templateName = "SharedTemplate";
+
+        int SharedTemplateIndex = field("sharedTemplateIndex").toInt();
+        const QString templateName = (SharedTemplateIndex == 0)
+            ? QString("SharedTemplate")
+            : QString("SharedTemplate_%1").arg(SharedTemplateIndex);
         const QString templateFullName = "Template_Local_" + templateName;
         const QString templateSettings = theAPI->SbieIniGetEx(templateFullName, "");
         const QStringList templateSettingsLines = templateSettings.split(QRegularExpression(QStringLiteral("[\r\n]")), Qt::SkipEmptyParts);
         const QString templateComment = tr("Add your settings after this line.");
-        const QString templateTitle = tr("Shared Template");
+        const QString templateTitle = (SharedTemplateIndex == 0)
+            ? tr("Shared Template")
+            : tr("Shared Template") + " " + QString::number(SharedTemplateIndex);
         const QString boxSettings = theAPI->SbieIniGetEx(BoxName, "");
         const QStringList boxSettingsLines = boxSettings.split(QRegularExpression(QStringLiteral("[\r\n]")), Qt::SkipEmptyParts);
         const QStringList SPECIAL_SETTINGS = { "BorderColor", "BoxIcon", "ConfigLevel", "CopyLimitKb" };
@@ -155,7 +171,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         }
         if (sharedTemplateMode == 1) { // Insert as template
             const QString insertValue = templateFullName.mid(9); // Template_
-            pBox->InsertText("Template", insertValue);
+            pBox->AppendText("Template", insertValue);
         }
         else if (sharedTemplateMode == 2) { // Append template settings to configuration
             for (const QString& tLine : templateSettingsLines) {
@@ -197,8 +213,8 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                     pBox->SetBool("UsePrivacyMode", true);
 		    	case CSandBoxPlus::eAppBox:
 		    		pBox->SetBool("NoSecurityIsolation", true);
-		    		//pBox->InsertText("Template", "NoUACProxy"); // proxy is always needed for exes in the box
-		    		pBox->InsertText("Template", "RpcPortBindingsExt");
+		    		//pBox->AppendText("Template", "NoUACProxy"); // proxy is always needed for exes in the box
+		    		pBox->AppendText("Template", "RpcPortBindingsExt");
 		    		break;
 		    }
 
@@ -236,14 +252,14 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                 pBox->SetBool("AutoRecover", true);
 
             if (field("blockNetwork").toInt() == 1) { // device based
-                //pBox->InsertText("AllowNetworkAccess", "<BlockNetAccess>,n");
-                pBox->InsertText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
-                //pBox->InsertText("ClosedFilePath", "<BlockNetDevices>,InternetAccessDevices");
+                //pBox->AppendText("AllowNetworkAccess", "<BlockNetAccess>,n");
+                pBox->AppendText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
+                //pBox->AppendText("ClosedFilePath", "<BlockNetDevices>,InternetAccessDevices");
             }
             else if (field("blockNetwork").toInt() == 2) { // using WFP
-                pBox->InsertText("AllowNetworkAccess", "!<InternetAccess>,n");
-                //pBox->InsertText("AllowNetworkAccess", "<BlockNetAccess>,n");
-                //pBox->InsertText("ClosedFilePath", "<BlockNetDevices>,InternetAccessDevices");
+                pBox->AppendText("AllowNetworkAccess", "!<InternetAccess>,n");
+                //pBox->AppendText("AllowNetworkAccess", "<BlockNetAccess>,n");
+                //pBox->AppendText("ClosedFilePath", "<BlockNetDevices>,InternetAccessDevices");
             }
             pBox->SetBool("BlockNetworkFiles", !field("shareAccess").toBool());
 
@@ -336,14 +352,38 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
 
     layout->addItem(new QSpacerItem(0, 3), row++, 0);
 
-    layout->addWidget(new QLabel(tr("Enter box name:")), row++, 0);
+    m_pAlias = nullptr;
+    bool bUseRandomName = theConf->GetBool("Options/UseRandomBoxName", false);
+    if (bUseRandomName)
+    {
+        layout->addWidget(new QLabel(tr("Alias:")), row++, 0);
 
-    m_pBoxName = new QLineEdit();
-    m_pBoxName->setMaxLength(32); // BOXNAME_COUNT
-    m_pBoxName->setText(theAPI->MkNewName("New Box"));
-    m_pBoxName->setFocus();
-    layout->addWidget(m_pBoxName, row++, 1, 1, 2);
+        m_pAlias = new QLineEdit();
+        m_pAlias->setMaxLength(38); // BOXNAME_COUNT
+        m_pAlias->setText(theAPI->MkNewName("New Box"));
+        layout->addWidget(m_pAlias, row++, 1, 1, 2);
+        m_pAlias->setFocus();
+
+        QString guidName;
+        do {
+            guidName = QUuid::createUuid().toString(QUuid::WithoutBraces).replace("-", "");
+        } while (!theAPI->GetBoxByName(guidName).isNull());
+        m_pBoxName = new QLineEdit();
+        m_pBoxName->setText(guidName);
+        m_pBoxName->setVisible(false);
+    }
+    else
+    {
+        layout->addWidget(new QLabel(tr("Enter box name:")), row++, 0);
+
+        m_pBoxName = new QLineEdit();
+        m_pBoxName->setMaxLength(38); // BOXNAME_COUNT
+        m_pBoxName->setText(theAPI->MkNewName("New Box"));
+        m_pBoxName->setFocus();
+        layout->addWidget(m_pBoxName, row++, 1, 1, 2);
+    }
     registerField("boxName", m_pBoxName);
+    registerField("boxNameAlias", m_pAlias ? m_pAlias : m_pBoxName);
 
 
     /*QLabel* pMore = new QLabel(tr("<a href=\"more\">More Types</a>"));
@@ -512,7 +552,7 @@ void CBoxTypePage::OnBoxTypChanged()
 #endif
 
     if(BoxType != CSandBoxPlus::eDefault || BlackBox)
-		theGUI->CheckCertificate(this, BlackBox);
+		theGUI->CheckCertificate(this, BlackBox ? 1 : 0);
 
     emit completeChanged();
 }
@@ -523,6 +563,8 @@ void CBoxTypePage::OnAdvanced()
     if (m_bInstant)
     {
         QString BoxName = m_pBoxName->text();
+        QString Alias;
+        if (m_pAlias) Alias = m_pAlias->text();
 #ifdef USE_COMBO
         int BoxType = m_pBoxType->currentIndex();
 #endif
@@ -530,6 +572,7 @@ void CBoxTypePage::OnAdvanced()
         wizard()->restart();
 
         m_pBoxName->setText(BoxName);
+        if (m_pAlias) m_pAlias->setText(Alias);
 #ifdef USE_COMBO
         m_pBoxType->setCurrentIndex(BoxType);
 #endif
@@ -679,6 +722,14 @@ void CFilesPage::initializePage()
     m_pBoxLocation->clear();
     QString Location = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
     m_pBoxLocation->addItem(Location/*.replace("%SANDBOX%", field("boxName").toString())*/);
+    QStringList StdLocations = QStringList() 
+        << "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%" 
+        << "\\??\\%SystemDrive%\\Sandbox\\%SANDBOX%" 
+        << "\\??\\%SystemDrive%\\Users\\%USER%\\Sandbox\\%SANDBOX%";
+    foreach(auto StdLocation, StdLocations) {
+        if (StdLocation != Location)
+            m_pBoxLocation->addItem(StdLocation);
+    }
 }
 
 bool CFilesPage::validatePage()
@@ -687,7 +738,16 @@ bool CFilesPage::validatePage()
     if (Location == m_pBoxLocation->itemText(0))
         wizard()->setField("boxLocation", "");
     else {
-        if (Location.mid(2).contains(QRegularExpression("[ <>:\"/\\|?*\\[\\]]"))){
+        int offset = Location.left(4) == "\\??\\" ? 4 : 0;
+        if (Location.length() < offset + 4) {
+            QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located at the root of a partition, please select a folder."));
+            return false;
+        }
+        if (Location.left(2) == "\\\\") {
+            QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located on a network share, please select a local folder."));
+            return false;
+        }
+        if (Location.mid(offset + 2).contains(QRegularExpression("[ <>:\"/\\|?*\\[\\]]"))){
             QMessageBox::critical(this, "Sandboxie-Plus", tr("The selected box location is not a valid path."));
             return false;
         }
@@ -697,7 +757,7 @@ bool CFilesPage::validatePage()
                 "Are you sure you want to use an existing folder?"), QDialogButtonBox::Yes, QDialogButtonBox::No) != QDialogButtonBox::Yes)
                 return false;
         }
-        if (!QDir().exists(Location.left(3))) {
+        if (Location.mid(offset, 13).compare("%SystemDrive%") != 0 && !QDir().exists(Location.mid(offset, 3))) {
             QMessageBox::critical(this, "Sandboxie-Plus", tr("The selected box location is not placed on a currently available drive."));
             return false;
         }
@@ -896,21 +956,67 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     QString SharedTemplateTip1 = tr("This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.");
     QString SharedTemplateTip2 = tr("This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.");
     QString SharedTemplateTip3 = tr("This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.");
-    QComboBox* pSharedTemplate = new QComboBox();
-    pSharedTemplate->addItem(tr("Disabled"));
-    pSharedTemplate->setItemData(0, SharedTemplateTip0, Qt::ToolTipRole);
-    pSharedTemplate->addItem(tr("Use as a template"));
-    pSharedTemplate->setItemData(1, SharedTemplateTip1, Qt::ToolTipRole);
-    pSharedTemplate->addItem(tr("Append to the configuration"));
-    pSharedTemplate->setItemData(2, SharedTemplateTip2, Qt::ToolTipRole);
-    pSharedTemplate->addItem(tr("Remove defaults if set"));
-    pSharedTemplate->setItemData(3, SharedTemplateTip3, Qt::ToolTipRole);
-    layout->addWidget(pSharedTemplate, row++, 2);
-    pSharedTemplate->setCurrentIndex(theConf->GetInt("BoxDefaults/SharedTemplate", 0));
+    m_pSharedTemplate = new QComboBox();
+    m_pSharedTemplate->addItem(tr("Disabled"));
+    m_pSharedTemplate->setItemData(0, SharedTemplateTip0, Qt::ToolTipRole);
+    m_pSharedTemplate->addItem(tr("Use as a template"));
+    m_pSharedTemplate->setItemData(1, SharedTemplateTip1, Qt::ToolTipRole);
+    m_pSharedTemplate->addItem(tr("Append to the configuration"));
+    m_pSharedTemplate->setItemData(2, SharedTemplateTip2, Qt::ToolTipRole);
+    m_pSharedTemplate->addItem(tr("Remove defaults if set"));
+    m_pSharedTemplate->setItemData(3, SharedTemplateTip3, Qt::ToolTipRole);
+    layout->addWidget(m_pSharedTemplate, row++, 2);
+    m_pSharedTemplate->setCurrentIndex(theConf->GetInt("BoxDefaults/SharedTemplate", 0));
     layout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum), 0, 4, 1, 1);
-    registerField("sharedTemplate", pSharedTemplate);
+    registerField("sharedTemplate", m_pSharedTemplate);
+
+    QLabel* pSharedTemplateIndexLbl = new QLabel(tr("Shared template selection"), this);
+    layout->addWidget(pSharedTemplateIndexLbl, row, 1);
+
+    m_pSharedTemplateIndex = new QComboBox();
+    QStringList templateOptions;
+    QStringList templateToolTips;
+
+    for (int i = 0; i <= 9; ++i) {
+        QString templateName = (i == 0)
+            ? QString("SharedTemplate")
+            : QString("SharedTemplate_%1").arg(i);
+        QString templateFullName = "Template_Local_" + templateName;
+        QString templateTitle = theAPI->SbieIniGetEx(templateFullName, "Tmpl.Title");
+
+        // Determine the template name, including the index if not zero
+        QString templateNameCustom = templateTitle.isEmpty()
+            ? (i == 0 ? SharedTemplateName : SharedTemplateName + " " + QString::number(i))
+            : templateTitle;
+
+        templateOptions << templateNameCustom;
+
+        // Set tooltip text using the combined template name
+        QString toolTipText = tr("This option specifies the template to be used in shared template mode. (%1)").arg(templateFullName);
+        templateToolTips << toolTipText;
+    }
+
+    // Set options to the combobox
+    m_pSharedTemplateIndex->addItems(templateOptions);
+
+    // Set tooltips for each item
+    for (int i = 0; i < templateOptions.size(); ++i) {
+        m_pSharedTemplateIndex->setItemData(i, templateToolTips[i], Qt::ToolTipRole);
+    }
+
+    layout->addWidget(m_pSharedTemplateIndex, row++, 2);
+    m_pSharedTemplateIndex->setCurrentIndex(theConf->GetInt("BoxDefaults/SharedTemplateIndex", 0));
+    registerField("sharedTemplateIndex", m_pSharedTemplateIndex);
+
 
     setLayout(layout);
+
+    // Connect the combo box signal to the slot
+    connect(m_pSharedTemplate, qOverload<int>(&QComboBox::currentIndexChanged),
+        this, &CAdvancedPage::OnSharedTemplateIndexChanged);
+
+    // Initial call to set the state based on the default index
+    OnSharedTemplateIndexChanged(m_pSharedTemplate->currentIndex());
 
 
 	int size = 16.0;
@@ -918,6 +1024,14 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
 	size *= (QApplication::desktop()->logicalDpiX() / 96.0); // todo Qt6
 #endif
     AddIconToLabel(pBoxLabel, CSandMan::GetIcon("Advanced").pixmap(size,size));
+}
+
+void CAdvancedPage::OnSharedTemplateIndexChanged(int index)
+{
+    if (m_pSharedTemplateIndex) {
+        bool enable = (index != 0);
+        m_pSharedTemplateIndex->setEnabled(enable);
+    }
 }
 
 int CAdvancedPage::nextId() const
@@ -989,6 +1103,9 @@ void CSummaryPage::initializePage()
 {
     m_pSummary->setText(theGUI->GetBoxDescription(wizard()->field("boxType").toInt()));
 
+    if (((CNewBoxWizard*)wizard())->m_bUseRandomName)
+        m_pSummary->append(tr("\nThe actual sandbox name is: %1").arg(wizard()->field("boxName").toString()));
+
     QString Location = field("boxLocation").toString();
     if (Location.isEmpty())
         Location = ((CNewBoxWizard*)wizard())->GetDefaultLocation();
@@ -997,7 +1114,7 @@ void CSummaryPage::initializePage()
     if (field("autoRemove").toBool()) 
         m_pSummary->append(tr("\nThis box's content will be DISCARDED when it's closed, and the box will be removed."));
     else if (field("autoDelete").toBool())
-        m_pSummary->append(tr("\nThis box will DISCARD its content when its closed, its suitable only for temporary data."));
+        m_pSummary->append(tr("\nThis box will DISCARD its content when it's closed, it's suitable only for temporary data."));
     if (field("blockNetwork").toInt())
         m_pSummary->append(tr("\nProcesses in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential."));
     if (field("msiServer").toBool())
@@ -1035,6 +1152,7 @@ bool CSummaryPage::validatePage()
         theConf->SetValue("BoxDefaults/ImagesProtection", field("imagesProtection").toBool());
         theConf->SetValue("BoxDefaults/CoverBoxedWindows", field("coverBoxedWindows").toBool());
         theConf->SetValue("BoxDefaults/SharedTemplate", field("sharedTemplate").toInt());
+        theConf->SetValue("BoxDefaults/SharedTemplateIndex", field("sharedTemplateIndex").toInt());
     }
 
     theConf->SetValue("Options/InstantBoxWizard", m_pSetInstant->isChecked());

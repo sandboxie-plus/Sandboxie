@@ -108,15 +108,33 @@ QString CSbieProcess::GetStatusStr() const
 		Status += tr(" Elevated");
 	if (m_ProcessInfo.IsSystem)
 		Status += tr(" as System");
+	if (m_ProcessInfo.IsFakeAdmin)
+		Status += tr(" fake Admin");
 
 	if(m_SessionId != theAPI->GetSessionID() && m_SessionId != -1)
 		Status += tr(" in session %1").arg(m_SessionId);
 
+
+	QStringList Types;
+
+	if ((m_ProcessFlags & 0x00800000) != 0) // SBIE_FLAG_PROCESS_IN_APP_PKG
+		Types.append("UWP");
+
 	quint32 ImageType = GetImageType();
 	if (ImageType != -1) {
 		QString Type = ImageTypeToStr(ImageType);
-		if(!Type.isEmpty())
-			Status += tr(" (%1)").arg(Type);
+		if(!Type.isEmpty()) Types.append(Type);
+	}
+
+#ifdef _DEBUG
+	if ((m_ProcessFlags & 0x08000000) != 0) // SBIE_FLAG_PROCESS_IN_PCA_JOB
+		Types.append("PCA");
+#endif
+
+	if (!Types.isEmpty()) {
+		if (!Status.isEmpty())
+			Status += " ";
+		Status += "(" + Types.join(", ") + ")";
 	}
 
 	return Status;

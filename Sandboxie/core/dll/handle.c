@@ -51,6 +51,7 @@ typedef struct _HANDLE_STATE {
     BOOLEAN DeleteOnClose;
     LIST    CloseHandlers;
     WCHAR*  RelocationPath;
+    ACCESS_MASK KeyWow64Flags;
 
 } HANDLE_STATE;
 
@@ -153,6 +154,46 @@ _FX WCHAR* Handle_GetRelocationPath(HANDLE FileHandle, ULONG ExtraLength)
 
 
 //---------------------------------------------------------------------------
+// Handle_SetKeyWow64Flags
+//---------------------------------------------------------------------------
+
+
+_FX VOID Handle_SetKeyWow64Flags(HANDLE FileHandle, ACCESS_MASK Wow64Flags)
+{
+    EnterCriticalSection(&Handle_StatusData_CritSec);
+
+    HANDLE_STATE* state = map_get(&Handle_StatusData, FileHandle);
+    if (!state)
+        state = map_insert(&Handle_StatusData, FileHandle, NULL, sizeof(HANDLE_STATE));
+
+    state->KeyWow64Flags = Wow64Flags & (KEY_WOW64_32KEY | KEY_WOW64_64KEY);
+
+    LeaveCriticalSection(&Handle_StatusData_CritSec);
+}
+
+
+//---------------------------------------------------------------------------
+// Handle_GetKeyWow64Flags
+//---------------------------------------------------------------------------
+
+
+_FX ACCESS_MASK Handle_GetKeyWow64Flags(HANDLE FileHandle)
+{
+    ACCESS_MASK wow64Flags = 0;
+
+    EnterCriticalSection(&Handle_StatusData_CritSec);
+
+    HANDLE_STATE* state = map_get(&Handle_StatusData, FileHandle);
+    if (state)
+        wow64Flags = state->KeyWow64Flags & (KEY_WOW64_32KEY | KEY_WOW64_64KEY);
+
+    LeaveCriticalSection(&Handle_StatusData_CritSec);
+
+    return wow64Flags;
+}
+
+
+//---------------------------------------------------------------------------
 // Handle_FreeCloseHandler
 //---------------------------------------------------------------------------
 
@@ -186,7 +227,7 @@ _FX VOID Handle_ExecuteCloseHandler(HANDLE FileHandle, BOOLEAN* DeleteOnClose)
                 break;
             handler->Close(FileHandle, handler->Param);
             List_Remove(&CloseHandlers, handler);
-            Pool_Free(handler, sizeof(HANDLE_HANDLER));
+            Dll_Free(handler);
         }
     }
 }
@@ -219,7 +260,7 @@ _FX BOOLEAN Handle_RegisterHandler(HANDLE FileHandle, P_HandlerFunc CloseHandler
 
     if (handler == NULL) 
     {
-        HANDLE_HANDLER* newNandler = Pool_Alloc(Dll_Pool, sizeof(HANDLE_HANDLER));
+        HANDLE_HANDLER* newNandler = Dll_Alloc(sizeof(HANDLE_HANDLER));
         memzero(&newNandler->list_elem, sizeof(LIST_ELEM));
 
         newNandler->Close = CloseHandler;
@@ -283,6 +324,9 @@ _FX void Handle_SetupDuplicate(HANDLE OldFileHandle, HANDLE NewFileHandle)
 
         if(state->RelocationPath)
             Handle_SetRelocationPath(NewFileHandle, state->RelocationPath);
+
+        if (state->KeyWow64Flags)
+            Handle_SetKeyWow64Flags(NewFileHandle, state->KeyWow64Flags);
 
         HANDLE_HANDLER* handler = List_Head(&state->CloseHandlers);
         while (handler) 

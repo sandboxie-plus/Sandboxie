@@ -206,6 +206,18 @@ ReadyMemoComponents=選擇的元件:
 ReadyMemoGroup=「開始」功能表資料夾:
 ReadyMemoTasks=附加工作:
 
+; *** TDownloadWizardPage wizard page and DownloadTemporaryFile
+DownloadingLabel=正在下載附加檔案...
+ButtonStopDownload=停止下載(&S)
+StopDownload=您确定要停止下載嗎？
+ErrorDownloadAborted=下載已中止
+ErrorDownloadFailed=下載失敗：%1 %2
+ErrorDownloadSizeFailed=獲取下載大小失敗：%1 %2
+ErrorFileHash1=校驗檔案哈希失敗：%1
+ErrorFileHash2=無效的檔案哈希：預期 %1，實際 %2
+ErrorProgress=無效的進度：%1 / %2
+ErrorFileSize=檔案大小錯誤：預期 %1，實際 %2
+
 ; *** "Preparing to Install" wizard page
 WizardPreparing=準備安裝程式
 PreparingDesc=安裝程式準備將 [name] 安裝到您的電腦上。
@@ -216,6 +228,7 @@ ApplicationsFound2=下面的應用程式正在使用安裝程式所需要更新�
 CloseApplications=關閉應用程式(&A)
 DontCloseApplications=不要關閉應用程式 (&D)
 ErrorCloseApplications=安裝程式無法自動關閉所有應用程式。建議您在繼續前先關閉所有應用程式使用的檔案。
+PrepareToInstallNeedsRestart=安裝程式必須重啓您的電腦。電腦重啓後，請再次運行安裝程式以完成 [name] 的安裝。%n%n是否立即重新啓動？
 
 ; *** "Installing" wizard page
 WizardInstalling=正在安裝
@@ -288,7 +301,15 @@ ExistingFileReadOnlyRetry=移除唯讀屬性並重試 (&R)
 ExistingFileReadOnlyKeepExisting=保留現有檔案 (&K)
 ErrorReadingExistingDest=讀取一個已存在的檔案時發生錯誤:
 FileExists=檔案已經存在。%n%n 要讓安裝程式加以覆寫嗎?
-ExistingFileNewer=存在的檔案版本比較新，建議您保留目前已存在的檔案。%n%n您要保留目前已存在的檔案嗎?
+FileExistsSelectAction=選擇操作
+FileExists2=檔案已經存在。
+FileExistsOverwriteExisting=覆寫已存在的档案(&O)
+FileExistsKeepExisting=保畱現有的档案(&K)
+FileExistsOverwriteOrKeepAll=為所有衝突档案執行此操作(&D)
+ExistingFileNewer2=現有的档案比安裝程式將要安裝的档案還要新。
+ExistingFileNewerOverwriteExisting=覆蓋已存在的档案(&O)
+ExistingFileNewerKeepExisting=保畱現有的档案(&K) (推薦)
+ExistingFileNewerOverwriteOrKeepAll=為所有衝突档案執行此操作(&D)
 ErrorChangingAttr=在變更檔案屬性時發生錯誤:
 ErrorCreatingTemp=在目的資料夾中建立檔案時發生錯誤:
 ErrorReadingSource=讀取原始檔案時發生錯誤:

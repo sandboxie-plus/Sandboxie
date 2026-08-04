@@ -12,16 +12,17 @@
 CSetupWizard::CSetupWizard(int iOldLevel, QWidget *parent)
     : QWizard(parent)
 {
-    if (iOldLevel < SETUP_LVL_1) {
+    if (iOldLevel < SETUP_LVL_1)
         setPage(Page_Intro, new CIntroPage);
-        setPage(Page_Certificate, new CCertificatePage);
+    if (iOldLevel < SETUP_LVL_3)
+        setPage(Page_Certificate, new CCertificatePage(iOldLevel));
+    if (iOldLevel < SETUP_LVL_1) {
         setPage(Page_UI, new CUIPage);
         setPage(Page_Shell, new CShellPage);
         //setPage(Page_WFP, new CWFPPage);
     }
-    if (iOldLevel < SETUP_LVL_2) {
+    if (iOldLevel < SETUP_LVL_2)
         setPage(Page_Update, new CSBUpdate);
-    }
     setPage(Page_Finish, new CFinishPage);
 
     setWizardStyle(ModernStyle);
@@ -150,6 +151,8 @@ void CSetupWizard::ShellUninstall()
 
 	CSettingsWindow::RemoveContextMenu();
 	CSbieUtils::RemoveContextMenu2();
+	CSbieUtils::RemoveContextMenu3();
+	CSbieUtils::RemoveContextMenu4();
 
     // todo: delete desktop browser shortcut and start menu integration
 }
@@ -239,12 +242,17 @@ bool CIntroPage::isComplete() const
 // CCertificatePage
 // 
 
-CCertificatePage::CCertificatePage(QWidget *parent)
+CCertificatePage::CCertificatePage(int iOldLevel, QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Install your <b>Sandboxie-Plus</b> support certificate"));
     setSubTitle(tr("If you have a supporter certificate, please fill it into the field below."));
     
+    if (iOldLevel < SETUP_LVL_1)
+        m_NextPage = CSetupWizard::Page_UI;
+    else if (iOldLevel < SETUP_LVL_3)
+        m_NextPage = CSetupWizard::Page_Finish;
+
     QGridLayout *layout = new QGridLayout;
 
     m_pTopLabel = new QLabel();
@@ -279,6 +287,13 @@ CCertificatePage::CCertificatePage(QWidget *parent)
     layout->addWidget(m_pEvaluate);
     connect(m_pEvaluate, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
     registerField("isEvaluate", m_pEvaluate);
+
+    QLabel* pGetEvalCert = new QLabel(tr("<b><a href=\"_\"><font color='red'>Get a free evaluation certificate</font></a> and enjoy all premium features for %1 days.</b>").arg(EVAL_DAYS));
+    pGetEvalCert->setToolTip(tr("You can request a free %1-day evaluation certificate up to %2 times per hardware ID.").arg(EVAL_DAYS).arg(EVAL_MAX));
+    layout->addWidget(pGetEvalCert);
+    connect(pGetEvalCert, &QLabel::linkActivated, this, [=]() {
+        CSettingsWindow::StartEval(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+	});
 
     layout->addWidget(new QWidget());
 
@@ -328,7 +343,7 @@ void CCertificatePage::initializePage()
 
 int CCertificatePage::nextId() const
 {
-    return CSetupWizard::Page_UI;
+    return m_NextPage;
 }
 
 bool CCertificatePage::isComplete() const 
@@ -376,8 +391,19 @@ bool CCertificatePage::validatePage()
         return false;
     }
 
-    if (!Certificate.isEmpty() && Certificate != g_Certificate)
-		return CSettingsWindow::ApplyCertificate(Certificate, this);
+    if (!Certificate.isEmpty()) {
+        if (Certificate != g_Certificate) {
+            if (CSettingsWindow::ApplyCertificate(Certificate, this))
+                return false;
+        }
+        if (CSettingsWindow::CertRefreshRequired()) {
+            if (!CSettingsWindow::TryRefreshCert(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)))) {
+                m_pCertificate->clear();
+                theGUI->SetCertificate("");
+            }
+            return false;
+        }
+    }
 
     return true;
 }

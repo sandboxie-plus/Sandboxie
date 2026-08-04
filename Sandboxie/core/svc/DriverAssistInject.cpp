@@ -60,6 +60,12 @@ void DriverAssist::InjectLow(void *_msg)
     WCHAR* file_root_path = NULL;
     WCHAR* reg_root_path = NULL;
 
+    if (!m_DriverReady) {
+
+		errlvl = 0xFF;
+		goto finish;
+    }
+
 	//
 	// open new process and verify process creation time
 	//
@@ -133,7 +139,7 @@ void DriverAssist::InjectLow(void *_msg)
     //
 
     // NoSbieDesk BEGIN
-    if (!CompartmentMode && !SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE))
+    if (!(CompartmentMode || SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE)))
     // NoSbieDesk END
     if (!msg->bHostInject)
     {

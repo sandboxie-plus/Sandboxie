@@ -49,10 +49,10 @@ QString ErrorString(qint32 err)
 	QString Error;
 	HMODULE handle = NULL; //err < 0 ? GetModuleHandle(L"NTDLL.DLL") : NULL;
 	DWORD flags = 0; //err < 0 ? FORMAT_MESSAGE_FROM_HMODULE : 0;
-	LPTSTR s;
+	LPWSTR s;
 	if (::FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | flags, handle, err, 0, (LPTSTR)&s, 0, NULL) > 0)
 	{
-		LPTSTR p = wcschr(s, L'\r');
+		LPWSTR p = wcschr(s, L'\r');
 		if (p != NULL) *p = L'\0';
 		Error = QString::fromWCharArray(s);
 		::LocalFree(s);
@@ -74,6 +74,14 @@ CTraceEntry::CTraceEntry(quint64 Timestamp, quint32 ProcessId, quint32 ThreadId,
 		m_Message += ", name=" + m_SubType;
 		m_SubType.clear();
 	}
+	/*if (m_Type.Type == MONITOR_HOOK)
+	{
+		int colon_pos = m_Message.lastIndexOf(':');
+		if (colon_pos != -1) {
+			m_Name = m_Message.mid(colon_pos + 1).trimmed();
+			m_Message = m_Message.left(colon_pos);
+		}
+	}*/
 
 	m_TimeStamp = Timestamp ? Timestamp : QDateTime::currentDateTime().toMSecsSinceEpoch();
 
@@ -113,7 +121,7 @@ QList<quint32> CTraceEntry::AllTypes()
 		<< MONITOR_KEY << MONITOR_FILE << MONITOR_PIPE 
 		<< MONITOR_IPC << MONITOR_RPC << MONITOR_COMCLASS << MONITOR_RTCLASS
 		<< MONITOR_WINCLASS << MONITOR_DRIVE  << MONITOR_IGNORE << MONITOR_IMAGE 
-		<< MONITOR_NETFW << MONITOR_DNS << MONITOR_SCM << MONITOR_OTHER;
+		<< MONITOR_NETFW << MONITOR_DNS << MONITOR_SCM << MONITOR_HOOK << MONITOR_OTHER;
 }
 
 QString CTraceEntry::GetTypeStr(quint32 Type)
@@ -136,6 +144,7 @@ QString CTraceEntry::GetTypeStr(quint32 Type)
 	case MONITOR_NETFW:			return "Socket"; break;
 	case MONITOR_DNS:			return "Dns"; break;
 	case MONITOR_SCM:			return "SCM"; break; // Service Control Manager
+	case MONITOR_HOOK:			return "Hook"; break;
 	case MONITOR_OTHER:			return "Debug"; break;
 	default:					return QString();
 	}

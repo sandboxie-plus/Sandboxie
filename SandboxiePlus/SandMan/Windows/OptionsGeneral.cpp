@@ -55,9 +55,18 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxIndicator->addItem(tr("Display [#] indicator only"), "n");
 	ui.cmbBoxIndicator->addItem(tr("Display box name in title"), "y");
 
+	ui.cmbBoxBorderText->addItem(tr("Don't show in border"), "no");
+	ui.cmbBoxBorderText->addItem(tr("Show within the border"), "in");
+	ui.cmbBoxBorderText->addItem(tr("Show above the border"), "out");
+
 	ui.cmbBoxBorder->addItem(tr("Border disabled"), "off");
 	ui.cmbBoxBorder->addItem(tr("Show only when title is in focus"), "ttl");
-	ui.cmbBoxBorder->addItem(tr("Always show"), "on");
+	ui.cmbBoxBorder->addItem(tr("Always show (focused window only)"), "on");
+	ui.cmbBoxBorder->addItem(tr("Show for all windows in this box"), "all");
+	QString outsideSuffix = tr(" (outside)");
+	ui.cmbBoxBorder->addItem(tr("Show only when title is in focus") + outsideSuffix, "ttloutside");
+	ui.cmbBoxBorder->addItem(tr("Always show (focused window only)") + outsideSuffix, "onoutside");
+	ui.cmbBoxBorder->addItem(tr("Show for all windows in this box") + outsideSuffix, "alloutside");
 
 
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
@@ -87,17 +96,18 @@ void COptionsWindow::CreateGeneral()
 		}
 	}
 
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard)) {
-		QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
-			ui.chkPrivacy, ui.chkUseSpecificity,
-			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkHostProtect, ui.chkRamBox, NULL };
+	if (!g_CertInfo.opt_sec) {
+		QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices, ui.chkPrivacy, ui.chkUseSpecificity, ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkHostProtect, NULL };
 		for (QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
 			COptionsWindow__AddCertIcon(*ExWidget);
 	}
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard2))
+	if (!g_CertInfo.active)
+		COptionsWindow__AddCertIcon(ui.chkRamBox, true);
+	if (!g_CertInfo.opt_enc) {
 		COptionsWindow__AddCertIcon(ui.chkConfidential, true);
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced1))
 		COptionsWindow__AddCertIcon(ui.chkEncrypt, true);
+		COptionsWindow__AddCertIcon(ui.chkAllowEfs, true);
+	}
 
 
 	m_HoldBoxType = false;
@@ -128,27 +138,43 @@ void COptionsWindow::CreateGeneral()
     pActionWidget->setDefaultWidget(pIconWidget);
 	pColorMenu->addAction(pActionWidget);
 	pColorMenu->addSeparator();
+
+	QWidget* pSliderWidget = new QWidget(this);
+	QHBoxLayout* pSliderLayout = new QHBoxLayout(pSliderWidget);
+	pSliderLayout->setContentsMargins(0, 0, 0, 0);
+	pSliderLayout->setSpacing(0);
 	m_pColorSlider = new QSlider(Qt::Horizontal, this);
 	m_pColorSlider->setMinimum(0);
 	m_pColorSlider->setMaximum(359);
 	m_pColorSlider->setMinimumHeight(16);
+	m_pColorSlider->setMinimumWidth(120);
 	connect(m_pColorSlider, SIGNAL(valueChanged(int)), this, SLOT(OnColorSlider(int)));
+	m_pColorReset = new QToolButton(this);
+	m_pColorReset->setText(QChar(0x21BA));
+	connect(m_pColorReset, SIGNAL(clicked(bool)), this, SLOT(OnColorReset()));
+	int maxButtonWidth = qMax(m_pPickIcon->sizeHint().width(), m_pColorReset->sizeHint().width());
+	m_pPickIcon->setMinimumWidth(maxButtonWidth);
+	m_pColorReset->setMinimumWidth(maxButtonWidth);
+	pSliderLayout->addWidget(m_pColorSlider);
+	pSliderLayout->addWidget(m_pColorReset);
 	pActionWidget = new QWidgetAction(this);
-    pActionWidget->setDefaultWidget(m_pColorSlider);
+    pActionWidget->setDefaultWidget(pSliderWidget);
 	pColorMenu->addAction(pActionWidget);
 	ui.btnBorderColor->setMenu(pColorMenu);
 
 	connect(ui.cmbBoxIndicator, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.cmbBoxBorder, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.cmbBoxBorderText, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.btnBorderColor, SIGNAL(clicked(bool)), this, SLOT(OnPickColor()));
 	connect(ui.spinBorderWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.spinBorderAlpha, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.spinLabelWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkBorderLabelOnly, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkBorderInsideMaximized, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkShowForRun, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkPinToTray, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.cmbDblClick, SIGNAL(currentIndexChanged(int)), this, SLOT(OnActionChanged()));
-
-	connect(ui.chkBlockNetShare, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
-	connect(ui.chkBlockNetParam, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.chkSecurityMode, SIGNAL(clicked(bool)), this, SLOT(OnSecurityMode()));
 	connect(ui.chkLockDown, SIGNAL(clicked(bool)), this, SLOT(OnSecurityMode()));
@@ -157,6 +183,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkDropRights, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkFakeElevation, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkMsiExemptions, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkACLs, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	
 	connect(ui.chkBlockSpooler, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkOpenSpooler, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -175,7 +202,7 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbVersion->addItem(tr("Version 1"));
 	ui.cmbVersion->addItem(tr("Version 2"));
 
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 	bool bEmpty = pBoxEx ? pBoxEx->IsEmpty() : true;
 	ui.lblWhenEmpty->setVisible(!bEmpty);
 	ui.lblScheme->setEnabled(bEmpty);
@@ -228,6 +255,8 @@ void COptionsWindow::CreateGeneral()
 
 	connect(ui.chkRawDiskRead, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkRawDiskNotify, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	
+	connect(ui.chkAllowEfs, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.btnAddCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddCommand()));
 	QMenu* pRunBtnMenu = new QMenu(ui.btnAddCmd);
@@ -238,6 +267,8 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.btnCmdDown, SIGNAL(clicked(bool)), this, SLOT(OnCommandDown()));
 	connect(ui.btnDelCmd, SIGNAL(clicked(bool)), this, SLOT(OnDelCommand()));
 	connect(ui.treeRun, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnRunChanged()));
+
+	connect(ui.txtNotes, SIGNAL(textChanged()), this, SLOT(OnGeneralChanged()));
 }
 
 void COptionsWindow::LoadGeneral()
@@ -246,15 +277,55 @@ void COptionsWindow::LoadGeneral()
 	ui.cmbBoxIndicator->setCurrentIndex(ui.cmbBoxIndicator->findData(BoxNameTitle.toLower()));
 
 	QStringList BorderCfg = m_pBox->GetText("BorderColor").split(",");
-	ui.cmbBoxBorder->setCurrentIndex(ui.cmbBoxBorder->findData(BorderCfg.size() >= 2 ? BorderCfg[1].toLower() : "on"));
+	bool borderLabelOnly = false;
+	{
+		QString rawMode = BorderCfg.size() >= 2 ? BorderCfg[1].toLower() : "on";
+		bool borderOutside = rawMode.endsWith("outside");
+		if (borderOutside)
+			rawMode.chop(7);
+		borderLabelOnly = rawMode.endsWith("lbl");
+		if (borderLabelOnly)
+			borderOutside = false;
+		QString baseMode = borderLabelOnly ? rawMode.left(rawMode.length() - 3) : rawMode;
+		if (borderOutside)
+			baseMode += "outside";
+		if (baseMode.isEmpty()) baseMode = "on";
+		int idx = ui.cmbBoxBorder->findData(baseMode);
+		if (idx < 0) idx = ui.cmbBoxBorder->findData("on");
+		ui.cmbBoxBorder->setCurrentIndex(idx);
+	}
 	SetBoxColor(QColor("#" + BorderCfg[0].mid(5, 2) + BorderCfg[0].mid(3, 2) + BorderCfg[0].mid(1, 2)));
 	int BorderWidth = BorderCfg.count() >= 3 ? BorderCfg[2].toInt() : 0;
 	if (!BorderWidth) BorderWidth = 6;
 	ui.spinBorderWidth->setValue(BorderWidth);
+	// Read alpha value (4th parameter) - default to 192 (75% opacity)
+	bool alphaOk = false;
+	m_BorderAlpha = BorderCfg.count() >= 4 ? BorderCfg[3].toInt(&alphaOk) : 192;
+	if (!alphaOk || m_BorderAlpha < 0 || m_BorderAlpha > 255)
+		m_BorderAlpha = 192;
+	ui.spinBorderAlpha->setValue(m_BorderAlpha);
+
+	QString labelMode = BorderCfg.count() >= 5 ? BorderCfg[4].toLower() : "in";
+	int labelModeIndex = ui.cmbBoxBorderText->findData(labelMode);
+	if (labelModeIndex < 0)
+		labelModeIndex = ui.cmbBoxBorderText->findData("in");
+	ui.cmbBoxBorderText->setCurrentIndex(labelModeIndex);
+	// Set after cmbBoxBorderText is loaded: OnGeneralChanged (fired by spinners) reads
+	// cmbBoxBorderText to decide whether to uncheck, so we must apply this value last.
+	ui.chkBorderLabelOnly->setChecked(borderLabelOnly);
+	ui.chkBorderInsideMaximized->setChecked(m_pBox->GetBool("BorderInsideMaximized", true));
+
+	// Optional per-label width values (legacy config falls back to border values).
+	int labelWidth = BorderCfg.count() >= 6 ? BorderCfg[5].toInt() : BorderWidth;
+	if (labelWidth <= 0)
+		labelWidth = BorderWidth;
+	ui.spinLabelWidth->setValue(labelWidth);
 
 	m_BoxIcon = m_pBox->GetText("BoxIcon");
 	m_pUseIcon->setChecked(!m_BoxIcon.isEmpty());
 	m_pPickIcon->setEnabled(!m_BoxIcon.isEmpty());
+	m_CustomColor = m_pBox->GetBool("CustomColor", false);
+	m_pColorReset->setEnabled(m_CustomColor);
 	StrPair PathIndex = Split2(m_BoxIcon, ",");
 	if (!PathIndex.second.isEmpty() && !PathIndex.second.contains("."))
 		ui.btnBorderColor->setIcon(LoadWindowsIcon(PathIndex.first, PathIndex.second.toInt()));
@@ -262,13 +333,9 @@ void COptionsWindow::LoadGeneral()
 		ui.btnBorderColor->setIcon(QPixmap(m_BoxIcon));
 	else
 		ui.btnBorderColor->setIcon(QIcon());
-	
 
 	ui.chkShowForRun->setChecked(m_pBox->GetBool("ShowForRunIn", true));
 	ui.chkPinToTray->setChecked(m_pBox->GetBool("PinToTray", false));
-
-	ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", false));
-	ui.chkBlockNetParam->setChecked(m_pBox->GetBool("BlockNetParam", true));
 	
 	ui.chkSecurityMode->setChecked(m_pBox->GetBool("UseSecurityMode", false));
 	ui.chkLockDown->setChecked(m_pBox->GetBool("SysCallLockDown", false));
@@ -277,6 +344,7 @@ void COptionsWindow::LoadGeneral()
 	ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
 	ui.chkFakeElevation->setChecked(m_pBox->GetBool("FakeAdminRights", false));
 	ui.chkMsiExemptions->setChecked(m_pBox->GetBool("MsiInstallerExemptions", false));
+	ui.chkACLs->setChecked(m_pBox->GetBool("UseOriginalACLs", false));
 
 	ui.chkBlockSpooler->setChecked(m_pBox->GetBool("ClosePrintSpooler", false));
 	ui.chkOpenSpooler->setChecked(m_pBox->GetBool("OpenPrintSpooler", false));
@@ -335,11 +403,11 @@ void COptionsWindow::LoadGeneral()
 	ui.chkForceProtection->setChecked(m_pBox->GetBool("ForceProtectionOnMount", false));
 	ui.chkUserOperation->setChecked(m_pBox->GetBool("BlockInterferenceControl", false));
 	ui.chkCoverBar->setChecked(m_pBox->GetBool("AllowCoverTaskbar", false));
-	if (ui.chkRamBox->isEnabled()) {
+	if (ui.chkRamBox->isEnabled())
 		ui.chkEncrypt->setEnabled(!ui.chkRamBox->isChecked());
-		ui.chkForceProtection->setEnabled(!ui.chkRamBox->isChecked());
-	}
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	ui.chkForceProtection->setEnabled(ui.chkEncrypt->isEnabled() && ui.chkEncrypt->isChecked());
+
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx && QFile::exists(pBoxEx->GetBoxImagePath())) 
 	{
 		if (!ui.btnPassword->menu()) {
@@ -358,7 +426,7 @@ void COptionsWindow::LoadGeneral()
 	ui.txtCopyLimit->setText(QString::number(iLimit > 0 ? iLimit : 80 * 1024));
 	ui.chkCopyPrompt->setChecked(m_pBox->GetBool("PromptForFileMigration", true));
 	ui.chkNoCopyWarn->setChecked(!m_pBox->GetBool("CopyLimitSilent", false));
-	ui.chkDenyWrite->setChecked(m_pBox->GetBool("CopyBlockDenyWrite", false));
+	ui.chkDenyWrite->setChecked(!m_pBox->GetBool("CopyBlockDenyWrite", false));
 	ui.chkNoCopyMsg->setChecked(m_pBox->GetBool("NotifyNoCopy", false));
 	
 	LoadCopyRules();
@@ -373,6 +441,18 @@ void COptionsWindow::LoadGeneral()
 
 	ui.chkRawDiskRead->setChecked(m_pBox->GetBool("AllowRawDiskRead", false));
 	ui.chkRawDiskNotify->setChecked(m_pBox->GetBool("NotifyDirectDiskAccess", false));
+
+	ui.chkAllowEfs->setChecked(m_pBox->GetBool("EnableEFS", false));
+
+	QString Note;
+	foreach(QString Value, m_pBox->GetTextList("Note", false)) {
+		if (!Note.isEmpty())
+			Note += "\n";
+		if (Value == "_")
+			Value = "";
+		Note += Value;
+	}
+	ui.txtNotes->setPlainText(Note);
 
 	OnGeneralChanged();
 
@@ -389,15 +469,36 @@ void COptionsWindow::SaveGeneral()
 
 	QStringList BorderCfg;
 	BorderCfg.append(QString("#%1%2%3").arg(m_BorderColor.blue(), 2, 16, QChar('0')).arg(m_BorderColor.green(), 2, 16, QChar('0')).arg(m_BorderColor.red(), 2, 16, QChar('0')));
-	BorderCfg.append(ui.cmbBoxBorder->currentData().toString());
+	{
+		QString baseMode = ui.cmbBoxBorder->currentData().toString();
+		bool borderOutside = baseMode.endsWith("outside");
+		if (borderOutside)
+			baseMode.chop(7);
+		bool labelOnly = ui.chkBorderLabelOnly->isChecked() && baseMode != "off";
+		if (labelOnly)
+			borderOutside = false;
+		if (labelOnly)
+			baseMode += "lbl";
+		if (borderOutside)
+			baseMode += "outside";
+		BorderCfg.append(baseMode);
+	}
 	BorderCfg.append(QString::number(ui.spinBorderWidth->value()));
+	BorderCfg.append(QString::number(ui.spinBorderAlpha->value())); // Get alpha from spinner
+	BorderCfg.append(ui.cmbBoxBorderText->currentData().toString());
+	BorderCfg.append(QString::number(ui.spinLabelWidth->value()));
 	WriteText("BorderColor", BorderCfg.join(","));
+	WriteAdvancedCheck(ui.chkBorderInsideMaximized, "BorderInsideMaximized", "", "n");
 
 	if(m_pUseIcon->isChecked())
 		WriteText("BoxIcon", m_BoxIcon);
 	else
 		m_pBox->DelValue("BoxIcon");
-		
+
+	if (m_CustomColor)
+		WriteText("CustomColor", "y");
+	else
+		m_pBox->DelValue("CustomColor");
 
 	WriteAdvancedCheck(ui.chkShowForRun, "ShowForRunIn", "", "n");
 	WriteAdvancedCheck(ui.chkPinToTray, "PinToTray", "y", "");
@@ -407,9 +508,6 @@ void COptionsWindow::SaveGeneral()
 	if (Action == "!options") m_pBox->DelValue("DblClickAction");
 	else m_pBox->SetText("DblClickAction", Action);
 
-	WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "y", "");
-	WriteAdvancedCheck(ui.chkBlockNetParam, "BlockNetParam", "", "n");
-
 	WriteAdvancedCheck(ui.chkSecurityMode, "UseSecurityMode", "y", "");
 	WriteAdvancedCheck(ui.chkLockDown, "SysCallLockDown", "y", "");
 	WriteAdvancedCheck(ui.chkRestrictDevices, "RestrictDevices", "y", "");
@@ -417,6 +515,7 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkDropRights, "DropAdminRights", "y", "");
 	WriteAdvancedCheck(ui.chkFakeElevation, "FakeAdminRights", "y", "");
 	WriteAdvancedCheck(ui.chkMsiExemptions, "MsiInstallerExemptions", "y", "");
+	WriteAdvancedCheck(ui.chkACLs, "UseOriginalACLs", "y", "");
 
 	WriteAdvancedCheck(ui.chkBlockSpooler, "ClosePrintSpooler", "y", "");
 	WriteAdvancedCheck(ui.chkOpenSpooler, "OpenPrintSpooler", "y", "");
@@ -444,7 +543,7 @@ void COptionsWindow::SaveGeneral()
 	//WriteTextList("RunCommand", RunCommands);
 	m_pBox->DelValue("RunCommand");
 	foreach(const QString& Value, RunCommands)
-		m_pBox->InsertText("RunCommand", Value);
+		m_pBox->AppendText("RunCommand", Value);
 
 
 	if (ui.cmbVersion->isEnabled()) 
@@ -484,7 +583,7 @@ void COptionsWindow::SaveGeneral()
 
 	WriteAdvancedCheck(ui.chkCopyPrompt, "PromptForFileMigration", "", "n");
 	WriteAdvancedCheck(ui.chkNoCopyWarn, "CopyLimitSilent", "", "y");
-	WriteAdvancedCheck(ui.chkDenyWrite, "CopyBlockDenyWrite", "y", "");
+	WriteAdvancedCheck(ui.chkDenyWrite, "CopyBlockDenyWrite", "", "y");
 	WriteAdvancedCheck(ui.chkNoCopyMsg, "NotifyNoCopy", "y", "");
 
 	if (ui.chkProtectBox->checkState() == Qt::Checked) {
@@ -504,6 +603,18 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkRawDiskRead, "AllowRawDiskRead", "y", "");
 	WriteAdvancedCheck(ui.chkRawDiskNotify, "NotifyDirectDiskAccess", "y", "");
 
+	WriteAdvancedCheck(ui.chkAllowEfs, "EnableEFS", "y", "");
+
+	m_pBox->DelValue("Note");
+	QString Note = ui.txtNotes->toPlainText();
+	if (!Note.isEmpty()) {
+		foreach(QString Value, Note.split("\n")) {
+			if (Value == "")
+				Value = "_";
+			m_pBox->AppendText("Note", Value);
+		}
+	}
+
 	m_GeneralChanged = false;
 }
 
@@ -518,6 +629,8 @@ void COptionsWindow::LoadCopyRules()
 		ParseAndAddCopyRule(Value, eDontCopy);
 	foreach(const QString & Value, m_pBox->GetTextList("CopyEmpty", m_Template))
 		ParseAndAddCopyRule(Value, eCopyEmpty);
+	foreach(const QString & Value, m_pBox->GetTextList("CopyNewer", m_Template))
+		ParseAndAddCopyRule(Value, eCopyNewer);
 
 	foreach(const QString & Value, m_pBox->GetTextList("CopyAlwaysDisabled", m_Template))
 		ParseAndAddCopyRule(Value, eCopyAlways, true);
@@ -525,6 +638,8 @@ void COptionsWindow::LoadCopyRules()
 		ParseAndAddCopyRule(Value, eDontCopy, true);
 	foreach(const QString & Value, m_pBox->GetTextList("CopyEmptyDisabled", m_Template))
 		ParseAndAddCopyRule(Value, eCopyEmpty, true);
+	foreach(const QString & Value, m_pBox->GetTextList("CopyNewerDisabled", m_Template))
+		ParseAndAddCopyRule(Value, eCopyNewer, true);
 
 	LoadCopyRulesTmpl();
 
@@ -543,6 +658,8 @@ void COptionsWindow::LoadCopyRulesTmpl(bool bUpdate)
 				ParseAndAddCopyRule(Value, eDontCopy, false, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("CopyEmpty", Template))
 				ParseAndAddCopyRule(Value, eCopyEmpty, false, Template);
+			foreach(const QString & Value, m_pBox->GetTextListTmpl("CopyNewer", Template))
+				ParseAndAddCopyRule(Value, eCopyNewer, false, Template);
 		}
 	}
 	else if (bUpdate)
@@ -567,6 +684,7 @@ QString COptionsWindow::GetCopyActionStr(ECopyAction Action)
 	case eCopyAlways:	return tr("Always copy");
 	case eDontCopy:		return tr("Don't copy");
 	case eCopyEmpty:	return tr("Copy empty");
+	case eCopyNewer:	return tr("Copy newer");
 	}
 	return "";
 }
@@ -617,6 +735,8 @@ void COptionsWindow::SaveCopyRules()
 	QList<QString> DontCopyDisabled;
 	QList<QString> CopyEmpty;
 	QList<QString> CopyEmptyDisabled;
+	QList<QString> CopyNewer;
+	QList<QString> CopyNewerDisabled;
 	for (int i = 0; i < ui.treeCopy->topLevelItemCount(); i++)
 	{
 		QTreeWidgetItem* pItem = ui.treeCopy->topLevelItem(i);
@@ -635,6 +755,7 @@ void COptionsWindow::SaveCopyRules()
 			case eCopyAlways:	CopyAlways.append(Pattern); break;
 			case eDontCopy:		DontCopy.append(Pattern); break;
 			case eCopyEmpty:	CopyEmpty.append(Pattern); break;
+			case eCopyNewer:	CopyNewer.append(Pattern); break;
 			}
 		}
 		else {
@@ -642,6 +763,7 @@ void COptionsWindow::SaveCopyRules()
 			case eCopyAlways:	CopyAlwaysDisabled.append(Pattern); break;
 			case eDontCopy:		DontCopyDisabled.append(Pattern); break;
 			case eCopyEmpty:	CopyEmptyDisabled.append(Pattern); break;
+			case eCopyNewer:	CopyNewerDisabled.append(Pattern); break;
 			}
 		}
 	}
@@ -651,6 +773,8 @@ void COptionsWindow::SaveCopyRules()
 	WriteTextList("DontCopyDisabled", DontCopyDisabled);
 	WriteTextList("CopyEmpty", CopyEmpty);
 	WriteTextList("CopyEmptyDisabled", CopyEmptyDisabled);
+	WriteTextList("CopyNewer", CopyNewer);
+	WriteTextList("CopyNewerDisabled", CopyNewerDisabled);
 
 	m_CopyRulesChanged = false;
 }
@@ -667,6 +791,7 @@ void COptionsWindow::OnCopyItemDoubleClicked(QTreeWidgetItem* pItem, int Column)
 	pMode->addItem(tr("Always copy"), (int)eCopyAlways);
 	pMode->addItem(tr("Don't copy"), (int)eDontCopy);
 	pMode->addItem(tr("Copy empty"), (int)eCopyEmpty);
+	pMode->addItem(tr("Copy newer"), (int)eCopyNewer);
 	pMode->setCurrentIndex(pMode->findData(pItem->data(0, Qt::UserRole)));
 	ui.treeCopy->setItemWidget(pItem, 0, pMode);
 
@@ -790,6 +915,16 @@ void COptionsWindow::OnDelCopyRule()
 
 void COptionsWindow::OnGeneralChanged()
 {
+	// Disable label-only checkbox when border is fully off, or when the label itself is disabled
+	// (label-only with no label = nothing to show)
+	bool borderActive = ui.cmbBoxBorder->currentData().toString() != "off";
+	bool labelEnabled = ui.cmbBoxBorderText->currentData().toString() != "no";
+	bool borderOutside = ui.cmbBoxBorder->currentData().toString().endsWith("outside");
+	ui.chkBorderLabelOnly->setEnabled(borderActive && labelEnabled);
+	ui.chkBorderInsideMaximized->setEnabled(borderOutside);
+	if (!borderActive || !labelEnabled)
+		ui.chkBorderLabelOnly->setChecked(false);
+
 	ui.lblCopyLimit->setEnabled(ui.chkCopyLimit->isChecked());
 	ui.txtCopyLimit->setEnabled(ui.chkCopyLimit->isChecked());
 	ui.lblCopyLimit->setText(tr("kilobytes (%1)").arg(FormatSize(ui.txtCopyLimit->text().toULongLong() * 1024)));
@@ -834,7 +969,7 @@ void COptionsWindow::UpdateBoxSecurity()
 void COptionsWindow::OnSecurityMode()
 {
 	if (ui.chkSecurityMode->isChecked() || (ui.chkLockDown->isEnabled() && ui.chkLockDown->isChecked()) || (ui.chkRestrictDevices->isEnabled() && ui.chkRestrictDevices->isChecked()))
-		theGUI->CheckCertificate(this);
+		theGUI->CheckCertificate(this, 0);
 
 	UpdateBoxSecurity();
 
@@ -903,6 +1038,7 @@ void COptionsWindow::OnPickColor()
 	QColor color = QColorDialog::getColor(m_BorderColor, this, tr("Select color"));
 	if (!color.isValid())
 		return;
+	m_CustomColor = true;
 	m_GeneralChanged = true;
 	OnOptChanged();
 	SetBoxColor(color);
@@ -915,8 +1051,11 @@ void COptionsWindow::SetBoxColor(const QColor& color)
 	QRgb qrgb = color.rgba();
 	my_rgb rgb = { (double)qRed(qrgb), (double)qGreen(qrgb), (double)qBlue(qrgb) };
 	my_hsv hsv = rgb2hsv(rgb);
+	m_SliderCustomColor = !m_CustomColor || m_SliderCustomColor;
 	m_pColorSlider->setValue((int)hsv.h);
+	m_SliderCustomColor = false;
 	m_BorderColor = color;
+	m_pColorReset->setEnabled(m_CustomColor);
 	UpdateBoxColor();
 }
 
@@ -924,9 +1063,18 @@ void COptionsWindow::OnColorSlider(int value)
 {
 	my_hsv hsv = { (double)value, 1, 255 };
 	my_rgb rgb = hsv2rgb(hsv);
+	m_CustomColor = !m_SliderCustomColor || m_CustomColor;
 	m_GeneralChanged = true;
 	OnOptChanged();
 	SetBoxColor(qRgb(rgb.r, rgb.g, rgb.b));
+}
+
+void COptionsWindow::OnColorReset()
+{
+	m_CustomColor = false;
+	SetBoxColor(theGUI->GetBoxColor(ui.cmbBoxType->currentData().toInt()));
+	m_GeneralChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::UpdateBoxColor()
@@ -942,7 +1090,7 @@ QString COptionsWindow::GetActionFile()
 	QString Action = ui.cmbDblClick->currentData().toString();
 	if (Action.isEmpty()) Action = ui.cmbDblClick->currentText();
 	if (!Action.isEmpty() && Action.left(1) != "!") {
-		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+		auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 		if (pBoxEx) {
 			QString Path = pBoxEx->GetCommandFile(Action);
 			ui.btnBorderColor->setIcon(LoadWindowsIcon(Path, 0));
@@ -983,11 +1131,11 @@ void COptionsWindow::OnBrowsePath()
 	if (Name.isEmpty())
 		return;
 
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 	
 	QVariantMap Entry;
 	Entry["Name"] = Name;
-	Entry["Command"] = "\"" + (pBoxEx ? pBoxEx->MakeBoxCommand(Value) : Value) + "\"";
+	Entry["Command"] = (pBoxEx ? pBoxEx->MakeBoxCommand(Value) : Value);
 	AddRunItem(ui.treeRun, Entry);
 
 	m_GeneralChanged = true;
@@ -1106,7 +1254,8 @@ void COptionsWindow::OnBoxTypChanged()
 		break;
 	}
 
-	SetBoxColor(theGUI->GetBoxColor(BoxType));
+	if (!m_CustomColor)
+		SetBoxColor(theGUI->GetBoxColor(BoxType));
 
 	m_GeneralChanged = true;
 	m_AccessChanged = true;
@@ -1142,11 +1291,13 @@ void COptionsWindow::OnDiskChanged()
 	}
 	else {
 		ui.chkEncrypt->setEnabled(true);
-		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+		auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 		ui.btnPassword->setEnabled(ui.chkEncrypt->isChecked() && pBoxEx && pBoxEx->GetMountRoot().isEmpty());
 		ui.chkForceProtection->setEnabled(ui.chkEncrypt->isChecked());
 	}
 	
+	ui.chkForceProtection->setEnabled(ui.chkEncrypt->isEnabled() && ui.chkEncrypt->isChecked());
+
 	OnGeneralChanged();
 }
 
@@ -1171,7 +1322,7 @@ bool COptionsWindow::RunImBox(const QStringList& Arguments)
 
 void COptionsWindow::OnSetPassword()
 {
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 	bool bNew = !QFile::exists(pBoxEx->GetBoxImagePath());
 	CBoxImageWindow window(bNew ? CBoxImageWindow::eNew : CBoxImageWindow::eChange, this);
 	if (bNew) window.SetImageSize(m_ImageSize);
@@ -1183,21 +1334,22 @@ void COptionsWindow::OnSetPassword()
 		}
 		else {
 
-			QStringList Arguments;
-			Arguments.append("type=image");
-			Arguments.append("image=" + pBoxEx->GetBoxImagePath());
-			Arguments.append("key=" + m_Password);
-			Arguments.append("new_key=" + window.GetNewPassword());
-
-			if (RunImBox(Arguments))
+			QString NewPassword = window.GetNewPassword();
+			QByteArray Buffer;
+			Buffer.resize((NewPassword.size() + 1) * sizeof(wchar_t));
+			memcpy(Buffer.data(), NewPassword.utf16(), Buffer.size());
+			SB_STATUS Status = theAPI->ExecImDisk(pBoxEx->GetBoxImagePath(), m_Password, "new_key", true, &Buffer, SECTION_PARAM_ID_KEY);
+			if(Status)
 				QMessageBox::information(this, "Sandboxie-Plus", tr("Image Password Changed"));
+			else
+				QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to Change Password"));
 		}
 	}
 }
 
 void COptionsWindow::OnBackupHeader()
 {
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 
 	QString FileName = QFileDialog::getSaveFileName(theGUI, tr("Backup Image Header for %1").arg(m_pBox->GetName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
 
@@ -1212,7 +1364,7 @@ void COptionsWindow::OnBackupHeader()
 
 void COptionsWindow::OnRestoreHeader()
 {
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 
 	QString FileName = QFileDialog::getOpenFileName(theGUI, tr("Restore Image Header for %1").arg(m_pBox->GetName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
 

@@ -11,7 +11,8 @@ QT_END_NAMESPACE
 
 #define SETUP_LVL_1 1
 #define SETUP_LVL_2 2
-#define SETUP_LVL_CURRENT SETUP_LVL_2
+#define SETUP_LVL_3 3
+#define SETUP_LVL_CURRENT SETUP_LVL_3
 
 class CSetupWizard : public QWizard
 {
@@ -59,7 +60,7 @@ class CCertificatePage : public QWizardPage
     Q_OBJECT
 
 public:
-    CCertificatePage(QWidget *parent = nullptr);
+    CCertificatePage(int iOldLevel, QWidget *parent = nullptr);
 
     void initializePage() override;
     int nextId() const override;
@@ -74,6 +75,7 @@ private:
     QPlainTextEdit* m_pCertificate;
     QLineEdit* m_pSerial;
     QCheckBox* m_pEvaluate;
+    int m_NextPage;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////

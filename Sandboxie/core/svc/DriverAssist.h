@@ -24,6 +24,9 @@
 #ifndef _MY_DRIVERASSIST_H
 #define _MY_DRIVERASSIST_H
 
+#include <map>
+#include <vector>
+#include <string>
 
 class DriverAssist
 {
@@ -40,6 +43,12 @@ public:
 
     static bool IsDriverReady();
 
+    static void InitializeSidCache();
+
+    static void DestroySidCache();
+
+    static bool LookupSidCached(const PSID pSid, 
+        WCHAR *UserName, ULONG* UserNameLen);
 
 private:
 
@@ -103,7 +112,7 @@ private:
     // log messages to file
     //
 
-    void LogMessage();
+    void LogMessage(void *_msg);
 
     void LogMessage_Single(ULONG code, wchar_t* data, ULONG pid);
     void LogMessage_Multi(ULONG msgid, const WCHAR *path, const WCHAR *text);
@@ -143,13 +152,15 @@ private:
 
 	ULONG m_last_message_number;
 
+    static std::map<std::wstring, std::wstring> m_SidCache;
+
     //
     // critical sections
     //
 
     CRITICAL_SECTION m_LogMessage_CritSec;
     CRITICAL_SECTION m_critSecHostInjectedSvcs;
-
+    static CRITICAL_SECTION m_SidCache_CritSec;
 };
 
 

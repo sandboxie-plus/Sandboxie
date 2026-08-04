@@ -50,7 +50,7 @@ typedef struct _CACHE_PATH
 static NTSTATUS File_TranslateShares(
     const WCHAR *dos_path, POOL *pool, WCHAR **out_path, ULONG *out_len);
 
-static NTSTATUS File_TranslateSymlinks(WCHAR *name, ULONG max_len);
+NTSTATUS File_TranslateSymlinks(WCHAR *name, ULONG max_len);
 
 void File_InitReparsePoints(BOOLEAN init);
 

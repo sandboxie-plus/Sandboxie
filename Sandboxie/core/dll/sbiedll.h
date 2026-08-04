@@ -95,6 +95,9 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_StartSbieSvc(BOOLEAN retry);
 
 SBIEDLL_EXPORT  const WCHAR *SbieDll_GetStartError(void);
 
+SBIEDLL_EXPORT  BOOLEAN SbieDll_SetServiceRegistryValue(
+    const WCHAR *name, ULONG type, const void *data, ULONG dataSize);
+
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetServiceRegistryValue(
     const WCHAR *name, void *kvpi, ULONG sizeof_kvpi);
 
@@ -137,6 +140,8 @@ SBIEDLL_EXPORT  struct _MSG_HEADER *SbieDll_CallServer(
 SBIEDLL_EXPORT  void *SbieDll_CallServerQueue(
 	const WCHAR* queue, void *req, ULONG req_len, ULONG rpl_min_len);
 
+SBIEDLL_EXPORT  void* SbieDll_AllocMem(ULONG size);
+
 SBIEDLL_EXPORT  void SbieDll_FreeMem(void *data);
 
 SBIEDLL_EXPORT  ULONG SbieDll_QueueCreate(
@@ -156,6 +161,9 @@ SBIEDLL_EXPORT  ULONG SbieDll_QueuePutReq(
 SBIEDLL_EXPORT  ULONG SbieDll_QueueGetRpl(
     const WCHAR *QueueName, ULONG RequestId,
     void **out_DataPtr, ULONG *out_DataLen);
+
+SBIEDLL_EXPORT  void *SbieDll_CallProxySvr(
+    WCHAR *QueueName, void *req, ULONG req_len, ULONG rpl_min_len, DWORD timeout_sec);
 
 SBIEDLL_EXPORT  ULONG SbieDll_UpdateConf(
     WCHAR OpCode, const WCHAR *Password, const WCHAR *Section,
@@ -238,7 +246,7 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForName(
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForName_bool(
     const WCHAR* boxname, const WCHAR* name, const WCHAR* setting, BOOLEAN defval);
 
-SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* color, BOOL* title, int* width);
+SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* color, BOOL* title, int* width, int* alpha);
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_IsReservedFileName(const WCHAR* name);
 

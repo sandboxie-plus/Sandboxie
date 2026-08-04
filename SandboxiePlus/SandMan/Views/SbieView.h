@@ -44,6 +44,7 @@ public:
 	virtual void				SaveState();
 
 	virtual QTreeViewEx*		GetTree() { return m_pSbieTree; }
+	CSbieModel*					GetSbieModel() { return m_pSbieModel; }
 
 	virtual QList<CSandBoxPtr>	GetSelectedBoxes();
 	virtual QList<CBoxedProcessPtr>	GetSelectedProcesses();
@@ -54,10 +55,14 @@ public:
 	void						OnDoubleClicked(const CSandBoxPtr &pBox);
 
 	virtual QString				AddNewBox(bool bAlowTemp = false);
-	virtual QString				ImportSandbox();
+	virtual void				AddNewBoxAction();
 	virtual QString				AddNewGroup();
+	virtual void				AddNewGroupAction();
+	virtual void				ImportBoxesAction();
 	virtual bool				TestNameAndWarn(const QString& Name);
 	virtual void				SelectBox(const QString& Name);
+	virtual void				SelectBoxes(const QStringList& Names);
+	virtual void				SelectNames(const QStringList& Names);
 
 	virtual void				PopUpMenu(const QString& Name);
 	virtual QMenu*				GetMenu(const QString& Name);
@@ -83,6 +88,7 @@ private slots:
 	void						OnToolTipCallback(const QVariant& ID, QString& ToolTip);
 
 	void						OnCustomSortByColumn(int column);
+	void                        OnHeaderChange();
 
 	void						OnDoubleClicked(const QModelIndex& index);
 	void						OnClicked(const QModelIndex& index);
@@ -92,6 +98,7 @@ private slots:
 	void						OnMenuContextAction();
 
 	void						OnGroupAction();
+	void						OnMoveTo(QTreeWidgetItem* pItem);
 	void						OnGroupAction(QAction* pAction);
 	void						OnSandBoxAction();
 	void						OnSandBoxAction(QAction* pAction);
@@ -101,6 +108,7 @@ private slots:
 
 	void						OnExpanded(const QModelIndex& index) { ChangeExpand(index, true); }
 	void						OnCollapsed(const QModelIndex& index) { ChangeExpand(index, false); }
+	void						UpdateColapsed();
 
 	void						OnMoveItem(const QString& Name, const QString& To, int row);
 
@@ -114,6 +122,8 @@ protected:
 	virtual void				UpdateStartMenu(CSandBoxPlus* pBoxEx);
 	virtual void				UpdateRunMenu(const CSandBoxPtr& pBox);
 
+	void						OnMoveTo(const QString& Group);
+
 	QMap<QString, QStringList>	m_Groups;
 	QSet<QString>				m_Collapsed;
 	bool						m_HoldExpand;
@@ -121,6 +131,7 @@ protected:
 private:
 
 	void					CreateMenu();
+	void					CreateGroupsMenu();
 	void					CreateOldMenu();
 	void					CreateGroupMenu();
 	void					CreateTrayMenu();
@@ -131,6 +142,7 @@ private:
 	void					UpdateMoveMenu();
 	void					RenameGroup(const QString OldName, const QString NewName);
 	void					RenameItem(const QString OldName, const QString NewName);
+	bool					NormalizeGroups();
 
 	void					SetCustomOrder();
 	bool					MoveItem(const QString& Name, const QString& To, int pos = -1);
@@ -139,6 +151,9 @@ private:
 	bool					IsParentOf(const QString& Name, const QString& Group);
 
 	void					ChangeExpand(const QModelIndex& index, bool bExpand);
+	QStringList				GetSelectedBoxNames();
+	void					RestoreBoxSelectionLater(const QStringList& Names, int Delay = 50);
+	void					RestoreNameSelectionLater(const QStringList& Names, int Delay = 50);
 
 	QMenu*					GetMenuFolder(const QString& Folder, QMenu* pParent, QMap<QString, QMenu*>& Folders);
 
@@ -190,6 +205,7 @@ private:
 	QAction*				m_pMenuEmptyBox;
 	QMenu*					m_pMenuContent;
 	QAction*				m_pMenuExplore;
+	QAction*				m_pMenuBrowseNT;
 	QAction*				m_pMenuBrowse;
 	QAction*				m_pMenuRefresh;
 	QAction*				m_pMenuRegEdit;
@@ -200,11 +216,14 @@ private:
 	QAction*				m_pMenuRemove;
 	QMenu*					m_pMenuTools;
 	QAction*				m_pMenuDuplicate;
+	QAction*				m_pMenuDuplicateEx;
 	QAction*				m_pMenuExport;
 	QAction*				m_pMenuMoveUp;
 	//QAction*				m_pMenuMoveBy;
 	QAction*				m_pMenuMoveDown;
 	QMenu*					m_pMenuMoveTo;
+	QWidgetAction*			m_pGroupList;
+	QTreeWidget*			m_pGroupTree;
 	QAction*				m_pMenuRename;
 
 	QAction*				m_pMenuTerminate;
@@ -227,7 +246,16 @@ private:
 	QAction*				m_pCtxPinToRun;
 	QAction*				m_pCtxMkLink;
 
+	QMenu*					m_pCurMenu;
+
 	QFileIconProvider		m_IconProvider;
+	QMap<QString, QIcon>	m_RunMenuWinIconCache;
+	QMap<QString, QIcon>	m_RunMenuFileIconCache;
+
+	bool					m_MoveBatchPending;
+	bool					m_MoveBatchChanged;
+	QStringList				m_MoveBatchFocusBoxes;
+	QStringList				m_MoveBatchFocusNames;
 
 	QList<CSandBoxPtr>		m_CurSandBoxes;
 	QList<CBoxedProcessPtr>	m_CurProcesses;

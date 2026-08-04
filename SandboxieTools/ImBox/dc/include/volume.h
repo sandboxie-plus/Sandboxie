@@ -5,6 +5,8 @@
 
 #define DC_VOLUME_SIGN 0x50524344
 
+#define DC_INFO_MAGIC  'dcvi'
+
 // Header key derivation
 #define PKCS5_SALT_SIZE			64
 
@@ -60,9 +62,19 @@ typedef struct _dc_header {
 	u64 tmp_size;    /* temporary part size      */
 	u8  tmp_wp_mode; /* data wipe mode */
 
-	u8  reserved[1422 - 1];
+	u8  reserved[389];
+
+	// DC Volume Information Field
+
+	u32 info_magic; // = 'dcvi'
+	u16 info_reserved;
+	u16 info_size;
+	u8  info_data[1024];
 
 } dc_header;
+
+const int _DC_HEADER_SIZE = sizeof(dc_header);
+
 
 #define IS_INVALID_VOL_FLAGS(_f) ( ((_f) & VF_NO_REDIR) && \
 	((_f) & (VF_TMP_MODE | VF_REENCRYPT | VF_STORAGE_FILE)) )

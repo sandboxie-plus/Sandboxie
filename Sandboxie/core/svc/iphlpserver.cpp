@@ -364,7 +364,7 @@ MSG_HEADER *IpHlpServer::SendEchoHandler(MSG_HEADER *msg, HANDLE idProcess)
 
         if (num_replies == 0) {
             rpl->h.status = GetLastError();
-            reply_size = 0;
+            num_replies = 1; // even on error we need to return one valid result buffer
         } else
             rpl->h.status = ERROR_SUCCESS;
 

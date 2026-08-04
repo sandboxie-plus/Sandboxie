@@ -216,6 +216,7 @@ HRESULT STDMETHODCALLTYPE Site_OnPosRectChange(IOleInPlaceSite FAR* This, LPCREC
 // IOleInPlaceSite structure.
 #pragma warning (push)
 #pragma warning(disable : 4028)
+#pragma warning(disable : 4113)
 IOleInPlaceSiteVtbl MyIOleInPlaceSiteTable =  {Site_QueryInterface,	// This gives a compiler warning because we're using
 															// the same function as the MyIOleClientSiteTable uses.
 															// And the first arg to that Site_QueryInterface() is

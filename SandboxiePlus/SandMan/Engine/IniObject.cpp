@@ -14,7 +14,7 @@ QVariantMap CIniObject::getIniSection(const QVariantMap& Options) {
     QMultiMap<QString, QVariant> Map;
     auto Section = m_pIni->GetIniSection(0,m_WithTemplate || Options["withTemplate"].toBool());
     for (auto I = Section.begin(); I != Section.end(); ++I)
-        Map.insert(I->first, I->second);
+        Map.insert(I->Name, I->Value);
 
     QVariantMap Data;
     foreach(const QString & Key, Map.uniqueKeys())

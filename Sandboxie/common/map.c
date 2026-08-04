@@ -233,7 +233,7 @@ static map_node_t** map_getmatch(map_base_t* m, map_node_t** next, unsigned int 
 }
 
 
-static map_node_t** map_getref(map_base_t* m, const void* _key) 
+static map_node_t** map_getref(map_base_t* m, const void* _key, int* bucket_index) 
 {
     if (!m->buckets) return NULL;
 
@@ -249,32 +249,39 @@ static map_node_t** map_getref(map_base_t* m, const void* _key)
     }
     unsigned int hash = m->func_hash_key(key, ksize);
 
-    map_node_t** next = &m->buckets[map_bucket_idx(m, hash)];
-	return map_getmatch(m, next, hash, key, ksize);
+    *bucket_index = map_bucket_idx(m, hash);
+    map_node_t** next = &m->buckets[*bucket_index];
+    return map_getmatch(m, next, hash, key, ksize);
 }
 
 
 void* map_get(map_base_t* m, const void* key) 
 {
-    map_node_t** node = map_getref(m, key);
+    int bucket_index;
+    map_node_t** node = map_getref(m, key, &bucket_index);
     return node ? (*node)->value : NULL;
 }
 
+void map_remove_node(map_base_t* m, map_node_t** next)
+{
+    map_node_t* node = *next;
+    *next = (*next)->next;
+    m->func_free(m->mem_pool, node);
+    m->nnodes--;
+}
 
 BOOLEAN map_take(map_base_t* m, const void* key, void* vdata, size_t vsize)
 {
-    map_node_t** next = map_getref(m, key);
+    int bucket_index;
+    map_node_t** next = map_getref(m, key, &bucket_index);
     if (next) {
-        map_node_t* node = *next;
-        *next = (*next)->next;
         if (vdata) {
             if (vsize) // by value
-                memcpy(vdata, node->value, vsize);
+                memcpy(vdata, (*next)->value, vsize);
             else // by extern pointer
-                *((UINT_PTR*)vdata) = (UINT_PTR)node->value;
+                *((UINT_PTR*)vdata) = (UINT_PTR)(*next)->value;
         }
-        m->func_free(m->mem_pool, node);
-        m->nnodes--;
+        map_remove_node(m, next);
         return TRUE;
     }
     if(vdata && !vsize)
@@ -327,24 +334,32 @@ BOOLEAN map_next(map_base_t* m, map_iter_t* iter)
 {
     if (iter->node) {
 		map_node_t** next = &iter->node->next;
-		if(iter->ksize){
+		if(iter->ksize) {
 			// note: here key must always be pointer to key value
 			next = map_getmatch(m, next, iter->node->hash, iter->key, iter->ksize); 
-			if(!next) return FALSE;
+            if (!next) {
+                iter->node = NULL;
+                return FALSE;
+            }
 		}
         iter->node = *next;
         if (iter->node == NULL) goto nextBucket;
     }
     else { // first tun
-		if(iter->ksize){
-			map_node_t** node = map_getref(m, iter->key);
-			if(!node) return FALSE;
+		if(iter->ksize) {
+			map_node_t** node = map_getref(m, iter->key, &iter->bucketIdx);
+			if(!node) {
+                iter->node = NULL;
+                return FALSE;
+            }
 			iter->node = *node;
 		} else
     nextBucket:
         do {
-            if (++iter->bucketIdx >= m->nbuckets) 
+            if (++iter->bucketIdx >= m->nbuckets)  {
+                iter->node = NULL;
                 return FALSE;
+            }
             iter->node = m->buckets[iter->bucketIdx];
         } while (iter->node == NULL);
     }
@@ -353,6 +368,19 @@ BOOLEAN map_next(map_base_t* m, map_iter_t* iter)
     return TRUE;
 }
 
+
+BOOLEAN map_erase(map_base_t* m, map_iter_t* iter)
+{
+	if (!iter->node) return FALSE;
+    map_node_t **pnode = &m->buckets[iter->bucketIdx];
+    while (*pnode != iter->node) {
+		if (!iter->node) return FALSE; // end of bucket
+        pnode = &(*pnode)->next;
+    }
+	BOOLEAN ret = map_next(m, iter);
+	map_remove_node(m, pnode);
+	return ret;
+}
 
 
 /*void map_dump(map_base_t *m)

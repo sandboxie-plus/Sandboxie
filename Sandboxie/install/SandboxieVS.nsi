@@ -137,6 +137,7 @@ Page custom DriverPage
 !insertmacro MUI_LANGUAGE "Czech"
 !insertmacro MUI_LANGUAGE "Danish"
 !insertmacro MUI_LANGUAGE "Dutch"
+!insertmacro MUI_LANGUAGE "Norwegian"
 !insertmacro MUI_LANGUAGE "Estonian"
 !insertmacro MUI_LANGUAGE "Farsi"
 !insertmacro MUI_LANGUAGE "Finnish"
@@ -180,6 +181,7 @@ Page custom DriverPage
 !insertmacro MyLanguage "Czech" CP1250
 !insertmacro MyLanguage "Danish" CP865
 !insertmacro MyLanguage "Dutch" LATIN1
+!insertmacro MyLanguage "Norwegian" LATIN1
 !insertmacro MyLanguage "Estonian" LATIN1
 !insertmacro MyLanguage "Farsi" CP1256
 !insertmacro MyLanguage "Finnish" LATIN1

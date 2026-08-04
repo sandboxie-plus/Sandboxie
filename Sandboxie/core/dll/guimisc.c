@@ -139,6 +139,9 @@ static BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason);
 
 static UINT_PTR Gui_SetTimer(HWND hWnd, UINT_PTR nIDEvent, UINT uElapse, TIMERPROC lpTimerFunc);
 
+static DWORD Wimm_timeGetTime(); 
+
+static MMRESULT Wimm_timeSetEvent(UINT uDelay, UINT uResolution, LPTIMECALLBACK lpTimeProc, DWORD_PTR dwUser, UINT fuEvent);
 //---------------------------------------------------------------------------
 
 
@@ -174,7 +177,7 @@ typedef DPI_AWARENESS_CONTEXT (WINAPI *P_GetThreadDpiAwarenessContext)(
 
 static P_GetThreadDpiAwarenessContext __sys_GetThreadDpiAwarenessContext = NULL;
 
-
+static ULONG64 Dll_FirsttimeGetTimeValue = 0;
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -343,9 +346,26 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
     }
 	
 	if (SbieApi_QueryConfBool(NULL, L"UseChangeSpeed", FALSE)) 	{
-		P_SetTimer SetTimer = Ldr_GetProcAddrNew(DllName_user32, "SetTimer", "SetTimer");
+		P_SetTimer SetTimer = Ldr_GetProcAddrNew(DllName_user32, L"SetTimer", "SetTimer");
         if (SetTimer) {
             SBIEDLL_HOOK(Gui_, SetTimer);
+        }
+
+        // hook winmm timeGetTime and timeSetEvent
+        if(GetModuleHandle(DllName_winmm) == NULL)
+        {
+            LoadLibrary(DllName_winmm);
+        }
+
+        P_timeGetTime timeGetTime = (P_timeGetTime)Ldr_GetProcAddrNew(DllName_winmm, L"timeGetTime", "timeGetTime");
+        if (timeGetTime) {
+            SBIEDLL_HOOK(Wimm_, timeGetTime);
+            Dll_FirsttimeGetTimeValue = __sys_timeGetTime();
+        }
+
+        P_timeSetEvent timeSetEvent = (P_timeSetEvent)Ldr_GetProcAddrNew(DllName_winmm, L"timeSetEvent", "timeSetEvent");
+        if(timeSetEvent) {
+            SBIEDLL_HOOK(Wimm_, timeSetEvent);
         }
 	}
 	
@@ -1339,6 +1359,7 @@ _FX LONG Gui_ChangeDisplaySettingsEx_impl(
     }
 }
 
+
 //---------------------------------------------------------------------------
 // Gui_ChangeDisplaySettingsExA
 //---------------------------------------------------------------------------
@@ -1377,10 +1398,13 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
     GUI_GET_RAW_INPUT_DEVICE_INFO_REQ* req;
     GUI_GET_RAW_INPUT_DEVICE_INFO_RPL* rpl;
 
-    // Note: pcbSize seems to be in tchars not in bytes!
     ULONG lenData = 0;
-    if (pData && pcbSize)
-        lenData = (*pcbSize) * (bUnicode ? sizeof(WCHAR) : 1);
+    if (pData && pcbSize) {
+        lenData = *pcbSize;
+        if (uiCommand == RIDI_DEVICENAME && bUnicode) {
+            lenData *= sizeof(WCHAR);
+        }
+    }
 
     ULONG reqSize = sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ) + lenData + 10;
     req = Dll_Alloc(reqSize);
@@ -1391,12 +1415,17 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
     req->hDevice = (ULONG64)hDevice;
     req->uiCommand = uiCommand;
     req->unicode = bUnicode;
-    if (lenData) {
+    req->hasData = !!pData;
+
+    if (lenData)
         memcpy(reqData, pData, lenData);
-        req->hasData = TRUE;
-    } else
-        req->hasData = FALSE;
-    req->cbSize = pcbSize ? *pcbSize : -1;
+
+    // GetRawInputDeviceInfoA accesses pcbSize without testing it for being not NULL 
+    // hence if the caller passes NULL we use a dummy value so that we don't crash the helper service
+    if (pcbSize)
+        req->cbSize = *pcbSize;
+    else
+        req->cbSize = 0;
 
     rpl = Gui_CallProxy(req, reqSize, sizeof(*rpl));
 
@@ -1404,21 +1433,21 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
 
     if (!rpl)
         return -1;
-    else {
-        ULONG error = rpl->error;
-        ULONG retval = rpl->retval;
 
-        if (pcbSize)
-            *pcbSize = rpl->cbSize;
-        if (lenData) {
-            LPVOID rplData = (BYTE*)rpl + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
-            memcpy(pData, rplData, lenData);
-        }
+    ULONG error = rpl->error;
+    ULONG retval = rpl->retval;
 
-        Dll_Free(rpl);
-        SetLastError(error);
-        return retval;
+    if (pcbSize)
+        *pcbSize = rpl->cbSize;
+
+    if (lenData) {
+        LPVOID rplData = (BYTE*)rpl + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
+        memcpy(pData, rplData, lenData);
     }
+
+    Dll_Free(rpl);
+    SetLastError(error);
+    return retval;
 }
 
 
@@ -1697,10 +1726,48 @@ _FX BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason)
 _FX UINT_PTR Gui_SetTimer(HWND hWnd, UINT_PTR nIDEvent, UINT uElapse, TIMERPROC lpTimerFunc)
 {
 	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTimerSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowTimerSpeed", 1);
-	if (add != 0 && low != 0)
-		return __sys_SetTimer(hWnd, nIDEvent, uElapse * add / low, lpTimerFunc);
-	else
-		return 0;
+	if (add != 0 && low != 0) {
+        UINT64 newElapse = uElapse;
+        newElapse = newElapse * low / add;
+		return __sys_SetTimer(hWnd, nIDEvent, (UINT)newElapse, lpTimerFunc);
+    }
+
+	return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// WINMM_timeGetTime
+//---------------------------------------------------------------------------
+
+
+_FX DWORD Wimm_timeGetTime()
+{
+    ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTimerSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowTimerSpeed", 1);
+    ULONG64 time = __sys_timeGetTime();
+    if(add != 0 && low != 0) {
+        time = Dll_FirsttimeGetTimeValue + (time - Dll_FirsttimeGetTimeValue) * add / low; // multi
+    }
+    
+    return (DWORD)time;
+}
+
+
+//---------------------------------------------------------------------------
+// WINMM_timeSetEvent
+//---------------------------------------------------------------------------
+
+
+_FX MMRESULT Wimm_timeSetEvent(UINT uDelay, UINT uResolution, LPTIMECALLBACK lpTimeProc, DWORD_PTR dwUser, UINT fuEvent)
+{
+	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTimerSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowTimerSpeed", 1);
+	if (add != 0 && low != 0) {
+        UINT64 newDelay = uDelay;
+        newDelay = newDelay * low / add;
+        return __sys_timeSetEvent((UINT)newDelay, uResolution, lpTimeProc, dwUser, fuEvent);
+    }
+	
+    return 0;
 }
 
 

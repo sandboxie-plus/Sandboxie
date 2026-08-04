@@ -1459,6 +1459,94 @@ _FX BOOLEAN Process_IsInPcaJob(HANDLE ProcessId)
 
 
 //---------------------------------------------------------------------------
+// Process_IsInAppPkg
+//---------------------------------------------------------------------------
+
+#define TOKEN_SECURITY_ATTRIBUTE_TYPE_INVALID 0x00
+#define TOKEN_SECURITY_ATTRIBUTE_TYPE_INT64 0x01
+#define TOKEN_SECURITY_ATTRIBUTE_TYPE_UINT64 0x02
+#define TOKEN_SECURITY_ATTRIBUTE_TYPE_STRING 0x03 // Case insensitive attribute value string by default. Unless the flag TOKEN_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE is set.
+#define TOKEN_SECURITY_ATTRIBUTE_TYPE_FQBN 0x04 // Fully-qualified binary name.
+#define TOKEN_SECURITY_ATTRIBUTE_TYPE_SID 0x05
+#define TOKEN_SECURITY_ATTRIBUTE_TYPE_BOOLEAN 0x06
+#define TOKEN_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING 0x10
+
+_FX BOOLEAN Process_IsInAppPkg(HANDLE ProcessId)
+{
+    NTSTATUS status;
+    HANDLE processHandle = NULL;
+    HANDLE tokenHandle = NULL;
+    OBJECT_ATTRIBUTES objAttr;
+    CLIENT_ID clientId;
+    PTOKEN_SECURITY_ATTRIBUTES_INFORMATION info = NULL;
+    ULONG returnLength = 0;
+    BOOLEAN IsInAppPkg = FALSE;
+
+    // Initialize structures
+    InitializeObjectAttributes(&objAttr, NULL, OBJ_KERNEL_HANDLE, NULL, NULL);
+    clientId.UniqueProcess = ProcessId;
+    clientId.UniqueThread = NULL;
+    status = ZwOpenProcess(&processHandle, PROCESS_QUERY_INFORMATION, &objAttr, &clientId);
+    if (!NT_SUCCESS(status))
+        goto Cleanup;
+
+    status = ZwOpenProcessTokenEx(processHandle, TOKEN_QUERY, OBJ_KERNEL_HANDLE, &tokenHandle);
+    if (!NT_SUCCESS(status))
+        goto Cleanup;
+
+    status = ZwQueryInformationToken(tokenHandle, TokenSecurityAttributes, NULL, 0, &returnLength);
+    if (status != STATUS_BUFFER_TOO_SMALL && returnLength == 0)
+        goto Cleanup;
+
+    info = (PTOKEN_SECURITY_ATTRIBUTES_INFORMATION)ExAllocatePoolWithTag(PagedPool, returnLength, tzuk);
+    if (!info)
+        goto Cleanup;
+
+    status = ZwQueryInformationToken( tokenHandle, TokenSecurityAttributes, info, returnLength, &returnLength);
+
+    if (!NT_SUCCESS(status))
+    {
+        goto Cleanup;
+    }
+
+    // Find WIN://SYSAPPID attribute
+    for (ULONG i = 0; i < info->AttributeCount; i++)
+    {
+        PTOKEN_SECURITY_ATTRIBUTE_V1 attr = &info->Attribute.pAttributeV1[i];
+
+        if (attr->ValueType == TOKEN_SECURITY_ATTRIBUTE_TYPE_STRING)
+        {
+            UNICODE_STRING attrName;
+            RtlInitUnicodeString(&attrName, L"WIN://SYSAPPID");
+
+            UNICODE_STRING currentName;
+            RtlInitUnicodeString(&currentName, attr->Name.Buffer);
+
+            if (RtlEqualUnicodeString(&attrName, &currentName, TRUE) &&
+                attr->ValueCount > 0)
+            {
+                IsInAppPkg = TRUE;
+				DbgPrint("SBIE: Process is in App Package: %wZ\n", attr->Values.pString);
+                break;
+            }
+        }
+    }
+
+Cleanup:
+    if (info)
+        ExFreePoolWithTag(info, tzuk);
+
+    if (tokenHandle)
+        ZwClose(tokenHandle);
+
+    if (processHandle)
+        ZwClose(processHandle);
+
+    return IsInAppPkg;
+}
+
+
+//---------------------------------------------------------------------------
 // Process_ScheduleKillProc
 //---------------------------------------------------------------------------
 

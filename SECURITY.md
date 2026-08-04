@@ -2,9 +2,99 @@
 
 ## Reporting a vulnerability
 
-Please report any found security vulnerability directly to me at xanatosdavid[at]gmail.com or through the [Report a vulnerability](https://github.com/sandboxie-plus/Sandboxie/security/advisories/new) form provided by GitHub. Please describe the issue in full detail and, if possible, include a proof of concept exploit.
+1. Please report any found security vulnerability directly to me at xanatosdavid[at]gmail.com or through the [Report a vulnerability](https://github.com/sandboxie-plus/Sandboxie/security/advisories/new) form provided by GitHub.
 
-## Fixed security issues
+2. Please describe the issue in full detail and, if possible, include a proof of concept exploit.
+
+3. Please do not submit unverified AI-generated reports. While they may appear valid at first glance, they are often incorrect and end up wasting valuable time.
+
+## Fixed vulnerabilities
+
+### SECURITY ISSUE ID-40 (reported by b0l0k)
+Sandboxie APC Injection Sandbox Escape
+
+fixed in: 1.17.6 / 5.72.6
+
+### SECURITY ISSUE ID-39 (reported by sammy12342)
+Local Privilege Escalation via TOCTOU in UpdUtil addon installation (CVE-2026-34596)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-38 (reported by Yanchon918s)
+Parameter validation in NamedPipeServer (CVE-2026-34464)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-37 (reported by Yanchon918s)
+Name validation in ProcessServer handlers (CVE-2026-34462)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-36 (reported by Yanchon918s)
+Issue with RunSbieCtrl (CVE-2026-34461)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-35 (reported by sammy12342)
+Issues with GetRawInputDeviceInfoSlave (CVE-2026-34459)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-34 (reported by sammy12342)
+EditAdminOnly bypass via INI CRLF injection in Sandboxie Plus (CVE-2026-34458)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-33 (reported by sammy12342)
+Local Denial of Service (DoS) vulnerability exploitable by sandboxed process (CVE-2026-32603)
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-32
+EditPassword hash entropy loss: new passwords will be salted SHA-256 and base64-encoded
+- Note: existing passwords remain weak
+
+fixed in: 1.17.3 / 5.72.3
+
+### SECURITY ISSUE ID-31 (thanks pentester.z)
+Missing parameter validation within named syscall invocation when using WoW64
+
+fixed in: 1.16.7 / 5.71.7
+
+### SECURITY ISSUE ID-30 (thanks pentester.z)
+Missing safety checks when retrieving driver information
+
+fixed in: 1.16.7 / 5.71.7
+
+### SECURITY ISSUE ID-29 (thanks pentester.z)
+Possible buffer overflow when parsing certificates
+
+fixed in: 1.16.7 / 5.71.7
+
+### SECURITY ISSUE ID-28 (thanks DepthFirstDisclosures)
+Buffer overflow in SbieIniServer (CVE-2025-64721)
+
+fixed in: 1.16.7 / 5.71.7
+
+### SECURITY ISSUE ID-27 (thanks love-code-yeyixiao)
+Leak of encrypted sandbox key during password change ([CVE-2025-54422](https://github.com/sandboxie-plus/Sandboxie/security/advisories/GHSA-jp7r-vgv9-43p7))
+
+fixed in: 1.16.2 / 5.71.2
+
+### SECURITY ISSUE ID-26 (thanks sgayou)
+Registry set/get functions were missing some critical safety checks (CVE-2025-46713, CVE-2025-46714, CVE-2025-46716, CVE-2025-46715)
+
+fixed in: 1.15.12 / 5.70.12
+
+### SECURITY ISSUE ID-25 (thanks hg421)
+A new method of exploiting HostInjectDll mechanism for local privilege escalation
+
+fixed in: 1.15.9 / 5.70.9
+
+### SECURITY ISSUE ID-24
+Files stored inside a sandbox folder were accessible to all users on a system, resulting in security issues in multi-user scenarios ([CVE-2024-49360](https://github.com/sandboxie-plus/Sandboxie/security/advisories/GHSA-4chj-3c28-gvmp))
+
+fixed in: 1.15.0 / 5.70.0
 
 ### SECURITY ISSUE ID-23 (thanks Diversenok)
 A sandboxed process with administrative privileges could enable SeManageVolumePrivilege, this allowed it to read MFT data, in case of files smaller than 1 cluster that allowed to read the file payload

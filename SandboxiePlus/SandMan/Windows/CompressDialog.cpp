@@ -22,6 +22,11 @@ CCompressDialog::CCompressDialog(QWidget *parent)
 	ui.setupUi(this);
 	this->setWindowTitle(tr("Sandboxie-Plus - Sandbox Export"));
 
+	connect(ui.cmbFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(OnFormatChanged(int)));
+
+	ui.cmbFormat->addItem(tr("7-Zip"), ".7z");
+	ui.cmbFormat->addItem(tr("Zip"), ".zip");
+
 	ui.cmbCompression->addItem(tr("Store"), 0);
 	ui.cmbCompression->addItem(tr("Fastest"), 1);
 	ui.cmbCompression->addItem(tr("Fast"), 3);
@@ -39,6 +44,17 @@ CCompressDialog::CCompressDialog(QWidget *parent)
 CCompressDialog::~CCompressDialog()
 {
 	//theConf->SetBlob("CompressDialog/Window_Geometry", saveGeometry());
+}
+
+void CCompressDialog::OnFormatChanged(int index)
+{
+	ui.chkSolid->setEnabled(index == 0);
+	ui.chkEncrypt->setEnabled(index == 0);
+}
+
+QString CCompressDialog::GetFormat()
+{
+	return ui.cmbFormat->currentData().toString();
 }
 
 int CCompressDialog::GetLevel()

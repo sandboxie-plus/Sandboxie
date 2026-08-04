@@ -167,10 +167,10 @@ void FlashWindowBorder(HWND hwnd, BOOL fShowHidden)
 
 void LoadFinderResources()
 {
-    hBitmapDrag1 = LoadBitmap(GetModuleHandle(0), L"FINDER_FULL");
-    hBitmapDrag2 = LoadBitmap(GetModuleHandle(0), L"FINDER_EMPTY");
+    hBitmapDrag1 = LoadBitmapW(GetModuleHandle(0), L"FINDER_FULL");
+    hBitmapDrag2 = LoadBitmapW(GetModuleHandle(0), L"FINDER_EMPTY");
 
-    hCursor = LoadCursor(GetModuleHandle(0),      L"FINDER_CURSOR");
+    hCursor = LoadCursorW(GetModuleHandle(0),      L"FINDER_CURSOR");
 }
 
 void FreeFinderResources()

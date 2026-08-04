@@ -36,7 +36,8 @@
 #define PROCESS_DENIED_ACCESS_MASK                              \
         ~(  STANDARD_RIGHTS_READ | SYNCHRONIZE |                \
             PROCESS_VM_READ | PROCESS_QUERY_INFORMATION |       \
-            PROCESS_QUERY_LIMITED_INFORMATION )
+            PROCESS_QUERY_LIMITED_INFORMATION |                 \
+            PROCESS_SET_LIMITED_INFORMATION )
 
 #define THREAD_DENIED_ACCESS_MASK                               \
         ~(  STANDARD_RIGHTS_READ | SYNCHRONIZE |                \
@@ -50,10 +51,6 @@
 
 
 struct _THREAD {
-
-#ifndef USE_PROCESS_MAP
-    LIST_ELEM list_elem;
-#endif 
 
     HANDLE tid;
 

@@ -31,7 +31,7 @@ typedef HRESULT (CALLBACK *P_GetScaleFactorForMonitor)(HMONITOR, DEVICE_SCALE_FA
 
 UINT GetMonitorScaling(HWND hwnd)
 {
-    static HINSTANCE shcore = LoadLibrary(L"Shcore.dll");
+    static HINSTANCE shcore = LoadLibraryW(L"Shcore.dll");
     if (shcore != nullptr)
     {
         if (auto getScaleFactorForMonitor =
@@ -87,14 +87,14 @@ UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
 		{
 			std::wstring result = CSandMan::tr("The selected window is running as part of program %1 in sandbox %2").arg(pProcess->GetProcessName()).arg(pProcess->GetBoxName()).toStdWString();
 
-			SetWindowText(GetDlgItem(hwndTool, ID_FINDER_RESULT), result.c_str());
+			SetWindowTextW(GetDlgItem(hwndTool, ID_FINDER_RESULT), result.c_str());
 			//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_YES_BOXED), SW_SHOW);
 		}
 		else
 		{
 			std::wstring result = CSandMan::tr("The selected window is not running as part of any sandboxed program.").toStdWString();
 
-			SetWindowText(GetDlgItem(hwndTool, ID_FINDER_RESULT), result.c_str());
+			SetWindowTextW(GetDlgItem(hwndTool, ID_FINDER_RESULT), result.c_str());
 			//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_NOT_BOXED), SW_SHOW);
 		}
 		::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_RESULT), SW_SHOW);
@@ -133,9 +133,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 			std::wstring info = CSandMan::tr("Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.").toStdWString();
 
-			CreateWindow(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, DS(10), DS(10), DS(32), DS(32), hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
-			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, DS(60), DS(10), DS(180), DS(85), hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
-			CreateWindow(L"Static", L"", WS_CHILD, DS(60), DS(100), DS(180), DS(50), hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
+			CreateWindowW(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, DS(10), DS(10), DS(32), DS(32), hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
+			CreateWindowW(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, DS(60), DS(10), DS(180), DS(85), hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
+			CreateWindowW(L"Static", L"", WS_CHILD, DS(60), DS(100), DS(180), DS(50), hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
 
 			WndData.hFont = CreateFont(DS(13), 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
 			if (WndData.hFont) {
@@ -164,14 +164,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 {
 	MSG  msg;
-	WNDCLASS mainWindowClass = { 0 };
+	WNDCLASSW mainWindowClass = { 0 };
 
 	HINSTANCE hInstance = NULL;
 
 	// You can set the main window name to anything, but
 	// typically you should prefix custom window classes
 	// with something that makes it unique.
-	mainWindowClass.lpszClassName = TEXT("SBp.WndFinder");
+	mainWindowClass.lpszClassName = L"SBp.WndFinder";
 
 	mainWindowClass.hInstance = hInstance;
 	mainWindowClass.hbrBackground = GetSysColorBrush(COLOR_3DFACE);
@@ -180,7 +180,7 @@ DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 
 	mainWindowClass.cbWndExtra = sizeof(void*); // SFinderWndData
 
-	RegisterClass(&mainWindowClass);
+	RegisterClassW(&mainWindowClass);
 
 	// Notes:
 	// - The classname identifies the TYPE of the window. Not a C type.
@@ -201,7 +201,7 @@ DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 	SFinderWndData WndData;
 	WndData.Scale = GetMonitorScaling(MainWndHandle);
 
-	HWND hwnd = CreateWindow(mainWindowClass.lpszClassName, CSandMan::tr("Sandboxie-Plus - Window Finder").toStdWString().c_str()
+	HWND hwnd = CreateWindowW(mainWindowClass.lpszClassName, CSandMan::tr("Sandboxie-Plus - Window Finder").toStdWString().c_str()
 		, WS_SYSMENU | WS_CAPTION | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, DS(275), DS(135), NULL, 0, hInstance, &WndData);
 
 	while (GetMessage(&msg, NULL, 0, 0))

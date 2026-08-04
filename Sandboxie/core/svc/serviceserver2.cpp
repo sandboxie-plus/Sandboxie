@@ -31,6 +31,9 @@
 #include "core/dll/sbiedll.h"
 #include <aclapi.h>
 #include "ProcessServer.h"
+#include <wtsapi32.h>
+#include "sbieiniserver.h"
+#include <userenv.h>
 
 #define MISC_H_WITHOUT_WIN32_NTDDK_H
 #include "misc.h"
@@ -67,12 +70,14 @@ bool ServiceServer::CanCallerDoElevation(
         }
         else 
         {
+            ULONG64 ProcessFlags = SbieApi_QueryProcessInfo(idProcess, 0);
+
             //
             // If admin permission emulation is active and this service will 
             // not be started with a system token allow it to be start
             //
 
-            if (DropRights && SbieDll_GetSettingsForName_bool(boxname, exename, L"FakeAdminRights", FALSE))
+            if (DropRights && SbieDll_GetSettingsForName_bool(boxname, exename, L"FakeAdminRights", (ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0))
                 DropRights = false;
 
             // 
@@ -80,7 +85,14 @@ bool ServiceServer::CanCallerDoElevation(
             // by SandboxieRpcSs.exe allow it to be started
             //
 
-            if (DropRights && SbieDll_CheckStringInList(ServiceName, boxname, L"StartService"))
+            if (DropRights && (SbieDll_CheckStringInList(ServiceName, boxname, L"StartService") || SbieDll_CheckStringInList(ServiceName, boxname, L"RunServiceAsSystem")))
+                DropRights = false;
+
+            //
+            // always allow to start cryptsvc if needed
+            //
+
+            if (DropRights && _wcsicmp(ServiceName, L"CryptSvc") == 0)
                 DropRights = false;
         }
     }
@@ -203,7 +215,9 @@ WCHAR *ServiceServer::BuildPathForStartExe(
 {
     const WCHAR *_env_fmt = L"/env:" ENV_VAR_PFX L"%s=\"%s\" ";
 
-    ULONG args_len = (wcslen(InArgs) + wcslen(devmap) + 192) * sizeof(WCHAR);
+    ULONG args_len = (wcslen(InArgs) + 192) * sizeof(WCHAR);
+    if (devmap)
+        args_len += wcslen(devmap) * sizeof(WCHAR);
     if (svcname)
         args_len += (wcslen(svcname) + 96) * sizeof(WCHAR);
 
@@ -295,16 +309,24 @@ int ServiceServer::RunServiceAsSystem(const WCHAR* svcname, const WCHAR* boxname
     if (svcname && _wcsicmp(svcname, L"MSIServer") == 0 && SbieApi_QueryConfBool(boxname, L"MsiInstallerExemptions", FALSE))
         return 2;
 
-    // legacy behaviour option
-    if (SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE)) 
-        return 1;
-    
-    if (!svcname)
-        return 0;
+    // check custom exception list - exceptions bypass also drop rights
+    if (svcname && SbieDll_CheckStringInList(svcname, boxname, L"RunServiceAsSystem")) {
+        return 2;
+    }
 
-    // check exception list
-    return SbieDll_CheckStringInList(svcname, boxname, L"RunServiceAsSystem") ? 1 : 0;
+    // legacy behaviour option
+    if (SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE)) {
+
+        // with drop rights ensure CryptSvc can still run at least as user
+        if (svcname && _wcsicmp(svcname, L"CryptSvc") == 0 && CheckDropRights(boxname, NULL))
+            return 0;
+
+        return 1;
+    }
+    
+    return 0;
 }
+
 
 
 //---------------------------------------------------------------------------
@@ -353,7 +375,11 @@ ULONG ServiceServer::RunHandler2(
             // use our system token
             ok = OpenProcessToken(GetCurrentProcess(), TOKEN_RIGHTS, &hOldToken);
         }
-        // OriginalToken BEGIN
+        else {
+            // use the users default token
+            ok = WTSQueryUserToken(idSession, &hOldToken);
+        }
+        /*// OriginalToken BEGIN
         else if (CompartmentMode || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
             HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (ULONG)(ULONG_PTR)idProcess);
             if (!hProcess)
@@ -369,7 +395,7 @@ ULONG ServiceServer::RunHandler2(
         else {
             // use the callers original token
             hOldToken = (HANDLE)SbieApi_QueryProcessInfo(idProcess, 'ptok');
-        }
+        }*/
     }
 
     if (ok) {
@@ -509,25 +535,76 @@ ULONG ServiceServer::UacHandler2(
     ULONG error;
     ULONG errlvl;
     BOOL  ok = TRUE;
+    BOOL  quick = FALSE; // don't use UAC prompt
+    BOOL  fake = FALSE;
+    
+    if (SbieApi_QueryConfBool(NULL, L"UseSandboxieUAC", TRUE)) {
 
-    if (ok) {
+        ULONG SessionId;
+        //WCHAR BoxName[BOXNAME_COUNT];
+        //if (NT_SUCCESS(SbieApi_QueryProcess(idProcess, BoxName, NULL, NULL, &SessionId))) {
+        if (ProcessIdToSessionId((DWORD)(UINT_PTR)idProcess, &SessionId)) {
 
-        STARTUPINFO si;
-        LARGE_INTEGER pkt_addr_64;
-        WCHAR cmdline[256];
+            HANDLE hToken;
+            if (OpenProcessToken(GetCurrentProcess(), TOKEN_ALL_ACCESS, &hToken)) {
 
-        pkt_addr_64.QuadPart = pkt_addr;
-        wsprintf(cmdline, L"%s_UacProxy:%08X_%08X_%08X_%08X_@%s",
-            SANDBOXIE, (ULONG)(ULONG_PTR)idProcess,
-            pkt_addr_64.HighPart, pkt_addr_64.LowPart, pkt_len,
-            devmap);
+                HANDLE hNewToken;
+                if (DuplicateTokenEx(hToken, MAXIMUM_ALLOWED, nullptr, SecurityIdentification, TokenPrimary, &hNewToken)) {
 
-        errlvl = 0x41;
-        if (SbieDll_RunFromHome(SBIESVC_EXE, cmdline, &si, NULL))
-            ExePath = (WCHAR *)si.lpReserved;
-        else {
-            ok = FALSE;
-            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+                    // Set the new session ID on the duplicated token
+                    if (SetTokenInformation(hNewToken, TokenSessionId, (LPVOID)&SessionId, sizeof(SessionId))) {
+
+                        WCHAR args[128];
+                        LARGE_INTEGER pkt_addr_64;
+                        pkt_addr_64.QuadPart = pkt_addr;
+
+                        wsprintf(args, L"uac_prompt %08X_%08X_%08X_%08X",
+                            (ULONG)(ULONG_PTR)idProcess,
+                            pkt_addr_64.HighPart, pkt_addr_64.LowPart, pkt_len);
+
+                        ExePath = BuildPathForStartExe(idProcess, NULL, NULL, args, NULL);
+
+                        if (ExePath) {
+
+                            STARTUPINFOW si = { 0 };
+                            si.cb = sizeof(si);
+                            si.dwFlags = STARTF_FORCEOFFFEEDBACK;
+                            si.wShowWindow = SW_SHOWNORMAL;
+                            PROCESS_INFORMATION pi = { 0 };
+                            if (CreateProcessAsUserW(hNewToken, NULL, ExePath, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+
+                                if (WaitForSingleObject(pi.hProcess, INFINITE) == 0) {
+
+                                    DWORD Code = 0;
+                                    if (GetExitCodeProcess(pi.hProcess, &Code)) {
+
+                                        if (Code == IDYES) {
+                                            if(SbieApi_QueryConfBool(NULL, L"PromptOnSecureDesktop", TRUE))
+                                                quick = TRUE;
+                                        } else if (Code == IDNO)
+                                            fake = TRUE;
+                                        else
+                                            ok = FALSE;
+                                    }
+                                }
+
+                                CloseHandle(pi.hProcess);
+                                CloseHandle(pi.hThread);
+                            }
+
+                            HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, ExePath);
+                            ExePath = NULL;
+                        }
+                    }
+                    CloseHandle(hNewToken);
+                }
+                CloseHandle(hToken);
+            }
+        }
+
+        if (!ok) {
+            RunUacSlave3(idProcess, pkt_addr, pkt_len, true, NULL);
+            return ERROR_SUCCESS;
         }
     }
 
@@ -575,6 +652,68 @@ ULONG ServiceServer::UacHandler2(
         }
     }
 
+    if (ok && quick && !SbieIniServer::TokenIsAdmin(hNewToken, true)) {
+
+        //
+        // get the full token if the user is in the admin group but the token is not elevated
+        //
+        
+        ULONG returnLength;
+        TOKEN_LINKED_TOKEN linkedToken = {0};
+        if (NT_SUCCESS(NtQueryInformationToken(hNewToken, (TOKEN_INFORMATION_CLASS)TokenLinkedToken,
+            &linkedToken, sizeof(TOKEN_LINKED_TOKEN), &returnLength))) {
+
+            CloseHandle(hNewToken);
+            hNewToken = linkedToken.LinkedToken;
+        }
+        else // the user is not in the admin group we need to go full UAC and runas
+            quick = FALSE;
+    }
+
+    if (ok) {
+        
+        //
+        // Prepare command line
+        //
+
+        STARTUPINFO si;
+        WCHAR cmdline[384];
+        LARGE_INTEGER pkt_addr_64;
+        pkt_addr_64.QuadPart = pkt_addr;
+
+        errlvl = 0x41;
+        if (quick || fake) {
+
+            if (SbieDll_RunFromHome(SBIESVC_EXE, NULL, &si, NULL)) { // get service path
+            
+                wsprintf(cmdline, L"%s%s %s_UacProxy:%08X_%08X_%08X_%08X_",
+                    fake ? L"/fake_admin " : L"",
+                    (WCHAR*)si.lpReserved,
+                    SANDBOXIE, (ULONG)(ULONG_PTR)idProcess,
+                    pkt_addr_64.HighPart, pkt_addr_64.LowPart, pkt_len);
+
+                HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, si.lpReserved);
+
+                ExePath = BuildPathForStartExe(idProcess, devmap, NULL, cmdline, NULL);
+            }
+        }
+        else {
+
+            wsprintf(cmdline, L"%s_UacProxy:%08X_%08X_%08X_%08X_@%s",
+                SANDBOXIE, (ULONG)(ULONG_PTR)idProcess,
+                pkt_addr_64.HighPart, pkt_addr_64.LowPart, pkt_len,
+                devmap);
+
+            if (SbieDll_RunFromHome(SBIESVC_EXE, cmdline, &si, NULL))
+                ExePath = (WCHAR*)si.lpReserved;
+        }
+
+        if (!ExePath) {
+            ok = FALSE;
+            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        }
+    }
+
     if (ok) {
 
         //
@@ -589,10 +728,17 @@ ULONG ServiceServer::UacHandler2(
         si.cb = sizeof(STARTUPINFO);
         si.dwFlags = STARTF_FORCEOFFFEEDBACK;
 
+        LPVOID lpEnvironment = NULL;
+        if (quick || fake)
+            CreateEnvironmentBlock(&lpEnvironment, hNewToken, FALSE);
+
         errlvl = 0x45;
         ok = CreateProcessAsUser(
                 hNewToken, NULL, ExePath, NULL, NULL,
-                FALSE, 0, NULL, NULL, &si, &pi);
+                FALSE, lpEnvironment ? CREATE_UNICODE_ENVIRONMENT : 0, lpEnvironment, NULL, &si, &pi);
+
+        if(lpEnvironment)
+            DestroyEnvironmentBlock(lpEnvironment);
 
         if (ok) {
 
@@ -732,7 +878,7 @@ void ServiceServer::RunUacSlave2(ULONG_PTR *ThreadArgs)
             WCHAR *quote = wcsrchr(AppName, L'\"');
             if (quote)
                 *quote = L'\0';
-        } else if (memcmp(AppName, L"*MSI*", 5 * sizeof(WCHAR)) == 0)
+        } else if (memcmp(AppName, L"*MSI*", 5 * sizeof(WCHAR)) == 0) // bug bug "*MSI*" is in app name but here we get the command line see *OutAppName = cmd; in RunUacSlave4
             AppName = L"Windows Installer";
     } else
         AppName = L"?";
@@ -1168,7 +1314,9 @@ void ServiceServer::RunUacSlave3(
 
             errlvl = 0x89;
             hProcess = NULL;
-            SbieApi_OpenProcess(&hProcess, idProcess);
+            hProcess = SbieDll_OpenProcess(PROCESS_VM_READ | PROCESS_VM_WRITE |
+                                PROCESS_VM_OPERATION | PROCESS_DUP_HANDLE,
+                                idProcess);
             if (! hProcess)
                 SetLastError(ERROR_ACCESS_DENIED);
 
@@ -1282,6 +1430,9 @@ void ServiceServer::RunUacSlave3(
 
     if (! ok)
         ReportError2218(idProcess, errlvl);
+
+    if (hProcess)
+        CloseHandle(hProcess);
 }
 
 

@@ -27,7 +27,6 @@
 
 #include "PipeServer.h"
 
-#define NEW_INI_MODE
 
 class SbieIniServer
 {
@@ -38,9 +37,7 @@ public:
 
     ~SbieIniServer();
 
-#ifdef NEW_INI_MODE
     static void NotifyConfigReloaded();
-#endif
 
     static bool TokenIsAdmin(HANDLE hToken, bool OnlyFull = false);
 
@@ -62,15 +59,13 @@ protected:
 
     bool SetUserSettingsSectionName(HANDLE hToken);
 
+    static bool SetUserSettingsSectionName(HANDLE hToken, WCHAR* m_username, WCHAR* m_sectionname);
+
     bool UserCanEdit(HANDLE hToken);
 
-#ifdef NEW_INI_MODE
     ULONG CacheConfig();
 
-    struct SIniSection* GetIniSection(const WCHAR* section, bool bCanAdd);
-
     MSG_HEADER *GetSetting(MSG_HEADER *msg);
-#endif
 
     ULONG SetSetting(MSG_HEADER *msg);
 
@@ -82,18 +77,9 @@ protected:
 
     ULONG SetOrTestPassword(MSG_HEADER *msg);
 
-#ifndef NEW_INI_MODE
-    ULONG CallSetSetting(WCHAR *text, MSG_HEADER *msg);
-
-    bool AddText(const WCHAR *line);
-
-    bool AddCallerText(WCHAR *setting, WCHAR *value);
-#endif
-
     ULONG RefreshConf();
 
-    bool GetIniPath(WCHAR **IniPath,
-                    BOOLEAN *IsHomePath = NULL, BOOLEAN* IsUTF8 = NULL);
+    bool GetIniPath(WCHAR **IniPath, BOOLEAN *IsHomePath = NULL);
 
     ULONG IsCallerAuthorized(HANDLE hToken, const WCHAR *Password, const WCHAR *Section = NULL);
 
@@ -103,10 +89,21 @@ protected:
 
     bool HashPassword(const WCHAR *Password, WCHAR *Hash41);
 
+    bool GenerateSalt(UCHAR Salt[16]);
+
+    bool HashPassword2(const WCHAR *Password, const UCHAR Salt[16], UCHAR Hash[32]);
+
     MSG_HEADER *RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
+
+    MSG_HEADER *SetDatFile(MSG_HEADER *msg, HANDLE idProcess);
+	
+    //MSG_HEADER *GetDatFile(MSG_HEADER *msg, HANDLE idProcess);
 
     MSG_HEADER *RC4Crypt(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
 
+public:
+
+    static NTSTATUS RunSbieCtrl(HANDLE hToken, const WCHAR* DeskName, const WCHAR* CtrlCmd = NULL, size_t CtrlCmdLen = 0);
 
 protected:
 
@@ -114,15 +111,7 @@ protected:
     static SbieIniServer* m_instance;
     WCHAR m_username[256];
     WCHAR m_sectionname[128];
-#ifdef NEW_INI_MODE
-    struct SConfigIni* m_pConfigIni;
-#else
-    WCHAR *m_text, *m_text_base;
-    ULONG m_text_max_len;
-    WCHAR m_line[1500];
-    //BOOLEAN m_insertbom;
-#endif
-    BOOLEAN m_admin;
+    class CIniFile* m_pSbieIni;
     HANDLE m_hLockFile;
     ULONG m_session_id;
 

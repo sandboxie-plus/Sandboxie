@@ -97,6 +97,7 @@ endif
 ;----------------------------------------------------------------------------
 
 ifdef _WIN64
+ifdef XP_SUPPORT
 
 EXTERN Process_FindSandboxed : proc
 
@@ -129,6 +130,7 @@ Process_FindSandboxed64 PROC FRAME
 
 Process_FindSandboxed64 ENDP
 
+endif
 endif
 
 ;----------------------------------------------------------------------------

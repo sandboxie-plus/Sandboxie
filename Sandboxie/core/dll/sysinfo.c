@@ -132,7 +132,7 @@ _FX BOOLEAN SysInfo_Init(void)
     }
 
     extern BOOLEAN Gui_OpenAllWinClasses;
-    SysInfo_UseSbieJob = !Gui_OpenAllWinClasses && !SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE);
+    SysInfo_UseSbieJob = !Gui_OpenAllWinClasses && !SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE) && !Dll_CompartmentMode;
 
     if (Dll_OsBuild >= 8400)
         SysInfo_CanUseJobs = SbieApi_QueryConfBool(NULL, L"AllowBoxedJobs", FALSE);
@@ -212,7 +212,7 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 {
     NTSTATUS status;
 
-    if ((SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, L"HideFirmwareInfo", FALSE)) {
+    if ((SystemInformationClass == SystemFirmwareTableInformation) && Config_GetSettingsForImageName_bool(L"HideFirmwareInfo", FALSE)) {
 
         PSYSTEM_FIRMWARE_TABLE_INFORMATION firmwareTableInfo = (PSYSTEM_FIRMWARE_TABLE_INFORMATION)Buffer;
 
@@ -246,7 +246,7 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
             // if not set we return no information, 0 length
             if (RegOpenKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom", 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
                 if (RegQueryValueExW(hKey, L"SMBiosTable", NULL, &type, (LPBYTE)lpData, &dwLen) != ERROR_SUCCESS) {
-                    dwLen = 0;
+                    dwLen = 0; // In case of failure, reset the length
                 }
                 RegCloseKey(hKey);
             }
@@ -554,9 +554,24 @@ _FX NTSTATUS SysInfo_GetJobName(OBJECT_ATTRIBUTES* ObjectAttributes, WCHAR** Out
     *OutCopyPath = NULL;
 
     if (ObjectAttributes && ObjectAttributes->ObjectName) {
-        objname_len = ObjectAttributes->ObjectName->Length & ~1;
+        objname_len = ObjectAttributes->ObjectName->Length / sizeof(WCHAR);
         objname_buf = ObjectAttributes->ObjectName->Buffer;
-    } else {
+
+        // Normalize Win32 BaseNamedObjects prefixes to plain names before
+        // constructing the sandbox object path.
+        if (objname_len >= 7 && _wcsnicmp(objname_buf, L"Global\\", 7) == 0) {
+            objname_len -= 7;
+            objname_buf += 7;
+        }
+        else if (objname_len >= 6 && _wcsnicmp(objname_buf, L"Local\\", 6) == 0) {
+            objname_len -= 6;
+            objname_buf += 6;
+        }
+    } 
+    else { // unnamed job
+
+        if (Dll_CompartmentMode) 
+            return STATUS_BAD_INITIAL_PC;
 
         ULONG jobCounter = InterlockedIncrement(&JobCounter);
         Sbie_snwprintf(dummy_name, MAX_PATH, L"%s_DummyJob_%s_p%d_t%d_c%d",
@@ -567,20 +582,17 @@ _FX NTSTATUS SysInfo_GetJobName(OBJECT_ATTRIBUTES* ObjectAttributes, WCHAR** Out
     }
 
 
-    name = Dll_GetTlsNameBuffer(TlsData, COPY_NAME_BUFFER, Dll_BoxIpcPathLen + objname_len);
+    name = Dll_GetTlsNameBuffer(TlsData, COPY_NAME_BUFFER, (Dll_BoxIpcPathLen + objname_len) * sizeof(WCHAR));
 
     *OutCopyPath = name;
 
-    //if (Dll_AlernateIpcNaming)
-    //{
-    //    wmemcpy(name, objname_buf, objname_len);
-    //    name += objname_len;
-    //
-    //    wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
-    //    name += Dll_BoxIpcPathLen;
-    //}
-    //else
-    {
+    if (Dll_AlternateIpcNaming) {
+        wmemcpy(name, objname_buf, objname_len);
+        name += objname_len;
+    
+        wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
+        name += Dll_BoxIpcPathLen;
+    } else {
         wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
         name += Dll_BoxIpcPathLen;
 

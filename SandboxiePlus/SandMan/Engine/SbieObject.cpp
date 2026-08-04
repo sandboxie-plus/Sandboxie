@@ -210,6 +210,8 @@ void CSbieObject::ShellRemove()
 {
 	CSettingsWindow::RemoveContextMenu();
 	CSbieUtils::RemoveContextMenu2();
+	CSbieUtils::RemoveContextMenu3();
+	CSbieUtils::RemoveContextMenu4();
 }
 
 void CSbieObject::LogMessage(const QVariant& Message, bool bNotify)

@@ -414,7 +414,7 @@ _FX VOID File_AppendPathEntry_internal(HANDLE hPathsFile, const WCHAR* Path, ULO
 
     // write the path
     WCHAR* PathEx = TranslatePath ? TranslatePath(Path) : NULL;
-    NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, PathEx ? PathEx : Path, wcslen(PathEx ? PathEx : Path) * sizeof(WCHAR), NULL, NULL);
+    NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, PathEx ? PathEx : (WCHAR*)Path, wcslen(PathEx ? PathEx : Path) * sizeof(WCHAR), NULL, NULL);
     if (PathEx) Dll_Free(PathEx);
 
     // write the flags
@@ -427,7 +427,7 @@ _FX VOID File_AppendPathEntry_internal(HANDLE hPathsFile, const WCHAR* Path, ULO
         NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, FlagStr, sizeof(WCHAR), NULL, NULL); // write |
 
         WCHAR* RelocationEx = TranslatePath ? TranslatePath(Relocation) : NULL;
-        NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, RelocationEx ? RelocationEx : Relocation, wcslen(RelocationEx ? RelocationEx : Relocation) * sizeof(WCHAR), NULL, NULL);
+        NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, RelocationEx ? RelocationEx : (WCHAR*)Relocation, wcslen(RelocationEx ? RelocationEx : Relocation) * sizeof(WCHAR), NULL, NULL);
         if (RelocationEx) Dll_Free(RelocationEx);
     }
 
@@ -1090,6 +1090,11 @@ _FX BOOLEAN File_HasDeleted_v2(const WCHAR* TruePath)
 
 _FX VOID File_SetRelocation_internal(LIST* Root, const WCHAR *OldTruePath, const WCHAR *NewTruePath)
 {
+    // 0. check for no operation - in this case 5. would loop forever
+
+    if (_wcsicmp(OldTruePath, NewTruePath) == 0)
+        return;
+    
     // 1. separate branch from OldTruePath
     
     LIST* Parent = NULL;

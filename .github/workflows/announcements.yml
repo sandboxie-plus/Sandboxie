@@ -1,0 +1,336 @@
+name: Lock previous announcement(s)
+
+on:
+  release:
+    types: [released]
+
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Latest release tag to keep open'
+        required: true
+        type: string
+
+jobs:
+  lock-announcements:
+    name: ${{ github.workflow }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      discussions: write
+
+    steps:
+      - name: Waiting for release tag
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          CATEGORY_NAME: Announcements
+          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.release_tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          owner="${REPO%/*}"
+          repo="${REPO#*/}"
+          release_tag="${RELEASE_TAG}"
+
+          if [[ -z "${release_tag}" || "${release_tag}" == "null" ]]; then
+            echo "Release event did not provide a tag name." >&2
+            exit 1
+          fi
+
+          echo "Repository: ${owner}/${repo}"
+          echo "Category: ${CATEGORY_NAME}"
+          echo "Release tag to keep unlocked: ${release_tag}"
+          echo "Locking all old release announcements"
+
+          read -r -d '' CATEGORY_QUERY <<'EOF' || true
+          query($owner: String!, $repo: String!) {
+            repository(owner: $owner, name: $repo) {
+              discussionCategories(first: 100) {
+                nodes {
+                  id
+                  name
+                }
+              }
+            }
+          }
+          EOF
+
+          category_id="$(
+            gh api graphql \
+              -f owner="$owner" \
+              -f repo="$repo" \
+              -f query="$CATEGORY_QUERY" \
+              --jq '.data.repository.discussionCategories.nodes[] | select(.name == env.CATEGORY_NAME) | .id'
+          )"
+
+          if [[ -z "${category_id}" ]]; then
+            echo "Discussion category not found: ${CATEGORY_NAME}" >&2
+            exit 1
+          fi
+
+          echo "Resolved category ID: ${category_id}"
+
+          read -r -d '' DISCUSSIONS_QUERY <<'EOF' || true
+          query($owner: String!, $repo: String!, $cursor: String) {
+            repository(owner: $owner, name: $repo) {
+              discussions(first: 50, after: $cursor, orderBy: { field: CREATED_AT, direction: DESC }) {
+                nodes {
+                  id
+                  number
+                  title
+                  url
+                  createdAt
+                  closed
+                  locked
+                  category {
+                    id
+                    name
+                  }
+                }
+                pageInfo {
+                  hasNextPage
+                  endCursor
+                }
+              }
+            }
+          }
+          EOF
+
+          read -r -d '' CLOSE_MUTATION <<'EOF' || true
+          mutation($id: ID!, $reason: DiscussionCloseReason) {
+            closeDiscussion(input: {discussionId: $id, reason: $reason}) {
+              discussion {
+                closed
+                closedAt
+                stateReason
+              }
+            }
+          }
+          EOF
+
+          read -r -d '' LOCK_MUTATION <<'EOF' || true
+          mutation($id: ID!) {
+            lockLockable(input: { lockableId: $id }) {
+              lockedRecord {
+                __typename
+              }
+            }
+          }
+          EOF
+
+          # Retry loop to find the discussion (max 4 attempts)
+          matching_count=0
+          max_attempts=4
+          attempt=0
+
+          while [[ "$matching_count" -eq 0 && "$attempt" -lt "$max_attempts" ]]; do
+            attempt=$((attempt + 1))
+            echo "Attempt $attempt: querying discussions for release tag ${release_tag}..."
+
+            discussions_json='[]'
+            cursor=""
+
+            while :; do
+              if [[ -n "${cursor}" ]]; then
+                response="$(
+                  gh api graphql \
+                    -f owner="$owner" \
+                    -f repo="$repo" \
+                    -F cursor="$cursor" \
+                    -f query="$DISCUSSIONS_QUERY"
+                )"
+              else
+                response="$(
+                  gh api graphql \
+                    -f owner="$owner" \
+                    -f repo="$repo" \
+                    -f query="$DISCUSSIONS_QUERY"
+                )"
+              fi
+
+              page_matches="$(
+                jq -c --arg category_id "$category_id" '
+                  [
+                    .data.repository.discussions.nodes[]
+                    | select(.category.id == $category_id)
+                  ]
+                ' <<<"$response"
+              )"
+
+              discussions_json="$(
+                jq -sc 'add' \
+                  <(printf '%s\n' "$discussions_json") \
+                  <(printf '%s\n' "$page_matches")
+              )"
+
+              has_next="$(jq -r '.data.repository.discussions.pageInfo.hasNextPage' <<<"$response")"
+              cursor="$(jq -r '.data.repository.discussions.pageInfo.endCursor // empty' <<<"$response")"
+
+              if [[ "$has_next" != "true" || -z "${cursor}" ]]; then
+                break
+              fi
+            done
+
+            total_in_category="$(jq 'length' <<<"$discussions_json")"
+            echo "Found ${total_in_category} discussion(s) in category ${CATEGORY_NAME}"
+
+            if [[ "$total_in_category" -eq 0 ]]; then
+              echo "No discussions found in the configured category."
+              exit 0
+            fi
+
+            release_like_discussions="$(
+              jq -c '
+                [
+                  .[]
+                  | select(.title | test("v[0-9]+\\.[0-9]+\\.[0-9]+"; "i"))
+                ]
+              ' <<<"$discussions_json"
+            )"
+
+            release_like_count="$(jq 'length' <<<"$release_like_discussions")"
+            echo "Found ${release_like_count} outdated release(s) in category ${CATEGORY_NAME}"
+
+            # echo "Debug: release-like discussions JSON:"
+            # echo "$release_like_discussions" | jq '.'
+
+            if [[ "$release_like_count" -eq 0 ]]; then
+              echo "No release-like discussions found."
+              exit 0
+            fi
+
+            matching_current_release="$(
+              jq -c --arg tag "$release_tag" '
+                [
+                  .[]
+                  | select(.title | contains($tag))
+                ]
+                | sort_by(.createdAt)
+                | reverse
+              ' <<<"$discussions_json"
+            )"
+
+            matching_count="$(jq 'length' <<<"$matching_current_release")"
+
+            if [[ "$matching_count" -gt 0 ]]; then
+              echo "Found matching discussion for release tag ${release_tag}!"
+              break
+            fi
+
+            if [[ "$attempt" -lt "$max_attempts" ]]; then
+              echo "Discussion not found yet, waiting 60 seconds before retry..."
+              sleep 60
+            fi
+          done
+
+          if [[ "$matching_count" -eq 0 ]]; then
+            echo "No release announcement title contains release tag: ${release_tag}"
+            echo "Nothing will be locked to avoid affecting the wrong discussions."
+            exit 0
+          fi
+
+          keep_id="$(jq -r '.[0].id' <<<"$matching_current_release")"
+          keep_number="$(jq -r '.[0].number' <<<"$matching_current_release")"
+          keep_title="$(jq -r '.[0].title' <<<"$matching_current_release")"
+          keep_url="$(jq -r '.[0].url' <<<"$matching_current_release")"
+
+          echo "Keeping unlocked discussion #${keep_number}: ${keep_title}"
+          echo "URL: ${keep_url}"
+
+          candidate_count="$(jq --arg keep_id "$keep_id" '
+            [
+              .[]
+              | select(.id != $keep_id)
+              | select(.closed != true)
+            ]
+            | length
+          ' <<<"$release_like_discussions")"
+
+          echo "Found ${candidate_count} old unlocked release announcement(s) eligible for locking in total."
+
+          mapfile -t to_lock < <(
+            jq -c --arg keep_id "$keep_id" '
+              sort_by(.createdAt) | reverse
+              | map(select(.id != $keep_id and .closed != true))
+              | .[]
+            ' <<<"$release_like_discussions"
+          )
+
+          echo "Selected ${#to_lock[@]} discussion(s) to lock in this run."
+
+          if [[ "${#to_lock[@]}" -eq 0 ]]; then
+            echo "No previous release announcements need locking."
+            echo "Backlog status: clear."
+            exit 0
+          fi
+
+          closed_and_locked_count=0
+
+          for discussion in "${to_lock[@]}"; do
+            id="$(jq -r '.id' <<<"$discussion")"
+            number="$(jq -r '.number' <<<"$discussion")"
+            title="$(jq -r '.title' <<<"$discussion")"
+            url="$(jq -r '.url' <<<"$discussion")"
+            closed="$(jq -r '.closed' <<<"$discussion")"
+            locked="$(jq -r '.locked' <<<"$discussion")"
+
+            current_state="$(
+              gh api graphql \
+                -f id="$id" \
+                -f query='
+                  query($id: ID!) {
+                    node(id: $id) {
+                      ... on Discussion {
+                        closed
+                        locked
+                      }
+                    }
+                  }
+                ' \
+                --jq '.node'
+            )"
+
+            closed_current="$(echo "$current_state" | jq -r '.closed')"
+            locked_current="$(echo "$current_state" | jq -r '.locked')"
+
+            actions_made=""
+
+            if [[ "$closed_current" != "true" ]]; then
+              echo "Closing discussion #${number}: ${title}"
+              echo " URL: ${url}"
+              echo " Reason: OUTDATED"
+
+              gh api graphql \
+                -f id="$id" \
+                -f reason="OUTDATED" \
+                -f query="$CLOSE_MUTATION" \
+                >/dev/null
+
+              echo " → Closed ✓"
+              actions_made="${actions_made}closed "
+            fi
+
+            if [[ "$locked_current" != "true" ]]; then
+              echo "Locking discussion #${number}: ${title}"
+
+              gh api graphql \
+                -f id="$id" \
+                -f query="$LOCK_MUTATION" \
+                >/dev/null
+
+              echo " → Locked ✓"
+              actions_made="${actions_made}locked "
+            fi
+
+            if [[ -n "$actions_made" ]]; then
+              closed_and_locked_count=$((closed_and_locked_count + 1))
+            fi
+          done
+
+          remaining_count=$((candidate_count - closed_and_locked_count))
+
+          echo "Done. Closed and locked ${closed_and_locked_count} previous release announcement(s)."
+          echo "Backlog remaining: ${remaining_count} old unlocked release announcement(s)."
+
+          echo "Backlog status: clear."

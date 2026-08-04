@@ -371,7 +371,7 @@ CSymbolProvider* CSymbolProvider::Instance()
         HMODULE DbgHelpMod = LoadLibrary((KitsRoot + "dbghelp.dll").toStdWString().c_str());
         HMODULE SymSrvMod  = LoadLibrary((KitsRoot + "symsrv.dll").toStdWString().c_str());*/
 
-        HMODULE DbgHelpMod = LoadLibrary(L"dbghelp.dll");
+        HMODULE DbgHelpMod = LoadLibraryW(L"dbghelp.dll");
 
         __sys_SymFromAddr = (P_SymFromAddr)GetProcAddress(DbgHelpMod, "SymFromAddr");
         __sys_SymGetModuleInfoW64 = (P_SymGetModuleInfoW64)GetProcAddress(DbgHelpMod, "SymGetModuleInfoW64");

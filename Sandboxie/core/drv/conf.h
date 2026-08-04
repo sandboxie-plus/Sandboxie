@@ -105,6 +105,10 @@ WCHAR *Conf_Expand(
     CONF_EXPAND_ARGS *args, const WCHAR *model_value,
     const WCHAR *setting_name);
 
+WCHAR *Conf_ExpandEx(
+    CONF_EXPAND_ARGS *args, const WCHAR *model_value,
+    const WCHAR *setting_name, BOOLEAN *out_suppress_log);
+
 
 //---------------------------------------------------------------------------
 // Private Functions
@@ -127,6 +131,8 @@ BOOLEAN Conf_IsBoxEnabled(
 NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms);
 
 NTSTATUS Conf_Api_Query(PROCESS *proc, ULONG64 *parms);
+
+NTSTATUS Conf_Api_Set(PROCESS *proc, ULONG64 *parms);
 
 
 //---------------------------------------------------------------------------

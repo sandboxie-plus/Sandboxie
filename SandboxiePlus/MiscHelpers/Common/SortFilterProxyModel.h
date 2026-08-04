@@ -74,11 +74,8 @@ public:
 	}
 
 public slots:
-	void SetFilter(const QString& Exp, int iOptions, int Col = -1) // -1 = any
+	void SetFilter(const QRegularExpression& RegExp, int iOptions, int Col = -1) // -1 = any
 	{
-		QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
-		QRegularExpression RegExp(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
-
 		QModelIndex idx;
 		m_iColumn = Col;
 		m_bHighLight = (iOptions & CFinder::eHighLight) != 0;

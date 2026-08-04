@@ -40,6 +40,16 @@ static NTSTATUS UserEnv_RtlGetVersion(LPOSVERSIONINFOEXW lpVersionInfo);
 static BOOL UserEnv_GetVersionExW(LPOSVERSIONINFOEXW lpVersionInfo);
 static BOOL UserEnv_GetVersionExA(LPOSVERSIONINFOEXA lpVersionInfo);
 
+static HRESULT UserEnv_CreateAppContainerProfile(
+    PCWSTR              pszAppContainerName,
+    PCWSTR              pszDisplayName,
+    PCWSTR              pszDescription,
+    PSID_AND_ATTRIBUTES pCapabilities,
+    DWORD               dwCapabilityCount,
+    PSID                *ppSidAppContainerSid);
+
+//static BOOL UserEnv_GetProfileType(DWORD* pdwFlags);
+
 //---------------------------------------------------------------------------
 
 
@@ -55,6 +65,15 @@ typedef NTSTATUS(*P_RtlGetVersion)(LPOSVERSIONINFOEXW);
 typedef BOOL (*P_GetVersionExW)(LPOSVERSIONINFOEXW lpVersionInfo);
 typedef BOOL (*P_GetVersionExA)(LPOSVERSIONINFOEXA lpVersionInfo);
 
+typedef BOOL(*P_CreateAppContainerProfile)(
+    PCWSTR              pszAppContainerName,
+    PCWSTR              pszDisplayName,
+    PCWSTR              pszDescription,
+    PSID_AND_ATTRIBUTES pCapabilities,
+    DWORD               dwCapabilityCount,
+    PSID                *ppSidAppContainerSid);
+
+//typedef BOOL (*P_GetProfileType)(DWORD* pdwFlags);
 
 //---------------------------------------------------------------------------
 
@@ -66,6 +85,10 @@ static P_GetAppliedGPOList          __sys_GetAppliedGPOList         = NULL;
 static P_RtlGetVersion              __sys_RtlGetVersion = NULL;
 static P_GetVersionExW              __sys_GetVersionExW             = NULL;
 static P_GetVersionExA              __sys_GetVersionExA             = NULL;
+
+static P_CreateAppContainerProfile  __sys_CreateAppContainerProfile = NULL;
+
+//static P_GetProfileType             __sys_GetProfileType            = NULL;
 
 static DWORD UserEnv_dwBuildNumber = 0;
 
@@ -107,9 +130,13 @@ _FX BOOLEAN UserEnv_InitVer(HMODULE module)
 
 _FX BOOLEAN UserEnv_Init(HMODULE module)
 {
+    ANSI_STRING ansi;
+    NTSTATUS status;
     void *RegisterGPNotification;
     void *UnregisterGPNotification;
     void *GetAppliedGPOList;
+    void *CreateAppContainerProfile;
+    //void *GetProfileType;
 
     if (module == Dll_KernelBase) {
 
@@ -137,6 +164,24 @@ _FX BOOLEAN UserEnv_Init(HMODULE module)
 
         SBIEDLL_HOOK(UserEnv_,RegisterGPNotification);
         SBIEDLL_HOOK(UserEnv_,UnregisterGPNotification);
+
+        //
+        // $Workaround$ - 3rd party fix - Chrome-Fix
+        // GetProfileType -> PT_ROAMING chrome disables ABE
+        //
+        //
+        //GetProfileType = GetProcAddress(module, "GetProfileType");
+        //SBIEDLL_HOOK(UserEnv_, GetProfileType);
+    }
+
+    if (!Dll_CompartmentMode) // see Proc_UpdateProcThreadAttribute
+    if (Dll_OsBuild >= 9200) // Windows 8 and later
+    {
+        RtlInitString(&ansi, "CreateAppContainerProfile");
+        status = LdrGetProcedureAddress(
+            module, &ansi, 0, (void**)&CreateAppContainerProfile);
+        if (NT_SUCCESS(status))
+            SBIEDLL_HOOK(UserEnv_, CreateAppContainerProfile);
     }
 
     return TRUE;
@@ -278,3 +323,87 @@ _FX BOOL UserEnv_GetVersionExA(LPOSVERSIONINFOEXA lpVersionInfo)
 
     return rc;
 }
+
+
+//---------------------------------------------------------------------------
+// UserEnv_CreateAppContainerProfile
+//---------------------------------------------------------------------------
+
+
+_FX HRESULT UserEnv_CreateAppContainerProfile(
+    PCWSTR              pszAppContainerName,
+    PCWSTR              pszDisplayName,
+    PCWSTR              pszDescription,
+    PSID_AND_ATTRIBUTES pCapabilities,
+    DWORD               dwCapabilityCount,
+    PSID                *ppSidAppContainer)
+{
+  //  HRESULT hr = __sys_CreateAppContainerProfile(
+  //      pszAppContainerName,
+  //      pszDisplayName,
+  //      pszDescription,
+  //      pCapabilities,
+  //      dwCapabilityCount,
+  //      ppSidAppContainerSid);
+
+    if (!ppSidAppContainer)
+        return E_POINTER;
+
+    *ppSidAppContainer = NULL;
+
+    // Build a SID that resembles an AppContainer SID: S-1-15-2-<a>-<b>-<c>-<d>
+    // SID layout:
+    //  - Revision = 1
+    //  - IdentifierAuthority = SECURITY_APP_PACKAGE_AUTHORITY (0,0,0,0,0,15)
+    //  - SubAuthorities: [2, 0x11111111, 0x22222222, 0x33333333, 0x44444444]
+    #define revision SID_REVISION        // 1
+    #define subAuthCount 5
+    const DWORD subAuth[subAuthCount] = {
+        2,              // AppContainer base RID (matches S-1-15-2-...)
+        0x11111111,
+        0x22222222,
+        0x33333333,
+        0x44444444
+    };
+
+    // IdentifierAuthority is 6 bytes big-endian; value 15 => {0,0,0,0,0,15}
+    SID_IDENTIFIER_AUTHORITY appPkgAuthority = { 0, 0, 0, 0, 0, 15 };
+
+    // Allocate enough memory for SID header + N subauthorities
+    const SIZE_T sidSize = sizeof(SID) + (subAuthCount - 1) * sizeof(DWORD);
+
+    PSID sid = (PSID)LocalAlloc(LMEM_FIXED, sidSize);
+    if (!sid)
+        return HRESULT_FROM_WIN32(ERROR_OUTOFMEMORY);
+
+    // Manually populate the SID structure
+    SID* s = (SID*)sid;
+    s->Revision = revision;
+    s->SubAuthorityCount = subAuthCount;
+    s->IdentifierAuthority = appPkgAuthority;
+    for (BYTE i = 0; i < subAuthCount; ++i)
+        s->SubAuthority[i] = subAuth[i];
+
+    *ppSidAppContainer = sid;
+    return S_OK;
+}
+
+
+//---------------------------------------------------------------------------
+// UserEnv_GetProfileType
+//---------------------------------------------------------------------------
+//
+//#define PT_TEMPORARY                 0x00000001      // A profile has been allocated that will be deleted at logoff.
+//#define PT_ROAMING                   0x00000002      // The loaded profile is a roaming profile.
+//#define PT_MANDATORY                 0x00000004      // The loaded profile is mandatory.
+//#define PT_ROAMING_PREEXISTING       0x00000008      // The loaded roaming profile is not a brand new one - it was obtained from roamed location
+//
+//_FX BOOL UserEnv_GetProfileType(DWORD* pdwFlags) 
+//{
+//    extern BOOLEAN Dll_UseChromeSecurePreferencesHack;
+//    if (pdwFlags && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && Dll_UseChromeSecurePreferencesHack) {
+//		SbieApi_Log(2325, L"UserEnv_GetProfileType called, returning PT_ROAMING");
+//        *pdwFlags = PT_ROAMING;
+//    }
+//    return TRUE;
+//}

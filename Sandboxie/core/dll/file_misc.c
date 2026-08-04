@@ -453,37 +453,37 @@ _FX NTSTATUS File_CreateBoxedPath(const WCHAR *PathToCreate)
 //---------------------------------------------------------------------------
 
 
-_FX BOOL File_GetVolumeInformationW(
-    const WCHAR *lpRootPathName,
-    WCHAR *lpVolumeNameBuffer, ULONG nVolumeNameSize,
-    ULONG *lpVolumeSerialNumber, ULONG *lpMaximumComponentLength,
-    ULONG *lpFileSystemFlags,
-    WCHAR *lpFileSystemNameBuffer, ULONG nFileSystemNameSize)
-{
-    //
-    // the flash plugin process of Google Chrome issues a special form
-    // of GetVolumeInformationW with all-NULL parameters.  this fails
-    // with an access denied error.  to work around this, we install
-    // this hook, and automatically return TRUE in this special case.
-    //
-
-    // $Workaround$ - 3rd party fix
-    if (Dll_ChromeSandbox &&
-        lpVolumeNameBuffer == NULL && nVolumeNameSize == 0 &&
-        lpVolumeSerialNumber == NULL && lpMaximumComponentLength == NULL &&
-        lpFileSystemFlags == NULL &&
-        lpFileSystemNameBuffer == NULL && nFileSystemNameSize == 0) {
-
-        SetLastError(ERROR_SUCCESS);
-        return TRUE;
-
-    }
-
-    return __sys_GetVolumeInformationW(
-        lpRootPathName, lpVolumeNameBuffer, nVolumeNameSize,
-        lpVolumeSerialNumber, lpMaximumComponentLength,
-        lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
-}
+//_FX BOOL File_GetVolumeInformationW(
+//    const WCHAR *lpRootPathName,
+//    WCHAR *lpVolumeNameBuffer, ULONG nVolumeNameSize,
+//    ULONG *lpVolumeSerialNumber, ULONG *lpMaximumComponentLength,
+//    ULONG *lpFileSystemFlags,
+//    WCHAR *lpFileSystemNameBuffer, ULONG nFileSystemNameSize)
+//{
+//    //
+//    // the flash plugin process of Google Chrome issues a special form
+//    // of GetVolumeInformationW with all-NULL parameters.  this fails
+//    // with an access denied error.  to work around this, we install
+//    // this hook, and automatically return TRUE in this special case.
+//    //
+//
+//    // $Workaround$ - 3rd party fix
+//    if (Dll_ChromeSandbox &&
+//        lpVolumeNameBuffer == NULL && nVolumeNameSize == 0 &&
+//        lpVolumeSerialNumber == NULL && lpMaximumComponentLength == NULL &&
+//        lpFileSystemFlags == NULL &&
+//        lpFileSystemNameBuffer == NULL && nFileSystemNameSize == 0) {
+//
+//        SetLastError(ERROR_SUCCESS);
+//        return TRUE;
+//
+//    }
+//
+//    return __sys_GetVolumeInformationW(
+//        lpRootPathName, lpVolumeNameBuffer, nVolumeNameSize,
+//        lpVolumeSerialNumber, lpMaximumComponentLength,
+//        lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
+//}
 
 
 //---------------------------------------------------------------------------
@@ -518,19 +518,44 @@ BOOL File_WriteProcessMemory(
     SIZE_T nSize,
     SIZE_T * lpNumberOfBytesWritten)
 {
-    //
-    // this function is only hooked when Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX
-    //
-
-    if ((Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD) &&
-        lpBaseAddress && lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread"))
-    //if (RpcRt_TestCallingModule((ULONG_PTR)lpBaseAddress, (ULONG_PTR)Dll_Ntdll))
-    {
-        if (lpNumberOfBytesWritten)
+    if (!Dll_CompartmentMode) {
+    
+        // $Workaround$ - 3rd party fix
+        if ((Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD) &&
+            lpBaseAddress && (
+                lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread")
+			 || lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtMapViewOfSection")
+            ))
+        //if (RpcRt_TestCallingModule((ULONG_PTR)lpBaseAddress, (ULONG_PTR)Dll_Ntdll))
         {
-            *lpNumberOfBytesWritten = nSize;
+            if (lpNumberOfBytesWritten)
+            {
+                *lpNumberOfBytesWritten = nSize;
+            }
+            return TRUE; // ignore
         }
-        return TRUE; // ignore
+    }
+
+    if (Dll_HookTrace) {
+
+        WCHAR* pModule = NULL;
+        char* pExport = NULL;
+        LPVOID pAddress = NULL;
+        if (Trace_FindExportByAddress(lpBaseAddress, &pModule, &pExport, &pAddress))
+        {
+            if (_wcsicmp(Dll_ImageName, pModule) != 0) // ignore self
+            {
+                WCHAR dbg[1024];
+                WCHAR* dbg_ptr = dbg;
+                size_t dbg_size = ARRAYSIZE(dbg);
+                int len = Sbie_snwprintf(dbg_ptr, dbg_size, L"Application Hooking: %s!%S+0x%Ix [", pModule, pExport, ((UINT_PTR)lpBaseAddress - (UINT_PTR)pAddress));
+                dbg_ptr += len;
+                dbg_size -= len;
+                BufferToHexW(lpBuffer, nSize, dbg_ptr, dbg_size - 1);
+                wcscat(dbg_ptr, L"]");
+                SbieApi_MonitorPutMsg(MONITOR_HOOK, dbg);
+            }
+        }
     }
 
     return __sys_WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten);

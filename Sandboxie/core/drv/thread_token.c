@@ -319,8 +319,15 @@ _FX NTSTATUS Thread_SetInformationProcess(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
 {
     NTSTATUS status;
+
+    ULONG InfoClass = (ULONG)user_args[1];
+
+    if (InfoClass == ProcessBreakOnTermination) {
+        
+        status = STATUS_ACCESS_DENIED;
+    
     //Windows RS5 adds a new "undocumented" Process Information class: 0x5d (93) that is likely ProcessAccessTokenEx
-    if (((user_args[1] == ProcessAccessToken) || (user_args[1] == ProcessAccessTokenEx)) && proc->primary_token) {
+    } else if (((InfoClass == ProcessAccessToken) || (InfoClass == ProcessAccessTokenEx)) && proc->primary_token) {
         HANDLE ProcessHandle = (HANDLE)user_args[0];
         void  *InfoBuffer    = (void *)user_args[2];
         ULONG  InfoLength    = (ULONG)user_args[3];
@@ -1151,7 +1158,11 @@ _FX NTSTATUS Thread_SetInformationThread(
 
     ULONG InfoClass = (ULONG)user_args[1];
 
-    if (InfoClass == ThreadImpersonationToken && proc->primary_token) {
+    if (InfoClass == ThreadBreakOnTermination){
+
+        status = STATUS_ACCESS_DENIED;
+
+    } else if (InfoClass == ThreadImpersonationToken && proc->primary_token) {
 
         HANDLE ThreadHandle  = (HANDLE)user_args[0];
         void  *InfoBuffer    = (void *)user_args[2];

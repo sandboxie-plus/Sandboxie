@@ -341,15 +341,15 @@ bool CWizardEngine::ApplyShadowChanges()
             continue;
         }
         
-        QList<QPair<QString, QString>> New = I->pShadow->GetIniSection();
-        QList<QPair<QString, QString>> Old = I->pOriginal->GetIniSection();
+        QList<CSbieIni::SbieIniValue> New = I->pShadow->GetIniSection();
+        QList<CSbieIni::SbieIniValue> Old = I->pOriginal->GetIniSection();
 
         // discard unchanged
         for (auto I = New.begin(); I != New.end();) {
             auto II = I++;
             for (auto J = Old.begin(); J != Old.end();) {
                 auto JJ = J++;
-                if (II->first == JJ->first && II->second == JJ->second) {
+                if (II->Name == JJ->Name && II->Value == JJ->Value) {
                     I = New.erase(II);
                     J = Old.erase(JJ);
                     break;
@@ -359,13 +359,13 @@ bool CWizardEngine::ApplyShadowChanges()
 
         // apply changed
         foreach(auto & O, Old)
-            I->pOriginal->DelValue(O.first, O.second);
+            I->pOriginal->DelValue(O.Name, O.Value);
         foreach(auto & N, New) {
-            if (N.first == "FileRootPath" || N.first == "IsShadow")
+            if (N.Name == "FileRootPath" || N.Name == "IsShadow")
                 continue; // skip
-            if(N.first == "Template" && IsNoAppliedShadow("Template_" + N.second))
+            if(N.Name == "Template" && IsNoAppliedShadow("Template_" + N.Value))
                 continue; // don't copy non-applied shadow templates
-            I->pOriginal->AppendText(N.first, N.second);
+            I->pOriginal->AppendText(N.Name, N.Value);
         }
     }
 
@@ -401,14 +401,14 @@ QSharedPointer<CSbieIni> CWizardEngine::MakeShadow(const QSharedPointer<CSbieIni
         ShadowName.truncate(32 - (Suffix.length() + 3)); // BOXNAME_COUNT
         ShadowName = theAPI->MkNewName(ShadowName.append(Suffix));
 
-		QList<QPair<QString, QString>> Settings = pIni->GetIniSection();
-		for (QList<QPair<QString, QString>>::iterator I = Settings.begin(); I != Settings.end(); ++I)
-			theAPI->SbieIniSet(ShadowName, I->first, I->second, CSbieAPI::eIniInsert, false);
+		QList<CSbieIni::SbieIniValue> Settings = pIni->GetIniSection();
+		for (QList<CSbieIni::SbieIniValue>::iterator I = Settings.begin(); I != Settings.end(); ++I)
+			theAPI->SbieIniSet(ShadowName, I->Name, I->Value, CSbieIni::eIniInsert, false);
 
         CSandBoxPtr pBox = pIni.objectCast<CSandBox>();
         if(!pBox.isNull())
-            theAPI->SbieIniSet(ShadowName, "FileRootPath", pBox->GetFileRoot(), CSbieAPI::eIniUpdate, false);
-        theAPI->SbieIniSet(ShadowName, "IsShadow", "y", CSbieAPI::eIniUpdate, false);
+            theAPI->SbieIniSet(ShadowName, "FileRootPath", pBox->GetFileRoot(), CSbieIni::eIniUpdate, false);
+        theAPI->SbieIniSet(ShadowName, "IsShadow", "y", CSbieIni::eIniUpdate, false);
 
 		theAPI->CommitIniChanges();
 		theAPI->ReloadBoxes(true);

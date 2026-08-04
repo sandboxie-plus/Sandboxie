@@ -28,7 +28,7 @@ equals(MY_ARCH, ARM64) {
 CONFIG(debug, debug|release):!contains(QMAKE_HOST.arch, x86_64):LIBS += -L../Bin/Win32/Debug
 CONFIG(release, debug|release):!contains(QMAKE_HOST.arch, x86_64):LIBS += -L../Bin/Win32/Release
 
-LIBS += -lNtdll -lAdvapi32 -lOle32 -lUser32 -lShell32 -lGdi32 -lQSbieAPI -lMiscHelpers -lqtsingleapp -lUGlobalHotkey -lbcrypt -lVersion -ltaskschd
+LIBS += -lNtdll -lAdvapi32 -lOle32 -lUser32 -lShell32 -lGdi32 -lQSbieAPI -lMiscHelpers -lqtsingleapp -lUGlobalHotkey -lbcrypt -lVersion -ltaskschd -lws2_32 -liphlpapi
 
 CONFIG(release, debug|release):{
 QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO

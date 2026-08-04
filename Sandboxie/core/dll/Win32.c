@@ -250,7 +250,7 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
     Dll_Win32u = hmodule;
 
 	// In Windows 10 all Win32k.sys calls are located in win32u.dll
-    if (Dll_OsBuild < 10041 || (Dll_ProcessFlags & SBIE_FLAG_WIN32K_HOOKABLE) == 0 || !SbieApi_QueryConfBool(NULL, L"EnableWin32kHooks", TRUE))
+    if (Dll_OsBuild < 14393 || (Dll_ProcessFlags & SBIE_FLAG_WIN32K_HOOKABLE) == 0 || !SbieApi_QueryConfBool(NULL, L"EnableWin32kHooks", TRUE))
         return TRUE; // just return on older builds, or not enabled
 
     if (Dll_CompartmentMode || SbieApi_data->flags.bNoSysHooks)
@@ -261,12 +261,12 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
     // this however with some other software causes issues, presumably as then other syscalls would need to have the same token
     //
 
-    BOOLEAN useByDefualt = (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME);
-    if (SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"UseWin32kHooks", useByDefualt)) {
+    BOOLEAN UseByDefault = (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME);
+    if (SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"UseWin32kHooks", UseByDefault)) {
 
         // disable Electron Workaround when we are ready to hook the required win32k syscalls
-        extern BOOL Dll_ElectronWorkaround;
-        Dll_ElectronWorkaround = FALSE; 
+        //extern BOOL Dll_ElectronWorkaround;
+        //Dll_ElectronWorkaround = FALSE; 
 
 #ifndef _WIN64
         if (Dll_IsWow64) 
@@ -279,6 +279,41 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
 	return TRUE;
 }
 
+
+//
+// Win32_HookWin32WoW64 needs to be able to read and write the 64-bit portion of the address space
+// therefore we issue direct syscalls using 64 bit arguments to our driver's syscall interface
+// The driver accepts function names and optionally returns the corresponding syscall index for later direct use
+// This replaces the use of heaven's gate (wow64ext), as it is unavailable when running in emulation on arm64
+//
+
+
+//---------------------------------------------------------------------------
+// SbieApi_SysCall
+//---------------------------------------------------------------------------
+
+
+NTSTATUS SbieApi_SysCall(const char* name, USHORT* syscall_index, ULONG64* stack)
+{
+    __declspec(align(8)) ANSI_STRING64 Name;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    memset(parms, 0, sizeof(parms));
+
+    Name.Length        = strlen(name);
+    Name.MaximumLength = Name.Length + sizeof(UCHAR);
+    Name.Buffer        = (ULONG64)(ULONG_PTR)name;
+    if (Name.Length == 0 || Name.Length >= 64)
+        return STATUS_INVALID_PARAMETER_1;
+
+    parms[0] = API_INVOKE_SYSCALL;
+    parms[1] = (ULONG64)(ULONG_PTR)(syscall_index ? *syscall_index : 0xFFF);
+    parms[2] = (ULONG64)(ULONG_PTR)stack; // pointer to system service arguments on stack
+    parms[3] = (ULONG64)(ULONG_PTR)&Name;
+    parms[4] = (ULONG64)(ULONG_PTR)syscall_index; // we cache the syscall index for subsequent calls to avoid the slow name lookup
+
+    NTSTATUS status = SbieApi_Ioctl(parms);
+    return status;
+}
 
 #ifndef _WIN64
 
@@ -590,14 +625,6 @@ finish:
 }
 
 
-//
-// Win32_HookWin32WoW64 needs to be able to read and write the 64-bit portion of the address space
-// therefore we issue direct syscalls using 64 bit arguments to our driver's syscall interface
-// The driver accepts function names and optionally returns the corresponding syscall index for later direct use
-// This replaces the use of heaven's gate (wow64ext), as it is unavailable when running in emulation on arm64
-//
-
-
 //---------------------------------------------------------------------------
 // SbieApi_ProtectVirtualMemory
 //---------------------------------------------------------------------------
@@ -608,8 +635,6 @@ NTSTATUS SbieApi_ProtectVirtualMemory(HANDLE hProcess, DWORD64 lpAddress, SIZE_T
     ULONG64 BaseAddress = lpAddress;
     ULONG64 NumberOfBytesToProtect = dwSize;
 
-    static SHORT syscall_index = 0xFFF;
-
 	ULONG64 stack[17];
 	stack[0] = hProcess;
 	stack[1] = &BaseAddress;
@@ -617,16 +642,8 @@ NTSTATUS SbieApi_ProtectVirtualMemory(HANDLE hProcess, DWORD64 lpAddress, SIZE_T
 	stack[3] = flNewProtect;
 	stack[4] = lpflOldProtect;
 
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-    memset(parms, 0, sizeof(parms));
-    parms[0] = API_INVOKE_SYSCALL;
-	parms[1] = (ULONG64)(ULONG_PTR)syscall_index;
-    parms[2] = (ULONG64)(ULONG_PTR)stack; // pointer to system service arguments on stack
-    parms[3] = (ULONG64)(ULONG_PTR)"ProtectVirtualMemory";
-    parms[4] = (ULONG64)(ULONG_PTR)&syscall_index;
-
-    NTSTATUS status = SbieApi_Ioctl(parms);
-    return status;
+    static USHORT syscall_index = 0xFFF;
+    return SbieApi_SysCall("ProtectVirtualMemory", &syscall_index, stack);
 }
 
 
@@ -637,8 +654,6 @@ NTSTATUS SbieApi_ProtectVirtualMemory(HANDLE hProcess, DWORD64 lpAddress, SIZE_T
 
 NTSTATUS SbieApi_ReadVirtualMemory(HANDLE hProcess, DWORD64 lpBaseAddress, LPVOID lpBuffer, SIZE_T nSize, ULONG64 *lpNumberOfBytesRead)
 {
-    static SHORT syscall_index = 0xFFF;
-
 	ULONG64 stack[17];
 	stack[0] = hProcess;
 	stack[1] = lpBaseAddress;
@@ -646,15 +661,8 @@ NTSTATUS SbieApi_ReadVirtualMemory(HANDLE hProcess, DWORD64 lpBaseAddress, LPVOI
 	stack[3] = nSize;
 	stack[4] = lpNumberOfBytesRead;
 
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-    memset(parms, 0, sizeof(parms));
-    parms[0] = API_INVOKE_SYSCALL;
-	parms[1] = (ULONG64)(ULONG_PTR)syscall_index;
-    parms[2] = (ULONG64)(ULONG_PTR)stack; // pointer to system service arguments on stack
-    parms[3] = (ULONG64)(ULONG_PTR)"ReadVirtualMemory";
-    parms[4] = (ULONG64)(ULONG_PTR)&syscall_index;
-
-    NTSTATUS status = SbieApi_Ioctl(parms);
+    static USHORT syscall_index = 0xFFF;
+    NTSTATUS status = SbieApi_SysCall("ReadVirtualMemory", &syscall_index, stack);
     if (status == STATUS_PARTIAL_COPY)
         status = STATUS_SUCCESS;
     return status;
@@ -668,8 +676,6 @@ NTSTATUS SbieApi_ReadVirtualMemory(HANDLE hProcess, DWORD64 lpBaseAddress, LPVOI
 
 NTSTATUS SbieApi_WriteVirtualMemory(HANDLE hProcess, DWORD64 lpBaseAddress, LPVOID lpBuffer, SIZE_T nSize, ULONG64 *lpNumberOfBytesWritten)
 {
-    static SHORT syscall_index = 0xFFF;
-
 	ULONG64 stack[17];
 	stack[0] = hProcess;
 	stack[1] = lpBaseAddress;
@@ -677,16 +683,8 @@ NTSTATUS SbieApi_WriteVirtualMemory(HANDLE hProcess, DWORD64 lpBaseAddress, LPVO
 	stack[3] = nSize;
 	stack[4] = lpNumberOfBytesWritten;
 
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-    memset(parms, 0, sizeof(parms));
-    parms[0] = API_INVOKE_SYSCALL;
-	parms[1] = (ULONG64)(ULONG_PTR)syscall_index;
-    parms[2] = (ULONG64)(ULONG_PTR)stack; // pointer to system service arguments on stack
-    parms[3] = (ULONG64)(ULONG_PTR)"WriteVirtualMemory";
-    parms[4] = (ULONG64)(ULONG_PTR)&syscall_index;
-
-    NTSTATUS status = SbieApi_Ioctl(parms);
-    return status;
+    static USHORT syscall_index = 0xFFF;
+    return SbieApi_SysCall("WriteVirtualMemory", &syscall_index, stack);
 }
 
 
@@ -697,23 +695,13 @@ NTSTATUS SbieApi_WriteVirtualMemory(HANDLE hProcess, DWORD64 lpBaseAddress, LPVO
 
 NTSTATUS SbieApi_FlushInstructionCache(HANDLE hProcess, DWORD64 lpBaseAddress, SIZE_T nSize)
 {
-    static SHORT syscall_index = 0xFFF;
-
 	ULONG64 stack[17];
 	stack[0] = hProcess;
 	stack[1] = lpBaseAddress;
 	stack[2] = nSize;
-	
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-    memset(parms, 0, sizeof(parms));
-    parms[0] = API_INVOKE_SYSCALL;
-	parms[1] = (ULONG64)(ULONG_PTR)syscall_index;
-    parms[2] = (ULONG64)(ULONG_PTR)stack; // pointer to system service arguments on stack
-    parms[3] = (ULONG64)(ULONG_PTR)"FlushInstructionCache";
-    parms[4] = (ULONG64)(ULONG_PTR)&syscall_index;
 
-    NTSTATUS status = SbieApi_Ioctl(parms);
-    return status;
+    static USHORT syscall_index = 0xFFF;
+    return SbieApi_SysCall("FlushInstructionCache", &syscall_index, stack);
 }
 
 
@@ -726,8 +714,6 @@ NTSTATUS SbieApi_QueryVirtualMemory(HANDLE hProcess, DWORD64 BaseAddress, MEMORY
 {
     DWORD64 ReturnLength64 = 0;
 
-    static SHORT syscall_index = 0xFFF;
-
 	ULONG64 stack[17];
 	stack[0] = hProcess;
 	stack[1] = BaseAddress;
@@ -736,18 +722,10 @@ NTSTATUS SbieApi_QueryVirtualMemory(HANDLE hProcess, DWORD64 BaseAddress, MEMORY
 	stack[4] = MemoryInformationLength;
     stack[5] = &ReturnLength64;
 
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-    memset(parms, 0, sizeof(parms));
-    parms[0] = API_INVOKE_SYSCALL;
-	parms[1] = (ULONG64)(ULONG_PTR)syscall_index;
-    parms[2] = (ULONG64)(ULONG_PTR)stack; // pointer to system service arguments on stack
-    parms[3] = (ULONG64)(ULONG_PTR)"QueryVirtualMemory";
-    parms[4] = (ULONG64)(ULONG_PTR)&syscall_index;
-
-    NTSTATUS status = SbieApi_Ioctl(parms);
-
-    if(ReturnLength) *ReturnLength = (SIZE_T)ReturnLength64;
-
+    static USHORT syscall_index = 0xFFF;
+    NTSTATUS status = SbieApi_SysCall("QueryVirtualMemory", &syscall_index, stack);
+    if(ReturnLength) 
+        *ReturnLength = (SIZE_T)ReturnLength64;
     return status;
 }
 

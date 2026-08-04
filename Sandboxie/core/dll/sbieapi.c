@@ -61,7 +61,7 @@ int __CRTDECL Sbie_snwprintf(wchar_t *_Buffer, size_t Count, const wchar_t * con
 	int _Result;
 	va_list _ArgList;
 
-	extern int(*P_vsnwprintf)(wchar_t *_Buffer, size_t Count, const wchar_t * const, va_list Args);
+	extern int(__cdecl *P_vsnwprintf)(wchar_t *_Buffer, size_t Count, const wchar_t * const, va_list Args);
 
 	va_start(_ArgList, _Format);
 	_Result = P_vsnwprintf(_Buffer, Count, _Format, _ArgList);
@@ -78,7 +78,7 @@ int __CRTDECL Sbie_snprintf(char *_Buffer, size_t Count, const char * const _For
 	int _Result;
 	va_list _ArgList;
 
-	extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
+	extern int(__cdecl *P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
 
 	va_start(_ArgList, _Format);
 	_Result = P_vsnprintf(_Buffer, Count, _Format, _ArgList);
@@ -382,7 +382,7 @@ _FX LONG SbieApi_vLogEx(
     tmp2 = (UCHAR *)tmp1 + API_LOG_MESSAGE_MAX_LEN * 2 - 510;
     if (format) {
 
-        extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
+        extern int(__cdecl *P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
 
         Sbie_snprintf(tmp1, 510, "%S", format);
         P_vsnprintf(tmp2, 510, tmp1, va_args);
@@ -904,7 +904,7 @@ _FX LONG SbieApi_EnumProcessEx(
     parms[5] = (ULONG64)(LONG_PTR)boxed_count;
     status = SbieApi_Ioctl(parms);
 
-    if (! NT_SUCCESS(status))
+    if (!NT_SUCCESS(status) && boxed_pids)
         boxed_pids[0] = 0;
 
     return status;
@@ -1390,6 +1390,46 @@ _FX LONG SbieApi_ReloadConf(ULONG session_id, ULONG flags)
 
 
 //---------------------------------------------------------------------------
+// SbieApi_UpdateConf
+//---------------------------------------------------------------------------
+
+
+_FX ULONG SbieApi_UpdateConf(
+    ULONG op, 
+    const WCHAR *section_name,
+    const WCHAR *setting_name, 
+    const WCHAR *value_ptr)
+{
+    NTSTATUS status;
+    __declspec(align(8)) UNICODE_STRING64 Input;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    WCHAR x_section[66];
+    WCHAR x_setting[66];
+
+    memzero(x_section, sizeof(x_section));
+    memzero(x_setting, sizeof(x_setting));
+    if (section_name)
+        wcsncpy(x_section, section_name, 64);
+    if (setting_name)
+        wcsncpy(x_setting, setting_name, 64);
+
+    Input.Length        = wcslen(value_ptr) * sizeof(WCHAR);
+    Input.MaximumLength = Input.Length + sizeof(WCHAR);
+    Input.Buffer        = (ULONG64)(ULONG_PTR)value_ptr;
+
+    memset(parms, 0, sizeof(parms));
+    parms[0] = API_UPDATE_CONF;
+    parms[1] = (ULONG64)(ULONG_PTR)op;
+    parms[2] = (ULONG64)(ULONG_PTR)x_section;
+    parms[3] = (ULONG64)(ULONG_PTR)x_setting;
+    parms[4] = (ULONG64)(ULONG_PTR)(value_ptr ? &Input : NULL);
+    status = SbieApi_Ioctl(parms);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 // SbieApi_QueryConf
 //---------------------------------------------------------------------------
 
@@ -1718,6 +1758,34 @@ _FX LONG SbieApi_MonitorPut2Ex(
     return status;
 }
 
+
+//---------------------------------------------------------------------------
+// SbieApi_MonitorGetEx
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_MonitorPutEx(
+    ULONG Type,
+    ULONG Pid,
+    ULONG Tid,
+    const WCHAR *Message)                    // WCHAR [256]
+{
+    NTSTATUS status;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    API_MONITOR_PUT_EX_ARGS *args = (API_MONITOR_PUT_EX_ARGS *)parms;
+
+    memset(parms, 0, sizeof(parms));
+    args->func_code              = API_MONITOR_PUT_EX;
+    args->log_type.val           = Type;
+    args->log_len.val64          = wcslen(Message) * sizeof(WCHAR);
+    args->log_ptr.val64          = (ULONG64)(ULONG_PTR)Message;
+    args->log_pid.val            = Pid;
+    args->log_tid.val            = Tid;
+    status = SbieApi_Ioctl(parms);
+
+    return status;
+}
+
 //---------------------------------------------------------------------------
 // SbieApi_MonitorGet
 //---------------------------------------------------------------------------
@@ -1816,7 +1884,7 @@ _FX LONG SbieApi_GetUnmountHive(
 //---------------------------------------------------------------------------
 
 
-_FX LONG SbieApi_SessionLeader(HANDLE TokenHandle, HANDLE *ProcessId)
+_FX LONG SbieApi_SessionLeader(ULONG session_id, HANDLE *ProcessId)
 {
     NTSTATUS status;
     __declspec(align(8)) ULONG64 ResultValue;
@@ -1826,9 +1894,11 @@ _FX LONG SbieApi_SessionLeader(HANDLE TokenHandle, HANDLE *ProcessId)
     memset(parms, 0, sizeof(parms));
     args->func_code               = API_SESSION_LEADER;
     if (ProcessId) {
-        args->token_handle.val64  = (ULONG64)(ULONG_PTR)TokenHandle;
+        args->session_id.val64    = (ULONG64)(ULONG_PTR)session_id;
+        args->token_handle.val64  = 0;
         args->process_id.val64    = (ULONG64)(ULONG_PTR)&ResultValue;
     } else {
+        args->session_id.val64    = 0;
         args->token_handle.val64  = 0;
         args->process_id.val64    = 0;
     }

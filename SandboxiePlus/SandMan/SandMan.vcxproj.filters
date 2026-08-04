@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -69,17 +69,11 @@
     <ClCompile Include="Models\SbieModel.cpp">
       <Filter>Models</Filter>
     </ClCompile>
-    <ClCompile Include="Views\SbieView.cpp">
-      <Filter>Views</Filter>
-    </ClCompile>
     <ClCompile Include="SbiePlusAPI.cpp">
       <Filter>SandMan</Filter>
     </ClCompile>
     <ClCompile Include="Helpers\WinAdmin.cpp">
       <Filter>Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Windows\OptionsWindow.cpp">
-      <Filter>Windows</Filter>
     </ClCompile>
     <ClCompile Include="Windows\SettingsWindow.cpp">
       <Filter>Windows</Filter>
@@ -101,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="Models\TraceModel.cpp">
       <Filter>Models</Filter>
-    </ClCompile>
-    <ClCompile Include="Views\TraceView.cpp">
-      <Filter>Views</Filter>
     </ClCompile>
     <ClCompile Include="Windows\SelectBoxWindow.cpp">
       <Filter>Windows</Filter>
@@ -183,6 +174,9 @@
     <ClCompile Include="Helpers\WinHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers\MiniDumpFilter.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
     <ClCompile Include="Wizards\NewBoxWizard.cpp">
       <Filter>Wizards</Filter>
     </ClCompile>
@@ -222,6 +216,9 @@
     <ClCompile Include="AddonManager.cpp">
       <Filter>SandMan</Filter>
     </ClCompile>
+    <ClCompile Include="BoxTransfer.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\SandboxieTools\Common\verify.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -232,7 +229,38 @@
       <Filter>Windows</Filter>
     </ClCompile>
     <ClCompile Include="Windows\TestProxyDialog.cpp">
-        <Filter>Windows</Filter>
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\ExtractDialog.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\RenameSandboxDialog.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers\TabOrder.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Views\TraceView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
+
+    <ClCompile Include="Windows\OptionsWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers\IniHighlighter.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Views\SbieView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\EditorSettingsWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\NtObjectModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Views\NtObjectView.cpp">
+      <Filter>Views</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +294,9 @@
     <ClInclude Include="Helpers\WinHelper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Helpers\MiniDumpFilter.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
     <ClInclude Include="Helpers\StorageInfo.h">
       <Filter>Helpers</Filter>
     </ClInclude>
@@ -274,6 +305,12 @@
     </ClInclude>
     <ClInclude Include="CustomStyles.h">
       <Filter>SandMan</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\PendingChanges.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\TabOrder.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +347,7 @@
     <QtMoc Include="Views\TraceView.h">
       <Filter>Views</Filter>
     </QtMoc>
+
     <QtMoc Include="Windows\SelectBoxWindow.h">
       <Filter>Windows</Filter>
     </QtMoc>
@@ -376,6 +414,9 @@
     <QtMoc Include="AddonManager.h">
       <Filter>SandMan</Filter>
     </QtMoc>
+    <QtMoc Include="BoxTransfer.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
     <QtMoc Include="Engine\ScriptManager.h">
       <Filter>Engine</Filter>
     </QtMoc>
@@ -383,7 +424,25 @@
       <Filter>Windows</Filter>
     </QtMoc>
     <QtMoc Include="Windows\TestProxyDialog.h">
-        <Filter>Windows</Filter>
+      <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Windows\ExtractDialog.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Windows\RenameSandboxDialog.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Helpers\IniHighlighter.h">
+      <Filter>Helpers</Filter>
+    </QtMoc>
+    <QtMoc Include="Windows\EditorSettingsWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\NtObjectModel.h">
+      <Filter>Models</Filter>
+    </QtMoc>
+    <QtMoc Include="Views\NtObjectView.h">
+      <Filter>Views</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -428,7 +487,16 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\TestProxyDialog.ui">
-        <Filter>Form Files</Filter>
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\ExtractDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\RenameSandboxDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\EditorSettingsWindow.ui">
+      <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
@@ -436,6 +504,9 @@
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_fr.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_hi.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_pt_BR.ts">

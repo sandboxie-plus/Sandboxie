@@ -260,20 +260,20 @@
     <CustomBuild Include="dc\crypto_fast\i386\aes_i386.asm">
       <Filter>DC\crypto_fast\i386</Filter>
     </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\i386\xts_serpent_sse2_i386.asm">
+      <Filter>DC\crypto_fast\i386</Filter>
+    </CustomBuild>
     <CustomBuild Include="dc\crypto_fast\i386\aes_padlock_i386.asm">
-      <Filter>Source Files</Filter>
+      <Filter>DC\crypto_fast\i386</Filter>
     </CustomBuild>
     <CustomBuild Include="dc\crypto_fast\i386\twofish_i386.asm">
-      <Filter>Source Files</Filter>
+      <Filter>DC\crypto_fast\i386</Filter>
     </CustomBuild>
     <CustomBuild Include="dc\crypto_fast\i386\xts_aes_ni_i386.asm">
-      <Filter>Source Files</Filter>
+      <Filter>DC\crypto_fast\i386</Filter>
     </CustomBuild>
     <CustomBuild Include="dc\crypto_fast\i386\xts_serpent_avx_i386.asm">
-      <Filter>Source Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="dc\crypto_fast\i386\xts_serpent_sse2_i386.asm">
-      <Filter>Source Files</Filter>
+      <Filter>DC\crypto_fast\i386</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

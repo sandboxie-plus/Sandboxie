@@ -29,7 +29,7 @@ struct SSecureBuffer
 #ifdef _M_IX86
 		ptr = (T*)VirtualAlloc(NULL, length, MEM_COMMIT + MEM_RESERVE, PAGE_EXECUTE_READWRITE);
 #else
-		ptr = (T*)VirtualAlloc(NULL, length, MEM_COMMIT+MEM_RESERVE, PAGE_READWRITE);
+		ptr = (T*)VirtualAlloc(NULL, length, MEM_COMMIT + MEM_RESERVE, PAGE_READWRITE);
 #endif
 		if(ptr)
 			VirtualLock(ptr, length);
@@ -65,6 +65,8 @@ struct SCryptoIO
 	SSecureBuffer<dc_pass> password;
 
 	xts_key benc_k;
+
+	SSection* section;
 };
 
 CCryptoIO::CCryptoIO(CAbstractIO* pIO, const WCHAR* pKey, const std::wstring& Cipher)
@@ -79,6 +81,8 @@ CCryptoIO::CCryptoIO(CAbstractIO* pIO, const WCHAR* pKey, const std::wstring& Ci
 			m->password->size = MAX_PASSWORD * sizeof(wchar_t);
 		memcpy(m->password->pass, pKey, m->password->size);
 	}
+
+	m->section = NULL;
 
 	m_pIO = pIO;
 
@@ -175,6 +179,14 @@ int CCryptoIO::InitCrypto()
 
 	if (ret == ERR_OK) {
 		xts_set_key(header->key_1, header->alg_1, &m->benc_k);
+
+		if (m->section && header->info_magic == DC_INFO_MAGIC) {
+			m->section->magic = SECTION_MAGIC;
+			m->section->id = SECTION_PARAM_ID_DATA;
+			m->section->size = header->info_size;
+			memcpy(m->section->data, header->info_data, header->info_size);
+		}
+
 		DbgPrint(L" SUCCESS.\n");
 	}
 	else
@@ -365,4 +377,74 @@ int CCryptoIO::RestoreHeader(CAbstractIO* pIO, const std::wstring& Path)
 		ret = ERR_FILE_NOT_OPENED;
 
 	return ret;
+}
+
+void CCryptoIO::SetDataSection(SSection* pSection)
+{
+	m->section = pSection;
+}
+
+int CCryptoIO::SetData(const UCHAR* pData, SIZE_T uSize)
+{
+	int ret = m_pIO ? m_pIO->Init() : ERR_UNKNOWN_TYPE;
+
+	if (ret != ERR_OK)
+		return ret;
+
+	SSecureBuffer<dc_header> header;
+	if (!header) {
+		DbgPrint(L"Malloc Failed\n");
+		return ERR_MALLOC_ERROR;
+	}
+
+	m_pIO->DiskRead(header.ptr, sizeof(dc_header), 0);
+
+	ret = dc_decrypt_header(header.ptr, m->password.ptr) ? ERR_OK : ERR_WRONG_PASSWORD;
+
+	if (ret != ERR_OK)
+		return ret;
+
+	if(uSize> sizeof(header.ptr->info_data))
+		return ERR_DATA_TO_LONG;
+
+	header.ptr->info_magic = DC_INFO_MAGIC;
+	header.ptr->info_reserved = 0;
+	header.ptr->info_size = uSize;
+	memcpy(header.ptr->info_data, pData, uSize);
+
+	ret = WriteHeader(header.ptr);
+
+	return ret;
+}
+
+int CCryptoIO::GetData(UCHAR* pData, SIZE_T* pSize)
+{
+	int ret = m_pIO ? m_pIO->Init() : ERR_UNKNOWN_TYPE;
+
+	if (ret != ERR_OK)
+		return ret;
+
+	SSecureBuffer<dc_header> header;
+	if (!header) {
+		DbgPrint(L"Malloc Failed\n");
+		return ERR_MALLOC_ERROR;
+	}
+
+	m_pIO->DiskRead(header.ptr, sizeof(dc_header), 0);
+
+	ret = dc_decrypt_header(header.ptr, m->password.ptr) ? ERR_OK : ERR_WRONG_PASSWORD;
+
+	if (ret != ERR_OK)
+		return ret;
+
+	if (header.ptr->info_magic != DC_INFO_MAGIC)
+		return ERR_DATA_NOT_FOUND;
+
+	//if (*pSize < header.ptr->info_size)
+	//	return ERR_BUFFER_TO_SMALL;
+
+	*pSize = header.ptr->info_size;
+	memcpy(pData, header.ptr->info_data, *pSize);
+
+	return ERR_OK;
 }

@@ -98,6 +98,7 @@ NTSTATUS Thread_GetKernelHandleForUserHandle(
 static const WCHAR *Ipc_Event_TypeName      = L"Event";
 static const WCHAR *Ipc_EventPair_TypeName  = L"EventPair";
 static const WCHAR *Ipc_KeyedEvent_TypeName = L"KeyedEvent";
+static const WCHAR *Ipc_Timer_TypeName      = L"Timer";
 static const WCHAR *Ipc_Mutant_TypeName     = L"Mutant";
 static const WCHAR *Ipc_Semaphore_TypeName  = L"Semaphore";
 static const WCHAR *Ipc_Section_TypeName    = L"Section";
@@ -148,6 +149,7 @@ _FX BOOLEAN Ipc_Init(void)
     Ipc_Init_Type_Generic(Ipc_Event_TypeName, 0);
     Ipc_Init_Type_Generic(Ipc_EventPair_TypeName, 0);
     Ipc_Init_Type_Generic(Ipc_KeyedEvent_TypeName, 0);
+    Ipc_Init_Type_Generic(Ipc_Timer_TypeName, 0); // NtCreateTimer2 introduced windows 8.1 does not take a names so does not need filering
     Ipc_Init_Type_Generic(Ipc_Mutant_TypeName, 0);
     Ipc_Init_Type_Generic(Ipc_Semaphore_TypeName, 0);
     Ipc_Init_Type_Generic(Ipc_Section_TypeName, 17763); // NtCreateSectionEx introduced in windows 10 1809

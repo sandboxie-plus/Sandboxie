@@ -190,7 +190,7 @@ LONG SbieApi_EnumProcessEx(
 
 SBIEAPI_EXPORT
 LONG SbieApi_SessionLeader(
-    HANDLE TokenHandle,
+    ULONG session_id,
     HANDLE *ProcessId);
 
 SBIEAPI_EXPORT
@@ -230,6 +230,13 @@ LONG SbieApi_MonitorPut2Ex(
     const WCHAR *Name,
     BOOLEAN bCheckObjectExists,
     BOOLEAN bIsMessage);
+
+SBIEAPI_EXPORT
+LONG SbieApi_MonitorPutEx(
+    ULONG Type,
+    ULONG Pid,
+    ULONG Tid,
+    const WCHAR *Message);          // WCHAR [256]
 
 //SBIEAPI_EXPORT
 //LONG SbieApi_MonitorGet(
@@ -344,6 +351,12 @@ LONG SbieApi_QueryDrvInfo(
 SBIEAPI_EXPORT
 LONG SbieApi_ReloadConf(ULONG session_id, ULONG flags);
 
+SBIEAPI_EXPORT
+ULONG SbieApi_UpdateConf(
+    ULONG op, 
+    const WCHAR *section_name,
+    const WCHAR *setting_name, 
+    const WCHAR *value_ptr);
 
 SBIEAPI_EXPORT
 LONG SbieApi_QueryConf(

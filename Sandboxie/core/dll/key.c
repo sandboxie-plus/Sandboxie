@@ -29,6 +29,7 @@
 #include "core/drv/api_defs.h"
 #include <stdio.h>
 #include "debug.h"
+#include "common/str_util.h"
 
 //---------------------------------------------------------------------------
 // Defines
@@ -1075,11 +1076,11 @@ _FX NTSTATUS Key_FixNameWow64_2(WCHAR **OutTruePath, WCHAR **OutCopyPath)
 _FX BOOLEAN Key_FixNameWow64_3(WCHAR **OutPath)
 {
     WCHAR *ptr1, *ptr2;
-    ptr1 = wcsstr(*OutPath, Key_Wow6432Node);
+    ptr1 = wcsistr(*OutPath, Key_Wow6432Node);
     if (! ptr1)
         return FALSE;
     ptr2 = ptr1 + 12;
-    if (wcsncmp(ptr2, Key_Wow6432Node, 12) != 0)
+    if (_wcsnicmp(ptr2, Key_Wow6432Node, 12) != 0)
         return FALSE;
     ptr1 = ptr2 + 12;
     wmemmove(ptr2, ptr1, wcslen(ptr1) + 1);
@@ -1107,7 +1108,7 @@ _FX ACCESS_MASK Key_GetWow64Flag(
         if (Dll_OsBuild >= 7600)
             DesiredAccess |= KEY_WOW64_64KEY;
 
-        else if (wcsstr(TruePath, Key_Wow6432Node))
+        else if (wcsistr(TruePath, Key_Wow6432Node))
             DesiredAccess |= KEY_WOW64_32KEY;
 
         else
@@ -1356,6 +1357,7 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
     ULONG mp_flags;
     BOOLEAN CopyPathCreated;
     BOOLEAN TruePathExists;
+    ACCESS_MASK ResultWow64Flags;
     PSECURITY_DESCRIPTOR *OverrideSecurityDescriptor;
     ULONG TruePathFlags;
     WCHAR* OriginalPath;
@@ -1398,8 +1400,15 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
     CopyPathCreated = FALSE;
     TruePathExists = FALSE;
+    ResultWow64Flags = DesiredAccess & (KEY_WOW64_32KEY | KEY_WOW64_64KEY);
     OriginalPath = NULL;
     TrueOpened = FALSE;
+
+    if (Dll_IsWin64 && ObjectAttributes && ObjectAttributes->RootDirectory && !ResultWow64Flags) {
+        ResultWow64Flags = Handle_GetKeyWow64Flags(ObjectAttributes->RootDirectory);
+        if (ResultWow64Flags)
+            DesiredAccess |= ResultWow64Flags;
+    }
 
     TlsData->key_NtCreateKey_lock = TRUE;
 
@@ -1934,7 +1943,7 @@ SkipReadOnlyCheck:
     //
 
     if (CopyPathCreated)
-        Key_DiscardMergeByPath(TruePath, TRUE);
+        Key_UpdateMergeByPath(TruePath, FALSE, TRUE);
 
     //
     // Relocation, if we opened a relocated location we need to 
@@ -1944,6 +1953,10 @@ SkipReadOnlyCheck:
     if (TrueOpened && OriginalPath) {
 
         Handle_SetRelocationPath(*KeyHandle, OriginalPath);
+    }
+
+    if (NT_SUCCESS(status) && KeyHandle && *KeyHandle && ResultWow64Flags) {
+        Handle_SetKeyWow64Flags(*KeyHandle, ResultWow64Flags);
     }
 
 #undef __sys_NtCreateKeyX
@@ -2558,7 +2571,7 @@ _FX NTSTATUS Key_MarkDeletedAndClose(HANDLE KeyHandle)
         if (NT_SUCCESS(status)) {
             Key_MarkDeletedEx_v2(TruePath, NULL);
 
-            Key_DiscardMergeByPath(TruePath, TRUE);
+            Key_UpdateMergeByPath(TruePath, TRUE, FALSE);
         }
 
         __sys_NtDeleteKey(KeyHandle);
@@ -2578,7 +2591,7 @@ _FX NTSTATUS Key_MarkDeletedAndClose(HANDLE KeyHandle)
         // refresh all merges
         //
 
-        Key_DiscardMergeByHandle(TlsData, KeyHandle, TRUE);
+        Key_UpdateMergeByHandle(TlsData, KeyHandle, TRUE);
     }
 
     //
@@ -2710,7 +2723,7 @@ _FX NTSTATUS Key_NtDeleteValueKey(
 
             Key_MarkDeletedEx_v2(TruePath, ValueName->Buffer);
 
-            __sys_NtDeleteValueKey(KeyHandle, ValueName);
+            status = __sys_NtDeleteValueKey(KeyHandle, ValueName);
 
         } else {
 
@@ -2830,7 +2843,7 @@ _FX NTSTATUS Key_NtSetValueKey(
     // refresh all merges
     //
 
-    Key_DiscardMergeByHandle(TlsData, KeyHandle, FALSE);
+    Key_UpdateMergeByHandle(TlsData, KeyHandle, FALSE);
 
     SetLastError(LastError);
 
@@ -4632,7 +4645,7 @@ _FX NTSTATUS Key_NtRenameKey(
     InitializeObjectAttributes(
         &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-    status = __sys_NtOpenKey(&handle, KEY_READ, &objattrs);
+    status = SbieApi_OpenKey(&handle, TruePath2);
 
     if (NT_SUCCESS(status)) {
 
@@ -4654,9 +4667,8 @@ _FX NTSTATUS Key_NtRenameKey(
         Key_SetRelocation(TruePath, NewTruePath);
     }
 
-    //*TruePathSlash = L'\0';
-    //Key_DiscardMergeByPath(TruePath, TRUE); // fix-me: act on Key_MergeCacheList
-    //*TruePathSlash = L'\\';
+    Key_UpdateMergeByPath(TruePath, TRUE, FALSE);
+    Key_UpdateMergeByPath(NewTruePath, FALSE, TRUE);
 
     status = STATUS_SUCCESS;
 

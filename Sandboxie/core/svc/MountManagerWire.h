@@ -56,6 +56,7 @@ struct tagIMBOX_MOUNT_REQ
 	MSG_HEADER h;
 	WCHAR password[128 + 1];
 	BOOL protect_root;
+	BOOL admin_only;
 	BOOL auto_unmount;
 	WCHAR reg_root[MAX_REG_ROOT_LEN];
 	WCHAR file_root[1];

@@ -1,6 +1,6 @@
 /*
- * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2024 David Xanatos, xanasoft.com
+ * Copyright 2004-2020 Sandboxie Holdings, LLC
+ * Copyright 2020-2026 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -36,6 +36,8 @@
 #include "core/drv/api_defs.h"
 #include "core/drv/verify.h"
 #include "common/rbtree.h"
+#define _WINSOCK2API_
+#include <IPTypes.h>
 
 
 //---------------------------------------------------------------------------
@@ -68,9 +70,24 @@ static BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* RuleStr);
 
 static BOOLEAN WSA_InitNetProxy();
 
+static BOOLEAN WSA_InitBindIP();
+
+static BOOLEAN WSA_GetStrictBindIP();
+
+static BOOLEAN WSA_IsBindIPValid();
+
+static BOOLEAN WSA_RefreshBindIPState();
+
 BOOLEAN WSA_InitNetDnsFilter(HMODULE module);
 
 static int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol);
+
+static int WSA_WSAStartup(
+    WORD wVersionRequested,
+    void* lpWSAData);
+    
+static int WSA_WSACleanup(void);
+
 
 static int WSA_WSAIoctl(
     SOCKET                             s,
@@ -120,6 +137,9 @@ static int WSA_GetAddrInfoW(
     const ADDRINFOW* pHints,
     PADDRINFOW* ppResult);
 
+static void WSA_FreeAddrInfoW(
+    PADDRINFOW      pAddrInfo);
+
 static SOCKET WSA_WSASocketW(
     int                 af,
     int                 type,
@@ -156,7 +176,11 @@ static int WSA_ConnectEx(
     LPDWORD         lpdwBytesSent,
     LPOVERLAPPED    lpOverlapped);
 
-/*static SOCKET WSA_accept(
+/*static int WSA_listen(
+    SOCKET          s,
+    int             backlog);
+
+static SOCKET WSA_accept(
     SOCKET   s,
     void     *addr,
     int      *addrlen);
@@ -197,7 +221,7 @@ static int WSA_WSASendTo(
     LPWSAOVERLAPPED                    lpOverlapped,
     LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 
-/*static int WSA_recvfrom(
+static int WSA_recvfrom(
     SOCKET   s,
     char     *buf,
     int      len,
@@ -214,17 +238,27 @@ static int WSA_WSARecvFrom(
     void                               *lpFrom,
     LPINT                              lpFromlen,
     LPWSAOVERLAPPED                    lpOverlapped,
-    LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);*/
+    LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 
 static int WSA_closesocket(SOCKET s);
 
+static int WSA_IsLocalLoop(const short* addr, int addrlen);
+
 
 BOOLEAN socks5_handshake(SOCKET s, BOOLEAN auth, WCHAR login[256], WCHAR pass[256]);
+
 char socks5_request(SOCKET s, const SOCKADDR* addr);
+
+USHORT start_socks5_relay(const SOCKADDR* addr, const SOCKADDR* proxy, BOOLEAN auth, WCHAR login[256], WCHAR pass[256]);
 
 
 //---------------------------------------------------------------------------
 
+static P_WSAStartup         __sys_WSAStartup        = NULL;
+
+static P_WSACleanup         __sys_WSACleanup        = NULL;
+
+       P_socket             __sys_socket            = NULL;
 
 static P_WSAIoctl           __sys_WSAIoctl          = NULL;
 
@@ -235,20 +269,28 @@ static P_ioctlsocket        __sys_ioctlsocket       = NULL;
 static P_WSAAsyncSelect     __sys_WSAAsyncSelect    = NULL;
 static P_WSAEventSelect     __sys_WSAEventSelect    = NULL;
 
+       P_select             __sys_select            = NULL;
+
 static P_WSAEnumNetworkEvents __sys_WSAEnumNetworkEvents = NULL;
 
 static P_WSANSPIoctl        __sys_WSANSPIoctl       = NULL;
 
 static P_WSASocketW         __sys_WSASocketW        = NULL;
 
-static P_bind               __sys_bind              = NULL;
+       P_bind               __sys_bind              = NULL;
 
-static P_connect            __sys_connect           = NULL;
+       P_getsockname        __sys_getsockname       = NULL;
+
+       P_WSAFDIsSet         __sys_WSAFDIsSet        = NULL;
+
+       P_connect            __sys_connect           = NULL;
 static P_WSAConnect         __sys_WSAConnect        = NULL;
 static P_ConnectEx          __sys_ConnectEx         = NULL;
 
-/*static P_accept             __sys_accept            = NULL;
-static P_WSAAccept          __sys_WSAAccept         = NULL;
+       P_listen             __sys_listen            = NULL;
+
+       P_accept             __sys_accept            = NULL;
+/*static P_WSAAccept          __sys_WSAAccept         = NULL;
 static P_AcceptEx           __sys_AcceptEx          = NULL;*/
 
        P_recv               __sys_recv              = NULL;
@@ -257,14 +299,16 @@ static P_AcceptEx           __sys_AcceptEx          = NULL;*/
 static P_sendto             __sys_sendto            = NULL;
 static P_WSASendTo          __sys_WSASendTo         = NULL;
 
-/*static P_recvfrom           __sys_recvfrom          = NULL;
-static P_WSARecvFrom        __sys_WSARecvFrom       = NULL;*/
+static P_recvfrom           __sys_recvfrom          = NULL;
+static P_WSARecvFrom        __sys_WSARecvFrom       = NULL;
 
 static P_shutdown           __sys_shutdown          = NULL;
 
-static P_closesocket        __sys_closesocket       = NULL;
+       P_closesocket        __sys_closesocket       = NULL;
 
 static P_GetAddrInfoW       __sys_GetAddrInfoW      = NULL;
+
+static P_FreeAddrInfoW      __sys_FreeAddrInfoW     = NULL;
 
        P_inet_ntop          __sys_inet_ntop         = NULL;
 
@@ -273,14 +317,14 @@ static P_GetAddrInfoW       __sys_GetAddrInfoW      = NULL;
 //---------------------------------------------------------------------------
 
 struct NETPROXY_RULE {
-    USHORT af;
+    int used;
 
     SOCKADDR_IN     WSA_ProxyAddr;
     SOCKADDR_IN6_LH WSA_ProxyAddr6;
 
     BOOLEAN auth;
-    WCHAR   login[255];
-    WCHAR   pass[255];
+    WCHAR   login[256];
+    WCHAR   pass[256];
 
     rbtree_t ip_map;
 };
@@ -294,13 +338,32 @@ static BOOLEAN          WSA_WFPisBlocking     = FALSE;
 
 static BOOLEAN          WSA_TraceFlag         = FALSE;
 
+static BOOLEAN          WSA_StartupDone       = FALSE;
 static BOOLEAN          WSA_ProxyEnabled      = FALSE;
-static NETPROXY_RULE*   WSA_Proxy             = NULL;
+static BOOLEAN          WSA_ProxyThread       = FALSE;
+static BOOLEAN          WSA_ProxyHack         = FALSE;
+static NETPROXY_RULE*   WSA_Proxy4            = NULL;
+static NETPROXY_RULE*   WSA_Proxy6            = NULL;
 #ifdef PROXY_RESOLVE_HOST_NAMES
        HASH_MAP         DNS_LookupMap;
 #endif
 
+static BOOLEAN          WSA_BindIP            = FALSE;
+static SOCKADDR_IN      WSA_BindIP4           = {0};
+static SOCKADDR_IN6_LH  WSA_BindIP6           = {0};
+
+// Track which IP versions are explicitly configured
+static BOOLEAN          WSA_BindIPv4Configured = FALSE;  // TRUE if IPv4 BindAdapterIP or BindAdapter is set
+static BOOLEAN          WSA_BindIPv6Configured = FALSE;  // TRUE if IPv6 BindAdapterIP or BindAdapter is set
+
+// Track adapter name for BindAdapter validation (vs BindAdapterIP which uses IP)
+static WCHAR            WSA_BindAdapterName[256] = {0};
+static BOOLEAN          WSA_UseBindAdapter   = FALSE;  // TRUE = BindAdapter, FALSE = BindAdapterIP
+
 typedef struct _WSA_SOCK {
+
+    USHORT af;
+
     ULONG NonBlocking;
 
     BOOLEAN ConnectedSet;
@@ -314,10 +377,30 @@ typedef struct _WSA_SOCK {
     void*   hEventObject;
     long    lNetworkEvents;
 
+    // Binding
+    BOOLEAN Bound;
+
 } WSA_SOCK;
 
 static HASH_MAP   WSA_SockMap;
 
+BOOLEAN WSA_isBlockLocalLoop = FALSE;
+
+//---------------------------------------------------------------------------
+// Debug helpers (controlled by NetFwTrace setting)
+//---------------------------------------------------------------------------
+
+// Helper macro that uses Sbie_snwprintf to build BindIP-prefixed trace messages
+// Since Sbie_snwprintf doesn't have a va_list variant, we use a macro to inject the prefix
+#define WSA_DebugBindMsg(fmt, ...) \
+    do { \
+        if (WSA_TraceFlag) { \
+            wchar_t _msg[512]; \
+            int _res = Sbie_snwprintf(_msg, sizeof(_msg)/sizeof(_msg[0]), L"BindIP; " fmt, ##__VA_ARGS__); \
+            if (_res >= 0) \
+                SbieApi_MonitorPutMsg(MONITOR_OTHER, _msg); \
+        } \
+    } while (0)
 
 
 //---------------------------------------------------------------------------
@@ -329,8 +412,76 @@ _FX WSA_SOCK* WSA_GetSock(SOCKET s, BOOLEAN bCanAdd)
 {
     WSA_SOCK* pSock = (WSA_SOCK*)map_get(&WSA_SockMap, (void*)s);
     if (pSock == NULL && bCanAdd)
-        pSock = (WSA_SOCK*)map_insert(&WSA_SockMap, (void*)s, NULL, sizeof(WSA_SOCK));
+        pSock = (WSA_SOCK*)map_insert(&WSA_SockMap, (void*)s, NULL, sizeof(WSA_SOCK)); // returns a MemZero'ed object
     return pSock;
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_WSAStartup
+//---------------------------------------------------------------------------
+
+
+_FX int WSA_WSAStartup(
+    WORD wVersionRequested,
+    void* lpWSAData)
+{
+    int ret = __sys_WSAStartup(wVersionRequested, lpWSAData);
+    if (ret != 0)
+        return ret;
+
+    if (WSA_StartupDone)
+        return 0;
+    WSA_StartupDone = TRUE;
+	
+	WSA_isBlockLocalLoop = SbieApi_QueryConfBool(NULL, L"BlockLocalLoop", FALSE);
+
+    //
+    // Initialize network proxy
+    //
+
+    if (WSA_InitNetProxy()) {
+
+        WSA_ProxyEnabled = TRUE;
+
+        __declspec(align(8)) SCertInfo CertInfo = { 0 }; // experimental not yet for public
+        if (NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) && (CertInfo.type == eCertDeveloper || CERT_IS_TYPE(CertInfo, eCertEternal)))
+            WSA_ProxyThread = SbieApi_QueryConfBool(NULL, L"UseProxyThreads", FALSE);
+
+        if (!WSA_ProxyThread)
+            WSA_ProxyHack = TRUE;
+    }
+
+    //
+    // Initialize bind
+    //
+
+    if (WSA_InitBindIP()) {
+
+        WSA_BindIP = TRUE;
+    }
+	
+    //
+    // Init helper map if needed
+    //
+
+    if (WSA_ProxyHack || WSA_BindIP) {
+
+        map_init(&WSA_SockMap, Dll_Pool);
+    }
+
+    return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_WSACleanup
+//---------------------------------------------------------------------------
+
+
+_FX int WSA_WSACleanup(void)
+{
+    return __sys_WSACleanup();
 }
 
 
@@ -392,7 +543,7 @@ _FX int WSA_ioctlsocket(
     // for now we will only monitor ioctlsocket
     //
 
-    if (WSA_ProxyEnabled && (cmd == FIONBIO) && argp) 
+    if (WSA_ProxyHack && (cmd == FIONBIO) && argp) 
         WSA_GetSock(s, TRUE)->NonBlocking = *argp;
 
     return __sys_ioctlsocket(s, cmd, argp);
@@ -410,7 +561,7 @@ _FX int WSA_WSAAsyncSelect(
     UINT    wMsg,
     long    lEvent)
 {
-    if (WSA_ProxyEnabled) {
+    if (WSA_ProxyHack) {
         WSA_SOCK* pSock = WSA_GetSock(s, TRUE);
 
         pSock->hWnd = hWnd;
@@ -434,7 +585,7 @@ _FX int WSA_WSAEventSelect(
     void*   hEventObject,
     long    lNetworkEvents)
 {
-    if (WSA_ProxyEnabled) {
+    if (WSA_ProxyHack) {
         WSA_SOCK* pSock = WSA_GetSock(s, TRUE);
 
         pSock->hEventObject = hEventObject;
@@ -459,7 +610,7 @@ _FX int WSA_WSAEnumNetworkEvents(
 {
     int ret = __sys_WSAEnumNetworkEvents(s, hEventObject, lpNetworkEvents);
 
-    if (WSA_ProxyEnabled) {
+    if (WSA_ProxyHack) {
         WSA_SOCK* pSock = WSA_GetSock(s, TRUE);
 
         if (pSock->ConnectedSet) {
@@ -562,7 +713,12 @@ static SOCKET WSA_WSASocketW(
         }
     }
 
-    return __sys_WSASocketW(af, type, protocol, lpProtocolInfo, g, dwFlags);
+    SOCKET s = __sys_WSASocketW(af, type, protocol, lpProtocolInfo, g, dwFlags);
+
+    if (WSA_ProxyHack || WSA_BindIP)
+        WSA_GetSock(s, TRUE)->af = af;
+
+    return s;
 }
 
 
@@ -657,11 +813,223 @@ _FX int WSA_bind(
 {
     BOOLEAN new_name = WSA_HandleAfUnix(&name, &namelen);
 
+    if (WSA_BindIP) {
+        const SOCKADDR* sa = (const SOCKADDR*)name;
+        int fam = (name && namelen >= (int)sizeof(USHORT)) ? sa->sa_family : -1;
+        BOOLEAN StrictBindIP = WSA_GetStrictBindIP();
+        WSA_DebugBindMsg(L"bind: req_af=%d strict=%d useAdapter=%d cfg(v4=%d,v6=%d)\n",
+                fam, (int)StrictBindIP, (int)WSA_UseBindAdapter, (int)WSA_BindIPv4Configured, (int)WSA_BindIPv6Configured);
+        
+        // Validate that the configured bind IP is still available on the system
+        // If not available, fail the bind to prevent fallback to default adapter
+        if (!WSA_IsBindIPValid()) {
+            if (new_name) Dll_Free((void*)name);
+            __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+            return SOCKET_ERROR;
+        }
+
+        // When StrictBindIP is enabled, block binds for IP families that aren't configured
+        // This ensures: IPv4 configured + IPv6 not configured = block IPv6 binds
+        //               IPv6 configured + IPv4 not configured = block IPv4 binds
+        if (StrictBindIP) {
+            if (namelen >= sizeof(SOCKADDR_IN) && name && ((short*)name)[0] == AF_INET) {
+                // Treat wildcard configured IPv4 (0.0.0.0) as effectively "not configured" when StrictBindIP is on
+                BOOLEAN cfg_is_wildcard_v4 = (WSA_BindIP4.sin_family == AF_INET && WSA_BindIP4.sin_addr.S_un.S_addr == 0);
+                if (!WSA_BindIPv4Configured || cfg_is_wildcard_v4) {
+                    if (cfg_is_wildcard_v4)
+                        WSA_DebugBindMsg(L"bind: StrictBindIP - IPv4 configured as wildcard (0.0.0.0) -> BLOCKED\n%s", L"");
+                    else
+                        WSA_DebugBindMsg(L"bind: StrictBindIP - IPv4 not configured - BLOCKED\n%s", L"");
+                    if (new_name) Dll_Free((void*)name);
+                    __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                    return SOCKET_ERROR;
+                }
+            }
+            else if (namelen >= sizeof(SOCKADDR_IN6_LH) && name && ((short*)name)[0] == AF_INET6) {
+                // Treat wildcard configured IPv6 (::) as effectively "not configured" when StrictBindIP is on
+                BOOLEAN cfg_is_wildcard_v6 = FALSE;
+                if (WSA_BindIP6.sin6_family == AF_INET6) {
+                    BYTE* cfg = WSA_BindIP6.sin6_addr.u.Byte;
+                    cfg_is_wildcard_v6 = (cfg[0]|cfg[1]|cfg[2]|cfg[3]|cfg[4]|cfg[5]|cfg[6]|cfg[7]|cfg[8]|cfg[9]|cfg[10]|cfg[11]|cfg[12]|cfg[13]|cfg[14]|cfg[15]) == 0;
+                }
+                if (!WSA_BindIPv6Configured || cfg_is_wildcard_v6) {
+                    if (cfg_is_wildcard_v6)
+                        WSA_DebugBindMsg(L"bind: StrictBindIP - IPv6 configured as wildcard (::) -> BLOCKED\n%s", L"");
+                    else
+                        WSA_DebugBindMsg(L"bind: StrictBindIP - IPv6 not configured - BLOCKED\n%s", L"");
+                    if (new_name) Dll_Free((void*)name);
+                    __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                    return SOCKET_ERROR;
+                }
+            }
+        }
+
+        if (namelen >= sizeof(SOCKADDR_IN) && name && ((short*)name)[0] == AF_INET) 
+        {
+            SOCKADDR_IN* addr_in = (SOCKADDR_IN*)name;
+            BOOLEAN app_is_wildcard = (addr_in->sin_addr.S_un.S_addr == 0);  // Application binding to 0.0.0.0?
+            BOOLEAN cfg_is_wildcard = (WSA_BindIP4.sin_family == AF_INET && WSA_BindIP4.sin_addr.S_un.S_addr == 0);
+            
+            WSA_DebugBindMsg(L"bind: IPv4 app=%d.%d.%d.%d (wildcard=%d) cfg_wildcard=%d cfg_v4=%d\n",
+                addr_in->sin_addr.S_un.S_un_b.s_b1, addr_in->sin_addr.S_un.S_un_b.s_b2,
+                addr_in->sin_addr.S_un.S_un_b.s_b3, addr_in->sin_addr.S_un.S_un_b.s_b4,
+                (int)app_is_wildcard, (int)cfg_is_wildcard, (int)WSA_BindIPv4Configured);
+            
+            // If configured IP is wildcard (0.0.0.0), only block when StrictBindIP is enabled (treat as not configured)
+                    if (StrictBindIP && WSA_BindIPv4Configured && cfg_is_wildcard) {
+                WSA_DebugBindMsg(L"bind: StrictBindIP - IPv4 wildcard config (0.0.0.0) treated as not configured - BLOCKED\n%s", L"");
+                if (new_name) Dll_Free((void*)name);
+                __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                return SOCKET_ERROR;
+            }
+            // If IPv4 is configured with non-wildcard address, replace app's address
+            else if (WSA_BindIPv4Configured && WSA_BindIP4.sin_family == AF_INET && !cfg_is_wildcard) {
+                // Create writable copy if needed (name might be const/read-only)
+                if (!new_name) {
+                    void* writable_copy = Dll_Alloc(namelen);
+                    memcpy(writable_copy, name, namelen);
+                    name = writable_copy;
+                    new_name = TRUE;
+                    addr_in = (SOCKADDR_IN*)name;  // Update pointer to writable copy
+                }
+                WSA_DebugBindMsg(L"bind: replace IPv4 %d.%d.%d.%d -> %d.%d.%d.%d\n",
+                    addr_in->sin_addr.S_un.S_un_b.s_b1, addr_in->sin_addr.S_un.S_un_b.s_b2,
+                    addr_in->sin_addr.S_un.S_un_b.s_b3, addr_in->sin_addr.S_un.S_un_b.s_b4,
+                    ((BYTE*)&WSA_BindIP4.sin_addr)[0], ((BYTE*)&WSA_BindIP4.sin_addr)[1],
+                    ((BYTE*)&WSA_BindIP4.sin_addr)[2], ((BYTE*)&WSA_BindIP4.sin_addr)[3]);
+                memcpy(&addr_in->sin_addr, &WSA_BindIP4.sin_addr, sizeof(WSA_BindIP4.sin_addr));
+                WSA_GetSock(s, TRUE)->Bound = TRUE;
+            }
+        }
+        else if (namelen >= sizeof(SOCKADDR_IN6_LH) && name && ((short*)name)[0] == AF_INET6) {
+            SOCKADDR_IN6_LH* addr6_in = (SOCKADDR_IN6_LH*)name;
+            BYTE* app_bytes = addr6_in->sin6_addr.u.Byte;
+            BOOLEAN app_is_wildcard = (app_bytes[0] == 0 && app_bytes[1] == 0 && app_bytes[2] == 0 && app_bytes[3] == 0 &&
+                                       app_bytes[4] == 0 && app_bytes[5] == 0 && app_bytes[6] == 0 && app_bytes[7] == 0 &&
+                                       app_bytes[8] == 0 && app_bytes[9] == 0 && app_bytes[10] == 0 && app_bytes[11] == 0 &&
+                                       app_bytes[12] == 0 && app_bytes[13] == 0 && app_bytes[14] == 0 && app_bytes[15] == 0);
+            
+            BOOLEAN cfg_is_wildcard = FALSE;
+            if (WSA_BindIP6.sin6_family == AF_INET6) {
+                BYTE* cfg_bytes = WSA_BindIP6.sin6_addr.u.Byte;
+                cfg_is_wildcard = (cfg_bytes[0] == 0 && cfg_bytes[1] == 0 && cfg_bytes[2] == 0 && cfg_bytes[3] == 0 &&
+                                   cfg_bytes[4] == 0 && cfg_bytes[5] == 0 && cfg_bytes[6] == 0 && cfg_bytes[7] == 0 &&
+                                   cfg_bytes[8] == 0 && cfg_bytes[9] == 0 && cfg_bytes[10] == 0 && cfg_bytes[11] == 0 &&
+                                   cfg_bytes[12] == 0 && cfg_bytes[13] == 0 && cfg_bytes[14] == 0 && cfg_bytes[15] == 0);
+            }
+            
+            WSA_DebugBindMsg(L"bind: IPv6 app_wildcard=%d cfg_wildcard=%d cfg_v6=%d\n",
+                (int)app_is_wildcard, (int)cfg_is_wildcard, (int)WSA_BindIPv6Configured);
+            
+            // If configured IP is wildcard (::), only block when StrictBindIP is enabled (treat as not configured)
+                    if (StrictBindIP && WSA_BindIPv6Configured && cfg_is_wildcard) {
+                WSA_DebugBindMsg(L"bind: StrictBindIP - IPv6 wildcard config (::) treated as not configured - BLOCKED\n%s", L"");
+                if (new_name) Dll_Free((void*)name);
+                __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                return SOCKET_ERROR;
+            }
+            // If IPv6 is configured with non-wildcard address, replace app's address
+            else if (WSA_BindIPv6Configured && WSA_BindIP6.sin6_family == AF_INET6 && !cfg_is_wildcard) {
+                // Create writable copy if needed (name might be const/read-only)
+                if (!new_name) {
+                    void* writable_copy = Dll_Alloc(namelen);
+                    memcpy(writable_copy, name, namelen);
+                    name = writable_copy;
+                    new_name = TRUE;
+                    addr6_in = (SOCKADDR_IN6_LH*)name;  // Update pointer to writable copy
+                }
+                BYTE* orig = addr6_in->sin6_addr.u.Byte;
+                BYTE* repl = WSA_BindIP6.sin6_addr.u.Byte;
+                WSA_DebugBindMsg(L"bind: replace IPv6 %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x -> %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x\n",
+                    orig[0],orig[1],orig[2],orig[3],orig[4],orig[5],orig[6],orig[7],orig[8],orig[9],orig[10],orig[11],orig[12],orig[13],orig[14],orig[15],
+                    repl[0],repl[1],repl[2],repl[3],repl[4],repl[5],repl[6],repl[7],repl[8],repl[9],repl[10],repl[11],repl[12],repl[13],repl[14],repl[15]);
+                memcpy(&addr6_in->sin6_addr, &WSA_BindIP6.sin6_addr, sizeof(WSA_BindIP6.sin6_addr));
+                WSA_GetSock(s, TRUE)->Bound = TRUE;
+            }
+        }
+    }
+
     int ret = __sys_bind(s, name, namelen);
 
     if (new_name) Dll_Free((void*)name);
 
     return ret;
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_begin_connect
+//---------------------------------------------------------------------------
+
+
+_FX int WSA_bind_ip(
+    SOCKET         s/*,
+    const void     *name,
+    int            namelen*/)
+{
+    WSA_SOCK* pSock = WSA_GetSock(s, TRUE);
+    if (pSock->Bound)
+        return 0;
+
+    // Validate that the configured bind IP is still available
+    // Only fail if StrictBindIP is enabled - otherwise allow fallback for compatibility
+        BOOLEAN StrictBindIP = WSA_GetStrictBindIP();
+    BOOLEAN __bind_valid = WSA_IsBindIPValid();
+    WSA_DebugBindMsg(L"bind_ip: sock_af=%d valid=%d strict=%d useAdapter=%d cfg(v4=%d,v6=%d)\n",
+            (int)pSock->af, (int)__bind_valid, (int)StrictBindIP, (int)WSA_UseBindAdapter, (int)WSA_BindIPv4Configured, (int)WSA_BindIPv6Configured);
+    if (!__bind_valid) {
+            if (StrictBindIP) {
+            __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+            return -1;  // Fail when StrictBindIP enabled and adapter unavailable
+        }
+        return 0;  // Allow connection without binding when StrictBindIP disabled
+    }
+
+    //if (namelen >= sizeof(SOCKADDR_IN) && name && ((short*)name)[0] == AF_INET) {
+    if (pSock->af == AF_INET){
+        WSA_DebugBindMsg(L"bind_ip: attempt IPv4 cfg_v4=%d struct_family=%d\n",
+            (int)WSA_BindIPv4Configured, (int)WSA_BindIP4.sin_family);
+        // With StrictBindIP enabled, check if IPv4 is actually configured
+            if (StrictBindIP) {
+            // Treat wildcard configured IPv4 (0.0.0.0) as not configured when StrictBindIP is on
+            BOOLEAN ipv4_is_wildcard = (WSA_BindIP4.sin_family == AF_INET && WSA_BindIP4.sin_addr.S_un.S_addr == 0);
+            BOOLEAN ipv4_allowed = WSA_BindIPv4Configured && !ipv4_is_wildcard;
+            if (!ipv4_allowed) {
+                __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                return -1;
+            }
+        }
+        // Double-check the structure is valid before binding
+        if (WSA_BindIP4.sin_family == AF_INET) {
+            __sys_bind(s, &WSA_BindIP4, sizeof(WSA_BindIP4));
+            pSock->Bound = TRUE;
+        }
+    }
+    //else if (namelen >= sizeof(SOCKADDR_IN6_LH) && name && ((short*)name)[0] == AF_INET6) {
+    else if (pSock->af == AF_INET6){
+        WSA_DebugBindMsg(L"bind_ip: attempt IPv6 cfg_v6=%d struct_family=%d\n",
+            (int)WSA_BindIPv6Configured, (int)WSA_BindIP6.sin6_family);
+        // With StrictBindIP enabled, check if IPv6 is actually configured
+            if (StrictBindIP) {
+            // Treat wildcard configured IPv6 (::) as not configured when StrictBindIP is on
+            BOOLEAN ipv6_is_wildcard = FALSE;
+            if (WSA_BindIP6.sin6_family == AF_INET6) {
+                BYTE* cfg = WSA_BindIP6.sin6_addr.u.Byte;
+                ipv6_is_wildcard = (cfg[0]|cfg[1]|cfg[2]|cfg[3]|cfg[4]|cfg[5]|cfg[6]|cfg[7]|cfg[8]|cfg[9]|cfg[10]|cfg[11]|cfg[12]|cfg[13]|cfg[14]|cfg[15]) == 0;
+            }
+            BOOLEAN ipv6_allowed = WSA_BindIPv6Configured && !ipv6_is_wildcard;
+            if (!ipv6_allowed) {
+                __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                return -1;
+            }
+        }
+        // Double-check the structure is valid before binding
+        if (WSA_BindIP6.sin6_family == AF_INET6) {
+            __sys_bind(s, &WSA_BindIP6, sizeof(WSA_BindIP6));
+            pSock->Bound = TRUE;
+        }
+    }
+    return 0;
 }
 
 
@@ -714,6 +1082,41 @@ _FX void WSA_DumpIP(ADDRESS_FAMILY af, IP_ADDRESS* pIP, wchar_t* pStr)
         Sbie_snwprintf(pStr, 5 + 10, L"; %d: ???", af);
 }
 
+//---------------------------------------------------------------------------
+// WSA_IsLocalLoop
+//---------------------------------------------------------------------------
+static _FX ULONG WSA_htonl(ULONG x) {
+	return ((x & 0x000000FF) << 24) |
+		((x & 0x0000FF00) << 8) |
+		((x & 0x00FF0000) >> 8) |
+		((x & 0xFF000000) >> 24);
+}
+
+_FX int WSA_IsLocalLoop(const short* addr, int addrlen) {
+	if (!WSA_isBlockLocalLoop || !addr || addrlen < sizeof(USHORT) * 2)
+		return 0;
+
+	IP_ADDRESS ip;
+	if (!WSA_GetIP(addr, addrlen, &ip))
+		return 0;
+
+	// Determine if it is an IPv4-mapped IPv6 address 127.x.x.x
+	if (ip.Data32[0] == 0 &&
+		ip.Data32[1] == 0 &&
+		ip.Data32[2] == WSA_htonl(0xFFFF) &&
+		(ip.Data[12] == 127)) {
+		return 1;
+	}
+
+	// Determine if it is an IPv6 loopback address ::1
+	static const BYTE loop6[16] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 };
+	if (memcmp(ip.Data, loop6, 16) == 0) {
+		return 1;
+	}
+
+	return 0;
+}
+
 
 //---------------------------------------------------------------------------
 // WSA_IsBlockedTraffic
@@ -722,7 +1125,11 @@ _FX void WSA_DumpIP(ADDRESS_FAMILY af, IP_ADDRESS* pIP, wchar_t* pStr)
 
 _FX int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol)
 {
-
+	if (WSA_isBlockLocalLoop && WSA_IsLocalLoop(addr, addrlen)) {
+		SetLastError(WSAECONNREFUSED);
+		return 1;
+	}
+	
     if (WSA_FwList.count > 0 && addrlen >= sizeof(USHORT) * 2 && addr && (addr[0] == AF_INET || addr[0] == AF_INET6)) {
 
         USHORT port = _ntohs(addr[1]);
@@ -752,38 +1159,101 @@ _FX int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol)
 
 
 //---------------------------------------------------------------------------
-// WSA_GetProxy
+// WSA_BypassProxy
 //---------------------------------------------------------------------------
 
 #define NETFW_MATCH_NONE	0
 
 ULONG NetFw_MatchAddress(rbtree_t* ip_map, IP_ADDRESS* ip);
 
-_FX BOOLEAN WSA_GetProxy(const short *addr, int addrlen, void** proxy, int* proxylen)
+_FX BOOLEAN WSA_BypassProxyImpl(NETPROXY_RULE* WSA_Proxy, const short* addr, int addrlen)
 {
     if (!WSA_Proxy)
         return FALSE;
 
-    // check if there are any IP's specified for which wes should bypass the proxy
+    // check if there are any IPs specified for which we should bypass the proxy
     if (WSA_Proxy->ip_map.count > 0) {
         IP_ADDRESS ip;
         if (WSA_GetIP(addr, addrlen, &ip)) {
             if (NetFw_MatchAddress(&WSA_Proxy->ip_map, &ip) != NETFW_MATCH_NONE)
-                return FALSE;
+                return TRUE;
         }
     }
 
+    return FALSE;
+}
+
+_FX BOOLEAN WSA_BypassProxy(const short *addr, int addrlen)
+{
     const SOCKADDR* name = (SOCKADDR*)addr;
-    if (name->sa_family == AF_INET && WSA_Proxy->af == name->sa_family) {
-        *proxy = &WSA_Proxy->WSA_ProxyAddr;
-        *proxylen = sizeof(SOCKADDR_IN);
+    if (name->sa_family == AF_INET) {
+        if (WSA_BypassProxyImpl(WSA_Proxy4, addr, addrlen))
+            return TRUE;
+    } else if (name->sa_family == AF_INET6) {
+        if (WSA_BypassProxyImpl(WSA_Proxy6, addr, addrlen))
+            return TRUE;
     }
-    else if (name->sa_family == AF_INET6 && WSA_Proxy->af == name->sa_family) {
-        *proxy = &WSA_Proxy->WSA_ProxyAddr6;
-        *proxylen = sizeof(SOCKADDR_IN6_LH);
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_GetProxy
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN WSA_GetProxy(const short *addr, int addrlen, void** proxy, int* proxylen, NETPROXY_RULE** pWSA_Proxy)
+{
+    //
+    // First try finding an available proxy of the same IP type
+    // if non is matching take ipv6 when prsent else ipv4
+    //
+
+    const SOCKADDR* name = (SOCKADDR*)addr;
+    if (name->sa_family == AF_INET && WSA_Proxy4) {
+        if (WSA_ProxyThread) {
+            *pWSA_Proxy = NULL; // indicate thread mode
+
+            USHORT port = start_socks5_relay(addr, &WSA_Proxy4->WSA_ProxyAddr, WSA_Proxy4->auth, WSA_Proxy4->login, WSA_Proxy4->pass);
+            if (!port)
+                return FALSE;
+
+            *proxy = (void*)addr;
+            *proxylen = addrlen;
+
+            SOCKADDR_IN* v4 = *proxy;
+            v4->sin_addr.S_un.S_addr = _ntohl(0x7F000001); // 127.0.0.1
+            v4->sin_port = port;
+        }
+        else {
+            *pWSA_Proxy = WSA_Proxy4;
+            *proxy = &WSA_Proxy4->WSA_ProxyAddr;
+            *proxylen = sizeof(SOCKADDR_IN);
+        }
     }
-    else
-        return FALSE;
+    else if (name->sa_family == AF_INET6 && WSA_Proxy6) {
+        if (WSA_ProxyThread) {
+            *pWSA_Proxy = NULL; // indicate thread mode
+
+            USHORT port = start_socks5_relay(addr, &WSA_Proxy6->WSA_ProxyAddr, WSA_Proxy6->auth, WSA_Proxy6->login, WSA_Proxy6->pass);
+            if (!port)
+                return FALSE;
+
+            *proxy = (void*)addr;
+            *proxylen = addrlen;
+
+            SOCKADDR_IN6_LH* v6 = *proxy;
+            v6->sin6_addr = (struct in6_addr){{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}}; // ::1
+            v6->sin6_port = port;
+        }
+        else {
+            *pWSA_Proxy = WSA_Proxy6;
+            *proxy = &WSA_Proxy6->WSA_ProxyAddr6;
+            *proxylen = sizeof(SOCKADDR_IN6_LH);
+        }
+    } 
+    else 
+        return FALSE; // no proxy found
     return TRUE;
 }
 
@@ -866,25 +1336,61 @@ _FX int WSA_connect(
 {
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
+		
+	if (WSA_isBlockLocalLoop && WSA_IsLocalLoop(name, namelen)) {
+		 return SOCKET_ERROR;
+	}
+
+    // If BindIP is configured, try to bind the socket to the configured adapter
+    // When StrictBindIP=n, we allow connections even if adapter is unavailable
+    // When StrictBindIP=y, we block if adapter is down (security-first approach)
+    if (WSA_BindIP) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        // If adapter is unavailable and StrictBindIP is enabled, fail immediately
+        if (!bind_valid && strict) {
+            __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+            return SOCKET_ERROR;
+        }
+        
+        // If adapter is available, bind to it (regardless of strict mode)
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
+        // If adapter unavailable but StrictBindIP=n, continue without binding
+        // This allows proxy to work as fallback when VPN is down
+    }
 
     void* proxy;
     int proxylen;
-    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, namelen, &proxy, &proxylen)) {
+    NETPROXY_RULE* WSA_Proxy;
 
-        WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
-        if (pSock) WSA_begin_connect(pSock, s);
+    if (WSA_ProxyEnabled && !is_localhost(name) && !WSA_BypassProxy(name, namelen)) {
 
-        int ret = __sys_connect(s, proxy, proxylen);
-        if (ret == 0) {
+        int ret = SOCKET_ERROR;
 
-            if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
-                ret = SOCKET_ERROR;
+        if (WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
 
-            if (ret != 0) 
-                __sys_shutdown(s, SD_BOTH);
+            WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
+            if (WSA_ProxyHack && pSock) WSA_begin_connect(pSock, s);
+
+            ret = __sys_connect(s, proxy, proxylen);
+            if (WSA_Proxy && ret == SOCKS_SUCCESS) {
+
+                if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
+                    ret = SOCKET_ERROR;
+
+                if (ret != SOCKS_SUCCESS)
+                    __sys_shutdown(s, SD_BOTH);
+            }
+
+            if (WSA_ProxyHack && pSock) ret = WSA_end_connect(pSock, s, ret);
         }
-
-        if (pSock) ret = WSA_end_connect(pSock, s, ret);
+        else
+            __sys_WSASetLastError(WSAECONNREFUSED);
 
         return ret;
     }
@@ -916,24 +1422,56 @@ _FX int WSA_WSAConnect(
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
 
-    void* proxy;
-    int proxylen;
-    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, namelen, &proxy, &proxylen)) {
-
-        WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
-        if (pSock) WSA_begin_connect(pSock, s);
-
-        int ret = __sys_WSAConnect(s, proxy, proxylen, lpCallerData, lpCalleeData, lpSQOS, lpGQOS);
-        if (ret == 0) {
-
-            if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
-                ret = SOCKET_ERROR;
-
-            if (ret != 0) 
-                __sys_shutdown(s, SD_BOTH);
+    // If BindIP is configured, try to bind the socket to the configured adapter
+    // When StrictBindIP=n, we allow connections even if adapter is unavailable
+    // When StrictBindIP=y, we block if adapter is down (security-first approach)
+    if (WSA_BindIP) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        // If adapter is unavailable and StrictBindIP is enabled, fail immediately
+        if (!bind_valid && strict) {
+            __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+            return SOCKET_ERROR;
         }
         
-        if (pSock) ret = WSA_end_connect(pSock, s, ret);
+        // If adapter is available, bind to it (regardless of strict mode)
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
+        // If adapter unavailable but StrictBindIP=n, continue without binding
+        // This allows proxy to work as fallback when VPN is down
+    }
+
+    void* proxy;
+    int proxylen;
+    NETPROXY_RULE* WSA_Proxy;
+
+    if (WSA_ProxyEnabled && !is_localhost(name) && !WSA_BypassProxy(name, namelen)) {
+
+        int ret = SOCKET_ERROR;
+
+        if (WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
+
+            WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
+            if (WSA_ProxyHack && pSock) WSA_begin_connect(pSock, s);
+
+            ret = __sys_WSAConnect(s, proxy, proxylen, lpCallerData, lpCalleeData, lpSQOS, lpGQOS);
+            if (WSA_Proxy && ret == SOCKS_SUCCESS) {
+
+                if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
+                    ret = SOCKET_ERROR;
+
+                if (ret != SOCKS_SUCCESS)
+                    __sys_shutdown(s, SD_BOTH);
+            }
+
+            if (WSA_ProxyHack && pSock) ret = WSA_end_connect(pSock, s, ret);
+        }
+        else
+            __sys_WSASetLastError(WSAECONNREFUSED);
 
         return ret;
     }
@@ -965,34 +1503,74 @@ _FX int WSA_ConnectEx(
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
 
+    // If BindIP is configured, try to bind the socket to the configured adapter
+    // When StrictBindIP=n, we allow connections even if adapter is unavailable
+    // When StrictBindIP=y, we block if adapter is down (security-first approach)
+    if (WSA_BindIP) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        // If adapter is unavailable and StrictBindIP is enabled, fail immediately
+        if (!bind_valid && strict) {
+            __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+            return SOCKET_ERROR;
+        }
+        
+        // If adapter is available, bind to it (regardless of strict mode)
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
+        // If adapter unavailable but StrictBindIP=n, continue without binding
+        // This allows proxy to work as fallback when VPN is down
+    }
+
     void* proxy;
     int proxylen;
-    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, namelen, &proxy, &proxylen)) {
+    NETPROXY_RULE* WSA_Proxy;
 
-        WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
-        if (pSock) WSA_begin_connect(pSock, s);
+    if (WSA_ProxyEnabled && !is_localhost(name) && !WSA_BypassProxy(name, namelen)) {
 
-        int ret = __sys_connect(s, proxy, proxylen);
-        if (ret == 0) {
+        int ret = SOCKET_ERROR;
 
-            if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
-                ret = SOCKET_ERROR;
+        if (WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
 
-            if (ret == 0 && lpSendBuffer) {
-                ret = __sys_send(s, (const char*)lpSendBuffer, dwSendDataLength, 0);
-                if (ret != SOCKET_ERROR) {
-                    *lpdwBytesSent = ret;
-                    ret = 0;
+            WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
+            if (WSA_ProxyHack && pSock) WSA_begin_connect(pSock, s);
+
+            if (WSA_Proxy) {
+
+                ret = __sys_connect(s, proxy, proxylen);
+                if (ret == SOCKS_SUCCESS) {
+
+                    if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
+                        ret = SOCKET_ERROR;
+
+                    if (ret == 0 && lpSendBuffer) {
+                        ret = __sys_send(s, (const char*)lpSendBuffer, dwSendDataLength, 0);
+                        if (ret != SOCKET_ERROR) {
+                            *lpdwBytesSent = ret;
+                            ret = SOCKS_SUCCESS;
+                        }
+                    }
+
+                    if (ret != SOCKS_SUCCESS)
+                        __sys_shutdown(s, SD_BOTH);
                 }
+            } 
+            else {
+
+                if (__sys_ConnectEx(s, proxy, proxylen, lpSendBuffer, dwSendDataLength, lpdwBytesSent, lpOverlapped))
+                    ret = SOCKS_SUCCESS;
             }
 
-            if (ret != 0) 
-                __sys_shutdown(s, SD_BOTH);
+            if (WSA_ProxyHack && pSock) ret = WSA_end_connect(pSock, s, ret);
         }
+        else
+            __sys_WSASetLastError(WSAECONNREFUSED);
 
-        if (pSock) ret = WSA_end_connect(pSock, s, ret);
-
-        return ret == 0;
+        return ret == SOCKS_SUCCESS;
     }
 
     BOOLEAN new_name = WSA_HandleAfUnix(&name, &namelen);
@@ -1006,9 +1584,21 @@ _FX int WSA_ConnectEx(
 
 /*
 //---------------------------------------------------------------------------
-// WSA_accept
+// WSA_listen
 //---------------------------------------------------------------------------
 
+static int WSA_listen(
+    SOCKET          s,
+    int             backlog)
+{
+
+    return  __sys_listen(s, backlog);
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_accept
+//---------------------------------------------------------------------------
 
 _FX SOCKET WSA_accept(
     SOCKET   s,
@@ -1089,6 +1679,25 @@ _FX int WSA_sendto(
 {
     if (WSA_IsBlockedTraffic(to, tolen, IPPROTO_UDP))
         return SOCKET_ERROR;
+
+    // If BindIP is configured, try to bind the socket
+    // With StrictBindIP=n, allow sending even if adapter unavailable
+    if (WSA_BindIP) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        if (!bind_valid && strict) {
+            __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+            return SOCKET_ERROR;
+        }
+        
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
+    }
+
     return __sys_sendto(s, buf, len, flags, to, tolen);
 }
 
@@ -1111,11 +1720,30 @@ _FX int WSA_WSASendTo(
 {
     if (WSA_IsBlockedTraffic(lpTo, iTolen, IPPROTO_UDP))
         return SOCKET_ERROR;
+
+    // If BindIP is configured, try to bind the socket
+    // With StrictBindIP=n, allow sending even if adapter unavailable
+    if (WSA_BindIP) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        if (!bind_valid && strict) {
+            __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+            return SOCKET_ERROR;
+        }
+        
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
+    }
+
     return __sys_WSASendTo(s, lpBuffers, dwBufferCount, lpNumberOfBytesSent,
         dwFlags, lpTo, iTolen, lpOverlapped, lpCompletionRoutine);
 }
 
-/*
+
 //---------------------------------------------------------------------------
 // WSA_recvfrom
 //---------------------------------------------------------------------------
@@ -1129,9 +1757,37 @@ _FX int WSA_recvfrom(
     void     *from,
     int      *fromlen)
 {
+    // If BindIP is configured, try to bind the socket
+    // With StrictBindIP=n, allow receiving even if adapter unavailable
+    if (WSA_BindIP) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        if (!bind_valid && strict) {
+            __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+            return SOCKET_ERROR;
+        }
+        
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
+    }
+
+    char buffer[128];
+    int buffer_len = sizeof(buffer);
+    if (!from) {
+        from = buffer;
+        fromlen = &buffer_len;
+    }
+
+    int ret = __sys_recvfrom(s, buf, len, flags, from, fromlen);
+
     if (WSA_IsBlockedTraffic(from, *fromlen, IPPROTO_UDP))
         return SOCKET_ERROR;
-    return __sys_recvfrom(s, buf, len, flags, from, fromlen);
+
+    return ret;
 }
 
 
@@ -1151,12 +1807,39 @@ _FX int WSA_WSARecvFrom(
     LPWSAOVERLAPPED                    lpOverlapped,
     LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine)
 {
+    // If BindIP is configured, try to bind the socket
+    // With StrictBindIP=n, allow receiving even if adapter unavailable
+    if (WSA_BindIP) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        if (!bind_valid && strict) {
+            __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+            return SOCKET_ERROR;
+        }
+        
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
+    }
+
+    char buffer[128];
+    int buffer_len = sizeof(buffer);
+    if (!lpFrom) {
+        lpFrom = buffer;
+        lpFromlen = &buffer_len;
+    }
+
+    int ret = __sys_WSARecvFrom(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd,
+        lpFlags, lpFrom, lpFromlen, lpOverlapped, lpCompletionRoutine);
+
     if (WSA_IsBlockedTraffic(lpFrom, *lpFromlen, IPPROTO_UDP))
         return SOCKET_ERROR;
-    return __sys_WSARecvFrom(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd,
-        lpFlags, lpFrom, lpFromlen, lpOverlapped, lpCompletionRoutine);
+
+    return ret;
 }
-*/
 
 
 //---------------------------------------------------------------------------
@@ -1166,7 +1849,7 @@ _FX int WSA_WSARecvFrom(
 
 _FX int WSA_closesocket(SOCKET s)
 {
-    if (WSA_ProxyEnabled)
+    if (WSA_ProxyHack || WSA_BindIP)
         map_remove(&WSA_SockMap, (void*)s);
     return __sys_closesocket(s);
 }
@@ -1180,6 +1863,7 @@ _FX int WSA_closesocket(SOCKET s)
 _FX void WSA_InitNetFwRules()
 {
     WCHAR conf_buf[2048];
+
     for (ULONG index = 0; ; ++index) {
 
         NTSTATUS status = SbieApi_QueryConf(
@@ -1213,6 +1897,78 @@ void NetFw_RuleAddIpRange(rbtree_t* tree, IP_ADDRESS* IpBegin, IP_ADDRESS* IpEnd
 
 const WCHAR* wcsnchr(const WCHAR* str, size_t max, WCHAR ch);
 
+static BOOLEAN WSA_DecryptProxyPassword(WCHAR password[256], const WCHAR* encoded, ULONG encoded_len)
+{
+    WCHAR* encoded_copy = NULL;
+    SBIE_INI_RC4_CRYPT_REQ* req = NULL;
+    SBIE_INI_RC4_CRYPT_RPL* rpl = NULL;
+    BOOLEAN ok = FALSE;
+
+    if (encoded_len == 0 || (encoded_len % 4) != 0)
+        goto cleanup;
+
+    for (ULONG i = 0; i < encoded_len; ++i) {
+        WCHAR ch = encoded[i];
+        if (ch == L'=') {
+            if (i < encoded_len - 2 || (i == encoded_len - 2 && encoded[i + 1] != L'='))
+                goto cleanup;
+        }
+        else if (!((ch >= L'0' && ch <= L'9') ||
+                   (ch >= L'A' && ch <= L'Z') ||
+                   (ch >= L'a' && ch <= L'z') || ch == L'+' || ch == L'/')) {
+            goto cleanup;
+        }
+    }
+
+    encoded_copy = Dll_Alloc(((SIZE_T)encoded_len + 1) * sizeof(WCHAR));
+    if (!encoded_copy)
+        goto cleanup;
+    wmemcpy(encoded_copy, encoded, encoded_len);
+    encoded_copy[encoded_len] = L'\0';
+
+    SIZE_T decoded_len = b64_decoded_size(encoded_copy);
+    if (decoded_len == 0 || decoded_len > 255 * sizeof(WCHAR) ||
+            (decoded_len % sizeof(WCHAR)) != 0)
+        goto cleanup;
+
+    ULONG req_len = sizeof(SBIE_INI_RC4_CRYPT_REQ) + (ULONG)decoded_len;
+    req = Dll_Alloc(req_len);
+    if (!req)
+        goto cleanup;
+    memset(req, 0, req_len);
+
+    req->h.length = req_len;
+    req->h.msgid = MSGID_SBIE_INI_RC4_CRYPT;
+    req->value_len = (ULONG)decoded_len;
+    if (!b64_decode(encoded_copy, req->value, decoded_len))
+        goto cleanup;
+
+    rpl = (SBIE_INI_RC4_CRYPT_RPL*)SbieDll_CallServer(&req->h);
+    if (!rpl || !NT_SUCCESS(rpl->h.status) ||
+            rpl->h.length < sizeof(SBIE_INI_RC4_CRYPT_RPL) ||
+            rpl->value_len > rpl->h.length - sizeof(SBIE_INI_RC4_CRYPT_RPL) ||
+            rpl->value_len != decoded_len ||
+            (rpl->value_len % sizeof(WCHAR)) != 0)
+        goto cleanup;
+
+    ULONG password_len = rpl->value_len / sizeof(WCHAR);
+    if (password_len > 255)
+        goto cleanup;
+
+    wmemcpy(password, rpl->value, password_len);
+    password[password_len] = L'\0';
+    ok = TRUE;
+
+cleanup:
+    if (rpl)
+        Dll_Free(rpl);
+    if (req)
+        Dll_Free(req);
+    if (encoded_copy)
+        Dll_Free(encoded_copy);
+    return ok;
+}
+
 BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
 {
     // NetworkUseProxy=explorer.exe,Address=198.98.55.77;Port=40000;Auth=No;Login=l2sxbnjqR5JJAAoCnA;Password=12OxyLTW9nma5HbNjC
@@ -1224,15 +1980,36 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
         addr_value[addr_len] = L'\0';
         if (_inet_aton(addr_value, &proxy->WSA_ProxyAddr.sin_addr) == 1) {
             proxy->WSA_ProxyAddr.sin_family = AF_INET;
-            proxy->af = AF_INET;
         }
-        else if (_inet_pton(AF_INET6, addr_value, &proxy->WSA_ProxyAddr6.sin6_addr) == 1)
-        {
+        else if (_inet_pton(AF_INET6, addr_value, &proxy->WSA_ProxyAddr6.sin6_addr) == 1) {
             proxy->WSA_ProxyAddr6.sin6_family = AF_INET6;
-            proxy->af = AF_INET6;
         } 
-        else
-            return FALSE;
+        else { // host name?
+        
+            ADDRINFOW hints = { 0 };
+            hints.ai_family = AF_UNSPEC;       // Allow IPv4 or IPv6
+            hints.ai_socktype = SOCK_STREAM;   // TCP
+            hints.ai_protocol = IPPROTO_TCP;
+
+            ADDRINFOW* res = NULL;
+            int ret = __sys_GetAddrInfoW(addr_value, NULL, &hints, &res);
+            if (ret == SOCKS_SUCCESS) {
+
+                for (ADDRINFOW* ptr = res; ptr != NULL; ptr = ptr->ai_next) {
+                    if (ptr->ai_family == AF_INET && proxy->WSA_ProxyAddr.sin_family == 0) {
+                        memcpy(&proxy->WSA_ProxyAddr, ptr->ai_addr, sizeof(SOCKADDR_IN));
+                    }
+                    else if (ptr->ai_family == AF_INET6 && proxy->WSA_ProxyAddr6.sin6_family == 0) {
+                        memcpy(&proxy->WSA_ProxyAddr6, ptr->ai_addr, sizeof(SOCKADDR_IN6_LH));
+                    }
+                }
+
+                __sys_FreeAddrInfoW(res);
+            }
+
+            if(proxy->WSA_ProxyAddr.sin_family != AF_INET && proxy->WSA_ProxyAddr6.sin6_family != AF_INET6)
+                return FALSE; // no ip found
+        }
         addr_value[addr_len] = L';';
     } 
     else
@@ -1246,10 +2023,8 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
             return FALSE;
 
         USHORT port = _ntohs((USHORT)temp);
-        if (proxy->af == AF_INET6)
-            proxy->WSA_ProxyAddr6.sin6_port = port;
-        else if (proxy->af == AF_INET)
-            proxy->WSA_ProxyAddr.sin_port = port;
+        proxy->WSA_ProxyAddr6.sin6_port = port;
+        proxy->WSA_ProxyAddr.sin_port = port;
     } 
     else
         return FALSE;
@@ -1298,6 +2073,7 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
         if (login_len > 255)
             return FALSE;
         wmemcpy(proxy->login, login_value, login_len);
+        proxy->login[login_len] = L'\0';
     }
 
     WCHAR* pass_value;
@@ -1311,34 +2087,9 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
     }
     else {
         ok = SbieDll_FindTagValuePtr(found_value, L"EncryptedPW", &pass_value, &pass_len, L'=', L';');
-        if (ok) {
-
-            SBIE_INI_RC4_CRYPT_REQ req;
-            SBIE_INI_RC4_CRYPT_RPL *rpl;
-
-            pass_value[pass_len] = L'\0';
-
-            req.h.length = sizeof(SBIE_INI_RC4_CRYPT_REQ) + 255;
-            req.h.msgid = MSGID_SBIE_INI_RC4_CRYPT;
-            req.value_len = b64_decoded_size(pass_value);
-            b64_decode(pass_value, req.value, req.value_len);
-
-            pass_value[pass_len] = L'\0';
-
-            rpl = (SBIE_INI_RC4_CRYPT_RPL *)SbieDll_CallServer(&req.h);
-            if (rpl){
-
-                pass_len = rpl->value_len / sizeof(wchar_t);
-                if (pass_len > 255)
-                    return FALSE;
-                wmemcpy(proxy->pass, rpl->value, pass_len);
-                proxy->pass[pass_len] = L'\0';
-
-                Dll_Free(rpl);
-            }
-        }
+        if (ok && !WSA_DecryptProxyPassword(proxy->pass, pass_value, pass_len))
+            return FALSE;
     }
-
 
     return TRUE;
 }
@@ -1356,12 +2107,9 @@ int NetFw_IpCmp(const void* l, const void* r);
 _FX BOOLEAN WSA_InitNetProxy()
 {
     WCHAR proxy_buf[2048];
-    WSA_Proxy = Dll_Alloc(sizeof(NETPROXY_RULE));
-    memset(WSA_Proxy, 0, sizeof(NETPROXY_RULE));
-
-    rbtree_init(&WSA_Proxy->ip_map, NetFw_IpCmp);
-
-    BOOLEAN ok = FALSE;
+    
+    ULONG FoundLevel4 = -1;
+    ULONG FoundLevel6 = -1;
 
     for (ULONG index = 0; ; ++index) {
         NTSTATUS status = SbieApi_QueryConf(
@@ -1374,27 +2122,459 @@ _FX BOOLEAN WSA_InitNetProxy()
         if (!value || (level != NETPROXY_MATCH_EXACT && level != NETPROXY_MATCH_GLOBAL))
             continue;
 
-        ok = WSA_ParseNetProxy(WSA_Proxy, value);
-        if (ok)
-            break;
+        NETPROXY_RULE* WSA_Proxy = Dll_Alloc(sizeof(NETPROXY_RULE));
+        if (!WSA_Proxy) break;
+        memset(WSA_Proxy, 0, sizeof(NETPROXY_RULE));
+        rbtree_init(&WSA_Proxy->ip_map, NetFw_IpCmp);
+
+        if (WSA_ParseNetProxy(WSA_Proxy, value)) {
+
+            if (WSA_Proxy->WSA_ProxyAddr.sin_family == AF_INET) {
+                if (FoundLevel4 > level) {
+                    if(WSA_Proxy4 && --WSA_Proxy4->used == 0)
+                        Dll_Free(WSA_Proxy4);
+                    WSA_Proxy4 = WSA_Proxy;
+                    WSA_Proxy4->used++;
+                    FoundLevel4 = level;
+                }
+            }
+
+            if (WSA_Proxy->WSA_ProxyAddr6.sin6_family == AF_INET6) {
+                if (FoundLevel6 > level) {
+                    if(WSA_Proxy6 && --WSA_Proxy6->used == 0)
+                        Dll_Free(WSA_Proxy6);
+                    WSA_Proxy6 = WSA_Proxy;
+                    WSA_Proxy6->used++;
+                    FoundLevel6 = level;
+                }
+            }
+        }
+
+        if(WSA_Proxy->used == 0)
+            Dll_Free(WSA_Proxy);
     }
 
-    if (!ok) {
-        Dll_Free(WSA_Proxy);
-        WSA_Proxy = NULL;
+    if (FoundLevel4 == -1 && FoundLevel6 == -1)
         return FALSE;
-    }
+    //
+    // even if no proxies were set up due to config error, if any were configured 
+    // enable proxy and fail connections to prevent accidental ip leakage
+    //
 
-    SCertInfo CertInfo = { 0 };
-    if (!NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 3, -1, (ULONG_PTR)&CertInfo, sizeof(CertInfo))) || !CERT_IS_LEVEL(CertInfo, eCertAdvanced)) {
+    __declspec(align(8)) SCertInfo CertInfo = { 0 };
+    if (!NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) || !(CertInfo.active && CertInfo.opt_net)) {
 
         const WCHAR* strings[] = { L"NetworkUseProxy" , NULL };
         SbieApi_LogMsgExt(-1, 6009, strings);
 
-        return FALSE;
+        WSA_Proxy4 = NULL;
+        WSA_Proxy6 = NULL;
     }
 
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_GetStrictBindIP
+//---------------------------------------------------------------------------
+
+_FX BOOLEAN WSA_GetStrictBindIP()
+{
+    // Query StrictBindIP with per-process matching support
+    // Default: TRUE (strict mode enabled by default for security)
+    return Config_GetSettingsForImageName_bool(L"StrictBindIP", TRUE);
+}
+
+_FX BOOLEAN WSA_RefreshBindIPState()
+{
+    HMODULE Iphlpapi = LoadLibraryW(L"Iphlpapi.dll");
+    if (!Iphlpapi)
+        return FALSE;
+
+    P_GetAdaptersAddresses GetAdaptersAddresses = (P_GetAdaptersAddresses)GetProcAddress(Iphlpapi, "GetAdaptersAddresses");
+    if (!GetAdaptersAddresses) {
+        FreeLibrary(Iphlpapi);
+        return FALSE;
+    }
+
+    ULONG bufferSize = 0;
+    GetAdaptersAddresses(AF_UNSPEC, GAA_FLAG_INCLUDE_PREFIX, NULL, NULL, &bufferSize);
+
+    IP_ADAPTER_ADDRESSES* adapters = Dll_Alloc(bufferSize * 10 / 8);
+    if (!adapters) {
+        FreeLibrary(Iphlpapi);
+        return FALSE;
+    }
+
+    BOOLEAN bResult = FALSE;
+
+    // Log refresh start and current configured flags
+    WSA_DebugBindMsg(L"Refresh: mode=%ls adapter='%ls' cfg_before v4=%d v6=%d\n",
+        WSA_UseBindAdapter ? L"BindAdapter" : L"BindAdapterIP",
+        WSA_BindAdapterName,
+        (int)WSA_BindIPv4Configured,
+        (int)WSA_BindIPv6Configured);
+
+    if (GetAdaptersAddresses(AF_UNSPEC, GAA_FLAG_INCLUDE_PREFIX, NULL, adapters, &bufferSize) == NO_ERROR) {
+        if (WSA_UseBindAdapter) {
+            if (wcslen(WSA_BindAdapterName) > 0) {
+                for (IP_ADAPTER_ADDRESSES* adapter = adapters; adapter != NULL; adapter = adapter->Next) {
+                    if (_wcsicmp(adapter->FriendlyName, WSA_BindAdapterName) == 0) {
+                        // SECURITY: Only accept adapters that are UP (IfOperStatusUp = 1)
+                        // Disconnected adapters often get APIPA addresses (169.254.x.x) which should NOT be used
+                        if (adapter->OperStatus != 1) {  // IfOperStatusUp
+                            WSA_DebugBindMsg(L"Refresh: Adapter '%ls' found but status=%d (not UP=1)\n",
+                                adapter->FriendlyName, (int)adapter->OperStatus);
+                            bResult = FALSE;
+                            break;
+                        }
+                        
+                        // Found target adapter: update cached addresses, but don't broaden configured IP families.
+                        BOOLEAN has_ipv4 = FALSE;
+                        BOOLEAN has_ipv6 = FALSE;
+                        for (IP_ADAPTER_UNICAST_ADDRESS* unicast = adapter->FirstUnicastAddress; unicast != NULL; unicast = unicast->Next) {
+                            if (unicast->Address.lpSockaddr && unicast->Address.lpSockaddr->sa_family == AF_INET) {
+                                SOCKADDR_IN* addr = (SOCKADDR_IN*)unicast->Address.lpSockaddr;
+                                // Skip APIPA addresses (169.254.x.x) - these indicate disconnected/failed DHCP
+                                if ((addr->sin_addr.S_un.S_addr & 0x0000FFFF) == 0x0000FEA9) {  // 169.254.0.0/16 in network byte order
+                                    WSA_DebugBindMsg(L"Refresh: Skipping APIPA address 169.254.x.x\n");
+                                    continue;
+                                }
+                                memcpy(&WSA_BindIP4, unicast->Address.lpSockaddr, sizeof(SOCKADDR_IN));
+                                has_ipv4 = TRUE;
+                            } else if (unicast->Address.lpSockaddr && unicast->Address.lpSockaddr->sa_family == AF_INET6) {
+                                // Skip link-local IPv6 addresses (fe80::/10) - these are auto-configured and not routable
+                                SOCKADDR_IN6_LH* addr = (SOCKADDR_IN6_LH*)unicast->Address.lpSockaddr;
+                                if ((addr->sin6_addr.u.Byte[0] == 0xfe) && ((addr->sin6_addr.u.Byte[1] & 0xc0) == 0x80)) {
+                                    WSA_DebugBindMsg(L"Refresh: Skipping link-local IPv6 fe80::/10\n");
+                                    continue;
+                                }
+                                memcpy(&WSA_BindIP6, unicast->Address.lpSockaddr, sizeof(SOCKADDR_IN6_LH));
+                                has_ipv6 = TRUE;
+                            }
+                        }
+                        WSA_DebugBindMsg(L"Refresh: Adapter '%ls' UP: has_v4=%d has_v6=%d\n",
+                            adapter->FriendlyName, (int)has_ipv4, (int)has_ipv6);
+                        // Zero-out unavailable families to avoid stale addresses
+                        if (!has_ipv4) memset(&WSA_BindIP4, 0, sizeof(WSA_BindIP4));
+                        if (!has_ipv6) memset(&WSA_BindIP6, 0, sizeof(WSA_BindIP6));
+
+                        // Update configured flags to reflect what's actually available on the adapter
+                        WSA_BindIPv4Configured = has_ipv4;
+                        WSA_BindIPv6Configured = has_ipv6;
+
+                        WSA_DebugBindMsg(L"Refresh: Adapter present: cfg_after v4=%d v6=%d\n",
+                            (int)WSA_BindIPv4Configured, (int)WSA_BindIPv6Configured);
+                        bResult = TRUE; // adapter is present
+                        break;
+                    }
+                }
+                if (!bResult) {
+                    WSA_DebugBindMsg(L"Refresh: Adapter '%ls' NOT found or not UP\n", WSA_BindAdapterName);
+                }
+            }
+        } else {
+            // BindAdapterIP mode: verify the configured IP addresses are actually present on the system
+            BOOLEAN ipv4_found = FALSE;
+            BOOLEAN ipv6_found = FALSE;
+            
+            // Check if we have configured IPs to search for
+            BOOLEAN search_ipv4 = (WSA_BindIP4.sin_family == AF_INET);
+            BOOLEAN search_ipv6 = (WSA_BindIP6.sin6_family == AF_INET6);
+            
+            if (search_ipv4 || search_ipv6) {
+                // Scan all adapters to find the configured IP addresses
+                for (IP_ADAPTER_ADDRESSES* adapter = adapters; adapter != NULL; adapter = adapter->Next) {
+                    // SECURITY: Only check adapters that are UP (IfOperStatusUp = 1)
+                    // Skip disconnected/down adapters to prevent using APIPA or stale addresses
+                    if (adapter->OperStatus != 1) {  // IfOperStatusUp
+                        continue;
+                    }
+                    
+                    for (IP_ADAPTER_UNICAST_ADDRESS* unicast = adapter->FirstUnicastAddress; unicast != NULL; unicast = unicast->Next) {
+                        if (!unicast->Address.lpSockaddr)
+                            continue;
+                            
+                        if (search_ipv4 && !ipv4_found && unicast->Address.lpSockaddr->sa_family == AF_INET) {
+                            SOCKADDR_IN* addr = (SOCKADDR_IN*)unicast->Address.lpSockaddr;
+                            if (addr->sin_addr.S_un.S_addr == WSA_BindIP4.sin_addr.S_un.S_addr) {
+                                ipv4_found = TRUE;
+                                WSA_DebugBindMsg(L"Refresh: IPv4 %d.%d.%d.%d found on UP adapter '%ls'\n",
+                                    ((BYTE*)&addr->sin_addr)[0], ((BYTE*)&addr->sin_addr)[1],
+                                    ((BYTE*)&addr->sin_addr)[2], ((BYTE*)&addr->sin_addr)[3],
+                                    adapter->FriendlyName);
+                            }
+                        }
+                        else if (search_ipv6 && !ipv6_found && unicast->Address.lpSockaddr->sa_family == AF_INET6) {
+                            SOCKADDR_IN6_LH* addr = (SOCKADDR_IN6_LH*)unicast->Address.lpSockaddr;
+                            if (memcmp(&addr->sin6_addr, &WSA_BindIP6.sin6_addr, sizeof(addr->sin6_addr)) == 0) {
+                                ipv6_found = TRUE;
+                                BYTE* b = addr->sin6_addr.u.Byte;
+                                WSA_DebugBindMsg(L"Refresh: IPv6 %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x found on UP adapter '%ls'\n",
+                                    b[0],b[1],b[2],b[3],b[4],b[5],b[6],b[7],b[8],b[9],b[10],b[11],b[12],b[13],b[14],b[15],
+                                    adapter->FriendlyName);
+                            }
+                        }
+                        
+                        // Early exit if both found
+                        if ((!search_ipv4 || ipv4_found) && (!search_ipv6 || ipv6_found))
+                            break;
+                    }
+                    if ((!search_ipv4 || ipv4_found) && (!search_ipv6 || ipv6_found))
+                        break;
+                }
+            }
+            
+            // Result is valid only if all configured IPs were found
+            bResult = (!search_ipv4 || ipv4_found) && (!search_ipv6 || ipv6_found);
+            WSA_DebugBindMsg(L"Refresh: search(v4=%d,v6=%d) found(v4=%d,v6=%d) valid=%d\n",
+                (int)search_ipv4, (int)search_ipv6, (int)ipv4_found, (int)ipv6_found, (int)bResult);
+        }
+    }
+
+    Dll_Free(adapters);
+    FreeLibrary(Iphlpapi);
+    return bResult;
+}
+
+_FX BOOLEAN WSA_IsBindIPValid()
+{
+    static BOOLEAN cachedValid = FALSE;
+    static DWORD lastRefreshTime = 0;
+    
+    DWORD now = GetTickCount();
+    
+    // Refresh every 5 seconds to detect network changes (VPN connect/disconnect, etc.)
+    // SECURITY: Always re-check if cached result was FALSE to prevent IP leakage
+    // Only use cache when last check was successful AND within time window
+    if (lastRefreshTime == 0 || (now - lastRefreshTime) > 5000 || !cachedValid) {
+        cachedValid = WSA_RefreshBindIPState();
+        lastRefreshTime = now;
+        
+        // If refresh failed, invalidate the cache immediately
+        if (!cachedValid) {
+            lastRefreshTime = 0;
+        }
+    }
+    
+    return cachedValid;
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_InitBindIP
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN WSA_InitBindIP()
+{
+    WCHAR conf_buf[2048];
+
+    IP_ADAPTER_ADDRESSES* adapters = NULL;
+
+    int State = 0;
+    ULONG FoundLevel = -1;
+    WCHAR ConfiguredAdapterName[256] = {0};  // Store the configured adapter name from config
+    
+    for (ULONG index = 0; ; ++index) {
+
+        NTSTATUS status = SbieApi_QueryConf(
+            NULL, L"BindAdapter", index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status))
+            break;
+
+        ULONG level = -1;
+        WCHAR* value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, &level);
+        if (!value)
+            continue;
+
+        if (FoundLevel < level)
+            continue;
+
+        if(!State)
+            State = 1; // set
+
+        // Store the configured adapter name for later use
+        if (wcslen(value) < sizeof(ConfiguredAdapterName) / sizeof(WCHAR))
+            wcscpy_s(ConfiguredAdapterName, sizeof(ConfiguredAdapterName) / sizeof(WCHAR), value);
+
+        if (!adapters) {
+            HMODULE Iphlpapi = LoadLibraryW(L"Iphlpapi.dll");
+            if (Iphlpapi) {
+                P_GetAdaptersAddresses GetAdaptersAddresses = (P_GetAdaptersAddresses)GetProcAddress(Iphlpapi, "GetAdaptersAddresses");
+                if (GetAdaptersAddresses) {
+                    ULONG bufferSize = 0;
+                    GetAdaptersAddresses(AF_UNSPEC, GAA_FLAG_INCLUDE_PREFIX, NULL, NULL, &bufferSize);
+                    adapters = Dll_Alloc(bufferSize * 10 / 8);
+                    if (adapters) {
+                        if (GetAdaptersAddresses(AF_UNSPEC, GAA_FLAG_INCLUDE_PREFIX, NULL, adapters, &bufferSize) != NO_ERROR) {
+                            Dll_Free(adapters);
+                            adapters = NULL;
+                        }
+                    }
+                }
+                FreeLibrary(Iphlpapi);
+            }
+            if (!adapters) break;
+        }
+
+        for (IP_ADAPTER_ADDRESSES* adapter = adapters; adapter != NULL; adapter = adapter->Next) {
+
+            if (_wcsicmp(adapter->FriendlyName, value) != 0)
+                continue;
+
+            // SECURITY: Only accept adapters that are UP (IfOperStatusUp = 1)
+            // Skip disconnected adapters during initialization to avoid APIPA addresses
+            if (adapter->OperStatus != 1) {  // IfOperStatusUp
+                WSA_DebugBindMsg(L"Init: Adapter '%ls' found but status=%d (not UP=1) - skipping\n",
+                    adapter->FriendlyName, (int)adapter->OperStatus);
+                continue;  // Keep searching in case adapter comes up later
+            }
+
+            // Found matching adapter - store the name for runtime validation
+            wcsncpy_s(WSA_BindAdapterName, sizeof(WSA_BindAdapterName) / sizeof(WCHAR), adapter->FriendlyName, _TRUNCATE);
+
+            State = 2; // Adapter found (mark before checking addresses - adapters without IPs are still valid)
+
+            // Check which IP versions are actually available on this adapter
+            BOOLEAN has_ipv4 = FALSE;
+            BOOLEAN has_ipv6 = FALSE;
+            for (IP_ADAPTER_UNICAST_ADDRESS* unicast = adapter->FirstUnicastAddress; unicast != NULL; unicast = unicast->Next) {
+
+                if (unicast->Address.lpSockaddr && unicast->Address.lpSockaddr->sa_family == AF_INET) {
+                    SOCKADDR_IN* addr = (SOCKADDR_IN*)unicast->Address.lpSockaddr;
+                    // Skip APIPA addresses (169.254.x.x) - these indicate disconnected/failed DHCP
+                    if ((addr->sin_addr.S_un.S_addr & 0x0000FFFF) == 0x0000FEA9) {  // 169.254.0.0/16 in network byte order
+                        WSA_DebugBindMsg(L"Init: Skipping APIPA address 169.254.x.x\n");
+                        continue;
+                    }
+                    memcpy(&WSA_BindIP4, unicast->Address.lpSockaddr, sizeof(SOCKADDR_IN));
+                    has_ipv4 = TRUE;
+                }
+                else if (unicast->Address.lpSockaddr && unicast->Address.lpSockaddr->sa_family == AF_INET6) {
+                    SOCKADDR_IN6_LH* addr = (SOCKADDR_IN6_LH*)unicast->Address.lpSockaddr;
+                    // Skip link-local IPv6 addresses (fe80::/10) - these are auto-configured and not routable
+                    if ((addr->sin6_addr.u.Byte[0] == 0xfe) && ((addr->sin6_addr.u.Byte[1] & 0xc0) == 0x80)) {
+                        WSA_DebugBindMsg(L"Init: Skipping link-local IPv6 fe80::/10\n");
+                        continue;
+                    }
+                    memcpy(&WSA_BindIP6, unicast->Address.lpSockaddr, sizeof(SOCKADDR_IN6_LH));
+                    has_ipv6 = TRUE;
+                }
+            }
+
+            // Track which IP versions are actually available on this adapter
+            WSA_BindIPv4Configured = has_ipv4;
+            WSA_BindIPv6Configured = has_ipv6;
+            
+            // Completely zero out structures for unavailable IP versions to prevent any accidental use
+            if (!has_ipv4) memset(&WSA_BindIP4, 0, sizeof(WSA_BindIP4));
+            if (!has_ipv6) memset(&WSA_BindIP6, 0, sizeof(WSA_BindIP6));
+
+            FoundLevel = level;
+        }
+    }
+
+    if (adapters)
+        Dll_Free(adapters);
+    
+    if (State == 1) { // set but not present in the system
+        // Adapter configured but not found at startup
+        // We still need to enable BindIP to allow it to work if adapter appears later
+        // Initialize with dummy values - runtime validation via WSA_IsBindIPValid() will check the system state
+        
+        // Store the adapter name for BindAdapter mode
+        WSA_UseBindAdapter = TRUE;
+        // Use the configured adapter name we stored from the config
+        wcsncpy_s(WSA_BindAdapterName, sizeof(WSA_BindAdapterName) / sizeof(WCHAR), ConfiguredAdapterName, _TRUNCATE);
+
+        WSA_BindIP4.sin_family      = AF_INET;
+        WSA_BindIP4.sin_port        = 0;
+        WSA_BindIP4.sin_addr.s_addr = 0;  // Will be checked at runtime
+
+        WSA_BindIP6.sin6_family     = AF_INET6;
+        WSA_BindIP6.sin6_port       = 0;
+        WSA_BindIP6.sin6_flowinfo   = 0;
+        memset(&WSA_BindIP6.sin6_addr, 0, sizeof(WSA_BindIP6.sin6_addr)); // Will be checked at runtime
+        WSA_BindIP6.sin6_scope_id   = 0;
+
+        // Adapter not yet available - will be detected at runtime via WSA_IsBindIPValid()
+        // Initially mark both as potentially available, runtime checks will determine actual availability
+        WSA_BindIPv4Configured = FALSE;
+        WSA_BindIPv6Configured = FALSE;
+
+        return TRUE;  // Enable BindIP, let runtime validation handle adapter presence
+    }
+
+    if (FoundLevel != -1) {
+        // Adapter found - we're using BindAdapter mode
+        // The IP versions that are available have already been detected in the loop above
+        // WSA_BindIPv4Configured and WSA_BindIPv6Configured are already set correctly
+        WSA_UseBindAdapter = TRUE;
+        return TRUE;
+    }
+
+    BOOLEAN bFoundIPv4 = FALSE;
+    BOOLEAN bFoundIPv6 = FALSE;
+    ULONG FoundLevel4 = -1;
+    ULONG FoundLevel6 = -1;
+    
+    // Reset the configured flags before checking BindAdapterIP settings
+    // This ensures that if only IPv6 is configured, IPv4 stays FALSE
+    WSA_BindIPv4Configured = FALSE;
+    WSA_BindIPv6Configured = FALSE;
+    
+    for (ULONG index = 0; ; ++index) {
+
+        NTSTATUS status = SbieApi_QueryConf(
+            NULL, L"BindAdapterIP", index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status))
+            break;
+
+        ULONG level = -1;
+        WCHAR* value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, &level);
+        if (!value)
+            continue;
+
+        SOCKADDR_IN tempIPv4;
+        SOCKADDR_IN6_LH tempIPv6;
+        
+        if (_inet_aton(value, &tempIPv4.sin_addr) == 1) {
+            // Accept any IPv4 address including 0.0.0.0 (INADDR_ANY)
+            // If user specifies 0.0.0.0, they want to listen on all IPv4 interfaces
+            // Only accept first IPv4 address, or one with higher priority (lower level)
+            if (!bFoundIPv4 || FoundLevel4 > level) {
+                WSA_BindIP4.sin_family = AF_INET;
+                WSA_BindIP4.sin_addr = tempIPv4.sin_addr;
+                FoundLevel4 = level;
+                WSA_UseBindAdapter = FALSE;  // Using BindAdapterIP mode
+                WSA_BindIPv4Configured = TRUE;  // Mark IPv4 as explicitly configured
+                bFoundIPv4 = TRUE;
+                BYTE* b = (BYTE*)&WSA_BindIP4.sin_addr;
+                WSA_DebugBindMsg(L"Init: parsed IPv4 '%ls' -> %d.%d.%d.%d\n",
+                    value, b[0], b[1], b[2], b[3]);
+            }
+        }
+        else if(_inet_pton(AF_INET6, value, &tempIPv6.sin6_addr) == 1){
+            // Accept any IPv6 address including :: (in6addr_any)
+            // If user specifies ::, they want to listen on all IPv6 interfaces
+            // Only accept first IPv6 address, or one with higher priority (lower level)
+            if (!bFoundIPv6 || FoundLevel6 > level) {
+                WSA_BindIP6.sin6_family = AF_INET6;
+                WSA_BindIP6.sin6_addr = tempIPv6.sin6_addr;
+                FoundLevel6 = level;
+                WSA_UseBindAdapter = FALSE;  // Using BindAdapterIP mode
+                WSA_BindIPv6Configured = TRUE;  // Mark IPv6 as explicitly configured
+                bFoundIPv6 = TRUE;
+                BYTE* b = WSA_BindIP6.sin6_addr.u.Byte;
+                WSA_DebugBindMsg(L"Init: parsed IPv6 '%ls' -> %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x\n",
+                    value, b[0],b[1],b[2],b[3],b[4],b[5],b[6],b[7],b[8],b[9],b[10],b[11],b[12],b[13],b[14],b[15]);
+            }
+        }
+    }
+
+    return FoundLevel4 != -1 || FoundLevel6 != -1;
 }
 
 
@@ -1405,6 +2585,9 @@ _FX BOOLEAN WSA_InitNetProxy()
 
 _FX BOOLEAN WSA_Init(HMODULE module)
 {
+    P_WSAStartup        WSAStartup;
+    P_WSACleanup        WSACleanup;
+
     P_WSAIoctl          WSAIoctl;
 
     P_ioctlsocket       ioctlsocket;
@@ -1421,13 +2604,16 @@ _FX BOOLEAN WSA_Init(HMODULE module)
 
     P_connect           connect;
     P_WSAConnect        WSAConnect;
-    /*P_accept            accept;
+
+    /*P_listen            listen;
+
+    P_accept            accept;
     P_WSAAccept         WSAAccept;*/
 
     P_sendto            sendto;
     P_WSASendTo         WSASendTo;
-    /*P_recvfrom          recvfrom;
-    P_WSARecvFrom       WSARecvFrom;*/
+    P_recvfrom          recvfrom;
+    P_WSARecvFrom       WSARecvFrom;
     P_closesocket       closesocket;
 
 #ifdef PROXY_RESOLVE_HOST_NAMES
@@ -1447,19 +2633,18 @@ _FX BOOLEAN WSA_Init(HMODULE module)
         WSA_InitNetFwRules();
 
     //
-    // Initialize network proxy
-    //
-
-    if (WSA_InitNetProxy()) {
-
-        WSA_ProxyEnabled = TRUE;
-
-        map_init(&WSA_SockMap, Dll_Pool);
-    }
-
-    //
     // hook required WS2 functions
     //
+
+    WSAStartup = (P_WSAStartup)GetProcAddress(module, "WSAStartup"); 
+    if (WSAStartup) {
+        SBIEDLL_HOOK(WSA_, WSAStartup);
+    }
+
+    WSACleanup = (P_WSACleanup)GetProcAddress(module, "WSACleanup"); 
+    if (WSACleanup) {
+        SBIEDLL_HOOK(WSA_, WSACleanup);
+    }
 
     WSAIoctl = (P_WSAIoctl)GetProcAddress(module, "WSAIoctl");
     if (WSAIoctl) {
@@ -1469,43 +2654,43 @@ _FX BOOLEAN WSA_Init(HMODULE module)
     __sys_WSAGetLastError = (P_WSAGetLastError)GetProcAddress(module, "WSAGetLastError");
     __sys_WSASetLastError = (P_WSASetLastError)GetProcAddress(module, "WSASetLastError");
 
-    if (WSA_ProxyEnabled) {
+    //
+    // Note: for our proxy implementation we need to have the sockets in blocking mode
+    // unfortunately windows does not provide a way to query the blocking flag
+    // not even when asking the driver directly :(
+    // Hence we need to monitor the below calls and maintain and cache the blocking state
+    //
+  
+    //int InputBuffer[] = { 2,0,0,0 };
+    //((char*)&InputBuffer[2])[0] = 1;
+    //Status = NtDeviceIoControlFile((HANDLE)sock, NULL, 0i64, 0i64, &IoStatusBlock, /*IOCTL_AFD_SET_INFORMATION*/ 0x1203B, InputBuffer, 0x10u, 0i64, 0);               // Set blocking -> STATUS_SUCCESS
+    //Status = NtDeviceIoControlFile((HANDLE)sock, NULL, 0i64, 0i64, &IoStatusBlock, /*IOCTL_AFD_SET_INFORMATION*/ 0x1207b, InputBuffer, 0x10u, InputBuffer, 0x10u);    // Get blocking -> STATUS_INVALID_PARAMETER :(
 
-        //
-        // Note: for our proxy implementation we need to have the sockets in blocking mode
-        // unfortunately windows does not provide a way to query the blocking flag
-        // not even when asking the driver directly :(
-        // Hence we need to monitor the below calls and maintain and cache the blocking state
-        //
-
-	    //int InputBuffer[] = { 2,0,0,0 };
-	    //((char*)&InputBuffer[2])[0] = 1;
-	    //Status = NtDeviceIoControlFile((HANDLE)sock, NULL, 0i64, 0i64, &IoStatusBlock, /*IOCTL_AFD_SET_INFORMATION*/ 0x1203B, InputBuffer, 0x10u, 0i64, 0);               // Set blocking -> STATUS_SUCCESS
-	    //Status = NtDeviceIoControlFile((HANDLE)sock, NULL, 0i64, 0i64, &IoStatusBlock, /*IOCTL_AFD_SET_INFORMATION*/ 0x1207b, InputBuffer, 0x10u, InputBuffer, 0x10u);    // Get blocking -> STATUS_INVALID_PARAMETER :(
-
-        ioctlsocket = (P_ioctlsocket)GetProcAddress(module, "ioctlsocket");
-        if (ioctlsocket) {
-            SBIEDLL_HOOK(WSA_,ioctlsocket);
-        }
-
-        WSAAsyncSelect = (P_WSAAsyncSelect)GetProcAddress(module, "WSAAsyncSelect");
-        if (WSAAsyncSelect) {
-            SBIEDLL_HOOK(WSA_,WSAAsyncSelect);
-        }
-
-        WSAEventSelect = (P_WSAEventSelect)GetProcAddress(module, "WSAEventSelect");
-        if (WSAEventSelect) {
-            SBIEDLL_HOOK(WSA_,WSAEventSelect);
-        }
-
-        WSAEnumNetworkEvents = (P_WSAEnumNetworkEvents)GetProcAddress(module, "WSAEnumNetworkEvents");
-        if (WSAEnumNetworkEvents) {
-            SBIEDLL_HOOK(WSA_,WSAEnumNetworkEvents);
-        }
-
-        __sys_recv = (P_recv)GetProcAddress(module, "recv");
-        __sys_send = (P_send)GetProcAddress(module, "send");
+    ioctlsocket = (P_ioctlsocket)GetProcAddress(module, "ioctlsocket");
+    if (ioctlsocket) {
+        SBIEDLL_HOOK(WSA_, ioctlsocket);
     }
+
+    WSAAsyncSelect = (P_WSAAsyncSelect)GetProcAddress(module, "WSAAsyncSelect");
+    if (WSAAsyncSelect) {
+        SBIEDLL_HOOK(WSA_, WSAAsyncSelect);
+    }
+
+    WSAEventSelect = (P_WSAEventSelect)GetProcAddress(module, "WSAEventSelect");
+    if (WSAEventSelect) {
+        SBIEDLL_HOOK(WSA_, WSAEventSelect);
+    }
+
+    WSAEnumNetworkEvents = (P_WSAEnumNetworkEvents)GetProcAddress(module, "WSAEnumNetworkEvents");
+    if (WSAEnumNetworkEvents) {
+        SBIEDLL_HOOK(WSA_, WSAEnumNetworkEvents);
+    }
+
+    // +++
+
+    __sys_recv = (P_recv)GetProcAddress(module, "recv");
+
+    __sys_send = (P_send)GetProcAddress(module, "send");
 
     if (!Dll_CompartmentMode) {
         WSANSPIoctl = (P_WSANSPIoctl)GetProcAddress(module, "WSANSPIoctl");
@@ -1519,14 +2704,22 @@ _FX BOOLEAN WSA_Init(HMODULE module)
         SBIEDLL_HOOK(WSA_,bind);
     }
     
+    __sys_socket = (P_socket)GetProcAddress(module, "socket"); // uses WSASocketW
+    
     WSASocketW = (P_WSASocketW)GetProcAddress(module, "WSASocketW");
     if (WSASocketW) {
         SBIEDLL_HOOK(WSA_,WSASocketW);
     }
 
-    //if (! Dll_SkipHook(L"wsaconn")) {
-    
+    __sys_getsockname = (P_getsockname)GetProcAddress(module, "getsockname");
+
+    __sys_WSAFDIsSet = (P_WSAFDIsSet )GetProcAddress(module, "__WSAFDIsSet");
+
+    __sys_select = (P_select)GetProcAddress(module, "select");
+
     // TCP
+    //if (! Dll_SkipHook(L"wsaconn")) {
+   
     connect = (P_connect)GetProcAddress(module, "connect");
     if (connect) {
         SBIEDLL_HOOK(WSA_,connect);
@@ -1539,7 +2732,16 @@ _FX BOOLEAN WSA_Init(HMODULE module)
 
     //}
 
-    /*accept = (P_accept)GetProcAddress(module, "accept");
+    __sys_listen = (P_listen)GetProcAddress(module, "listen");
+
+    __sys_accept = (P_accept)GetProcAddress(module, "accept");
+
+    /*listen = (P_listen)GetProcAddress(module, "listen");
+    if (listen) {
+        SBIEDLL_HOOK(WSA_,listen);
+    }
+
+    accept = (P_accept)GetProcAddress(module, "accept");
     if (accept) {
         SBIEDLL_HOOK(WSA_,accept);
     }
@@ -1561,7 +2763,7 @@ _FX BOOLEAN WSA_Init(HMODULE module)
         SBIEDLL_HOOK(WSA_,WSASendTo);
     }
 
-    /*recvfrom = (P_recvfrom)GetProcAddress(module, "recvfrom");
+    recvfrom = (P_recvfrom)GetProcAddress(module, "recvfrom");
     if (recvfrom) {
         SBIEDLL_HOOK(WSA_,recvfrom);
     }
@@ -1569,12 +2771,16 @@ _FX BOOLEAN WSA_Init(HMODULE module)
     WSARecvFrom = (P_WSARecvFrom)GetProcAddress(module, "WSARecvFrom");
     if (WSARecvFrom) {
         SBIEDLL_HOOK(WSA_,WSARecvFrom);
-    }*/
+    }
     //
         
     __sys_shutdown = (P_shutdown)GetProcAddress(module, "shutdown");
 
     __sys_inet_ntop = (P_inet_ntop)GetProcAddress(module, "inet_ntop");
+
+    __sys_GetAddrInfoW = (P_GetAddrInfoW)GetProcAddress(module, "GetAddrInfoW"); 
+
+    __sys_FreeAddrInfoW = (P_FreeAddrInfoW)GetProcAddress(module, "FreeAddrInfoW");
 
 #ifdef PROXY_RESOLVE_HOST_NAMES
     if(WSA_ProxyEnabled && SbieApi_QueryConfBool(NULL, L"NetworkProxyResolveHostnames", FALSE)) {

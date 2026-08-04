@@ -51,10 +51,6 @@ struct _PROCESS {
     // changes to the linked list of PROCESS blocks are synchronized by
     // an exclusive lock on Process_ListLock
 
-#ifndef USE_PROCESS_MAP
-    LIST_ELEM list_elem;
-#endif
-
     // process id
 
     HANDLE pid;
@@ -100,11 +96,7 @@ struct _PROCESS {
 
     PERESOURCE threads_lock;
 
-#ifdef USE_PROCESS_MAP
     HASH_MAP thread_map;
-#else
-    LIST threads;
-#endif
 
     // flags
 
@@ -133,6 +125,8 @@ struct _PROCESS {
     BOOLEAN in_pca_job;
     BOOLEAN can_use_jobs;
 
+    BOOLEAN in_app_pkg;
+
     UCHAR   create_console_flag;
 
     BOOLEAN disable_monitor;
@@ -142,6 +136,7 @@ struct _PROCESS {
     BOOLEAN protect_host_images;
     BOOLEAN use_security_mode;
     BOOLEAN is_locked_down;
+    BOOLEAN open_all_nt;
 #ifdef USE_MATCH_PATH_EX
     BOOLEAN restrict_devices;
     BOOLEAN use_rule_specificity;
@@ -215,6 +210,8 @@ struct _PROCESS {
     LIST open_win_classes;
     ULONG gui_trace;
 
+    BOOLEAN filter_win32k_syscalls;
+
     BOOLEAN bHostInject;
 
 };
@@ -237,14 +234,16 @@ void Process_Unload(BOOLEAN FreeLock);
 
 PROCESS *Process_Find(HANDLE ProcessId, KIRQL *out_irql);
 
+#ifdef XP_SUPPORT
 PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql);
+#endif
 
-PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql);
+//PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql);
 
 // Start supervising a new process
 
 BOOLEAN Process_NotifyProcess_Create(
-    HANDLE ProcessId, HANDLE ParentId, HANDLE CallerId, BOX *box);
+    HANDLE ProcessId, HANDLE ParentId, HANDLE CallerId, UNICODE_STRING* Name, ULONG NameLength, BOX *box);
 
 
 // Process_IsSameBox returns TRUE if the other process identified by
@@ -491,6 +490,8 @@ VOID Process_IsSbieImage(const WCHAR *image_path, BOOLEAN *image_sbie, BOOLEAN *
 
 BOOLEAN Process_IsInPcaJob(HANDLE ProcessId);
 
+BOOLEAN Process_IsInAppPkg(HANDLE ProcessId);
+
 
 void Process_SetTerminated(PROCESS *proc, ULONG reason);
 
@@ -536,15 +537,9 @@ NTSTATUS Process_Api_Kill(PROCESS *proc, ULONG64 *parms);
 //---------------------------------------------------------------------------
 
 
-#ifdef USE_PROCESS_MAP
 extern HASH_MAP Process_Map;
 extern HASH_MAP Process_MapDfp;
 extern HASH_MAP Process_MapFcp;
-#else
-extern LIST Process_List;
-extern LIST Process_ListDfp;
-extern LIST Process_ListFcp;
-#endif
 extern PERESOURCE Process_ListLock;
 
 extern volatile BOOLEAN Process_ReadyToSandbox;

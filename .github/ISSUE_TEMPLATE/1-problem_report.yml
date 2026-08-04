@@ -1,6 +1,6 @@
 name: Problem report
 description: Please report your problem here to help us improve.
-labels: ["Confirmation pending"]
+labels: ["Confirmation Pending"]
 body:
   - type: markdown
     attributes:

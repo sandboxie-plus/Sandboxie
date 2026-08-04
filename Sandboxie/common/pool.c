@@ -118,6 +118,10 @@ static const ULONG Pool_Tag = 'loop';
 #define LARGE_CHUNK_SIZE    PAD_8(sizeof(LARGE_CHUNK))
 
 
+// Maximum possible size for a large chunk
+#define LARGE_CHUNK_MAXIMUM     (0xFFFFFFFFu - (LARGE_CHUNK_SIZE + POOL_PAGE_SIZE))
+
+
 //---------------------------------------------------------------------------
 // Structures and Types
 //---------------------------------------------------------------------------
@@ -192,7 +196,6 @@ static void *Pool_Alloc_Mem(ULONG size, ULONG tag);
 static void Pool_Free_Mem(void *ptr, ULONG tag);
 
 static PAGE *Pool_Alloc_Page(POOL *pool, ULONG tag);
-static void  Pool_Free_Page(PAGE *page);
 
 static ULONG Pool_Find_Cells(PAGE *page, ULONG size);
 
@@ -385,11 +388,12 @@ ALIGNED void *Pool_Alloc_Mem(ULONG size, ULONG tag)
     // size parameter will be a multiple of POOL_PAGE_SIZE, and this routine
     // must return memory allocated with page-alignment
 #ifdef KERNEL_MODE
-#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
-    ptr = ExAllocatePool2(POOL_FLAG_PAGED, size, tag);
-#else
+//#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+//    ptr = ExAllocatePool2(POOL_FLAG_PAGED, size, tag);
+//#else
+#pragma warning(suppress: 4996) // suppress deprecation warning
     ptr = ExAllocatePoolWithTag(PagedPool, size, tag);
-#endif
+//#endif
 #else
     SIZE_T RegionSize = size;
 #ifdef _M_ARM64EC
@@ -537,13 +541,14 @@ ALIGNED POOL *Pool_CreateTagged(ULONG tag)
 
 #elif defined(KERNEL_MODE)
 
-#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
-    pool->lock = ExAllocatePool2(
-                                POOL_FLAG_NON_PAGED, sizeof(ERESOURCE), tag);
-#else
+//#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+//    pool->lock = ExAllocatePool2(
+//                                POOL_FLAG_NON_PAGED, sizeof(ERESOURCE), tag);
+//#else
+#pragma warning(suppress: 4996) // suppress deprecation warning
     pool->lock = ExAllocatePoolWithTag(
                                 NonPagedPool, sizeof(ERESOURCE), tag);
-#endif
+//#endif
     if (! pool->lock) {
         Pool_Free_Mem(page, tag);
         return NULL;
@@ -645,6 +650,9 @@ ALIGNED ULONG Pool_Delete(POOL *pool)
 
 ALIGNED void *Pool_Alloc(POOL *pool, ULONG size)
 {
+    if (size >= LARGE_CHUNK_MAXIMUM)
+        return NULL;
+
     void *ptr = NULL;
     if (size) {
 

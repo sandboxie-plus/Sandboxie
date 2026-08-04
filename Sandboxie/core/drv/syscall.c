@@ -48,7 +48,7 @@ static BOOLEAN Syscall_Init_ServiceData(void);
 
 static void Syscall_ErrorForAsciiName(const UCHAR *name_a);
 
-void Syscall_Update_Lockdown();
+void Syscall_Update_Config();
 
 
 //---------------------------------------------------------------------------
@@ -106,6 +106,7 @@ static BOOLEAN Syscall_GetKernelAddr(
 #pragma alloc_text (INIT, Syscall_GetIndexFromNtdll)
 #pragma alloc_text (INIT, Syscall_GetKernelAddr)
 #pragma alloc_text (INIT, Syscall_GetServiceTable)
+#pragma alloc_text (INIT, Syscall_GetServiceTableFilter)
 #endif // ALLOC_PRAGMA
 
 #include "syscall_util.c"
@@ -290,8 +291,8 @@ _FX BOOLEAN Syscall_Init_List(void)
         //if (    IS_PROC_NAME(16,  "MapViewOfSection")) // $Workaround$ - 3rd party fix
         //    goto next_zwxxx;
 
-        if(Syscall_HookMapMatch(name, name_len, &disabled_hooks))
-            goto next_zwxxx;
+        //if (Syscall_HookMapMatch(name, name_len, &disabled_hooks))
+        //    goto next_zwxxx;
 
 #undef IS_PROC_NAME
 
@@ -341,11 +342,13 @@ _FX BOOLEAN Syscall_Init_List(void)
         entry->param_count = (USHORT)param_count;
         entry->ntdll_offset = proc_offset;
         entry->ntos_func = ntos_addr;
+        entry->ntos_func2 = NULL;
         entry->handler1_func = NULL;
         entry->handler2_func = NULL;
 #ifdef _M_AMD64
         entry->handler3_func_support_procmon = NULL;
 #endif
+        entry->disabled = (Syscall_HookMapMatch(name, name_len, &disabled_hooks) != 0);
         entry->approved = (Syscall_HookMapMatch(name, name_len, &approved_syscalls) != 0);
         entry->name_len = (USHORT)name_len;
         memcpy(entry->name, name, name_len);
@@ -510,7 +513,7 @@ _FX SYSCALL_ENTRY *Syscall_GetByName(const UCHAR *name)
         entry = List_Next(entry);
     }
 
-    Syscall_ErrorForAsciiName(name);
+    //Syscall_ErrorForAsciiName(name);
     return NULL;
 }
 
@@ -641,10 +644,27 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     if (syscall_index == 0xFFF && parms[3] != 0) {
         __try {
 
-            entry = Syscall_GetByName((UCHAR*)parms[3]);
+            ANSI_STRING64* uni = (ANSI_STRING64*)parms[3];
+            SIZE_T callNameLen = 0;
+            UCHAR* callNameBuff = 0;
+            UCHAR callName[66];
 
-            if(parms[4]) // return found index to the caller to be re used later
-                *(USHORT*)parms[4] = entry->syscall_index; 
+            ProbeForRead(uni, sizeof(ANSI_STRING64), sizeof(ULONG_PTR));
+            callNameLen = uni->Length;
+            callNameBuff = (UCHAR*)uni->Buffer;
+            ProbeForRead(callNameBuff, callNameLen, sizeof(UCHAR));
+            if(callNameLen >= sizeof(callName))
+                ExRaiseStatus(STATUS_INVALID_PARAMETER_3);
+            memcpy(callName, callNameBuff, callNameLen);
+            callName[callNameLen] = '\0';
+
+            entry = Syscall_GetByName(callName);
+
+            USHORT* CallIndexPtr = (USHORT*)parms[4];
+            if (CallIndexPtr) { // return found index to the caller to be re used later if requested
+                ProbeForWrite(CallIndexPtr, sizeof(USHORT), sizeof(USHORT));
+                *CallIndexPtr = entry ? entry->syscall_index : 0;
+            }
 
         } __except (EXCEPTION_EXECUTE_HANDLER) {
             entry = NULL;
@@ -677,7 +697,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     else
 #endif
     if(!proc->is_locked_down || entry->approved)
-        Thread_SetThreadToken(proc);        // may set proc->terminated
+        Thread_SetThreadToken(proc);        // may set proc->terminated // does nothing if !proc->primary_token
 
     if (proc->terminated) {
 
@@ -742,7 +762,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
         //}
 
 
-        if (entry->handler1_func) {
+        if (entry->handler1_func && !proc->open_all_nt) {
 
             status = entry->handler1_func(proc, entry, user_args);
 
@@ -914,7 +934,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
         status = STATUS_SUCCESS;
 
-    } else {
+    } else if(proc->primary_token) {
 
         Thread_ClearThreadToken();
     }
@@ -994,8 +1014,10 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     // store corresponding offset within ntdll into the other ULONG
     //
 
-    entry = List_Head(&Syscall_List);
-    while (entry) {
+    for (entry = List_Head(&Syscall_List); entry; entry = List_Next(entry)) {
+
+        if (entry->disabled)
+            continue;
 
         ULONG syscall_index = (ULONG)entry->syscall_index;
 #ifndef _WIN64
@@ -1012,8 +1034,6 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
             ((char*)ptr)[entry->name_len] = 0;
             ptr += 16; // 16 * sizeog(ULONG) = 64
         }
-
-        entry = List_Next(entry);
     }
 
     //
@@ -1029,17 +1049,20 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
 
 
 //---------------------------------------------------------------------------
-// Syscall_Update_Lockdown
+// Syscall_Update_Config
 //---------------------------------------------------------------------------
 
 
-_FX void Syscall_Update_Lockdown()
+_FX void Syscall_Update_Config()
 {
     SYSCALL_ENTRY *entry;
 
 #ifdef HOOK_WIN32K
-    Syscall_Update_Lockdown32();
+    Syscall_Update_Config32();
 #endif
+
+    LIST disabled_hooks;
+    Syscall_LoadHookMap(L"DisableWinNtHook", &disabled_hooks);
 
     LIST approved_syscalls;
     Syscall_LoadHookMap(L"ApproveWinNtSysCall", &approved_syscalls);
@@ -1047,10 +1070,13 @@ _FX void Syscall_Update_Lockdown()
     entry = List_Head(&Syscall_List);
     while (entry) {
 
+        entry->disabled = (Syscall_HookMapMatch(entry->name, entry->name_len, &disabled_hooks) != 0);
         entry->approved = (Syscall_HookMapMatch(entry->name, entry->name_len, &approved_syscalls) != 0);
 
         entry = List_Next(entry);
     }
+
+    Syscall_FreeHookMap(&disabled_hooks);
 
     Syscall_FreeHookMap(&approved_syscalls);
 }

@@ -33,6 +33,50 @@
 
     EXPORT  SbieLowData
 
+    EXPORT  _InterlockedCompareExchange64
+    EXPORT  _InterlockedExchange64
+
+;----------------------------------------------------------------------------
+; _InterlockedCompareExchange64:
+;   VOID* _InterlockedCompareExchange64(volatile LONG64* dest, LONG64 exchange, LONG64 comparand)
+;   Returns original *dest in X0
+;----------------------------------------------------------------------------
+_InterlockedCompareExchange64 PROC
+    DMB     SY                 ; full barrier
+
+cmp_loop
+    LDAXR   X3, [X0]            ; X3 = old = *dest
+    CMP     X3, X2              ; compare old vs comparand
+    BNE     exit_cmp            ; if not equal, done
+
+    STLXR   W4, X1, [X0]        ; attempt *dest = exchange
+    CBNZ    W4, cmp_loop        ; retry on failure
+
+    DMB     SY                  ; barrier after store
+
+exit_cmp
+    MOV     X0, X3              ; return old in X0
+    RET
+_InterlockedCompareExchange64 ENDP
+
+;----------------------------------------------------------------------------
+; _InterlockedExchange64:
+;   LONG64 _InterlockedExchange64(volatile LONG64* target, LONG64 value)
+;   Returns original *target in X0
+;----------------------------------------------------------------------------
+_InterlockedExchange64 PROC
+    DMB     SY                  ; full barrier
+
+exchange_loop
+    LDAXR   X3, [X0]            ; X3 = old = *target
+    STLXR   W4, X1, [X0]        ; attempt *target = value
+    CBNZ    W4, exchange_loop   ; retry on failure
+
+    DMB     SY                  ; barrier after store
+    MOV     X0, X3              ; return old in X0
+    RET
+_InterlockedExchange64 ENDP
+
 ;----------------------------------------------------------------------------
 ; break
 ;----------------------------------------------------------------------------
@@ -285,7 +329,7 @@ DetourCodeARM64 PROC
 ;    bne	    DetourError
 
 	;
-	; resume execution or original function
+	; resume execution of original function
 	;
 
     ldp     x0, x1, [sp, #0x00]

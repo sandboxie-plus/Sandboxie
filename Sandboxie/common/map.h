@@ -30,7 +30,7 @@ typedef struct map_base_t map_base_t;
 
 struct map_base_t {
   map_node_t **buckets;
-  unsigned int nbuckets, nnodes;
+  int nbuckets, nnodes;
 
   void* mem_pool;
   void*(*func_malloc)(void* pool, size_t size);
@@ -57,7 +57,7 @@ __inline void map_remove(map_base_t* m, const void* key) { map_take(m, key, NULL
 void map_clear(map_base_t *m);
 
 typedef struct {
-  unsigned int bucketIdx;
+  int bucketIdx;
   map_node_t *node;
   int ksize;
   const void* key;
@@ -67,6 +67,7 @@ typedef struct {
 map_iter_t map_iter();
 map_iter_t map_key_iter(map_base_t *m, const void* key);
 BOOLEAN map_next(map_base_t *m, map_iter_t *iter);
+BOOLEAN map_erase(map_base_t *m, map_iter_t *iter);
 
 //void map_dump(map_base_t *m);
 

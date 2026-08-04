@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (c) 2020, David Xanatos
+ * Copyright (c) 2020-2025, David Xanatos
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -235,7 +235,7 @@ void CSbieTemplates::CollectClasses()
 	EnumWindows([](HWND hwnd, LPARAM lparam) 
 	{ 
 		WCHAR clsnm[256];
-		GetClassName(hwnd, clsnm, 250);
+		GetClassNameW(hwnd, clsnm, 250);
 		clsnm[250] = L'\0';
 
 		if (clsnm[0] && wcsncmp(clsnm, L"Sandbox:", 8) != 0)
@@ -257,14 +257,14 @@ void CSbieTemplates::CollectServices()
 		return;
 
 	ULONG info_len = 10240;
-	ENUM_SERVICE_STATUS* info = (ENUM_SERVICE_STATUS *)malloc(info_len);
+	ENUM_SERVICE_STATUSW* info = (ENUM_SERVICE_STATUSW *)malloc(info_len);
 
 	ULONG ResumeHandle = 0;
 	for(;;)
 	{
 		ULONG len;
 		ULONG num;
-		BOOL ret = EnumServicesStatus(hManager, SERVICE_TYPE_ALL, SERVICE_STATE_ALL, info, info_len, &len, &num, &ResumeHandle);
+		BOOL ret = EnumServicesStatusW(hManager, SERVICE_TYPE_ALL, SERVICE_STATE_ALL, info, info_len, &len, &num, &ResumeHandle);
 		if (!ret && GetLastError() != ERROR_MORE_DATA)
 			break;
 
@@ -294,36 +294,40 @@ void CSbieTemplates::CollectProducts()
 
 	m_Products.clear();
 
-	ULONG DesiredAccess = KEY_READ;
-	for(;;)
+	QList<HKEY> Roots = QList<HKEY>() << HKEY_LOCAL_MACHINE << HKEY_CURRENT_USER;
+	for (auto Root : Roots) 
 	{
-		HKEY hkey;
-		LONG rc = RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall", 0, DesiredAccess, &hkey);
-		if (rc != 0)
-			continue;
-		
-		WCHAR name[128];
-		for(ULONG index = 0; rc != ERROR_NO_MORE_ITEMS; index++)
+		ULONG DesiredAccess = KEY_READ;
+		for (;;)
 		{
-			ULONG name_len = 120;
-			rc = RegEnumKeyEx(hkey, index, name, &name_len, NULL, NULL, NULL, NULL);
-			if (rc == 0) {
-				_wcslwr(name);
-				m_Products.append(QString::fromWCharArray(name));
-			}
-		}
+			HKEY hkey;
+			LONG rc = RegOpenKeyExW(Root, L"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall", 0, DesiredAccess, &hkey);
+			if (rc != 0)
+				break;
 
-		RegCloseKey(hkey);
-		
+			WCHAR name[128];
+			for (ULONG index = 0; rc != ERROR_NO_MORE_ITEMS; index++)
+			{
+				ULONG name_len = 120;
+				rc = RegEnumKeyExW(hkey, index, name, &name_len, NULL, NULL, NULL, NULL);
+				if (rc == 0) {
+					_wcslwr(name);
+					m_Products.append(QString::fromWCharArray(name));
+				}
+			}
+
+			RegCloseKey(hkey);
+
 #ifdef _WIN64
-		if (DesiredAccess & KEY_WOW64_32KEY)
-			break;
-		DesiredAccess |= KEY_WOW64_32KEY;
+			if (DesiredAccess & KEY_WOW64_32KEY)
+				break;
+			DesiredAccess |= KEY_WOW64_32KEY;
 #else // ! _WIN64
-		if (!is64BitOperatingSystem || (DesiredAccess & KEY_WOW64_64KEY))
-			break;
-		DesiredAccess |= KEY_WOW64_64KEY;
+			if (!is64BitOperatingSystem || (DesiredAccess & KEY_WOW64_64KEY))
+				break;
+			DesiredAccess |= KEY_WOW64_64KEY;
 #endif _WIN64
+		}
 	}
 }
 
@@ -361,16 +365,16 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 
 	QString scan = pTemplate->GetText("Tmpl.Scan", QString(), false, false, true);
 	BOOL scanIpc = (scan.indexOf(L'i') != -1);
-	BOOL scanWin = (scan.indexOf(L'w') != -1);
-	BOOL scanSvc = (scan.indexOf(L's') != -1);
-	if (!(scanIpc || scanWin || scanSvc))
+	BOOL scanWindow = (scan.indexOf(L'w') != -1);
+	BOOL scanSoftware = (scan.indexOf(L's') != -1);
+	if (!(scanIpc || scanWindow || scanSoftware))
 		return false;
 
-	QList<QPair<QString, QString>> settings = pTemplate->GetIniSection(0, true);
-	for(QList<QPair<QString, QString>>::iterator I = settings.begin(); I != settings.end(); ++I)
+	QList<CSbieIni::SbieIniValue> settings = pTemplate->GetIniSection(0, true);
+	for(QList<CSbieIni::SbieIniValue>::iterator I = settings.begin(); I != settings.end(); ++I)
 	{
-		QString setting = I->first;
-		QString value = I->second;
+		QString setting = I->Name;
+		QString value = I->Value;
 
 		if (scanIpc && ((setting.compare("OpenIpcPath", Qt::CaseInsensitive) == 0) || setting.compare("Tmpl.ScanIpc", Qt::CaseInsensitive) == 0))
 		{
@@ -386,7 +390,7 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 			if (CheckObjects(value))
 				return true;
 		}
-		else if (scanWin && ((setting.compare("OpenWinClass", Qt::CaseInsensitive) == 0 || setting.compare("Tmpl.ScanWinClass", Qt::CaseInsensitive) == 0)))
+		else if (scanWindow && ((setting.compare("OpenWinClass", Qt::CaseInsensitive) == 0 || setting.compare("Tmpl.ScanWinClass", Qt::CaseInsensitive) == 0)))
 		{
 			// skip to unspecific entries
 			if(value.left(2).compare("*:") == 0)
@@ -395,22 +399,22 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 			if (CheckClasses(value))
 				return true;
 		}
-		else if (scanSvc && setting.compare("Tmpl.ScanService", Qt::CaseInsensitive) == 0)
+		else if (scanSoftware && setting.compare("Tmpl.ScanService", Qt::CaseInsensitive) == 0)
 		{
 			if (CheckServices(value))
 				return true;
 		}
-		else if (scanSvc && setting.compare("Tmpl.ScanProduct", Qt::CaseInsensitive) == 0)
+		else if (scanSoftware && setting.compare("Tmpl.ScanProduct", Qt::CaseInsensitive) == 0)
 		{
 			if (CheckProducts(value))
 				return true;
 		}
-		else if (scanSvc && setting.compare("Tmpl.ScanKey", Qt::CaseInsensitive) == 0)
+		else if (scanSoftware && setting.compare("Tmpl.ScanKey", Qt::CaseInsensitive) == 0)
 		{
 			if (CheckRegistryKey(value))
 				return true;
 		}
-		else if (scanSvc && setting.compare("Tmpl.ScanFile", Qt::CaseInsensitive) == 0)
+		else if (scanSoftware && setting.compare("Tmpl.ScanFile", Qt::CaseInsensitive) == 0)
 		{
 			if (CheckFile(ExpandPath(value)))
 				return true;
@@ -422,7 +426,19 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 
 bool CSbieTemplates::CheckRegistryKey(const QString& Value)
 {
-	std::wstring keypath = Value.toStdWString();
+	QString KeyPath = Value;
+
+	if (KeyPath.startsWith("HKEY_LOCAL_MACHINE", Qt::CaseInsensitive))			KeyPath.replace(0, 18, "\\REGISTRY\\MACHINE");
+	else if (KeyPath.startsWith("HKEY_CLASSES_ROOT", Qt::CaseInsensitive))		KeyPath.replace(0, 17, "\\REGISTRY\\MACHINE\\SOFTWARE\\Classes");
+	else if (KeyPath.startsWith("HKEY_CURRENT_USER", Qt::CaseInsensitive))		KeyPath.replace(0, 17, "\\REGISTRY\\USER\\" + m_pAPI->GetCurrentUserSid());
+	else if (KeyPath.startsWith("HKEY_USERS", Qt::CaseInsensitive))				KeyPath.replace(0, 10, "\\REGISTRY\\USER");
+	//else if (KeyPath.startsWith("HKEY_CURRENT_CONFIG", Qt::CaseInsensitive))	KeyPath.replace(0, 19, "\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Hardware Profiles\\Current");
+	else if(!KeyPath.startsWith("\\REGISTRY\\", Qt::CaseInsensitive))
+		return false;
+
+	qDebug() << Value << KeyPath;
+
+	std::wstring keypath = KeyPath.toStdWString();
 
 	OBJECT_ATTRIBUTES objattrs;
 	UNICODE_STRING objname;
@@ -442,7 +458,7 @@ bool CSbieTemplates::CheckRegistryKey(const QString& Value)
 bool CSbieTemplates::CheckFile(const QString& Value)
 {
 	std::wstring path = Value.toStdWString();
-	if (GetFileAttributes(path.c_str()) != INVALID_FILE_ATTRIBUTES)
+	if (GetFileAttributesW(path.c_str()) != INVALID_FILE_ATTRIBUTES)
 		return true;
 	return false;
 }
@@ -499,7 +515,7 @@ void CSbieTemplates::InitExpandPaths(bool WithUser)
 	keyPath += L"Shell Folders";
 
 	HKEY hkey;
-	LONG rc = RegOpenKey(HKEY_CURRENT_USER, keyPath.c_str(), &hkey);
+	LONG rc = RegOpenKeyW(HKEY_CURRENT_USER, keyPath.c_str(), &hkey);
 	for (ULONG index = 0; rc == 0; index++)
 	{
 		WCHAR name[64];
@@ -510,11 +526,11 @@ void CSbieTemplates::InitExpandPaths(bool WithUser)
 
 		name_len = 60;
 		value_len = MAX_PATH + 4;
-		rc = RegEnumValue(hkey, index, name, &name_len, NULL, &type, (BYTE *)value, &value_len);
+		rc = RegEnumValueW(hkey, index, name, &name_len, NULL, &type, (BYTE *)value, &value_len);
 		if (rc == 0 && (type == REG_SZ || type == REG_EXPAND_SZ)) 
 		{
 			WCHAR expand[MAX_PATH + 8];
-			ULONG len = ExpandEnvironmentStrings(value, expand, MAX_PATH + 4);
+			ULONG len = ExpandEnvironmentStringsW(value, expand, MAX_PATH + 4);
 			if (len > 0 && len <= MAX_PATH) 
 			{
 				QString value = QString::fromWCharArray(expand);

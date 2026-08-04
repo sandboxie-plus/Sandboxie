@@ -278,6 +278,8 @@ extern POBJECT_TYPE *PsProcessType;
 extern POBJECT_TYPE *MmSectionObjectType;
 extern POBJECT_TYPE *ExWindowStationObjectType;
 
+NTOS_API(ULONG_PTR) PsGetProcessWin32Process(PEPROCESS Process);
+
 NTOS_API(ULONG_PTR) PsGetThreadWin32Thread(PETHREAD Thread);
 
 NTOS_API(HANDLE) PsGetProcessWin32WindowStation(PEPROCESS EProcess);

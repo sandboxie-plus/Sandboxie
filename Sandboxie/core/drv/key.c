@@ -81,6 +81,9 @@ static BOOLEAN Key_MountHive2(PROCESS *proc, KEY_MOUNT *mount);
 static BOOLEAN Key_MountHive3(
     PROCESS *proc, OBJECT_ATTRIBUTES *target, OBJECT_ATTRIBUTES *source);
 
+static BOOLEAN Key_MountHive4(
+    PROCESS *proc, OBJECT_ATTRIBUTES *target, OBJECT_ATTRIBUTES *source);
+
 
 //---------------------------------------------------------------------------
 
@@ -855,6 +858,11 @@ _FX BOOLEAN Key_MountHive2(PROCESS *proc, KEY_MOUNT *mount)
     status = ZwOpenKey(&handle, KEY_READ, &target);
     if (! NT_SUCCESS(status)) {
 
+        if (proc->in_app_pkg){
+
+            return Key_MountHive4(proc, &target, &source);
+        }
+
         return Key_MountHive3(proc, &target, &source);
     }
 
@@ -1031,6 +1039,216 @@ _FX BOOLEAN Key_MountHive3(
         }
 
         ExFreePool(old_token_dacl);
+    }
+
+    return ok;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_MountHive4
+//---------------------------------------------------------------------------
+
+typedef struct _LOAD_HIVE_CONTEXT {
+    OBJECT_ATTRIBUTES* Target;
+    OBJECT_ATTRIBUTES* Source;
+    NTSTATUS Status;
+} LOAD_HIVE_CONTEXT, *PLOAD_HIVE_CONTEXT;
+
+VOID LoadHiveSystemThread(PVOID Context) 
+{
+    PLOAD_HIVE_CONTEXT ctx = (PLOAD_HIVE_CONTEXT)Context;
+    OBJECT_ATTRIBUTES targetAttr;
+    PSECURITY_DESCRIPTOR securityDescriptor = NULL;
+    PACL dacl = NULL;
+    ULONG daclSize;
+    HANDLE hKey = NULL;
+
+    SID_IDENTIFIER_AUTHORITY worldAuthority = SECURITY_WORLD_SID_AUTHORITY;
+    SID_IDENTIFIER_AUTHORITY ntAuthority = SECURITY_NT_AUTHORITY;
+
+
+    UCHAR everyoneSidBuffer[12];
+    PSID everyoneSid = (PSID)everyoneSidBuffer;
+
+    UCHAR authUsersSidBuffer[12];
+    PSID authenticatedUsersSid = (PSID)authUsersSidBuffer;
+
+    //UCHAR systemSidBuffer[12];
+    //PSID systemSid = (PSID)systemSidBuffer;
+    // 
+    //UCHAR adminsSidBuffer[16];
+    //PSID adminsSid = (PSID)adminsSidBuffer;
+
+    // Build Everyone SID (S-1-1-0)
+    RtlInitializeSid(everyoneSid, &worldAuthority, 1);
+    *RtlSubAuthoritySid(everyoneSid, 0) = SECURITY_WORLD_RID;
+
+    // Build Authenticated Users SID (S-1-5-11)
+    RtlInitializeSid(authenticatedUsersSid, &ntAuthority, 1);
+    *RtlSubAuthoritySid(authenticatedUsersSid, 0) = SECURITY_AUTHENTICATED_USER_RID;
+
+    // Build SYSTEM SID (S-1-5-18)
+    //RtlInitializeSid(systemSid, &ntAuthority, 1);
+    //*RtlSubAuthoritySid(systemSid, 0) = SECURITY_LOCAL_SYSTEM_RID;
+
+    // Build Administrators SID (S-1-5-32-544)
+    //RtlInitializeSid(adminsSid, &ntAuthority, 2);
+    //*RtlSubAuthoritySid(adminsSid, 0) = SECURITY_BUILTIN_DOMAIN_RID;
+    //*RtlSubAuthoritySid(adminsSid, 1) = DOMAIN_ALIAS_RID_ADMINS;
+
+    // Calculate DACL size
+    daclSize = sizeof(ACL) +
+        (4 * sizeof(ACCESS_ALLOWED_ACE)) +
+        //RtlLengthSid(systemSid) +
+        //RtlLengthSid(adminsSid) +
+        RtlLengthSid(everyoneSid) +
+        RtlLengthSid(authenticatedUsersSid) -
+        (4 * sizeof(ULONG)); // Subtract SidStart fields
+
+    // Allocate DACL
+    dacl = (PACL)ExAllocatePoolWithTag(NonPagedPool, daclSize, 'lcaD');
+    if (!dacl) {
+        ctx->Status = STATUS_INSUFFICIENT_RESOURCES;
+        goto cleanup;
+    }
+
+    // Create DACL
+    ctx->Status = RtlCreateAcl(dacl, daclSize, ACL_REVISION);
+    if (!NT_SUCCESS(ctx->Status)) goto cleanup;
+
+    // SYSTEM with full control
+    //ctx->Status = RtlAddAccessAllowedAce(dacl, ACL_REVISION, KEY_ALL_ACCESS, systemSid);
+    //if (!NT_SUCCESS(ctx->Status)) goto cleanup;
+
+    // Admins with full control
+    //ctx->Status = RtlAddAccessAllowedAce(dacl, ACL_REVISION, KEY_ALL_ACCESS, adminsSid);
+    //if (!NT_SUCCESS(ctx->Status)) goto cleanup;
+
+    // Add ACEs - Everyone with READ and WRITE
+    ctx->Status = RtlAddAccessAllowedAce(dacl, ACL_REVISION,  KEY_ALL_ACCESS, everyoneSid);
+    if (!NT_SUCCESS(ctx->Status)) goto cleanup;
+
+    // Authenticated Users with READ and WRITE
+    ctx->Status = RtlAddAccessAllowedAce(dacl, ACL_REVISION, KEY_ALL_ACCESS, authenticatedUsersSid);
+    if (!NT_SUCCESS(ctx->Status)) goto cleanup;
+
+    // Create security descriptor
+    securityDescriptor = (PSECURITY_DESCRIPTOR)ExAllocatePoolWithTag(NonPagedPool, SECURITY_DESCRIPTOR_MIN_LENGTH, 'ceSd');
+    if (!securityDescriptor) {
+        ctx->Status = STATUS_INSUFFICIENT_RESOURCES;
+        goto cleanup;
+    }
+
+    ctx->Status = RtlCreateSecurityDescriptor(securityDescriptor, SECURITY_DESCRIPTOR_REVISION);
+    if (!NT_SUCCESS(ctx->Status)) goto cleanup;
+
+    ctx->Status = RtlSetDaclSecurityDescriptor(securityDescriptor, TRUE, dacl, FALSE);
+    if (!NT_SUCCESS(ctx->Status)) goto cleanup;
+
+    // Load the hive
+    ctx->Status = ZwLoadKey(ctx->Target, ctx->Source);
+    if (!NT_SUCCESS(ctx->Status)) {
+        DbgPrint("ZwLoadKey failed: %08X\n", ctx->Status);
+        goto cleanup;
+    }
+
+    // Open the loaded key
+    InitializeObjectAttributes(&targetAttr, ctx->Target->ObjectName, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
+    ctx->Status = ZwOpenKey(&hKey, WRITE_DAC, &targetAttr);
+    if (!NT_SUCCESS(ctx->Status)) {
+        DbgPrint("Failed to open loaded key: %08X\n", ctx->Status);
+        goto cleanup;
+    }
+
+    // Set the security descriptor on the key
+    ctx->Status = ZwSetSecurityObject(hKey, DACL_SECURITY_INFORMATION, securityDescriptor);
+    if (!NT_SUCCESS(ctx->Status)) {
+        DbgPrint("ZwSetSecurityObject failed: %08X\n", ctx->Status);
+        goto cleanup;
+    }
+
+    //DbgPrint("ZwLoadKey in system thread: target=%wZ, source=%wZ, status=%08X\n",
+    //    ctx->Target, ctx->Source, ctx->Status);
+
+cleanup:
+    if (hKey) ZwClose(hKey);
+    if (dacl) ExFreePoolWithTag(dacl, 'lcaD');
+    if (securityDescriptor) ExFreePoolWithTag(securityDescriptor, 'ceSd');
+
+    PsTerminateSystemThread(STATUS_SUCCESS);
+}
+
+NTSTATUS LoadHiveSynchronous(OBJECT_ATTRIBUTES *target, OBJECT_ATTRIBUTES *source) 
+{
+    NTSTATUS status;
+    HANDLE threadHandle;
+    OBJECT_ATTRIBUTES objAttr;
+    LOAD_HIVE_CONTEXT ctx;
+    PVOID threadObject;
+
+	ctx.Target = target;
+	ctx.Source = source;
+
+    InitializeObjectAttributes(&objAttr, NULL, OBJ_KERNEL_HANDLE, NULL, NULL);
+
+    status = PsCreateSystemThread(
+        &threadHandle,
+        THREAD_ALL_ACCESS,
+        &objAttr,
+        NULL,           // No process - pure system thread
+        NULL,
+        LoadHiveSystemThread,
+        &ctx);
+
+    if (!NT_SUCCESS(status)) {
+        //DbgPrint("PsCreateSystemThread failed: %08X\n", status);
+        return status;
+    }
+
+    status = ObReferenceObjectByHandle(threadHandle, THREAD_ALL_ACCESS, *PsThreadType, KernelMode, &threadObject,NULL);
+
+    ZwClose(threadHandle);
+
+    if (!NT_SUCCESS(status)) {
+        //DbgPrint("ObReferenceObjectByHandle failed: %08X\n", status);
+        return status;
+    }
+
+    //DbgPrint("Waiting for system thread to complete...\n");
+    KeWaitForSingleObject(threadObject, Executive, KernelMode, FALSE, NULL);  // Infinite wait
+
+    ObDereferenceObject(threadObject);
+
+    return ctx.Status;
+}
+
+_FX BOOLEAN Key_MountHive4(
+    PROCESS *proc, OBJECT_ATTRIBUTES *target, OBJECT_ATTRIBUTES *source)
+{
+    NTSTATUS status;
+
+    BOOLEAN ok = FALSE;
+
+    //
+	// Processes running in an AppContainer may not be able to load registry hives
+	// hence we use a system thread to perform the load operation synchronously.
+    //
+
+    status = LoadHiveSynchronous(target, source);
+
+    if (! NT_SUCCESS(status))
+        Log_Status(MSG_MOUNT_FAILED, 0x23, status);
+    else {
+        ok = TRUE;
+
+        SVC_REGHIVE_MSG msg;
+
+        msg.process_id = (ULONG)(ULONG_PTR)proc->pid;
+        msg.session_id = proc->box->session_id;
+        wcscpy(msg.boxname, proc->box->name);
+
+        Api_SendServiceMessage(SVC_MOUNTED_HIVE, sizeof(msg), &msg);
     }
 
     return ok;

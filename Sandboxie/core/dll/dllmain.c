@@ -206,6 +206,8 @@ _FX BOOL WINAPI DllMain(
             Gui_ResetClipCursor();
         }
 
+        Gui_UninitMisc();
+
     }
 
     return TRUE;

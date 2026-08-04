@@ -2002,3 +2002,37 @@ static void CALLBACK Gui_WinEventHookProc(
     if (! bFilter)
         origProc(hWinEventHook, event, hwnd, idObject, idChild, idEventThread, dwmsEventTime);
 }
+
+
+//---------------------------------------------------------------------------
+// Gui_UninitMisc
+//---------------------------------------------------------------------------
+
+
+_FX VOID Gui_UninitMisc(void)
+{
+    GUI_WIN_EVENT_HOOK *ghk;
+    GUI_WIN_EVENT_HOOK *ghk_next;
+
+    //
+    // tear down the WinEvent hook tracking state initialized in Gui_InitMisc;
+    // unhook any still-registered hooks and free the remaining entries so DLL
+    // unload / process detach does not leak memory or handles
+    //
+
+    if (! Gui_AlwaysActive)
+        return;
+
+    EnterCriticalSection(&Gui_WinEventHooksCritSec);
+    for (ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
+            ghk; ghk = ghk_next) {
+        ghk_next = (GUI_WIN_EVENT_HOOK *)List_Next(ghk);
+        __sys_UnhookWinEvent(ghk->hHook);
+        List_Remove(&Gui_WinEventHooks, ghk);
+        Dll_Free(ghk);
+    }
+    LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+
+    DeleteCriticalSection(&Gui_WinEventHooksCritSec);
+    Gui_AlwaysActive = FALSE;
+}

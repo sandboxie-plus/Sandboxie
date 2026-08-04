@@ -1644,6 +1644,126 @@ _FX VOID Gui_ProtectScreen(HWND hWnd)
 
 
 //---------------------------------------------------------------------------
+// Gui_AlwaysActiveMsg
+//---------------------------------------------------------------------------
+
+
+static BOOLEAN Gui_AlwaysActiveMsg(
+    HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT *pResult)
+{
+    //
+    // under AlwaysActive, handle activation/focus messages so the boxed
+    // window keeps appearing active even when another application takes the
+    // foreground.  Returns TRUE when the message has been consumed, in which
+    // case *pResult holds the result to return from the window procedure
+    //
+
+    if (! Gui_AlwaysActive)
+        return FALSE;
+
+    if (uMsg == WM_SETFOCUS) {
+        //
+        // cache the most recently focused window handle
+        //
+        THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+        if (threadData)
+            threadData->gui_focus_window = hWnd;
+    }
+
+    if (uMsg == WM_KILLFOCUS) {
+        //
+        // suppress focus loss only when the message receiver is a top-level
+        // window and the focus moves outside the current process (or to no
+        // window at all); intra-process focus changes are allowed
+        //
+        if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
+            if (! wParam) {
+                *pResult = 0;
+                return TRUE;
+            } else {
+                DWORD pid = 0;
+                if (! (__sys_GetWindowThreadProcessId((HWND)wParam, &pid) && pid == Dll_ProcessId)) {
+                    *pResult = 0;
+                    return TRUE;
+                }
+            }
+        }
+    }
+
+    if (uMsg == WM_NCACTIVATE) {
+        //
+        // keep the always-active window's caption looking active when it is
+        // being deactivated.  WM_NCACTIVATE may be delivered before
+        // WM_ACTIVATE, so decide directly from the always-active window
+        // state instead of relying on a flag set by WM_ACTIVATE
+        //
+        if (! wParam && hWnd == Gui_PreviousActiveWindow) {
+            *pResult = TRUE;
+            return TRUE;
+        }
+    }
+
+    if (uMsg == WM_ACTIVATEAPP) {
+        //
+        // WM_ACTIVATEAPP is only sent when activation moves to a window of a
+        // different application; under AlwaysActive suppress the deactivation
+        // notification so the boxed app keeps appearing active
+        //
+        if (! wParam) {
+            *pResult = 0;
+            return TRUE;
+        }
+    }
+
+    if (uMsg == WM_ACTIVATE) {
+        switch (LOWORD(wParam)) {
+        case WA_INACTIVE:
+            //
+            // allow normal intra-process activation; suppress deactivation
+            // only when activation moves to a window outside this process
+            //
+            {
+                BOOLEAN bSuppress = TRUE;
+                if (lParam) {
+                    DWORD pid = 0;
+                    if (__sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)
+                        bSuppress = FALSE;
+                }
+                if (bSuppress) {
+                    *pResult = 0;
+                    return TRUE;
+                }
+            }
+            break;
+        case WA_ACTIVE:
+        case WA_CLICKACTIVE:
+            Gui_PreviousActiveWindow = hWnd;
+            {
+                THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+                if (threadData)
+                    threadData->gui_active_window = hWnd;
+            }
+            break;
+        }
+    }
+
+    if (uMsg == WM_NCDESTROY) {
+        if (hWnd == Gui_PreviousActiveWindow)
+            Gui_PreviousActiveWindow = NULL;
+        {
+            THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+            if (threadData && hWnd == threadData->gui_active_window)
+                threadData->gui_active_window = NULL;
+            if (threadData && hWnd == threadData->gui_focus_window)
+                threadData->gui_focus_window = NULL;
+        }
+    }
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
 // Gui_WindowProcW
 //---------------------------------------------------------------------------
 
@@ -1673,93 +1793,10 @@ _FX LRESULT Gui_WindowProcW(
 			return TRUE;
 	}
 
-	if (uMsg == WM_SETFOCUS && Gui_AlwaysActive) {
-		//
-		// cache the most recently focused window handle
-		//
-		THREAD_DATA *threadData = Dll_GetTlsData(NULL);
-		if (threadData)
-			threadData->gui_focus_window = hWnd;
-	}
-
-	if (uMsg == WM_KILLFOCUS && Gui_AlwaysActive) {
-		//
-		// suppress focus loss only when the message receiver is a top-level
-		// window and the focus moves outside the current process (or to no
-		// window at all); intra-process focus changes are allowed
-		//
-		if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
-			if (! wParam) {
-				return 0;
-			} else {
-				DWORD pid = 0;
-				if (! (__sys_GetWindowThreadProcessId((HWND)wParam, &pid) && pid == Dll_ProcessId))
-					return 0;
-			}
-		}
-	}
-
-	if (uMsg == WM_NCACTIVATE && Gui_AlwaysActive) {
-		//
-		// keep the always-active window's caption looking active when it is
-		// being deactivated.  WM_NCACTIVATE may be delivered before
-		// WM_ACTIVATE, so decide directly from the always-active window
-		// state instead of relying on a flag set by WM_ACTIVATE
-		//
-		if (! wParam && hWnd == Gui_PreviousActiveWindow)
-			return TRUE;
-	}
-
-	if (uMsg == WM_ACTIVATEAPP && Gui_AlwaysActive) {
-		//
-		// WM_ACTIVATEAPP is only sent when activation moves to a window of a
-		// different application; under AlwaysActive suppress the deactivation
-		// notification so the boxed app keeps appearing active
-		//
-		if (! wParam)
-			return 0;
-	}
-
-	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
-		switch (LOWORD(wParam)) {
-		case WA_INACTIVE:
-			//
-			// allow normal intra-process activation; suppress deactivation
-			// only when activation moves to a window outside this process
-			//
-			{
-				BOOLEAN bSuppress = TRUE;
-				if (lParam) {
-					DWORD pid = 0;
-					if (__sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)
-						bSuppress = FALSE;
-				}
-				if (bSuppress)
-					return 0;
-			}
-			break;
-		case WA_ACTIVE:
-		case WA_CLICKACTIVE:
-			Gui_PreviousActiveWindow = hWnd;
-			{
-				THREAD_DATA *threadData = Dll_GetTlsData(NULL);
-				if (threadData)
-					threadData->gui_active_window = hWnd;
-			}
-			break;
-		}
-	}
-
-	if (uMsg == WM_NCDESTROY && Gui_AlwaysActive) {
-		if (hWnd == Gui_PreviousActiveWindow)
-			Gui_PreviousActiveWindow = NULL;
-		{
-			THREAD_DATA *threadData = Dll_GetTlsData(NULL);
-			if (threadData && hWnd == threadData->gui_active_window)
-				threadData->gui_active_window = NULL;
-			if (threadData && hWnd == threadData->gui_focus_window)
-				threadData->gui_focus_window = NULL;
-		}
+	{
+		LRESULT alwaysActiveResult;
+		if (Gui_AlwaysActiveMsg(hWnd, uMsg, wParam, lParam, &alwaysActiveResult))
+			return alwaysActiveResult;
 	}
 
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldW_Atom);
@@ -1823,93 +1860,10 @@ _FX LRESULT Gui_WindowProcA(
 		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
 			return TRUE;
 	}
-	if (uMsg == WM_SETFOCUS && Gui_AlwaysActive) {
-		//
-		// cache the most recently focused window handle
-		//
-		THREAD_DATA *threadData = Dll_GetTlsData(NULL);
-		if (threadData)
-			threadData->gui_focus_window = hWnd;
-	}
-
-	if (uMsg == WM_KILLFOCUS && Gui_AlwaysActive) {
-		//
-		// suppress focus loss only when the message receiver is a top-level
-		// window and the focus moves outside the current process (or to no
-		// window at all); intra-process focus changes are allowed
-		//
-		if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
-			if (! wParam) {
-				return 0;
-			} else {
-				DWORD pid = 0;
-				if (! (__sys_GetWindowThreadProcessId((HWND)wParam, &pid) && pid == Dll_ProcessId))
-					return 0;
-			}
-		}
-	}
-
-	if (uMsg == WM_NCACTIVATE && Gui_AlwaysActive) {
-		//
-		// keep the always-active window's caption looking active when it is
-		// being deactivated.  WM_NCACTIVATE may be delivered before
-		// WM_ACTIVATE, so decide directly from the always-active window
-		// state instead of relying on a flag set by WM_ACTIVATE
-		//
-		if (! wParam && hWnd == Gui_PreviousActiveWindow)
-			return TRUE;
-	}
-
-	if (uMsg == WM_ACTIVATEAPP && Gui_AlwaysActive) {
-		//
-		// WM_ACTIVATEAPP is only sent when activation moves to a window of a
-		// different application; under AlwaysActive suppress the deactivation
-		// notification so the boxed app keeps appearing active
-		//
-		if (! wParam)
-			return 0;
-	}
-
-	if (uMsg == WM_ACTIVATE && Gui_AlwaysActive) {
-		switch (LOWORD(wParam)) {
-		case WA_INACTIVE:
-			//
-			// allow normal intra-process activation; suppress deactivation
-			// only when activation moves to a window outside this process
-			//
-			{
-				BOOLEAN bSuppress = TRUE;
-				if (lParam) {
-					DWORD pid = 0;
-					if (__sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)
-						bSuppress = FALSE;
-				}
-				if (bSuppress)
-					return 0;
-			}
-			break;
-		case WA_ACTIVE:
-		case WA_CLICKACTIVE:
-			Gui_PreviousActiveWindow = hWnd;
-			{
-				THREAD_DATA *threadData = Dll_GetTlsData(NULL);
-				if (threadData)
-					threadData->gui_active_window = hWnd;
-			}
-			break;
-		}
-	}
-
-	if (uMsg == WM_NCDESTROY && Gui_AlwaysActive) {
-		if (hWnd == Gui_PreviousActiveWindow)
-			Gui_PreviousActiveWindow = NULL;
-		{
-			THREAD_DATA *threadData = Dll_GetTlsData(NULL);
-			if (threadData && hWnd == threadData->gui_active_window)
-				threadData->gui_active_window = NULL;
-			if (threadData && hWnd == threadData->gui_focus_window)
-				threadData->gui_focus_window = NULL;
-		}
+	{
+		LRESULT alwaysActiveResult;
+		if (Gui_AlwaysActiveMsg(hWnd, uMsg, wParam, lParam, &alwaysActiveResult))
+			return alwaysActiveResult;
 	}
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);
     lResult = __sys_CallWindowProcA(wndproc, hWnd, uMsg, wParam, new_lParam);

@@ -61,7 +61,7 @@ jobs:
         clean: false
 
     - name: Initialize CodeQL (C/C++)
-      uses: github/codeql-action/init@v4
+      uses: github/codeql-action/init@v4.37.4
       with:
         languages: c-cpp
         build-mode: manual
@@ -108,7 +108,7 @@ jobs:
       run: msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=x64 -maxcpucount:8
 
     - name: Perform CodeQL Analysis (C/C++)
-      uses: github/codeql-action/analyze@v4
+      uses: github/codeql-action/analyze@v4.37.4
       with:
         category: "/language:c-cpp"
 
@@ -133,12 +133,12 @@ jobs:
       uses: actions/checkout@v7
 
     - name: Initialize CodeQL (${{ matrix.language }})
-      uses: github/codeql-action/init@v4
+      uses: github/codeql-action/init@v4.37.4
       with:
         languages: ${{ matrix.language }}
         config-file: ./.github/codeql/codeql-config.yml
 
     - name: Perform CodeQL Analysis (${{ matrix.language }})
-      uses: github/codeql-action/analyze@v4
+      uses: github/codeql-action/analyze@v4.37.4
       with:
         category: "/language:${{ matrix.language }}"

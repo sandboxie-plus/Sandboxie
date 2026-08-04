@@ -1542,16 +1542,21 @@ check_sandbox_prefix:
 
     //
     // block raw (reverse) access to junction destination paths, unless
-    // it was disabled with JunctionBlockRawAccess=n.  neither the block
-    // nor the forward mapping applies to paths that are already inside
-    // the sandbox (box copy paths) or under the Sandboxie home directory,
-    // otherwise the sandbox's own machinery would be remapped as well
+    // it was disabled with JunctionBlockRawAccess=n.  the block does not
+    // apply to paths that are already inside the sandbox (box copy paths),
+    // since those are the program's own sandboxed copies, not a direct
+    // access to the real destination.  neither the block nor the forward
+    // mapping applies to paths under the Sandboxie home directory, to keep
+    // the sandbox's own binaries from being remapped.  the forward mapping
+    // itself applies to boxed paths as well, since the program typically
+    // addresses files through boxed parent directory handles
     //
 
-    if (objname_len && TruePath && !is_boxed_path &&
+    if (objname_len && TruePath &&
             ! File_Junction_IsHomePath(TruePath, wcslen(TruePath))) {
 
-        if (File_Junction_BlockRawAccessPath(TruePath, wcslen(TruePath))) {
+        if (!is_boxed_path &&
+                File_Junction_BlockRawAccessPath(TruePath, wcslen(TruePath))) {
             status = STATUS_ACCESS_DENIED;
             return status;
         }

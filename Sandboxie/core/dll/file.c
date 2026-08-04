@@ -504,6 +504,7 @@ BOOLEAN Dll_UseChromeSecurePreferencesHack = FALSE;
 
 #include <winioctl.h>
 #include "file_link.c"
+#include "file_junction.c"
 #include "file_pipe.c"
 #include "file_del.c"
 #include "file_snapshots.c"
@@ -1536,6 +1537,30 @@ check_sandbox_prefix:
             }
 
             *name = L'\0';
+        }
+    }
+
+    //
+    // block raw (reverse) access to junction destination paths, unless
+    // it was disabled with JunctionBlockRawAccess=n
+    //
+
+    if (objname_len && TruePath) {
+
+        if (File_Junction_BlockRawAccessPath(TruePath, wcslen(TruePath))) {
+            status = STATUS_ACCESS_DENIED;
+            return status;
+        }
+
+        //
+        // apply junction path mapping, before the true path is
+        // converted into the sandbox copy path
+        //
+
+        WCHAR *JunctionPath = File_ApplyJunctionMap(TlsData, TruePath);
+        if (JunctionPath != TruePath) {
+            TruePath = JunctionPath;
+            *OutTruePath = TruePath;
         }
     }
 
@@ -6490,6 +6515,22 @@ _FX NTSTATUS File_NtQueryInformationFile(
 
             if (SbieDll_TranslateNtToDosPath(TruePath)) {
                 TruePathLen = wcslen(TruePath);
+
+                //
+                // apply reverse junction path mapping so that the
+                // caller sees the virtual path it used to open the file
+                //
+
+                if (TruePathLen >= 3 && TruePath[1] == L':') {
+
+                    WCHAR *JunctionPath = File_ApplyJunctionMapReverse(
+                        TlsData, TruePath, TruePathLen);
+                    if (JunctionPath) {
+                        TruePath = JunctionPath;
+                        TruePathLen = wcslen(TruePath);
+                    }
+                }
+
                 if (TruePathLen >= 2 && TruePath[1] == L':') {
                     if (TruePathLen == 2)
                         TruePathLen = 0;
@@ -6849,6 +6890,24 @@ _FX ULONG File_GetFinalPathNameByHandleW(
         rc = __sys_GetFinalPathNameByHandleW(
                     hFile, lpszFilePath, cchFilePath, dwFlags);
         err = GetLastError();
+    }
+
+    //
+    // if the result is a DOS drive path, apply reverse junction
+    // path mapping so that the caller sees the virtual path
+    //
+
+    if (rc >= 6 && rc < cchFilePath &&
+            lpszFilePath[0] == L'\\' && lpszFilePath[1] == L'\\' &&
+            lpszFilePath[2] == L'?' && lpszFilePath[3] == L'\\' &&
+            (lpszFilePath[4] >= L'A' && lpszFilePath[4] <= L'Z' ||
+             lpszFilePath[4] >= L'a' && lpszFilePath[4] <= L'z') &&
+            lpszFilePath[5] == L':') {
+
+        ULONG JunctionLen = File_ApplyJunctionMapReverseInPlace(
+            lpszFilePath + 4, rc - 4, cchFilePath - 4);
+        if (JunctionLen)
+            rc = JunctionLen + 4;
     }
 
     if (Dll_ApiTrace || Dll_FileTrace) {

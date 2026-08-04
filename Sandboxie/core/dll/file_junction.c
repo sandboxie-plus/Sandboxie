@@ -190,6 +190,34 @@ _FX BOOLEAN File_Junction_BlockRawAccessPath(const WCHAR *Path, ULONG PathLen)
 
 
 //---------------------------------------------------------------------------
+// File_Junction_IsHomePath
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN File_Junction_IsHomePath(const WCHAR *Path, ULONG PathLen)
+{
+    const WCHAR *home = Dll_HomeDosPath;
+    ULONG home_len;
+
+    if (! home)
+        return FALSE;
+
+    home_len = wcslen(home);
+
+    if (home_len > PathLen)
+        return FALSE;
+    if (_wcsnicmp(Path, home, home_len) != 0)
+        return FALSE;
+
+    if (home_len == PathLen)
+        return TRUE;
+    if (Path[home_len] == L'\\')
+        return TRUE;
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
 // File_InitJunctions
 //---------------------------------------------------------------------------
 
@@ -305,8 +333,7 @@ _FX WCHAR *File_ApplyJunctionMap(THREAD_DATA *TlsData, WCHAR *TruePath)
 
     NewPath_len = best->dst_len + (TruePath_len - best->src_len);
 
-    NewPath = Dll_GetTlsNameBuffer(
-        TlsData, TRUE_NAME_BUFFER, (NewPath_len + 1) * sizeof(WCHAR));
+    NewPath = Dll_AllocTemp((NewPath_len + 1) * sizeof(WCHAR));
 
     wmemmove(NewPath + best->dst_len, TruePath + best->src_len,
                 NewPath_len - best->dst_len + 1);
@@ -334,8 +361,7 @@ _FX WCHAR *File_ApplyJunctionMapReverse(
 
     NewPath_len = best->src_len + (Path_len - best->dst_len);
 
-    NewPath = Dll_GetTlsNameBuffer(
-        TlsData, TRUE_NAME_BUFFER, (NewPath_len + 1) * sizeof(WCHAR));
+    NewPath = Dll_AllocTemp((NewPath_len + 1) * sizeof(WCHAR));
 
     wmemmove(NewPath + best->src_len, Path + best->dst_len,
                 NewPath_len - best->src_len + 1);

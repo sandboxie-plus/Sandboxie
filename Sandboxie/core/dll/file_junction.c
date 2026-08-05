@@ -123,6 +123,17 @@ static BOOLEAN File_Junction_IsDosPath(const WCHAR *Path, ULONG PathLen)
 
 
 //---------------------------------------------------------------------------
+// File_Junction_IsNtPath
+//---------------------------------------------------------------------------
+
+
+static BOOLEAN File_Junction_IsNtPath(const WCHAR *Path, ULONG PathLen)
+{
+    return PathLen >= 9 && _wcsnicmp(Path, L"\\Device\\", 8) == 0;
+}
+
+
+//---------------------------------------------------------------------------
 // File_Junction_FindForward
 //---------------------------------------------------------------------------
 
@@ -319,10 +330,14 @@ _FX void File_InitJunctions(void)
     if (File_JunctionEntries) {
 
         for (index = 0; index < File_JunctionCount; ++index) {
-            Dll_Free(File_JunctionEntries[index].src);
-            Dll_Free(File_JunctionEntries[index].dst);
-            Dll_Free(File_JunctionEntries[index].src_nt);
-            Dll_Free(File_JunctionEntries[index].dst_nt);
+            if (File_JunctionEntries[index].src)
+                Dll_Free(File_JunctionEntries[index].src);
+            if (File_JunctionEntries[index].dst)
+                Dll_Free(File_JunctionEntries[index].dst);
+            if (File_JunctionEntries[index].src_nt)
+                Dll_Free(File_JunctionEntries[index].src_nt);
+            if (File_JunctionEntries[index].dst_nt)
+                Dll_Free(File_JunctionEntries[index].dst_nt);
         }
 
         Dll_Free(File_JunctionEntries);
@@ -419,11 +434,13 @@ _FX void File_InitJunctions(void)
         entry->dst_len = dst_len;
 
         //
-        // also record the NT device form of the paths, because the
-        // junction mapping in File_GetName operates on NT device paths
-        // while process creation checks may pass DOS paths.  if a path
-        // can't be converted (for example an unknown drive letter) the
-        // NT form is left NULL and only the DOS form matches.
+        // record both the DOS and the NT device form of the source and
+        // target paths.  the junction mapping in File_GetName operates
+        // on NT device paths while process creation checks may pass DOS
+        // paths.  the config may store either form, so derive the
+        // missing form where possible.  if a path can't be converted
+        // (for example an unknown drive letter) the derived form is
+        // left NULL and only the stored form matches.
         //
 
         entry->src_nt = NULL;
@@ -431,7 +448,42 @@ _FX void File_InitJunctions(void)
         entry->src_nt_len = 0;
         entry->dst_nt_len = 0;
 
-        {
+        if (File_Junction_IsNtPath(entry->src, entry->src_len)) {
+
+            //
+            // config stores the NT device form:  use it directly and
+            // derive the DOS form for the DOS-based checks
+            //
+
+            entry->src_nt = entry->src;
+            entry->src_nt_len = entry->src_len;
+
+            WCHAR *src_dos = Dll_Alloc((entry->src_len + 1) * sizeof(WCHAR));
+            if (src_dos) {
+
+                wmemcpy(src_dos, entry->src, entry->src_len + 1);
+
+                if (SbieDll_TranslateNtToDosPath(src_dos)) {
+                    entry->src = src_dos;
+                    entry->src_len = wcslen(src_dos);
+                }
+                else {
+                    Dll_Free(src_dos);
+                    entry->src = NULL;
+                    entry->src_len = 0;
+                }
+            }
+            else {
+                entry->src = NULL;
+                entry->src_len = 0;
+            }
+        }
+        else {
+
+            //
+            // config stores the DOS form:  keep it and derive the NT form
+            //
+
             WCHAR *src_nt = File_TranslateDosToNtPath(entry->src);
             if (src_nt) {
                 ULONG src_nt_len = wcslen(src_nt);
@@ -442,6 +494,43 @@ _FX void File_InitJunctions(void)
                 }
                 Dll_Free(src_nt);
             }
+        }
+
+        if (File_Junction_IsNtPath(entry->dst, entry->dst_len)) {
+
+            //
+            // config stores the NT device form:  use it directly and
+            // derive the DOS form for the DOS-based checks
+            //
+
+            entry->dst_nt = entry->dst;
+            entry->dst_nt_len = entry->dst_len;
+
+            WCHAR *dst_dos = Dll_Alloc((entry->dst_len + 1) * sizeof(WCHAR));
+            if (dst_dos) {
+
+                wmemcpy(dst_dos, entry->dst, entry->dst_len + 1);
+
+                if (SbieDll_TranslateNtToDosPath(dst_dos)) {
+                    entry->dst = dst_dos;
+                    entry->dst_len = wcslen(dst_dos);
+                }
+                else {
+                    Dll_Free(dst_dos);
+                    entry->dst = NULL;
+                    entry->dst_len = 0;
+                }
+            }
+            else {
+                entry->dst = NULL;
+                entry->dst_len = 0;
+            }
+        }
+        else {
+
+            //
+            // config stores the DOS form:  keep it and derive the NT form
+            //
 
             WCHAR *dst_nt = File_TranslateDosToNtPath(entry->dst);
             if (dst_nt) {

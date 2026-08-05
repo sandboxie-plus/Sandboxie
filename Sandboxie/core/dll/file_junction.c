@@ -66,7 +66,6 @@ static WCHAR *File_Junction_TrimString(WCHAR *str, ULONG *len);
 static FILE_JUNCTION_ENTRY *File_JunctionEntries = NULL;
 static ULONG File_JunctionCount = 0;
 static BOOLEAN File_Junction_BlockRawAccess = TRUE;
-static ULONG File_Junction_PolicyVersion = 0;
 
 
 //---------------------------------------------------------------------------
@@ -270,17 +269,6 @@ _FX BOOLEAN File_Junction_IsMappedSrc(const WCHAR *Path, ULONG PathLen)
 
 
 //---------------------------------------------------------------------------
-// File_Junction_GetPolicyVersion
-//---------------------------------------------------------------------------
-
-
-_FX ULONG File_Junction_GetPolicyVersion(void)
-{
-    return File_Junction_PolicyVersion;
-}
-
-
-//---------------------------------------------------------------------------
 // File_Junction_IsHomePath
 //---------------------------------------------------------------------------
 
@@ -353,31 +341,6 @@ _FX void File_InitJunctions(void)
 
     File_Junction_BlockRawAccess = SbieApi_QueryConfBool(
         Dll_BoxName, L"JunctionBlockRawAccess", TRUE);
-
-    //
-    // policy version:  0 (default) denies process creation from a
-    // junction source folder, since the kernel may fail to read the
-    // image through the virtual path.  version 1 overrides (disables)
-    // JunctionBlockRawAccess and instead remaps process images started
-    // from a junction source folder to the junction target at process
-    // creation time.
-    //
-
-    File_Junction_PolicyVersion = 0;
-
-    {
-        WCHAR val[CONF_LINE_LEN];
-
-        if (NT_SUCCESS(SbieApi_QueryConf(
-                Dll_BoxName, L"JunctionPolicyVersion", 0,
-                val, sizeof(val) - sizeof(WCHAR)))) {
-
-            File_Junction_PolicyVersion = (ULONG)_wtoi(val);
-
-            if (File_Junction_PolicyVersion >= 1)
-                File_Junction_BlockRawAccess = FALSE;
-        }
-    }
 
     index = 0;
 

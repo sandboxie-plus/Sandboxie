@@ -1569,6 +1569,7 @@ check_sandbox_prefix:
         }
 
         if (objname_len && !is_boxed_path &&
+                ! TlsData->file_dont_block_junction_raw_access &&
                 File_Junction_BlockRawAccessPath(TruePath, wcslen(TruePath))) {
             if (Dll_FileTrace)
                 SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE,
@@ -7577,6 +7578,7 @@ _FX NTSTATUS File_SetAttributes(
         RtlInitUnicodeString(&objname, TruePath);
 
         ++TlsData->file_dont_strip_write_access;
+        ++TlsData->file_dont_block_junction_raw_access;
 
         status = NtCreateFile(
             &FileHandle,
@@ -7584,6 +7586,7 @@ _FX NTSTATUS File_SetAttributes(
             &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
             FILE_OPEN_IF, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
 
+        --TlsData->file_dont_block_junction_raw_access;
         --TlsData->file_dont_strip_write_access;
 
         if (! NT_SUCCESS(status))
@@ -8031,6 +8034,7 @@ _FX NTSTATUS File_OpenForRenameFile(
     RtlInitUnicodeString(&objname, TruePath);
 
     ++TlsData->file_dont_strip_write_access;
+    ++TlsData->file_dont_block_junction_raw_access;
 
     status = NtCreateFile(
         pSourceHandle, FILE_GENERIC_WRITE | DELETE, &objattrs,
@@ -8056,6 +8060,7 @@ _FX NTSTATUS File_OpenForRenameFile(
             FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
     }
 
+    --TlsData->file_dont_block_junction_raw_access;
     --TlsData->file_dont_strip_write_access;
 
     return status;
@@ -8287,6 +8292,7 @@ _FX NTSTATUS File_RenameFile(
     RtlInitUnicodeString(&objname, TargetTruePath);
 
     ++TlsData->file_dont_strip_write_access;
+    ++TlsData->file_dont_block_junction_raw_access;
 
     status = NtCreateFile(
         &TargetHandle, FILE_GENERIC_WRITE, &objattrs,
@@ -8332,6 +8338,7 @@ _FX NTSTATUS File_RenameFile(
         }
     }
 
+    --TlsData->file_dont_block_junction_raw_access;
     --TlsData->file_dont_strip_write_access;
 
     *TargetFileName = save_char;

@@ -858,62 +858,6 @@ BOOLEAN Proc_IsLikelyElectronProcess(const WCHAR *cmd)
 
 
 //---------------------------------------------------------------------------
-// Proc_GetImagePathForJunctionPolicy
-//---------------------------------------------------------------------------
-
-
-static WCHAR *Proc_GetImagePathForJunctionPolicy(
-    const WCHAR *lpApplicationName, const WCHAR *lpCommandLine)
-{
-    const WCHAR *start;
-    const WCHAR *end;
-    ULONG len;
-    WCHAR *mybuf;
-
-    if (lpApplicationName) {
-        start = lpApplicationName;
-        len = (ULONG)wcslen(start);
-    }
-    else if (lpCommandLine) {
-
-        start = lpCommandLine;
-
-        if (*start == L'\"') {
-            ++start;
-            end = start;
-            while (*end != L'\0' && *end != L'\"')
-                ++end;
-        }
-        else {
-            end = start;
-            while (*end != L'\0' && *end != L' ')
-                ++end;
-        }
-
-        len = (ULONG)(end - start);
-    }
-    else
-        return NULL;
-
-    //
-    // only absolute drive paths can match a junction source folder
-    //
-
-    if (len < 3 || start[1] != L':')
-        return NULL;
-
-    mybuf = Dll_Alloc((len + 1) * sizeof(WCHAR));
-    if (! mybuf)
-        return NULL;
-
-    wmemcpy(mybuf, start, len);
-    mybuf[len] = L'\0';
-
-    return mybuf;
-}
-
-
-//
 // Starting with build 5.49.9 Proc_CreateProcessInternalW_RS5 and
 // Proc_CreateProcessInternalW have been unified in order to avoid duplicate code
 //
@@ -955,30 +899,6 @@ _FX BOOL Proc_CreateProcessInternalW(
         lpProcessInformation, &ok)) {
 
         return ok;
-    }
-
-    //
-    // junction policy version 0:  deny process creation from a junction
-    // source folder, since the kernel may not be able to read the image
-    // through the virtual path
-    //
-
-    if (File_Junction_GetPolicyVersion() == 0) {
-
-        WCHAR *JunctionImage = Proc_GetImagePathForJunctionPolicy(
-            lpApplicationName, lpCommandLine);
-
-        if (JunctionImage) {
-
-            if (File_Junction_IsMappedSrc(JunctionImage, (ULONG)wcslen(JunctionImage))) {
-
-                Dll_Free(JunctionImage);
-                SetLastError(ERROR_ACCESS_DENIED);
-                return FALSE;
-            }
-
-            Dll_Free(JunctionImage);
-        }
     }
 
     // OriginalToken BEGIN
@@ -1300,18 +1220,6 @@ _FX BOOL Proc_CreateProcessInternalW(
 #endif ! _WIN64
 
         lpApplicationName = TlsData->proc_image_path;
-    }
-
-    //
-    // junction policy version 1:  remap the process image from a junction
-    // source folder to the junction target, so the image is read from the
-    // real path instead of the virtual path
-    //
-
-    if (lpApplicationName && File_Junction_GetPolicyVersion() >= 1 &&
-            File_Junction_IsMappedSrc(lpApplicationName, (ULONG)wcslen(lpApplicationName))) {
-
-        lpApplicationName = File_ApplyJunctionMap(TlsData, (WCHAR *)lpApplicationName);
     }
 
     // const wchar_t* imageName = L"DcomLaunch.exe";

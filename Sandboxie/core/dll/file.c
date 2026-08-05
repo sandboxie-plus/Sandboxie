@@ -1561,8 +1561,18 @@ check_sandbox_prefix:
 
     if (TruePath && ! File_Junction_IsHomePath(TruePath, wcslen(TruePath))) {
 
+        if (Dll_FileTrace) {
+            WCHAR dbg[512];
+            Sbie_snwprintf(dbg, 512, L"junction: TruePath=%s objname=%u boxed=%d",
+                TruePath, objname_len, (int)is_boxed_path);
+            SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
+        }
+
         if (objname_len && !is_boxed_path &&
                 File_Junction_BlockRawAccessPath(TruePath, wcslen(TruePath))) {
+            if (Dll_FileTrace)
+                SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE,
+                    L"junction: blocked raw access");
             status = STATUS_ACCESS_DENIED;
             return status;
         }
@@ -1574,6 +1584,9 @@ check_sandbox_prefix:
 
         WCHAR *JunctionPath = File_ApplyJunctionMap(TlsData, TruePath);
         if (JunctionPath != TruePath) {
+            if (Dll_FileTrace)
+                SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE,
+                    L"junction: mapped to target");
             TruePath = JunctionPath;
             *OutTruePath = TruePath;
         }

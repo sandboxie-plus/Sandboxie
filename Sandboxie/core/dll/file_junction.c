@@ -47,10 +47,10 @@ typedef struct _FILE_JUNCTION_ENTRY {
 
 
 static FILE_JUNCTION_ENTRY *File_Junction_FindForward(
-    const WCHAR *Path, ULONG PathLen);
+    const WCHAR *Path, ULONG PathLen, BOOLEAN *pMatchedDos);
 
 static FILE_JUNCTION_ENTRY *File_Junction_FindReverse(
-    const WCHAR *Path, ULONG PathLen);
+    const WCHAR *Path, ULONG PathLen, BOOLEAN *pMatchedDos);
 
 static BOOLEAN File_Junction_IsBoundary(
     const WCHAR *Path, ULONG PrefixLen);
@@ -128,44 +128,49 @@ static BOOLEAN File_Junction_IsDosPath(const WCHAR *Path, ULONG PathLen)
 
 
 static FILE_JUNCTION_ENTRY *File_Junction_FindForward(
-    const WCHAR *Path, ULONG PathLen)
+    const WCHAR *Path, ULONG PathLen, BOOLEAN *pMatchedDos)
 {
     ULONG i;
     ULONG best_len = 0;
-    BOOLEAN dos = File_Junction_IsDosPath(Path, PathLen);
+    BOOLEAN best_dos = FALSE;
     FILE_JUNCTION_ENTRY *best = NULL;
     FILE_JUNCTION_ENTRY *entry;
 
     for (i = 0; i < File_JunctionCount; ++i) {
 
-        const WCHAR *src;
-        ULONG src_len;
-
         entry = &File_JunctionEntries[i];
 
-        if (dos) {
-            src = entry->src;
-            src_len = entry->src_len;
-        }
-        else {
-            src = entry->src_nt;
-            src_len = entry->src_nt_len;
+        //
+        // try the DOS form of the source path
+        //
+
+        if (entry->src && entry->src_len <= PathLen &&
+                entry->src_len >= best_len &&
+                File_Junction_IsBoundary(Path, entry->src_len) &&
+                _wcsnicmp(Path, entry->src, entry->src_len) == 0) {
+
+            best = entry;
+            best_len = entry->src_len;
+            best_dos = TRUE;
         }
 
-        if (! src)
-            continue;
-        if (src_len > PathLen)
-            continue;
-        if (src_len < best_len)
-            continue;
-        if (! File_Junction_IsBoundary(Path, src_len))
-            continue;
-        if (_wcsnicmp(Path, src, src_len) != 0)
-            continue;
+        //
+        // try the NT device form of the source path
+        //
 
-        best = entry;
-        best_len = src_len;
+        if (entry->src_nt && entry->src_nt_len <= PathLen &&
+                entry->src_nt_len >= best_len &&
+                File_Junction_IsBoundary(Path, entry->src_nt_len) &&
+                _wcsnicmp(Path, entry->src_nt, entry->src_nt_len) == 0) {
+
+            best = entry;
+            best_len = entry->src_nt_len;
+            best_dos = FALSE;
+        }
     }
+
+    if (pMatchedDos)
+        *pMatchedDos = best_dos;
 
     return best;
 }
@@ -177,44 +182,49 @@ static FILE_JUNCTION_ENTRY *File_Junction_FindForward(
 
 
 static FILE_JUNCTION_ENTRY *File_Junction_FindReverse(
-    const WCHAR *Path, ULONG PathLen)
+    const WCHAR *Path, ULONG PathLen, BOOLEAN *pMatchedDos)
 {
     ULONG i;
     ULONG best_len = 0;
-    BOOLEAN dos = File_Junction_IsDosPath(Path, PathLen);
+    BOOLEAN best_dos = FALSE;
     FILE_JUNCTION_ENTRY *best = NULL;
     FILE_JUNCTION_ENTRY *entry;
 
     for (i = 0; i < File_JunctionCount; ++i) {
 
-        const WCHAR *dst;
-        ULONG dst_len;
-
         entry = &File_JunctionEntries[i];
 
-        if (dos) {
-            dst = entry->dst;
-            dst_len = entry->dst_len;
-        }
-        else {
-            dst = entry->dst_nt;
-            dst_len = entry->dst_nt_len;
+        //
+        // try the DOS form of the target path
+        //
+
+        if (entry->dst && entry->dst_len <= PathLen &&
+                entry->dst_len >= best_len &&
+                File_Junction_IsBoundary(Path, entry->dst_len) &&
+                _wcsnicmp(Path, entry->dst, entry->dst_len) == 0) {
+
+            best = entry;
+            best_len = entry->dst_len;
+            best_dos = TRUE;
         }
 
-        if (! dst)
-            continue;
-        if (dst_len > PathLen)
-            continue;
-        if (dst_len < best_len)
-            continue;
-        if (! File_Junction_IsBoundary(Path, dst_len))
-            continue;
-        if (_wcsnicmp(Path, dst, dst_len) != 0)
-            continue;
+        //
+        // try the NT device form of the target path
+        //
 
-        best = entry;
-        best_len = dst_len;
+        if (entry->dst_nt && entry->dst_nt_len <= PathLen &&
+                entry->dst_nt_len >= best_len &&
+                File_Junction_IsBoundary(Path, entry->dst_nt_len) &&
+                _wcsnicmp(Path, entry->dst_nt, entry->dst_nt_len) == 0) {
+
+            best = entry;
+            best_len = entry->dst_nt_len;
+            best_dos = FALSE;
+        }
     }
+
+    if (pMatchedDos)
+        *pMatchedDos = best_dos;
 
     return best;
 }
@@ -227,9 +237,11 @@ static FILE_JUNCTION_ENTRY *File_Junction_FindReverse(
 
 _FX BOOLEAN File_Junction_BlockRawAccessPath(const WCHAR *Path, ULONG PathLen)
 {
+    BOOLEAN matched_dos;
+
     if (! File_Junction_BlockRawAccess)
         return FALSE;
-    return File_Junction_FindReverse(Path, PathLen) != NULL;
+    return File_Junction_FindReverse(Path, PathLen, &matched_dos) != NULL;
 }
 
 
@@ -240,7 +252,9 @@ _FX BOOLEAN File_Junction_BlockRawAccessPath(const WCHAR *Path, ULONG PathLen)
 
 _FX BOOLEAN File_Junction_IsMappedSrc(const WCHAR *Path, ULONG PathLen)
 {
-    return File_Junction_FindForward(Path, PathLen) != NULL;
+    BOOLEAN matched_dos;
+
+    return File_Junction_FindForward(Path, PathLen, &matched_dos) != NULL;
 }
 
 
@@ -441,6 +455,27 @@ _FX void File_InitJunctions(void)
             }
         }
     }
+
+    //
+    // diagnostic:  report the loaded junction entries so that a failure
+    // to map can be traced back to the entries or the path forms
+    //
+
+    if (File_JunctionCount) {
+
+        FILE_JUNCTION_ENTRY *e = &File_JunctionEntries[0];
+        WCHAR dbg[CONF_LINE_LEN * 2 + 96];
+
+        Sbie_snwprintf(dbg, CONF_LINE_LEN * 2 + 96,
+            L"junction: %u entries, src=%s dst=%s src_nt=%s dst_nt=%s",
+            File_JunctionCount,
+            e->src ? e->src : L"<null>",
+            e->dst ? e->dst : L"<null>",
+            e->src_nt ? e->src_nt : L"<null>",
+            e->dst_nt ? e->dst_nt : L"<null>");
+
+        SbieApi_MonitorPut(MONITOR_FILE | MONITOR_OPEN, dbg);
+    }
 }
 
 
@@ -452,7 +487,7 @@ _FX void File_InitJunctions(void)
 _FX WCHAR *File_ApplyJunctionMap(THREAD_DATA *TlsData, WCHAR *TruePath)
 {
     FILE_JUNCTION_ENTRY *best;
-    BOOLEAN dos;
+    BOOLEAN matched_dos;
     const WCHAR *src, *dst;
     ULONG src_len, dst_len;
     ULONG TruePath_len;
@@ -461,12 +496,11 @@ _FX WCHAR *File_ApplyJunctionMap(THREAD_DATA *TlsData, WCHAR *TruePath)
 
     TruePath_len = wcslen(TruePath);
 
-    best = File_Junction_FindForward(TruePath, TruePath_len);
+    best = File_Junction_FindForward(TruePath, TruePath_len, &matched_dos);
     if (! best)
         return TruePath;
 
-    dos = File_Junction_IsDosPath(TruePath, TruePath_len);
-    if (dos) {
+    if (matched_dos) {
         src = best->src;
         src_len = best->src_len;
         dst = best->dst;
@@ -500,18 +534,17 @@ _FX WCHAR *File_ApplyJunctionMapReverse(
     THREAD_DATA *TlsData, WCHAR *Path, ULONG Path_len)
 {
     FILE_JUNCTION_ENTRY *best;
-    BOOLEAN dos;
+    BOOLEAN matched_dos;
     const WCHAR *src, *dst;
     ULONG src_len, dst_len;
     ULONG NewPath_len;
     WCHAR *NewPath;
 
-    best = File_Junction_FindReverse(Path, Path_len);
+    best = File_Junction_FindReverse(Path, Path_len, &matched_dos);
     if (! best)
         return NULL;
 
-    dos = File_Junction_IsDosPath(Path, Path_len);
-    if (dos) {
+    if (matched_dos) {
         src = best->src;
         src_len = best->src_len;
         dst = best->dst;
@@ -545,17 +578,16 @@ _FX ULONG File_ApplyJunctionMapReverseInPlace(
     WCHAR *Path, ULONG Path_len, ULONG MaxLen)
 {
     FILE_JUNCTION_ENTRY *best;
-    BOOLEAN dos;
+    BOOLEAN matched_dos;
     const WCHAR *src, *dst;
     ULONG src_len, dst_len;
     ULONG NewPath_len;
 
-    best = File_Junction_FindReverse(Path, Path_len);
+    best = File_Junction_FindReverse(Path, Path_len, &matched_dos);
     if (! best)
         return 0;
 
-    dos = File_Junction_IsDosPath(Path, Path_len);
-    if (dos) {
+    if (matched_dos) {
         src = best->src;
         src_len = best->src_len;
         dst = best->dst;

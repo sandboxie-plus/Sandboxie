@@ -46,6 +46,16 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 	m_pSearch = new QLineEdit();
 	m_pSearch->setPlaceholderText(m_Placeholder);
 	m_pSearch->setMinimumWidth(200);
+	QAction* pClearSearch = m_pSearch->addAction(
+		QIcon(":/Actions/Erase.png"), QLineEdit::TrailingPosition);
+	pClearSearch->setToolTip(tr("Clear search"));
+	pClearSearch->setVisible(false);
+	connect(pClearSearch, &QAction::triggered,
+		m_pSearch, &QLineEdit::clear);
+	connect(m_pSearch, &QLineEdit::textChanged,
+		pClearSearch, [pClearSearch](const QString& Text) {
+			pClearSearch->setVisible(!Text.isEmpty());
+		});
 	//m_pSearch->setMaximumWidth(400);
 	m_pSearchLayout->addWidget(m_pSearch);
 	QObject::connect(m_pSearch, SIGNAL(textChanged(QString)), this, SLOT(OnText()));

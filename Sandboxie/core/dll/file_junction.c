@@ -520,12 +520,12 @@ _FX void File_InitJunctions(void)
 
     //
     // determine whether raw (reverse) access to junction destination
-    // paths should be blocked;  defaults to yes, disable with
-    // JunctionBlockRawAccess=n
+    // paths should be blocked;  defaults to no, enable with
+    // JunctionBlockRawAccess=y
     //
 
     File_Junction_BlockRawAccess = SbieApi_QueryConfBool(
-        Dll_BoxName, L"JunctionBlockRawAccess", TRUE);
+        Dll_BoxName, L"JunctionBlockRawAccess",FALSE);
 
     index = 0;
 

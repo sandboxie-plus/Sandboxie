@@ -207,6 +207,7 @@ typedef struct _GUI_WIN_EVENT_HOOK {
 
 static CRITICAL_SECTION Gui_WinEventHooksCritSec;
 static LIST Gui_WinEventHooks;
+static BOOLEAN Gui_WinEventHooksInitialized = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -246,6 +247,7 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 		if (Gui_AlwaysActive) {
 			InitializeCriticalSection(&Gui_WinEventHooksCritSec);
 			List_Init(&Gui_WinEventHooks);
+			Gui_WinEventHooksInitialized = TRUE;
 
 			SBIEDLL_HOOK_GUI(GetForegroundWindow);
 			SBIEDLL_HOOK_GUI(GetActiveWindow);
@@ -2087,7 +2089,7 @@ _FX VOID Gui_UninitMisc(void)
     // unload / process detach does not leak memory or handles
     //
 
-    if (! Gui_AlwaysActive)
+    if (! Gui_WinEventHooksInitialized)
         return;
 
     EnterCriticalSection(&Gui_WinEventHooksCritSec);
@@ -2101,5 +2103,5 @@ _FX VOID Gui_UninitMisc(void)
     LeaveCriticalSection(&Gui_WinEventHooksCritSec);
 
     DeleteCriticalSection(&Gui_WinEventHooksCritSec);
-    Gui_AlwaysActive = FALSE;
+    Gui_WinEventHooksInitialized = FALSE;
 }

@@ -359,6 +359,7 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
     WCHAR *buf;
     P_NtCreateFile pNtCreateFile;
     P_NtClose pNtClose;
+    WCHAR dbg[512];
 
     if (! Dll_BoxFilePath || Dll_BoxFilePathLen == 0)
         return;
@@ -390,9 +391,10 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
     if (! NT_SUCCESS(status) || ! CopyPath ||
             _wcsnicmp(CopyPath, Dll_BoxFilePath, Dll_BoxFilePathLen) != 0) {
 
-        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE,
+        Sbie_snwprintf(dbg, 512,
             L"junction: box placeholder GetCopyPath failed st=%08x src=%s",
             status, NtSource);
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
         Dll_PopTlsNameBuffer(TlsData);
         return;
     }
@@ -456,9 +458,10 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
                 }
                 else if (st != STATUS_OBJECT_NAME_COLLISION &&
                          st != STATUS_FILE_IS_A_DIRECTORY) {
-                    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE,
+                    Sbie_snwprintf(dbg, 512,
                         L"junction: box placeholder create failed st=%08x path=%s",
                         st, buf);
+                    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
                     Dll_Free(buf);
                     Dll_PopTlsNameBuffer(TlsData);
                     return;
@@ -471,8 +474,8 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
         }
     }
 
-    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE,
-        L"junction: box placeholder ensured path=%s", buf);
+    Sbie_snwprintf(dbg, 512, L"junction: box placeholder ensured path=%s", buf);
+    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
 
     Dll_Free(buf);
     Dll_PopTlsNameBuffer(TlsData);

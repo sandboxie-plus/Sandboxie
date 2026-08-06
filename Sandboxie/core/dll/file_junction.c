@@ -307,16 +307,26 @@ static BOOLEAN File_Junction_SourceExists(const WCHAR *NtSource)
     OBJECT_ATTRIBUTES objattrs;
     UNICODE_STRING objname;
     FILE_NETWORK_OPEN_INFORMATION info;
+    P_NtQueryFullAttributesFile pQuery;
     NTSTATUS status;
 
-    if (! __sys_NtQueryFullAttributesFile)
+    //
+    // note: at the time File_InitJunctions runs the __sys_* hooks are not
+    // installed yet, so resolve the real ntdll routine directly.
+    //
+
+    pQuery = __sys_NtQueryFullAttributesFile;
+    if (! pQuery)
+        pQuery = (P_NtQueryFullAttributesFile)
+                    GetProcAddress(Dll_Ntdll, "NtQueryFullAttributesFile");
+    if (! pQuery)
         return FALSE;
 
     RtlInitUnicodeString(&objname, NtSource);
     InitializeObjectAttributes(
         &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-    status = __sys_NtQueryFullAttributesFile(&objattrs, &info);
+    status = pQuery(&objattrs, &info);
     return NT_SUCCESS(status);
 }
 
@@ -348,11 +358,26 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
     const WCHAR *p;
     WCHAR *buf;
     P_NtCreateFile pNtCreateFile;
+    P_NtClose pNtClose;
 
     if (! Dll_BoxFilePath || Dll_BoxFilePathLen == 0)
         return;
 
-    if (! __sys_NtCreateFile || ! __sys_NtClose)
+    //
+    // note: at the time File_InitJunctions runs the __sys_* hooks are not
+    // installed yet, so resolve the real ntdll routines directly.
+    //
+
+    pNtCreateFile = __sys_NtCreateFile;
+    if (! pNtCreateFile)
+        pNtCreateFile = (P_NtCreateFile)GetProcAddress(Dll_Ntdll, "NtCreateFile");
+    if (! pNtCreateFile)
+        return;
+
+    pNtClose = __sys_NtClose;
+    if (! pNtClose)
+        pNtClose = (P_NtClose)GetProcAddress(Dll_Ntdll, "NtClose");
+    if (! pNtClose)
         return;
 
     TlsData = Dll_GetTlsData(NULL);
@@ -365,6 +390,9 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
     if (! NT_SUCCESS(status) || ! CopyPath ||
             _wcsnicmp(CopyPath, Dll_BoxFilePath, Dll_BoxFilePathLen) != 0) {
 
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE,
+            L"junction: box placeholder GetCopyPath failed st=%08x src=%s",
+            status, NtSource);
         Dll_PopTlsNameBuffer(TlsData);
         return;
     }
@@ -387,8 +415,6 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
     cur = root_len;
     while (cur > 0 && buf[cur - 1] == L'\\')
         --cur;                     // normalize: we add separators ourselves
-
-    pNtCreateFile = __sys_NtCreateFile;
 
     p = CopyPath + Dll_BoxFilePathLen;
     while (p && *p) {
@@ -426,10 +452,13 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
                     FILE_OPEN_IF, FILE_DIRECTORY_FILE, NULL, 0);
 
                 if (NT_SUCCESS(st)) {
-                    __sys_NtClose(handle);
+                    pNtClose(handle);
                 }
                 else if (st != STATUS_OBJECT_NAME_COLLISION &&
                          st != STATUS_FILE_IS_A_DIRECTORY) {
+                    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE,
+                        L"junction: box placeholder create failed st=%08x path=%s",
+                        st, buf);
                     Dll_Free(buf);
                     Dll_PopTlsNameBuffer(TlsData);
                     return;
@@ -441,6 +470,9 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
             p = end;
         }
     }
+
+    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE,
+        L"junction: box placeholder ensured path=%s", buf);
 
     Dll_Free(buf);
     Dll_PopTlsNameBuffer(TlsData);

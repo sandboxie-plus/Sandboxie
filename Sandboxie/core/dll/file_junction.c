@@ -65,7 +65,7 @@ static WCHAR *File_Junction_TrimString(WCHAR *str, ULONG *len);
 
 static FILE_JUNCTION_ENTRY *File_JunctionEntries = NULL;
 static ULONG File_JunctionCount = 0;
-static BOOLEAN File_Junction_BlockRawAccess = TRUE;
+static BOOLEAN File_Junction_BlockRawAccess = FALSE;
 
 
 //---------------------------------------------------------------------------

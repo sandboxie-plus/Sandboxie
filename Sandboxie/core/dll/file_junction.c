@@ -298,6 +298,156 @@ _FX BOOLEAN File_Junction_IsHomePath(const WCHAR *Path, ULONG PathLen)
 
 
 //---------------------------------------------------------------------------
+// File_Junction_SourceExists
+//---------------------------------------------------------------------------
+
+
+static BOOLEAN File_Junction_SourceExists(const WCHAR *NtSource)
+{
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    FILE_NETWORK_OPEN_INFORMATION info;
+    NTSTATUS status;
+
+    if (! __sys_NtQueryFullAttributesFile)
+        return FALSE;
+
+    RtlInitUnicodeString(&objname, NtSource);
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    status = __sys_NtQueryFullAttributesFile(&objattrs, &info);
+    return NT_SUCCESS(status);
+}
+
+
+//---------------------------------------------------------------------------
+// File_Junction_CreateSourceBoxCopy
+//---------------------------------------------------------------------------
+//
+// Create a copy of the (virtual) junction source directory inside the box.
+// The whole point of a junction mapping is that the source name is virtual
+// and every access to it is redirected to the target, so the box copy of the
+// source would never be materialized by the normal write path.  By creating
+// the name inside the box we make the box/dir merge machinery show it as a
+// real directory (an empty placeholder folder) when the parent directory is
+// enumerated.  That lets Explorer and other tools reveal the virtual source
+// directory and attempt to open it, at which point the junction remapping in
+// File_GetName redirects the access to the real target.
+//
+//---------------------------------------------------------------------------
+
+
+static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
+{
+    THREAD_DATA *TlsData;
+    WCHAR *CopyPath;
+    NTSTATUS status;
+    ULONG root_len;
+    ULONG cur;
+    const WCHAR *p;
+    WCHAR *buf;
+    P_NtCreateFile pNtCreateFile;
+
+    if (! Dll_BoxFilePath || Dll_BoxFilePathLen == 0)
+        return;
+
+    if (! __sys_NtCreateFile || ! __sys_NtClose)
+        return;
+
+    TlsData = Dll_GetTlsData(NULL);
+    if (! TlsData)
+        return;
+
+    Dll_PushTlsNameBuffer(TlsData);
+
+    status = File_GetCopyPath((WCHAR *)NtSource, &CopyPath);
+    if (! NT_SUCCESS(status) || ! CopyPath ||
+            _wcsnicmp(CopyPath, Dll_BoxFilePath, Dll_BoxFilePathLen) != 0) {
+
+        Dll_PopTlsNameBuffer(TlsData);
+        return;
+    }
+
+    //
+    // CopyPath is the box root followed by the portable suffix (e.g.
+    // "\user\current\Desktop\DCrypt_X64").  append the components one at
+    // a time, creating each directory level as we go, so all the missing
+    // parents are created as well.
+    //
+
+    root_len = Dll_BoxFilePathLen;
+    buf = Dll_Alloc((wcslen(CopyPath) + 2) * sizeof(WCHAR));
+    if (! buf) {
+        Dll_PopTlsNameBuffer(TlsData);
+        return;
+    }
+
+    wmemcpy(buf, Dll_BoxFilePath, root_len);
+    cur = root_len;
+    while (cur > 0 && buf[cur - 1] == L'\\')
+        --cur;                     // normalize: we add separators ourselves
+
+    pNtCreateFile = __sys_NtCreateFile;
+
+    p = CopyPath + Dll_BoxFilePathLen;
+    while (p && *p) {
+
+        if (*p == L'\\')
+            ++p;
+        if (! *p)
+            break;
+
+        {
+            const WCHAR *end = wcschr(p, L'\\');
+            ULONG comp_len = end ? (ULONG)(end - p) : (ULONG)wcslen(p);
+
+            buf[cur++] = L'\\';
+            wmemcpy(buf + cur, p, comp_len);
+            cur += comp_len;
+            buf[cur] = L'\0';
+
+            {
+                HANDLE handle;
+                UNICODE_STRING objname;
+                OBJECT_ATTRIBUTES objattrs;
+                IO_STATUS_BLOCK io;
+                NTSTATUS st;
+
+                RtlInitUnicodeString(&objname, buf);
+                InitializeObjectAttributes(
+                    &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+                st = pNtCreateFile(
+                    &handle, (ACCESS_MASK)(0x04 /*FILE_ADD_SUBDIRECTORY*/
+                                | FILE_READ_ATTRIBUTES),
+                    &objattrs, &io, NULL, FILE_ATTRIBUTE_DIRECTORY,
+                    FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                    FILE_OPEN_IF, FILE_DIRECTORY_FILE, NULL, 0);
+
+                if (NT_SUCCESS(st)) {
+                    __sys_NtClose(handle);
+                }
+                else if (st != STATUS_OBJECT_NAME_COLLISION &&
+                         st != STATUS_FILE_IS_A_DIRECTORY) {
+                    Dll_Free(buf);
+                    Dll_PopTlsNameBuffer(TlsData);
+                    return;
+                }
+            }
+
+            if (! end)
+                break;
+            p = end;
+        }
+    }
+
+    Dll_Free(buf);
+    Dll_PopTlsNameBuffer(TlsData);
+}
+
+
+//---------------------------------------------------------------------------
 // File_InitJunctions
 //---------------------------------------------------------------------------
 
@@ -506,6 +656,17 @@ _FX void File_InitJunctions(void)
                 Dll_Free(dst_nt);
             }
         }
+
+        //
+        // if the virtual source directory does not exist anywhere on the
+        // real files system, create an empty placeholder of that name in
+        // the box so that the directory merge machinery reveals it when
+        // the parent directory is enumerated;  the junction remapping
+        // still redirects any actual access to the real target
+        //
+
+        if (entry->src_nt && ! File_Junction_SourceExists(entry->src_nt))
+            File_Junction_CreateSourceBoxCopy(entry->src_nt);
     }
 
     //

@@ -2082,26 +2082,48 @@ _FX VOID Gui_UninitMisc(void)
 {
     GUI_WIN_EVENT_HOOK *ghk;
     GUI_WIN_EVENT_HOOK *ghk_next;
+    HWINEVENTHOOK *handles;
+    ULONG count;
+    ULONG i;
 
     //
-    // tear down the WinEvent hook tracking state initialized in Gui_InitMisc;
-    // unhook any still-registered hooks and free the remaining entries so DLL
-    // unload / process detach does not leak memory or handles
+    // tear down the WinEvent hook tracking state initialized in Gui_InitMisc.
+    // Detach the entries from the list while holding the lock, but call user32
+    // (UnhookWinEvent) only after releasing it: unhooking can wait on an
+    // in-flight callback, and that callback needs the same critical section,
+    // so holding the lock across the unhook would deadlock
     //
 
     if (! Gui_WinEventHooksInitialized)
         return;
 
+    handles = NULL;
+    count = 0;
+
     EnterCriticalSection(&Gui_WinEventHooksCritSec);
-    for (ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
-            ghk; ghk = ghk_next) {
-        ghk_next = (GUI_WIN_EVENT_HOOK *)List_Next(ghk);
-        __sys_UnhookWinEvent(ghk->hHook);
-        List_Remove(&Gui_WinEventHooks, ghk);
-        Dll_Free(ghk);
+    count = List_Count(&Gui_WinEventHooks);
+    if (count) {
+        handles = Dll_Alloc(count * sizeof(HWINEVENTHOOK));
+        if (handles) {
+            i = 0;
+            for (ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
+                    ghk; ghk = ghk_next) {
+                ghk_next = (GUI_WIN_EVENT_HOOK *)List_Next(ghk);
+                handles[i++] = ghk->hHook;
+                List_Remove(&Gui_WinEventHooks, ghk);
+                Dll_Free(ghk);
+            }
+            count = i;
+        }
     }
     LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+    Gui_WinEventHooksInitialized = FALSE;
+
+    if (handles) {
+        for (i = 0; i < count; i++)
+            __sys_UnhookWinEvent(handles[i]);
+        Dll_Free(handles);
+    }
 
     DeleteCriticalSection(&Gui_WinEventHooksCritSec);
-    Gui_WinEventHooksInitialized = FALSE;
 }

@@ -209,12 +209,12 @@ _FX BOOL WINAPI DllMain(
             Gui_ResetClipCursor();
         }
 
-        // only perform the WinEvent teardown on an explicit unload
-        // (FreeLibrary); during process termination the loader lock makes it
-        // unsafe to call into user32 from DllMain, and the OS cleans up any
-        // remaining hooks anyway
-        if (lpReserved == NULL)
-            Gui_UninitMisc();
+        // NOTE: WinEvent/AlwaysActive teardown (Gui_UninitMisc) is NOT done
+        // here.  It calls into user32 (UnhookWinEvent), which is unsafe inside
+        // DllMain's DLL_PROCESS_DETACH because the loader lock is held and the
+        // OS discards any remaining hooks/handles at process exit.  Gui_UninitMisc
+        // is exported for callers that need to tear it down on an explicit,
+        // pre-unload shutdown path outside DllMain.
 
         if(!SbieApi_data && SbieApi_DeviceHandle != INVALID_HANDLE_VALUE)
             NtClose(SbieApi_DeviceHandle);

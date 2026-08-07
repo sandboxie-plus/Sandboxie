@@ -561,7 +561,7 @@ utökas till 512-bitar med tillämpandet av Leet (L337) talmodifikationer, och �
     <message>
         <location filename="BoxTransfer.cpp" line="84"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Källa</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="94"/>
@@ -576,7 +576,7 @@ utökas till 512-bitar med tillämpandet av Leet (L337) talmodifikationer, och �
     <message>
         <location filename="BoxTransfer.cpp" line="99"/>
         <source>Export each box to its own file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportera varje låda till dess egna fil</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="104"/>
@@ -627,7 +627,7 @@ utökas till 512-bitar med tillämpandet av Leet (L337) talmodifikationer, och �
     <message>
         <location filename="BoxTransfer.cpp" line="253"/>
         <source>Duplicate!</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplicera!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="447"/>
@@ -638,7 +638,7 @@ utökas till 512-bitar med tillämpandet av Leet (L337) talmodifikationer, och �
     <message>
         <location filename="BoxTransfer.cpp" line="462"/>
         <source>Cannot export: Sandbox has running processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan inte exportera: Sandlåda har körande processer.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="481"/>
@@ -648,72 +648,72 @@ utökas till 512-bitar med tillämpandet av Leet (L337) talmodifikationer, och �
     <message>
         <location filename="BoxTransfer.cpp" line="486"/>
         <source>No boxes selected for separate file export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga lådor valda för separat filexport.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="529"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
-        <translation>Sandlåda %1 har körandes processer. Skippa det?</translation>
+        <translation>Sandlåda &apos;%1&apos; har körandes processer. Skippa det?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="550"/>
         <source>Mount &apos;%1&apos; for Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Montera &apos;%1&apos; för export</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="553"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Krypterad sandlåda &apos;%1&apos; är inte monterad. Skippa det?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="564"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Misslyckades att avmontera %1 för ommontering.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="574"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Misslyckades att montera krypterad sandlåda &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="606"/>
         <source>Select Export Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj exportmapp</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="645"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished">Exportera sandlåda</translation>
+        <translation>Exportera sandlåda</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="940"/>
         <source>Password for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösenord för %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="956"/>
         <source>Failed to open archive (%1): %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Misslyckades att öppna arkiv (%1): %2</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1014"/>
         <source>Select Archives</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj arkiv</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1015"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip arkiv  (*.7z);;Zip arkiv (*.zip);;All arkiv (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1052"/>
         <source>The selected archives do not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>De valda arkiven innehåller inte några sandlådedata.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1078"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan inte importera multipla lådor med samma namn &apos;%1&apos;. Vänligen namnändra dem först.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1164"/>
@@ -765,7 +765,7 @@ utökas till 512-bitar med tillämpandet av Leet (L337) talmodifikationer, och �
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="359"/>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="377"/>
@@ -1643,17 +1643,12 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
 <context>
     <name>CFinder</name>
     <message>
-        <location filename="../MiscHelpers/Common/Finder.cpp" line="51"/>
-        <source>Clear search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MiscHelpers/Common/Finder.cpp" line="126"/>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
         <source>Expand all</source>
         <translation>Expandera alla</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/Finder.cpp" line="132"/>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
         <source>Collapse all</source>
         <translation>Dra samman alla</translation>
     </message>
@@ -1804,7 +1799,7 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2700"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppmärksamhet</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -2828,7 +2823,7 @@ Vill du aktivera autoavsluta?</translation>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="833"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1007"/>
@@ -3104,7 +3099,7 @@ Vill du aktivera autoavsluta?</translation>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
         <source> (outside)</source>
-        <translation type="unfinished"></translation>
+        <translation> (utanför)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="78"/>
@@ -3193,7 +3188,7 @@ Vill du aktivera autoavsluta?</translation>
         <location filename="Windows/OptionsGeneral.cpp" line="687"/>
         <location filename="Windows/OptionsGeneral.cpp" line="794"/>
         <source>Copy newer</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiera aldrig</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="930"/>
@@ -3853,7 +3848,7 @@ Full sökväg: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="932"/>
         <source>%1 file(s) hidden by AutoRecoverIgnore</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 fil(er) dolda av AutoRecoverIgnore</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="1283"/>
@@ -5104,7 +5099,7 @@ Nej väljer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="521"/>
         <source> (Administrator)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Administratör)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="786"/>
@@ -5226,7 +5221,7 @@ Nej väljer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1514"/>
         <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Lådor: %1 (%2 aktiv)  |  Processer: %3  |  Minne: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1921"/>
@@ -5919,17 +5914,17 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     <message>
         <location filename="Models/SbieModel.cpp" line="840"/>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation>CPU</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="841"/>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Minne</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="842"/>
         <source>Private Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Privata bytes</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="843"/>
@@ -6624,25 +6619,29 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <location filename="Views/SbieView.cpp" line="638"/>
         <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    CPU: %1  |  Minne: %2  |  Privata bytes: %3
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="641"/>
         <source>    Sandbox: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Sandlåda: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="643"/>
         <source>    Image: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Avbild:%1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="646"/>
         <source>    Start Time: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Starttid: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="940"/>
@@ -8085,7 +8084,8 @@ Försök skicka utan bifogad logg.</translation>
         <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
         <source>
 The actual sandbox name is: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Det faktiska sandlådenamnet är: %1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1112"/>
@@ -9950,7 +9950,7 @@ Detta görs för att  förhindra Rogue-processer inuti sandlådan från att skap
     <message>
         <location filename="Forms/OptionsWindow.ui" line="366"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
-        <translation>När kontrollerad, döljer den färgade gränsramen och visar endast sandlådenamnet eller alias som en etikett. Kräver att etikettalternativet blir aktiverat</translation>
+        <translation>När kontrollerad, döljer den färgade gränsramen och visar endast sandlådenamnet eller alias som en etikett. Kräver att etikettalternativet blir aktiverat.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="369"/>
@@ -9960,12 +9960,12 @@ Detta görs för att  förhindra Rogue-processer inuti sandlådan från att skap
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>När en utsides gräns blir klippt av skärmens gräns, dra den till insidan istället på maximerade eller brutna fönster.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="379"/>
         <source>Inside when maximized or snapped</source>
-        <translation type="unfinished"></translation>
+        <translation>Innanför vid maximering eller bruten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1047"/>
@@ -9985,17 +9985,17 @@ Detta görs för att  förhindra Rogue-processer inuti sandlådan från att skap
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1845"/>
         <source>Total CPU Rate Limit (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Total CPU värdegräns (%):</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1861"/>
         <source>Leave it blank to disable the setting (1-100)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lämna det blankt för att inaktivera inställningen (1-100)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1871"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2061"/>
@@ -10121,12 +10121,12 @@ För att specificera en process, använd &apos;$:program.exe&apos; som sökväg.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4429"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd ovan exkluderingslista för att dölja matchande filer från fönstret Omedelbar återställning</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4432"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kräver att kontrolllådan &quot;Visa alla&quot; är omarkerad i återställningsfönstret.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4493"/>
@@ -11540,7 +11540,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>Show Ignored Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa ignorerade filer</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
@@ -12654,7 +12654,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
     <message>
         <location filename="Forms/SettingsWindow.ui" line="71"/>
         <source>Use random GUID as sandbox name when creating new boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd slumpmässig GUID som sandlådenamn vid skapande av nya lådor</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="281"/>
@@ -12699,7 +12699,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1161"/>
         <source>Highlight unapplied changes in Options and Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Markera otillämpade ändringar i Alternativ och Inställningar</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1230"/>
@@ -12795,7 +12795,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2691"/>
         <source>Add Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Addera portabel låda</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2721"/>
@@ -12844,12 +12844,12 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2976"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tvinga program som öppnar filer från en sandlåda att köra i den sandlådan.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2979"/>
         <source>Force programs opening boxed files into their sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Tvinga program att öppna lådade filer in i sin sandlåda</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2986"/>

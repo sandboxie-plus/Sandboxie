@@ -70,6 +70,7 @@ CFileFilterProxyModel::CFileFilterProxyModel(QObject* parent)
 	: QSortFilterProxyModel(parent)
 {
 	m_bFilterActive = false;
+	setSortCaseSensitivity(Qt::CaseInsensitive);
 }
 
 void CFileFilterProxyModel::SetSearchPattern(const QRegularExpression& pattern)
@@ -196,6 +197,8 @@ bool CFileFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex& 
 ////////////////////////////////////////////////////////////////////////////////////////
 // CFileView
 
+QSet<CFileView*> CFileView::s_Instances;
+
 CFileView::CFileView(QWidget *parent)
 	: QWidget(parent)
 {
@@ -232,10 +235,14 @@ CFileView::CFileView(QWidget *parent)
 		this, SLOT(OnSetFilter(const QRegularExpression&, int, int)));
 
 	m_pMainLayout->addWidget(m_pFinder, 1, 0);
+
+    s_Instances.insert(this);
 }
 
 CFileView::~CFileView()
 {
+    s_Instances.remove(this);
+
     SaveState();
 
     if (m_pSearchThread) {
@@ -257,8 +264,10 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
     m_pFinder->Close();
 
 	if (m_pSearchThread) {
-		m_pSearchThread->cancel();
-		m_pSearchThread->wait();
+        CFileSearchThread* pSearchThread = m_pSearchThread;
+        pSearchThread->cancel();
+        pSearchThread->wait();
+        m_pSearchThread = nullptr;
 	}
 
 	m_pBox = pBox;
@@ -410,12 +419,18 @@ void CFileView::DoSearch()
     m_pProxyModel->SetSearchInProgress(true);
 
 	m_pSearchThread = new CFileSearchThread(m_RootPath, searchPattern, this);
+    CFileSearchThread* pSearchThread = m_pSearchThread;
 
 	connect(m_pSearchThread, &CFileSearchThread::pathFound, m_pProxyModel, &CFileFilterProxyModel::AddPathFilter, Qt::QueuedConnection);
 
 	connect(m_pSearchThread, &CFileSearchThread::progressUpdate, m_pFinder, &CFinder::SetProgress, Qt::QueuedConnection);
 
-	connect(m_pSearchThread, &QThread::finished, this, [this]() {
+	connect(m_pSearchThread, &QThread::finished, this, [this, pSearchThread]() {
+        if (m_pSearchThread != pSearchThread) {
+            pSearchThread->deleteLater();
+            return;
+        }
+
         // Search completed - now activate filtering to show only results
         m_pProxyModel->SetSearchInProgress(false);
         m_pProxyModel->RefreshFilter();
@@ -431,7 +446,7 @@ void CFileView::DoSearch()
         }
         
         m_pFinder->HideProgress();
-        m_pSearchThread->deleteLater();
+        pSearchThread->deleteLater();
         m_pSearchThread = nullptr;
         m_pTreeView->expandAll();
     }, Qt::QueuedConnection);
@@ -442,6 +457,7 @@ void CFileView::DoSearch()
 
 #include <windows.h>
 #include <Shlobj.h>
+#include <sherrors.h>
 #include <atlbase.h>
 
 #define MENU_SANDBOX            -1
@@ -450,6 +466,7 @@ void CFileView::DoSearch()
 #define MENU_CREATE_SHORTCUT    3
 #define MENU_CHECK_FILE         4
 #define MENU_PIN_FILE           5
+#define MENU_DELETE_FILE        6
 
 void addSeparatorToShellContextMenu(HMENU hMenu)
 {
@@ -645,6 +662,10 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
                     DestroyMenu(hMenu);
                     return MENU_SANDBOX;
                 }
+                if (_wcsicmp(verbBuffer, L"delete") == 0) {
+                    DestroyMenu(hMenu);
+                    return MENU_DELETE_FILE;
+                }
             }
             
             CMINVOKECOMMANDINFOEX info = { 0 };
@@ -660,6 +681,45 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
     DestroyMenu(hMenu);
 
     return 0;
+}
+
+static HRESULT deleteShellItems(const QStringList& Files, HWND parentWindow)
+{
+    CComPtr<IFileOperation> operation;
+    HRESULT hr = operation.CoCreateInstance(CLSID_FileOperation);
+    if (FAILED(hr))
+        return hr;
+
+    hr = operation->SetOwnerWindow(parentWindow);
+    if (FAILED(hr))
+        return hr;
+
+    hr = operation->SetOperationFlags(FOF_ALLOWUNDO | FOF_WANTNUKEWARNING);
+    if (FAILED(hr))
+        return hr;
+
+    foreach(QString File, Files) {
+        while (File.length() > 3 && File.endsWith("\\"))
+            File.chop(1);
+
+        CComPtr<IShellItem> item;
+        hr = SHCreateItemFromParsingName((LPCWSTR)File.utf16(), NULL,
+            IID_PPV_ARGS(&item));
+        if (FAILED(hr))
+            return hr;
+
+        hr = operation->DeleteItem(item, NULL);
+        if (FAILED(hr))
+            return hr;
+    }
+
+    hr = operation->PerformOperations();
+    if (FAILED(hr))
+        return hr;
+
+    BOOL aborted = FALSE;
+    hr = operation->GetAnyOperationsAborted(&aborted);
+    return SUCCEEDED(hr) && aborted ? HRESULT_FROM_WIN32(ERROR_CANCELLED) : hr;
 }
 
 
@@ -749,6 +809,38 @@ void CFileView::OnFileMenu(const QPoint&)
             SB_PROGRESS Status = theGUI->CheckFiles(m_pBox->GetName(), Files);
             if (Status.GetStatus() == OP_ASYNC)
                 theGUI->AddAsyncOp(Status.GetValue());
+            break;
+        }
+        case MENU_DELETE_FILE:
+        {
+            CSandBoxPtr pBox = m_pBox;
+            QString FileRoot = pBox->GetFileRoot();
+            QList<QPair<QPointer<CFileView>, CSandBoxPtr>> FileViews;
+            foreach(CFileView* pFileView, s_Instances) {
+                if (!pFileView->m_pBox.isNull()
+                    && pFileView->m_pBox->GetFileRoot().compare(
+                        FileRoot, Qt::CaseInsensitive) == 0) {
+                    FileViews.append(qMakePair(
+                        QPointer<CFileView>(pFileView), pFileView->m_pBox));
+                    pFileView->SetBox(CSandBoxPtr());
+                }
+            }
+
+            HRESULT hr = deleteShellItems(Files, (HWND)window()->winId());
+
+            foreach(const auto& FileView, FileViews) {
+                if (FileView.first)
+                    FileView.first->SetBox(FileView.second);
+            }
+
+            if (FAILED(hr)
+                && hr != HRESULT_FROM_WIN32(ERROR_CANCELLED)
+                && hr != COPYENGINE_E_USER_CANCELLED
+                && hr != COPYENGINE_E_CANCELLED) {
+                QMessageBox::critical(this, tr("Delete Failed"),
+                    tr("The selected files could not be deleted.\n\nError: 0x%1")
+                    .arg((quint32)hr, 8, 16, QChar('0')));
+            }
             break;
         }
         case MENU_PIN_FILE:

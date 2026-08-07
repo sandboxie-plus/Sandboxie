@@ -435,7 +435,8 @@ russian.UninstallTaskLabel1=Выберите тип удаления
 russian.UninstallTaskLabel2=Как вы хотите удалить Sandboxie-Plus?
 russian.UninstallTaskLabel3=Сохранять файлы конфигурации и песочницы (&K)%nЭто наиболее рекомендуемый вариант, если вы планируете переустановить Sandboxie-Plus, сохранив файлы конфигурации и песочницы.
 russian.UninstallTaskLabel4=Удалить файлы конфигурации (&C)%nВыберите этот параметр, чтобы удалить файлы конфигурации Sandboxie.ini и Sandboxie-Plus.ini, оставив файлы песочницы без изменений.
-russian.UninstallTaskLabel5=Удалить файлы конфигурации и песочницы (&S)%nВыберите этот параметр, чтобы удалить все файлы конфигурации и песочницы, включая папку Sandbox, расположение которой заданно в FileRootPath.
+russian.UninstallTaskLabel5=Удалить файлы конфигурации и песочницы (&S)%nВыберите этот параметр, чтобы удалить все файлы конфигурации и песочницы, включая папку Sandbox, расположение которой задано в FileRootPath.
+russian.InstallImDisk=Установить (или обновить) драйвер ImDisk 3.0 (для RamDisk и зашифрованных песочниц)
 russian.RefreshBuild=Скачать последние Templates.ini и переводы
 russian.Qt6Win10Unsupported=Фреймворк Qt 6 не поддерживает версии Windows 10 1507, 1511 или 1607.%nПожалуйста, обновитесь до Windows 10 1809 (сборка 17763) или новее.%nСмотрите проблему #5079 для деталей:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nВы по-прежнему хотите продолжить установку?
 
@@ -531,9 +532,10 @@ ukrainian.ClassicFound=Виявлена версія Sandboxie Classic, на п�
 ukrainian.RunSandboxedMenu=Виконати в пісочниці (&S)
 ukrainian.UninstallTaskLabel1=Оберіть тип видалення
 ukrainian.UninstallTaskLabel2=Як ви хочете видалити Sandboxie-Plus?
-ukrainian.UninstallTaskLabel3=Зберігти файли конфігурації и пісочниць (&K)%nЦе найбільш рекомендований варіант, якщо ви плануете перевстановити Sandboxie-Plus, зберігши файли конфігурації и пісочниць.
+ukrainian.UninstallTaskLabel3=Зберігти файли конфігурації та пісочниць (&K)%nЦе найбільш рекомендований варіант, якщо ви плануєте перевстановити Sandboxie-Plus, зберігши файли конфігурації та пісочниць.
 ukrainian.UninstallTaskLabel4=Видалити файли конфігурації (&C)%nОберіть цей параметр, щоб видалити файли конфігурації Sandboxie.ini та Sandboxie-Plus.ini, залишивши файли пісочниць без змін.
 ukrainian.UninstallTaskLabel5=Видалити файли конфігурації та пісочниць (&S)%nОберіть цей параметр, щоб видалити всі файли конфігурації та пісочниць, включаючи папку Sandbox, яка має місцерозташування в FileRootPath.
+ukrainian.InstallImDisk=Встановити (або оновити) драйвер ImDisk 3.0 (для RamDisk та зашифрованих пісочниць)
 ukrainian.RefreshBuild=Завантажити останні Templates.ini та переклади
 ukrainian.Qt6Win10Unsupported=Фреймворк Qt 6 не підтримує версії Windows 10 1507, 1511 або 1607.%nОновіть до Windows 10 1809 (збірка 17763) або новіше.%nДив. проблему #5079 для деталей:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nВи все ще хочете продовжити встановлення?
 

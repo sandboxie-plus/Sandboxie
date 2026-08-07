@@ -76,18 +76,18 @@
     <message>
         <location filename="AddonManager.cpp" line="185"/>
         <source>Add-on not found, please try updating the add-on list in the global settings!</source>
-        <translation type="unfinished"></translation>
+        <translation>Додаток не знайдено, спробуйте оновити список додатків у глобальних налаштуваннях!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="233"/>
         <source>Add-on Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Додаток не знайдено</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="234"/>
         <source>Add-on is not available for this platform</source>
         <oldsource>Addon is not available for this paltform</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Додаток недоступний для цієї платформи</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
@@ -98,24 +98,24 @@
     <message>
         <location filename="AddonManager.cpp" line="236"/>
         <source>Executing add-on setup failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося виконати налаштування додатка</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
         <source>Failed to delete a file during add-on removal</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося видалити файл під час видалення додатка</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="251"/>
         <source>Updater failed to perform add-on operation</source>
         <oldsource>Updater failed to perform plugin operation</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Програмі оновлення не вдалося виконати операцію з додатком</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="253"/>
         <source>Updater failed to perform add-on operation, error: %1</source>
         <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Програмі оновлення не вдалося виконати операцію з додатком, помилка: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="169"/>
@@ -130,7 +130,7 @@
     <message>
         <location filename="AddonManager.cpp" line="213"/>
         <source>Add-on not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Додаток не знайдено!</translation>
     </message>
 </context>
 <context>
@@ -153,18 +153,18 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="934"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Запобігти ізольованим програмам на хості завантажувати ізольовані DLL</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="935"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
         <oldsource>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ця функція може знизити сумісність, оскільки також запобігає процесам у пісочниці записувати в процеси хоста та навіть запускати їх.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="942"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця функція може погіршити взаємодію з користувачем, оскільки також запобігає звичайним знімкам екрана.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="947"/>
@@ -182,32 +182,35 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей параметр додає локальний шаблон або його налаштування до конфігурації пісочниці, щоб налаштування в цьому шаблоні були спільними між пісочницями.
+Однак, якщо в якості режиму спільного доступу обрано параметр 'використовувати як шаблон', деякі налаштування можуть не відображатися в інтерфейсі.
+Щоб змінити налаштування шаблону, знайдіть шаблон '%1' у списку Шаблонів програм у Параметрах пісочниці, а потім двічі клацніть на ньому для редагування.
+Щоб вимкнути цей шаблон для пісочниці, просто зніміть позначку в списку шаблонів.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="955"/>
         <source>This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей параметр не додає жодних налаштувань до конфігурації пісочниці та не видаляє стандартні налаштування на основі налаштувань видалення в шаблоні.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="956"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей параметр додає спільний шаблон до конфігурації пісочниці як локальний шаблон і може також видалити стандартні налаштування на основі налаштувань видалення в шаблоні.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="957"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей параметр додає налаштування зі спільного шаблону до конфігурації пісочниці і може також видалити стандартні налаштування на основі налаштувань видалення в шаблоні.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="958"/>
         <source>This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей параметр не додає жодних налаштувань до конфігурації пісочниці, але може видалити стандартні налаштування на основі налаштувань видалення в шаблоні.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="966"/>
         <source>Remove defaults if set</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити стандартні, якщо встановлено</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="973"/>
@@ -217,7 +220,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="995"/>
         <source>This option specifies the template to be used in shared template mode. (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей параметр визначає шаблон для використання в режимі спільного шаблону. (%1)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="960"/>
@@ -283,12 +286,12 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="36"/>
         <source>Toggle Debugger</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемкнути зневаджувач</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="102"/>
         <source>To debug troubleshooting scripts you need the V4 Script Debugger add-on, do you want to download and install it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Для зневадження скриптів усунення неполадок потрібен додаток V4 Script Debugger, бажаєте завантажити та встановити його?</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="106"/>
@@ -299,13 +302,13 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <location filename="Wizards/BoxAssistant.cpp" line="161"/>
         <source>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debugger could not be opened.</source>
         <oldsource>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debuger could not be opened.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося створити екземпляр V4ScriptDebuggerBackend, ймовірно V4ScriptDebugger.dll та/або його залежності відсутні, зневаджувач скриптів не вдалося відкрити.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="211"/>
         <source>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an inconsistent state.</source>
         <oldsource>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an incosistent state.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Виконується процедура усунення неполадок, скасування майстра перерве її, що може залишити пісочницю в неузгодженому стані.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="212"/>
@@ -331,7 +334,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="37"/>
         <source>Creating new box image, please enter a secure password, and choose a disk image size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Створення нового образу пісочниці. Введіть надійний пароль та оберіть розмір образу диска.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="41"/>
@@ -377,12 +380,12 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль обмежений максимальною довжиною 128 символів. Ця довжина дозволяє приблизно 384 біти ентропії з парольною фразою зі справжніх англійських слів, збільшується до 512 біт із застосуванням модифікацій Leet (L337) та перевищує 768 біт при використанні повністю випадкових друкованих символів ASCII.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="167"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
-        <translation type="unfinished"></translation>
+        <translation>Образ диска пісочниці повинен бути розміром не менше 256 МБ, рекомендовано 2 ГБ.</translation>
     </message>
 </context>
 <context>
@@ -534,27 +537,27 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="550"/>
         <source>Mount &apos;%1&apos; for Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Змонтувати '%1' для експорту</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="553"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Зашифрована пісочниця '%1' не змонтована. Пропустити?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="564"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося розмонтувати '%1' для повторного монтування.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="574"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося змонтувати зашифровану пісочницю '%1'.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="606"/>
         <source>Select Export Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть теку для експорту</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="645"/>
@@ -641,7 +644,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="359"/>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="377"/>
@@ -661,24 +664,24 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="434"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Зміцнена безпека&lt;/a&gt; Пісочниця з &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Захистом даних&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="435"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. 
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей тип пісочниці забезпечує найвищий рівень захисту, значно зменшуючи поверхню атаки для ізольованих процесів. Він суворо обмежує доступ до даних користувача, дозволяючи процесам у цій пісочниці доступ лише до каталогів C:\Windows та C:\Program Files. Весь профіль користувача залишається прихованим, забезпечуючи максимальну безпеку.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="438"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Зміцнена безпека&lt;/a&gt; Пісочниця</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="439"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей тип пісочниці забезпечує найвищий рівень захисту, значно зменшуючи поверхню атаки для ізольованих процесів.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="440"/>
@@ -689,7 +692,7 @@ The entire user profile remains hidden, ensuring maximum security.</source>
         <location filename="Wizards/NewBoxWizard.cpp" line="441"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
-        <translation type="unfinished"></translation>
+        <translation>У цьому типі пісочниці ізольованим процесам заборонено доступ до будь-яких особистих файлів або даних користувача. Основна увага приділяється захисту даних користувача, і тому лише каталоги C:\Windows та C:\Program Files доступні для процесів у цій пісочниці. Це гарантує безпеку особистих файлів.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="443"/>
@@ -700,24 +703,24 @@ only C:\Windows and C:\Program Files directories are accessible to processes run
         <location filename="Wizards/NewBoxWizard.cpp" line="444"/>
         <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей тип пісочниці пропонує стандартну поведінку класичного Sandboxie. Він забезпечує користувачам знайому та надійну схему ізоляції. Програми можна запускати в цій пісочниці, гарантуючи їх роботу в контрольованому та ізольованому середовищі.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Відсік для програм&lt;/a&gt; з &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Захистом даних&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="447"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="450"/>
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей тип пісочниці надає пріоритет сумісності, забезпечуючи при цьому належний рівень ізоляції. Він призначений для запуску довірених програм у окремих відсіках. Хоча рівень ізоляції знижений порівняно з іншими типами, він забезпечує покращену сумісність із широким спектром програм.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="449"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Відсік для програм&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="458"/>
@@ -729,7 +732,7 @@ While the level of isolation is reduced compared to other box types, it offers i
         <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. 
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
-        <translation type="unfinished"></translation>
+        <translation>У цьому типі пісочниця використовує зашифрований образ диска як кореневу теку. Це забезпечує додатковий рівень конфіденційності та безпеки. Доступ до віртуального диска при монтуванні обмежений програмами в пісочниці. Sandboxie запобігає іншим процесам на хості отримувати доступ до ізольованих процесів. Це забезпечує найвищий рівень конфіденційності та захисту даних.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="481"/>
@@ -759,7 +762,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="487"/>
         <source>Application Compartment Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця-відсік для програм</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="488"/>
@@ -902,7 +905,9 @@ Please browse to the correct user profile directory.</source>
         <oldsource>No suitable fodlers have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Відповідних тек не знайдено.
+Примітка: потрібно запустити браузер без ізоляції, щоб вони були створені.
+Перейдіть до правильної теки профілю користувача.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="804"/>
@@ -912,7 +917,7 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="810"/>
         <source>Please ensure the selected directory is correct, the wizard is not confident in all the presented options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Переконайтеся, що обрана тека правильна, майстер не впевнений у всіх запропонованих варіантах.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="813"/>
@@ -1075,7 +1080,7 @@ Error: %1</source>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1074"/>
         <source>FindNext</source>
-        <translation type="unfinished"></translation>
+        <translation>ЗнайтиДалі</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1084"/>
@@ -1095,7 +1100,12 @@ Error: %1</source>
 + Alt: Whole Words
 
 Find String:</source>
-        <translation type="unfinished"></translation>
+        <translation>F3: Знайти далі
++ Shift: Назад
++ Ctrl: З урахуванням регістру
++ Alt: Цілі слова
+
+Рядок пошуку:</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2286"/>
@@ -1173,7 +1183,7 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="28"/>
         <source>Validate INI Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевіряти ключі INI</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
@@ -1206,7 +1216,7 @@ You can click Finish to close this wizard.</source>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Full details</source>
-        <translation type="unfinished"></translation>
+        <translation>Повні подробиці</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="34"/>
@@ -1216,7 +1226,7 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="37"/>
         <source>Auto Completion Consent</source>
-        <translation type="unfinished"></translation>
+        <translation>Згода на автозавершення</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
@@ -1226,7 +1236,7 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Consented</source>
-        <translation type="unfinished"></translation>
+        <translation>Надано згоду</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="40"/>
@@ -1252,7 +1262,7 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="43"/>
         <source>Enable Fuzzy Matching</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути нечітку відповідність</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
@@ -1272,12 +1282,12 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="76"/>
         <source>Reset all settings to their default values and remove custom config entries.</source>
-        <translation type="unfinished"></translation>
+        <translation>Скинути всі налаштування до стандартних значень та видалити власні записи конфігурації.</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
@@ -1287,7 +1297,7 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Unchecked</source>
-        <translation type="unfinished"></translation>
+        <translation>Знято</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
@@ -1297,7 +1307,7 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Checked</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановлено</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
@@ -1405,7 +1415,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="671"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Схема віртуалізації</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="675"/>
@@ -1425,7 +1435,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="687"/>
         <source>Use volume serial numbers for drives</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати серійні номери томів для дисків</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="692"/>
@@ -1630,7 +1640,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2700"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Увага</translation>
     </message>
     <message>
         <source>Debug</source>
@@ -1755,7 +1765,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="806"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
-        <translation type="unfinished"></translation>
+        <translation>Запитувати користувача, чи дозволити виняток з блокування</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="812"/>
@@ -1775,7 +1785,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="827"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити MSIServer працювати з ізольованим системним маркером</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="834"/>
@@ -1790,7 +1800,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="839"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished"></translation>
+        <translation>Використання власного маркера Sandboxie дозволяє краще ізолювати окремі пісочниці одну від одної, а в стовпці користувача диспетчера завдань відображається ім'я пісочниці, до якої належить процес. Деякі сторонні рішення безпеки можуть мати проблеми з власними маркерами.</translation>
     </message>
 </context>
 <context>
@@ -1955,7 +1965,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Views/NtObjectView.cpp" line="213"/>
         <source>%1 - NT Object Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Простір імен об’єктів NT</translation>
     </message>
 </context>
 <context>
@@ -2087,7 +2097,7 @@ Do you still want to update?</source>
         <location filename="OnlineUpdater.cpp" line="909"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>оновлений підпис недійсний !!!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="910"/>
@@ -2243,7 +2253,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="327"/>
         <source>No Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Без перейменування</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="331"/>
@@ -2270,22 +2280,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="342"/>
         <source>Allow write-access outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити запис за межами пісочниці.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="343"/>
         <source>Allow write-access outside the sandbox, also for applications installed inside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити запис за межами пісочниці, також для програм, встановлених усередині пісочниці.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="344"/>
         <source>Don&apos;t rename window classes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не перейменовувати класи вікон.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="345"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
-        <translation type="unfinished"></translation>
+        <translation>Заборонити доступ до розташування хоста та запобігти створенню ізольованих копій.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="346"/>
@@ -2300,12 +2310,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="348"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Приховати файли, теки або ключі реєстру хоста від ізольованих процесів.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="349"/>
         <source>Ignore UIPI restrictions for processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ігнорувати обмеження UIPI для процесів.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="358"/>
@@ -2393,7 +2403,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="575"/>
         <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкриття повного доступу до IPC також відкриває доступ COM, ви все ще хочете обмежити COM пісочницею?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="576"/>
@@ -2403,7 +2413,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="585"/>
         <source>&apos;OpenWinClass=program.exe,#&apos; is not supported, use &apos;NoRenameWinClass=program.exe,*&apos; instead</source>
-        <translation type="unfinished"></translation>
+        <translation>'OpenWinClass=program.exe,#' не підтримується, використовуйте 'NoRenameWinClass=program.exe,*' замість цього</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="628"/>
@@ -2423,33 +2433,33 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="67"/>
         <source>Enable the use of win32 hooks for selected processes. Note: You need to enable win32k syscall hook support globally first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути використання хуків win32 для обраних процесів. Примітка: Спочатку потрібно глобально увімкнути підтримку перехоплення системних викликів win32k.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="68"/>
         <source>Enable crash dump creation in the sandbox folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути створення дампів збоїв у теці пісочниці</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="69"/>
         <source>Always use ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant.</source>
-        <translation type="unfinished"></translation>
+        <translation>Завжди використовувати виправлення ElevateCreateProcess, як це іноді робить Помічник сумісності програм.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
         <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути спеціальну непослідовну поведінку PreferExternalManifest, необхідну для деяких виправлень Edge</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="72"/>
         <source>Set RpcMgmtSetComTimeout usage for specific processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити використання RpcMgmtSetComTimeout для конкретних процесів</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="73"/>
         <source>Makes a write open call to a file that won&apos;t be copied fail instead of turning it read-only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Спричиняє помилку при спробі відкрити для запису файл, який не буде скопійовано, замість переведення у режим лише для читання.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="76"/>
@@ -2460,7 +2470,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="77"/>
         <source>Force specified processes to wait for a debugger to attach.</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусити вказані процеси чекати підключення зневаджувача.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="79"/>
@@ -2573,12 +2583,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1575"/>
         <source>Failed to retrieve firmware table information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося отримати інформацію про таблиці мікропрограми.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1583"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Таблицю мікропрограми успішно збережено до реєстру хоста: HKEY_CURRENT_USER\System\SbieCustom\&lt;br /&gt;ви можете скопіювати її до ізольованого реєстру, щоб мати різне значення для кожної пісочниці.</translation>
     </message>
     <message>
         <source>On Delete</source>
@@ -2622,7 +2632,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="135"/>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Дочірні</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="155"/>
@@ -2657,18 +2667,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsForce.cpp" line="345"/>
         <source>For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets.</source>
         <oldsource>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>З міркувань безпеки не дозволяється створювати повністю шаблонні пресети BreakoutDocument.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="355"/>
         <source>For security reasons the specified extension %1 should not be broken out.</source>
-        <translation type="unfinished"></translation>
+        <translation>З міркувань безпеки вказане розширення %1 не повинно виходити за межі пісочниці.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="412"/>
         <source>Forcing the specified entry will most likely break Windows, are you sure you want to proceed?</source>
         <oldsource>Forcing the specified folder will most likely break Windows, are you sure you want to proceed?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Примусове додавання вказаного запису, найімовірніше, зламає Windows, ви впевнені, що хочете продовжити?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
@@ -2770,7 +2780,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
         <source> (outside)</source>
-        <translation type="unfinished"></translation>
+        <translation> (зовні)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="78"/>
@@ -2825,7 +2835,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="415"/>
         <source>Backup Image Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Резервна копія заголовка образу</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="416"/>
@@ -2859,7 +2869,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsGeneral.cpp" line="687"/>
         <location filename="Windows/OptionsGeneral.cpp" line="794"/>
         <source>Copy newer</source>
-        <translation type="unfinished"></translation>
+        <translation>Копіювати новіші</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="930"/>
@@ -2904,7 +2914,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1354"/>
         <source>Backup Image Header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Резервна копія заголовка образу для %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1362"/>
@@ -2979,7 +2989,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="111"/>
         <source>None (Don&apos;t bind to adapter)</source>
-        <translation type="unfinished"></translation>
+        <translation>Немає (Не прив’язувати до адаптера)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="206"/>
@@ -3230,12 +3240,12 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1875"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Потрібна згода на автозавершення</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1877"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Функція автозавершення потребує вашої згоди для продовження.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1879"/>
@@ -3244,7 +3254,7 @@ Please select a folder which contains this file.</source>
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо ви не впевнені в налаштуваннях, що відображаються у спливаючому вікні автозавершення, ми наполегливо рекомендуємо ознайомитися з документацією або вихідним кодом програми перед продовженням. Увімкнення цієї функції без належного розуміння може призвести до непередбачених наслідків, за які ви несете повну відповідальність. Оберіть режим автозавершення: %1 Вручну: Пропозиції автозавершення з %2. %1 Під час введення: Пропозиції автозавершення під час набору.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1887"/>
@@ -3625,7 +3635,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="932"/>
         <source>%1 file(s) hidden by AutoRecoverIgnore</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 файл(ів) приховано за допомогою AutoRecoverIgnore</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="1283"/>
@@ -3695,7 +3705,7 @@ Error: </source>
         <location filename="Wizards/SetupWizard.cpp" line="623"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Як і будь-який інший продукт безпеки, важливо підтримувати Sandboxie-Plus в актуальному стані.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="631"/>
@@ -3754,7 +3764,7 @@ Error: </source>
         <location filename="Wizards/SetupWizard.cpp" line="669"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Канал Insider пропонує ранній доступ до нових функцій та виправлень, які врешті будуть випущені для загального доступу, а також всі відповідні покращення зі стабільного каналу. На відміну від каналу попереднього перегляду, він не містить неперевірених, потенційно проблемних або експериментальних змін.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="674"/>
@@ -3776,34 +3786,34 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="688"/>
         <source>Get the latest Scripts for the Troubleshooting Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Отримати останні скрипти для Майстра усунення неполадок</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="689"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Перевірити наявність останніх скриптів для майстра усунення неполадок.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="693"/>
         <source>Keep the list of optional Add-on components up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Підтримувати список додаткових компонентів в актуальному стані</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="694"/>
         <source>Check for latest available add-ons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Перевірити наявність останніх доступних додатків.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="703"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus застосовує суворі обмеження для програм, що може призвести до проблем сумісності. Підтримуйте Sandboxie-Plus в актуальному стані, включаючи шаблони сумісності та засоби усунення неполадок, для забезпечення безперебійної роботи з оновленнями Windows та програм.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="709"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступ до останніх шаблонів сумісності та онлайн-бази усунення неполадок потребує дійсного &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;сертифіката спонсора&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -3888,7 +3898,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SbiePlusAPI.cpp" line="623"/>
         <source>No INet (with Exceptions)</source>
-        <translation type="unfinished"></translation>
+        <translation>Без Інтернету (з винятками)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="625"/>
@@ -3942,7 +3952,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="2254"/>
         <source>No Force Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Без примусових процесів</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4744"/>
@@ -4526,7 +4536,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ваша збірка Windows %1 перевищує поточні можливості підтримки вашої версії Sandboxie, що призводить до вимкнення ізоляції безпеки на основі маркерів. Всі програми працюватимуть у режимі відсіку без безпечної ізоляції. Перевірте наявність оновлень для Sandboxie.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2979"/>
@@ -4536,7 +4546,7 @@ Please check if there is an update for sandboxie.</oldsource>
     <message>
         <location filename="SandMan.cpp" line="2986"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваша збірка Windows %1 перевищує поточні відомі можливості підтримки вашої версії Sandboxie. Sandboxie спробує використати останні відомі зміщення, що може спричинити нестабільність системи.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2997"/>
@@ -5053,7 +5063,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="925"/>
         <source>Auto Expand Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Авторозгортання дерева</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1080"/>
@@ -5079,7 +5089,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="SandMan.cpp" line="2009"/>
         <location filename="SandMan.cpp" line="2040"/>
         <source>Which box you want to add in?</source>
-        <translation type="unfinished"></translation>
+        <translation>У яку пісочницю ви хочете додати?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2009"/>
@@ -5126,7 +5136,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="2768"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконання OnBoxTerminate: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3004"/>
@@ -5134,7 +5144,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sandman минулого разу не завершив перерахування встановлених оновлень Windows, ймовірно він завис. Бажаєте вимкнути сканування оновлень Windows у виявленні сумісності програм?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3208"/>
@@ -5190,7 +5200,7 @@ Do you want to disable Windows Updates scanning from the the software compatibil
     <message>
         <location filename="SandMan.cpp" line="3665"/>
         <source>The Certificate is node locked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сертифікат прив’язаний до вузла.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3669"/>
@@ -5425,7 +5435,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandMan.cpp" line="4637"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Вміст незмонтованої пісочниці не може бути видалений</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4639"/>
@@ -5504,7 +5514,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4916"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>RegExp</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4917"/>
@@ -5646,7 +5656,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Models/SbieModel.cpp" line="842"/>
         <source>Private Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Приватні байти</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="843"/>
@@ -5848,7 +5858,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation type="unfinished"></translation>
+        <translation> підроблений Адмін</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -6035,7 +6045,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="196"/>
         <location filename="Views/SbieView.cpp" line="369"/>
         <source>(Host) Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>(Хост) Меню Пуск</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="227"/>
@@ -6050,7 +6060,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="261"/>
         <source>Disable Force Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути примусові правила</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="264"/>
@@ -6227,7 +6237,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="638"/>
         <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;ЦП: %1  |  Пам'ять: %2  |  Приватні байти: %3</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="641"/>
@@ -6240,13 +6250,13 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="643"/>
         <source>    Image: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Образ: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="646"/>
         <source>    Start Time: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Час запуску: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="940"/>
@@ -6332,7 +6342,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="222"/>
         <location filename="Views/SbieView.cpp" line="389"/>
         <source>Mount Box Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Змонтувати образ пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="178"/>
@@ -6344,13 +6354,13 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="223"/>
         <location filename="Views/SbieView.cpp" line="390"/>
         <source>Unmount Box Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Розмонтувати образ пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="265"/>
         <location filename="Views/SbieView.cpp" line="402"/>
         <source>Browse NT Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>Переглянути простір імен NT</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="268"/>
@@ -6675,7 +6685,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="329"/>
         <location filename="Windows/SettingsWindow.cpp" line="333"/>
         <source>Fully integrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Повна інтеграція</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="335"/>
@@ -6751,7 +6761,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="3203"/>
         <location filename="Windows/SettingsWindow.cpp" line="3212"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3208"/>
@@ -6778,7 +6788,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1882"/>
         <source>Volume not attached</source>
-        <translation type="unfinished"></translation>
+        <translation>Том не підключено</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3290"/>
@@ -6810,7 +6820,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3667"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Обов'язкове оновлення безпеки для вашого сертифіката спонсора Sandboxie-Plus необхідне. Бажаєте завантажити оновлений сертифікат зараз?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3668"/>
@@ -6854,7 +6864,7 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3295"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color='red'&gt;Для поточної збірки функції Plus залишаються увімкненими&lt;/font&gt;, але ви більше не маєте доступу до сервісів Sandboxie-Live, включаючи оновлення сумісності та онлайн-базу усунення неполадок.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3354"/>
@@ -6897,7 +6907,7 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="350"/>
         <source>Same as main</source>
-        <translation type="unfinished"></translation>
+        <translation>Як головний</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="351"/>
@@ -6932,7 +6942,7 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="582"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Тристанова поведінка: знято = ніколи, частково встановлено = лише коли %1 утримується (за замовчуванням), встановлено = завжди.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3358"/>
@@ -6947,24 +6957,24 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3360"/>
         <source>Sandboxie Desktop (Desk): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Desktop (Desk): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3391"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Це не схоже на серійний номер Sandboxie-Plus.&lt;br /&gt;Якщо ви намагались ввести UpdateKey або Підпис із сертифіката, це неправильно — введіть весь сертифікат у текстове поле вище.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3398"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ви намагаєтесь використати ключ оновлення функцій без наявного сертифіката спонсора. Будь ласка, спочатку введіть свій поточний сертифікат.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3404"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ви намагаєтесь використати ключ поновлення без наявного сертифіката спонсора. Будь ласка, спочатку введіть свій поточний сертифікат.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3409"/>
@@ -7020,7 +7030,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3730"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Функція автозавершення потребує вашої згоди для продовження.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3732"/>
@@ -7029,7 +7039,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо ви не впевнені в налаштуваннях, що відображаються у спливаючому вікні автозавершення, ми наполегливо рекомендуємо ознайомитися з документацією або вихідним кодом програми перед продовженням. Оберіть режим автозавершення: %1 Вручну: Пропозиції автозавершення з %2. %1 Під час введення: Пропозиції автозавершення під час набору.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3740"/>
@@ -7196,7 +7206,7 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3521"/>
         <source>Contributor</source>
-        <translation type="unfinished"></translation>
+        <translation>Учасник</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3523"/>
@@ -7300,12 +7310,12 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2053"/>
         <source>Set Force in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити примусовий запуск у пісочниці</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2062"/>
         <source>Set Open Path in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити відкритий шлях у пісочниці</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3599"/>
@@ -7342,7 +7352,7 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2448"/>
         <source>by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>від %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2456"/>
@@ -7352,7 +7362,7 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2484"/>
         <source>This Add-on is mandatory and can not be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей додаток є обов’язковим і не може бути видалений.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2493"/>
@@ -7444,7 +7454,7 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3728"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Потрібна згода на автозавершення</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3127"/>
@@ -7605,7 +7615,7 @@ Choose autocomplete mode:
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="832"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сумісність із пісочницею залежить від конфігурації, тому долучення файлу Sandboxie.ini значно допомагає у пошуку проблеми.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="835"/>
@@ -7618,12 +7628,12 @@ Choose autocomplete mode:
 Before sending, you can review the logs in the main window.</source>
         <oldsource>Select partially checked state to sends only message log but no trace log.
 Before sending you can review the logs in the main window.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Вибір часткового стану відправляє лише журнал повідомлень, але не журнал трасування. Перед відправкою ви можете переглянути журнали в головному вікні.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="840"/>
         <source>Attach Crash Dumps</source>
-        <translation type="unfinished"></translation>
+        <translation>Долучити дампи збоїв</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="841"/>
@@ -7639,7 +7649,7 @@ Before sending you can review the logs in the main window.</oldsource>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="846"/>
         <source>You have the option to provide an email address to receive a notification once a solution for your issue has been identified.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви можете вказати електронну адресу для отримання повідомлення, коли рішення вашої проблеми буде знайдено.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="854"/>
@@ -7654,12 +7664,12 @@ Before sending you can review the logs in the main window.</oldsource>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="867"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
-        <translation type="unfinished"></translation>
+        <translation>На жаль, автоматичної процедури усунення неполадок для описаної вами проблеми не існує.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="872"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо ви бажаєте надіслати звіт про проблему, перегляньте звіт нижче та натисніть 'Завершити'.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="971"/>
@@ -7669,7 +7679,7 @@ Before sending you can review the logs in the main window.</oldsource>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1005"/>
         <source>Compressing Dumps</source>
-        <translation type="unfinished"></translation>
+        <translation>Стиснення дампів</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1042"/>
@@ -7717,7 +7727,8 @@ Try submitting without the log attached.</source>
         <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
         <source>
 The actual sandbox name is: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Фактичне ім'я пісочниці: %1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1112"/>
@@ -7748,7 +7759,8 @@ This box will DISCARD its content when its closed, its suitable only for tempora
         <location filename="Wizards/NewBoxWizard.cpp" line="1119"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Процеси в цій пісочниці не матимуть доступу до Інтернету або локальної мережі, це гарантує конфіденційність усіх даних.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1121"/>
@@ -7756,13 +7768,15 @@ Processes in this box will not be able to access the internet or the local netwo
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>
+Ця пісочниця запускатиме MSIServer (службу інсталятора *.msi) із системним маркером, це покращує сумісність, але знижує ізоляцію безпеки.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1123"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Процеси в цій пісочниці вважатимуть, що вони запущені з правами адміністратора, фактично їх не маючи, тому інсталятори можна використовувати навіть у зміцненій пісочниці.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1125"/>
@@ -7770,7 +7784,8 @@ Processes in this box will think they are run with administrative privileges, wi
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <oldsource>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>
+Процеси в цій пісочниці працюватимуть з власним маркером процесу, що вказує на пісочницю, до якої вони належать.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1164"/>
@@ -7786,13 +7801,13 @@ Processes in this box will be running with a custom process token indicating the
 If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate.</source>
         <oldsource>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ця збірка Insider потребує спеціального сертифіката типу GREAT_PATREON, PERSONAL-HUGE або CONTRIBUTOR. Якщо ви вже є Великим Прихильником на Patreon, Sandboxie може перевірити онлайн оновлення вашого сертифіката.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="51"/>
         <location filename="Windows/SupportDialog.cpp" line="345"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця збірка Insider потребує спеціального сертифіката типу GREAT_PATREON, PERSONAL-HUGE або CONTRIBUTOR.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="72"/>
@@ -7802,7 +7817,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="163"/>
         <source>This is a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;exclusive Insider build&lt;/a&gt; of Sandboxie-Plus it is only available to &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Supporters&lt;/a&gt; on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Це &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;ексклюзивна збірка Insider&lt;/a&gt; Sandboxie-Plus, яка потребує спеціального сертифіката.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="169"/>
@@ -7868,7 +7883,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/SupportDialog.cpp" line="204"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;. This pause allows you to consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt; or &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;earning one by contributing&lt;/a&gt; to the project. &lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
         <oldsource>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie &lt;u&gt;без&lt;/u&gt; дійсного сертифіката спонсора іноді &lt;b&gt;&lt;font color='red'&gt;призупинятиметься на кілька секунд&lt;/font&gt;&lt;/b&gt; перед початком роботи.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="235"/>
@@ -8237,7 +8252,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="262"/>
         <source>Show NT Object Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати дерево об’єктів NT</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="269"/>
@@ -8298,7 +8313,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="313"/>
         <source>Show Stack Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати стек викликів</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="318"/>
@@ -8318,7 +8333,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="383"/>
         <source>To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Для використання функції стеків викликів потрібні DbgHelp.dll та SymSrv.dll, бажаєте завантажити та встановити їх?</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="736"/>
@@ -8445,12 +8460,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/CompressDialog.ui" line="48"/>
         <source>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Суцільне архівування покращує ступінь стиснення, обробляючи кілька файлів як один безперервний блок даних. Ідеально підходить для великої кількості малих файлів, робить архів компактнішим, але може збільшити час вилучення окремих файлів.</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="51"/>
         <source>Create Solide Archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити суцільний архів</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
@@ -9047,12 +9062,12 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="486"/>
         <source>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати серійні номери томів для дисків, наприклад: \drive\C~1234-ABCD</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="503"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Структуру пісочниці можна змінити лише коли пісочниця порожня</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="557"/>
@@ -9068,12 +9083,12 @@ If leader processes are defined, all others are treated as lingering processes.<
         <location filename="Forms/OptionsWindow.ui" line="531"/>
         <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box&apos;s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
         <oldsource>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Коли &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Шифрування пісочниці&lt;/a&gt; увімкнено, коренева тека пісочниці, включаючи вулик реєстру, зберігається в зашифрованому образі диска з використанням реалізації AES-XTS від &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="420"/>
         <source>Partially checked means prevent box removal but not content deletion.</source>
-        <translation type="unfinished"></translation>
+        <translation>Часткова позначка означає запобігання видаленню пісочниці, але не видаленню вмісту.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="479"/>
@@ -9098,7 +9113,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="493"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Схема віртуалізації</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="597"/>
@@ -9110,12 +9125,12 @@ If leader processes are defined, all others are treated as lingering processes.<
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
-        <translation type="unfinished"></translation>
+        <translation>2113: Вміст мігрованого файлу було відкинуто / 2114: Файл не мігровано, запис у файл заборонено / 2115: Файл не мігровано, файл буде відкрито лише для читання</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="659"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати повідомлення 2113/2114/2115, коли файл не повністю мігровано</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="683"/>
@@ -9130,22 +9145,22 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="744"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="752"/>
         <source>Sandboxie does not allow writing to host files, unless permitted by the user. When a sandboxed application attempts to modify a file, the entire file must be copied into the sandbox, for large files this can take a significate amount of time. Sandboxie offers options for handling these cases, which can be configured on this page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie не дозволяє запис у файли хоста, якщо це не дозволено користувачем. Коли ізольована програма намагається змінити файл, весь файл повинен бути скопійований у пісочницю; для великих файлів це може зайняти значний час. Sandboxie пропонує параметри для обробки таких випадків, які можна налаштувати на цій сторінці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="762"/>
         <source>Using wildcard patterns file specific behavior can be configured in the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>За допомогою шаблонів підстановки можна налаштувати поведінку для конкретних файлів у списку нижче:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="776"/>
         <source>When a file cannot be migrated, open it in read-only mode instead</source>
-        <translation type="unfinished"></translation>
+        <translation>Коли файл не може бути мігровано, відкривати його в режимі лише для читання</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1047"/>
@@ -9167,7 +9182,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1367"/>
         <source>File ACLs</source>
-        <translation type="unfinished"></translation>
+        <translation>ACL файлів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1427"/>
@@ -9177,7 +9192,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1518"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Різні функції ізоляції можуть порушити сумісність з деякими програмами. Якщо ви використовуєте цю пісочницю НЕ для безпеки, а для портативності програм, змінюючи ці параметри, ви можете відновити сумісність, пожертвувавши деякою безпекою.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1488"/>
@@ -9198,7 +9213,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1630"/>
         <source>Protect processes within this box from host processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Захистити процеси в цій пісочниці від процесів хоста</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1637"/>
@@ -9208,12 +9223,12 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1567"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати повідомлення 1318/1317, коли процес хоста намагається отримати доступ до ізольованого процесу/кореня пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1651"/>
         <source>Sandboxie-Plus is able to create confidential sandboxes that provide robust protection against unauthorized surveillance or tampering by host processes. By utilizing an encrypted sandbox image, this feature delivers the highest level of operational confidentiality, ensuring the safety and integrity of sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus здатний створювати конфіденційні пісочниці, які забезпечують надійний захист від несанкціонованого спостереження або втручання з боку процесів хоста.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1616"/>
@@ -9228,33 +9243,33 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3340"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштувати, які процеси можуть отримувати доступ до об'єктів робочого столу, таких як Windows та подібних.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4520"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Коли глобальну гарячу клавішу натиснуто 3 рази поспіль, цей виняток буде ігноровано.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4523"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Виключити цю пісочницю із завершення при виклику "Завершити всі процеси".</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4611"/>
         <source>Image Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Захист образу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4649"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати повідомлення 1305, коли програма намагається завантажити ізольовану dll</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4642"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Запобігти ізольованим програмам на хості завантажувати DLL з пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4581"/>
@@ -9272,13 +9287,13 @@ If leader processes are defined, all others are treated as lingering processes.<
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Правила доступу до ресурсів Sandboxie часто обмежують бінарні файли програм, розташованих усередині пісочниці. Цей параметр дозволяє налаштувати поведінку OpenFilePath, OpenKeyPath тощо.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4662"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Функціональність Sandboxie можна розширити за допомогою додаткових DLL, які можуть завантажуватися в кожен ізольований процес при запуску файлом SbieDll.dll.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1987"/>
@@ -9298,17 +9313,17 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2041"/>
         <source>Privilege isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Ізоляція привілеїв</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2097"/>
         <source>Sandboxie token</source>
-        <translation type="unfinished"></translation>
+        <translation>Маркер Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2022"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished"></translation>
+        <translation>Використання власного маркера Sandboxie дозволяє краще ізолювати окремі пісочниці одну від одної, а в стовпці користувача диспетчера завдань відображається ім'я пісочниці, до якої належить процес. Деякі сторонні рішення безпеки можуть мати проблеми з власними маркерами.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2244"/>
@@ -9318,38 +9333,38 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2266"/>
         <source>Force Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусові програми</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2346"/>
         <source>Disable forced Process and Folder for this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути примусовий процес та теку для цієї пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2407"/>
         <source>Breakout Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Програми виходу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2512"/>
         <source>Breakout Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Програма виходу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2486"/>
         <source>Breakout Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Тека виходу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="469"/>
         <source>Force protection on mount</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусовий захист при монтуванні</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1623"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
         <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Запобігти процесам захоплювати зображення вікон з ізольованих вікон</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1722"/>
@@ -9360,13 +9375,13 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="929"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ця функція не блокує всі способи отримання знімка екрана, лише деякі поширені.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="912"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Запобігти переміщенню миші, виведенню на передній план та подібним операціям; це може спричинити проблеми з іграми.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="922"/>
@@ -9382,13 +9397,13 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1747"/>
         <source>Job Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Об’єкт завдання</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2464"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Програмам у цьому списку буде дозволено вийти за межі пісочниці при запуску.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1793"/>
@@ -9411,7 +9426,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="366"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Коли встановлено, приховує кольорову рамку та показує лише ім’я пісочниці або псевдонім як мітку. Потрібно увімкнути параметр мітки.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="369"/>
@@ -9421,39 +9436,39 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Коли зовнішня рамка обрізається краєм монітора, малювати її всередині розгорнутих або прикріплених вікон.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="379"/>
         <source>Inside when maximized or snapped</source>
-        <translation type="unfinished"></translation>
+        <translation>Всередині при розгорнутому або прикріпленому вікні</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1417"/>
         <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
         <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати оригінальні записи контролю доступу для ізольованих файлів та тек (для MSIServer увімкнути винятки)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1435"/>
         <source>Run Processes on an own Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Запускати процеси на окремому ізольованому робочому столі</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1537"/>
         <source>Desktop Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Ізоляція робочого столу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1544"/>
         <source>Open Window Station (improves compatibility by reducing desktop isolation)</source>
         <oldsource>Open Window Station (improves compatybility by reducing desktop isolation)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити Window Station (покращує сумісність за рахунок зниження ізоляції робочого столу)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1739"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
-        <translation type="unfinished"></translation>
+        <translation>Коли корінь пісочниці захищено, вимагати запуску SandMan від імені Адміністратора для доступу до файлів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1845"/>
@@ -9463,7 +9478,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1861"/>
         <source>Leave it blank to disable the setting (1-100)</source>
-        <translation type="unfinished"></translation>
+        <translation>Залиште порожнім для вимкнення налаштування (1-100)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1871"/>
@@ -9480,64 +9495,64 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="2118"/>
         <source>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
 Partially checked: No groups will be added to the newly created sandboxed token.</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановлено: Локальну групу також буде додано до новоствореного ізольованого маркера, що дозволяє адресувати пісочницю в правилах доступу. Часткова позначка: Жодних груп не буде додано.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2122"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити новий ізольований маркер замість зниження привілеїв оригінального маркера</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2132"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Знизити рівень цілісності процесу ConHost.exe</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2152"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
-        <translation type="unfinished"></translation>
+        <translation>За замовчуванням Sandboxie запускає процеси з маркером цілісності UNTRUSTED для максимальної ізоляції. Увімкнення цього параметра використовує маркер LOW замість цього, що знижує ізоляцію, але покращує сумісність.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2156"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати маркер LOW замість UNTRUSTED (знижує ізоляцію)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2397"/>
         <source>Force Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусові дочірні</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2531"/>
         <source>Breakout Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Документ виходу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2538"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc...) extensions. Please review the security section for each option in the documentation before use.</source>
         <oldsource>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;font color='red'&gt;ПОПЕРЕДЖЕННЯ БЕЗПЕКИ&lt;/font&gt;:&lt;/b&gt; Використання &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutFolder та/або BreakoutProcess&lt;/a&gt; у поєднанні з директивами Open[File/Pipe]Path може скомпрометувати безпеку.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2568"/>
         <source>Lingering Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Затримувані програми</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2614"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Затримувані програми буде автоматично завершено, якщо вони все ще працюють після завершення всіх інших процесів.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2647"/>
         <source>Leader Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Провідні програми</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2713"/>
         <source>If leader processes are defined, all others are treated as lingering processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо визначено провідні процеси, всі інші вважаються затримуваними.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2726"/>
@@ -9547,18 +9562,18 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2747"/>
         <source>Use Linger Leniency</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати поблажливість затримки</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2757"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Не зупиняти затримувані процеси з вікнами</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2884"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Цей параметр можна використовувати для запобігання запуску програм у пісочниці без відома або згоди користувача.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2887"/>
@@ -9575,7 +9590,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
         <location filename="Forms/OptionsWindow.ui" line="3012"/>
         <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштувати, які процеси можуть отримувати доступ до файлів, тек та каналів. Доступ 'Open' застосовується лише до бінарних файлів програм, розташованих за межами пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3026"/>
@@ -9586,7 +9601,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
         <location filename="Forms/OptionsWindow.ui" line="3119"/>
         <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштувати, які процеси можуть отримувати доступ до реєстру. Доступ 'Open' застосовується лише до бінарних файлів програм, розташованих за межами пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3133"/>
@@ -9597,7 +9612,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
         <location filename="Forms/OptionsWindow.ui" line="3226"/>
         <source>Configure which processes can access NT IPC objects like ALPC ports and other processes memory and context.
 To specify a process use &apos;$:program.exe&apos; as path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштувати, які процеси можуть отримувати доступ до об'єктів NT IPC, таких як порти ALPC та пам'ять і контекст інших процесів. Для вказівки процесу використовуйте '$:program.exe' як шлях.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3240"/>
@@ -9622,12 +9637,12 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3446"/>
         <source>Configure which processes can access COM objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштувати, які процеси можуть отримувати доступ до об'єктів COM.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3458"/>
         <source>Don&apos;t use virtualized COM, Open access to hosts COM infrastructure (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Не використовувати віртуалізований COM, відкрити доступ до інфраструктури COM хоста (не рекомендовано)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3466"/>
@@ -9637,7 +9652,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3479"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Застосувати правила Close...=!&lt;програма&gt;,... також до всіх бінарних файлів у пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3578"/>
@@ -9682,22 +9697,22 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4429"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати наведений вище список виключень для приховування відповідних файлів з вікна Швидкого відновлення</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4432"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимагає, щоб прапорець "Показати все" був знятий у вікні відновлення.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4493"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезапускати примусові процеси, запущені в об’єкті завдання PCA (Помічника сумісності програм)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4571"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати евристику для ідентифікації процесів на основі Electron/Chromium</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6168"/>
@@ -9733,7 +9748,22 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        Показує детальні підказки при наведенні на налаштування.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Режими:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Встановлено&lt;/span&gt;: Повні подробиці (версії, синтаксис, опис тощо)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Частково встановлено&lt;/span&gt;: Лише основна інформація&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Допоміжні позначення синтаксису:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Вертикальна риска&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Розділяє альтернативні значення&lt;br&gt;
+        • &lt;i&gt;Квадратні дужки&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Позначають необов'язкові параметри&lt;br&gt;
+        • &lt;i&gt;Круглі дужки&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Містять допустимі варіанти&lt;br&gt;
+        • &lt;i&gt;Кутові дужки&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Вказують замінювані заповнювачі&lt;br&gt;
+        • &lt;i&gt;Жирні значення&lt;/i&gt; — Представляють значення за замовчуванням (можна опустити)&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6236"/>
@@ -9779,7 +9809,19 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;b&gt;Режими:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Встановлено&lt;/span&gt;: Автозавершення + Виправлення регістру&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Частково встановлено&lt;/span&gt;: Лише ручне виправлення &lt;code&gt;Ctrl+R&lt;/code&gt;&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Навігація:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Переміщення по спливаючому вікну&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Підтвердити вибір&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Примусово відкрити пропозиції&lt;br&gt;
+        • &lt;code&gt;Tab&lt;/code&gt;: Застосувати перший або підтвердити вибір&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6259"/>
@@ -9947,7 +9989,7 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4189"/>
         <source>Bind to Adapter IP</source>
-        <translation type="unfinished"></translation>
+        <translation>Прив’язати до IP адаптера</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4127"/>
@@ -10197,17 +10239,17 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1394"/>
         <source>Use the original token only for approved NT system calls</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати оригінальний маркер лише для затверджених системних викликів NT</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1227"/>
         <source>Restrict driver/device access to only approved ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Обмежити доступ до драйверів/пристроїв лише затвердженими</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1328"/>
         <source>Enable all security enhancements (make security hardened box)</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути всі покращення безпеки (створити зміцнену пісочницю)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="891"/>
@@ -10361,7 +10403,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <location filename="Forms/OptionsWindow.ui" line="4767"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Тут ви можете налаштувати розширені параметри для кожного процесу, щоб покращити сумісність та/або налаштувати поведінку пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4778"/>
@@ -10465,7 +10507,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4949"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ці команди виконуються ПОЗА пісочницею після завершення всіх процесів у пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5221"/>
@@ -10476,29 +10518,29 @@ instead of &quot;*&quot;.</source>
         <location filename="Forms/OptionsWindow.ui" line="5230"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Приховати інформацію про мікропрограму</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5107"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Деякі програми зчитують деталі системи через WMI (вбудовану базу даних Windows) замість звичайних способів. Sandboxie може запобігти доступу ізольованих процесів до цієї інформації.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5110"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Запобігти ізольованим процесам отримувати деталі системи через WMI (див. підказку для додаткової інформації)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5153"/>
         <source>Process Hiding</source>
-        <translation type="unfinished"></translation>
+        <translation>Приховування процесів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5297"/>
         <source>Use a custom Locale/LangID</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати власний Locale/LangID</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5290"/>
@@ -10508,28 +10550,28 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4089"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати внутрішні потоки проксі-ретрансляції замість прямої модифікації сокета (вирішує рідкісні проблеми сумісності)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5264"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Скинути поточні таблиці мікропрограми до HKCU\System\SbieCustom</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5267"/>
         <source>Dump FW Tables</source>
-        <translation type="unfinished"></translation>
+        <translation>Скинути таблиці мікропрограми</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5447"/>
         <source>Trace function hooking by SbieDll</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстежувати перехоплення функцій SbieDll</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5541"/>
         <source>Syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Трасування системних викликів (створює багато виводу)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5618"/>
@@ -10554,7 +10596,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5719"/>
         <source>Config Dump</source>
-        <translation type="unfinished"></translation>
+        <translation>Дамп конфігурації</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5750"/>
@@ -10564,7 +10606,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5760"/>
         <source>No Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Без глобальних</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5770"/>
@@ -10663,17 +10705,17 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4544"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
-        <translation type="unfinished"></translation>
+        <translation>Застосувати обхідне рішення ElevateCreateProcess (застаріла поведінка)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4537"/>
         <source>Use desktop object workaround for all processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати обхідне рішення об’єкта робочого столу для всіх процесів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5019"/>
         <source>This command will be run before the box content will be deleted</source>
-        <translation type="unfinished"></translation>
+        <translation>Цю команду буде виконано перед видаленням вмісту пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4859"/>
@@ -10684,7 +10726,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/OptionsWindow.ui" line="4984"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Цю команду буде виконано перед відновленням файлу, шлях до файлу буде передано як перший аргумент. Якщо ця команда поверне значення, відмінне від 0, відновлення буде заблоковано</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4987"/>
@@ -10699,22 +10741,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="905"/>
         <source>Prevent sandboxed processes from interfering with power operations (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Запобігти ізольованим процесам втручатися в операції живлення (Експериментально)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="915"/>
         <source>Prevent interference with the user interface (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Запобігти втручанню в інтерфейс користувача (Експериментально)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="932"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
-        <translation type="unfinished"></translation>
+        <translation>Запобігти ізольованим процесам захоплювати зображення вікон (Експериментально, може спричинити артефакти інтерфейсу)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1729"/>
         <source>Protect processes in this box from being accessed by specified unsandboxed host processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Захистити процеси в цій пісочниці від доступу вказаних неізольованих процесів хоста.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1665"/>
@@ -10750,7 +10792,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3875"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
-        <translation type="unfinished"></translation>
+        <translation>За допомогою DNS-фільтра можна блокувати окремі домени для кожного процесу. Залиште стовпець IP порожнім для блокування або введіть IP для перенаправлення.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3914"/>
@@ -10795,7 +10837,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4013"/>
         <source>Resolve hostnames via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Розв’язувати імена хостів через проксі</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4150"/>
@@ -10812,7 +10854,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/OptionsWindow.ui" line="1835"/>
         <location filename="Forms/OptionsWindow.ui" line="1944"/>
         <source>Leave it blank to disable the setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Залиште порожнім для вимкнення налаштування</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1819"/>
@@ -10832,7 +10874,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4530"/>
         <source>Restart force process before they begin to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезапускати примусовий процес перед початком виконання</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4952"/>
@@ -10847,7 +10889,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5244"/>
         <source>Obfuscate known unique identifiers in the registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Обфускувати відомі унікальні ідентифікатори в реєстрі</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5140"/>
@@ -10862,22 +10904,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5204"/>
         <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей параметр приховує шлях реєстру *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, що дозволяє приховати встановлене на хості програмне забезпечення від ізольованих процесів.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5207"/>
         <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
-        <translation type="unfinished"></translation>
+        <translation>Приховати ключ видалення програм хоста (див. підказку)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5277"/>
         <source>Hide Network Adapter MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Приховати MAC-адресу мережевого адаптера</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5602"/>
         <source>API call Trace (traces all SBIE hooks)</source>
-        <translation type="unfinished"></translation>
+        <translation>Трасування API-викликів (відстежує всі хуки SBIE)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5427"/>
@@ -10962,7 +11004,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="89"/>
         <source>fallback</source>
-        <translation type="unfinished"></translation>
+        <translation>резервний</translation>
     </message>
 </context>
 <context>
@@ -11033,7 +11075,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>Show Ignored Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати ігноровані файли</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
@@ -11089,7 +11131,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусово ізолювати прямий дочірній процес, але не включає непрямі дочірні процеси, відкриті через інтерфейс DCOM та IPC.</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="108"/>
@@ -11104,7 +11146,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
         <source>Force Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусові дочірні</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="59"/>
@@ -11212,12 +11254,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="406"/>
         <source>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie може видавати &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;повідомлення SBIE&lt;/a&gt; до журналу повідомлень та показувати їх як спливаючі вікна.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>
         <source>Disable SBIE messages popups (they will still be logged to the Messages tab)</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути спливаючі повідомлення SBIE (вони все одно будуть записуватися на вкладці Повідомлення)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="730"/>
@@ -11331,7 +11373,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="483"/>
         <source>Windows Shell</source>
-        <translation type="unfinished"></translation>
+        <translation>Оболонка Windows</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="986"/>
@@ -11396,7 +11438,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="680"/>
         <source>Add &apos;Set Force in Sandbox&apos; to the context menu</source>
         <oldsource>Add ‘Set Force in Sandbox&apos; to the context menu</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Додати 'Встановити примусовий запуск у пісочниці' до контекстного меню</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="587"/>
@@ -11406,17 +11448,17 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="693"/>
         <source>Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Ізольований робочий стіл</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="700"/>
         <source>Switch to sandboxed desktop when starting a process</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемикатися на ізольований робочий стіл при запуску процесу</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Switch to sandboxed desktop with double click</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемикатися на ізольований робочий стіл подвійним кліком</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1268"/>
@@ -11431,17 +11473,17 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1686"/>
         <source>Add-Ons Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Менеджер додатків</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1696"/>
         <source>Optional Add-Ons</source>
-        <translation type="unfinished"></translation>
+        <translation>Додаткові компоненти</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1704"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus пропонує численні параметри та підтримує широкий спектр розширень. На цій сторінці ви можете керувати додатковими компонентами.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1740"/>
@@ -11461,7 +11503,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1758"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update add-on list now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://addons&quot;&gt;оновити список додатків зараз&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1768"/>
@@ -11471,7 +11513,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1778"/>
         <source>Add-On Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування додатків</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1786"/>
@@ -11506,7 +11548,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="211"/>
         <source>Hotkey for bringing sandman to the top:</source>
-        <translation type="unfinished"></translation>
+        <translation>Гаряча клавіша для виведення Sandman на передній план:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="225"/>
@@ -11522,12 +11564,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="180"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевіряти стан автовидалення пісочниць при запуску Sandman</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="571"/>
         <source>Integrate with Host Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Інтеграція з робочим столом хоста</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="722"/>
@@ -11552,7 +11594,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1889"/>
         <source>When a Ram Disk is already mounted you need to unmount it for this option to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Коли Ram-диск вже змонтовано, потрібно розмонтувати його, щоб цей параметр набув чинності.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1892"/>
@@ -11577,7 +11619,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2072"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Прихильники проекту Sandboxie-Plus можуть отримати &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;сертифікат спонсора&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1953"/>
@@ -11592,7 +11634,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2040"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Підтримка Sandboxie в актуальному стані з поточними випусками Windows та сумісність з усіма веб-браузерами — це нескінченна робота.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1939"/>
@@ -11622,7 +11664,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2282"/>
         <source>Full Upgrades</source>
-        <translation type="unfinished"></translation>
+        <translation>Повні оновлення</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2358"/>
@@ -11663,7 +11705,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="71"/>
         <source>Use random GUID as sandbox name when creating new boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати випадковий GUID як ім’я пісочниці при створенні нових</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>
@@ -11678,7 +11720,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="858"/>
         <source>Show overlay icons for boxes in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати накладені значки для пісочниць у списку трея</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="865"/>
@@ -11688,12 +11730,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="872"/>
         <source>Maximum displayed characters for compact tray aliases. Ignored when alias display is disabled (name limit is fixed to 32).</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальна кількість символів для компактних псевдонімів у треї. Ігнорується, коли відображення псевдонімів вимкнено (ліміт імені фіксований на 32).</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="891"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while Ctrl is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Тристанова поведінка: знято = ніколи, частково встановлено = лише коли Ctrl утримується (за замовчуванням), встановлено = завжди.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="894"/>
@@ -11703,12 +11745,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1161"/>
         <source>Highlight unapplied changes in Options and Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Підсвічувати незастосовані зміни в Параметрах та Налаштуваннях</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1230"/>
         <source>Group state on start</source>
-        <translation type="unfinished"></translation>
+        <translation>Стан груп при запуску</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1466"/>
@@ -11733,7 +11775,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1537"/>
         <source>Support Dialog:</source>
-        <translation type="unfinished"></translation>
+        <translation>Діалог підтримки:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1550"/>
@@ -11743,7 +11785,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1563"/>
         <source>Fallback:</source>
-        <translation type="unfinished"></translation>
+        <translation>Резервний:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1608"/>
@@ -11753,12 +11795,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1624"/>
         <source>Hint: Specific window settings override non-main settings. Fallback is used when the target monitor cannot be used; when disabled, each window falls back to its default current-monitor behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>Підказка: Налаштування конкретного вікна перевизначають неосновні налаштування. Резервний варіант використовується, коли цільовий монітор не може бути використаний; коли вимкнено, кожне вікно повертається до своєї стандартної поведінки поточного монітора.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1646"/>
         <source>Window Locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Розташування вікон</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1653"/>
@@ -11774,7 +11816,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="2648"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати власний покращений запит UAC Sandboxie (рекомендовано)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2658"/>
@@ -11823,7 +11865,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2664"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>У наведеному нижче списку можна додати шляхи до конфігураційних ini портативних пісочниць</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2803"/>
@@ -11839,32 +11881,32 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="2938"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Показувати повідомлення 1321, коли процес примусово запущено в пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2948"/>
         <source>Force Process Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри примусового процесу</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2976"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусово запускати програми, що відкривають файли з пісочниці, у тій самій пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2979"/>
         <source>Force programs opening boxed files into their sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусово запускати програми, що відкривають файли з пісочниці, у відповідній пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2986"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусово запускати файли з міткою Інтернету в пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3006"/>
         <source>Sandbox for MoTW marked files</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця для файлів з міткою MoTW</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3025"/>
@@ -11919,7 +11961,11 @@ Please note that this values are currently user specific and saved globally for 
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        Показує детальні підказки при наведенні на налаштування.&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3406"/>
@@ -11965,7 +12011,19 @@ Please note that this values are currently user specific and saved globally for 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;b&gt;Режими:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Встановлено&lt;/span&gt;: Автозавершення + Виправлення регістру&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Частково встановлено&lt;/span&gt;: Лише ручне виправлення &lt;code&gt;Ctrl+R&lt;/code&gt;&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Навігація:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Переміщення по спливаючому вікну&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Підтвердити вибір&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Примусово відкрити пропозиції&lt;br&gt;
+        • &lt;code&gt;Tab&lt;/code&gt;: Застосувати перший або підтвердити вибір&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3429"/>
@@ -12108,7 +12166,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1171"/>
         <source>Alternate row background in lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Чергувати фон рядків у списках</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1110"/>
@@ -12181,22 +12239,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="594"/>
         <source>Scan shell folders and offer links in run menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканувати теки оболонки та пропонувати посилання в меню запуску</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="627"/>
         <source>Integrate with Host Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Інтеграція з меню Пуск хоста</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1217"/>
         <source>Use new config dialog layout *</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати новий макет діалогу конфігурації *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1966"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: 00000000-0000-0000-0000-000000000000</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2131"/>
@@ -12216,13 +12274,13 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2188"/>
         <source>Keep add-on list up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Підтримувати список додатків в актуальному стані</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2245"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Канал Insider пропонує ранній доступ до нових функцій та виправлень, які врешті будуть випущені для загального доступу, а також всі відповідні покращення зі стабільного каналу. На відміну від каналу попереднього перегляду, він не містить неперевірених, потенційно проблемних або експериментальних змін.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2249"/>
@@ -12242,7 +12300,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2322"/>
         <source>Keep Troubleshooting scripts up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Підтримувати скрипти усунення неполадок в актуальному стані</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2586"/>
@@ -12252,12 +12310,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2552"/>
         <source>This feature protects the sandbox by restricting access, preventing other users from accessing the folder. Ensure the root folder path contains the %USER% macro so that each user gets a dedicated sandbox folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця функція захищає пісочницю, обмежуючи доступ, запобігаючи іншим користувачам отримувати доступ до теки.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2555"/>
         <source>Restrict box root folder access to the the user whom created that sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Обмежити доступ до кореневої теки пісочниці лише користувачу, який її створив</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="274"/>
@@ -12272,7 +12330,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2896"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати повідомлення 1301, коли примусові процеси вимкнено</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2399"/>
@@ -12283,7 +12341,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="429"/>
         <source>This option also enables asynchronous operation when needed and suspends updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей параметр також увімкнює асинхронну роботу за потреби та призупиняє оновлення.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="432"/>
@@ -12308,7 +12366,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1012"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви можете налаштувати власні записи для меню запуску всіх пісочниць.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1034"/>
@@ -12380,7 +12438,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3252"/>
         <source>This list contains user created custom templates for sandbox options</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей список містить створені користувачем шаблони для параметрів пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3287"/>
@@ -12461,12 +12519,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2225"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Інкрементальні оновлення</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2222"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Оперативні виправлення для встановленої версії, оновлення Templates.ini та перекладів.</translation>
     </message>
     <message>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>

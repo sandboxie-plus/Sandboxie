@@ -624,7 +624,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="359"/>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Псевдоним:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="377"/>
@@ -1625,7 +1625,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2700"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Внимание</translation>
     </message>
 </context>
 <context>
@@ -2618,7 +2618,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
         <source> (outside)</source>
-        <translation type="unfinished"></translation>
+        <translation> (снаружи)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="78"/>
@@ -2707,7 +2707,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsGeneral.cpp" line="687"/>
         <location filename="Windows/OptionsGeneral.cpp" line="794"/>
         <source>Copy newer</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать более новые</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="930"/>
@@ -6521,7 +6521,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3360"/>
         <source>Sandboxie Desktop (Desk): %1</source>
-        <translation></translation>
+        <translation>Sandboxie Desktop (Desk): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3391"/>
@@ -6531,12 +6531,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3398"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
-        <translation>Вы пытаетесь использовать ключ обновления функции без ввода ранее существовавшего сертификата поддержки. Обратите внимание, что для этого типа ключа (&lt;b&gt;как это четко указано жирным шрифтом на веб-сайте&lt;/b) требуется наличие уже существующего действующего сертификата поддержки; без него ключ бесполезен.&lt;br /&gt;Если вы хотите использовать расширенные функции, вам необходимо получить как стандартный сертификат, так и ключ обновления функции, чтобы разблокировать расширенные функции.</translation>
+        <translation>Вы пытаетесь использовать ключ обновления функции без ввода ранее существовавшего сертификата спонсора. Обратите внимание, что для этого типа ключа (&lt;b&gt;как это четко указано жирным шрифтом на веб-сайте&lt;/b) требуется наличие уже существующего действующего сертификата спонсора; без него ключ бесполезен.&lt;br /&gt;Если вы хотите использовать расширенные функции, вам необходимо получить как стандартный сертификат, так и ключ обновления функции, чтобы разблокировать расширенные функции.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3404"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
-        <translation>Вы пытаетесь использовать ключ продления без ввода ранее существовавшего сертификата поддержки. Обратите внимание, что для этого типа ключа (&lt;b&gt;как это четко указано жирным шрифтом на веб-сайте&lt;/b) требуется наличие уже существующего действующего сертификата поддержки; без него ключ бесполезен.</translation>
+        <translation>Вы пытаетесь использовать ключ продления без ввода ранее существовавшего сертификата спонсора. Обратите внимание, что для этого типа ключа (&lt;b&gt;как это четко указано жирным шрифтом на веб-сайте&lt;/b) требуется наличие уже существующего действующего сертификата спонсора; без него ключ бесполезен.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3409"/>
@@ -7268,7 +7268,8 @@ Try submitting without the log attached.</source>
         <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
         <source>
 The actual sandbox name is: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Фактическое имя песочницы: %1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1112"/>
@@ -8920,12 +8921,12 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если внешняя рамка обрезается краем монитора, рисовать её внутри развёрнутых или прикреплённых окон.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="379"/>
         <source>Inside when maximized or snapped</source>
-        <translation type="unfinished"></translation>
+        <translation>Внутри при развёрнутом или прикреплённом окне</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="922"/>
@@ -11339,7 +11340,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="71"/>
         <source>Use random GUID as sandbox name when creating new boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать случайный GUID в качестве имени песочницы при создании новых</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="281"/>
@@ -11384,7 +11385,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1161"/>
         <source>Highlight unapplied changes in Options and Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Подсвечивать неприменённые изменения в Параметрах и Настройках</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1230"/>

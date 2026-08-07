@@ -8,6 +8,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added outside sandboxed-window border modes (`onoutside`, `ttloutside`, and `alloutside`) in SandMan; these draw the configured border outside the application frame, while the new `BorderInsideMaximized=y` setting (enabled by default) moves the border and label inside maximized or snapped windows so they remain visible
+- added persistence for manually expanded and collapsed SandMan process-tree branches across task-list refreshes and UI restarts [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
+
+### Changed
+- changed SandMan's Auto Expand Tree to temporarily expand box groups, sandboxes, and process branches without overwriting their saved manual expansion states; set the SandMan UI configuration option `Options/LegacyAutoExpandTree=true` to retain the previous expand-all/collapse-all behavior [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
 
 ### Fixed
 - fixed SandMan File Panel column widths resetting when switching between boxes [#5473](https://github.com/sandboxie-plus/Sandboxie/issues/5473)

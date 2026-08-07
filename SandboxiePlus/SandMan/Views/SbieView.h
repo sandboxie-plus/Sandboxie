@@ -45,6 +45,7 @@ public:
 
 	virtual QTreeViewEx*		GetTree() { return m_pSbieTree; }
 	CSbieModel*					GetSbieModel() { return m_pSbieModel; }
+	void						SetAutoExpand(bool bExpand, bool bLegacy);
 
 	virtual QList<CSandBoxPtr>	GetSelectedBoxes();
 	virtual QList<CBoxedProcessPtr>	GetSelectedProcesses();
@@ -126,6 +127,9 @@ protected:
 
 	QMap<QString, QStringList>	m_Groups;
 	QSet<QString>				m_Collapsed;
+	QHash<QString, bool>		m_ProcessExpandState;
+	QSet<QString>				m_AutoExpandCollapsed;
+	bool						m_ProcessStateCleanupPending;
 	bool						m_HoldExpand;
 
 private:
@@ -151,6 +155,11 @@ private:
 	bool					IsParentOf(const QString& Name, const QString& Group);
 
 	void					ChangeExpand(const QModelIndex& index, bool bExpand);
+	void					ApplyExpandState(bool bAutoExpand, const QModelIndex& Parent = QModelIndex());
+	QString					GetExpandStateKey(const QModelIndex& ModelIndex) const;
+	QString					GetProcessExpandKey(const CBoxedProcessPtr& pProcess) const;
+	void					SaveProcessExpandState();
+	void					CleanupProcessExpandState();
 	QStringList				GetSelectedBoxNames();
 	void					RestoreBoxSelectionLater(const QStringList& Names, int Delay = 50);
 	void					RestoreNameSelectionLater(const QStringList& Names, int Delay = 50);

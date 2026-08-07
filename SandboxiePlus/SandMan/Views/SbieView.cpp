@@ -33,6 +33,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	this->setLayout(m_pMainLayout);
 
 	m_HoldExpand = false;
+	m_ProcessStateCleanupPending = false;
 	m_MoveBatchPending = false;
 	m_MoveBatchChanged = false;
 
@@ -547,14 +548,30 @@ void CSbieView::Refresh()
 
 	if (!Added.isEmpty())
 		QTimer::singleShot(10, this, [this, Added]() {
+			bool bAutoExpand = theGUI->IsAutoExpand();
+			bool bLegacyAutoExpand = theConf->GetBool("Options/LegacyAutoExpandTree", false);
+
 			foreach(const QVariant ID, Added) {
 
 				QModelIndex ModelIndex = m_pSbieModel->FindIndex(ID);
 
 				if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
-					if (theGUI->IsAutoExpand()) {
+					CBoxedProcessPtr pProcess = m_pSbieModel->GetProcess(ModelIndex);
+					QString Key = GetProcessExpandKey(pProcess);
+					bool bExpand;
+					if (bAutoExpand && !bLegacyAutoExpand)
+						bExpand = !m_AutoExpandCollapsed.contains(GetExpandStateKey(ModelIndex));
+					else
+						bExpand = m_ProcessExpandState.contains(Key)
+							? m_ProcessExpandState.value(Key) : bAutoExpand;
+					if (bExpand) {
 						m_HoldExpand = true;
 						m_pSbieTree->expand(m_pSortProxy->mapFromSource(ModelIndex));
+						m_HoldExpand = false;
+					}
+					else {
+						m_HoldExpand = true;
+						m_pSbieTree->collapse(m_pSortProxy->mapFromSource(ModelIndex));
 						m_HoldExpand = false;
 					}
 				}
@@ -566,7 +583,10 @@ void CSbieView::Refresh()
 					else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
 						Name = m_pSbieModel->GetSandBox(ModelIndex)->GetName();
 
-					if (!m_Collapsed.contains(Name)) {
+					bool bExpand = bAutoExpand && !bLegacyAutoExpand
+						? !m_AutoExpandCollapsed.contains(GetExpandStateKey(ModelIndex))
+						: !m_Collapsed.contains(Name);
+					if (bExpand) {
 						m_HoldExpand = true;
 						m_pSbieTree->expand(m_pSortProxy->mapFromSource(ModelIndex));
 						m_HoldExpand = false;
@@ -574,6 +594,8 @@ void CSbieView::Refresh()
 				}
 			}
 		});
+
+	CleanupProcessExpandState();
 
 	// add new boxes to the default group
 
@@ -2713,9 +2735,26 @@ void CSbieView::ChangeExpand(const QModelIndex& index, bool bExpand)
 		return;
 
 	QModelIndex ModelIndex = m_pSortProxy->mapToSource(index);
-
-	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess)
+	if (theGUI->IsAutoExpand()
+	 && !theConf->GetBool("Options/LegacyAutoExpandTree", false)) {
+		QString Key = GetExpandStateKey(ModelIndex);
+		if (!Key.isEmpty()) {
+			if (bExpand)
+				m_AutoExpandCollapsed.remove(Key);
+			else
+				m_AutoExpandCollapsed.insert(Key);
+		}
 		return;
+	}
+
+	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
+		QString Key = GetProcessExpandKey(m_pSbieModel->GetProcess(ModelIndex));
+		if (!Key.isEmpty()) {
+			m_ProcessExpandState.insert(Key, bExpand);
+			SaveProcessExpandState();
+		}
+		return;
+	}
 
 	QString Name;
 	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
@@ -2736,8 +2775,135 @@ void CSbieView::ChangeExpand(const QModelIndex& index, bool bExpand)
 	theConf->SetValue("UIConfig/BoxCollapsedView", Collapsed);
 }
 
+void CSbieView::SetAutoExpand(bool bExpand, bool bLegacy)
+{
+	m_AutoExpandCollapsed.clear();
+
+	if (bLegacy) {
+		if (bExpand)
+			m_pSbieTree->expandAll();
+		else
+			m_pSbieTree->collapseAll();
+		return;
+	}
+
+	m_HoldExpand = true;
+	if (bExpand)
+		m_pSbieTree->expandAll();
+	else
+		ApplyExpandState(false);
+	m_HoldExpand = false;
+}
+
+void CSbieView::ApplyExpandState(bool bAutoExpand, const QModelIndex& Parent)
+{
+	for (int Row = 0; Row < m_pSortProxy->rowCount(Parent); ++Row) {
+		QModelIndex Index = m_pSortProxy->index(Row, 0, Parent);
+		QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
+
+		bool bExpand;
+		if (bAutoExpand)
+			bExpand = !m_AutoExpandCollapsed.contains(GetExpandStateKey(ModelIndex));
+		else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
+			QString Key = GetProcessExpandKey(m_pSbieModel->GetProcess(ModelIndex));
+			bExpand = m_ProcessExpandState.value(Key, false);
+		}
+		else {
+			QString Name;
+			if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
+				Name = m_pSbieModel->GetID(ModelIndex).toString();
+			else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
+				Name = m_pSbieModel->GetSandBox(ModelIndex)->GetName();
+			bExpand = !m_Collapsed.contains(Name);
+		}
+
+		m_pSbieTree->setExpanded(Index, bExpand);
+		ApplyExpandState(bAutoExpand, Index);
+	}
+}
+
+QString CSbieView::GetExpandStateKey(const QModelIndex& ModelIndex) const
+{
+	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
+		QString Key = GetProcessExpandKey(m_pSbieModel->GetProcess(ModelIndex));
+		return Key.isEmpty() ? QString() : "p|" + Key;
+	}
+	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
+		return "g|" + m_pSbieModel->GetID(ModelIndex).toString();
+	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
+		return "b|" + m_pSbieModel->GetSandBox(ModelIndex)->GetName();
+	return QString();
+}
+
+QString CSbieView::GetProcessExpandKey(const CBoxedProcessPtr& pProcess) const
+{
+	if (pProcess.isNull() || !pProcess->GetTimeStamp().isValid())
+		return QString();
+
+	return QString("%1|%2|%3").arg(pProcess->GetBoxName())
+		.arg(pProcess->GetProcessId()).arg(pProcess->GetTimeStamp().toMSecsSinceEpoch());
+}
+
+void CSbieView::SaveProcessExpandState()
+{
+	if (m_ProcessExpandState.isEmpty()) {
+		theConf->DelValue("UIConfig/ProcessTreeState");
+		return;
+	}
+
+	QStringList State;
+	for (auto I = m_ProcessExpandState.constBegin(); I != m_ProcessExpandState.constEnd(); ++I)
+		State.append(QString(I.value() ? "e|" : "c|") + I.key());
+	State.sort();
+	theConf->SetValue("UIConfig/ProcessTreeState", State);
+}
+
+void CSbieView::CleanupProcessExpandState()
+{
+	QMap<quint32, CBoxedProcessPtr> Processes = theAPI->GetAllProcesses();
+	if (m_ProcessStateCleanupPending) {
+		m_ProcessStateCleanupPending = false;
+		if (Processes.isEmpty())
+			return;
+	}
+
+	QSet<QString> LiveProcesses;
+	foreach(const CBoxedProcessPtr& pProcess, Processes) {
+		if (!pProcess->IsTerminated()) {
+			QString Key = GetProcessExpandKey(pProcess);
+			if (!Key.isEmpty())
+				LiveProcesses.insert(Key);
+		}
+	}
+	for (auto I = m_AutoExpandCollapsed.begin(); I != m_AutoExpandCollapsed.end();) {
+		if (I->startsWith("p|") && !LiveProcesses.contains(I->mid(2)))
+			I = m_AutoExpandCollapsed.erase(I);
+		else
+			++I;
+	}
+
+	bool Changed = false;
+	for (auto I = m_ProcessExpandState.begin(); I != m_ProcessExpandState.end();) {
+		if (!LiveProcesses.contains(I.key())) {
+			I = m_ProcessExpandState.erase(I);
+			Changed = true;
+		}
+		else
+			++I;
+	}
+	if (Changed)
+		SaveProcessExpandState();
+}
+
 void CSbieView::UpdateColapsed()
 {
+	if (!theConf->GetBool("Options/LegacyAutoExpandTree", false)) {
+		m_HoldExpand = true;
+		ApplyExpandState(theGUI->IsAutoExpand());
+		m_HoldExpand = false;
+		return;
+	}
+
 	foreach(const QString& Group, m_Groups.keys())
 	{
 		if (!m_Collapsed.contains(Group)) {
@@ -2780,6 +2946,22 @@ void CSbieView::ReloadUserConfig()
 			m_Collapsed = ListToSet(SplitStr(Collapsed, ","));
 		//}
 	}
+
+	m_ProcessExpandState.clear();
+	QStringList ProcessState = theConf->GetStringList("UIConfig/ProcessTreeState");
+	if (ProcessState.isEmpty()) {
+		QString State = theConf->GetString("UIConfig/ProcessTreeState");
+		if (!State.isEmpty())
+			ProcessState.append(State);
+	}
+	foreach(const QString& State, ProcessState) {
+		if (State.length() > 2 && State.at(1) == '|'
+		 && (State.at(0) == 'e' || State.at(0) == 'c'))
+			m_ProcessExpandState.insert(State.mid(2), State.at(0) == 'e');
+	}
+	m_ProcessStateCleanupPending = !m_ProcessExpandState.isEmpty();
+	if (m_ProcessExpandState.isEmpty())
+		theConf->DelValue("UIConfig/ProcessTreeState");
 
 	ClearUserUIConfig();
 }

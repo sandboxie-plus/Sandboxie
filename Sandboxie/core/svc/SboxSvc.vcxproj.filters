@@ -66,6 +66,9 @@
     <ClCompile Include="..\..\common\pattern.c">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\program_control_runtime.c">
+      <Filter>common</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\common\stream.c">
       <Filter>common</Filter>
     </ClCompile>
@@ -173,6 +176,12 @@
     </ClInclude>
     <ClInclude Include="MountManager.h">
       <Filter>MountManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\program_control_rule.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\program_control_runtime.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

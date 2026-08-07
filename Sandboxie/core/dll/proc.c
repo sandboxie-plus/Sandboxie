@@ -33,6 +33,7 @@
 #include "msgs/msgs.h"
 #include "common/str_util.h"
 #include "common/program_control_rule.h"
+#include "common/program_control_runtime.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -155,6 +156,12 @@ static BOOLEAN Proc_CheckBreakoutFolderInList(
 static BOOLEAN Proc_CheckBreakoutDocumentInList(
     const WCHAR *docPath, ULONG docPathLen, const WCHAR *imageName, const WCHAR *boxname);
 
+static BOOLEAN Proc_CheckBreakoutDocumentArg(
+    const WCHAR *docPath,
+    ULONG docPathLen,
+    const WCHAR *createdImage,
+    const WCHAR *boxname);
+
 static BOOLEAN Proc_IsBreakoutCandidate(
     const WCHAR *appPath, const WCHAR *boxname, BOOLEAN allowTargeted);
 
@@ -183,6 +190,24 @@ static void Proc_AdjustBreakoutProcessRule(WCHAR *value, void *context);
 static void Proc_AdjustBreakoutFolderRule(WCHAR *value, void *context);
 
 static void Proc_AdjustBreakoutDocumentRule(WCHAR *value, void *context);
+
+static BOOLEAN Proc_RuntimeCompileSettingAdjusted(
+    SBIE_RT_RULESET *ruleset,
+    const WCHAR *setting,
+    const WCHAR *value,
+    int useRuleExtensions,
+    BreakoutAdjustRuleFn adjustRule,
+    void *adjustContext);
+
+static BOOLEAN Proc_LoadRuntimeRulesetForSetting(
+    const WCHAR *boxname,
+    const WCHAR *setting,
+    int useRuleExtensions,
+    BreakoutAdjustRuleFn adjustRule,
+    void *adjustContext,
+    SBIE_RT_RULESET *ruleset);
+
+static BOOLEAN Proc_RuntimeMatchAllowedTarget(const SBIE_RT_MATCH *match, BOOLEAN allowTargeted);
 
 //static BOOLEAN Proc_IsProcessRunning(const WCHAR *ImageToFind);
 
@@ -822,20 +847,51 @@ _FX const WCHAR* SbieDll_FindArgumentEnd(const WCHAR* arguments)
 static BOOLEAN Proc_CheckBreakoutProcessInList(
     const WCHAR *imageName, const WCHAR *appPath, const WCHAR *boxname, BOOLEAN allowTargeted)
 {
-    ULONG appPathLen;
     BOOLEAN use_rule_extensions;
+    POOL *pool;
+    SBIE_RT_RULESET ruleset;
+    SBIE_RT_MATCH process_match;
+    SBIE_RT_MATCH children_match;
+    SBIE_RT_MATCH breakout_match;
+    BOOLEAN result = FALSE;
 
     if (!imageName || !*imageName || !appPath || !*appPath)
         return FALSE;
 
-    appPathLen = wcslen(appPath);
     use_rule_extensions = SbieApi_QueryConfBool(boxname, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
 
-    return ProgramControl_FindProcessSettingMatch(
-        boxname, L"BreakoutProcess", imageName, appPath, appPathLen,
-        allowTargeted ? 1 : 0, use_rule_extensions ? 1 : 0,
-        Proc_AdjustBreakoutProcessRule, NULL,
-        NULL, 0, NULL, NULL, NULL) ? TRUE : FALSE;
+    pool = Pool_Create();
+    if (!pool)
+        return FALSE;
+
+    ProgramControl_RuntimeInitRuleset(&ruleset, pool);
+    if (Proc_LoadRuntimeRulesetForSetting(
+            boxname,
+            L"BreakoutProcess",
+            use_rule_extensions ? 1 : 0,
+            Proc_AdjustBreakoutProcessRule,
+            NULL,
+            &ruleset)) {
+        ProgramControl_RuntimeInitMatch(&process_match);
+        ProgramControl_RuntimeInitMatch(&children_match);
+        ProgramControl_RuntimeInitMatch(&breakout_match);
+
+        if (ProgramControl_RuntimeMatchProcess(
+                &ruleset,
+                imageName,
+                appPath,
+                Proc_BreakoutMatchImage,
+                NULL,
+                &process_match,
+                &children_match,
+                &breakout_match)) {
+            result = Proc_RuntimeMatchAllowedTarget(&breakout_match, allowTargeted);
+        }
+    }
+
+    ProgramControl_RuntimeFreeRuleset(&ruleset);
+    Pool_Delete(pool);
+    return result;
 }
 
 static BOOLEAN Proc_CheckBreakoutFolderInList(
@@ -844,6 +900,11 @@ static BOOLEAN Proc_CheckBreakoutFolderInList(
     const WCHAR *lpProgram;
     ULONG appDirLen;
     BOOLEAN use_rule_extensions;
+    POOL *pool;
+    SBIE_RT_RULESET ruleset;
+    SBIE_RT_MATCH force_match;
+    SBIE_RT_MATCH breakout_match;
+    BOOLEAN result = FALSE;
 
     if (!appPath || !*appPath)
         return FALSE;
@@ -855,12 +916,40 @@ static BOOLEAN Proc_CheckBreakoutFolderInList(
     appDirLen = (ULONG)(lpProgram - appPath);
     use_rule_extensions = SbieApi_QueryConfBool(boxname, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
 
-    // Use the calling process image (Dll_ImageName) for image-scope matching.
-    // The caller is the parent launching the target, so folder scope must
-    // reflect who is launching, not what is being launched.
-    return ProgramControl_CheckFolderMatchFromConf(
-        boxname, Dll_ImageName, appPath, appDirLen, allowTargeted, use_rule_extensions ? 1 : 0,
-        Proc_BreakoutMatchImage, NULL, Proc_AdjustBreakoutFolderRule, NULL) ? TRUE : FALSE;
+    pool = Pool_Create();
+    if (!pool)
+        return FALSE;
+
+    ProgramControl_RuntimeInitRuleset(&ruleset, pool);
+    if (Proc_LoadRuntimeRulesetForSetting(
+            boxname,
+            L"BreakoutFolder",
+            use_rule_extensions ? 1 : 0,
+            Proc_AdjustBreakoutFolderRule,
+            NULL,
+            &ruleset)) {
+        ProgramControl_RuntimeInitMatch(&force_match);
+        ProgramControl_RuntimeInitMatch(&breakout_match);
+
+        // Use the calling process image (Dll_ImageName) for image-scope matching.
+        // The caller is the parent launching the target, so folder scope must
+        // reflect who is launching, not what is being launched.
+        if (ProgramControl_RuntimeMatchFolder(
+                &ruleset,
+                Dll_ImageName,
+                Proc_BreakoutMatchImage,
+                NULL,
+                appPath,
+                appDirLen,
+                &force_match,
+                &breakout_match)) {
+            result = Proc_RuntimeMatchAllowedTarget(&breakout_match, allowTargeted);
+        }
+    }
+
+    ProgramControl_RuntimeFreeRuleset(&ruleset);
+    Pool_Delete(pool);
+    return result;
 }
 
 static int Proc_BreakoutMatchImage(const WCHAR *pattern, const WCHAR *imageName, void *context)
@@ -908,30 +997,188 @@ static BOOLEAN Proc_CheckBreakoutDocumentInList(
     const WCHAR *docPath, ULONG docPathLen, const WCHAR *imageName, const WCHAR *boxname)
 {
     BOOLEAN use_rule_extensions;
+    POOL *pool;
+    SBIE_RT_RULESET ruleset;
+    SBIE_RT_MATCH match;
+    BOOLEAN result = FALSE;
 
     if (!docPath || !*docPath || !imageName || !*imageName)
         return FALSE;
 
     use_rule_extensions = SbieApi_QueryConfBool(boxname, L"UseForceBreakoutRuleExtensions", FALSE) ? TRUE : FALSE;
 
-    return ProgramControl_FindDocumentSettingMatch(
-        boxname,
-        L"BreakoutDocument",
-        imageName,
-        docPath,
-        docPathLen,
-        1,
-        use_rule_extensions ? 1 : 0,
-        Proc_BreakoutMatchImage,
-        NULL,
-        Proc_AdjustBreakoutDocumentRule,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        NULL,
-        NULL,
-        NULL) ? TRUE : FALSE;
+    pool = Pool_Create();
+    if (!pool)
+        return FALSE;
+
+    ProgramControl_RuntimeInitRuleset(&ruleset, pool);
+    if (Proc_LoadRuntimeRulesetForSetting(
+            boxname,
+            L"BreakoutDocument",
+            use_rule_extensions ? 1 : 0,
+            Proc_AdjustBreakoutDocumentRule,
+            NULL,
+            &ruleset)) {
+        ProgramControl_RuntimeInitMatch(&match);
+        result = ProgramControl_RuntimeMatchDocument(
+            &ruleset,
+            imageName,
+            Proc_BreakoutMatchImage,
+            NULL,
+            docPath,
+            docPathLen,
+            &match) ? TRUE : FALSE;
+    }
+
+    ProgramControl_RuntimeFreeRuleset(&ruleset);
+    Pool_Delete(pool);
+    return result;
+}
+
+static BOOLEAN Proc_CheckBreakoutDocumentArg(
+    const WCHAR *docPath,
+    ULONG docPathLen,
+    const WCHAR *createdImage,
+    const WCHAR *boxname)
+{
+    const WCHAR *matchImage;
+    WCHAR *docMatchPath;
+    BOOLEAN result;
+
+    if (!docPath || !*docPath || !docPathLen || !boxname)
+        return FALSE;
+
+    matchImage = (createdImage && *createdImage) ? createdImage : Dll_ImageName;
+    if (!matchImage || !*matchImage)
+        return FALSE;
+
+    docMatchPath = Dll_Alloc((docPathLen + 1) * sizeof(WCHAR));
+    if (!docMatchPath)
+        return FALSE;
+
+    wmemcpy(docMatchPath, docPath, docPathLen);
+    docMatchPath[docPathLen] = L'\0';
+
+    result = Proc_CheckBreakoutDocumentInList(docMatchPath, docPathLen, matchImage, boxname);
+    Dll_Free(docMatchPath);
+    return result;
+}
+
+static BOOLEAN Proc_RuntimeMatchAllowedTarget(const SBIE_RT_MATCH *match, BOOLEAN allowTargeted)
+{
+    if (!match || !match->matched)
+        return FALSE;
+
+    if (!allowTargeted &&
+        ProgramControl_RuntimeGetApplicableTargetBox(match, NULL))
+        return FALSE;
+
+    return TRUE;
+}
+
+static BOOLEAN Proc_RuntimeCompileSettingAdjusted(
+    SBIE_RT_RULESET *ruleset,
+    const WCHAR *setting,
+    const WCHAR *value,
+    int useRuleExtensions,
+    BreakoutAdjustRuleFn adjustRule,
+    void *adjustContext)
+{
+    WCHAR parseBuf[CONF_LINE_LEN];
+    WCHAR compileBuf[CONF_LINE_LEN];
+    SBIE_PROGRAM_RULE_KIND ruleKind = SBIE_RULE_KIND_NONE;
+    SBIE_NORMALIZED_RULE rule;
+    WCHAR *parseValue = parseBuf;
+    size_t baseOffset;
+    size_t suffixOffset;
+    WCHAR *compileBase;
+    WCHAR *compileSep;
+
+    if (!ruleset || !setting || !value || !*value)
+        return FALSE;
+
+    wcscpy_s(parseBuf, ARRAYSIZE(parseBuf), value);
+    wcscpy_s(compileBuf, ARRAYSIZE(compileBuf), value);
+
+    if (!ProgramControl_GetRuleKindForSetting(setting, &ruleKind))
+        return FALSE;
+
+    if (ruleKind != SBIE_RULE_KIND_PROCESS || _wcsicmp(setting, L"BreakoutProcess") == 0) {
+        parseValue = ProgramControl_ParseImageScopeInPlace(parseBuf, NULL, NULL, NULL, NULL);
+        if (!parseValue)
+            return FALSE;
+    }
+
+    if (!ProgramControl_ParseRuleExtensionsInPlace(parseValue, &rule, useRuleExtensions))
+        return FALSE;
+
+    if (adjustRule) {
+        baseOffset = (size_t)(rule.base_rule - parseBuf);
+        compileBase = compileBuf + baseOffset;
+        compileSep = wcschr(compileBase, L'|');
+        if (compileSep) {
+            if (wcscpy_s(parseBuf, ARRAYSIZE(parseBuf), compileSep) != 0)
+                return FALSE;
+            *compileSep = L'\0';
+        }
+
+        adjustRule(compileBase, adjustContext);
+
+        if (compileSep) {
+            compileSep = compileBase + wcslen(compileBase);
+            suffixOffset = (size_t)(compileSep - compileBuf);
+            if (suffixOffset >= ARRAYSIZE(compileBuf) ||
+                wcscpy_s(compileSep, ARRAYSIZE(compileBuf) - suffixOffset, parseBuf) != 0)
+                return FALSE;
+        }
+    }
+
+    return ProgramControl_RuntimeCompileSetting(
+        ruleset, setting, compileBuf, useRuleExtensions) ? TRUE : FALSE;
+}
+
+static BOOLEAN Proc_LoadRuntimeRulesetForSetting(
+    const WCHAR *boxname,
+    const WCHAR *setting,
+    int useRuleExtensions,
+    BreakoutAdjustRuleFn adjustRule,
+    void *adjustContext,
+    SBIE_RT_RULESET *ruleset)
+{
+    WCHAR buf[CONF_LINE_LEN];
+    ULONG index = 0;
+
+    if (!setting || !*setting || !ruleset)
+        return FALSE;
+
+    while (1) {
+        NTSTATUS status;
+
+        if (_wcsicmp(setting, L"BreakoutFolder") == 0 ||
+            _wcsicmp(setting, L"BreakoutDocument") == 0)
+            status = SbieApi_QueryConf(boxname, setting, index, buf, sizeof(buf) - 16 * sizeof(WCHAR));
+        else
+            status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, sizeof(buf) - sizeof(WCHAR));
+
+        ++index;
+        if (!NT_SUCCESS(status)) {
+            if (status == STATUS_BUFFER_TOO_SMALL)
+                continue;
+            break;
+        }
+
+        if (!Proc_RuntimeCompileSettingAdjusted(
+                ruleset,
+                setting,
+                buf,
+                useRuleExtensions,
+                adjustRule,
+                adjustContext)) {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
 }
 
 static BOOLEAN Proc_ShouldIgnoreBreakout(void)
@@ -1613,21 +1860,9 @@ _FX BOOL Proc_CreateProcessInternalW(
 
         if (breakout_rules_enabled && doc_len > 0 &&
             doc_start[0] != L'-' && doc_start[0] != L'/') {
-            if (!use_rule_extensions) {
-                if (SbieDll_CheckPatternInList(doc_start, doc_len, NULL, L"BreakoutDocument"))
-                    has_breakout_document_arg = TRUE;
-            }
-            else if (created_image && Dll_BoxName) {
-                WCHAR *doc_match_path = Dll_Alloc((doc_len + 1) * sizeof(WCHAR));
-                if (doc_match_path) {
-                    wmemcpy(doc_match_path, doc_start, doc_len);
-                    doc_match_path[doc_len] = L'\0';
-
-                    if (Proc_CheckBreakoutDocumentInList(doc_match_path, doc_len, created_image, Dll_BoxName))
-                        has_breakout_document_arg = TRUE;
-
-                    Dll_Free(doc_match_path);
-                }
+            if (Dll_BoxName &&
+                Proc_CheckBreakoutDocumentArg(doc_start, doc_len, created_image, Dll_BoxName)) {
+                has_breakout_document_arg = TRUE;
             }
         }
 
@@ -2258,6 +2493,12 @@ finish:
         hook NtQueryInformationProcess if env var SBIE_OVERRIDE_PARENT_PID exists
     }*/
 
+    {
+        WCHAR msg[1024];
+        Sbie_snwprintf(msg, 1024, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
+    }
+
     //
     // free work areas and return
     //
@@ -2279,12 +2520,6 @@ finish:
     if (TlsData->proc_command_line) {
         Dll_Free(TlsData->proc_command_line);
         TlsData->proc_command_line = NULL;
-    }
-
-    {
-        WCHAR msg[1024];
-        Sbie_snwprintf(msg, 1024, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
-        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
     }
 
     SetLastError(err);
@@ -3678,6 +3913,39 @@ _FX NTSTATUS Proc_NtQueryInformationProcess(
             WCHAR *TruePath, *CopyPath;
             if (NT_SUCCESS(File_GetName(NULL, (UNICODE_STRING*)ProcessInformation, &TruePath, &CopyPath, NULL)))
                 RtlInitUnicodeString((UNICODE_STRING*)ProcessInformation, TruePath);    // return non-sandboxed path so caller can't tell he's sandboxed.
+        }
+    }
+    else if ((ProcessInformationClass == ProcessImageFileNameWin32) && (NT_SUCCESS(status))) {
+        if (ProcessInformation) {
+            UNICODE_STRING *ImageName = (UNICODE_STRING*)ProcessInformation;
+            ULONG nameLen = ImageName->Length / sizeof(WCHAR);
+
+            if (Dll_BoxFileDosPath && Dll_BoxFileDosPathLen
+                && ImageName->Buffer
+                && nameLen >= Dll_BoxFileDosPathLen
+                && _wcsnicmp(ImageName->Buffer, Dll_BoxFileDosPath, Dll_BoxFileDosPathLen) == 0)
+            {
+                WCHAR *BoxedPath = Dll_AllocTemp((nameLen + 1) * sizeof(WCHAR));
+                if (BoxedPath) {
+                    WCHAR *TruePath;
+
+                    wmemcpy(BoxedPath, ImageName->Buffer, nameLen);
+                    BoxedPath[nameLen] = L'\0';
+
+                    TruePath = File_GetTruePathForBoxedPath(BoxedPath, TRUE);
+                    if (TruePath) {
+                        ULONG trueLen = wcslen(TruePath);
+                        THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+                        WCHAR *ImagePath = Dll_GetTlsNameBuffer(
+                            TlsData, TRUE_NAME_BUFFER, (trueLen + 1) * sizeof(WCHAR));
+                        wmemcpy(ImagePath, TruePath, trueLen + 1);
+                        RtlInitUnicodeString(ImageName, ImagePath);
+                        Dll_Free(TruePath);
+                    }
+
+                    Dll_Free(BoxedPath);
+                }
+            }
         }
     }
 

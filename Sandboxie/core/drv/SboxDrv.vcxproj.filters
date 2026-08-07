@@ -41,6 +41,9 @@
     <ClCompile Include="..\..\common\pattern.c">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\program_control_runtime.c">
+      <Filter>common</Filter>
+    </ClCompile>
     <ClCompile Include="..\dll\hook_inst.c">
       <Filter>hook</Filter>
     </ClCompile>

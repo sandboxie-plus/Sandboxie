@@ -29,6 +29,7 @@
 #include "core/drv/api_defs.h"
 #include "common/my_version.h"
 #include "common/program_control_rule.h"
+#include "common/program_control_runtime.h"
 #include <stdlib.h>
 #include <sddl.h>
 #include <aclapi.h>
@@ -131,20 +132,26 @@ static BOOLEAN UserServer_AreBreakoutRulesEnabled(const WCHAR* boxname)
     return SbieApi_QueryConfBool(boxname, L"DisableBreakoutRules", FALSE) ? FALSE : TRUE;
 }
 
-static BOOLEAN UserServer_GetBreakoutDocumentTarget(
-    const WCHAR* boxname, const WCHAR* imageName, const WCHAR* path, ULONG length,
-    WCHAR* outTarget, ULONG outTargetCch, LONG* outPriority, BOOLEAN* outHasMatch, ULONG* outLevel)
+static BOOLEAN UserServer_AreForceRulesEnabled(const WCHAR* boxname)
 {
-    BOOLEAN use_rule_extensions;
-    int has_target = 0;
-    BOOLEAN has_match;
+    return SbieApi_QueryConfBool(boxname, L"DisableForceRules", FALSE) ? FALSE : TRUE;
+}
 
-    if (!boxname || !imageName || !path || !outTarget || outTargetCch == 0)
-        return FALSE;
+static void UserServer_RuntimeCopyMatch(
+    const SBIE_RT_MATCH* match,
+    BOOLEAN* outHasTarget,
+    WCHAR* outTarget,
+    ULONG outTargetCch,
+    LONG* outPriority,
+    BOOLEAN* outHasMatch,
+    ULONG* outLevel)
+{
+    const WCHAR* target_box = NULL;
 
-    use_rule_extensions = UserServer_UseRuleExtensions(boxname, L"BreakoutDocument");
-
-    outTarget[0] = L'\0';
+    if (outHasTarget)
+        *outHasTarget = FALSE;
+    if (outTarget && outTargetCch)
+        outTarget[0] = L'\0';
     if (outPriority)
         *outPriority = -1;
     if (outHasMatch)
@@ -152,28 +159,199 @@ static BOOLEAN UserServer_GetBreakoutDocumentTarget(
     if (outLevel)
         *outLevel = (ULONG)-1;
 
-    has_match = ProgramControl_FindDocumentSettingMatch(
-        boxname,
-        L"BreakoutDocument",
-        imageName,
-        path,
-        length,
-        1,
-        use_rule_extensions ? 1 : 0,
-        UserServer_MatchImage,
-        NULL,
-        UserServer_AdjustDocumentRule,
-        NULL,
-        &has_target,
-        outTarget,
-        outTargetCch,
-        NULL,
-        outPriority,
-        (unsigned long*)outLevel) ? TRUE : FALSE;
+    if (!match || !match->matched)
+        return;
 
+    if (ProgramControl_RuntimeGetApplicableTargetBox(match, &target_box)) {
+        if (outHasTarget)
+            *outHasTarget = TRUE;
+        if (outTarget && outTargetCch)
+            wcscpy_s(outTarget, outTargetCch, target_box);
+    }
+    if (outPriority)
+        *outPriority = match->has_priority ? (LONG)match->priority : -1;
     if (outHasMatch)
-        *outHasMatch = has_match;
+        *outHasMatch = TRUE;
+    if (outLevel)
+        *outLevel = (ULONG)match->level;
+}
 
+static BOOLEAN UserServer_RuntimeCompileSettingAdjusted(
+    SBIE_RT_RULESET* ruleset,
+    const WCHAR* setting,
+    const WCHAR* value,
+    int useRuleExtensions,
+    BreakoutAdjustRuleFn adjustRule,
+    void* adjustContext)
+{
+    WCHAR parseBuf[CONF_LINE_LEN];
+    WCHAR compileBuf[CONF_LINE_LEN];
+    SBIE_PROGRAM_RULE_KIND ruleKind = SBIE_RULE_KIND_NONE;
+    SBIE_NORMALIZED_RULE rule;
+    WCHAR* parseValue = parseBuf;
+    size_t baseOffset;
+    size_t suffixOffset;
+    WCHAR* compileBase;
+    WCHAR* compileSep;
+
+    if (!ruleset || !setting || !value || !*value)
+        return FALSE;
+
+    wcscpy_s(parseBuf, ARRAYSIZE(parseBuf), value);
+    wcscpy_s(compileBuf, ARRAYSIZE(compileBuf), value);
+
+    if (!ProgramControl_GetRuleKindForSetting(setting, &ruleKind))
+        return FALSE;
+
+    if (ruleKind != SBIE_RULE_KIND_PROCESS) {
+        parseValue = ProgramControl_ParseImageScopeInPlace(parseBuf, NULL, NULL, NULL, NULL);
+        if (!parseValue)
+            return FALSE;
+    }
+
+    if (!ProgramControl_ParseRuleExtensionsInPlace(parseValue, &rule, useRuleExtensions))
+        return FALSE;
+
+    if (adjustRule) {
+        baseOffset = (size_t)(rule.base_rule - parseBuf);
+        compileBase = compileBuf + baseOffset;
+        compileSep = wcschr(compileBase, L'|');
+        if (compileSep) {
+            if (wcscpy_s(parseBuf, ARRAYSIZE(parseBuf), compileSep) != 0)
+                return FALSE;
+            *compileSep = L'\0';
+        }
+
+        adjustRule(compileBase, adjustContext);
+
+        if (compileSep) {
+            compileSep = compileBase + wcslen(compileBase);
+            suffixOffset = (size_t)(compileSep - compileBuf);
+            if (suffixOffset >= ARRAYSIZE(compileBuf) ||
+                wcscpy_s(compileSep, ARRAYSIZE(compileBuf) - suffixOffset, parseBuf) != 0)
+                return FALSE;
+        }
+    }
+
+    return ProgramControl_RuntimeCompileSetting(
+        ruleset, setting, compileBuf, useRuleExtensions) ? TRUE : FALSE;
+}
+
+static BOOLEAN UserServer_LoadRuntimeRulesetForSetting(
+    const WCHAR* boxname,
+    const WCHAR* setting,
+    int useRuleExtensions,
+    BreakoutAdjustRuleFn adjustRule,
+    void* adjustContext,
+    SBIE_RT_RULESET* ruleset)
+{
+    WCHAR buf[CONF_LINE_LEN];
+    ULONG index = 0;
+
+    if (!setting || !*setting || !ruleset)
+        return FALSE;
+
+    while (1) {
+        NTSTATUS status;
+
+        if (_wcsicmp(setting, L"ForceFolder") == 0 ||
+            _wcsicmp(setting, L"BreakoutFolder") == 0 ||
+            _wcsicmp(setting, L"BreakoutDocument") == 0)
+            status = SbieApi_QueryConf(boxname, setting, index, buf, sizeof(buf) - 16 * sizeof(WCHAR));
+        else
+            status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, sizeof(buf) - sizeof(WCHAR));
+
+        ++index;
+        if (!NT_SUCCESS(status)) {
+            if (status == STATUS_BUFFER_TOO_SMALL)
+                continue;
+            break;
+        }
+
+        if (!UserServer_RuntimeCompileSettingAdjusted(
+                ruleset,
+                setting,
+                buf,
+                useRuleExtensions,
+                adjustRule,
+                adjustContext)) {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+struct USERSERVER_BREAKOUT_RULE_LIST_SCOPE {
+    POOL* pool;
+    SBIE_RT_RULESET ruleset;
+    BOOLEAN breakout_document_cache_complete;
+    BOOLEAN breakout_folder_cache_complete;
+
+    USERSERVER_BREAKOUT_RULE_LIST_SCOPE()
+        : pool(NULL), breakout_document_cache_complete(FALSE), breakout_folder_cache_complete(FALSE)
+    {
+        pool = Pool_Create();
+        if (pool)
+            ProgramControl_RuntimeInitRuleset(&ruleset, pool);
+    }
+
+    ~USERSERVER_BREAKOUT_RULE_LIST_SCOPE()
+    {
+        if (pool) {
+            ProgramControl_RuntimeFreeRuleset(&ruleset);
+            Pool_Delete(pool);
+        }
+    }
+};
+
+static BOOLEAN UserServer_GetBreakoutDocumentTarget(
+    const WCHAR* boxname, const WCHAR* imageName, const WCHAR* path, ULONG length,
+    WCHAR* outTarget, ULONG outTargetCch, LONG* outPriority, BOOLEAN* outHasMatch, ULONG* outLevel)
+{
+    BOOLEAN use_rule_extensions;
+    POOL* pool;
+    SBIE_RT_RULESET ruleset;
+    SBIE_RT_MATCH breakout_document_match;
+    BOOLEAN has_target = FALSE;
+
+    if (!boxname || !imageName || !path || !outTarget || outTargetCch == 0)
+        return FALSE;
+
+    use_rule_extensions = UserServer_UseRuleExtensions(boxname, L"BreakoutDocument");
+    pool = Pool_Create();
+    if (!pool) {
+        UserServer_RuntimeCopyMatch(NULL, NULL, outTarget, outTargetCch, outPriority, outHasMatch, outLevel);
+        return FALSE;
+    }
+
+    ProgramControl_RuntimeInitRuleset(&ruleset, pool);
+    ProgramControl_RuntimeInitMatch(&breakout_document_match);
+
+    if (UserServer_LoadRuntimeRulesetForSetting(
+            boxname,
+            L"BreakoutDocument",
+            use_rule_extensions ? 1 : 0,
+            UserServer_AdjustDocumentRule,
+            NULL,
+            &ruleset) &&
+        ProgramControl_RuntimeMatchDocument(
+            &ruleset,
+            imageName,
+            UserServer_MatchImage,
+            NULL,
+            path,
+            length,
+            &breakout_document_match) &&
+        breakout_document_match.matched) {
+        UserServer_RuntimeCopyMatch(&breakout_document_match, &has_target, outTarget, outTargetCch, outPriority, outHasMatch, outLevel);
+    }
+    else {
+        UserServer_RuntimeCopyMatch(NULL, &has_target, outTarget, outTargetCch, outPriority, outHasMatch, outLevel);
+    }
+
+    ProgramControl_RuntimeFreeRuleset(&ruleset);
+    Pool_Delete(pool);
     return has_target;
 }
 
@@ -228,6 +406,152 @@ static void UserServer_UpdateBreakoutDocumentWinner(
     }
 }
 
+static BOOLEAN UserServer_GetCachedBreakoutDocumentTarget(
+    const SBIE_RT_RULESET* ruleset,
+    const WCHAR* imageName,
+    const WCHAR* path,
+    ULONG length,
+    WCHAR* outTarget,
+    ULONG outTargetCch,
+    LONG* outPriority,
+    BOOLEAN* outHasMatch,
+    ULONG* outLevel)
+{
+    SBIE_RT_MATCH breakout_document_match;
+    BOOLEAN has_target = FALSE;
+
+    if (!imageName || !*imageName || !path || !outTarget || outTargetCch == 0)
+        return FALSE;
+
+    UserServer_RuntimeCopyMatch(NULL, &has_target, outTarget, outTargetCch, outPriority, outHasMatch, outLevel);
+    ProgramControl_RuntimeInitMatch(&breakout_document_match);
+
+    if (ruleset &&
+        ProgramControl_RuntimeMatchDocument(
+            ruleset,
+            imageName,
+            UserServer_MatchImage,
+            NULL,
+            path,
+            length,
+            &breakout_document_match) &&
+        breakout_document_match.matched) {
+        UserServer_RuntimeCopyMatch(&breakout_document_match, &has_target, outTarget, outTargetCch, outPriority, outHasMatch, outLevel);
+    }
+
+    return has_target;
+}
+
+static void UserServer_UpdateCachedBreakoutDocumentWinner(
+    const SBIE_RT_RULESET* ruleset,
+    const WCHAR* scopeImage,
+    const WCHAR* path,
+    ULONG path_len,
+    BOOLEAN* ioMatch,
+    LONG* ioPriority,
+    ULONG* ioLevel,
+    BOOLEAN* ioHasTarget,
+    WCHAR* ioTarget,
+    ULONG ioTargetCch)
+{
+    LONG cand_priority = -1;
+    ULONG cand_level = (ULONG)-1;
+    BOOLEAN cand_match = FALSE;
+    WCHAR cand_target[BOXNAME_COUNT] = { 0 };
+    BOOLEAN cand_has_target;
+
+    if (!scopeImage || !*scopeImage || !ioMatch || !ioPriority || !ioLevel || !ioHasTarget || !ioTarget || ioTargetCch == 0)
+        return;
+
+    cand_has_target = UserServer_GetCachedBreakoutDocumentTarget(
+        ruleset,
+        scopeImage,
+        path,
+        path_len,
+        cand_target,
+        _countof(cand_target),
+        &cand_priority,
+        &cand_match,
+        &cand_level);
+
+    if (cand_match && ProgramControl_ShouldReplaceTargetMatch(
+            *ioMatch ? 1 : 0,
+            (*ioPriority >= 0) ? 1 : 0,
+            *ioPriority,
+            *ioLevel,
+            (cand_priority >= 0) ? 1 : 0,
+            cand_priority,
+            cand_level)) {
+        *ioMatch = TRUE;
+        *ioPriority = cand_priority;
+        *ioLevel = cand_level;
+        *ioHasTarget = cand_has_target;
+        if (cand_has_target)
+            wcscpy_s(ioTarget, ioTargetCch, cand_target);
+        else
+            ioTarget[0] = L'\0';
+    }
+}
+
+static BOOLEAN UserServer_GetCachedBreakoutFolderResult(
+    const SBIE_RT_RULESET* ruleset,
+    const WCHAR* imageName,
+    const WCHAR* appPath,
+    ULONG appDirLen,
+    LONG* outPriority,
+    BOOLEAN* outHasMatch,
+    BOOLEAN* outHasTarget,
+    WCHAR* outTarget,
+    ULONG outTargetCch)
+{
+    SBIE_RT_MATCH force_folder_match;
+    SBIE_RT_MATCH breakout_folder_match;
+    BOOLEAN has_target = FALSE;
+
+    if (outPriority)
+        *outPriority = -1;
+    if (outHasMatch)
+        *outHasMatch = FALSE;
+    if (outHasTarget)
+        *outHasTarget = FALSE;
+    if (outTarget && outTargetCch)
+        outTarget[0] = L'\0';
+
+    if (!ruleset || !imageName || !*imageName || !appPath || !*appPath || !appDirLen)
+        return FALSE;
+
+    ProgramControl_RuntimeInitMatch(&force_folder_match);
+    ProgramControl_RuntimeInitMatch(&breakout_folder_match);
+
+    if (!ProgramControl_RuntimeMatchFolder(
+            ruleset,
+            imageName,
+            UserServer_MatchImage,
+            NULL,
+            appPath,
+            appDirLen,
+            &force_folder_match,
+            &breakout_folder_match) ||
+        !breakout_folder_match.matched)
+        return FALSE;
+
+    has_target = ProgramControl_RuntimeGetApplicableTargetBox(
+        &breakout_folder_match, NULL) ? TRUE : FALSE;
+    if (outHasMatch)
+        *outHasMatch = TRUE;
+    if (outPriority)
+        *outPriority = breakout_folder_match.has_priority ? (LONG)breakout_folder_match.priority : -1;
+    if (outHasTarget)
+        *outHasTarget = has_target;
+    if (has_target && outTarget && outTargetCch) {
+        const WCHAR* target_box = NULL;
+        ProgramControl_RuntimeGetApplicableTargetBox(&breakout_folder_match, &target_box);
+        wcscpy_s(outTarget, outTargetCch, target_box);
+    }
+
+    return TRUE;
+}
+
 // Scans ForceFolder rules to find if any match the directory containing path.
 // Returns TRUE if a match is found, and sets *outPriority to the Priority=N
 // value of the best-matching rule (-1 if no Priority= was specified).
@@ -256,10 +580,10 @@ static BOOLEAN UserServer_GetForceFolderPriority(
     if (!dir_len)
         return FALSE;
 
-    use_rule_extensions = UserServer_UseRuleExtensions(boxname, L"ForceFolder");
-
     if (outPriority)
         *outPriority = -1;
+
+    use_rule_extensions = UserServer_UseRuleExtensions(boxname, L"ForceFolder");
 
     dir_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, (dir_len + 1) * sizeof(WCHAR));
     if (!dir_path)
@@ -268,26 +592,50 @@ static BOOLEAN UserServer_GetForceFolderPriority(
     memcpy(dir_path, path, dir_len * sizeof(WCHAR));
     dir_path[dir_len] = L'\0';
 
-    BOOLEAN found = ProgramControl_CheckFolderSettingMatchFromConf(
-        boxname,
-        L"ForceFolder",
-        imageName,
-        dir_path,
-        dir_len,
-        1,
-        &has_priority,
-        &best_priority,
-        use_rule_extensions ? 1 : 0,
-        UserServer_MatchImage,
-        NULL,
-        UserServer_AdjustFolderRule,
-        NULL) ? TRUE : FALSE;
+    {
+        POOL* pool = Pool_Create();
+        SBIE_RT_RULESET ruleset;
+        SBIE_RT_MATCH force_folder_match;
+        SBIE_RT_MATCH breakout_folder_match;
+        BOOLEAN found = FALSE;
 
-    if (outPriority)
-        *outPriority = has_priority ? best_priority : -1;
+        if (pool) {
+            ProgramControl_RuntimeInitRuleset(&ruleset, pool);
+            ProgramControl_RuntimeInitMatch(&force_folder_match);
+            ProgramControl_RuntimeInitMatch(&breakout_folder_match);
 
-    HeapFree(GetProcessHeap(), 0, dir_path);
-    return found;
+            if (UserServer_LoadRuntimeRulesetForSetting(
+                    boxname,
+                    L"ForceFolder",
+                    use_rule_extensions ? 1 : 0,
+                    UserServer_AdjustFolderRule,
+                    NULL,
+                    &ruleset) &&
+                ProgramControl_RuntimeMatchFolder(
+                    &ruleset,
+                    imageName,
+                    UserServer_MatchImage,
+                    NULL,
+                    dir_path,
+                    dir_len,
+                    &force_folder_match,
+                    &breakout_folder_match) &&
+                force_folder_match.matched) {
+                found = TRUE;
+                has_priority = force_folder_match.has_priority ? TRUE : FALSE;
+                best_priority = force_folder_match.has_priority ? (LONG)force_folder_match.priority : -1;
+            }
+
+            ProgramControl_RuntimeFreeRuleset(&ruleset);
+            Pool_Delete(pool);
+        }
+
+        if (outPriority)
+            *outPriority = has_priority ? best_priority : -1;
+
+        HeapFree(GetProcessHeap(), 0, dir_path);
+        return found;
+    }
 }
 
 // Scans BreakoutFolder rules to find if any match the handler directory.
@@ -310,20 +658,44 @@ static BOOLEAN UserServer_GetBreakoutFolderPriority(
 
     use_rule_extensions = UserServer_UseRuleExtensions(boxname, L"BreakoutFolder");
 
-    found = ProgramControl_CheckFolderSettingMatchFromConf(
-        boxname,
-        L"BreakoutFolder",
-        imageName,
-        appPath,
-        appDirLen,
-        1,
-        &has_priority,
-        &best_priority,
-        use_rule_extensions ? 1 : 0,
-        UserServer_MatchImage,
-        NULL,
-        UserServer_AdjustFolderRule,
-        NULL) ? TRUE : FALSE;
+    {
+        POOL* pool = Pool_Create();
+        SBIE_RT_RULESET ruleset;
+        SBIE_RT_MATCH force_folder_match;
+        SBIE_RT_MATCH breakout_folder_match;
+
+        found = FALSE;
+        if (pool) {
+            ProgramControl_RuntimeInitRuleset(&ruleset, pool);
+            ProgramControl_RuntimeInitMatch(&force_folder_match);
+            ProgramControl_RuntimeInitMatch(&breakout_folder_match);
+
+            if (UserServer_LoadRuntimeRulesetForSetting(
+                    boxname,
+                    L"BreakoutFolder",
+                    use_rule_extensions ? 1 : 0,
+                    UserServer_AdjustFolderRule,
+                    NULL,
+                    &ruleset) &&
+                ProgramControl_RuntimeMatchFolder(
+                    &ruleset,
+                    imageName,
+                    UserServer_MatchImage,
+                    NULL,
+                    appPath,
+                    appDirLen,
+                    &force_folder_match,
+                    &breakout_folder_match) &&
+                breakout_folder_match.matched) {
+                found = TRUE;
+                has_priority = breakout_folder_match.has_priority ? TRUE : FALSE;
+                best_priority = breakout_folder_match.has_priority ? (LONG)breakout_folder_match.priority : -1;
+            }
+
+            ProgramControl_RuntimeFreeRuleset(&ruleset);
+            Pool_Delete(pool);
+        }
+    }
 
     if (outPriority)
         *outPriority = has_priority ? best_priority : -1;
@@ -336,6 +708,11 @@ static BOOLEAN UserServer_GetBreakoutFolderTarget(
     WCHAR* outTarget, ULONG outTargetCch)
 {
     BOOLEAN use_rule_extensions;
+    POOL* pool;
+    SBIE_RT_RULESET ruleset;
+    SBIE_RT_MATCH force_folder_match;
+    SBIE_RT_MATCH breakout_folder_match;
+    BOOLEAN has_target = FALSE;
 
     if (!outTarget || outTargetCch == 0)
         return FALSE;
@@ -346,21 +723,41 @@ static BOOLEAN UserServer_GetBreakoutFolderTarget(
         return FALSE;
 
     use_rule_extensions = UserServer_UseRuleExtensions(boxname, L"BreakoutFolder");
+    pool = Pool_Create();
+    if (!pool)
+        return FALSE;
 
-    return ProgramControl_GetFolderTargetFromConf(
-        boxname,
-        imageName,
-        appPath,
-        appDirLen,
-        outTarget,
-        outTargetCch,
-        NULL,
-        NULL,
-        use_rule_extensions ? 1 : 0,
-        UserServer_MatchImage,
-        NULL,
-        UserServer_AdjustFolderRule,
-        NULL) ? TRUE : FALSE;
+    ProgramControl_RuntimeInitRuleset(&ruleset, pool);
+    ProgramControl_RuntimeInitMatch(&force_folder_match);
+    ProgramControl_RuntimeInitMatch(&breakout_folder_match);
+
+    if (UserServer_LoadRuntimeRulesetForSetting(
+            boxname,
+            L"BreakoutFolder",
+            use_rule_extensions ? 1 : 0,
+            UserServer_AdjustFolderRule,
+            NULL,
+            &ruleset) &&
+        ProgramControl_RuntimeMatchFolder(
+            &ruleset,
+            imageName,
+            UserServer_MatchImage,
+            NULL,
+            appPath,
+            appDirLen,
+            &force_folder_match,
+            &breakout_folder_match) &&
+        breakout_folder_match.matched) {
+        const WCHAR* target_box = NULL;
+        if (ProgramControl_RuntimeGetApplicableTargetBox(&breakout_folder_match, &target_box)) {
+            wcscpy_s(outTarget, outTargetCch, target_box);
+            has_target = TRUE;
+        }
+    }
+
+    ProgramControl_RuntimeFreeRuleset(&ruleset);
+    Pool_Delete(pool);
+    return has_target;
 }
 
 // Scans ForceProcess rules to check if any match the given image name.
@@ -374,7 +771,12 @@ static BOOLEAN UserServer_QueryImageRuleMatch(
     BOOLEAN use_rule_extensions;
     const WCHAR* matchPath;
     ULONG matchPathLen;
-    int hasTarget = 0;
+    POOL* pool;
+    SBIE_RT_RULESET ruleset;
+    SBIE_RT_MATCH force_process_match;
+    SBIE_RT_MATCH force_children_match;
+    SBIE_RT_MATCH breakout_process_match;
+    SBIE_RT_MATCH* selected_match;
 
     if (!boxname || !setting || !imageName)
         return FALSE;
@@ -391,21 +793,60 @@ static BOOLEAN UserServer_QueryImageRuleMatch(
     if (outTarget && outTargetCch > 0)
         outTarget[0] = L'\0';
 
-    return ProgramControl_FindProcessSettingMatch(
-        boxname,
-        setting,
-        imageName,
-        matchPath,
-        matchPathLen,
-        1,
-        use_rule_extensions ? 1 : 0,
-        NULL,
-        NULL,
-        outTarget,
-        outTargetCch,
-        &hasTarget,
-        NULL,
-        outPriority) ? TRUE : FALSE;
+    pool = Pool_Create();
+    if (!pool)
+        return FALSE;
+
+    ProgramControl_RuntimeInitRuleset(&ruleset, pool);
+    ProgramControl_RuntimeInitMatch(&force_process_match);
+    ProgramControl_RuntimeInitMatch(&force_children_match);
+    ProgramControl_RuntimeInitMatch(&breakout_process_match);
+
+    if (!UserServer_LoadRuntimeRulesetForSetting(
+            boxname,
+            setting,
+            use_rule_extensions ? 1 : 0,
+            NULL,
+            NULL,
+            &ruleset) ||
+        !ProgramControl_RuntimeMatchProcess(
+            &ruleset,
+            imageName,
+            matchPath,
+            UserServer_MatchImage,
+            NULL,
+            &force_process_match,
+            &force_children_match,
+            &breakout_process_match)) {
+        ProgramControl_RuntimeFreeRuleset(&ruleset);
+        Pool_Delete(pool);
+        return FALSE;
+    }
+
+    if (_wcsicmp(setting, L"ForceProcess") == 0)
+        selected_match = &force_process_match;
+    else if (_wcsicmp(setting, L"ForceChildren") == 0)
+        selected_match = &force_children_match;
+    else
+        selected_match = &breakout_process_match;
+
+    if (!selected_match->matched) {
+        ProgramControl_RuntimeFreeRuleset(&ruleset);
+        Pool_Delete(pool);
+        return FALSE;
+    }
+
+    if (outPriority)
+        *outPriority = selected_match->has_priority ? (LONG)selected_match->priority : -1;
+    if (outTarget && outTargetCch > 0) {
+        const WCHAR* target_box = NULL;
+        if (ProgramControl_RuntimeGetApplicableTargetBox(selected_match, &target_box))
+            wcscpy_s(outTarget, outTargetCch, target_box);
+    }
+
+    ProgramControl_RuntimeFreeRuleset(&ruleset);
+    Pool_Delete(pool);
+    return TRUE;
 }
 
 static void UserServer_SelectBreakoutProcessFolderWinner(
@@ -1597,28 +2038,35 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
         LONG ff_priority = -1;
         LONG fp_priority = -1;
         LONG bp_priority = -1;
+        USERSERVER_BREAKOUT_RULE_LIST_SCOPE breakout_rule_scope;
+        if (breakout_rule_scope.pool) {
+            breakout_rule_scope.breakout_document_cache_complete =
+                UserServer_LoadRuntimeRulesetForSetting(
+                    boxname,
+                    L"BreakoutDocument",
+                    UserServer_UseRuleExtensions(boxname, L"BreakoutDocument") ? 1 : 0,
+                    UserServer_AdjustDocumentRule,
+                    NULL,
+                    &breakout_rule_scope.ruleset) ? TRUE : FALSE;
+            breakout_rule_scope.breakout_folder_cache_complete =
+                UserServer_LoadRuntimeRulesetForSetting(
+                    boxname,
+                    L"BreakoutFolder",
+                    UserServer_UseRuleExtensions(boxname, L"BreakoutFolder") ? 1 : 0,
+                    UserServer_AdjustFolderRule,
+                    NULL,
+                    &breakout_rule_scope.ruleset) ? TRUE : FALSE;
+        }
 
         WCHAR targetBox[BOXNAME_COUNT] = { 0 };
         BOOLEAN bd_match = FALSE;
         ULONG bd_level = (ULONG)-1;
         BOOLEAN has_target = FALSE;
 
-        UserServer_UpdateBreakoutDocumentWinner(
-            boxname,
-            image,
-            path_buff,
-            path_len,
-            &bd_match,
-            &bd_priority,
-            &bd_level,
-            &has_target,
-            targetBox,
-            BOXNAME_COUNT);
-
-        if (createdImage && _wcsicmp(createdImage, image) != 0) {
-            UserServer_UpdateBreakoutDocumentWinner(
-                boxname,
-                createdImage,
+        if (breakout_rule_scope.breakout_document_cache_complete) {
+            UserServer_UpdateCachedBreakoutDocumentWinner(
+                &breakout_rule_scope.ruleset,
+                image,
                 path_buff,
                 path_len,
                 &bd_match,
@@ -1627,38 +2075,101 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
                 &has_target,
                 targetBox,
                 BOXNAME_COUNT);
+        }
+        else {
+            UserServer_UpdateBreakoutDocumentWinner(
+                boxname,
+                image,
+                path_buff,
+                path_len,
+                &bd_match,
+                &bd_priority,
+                &bd_level,
+                &has_target,
+                targetBox,
+                BOXNAME_COUNT);
+        }
+
+        if (createdImage && _wcsicmp(createdImage, image) != 0) {
+            if (breakout_rule_scope.breakout_document_cache_complete) {
+                UserServer_UpdateCachedBreakoutDocumentWinner(
+                    &breakout_rule_scope.ruleset,
+                    createdImage,
+                    path_buff,
+                    path_len,
+                    &bd_match,
+                    &bd_priority,
+                    &bd_level,
+                    &has_target,
+                    targetBox,
+                    BOXNAME_COUNT);
+            }
+            else {
+                UserServer_UpdateBreakoutDocumentWinner(
+                    boxname,
+                    createdImage,
+                    path_buff,
+                    path_len,
+                    &bd_match,
+                    &bd_priority,
+                    &bd_level,
+                    &has_target,
+                    targetBox,
+                    BOXNAME_COUNT);
+            }
         }
 
         // Use handler-image scope only for shell-style document opens.
         if (!explicit_image_launch && policyImage != image) {
-            UserServer_UpdateBreakoutDocumentWinner(
-                boxname,
-                policyImage,
-                path_buff,
-                path_len,
-                &bd_match,
-                &bd_priority,
-                &bd_level,
-                &has_target,
-                targetBox,
-                BOXNAME_COUNT);
+            if (breakout_rule_scope.breakout_document_cache_complete) {
+                UserServer_UpdateCachedBreakoutDocumentWinner(
+                    &breakout_rule_scope.ruleset,
+                    policyImage,
+                    path_buff,
+                    path_len,
+                    &bd_match,
+                    &bd_priority,
+                    &bd_level,
+                    &has_target,
+                    targetBox,
+                    BOXNAME_COUNT);
+            }
+            else {
+                UserServer_UpdateBreakoutDocumentWinner(
+                    boxname,
+                    policyImage,
+                    path_buff,
+                    path_len,
+                    &bd_match,
+                    &bd_priority,
+                    &bd_level,
+                    &has_target,
+                    targetBox,
+                    BOXNAME_COUNT);
+            }
         }
 
         // ForceFolder: check if document's directory matches any ForceFolder rule.
         // Capture the match result for use as force_folder_match (scope-aware).
-        BOOLEAN ff_match = UserServer_GetForceFolderPriority(boxname, policyImage, path_buff, path_len, &ff_priority);
+        const BOOLEAN force_rules_enabled = UserServer_AreForceRulesEnabled(boxname);
+        BOOLEAN ff_match = FALSE;
+        if (force_rules_enabled)
+            ff_match = UserServer_GetForceFolderPriority(boxname, policyImage, path_buff, path_len, &ff_priority);
 
         // ForceProcess/BreakoutProcess target the effective launch image.
         ULONG policyPathLen = (policyPath && policyPath[0]) ? (ULONG)wcslen(policyPath) : 0;
-        BOOLEAN fp_match = UserServer_QueryImageRuleMatch(
-            boxname,
-            L"ForceProcess",
-            policyImage,
-            policyPath,
-            policyPathLen,
-            &fp_priority,
-            NULL,
-            0);
+        BOOLEAN fp_match = FALSE;
+        if (force_rules_enabled) {
+            fp_match = UserServer_QueryImageRuleMatch(
+                boxname,
+                L"ForceProcess",
+                policyImage,
+                policyPath,
+                policyPathLen,
+                &fp_priority,
+                NULL,
+                0);
+        }
 
         // BreakoutFolder checks the effective launch path (explicit image path or handler path).
         WCHAR bf_targetBox[BOXNAME_COUNT] = { 0 };
@@ -1668,19 +2179,33 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
             const WCHAR* policySlash = wcsrchr(policyPath, L'\\');
             if (policySlash && policySlash > policyPath) {
                 ULONG handlerDirLen = (ULONG)(policySlash - policyPath);
-                bf_match = UserServer_GetBreakoutFolderPriority(
-                    boxname,
-                    policyImage,
-                    policyPath,
-                    handlerDirLen,
-                    &bf_priority);
-                bf_has_target = UserServer_GetBreakoutFolderTarget(
-                    boxname,
-                    policyImage,
-                    policyPath,
-                    handlerDirLen,
-                    bf_targetBox,
-                    BOXNAME_COUNT);
+                if (breakout_rule_scope.breakout_folder_cache_complete) {
+                    bf_match = UserServer_GetCachedBreakoutFolderResult(
+                        &breakout_rule_scope.ruleset,
+                        policyImage,
+                        policyPath,
+                        handlerDirLen,
+                        &bf_priority,
+                        NULL,
+                        &bf_has_target,
+                        bf_targetBox,
+                        BOXNAME_COUNT);
+                }
+                else {
+                    bf_match = UserServer_GetBreakoutFolderPriority(
+                        boxname,
+                        policyImage,
+                        policyPath,
+                        handlerDirLen,
+                        &bf_priority);
+                    bf_has_target = UserServer_GetBreakoutFolderTarget(
+                        boxname,
+                        policyImage,
+                        policyPath,
+                        handlerDirLen,
+                        bf_targetBox,
+                        BOXNAME_COUNT);
+                }
             }
         }
 

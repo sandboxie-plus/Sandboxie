@@ -457,6 +457,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64EC'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\common\program_control_runtime.c">
+    </ClCompile>
     <ClCompile Include="..\..\common\pool.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
@@ -799,6 +801,7 @@
     <ClInclude Include="..\..\common\my_xeb.h" />
     <ClInclude Include="..\..\common\ntproto.h" />
     <ClInclude Include="..\..\common\program_control_rule.h" />
+    <ClInclude Include="..\..\common\program_control_runtime.h" />
     <ClInclude Include="..\..\common\str_util.h" />
     <ClInclude Include="..\..\common\list.h" />
     <ClInclude Include="..\..\common\netfw.h" />

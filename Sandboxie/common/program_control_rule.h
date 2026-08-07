@@ -23,6 +23,8 @@
 #ifndef _PROGRAM_CONTROL_RULE_H
 #define _PROGRAM_CONTROL_RULE_H
 
+#include <stddef.h>
+
 #ifndef PROGRAM_CONTROL_RULE_NO_CRT
 #include <wchar.h>
 #include <wctype.h>
@@ -47,6 +49,14 @@ typedef struct _SBIE_NORMALIZED_RULE
     int has_priority;
     long priority;
 } SBIE_NORMALIZED_RULE;
+
+typedef enum _SBIE_PROGRAM_RULE_KIND
+{
+    SBIE_RULE_KIND_NONE = 0,
+    SBIE_RULE_KIND_PROCESS = 1,
+    SBIE_RULE_KIND_FOLDER = 2,
+    SBIE_RULE_KIND_DOCUMENT = 3
+} SBIE_PROGRAM_RULE_KIND;
 
 typedef enum _SBIE_CONTEXT_KIND
 {
@@ -97,6 +107,37 @@ static __inline int ProgramControl_IsRuleExtensionSetting(const WCHAR *setting)
         _wcsicmp(setting, L"ForceFolder") == 0 ||
         _wcsicmp(setting, L"ForceChildren") == 0
     ) ? 1 : 0;
+}
+
+static __inline int ProgramControl_GetRuleKindForSetting(
+    const WCHAR *setting,
+    SBIE_PROGRAM_RULE_KIND *outKind)
+{
+    SBIE_PROGRAM_RULE_KIND kind = SBIE_RULE_KIND_NONE;
+
+    if (!setting)
+        return 0;
+
+    if (_wcsicmp(setting, L"BreakoutProcess") == 0 ||
+        _wcsicmp(setting, L"ForceProcess") == 0 ||
+        _wcsicmp(setting, L"ForceChildren") == 0) {
+        kind = SBIE_RULE_KIND_PROCESS;
+    }
+    else if (_wcsicmp(setting, L"BreakoutFolder") == 0 ||
+             _wcsicmp(setting, L"ForceFolder") == 0) {
+        kind = SBIE_RULE_KIND_FOLDER;
+    }
+    else if (_wcsicmp(setting, L"BreakoutDocument") == 0) {
+        kind = SBIE_RULE_KIND_DOCUMENT;
+    }
+    else {
+        return 0;
+    }
+
+    if (outKind)
+        *outKind = kind;
+
+    return 1;
 }
 
 static __inline int SbiePolicy_HasForceMatch(const SBIE_RULE_MATCH_SET *m)
@@ -202,7 +243,8 @@ static __inline int ProgramControl_MatchFolderRule(
 static __inline int ProgramControl_MatchFolderRuleNormalized(
     const SBIE_NORMALIZED_RULE *rule, const WCHAR *appPath, unsigned long appDirLen);
 
-static __inline int ProgramControl_WildcardMatchI(const WCHAR *pattern, const WCHAR *text)
+static __inline int ProgramControl_WildcardMatchNI(
+    const WCHAR *pattern, const WCHAR *text, size_t textLen)
 {
     if (!pattern || !text)
         return 0;
@@ -213,15 +255,16 @@ static __inline int ProgramControl_WildcardMatchI(const WCHAR *pattern, const WC
                 ++pattern;
             if (!*pattern)
                 return 1;
-            while (*text) {
-                if (ProgramControl_WildcardMatchI(pattern, text))
+            while (textLen) {
+                if (ProgramControl_WildcardMatchNI(pattern, text, textLen))
                     return 1;
                 ++text;
+                --textLen;
             }
-            return 0;
+            return ProgramControl_WildcardMatchNI(pattern, text, 0);
         }
 
-        if (!*text)
+        if (!textLen)
             return 0;
 
         if (*pattern != L'?' &&
@@ -236,9 +279,18 @@ static __inline int ProgramControl_WildcardMatchI(const WCHAR *pattern, const WC
 
         ++pattern;
         ++text;
+        --textLen;
     }
 
-    return (*text == L'\0');
+    return (textLen == 0);
+}
+
+static __inline int ProgramControl_WildcardMatchI(const WCHAR *pattern, const WCHAR *text)
+{
+    if (!text)
+        return 0;
+
+    return ProgramControl_WildcardMatchNI(pattern, text, wcslen(text));
 }
 
 static __inline int ProgramControl_RuleLooksLikePath(const WCHAR *rule)
@@ -619,9 +671,11 @@ static __inline int ProgramControl_ShouldAcceptTargetChoice(
     int overallHasMatch,
     int overallHasPriority,
     long overallBestPriority,
+    unsigned long overallBestLevel,
     int targetHasMatch,
     int targetHasPriority,
-    long targetBestPriority)
+    long targetBestPriority,
+    unsigned long targetBestLevel)
 {
     if (overallHasMatch && overallHasPriority) {
         if (!targetHasMatch)
@@ -632,57 +686,110 @@ static __inline int ProgramControl_ShouldAcceptTargetChoice(
             return 0;
     }
 
+    if (overallHasMatch && targetHasMatch &&
+        overallHasPriority == targetHasPriority &&
+        (!overallHasPriority || overallBestPriority == targetBestPriority) &&
+        targetBestLevel > overallBestLevel) {
+        return 0;
+    }
+
     return targetHasMatch ? 1 : 0;
+}
+
+static __inline WCHAR *ProgramControl_ParseImageScopeInPlace(
+    WCHAR *value,
+    WCHAR **outScopeRule,
+    int *outHasScope,
+    int *outScopeInvert,
+    unsigned long *outLevel)
+{
+    WCHAR *tmp;
+    WCHAR *scopeRule = NULL;
+    int scopeInvert = 0;
+    unsigned long level = 2;
+
+    if (outScopeRule)
+        *outScopeRule = NULL;
+    if (outHasScope)
+        *outHasScope = 0;
+    if (outScopeInvert)
+        *outScopeInvert = 0;
+    if (outLevel)
+        *outLevel = 2;
+
+    if (!value || !*value)
+        return NULL;
+
+    tmp = wcschr(value, L',');
+    if (tmp) {
+        *tmp = L'\0';
+
+        if (*value) {
+            scopeRule = value;
+            if (*scopeRule == L'!') {
+                scopeInvert = 1;
+                ++scopeRule;
+            }
+
+            if (scopeRule && *scopeRule) {
+                if (scopeRule[0] == L'*' && scopeRule[1] == L'\0')
+                    level = 2;
+                else
+                    level = scopeInvert ? 1 : 0;
+            }
+            else {
+                scopeRule = NULL;
+                scopeInvert = 0;
+                level = 2;
+            }
+        }
+
+        value = tmp + 1;
+    }
+
+    if (!*value)
+        return NULL;
+
+    if (outScopeRule)
+        *outScopeRule = scopeRule;
+    if (outHasScope)
+        *outHasScope = scopeRule ? 1 : 0;
+    if (outScopeInvert)
+        *outScopeInvert = scopeInvert;
+    if (outLevel)
+        *outLevel = level;
+
+    return value;
 }
 
 static __inline WCHAR *ProgramControl_MatchImageScopeAndGetValueEx(
     WCHAR *value, const WCHAR *imageName, BreakoutMatchImageFn matchImage, void *context,
     unsigned long *outLevel)
 {
-    WCHAR *tmp = wcschr(value, L',');
+    WCHAR *scopeRule = NULL;
+    int hasScope = 0;
+    int scopeInvert = 0;
+    int match;
 
-    if (tmp) {
-        int inv;
-        int match;
-        size_t len;
+    value = ProgramControl_ParseImageScopeInPlace(
+        value,
+        &scopeRule,
+        &hasScope,
+        &scopeInvert,
+        outLevel);
+    if (!value)
+        return NULL;
 
+    if (hasScope) {
         if (!imageName || !matchImage)
             return NULL;
 
-        if (*value == L'!') {
-            inv = 1;
-            ++value;
-        }
-        else
-            inv = 0;
-
-        len = (size_t)(tmp - value);
-        if (len) {
-            WCHAR saved = value[len];
-            value[len] = L'\0';
-            match = matchImage(value, imageName, context);
-            value[len] = saved;
-            if (inv)
-                match = !match;
-            if (!match)
-                return NULL;
-
-            if (outLevel) {
-                if (len == 1 && *value == L'*')
-                    *outLevel = 2;
-                else
-                    *outLevel = inv ? 1 : 0;
-            }
-        }
-
-        value = tmp + 1;
+        match = matchImage(scopeRule, imageName, context);
+        if (scopeInvert)
+            match = !match;
+        if (!match)
+            return NULL;
     }
-    else if (outLevel) {
-        *outLevel = 2;
-    }
-
-    if (!*value)
-        return NULL;
 
     return value;
 }
@@ -704,6 +811,29 @@ static __inline void ProgramControl_TrimTrailingBackslashes(WCHAR *value)
     len = wcslen(value);
     while (len && value[len - 1] == L'\\')
         value[--len] = L'\0';
+}
+
+static __inline int ProgramControl_MatchDocumentRule(
+    const WCHAR *rule,
+    const WCHAR *docPath,
+    unsigned long docPathLen)
+{
+    size_t ruleLen;
+
+    if (!rule || !*rule || !docPath || !*docPath)
+        return 0;
+
+    if (!docPathLen)
+        docPathLen = (unsigned long)wcslen(docPath);
+
+    if (wcschr(rule, L'*') || wcschr(rule, L'?'))
+        return ProgramControl_WildcardMatchI(rule, docPath);
+
+    ruleLen = wcslen(rule);
+    if ((unsigned long)ruleLen != docPathLen)
+        return 0;
+
+    return (_wcsnicmp(rule, docPath, ruleLen) == 0);
 }
 
 #ifndef PROGRAM_CONTROL_RULE_NO_QUERY_HELPERS
@@ -823,6 +953,7 @@ static __inline int ProgramControl_GetFolderTargetFromConf(
     int overallHasMatch = 0;
     int overallHasPriority = 0;
     long overallBestPriority = -1;
+    unsigned long overallBestLevel = (unsigned long)-1;
 
     if (!outTarget || !outTargetCch)
         return 0;
@@ -860,10 +991,18 @@ static __inline int ProgramControl_GetFolderTargetFromConf(
 
         if (ProgramControl_MatchFolderRuleNormalized(&rule, appPath, appDirLen)
             || ProgramControl_MatchFolderRuleNormalized(&rule, appPath, appPathLen)) {
-            overallHasMatch = 1;
-            if (rule.has_priority && (!overallHasPriority || rule.priority < overallBestPriority)) {
-                overallHasPriority = 1;
-                overallBestPriority = rule.priority;
+            if (ProgramControl_ShouldReplaceTargetMatch(
+                    overallHasMatch,
+                    overallHasPriority,
+                    overallBestPriority,
+                    overallBestLevel,
+                    rule.has_priority,
+                    rule.priority,
+                    level)) {
+                overallHasMatch = 1;
+                overallHasPriority = rule.has_priority;
+                overallBestPriority = rule.has_priority ? rule.priority : -1;
+                overallBestLevel = level;
             }
 
             if (!rule.has_target_box || !rule.target_box || !*rule.target_box)
@@ -891,9 +1030,11 @@ static __inline int ProgramControl_GetFolderTargetFromConf(
             overallHasMatch,
             overallHasPriority,
             overallBestPriority,
+            overallBestLevel,
             hasMatch,
             bestHasPriority,
-            bestPriority)) {
+            bestPriority,
+            bestLevel)) {
         return 0;
     }
 
@@ -971,29 +1112,6 @@ static __inline int ProgramControl_GetFolderPriorityFromConf(
         boxname, L"BreakoutFolder", imageName, appPath, appDirLen,
         outHasPriority, outPriority, useRuleExtensions, matchImage, matchContext,
         adjustRule, adjustContext);
-}
-
-static __inline int ProgramControl_MatchDocumentRule(
-    const WCHAR *rule,
-    const WCHAR *docPath,
-    unsigned long docPathLen)
-{
-    size_t ruleLen;
-
-    if (!rule || !*rule || !docPath || !*docPath)
-        return 0;
-
-    if (!docPathLen)
-        docPathLen = (unsigned long)wcslen(docPath);
-
-    if (wcschr(rule, L'*') || wcschr(rule, L'?'))
-        return ProgramControl_WildcardMatchI(rule, docPath);
-
-    ruleLen = wcslen(rule);
-    if ((unsigned long)ruleLen != docPathLen)
-        return 0;
-
-    return (_wcsnicmp(rule, docPath, ruleLen) == 0);
 }
 
 static __inline int ProgramControl_FindDocumentSettingMatch(
@@ -1180,7 +1298,7 @@ static __inline int ProgramControl_MatchFolderRule(
         return 0;
 
     if (wcschr(rule, L'*') || wcschr(rule, L'?'))
-        return ProgramControl_WildcardMatchI(rule, appPath);
+        return ProgramControl_WildcardMatchNI(rule, appPath, appDirLen);
 
     // Allow prefix matching: rule "C:\Folder" must match "C:\Folder"
     // (direct child) as well as "C:\Folder\sub" (subdirectory child).
@@ -1321,7 +1439,7 @@ static __inline int ProgramControl_MatchFolderRuleNormalized(
     while (baseLen && rule->base_rule[baseLen - 1] == L'\\')
         --baseLen;
 
-    if ((unsigned long)baseLen >= appDirLen)
+    if ((unsigned long)baseLen > appDirLen)
         return 1;
 
     {

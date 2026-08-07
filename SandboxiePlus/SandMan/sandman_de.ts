@@ -1434,7 +1434,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="51"/>
         <source>Clear search</source>
-        <translation type="unfinished"></translation>
+        <translation>Leere Suche</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="126"/>
@@ -9154,7 +9154,7 @@ Dies wird gemacht, um bösartige Prozesse innerhalb der Sandbox daran zu hindern
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</source>
-        <translation>Wenn ein äußerer Rahmen durch den Bildschirmrand abgeschnitten werden würde, wird dieser stattdessen innerhalb von maximierten oder angedockten Fenstern angezeigt.</translation>
+        <translation>Sollte ein äußerer Rahmen durch den Bildschirmrand abgeschnitten werden, wird dieser bei maximierten oder angedockten Fenstern stattdessen innen angezeigt.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="379"/>

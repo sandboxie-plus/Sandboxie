@@ -2148,3 +2148,4 @@ _FX VOID Gui_UninitMisc(void)
     }
 
     DeleteCriticalSection(&Gui_WinEventHooksCritSec);
+}

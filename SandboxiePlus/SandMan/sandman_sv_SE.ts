@@ -1643,12 +1643,17 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
 <context>
     <name>CFinder</name>
     <message>
-        <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="51"/>
+        <source>Clear search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="126"/>
         <source>Expand all</source>
         <translation>Expandera alla</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="132"/>
         <source>Collapse all</source>
         <translation>Dra samman alla</translation>
     </message>

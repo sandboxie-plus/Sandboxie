@@ -1542,12 +1542,17 @@ You can use %USER% to save each users sandbox to an own folder.</source>
 <context>
     <name>CFinder</name>
     <message>
-        <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="51"/>
+        <source>Clear search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="126"/>
         <source>Expand all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="132"/>
         <source>Collapse all</source>
         <translation type="unfinished"></translation>
     </message>

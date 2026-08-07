@@ -1432,12 +1432,17 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
 <context>
     <name>CFinder</name>
     <message>
-        <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="51"/>
+        <source>Clear search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="126"/>
         <source>Expand all</source>
         <translation>Alle aufklappen</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="132"/>
         <source>Collapse all</source>
         <translation>Alle zuklappen</translation>
     </message>

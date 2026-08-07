@@ -177,6 +177,13 @@ static bool IsWindowMaximizedOrArranged(SBoxBorder* m, HWND hWnd)
 	return IsZoomed(hWnd) || (m->IsWindowArranged && m->IsWindowArranged(hWnd));
 }
 
+static bool IsBorderInsideMaximizedOrArranged(SBoxBorder* m, CSandBox* pBox, HWND hWnd, bool outside, int labelMode)
+{
+	return pBox && (outside || labelMode == -1) &&
+		IsWindowMaximizedOrArranged(m, hWnd) &&
+		pBox->GetBool("BorderInsideMaximized", true);
+}
+
 static bool RectVectorEquals(const std::vector<RECT>& a, const std::vector<RECT>& b)
 {
 	if (a.size() != b.size())
@@ -1182,7 +1189,10 @@ void CBoxBorder::TimerProc()
 	HWND hWnd = foregroundForTick;
 	ULONG Style = hWnd ? GetWindowLong(hWnd, GWL_STYLE) : 0;
 	ULONG ExStyle = hWnd ? GetWindowLong(hWnd, GWL_EXSTYLE) : 0;
-	if (!hWnd || !(Style & WS_VISIBLE)) {
+	if (!hWnd || !(Style & WS_VISIBLE) || IsIconic(hWnd)) {
+		m->ActiveWnd = NULL;
+		m->ActivePid = 0;
+		m->ActiveExStyle = 0;
 		HideBorderWindow(m->MainBorder);
 		return;
 	}
@@ -1208,8 +1218,7 @@ void CBoxBorder::TimerProc()
 	bool boxOutside = false;
 	if (pProcessBox)
 		GetBoxBorderSettings(pProcessBox.data(), boxColor, boxWidth, boxAlpha, boxMode, boxLabelMode, boxLabelWidth, boxOutside);
-	bool insideMaximizedOrArranged = boxOutside && IsWindowMaximizedOrArranged(m, hWnd) &&
-		pProcessBox->GetBool("BorderInsideMaximized", true);
+	bool insideMaximizedOrArranged = IsBorderInsideMaximizedOrArranged(m, pProcessBox.data(), hWnd, boxOutside, boxLabelMode);
 	if (insideMaximizedOrArranged) {
 		boxOutside = false;
 		if (boxLabelMode != 0)
@@ -1217,7 +1226,9 @@ void CBoxBorder::TimerProc()
 	}
 
 	bool outsideChanged = m->MainBorder.outside != boxOutside;
-	if (m->pCurrentBox != pProcessBox.data() || m->CachedFocusBoxMode != boxMode || outsideChanged)
+	bool labelModeChanged = boxMode != eBorderAllWindows && boxMode != eBorderAllWindowsLabelOnly &&
+		m->MainBorder.labelMode != boxLabelMode;
+	if (m->pCurrentBox != pProcessBox.data() || m->CachedFocusBoxMode != boxMode || outsideChanged || labelModeChanged)
 	{
 		m->pCurrentBox = pProcessBox.data();
 		m->CachedFocusBoxMode = boxMode;
@@ -1271,7 +1282,7 @@ void CBoxBorder::TimerProc()
 		RECT rect;
 		GetActiveWindowRect(hWnd, &rect);
 
-		if (pid == m->ActivePid && hWnd == m->ActiveWnd) {
+		if (m->MainBorder.visible && pid == m->ActivePid && hWnd == m->ActiveWnd) {
 			if (RectEquals(rect, m->ActiveRect)) {
 				if ((!topMostStateChanged) && (!m->TitleState || m->TitleState == (CheckMousePointer() ? 1 : -1))) {
 					// Affinity may have changed even if geometry is unchanged; apply now so we don't
@@ -1842,6 +1853,8 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			HashMix64(sceneHash, (ULONGLONG)(style.labelOnly ? 1ULL : 0ULL));
 			if (style.enabled)
 			{
+				bool insideMaximizedOrArranged = IsBorderInsideMaximizedOrArranged(m, wnd.pBox, wnd.hWnd, style.outside, style.labelMode);
+				HashMix64(sceneHash, (ULONGLONG)(insideMaximizedOrArranged ? 1ULL : 0ULL));
 				bool coverForAffinity = IsCoverBoxedWindowsEnabled(m, wnd.pBox, nowEnum);
 				bool applyCaptureAffinity = wnd.pBox->GetBool("HideBordersFromCapture", coverForAffinity, true);
 				bool excludeTaskbar = wnd.pBox->GetBool("BorderExcludeTaskbar", globalBorderExcludeTaskbar);
@@ -1919,8 +1932,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			bool coverForAffinity = IsCoverBoxedWindowsEnabled(m, wnd.pBox, nowEnum);
 			bool applyCaptureAffinity = wnd.pBox->GetBool("HideBordersFromCapture", coverForAffinity, true);
 			bool excludeTaskbar = wnd.pBox->GetBool("BorderExcludeTaskbar", globalBorderExcludeTaskbar);
-			bool insideMaximizedOrArranged = style.outside && IsWindowMaximizedOrArranged(m, wnd.hWnd) &&
-				wnd.pBox->GetBool("BorderInsideMaximized", true);
+			bool insideMaximizedOrArranged = IsBorderInsideMaximizedOrArranged(m, wnd.pBox, wnd.hWnd, style.outside, style.labelMode);
 			bool effectiveOutside = style.outside && !insideMaximizedOrArranged;
 			int effectiveLabelMode = insideMaximizedOrArranged && style.labelMode != 0 ? 1 : style.labelMode;
 			enabledWindowCount++;

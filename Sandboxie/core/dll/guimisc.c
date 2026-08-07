@@ -2117,6 +2117,28 @@ _FX VOID Gui_UninitMisc(void)
         }
     }
     LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+
+    if (! handles && count) {
+        //
+        // Allocation failure: fall back to unhooking one-by-one without holding
+        // the critical section, so we don't leave live hooks after deleting it.
+        //
+        while (1) {
+            EnterCriticalSection(&Gui_WinEventHooksCritSec);
+            ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
+            if (ghk)
+                List_Remove(&Gui_WinEventHooks, ghk);
+            LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+
+            if (! ghk)
+                break;
+
+            __sys_UnhookWinEvent(ghk->hHook);
+            Dll_Free(ghk);
+        }
+        count = 0;
+    }
+
     Gui_WinEventHooksInitialized = FALSE;
 
     if (handles) {
@@ -2126,4 +2148,3 @@ _FX VOID Gui_UninitMisc(void)
     }
 
     DeleteCriticalSection(&Gui_WinEventHooksCritSec);
-}

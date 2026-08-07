@@ -515,9 +515,11 @@ MSG_HEADER *FileServer::GetAllHandles(HANDLE idProcess)
 
         if (! rpl)
             status = STATUS_INSUFFICIENT_RESOURCES;
-        else {
+		else {
 
-            for (i = 0; i < info->Count; ++i) {
+			rpl->num_handles = 0;
+
+			for (i = 0; i < info->Count; ++i) {
 
                 if (info->HandleInfo[i].ProcessId == (ULONG_PTR)idProcess) {
 

@@ -1341,14 +1341,16 @@ Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
     <message>
         <location filename="Views/FileView.cpp" line="840"/>
         <source>Delete Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="841"/>
         <source>The selected files could not be deleted.
 
 Error: 0x%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Die ausgewählten Dateien konnten nicht gelöscht werden.
+
+Fehler: 0x%1</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="870"/>

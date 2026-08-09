@@ -2,7 +2,7 @@
 
 #include "SharedAccessWidget.h"
 
-#include "../../QSbieAPI/SbieIni.h"
+#include "../QSbieAPI/Sandboxie/SbieIni.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>

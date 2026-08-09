@@ -2,6 +2,7 @@
 
 #include "AccessControlWidget.h"
 
+#include "../MiscHelpers/Common/Settings.h"
 #include <QTreeWidget>
 #include <QLineEdit>
 #include <QComboBox>

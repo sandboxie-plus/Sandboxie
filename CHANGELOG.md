@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed SandMan File Panel column widths resetting when switching between boxes [#5473](https://github.com/sandboxie-plus/Sandboxie/issues/5473)
 - fixed a bug that could cause the list of open handles to be reported incorrectly [#5502](https://github.com/sandboxie-plus/Sandboxie/pull/5502) (thanks NSShannon)
-- fixed SandMan File Panel and Browse Files blocking Recycle Bin deletion of expanded folder trees, and made file-name sorting case-insensitive [#5499](https://github.com/sandboxie-plus/Sandboxie/issues/5499)
+- fixed SandMan File Panel and Browse Files blocking Recycle Bin deletion of expanded folder trees, made file-name sorting case-insensitive, and made folders sort before files [#5499](https://github.com/sandboxie-plus/Sandboxie/issues/5499)
 - fixed SandMan Box Groups collapsing during refreshes, restarts, and sandbox moves despite remembered group state [#5477](https://github.com/sandboxie-plus/Sandboxie/issues/5477)
 - fixed driver incompatibility with latest Windows Insider build
 - fixed SandMan File Panel treating registry hive log files such as `RegHive.LOG1` and `RegHive.LOG2` as descendants of `RegHive` because of their shared filename prefix, causing them to be omitted when deleting the selection together [#4788](https://github.com/sandboxie-plus/Sandboxie/issues/4788)

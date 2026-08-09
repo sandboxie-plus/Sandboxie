@@ -194,6 +194,19 @@ bool CFileFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex& 
 	return false;
 }
 
+bool CFileFilterProxyModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
+{
+    QFileSystemModel* fileModel = qobject_cast<QFileSystemModel*>(sourceModel());
+    if (fileModel) {
+        bool leftIsDir = fileModel->isDir(source_left);
+        bool rightIsDir = fileModel->isDir(source_right);
+        if (leftIsDir != rightIsDir)
+            return sortOrder() == Qt::AscendingOrder ? leftIsDir : !leftIsDir;
+    }
+
+    return QSortFilterProxyModel::lessThan(source_left, source_right);
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 // CFileView
 

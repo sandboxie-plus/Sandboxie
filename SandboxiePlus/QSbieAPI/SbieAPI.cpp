@@ -2465,8 +2465,8 @@ bool CSbieAPI::TestSignature(const QByteArray& Data, const QByteArray& Signature
 
 bool CSbieAPI::GetLog()
 {
-	wchar_t* Buffer[4*1024];
-	ULONG Length = ARRAYSIZE(Buffer);
+	WCHAR Buffer[4 * 1024];
+	ULONG Length = sizeof(Buffer);
 
 	ULONG MsgCode = 0;
 	ULONG ProcessId = 0;

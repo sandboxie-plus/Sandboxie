@@ -1144,7 +1144,7 @@ bool MountManager::AcquireBoxRoot(const WCHAR* boxname, const WCHAR* reg_root, c
 					SbieApi_LogEx(session_id, 2238, L"");
                 else {
                     WCHAR drvLetter[32] = { 0 };
-                    SbieApi_QueryConf(NULL, L"RamDiskLetter", 0, drvLetter, ARRAYSIZE(drvLetter));
+                    SbieApi_QueryConf(NULL, L"RamDiskLetter", 0, drvLetter, sizeof(drvLetter));
                     m_RamDisk = MountImDisk(L"", NULL, sizeKb, session_id, *drvLetter ? drvLetter : NULL);
                 }
             }

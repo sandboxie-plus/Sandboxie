@@ -670,7 +670,7 @@ HBRUSH CLayoutPropertyPage::OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor)
 
         bool MakeTransparent = true;
         WCHAR clsnm[130];
-        if (GetClassName(pWnd->m_hWnd, clsnm, 128 * sizeof(WCHAR)) &&
+        if (GetClassName(pWnd->m_hWnd, clsnm, _countof(clsnm)) &&
                 _wcsicmp(clsnm, L"Edit") == 0) {
             //
             // WM_CTLCOLORSTATIC (nCtlColor == CTLCOLOR_STATIC)

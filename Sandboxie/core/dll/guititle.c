@@ -77,7 +77,7 @@ _FX BOOLEAN Gui_InitTitle(HMODULE module)
 
         NTSTATUS status;
 		WCHAR BoxAlias[MAX_PATH];
-		status = SbieApi_QueryConfAsIs(NULL, L"BoxAlias", 0, BoxAlias, ARRAYSIZE(BoxAlias));
+		status = SbieApi_QueryConfAsIs(NULL, L"BoxAlias", 0, BoxAlias, sizeof(BoxAlias));
         if (NT_SUCCESS(status) && *BoxAlias)
             BoxName = BoxAlias;
 

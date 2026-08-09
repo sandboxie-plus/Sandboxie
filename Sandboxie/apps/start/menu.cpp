@@ -1008,6 +1008,8 @@ _FX BOOL WriteStartMenuResult(const WCHAR *MapName, const WCHAR *Command)
     HANDLE hMapping;
     WCHAR *buf;
     WCHAR *IconPath;
+    WCHAR IconPathBuffer[
+        SBIE_DLL_HANDLE_PATH_BUFFER_BYTES / sizeof(WCHAR)];
     ULONG len, IconIndex;
     BOOLEAN GetLinkIconPathAndNumber(
         WCHAR *LinkPath, WCHAR **IconPath, ULONG *IconIndex);
@@ -1066,11 +1068,15 @@ _FX BOOL WriteStartMenuResult(const WCHAR *MapName, const WCHAR *Command)
 
                 BOOLEAN IsBoxedPath;
                 if (0 == SbieDll_GetHandlePath(
-                                    hFile, buf + 1024, &IsBoxedPath)) {
-                    if (SbieDll_TranslateNtToDosPath(buf + 1024)) {
-
-                        *(ULONG *)(buf + 1020) = IconIndex;
-                        ok = TRUE;
+                                    hFile, IconPathBuffer, &IsBoxedPath)) {
+                    if (SbieDll_TranslateNtToDosPath(IconPathBuffer)) {
+                        len = wcslen(IconPathBuffer);
+                        if (len < 1024) {
+                            wmemcpy(buf + 1024, IconPathBuffer, len);
+                            buf[1024 + len] = L'\0';
+                            *(ULONG *)(buf + 1020) = IconIndex;
+                            ok = TRUE;
+                        }
                     }
                 }
 

@@ -8668,7 +8668,7 @@ _FX HANDLE File_GetTrueHandle(HANDLE FileHandle, BOOLEAN *pIsOpenPath)
 
 
 _FX ULONG SbieDll_GetHandlePath(
-    HANDLE FileHandle, WCHAR *OutWchar8192, BOOLEAN *IsBoxedPath)
+    HANDLE FileHandle, WCHAR *OutPath, BOOLEAN *IsBoxedPath)
 {
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
@@ -8702,7 +8702,7 @@ _FX ULONG SbieDll_GetHandlePath(
     } else if (status == STATUS_BAD_INITIAL_PC)
         status = STATUS_SUCCESS;
 
-    if (NT_SUCCESS(status) && OutWchar8192) {
+    if (NT_SUCCESS(status) && OutPath) {
 
         ULONG len;
         WCHAR *src = TruePath;
@@ -8713,10 +8713,10 @@ _FX ULONG SbieDll_GetHandlePath(
         }
 
         len = wcslen(src);
-        if (len > 8192 / sizeof(WCHAR) - 4)
-            len = 8192 / sizeof(WCHAR) - 4;
-        wmemcpy(OutWchar8192, src, len);
-        OutWchar8192[len] = L'\0';
+        if (len > SBIE_DLL_HANDLE_PATH_BUFFER_BYTES / sizeof(WCHAR) - 4)
+            len = SBIE_DLL_HANDLE_PATH_BUFFER_BYTES / sizeof(WCHAR) - 4;
+        wmemcpy(OutPath, src, len);
+        OutPath[len] = L'\0';
     }
 
     Dll_PopTlsNameBuffer(TlsData);

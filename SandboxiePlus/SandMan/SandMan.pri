@@ -33,6 +33,7 @@ HEADERS += ./stdafx.h \
     ./Windows/SnapshotsWindow.h \
     ./Windows/SettingsWindow.h \
     ./Windows/OptionsWindow.h \
+    ./Windows/SharedAccessWidget.h \
     ./Windows/PendingChanges.h \
     ./Windows/EditorSettingsWindow.h \
     ./Windows/SelectBoxWindow.h \
@@ -40,6 +41,7 @@ HEADERS += ./stdafx.h \
     ./Windows/TestProxyDialog.h \
     ./OnlineUpdater.h \
     ./Wizards/NewBoxWizard.h \
+    ./Wizards/AccessControlWidget.h \
     ./Wizards/TemplateWizard.h \
     ./Wizards/SetupWizard.h \
     ./Wizards/BoxAssistant.h \
@@ -89,6 +91,7 @@ SOURCES += ./main.cpp \
     ./Helpers/TabOrder.cpp \
     ./Helpers/MiniDumpFilter.cpp \
     ./Windows/OptionsWindow.cpp \
+    ./Windows/SharedAccessWidget.cpp \
     ./Windows/EditorSettingsWindow.cpp \
     ./Windows/PopUpWindow.cpp \
     ./Windows/RecoveryWindow.cpp \
@@ -99,6 +102,7 @@ SOURCES += ./main.cpp \
     ./Windows/TestProxyDialog.cpp \
     ./OnlineUpdater.cpp \
     ./Wizards/NewBoxWizard.cpp \
+    ./Wizards/AccessControlWidget.cpp \
     ./Wizards/TemplateWizard.cpp \
     ./Wizards/SetupWizard.cpp \
     ./Wizards/BoxAssistant.cpp \

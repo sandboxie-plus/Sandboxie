@@ -1,11 +1,13 @@
 #include "stdafx.h"
 
 #include "NewBoxWizard.h"
+#include "AccessControlWidget.h"
 #include "../MiscHelpers/Common/Common.h"
 #include "../Windows/SettingsWindow.h"
 #include "../SandMan.h"
 #include "Helpers/WinAdmin.h"
 #include <QButtonGroup>
+#include <QVBoxLayout>
 #include "../QSbieAPI/SbieUtils.h"
 #include "../Views/SbieView.h"
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
@@ -19,6 +21,7 @@ CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
 {
     setPage(Page_Type, new CBoxTypePage(bAlowTemp));
     setPage(Page_Files, new CFilesPage);
+    setPage(Page_AccessControl, new CAccessControlPage);
     setPage(Page_Isolation, new CIsolationPage);
     setPage(Page_Advanced, new CAdvancedPage);
     setPage(Page_Summary, new CSummaryPage);
@@ -283,9 +286,9 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                 pBox->ImBoxCreate(ImageSize / 1024, Password);
 
             {
-                CFilesPage* pFilesPage = (CFilesPage*)page(Page_Files);
-                if (pFilesPage) {
-                    for (const auto& entry : pFilesPage->GetFilePathEntries())
+                CAccessControlPage* pAccessPage = (CAccessControlPage*)page(Page_AccessControl);
+                if (pAccessPage) {
+                    for (const auto& entry : pAccessPage->GetFileAccessEntries())
                         pBox->AppendText(entry.second, entry.first);
                 }
             }
@@ -673,45 +676,11 @@ CFilesPage::CFilesPage(QWidget *parent)
     layout->addWidget(pAutoRecover, row++, 1, 1, 3);
     registerField("autoRecover", pAutoRecover);
 
-    // Preconfigured File Control Paths
-    QLabel* pNormalLabel = new QLabel(tr("Preconfigured File Control Paths"), this);
-    QFont fntNormal = pNormalLabel->font();
-    fntNormal.setBold(true);
-    pNormalLabel->setFont(fntNormal);
-    layout->addWidget(pNormalLabel, row++, 0);
-
-    m_pNormalPaths = new QTreeWidget();
-    m_pNormalPaths->setHeaderLabels({ tr("Path"), tr("Type") });
-    m_pNormalPaths->setMaximumHeight(120);
-    m_pNormalPaths->setRootIsDecorated(false);
-    layout->addWidget(m_pNormalPaths, row++, 1, 1, 3);
-
-    QHBoxLayout* pNormalLayout = new QHBoxLayout();
-    pNormalLayout->setContentsMargins(0,0,0,0);
-    m_pNormalPathInput = new QLineEdit();
-    m_pNormalPathInput->setPlaceholderText(tr("Enter file or folder path..."));
-    pNormalLayout->addWidget(m_pNormalPathInput, 1);
-    QPushButton* pBrowseBtn = new QPushButton("...");
-    pBrowseBtn->setMaximumWidth(25);
-    connect(pBrowseBtn, &QPushButton::clicked, [this]() {
-        QString FilePath = QFileDialog::getOpenFileName(this, tr("Select File"));
-        if (!FilePath.isEmpty())
-            this->m_pNormalPathInput->setText(FilePath.replace("/", "\\"));
-    });
-    pNormalLayout->addWidget(pBrowseBtn);
-    m_pTypeCombo = new QComboBox();
-    m_pTypeCombo->addItem("Block", "BlockFilePath");
-    m_pTypeCombo->addItem("Normal", "NormalFilePath");
-    m_pTypeCombo->addItem("Write", "WriteFilePath");
-    m_pTypeCombo->addItem("Read", "ReadFilePath");
-    pNormalLayout->addWidget(m_pTypeCombo);
-    QPushButton* pAddBtn = new QPushButton(tr("Add"));
-    connect(pAddBtn, &QPushButton::clicked, this, &CFilesPage::OnAddNormalPath);
-    pNormalLayout->addWidget(pAddBtn);
-    QPushButton* pRemoveBtn = new QPushButton(tr("Remove"));
-    connect(pRemoveBtn, &QPushButton::clicked, this, &CFilesPage::OnRemoveNormalPath);
-    pNormalLayout->addWidget(pRemoveBtn);
-    layout->addLayout(pNormalLayout, row++, 1, 1, 3);
+    m_pSetAccessControl = new QCheckBox(tr("Configure file access control on the next page"));
+    m_pSetAccessControl->setToolTip(tr("When checked, the wizard will show an additional page on which file access control entries "
+        "can be added to restrict or define the access of sandboxed processes to files and folders."));
+    m_pSetAccessControl->setChecked(true);
+    layout->addWidget(m_pSetAccessControl, row++, 1, 1, 3);
 
 
     setLayout(layout);
@@ -726,6 +695,8 @@ CFilesPage::CFilesPage(QWidget *parent)
 
 int CFilesPage::nextId() const
 {
+    if (m_pSetAccessControl->isChecked())
+        return CNewBoxWizard::Page_AccessControl;
     return CNewBoxWizard::Page_Isolation;
 }
 
@@ -778,37 +749,49 @@ bool CFilesPage::validatePage()
     return true;
 }
 
-QList<QPair<QString, QString>> CFilesPage::GetFilePathEntries() const
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CAccessControlPage
+// 
+
+CAccessControlPage::CAccessControlPage(QWidget *parent)
+    : QWizardPage(parent)
 {
-    QList<QPair<QString, QString>> entries;
-    for (int i = 0; i < m_pNormalPaths->topLevelItemCount(); i++) {
-        QTreeWidgetItem* pItem = m_pNormalPaths->topLevelItem(i);
-        entries.append(qMakePair(pItem->text(0), pItem->data(1, Qt::UserRole).toString()));
-    }
-    return entries;
+    setTitle(tr("File access control"));
+    setSubTitle(tr("On this page custom file access control entries can be configured. "
+        "These entries define how sandboxed processes can access the specified files and folders, "
+        "e.g. to block access to sensitive data or to allow write access to files located in the host system."));
+
+    QVBoxLayout* pLayout = new QVBoxLayout;
+
+    m_pAccessControl = new CAccessControlWidget();
+    m_pAccessControl->SetTypes(QList<QPair<QString, QString>>()
+        << qMakePair(tr("Block"), QString("BlockFilePath"))
+        << qMakePair(tr("Normal"), QString("NormalFilePath"))
+        << qMakePair(tr("Write"), QString("WriteFilePath"))
+        << qMakePair(tr("Read"), QString("ReadFilePath")));
+    pLayout->addWidget(m_pAccessControl);
+
+    setLayout(pLayout);
 }
 
-void CFilesPage::OnAddNormalPath()
+int CAccessControlPage::nextId() const
 {
-    QString path = m_pNormalPathInput->text().trimmed();
-    if (path.isEmpty()) return;
-    path.replace("/", "\\");
-    QString configKey = m_pTypeCombo->currentData().toString();
-    QString typeName = m_pTypeCombo->currentText();
-    QTreeWidgetItem* pItem = new QTreeWidgetItem();
-    pItem->setText(0, path);
-    pItem->setText(1, typeName);
-    pItem->setData(1, Qt::UserRole, configKey);
-    m_pNormalPaths->addTopLevelItem(pItem);
-    m_pNormalPathInput->clear();
+    return CNewBoxWizard::Page_Isolation;
 }
 
-void CFilesPage::OnRemoveNormalPath()
+void CAccessControlPage::initializePage()
 {
-    QTreeWidgetItem* pItem = m_pNormalPaths->currentItem();
-    if (pItem) {
-        delete m_pNormalPaths->takeTopLevelItem(m_pNormalPaths->indexOfTopLevelItem(pItem));
-    }
+}
+
+bool CAccessControlPage::validatePage()
+{
+    return true;
+}
+
+QList<QPair<QString, QString>> CAccessControlPage::GetFileAccessEntries() const
+{
+    return m_pAccessControl->GetEntries();
 }
 
 
@@ -1167,9 +1150,9 @@ void CSummaryPage::initializePage()
         m_pSummary->append(tr("\nProcesses in this box will be running with a custom process token indicating the sandbox they belong to."));
 
     {
-        CFilesPage* pFilesPage = (CFilesPage*)((CNewBoxWizard*)wizard())->page(CNewBoxWizard::Page_Files);
-        if (pFilesPage) {
-            auto entries = pFilesPage->GetFilePathEntries();
+        CAccessControlPage* pAccessPage = (CAccessControlPage*)((CNewBoxWizard*)wizard())->page(CNewBoxWizard::Page_AccessControl);
+        if (pAccessPage) {
+            auto entries = pAccessPage->GetFileAccessEntries();
             if (!entries.isEmpty()) {
                 m_pSummary->append(tr("\nPreconfigured file control paths:"));
                 for (const auto& entry : entries)

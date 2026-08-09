@@ -180,6 +180,9 @@
     <ClCompile Include="Wizards\NewBoxWizard.cpp">
       <Filter>Wizards</Filter>
     </ClCompile>
+    <ClCompile Include="Wizards\AccessControlWidget.cpp">
+      <Filter>Wizards</Filter>
+    </ClCompile>
     <ClCompile Include="Helpers\StorageInfo.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
@@ -245,6 +248,9 @@
     </ClCompile>
 
     <ClCompile Include="Windows\OptionsWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\SharedAccessWidget.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
     <ClCompile Include="Helpers\IniHighlighter.cpp">
@@ -329,6 +335,9 @@
     <QtMoc Include="Windows\OptionsWindow.h">
       <Filter>Windows</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\SharedAccessWidget.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
     <QtMoc Include="Windows\SettingsWindow.h">
       <Filter>Windows</Filter>
     </QtMoc>
@@ -376,6 +385,9 @@
       <Filter>SandMan</Filter>
     </QtMoc>
     <QtMoc Include="Wizards\NewBoxWizard.h">
+      <Filter>Wizards</Filter>
+    </QtMoc>
+    <QtMoc Include="Wizards\AccessControlWidget.h">
       <Filter>Wizards</Filter>
     </QtMoc>
     <QtMoc Include="Wizards\TemplateWizard.h">

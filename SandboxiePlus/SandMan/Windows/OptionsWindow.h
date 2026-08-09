@@ -6,6 +6,9 @@
 #include "PendingChanges.h"
 #include "../../MiscHelpers/Common/SettingsWidgets.h"
 
+class CSbieIni;
+class CSharedFileWidget;
+
 //////////////////////////////////////////////////////////////////////////
 // COptionsWindow
 
@@ -174,11 +177,6 @@ private slots:
 	void OnAccessSelectionChanged() { CloseAccessEdit(); OnOptChanged();}
 	void OnAccessChanged(QTreeWidgetItem* pItem, int Column);
 
-	void OnAddFile()				{ AddAccessEntry(eFile, eOpen, "", ""); OnAccessChanged(); }
-	void OnBrowseFile();
-	void OnBrowseFolder();
-	void OnDelFile()				{ DeleteAccessEntry(ui.treeFiles->currentItem()); OnAccessChanged(); }
-	void OnShowFilesTmpl()			{ LoadAccessListTmpl(eFile, ui.chkShowFilesTmpl->isChecked(), true); }
 	void OnAddKey()					{ AddAccessEntry(eKey, eOpen, "", ""); OnAccessChanged(); }
 	void OnDelKey()					{ DeleteAccessEntry(ui.treeKeys->currentItem()); OnAccessChanged(); }
 	void OnShowKeysTmpl()			{ LoadAccessListTmpl(eKey, ui.chkShowKeysTmpl->isChecked(), true); }
@@ -625,6 +623,8 @@ protected:
 	QSharedPointer<CSbieIni> m_pBox;
 
 	QSet<QString> m_Programs;
+
+	CSharedFileWidget* m_FileAccess;
 
 	enum EProcCpec {
 		eNoSpec,

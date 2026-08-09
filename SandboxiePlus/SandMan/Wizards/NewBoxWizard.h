@@ -7,9 +7,10 @@ QT_BEGIN_NAMESPACE
 class QCheckBox;
 class QLabel;
 class QLineEdit;
-class QTreeWidget;
 class QRadioButton;
 QT_END_NAMESPACE
+
+class CAccessControlWidget;
 
 //#define USE_COMBO
 
@@ -18,7 +19,7 @@ class CNewBoxWizard : public QWizard
     Q_OBJECT
 
 public:
-    enum { Page_Type, Page_Files, Page_Isolation, Page_Advanced, Page_Summary };
+    enum { Page_Type, Page_Files, Page_AccessControl, Page_Isolation, Page_Advanced, Page_Summary };
 
     CNewBoxWizard(bool bAlowTemp, QWidget *parent = nullptr);
 
@@ -98,17 +99,31 @@ public:
     void initializePage() override;
     bool validatePage() override;
 
-    QList<QPair<QString, QString>> GetFilePathEntries() const;
-
-private slots:
-    void OnAddNormalPath();
-    void OnRemoveNormalPath();
-
 private:
     QComboBox* m_pBoxLocation;
-    QTreeWidget* m_pNormalPaths;
-    QLineEdit* m_pNormalPathInput;
-    QComboBox* m_pTypeCombo;
+    QCheckBox* m_pSetAccessControl;
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CAccessControlPage
+// 
+
+class CAccessControlPage : public QWizardPage
+{
+    Q_OBJECT
+
+public:
+    CAccessControlPage(QWidget *parent = nullptr);
+
+    int nextId() const override;
+    void initializePage() override;
+    bool validatePage() override;
+
+    QList<QPair<QString, QString>> GetFileAccessEntries() const;
+
+private:
+    CAccessControlWidget* m_pAccessControl;
 };
 
 

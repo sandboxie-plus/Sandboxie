@@ -16,7 +16,7 @@ Sandboxie is a sandbox-based isolation tool for Windows NT systems, letting apps
 - `Sandboxie/core/drv` — SbieDrv kernel-mode driver. Highest-risk code; changes can cause system crashes or weaken the sandbox boundary.
 - `Sandboxie/core/svc` — SbieSvc service, process creation, service IPC, RPC, policy, and privileged operations.
 - `Sandboxie/core/dll` — SbieDll injected into sandboxed processes; API hooks, redirection, networking, and compatibility behavior.
-- `Sandboxie/core/low` — LowLevel DLL used by the injection path and embedded into the service.
+- `Sandboxie/core/low` — LowLevel DLL used by the injection path and embedded in SbieDll.dll.
 - `Sandboxie/common` — shared low-level C/C++ utilities, native structures, helpers, and third-party components.
 - `Sandboxie/apps` — user-mode applications and system-service wrappers, including `apps/common`, Control, Start, SbieIni, and COM helpers.
 - `Sandboxie/msgs` — message definitions, parser/build projects, localized text, and generated language reports.

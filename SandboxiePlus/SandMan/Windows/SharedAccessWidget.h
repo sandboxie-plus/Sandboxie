@@ -90,6 +90,9 @@ public:
 	QTreeWidget* GetTree() const { return m_pTree; }
 	QSet<QString> GetPrograms() const { return m_Programs; }
 
+	// return all non-template entries as setting -> list of "program,path" values
+	QMap<QString, QList<QString>> GetAccessList() const;
+
 	// update the shown path of every item to the expanded one (column 3)
 	void ReloadPathDisplay();
 

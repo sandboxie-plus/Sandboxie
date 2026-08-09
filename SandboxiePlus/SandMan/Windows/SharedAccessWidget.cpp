@@ -193,6 +193,9 @@ void CSharedAccessWidget::ParseAndAddEntry(const QString& Setting, const QString
 
 void CSharedAccessWidget::LoadAccessList()
 {
+	if (!m_pIni)
+		return;
+
 	ClearEntries();
 
 	foreach(const SAccessEntryConfig& Config, GetAccessConfig())
@@ -210,6 +213,9 @@ void CSharedAccessWidget::LoadAccessList()
 
 void CSharedAccessWidget::LoadTemplates(bool bShow)
 {
+	if (!m_pIni)
+		return;
+
 	if (bShow)
 	{
 		foreach(const SAccessEntryConfig& Config, GetAccessConfig())
@@ -245,12 +251,25 @@ void CSharedAccessWidget::OnChangeTemplates()
 
 void CSharedAccessWidget::SaveAccessList()
 {
+	if (!m_pIni)
+		return;
+
 	QStringList Keys;
 	foreach(const SAccessEntryConfig& Config, GetAccessConfig()) {
 		if (!Keys.contains(Config.Setting))
 			Keys << Config.Setting;
 	}
 
+	QMap<QString, QList<QString>> AccessMap = GetAccessList();
+
+	foreach(const QString & Key, Keys) {
+		m_pIni->UpdateTextList(Key, AccessMap[Key], m_bTemplate);
+		m_pIni->UpdateTextList(Key + "Disabled", AccessMap[Key + "Disabled"], m_bTemplate);
+	}
+}
+
+QMap<QString, QList<QString>> CSharedAccessWidget::GetAccessList() const
+{
 	QMap<QString, QList<QString>> AccessMap;
 
 	for (int i = 0; i < m_pTree->topLevelItemCount(); i++)
@@ -267,6 +286,8 @@ void CSharedAccessWidget::SaveAccessList()
 
 		QString Program = pItem->data(1, Qt::UserRole).toString();
 		QString Value = pItem->data(3, Qt::UserRole).toString();
+		if (Value.isEmpty())
+			continue; // skip entries without a path
 		if (!Program.isEmpty())
 			Value.prepend(Program + ",");
 
@@ -275,10 +296,7 @@ void CSharedAccessWidget::SaveAccessList()
 		AccessMap[Setting].append(Value);
 	}
 
-	foreach(const QString & Key, Keys) {
-		m_pIni->UpdateTextList(Key, AccessMap[Key], m_bTemplate);
-		m_pIni->UpdateTextList(Key + "Disabled", AccessMap[Key + "Disabled"], m_bTemplate);
-	}
+	return AccessMap;
 }
 
 //////////////////////////////////////////////////////////////////// entry lookup (options integration)
@@ -351,7 +369,7 @@ void CSharedAccessWidget::OnItemChanged(QTreeWidgetItem* pItem, int Column)
 
 void CSharedAccessWidget::OnSelectionChanged()
 {
-	CloseAccessEdit(false);
+	CloseAccessEdit(true);
 	OnConfigChanged();
 }
 
@@ -505,7 +523,7 @@ bool CSharedAccessWidget::eventFilter(QObject* watched, QEvent* event)
 			}
 		}
 		else if (event->type() == QEvent::MouseButtonPress)
-			CloseAccessEdit(false);
+			CloseAccessEdit(true);
 	}
 	return QWidget::eventFilter(watched, event);
 }

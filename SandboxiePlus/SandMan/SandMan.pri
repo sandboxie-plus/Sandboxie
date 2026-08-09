@@ -41,7 +41,6 @@ HEADERS += ./stdafx.h \
     ./Windows/TestProxyDialog.h \
     ./OnlineUpdater.h \
     ./Wizards/NewBoxWizard.h \
-    ./Wizards/AccessControlWidget.h \
     ./Wizards/TemplateWizard.h \
     ./Wizards/SetupWizard.h \
     ./Wizards/BoxAssistant.h \
@@ -102,7 +101,6 @@ SOURCES += ./main.cpp \
     ./Windows/TestProxyDialog.cpp \
     ./OnlineUpdater.cpp \
     ./Wizards/NewBoxWizard.cpp \
-    ./Wizards/AccessControlWidget.cpp \
     ./Wizards/TemplateWizard.cpp \
     ./Wizards/SetupWizard.cpp \
     ./Wizards/BoxAssistant.cpp \

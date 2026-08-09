@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "NewBoxWizard.h"
-#include "AccessControlWidget.h"
+#include "../Windows/SharedAccessWidget.h"
 #include "../MiscHelpers/Common/Common.h"
 #include "../Windows/SettingsWindow.h"
 #include "../SandMan.h"
@@ -764,13 +764,10 @@ CAccessControlPage::CAccessControlPage(QWidget *parent)
 
     QVBoxLayout* pLayout = new QVBoxLayout;
 
-    m_pAccessControl = new CAccessControlWidget();
-    m_pAccessControl->SetTypes(QList<QPair<QString, QString>>()
-        << qMakePair(tr("Block"), QString("BlockFilePath"))
-        << qMakePair(tr("Normal"), QString("NormalFilePath"))
-        << qMakePair(tr("Write"), QString("WriteFilePath"))
-        << qMakePair(tr("Read"), QString("ReadFilePath")));
-    pLayout->addWidget(m_pAccessControl);
+    m_pFileAccess = new CSharedFileWidget(this);
+    m_pFileAccess->SetShowTemplates(false);
+    m_pFileAccess->SetTemplatesEnabled(false);
+    pLayout->addWidget(m_pFileAccess);
 
     setLayout(pLayout);
 }
@@ -791,7 +788,14 @@ bool CAccessControlPage::validatePage()
 
 QList<QPair<QString, QString>> CAccessControlPage::GetFileAccessEntries() const
 {
-    return m_pAccessControl->GetEntries();
+    QList<QPair<QString, QString>> Entries;
+    QMap<QString, QList<QString>> AccessMap = m_pFileAccess->GetAccessList();
+    for (QMap<QString, QList<QString>>::const_iterator I = AccessMap.constBegin(); I != AccessMap.constEnd(); ++I)
+    {
+        foreach(const QString& Value, I.value())
+            Entries.append(qMakePair(Value, I.key()));
+    }
+    return Entries;
 }
 
 

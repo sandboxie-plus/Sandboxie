@@ -10,7 +10,7 @@ class QLineEdit;
 class QRadioButton;
 QT_END_NAMESPACE
 
-class CAccessControlWidget;
+class CSharedFileWidget;
 
 //#define USE_COMBO
 
@@ -123,7 +123,7 @@ public:
     QList<QPair<QString, QString>> GetFileAccessEntries() const;
 
 private:
-    CAccessControlWidget* m_pAccessControl;
+    CSharedFileWidget* m_pFileAccess;
 };
 
 

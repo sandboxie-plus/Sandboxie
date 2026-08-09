@@ -2466,13 +2466,16 @@ bool CSbieAPI::TestSignature(const QByteArray& Data, const QByteArray& Signature
 bool CSbieAPI::GetLog()
 {
 	WCHAR Buffer[4 * 1024];
-	ULONG Length = sizeof(Buffer);
 
 	ULONG MsgCode = 0;
 	ULONG ProcessId = 0;
 	ULONG MessageNum = m->lastMessageNum;
 
-	__declspec(align(8)) UNICODE_STRING64 msgtext = { 0, (USHORT)Length, (ULONG64)Buffer };
+	__declspec(align(8)) UNICODE_STRING64 msgtext = {
+		0,
+		(USHORT)sizeof(Buffer),
+		(ULONG64)(ULONG_PTR)Buffer
+	};
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 	API_GET_MESSAGE_ARGS *args = (API_GET_MESSAGE_ARGS*)parms;
 

@@ -105,7 +105,7 @@ signals:
 	void Changed();
 
 protected:
-	virtual QList<SAccessEntryConfig> GetAccessConfig() = 0;	// defines the settings/mode strings for the derived type
+	virtual QList<SAccessEntryConfig> GetAccessConfig() const = 0;	// defines the settings/mode strings for the derived type
 	virtual QString GetAccessTypeStr() const = 0;
 	virtual int GetAccessTypeId() const = 0;
 	virtual eAccessMode::EAccessMode GetDefaultMode() const { return eAccessMode::eOpen; }
@@ -169,7 +169,7 @@ public:
 	CSharedFileWidget(QWidget* parent = NULL);
 
 protected:
-	virtual QList<SAccessEntryConfig> GetAccessConfig();
+	virtual QList<SAccessEntryConfig> GetAccessConfig() const;
 	virtual QString GetAccessTypeStr() const { return tr("File/Folder"); }
 	virtual int GetAccessTypeId() const { return eAccessType::eFile; }
 	virtual eAccessMode::EAccessMode GetDefaultMode() const { return eAccessMode::eOpen; }

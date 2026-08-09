@@ -133,7 +133,7 @@ void CSharedAccessWidget::ClearEntries()
 	m_pTree->clear();
 }
 
-void CSharedAccessWidget::AddEntry(eAccessMode::EAccessMode Mode, QString Program, const QString& Path, bool Enabled, const QString& Template)
+void CSharedAccessWidget::AddEntry(eAccessMode::EAccessMode Mode, const QString& Program, const QString& Path, bool Enabled, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 
@@ -142,16 +142,17 @@ void CSharedAccessWidget::AddEntry(eAccessMode::EAccessMode Mode, QString Progra
 	pItem->setData(0, Qt::UserRole, !Template.isEmpty() ? -1 : GetAccessTypeId());
 
 	// column 1: program
-	bool bAll = Program.isEmpty();
-	bool Not = !bAll && Program.left(1) == "!";
+	QString ProgramDisp = Program;
+	bool bAll = ProgramDisp.isEmpty();
+	bool Not = !bAll && ProgramDisp.left(1) == "!";
 	if (Not)
-		Program.remove(0, 1);
-	if (Program.left(1) == "<")
-		Program = tr("Group: %1").arg(Program.mid(1, Program.length() - 2));
+		ProgramDisp.remove(0, 1);
+	if (ProgramDisp.left(1) == "<")
+		ProgramDisp = tr("Group: %1").arg(ProgramDisp.mid(1, ProgramDisp.length() - 2));
 	else if (!bAll)
-		m_Programs.insert(Program);
-	pItem->setText(1, (Not ? "NOT " : "") + (bAll ? tr("All Programs") : Program));
-	pItem->setData(1, Qt::UserRole, (Not ? "!" : "") + (bAll ? "" : Program));
+		m_Programs.insert(ProgramDisp);
+	pItem->setText(1, (Not ? "NOT " : "") + (bAll ? tr("All Programs") : ProgramDisp));
+	pItem->setData(1, Qt::UserRole, (Not ? "!" : "") + (bAll ? "" : ProgramDisp));
 
 	// column 2: access mode
 	QString ModeStr, ModeTip;
@@ -538,7 +539,7 @@ CSharedFileWidget::CSharedFileWidget(QWidget* parent)
 	FillAddMenu();
 }
 
-QList<SAccessEntryConfig> CSharedFileWidget::GetAccessConfig()
+QList<SAccessEntryConfig> CSharedFileWidget::GetAccessConfig() const
 {
 	QList<SAccessEntryConfig> Config;
 

@@ -1154,7 +1154,7 @@ void CSummaryPage::initializePage()
         if (pAccessPage) {
             auto entries = pAccessPage->GetFileAccessEntries();
             if (!entries.isEmpty()) {
-                m_pSummary->append(tr("\nPreconfigured file control paths:"));
+                m_pSummary->append(tr("\nFile Access Control:"));
                 for (const auto& entry : entries)
                     m_pSummary->append(tr("  [%1] %2").arg(entry.second, entry.first));
             }

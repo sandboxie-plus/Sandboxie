@@ -1298,7 +1298,7 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="916"/>
+        <location filename="Views/FileView.cpp" line="939"/>
         <source>%1 - Files</source>
         <translation></translation>
     </message>
@@ -1306,49 +1306,49 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="606"/>
+        <location filename="Views/FileView.cpp" line="619"/>
         <source>Create Shortcut</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="629"/>
+        <location filename="Views/FileView.cpp" line="642"/>
         <source>Pin to Box Run Menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="636"/>
+        <location filename="Views/FileView.cpp" line="649"/>
         <source>Recover to Any Folder</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="638"/>
+        <location filename="Views/FileView.cpp" line="651"/>
         <source>Recover to Same Folder</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="642"/>
+        <location filename="Views/FileView.cpp" line="655"/>
         <source>Run Recovery Checks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="769"/>
+        <location filename="Views/FileView.cpp" line="792"/>
         <source>Select Directory</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="840"/>
+        <location filename="Views/FileView.cpp" line="863"/>
         <source>Delete Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="841"/>
+        <location filename="Views/FileView.cpp" line="864"/>
         <source>The selected files could not be deleted.
 
 Error: 0x%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="870"/>
+        <location filename="Views/FileView.cpp" line="893"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation></translation>
     </message>

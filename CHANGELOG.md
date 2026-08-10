@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - changed SandMan's Auto Expand Tree to temporarily expand box groups, sandboxes, and process branches without overwriting their saved manual expansion states; set the SandMan UI configuration option `Options/LegacyAutoExpandTree=true` to retain the previous expand-all/collapse-all behaviour [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
 - validated compatibility with Windows build 29634 and updated DynData
+- changed SandMan Trace Log auto scrolling overriding manual scrolling; it now pauses away from the bottom and provides an in-list resume button
 
 ### Fixed
 - fixed SandMan File Panel column widths resetting when switching between boxes [#5473](https://github.com/sandboxie-plus/Sandboxie/issues/5473)

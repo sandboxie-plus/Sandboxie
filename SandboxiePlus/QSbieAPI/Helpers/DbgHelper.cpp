@@ -20,6 +20,7 @@ typedef BOOL(WINAPI* P_SymGetModuleInfoW64)(HANDLE hProcess, DWORD64 qwAddr, PIM
 typedef DWORD(WINAPI* P_SymSetOptions)(DWORD SymOptions);
 typedef DWORD(WINAPI* P_SymGetOptions)();
 typedef BOOL(WINAPI* P_SymInitialize)(HANDLE hProcess, PCSTR UserSearchPath, BOOL fInvadeProcess);
+typedef BOOL(WINAPI* P_SymRefreshModuleList)(HANDLE hProcess);
 typedef BOOL(WINAPI* P_SymCleanup)(HANDLE ProcessHandle);
 typedef BOOL(WINAPI* P_SymSetSearchPathW)(HANDLE hProcess, PCWSTR SearchPath);
 typedef BOOL(WINAPI* P_SymRegisterCallbackW64)(HANDLE hProcess, PSYMBOL_REGISTERED_CALLBACK64 CallbackFunction, ULONG64 UserContext);
@@ -31,6 +32,7 @@ static P_SymSetOptions              __sys_SymSetOptions             = NULL;
 static P_SymGetOptions              __sys_SymGetOptions             = NULL;
 static P_SymSetSearchPathW          __sys_SymSetSearchPathW         = NULL;
 static P_SymInitialize              __sys_SymInitialize             = NULL;
+static P_SymRefreshModuleList       __sys_SymRefreshModuleList      = NULL;
 static P_SymCleanup                 __sys_SymCleanup                = NULL;
 static P_SymRegisterCallbackW64     __sys_SymRegisterCallbackW64    = NULL;
 
@@ -150,7 +152,27 @@ QString CSymbolProvider::Resolve(quint64 pid, quint64 Address)
     SYMBOL_INFO* symbolInfo = (SYMBOL_INFO*)buffer;
     symbolInfo->SizeOfStruct = sizeof(SYMBOL_INFO);
     symbolInfo->MaxNameLen = MAX_SYM_NAME;
-    if (__sys_SymFromAddr((HANDLE)Worker.handle, Address, &displacement, symbolInfo))
+    IMAGEHLP_MODULEW64 ModuleInfo;
+    ModuleInfo.SizeOfStruct = sizeof(ModuleInfo);
+
+    BOOL resolved = __sys_SymFromAddr(
+        (HANDLE)Worker.handle, Address, &displacement, symbolInfo);
+    BOOL moduleKnown = FALSE;
+    if (!resolved) {
+        moduleKnown = __sys_SymGetModuleInfoW64(
+            (HANDLE)Worker.handle, Address, &ModuleInfo);
+
+        if (!moduleKnown && __sys_SymRefreshModuleList &&
+                __sys_SymRefreshModuleList((HANDLE)Worker.handle)) {
+            resolved = __sys_SymFromAddr(
+                (HANDLE)Worker.handle, Address, &displacement, symbolInfo);
+            if (!resolved)
+                moduleKnown = __sys_SymGetModuleInfoW64(
+                    (HANDLE)Worker.handle, Address, &ModuleInfo);
+        }
+    }
+
+    if (resolved)
     {
         symbolInfo->Name[symbolInfo->NameLen] = 0;
 
@@ -158,7 +180,6 @@ QString CSymbolProvider::Resolve(quint64 pid, quint64 Address)
         if (displacement != 0)
             Symbol.append(QString("+0x%1").arg(displacement, 0, 16));
 
-        IMAGEHLP_MODULEW64 ModuleInfo;
         ModuleInfo.SizeOfStruct = sizeof(ModuleInfo);
         if (__sys_SymGetModuleInfoW64((HANDLE)Worker.handle, symbolInfo->ModBase ? symbolInfo->ModBase : symbolInfo->Address, &ModuleInfo))
             Symbol.prepend(QString::fromWCharArray(ModuleInfo.ModuleName) + "!");
@@ -167,9 +188,7 @@ QString CSymbolProvider::Resolve(quint64 pid, quint64 Address)
     {
         // Then this happens, probably symsrv.dll is missing
 
-        IMAGEHLP_MODULEW64 ModuleInfo;
-        ModuleInfo.SizeOfStruct = sizeof(ModuleInfo);
-        if (__sys_SymGetModuleInfoW64((HANDLE)Worker.handle, Address, &ModuleInfo))
+        if (moduleKnown)
             Symbol.prepend(QString::fromWCharArray(ModuleInfo.ModuleName) + "+" + QString("0x%1").arg(Address - ModuleInfo.BaseOfImage, 0, 16));
     }
 
@@ -379,6 +398,7 @@ CSymbolProvider* CSymbolProvider::Instance()
         __sys_SymGetOptions = (P_SymGetOptions)GetProcAddress(DbgHelpMod, "SymGetOptions");
         __sys_SymSetSearchPathW = (P_SymSetSearchPathW)GetProcAddress(DbgHelpMod, "SymSetSearchPathW");
         __sys_SymInitialize = (P_SymInitialize)GetProcAddress(DbgHelpMod, "SymInitialize");
+        __sys_SymRefreshModuleList = (P_SymRefreshModuleList)GetProcAddress(DbgHelpMod, "SymRefreshModuleList");
         __sys_SymCleanup = (P_SymCleanup)GetProcAddress(DbgHelpMod, "SymCleanup");
         __sys_SymRegisterCallbackW64 = (P_SymRegisterCallbackW64)GetProcAddress(DbgHelpMod, "SymRegisterCallbackW64");
 

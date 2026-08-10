@@ -52,6 +52,21 @@ void CStackView::Invalidate()
 
 void CStackView::ShowStack(const QVector<quint64>& Stack, const CBoxedProcessPtr& pProcess)
 {
+	if (m_pCurrentProcess != pProcess)
+	{
+		if (!m_pCurrentProcess.isNull())
+			disconnect(m_pCurrentProcess.data(), SIGNAL(SymbolChanged(quint64)),
+				this, SLOT(OnSymbolChanged(quint64)));
+
+		m_pCurrentProcess = pProcess;
+		if (!m_pCurrentProcess.isNull())
+			connect(m_pCurrentProcess.data(), SIGNAL(SymbolChanged(quint64)),
+				this, SLOT(OnSymbolChanged(quint64)), Qt::UniqueConnection);
+	}
+
+	m_CurrentStack = Stack;
+	pProcess->ResolveSymbols(Stack);
+
 	int i = 0;
 	for (; i < Stack.count(); i++)
 	{
@@ -85,6 +100,19 @@ void CStackView::ShowStack(const QVector<quint64>& Stack, const CBoxedProcessPtr
 	CPanelWidgetEx::ApplyFilter(m_pStackList, m_pFinder->isVisible() ? &m_pFinder->GetSearchExp() : NULL);
 
 	m_bIsInvalid = false;
+}
+
+void CStackView::OnSymbolChanged(quint64 Address)
+{
+	if (m_pCurrentProcess.isNull())
+		return;
+
+	QString Symbol = m_pCurrentProcess->GetSymbol(Address);
+	for (int i = 0; i < m_CurrentStack.count(); i++) {
+		if (m_CurrentStack[i] == Address &&
+				i < m_pStackList->topLevelItemCount())
+			m_pStackList->topLevelItem(i)->setText(eSymbol, Symbol);
+	}
 }
 
 void CStackView::SetFilter(const QRegularExpression& Exp, int iOptions, int Col)

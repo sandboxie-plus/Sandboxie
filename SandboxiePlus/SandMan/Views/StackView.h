@@ -21,6 +21,7 @@ public slots:
 	void					Clear()			{ m_pStackList->clear(); }
 	void					Invalidate();
 	void					ShowStack(const QVector<quint64>& Stack, const CBoxedProcessPtr& pProcess);
+	void					OnSymbolChanged(quint64 Address);
 
 	//void					OnMenu(const QPoint &point);
 
@@ -43,6 +44,8 @@ private:
 
 	bool					m_bIsInvalid;
 	QTreeWidgetEx*			m_pStackList;
+	QVector<quint64>		m_CurrentStack;
+	CBoxedProcessPtr		m_pCurrentProcess;
 
 	CFinder*				m_pFinder;
 

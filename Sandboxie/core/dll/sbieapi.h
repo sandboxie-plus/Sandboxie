@@ -231,6 +231,8 @@ LONG SbieApi_MonitorPut2Ex(
     BOOLEAN bCheckObjectExists,
     BOOLEAN bIsMessage);
 
+LONG SbieApi_MonitorPutApiTrace(const CHAR *Name);
+
 SBIEAPI_EXPORT
 LONG SbieApi_MonitorPutEx(
     ULONG Type,

@@ -53,6 +53,7 @@ private slots:
 	void OnSelectAll();
 	void OnSelectNone();
 	void OnItemChanged(QTreeWidgetItem* item, int column);
+	void OnReadAliases(bool checked);
 
 private:
 	void UpdateConflictIndicators();
@@ -60,9 +61,11 @@ private:
 	EMode m_Mode;
 	QTreeWidget* m_pBoxTree;
 	QCheckBox* m_pGlobalConfig;
+	QCheckBox* m_pReadAliases;
 	QCheckBox* m_pSeparateFiles;
 	QPushButton* m_pSelectAll;
 	QPushButton* m_pSelectNone;
+	QMap<QString, QMap<QString, QString>> m_ArchiveAliases;
 };
 
 void ExportMultiBoxes(QWidget* parent, const QList<CSandBoxPtr>& SandBoxes = QList<CSandBoxPtr>());

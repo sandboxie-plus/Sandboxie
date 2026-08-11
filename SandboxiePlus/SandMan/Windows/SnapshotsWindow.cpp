@@ -20,7 +20,7 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
 
 	ui.setupUi(this);
-	this->setWindowTitle(tr("%1 - Snapshots").arg(pBox->GetName()));
+	this->setWindowTitle(tr("%1 - Snapshots").arg(CSandMan::GetBoxDisplayName(pBox)));
 
 	ui.treeSnapshots->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 

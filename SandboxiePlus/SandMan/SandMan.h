@@ -73,6 +73,8 @@ public:
 	void				CheckResults(QList<SB_STATUS> Results, QWidget* pParent, bool bAsync = false);
 
 	static QIcon		GetIcon(const QString& Name, int iAction = 1);
+	static QString		GetBoxDisplayName(const CSandBoxPtr& pBox, CSandBoxPlus::EDisplayNameContext Context = CSandBoxPlus::eDisplayNormal);
+	static QString		GetBoxDisplayName(const QString& BoxName, CSandBoxPlus::EDisplayNameContext Context = CSandBoxPlus::eDisplayNormal);
 
 	bool				IsFullyPortable();
 

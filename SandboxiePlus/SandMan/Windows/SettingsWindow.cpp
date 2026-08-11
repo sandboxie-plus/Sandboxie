@@ -346,6 +346,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbOnClose->addItem(tr("Prompt before Close"), "Prompt");
 	ui.cmbOnClose->addItem(tr("Close"), "Close");
 	ui.cmbOnClose->addItem(tr("Hide (Run invisible in Background)"), "Hide");
+	ui.cmbBoxAliasDisplayMode->addItem(tr("Sandbox name"), 1);
+	ui.cmbBoxAliasDisplayMode->addItem(tr("Sandbox alias"), 0);
+	ui.cmbBoxAliasDisplayMode->addItem(tr("Sandbox alias and name"), 2);
+	ui.cmbBoxAliasDisplayMode->setCurrentIndex(1);
 
 	const QString sameAsMainLabel = tr("Same as main");
 	const QString keepCurrentLabel = tr("Keep current monitor");
@@ -690,6 +694,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkSbieLogon, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkSbieAll, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkSbieUAC, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.cmbBoxAliasDisplayMode, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	m_GeneralChanged = false;
 
 	connect(ui.chkWatchConfig, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged())); // not sbie ini
@@ -1569,7 +1574,7 @@ void CSettingsWindow::LoadSettings()
 		
 		ui.cmbDefault->clear();
 		foreach(const CSandBoxPtr & pBox, theAPI->GetAllBoxes())
-			ui.cmbDefault->addItem(pBox.objectCast<CSandBoxPlus>()->GetDisplayName(), pBox->GetName());
+			ui.cmbDefault->addItem(pBox.objectCast<CSandBoxPlus>()->GetDisplayName(CSandBoxPlus::eDisplayCompact), pBox->GetName());
 		int pos = ui.cmbDefault->findData(theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox"));
 		if(pos == -1)
 			pos = ui.cmbDefault->findData("DefaultBox");
@@ -1602,6 +1607,10 @@ void CSettingsWindow::LoadSettings()
 		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", false));
 		ui.chkSbieAll->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieAllGroup", true));
 		ui.chkSbieUAC->setChecked(theAPI->GetGlobalSettings()->GetBool("UseSandboxieUAC", true));
+		int iBoxAliasDisplayMode = theAPI->GetGlobalSettings()->GetNum("BoxAliasDisplayMode", 0);
+		if (iBoxAliasDisplayMode < 0 || iBoxAliasDisplayMode > 2)
+			iBoxAliasDisplayMode = 0;
+		ui.cmbBoxAliasDisplayMode->setCurrentIndex(ui.cmbBoxAliasDisplayMode->findData(iBoxAliasDisplayMode));
 
 		ui.treeImport->clear();
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("ImportBox", false))
@@ -1666,8 +1675,8 @@ void CSettingsWindow::LoadSettings()
 				Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
 			else
 				Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
-			ui.cmbMoTWSandbox->addItem(Icon, pBoxEx->GetDisplayName(), pBox->GetName());
-			ui.cmbUsbSandbox->addItem(Icon, pBoxEx->GetDisplayName(), pBox->GetName());
+			ui.cmbMoTWSandbox->addItem(Icon, pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayCompact), pBox->GetName());
+			ui.cmbUsbSandbox->addItem(Icon, pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayCompact), pBox->GetName());
 		}
 		ui.cmbMoTWSandbox->setCurrentIndex(CurMoTWBox);
 		ui.cmbUsbSandbox->setCurrentIndex(CurUsbBox);
@@ -1694,6 +1703,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkSbieLogon->setEnabled(false);
 		ui.chkSbieAll->setEnabled(false);
 		ui.chkSbieUAC->setEnabled(false);
+		ui.cmbBoxAliasDisplayMode->setEnabled(false);
 		ui.regRoot->setEnabled(false);
 		ui.ipcRoot->setEnabled(false);
 		ui.chkRamDisk->setEnabled(false);
@@ -2208,6 +2218,8 @@ void CSettingsWindow::SaveSettings()
 				WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "y", "");
 				WriteAdvancedCheck(ui.chkSbieAll, "SandboxieAllGroup", "", "n");
 				WriteAdvancedCheck(ui.chkSbieUAC, "UseSandboxieUAC", "", "n");
+				WriteText("BoxAliasDisplayMode", ui.cmbBoxAliasDisplayMode->currentData().toInt() == 0
+					? QString() : QString::number(ui.cmbBoxAliasDisplayMode->currentData().toInt()));
 
 				if (m_FeaturesChanged) {
 					m_FeaturesChanged = false;

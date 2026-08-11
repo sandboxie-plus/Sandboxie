@@ -438,7 +438,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 	}
 
 	ui.setupUi(this);
-	this->setWindowTitle(tr("%1 - File Recovery").arg(pBox->GetName()));
+	this->setWindowTitle(tr("%1 - File Recovery").arg(CSandMan::GetBoxDisplayName(pBox)));
 
 	FixTriStateBoxPallete(this);
 

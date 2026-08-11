@@ -493,27 +493,12 @@ double CSandMan__GetBoxOrder(const QMap<QString, QStringList>& Groups, const QSt
 	return 1000000000;
 }
 
-// Builds the rich status tooltip shown on sandbox items — matches the format used in the main sandbox tree view.
+// Builds the rich status tooltip shown on sandbox items, matches the format used in the main sandbox tree view.
 static QString CSandMan__BuildBoxTooltip(const CSandBoxPlus* pBoxEx)
 {
 	if (!pBoxEx)
 		return QString();
-
-	QString boxName = pBoxEx->GetName();
-	QString boxAlias = pBoxEx->GetText("BoxAlias").trimmed();
-	QString boxAliasDisabled = pBoxEx->GetText("BoxAliasDisabled");
-	bool aliasEnabled = !boxAlias.isEmpty() && boxAliasDisabled.isEmpty();
-	QString tip = boxName + "\n";
-	if (aliasEnabled && boxAlias.compare(boxName, Qt::CaseSensitive) != 0)
-		tip += CSandMan::tr("    Alias: %1\n").arg(boxAlias);
-	tip += CSandMan::tr("    File root: %1\n").arg(pBoxEx->GetFileRoot());
-	tip += CSandMan::tr("    Registry root: %1\n").arg(pBoxEx->GetRegRoot());
-	tip += CSandMan::tr("    IPC root: %1\n").arg(pBoxEx->GetIpcRoot());
-	if (!pBoxEx->GetMountRoot().isEmpty())
-		tip += CSandMan::tr("    Disk root: %1\n").arg(pBoxEx->GetMountRoot());
-	tip += CSandMan::tr("Options:\n    ");
-	tip += pBoxEx->GetStatusStr().replace(", ", "\n    ");
-	return tip;
+	return pBoxEx->GetBoxToolTip();
 }
 
 // Returns a cached custom icon (BoxIcon / DblClickAction). Falls back to null QIcon if none found.
@@ -568,7 +553,7 @@ QAction* CSandMan__MakeBoxEntry(QMenu* pMenu, CSandBoxPlus* pBoxEx, QFileIconPro
 	if (!pBoxEx) return nullptr;
 
 	bool bTrayUseAlias = theConf ? theConf->GetBool("Options/TrayUseAlias", true) : true;
-	QString displayNameRaw = bTrayUseAlias ? pBoxEx->GetDisplayName() : pBoxEx->GetName();
+	QString displayNameRaw = bTrayUseAlias ? pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayCompact) : pBoxEx->GetName();
 	bool truncated = false;
 	QString displayName = CTrayTreeWidget::MakeTrayDisplayText(displayNameRaw, CTrayTreeWidget::GetTrayAliasMaxChars(bTrayUseAlias), &truncated);
 	QAction* pBoxAction = new QAction(displayName);
@@ -737,7 +722,7 @@ void CSandMan::OnBoxMenuHover(QAction* action)
 		action->setMenu(pMenu);
 	}
 
-	// Show rich tooltip manually — QAction+submenu combos don't auto-show Qt tooltips
+	// Show rich tooltip manually, QAction+submenu combos don't auto-show Qt tooltips
 	QString statusTip = action->toolTip();
 	QString fallbackTip = action->property("tray_fallback_tip").toString();
 	QString tipToShow;
@@ -824,7 +809,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					QTreeWidgetItem* pParent = CSandMan__GetBoxParentTree(Groups, GroupItems, m_pTrayBoxes, pBox->GetName(), sortMode);
 
 					QTreeWidgetItem* pItem = new QTreeWidgetItem();
-					QString displayNameRaw = bTrayUseAlias ? pBoxEx->GetDisplayName() : pBoxEx->GetName();
+					QString displayNameRaw = bTrayUseAlias ? pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayCompact) : pBoxEx->GetName();
 					bool truncated = false;
 					QString displayName = CTrayTreeWidget::MakeTrayDisplayText(displayNameRaw, iTrayAliasMaxChars, &truncated);
 					pItem->setText(0, displayName);
@@ -901,7 +886,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					{
 						pItem = new QTreeWidgetItem();
 						pItem->setData(0, Qt::UserRole, pBox->GetName());
-						pItem->setText(0, "  " + pBoxEx->GetDisplayName());
+						pItem->setText(0, "  " + pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayCompact));
 						m_pTrayBoxes->addTopLevelItem(pItem);
 
 						bAdded = true;
@@ -957,7 +942,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					// Ensure the tree widget paints icons at the same size we measure
 					m_pTrayBoxes->setIconSize(QSize(iconSize, iconSize));
 					int indent = m_pTrayBoxes->indentation();
-					// Gap between icon and text, and right margin — scale proportionally with DPI
+					// Gap between icon and text, and right margin, scale proportionally with DPI
 					int spacing = qRound(4 * dpiScale);
 					int maxItemWidth = 0;
 					for (QTreeWidgetItemIterator it(m_pTrayBoxes, QTreeWidgetItemIterator::All); *it; ++it) {

@@ -1124,6 +1124,23 @@
                  </property>
                 </widget>
                </item>
+               <item row="14" column="1">
+                <widget class="QLabel" name="lblBoxAliasDisplayMode">
+                 <property name="text">
+                  <string>Sandbox name display:</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbBoxAliasDisplayMode</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="13" column="2">
+                <widget class="QComboBox" name="cmbBoxAliasDisplayMode">
+                 <property name="toolTip">
+                  <string>Controls whether display-only text uses the sandbox name, alias, or both. Compact views may show only the alias. Paths and internal sandbox identifiers always use the sandbox name.</string>
+                 </property>
+                </widget>
+               </item>
                <item row="9" column="1" colspan="3">
                 <widget class="QCheckBox" name="chkOverlayIcons">
                  <property name="text">
@@ -3583,6 +3600,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
   <tabstop>chkHideCore</tabstop>
   <tabstop>chkHighlightPendingChanges</tabstop>
   <tabstop>cmbGrouping</tabstop>
+  <tabstop>cmbBoxAliasDisplayMode</tabstop>
   <tabstop>cmbDPI</tabstop>
   <tabstop>cmbFontScale</tabstop>
   <tabstop>chkHide</tabstop>

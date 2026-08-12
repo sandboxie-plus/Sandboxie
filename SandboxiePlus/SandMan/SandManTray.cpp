@@ -344,10 +344,27 @@ static bool CSandMan__IsBeforeBySortMode(const QString& left, const QString& rig
 			return l < r;
 	}
 
-	int cmp = QString::localeAwareCompare(left, right);
+	int cmp = QString::compare(left, right, Qt::CaseInsensitive);
 	if (sortMode < 0)
 		return cmp > 0;
 	return cmp < 0;
+}
+
+static QString CSandMan__GetTrayActionSortName(QAction* pAction, int sortMode)
+{
+	if (!pAction)
+		return QString();
+
+	if (sortMode == 0) {
+		QString data = pAction->data().toString();
+		if (data.startsWith("box:"))
+			return data.mid(4);
+		if (data.startsWith("group:"))
+			return data.mid(6);
+	}
+
+	QString sortName = pAction->property("tray_sort_name").toString();
+	return sortName.isEmpty() ? pAction->text() : sortName;
 }
 
 static QAction* CSandMan__InsertGroupMenuSorted(QMenu* pTargetMenu, QAction* pStopAction, QMenu* pGroupMenu, const QString& groupName, int sortMode, const QMap<QString, QStringList>& Groups)
@@ -360,10 +377,11 @@ static QAction* CSandMan__InsertGroupMenuSorted(QMenu* pTargetMenu, QAction* pSt
 		if (pStopAction && pAction == pStopAction)
 			break;
 
-		if (!pAction->data().toString().startsWith("group:"))
+		QString data = pAction->data().toString();
+		if (!data.startsWith("group:") && !data.startsWith("box:"))
 			continue;
 
-		if (CSandMan__IsBeforeBySortMode(groupName, pAction->text(), sortMode, Groups)) {
+		if (CSandMan__IsBeforeBySortMode(groupName, CSandMan__GetTrayActionSortName(pAction, sortMode), sortMode, Groups)) {
 			pBeforeAction = pAction;
 			break;
 		}
@@ -376,10 +394,45 @@ static QAction* CSandMan__InsertGroupMenuSorted(QMenu* pTargetMenu, QAction* pSt
 	return pTargetMenu->addMenu(pGroupMenu);
 }
 
-static QTreeWidgetItem* CSandMan__InsertGroupItemSorted(QTreeWidget* pTree, QTreeWidgetItem* pParentItem, QTreeWidgetItem* pGroupItem, const QString& groupName, int sortMode, const QMap<QString, QStringList>& Groups)
+static QAction* CSandMan__InsertBoxMenuSorted(QMenu* pTargetMenu, QAction* pStopAction, QAction* pBoxAction, int sortMode, const QMap<QString, QStringList>& Groups)
 {
-	if (!pTree || !pGroupItem)
-		return pGroupItem;
+	if (!pTargetMenu || !pBoxAction)
+		return pBoxAction;
+
+	QString boxName = pBoxAction->data().toString().mid(4);
+	QString displayName = pBoxAction->property("tray_sort_name").toString();
+	QAction* pBeforeAction = nullptr;
+	for (QAction* pAction : pTargetMenu->actions()) {
+		if (pStopAction && pAction == pStopAction)
+			break;
+
+		QString data = pAction->data().toString();
+		if (!data.startsWith("group:") && !data.startsWith("box:"))
+			continue;
+
+		QString left = sortMode == 0 ? boxName : displayName;
+		if (CSandMan__IsBeforeBySortMode(left, CSandMan__GetTrayActionSortName(pAction, sortMode), sortMode, Groups)) {
+			pBeforeAction = pAction;
+			break;
+		}
+	}
+
+	if (pBeforeAction) {
+		pTargetMenu->insertAction(pBeforeAction, pBoxAction);
+		return pBoxAction;
+	}
+	if (pStopAction) {
+		pTargetMenu->insertAction(pStopAction, pBoxAction);
+		return pBoxAction;
+	}
+	pTargetMenu->addAction(pBoxAction);
+	return pBoxAction;
+}
+
+static QTreeWidgetItem* CSandMan__InsertTreeItemSorted(QTreeWidget* pTree, QTreeWidgetItem* pParentItem, QTreeWidgetItem* pItem, const QString& displayName, const QString& itemName, int sortMode, const QMap<QString, QStringList>& Groups)
+{
+	if (!pTree || !pItem)
+		return pItem;
 
 	int insertIndex = pParentItem ? pParentItem->childCount() : pTree->topLevelItemCount();
 	int count = pParentItem ? pParentItem->childCount() : pTree->topLevelItemCount();
@@ -390,21 +443,24 @@ static QTreeWidgetItem* CSandMan__InsertGroupItemSorted(QTreeWidget* pTree, QTre
 			continue;
 
 		QString existingName = pExisting->data(0, Qt::UserRole).toString();
-		if (!Groups.contains(existingName))
-			continue;
+		QString existingDisplayName = pExisting->data(0, Qt::UserRole + 2).toString();
+		if (existingDisplayName.isEmpty())
+			existingDisplayName = pExisting->text(0);
 
-		if (CSandMan__IsBeforeBySortMode(groupName, existingName, sortMode, Groups)) {
+		QString left = sortMode == 0 ? itemName : displayName;
+		QString right = sortMode == 0 ? existingName : existingDisplayName;
+		if (CSandMan__IsBeforeBySortMode(left, right, sortMode, Groups)) {
 			insertIndex = i;
 			break;
 		}
 	}
 
 	if (pParentItem)
-		pParentItem->insertChild(insertIndex, pGroupItem);
+		pParentItem->insertChild(insertIndex, pItem);
 	else
-		pTree->insertTopLevelItem(insertIndex, pGroupItem);
+		pTree->insertTopLevelItem(insertIndex, pItem);
 
-	return pGroupItem;
+	return pItem;
 }
 
 static QTreeWidgetItem* CSandMan__GetBoxParentTree(const QMap<QString, QStringList>& Groups, QMap<QString, QTreeWidgetItem*>& GroupItems, QTreeWidget* pTree, const QString& Name, int sortMode, int Depth = 0)
@@ -432,9 +488,9 @@ static QTreeWidgetItem* CSandMan__GetBoxParentTree(const QMap<QString, QStringLi
 			pParent->setFont(0, fnt);
 
 			if (QTreeWidgetItem* pParent2 = CSandMan__GetBoxParentTree(Groups, GroupItems, pTree, I.key(), sortMode, Depth + 1))
-				CSandMan__InsertGroupItemSorted(pTree, pParent2, pParent, I.key(), sortMode, Groups);
+				CSandMan__InsertTreeItemSorted(pTree, pParent2, pParent, I.key(), I.key(), sortMode, Groups);
 			else
-				CSandMan__InsertGroupItemSorted(pTree, nullptr, pParent, I.key(), sortMode, Groups);
+				CSandMan__InsertTreeItemSorted(pTree, nullptr, pParent, I.key(), I.key(), sortMode, Groups);
 		}
 
 		return pParent;
@@ -580,6 +636,7 @@ QAction* CSandMan__MakeBoxEntry(QMenu* pMenu, CSandBoxPlus* pBoxEx, QFileIconPro
 	}
 	pBoxAction->setData("box:" + pBoxEx->GetName());
 	pBoxAction->setMenu(pEmptyMenu);
+	pBoxAction->setProperty("tray_sort_name", displayNameRaw);
 	// Always store rich tooltip; OnBoxMenuHover decides whether to display it.
 	// When status tooltip mode is disabled, keep full-name tooltip only for truncated labels.
 	QString fallbackTip = truncated ? displayNameRaw : QString();
@@ -667,9 +724,9 @@ void CSandMan::CreateBoxMenu(QMenu* pMenu, int iOffset, int iSysTrayFilter)
 		QAction* pBoxAction = CSandMan__MakeBoxEntry(pMenu, pBoxEx.data(), IconProvider, iNoIcons, ColorIcons);
 		if (!pBoxAction) continue;
 		if (pSubMenu)
-			pSubMenu->addAction(pBoxAction);
+			CSandMan__InsertBoxMenuSorted(pSubMenu, nullptr, pBoxAction, sortMode, Groups);
 		else
-			pMenu->insertAction(pPos, pBoxAction);
+			CSandMan__InsertBoxMenuSorted(pMenu, pPos, pBoxAction, sortMode, Groups);
 		bAnyBoxAdded = true;
 	}
 
@@ -814,6 +871,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					QString displayName = CTrayTreeWidget::MakeTrayDisplayText(displayNameRaw, iTrayAliasMaxChars, &truncated);
 					pItem->setText(0, displayName);
 					pItem->setData(0, Qt::UserRole, pBox->GetName());
+					pItem->setData(0, Qt::UserRole + 2, displayNameRaw);
 					QIcon Icon;
 					if (bTrayIcons) {
 						QString boxIconStr  = pBox->GetText("BoxIcon");
@@ -832,10 +890,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					// Store both status and truncation tooltips; view logic picks one by mode/modifier
 					pItem->setToolTip(0, CSandMan__BuildBoxTooltip(pBoxEx.data()));
 					pItem->setData(0, Qt::UserRole + 1, truncated ? displayNameRaw : QString());
-					if (pParent)
-						pParent->addChild(pItem);
-					else
-						m_pTrayBoxes->addTopLevelItem(pItem);
+					CSandMan__InsertTreeItemSorted(m_pTrayBoxes, pParent, pItem, displayNameRaw, pBox->GetName(), sortMode, Groups);
 
 					bHasVisibleBoxes = true;
 				}

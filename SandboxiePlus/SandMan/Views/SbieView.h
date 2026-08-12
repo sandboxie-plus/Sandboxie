@@ -126,9 +126,8 @@ protected:
 	void						OnMoveTo(const QString& Group);
 
 	QMap<QString, QStringList>	m_Groups;
-	QSet<QString>				m_Collapsed;
+	QHash<QString, bool>		m_BoxExpandState;
 	QHash<QString, bool>		m_ProcessExpandState;
-	QSet<QString>				m_AutoExpandCollapsed;
 	bool						m_ProcessStateCleanupPending;
 	bool						m_HoldExpand;
 
@@ -155,9 +154,10 @@ private:
 	bool					IsParentOf(const QString& Name, const QString& Group);
 
 	void					ChangeExpand(const QModelIndex& index, bool bExpand);
-	void					ApplyExpandState(bool bAutoExpand, const QModelIndex& Parent = QModelIndex());
+	void					ApplyExpandState(bool bDefaultExpand, const QModelIndex& Parent = QModelIndex());
 	QString					GetExpandStateKey(const QModelIndex& ModelIndex) const;
 	QString					GetProcessExpandKey(const CBoxedProcessPtr& pProcess) const;
+	void					SaveBoxExpandState();
 	void					SaveProcessExpandState();
 	void					CleanupProcessExpandState();
 	QStringList				GetSelectedBoxNames();

@@ -558,12 +558,7 @@ void CSbieView::Refresh()
 				if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
 					CBoxedProcessPtr pProcess = m_pSbieModel->GetProcess(ModelIndex);
 					QString Key = GetProcessExpandKey(pProcess);
-					bool bExpand;
-					if (bAutoExpand && !bLegacyAutoExpand)
-						bExpand = !m_AutoExpandCollapsed.contains(GetExpandStateKey(ModelIndex));
-					else
-						bExpand = m_ProcessExpandState.contains(Key)
-							? m_ProcessExpandState.value(Key) : bAutoExpand;
+					bool bExpand = m_ProcessExpandState.value(Key, bAutoExpand);
 					if (bExpand) {
 						m_HoldExpand = true;
 						m_pSbieTree->expand(m_pSortProxy->mapFromSource(ModelIndex));
@@ -577,18 +572,16 @@ void CSbieView::Refresh()
 				}
 				else
 				{
-					QString Name;
-					if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
-						Name = m_pSbieModel->GetID(ModelIndex).toString();
-					else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
-						Name = m_pSbieModel->GetSandBox(ModelIndex)->GetName();
-
-					bool bExpand = bAutoExpand && !bLegacyAutoExpand
-						? !m_AutoExpandCollapsed.contains(GetExpandStateKey(ModelIndex))
-						: !m_Collapsed.contains(Name);
+					bool bExpand = m_BoxExpandState.value(GetExpandStateKey(ModelIndex),
+						bLegacyAutoExpand ? true : bAutoExpand);
 					if (bExpand) {
 						m_HoldExpand = true;
 						m_pSbieTree->expand(m_pSortProxy->mapFromSource(ModelIndex));
+						m_HoldExpand = false;
+					}
+					else {
+						m_HoldExpand = true;
+						m_pSbieTree->collapse(m_pSortProxy->mapFromSource(ModelIndex));
 						m_HoldExpand = false;
 					}
 				}
@@ -1022,8 +1015,16 @@ void CSbieView::RenameItem(const QString OldName, const QString NewName)
 	theConf->DelValue("SizeCache/" + OldName);
 	if(Size != -1) theConf->SetValue("SizeCache/" + NewName, Size);
 
-	if (m_Collapsed.remove(OldName))
-		m_Collapsed.insert(NewName);
+	bool ExpandStateChanged = false;
+	foreach(const QString& Prefix, QStringList() << "g|" << "b|") {
+		QString OldKey = Prefix + OldName;
+		if (m_BoxExpandState.contains(OldKey)) {
+			m_BoxExpandState.insert(Prefix + NewName, m_BoxExpandState.take(OldKey));
+			ExpandStateChanged = true;
+		}
+	}
+	if (ExpandStateChanged && theConf->GetInt("Options/BoxGroupHandling", 0) == 0)
+		SaveBoxExpandState();
 
 	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
 	{
@@ -1174,7 +1175,9 @@ void CSbieView::OnGroupAction(QAction* Action)
 						break;
 					}
 				}
-				m_Collapsed.remove(Group);
+				m_BoxExpandState.remove("g|" + Group);
+				if (theConf->GetInt("Options/BoxGroupHandling", 0) == 0)
+					SaveBoxExpandState();
 			}
 		}
 
@@ -1832,7 +1835,9 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 
 			if (!Status.IsError()) {
 				theConf->DelValue("SizeCache/" + Name);
-				m_Collapsed.remove(Name);
+				m_BoxExpandState.remove("b|" + Name);
+				if (theConf->GetInt("Options/BoxGroupHandling", 0) == 0)
+					SaveBoxExpandState();
 				for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
 				{
 					if (I.value().removeOne(Name)) {
@@ -2735,17 +2740,6 @@ void CSbieView::ChangeExpand(const QModelIndex& index, bool bExpand)
 		return;
 
 	QModelIndex ModelIndex = m_pSortProxy->mapToSource(index);
-	if (theGUI->IsAutoExpand()
-	 && !theConf->GetBool("Options/LegacyAutoExpandTree", false)) {
-		QString Key = GetExpandStateKey(ModelIndex);
-		if (!Key.isEmpty()) {
-			if (bExpand)
-				m_AutoExpandCollapsed.remove(Key);
-			else
-				m_AutoExpandCollapsed.insert(Key);
-		}
-		return;
-	}
 
 	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
 		QString Key = GetProcessExpandKey(m_pSbieModel->GetProcess(ModelIndex));
@@ -2756,29 +2750,15 @@ void CSbieView::ChangeExpand(const QModelIndex& index, bool bExpand)
 		return;
 	}
 
-	QString Name;
-	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
-		Name = m_pSbieModel->GetID(ModelIndex).toString();
-	else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
-		Name = m_pSbieModel->GetSandBox(ModelIndex)->GetName();
-
-	if(bExpand)
-		m_Collapsed.remove(Name);
-	else
-		m_Collapsed.insert(Name);
-
-	//QMap<QString, QStringList> Collapsed;
-	//Collapsed.insert("", SetToList(m_Collapsed));
-	//theAPI->GetUserSettings()->SetTextMap("CollapsedBoxes", Collapsed);
-
-	QString Collapsed = SetToList(m_Collapsed).join(",");
-	theConf->SetValue("UIConfig/BoxCollapsedView", Collapsed);
+	QString Key = GetExpandStateKey(ModelIndex);
+	if (!Key.isEmpty()) {
+		m_BoxExpandState.insert(Key, bExpand);
+		SaveBoxExpandState();
+	}
 }
 
 void CSbieView::SetAutoExpand(bool bExpand, bool bLegacy)
 {
-	m_AutoExpandCollapsed.clear();
-
 	if (bLegacy) {
 		if (bExpand)
 			m_pSbieTree->expandAll();
@@ -2788,37 +2768,26 @@ void CSbieView::SetAutoExpand(bool bExpand, bool bLegacy)
 	}
 
 	m_HoldExpand = true;
-	if (bExpand)
-		m_pSbieTree->expandAll();
-	else
-		ApplyExpandState(false);
+	ApplyExpandState(bExpand);
 	m_HoldExpand = false;
 }
 
-void CSbieView::ApplyExpandState(bool bAutoExpand, const QModelIndex& Parent)
+void CSbieView::ApplyExpandState(bool bDefaultExpand, const QModelIndex& Parent)
 {
 	for (int Row = 0; Row < m_pSortProxy->rowCount(Parent); ++Row) {
 		QModelIndex Index = m_pSortProxy->index(Row, 0, Parent);
 		QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
 
 		bool bExpand;
-		if (bAutoExpand)
-			bExpand = !m_AutoExpandCollapsed.contains(GetExpandStateKey(ModelIndex));
-		else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
+		if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
 			QString Key = GetProcessExpandKey(m_pSbieModel->GetProcess(ModelIndex));
-			bExpand = m_ProcessExpandState.value(Key, false);
+			bExpand = m_ProcessExpandState.value(Key, bDefaultExpand);
 		}
-		else {
-			QString Name;
-			if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
-				Name = m_pSbieModel->GetID(ModelIndex).toString();
-			else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
-				Name = m_pSbieModel->GetSandBox(ModelIndex)->GetName();
-			bExpand = !m_Collapsed.contains(Name);
-		}
+		else
+			bExpand = m_BoxExpandState.value(GetExpandStateKey(ModelIndex), bDefaultExpand);
 
 		m_pSbieTree->setExpanded(Index, bExpand);
-		ApplyExpandState(bAutoExpand, Index);
+		ApplyExpandState(bDefaultExpand, Index);
 	}
 }
 
@@ -2842,6 +2811,29 @@ QString CSbieView::GetProcessExpandKey(const CBoxedProcessPtr& pProcess) const
 
 	return QString("%1|%2|%3").arg(pProcess->GetBoxName())
 		.arg(pProcess->GetProcessId()).arg(pProcess->GetTimeStamp().toMSecsSinceEpoch());
+}
+
+void CSbieView::SaveBoxExpandState()
+{
+	if (m_BoxExpandState.isEmpty()) {
+		theConf->DelValue("UIConfig/BoxTreeState");
+		theConf->DelValue("UIConfig/BoxCollapsedView");
+		return;
+	}
+
+	QStringList State;
+	QSet<QString> Collapsed;
+	for (auto I = m_BoxExpandState.constBegin(); I != m_BoxExpandState.constEnd(); ++I) {
+		State.append(QString(I.value() ? "e|" : "c|") + I.key());
+		if (!I.value())
+			Collapsed.insert(I.key().mid(2));
+	}
+	State.sort();
+	theConf->SetValue("UIConfig/BoxTreeState", State);
+	if (Collapsed.isEmpty())
+		theConf->DelValue("UIConfig/BoxCollapsedView");
+	else
+		theConf->SetValue("UIConfig/BoxCollapsedView", SetToList(Collapsed).join(","));
 }
 
 void CSbieView::SaveProcessExpandState()
@@ -2875,13 +2867,6 @@ void CSbieView::CleanupProcessExpandState()
 				LiveProcesses.insert(Key);
 		}
 	}
-	for (auto I = m_AutoExpandCollapsed.begin(); I != m_AutoExpandCollapsed.end();) {
-		if (I->startsWith("p|") && !LiveProcesses.contains(I->mid(2)))
-			I = m_AutoExpandCollapsed.erase(I);
-		else
-			++I;
-	}
-
 	bool Changed = false;
 	for (auto I = m_ProcessExpandState.begin(); I != m_ProcessExpandState.end();) {
 		if (!LiveProcesses.contains(I.key())) {
@@ -2906,7 +2891,7 @@ void CSbieView::UpdateColapsed()
 
 	foreach(const QString& Group, m_Groups.keys())
 	{
-		if (!m_Collapsed.contains(Group)) {
+		if (m_BoxExpandState.value("g|" + Group, true)) {
 			QModelIndex index = m_pSbieModel->FindGroupIndex(Group);
 			if(index.isValid())
 				m_pSbieTree->expand(m_pSortProxy->mapFromSource(index));
@@ -2931,20 +2916,33 @@ void CSbieView::ReloadUserConfig()
 	UpdateMoveMenu();
 
 	int Handling = theConf->GetInt("Options/BoxGroupHandling", 0);
-	if(Handling == 2)
-		m_Collapsed = ListToSet(m_Groups.keys());
-	else if(Handling == 1)
-		m_Collapsed.clear();
+	m_BoxExpandState.clear();
+	if(Handling == 1 || Handling == 2) {
+		foreach(const QString& Group, m_Groups.keys())
+			m_BoxExpandState.insert("g|" + Group, Handling == 1);
+	}
 	else if (Handling == 0)
 	{
-		//QMap<QString, QStringList> Collapsed = theAPI->GetUserSettings()->GetTextMap("CollapsedBoxes");
-		//m_Collapsed = ListToSet(Collapsed[""]);
-		//if (m_Collapsed.isEmpty()) { // try legacy entries
-		QString Collapsed = theConf->GetString("UIConfig/BoxCollapsedView");
-		//if (Collapsed.isEmpty())
-		//	Collapsed = theAPI->GetUserSettings()->GetText("BoxCollapsedView");
-			m_Collapsed = ListToSet(SplitStr(Collapsed, ","));
-		//}
+		QStringList BoxState = theConf->GetStringList("UIConfig/BoxTreeState");
+		if (BoxState.isEmpty()) {
+			QString State = theConf->GetString("UIConfig/BoxTreeState");
+			if (!State.isEmpty())
+				BoxState.append(State);
+		}
+		foreach(const QString& State, BoxState) {
+			if (State.length() > 4 && State.at(1) == '|'
+			 && (State.at(0) == 'e' || State.at(0) == 'c')
+			 && (State.mid(2, 2) == "g|" || State.mid(2, 2) == "b|"))
+				m_BoxExpandState.insert(State.mid(2), State.at(0) == 'e');
+		}
+		if (m_BoxExpandState.isEmpty()) {
+			foreach(const QString& Name, SplitStr(theConf->GetString("UIConfig/BoxCollapsedView"), ",")) {
+				if (m_Groups.contains(Name))
+					m_BoxExpandState.insert("g|" + Name, false);
+				if (!theAPI->GetBoxByName(Name).isNull())
+					m_BoxExpandState.insert("b|" + Name, false);
+			}
+		}
 	}
 
 	m_ProcessExpandState.clear();
@@ -3074,14 +3072,20 @@ void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes)
 		}
 	}
 
-	QSet<QString> Temp = m_Collapsed;
-	foreach(QString Name, m_Collapsed)
-	{
-		if (m_Groups.end() == std::find_if(m_Groups.begin(), m_Groups.end(),
-					  [Name](const QStringList& item)->int { return item.contains(Name); }))
-			Temp.remove(Name);
+	bool ExpandStateChanged = false;
+	for (auto I = m_BoxExpandState.begin(); I != m_BoxExpandState.end();) {
+		QString Name = I.key().mid(2);
+		bool Exists = I.key().startsWith("g|") ? m_Groups.contains(Name)
+			: !theAPI->GetBoxByName(Name).isNull();
+		if (!Exists) {
+			I = m_BoxExpandState.erase(I);
+			ExpandStateChanged = true;
+		}
+		else
+			++I;
 	}
-	m_Collapsed = Temp;
+	if (ExpandStateChanged && theConf->GetInt("Options/BoxGroupHandling", 0) == 0)
+		SaveBoxExpandState();
 }
 
 void CSbieView::SaveBoxGrouping()

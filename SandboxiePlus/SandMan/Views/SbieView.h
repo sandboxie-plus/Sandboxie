@@ -128,7 +128,6 @@ protected:
 	QMap<QString, QStringList>	m_Groups;
 	QHash<QString, bool>		m_BoxExpandState;
 	QHash<QString, bool>		m_ProcessExpandState;
-	bool						m_ProcessStateCleanupPending;
 	bool						m_HoldExpand;
 
 private:

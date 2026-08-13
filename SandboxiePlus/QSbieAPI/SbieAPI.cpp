@@ -139,6 +139,7 @@ CSbieAPI::CSbieAPI(QObject* parent) : QThread(parent)
 	m_IniReLoad = false;
 	m_bReloadPending = false;
 	m_bBoxesDirty = false;
+	m_bProcessListInitialized = false;
 
 	connect(&m_IniWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnIniChanged(const QString&)));
 	connect(this, SIGNAL(ProcessBoxed(quint32, const QString&, const QString&, quint32, const QString&)), this, SLOT(OnProcessBoxed(quint32, const QString&, const QString&, quint32, const QString&)));
@@ -413,6 +414,7 @@ SB_STATUS CSbieAPI::Disconnect()
 
 	m_SandBoxes.clear();
 	m_BoxedProxesses.clear();
+	m_bProcessListInitialized = false;
 	m_bBoxesDirty = true;
 
 	emit StatusChanged();
@@ -1582,6 +1584,7 @@ SB_STATUS CSbieAPI::UpdateProcesses(int iKeep, bool bAllSessions)
 	}
 
 	delete[] boxed_pids;
+	m_bProcessListInitialized = true;
 	return SB_OK;
 }
 

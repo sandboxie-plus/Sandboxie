@@ -33,7 +33,6 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	this->setLayout(m_pMainLayout);
 
 	m_HoldExpand = false;
-	m_ProcessStateCleanupPending = false;
 	m_MoveBatchPending = false;
 	m_MoveBatchChanged = false;
 
@@ -2852,13 +2851,10 @@ void CSbieView::SaveProcessExpandState()
 
 void CSbieView::CleanupProcessExpandState()
 {
-	QMap<quint32, CBoxedProcessPtr> Processes = theAPI->GetAllProcesses();
-	if (m_ProcessStateCleanupPending) {
-		m_ProcessStateCleanupPending = false;
-		if (Processes.isEmpty())
-			return;
-	}
+	if (!theAPI->IsProcessListInitialized())
+		return;
 
+	QMap<quint32, CBoxedProcessPtr> Processes = theAPI->GetAllProcesses();
 	QSet<QString> LiveProcesses;
 	foreach(const CBoxedProcessPtr& pProcess, Processes) {
 		if (!pProcess->IsTerminated()) {
@@ -2939,7 +2935,7 @@ void CSbieView::ReloadUserConfig()
 			foreach(const QString& Name, SplitStr(theConf->GetString("UIConfig/BoxCollapsedView"), ",")) {
 				if (m_Groups.contains(Name))
 					m_BoxExpandState.insert("g|" + Name, false);
-				if (!theAPI->GetBoxByName(Name).isNull())
+				else
 					m_BoxExpandState.insert("b|" + Name, false);
 			}
 		}
@@ -2957,7 +2953,6 @@ void CSbieView::ReloadUserConfig()
 		 && (State.at(0) == 'e' || State.at(0) == 'c'))
 			m_ProcessExpandState.insert(State.mid(2), State.at(0) == 'e');
 	}
-	m_ProcessStateCleanupPending = !m_ProcessExpandState.isEmpty();
 	if (m_ProcessExpandState.isEmpty())
 		theConf->DelValue("UIConfig/ProcessTreeState");
 
@@ -3076,7 +3071,7 @@ void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes)
 	for (auto I = m_BoxExpandState.begin(); I != m_BoxExpandState.end();) {
 		QString Name = I.key().mid(2);
 		bool Exists = I.key().startsWith("g|") ? m_Groups.contains(Name)
-			: !theAPI->GetBoxByName(Name).isNull();
+			: AllBoxes.isEmpty() || AllBoxes.contains(Name.toLower());
 		if (!Exists) {
 			I = m_BoxExpandState.erase(I);
 			ExpandStateChanged = true;

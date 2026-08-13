@@ -102,7 +102,7 @@
     <message>
         <location filename="AddonManager.cpp" line="237"/>
         <source>Failed to delete a file during add-on removal</source>
-        <translation>刪除檔案失敗，因附加元件正在移除</translation>
+        <translation>移除附加元件時無法刪除檔案</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="251"/>
@@ -261,7 +261,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="935"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
-        <translation>該功能可能降低相容性，因其同時阻止了沙箱所屬處理程序向主機所屬處理程序寫入資料，或僅是將其啟動。</translation>
+        <translation>此功能可能降低相容性，因為它也會阻止沙箱內的處理程序寫入主機上的處理程序，甚至無法啟動它們。</translation>
     </message>
     <message>
         <source>Prevents the sandboxed window from being captured.</source>
@@ -865,9 +865,9 @@ While the level of isolation is reduced compared to other box types, it offers i
         <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. 
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
-        <translation>在此沙箱類型中沙箱使用加密的磁碟映像作為其根資料夾。這提供了額外的隱私和安全層級。
-安裝後對虛擬磁碟的存取僅限於沙箱中執行的程式。 Sandboxie 可防止主機系統上的其它處理程序存取沙箱化處理程序。
-這確保了機密型沙箱環境中最高水準的隱私和資料保護。</translation>
+        <translation>在此沙箱類型中，沙箱會使用加密磁碟映像作為根資料夾，提供額外的隱私與安全防護。
+掛載後，只有在沙箱內執行的程式才能存取虛擬磁碟。Sandboxie 會防止主機系統上的其他處理程序存取沙箱化處理程序。
+這能在機密型沙箱環境中提供最高等級的隱私與資料保護。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="481"/>
@@ -2240,7 +2240,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="505"/>
         <source>Enable auto template updates</source>
-        <translation>啟用自動模板更新</translation>
+        <translation>啟用自動範本更新</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="553"/>
@@ -2872,13 +2872,13 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="335"/>
         <source>Please enter Document File Extension.</source>
-        <translation>請選取文件副檔名。</translation>
+        <translation>請輸入文件副檔名。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="345"/>
         <source>For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets.</source>
         <oldsource>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</oldsource>
-        <translation>由於安全原因，不允許建立完全通用字元的分離文件預設。</translation>
+        <translation>基於安全考量，不允許建立完全由萬用字元組成的分離文件預設。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="355"/>

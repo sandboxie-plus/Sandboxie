@@ -22,6 +22,7 @@ class CSbieTemplatesEx;
 class CTraceView;
 class CScriptManager;
 class CAddonManager;
+class QLineEdit;
 
 struct ToolBarAction {
 	// Identifier of action stored in ini. Empty for separator.
@@ -296,6 +297,7 @@ private slots:
 	void				OnAbout();
 
 	void				OnShowHide();
+	void				OnTraySearch(const QString& Text);
 	void				OnSysTray(QSystemTrayIcon::ActivationReason Reason);
 
 	void				SetUITheme();
@@ -475,6 +477,7 @@ private:
 
 	QSystemTrayIcon*	m_pTrayIcon;
 	QMenu*				m_pTrayMenu;
+	QLineEdit*			m_pTraySearch;
 	QWidgetAction*		m_pTrayList;
 	QTreeWidget*		m_pTrayBoxes;
 	int					m_iTrayPos;

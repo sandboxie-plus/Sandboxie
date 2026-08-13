@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added outside sandboxed-window border modes (`onoutside`, `ttloutside`, and `alloutside`) in SandMan; these draw the configured border outside the application frame, while the new `BorderInsideMaximized=y` setting (enabled by default) moves the border and label inside maximized or snapped windows so they remain visible
 - added persistence for manually expanded and collapsed SandMan process-tree branches across task-list refreshes and UI restarts [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
 - added global `BoxAliasDisplayMode` controls for display-only sandbox names across SandMan, Start.exe, window titles, borders, tooltips, recovery logs, and messages, while preserving the real box name for paths and operations; Import Sandboxes can optionally read archived aliases [#5521](https://github.com/sandboxie-plus/Sandboxie/issues/5521)
+- added an optional literal search box to compact and non-compact SandMan tray menus for filtering sandboxes and groups
 
 ### Changed
 - changed SandMan's Auto Expand Tree to temporarily expand box groups, sandboxes, and process branches without overwriting their saved manual expansion states; set the SandMan UI configuration option `Options/LegacyAutoExpandTree=true` to retain the previous expand-all/collapse-all behaviour [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)

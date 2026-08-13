@@ -153,6 +153,18 @@ void CSandMan::CreateTrayMenu()
 	QFont f = pShowHide->font();
 	f.setBold(true);
 	pShowHide->setFont(f);
+
+	m_pTraySearch = NULL;
+	if (theConf->GetBool("Options/TraySearch", true)) {
+		QWidgetAction* pTraySearchAction = new QWidgetAction(m_pTrayMenu);
+		m_pTraySearch = new QLineEdit();
+		m_pTraySearch->setPlaceholderText(tr("Find sandbox..."));
+		m_pTraySearch->setClearButtonEnabled(true);
+		pTraySearchAction->setDefaultWidget(m_pTraySearch);
+		m_pTrayMenu->addAction(pTraySearchAction);
+		connect(m_pTraySearch, SIGNAL(textChanged(const QString&)), this, SLOT(OnTraySearch(const QString&)));
+	}
+
 	m_pTrayMenu->addSeparator();
 
 	m_iTrayPos = m_pTrayMenu->actions().count();
@@ -305,6 +317,46 @@ static QString CSandMan__GetTrayEmptyText(int iSysTrayFilter)
 	return CSandMan::tr("No sandboxes to show.");
 }
 
+static bool CSandMan__FilterTrayMenu(QMenu* pMenu, const QString& Filter, bool bParentMatch = false)
+{
+	bool bAnyMatch = false;
+	foreach(QAction* pAction, pMenu->actions()) {
+		QString Data = pAction->data().toString();
+		if (Data.startsWith("group:")) {
+			bool bGroupMatch = bParentMatch || pAction->text().contains(Filter, Qt::CaseInsensitive);
+			bool bChildMatch = pAction->menu() && CSandMan__FilterTrayMenu(pAction->menu(), Filter, bGroupMatch);
+			pAction->setVisible(bGroupMatch || bChildMatch);
+			bAnyMatch |= pAction->isVisible();
+		}
+		else if (Data.startsWith("box:")) {
+			QString DisplayName = pAction->property("tray_sort_name").toString();
+			bool bMatch = bParentMatch || DisplayName.contains(Filter, Qt::CaseInsensitive)
+				|| Data.mid(4).contains(Filter, Qt::CaseInsensitive);
+			pAction->setVisible(bMatch);
+			bAnyMatch |= bMatch;
+		}
+		else if (Data.startsWith("empty:")) {
+			bool bMatch = Filter.isEmpty();
+			pAction->setVisible(bMatch);
+			bAnyMatch |= bMatch;
+		}
+	}
+	return bAnyMatch;
+}
+
+static bool CSandMan__FilterTrayTreeItem(QTreeWidgetItem* pItem, const QString& Filter, bool bParentMatch = false)
+{
+	QString Name = pItem->data(0, Qt::UserRole).toString();
+	QString DisplayName = pItem->data(0, Qt::UserRole + 2).toString();
+	bool bMatch = Filter.isEmpty() || bParentMatch || Name.contains(Filter, Qt::CaseInsensitive)
+		|| DisplayName.contains(Filter, Qt::CaseInsensitive);
+	bool bChildMatch = false;
+	for (int i = 0; i < pItem->childCount(); ++i)
+		bChildMatch |= CSandMan__FilterTrayTreeItem(pItem->child(i), Filter, bMatch);
+	pItem->setHidden(!bMatch && !bChildMatch);
+	return bMatch || bChildMatch;
+}
+
 void CSandMan::OnShowHide()
 {
 	if (isVisible()) {
@@ -312,6 +364,16 @@ void CSandMan::OnShowHide()
 		hide();
 	} else
 		show();
+}
+
+void CSandMan::OnTraySearch(const QString& Text)
+{
+	if (m_pTrayBoxes) {
+		for (int i = 0; i < m_pTrayBoxes->topLevelItemCount(); ++i)
+			CSandMan__FilterTrayTreeItem(m_pTrayBoxes->topLevelItem(i), Text);
+	}
+	else if (m_pTrayMenu)
+		CSandMan__FilterTrayMenu(m_pTrayMenu, Text);
 }
 
 double CSandMan__GetBoxOrder(const QMap<QString, QStringList>& Groups, const QString& Name, double value = 0.0, int Depth = 0);
@@ -810,6 +872,8 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 				break;
 
 			int iSysTrayFilter = theConf->GetInt("Options/SysTrayFilter", 0);
+			if (m_pTraySearch)
+				m_pTraySearch->clear();
 
 			if(!m_pTrayBoxes)
 				CreateBoxMenu(m_pTrayMenu, m_iTrayPos, iSysTrayFilter);
@@ -1026,7 +1090,9 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 				}
 			}
 
-			m_pTrayMenu->popup(QCursor::pos());	
+			m_pTrayMenu->popup(QCursor::pos());
+			if (m_pTraySearch)
+				m_pTraySearch->setFocus();
 			break;
 		}
 		case QSystemTrayIcon::DoubleClick:

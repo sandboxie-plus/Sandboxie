@@ -171,7 +171,7 @@ SelectComponentsDesc=選擇將會被安裝的元件。
 SelectComponentsLabel2=選擇您想要安裝的元件；清除您不想安裝的元件。然後按 [下一步] 繼續安裝。
 FullInstallation=完整安裝
 ; if possible don't translate 'Compact' as 'Minimal' (I mean 'Minimal' in your language)
-CompactInstallation=最小安裝
+CompactInstallation=精簡安裝
 CustomInstallation=自訂安裝
 NoUninstallWarningTitle=元件已存在
 NoUninstallWarning=安裝程式偵測到以下元件已經安裝在您的電腦上:%n%n%1%n%n取消選擇這些元件將不會移除它們。%n%n您仍然要繼續嗎?
@@ -229,7 +229,7 @@ ApplicationsFound=下列應用程式正在使用安裝程式必須更新的檔�
 ApplicationsFound2=下列應用程式正在使用安裝程式必須更新的檔案。建議允許安裝程式自動關閉這些應用程式。安裝完成後，安裝程式將嘗試重新啟動這些應用程式。
 CloseApplications=關閉應用程式(&A)
 DontCloseApplications=不要關閉應用程式 (&D)
-ErrorCloseApplications=安裝程式無法自動關閉所有應用程式。建議您在繼續前先關閉所有應用程式使用的檔案。
+ErrorCloseApplications=安裝程式無法自動關閉所有應用程式。建議您在繼續前，手動關閉所有正在使用安裝程式需要更新之檔案的應用程式。
 PrepareToInstallNeedsRestart=安裝程式必須重新啟動您的電腦。電腦重新啟動後，請再次執行安裝程式以完成 [name] 的安裝。%n%n是否立即重新啟動？
 
 ; *** "Installing" wizard page
@@ -237,7 +237,7 @@ WizardInstalling=正在安裝
 InstallingLabel=請稍候，安裝程式正在將 [name] 安裝到您的電腦上
 
 ; *** "Setup Completed" wizard page
-FinishedHeadingLabel=安裝完成
+FinishedHeadingLabel=[name] 安裝完成
 FinishedLabelNoIcons=安裝程式已經將 [name] 安裝在您的電腦上。
 FinishedLabel=安裝程式已經將 [name] 安裝在您的電腦中，您可以選擇程式的圖示來執行該應用程式。
 ClickFinish=按 [完成] 以結束安裝程式。

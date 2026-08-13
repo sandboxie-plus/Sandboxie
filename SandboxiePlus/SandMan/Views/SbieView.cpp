@@ -1635,23 +1635,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuSnapshots)
 	{
-		CSandBoxPtr pBox = SandBoxes.first();
-
-		static QMap<void*, CSnapshotsWindow*> SnapshotWindows;
-		CSnapshotsWindow* pSnapshotsWindow = SnapshotWindows.value(pBox.data());
-		if (pSnapshotsWindow == NULL) {
-			pSnapshotsWindow = new CSnapshotsWindow(SandBoxes.first(), this);
-			connect(theGUI, SIGNAL(Closed()), pSnapshotsWindow, SLOT(close()));
-			SnapshotWindows.insert(pBox.data(), pSnapshotsWindow);
-			connect(pSnapshotsWindow, &CSnapshotsWindow::Closed, [this, pBox]() {
-				SnapshotWindows.remove(pBox.data());
-			});
-			CSandMan::SafeShow(pSnapshotsWindow);
-		}
-		else {
-			pSnapshotsWindow->setWindowState((pSnapshotsWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-			SetForegroundWindow((HWND)pSnapshotsWindow->winId());
-		}
+		ShowSnapshots(SandBoxes.first());
 	}
 	else if (Action == m_pMenuDuplicate || Action == m_pMenuDuplicateEx)
 	{
@@ -2773,6 +2757,29 @@ void CSbieView::ChangeExpand(const QModelIndex& index, bool bExpand)
 
 	QString Collapsed = SetToList(m_Collapsed).join(",");
 	theConf->SetValue("UIConfig/BoxCollapsedView", Collapsed);
+}
+
+void CSbieView::ShowSnapshots(const CSandBoxPtr& pBox)
+{
+	if (pBox.isNull())
+		return;
+
+	static QMap<void*, CSnapshotsWindow*> SnapshotWindows;
+	CSnapshotsWindow* pSnapshotsWindow = SnapshotWindows.value(pBox.data());
+	if (pSnapshotsWindow == NULL) {
+		pSnapshotsWindow = new CSnapshotsWindow(pBox, this);
+		connect(theGUI, SIGNAL(Closed()), pSnapshotsWindow, SLOT(close()));
+		SnapshotWindows.insert(pBox.data(), pSnapshotsWindow);
+		connect(pSnapshotsWindow, &CSnapshotsWindow::Closed, [pBox]() {
+			SnapshotWindows.remove(pBox.data());
+		});
+		CSandMan::SafeShow(pSnapshotsWindow);
+	}
+	else {
+		pSnapshotsWindow->Refresh();
+		pSnapshotsWindow->setWindowState((pSnapshotsWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+		SetForegroundWindow((HWND)pSnapshotsWindow->winId());
+	}
 }
 
 void CSbieView::SetAutoExpand(bool bExpand, bool bLegacy)

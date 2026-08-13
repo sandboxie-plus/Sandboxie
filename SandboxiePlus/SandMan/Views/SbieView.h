@@ -70,6 +70,7 @@ public:
 	virtual void				ShowOptions(const QString& Name);
 	virtual void				ShowOptions(const CSandBoxPtr& pBox);
 	virtual void				ShowBrowse(const CSandBoxPtr& pBox);
+	virtual void				ShowSnapshots(const CSandBoxPtr& pBox);
 
 	QMap<QString, QStringList>	GetGroups() { return m_Groups; }
 

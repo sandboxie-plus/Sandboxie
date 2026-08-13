@@ -165,17 +165,17 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
+           <widget class="QPushButton" name="btnRefresh">
+            <property name="minimumSize">
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>0</width>
+              <height>23</height>
              </size>
             </property>
-           </spacer>
+            <property name="text">
+             <string>Refresh View</string>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QPushButton" name="btnRemove">
@@ -233,6 +233,7 @@
   <tabstop>chkDefault</tabstop>
   <tabstop>txtInfo</tabstop>
   <tabstop>btnTake</tabstop>
+  <tabstop>btnRefresh</tabstop>
   <tabstop>btnSelect</tabstop>
   <tabstop>btnRemove</tabstop>
  </tabstops>

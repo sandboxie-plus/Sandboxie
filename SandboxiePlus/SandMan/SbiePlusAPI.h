@@ -166,7 +166,7 @@ public:
 	class CRecoveryWindow*	m_pRecoveryWnd;
 
 	bool					IsBoxBusy() const { return IsSizePending() || !m_JobQueue.isEmpty(); }
-	SB_STATUS				DeleteContentAsync(bool DeleteSnapshots = true, bool bOnAutoDelete = false);
+	SB_STATUS				DeleteContentAsync(bool DeleteSnapshots = true, bool UseCurrentSnapshot = false);
 
 	struct SLink {
 		SLink() :Url(false), IconIndex(0) {}

@@ -18,7 +18,7 @@ Sandboxie Classic builds under Visual Studio 2019, as it offers the widest compa
 7) If the WDK Extension doesn't install automatically, install it (can be found in <Windows Kits directory>\10\Vsix\VS2019)
 8) If you have a more recent Windows SDK version installed, retarget the solution to 10.0.19041
 	- This is for example necessary if VS 2022 is also installed with the default desktop C++ components
-9) To compile for x64, it's necessary to first compile `Solution/core/LowLevel` for Win32 (x86)
+9) To compile for x64, it's necessary to first compile `core/low/LowLevel.vcxproj` for Win32 (x86)
 
 ### Source projects (in alphabetical order)
 

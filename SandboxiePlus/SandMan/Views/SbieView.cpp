@@ -3051,7 +3051,7 @@ bool CSbieView::NormalizeGroups()
 	return Changed;
 }
 
-void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes) 
+void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes, bool bBoxesLoaded)
 {
 	if (!AllBoxes.isEmpty())
 	{
@@ -3068,16 +3068,18 @@ void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes)
 	}
 
 	bool ExpandStateChanged = false;
-	for (auto I = m_BoxExpandState.begin(); I != m_BoxExpandState.end();) {
-		QString Name = I.key().mid(2);
-		bool Exists = I.key().startsWith("g|") ? m_Groups.contains(Name)
-			: AllBoxes.isEmpty() || AllBoxes.contains(Name.toLower());
-		if (!Exists) {
-			I = m_BoxExpandState.erase(I);
-			ExpandStateChanged = true;
+	if (bBoxesLoaded) {
+		for (auto I = m_BoxExpandState.begin(); I != m_BoxExpandState.end();) {
+			QString Name = I.key().mid(2);
+			bool Exists = I.key().startsWith("g|") ? m_Groups.contains(Name)
+				: AllBoxes.contains(Name.toLower());
+			if (!Exists) {
+				I = m_BoxExpandState.erase(I);
+				ExpandStateChanged = true;
+			}
+			else
+				++I;
 		}
-		else
-			++I;
 	}
 	if (ExpandStateChanged && theConf->GetInt("Options/BoxGroupHandling", 0) == 0)
 		SaveBoxExpandState();

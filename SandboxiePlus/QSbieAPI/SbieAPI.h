@@ -65,7 +65,7 @@ public:
 	virtual SB_STATUS		CreateBox(const QString& BoxName, bool bReLoad = true);
 
 	virtual SB_STATUS		UpdateProcesses(int iKeep, bool bAllSessions);
-	bool					IsProcessListInitialized() const { return m_bProcessListInitialized; }
+	bool					IsProcessListInitialized() const;
 
 	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { return m_SandBoxes; }
 	virtual QMap<quint32, CBoxedProcessPtr> GetAllProcesses() { return m_BoxedProxesses; }
@@ -258,7 +258,6 @@ protected:
 
 	QMap<QString, CSandBoxPtr> m_SandBoxes;
 	QMap<quint32, CBoxedProcessPtr> m_BoxedProxesses;
-	bool m_bProcessListInitialized;
 
 	QMap<quint32, SWndInfo> m_WindowMap;
 

@@ -82,7 +82,7 @@ public slots:
 	void						Clear();
 	void						Refresh();
 	void						ReloadUserConfig();
-	void						ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes = QMap<QString, CSandBoxPtr>());
+	void						ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes = QMap<QString, CSandBoxPtr>(), bool bBoxesLoaded = false);
 	void						SaveBoxGrouping();
 
 private slots:

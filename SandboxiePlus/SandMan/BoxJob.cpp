@@ -16,10 +16,7 @@ SB_PROGRESS CCleanUpJob::Start()
 	if (!m_DeleteSnapshots && pBox->HasSnapshots()) {
 		QString Current;
 		QString Default = pBox->GetDefaultSnapshot(&Current);
-		if (m_bOnAutoDelete) {
-			Default = Current; // on auto delete always return to the latest
-		}
-		Status = pBox->SelectSnapshot(Default);
+		Status = pBox->SelectSnapshot(m_UseCurrentSnapshot ? Current : Default);
 	}
 	else // if there are no snapshots jut use the normal cleaning procedure
 		Status = pBox->CleanBox();

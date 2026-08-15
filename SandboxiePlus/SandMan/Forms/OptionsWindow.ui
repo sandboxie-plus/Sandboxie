@@ -401,6 +401,54 @@
                  </property>
                 </widget>
                </item>
+               <item row="11" column="2">
+                <widget class="QLabel" name="lblAutoDeleteSnapshot">
+                 <property name="text">
+                  <string>After automatic deletion, restore from snapshot:</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbAutoDeleteSnapshot</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="3">
+                <widget class="QComboBox" name="cmbAutoDeleteSnapshot"/>
+               </item>
+               <item row="11" column="4">
+                <widget class="QToolButton" name="btnAutoDeleteSnapshots">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>32</width>
+                   <height>32</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Open Snapshot Manager</string>
+                 </property>
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="5">
+                <spacer name="horizontalSpacerAutoDeleteSnapshot">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
                <item row="0" column="0">
                 <widget class="QLabel" name="lblStructure">
                  <property name="font">
@@ -414,7 +462,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="11" column="1" colspan="6">
+               <item row="12" column="1" colspan="6">
                 <widget class="QCheckBox" name="chkProtectBox">
                  <property name="toolTip">
                   <string>Partially checked means prevent box removal but not content deletion.</string>
@@ -437,7 +485,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="16" column="1">
+               <item row="17" column="1">
                 <spacer name="verticalSpacer_2">
                  <property name="orientation">
                   <enum>Qt::Orientation::Vertical</enum>
@@ -504,21 +552,27 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="5">
+               <item row="5" column="3">
                 <widget class="QToolButton" name="btnPassword">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
                   <string>Set Password</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1" colspan="4">
+               <item row="5" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkEncrypt">
                  <property name="text">
                   <string>Encrypt sandbox content</string>
                  </property>
                 </widget>
                </item>
-               <item row="14" column="2" colspan="5">
+               <item row="15" column="2" colspan="5">
                 <widget class="QCheckBox" name="chkRawDiskNotify">
                  <property name="text">
                   <string>Warn when an application opens a harddrive handle</string>
@@ -538,14 +592,14 @@
                  </property>
                 </widget>
                </item>
-               <item row="13" column="1" colspan="6">
+               <item row="14" column="1" colspan="6">
                 <widget class="QCheckBox" name="chkRawDiskRead">
                  <property name="text">
                   <string>Allow elevated sandboxed applications to read the harddrive</string>
                  </property>
                 </widget>
                </item>
-               <item row="12" column="0" colspan="2">
+               <item row="13" column="0" colspan="2">
                 <widget class="QLabel" name="lblRawDisk">
                  <property name="font">
                   <font>
@@ -558,7 +612,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="14" column="1">
+               <item row="15" column="1">
                 <widget class="QLabel" name="label_37">
                  <property name="maximumSize">
                   <size>
@@ -578,7 +632,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="16" column="2" colspan="5">
+               <item row="17" column="2" colspan="5">
                 <spacer name="horizontalSpacer_4">
                  <property name="orientation">
                   <enum>Qt::Orientation::Horizontal</enum>
@@ -591,7 +645,7 @@
                  </property>
                 </spacer>
                </item>
-               <item row="15" column="1" colspan="2">
+               <item row="16" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkAllowEfs">
                  <property name="text">
                   <string>Allow sandboxed processes to open files protected by EFS</string>
@@ -4425,11 +4479,11 @@ The process match level has a higher priority than the specificity and describes
                </item>
                <item row="7" column="0" colspan="2">
                 <widget class="QCheckBox" name="chkUseIgnoreForQuick">
-                 <property name="text">
-                  <string>Use the above exclusion list to hide matching files from the Quick Recovery window</string>
-                 </property>
                  <property name="toolTip">
                   <string>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use the above exclusion list to hide matching files from the Quick Recovery window</string>
                  </property>
                  <property name="checked">
                   <bool>true</bool>
@@ -6353,6 +6407,8 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>btnPassword</tabstop>
   <tabstop>chkForceProtection</tabstop>
   <tabstop>chkAutoEmpty</tabstop>
+  <tabstop>cmbAutoDeleteSnapshot</tabstop>
+  <tabstop>btnAutoDeleteSnapshots</tabstop>
   <tabstop>chkProtectBox</tabstop>
   <tabstop>chkRawDiskRead</tabstop>
   <tabstop>chkRawDiskNotify</tabstop>

@@ -2492,6 +2492,13 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 	}
 
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+	const bool UseAsyncDelete = theConf->GetBool("Options/UseAsyncBoxOps", false) || theGUI->IsSilentMode();
+	QString AutoDeleteSnapshotTarget = pBox->GetText("AutoDeleteSnapshotTarget", QString(), true, true, true);
+	if (AutoDeleteSnapshotTarget.compare("Current", Qt::CaseInsensitive) != 0
+	 && AutoDeleteSnapshotTarget.compare("Default", Qt::CaseInsensitive) != 0)
+		AutoDeleteSnapshotTarget = UseAsyncDelete ? "Default" : "Current";
+	const bool UseCurrentSnapshot = Mode == eAuto
+		&& AutoDeleteSnapshotTarget.compare("Current", Qt::CaseInsensitive) == 0;
 
 	if (pBoxEx->UseImageFile()) {
 		if (pBoxEx->GetMountRoot().isEmpty()) {
@@ -2514,8 +2521,8 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 		// schedule async OnBoxDelete triggers and clean up
 		//
 
-		if (theConf->GetBool("Options/UseAsyncBoxOps", false) || theGUI->IsSilentMode())
-			return pBoxEx->DeleteContentAsync(DeleteSnapshots);
+		if (UseAsyncDelete)
+			return pBoxEx->DeleteContentAsync(DeleteSnapshots, UseCurrentSnapshot);
 	}
 
 	m_iDeletingContent++;
@@ -2550,10 +2557,10 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 		//
 
 		SB_PROGRESS Status;
-		if (Mode != eForDelete && !DeleteSnapshots && pBox->HasSnapshots()) { // in auto delete mode always return to last snapshot
+		if (Mode != eForDelete && !DeleteSnapshots && pBox->HasSnapshots()) {
 			QString Current;
 			QString Default = pBox->GetDefaultSnapshot(&Current);
-			Status = pBox->SelectSnapshot(Mode == eAuto ? Current : Default);
+			Status = pBox->SelectSnapshot(UseCurrentSnapshot ? Current : Default);
 		}
 		else // if there are no snapshots just use the normal cleaning procedure
 			Status = pBox->CleanBox();
@@ -2921,7 +2928,7 @@ void CSandMan::OnStatusChanged()
 
 			auto AllBoxes = theAPI->GetAllBoxes();
 
-			m_pBoxView->ClearUserUIConfig(AllBoxes);
+			m_pBoxView->ClearUserUIConfig(AllBoxes, true);
 
 			foreach(const QString & Key, theConf->ListKeys("SizeCache")) {
 				if (!AllBoxes.contains(Key.toLower()) || !theConf->GetBool("Options/WatchBoxSize", false))

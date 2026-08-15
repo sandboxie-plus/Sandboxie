@@ -145,27 +145,28 @@ ChineseSimplified.InstallImDisk=安装（或更新）ImDisk 3.0驱动程序（�
 ChineseSimplified.Qt6Win10Unsupported=Qt 6 框架不支持 Windows 10 版本 1507、1511 或 1607。%n请升级到 Windows 10 1809（版本 17763）或更高版本。%n详情请参阅问题 #5079：%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n您仍想继续安装吗？
 
 ; Chinese Traditional
-ChineseTraditional.AddSandboxedMenu=加入「在沙箱中執行」選單
-ChineseTraditional.AddSandboxedBrowser=在桌面放置從沙盤開啟網頁瀏覽器的捷徑
-ChineseTraditional.SandboxieStartMenu1=在沙盤中執行應用程式
-ChineseTraditional.SandboxieStartMenu2=在沙盤中開啟網頁瀏覽器
+ChineseTraditional.AddSandboxedMenu=將「在沙箱中執行」加入環境選單
+ChineseTraditional.AddSandboxedBrowser=在桌面建立用於在沙箱中啟動網頁瀏覽器的捷徑
+ChineseTraditional.SandboxieStartMenu1=在沙箱中執行任何程式
+ChineseTraditional.SandboxieStartMenu2=在沙箱中執行網頁瀏覽器
 ChineseTraditional.SandboxieStartMenu3=Sandboxie 開始功能表
-ChineseTraditional.SandboxedBrowser=從沙盤開啟網頁瀏覽器
+ChineseTraditional.SandboxedBrowser=沙箱化網頁瀏覽器
 ChineseTraditional.CustomPageLabel1=選擇安裝方式
 ChineseTraditional.CustomPageLabel2=應該如何安裝
 ChineseTraditional.CustomPageLabel3=選擇安裝模式
 ChineseTraditional.CustomPageInstallMode=在這台電腦上安裝 {#MyAppName}
 ChineseTraditional.CustomPageUpgradeMode=更新目前已安裝的 {#MyAppName}
-ChineseTraditional.CustomPagePortableMode=解壓縮所有檔案到指定目錄供便攜化使用
+ChineseTraditional.CustomPagePortableMode=將所有檔案解壓縮至指定資料夾以供可攜式使用
 ChineseTraditional.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
-ChineseTraditional.ClassicFound=偵測到已安裝 Sandboxie 原版，要繼續安裝必須先將其移除，是否開始移除？
+ChineseTraditional.ClassicFound=偵測到已安裝 Sandboxie Classic。必須先解除安裝才能繼續，是否立即解除安裝？
 ChineseTraditional.RunSandboxedMenu=在沙箱中執行(&S)
-ChineseTraditional.UninstallTaskLabel1=選擇移除類型
-ChineseTraditional.UninstallTaskLabel2=要如何移除 Sandboxie-Plus？
-ChineseTraditional.UninstallTaskLabel3=保留設定檔和沙箱(&K)%n如果您打算保留設定檔和沙箱的同時，並重新安裝 Sandboxie-Plus，這是最推薦的選項。
-ChineseTraditional.UninstallTaskLabel4=刪除設定檔案(&C)%n選擇此選項可刪除 Sandboxie.ini 和 Sandboxie-Plus.ini 設定檔，並完整保留沙箱。
-ChineseTraditional.UninstallTaskLabel5=刪除設定檔和沙箱(&S)%n選擇此選項可刪除所有設定檔和沙箱，包含位於 FileRootPath 自訂路徑中的 Sandbox 資料夾。
-ChineseTraditional.RefreshBuild=下載最新的 Templates.ini 和翻譯
+ChineseTraditional.UninstallTaskLabel1=選擇解除安裝方式
+ChineseTraditional.UninstallTaskLabel2=要如何解除安裝 Sandboxie-Plus？
+ChineseTraditional.UninstallTaskLabel3=保留組態檔與沙箱(&K)%n若您打算保留目前的組態與沙箱並重新安裝 Sandboxie-Plus，建議選擇此選項。
+ChineseTraditional.UninstallTaskLabel4=移除組態檔(&C)%n選擇此選項會移除 Sandboxie.ini 與 Sandboxie-Plus.ini 組態檔，但保留沙箱不變。
+ChineseTraditional.UninstallTaskLabel5=移除組態檔與沙箱(&S)%n選擇此選項會移除所有組態檔與沙箱，包括 FileRootPath 自訂路徑中的 Sandbox 資料夾。
+ChineseTraditional.RefreshBuild=下載最新的 Templates.ini 與翻譯
+ChineseTraditional.InstallImDisk=安裝（或更新）ImDisk 3.0 驅動程式（用於 RAM 磁碟與加密沙箱）
 ChineseTraditional.Qt6Win10Unsupported=Qt 6 框架不支援 Windows 10 版本 1507、1511 或 1607。%n請升級到 Windows 10 1809（版本 17763）或更高版本。%n詳情請參閱問題 #5079：%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n您仍想繼續安裝嗎？
 
 ; Dutch

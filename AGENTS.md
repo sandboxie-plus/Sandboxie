@@ -91,7 +91,7 @@ Components are independently built. Communication between the driver, service, D
 ## Pull requests
 
 - Commit messages and pull request descriptions must be in **English** language.
-- Translators: see notes at https://git.io/J9G19
+- Translators: see notes at https://github.com/sandboxie-plus/Sandboxie/discussions/1123
 - **One PR = one logical change.** Don't mix unrelated fixes/features in a single pull request.
 - Link to any existing issue when possible; state impact on Plus, Classic, or both.
 

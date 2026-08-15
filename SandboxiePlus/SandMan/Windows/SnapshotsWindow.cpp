@@ -52,12 +52,14 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	connect(ui.treeSnapshots, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(OnSelectSnapshot()));
 
 	
+	ui.btnRefresh->setIcon(CSandMan::GetIcon("Refresh"));
 	QMenu* pSelMenu = new QMenu(ui.btnSelect);
 	pSelMenu->addAction(tr("Revert to empty box"), this, SLOT(OnSelectEmpty()));
 	ui.btnSelect->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnSelect->setMenu(pSelMenu);
 
 	connect(ui.btnTake, SIGNAL(clicked(bool)), this, SLOT(OnTakeSnapshot()));
+	connect(ui.btnRefresh, &QPushButton::clicked, this, &CSnapshotsWindow::Refresh);
 	connect(ui.btnSelect, SIGNAL(clicked(bool)), this, SLOT(OnSelectSnapshot()));
 	connect(ui.btnRemove, SIGNAL(clicked(bool)), this, SLOT(OnRemoveSnapshot()));
 	
@@ -88,6 +90,12 @@ void CSnapshotsWindow::closeEvent(QCloseEvent *e)
 {
 	emit Closed();
 	this->deleteLater();
+}
+
+void CSnapshotsWindow::Refresh()
+{
+	OnSaveInfo();
+	UpdateSnapshots(true);
 }
 
 void CSnapshotsWindow::UpdateSnapshots(bool AndSelect)
@@ -127,10 +135,23 @@ void CSnapshotsWindow::UpdateSnapshots(bool AndSelect)
 
 	if (AndSelect)
 	{
+		QSignalBlocker Blocker(ui.treeSnapshots->selectionModel());
 		QModelIndex CurIndex = m_pSnapshotModel->FindIndex(m_CurSnapshot);
 		if (CurIndex.isValid()) {
-			ui.treeSnapshots->selectionModel()->select(CurIndex, QItemSelectionModel::ClearAndSelect);
+			ui.treeSnapshots->setCurrentIndex(CurIndex);
 			UpdateSnapshot(CurIndex);
+		}
+		else {
+			ui.treeSnapshots->clearSelection();
+			m_SelectedID.clear();
+			m_SaveInfoPending = -1;
+			ui.txtName->clear();
+			ui.chkDefault->setChecked(false);
+			ui.txtInfo->clear();
+			m_SaveInfoPending = 0;
+			ui.groupBox->setEnabled(false);
+			ui.btnSelect->setEnabled(false);
+			ui.btnRemove->setEnabled(false);
 		}
 	}
 }

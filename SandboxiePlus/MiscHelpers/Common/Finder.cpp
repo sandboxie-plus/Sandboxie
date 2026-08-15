@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Finder.h"
+#include <QSignalBlocker>
 
 bool CFinder::m_DarkMode = false;
 
@@ -393,14 +394,18 @@ void CFinder::OnSelectNext()
 
 void CFinder::OnExpandAll()
 {
-	if (m_pTree)
+	if (m_pTree) {
+		QSignalBlocker Blocker(m_pTree);
 		m_pTree->expandAll();
+	}
 }
 
 void CFinder::OnCollapseAll()
 {
-	if (m_pTree)
+	if (m_pTree) {
+		QSignalBlocker Blocker(m_pTree);
 		m_pTree->collapseAll();
+	}
 }
 
 void CFinder::SetProgress(int value, int maximum)

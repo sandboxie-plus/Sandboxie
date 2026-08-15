@@ -1012,8 +1012,9 @@ MSG_HEADER *FileServer::OpenWow64Key(MSG_HEADER *msg, HANDLE idProcess)
         if (ok) {
             if (RegOpenUserClassesRoot(hToken, 0, KEY_READ, &hRootKey) != 0)
                 ok = FALSE;
+
+			CloseHandle( hToken );
         }
-        CloseHandle(hToken);
     }
 
     if (! ok)

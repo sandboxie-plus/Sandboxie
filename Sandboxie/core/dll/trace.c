@@ -510,18 +510,16 @@ void ApiInstrumentation(const char* pName, void** pStack)
 void __fastcall ApiInstrumentation(const char* pName, void** pStack)
 #endif
 {
-    void* ReturnAddress = *(pStack - 1);
-
     TEB* pTEB = NtCurrentTeb();
     ULONG_PTR* sbie_deph = (ULONG_PTR*)&pTEB->ReservedForDebuggerInstrumentation[15];
+
+    (void)pStack;
+
     if (*sbie_deph)
         return;
     *sbie_deph += 1;
 
-    WCHAR trace_str[256];
-    //ULONG len = Sbie_snwprintf(trace_str, 128, L"%S <-- %s%S", pName, CallingModule, pCaller ? pCaller : "");
-    ULONG len = Sbie_snwprintf(trace_str, 128, L"%S", pName);
-    SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
+    SbieApi_MonitorPutApiTrace(pName);
 
     *sbie_deph -= 1;
 }

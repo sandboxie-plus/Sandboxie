@@ -45,6 +45,7 @@ extern P_NtDeviceIoControlFile __sys_NtDeviceIoControlFile;
 
 static NTSTATUS SbieApi_Ioctl(ULONG64 *parms);
 
+static NTSTATUS SbieApi_IoctlTrace(ULONG64 *parms);
 
 //---------------------------------------------------------------------------
 // Variables
@@ -1754,6 +1755,75 @@ _FX LONG SbieApi_MonitorPut2Ex(
     args->check_object_exists.val64 = bCheckObjectExists;
     args->is_message.val64          = bIsMessage;
     status = SbieApi_Ioctl(parms);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieApi_IoctlTrace
+//---------------------------------------------------------------------------
+
+
+__declspec(noinline) static NTSTATUS SbieApi_IoctlTrace(ULONG64 *parms)
+{
+    IO_STATUS_BLOCK io_status;
+
+    if (SbieApi_DeviceHandle == INVALID_HANDLE_VALUE)
+        return STATUS_DEVICE_NOT_READY;
+
+    if (__sys_NtDeviceIoControlFile) {
+        return __sys_NtDeviceIoControlFile(
+            SbieApi_DeviceHandle, NULL, NULL, NULL, &io_status,
+            API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * API_NUM_ARGS,
+            NULL, 0);
+    }
+
+    return NtDeviceIoControlFile(
+        SbieApi_DeviceHandle, NULL, NULL, NULL, &io_status,
+        API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * API_NUM_ARGS,
+        NULL, 0);
+}
+
+
+//---------------------------------------------------------------------------
+// SbieApi_MonitorPutApiTrace
+//---------------------------------------------------------------------------
+
+
+__declspec(noinline) _FX LONG SbieApi_MonitorPutApiTrace(const CHAR *Name)
+{
+    NTSTATUS status;
+    WCHAR name[128];
+    ULONG length;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    API_MONITOR_PUT2_ARGS *args = (API_MONITOR_PUT2_ARGS *)parms;
+
+    if (! Name)
+        return STATUS_INVALID_PARAMETER;
+
+    for (length = 0; length < ARRAYSIZE(name) - 1; ++length) {
+        UCHAR ch = (UCHAR)Name[length];
+
+        if (! ch)
+            break;
+
+        name[length] = (WCHAR)ch;
+    }
+
+    if (! length)
+        return STATUS_INVALID_PARAMETER;
+
+    name[length] = L'\0';
+
+    memset(parms, 0, sizeof(parms));
+    args->func_code                 = API_MONITOR_PUT2;
+    args->log_type.val              = MONITOR_APICALL | MONITOR_TRACE;
+    args->log_len.val64             = length * sizeof(WCHAR);
+    args->log_ptr.val64             = (ULONG64)(ULONG_PTR)name;
+    args->check_object_exists.val64 = FALSE;
+    args->is_message.val64          = FALSE;
+    status = SbieApi_IoctlTrace(parms);
 
     return status;
 }

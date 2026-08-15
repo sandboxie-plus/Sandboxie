@@ -446,3 +446,14 @@ void CBoxedProcess::ResolveSymbols(const QVector<quint64>& Addresses)
 		}
 	}
 }
+
+void CBoxedProcess::OnSymbol(quint64 Address, const QString& Name)
+{
+	if (Name.isEmpty()) {
+		m_Symbols.remove(Address);
+		return;
+	}
+
+	m_Symbols[Address].Name = Name;
+	emit SymbolChanged(Address);
+}

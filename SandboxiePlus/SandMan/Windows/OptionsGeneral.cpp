@@ -10,6 +10,7 @@
 #include "Helpers/WinHelper.h"
 #include "Windows/BoxImageWindow.h"
 #include "AddonManager.h"
+#include "../Views/SbieView.h"
 #include "../../../SandboxieTools/ImBox/ImBox.h"
 
 class CCertBadge: public QLabel
@@ -67,6 +68,16 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxBorder->addItem(tr("Show only when title is in focus") + outsideSuffix, "ttloutside");
 	ui.cmbBoxBorder->addItem(tr("Always show (focused window only)") + outsideSuffix, "onoutside");
 	ui.cmbBoxBorder->addItem(tr("Show for all windows in this box") + outsideSuffix, "alloutside");
+
+	ui.cmbAutoDeleteSnapshot->addItem(tr("Active snapshot"), "Current");
+	ui.cmbAutoDeleteSnapshot->addItem(tr("Default snapshot"), "Default");
+	ui.cmbAutoDeleteSnapshot->setToolTip(tr("Selects the snapshot restored by SandMan after automatic deletion. The active state may be the empty sandbox rather than a saved snapshot."));
+	ui.btnAutoDeleteSnapshots->setIcon(CSandMan::GetIcon("Snapshots"));
+	connect(ui.btnAutoDeleteSnapshots, &QToolButton::clicked, this, [this]() {
+		auto pBox = m_pBox.objectCast<CSandBox>();
+		if (!pBox.isNull())
+			theGUI->GetBoxView()->ShowSnapshots(pBox);
+	});
 
 
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
@@ -252,6 +263,7 @@ void COptionsWindow::CreateGeneral()
 
 	connect(ui.chkProtectBox, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkAutoEmpty, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.cmbAutoDeleteSnapshot, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.chkRawDiskRead, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkRawDiskNotify, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -438,6 +450,14 @@ void COptionsWindow::LoadGeneral()
 	else
 		ui.chkProtectBox->setCheckState(Qt::Unchecked);
 	ui.chkAutoEmpty->setChecked(m_pBox->GetBool("AutoDelete", false));
+	QString AutoDeleteSnapshotTarget = m_pBox->GetText("AutoDeleteSnapshotTarget", QString(), true, true, true);
+	if (AutoDeleteSnapshotTarget.compare("Current", Qt::CaseInsensitive) == 0)
+		AutoDeleteSnapshotTarget = "Current";
+	else if (AutoDeleteSnapshotTarget.compare("Default", Qt::CaseInsensitive) == 0)
+		AutoDeleteSnapshotTarget = "Default";
+	else
+		AutoDeleteSnapshotTarget = theConf->GetBool("Options/UseAsyncBoxOps", false) ? "Default" : "Current";
+	ui.cmbAutoDeleteSnapshot->setCurrentIndex(ui.cmbAutoDeleteSnapshot->findData(AutoDeleteSnapshotTarget));
 
 	ui.chkRawDiskRead->setChecked(m_pBox->GetBool("AllowRawDiskRead", false));
 	ui.chkRawDiskNotify->setChecked(m_pBox->GetBool("NotifyDirectDiskAccess", false));
@@ -599,6 +619,7 @@ void COptionsWindow::SaveGeneral()
 		m_pBox->DelValue("NeverRemove");
 	}
 	WriteAdvancedCheck(ui.chkAutoEmpty, "AutoDelete", "y", "");
+	WriteText("AutoDeleteSnapshotTarget", ui.cmbAutoDeleteSnapshot->currentData().toString());
 
 	WriteAdvancedCheck(ui.chkRawDiskRead, "AllowRawDiskRead", "y", "");
 	WriteAdvancedCheck(ui.chkRawDiskNotify, "NotifyDirectDiskAccess", "y", "");
@@ -932,6 +953,9 @@ void COptionsWindow::OnGeneralChanged()
 	ui.chkNoCopyWarn->setEnabled(ui.chkCopyLimit->isChecked() && !ui.chkCopyPrompt->isChecked());
 
 	ui.chkAutoEmpty->setEnabled(ui.chkProtectBox->checkState() != Qt::Checked);
+	ui.lblAutoDeleteSnapshot->setEnabled(ui.chkAutoEmpty->isEnabled() && ui.chkAutoEmpty->isChecked());
+	ui.cmbAutoDeleteSnapshot->setEnabled(ui.chkAutoEmpty->isEnabled() && ui.chkAutoEmpty->isChecked());
+	ui.btnAutoDeleteSnapshots->setEnabled(ui.cmbAutoDeleteSnapshot->isEnabled() && !m_pBox.objectCast<CSandBox>().isNull());
 
 	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityIsolation->isChecked());
 	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());

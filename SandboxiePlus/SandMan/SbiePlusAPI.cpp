@@ -855,7 +855,7 @@ int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
 	return FindInStrList(Programs, ProgName) != Programs.end() ? 1 : 0; 
 }
 
-SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteSnapshots, bool bOnAutoDelete)
+SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteSnapshots, bool UseCurrentSnapshot)
 {
 	if (GetBool("NeverDelete", false))
 		return SB_ERR(SB_DeleteProtect);
@@ -870,7 +870,7 @@ SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteSnapshots, bool bOnAutoDel
 		AddJobToQueue(pJob);
 	}
 
-	CBoxJob* pJob = new CCleanUpJob(this, DeleteSnapshots, bOnAutoDelete);
+	CBoxJob* pJob = new CCleanUpJob(this, DeleteSnapshots, UseCurrentSnapshot);
 	AddJobToQueue(pJob);
 
 	return SB_OK;

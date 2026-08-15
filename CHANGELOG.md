@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed SandMan Box Groups collapsing during refreshes, restarts, and sandbox moves despite remembered group state [#5477](https://github.com/sandboxie-plus/Sandboxie/issues/5477)
 - fixed driver incompatibility with latest Windows Insider build
 - fixed SandMan File Panel treating registry hive log files such as `RegHive.LOG1` and `RegHive.LOG2` as descendants of `RegHive` because of their shared filename prefix, causing them to be omitted when deleting the selection together [#4788](https://github.com/sandboxie-plus/Sandboxie/issues/4788)
+- fixed incorrect character and byte buffer-size handling in Start Menu shortcut data, window class-name queries, configuration reads, and SandMan driver-log retrieval [#5518](https://github.com/sandboxie-plus/Sandboxie/pull/5518)
 - fixed Start Menu shortcut icon-path IPC buffer handling [#5517](https://github.com/sandboxie-plus/Sandboxie/pull/5517)
 
 

@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added persistence for manually expanded and collapsed SandMan process-tree branches across task-list refreshes and UI restarts [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
 
 ### Changed
-- changed SandMan's Auto Expand Tree to temporarily expand box groups, sandboxes, and process branches without overwriting their saved manual expansion states; set the SandMan UI configuration option `Options/LegacyAutoExpandTree=true` to retain the previous expand-all/collapse-all behaviour [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
+- changed SandMan's Auto Expand Tree to preserve explicit group, sandbox, and process expansion choices while using the toggle as the default for items without saved state; Find bar Expand All and Collapse All remain one-time actions, and `Options/LegacyAutoExpandTree=true` retains the previous behavior [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
 - validated compatibility with Windows build 29634 and updated DynData
 - changed SandMan Trace Log auto scrolling overriding manual scrolling; it now pauses away from the bottom and provides an in-list resume button
 

@@ -1,10 +1,27 @@
-if exist %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe goto done
+@echo off
+setlocal
 
-curl -LsSO --output-dir %~dp0..\..\ https://download.qt.io/official_releases/jom/jom_1_1_4.zip
-"C:\Program Files\7-Zip\7z.exe" x -aoa -o%~dp0..\..\Qt\Tools\QtCreator\bin\ %~dp0..\..\jom_1_1_4.zip
+rem Repository root
+for %%I in ("%~dp0..") do set "REPO_ROOT=%%~fI"
+
+rem Qt is installed next to the repository
+for %%I in ("%~dp0..\..") do set "QT_ROOT=%%~fI"
+
+set "ZIP=%REPO_ROOT%\jom_1_1_4.zip"
+set "JOM_DIR=%QT_ROOT%\Qt\Tools\QtCreator\bin"
+set "JOM_EXE=%JOM_DIR%\jom.exe"
+
+if exist "%JOM_EXE%" goto :done
+
+if not exist "%ZIP%" (
+  curl -fL -o "%ZIP%" "https://download.qt.io/official_releases/jom/jom_1_1_4.zip" || exit /b 1
+)
+
+if not exist "%JOM_DIR%\" mkdir "%JOM_DIR%" || exit /b 1
+"C:\Program Files\7-Zip\7z.exe" x -aoa -o"%JOM_DIR%\" "%ZIP%" || exit /b 1
+
+if not exist "%JOM_EXE%" exit /b 1
 
 :done
-
-REM dir %~dp0..\..\
-REM dir %~dp0..\..\Qt
-REM dir %~dp0..\..\Qt\Tools
+endlocal
+exit /b 0

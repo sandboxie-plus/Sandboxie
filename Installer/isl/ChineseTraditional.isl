@@ -1,4 +1,4 @@
-﻿; *** Inno Setup version 6.0.0+ Chinese Traditional messages ***
+﻿; *** Inno Setup version 6.1.0+ Chinese (Traditional) messages ***
 ;
 ; Name: John Wu, mr.johnwu@gmail.com
 ; Base on 5.5.3+ translations by Samuel Lee, Email: 751555749@qq.com
@@ -47,9 +47,9 @@ LastErrorMessage=%1%n%n錯誤 %2: %3
 SetupFileMissing=安裝資料夾中遺失檔案 %1。請修正此問題或重新取得此軟體。
 SetupFileCorrupt=安裝檔案已經損毀。請重新取得此軟體。
 SetupFileCorruptOrWrongVer=安裝檔案已經損毀，或與安裝程式的版本不符。請重新取得此軟體。
-InvalidParameter=某個無效的變量已被傳遞到了命令列:%n%n%1
+InvalidParameter=傳遞了無效的命令列參數：%n%n%1
 SetupAlreadyRunning=安裝程式已經在執行。
-WindowsVersionNotSupported=本安裝程式並不支援目前在電腦所運行的 Windows 版本。
+WindowsVersionNotSupported=本安裝程式不支援此電腦目前執行的 Windows 版本。
 WindowsServicePackRequired=本安裝程式需要 %1 Service Pack %2 或更新。
 NotOnThisPlatform=這個程式無法在 %1 執行。
 OnlyOnThisPlatform=這個程式必須在 %1 執行。
@@ -112,7 +112,7 @@ NewFolderName=新資料夾
 
 ; *** "Welcome" wizard page
 WelcomeLabel1=歡迎使用 [name] 安裝程式
-WelcomeLabel2=這個安裝程式將會安裝 [name/ver] 到您的電腦。%n%n我們強烈建議您在安裝過程中關閉其它的應用程式，以避免與安裝程式發生沖突。
+WelcomeLabel2=這個安裝程式將會安裝 [name/ver] 到您的電腦。%n%n我們強烈建議您在安裝過程中關閉其他應用程式，以避免與安裝程式發生衝突。
 
 ; *** "Password" wizard page
 WizardPassword=密碼
@@ -150,7 +150,8 @@ SelectDirDesc=選擇安裝程式安裝 [name] 的位置。
 SelectDirLabel3=安裝程式將會把 [name] 安裝到下面的資料夾。
 SelectDirBrowseLabel=按 [下一步] 繼續，如果您想選擇另一個資料夾，請按 [瀏覽]。
 DiskSpaceMBLabel=最少需要 [mb] MB 磁碟空間。
-CannotInstallToNetworkDrive=安裝程式無法安裝於網絡磁碟機。
+DiskSpaceGBLabel=最少需要 [gb] GB 磁碟空間。
+CannotInstallToNetworkDrive=安裝程式無法安裝於網路磁碟機。
 CannotInstallToUNCPath=安裝程式無法安裝於 UNC 路徑。
 InvalidPath=您必須輸入完整的路徑名稱及磁碟機代碼。%n%n例如 C:\App 或 UNC 路徑格式 \\伺服器\共用資料夾。
 InvalidDrive=您選取的磁碟機或 UNC 名稱不存在或無法存取，請選擇其他的目的地。
@@ -170,13 +171,14 @@ SelectComponentsDesc=選擇將會被安裝的元件。
 SelectComponentsLabel2=選擇您想要安裝的元件；清除您不想安裝的元件。然後按 [下一步] 繼續安裝。
 FullInstallation=完整安裝
 ; if possible don't translate 'Compact' as 'Minimal' (I mean 'Minimal' in your language)
-CompactInstallation=最小安裝
+CompactInstallation=精簡安裝
 CustomInstallation=自訂安裝
 NoUninstallWarningTitle=元件已存在
 NoUninstallWarning=安裝程式偵測到以下元件已經安裝在您的電腦上:%n%n%1%n%n取消選擇這些元件將不會移除它們。%n%n您仍然要繼續嗎?
 ComponentSize1=%1 KB
 ComponentSize2=%1 MB
 ComponentsDiskSpaceMBLabel=目前的選擇需要至少 [mb] MB 磁碟空間。
+ComponentsDiskSpaceGBLabel=目前的選擇需要至少 [gb] GB 磁碟空間。
 
 ; *** "Select Additional Tasks" wizard page
 WizardSelectTasks=選擇附加的工作
@@ -209,33 +211,33 @@ ReadyMemoTasks=附加工作:
 ; *** TDownloadWizardPage wizard page and DownloadTemporaryFile
 DownloadingLabel=正在下載附加檔案...
 ButtonStopDownload=停止下載(&S)
-StopDownload=您确定要停止下載嗎？
+StopDownload=您確定要停止下載嗎？
 ErrorDownloadAborted=下載已中止
 ErrorDownloadFailed=下載失敗：%1 %2
-ErrorDownloadSizeFailed=獲取下載大小失敗：%1 %2
-ErrorFileHash1=校驗檔案哈希失敗：%1
-ErrorFileHash2=無效的檔案哈希：預期 %1，實際 %2
+ErrorDownloadSizeFailed=取得下載大小失敗：%1 %2
+ErrorFileHash1=驗證檔案雜湊失敗：%1
+ErrorFileHash2=無效的檔案雜湊：預期 %1，實際 %2
 ErrorProgress=無效的進度：%1 / %2
 ErrorFileSize=檔案大小錯誤：預期 %1，實際 %2
 
 ; *** "Preparing to Install" wizard page
-WizardPreparing=準備安裝程式
+WizardPreparing=正在準備安裝
 PreparingDesc=安裝程式準備將 [name] 安裝到您的電腦上。
-PreviousInstallNotCompleted=先前的安裝/ 解除安裝尚未完成，您必須重新啟動電腦以完成該安裝。%n%n在重新啟動電腦之後，請再執行這個程式來安裝 [name]。
+PreviousInstallNotCompleted=先前的安裝或解除安裝尚未完成，您必須重新啟動電腦以完成該安裝。%n%n在重新啟動電腦之後，請再執行這個程式來安裝 [name]。
 CannotContinue=安裝程式無法繼續。請按 [取消] 離開。
-ApplicationsFound=下面的應用程式正在使用安裝程式所需要更新的文檔。建議您允許安裝程式自動關閉這些應用程式。
-ApplicationsFound2=下面的應用程式正在使用安裝程式所需要更新的文檔。建議您允許安裝程式自動關閉這些應用程式。當安裝過程結束後，本安裝程式將會嘗試重新開啟該應用程式。
+ApplicationsFound=下列應用程式正在使用安裝程式必須更新的檔案。建議允許安裝程式自動關閉這些應用程式。
+ApplicationsFound2=下列應用程式正在使用安裝程式必須更新的檔案。建議允許安裝程式自動關閉這些應用程式。安裝完成後，安裝程式將嘗試重新啟動這些應用程式。
 CloseApplications=關閉應用程式(&A)
 DontCloseApplications=不要關閉應用程式 (&D)
-ErrorCloseApplications=安裝程式無法自動關閉所有應用程式。建議您在繼續前先關閉所有應用程式使用的檔案。
-PrepareToInstallNeedsRestart=安裝程式必須重啓您的電腦。電腦重啓後，請再次運行安裝程式以完成 [name] 的安裝。%n%n是否立即重新啓動？
+ErrorCloseApplications=安裝程式無法自動關閉所有應用程式。建議您在繼續前，手動關閉所有正在使用安裝程式需要更新之檔案的應用程式。
+PrepareToInstallNeedsRestart=安裝程式必須重新啟動您的電腦。電腦重新啟動後，請再次執行安裝程式以完成 [name] 的安裝。%n%n是否立即重新啟動？
 
 ; *** "Installing" wizard page
 WizardInstalling=正在安裝
 InstallingLabel=請稍候，安裝程式正在將 [name] 安裝到您的電腦上
 
 ; *** "Setup Completed" wizard page
-FinishedHeadingLabel=安裝完成
+FinishedHeadingLabel=[name] 安裝完成
 FinishedLabelNoIcons=安裝程式已經將 [name] 安裝在您的電腦上。
 FinishedLabel=安裝程式已經將 [name] 安裝在您的電腦中，您可以選擇程式的圖示來執行該應用程式。
 ClickFinish=按 [完成] 以結束安裝程式。
@@ -250,11 +252,11 @@ RunEntryExec=執行 %1
 RunEntryShellExec=檢視 %1
 
 ; *** "Setup Needs the Next Disk" 
-ChangeDiskTitle=安裝程式需要下一張磁片
-SelectDiskLabel2=請插入磁片 %1，然後按 [確定]。%n%n如果檔案不在以下所顯示的資料夾之中，請輸入正確的資料夾名稱或按 [瀏覽] 選取。
+ChangeDiskTitle=安裝程式需要下一張磁碟
+SelectDiskLabel2=請插入磁碟 %1，然後按 [確定]。%n%n如果檔案不在以下所顯示的資料夾之中，請輸入正確的資料夾名稱或按 [瀏覽] 選取。
 PathLabel=路徑(&P):
-FileNotInDir2=檔案“%1”無法在“%2”找到。請插入正確的磁片或選擇其它的資料夾。
-SelectDirectoryLabel=請指定下一張磁片的位置。
+FileNotInDir2=檔案“%1”無法在“%2”找到。請插入正確的磁碟或選擇其他資料夾。
+SelectDirectoryLabel=請指定下一張磁碟的位置。
 
 ; *** Installation phase messages
 SetupAborted=安裝沒有完成。%n%n請更正問題後重新安裝一次。
@@ -267,7 +269,7 @@ AbortRetryIgnoreCancel=取消安裝
 StatusClosingApplications=正在關閉應用程式...
 StatusCreateDirs=正在建立資料夾...
 StatusExtractFiles=正在解壓縮檔案...
-StatusCreateIcons=正在建立程式集圖示...
+StatusCreateIcons=正在建立捷徑...
 StatusCreateIniEntries=寫入 INI 檔案的項目...
 StatusCreateRegistryEntries=正在更新系統登錄...
 StatusRegisterFiles=正在登錄檔案...
@@ -303,23 +305,24 @@ ErrorReadingExistingDest=讀取一個已存在的檔案時發生錯誤:
 FileExists=檔案已經存在。%n%n 要讓安裝程式加以覆寫嗎?
 FileExistsSelectAction=選擇操作
 FileExists2=檔案已經存在。
-FileExistsOverwriteExisting=覆寫已存在的档案(&O)
-FileExistsKeepExisting=保畱現有的档案(&K)
-FileExistsOverwriteOrKeepAll=為所有衝突档案執行此操作(&D)
-ExistingFileNewer2=現有的档案比安裝程式將要安裝的档案還要新。
-ExistingFileNewerOverwriteExisting=覆蓋已存在的档案(&O)
-ExistingFileNewerKeepExisting=保畱現有的档案(&K) (推薦)
-ExistingFileNewerOverwriteOrKeepAll=為所有衝突档案執行此操作(&D)
+FileExistsOverwriteExisting=覆寫已存在的檔案(&O)
+FileExistsKeepExisting=保留現有的檔案(&K)
+FileExistsOverwriteOrKeepAll=對後續衝突執行相同操作(&D)
+ExistingFileNewer2=現有的檔案比安裝程式將要安裝的檔案還要新。
+ExistingFileNewerSelectAction=選擇操作
+ExistingFileNewerOverwriteExisting=覆寫已存在的檔案(&O)
+ExistingFileNewerKeepExisting=保留現有的檔案(&K)（建議）
+ExistingFileNewerOverwriteOrKeepAll=對後續衝突執行相同操作(&D)
 ErrorChangingAttr=在變更檔案屬性時發生錯誤:
 ErrorCreatingTemp=在目的資料夾中建立檔案時發生錯誤:
 ErrorReadingSource=讀取原始檔案時發生錯誤:
-ErrorCopying=復制檔案時發生錯誤:
+ErrorCopying=複製檔案時發生錯誤:
 ErrorReplacingExistingFile=取代檔案時發生錯誤:
 ErrorRestartReplace=重新啟動電腦後取代檔案失敗:
 ErrorRenamingTemp=在目的資料夾變更檔案名稱時發生錯誤:
-ErrorRegisterServer=無法注冊 DLL/OCX 檔案: %1。
-ErrorRegSvr32Failed=RegSvr32 失敗；退出代碼 %1
-ErrorRegisterTypeLib=無法注冊類型庫: %1。
+ErrorRegisterServer=無法註冊 DLL/OCX 檔案: %1。
+ErrorRegSvr32Failed=RegSvr32 失敗；結束代碼 %1
+ErrorRegisterTypeLib=無法註冊類型庫: %1。
 
 ; *** Uninstall display name markings
 ; used for example as 'My Program (32-bit)'

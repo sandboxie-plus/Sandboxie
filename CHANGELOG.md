@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.18.2 / 5.73.2] - 2026-08-??
+## [1.18.2 / 5.73.2] - 2026-08-16
 
 ### Added
 - added outside sandboxed-window border modes (`onoutside`, `ttloutside`, and `alloutside`) in SandMan; these draw the configured border outside the application frame, while the new `BorderInsideMaximized=y` setting (enabled by default) moves the border and label inside maximized or snapped windows so they remain visible

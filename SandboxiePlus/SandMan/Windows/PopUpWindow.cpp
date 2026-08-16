@@ -495,7 +495,7 @@ void CPopUpWindow::AddUserPrompt(quint32 RequestId, const QVariantMap& Data, qui
 	{
 	case CSbieAPI::eFileMigration:
 		Message = tr("Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?\nFile name: %3")
-			.arg(FormatSize(Data["fileSize"].toULongLong())).arg(pProcess->GetBoxName())
+			.arg(FormatSize(Data["fileSize"].toULongLong())).arg(CSandMan::GetBoxDisplayName(pProcess->GetBoxName()))
 			.arg(Data["fileName"].toString())
 			.arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId());
 		break;

@@ -3476,6 +3476,27 @@ QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData,
 		return Value.left(OpenBracket + 2) + DisplayName + Value.mid(CloseBracket);
 	};
 
+	auto FormatBracketedBoxWithValue = [&](const QString& Value) {
+		const int OpenBracket = Value.lastIndexOf(" [");
+		if (OpenBracket <= 0)
+			return Value;
+
+		const int ValueSeparator = Value.indexOf(" /", OpenBracket + 2);
+		if (ValueSeparator <= OpenBracket + 2)
+			return Value;
+
+		const int CloseBracket = Value.indexOf(']', ValueSeparator + 2);
+		if (CloseBracket < 0 || !Value.mid(CloseBracket + 1).isEmpty())
+			return Value;
+
+		const QString BoxName = Value.mid(OpenBracket + 2, ValueSeparator - OpenBracket - 2);
+		QString DisplayName;
+		if (!ResolveBoxDisplayName(BoxName, DisplayName))
+			return Value;
+
+		return Value.left(OpenBracket + 2) + DisplayName + Value.mid(ValueSeparator);
+	};
+
 	auto FormatLeadingBox = [&](const QString& Value, const QString& Separator) {
 		const int SeparatorPos = Value.indexOf(Separator);
 		if (SeparatorPos <= 0)
@@ -3509,6 +3530,12 @@ QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData,
 			case 1308:
 			case 1313:
 				Value = FormatBracketedBox(Value, ImageSuffix);
+				break;
+			case 2102:
+			case 2113:
+			case 2114:
+			case 2115:
+				Value = FormatBracketedBoxWithValue(Value);
 				break;
 			case 2103:
 				Value = FormatBracketedBox(Value, ServiceSuffix);

@@ -1120,7 +1120,7 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                         //
 
                         if (protect_process /*&& MyIsProcessRunningAsSystemAccount(cur_pid)*/) {
-                            if (Util_IsSystemProcess(cur_pid, "sbiesvc.exe")
+                            if (Util_IsSystemProcess(cur_pid, "sbiesvc.exe") || Util_IsSystemProcess(cur_pid, "start.exe")
                                 || Util_IsSystemProcess(cur_pid, "csrss.exe")
                                 || Util_IsSystemProcess(cur_pid, "lsass.exe")
                                 || Util_IsProtectedProcess(cur_pid)

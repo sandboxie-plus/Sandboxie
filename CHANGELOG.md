@@ -31,6 +31,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed ApiTrace stack exhaustion on Cygwin and other alternate stacks by replacing callback-side formatting with a compact synchronous logging path, preserving legacy ordering and stack capture
 - improved early stack symbol loading by retrying unresolved addresses after process discovery and refreshing the DbgHelp module list when needed
 - fixed SandMan offering to install the DbgHelp add-on when enabling stack traces even though the add-on was already installed
+- fixed ConfidentialBox=y could trap the user on a black screen when trying to elevate a process.
 
 
 

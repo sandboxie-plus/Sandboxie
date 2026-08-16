@@ -2120,11 +2120,14 @@ int Program_Start(void)
 
     if (! ok) {
 
+        keep_alive = FALSE; // disable keep alive when the process can't be started in the first place
+
+        if (run_elevated_2)
+            return err;
+
         WCHAR *errmsg = SbieDll_FormatMessage1(MSG_3205, cmdline);
         SetLastError(err);
         Show_Error(errmsg);
-
-        keep_alive = FALSE; // disable keep alive when the process can't be started in the first place
             
         return EXIT_FAILURE;
 
@@ -2538,8 +2541,16 @@ ULONG RestartInSandbox(void)
         if (WaitForSingleObject(pi.hProcess, INFINITE) == WAIT_OBJECT_0) {
 
             ok = GetExitCodeProcess(pi.hProcess, &err);
-            if (ok)
+            if (ok) {
+
+                if (run_elevated_2 && err != 0) {
+                    WCHAR* errmsg = SbieDll_FormatMessage1(MSG_3205, ChildCmdLine);
+                    SetLastError(err);
+                    Show_Error(errmsg);
+                }
+
                 return err;
+            }
         }
     }
 

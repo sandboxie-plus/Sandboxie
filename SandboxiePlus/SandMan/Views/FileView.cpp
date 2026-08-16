@@ -936,7 +936,7 @@ CFileBrowserWindow::CFileBrowserWindow(const CSandBoxPtr& pBox, QWidget *parent)
     m_FileView->SetBox(pBox);
     m_pMainLayout->addWidget(m_FileView, 0, 0);
 
-	this->setWindowTitle(tr("%1 - Files").arg(pBox->GetName()));
+	this->setWindowTitle(tr("%1 - Files").arg(CSandMan::GetBoxDisplayName(pBox)));
 
 	
 	//statusBar();

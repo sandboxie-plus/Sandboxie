@@ -1375,7 +1375,7 @@ void COptionsWindow::OnBackupHeader()
 {
 	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 
-	QString FileName = QFileDialog::getSaveFileName(theGUI, tr("Backup Image Header for %1").arg(m_pBox->GetName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
+	QString FileName = QFileDialog::getSaveFileName(theGUI, tr("Backup Image Header for %1").arg(pBoxEx->GetDisplayName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
 
 	QStringList Arguments;
 	Arguments.append("type=image");
@@ -1390,7 +1390,7 @@ void COptionsWindow::OnRestoreHeader()
 {
 	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 
-	QString FileName = QFileDialog::getOpenFileName(theGUI, tr("Restore Image Header for %1").arg(m_pBox->GetName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
+	QString FileName = QFileDialog::getOpenFileName(theGUI, tr("Restore Image Header for %1").arg(pBoxEx->GetDisplayName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
 
 	QStringList Arguments;
 	Arguments.append("type=image");

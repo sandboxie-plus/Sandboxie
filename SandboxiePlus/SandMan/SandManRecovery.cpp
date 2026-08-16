@@ -307,7 +307,11 @@ void CSandMan::AddFileRecovered(const QString& BoxName, const QString& FilePath)
 
 	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Box|FilePath
 	pItem->setText(0, QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss.zzz"));
-	pItem->setText(1, BoxName);
+	QString BoxDisplayName = GetBoxDisplayName(BoxName);
+	pItem->setText(1, BoxDisplayName);
+	pItem->setData(1, Qt::UserRole, BoxName);
+	if (BoxDisplayName.compare(BoxName, Qt::CaseInsensitive) != 0)
+		pItem->setToolTip(1, tr("Sandbox name: %1").arg(BoxName));
 	pItem->setText(2, FilePath);
 	pRecoveryLog->GetTree()->addTopLevelItem(pItem);
 

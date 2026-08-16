@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added outside sandboxed-window border modes (`onoutside`, `ttloutside`, and `alloutside`) in SandMan; these draw the configured border outside the application frame, while the new `BorderInsideMaximized=y` setting (enabled by default) moves the border and label inside maximized or snapped windows so they remain visible
 - added persistence for manually expanded and collapsed SandMan process-tree branches across task-list refreshes and UI restarts [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
+- added global `BoxAliasDisplayMode` controls for display-only sandbox names across SandMan, Start.exe, window titles, borders, tooltips, recovery logs, and messages, while preserving the real box name for paths and operations; Import Sandboxes can optionally read archived aliases [#5521](https://github.com/sandboxie-plus/Sandboxie/issues/5521)
+- added an optional literal search box to compact and non-compact SandMan tray menus for filtering sandboxes and groups
 - added a SandMan setting to restore either the active or default snapshot after automatic deletion, consistently across synchronous and asynchronous cleanup, with Snapshot Manager access and refresh controls
 
 ### Changed
@@ -23,9 +25,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed SandMan Box Groups collapsing during refreshes, restarts, and sandbox moves despite remembered group state [#5477](https://github.com/sandboxie-plus/Sandboxie/issues/5477)
 - fixed driver incompatibility with latest Windows Insider build
 - fixed SandMan File Panel treating registry hive log files such as `RegHive.LOG1` and `RegHive.LOG2` as descendants of `RegHive` because of their shared filename prefix, causing them to be omitted when deleting the selection together [#4788](https://github.com/sandboxie-plus/Sandboxie/issues/4788)
+- fixed `BoxNameTitle` prefix buffer sizing for long sandbox aliases and combined alias/name titles
 - fixed incorrect character and byte buffer-size handling in Start Menu shortcut data, window class-name queries, configuration reads, and SandMan driver-log retrieval [#5518](https://github.com/sandboxie-plus/Sandboxie/pull/5518)
 - fixed Start Menu shortcut icon-path IPC buffer handling [#5517](https://github.com/sandboxie-plus/Sandboxie/pull/5517)
-
 - fixed ApiTrace stack exhaustion on Cygwin and other alternate stacks by replacing callback-side formatting with a compact synchronous logging path, preserving legacy ordering and stack capture
 - improved early stack symbol loading by retrying unresolved addresses after process discovery and refreshing the DbgHelp module list when needed
 - fixed SandMan offering to install the DbgHelp add-on when enabling stack traces even though the add-on was already installed

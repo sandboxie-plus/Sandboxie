@@ -623,17 +623,7 @@ void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 		if (!pBoxEx)
 			return;
 
-		// todo more info
-
-		ToolTip = BoxName + "\n";
-		ToolTip += tr("    File root: %1\n").arg(pBoxEx->GetFileRoot());
-		ToolTip += tr("    Registry root: %1\n").arg(pBoxEx->GetRegRoot());
-		ToolTip += tr("    IPC root: %1\n").arg(pBoxEx->GetIpcRoot());
-		if(!pBoxEx->GetMountRoot().isEmpty())
-			ToolTip += tr("    Disk root: %1\n").arg(pBoxEx->GetMountRoot());
-		
-		ToolTip += tr("Options:\n    ");
-		ToolTip += pBoxEx->GetStatusStr().replace(", ", "\n    ");
+		ToolTip = pBoxEx->GetBoxToolTip();
 	}
 	else if (quint32 ProcessId = ID.toUInt())
 	{
@@ -652,7 +642,8 @@ void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 				ToolTip += tr("    CPU: %1  |  Memory: %2  |  Private Bytes: %3\n").arg(cpuStr, memStr, privStr);
 		}
 
-		ToolTip += tr("    Sandbox: %1\n").arg(pProcess->GetBoxName());
+		CSandBoxPtr pBox = theAPI->GetBoxByName(pProcess->GetBoxName());
+		ToolTip += tr("    Sandbox: %1\n").arg(pBox ? CSandMan::GetBoxDisplayName(pBox) : pProcess->GetBoxName());
 		if (!pProcess->GetFileName().isEmpty())
 			ToolTip += tr("    Image: %1\n").arg(pProcess->GetFileName());
 		QDateTime startTime = pProcess->GetTimeStamp();

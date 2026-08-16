@@ -1609,9 +1609,9 @@ void CSettingsWindow::LoadSettings()
 		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", false));
 		ui.chkSbieAll->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieAllGroup", true));
 		ui.chkSbieUAC->setChecked(theAPI->GetGlobalSettings()->GetBool("UseSandboxieUAC", true));
-		int iBoxAliasDisplayMode = theAPI->GetGlobalSettings()->GetNum("BoxAliasDisplayMode", 0);
+		int iBoxAliasDisplayMode = theAPI->GetGlobalSettings()->GetNum("BoxAliasDisplayMode", 2);
 		if (iBoxAliasDisplayMode < 0 || iBoxAliasDisplayMode > 2)
-			iBoxAliasDisplayMode = 0;
+			iBoxAliasDisplayMode = 2;
 		ui.cmbBoxAliasDisplayMode->setCurrentIndex(ui.cmbBoxAliasDisplayMode->findData(iBoxAliasDisplayMode));
 
 		ui.treeImport->clear();
@@ -2221,7 +2221,7 @@ void CSettingsWindow::SaveSettings()
 				WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "y", "");
 				WriteAdvancedCheck(ui.chkSbieAll, "SandboxieAllGroup", "", "n");
 				WriteAdvancedCheck(ui.chkSbieUAC, "UseSandboxieUAC", "", "n");
-				WriteText("BoxAliasDisplayMode", ui.cmbBoxAliasDisplayMode->currentData().toInt() == 0
+				WriteText("BoxAliasDisplayMode", ui.cmbBoxAliasDisplayMode->currentData().toInt() == 2
 					? QString() : QString::number(ui.cmbBoxAliasDisplayMode->currentData().toInt()));
 
 				if (m_FeaturesChanged) {

@@ -1002,14 +1002,20 @@ static std::wstring GetBoxDisplayName(CSandBox* pBox)
 	if (!pBox)
 		return std::wstring();
 
-	int aliasDisplayMode = pBox->GetAPI()->GetGlobalSettings()->GetNum("BoxAliasDisplayMode", 0);
-	if (aliasDisplayMode < 0 || aliasDisplayMode > 2)
-		aliasDisplayMode = 0;
-	QString alias = pBox->GetText("BoxAlias").trimmed();
-	if (aliasDisplayMode != 1 && !alias.isEmpty())
-		return alias.toStdWString();
+	// 0 - name
+	// 1 - alias
+	// 2 - name and alias
 
-	return pBox->GetName().toStdWString();
+	int aliasDisplayMode = pBox->GetAPI()->GetGlobalSettings()->GetNum("BoxAliasDisplayMode", 2);
+	if (aliasDisplayMode < 0 || aliasDisplayMode > 2)
+		aliasDisplayMode = 2;
+	QString BoxName = pBox->GetName().replace("_", " ");
+	QString Alias = pBox->GetText("BoxAlias").trimmed();
+	if (aliasDisplayMode == 1 || Alias.isEmpty())
+		return BoxName.toStdWString();
+	if (aliasDisplayMode == 2 && Alias.compare(BoxName, Qt::CaseInsensitive) != 0)
+		return QString("%1 (%2)").arg(Alias, BoxName).toStdWString();
+	return Alias.toStdWString();
 }
 
 static bool IsCoverBoxedWindowsEnabled(SBoxBorder* m, CSandBox* pBox, DWORD nowTick)

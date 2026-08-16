@@ -238,9 +238,9 @@ void CSandBoxPlus::UpdateDetails()
 	m_BoxColor = QColor("#" + BorderCfg[0].mid(5, 2) + BorderCfg[0].mid(3, 2) + BorderCfg[0].mid(1, 2)).rgb();
 
 	m_BoxAlias = GetText("BoxAlias").trimmed();
-	m_BoxAliasDisplayMode = m_pAPI->GetGlobalSettings()->GetNum("BoxAliasDisplayMode", 0);
+	m_BoxAliasDisplayMode = m_pAPI->GetGlobalSettings()->GetNum("BoxAliasDisplayMode", 2);
 	if (m_BoxAliasDisplayMode < 0 || m_BoxAliasDisplayMode > 2)
-		m_BoxAliasDisplayMode = 0;
+		m_BoxAliasDisplayMode = 2;
 }
 
 QString CSandBoxPlus::GetDisplayName(EDisplayNameContext Context) const
@@ -251,7 +251,7 @@ QString CSandBoxPlus::GetDisplayName(EDisplayNameContext Context) const
 QString CSandBoxPlus::FormatDisplayName(const QString& BoxName, const QString& BoxAlias, int DisplayMode, EDisplayNameContext Context)
 {
 	if (DisplayMode < 0 || DisplayMode > 2)
-		DisplayMode = 0;
+		DisplayMode = 2;
 	QString DisplayBoxName = QString(BoxName).replace("_", " ");
 	QString Alias = BoxAlias.trimmed();
 	if (DisplayMode == 1 || Alias.isEmpty())

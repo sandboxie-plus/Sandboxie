@@ -154,17 +154,6 @@ void CSandMan::CreateTrayMenu()
 	f.setBold(true);
 	pShowHide->setFont(f);
 
-	m_pTraySearch = NULL;
-	if (theConf->GetBool("Options/TraySearch", true)) {
-		QWidgetAction* pTraySearchAction = new QWidgetAction(m_pTrayMenu);
-		m_pTraySearch = new QLineEdit();
-		m_pTraySearch->setPlaceholderText(tr("Find sandbox..."));
-		m_pTraySearch->setClearButtonEnabled(true);
-		pTraySearchAction->setDefaultWidget(m_pTraySearch);
-		m_pTrayMenu->addAction(pTraySearchAction);
-		connect(m_pTraySearch, SIGNAL(textChanged(const QString&)), this, SLOT(OnTraySearch(const QString&)));
-	}
-
 	m_pTrayMenu->addSeparator();
 
 	m_iTrayPos = m_pTrayMenu->actions().count();
@@ -216,6 +205,17 @@ void CSandMan::CreateTrayMenu()
 		connect(m_pTrayBoxes, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnBoxMenu(const QPoint&)));
 		connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
 		//m_pBoxMenu
+	}
+
+	m_pTraySearch = NULL;
+	if (theConf->GetBool("Options/TraySearch", true)) {
+		QWidgetAction* pTraySearchAction = new QWidgetAction(m_pTrayMenu);
+		m_pTraySearch = new QLineEdit();
+		m_pTraySearch->setPlaceholderText(tr("Find sandbox..."));
+		m_pTraySearch->setClearButtonEnabled(true);
+		pTraySearchAction->setDefaultWidget(m_pTraySearch);
+		m_pTrayMenu->addAction(pTraySearchAction);
+		connect(m_pTraySearch, SIGNAL(textChanged(const QString&)), this, SLOT(OnTraySearch(const QString&)));
 	}
 
 	m_pTrayMenu->addSeparator();

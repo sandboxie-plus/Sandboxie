@@ -3600,7 +3600,6 @@ bool CSandMan::SetCertificate(const QByteArray& Certificate)
 	return Status;
 }
 
-
 bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 {
 	QString Message;

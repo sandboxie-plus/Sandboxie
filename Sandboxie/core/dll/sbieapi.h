@@ -103,7 +103,7 @@ LONG SbieApi_GetHomePath(
 SBIEAPI_EXPORT
 LONG SbieApi_QueryProcess(
     HANDLE ProcessId,
-    WCHAR *out_box_name_wchar34,        // WCHAR [34]
+    WCHAR *out_box_name_wchar34,        // WCHAR [BOXNAME_COUNT]
     WCHAR *out_image_name_wchar96,      // WCHAR [96]
     WCHAR *out_sid_wchar96,             // WCHAR [96]
     ULONG *out_session_id);             // ULONG
@@ -112,7 +112,7 @@ SBIEAPI_EXPORT
 LONG SbieApi_QueryProcessEx(
     HANDLE ProcessId,
     ULONG image_name_len_in_wchars,
-    WCHAR *out_box_name_wchar34,        // WCHAR [34]
+    WCHAR *out_box_name_wchar34,        // WCHAR [BOXNAME_COUNT]
     WCHAR *out_image_name_wcharXXX,     // WCHAR [?]
     WCHAR *out_sid_wchar96,             // WCHAR [96]
     ULONG *out_session_id);             // ULONG
@@ -121,7 +121,7 @@ SBIEAPI_EXPORT
 LONG SbieApi_QueryProcessEx2(
     HANDLE ProcessId,
     ULONG image_name_len_in_wchars,
-    WCHAR *out_box_name_wchar34,        // WCHAR [34]
+    WCHAR *out_box_name_wchar34,        // WCHAR [BOXNAME_COUNT]
     WCHAR *out_image_name_wcharXXX,     // WCHAR [?]
     WCHAR *out_sid_wchar96,             // WCHAR [96]
     ULONG *out_session_id,              // ULONG
@@ -147,7 +147,7 @@ LONG SbieApi_QueryProcessInfoStr(
 
 SBIEAPI_EXPORT
 LONG SbieApi_QueryBoxPath(
-    const WCHAR *box_name,              // WCHAR [34]
+    const WCHAR *box_name,              // WCHAR [BOXNAME_COUNT]
     WCHAR *out_file_path,
     WCHAR *out_key_path,
     WCHAR *out_ipc_path,
@@ -175,7 +175,7 @@ LONG SbieApi_QueryPathList(
 
 SBIEAPI_EXPORT
 LONG SbieApi_EnumProcessEx(
-    const WCHAR* box_name,          // WCHAR [34]
+    const WCHAR* box_name,          // WCHAR [BOXNAME_COUNT]
     BOOLEAN all_sessions,
     ULONG which_session,            // -1 for current session
     ULONG* boxed_pids,             // ULONG [512]
@@ -392,17 +392,17 @@ ULONG64 SbieApi_QueryConfNumber64(
 SBIEAPI_EXPORT
 LONG SbieApi_EnumBoxes(
     LONG index,                     // initialize to -1
-    WCHAR *box_name);               // WCHAR [34]
+    WCHAR *box_name);               // WCHAR [BOXNAME_COUNT]
 
 SBIEAPI_EXPORT
 LONG SbieApi_EnumBoxesEx(
     LONG index,                     // initialize to -1
-    WCHAR *box_name,                // WCHAR [34]
+    WCHAR *box_name,                // WCHAR [BOXNAME_COUNT]
     BOOLEAN ignore_hidden);
 
 SBIEAPI_EXPORT
 LONG SbieApi_IsBoxEnabled(
-    const WCHAR *box_name);         // WCHAR [34]
+    const WCHAR *box_name);         // WCHAR [BOXNAME_COUNT]
 
 SBIEAPI_EXPORT
 LONG SbieApi_SetUserName(

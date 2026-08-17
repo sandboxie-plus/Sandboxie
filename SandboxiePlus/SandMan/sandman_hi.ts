@@ -392,87 +392,87 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
 <context>
     <name>CBoxTransferDialog</name>
     <message>
-        <location filename="BoxTransfer.cpp" line="72"/>
+        <location filename="BoxTransfer.cpp" line="77"/>
         <source>Export Sandboxes</source>
         <translation>सैंडबॉक्स निर्यात करें</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="74"/>
+        <location filename="BoxTransfer.cpp" line="79"/>
         <source>Import Sandboxes</source>
         <translation>सैंडबॉक्स आयात करें</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="81"/>
+        <location filename="BoxTransfer.cpp" line="86"/>
         <source>Box Name</source>
         <translation>बॉक्स का नाम</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="81"/>
+        <location filename="BoxTransfer.cpp" line="86"/>
         <source>Status</source>
         <translation>स्थिति</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="84"/>
+        <location filename="BoxTransfer.cpp" line="89"/>
         <source>Archive Box Name</source>
         <translation>पुरालेख बॉक्स का नाम</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="84"/>
+        <location filename="BoxTransfer.cpp" line="89"/>
         <source>Import As</source>
         <translation>के रूप में आयात करें</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="84"/>
+        <location filename="BoxTransfer.cpp" line="89"/>
         <source>Conflict</source>
         <translation>टकराव</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="84"/>
+        <location filename="BoxTransfer.cpp" line="89"/>
         <source>Source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="94"/>
+        <location filename="BoxTransfer.cpp" line="99"/>
         <source>Export Global Configuration</source>
         <translation>वैश्विक कॉन्फ़िगरेशन निर्यात करें</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="94"/>
+        <location filename="BoxTransfer.cpp" line="99"/>
         <source>Import Global Configuration</source>
         <translation>वैश्विक कॉन्फ़िगरेशन आयात करें</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="99"/>
+        <location filename="BoxTransfer.cpp" line="112"/>
         <source>Export each box to its own file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="104"/>
+        <location filename="BoxTransfer.cpp" line="117"/>
         <source>Select All</source>
         <translation>सबका चयन करें</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="108"/>
+        <location filename="BoxTransfer.cpp" line="121"/>
         <source>Select None</source>
         <translation>कुछ मत चुनिए</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="137"/>
+        <location filename="BoxTransfer.cpp" line="150"/>
         <source>Running</source>
         <translation>दौड़ना</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="139"/>
+        <location filename="BoxTransfer.cpp" line="152"/>
         <source>Encrypted</source>
         <translation>कूट रूप दिया गया</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="141"/>
+        <location filename="BoxTransfer.cpp" line="154"/>
         <source>Empty</source>
         <translation>खाली</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="249"/>
+        <location filename="BoxTransfer.cpp" line="262"/>
         <source>Exists!</source>
         <translation>मौजूद है!</translation>
     </message>
@@ -481,116 +481,131 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <translation type="vanished">फ़ाइल नाम चुनें</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="647"/>
+        <location filename="BoxTransfer.cpp" line="698"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>7-ज़िप पुरालेख (*.7z);;ज़िप पुरालेख (*.ज़िप)</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="630"/>
-        <location filename="BoxTransfer.cpp" line="640"/>
-        <location filename="BoxTransfer.cpp" line="653"/>
+        <location filename="BoxTransfer.cpp" line="681"/>
+        <location filename="BoxTransfer.cpp" line="691"/>
+        <location filename="BoxTransfer.cpp" line="704"/>
         <source>Exporting: %1</source>
         <translation>निर्यात: %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="253"/>
+        <location filename="BoxTransfer.cpp" line="104"/>
+        <source>Show sandbox aliases (reads archive configuration)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="105"/>
+        <source>Disabled by default because reading aliases requires opening and extracting configuration from every selected archive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="266"/>
         <source>Duplicate!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="447"/>
-        <location filename="BoxTransfer.cpp" line="1009"/>
+        <location filename="BoxTransfer.cpp" line="376"/>
+        <source>Sandbox name: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="497"/>
+        <location filename="BoxTransfer.cpp" line="1123"/>
         <source>7-Zip library is not available.</source>
         <translation>7-ज़िप लाइब्रेरी उपलब्ध नहीं है.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="462"/>
+        <location filename="BoxTransfer.cpp" line="512"/>
         <source>Cannot export: Sandbox has running processes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="481"/>
+        <location filename="BoxTransfer.cpp" line="531"/>
         <source>Nothing selected for export.</source>
         <translation>निर्यात के लिए कुछ भी चयनित नहीं.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="486"/>
+        <location filename="BoxTransfer.cpp" line="536"/>
         <source>No boxes selected for separate file export.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="529"/>
+        <location filename="BoxTransfer.cpp" line="583"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
         <translation>सैंडबॉक्स &apos;%1&apos; में चालू प्रक्रियाएं हैं। इसे छोड़ दें?</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="550"/>
+        <location filename="BoxTransfer.cpp" line="601"/>
         <source>Mount &apos;%1&apos; for Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="553"/>
+        <location filename="BoxTransfer.cpp" line="604"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="564"/>
+        <location filename="BoxTransfer.cpp" line="615"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="574"/>
+        <location filename="BoxTransfer.cpp" line="625"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="606"/>
+        <location filename="BoxTransfer.cpp" line="657"/>
         <source>Select Export Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="645"/>
+        <location filename="BoxTransfer.cpp" line="696"/>
         <source>Export Sandbox</source>
         <translation type="unfinished">सैंडबॉक्स निर्यात करें</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="940"/>
+        <location filename="BoxTransfer.cpp" line="1052"/>
         <source>Password for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="956"/>
+        <location filename="BoxTransfer.cpp" line="1068"/>
         <source>Failed to open archive (%1): %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1014"/>
+        <location filename="BoxTransfer.cpp" line="1128"/>
         <source>Select Archives</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1015"/>
+        <location filename="BoxTransfer.cpp" line="1129"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1052"/>
+        <location filename="BoxTransfer.cpp" line="1166"/>
         <source>The selected archives do not contain any sandbox data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1078"/>
+        <location filename="BoxTransfer.cpp" line="1192"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1164"/>
-        <location filename="BoxTransfer.cpp" line="1172"/>
+        <location filename="BoxTransfer.cpp" line="1278"/>
+        <location filename="BoxTransfer.cpp" line="1286"/>
         <source>Importing: %1</source>
         <translation>आयात: %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="946"/>
+        <location filename="BoxTransfer.cpp" line="1058"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>संग्रह खोलने में विफल, गलत पासवर्ड?</translation>
     </message>
@@ -603,12 +618,12 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <translation type="vanished">संग्रह में कोई सैंडबॉक्स डेटा नहीं है.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1066"/>
+        <location filename="BoxTransfer.cpp" line="1180"/>
         <source>Nothing selected for import.</source>
         <translation>आयात के लिए कुछ भी चयनित नहीं.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1094"/>
+        <location filename="BoxTransfer.cpp" line="1208"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
         <translation>सैंडबॉक्स &apos;%1&apos; पहले से मौजूद है। इसका कॉन्फ़िगरेशन अधिलेखित कर दिया जाएगा. जारी रखना?</translation>
     </message>
@@ -3406,12 +3421,12 @@ The file was written by: %3</source>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="657"/>
-        <location filename="Windows/PopUpWindow.cpp" line="658"/>
+        <location filename="Windows/PopUpWindow.cpp" line="659"/>
         <source>UNKNOWN</source>
         <translation>अज्ञात</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="664"/>
+        <location filename="Windows/PopUpWindow.cpp" line="665"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
         <translation>एक बड़ी फ़ाइल %1 को सैंडबॉक्स %2 में स्थानांतरित किया जा रहा है, %3 बाएँ।
@@ -3421,22 +3436,22 @@ Full path: %4</source>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="344"/>
+        <location filename="SandManRecovery.cpp" line="348"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>सैंडबॉक्सी-प्लस - रिकवरी लॉग</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="355"/>
+        <location filename="SandManRecovery.cpp" line="359"/>
         <source>Time|Box Name|File Path</source>
         <translation>समय|बॉक्स नाम|फ़ाइल पथ</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="357"/>
+        <location filename="SandManRecovery.cpp" line="361"/>
         <source>Cleanup Recovery Log</source>
         <translation>क्लीनअप रिकवरी लॉग</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="367"/>
+        <location filename="SandManRecovery.cpp" line="371"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>निम्नलिखित फ़ाइलें हाल ही में पुनर्प्राप्त की गईं और सैंडबॉक्स से बाहर निकाली गईं।</translation>
@@ -3709,27 +3724,27 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="5071"/>
+        <location filename="SandMan.cpp" line="5090"/>
         <source>Waiting for folder: %1</source>
         <translation>फ़ोल्डर की प्रतीक्षा की जा रही है: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5072"/>
+        <location filename="SandMan.cpp" line="5091"/>
         <source>Deleting folder: %1</source>
         <translation>फ़ोल्डर हटाना: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5073"/>
+        <location filename="SandMan.cpp" line="5092"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>फ़ोल्डरों को मर्ज करना: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5074"/>
+        <location filename="SandMan.cpp" line="5093"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>स्नैपशॉट मर्ज समाप्त हो रहा है...</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="139"/>
+        <location filename="SbiePlusAPI.cpp" line="140"/>
         <source>Copying folder: %1</source>
         <translation>फ़ोल्डर कॉपी करना: %1</translation>
     </message>
@@ -3737,77 +3752,77 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="597"/>
+        <location filename="SbiePlusAPI.cpp" line="629"/>
         <source>Disabled</source>
         <translation>अक्षम</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="608"/>
+        <location filename="SbiePlusAPI.cpp" line="640"/>
         <source>OPEN Root Access</source>
         <translation>रूट एक्सेस खोलें</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="610"/>
+        <location filename="SbiePlusAPI.cpp" line="642"/>
         <source>Application Compartment</source>
         <translation>एप्लीकेशन कम्पार्टमेंट</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="612"/>
+        <location filename="SbiePlusAPI.cpp" line="644"/>
         <source>NOT SECURE</source>
         <translation>सुरक्षित नहीं</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="614"/>
+        <location filename="SbiePlusAPI.cpp" line="646"/>
         <source>Reduced Isolation</source>
         <translation>अलगाव में कमी</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="616"/>
+        <location filename="SbiePlusAPI.cpp" line="648"/>
         <source>Enhanced Isolation</source>
         <translation>बढ़ा हुआ अलगाव</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="619"/>
+        <location filename="SbiePlusAPI.cpp" line="651"/>
         <source>Privacy Enhanced</source>
         <translation>गोपनीयता बढ़ाई गई</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="623"/>
+        <location filename="SbiePlusAPI.cpp" line="655"/>
         <source>No INet (with Exceptions)</source>
         <translation>कोई INet नहीं (अपवादों के साथ)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="625"/>
+        <location filename="SbiePlusAPI.cpp" line="657"/>
         <source>No INet</source>
         <translation>कोई इनेट नहीं</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="628"/>
+        <location filename="SbiePlusAPI.cpp" line="660"/>
         <source>Net Share</source>
         <translation>नेट शेयर</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="630"/>
+        <location filename="SbiePlusAPI.cpp" line="662"/>
         <source>No Admin</source>
         <translation>कोई व्यवस्थापक नहीं</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="633"/>
+        <location filename="SbiePlusAPI.cpp" line="665"/>
         <source>Auto Delete</source>
         <translation>स्वतः हटाएं</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="638"/>
+        <location filename="SbiePlusAPI.cpp" line="670"/>
         <source>Normal</source>
         <translation>सामान्य</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="642"/>
+        <location filename="SbiePlusAPI.cpp" line="674"/>
         <source> (Portable)</source>
         <translation> (पोर्टेबल)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="645"/>
+        <location filename="SbiePlusAPI.cpp" line="677"/>
         <source> (Virtual)</source>
         <translation> (आभासी)</translation>
     </message>
@@ -3821,22 +3836,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>सैंडबॉक्सी-प्लस v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4916"/>
+        <location filename="SandMan.cpp" line="4935"/>
         <source>Reset Columns</source>
         <translation>कॉलम रीसेट करें</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4917"/>
+        <location filename="SandMan.cpp" line="4936"/>
         <source>Copy Cell</source>
         <translation>कॉपी सेल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4918"/>
+        <location filename="SandMan.cpp" line="4937"/>
         <source>Copy Row</source>
         <translation>पंक्ति कॉपी करें</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4919"/>
+        <location filename="SandMan.cpp" line="4938"/>
         <source>Copy Panel</source>
         <translation>पैनल कॉपी करें</translation>
     </message>
@@ -4099,7 +4114,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="SandMan.cpp" line="834"/>
-        <location filename="SandMan.cpp" line="5009"/>
+        <location filename="SandMan.cpp" line="5028"/>
         <source>About Sandboxie-Plus</source>
         <translation>सैंडबॉक्सी-प्लस के बारे में</translation>
     </message>
@@ -4185,9 +4200,9 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1729"/>
         <location filename="SandMan.cpp" line="2329"/>
         <location filename="SandMan.cpp" line="2871"/>
-        <location filename="SandMan.cpp" line="3942"/>
-        <location filename="SandMan.cpp" line="4399"/>
-        <location filename="SandMan.cpp" line="4415"/>
+        <location filename="SandMan.cpp" line="3955"/>
+        <location filename="SandMan.cpp" line="4412"/>
+        <location filename="SandMan.cpp" line="4428"/>
         <source>Don&apos;t show this message again.</source>
         <translation>यह संदेश दोबारा न दिखाएं.</translation>
     </message>
@@ -4222,72 +4237,77 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>कमांड लाइन के माध्यम से अज्ञात ऑपरेशन &apos;%1&apos; का अनुरोध किया गया</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="216"/>
+        <location filename="SandManTray.cpp" line="214"/>
+        <source>Find sandbox...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandManTray.cpp" line="228"/>
         <source>Dismiss Update Notification</source>
         <translation>अद्यतन अधिसूचना ख़ारिज करें</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="292"/>
+        <location filename="SandManTray.cpp" line="304"/>
         <source> - Driver/Service NOT Running!</source>
         <translation> - ड्राइवर/सेवा नहीं चल रही है!</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="294"/>
+        <location filename="SandManTray.cpp" line="306"/>
         <source> - Deleting Sandbox Content</source>
         <translation> - सैंडबॉक्स सामग्री हटाना</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="302"/>
+        <location filename="SandManTray.cpp" line="314"/>
         <source>No pinned sandboxes to show.</source>
         <translation>दिखाने के लिए कोई पिन किया हुआ सैंडबॉक्स नहीं।</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="304"/>
+        <location filename="SandManTray.cpp" line="316"/>
         <source>No active or pinned sandboxes to show.</source>
         <translation>दिखाने के लिए कोई सक्रिय या पिन किया हुआ सैंडबॉक्स नहीं।</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="305"/>
+        <location filename="SandManTray.cpp" line="317"/>
         <source>No sandboxes to show.</source>
         <translation>दिखाने के लिए कोई सैंडबॉक्स नहीं.</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="508"/>
+        <location filename="SbiePlusAPI.cpp" line="270"/>
         <source>    Alias: %1
 </source>
         <translation>    उपनाम: %1
 </translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="509"/>
+        <location filename="SbiePlusAPI.cpp" line="271"/>
         <source>    File root: %1
 </source>
         <translation>    फ़ाइल रूट: %1
 </translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="510"/>
+        <location filename="SbiePlusAPI.cpp" line="272"/>
         <source>    Registry root: %1
 </source>
         <translation>    रजिस्ट्री रूट: %1
 </translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="511"/>
+        <location filename="SbiePlusAPI.cpp" line="273"/>
         <source>    IPC root: %1
 </source>
         <translation>    आईपीसी रूट: %1
 </translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="513"/>
+        <location filename="SbiePlusAPI.cpp" line="275"/>
         <source>    Disk root: %1
 </source>
         <translation>    डिस्क रूट: %1
 </translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="514"/>
+        <location filename="SbiePlusAPI.cpp" line="276"/>
         <source>Options:
     </source>
         <translation>विकल्प:
@@ -4334,19 +4354,19 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>क्या आप चाहते हैं कि सेटअप विज़ार्ड छोड़ दिया जाए?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4078"/>
-        <location filename="SandMan.cpp" line="4080"/>
-        <location filename="SandMan.cpp" line="4675"/>
+        <location filename="SandMan.cpp" line="4091"/>
+        <location filename="SandMan.cpp" line="4093"/>
+        <location filename="SandMan.cpp" line="4694"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>सैंडबॉक्सी-प्लस - त्रुटि</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4078"/>
+        <location filename="SandMan.cpp" line="4091"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>सभी सैंडबॉक्सी घटकों को रोकने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4080"/>
+        <location filename="SandMan.cpp" line="4093"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>आवश्यक सैंडबॉक्सी घटकों को प्रारंभ करने में विफल</translation>
     </message>
@@ -4380,7 +4400,7 @@ No will choose: %2</source>
         <translation>   -   जुड़े नहीं हैं</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3615"/>
+        <location filename="SandMan.cpp" line="3628"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>चयनित सुविधा सेट केवल परियोजना समर्थकों के लिए उपलब्ध है। समर्थक प्रमाणपत्र के बिना सक्षम इस सुविधा सेट के साथ एक बॉक्स में शुरू की गई प्रक्रियाएं 5 मिनट के बाद समाप्त हो जाएंगी।</translation>
     </message>
@@ -4440,132 +4460,137 @@ No will choose: %2</source>
 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3794"/>
+        <location filename="SandManRecovery.cpp" line="314"/>
+        <source>Sandbox name: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3807"/>
         <source>Only Administrators can change the config.</source>
         <translation>केवल प्रशासक ही कॉन्फिगरेशन बदल सकते हैं।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3804"/>
+        <location filename="SandMan.cpp" line="3817"/>
         <source>Please enter the configuration password.</source>
         <translation>कृपया कॉन्फ़िगरेशन पासवर्ड दर्ज करें.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3812"/>
+        <location filename="SandMan.cpp" line="3825"/>
         <source>Login Failed: %1</source>
         <translation>लॉगिन विफल: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3851"/>
+        <location filename="SandMan.cpp" line="3864"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>क्या आप सभी सैंडबॉक्स में सभी प्रक्रियाओं को समाप्त करना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3941"/>
+        <location filename="SandMan.cpp" line="3954"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>सैंडबॉक्सी-प्लस को पोर्टेबल मोड में शुरू किया गया था और इसे आवश्यक सेवाएँ बनाने की आवश्यकता है। यह प्रशासनिक विशेषाधिकारों के लिए संकेत देगा.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3975"/>
+        <location filename="SandMan.cpp" line="3988"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>सावधानी: एक अन्य एजेंट (संभवतः SbieCtrl.exe) पहले से ही इस सैंडबॉक्सी सत्र का प्रबंधन कर रहा है, कृपया पहले इसे बंद करें और कार्यभार संभालने के लिए पुनः कनेक्ट करें।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4107"/>
+        <location filename="SandMan.cpp" line="4120"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>रखरखाव कार्य निष्पादित हो रहा है, कृपया प्रतीक्षा करें...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4309"/>
+        <location filename="SandMan.cpp" line="4322"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>क्या आप भी छिपे हुए संदेश बॉक्स रीसेट करना चाहते हैं (हाँ), या केवल सभी लॉग संदेश रीसेट करना चाहते हैं (नहीं)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4413"/>
+        <location filename="SandMan.cpp" line="4426"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>जब भी फ़ाइल सहेजी जाएगी तो परिवर्तन स्वचालित रूप से लागू हो जाएंगे।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4414"/>
+        <location filename="SandMan.cpp" line="4427"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>संपादक बंद होते ही परिवर्तन स्वचालित रूप से लागू हो जाएंगे।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4604"/>
+        <location filename="SandMan.cpp" line="4617"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>त्रुटि स्थिति: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4605"/>
+        <location filename="SandMan.cpp" line="4618"/>
         <source>Unknown</source>
         <translation>अज्ञात</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4625"/>
+        <location filename="SandMan.cpp" line="4638"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>सैंडबॉक्स को हटाने से पहले उसे खाली करना होगा।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4630"/>
+        <location filename="SandMan.cpp" line="4643"/>
         <source>Failed to copy box data files</source>
         <translation>बॉक्स डेटा फ़ाइलों की प्रतिलिपि बनाने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4635"/>
+        <location filename="SandMan.cpp" line="4648"/>
         <source>Failed to remove old box data files</source>
         <translation>पुरानी बॉक्स डेटा फ़ाइलें निकालने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4653"/>
+        <location filename="SandMan.cpp" line="4666"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>अज्ञात त्रुटि स्थिति: 0x%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4749"/>
+        <location filename="SandMan.cpp" line="4768"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
         <translation>क्या आप %1 को सैंडबॉक्स्ड या अनसैंडबॉक्स्ड वेब ब्राउज़र में खोलना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4753"/>
+        <location filename="SandMan.cpp" line="4772"/>
         <source>Sandboxed</source>
         <translation>सैंडबॉक्स</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4754"/>
+        <location filename="SandMan.cpp" line="4773"/>
         <source>Unsandboxed</source>
         <translation>सैंडबॉक्स नहीं किए गए</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4920"/>
+        <location filename="SandMan.cpp" line="4939"/>
         <source>Case Sensitive</source>
         <translation>अक्षर संवेदनशील</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4921"/>
+        <location filename="SandMan.cpp" line="4940"/>
         <source>RegExp</source>
         <translation>रेगुलर एक्सप्रेशन</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4922"/>
+        <location filename="SandMan.cpp" line="4941"/>
         <source>Highlight</source>
         <translation>प्रमुखता से दिखाना</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4923"/>
+        <location filename="SandMan.cpp" line="4942"/>
         <source>Close</source>
         <translation>बंद करना</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4924"/>
+        <location filename="SandMan.cpp" line="4943"/>
         <source>&amp;Find ...</source>
         <translation>&amp;ढूंढें...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4925"/>
+        <location filename="SandMan.cpp" line="4944"/>
         <source>All columns</source>
         <translation>सभी कॉलम</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4607"/>
+        <location filename="SandMan.cpp" line="4620"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>इस कार्रवाई के लिए व्यवस्थापक अधिकार आवश्यक हैं.</translation>
     </message>
@@ -4800,20 +4825,20 @@ Please check if there is an update for sandboxie.</oldsource>
         <translation> (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3514"/>
+        <location filename="SandMan.cpp" line="3516"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>प्रोग्राम %1 बॉक्स %2 में शुरू हुआ, 5 मिनट में समाप्त हो जाएगा क्योंकि बॉक्स को प्रोजेक्ट समर्थकों के लिए विशेष रूप से उपलब्ध सुविधाओं का उपयोग करने के लिए कॉन्फ़िगर किया गया था।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3516"/>
+        <location filename="SandMan.cpp" line="3518"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>बॉक्स %1 को विशेष रूप से प्रोजेक्ट समर्थकों के लिए उपलब्ध सुविधाओं का उपयोग करने के लिए कॉन्फ़िगर किया गया है, इन प्रीसेट को नजरअंदाज कर दिया जाएगा।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3497"/>
-        <location filename="SandMan.cpp" line="3505"/>
-        <location filename="SandMan.cpp" line="3517"/>
-        <location filename="SandMan.cpp" line="3604"/>
+        <location filename="SandMan.cpp" line="3499"/>
+        <location filename="SandMan.cpp" line="3507"/>
+        <location filename="SandMan.cpp" line="3519"/>
+        <location filename="SandMan.cpp" line="3617"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;एक प्रोजेक्ट समर्थक बनें&lt;/a&gt;, और एक &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;समर्थक प्रमाणपत्र प्राप्त करें&lt;/a&gt;</translation>
     </message>
@@ -4948,122 +4973,122 @@ Do you want to disable Windows Updates scanning from the the software compatibil
         <translation>हॉटकी %1 को कॉन्फ़िगर करने में विफल, त्रुटि: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3496"/>
+        <location filename="SandMan.cpp" line="3498"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
         <translation>बॉक्स %1 को विशेष रूप से प्रोजेक्ट समर्थकों के लिए उपलब्ध सुविधाओं का उपयोग करने के लिए कॉन्फ़िगर किया गया है।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3501"/>
+        <location filename="SandMan.cpp" line="3503"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>बॉक्स %1 को उन सुविधाओं का उपयोग करने के लिए कॉन्फ़िगर किया गया है जिनके लिए &lt;b&gt;advanced&lt;/b&gt; समर्थक प्रमाणपत्र की आवश्यकता होती है।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3503"/>
-        <location filename="SandMan.cpp" line="3602"/>
+        <location filename="SandMan.cpp" line="3505"/>
+        <location filename="SandMan.cpp" line="3615"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;उन्नत सुविधाओं को अनलॉक करने के लिए अपना प्रमाणपत्र&lt;/a&gt; अपग्रेड करें।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3598"/>
+        <location filename="SandMan.cpp" line="3611"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>चयनित सुविधा के लिए &lt;b&gt;advanced&lt;/b&gt; समर्थक प्रमाणपत्र की आवश्यकता है।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3600"/>
+        <location filename="SandMan.cpp" line="3613"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
         <translation>&lt;br /&gt;इस सुविधा को अनलॉक करने के लिए आपको ग्रेट पैट्रियन स्तर या उच्चतर पर होना चाहिए।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3612"/>
+        <location filename="SandMan.cpp" line="3625"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>चयनित सुविधा सेट केवल प्रोजेक्ट समर्थकों के लिए उपलब्ध है।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3658"/>
+        <location filename="SandMan.cpp" line="3671"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
         <translation>आप जिस प्रमाणपत्र का उपयोग करने का प्रयास कर रहे हैं उसे अवरुद्ध कर दिया गया है, जिसका अर्थ है कि इसे किसी कारण से अमान्य कर दिया गया है। इसका उपयोग करने का कोई भी प्रयास इसके उपयोग की शर्तों का उल्लंघन है!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3670"/>
+        <location filename="SandMan.cpp" line="3683"/>
         <source>The Certificate Signature is invalid!</source>
         <translation>प्रमाणपत्र हस्ताक्षर अमान्य है!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3671"/>
+        <location filename="SandMan.cpp" line="3684"/>
         <source>The Certificate is not suitable for this product.</source>
         <translation>प्रमाणपत्र इस उत्पाद के लिए उपयुक्त नहीं है.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3672"/>
+        <location filename="SandMan.cpp" line="3685"/>
         <source>The Certificate is node locked.</source>
         <translation>प्रमाणपत्र नोड लॉक है.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3676"/>
+        <location filename="SandMan.cpp" line="3689"/>
         <source>The support certificate is not valid.
 Error: %1</source>
         <translation>समर्थन प्रमाणपत्र मान्य नहीं है.
 त्रुटि: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3740"/>
+        <location filename="SandMan.cpp" line="3753"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>मूल्यांकन अवधि समाप्त हो गई है!!!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3852"/>
-        <location filename="SandMan.cpp" line="3877"/>
+        <location filename="SandMan.cpp" line="3865"/>
+        <location filename="SandMan.cpp" line="3890"/>
         <source>Don&apos;t ask in future</source>
         <translation>भविष्य में मत पूछना</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3876"/>
+        <location filename="SandMan.cpp" line="3889"/>
         <source>Do you want to terminate all processes in encrypted sandboxes, and unmount them?</source>
         <translation>क्या आप एन्क्रिप्टेड सैंडबॉक्स में सभी प्रक्रियाओं को समाप्त करना चाहते हैं, और उन्हें अनमाउंट करना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3902"/>
+        <location filename="SandMan.cpp" line="3915"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>कृपया जबरन प्रोग्राम नियमों को अक्षम करने की अवधि, सेकंड में दर्ज करें।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3917"/>
+        <location filename="SandMan.cpp" line="3930"/>
         <source>No Recovery</source>
         <translation>कोई पुनर्प्राप्ति नहीं</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3923"/>
+        <location filename="SandMan.cpp" line="3936"/>
         <source>No Messages</source>
         <translation>कोई संदेश नहीं</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3979"/>
+        <location filename="SandMan.cpp" line="3992"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation>&lt;b&gt;ERROR:&lt;/b&gt; सैंडबॉक्सी-प्लस मैनेजर (SandMan.exe) के पास वैध हस्ताक्षर (SandMan.exe.sig) नहीं है। कृपया &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;आधिकारिक डाउनलोड पेज&lt;/a&gt; से एक विश्वसनीय रिलीज़ डाउनलोड करें।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4082"/>
+        <location filename="SandMan.cpp" line="4095"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>रखरखाव कार्रवाई विफल (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4087"/>
+        <location filename="SandMan.cpp" line="4100"/>
         <source>Maintenance operation completed</source>
         <translation>रखरखाव कार्य पूरा हो गया</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4240"/>
+        <location filename="SandMan.cpp" line="4253"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>प्लस यूआई में, इस कार्यक्षमता को मुख्य सैंडबॉक्स सूची दृश्य में एकीकृत किया गया है।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4241"/>
+        <location filename="SandMan.cpp" line="4254"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>बॉक्स/समूह संदर्भ मेनू का उपयोग करके, आप बॉक्स और समूहों को अन्य समूहों में ले जा सकते हैं। आप वस्तुओं को इधर-उधर ले जाने के लिए ड्रैग और ड्रॉप का भी उपयोग कर सकते हैं। वैकल्पिक रूप से, आप आइटम को उनके समूह में ऊपर और नीचे ले जाने के लिए ALT को दबाए रखते हुए तीर कुंजियों का भी उपयोग कर सकते हैं।&lt;br /&gt;आप सैंडबॉक्स मेनू से नए बॉक्स और समूह बना सकते हैं।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4397"/>
+        <location filename="SandMan.cpp" line="4410"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -5072,250 +5097,250 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 यह फ़ाइल सैंडबॉक्सी का हिस्सा है और अगली बार सैंडबॉक्सी अपडेट होने पर इसमें किए गए सभी बदलाव वापस कर दिए जाएंगे।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4477"/>
+        <location filename="SandMan.cpp" line="4490"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>सैंडबॉक्सी कॉन्फिगरेशन पुनः लोड किया गया है</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4608"/>
+        <location filename="SandMan.cpp" line="4621"/>
         <source>Failed to execute: %1</source>
         <translation>निष्पादित करने में विफल: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4609"/>
+        <location filename="SandMan.cpp" line="4622"/>
         <source>Failed to connect to the driver</source>
         <translation>ड्राइवर से कनेक्ट करने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4610"/>
+        <location filename="SandMan.cpp" line="4623"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>सैंडबॉक्सी सेवा के साथ संचार करने में विफल: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4611"/>
+        <location filename="SandMan.cpp" line="4624"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>एक असंगत सैंडबॉक्सी %1 पाया गया। संगत संस्करण: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4612"/>
+        <location filename="SandMan.cpp" line="4625"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>सैंडबॉक्सी स्थापना पथ नहीं मिल सका।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4613"/>
+        <location filename="SandMan.cpp" line="4626"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>सैंडबॉक्स %1 से कॉन्फ़िगरेशन कॉपी करने में विफल: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4614"/>
+        <location filename="SandMan.cpp" line="4627"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>%1 नाम का एक सैंडबॉक्स पहले से मौजूद है</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4615"/>
+        <location filename="SandMan.cpp" line="4628"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>सैंडबॉक्स %1 हटाने में विफल: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4616"/>
+        <location filename="SandMan.cpp" line="4629"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>सैंडबॉक्स नाम 32 अक्षरों से अधिक लंबा नहीं हो सकता.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4617"/>
+        <location filename="SandMan.cpp" line="4630"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>सैंडबॉक्स नाम डिवाइस का नाम नहीं हो सकता.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4618"/>
+        <location filename="SandMan.cpp" line="4631"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>सैंडबॉक्स नाम में केवल अक्षर, अंक और अंडरस्कोर हो सकते हैं जो रिक्त स्थान के रूप में प्रदर्शित होते हैं।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4619"/>
+        <location filename="SandMan.cpp" line="4632"/>
         <source>Failed to terminate all processes</source>
         <translation>सभी प्रक्रियाएं समाप्त करने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4620"/>
+        <location filename="SandMan.cpp" line="4633"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>सैंडबॉक्स के लिए डिलीट प्रोटेक्शन सक्षम है</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4621"/>
+        <location filename="SandMan.cpp" line="4634"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>बॉक्स सामग्री को हटाने से पहले सभी सैंडबॉक्स प्रक्रियाओं को रोका जाना चाहिए</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4622"/>
+        <location filename="SandMan.cpp" line="4635"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>सैंडबॉक्स फ़ोल्डर हटाने में त्रुटि: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4623"/>
+        <location filename="SandMan.cpp" line="4636"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation>सैंडबॉक्स का नाम बदलने से पहले उसकी सभी प्रक्रियाओं को रोका जाना चाहिए।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4626"/>
+        <location filename="SandMan.cpp" line="4639"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>निर्देशिका &apos;%1&apos; को &apos;%2&apos; में स्थानांतरित करने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4627"/>
+        <location filename="SandMan.cpp" line="4640"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>बॉक्स छवि &apos;%1&apos; को &apos;%2&apos; पर ले जाने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4628"/>
+        <location filename="SandMan.cpp" line="4641"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>यह स्नैपशॉट ऑपरेशन तब निष्पादित नहीं किया जा सकता जब बॉक्स में प्रक्रियाएं अभी भी चल रही हों।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4629"/>
+        <location filename="SandMan.cpp" line="4642"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>नए स्नैपशॉट के लिए निर्देशिका बनाने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4631"/>
+        <location filename="SandMan.cpp" line="4644"/>
         <source>Snapshot not found</source>
         <translation>स्नैपशॉट नहीं मिला</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4632"/>
+        <location filename="SandMan.cpp" line="4645"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>स्नैपशॉट निर्देशिकाओं &apos;%1&apos; को &apos;%2&apos; के साथ मर्ज करने में त्रुटि, स्नैपशॉट को पूरी तरह से मर्ज नहीं किया गया है।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4633"/>
+        <location filename="SandMan.cpp" line="4646"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>पुरानी स्नैपशॉट निर्देशिका &apos;%1&apos; को हटाने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4634"/>
+        <location filename="SandMan.cpp" line="4647"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>कई बाद के स्नैपशॉट द्वारा साझा किए गए स्नैपशॉट को हटाया नहीं जा सकता</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4636"/>
+        <location filename="SandMan.cpp" line="4649"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>आप अनुभाग &apos;%1&apos; में कॉन्फ़िगरेशन अद्यतन करने के लिए अधिकृत नहीं हैं</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4637"/>
+        <location filename="SandMan.cpp" line="4650"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>अनुभाग %2 में कॉन्फ़िगरेशन सेटिंग %1 सेट करने में विफल: %3</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4638"/>
+        <location filename="SandMan.cpp" line="4651"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>खाली सैंडबॉक्स का स्नैपशॉट नहीं बनाया जा सकता</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4639"/>
+        <location filename="SandMan.cpp" line="4652"/>
         <source>A sandbox with that name already exists</source>
         <translation>इस नाम का एक सैंडबॉक्स पहले से मौजूद है</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4640"/>
+        <location filename="SandMan.cpp" line="4653"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>कॉन्फिग पासवर्ड 64 अक्षरों से अधिक लंबा नहीं होना चाहिए</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4641"/>
+        <location filename="SandMan.cpp" line="4654"/>
         <source>The operation was canceled by the user</source>
         <translation>उपयोगकर्ता द्वारा कार्रवाई रद्द कर दी गई थी</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4642"/>
+        <location filename="SandMan.cpp" line="4655"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
         <translation>अनमाउंट किए गए सैंडबॉक्स की सामग्री को हटाया नहीं जा सकता</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4644"/>
+        <location filename="SandMan.cpp" line="4657"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4646"/>
+        <location filename="SandMan.cpp" line="4659"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>आयात/निर्यात उपलब्ध नहीं है, 7z.dll लोड नहीं किया जा सका</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4647"/>
+        <location filename="SandMan.cpp" line="4660"/>
         <source>Failed to create the box archive</source>
         <translation>बॉक्स संग्रह बनाने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4648"/>
+        <location filename="SandMan.cpp" line="4661"/>
         <source>Failed to open the 7z archive</source>
         <translation>7z संग्रह खोलने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4649"/>
+        <location filename="SandMan.cpp" line="4662"/>
         <source>Failed to unpack the box archive</source>
         <translation>बॉक्स संग्रह को अनपैक करने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4650"/>
+        <location filename="SandMan.cpp" line="4663"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>चयनित 7z फ़ाइल एक बॉक्स संग्रह नहीं है</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4651"/>
+        <location filename="SandMan.cpp" line="4664"/>
         <source>Failed to copy directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>निर्देशिका &apos;%1&apos; को &apos;%2&apos; में कॉपी करने में विफल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4677"/>
+        <location filename="SandMan.cpp" line="4696"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>%1 आइटम के लिए ऑपरेशन विफल रहा।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4750"/>
+        <location filename="SandMan.cpp" line="4769"/>
         <source>Remember choice for later.</source>
         <translation>चुनाव बाद के लिए याद रखें।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4978"/>
+        <location filename="SandMan.cpp" line="4997"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
         <translation>&lt;h3&gt;Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;संस्करण %1&lt;/p&gt;&lt;p&gt; के बारे में</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4986"/>
+        <location filename="SandMan.cpp" line="5005"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
         <translation>सैंडबॉक्सी-प्लस की यह प्रति इसके लिए प्रमाणित है: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4988"/>
+        <location filename="SandMan.cpp" line="5007"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
         <translation>सैंडबॉक्सी-प्लस व्यक्तिगत और गैर-व्यावसायिक उपयोग के लिए निःशुल्क है।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4992"/>
+        <location filename="SandMan.cpp" line="5011"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>सैंडबॉक्सी-प्लस सैंडबॉक्सी की एक ओपन सोर्स निरंतरता है।&lt;br /&gt; अधिक जानकारी के लिए &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; पर जाएं। %3&lt;br /&gt;&lt;br /&gt;स्थापना: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt; से प्रतीक</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3745"/>
+        <location filename="SandMan.cpp" line="3758"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>समर्थक प्रमाणपत्र इस निर्माण के लिए मान्य नहीं है, कृपया एक अद्यतन प्रमाणपत्र प्राप्त करें</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3748"/>
+        <location filename="SandMan.cpp" line="3761"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
         <translation>समर्थक प्रमाणपत्र समाप्त हो गया है%1, कृपया एक अद्यतन प्रमाणपत्र प्राप्त करें</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3749"/>
+        <location filename="SandMan.cpp" line="3762"/>
         <source>, but it remains valid for the current build</source>
         <translation>, लेकिन यह वर्तमान निर्माण के लिए मान्य है</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3751"/>
+        <location filename="SandMan.cpp" line="3764"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>समर्थक प्रमाणपत्र %1 दिनों में समाप्त हो जाएगा, कृपया एक अद्यतन प्रमाणपत्र प्राप्त करें</translation>
     </message>
@@ -5608,38 +5633,38 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1047"/>
+        <location filename="SbiePlusAPI.cpp" line="1079"/>
         <source>Failed to initialize COM</source>
         <translation>COM आरंभ करने में विफल</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1053"/>
+        <location filename="SbiePlusAPI.cpp" line="1085"/>
         <source>Failed to create update session</source>
         <translation>अद्यतन सत्र बनाने में विफल</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1059"/>
+        <location filename="SbiePlusAPI.cpp" line="1091"/>
         <source>Failed to create update searcher</source>
         <translation>अद्यतन खोजकर्ता बनाने में विफल</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1065"/>
+        <location filename="SbiePlusAPI.cpp" line="1097"/>
         <source>Failed to set search options</source>
         <translation>खोज विकल्प सेट करने में विफल</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1073"/>
+        <location filename="SbiePlusAPI.cpp" line="1105"/>
         <source>Failed to enumerate installed Windows updates</source>
         <oldsource>Failed to search for updates</oldsource>
         <translation>स्थापित विंडोज़ अद्यतनों की गणना करने में विफल</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1079"/>
+        <location filename="SbiePlusAPI.cpp" line="1111"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>खोज परिणाम से अद्यतन सूची पुनर्प्राप्त करने में विफल</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1086"/>
+        <location filename="SbiePlusAPI.cpp" line="1118"/>
         <source>Failed to get update count</source>
         <translation>अद्यतन संख्या प्राप्त करने में विफल</translation>
     </message>
@@ -5863,45 +5888,41 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>लीडर प्रक्रिया सेट करें</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="629"/>
         <source>    File root: %1
 </source>
-        <translation>    फ़ाइल रूट: %1
+        <translation type="vanished">    फ़ाइल रूट: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="630"/>
         <source>    Registry root: %1
 </source>
-        <translation>    रजिस्ट्री रूट: %1
+        <translation type="vanished">    रजिस्ट्री रूट: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="631"/>
         <source>    IPC root: %1
 </source>
-        <translation>    आईपीसी रूट: %1
+        <translation type="vanished">    आईपीसी रूट: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="635"/>
         <source>Options:
     </source>
-        <translation>विकल्प:
+        <translation type="vanished">विकल्प:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="954"/>
+        <location filename="Views/SbieView.cpp" line="945"/>
         <source>[None]</source>
         <translation>[कोई नहीं]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1401"/>
+        <location filename="Views/SbieView.cpp" line="1392"/>
         <source>Please enter a new group name</source>
         <translation>एक नए समूह का नाम दर्ज करें</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1147"/>
+        <location filename="Views/SbieView.cpp" line="1138"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>क्या आप सचमुच चयनित समूह को हटाना चाहते हैं?</translation>
     </message>
@@ -6085,190 +6106,189 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>समूह को स्थानांतरित करें</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="633"/>
         <source>    Disk root: %1
 </source>
-        <translation>    डिस्क रूट: %1
+        <translation type="vanished">    डिस्क रूट: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="652"/>
+        <location filename="Views/SbieView.cpp" line="642"/>
         <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="655"/>
+        <location filename="Views/SbieView.cpp" line="646"/>
         <source>    Sandbox: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="657"/>
+        <location filename="Views/SbieView.cpp" line="648"/>
         <source>    Image: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="660"/>
+        <location filename="Views/SbieView.cpp" line="651"/>
         <source>    Start Time: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1135"/>
+        <location filename="Views/SbieView.cpp" line="1126"/>
         <source>Please enter a new name for the Group.</source>
         <translation>कृपया समूह के लिए एक नया नाम दर्ज करें.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1213"/>
+        <location filename="Views/SbieView.cpp" line="1204"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>प्रविष्टियों को इस प्रकार ले जाएँ (नकारात्मक मान ऊपर जाएँ, सकारात्मक मान नीचे जाएँ):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1320"/>
+        <location filename="Views/SbieView.cpp" line="1311"/>
         <source>A group can not be its own parent.</source>
         <translation>कोई समूह अपना अभिभावक नहीं हो सकता.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1431"/>
+        <location filename="Views/SbieView.cpp" line="1422"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
         <translation>सैंडबॉक्स नाम और बॉक्स समूह नाम &apos;,()&apos; प्रतीक या नियंत्रण वर्णों का उपयोग नहीं कर सकते।</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1436"/>
+        <location filename="Views/SbieView.cpp" line="1427"/>
         <source>This name is already used for a Box Group.</source>
         <translation>यह नाम पहले से ही बॉक्स समूह के लिए उपयोग किया जाता है।</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1441"/>
+        <location filename="Views/SbieView.cpp" line="1432"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>यह नाम पहले से ही सैंडबॉक्स के लिए उपयोग किया जा चुका है.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1510"/>
-        <location filename="Views/SbieView.cpp" line="1586"/>
-        <location filename="Views/SbieView.cpp" line="1925"/>
+        <location filename="Views/SbieView.cpp" line="1501"/>
+        <location filename="Views/SbieView.cpp" line="1577"/>
+        <location filename="Views/SbieView.cpp" line="1916"/>
         <source>Don&apos;t show this message again.</source>
         <translation>यह संदेश दोबारा न दिखाएं.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1577"/>
-        <location filename="Views/SbieView.cpp" line="1597"/>
-        <location filename="Views/SbieView.cpp" line="2103"/>
+        <location filename="Views/SbieView.cpp" line="1568"/>
+        <location filename="Views/SbieView.cpp" line="1588"/>
+        <location filename="Views/SbieView.cpp" line="2094"/>
         <source>This Sandbox is empty.</source>
         <translation>यह सैंडबॉक्स खाली है.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1605"/>
+        <location filename="Views/SbieView.cpp" line="1596"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>भविष्य में यह चेतावनी न दिखाएं</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1651"/>
+        <location filename="Views/SbieView.cpp" line="1642"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>कृपया डुप्लिकेट सैंडबॉक्स के लिए एक नया नाम दर्ज करें।</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1651"/>
-        <location filename="Views/SbieView.cpp" line="1674"/>
+        <location filename="Views/SbieView.cpp" line="1642"/>
+        <location filename="Views/SbieView.cpp" line="1665"/>
         <source>%1 Copy</source>
         <translation>%1 कॉपी</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1671"/>
-        <location filename="Views/SbieView.cpp" line="1687"/>
+        <location filename="Views/SbieView.cpp" line="1662"/>
+        <location filename="Views/SbieView.cpp" line="1678"/>
         <source>Not Created</source>
         <translation>नहीं बनाया गया</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1691"/>
+        <location filename="Views/SbieView.cpp" line="1682"/>
         <source>Copying: %1</source>
         <translation>प्रतिलिपि बनाना: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1791"/>
+        <location filename="Views/SbieView.cpp" line="1782"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>क्या आप सचमुच निम्नलिखित सैंडबॉक्स हटाना चाहते हैं?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;चेतावनी: बॉक्स सामग्री भी हटा दी जाएगी!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1858"/>
+        <location filename="Views/SbieView.cpp" line="1849"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation>क्या आप निम्नलिखित सैंडबॉक्स की सामग्री को हटाना चाहते हैं?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1873"/>
+        <location filename="Views/SbieView.cpp" line="1864"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation>क्या आप सचमुच निम्नलिखित सैंडबॉक्स की सामग्री को हटाना चाहते हैं?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1471"/>
+        <location filename="Views/SbieView.cpp" line="1462"/>
         <source>&lt;br /&gt;</source>
         <translation>&lt;br /&gt;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1473"/>
+        <location filename="Views/SbieView.cpp" line="1464"/>
         <source>... and %1 more</source>
         <translation>...और %1 और अधिक</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1604"/>
+        <location filename="Views/SbieView.cpp" line="1595"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
         <translation>चेतावनी: खोला गया रजिस्ट्री संपादक सैंडबॉक्स नहीं है, कृपया सावधान रहें और केवल पूर्व-चयनित सैंडबॉक्स स्थानों में ही परिवर्तन करें।</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1846"/>
+        <location filename="Views/SbieView.cpp" line="1837"/>
         <source>This Sandbox is already empty.</source>
         <translation>यह सैंडबॉक्स पहले से ही खाली है.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1863"/>
-        <location filename="Views/SbieView.cpp" line="1886"/>
+        <location filename="Views/SbieView.cpp" line="1854"/>
+        <location filename="Views/SbieView.cpp" line="1877"/>
         <source>Also delete all Snapshots</source>
         <translation>सभी स्नैपशॉट भी हटा दें</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1907"/>
+        <location filename="Views/SbieView.cpp" line="1898"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>क्या आप चयनित सैंडबॉक्स में सभी प्रक्रियाओं को समाप्त करना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1908"/>
-        <location filename="Views/SbieView.cpp" line="2004"/>
+        <location filename="Views/SbieView.cpp" line="1899"/>
+        <location filename="Views/SbieView.cpp" line="1995"/>
         <source>Terminate without asking</source>
         <translation>बिना पूछे समाप्त करें</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1923"/>
+        <location filename="Views/SbieView.cpp" line="1914"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>सैंडबॉक्सी स्टार्ट मेनू अब प्रदर्शित किया जाएगा। मेनू से एक एप्लिकेशन का चयन करें, और सैंडबॉक्सी आपके वास्तविक डेस्कटॉप पर एक नया शॉर्टकट आइकन बनाएगा, जिसका उपयोग आप सैंडबॉक्सी की देखरेख में चयनित एप्लिकेशन को लागू करने के लिए कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1978"/>
-        <location filename="Views/SbieView.cpp" line="2032"/>
+        <location filename="Views/SbieView.cpp" line="1969"/>
+        <location filename="Views/SbieView.cpp" line="2023"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>सैंडबॉक्स %1 के लिए शॉर्टकट बनाएं</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="2003"/>
+        <location filename="Views/SbieView.cpp" line="1994"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation>क्या आप %1 को समाप्त करना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="2003"/>
+        <location filename="Views/SbieView.cpp" line="1994"/>
         <source>the selected processes</source>
         <translation>चयनित प्रक्रियाएँ</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="2062"/>
+        <location filename="Views/SbieView.cpp" line="2053"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>इस बॉक्स में इंटरनेट प्रतिबंध नहीं हैं, क्या आप उन्हें सक्षम करना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="2154"/>
+        <location filename="Views/SbieView.cpp" line="2145"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
         <translation>यह सैंडबॉक्स वर्तमान में अक्षम है या विशिष्ट समूहों या उपयोगकर्ताओं तक सीमित है। क्या आप सभी को प्रवेश की अनुमति देना चाहेंगे?</translation>
@@ -6393,184 +6413,184 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>छिपाएँ (पृष्ठभूमि में अदृश्य चलाएँ)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="441"/>
         <source>None</source>
         <translation>कोई नहीं</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="438"/>
+        <location filename="Windows/SettingsWindow.cpp" line="442"/>
         <source>Native</source>
         <translation>देशी</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="439"/>
+        <location filename="Windows/SettingsWindow.cpp" line="443"/>
         <source>Qt</source>
         <translation>क्यूटी</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="441"/>
+        <location filename="Windows/SettingsWindow.cpp" line="445"/>
         <source>Every Day</source>
         <translation>रोज रोज</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="442"/>
+        <location filename="Windows/SettingsWindow.cpp" line="446"/>
         <source>Every Week</source>
         <translation>हर हफ्ते</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="443"/>
+        <location filename="Windows/SettingsWindow.cpp" line="447"/>
         <source>Every 2 Weeks</source>
         <translation>प्रत्येक 2 हफ्ते</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="444"/>
+        <location filename="Windows/SettingsWindow.cpp" line="448"/>
         <source>Every 30 days</source>
         <translation>हर 30 दिन में</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="446"/>
+        <location filename="Windows/SettingsWindow.cpp" line="450"/>
         <source>Ignore</source>
         <translation>अनदेखा करना</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="458"/>
+        <location filename="Windows/SettingsWindow.cpp" line="462"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3728"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3743"/>
         <source>Autocomplete Consent Required</source>
         <translation>स्वत: पूर्ण सहमति आवश्यक है</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3203"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3212"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3218"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3227"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3208"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3223"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(कॉपी)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3221"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3236"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation>सैंडबॉक्सी-प्लस संस्करण: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="945"/>
+        <location filename="Windows/SettingsWindow.cpp" line="951"/>
         <source>Search for settings</source>
         <translation>सेटिंग्स खोजें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1339"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1340"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1345"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1346"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
         <source>Run &amp;Sandboxed</source>
         <translation>&amp;Sandboxed चलाएँ</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1794"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1806"/>
         <source>kilobytes (%1)</source>
         <translation>किलोबाइट (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1882"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1894"/>
         <source>Volume not attached</source>
         <translation>वॉल्यूम संलग्न नहीं है</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3290"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3305"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>यह समर्थक प्रमाणपत्र समाप्त हो गया है, कृपया &lt;a href=&quot;%1&quot;&gt; एक अद्यतन प्रमाणपत्र प्राप्त करें&lt;/a&gt;।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3370"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3385"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;आपने %1/%2 मूल्यांकन प्रमाणपत्रों का उपयोग किया है। कोई और निःशुल्क प्रमाणपत्र उत्पन्न नहीं किया जा सकता.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3372"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3387"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt; एक निःशुल्क मूल्यांकन प्रमाणपत्र प्राप्त करें&lt;/a&gt; और %1 दिनों के लिए सभी प्रीमियम सुविधाओं का आनंद लें।&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3303"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3318"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>यह समर्थक प्रमाणपत्र &lt;font color=&apos;red&apos;&gt;%1 दिनों&lt;/font&gt; में समाप्त हो जाएगा, कृपया &lt;a href=&quot;%2&quot;&gt; एक अद्यतन प्रमाणपत्र प्राप्त करें&lt;/a&gt;।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="433"/>
+        <location filename="Windows/SettingsWindow.cpp" line="437"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
         <translation>पिछली स्थिति याद रखें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="434"/>
+        <location filename="Windows/SettingsWindow.cpp" line="438"/>
         <source>Expand all groups</source>
         <translation>सभी समूहों का विस्तार करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="435"/>
+        <location filename="Windows/SettingsWindow.cpp" line="439"/>
         <source>Collapse all groups</source>
         <translation>सभी समूहों को संक्षिप्त करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3200"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3215"/>
         <source>Click to reveal</source>
         <translation>प्रकट करने के लिए क्लिक करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3201"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3216"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
         <translation>छिपाने के लिए क्लिक करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3338"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3353"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>समाप्ति तिथि: %1 दिन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3357"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>; पात्र संरक्षक हमेशा xanasoft.com से &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;&lt;/a&gt; अद्यतन प्रमाणपत्र प्राप्त कर सकते हैं</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3354"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3369"/>
         <source>Options: %1</source>
         <translation>विकल्प: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3372"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>सुरक्षा/गोपनीयता उन्नत और ऐप बॉक्स (एसबॉक्स): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3357"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3358"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3359"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3360"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3372"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3373"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
         <source>Enabled</source>
         <translation>सक्रिय</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="370"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3357"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3358"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3359"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3360"/>
+        <location filename="Windows/SettingsWindow.cpp" line="374"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3372"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3373"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
         <source>Disabled</source>
         <translation>अक्षम</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="342"/>
-        <location filename="Windows/SettingsWindow.cpp" line="581"/>
+        <location filename="Windows/SettingsWindow.cpp" line="586"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
@@ -6580,183 +6600,198 @@ Right-click to copy</oldsource>
         <translation>बदलाव</translation>
     </message>
     <message>
+        <location filename="Windows/SettingsWindow.cpp" line="349"/>
+        <source>Sandbox name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Windows/SettingsWindow.cpp" line="350"/>
+        <source>Sandbox alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="351"/>
+        <source>Sandbox alias and name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="354"/>
         <source>Same as main</source>
         <translation>मुख्य के समान</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="351"/>
+        <location filename="Windows/SettingsWindow.cpp" line="355"/>
         <source>Keep current monitor</source>
         <translation>वर्तमान मॉनिटर रखें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="352"/>
+        <location filename="Windows/SettingsWindow.cpp" line="356"/>
         <source>Active monitor</source>
         <translation>सक्रिय मॉनिटर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="353"/>
+        <location filename="Windows/SettingsWindow.cpp" line="357"/>
         <source>Primary monitor</source>
         <translation>प्राथमिक मॉनिटर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="409"/>
+        <location filename="Windows/SettingsWindow.cpp" line="413"/>
         <source>Unknown Display</source>
         <translation>अज्ञात प्रदर्शन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="411"/>
+        <location filename="Windows/SettingsWindow.cpp" line="415"/>
         <source>Display %1: %2</source>
         <translation>प्रदर्शन %1: %2</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="413"/>
+        <location filename="Windows/SettingsWindow.cpp" line="417"/>
         <source> (Primary)</source>
         <translation> (प्राथमिक)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="582"/>
+        <location filename="Windows/SettingsWindow.cpp" line="587"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
         <translation>त्रि-स्थिति व्यवहार: अनचेक = कभी नहीं, आंशिक रूप से चेक किया गया = केवल तब जबकि %1 रखा गया है (डिफ़ॉल्ट), चेक किया गया = हमेशा।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3358"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3373"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>एन्क्रिप्टेड सैंडबॉक्स (ईबॉक्स): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3359"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
         <source>Network Interception (NetI): %1</source>
         <translation>नेटवर्क इंटरसेप्शन (नेटी): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3360"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>सैंडबॉक्सी डेस्कटॉप (डेस्क): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3391"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3406"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>यह सैंडबॉक्सी-प्लस सीरियल नंबर जैसा नहीं दिखता है।&lt;br /&gt;यदि आपने किसी प्रमाणपत्र से अपडेटकी या हस्ताक्षर दर्ज करने का प्रयास किया है, तो यह सही नहीं है, कृपया इसके बजाय पूरे प्रमाणपत्र को ऊपर के टेक्स्ट क्षेत्र में दर्ज करें।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3398"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3413"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>आप पहले से मौजूद समर्थक प्रमाणपत्र दर्ज किए बिना अपग्रेड-कुंजी सुविधा का उपयोग करने का प्रयास कर रहे हैं। कृपया ध्यान दें कि इस प्रकार की कुंजी (&lt;b&gt;जैसा कि वेबसाइट पर बोल्ड में स्पष्ट रूप से बताया गया है&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;यदि आप उन्नत सुविधाओं का उपयोग करना चाहते हैं, तो आपको उन्नत कार्यक्षमता को अनलॉक करने के लिए एक मानक प्रमाणपत्र और फीचर अपग्रेड कुंजी दोनों प्राप्त करने की आवश्यकता है।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3404"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3419"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>आप पहले से मौजूद समर्थक प्रमाणपत्र दर्ज किए बिना रिन्यू-कुंजी का उपयोग करने का प्रयास कर रहे हैं। कृपया ध्यान दें कि इस प्रकार की कुंजी (&lt;b&gt;जैसा कि वेबसाइट पर बोल्ड में स्पष्ट रूप से कहा गया है&lt;/b) के लिए आपके पास पहले से मौजूद वैध समर्थक प्रमाणपत्र होना आवश्यक है; इसके बिना यह बेकार है.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3409"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3424"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;यदि आपने उत्पाद विवरण नहीं पढ़ा है और गलती से यह कुंजी प्राप्त कर ली है, तो कृपया इस समस्या को हल करने के लिए ईमेल (हमारी वेबसाइट पर उपलब्ध) के माध्यम से हमसे संपर्क करें।&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3440"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3455"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>सैंडबॉक्सी-प्लस - मूल्यांकन प्रमाणपत्र प्राप्त करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3440"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3455"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>कृपया निःशुल्क %1-दिन मूल्यांकन प्रमाणपत्र प्राप्त करने के लिए अपना ईमेल पता दर्ज करें, जो %2 को जारी किया जाएगा और वर्तमान हार्डवेयर पर लॉक किया जाएगा।
 आप प्रत्येक अद्वितीय हार्डवेयर आईडी के लिए %3 मूल्यांकन प्रमाणपत्र तक का अनुरोध कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3466"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3481"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>प्रमाणपत्र पुनर्प्राप्त करने में त्रुटि: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3466"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3481"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>अज्ञात त्रुटि (संभवतः एक नेटवर्क समस्या)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3521"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3536"/>
         <source>Contributor</source>
         <translation>योगदानकर्ता</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3523"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3538"/>
         <source>Eternal</source>
         <translation>शाश्वत</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3525"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3540"/>
         <source>Developer</source>
         <translation>डेवलपर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3527"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3542"/>
         <source>Business</source>
         <translation>व्यापार</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3529"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3544"/>
         <source>Personal</source>
         <translation>निजी</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3531"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3546"/>
         <source>Great Patreon</source>
         <translation>महान पैट्रियन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3533"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3548"/>
         <source>Patreon</source>
         <translation>पैट्रियन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3535"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3550"/>
         <source>Family</source>
         <translation>परिवार</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3539"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3554"/>
         <source>Evaluation</source>
         <translation>मूल्यांकन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3541"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3556"/>
         <source>Type %1</source>
         <translation>%1 टाइप करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3571"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3586"/>
         <source>Advanced</source>
         <translation>विकसित</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3573"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3588"/>
         <source>Advanced (L)</source>
         <translation>उन्नत (एल)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3575"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3590"/>
         <source>Max Level</source>
         <translation>अधिकतम स्तर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3577"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3592"/>
         <source>Level %1</source>
         <translation>स्तर %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3730"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3745"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>स्वत: पूर्ण सुविधा को आगे बढ़ने के लिए आपकी सहमति की आवश्यकता है।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3732"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3747"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -6769,335 +6804,335 @@ Choose autocomplete mode:
 टाइप करते समय %1: टाइप करते समय स्वत: पूर्ण सुझाव।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3740"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3755"/>
         <source>Manual</source>
         <translation>नियमावली</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3741"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3756"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>%1 के साथ स्वत: पूर्ण सुझावों को ट्रिगर करता है।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3743"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3758"/>
         <source>While Typing</source>
         <translation>टाइप करते समय</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3744"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3759"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>टाइप करते समय स्वत: पूर्ण सुझावों को ट्रिगर करता है।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3747"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3762"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>स्वतः पूर्ण सुझावों को अक्षम रखता है.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3746"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3761"/>
         <source>Cancel</source>
         <translation>रद्द करना</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1910"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1922"/>
         <source>Supporter certificate required for access</source>
         <translation>पहुंच के लिए समर्थक प्रमाणपत्र आवश्यक है</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1927"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1939"/>
         <source>Supporter certificate required for automation</source>
         <translation>स्वचालन के लिए समर्थक प्रमाणपत्र आवश्यक है</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3616"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3631"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>दुर्भाग्य से यह प्रमाणपत्र वर्तमान बिल्ड के लिए मान्य नहीं है, आपको एक नया प्रमाणपत्र प्राप्त करना होगा या पुराने बिल्ड में डाउनग्रेड करना होगा।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3618"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3633"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>हालाँकि यह प्रमाणपत्र समाप्त हो चुका है, वर्तमान में स्थापित संस्करण के लिए प्लस सुविधाएँ सक्षम रहेंगी। हालाँकि, अब आपके पास संगतता अद्यतन और ऑनलाइन समस्या निवारण डेटाबेस सहित सैंडबॉक्सी-लाइव सेवाओं तक पहुंच नहीं होगी।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3620"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3635"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>यह प्रमाणपत्र दुर्भाग्य से समाप्त हो गया है, आपको एक नया प्रमाणपत्र प्राप्त करना होगा।</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1371"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1377"/>
         <source>Sandboxed Web Browser</source>
         <translation>सैंडबॉक्स्ड वेब ब्राउज़र</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="447"/>
-        <location filename="Windows/SettingsWindow.cpp" line="452"/>
+        <location filename="Windows/SettingsWindow.cpp" line="451"/>
+        <location filename="Windows/SettingsWindow.cpp" line="456"/>
         <source>Notify</source>
         <translation>सूचित करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="448"/>
-        <location filename="Windows/SettingsWindow.cpp" line="453"/>
+        <location filename="Windows/SettingsWindow.cpp" line="452"/>
+        <location filename="Windows/SettingsWindow.cpp" line="457"/>
         <source>Download &amp; Notify</source>
         <translation>डाउनलोड करें और सूचित करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="449"/>
-        <location filename="Windows/SettingsWindow.cpp" line="454"/>
+        <location filename="Windows/SettingsWindow.cpp" line="453"/>
+        <location filename="Windows/SettingsWindow.cpp" line="458"/>
         <source>Download &amp; Install</source>
         <translation>डाउनलोड करें और इंस्टॉल करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="638"/>
+        <location filename="Windows/SettingsWindow.cpp" line="643"/>
         <source>Browse for Program</source>
         <translation>प्रोग्राम के लिए ब्राउज़ करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="758"/>
+        <location filename="Windows/SettingsWindow.cpp" line="764"/>
         <source>Add %1 Template</source>
         <translation>%1 टेम्पलेट जोड़ें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="623"/>
-        <location filename="Windows/SettingsWindow.cpp" line="804"/>
+        <location filename="Windows/SettingsWindow.cpp" line="628"/>
+        <location filename="Windows/SettingsWindow.cpp" line="810"/>
         <source>Select font</source>
         <translation>फ़ॉन्ट चुनें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="625"/>
-        <location filename="Windows/SettingsWindow.cpp" line="806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="630"/>
+        <location filename="Windows/SettingsWindow.cpp" line="812"/>
         <source>Reset font</source>
         <translation>फ़ॉन्ट रीसेट करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="959"/>
+        <location filename="Windows/SettingsWindow.cpp" line="965"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 पीटी</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1220"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1226"/>
         <source>Please enter message</source>
         <translation>कृपया संदेश दर्ज करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1252"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1258"/>
         <source>Select Program</source>
         <translation>प्रोग्राम चुनें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1252"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1258"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>निष्पादनयोग्य (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1256"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1272"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1262"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1278"/>
         <source>Please enter a menu title</source>
         <translation>कृपया एक मेनू शीर्षक दर्ज करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1268"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1274"/>
         <source>Please enter a command</source>
         <translation>कृपया एक आदेश दर्ज करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3295"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3310"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;वर्तमान बिल्ड के लिए प्लस सुविधाएं सक्षम रहती हैं&lt;/font&gt;, लेकिन अब आपके पास संगतता अपडेट और ऑनलाइन समस्या निवारण डेटाबेस सहित सैंडबॉक्सी-लाइव सेवाओं तक पहुंच नहीं है।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3373"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3388"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>आप प्रति हार्डवेयर आईडी पर %2 बार तक निःशुल्क %1-दिन मूल्यांकन प्रमाणपत्र का अनुरोध कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3293"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3308"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;प्लस सुविधाएं %1 दिनों में अक्षम कर दी जाएंगी।&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3297"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3312"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus सुविधाएँ अब सक्षम नहीं हैं।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3355"/>
         <source>Expired: %1 days ago</source>
         <translation>समाप्त: %1 दिन पहले</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3424"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3452"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3681"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3439"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3467"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3696"/>
         <source>Retrieving certificate...</source>
         <translation>प्रमाणपत्र पुनर्प्राप्त किया जा रहा है...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3537"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3552"/>
         <source>Home</source>
         <translation>घर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2045"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2057"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>&amp;Un-सैंडबॉक्स्ड चलाएँ</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2053"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2065"/>
         <source>Set Force in Sandbox</source>
         <translation>सैंडबॉक्स में फोर्स सेट करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2062"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2074"/>
         <source>Set Open Path in Sandbox</source>
         <translation>सैंडबॉक्स में ओपन पाथ सेट करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3614"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>यह प्रमाणपत्र जैसा नहीं दिखता. कृपया संपूर्ण प्रमाणपत्र दर्ज करें, न कि उसका केवल एक भाग।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3624"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3639"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>मूल्यांकन प्रमाणपत्र सफलतापूर्वक लागू कर दिया गया है. अपने निःशुल्क परीक्षण का आनंद लें!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3627"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3642"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>सैंडबॉक्सी-प्लस के विकास का समर्थन करने के लिए धन्यवाद।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3629"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3644"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
 यह एक अस्थायी पैट्रियन प्रमाणपत्र है, जो 3 महीने के लिए वैध है। एक बार जब यह समाप्ति के करीब आ जाए, तो आप ऑनलाइन एक नया प्रमाणपत्र प्राप्त कर सकते हैं जो पूरी अवधि के लिए वैध होगा।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3667"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3682"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>आपके सैंडबॉक्सी-प्लस सपोर्टर प्रमाणपत्र के लिए एक अनिवार्य सुरक्षा अद्यतन आवश्यक है। क्या आप अब अद्यतन प्रमाणपत्र डाउनलोड करना चाहेंगे?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3668"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3683"/>
         <source>Auto update in future</source>
         <translation>भविष्य में स्वतः अद्यतन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2441"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2456"/>
         <source>Update Available</source>
         <translation>उपलब्ध अद्यतन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2443"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2458"/>
         <source>Installed</source>
         <translation>स्थापित</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2463"/>
         <source>by %1</source>
         <translation>%1 द्वारा</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2456"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2471"/>
         <source>(info website)</source>
         <translation>(जानकारी वेबसाइट)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2484"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2499"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>यह ऐड-ऑन अनिवार्य है और इसे हटाया नहीं जा सकता.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2493"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2705"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2508"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2720"/>
         <source>Select Directory</source>
         <translation>निर्देशिका का चयन करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2525"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2540"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;अभी जांचें&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2595"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
         <source>Select Portable Box ini</source>
         <translation>पोर्टेबल बॉक्स ini का चयन करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2595"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2605"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2620"/>
         <source>Ini Files (*.ini)</source>
         <translation>आईएनआई फ़ाइलें (*.आईएनआई)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2605"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2620"/>
         <source>Save new Portable Box ini</source>
         <translation>नया पोर्टेबल बॉक्स सहेजें ini</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2625"/>
         <source>File already exists, please select a different file name.</source>
         <translation>फ़ाइल पहले से मौजूद है, कृपया कोई भिन्न फ़ाइल नाम चुनें।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2616"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2631"/>
         <source>Invalid box name</source>
         <translation>अमान्य बॉक्स नाम</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2637"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2652"/>
         <source>Select Root Folder</source>
         <translation>रूट फ़ोल्डर का चयन करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2665"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2680"/>
         <source>Please enter the new configuration password.</source>
         <translation>कृपया नया कॉन्फ़िगरेशन पासवर्ड दर्ज करें.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2669"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2684"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>कृपया नया कॉन्फ़िगरेशन पासवर्ड पुनः दर्ज करें.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2674"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2689"/>
         <source>Passwords did not match, please retry.</source>
         <translation>पासवर्ड मेल नहीं खाते, कृपया पुनः प्रयास करें।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2686"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2701"/>
         <source>Process</source>
         <translation>प्रक्रिया</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2686"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2701"/>
         <source>Folder</source>
         <translation>फ़ोल्डर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2696"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2711"/>
         <source>Please enter a program file name</source>
         <translation>कृपया प्रोग्राम फ़ाइल नाम दर्ज करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2764"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2779"/>
         <source>Please enter the template identifier</source>
         <translation>कृपया टेम्प्लेट पहचानकर्ता दर्ज करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2772"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2787"/>
         <source>Error: %1</source>
         <translation>त्रुटि: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2804"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2819"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>क्या आप सचमुच चयनित स्थानीय टेम्पलेट हटाना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3127"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3142"/>
         <source>%1 (Current)</source>
         <translation>%1 (वर्तमान)</translation>
     </message>
@@ -10494,7 +10529,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1960"/>
+        <location filename="Views/SbieView.cpp" line="1951"/>
         <source>Drive %1</source>
         <translation>%1 ड्राइव करें</translation>
     </message>
@@ -10523,27 +10558,27 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="5061"/>
+        <location filename="SandMan.cpp" line="5080"/>
         <source>OK</source>
         <translation>ठीक है</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5062"/>
+        <location filename="SandMan.cpp" line="5081"/>
         <source>Apply</source>
         <translation>आवेदन करना</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5063"/>
+        <location filename="SandMan.cpp" line="5082"/>
         <source>Cancel</source>
         <translation>रद्द करना</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5064"/>
+        <location filename="SandMan.cpp" line="5083"/>
         <source>&amp;Yes</source>
         <translation>&amp;हाँ</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5065"/>
+        <location filename="SandMan.cpp" line="5084"/>
         <source>&amp;No</source>
         <translation>&amp;No</translation>
     </message>
@@ -10776,47 +10811,47 @@ Please note that this values are currently user specific and saved globally for 
         <translation>स्वचालित बॉक्स संचालन प्रारंभ होने पर एक ट्रे अधिसूचना दिखाएं</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1120"/>
+        <location filename="Forms/SettingsWindow.ui" line="1251"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
         <translation>* आंशिक रूप से चेक किया गया चेकबॉक्स व्यवहार को दृश्य मोड द्वारा निर्धारित करने के लिए छोड़ देगा।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2389"/>
+        <location filename="Forms/SettingsWindow.ui" line="2413"/>
         <source>Advanced Config</source>
         <translation>उन्नत कॉन्फिग</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2509"/>
+        <location filename="Forms/SettingsWindow.ui" line="2533"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>कर्नेल मोड ऑब्जेक्ट फ़िल्टरिंग सक्रिय करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2529"/>
+        <location filename="Forms/SettingsWindow.ui" line="2553"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>सैंडबॉक्स &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;फ़ाइल सिस्टम रूट&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2796"/>
+        <location filename="Forms/SettingsWindow.ui" line="2820"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>मुख्य विंडो छुप जाने पर पासवर्ड साफ़ करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2606"/>
+        <location filename="Forms/SettingsWindow.ui" line="2630"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>सैंडबॉक्स &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc रूट&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2462"/>
+        <location filename="Forms/SettingsWindow.ui" line="2486"/>
         <source>Sandbox default</source>
         <translation>सैंडबॉक्स डिफ़ॉल्ट</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2829"/>
+        <location filename="Forms/SettingsWindow.ui" line="2853"/>
         <source>Config protection</source>
         <translation>कॉन्फ़िगरेशन सुरक्षा</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2628"/>
+        <location filename="Forms/SettingsWindow.ui" line="2652"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -10871,232 +10906,232 @@ Please note that this values are currently user specific and saved globally for 
         <translation>विंडोज़ शैल</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="986"/>
+        <location filename="Forms/SettingsWindow.ui" line="993"/>
         <source>Move Up</source>
         <translation>बढ़ाना</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1005"/>
+        <location filename="Forms/SettingsWindow.ui" line="1012"/>
         <source>Move Down</source>
         <translation>नीचे की ओर</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1130"/>
+        <location filename="Forms/SettingsWindow.ui" line="1134"/>
         <source>Show overlay icons for boxes and processes</source>
         <translation>बक्सों और प्रक्रियाओं के लिए ओवरले आइकन दिखाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1154"/>
+        <location filename="Forms/SettingsWindow.ui" line="1158"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
         <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
         <translation>सैंडबॉक्सी की अपनी प्रक्रियाओं को कार्य सूची से छिपाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1210"/>
-        <location filename="Forms/SettingsWindow.ui" line="1240"/>
+        <location filename="Forms/SettingsWindow.ui" line="1214"/>
+        <location filename="Forms/SettingsWindow.ui" line="1264"/>
         <source>Interface Options</source>
         <oldsource>Display Options</oldsource>
         <translation>इंटरफ़ेस विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1281"/>
+        <location filename="Forms/SettingsWindow.ui" line="1305"/>
         <source>Ini Editor Font</source>
         <translation>आईएनआई संपादक फ़ॉन्ट</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1370"/>
+        <location filename="Forms/SettingsWindow.ui" line="1394"/>
         <source>Graphic Options</source>
         <translation>ग्राफ़िक विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1313"/>
+        <location filename="Forms/SettingsWindow.ui" line="1337"/>
         <source>Select font</source>
         <translation>फ़ॉन्ट चुनें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1323"/>
+        <location filename="Forms/SettingsWindow.ui" line="1347"/>
         <source>Reset font</source>
         <translation>फ़ॉन्ट रीसेट करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1416"/>
-        <location filename="Forms/SettingsWindow.ui" line="1479"/>
+        <location filename="Forms/SettingsWindow.ui" line="1440"/>
+        <location filename="Forms/SettingsWindow.ui" line="1503"/>
         <source>#</source>
         <translation>#</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1268"/>
+        <location filename="Forms/SettingsWindow.ui" line="1292"/>
         <source>External Ini Editor</source>
         <translation>बाहरी आईएनआई संपादक</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1686"/>
+        <location filename="Forms/SettingsWindow.ui" line="1710"/>
         <source>Add-Ons Manager</source>
         <translation>ऐड-ऑन मैनेजर</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1696"/>
+        <location filename="Forms/SettingsWindow.ui" line="1720"/>
         <source>Optional Add-Ons</source>
         <translation>वैकल्पिक ऐड-ऑन</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1704"/>
+        <location filename="Forms/SettingsWindow.ui" line="1728"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
         <translation>सैंडबॉक्सी-प्लस कई विकल्प प्रदान करता है और एक्सटेंशन की एक विस्तृत श्रृंखला का समर्थन करता है। इस पृष्ठ पर, आप ऐड-ऑन, प्लगइन्स और अन्य तृतीय-पक्ष घटकों के एकीकरण को कॉन्फ़िगर कर सकते हैं। वैकल्पिक घटकों को वेब से डाउनलोड किया जा सकता है, और कुछ इंस्टॉलेशन के लिए प्रशासनिक विशेषाधिकारों की आवश्यकता हो सकती है।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1740"/>
+        <location filename="Forms/SettingsWindow.ui" line="1764"/>
         <source>Status</source>
         <translation>स्थिति</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1745"/>
+        <location filename="Forms/SettingsWindow.ui" line="1769"/>
         <source>Version</source>
         <translation>संस्करण</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1750"/>
+        <location filename="Forms/SettingsWindow.ui" line="1774"/>
         <source>Description</source>
         <translation>विवरण</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1758"/>
+        <location filename="Forms/SettingsWindow.ui" line="1782"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update add-on list now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://addons&quot;&gt;ऐड-ऑन सूची को अभी अपडेट करें&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1768"/>
+        <location filename="Forms/SettingsWindow.ui" line="1792"/>
         <source>Install</source>
         <translation>स्थापित करना</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1778"/>
+        <location filename="Forms/SettingsWindow.ui" line="1802"/>
         <source>Add-On Configuration</source>
         <translation>ऐड-ऑन कॉन्फ़िगरेशन</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1786"/>
+        <location filename="Forms/SettingsWindow.ui" line="1810"/>
         <source>Enable Ram Disk creation</source>
         <translation>राम डिस्क निर्माण सक्षम करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1793"/>
+        <location filename="Forms/SettingsWindow.ui" line="1817"/>
         <source>kilobytes</source>
         <translation>किलोबाइट</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1846"/>
+        <location filename="Forms/SettingsWindow.ui" line="1870"/>
         <source>Disk Image Support</source>
         <translation>डिस्क छवि समर्थन</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1863"/>
+        <location filename="Forms/SettingsWindow.ui" line="1887"/>
         <source>RAM Limit</source>
         <translation>रैम सीमा</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1830"/>
+        <location filename="Forms/SettingsWindow.ui" line="1854"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
         <translation>&lt;a href=&quot;addon://ImDisk&quot;&gt; रैम डिस्क और डिस्क छवि समर्थन को सक्षम करने के लिए ImDisk&lt;/a&gt; ड्राइवर स्थापित करें।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1916"/>
+        <location filename="Forms/SettingsWindow.ui" line="1940"/>
         <source>Sandboxie Support</source>
         <translation>सैंडबॉक्सी समर्थन</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2005"/>
+        <location filename="Forms/SettingsWindow.ui" line="2029"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>यह समर्थक प्रमाणपत्र समाप्त हो गया है, कृपया &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt; एक अद्यतन प्रमाणपत्र प्राप्त करें&lt;/a&gt;।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2072"/>
+        <location filename="Forms/SettingsWindow.ui" line="2096"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>सैंडबॉक्सी-प्लस प्रोजेक्ट के समर्थक &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;समर्थक प्रमाणपत्र&lt;/a&gt; प्राप्त कर सकते हैं। यह एक लाइसेंस कुंजी की तरह है लेकिन ओपन सोर्स सॉफ़्टवेयर का उपयोग करने वाले अद्भुत लोगों के लिए है। :-)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1953"/>
+        <location filename="Forms/SettingsWindow.ui" line="1977"/>
         <source>Get</source>
         <translation>पाना</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2095"/>
+        <location filename="Forms/SettingsWindow.ui" line="2119"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
         <translation>सीरियल नंबर का उपयोग करके प्रमाणपत्र पुनः प्राप्त/अपग्रेड/नवीनीकृत करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2040"/>
+        <location filename="Forms/SettingsWindow.ui" line="2064"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
         <translation>सैंडबॉक्सी को विंडोज़ की आगामी रिलीज़ों के साथ अद्यतन रखना और सभी वेब ब्राउज़रों के साथ संगत रखना एक कभी न ख़त्म होने वाला प्रयास है। आप &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt; द्वारा विकास का समर्थन कर सकते हैं, सीधे प्रोजेक्ट&lt;/a&gt; में योगदान कर सकते हैं, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt; द्वारा अपना समर्थन दिखा सकते हैं, एक समर्थक प्रमाणपत्र &lt;/a&gt; खरीद सकते हैं, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt; द्वारा संरक्षक बन सकते हैं, Patreon&lt;/a&gt; पर सदस्यता ले सकते हैं, या &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal के माध्यम से दान&lt;/a&gt;.&lt;br /&gt;आपका समर्थन सैंडबॉक्सी की उन्नति और रखरखाव में महत्वपूर्ण भूमिका निभाता है।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1939"/>
+        <location filename="Forms/SettingsWindow.ui" line="1963"/>
         <source>SBIE_-_____-_____-_____-_____</source>
         <translation>एसबीआईई_-_____-_____-_____-_____</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2105"/>
+        <location filename="Forms/SettingsWindow.ui" line="2129"/>
         <source>Eval Cert</source>
         <translation>इवल सर्टिफिकेट</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2201"/>
+        <location filename="Forms/SettingsWindow.ui" line="2225"/>
         <source>Update Settings</source>
         <translation>सेटिंग्स अपडेट करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2358"/>
+        <location filename="Forms/SettingsWindow.ui" line="2382"/>
         <source>Update Check Interval</source>
         <translation>जाँच अंतराल अद्यतन करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2407"/>
+        <location filename="Forms/SettingsWindow.ui" line="2431"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>सैंडबॉक्स &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;रजिस्ट्री रूट&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2599"/>
+        <location filename="Forms/SettingsWindow.ui" line="2623"/>
         <source>Sandboxing features</source>
         <translation>सैंडबॉक्सिंग सुविधाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2671"/>
+        <location filename="Forms/SettingsWindow.ui" line="2695"/>
         <source>Change Password</source>
         <translation>पासवर्ड बदलें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2698"/>
+        <location filename="Forms/SettingsWindow.ui" line="2722"/>
         <source>Password must be entered in order to make changes</source>
         <translation>परिवर्तन करने के लिए पासवर्ड दर्ज करना होगा</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2678"/>
+        <location filename="Forms/SettingsWindow.ui" line="2702"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>केवल प्रशासक उपयोगकर्ता खाते ही परिवर्तन कर सकते हैं</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2803"/>
+        <location filename="Forms/SettingsWindow.ui" line="2827"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>परिवर्तनों के लिए Sandboxie.ini देखें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3097"/>
+        <location filename="Forms/SettingsWindow.ui" line="3121"/>
         <source>App Templates</source>
         <translation>ऐप टेम्प्लेट</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3107"/>
+        <location filename="Forms/SettingsWindow.ui" line="3131"/>
         <source>App Compatibility</source>
         <translation>ऐप अनुकूलता</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2737"/>
+        <location filename="Forms/SettingsWindow.ui" line="2761"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
         <translation>केवल प्रशासक उपयोगकर्ता खाते ही पॉज़ फ़ोर्सिंग प्रोग्राम कमांड का उपयोग कर सकते हैं</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2545"/>
+        <location filename="Forms/SettingsWindow.ui" line="2569"/>
         <source>Portable root folder</source>
         <translation>पोर्टेबल रूट फ़ोल्डर</translation>
     </message>
@@ -11116,12 +11151,12 @@ Please note that this values are currently user specific and saved globally for 
         <translation>सिस्ट्रे में चिह्न दिखाएँ:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2572"/>
+        <location filename="Forms/SettingsWindow.ui" line="2596"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>नेटवर्क एक्सेस को प्रतिबंधित करने के लिए विंडोज फ़िल्टरिंग प्लेटफ़ॉर्म का उपयोग करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2562"/>
+        <location filename="Forms/SettingsWindow.ui" line="2586"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
         <translation>GPU त्वरण को सक्षम करने के लिए हुक ने Win32k सिस्टम कॉल का चयन किया (क्रोम, फ़ायरफ़ॉक्स और अधिक के लिए आवश्यक)</translation>
@@ -11138,47 +11173,47 @@ Please note that this values are currently user specific and saved globally for 
         <translation>कॉम्पैक्ट बॉक्स सूची का उपयोग करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1059"/>
+        <location filename="Forms/SettingsWindow.ui" line="1066"/>
         <source>Interface Config</source>
         <translation>इंटरफ़ेस कॉन्फ़िग</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1137"/>
+        <location filename="Forms/SettingsWindow.ui" line="1141"/>
         <source>Make Box Icons match the Border Color</source>
         <translation>बॉक्स आइकन को बॉर्डर के रंग से मेल कराएं</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1144"/>
+        <location filename="Forms/SettingsWindow.ui" line="1148"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
         <translation>नेस्टेड टैब्स के बजाय बॉक्स विकल्प में पेज ट्री का उपयोग करें *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1178"/>
+        <location filename="Forms/SettingsWindow.ui" line="1182"/>
         <source>Use large icons in box list *</source>
         <translation>बॉक्स सूची में बड़े आइकन का उपयोग करें*</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1248"/>
+        <location filename="Forms/SettingsWindow.ui" line="1272"/>
         <source>High DPI Scaling</source>
         <translation>उच्च डीपीआई स्केलिंग</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1188"/>
+        <location filename="Forms/SettingsWindow.ui" line="1192"/>
         <source>Don&apos;t show icons in menus *</source>
         <translation>मेनू में आइकन न दिखाएं*</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1100"/>
+        <location filename="Forms/SettingsWindow.ui" line="1107"/>
         <source>Use Dark Theme</source>
         <translation>डार्क थीम का प्रयोग करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1403"/>
+        <location filename="Forms/SettingsWindow.ui" line="1427"/>
         <source>Font Scaling</source>
         <translation>फ़ॉन्ट स्केलिंग</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1439"/>
+        <location filename="Forms/SettingsWindow.ui" line="1463"/>
         <source>(Restart required)</source>
         <translation>(पुनरारंभ करना आवश्यक है)</translation>
     </message>
@@ -11188,67 +11223,67 @@ Please note that this values are currently user specific and saved globally for 
         <translation>पुनर्प्राप्ति विंडो को हमेशा शीर्ष पर दिखाएं</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1077"/>
+        <location filename="Forms/SettingsWindow.ui" line="1084"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation>बॉक्स सूची में &quot;पिज्जा&quot; पृष्ठभूमि दिखाएं *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1261"/>
+        <location filename="Forms/SettingsWindow.ui" line="1285"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1171"/>
+        <location filename="Forms/SettingsWindow.ui" line="1175"/>
         <source>Alternate row background in lists</source>
         <translation>सूचियों में वैकल्पिक पंक्ति पृष्ठभूमि</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1110"/>
+        <location filename="Forms/SettingsWindow.ui" line="1117"/>
         <source>Use Fusion Theme</source>
         <translation>फ़्यूज़न थीम का उपयोग करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="929"/>
-        <location filename="Forms/SettingsWindow.ui" line="1735"/>
-        <location filename="Forms/SettingsWindow.ui" line="2925"/>
-        <location filename="Forms/SettingsWindow.ui" line="3138"/>
-        <location filename="Forms/SettingsWindow.ui" line="3298"/>
+        <location filename="Forms/SettingsWindow.ui" line="936"/>
+        <location filename="Forms/SettingsWindow.ui" line="1759"/>
+        <location filename="Forms/SettingsWindow.ui" line="2949"/>
+        <location filename="Forms/SettingsWindow.ui" line="3162"/>
+        <location filename="Forms/SettingsWindow.ui" line="3322"/>
         <source>Name</source>
         <translation>नाम</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2930"/>
+        <location filename="Forms/SettingsWindow.ui" line="2954"/>
         <source>Path</source>
         <translation>पथ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2889"/>
+        <location filename="Forms/SettingsWindow.ui" line="2913"/>
         <source>Remove Program</source>
         <translation>प्रोग्राम हटाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2910"/>
+        <location filename="Forms/SettingsWindow.ui" line="2934"/>
         <source>Add Program</source>
         <translation>प्रोग्राम जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2879"/>
+        <location filename="Forms/SettingsWindow.ui" line="2903"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>जब निम्नलिखित में से कोई भी प्रोग्राम किसी सैंडबॉक्स के बाहर लॉन्च किया जाता है, तो सैंडबॉक्सी SBIE1301 संदेश जारी करेगा।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2903"/>
+        <location filename="Forms/SettingsWindow.ui" line="2927"/>
         <source>Add Folder</source>
         <translation>फ़ोल्डर जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2859"/>
+        <location filename="Forms/SettingsWindow.ui" line="2883"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>सूचीबद्ध प्रोग्रामों को इस सिस्टम पर प्रारंभ होने से रोकें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2917"/>
+        <location filename="Forms/SettingsWindow.ui" line="2941"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>जब कोई प्रोग्राम प्रारंभ होने में विफल रहता है तो संदेश 1308 जारी करें</translation>
     </message>
@@ -11283,27 +11318,27 @@ Please note that this values are currently user specific and saved globally for 
         <translation>होस्ट स्टार्ट मेनू के साथ एकीकृत करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1217"/>
+        <location filename="Forms/SettingsWindow.ui" line="1221"/>
         <source>Use new config dialog layout *</source>
         <translation>नए कॉन्फ़िगरेशन संवाद लेआउट का उपयोग करें *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2841"/>
+        <location filename="Forms/SettingsWindow.ui" line="2865"/>
         <source>Program Control</source>
         <translation>कार्यक्रम नियंत्रण</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2851"/>
+        <location filename="Forms/SettingsWindow.ui" line="2875"/>
         <source>Program Alerts</source>
         <translation>प्रोग्राम अलर्ट</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2896"/>
+        <location filename="Forms/SettingsWindow.ui" line="2920"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>जब बलपूर्वक प्रक्रियाएँ अक्षम कर दी गई हों तो संदेश 1301 जारी करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2399"/>
+        <location filename="Forms/SettingsWindow.ui" line="2423"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>सैंडबॉक्सी कॉन्फिग</translation>
@@ -11319,34 +11354,34 @@ Please note that this values are currently user specific and saved globally for 
         <translation>गेम/प्रेजेंटेशन मोड में होने पर पॉप-अप नोटिफिकेशन दबाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1069"/>
+        <location filename="Forms/SettingsWindow.ui" line="1076"/>
         <source>User Interface</source>
         <translation>प्रयोक्ता इंटरफ़ेस</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="907"/>
+        <location filename="Forms/SettingsWindow.ui" line="914"/>
         <source>Run Menu</source>
         <translation>मेनू चलाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="954"/>
+        <location filename="Forms/SettingsWindow.ui" line="961"/>
         <source>Add program</source>
         <translation>प्रोग्राम जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1012"/>
+        <location filename="Forms/SettingsWindow.ui" line="1019"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
         <translation>आप सभी सैंडबॉक्स रन मेनू के लिए कस्टम प्रविष्टियाँ कॉन्फ़िगर कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1034"/>
-        <location filename="Forms/SettingsWindow.ui" line="1714"/>
-        <location filename="Forms/SettingsWindow.ui" line="3318"/>
+        <location filename="Forms/SettingsWindow.ui" line="1041"/>
+        <location filename="Forms/SettingsWindow.ui" line="1738"/>
+        <location filename="Forms/SettingsWindow.ui" line="3342"/>
         <source>Remove</source>
         <translation>निकालना</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="934"/>
+        <location filename="Forms/SettingsWindow.ui" line="941"/>
         <source>Command Line</source>
         <translation>कमांड लाइन</translation>
     </message>
@@ -11393,57 +11428,57 @@ Please note that this values are currently user specific and saved globally for 
         <translation>सिस्टम ट्रे</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="827"/>
+        <location filename="Forms/SettingsWindow.ui" line="834"/>
         <source>On main window close:</source>
         <translation>मुख्य विंडो पर बंद करें:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="837"/>
+        <location filename="Forms/SettingsWindow.ui" line="844"/>
         <source>Open/Close from/to tray with a single click</source>
         <translation>एक क्लिक से ट्रे को/से खोलें/बंद करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="844"/>
+        <location filename="Forms/SettingsWindow.ui" line="851"/>
         <source>Minimize to tray</source>
         <translation>ट्रे पर छोटा करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1459"/>
+        <location filename="Forms/SettingsWindow.ui" line="1483"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
         <translation>स्क्रीन कैप्चर से सैंडमैन विंडो छुपाएं (यूआई पुनरारंभ आवश्यक)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1810"/>
+        <location filename="Forms/SettingsWindow.ui" line="1834"/>
         <source>Assign drive letter to Ram Disk</source>
         <translation>रैम डिस्क को ड्राइव लेटर असाइन करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1889"/>
+        <location filename="Forms/SettingsWindow.ui" line="1913"/>
         <source>When a Ram Disk is already mounted you need to unmount it for this option to take effect.</source>
         <translation>जब रैम डिस्क पहले से ही माउंट हो तो आपको इस विकल्प को प्रभावी करने के लिए इसे अनमाउंट करना होगा।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1892"/>
+        <location filename="Forms/SettingsWindow.ui" line="1916"/>
         <source>* takes effect on disk creation</source>
         <translation>* डिस्क निर्माण पर प्रभाव डालता है</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1906"/>
+        <location filename="Forms/SettingsWindow.ui" line="1930"/>
         <source>Support &amp;&amp; Updates</source>
         <translation>&amp;&amp; अपडेट का समर्थन करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1992"/>
+        <location filename="Forms/SettingsWindow.ui" line="2016"/>
         <source>Cert Options</source>
         <translation>प्रमाणपत्र विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2021"/>
+        <location filename="Forms/SettingsWindow.ui" line="2045"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;प्रमाणपत्र उपयोग मार्गदर्शिका&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1966"/>
+        <location filename="Forms/SettingsWindow.ui" line="1990"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
         <translation>HwId: 00000000-0000-0000-0000-00000000000</translation>
     </message>
@@ -11468,90 +11503,90 @@ Please note that this values are currently user specific and saved globally for 
         <translation>डबल क्लिक के साथ सैंडबॉक्स वाले डेस्कटॉप पर स्विच करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1452"/>
+        <location filename="Forms/SettingsWindow.ui" line="1476"/>
         <source>Ini Editor Options</source>
         <translation>आईएनआई संपादक विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2131"/>
+        <location filename="Forms/SettingsWindow.ui" line="2155"/>
         <source>Cert Info</source>
         <translation>प्रमाणित जानकारी</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2147"/>
+        <location filename="Forms/SettingsWindow.ui" line="2171"/>
         <source>Sandboxie-Plus Version: 0.0.0</source>
         <translation>सैंडबॉक्सी-प्लस संस्करण: 0.0.0</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2157"/>
+        <location filename="Forms/SettingsWindow.ui" line="2181"/>
         <source>Sandboxie Updater</source>
         <translation>सैंडबॉक्सी अपडेटर</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2188"/>
+        <location filename="Forms/SettingsWindow.ui" line="2212"/>
         <source>Keep add-on list up to date</source>
         <translation>ऐड-ऑन सूची को अद्यतन रखें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2245"/>
+        <location filename="Forms/SettingsWindow.ui" line="2269"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>इनसाइडर चैनल नई सुविधाओं और बगफिक्स तक शीघ्र पहुंच प्रदान करता है जो अंततः जनता के लिए जारी किए जाएंगे, साथ ही स्थिर चैनल से सभी प्रासंगिक सुधार भी होंगे। 
 पूर्वावलोकन चैनल के विपरीत, इसमें परीक्षण न किए गए, संभावित रूप से टूटने वाले, या प्रयोगात्मक परिवर्तन शामिल नहीं हैं जो व्यापक उपयोग के लिए तैयार नहीं हो सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2249"/>
+        <location filename="Forms/SettingsWindow.ui" line="2273"/>
         <source>Search in the Insider channel</source>
         <translation>इनसाइडर चैनल में खोजें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2279"/>
+        <location filename="Forms/SettingsWindow.ui" line="2303"/>
         <source>New full installers from the selected release channel.</source>
         <translation>चयनित रिलीज़ चैनल से नए पूर्ण इंस्टॉलर।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2282"/>
+        <location filename="Forms/SettingsWindow.ui" line="2306"/>
         <source>Full Upgrades</source>
         <translation>पूर्ण उन्नयन</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2292"/>
+        <location filename="Forms/SettingsWindow.ui" line="2316"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
         <translation>नए सैंडबॉक्सी-प्लस संस्करणों के लिए समय-समय पर जाँच करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2302"/>
+        <location filename="Forms/SettingsWindow.ui" line="2326"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider चैनल&lt;/a&gt; के बारे में अधिक जानकारी</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2322"/>
+        <location filename="Forms/SettingsWindow.ui" line="2346"/>
         <source>Keep Troubleshooting scripts up to date</source>
         <translation>समस्या निवारण स्क्रिप्ट को अद्यतित रखें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2516"/>
+        <location filename="Forms/SettingsWindow.ui" line="2540"/>
         <source>Default sandbox:</source>
         <translation>डिफ़ॉल्ट सैंडबॉक्स:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2586"/>
+        <location filename="Forms/SettingsWindow.ui" line="2610"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>अनाम टोकन के बजाय सैंडबॉक्सी लॉगिन का उपयोग करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2423"/>
+        <location filename="Forms/SettingsWindow.ui" line="2447"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
         <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
         <translation>सैंडबॉक्स वाले टोकन में &quot;सैंडबॉक्सी\ऑल सैंडबॉक्स&quot; समूह जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2552"/>
+        <location filename="Forms/SettingsWindow.ui" line="2576"/>
         <source>This feature protects the sandbox by restricting access, preventing other users from accessing the folder. Ensure the root folder path contains the %USER% macro so that each user gets a dedicated sandbox folder.</source>
         <translation>यह सुविधा अन्य उपयोगकर्ताओं को फ़ोल्डर तक पहुंचने से रोककर, पहुंच को प्रतिबंधित करके सैंडबॉक्स की सुरक्षा करती है। सुनिश्चित करें कि रूट फ़ोल्डर पथ में %USER% मैक्रो शामिल है ताकि प्रत्येक उपयोगकर्ता को एक समर्पित सैंडबॉक्स फ़ोल्डर मिल सके।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2555"/>
+        <location filename="Forms/SettingsWindow.ui" line="2579"/>
         <source>Restrict box root folder access to the the user whom created that sandbox</source>
         <translation>बॉक्स रूट फ़ोल्डर की पहुंच उस उपयोगकर्ता तक सीमित करें जिसने वह सैंडबॉक्स बनाया है</translation>
     </message>
@@ -11576,138 +11611,153 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>आखिरी बार इस्तेमाल किया गया बॉक्स याद रखें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="851"/>
+        <location filename="Forms/SettingsWindow.ui" line="827"/>
+        <source>Show search box in tray menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="858"/>
         <source>Show custom box icons in tray list</source>
         <translation>ट्रे सूची में कस्टम बॉक्स आइकन दिखाएं</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="858"/>
+        <location filename="Forms/SettingsWindow.ui" line="865"/>
         <source>Show overlay icons for boxes in tray list</source>
         <translation>ट्रे सूची में बक्सों के लिए ओवरले आइकन दिखाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="865"/>
+        <location filename="Forms/SettingsWindow.ui" line="872"/>
         <source>Show box alias name instead of box name in tray list</source>
         <translation>ट्रे सूची में बॉक्स नाम के बजाय बॉक्स उपनाम नाम दिखाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="872"/>
+        <location filename="Forms/SettingsWindow.ui" line="879"/>
         <source>Maximum displayed characters for compact tray aliases. Ignored when alias display is disabled (name limit is fixed to 32).</source>
         <translation>कॉम्पैक्ट ट्रे उपनामों के लिए अधिकतम प्रदर्शित वर्ण। उपनाम प्रदर्शन अक्षम होने पर अनदेखा किया जाता है (नाम सीमा 32 पर निर्धारित है)।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="891"/>
+        <location filename="Forms/SettingsWindow.ui" line="895"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while Ctrl is held (default), checked = always.</source>
         <translation>त्रि-स्थिति व्यवहार: अनचेक = कभी नहीं, आंशिक रूप से चेक किया गया = केवल Ctrl दबाए रखने पर (डिफ़ॉल्ट), चेक किया गया = हमेशा।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="894"/>
+        <location filename="Forms/SettingsWindow.ui" line="898"/>
         <source>Show sandbox status as tooltip in tray list</source>
         <translation>ट्रे सूची में टूलटिप के रूप में सैंडबॉक्स स्थिति दिखाएं</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1161"/>
+        <location filename="Forms/SettingsWindow.ui" line="1127"/>
+        <source>Controls whether display-only text uses the sandbox name, alias, or both. Compact views may show only the alias. Paths and internal sandbox identifiers always use the sandbox name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1165"/>
         <source>Highlight unapplied changes in Options and Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1230"/>
+        <location filename="Forms/SettingsWindow.ui" line="1234"/>
         <source>Group state on start</source>
         <translation>प्रारंभ में समूह स्थिति</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1466"/>
+        <location filename="Forms/SettingsWindow.ui" line="1241"/>
+        <source>Sandbox name display:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1490"/>
         <source>UI Font</source>
         <translation>यूआई फ़ॉन्ट</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1488"/>
+        <location filename="Forms/SettingsWindow.ui" line="1512"/>
         <source>Select Font</source>
         <translation>फ़ॉन्ट चुनें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1498"/>
+        <location filename="Forms/SettingsWindow.ui" line="1522"/>
         <source>Reset Font</source>
         <translation>फ़ॉन्ट रीसेट करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1526"/>
+        <location filename="Forms/SettingsWindow.ui" line="1550"/>
         <source>Window Options</source>
         <translation>विंडो विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1537"/>
+        <location filename="Forms/SettingsWindow.ui" line="1561"/>
         <source>Support Dialog:</source>
         <translation>समर्थन संवाद:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1550"/>
+        <location filename="Forms/SettingsWindow.ui" line="1574"/>
         <source>File Recovery:</source>
         <translation>फ़ाइल पुनर्प्राप्ति:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1563"/>
+        <location filename="Forms/SettingsWindow.ui" line="1587"/>
         <source>Fallback:</source>
         <translation>मैदान छोड़ना:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1608"/>
+        <location filename="Forms/SettingsWindow.ui" line="1632"/>
         <source>Non-main:</source>
         <translation>गैर-मुख्य:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1624"/>
+        <location filename="Forms/SettingsWindow.ui" line="1648"/>
         <source>Hint: Specific window settings override non-main settings. Fallback is used when the target monitor cannot be used; when disabled, each window falls back to its default current-monitor behavior.</source>
         <translation>संकेत: विशिष्ट विंडो सेटिंग्स गैर-मुख्य सेटिंग्स को ओवरराइड करती हैं। फ़ॉलबैक का उपयोग तब किया जाता है जब लक्ष्य मॉनिटर का उपयोग नहीं किया जा सकता है; अक्षम होने पर, प्रत्येक विंडो अपने डिफ़ॉल्ट वर्तमान-मॉनीटर व्यवहार पर वापस आ जाती है।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1646"/>
+        <location filename="Forms/SettingsWindow.ui" line="1670"/>
         <source>Window Locations</source>
         <translation>विंडो स्थान</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1653"/>
+        <location filename="Forms/SettingsWindow.ui" line="1677"/>
         <source>Notifications:</source>
         <translation>सूचनाएं:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1666"/>
+        <location filename="Forms/SettingsWindow.ui" line="1690"/>
         <source>Main:</source>
         <translation>मुख्य:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2648"/>
+        <location filename="Forms/SettingsWindow.ui" line="2672"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
         <translation>सैंडबॉक्सी के स्वयं के उन्नत यूएसी प्रॉम्प्ट का उपयोग करें (अनुशंसित)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2658"/>
+        <location filename="Forms/SettingsWindow.ui" line="2682"/>
         <source>Sandboxie.ini</source>
         <translation>Sandboxie.ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2691"/>
+        <location filename="Forms/SettingsWindow.ui" line="2715"/>
         <source>Add Portable Box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2721"/>
+        <location filename="Forms/SettingsWindow.ui" line="2745"/>
         <source>Remove Entry</source>
         <translation>प्रविष्टि हटाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2729"/>
+        <location filename="Forms/SettingsWindow.ui" line="2753"/>
         <source>Import Path</source>
         <translation>आयात पथ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2816"/>
+        <location filename="Forms/SettingsWindow.ui" line="2840"/>
         <source>Sandbox Configuration</source>
         <translation>सैंडबॉक्स कॉन्फ़िगरेशन</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2763"/>
+        <location filename="Forms/SettingsWindow.ui" line="2787"/>
         <source>Create Portable Box</source>
         <translation>पोर्टेबल बॉक्स बनाएं</translation>
     </message>
@@ -11716,89 +11766,89 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">पोर्टेबल बॉक्स आयात करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2705"/>
+        <location filename="Forms/SettingsWindow.ui" line="2729"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
         <translation>&lt;b&gt;Config सुरक्षा केवल Sandboxie.ini पोर्टेबल बॉक्स कॉन्फ़िगरेशन पर लागू होती है जो नीचे दिए गए तंत्र द्वारा संरक्षित नहीं है&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2664"/>
+        <location filename="Forms/SettingsWindow.ui" line="2688"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
         <translation>नीचे दी गई सूची में आप पोर्टेबल बॉक्स के कॉन्फ़िगरेशन इनिस में पथ जोड़ सकते हैं</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2789"/>
+        <location filename="Forms/SettingsWindow.ui" line="2813"/>
         <source>Add Portable Root</source>
         <translation>पोर्टेबल रूट जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2938"/>
+        <location filename="Forms/SettingsWindow.ui" line="2962"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
         <translation>जब किसी प्रक्रिया को सैंडबॉक्स में डाला गया हो तो संदेश 1321 जारी करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2948"/>
+        <location filename="Forms/SettingsWindow.ui" line="2972"/>
         <source>Force Process Options</source>
         <translation>बलपूर्वक प्रक्रिया विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2976"/>
+        <location filename="Forms/SettingsWindow.ui" line="3000"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2979"/>
+        <location filename="Forms/SettingsWindow.ui" line="3003"/>
         <source>Force programs opening boxed files into their sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2986"/>
+        <location filename="Forms/SettingsWindow.ui" line="3010"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
         <translation>वेब के चिह्न वाली फ़ाइलों को सैंडबॉक्स में बाध्य करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3006"/>
+        <location filename="Forms/SettingsWindow.ui" line="3030"/>
         <source>Sandbox for MoTW marked files</source>
         <translation>MoTW चिह्नित फ़ाइलों के लिए सैंडबॉक्स</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3025"/>
+        <location filename="Forms/SettingsWindow.ui" line="3049"/>
         <source>USB Drive Sandboxing</source>
         <translation>यूएसबी ड्राइव सैंडबॉक्सिंग</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3041"/>
+        <location filename="Forms/SettingsWindow.ui" line="3065"/>
         <source>Volume</source>
         <translation>आयतन</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3046"/>
+        <location filename="Forms/SettingsWindow.ui" line="3070"/>
         <source>Information</source>
         <translation>जानकारी</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3054"/>
+        <location filename="Forms/SettingsWindow.ui" line="3078"/>
         <source>Sandbox for USB drives:</source>
         <translation>यूएसबी ड्राइव के लिए सैंडबॉक्स:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3070"/>
+        <location filename="Forms/SettingsWindow.ui" line="3094"/>
         <source>Automatically sandbox all attached USB drives</source>
         <translation>सभी संलग्न USB ड्राइव को स्वचालित रूप से सैंडबॉक्स करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3127"/>
+        <location filename="Forms/SettingsWindow.ui" line="3151"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
         <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
         <translation>&lt;a href=&quot;sbie://templates&quot;&gt;संगतता टेम्प्लेट अभी अपडेट करें&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3183"/>
+        <location filename="Forms/SettingsWindow.ui" line="3207"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>भविष्य में, सॉफ़्टवेयर अनुकूलता की जाँच न करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3358"/>
+        <location filename="Forms/SettingsWindow.ui" line="3382"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
@@ -11833,7 +11883,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3406"/>
+        <location filename="Forms/SettingsWindow.ui" line="3430"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -11899,77 +11949,77 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3429"/>
+        <location filename="Forms/SettingsWindow.ui" line="3453"/>
         <source>Complete</source>
         <translation>पूरा</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3495"/>
+        <location filename="Forms/SettingsWindow.ui" line="3519"/>
         <source>Editor settings</source>
         <translation>संपादक सेटिंग</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3498"/>
+        <location filename="Forms/SettingsWindow.ui" line="3522"/>
         <source>⚙</source>
         <translation>⚙</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3376"/>
+        <location filename="Forms/SettingsWindow.ui" line="3400"/>
         <source>Tooltips</source>
         <translation>टूलटिप्स</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3479"/>
+        <location filename="Forms/SettingsWindow.ui" line="3503"/>
         <source>Validate</source>
         <translation>मान्य</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3163"/>
+        <location filename="Forms/SettingsWindow.ui" line="3187"/>
         <source>Enable</source>
         <translation>सक्षम</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3146"/>
+        <location filename="Forms/SettingsWindow.ui" line="3170"/>
         <source>Disable</source>
         <translation>अक्षम करना</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3153"/>
+        <location filename="Forms/SettingsWindow.ui" line="3177"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>सैंडबॉक्सी ने आपके सिस्टम में निम्नलिखित सॉफ़्टवेयर एप्लिकेशन का पता लगाया है। कॉन्फ़िगरेशन सेटिंग्स लागू करने के लिए ओके पर क्लिक करें, जिससे इन अनुप्रयोगों के साथ संगतता में सुधार होगा। ये कॉन्फ़िगरेशन सेटिंग्स सभी मौजूदा सैंडबॉक्स और किसी भी नए सैंडबॉक्स में प्रभावी होंगी।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3206"/>
+        <location filename="Forms/SettingsWindow.ui" line="3230"/>
         <source>Local Templates</source>
         <translation>स्थानीय टेम्पलेट</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3274"/>
+        <location filename="Forms/SettingsWindow.ui" line="3298"/>
         <source>Add Template</source>
         <translation>टेम्प्लेट जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3242"/>
+        <location filename="Forms/SettingsWindow.ui" line="3266"/>
         <source>Text Filter</source>
         <translation>पाठ फ़िल्टर</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3252"/>
+        <location filename="Forms/SettingsWindow.ui" line="3276"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation>इस सूची में सैंडबॉक्स विकल्पों के लिए उपयोगकर्ता द्वारा बनाए गए कस्टम टेम्पलेट शामिल हैं</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3287"/>
+        <location filename="Forms/SettingsWindow.ui" line="3311"/>
         <source>Open Template</source>
         <translation>टेम्प्लेट खोलें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3345"/>
+        <location filename="Forms/SettingsWindow.ui" line="3369"/>
         <source>Edit ini Section</source>
         <translation>आईएनआई अनुभाग संपादित करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3462"/>
+        <location filename="Forms/SettingsWindow.ui" line="3486"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
@@ -12015,58 +12065,58 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3442"/>
+        <location filename="Forms/SettingsWindow.ui" line="3466"/>
         <source>Save</source>
         <translation>बचाना</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3396"/>
+        <location filename="Forms/SettingsWindow.ui" line="3420"/>
         <source>Edit ini</source>
         <translation>ini संपादित करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3389"/>
+        <location filename="Forms/SettingsWindow.ui" line="3413"/>
         <source>Cancel</source>
         <translation>रद्द करना</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2225"/>
+        <location filename="Forms/SettingsWindow.ui" line="2249"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
         <translation>वृद्धिशील अद्यतन</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2222"/>
+        <location filename="Forms/SettingsWindow.ui" line="2246"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>स्थापित संस्करण के लिए हॉटपैच, Templates.ini के अपडेट और अनुवाद।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2235"/>
+        <location filename="Forms/SettingsWindow.ui" line="2259"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>पूर्वावलोकन चैनल में नवीनतम GitHub प्री-रिलीज़ शामिल हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2329"/>
+        <location filename="Forms/SettingsWindow.ui" line="2353"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>स्थिर चैनल में नवीनतम स्थिर GitHub रिलीज़ शामिल हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2332"/>
+        <location filename="Forms/SettingsWindow.ui" line="2356"/>
         <source>Search in the Stable channel</source>
         <translation>स्थिर चैनल में खोजें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2238"/>
+        <location filename="Forms/SettingsWindow.ui" line="2262"/>
         <source>Search in the Preview channel</source>
         <translation>पूर्वावलोकन चैनल में खोजें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1946"/>
+        <location filename="Forms/SettingsWindow.ui" line="1970"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
         <translation>भविष्य में प्रमाणपत्र की समाप्ति के बारे में सूचित न करें</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2088"/>
+        <location filename="Forms/SettingsWindow.ui" line="2112"/>
         <source>Enter the support certificate here</source>
         <translation>यहां समर्थन प्रमाणपत्र दर्ज करें</translation>
     </message>

@@ -436,12 +436,12 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="BoxTransfer.cpp" line="104"/>
         <source>Show sandbox aliases (reads archive configuration)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxaliase anzeigen (liest Archivkonfiguration)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="105"/>
         <source>Disabled by default because reading aliases requires opening and extracting configuration from every selected archive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardmäßig deaktiviert, da das Einlesen von Aliasen das Öffnen und Entpacken der Konfiguration aus jedem ausgewählten Archiv erfordert.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="112"/>
@@ -481,7 +481,7 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="BoxTransfer.cpp" line="376"/>
         <source>Sandbox name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxname: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="601"/>
@@ -2355,17 +2355,17 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Active snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiver Schnappschuss</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Default snapshot</source>
-        <translation type="unfinished">Standardschnappschuss</translation>
+        <translation>Standardschnappschuss</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Selects the snapshot restored by SandMan after automatic deletion. The active state may be the empty sandbox rather than a saved snapshot.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählt den Schnappschuss aus, der von SandMan nach der automatischen Löschung wiederhergestellt wird. Der aktive Zustand kann auch die leere Sandbox sein, anstatt ein gespeicherter Schnappschuss.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="89"/>
@@ -3685,7 +3685,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="5093"/>
         <source>Finishing Snapshot Merge...</source>
-        <translation>Beende Schnappschuss Zusammenführung...</translation>
+        <translation>Beende Schnappschusszusammenführung...</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="140"/>
@@ -4678,7 +4678,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandManTray.cpp" line="214"/>
         <source>Find sandbox...</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche Sandbox...</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="228"/>
@@ -4835,7 +4835,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandManRecovery.cpp" line="314"/>
         <source>Sandbox name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxname: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3864"/>
@@ -4945,7 +4945,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="4642"/>
         <source>Failed to create directory for new snapshot</source>
-        <translation>Konnte den Ordner für den neuen Schnappschuss (Snapshot) nicht erstellen</translation>
+        <translation>Konnte den Ordner für den neuen Schnappschuss nicht erstellen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="495"/>
@@ -5047,17 +5047,17 @@ Bitte überprüfen Sie, ob es ein Update für Sandboxie gibt.</translation>
     <message>
         <location filename="SandMan.cpp" line="4644"/>
         <source>Snapshot not found</source>
-        <translation>Schnappschuss (Snapshot) nicht gefunden</translation>
+        <translation>Schnappschuss nicht gefunden</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4645"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
-        <translation>Fehler beim Zusammenführen der Schnappschuss Ordner: &apos;%1&apos; mit &apos;%2&apos;, der Schnappschuss wurde nicht vollständig zusammengeführt.</translation>
+        <translation>Fehler beim Zusammenführen der Schnappschussordner: &apos;%1&apos; mit &apos;%2&apos;, der Schnappschuss wurde nicht vollständig zusammengeführt.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4646"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
-        <translation>Konnte alten Schnappschuss-Ordner &apos;%1&apos; nicht entfernen</translation>
+        <translation>Konnte alten Schnappschussordner &apos;%1&apos; nicht entfernen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4649"/>
@@ -5940,12 +5940,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Bewege Gruppe</translation>
     </message>
     <message>
-        <source>    Disk root: %1
-</source>
-        <translation type="vanished">    Diskquelle: %1
-</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="642"/>
         <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
 </source>
@@ -6116,12 +6110,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Diese Sandbox ist derzeit deaktiviert oder auf bestimmte Gruppen oder Benutzer beschränkt. Möchten Sie den Zugriff für alle erlauben?</translation>
     </message>
     <message>
-        <source>    File root: %1
-</source>
-        <translation type="vanished">    Dateiquelle: %1
-</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="178"/>
         <location filename="Views/SbieView.cpp" line="349"/>
         <source>Import Boxes</source>
@@ -6148,24 +6136,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="421"/>
         <source>Move Down</source>
         <translation>Nach unten verschieben</translation>
-    </message>
-    <message>
-        <source>    Registry root: %1
-</source>
-        <translation type="vanished">    Registry-Quelle: %1
-</translation>
-    </message>
-    <message>
-        <source>    IPC root: %1
-</source>
-        <translation type="vanished">    IPC-Quelle: %1
-</translation>
-    </message>
-    <message>
-        <source>Options:
-    </source>
-        <translation type="vanished">Optionen:
-    </translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="945"/>
@@ -6471,17 +6441,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="349"/>
         <source>Sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxname</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="350"/>
         <source>Sandbox alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxalias</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="351"/>
         <source>Sandbox alias and name</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxalias und -name</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="354"/>
@@ -7909,12 +7879,12 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Views/TraceView.cpp" line="342"/>
         <source>Resume Auto Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatischer Bildlauf fortsetzen</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="343"/>
         <source>Auto scrolling is paused. Click to resume.</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatischer Bildlauf wurde angehalten. Klicken zum Fortsetzen.</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="369"/>
@@ -8856,7 +8826,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5298"/>
         <source>Obfuscate known unique identifiers in the registry</source>
-        <translation>Verschleiere bekannte eindeutige Identifikationsnummern in der Registry</translation>
+        <translation>Verschleiere bekannte eindeutige Identifikatoren in der Registry</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="651"/>
@@ -9238,17 +9208,17 @@ Dies wird gemacht, um bösartige Prozesse innerhalb der Sandbox daran zu hindern
     <message>
         <location filename="Forms/OptionsWindow.ui" line="407"/>
         <source>After automatic deletion, restore from snapshot:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach automatischer Löschung folgenden Schnappschuss wiederherstellen:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="432"/>
         <source>Open Snapshot Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffne Schnappschussmanager</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="435"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1489"/>
@@ -11526,7 +11496,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="827"/>
         <source>Show search box in tray menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Suchfeld im Traymenü</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="858"/>
@@ -11561,7 +11531,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1127"/>
         <source>Controls whether display-only text uses the sandbox name, alias, or both. Compact views may show only the alias. Paths and internal sandbox identifiers always use the sandbox name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Steuert, ob angezeigter Text den Sandboxnamen, den Alias oder beides verwendet. In kompakten Ansichten wird möglicherweise nur der Alias angezeigt. Pfade und interne Sandboxidentifikatoren verwenden immer den Sandboxnamen.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1165"/>
@@ -11576,7 +11546,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1241"/>
         <source>Sandbox name display:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeige des Sandboxnamens:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1490"/>
@@ -11934,7 +11904,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="176"/>
         <source>Refresh View</source>
-        <translation type="unfinished">Ansicht aktualisieren</translation>
+        <translation>Ansicht aktualisieren</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="195"/>

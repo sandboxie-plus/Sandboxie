@@ -3440,6 +3440,76 @@ void CSandMan::OnMessageLogDblClick(QTreeWidgetItem* pItem, int Column)
 QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData, QString ProcessName, QString* pLink)
 {
 	QString Message;
+	const quint32 MessageId = MsgCode & 0xFFFF;
+
+	auto ResolveBoxDisplayName = [this](const QString& BoxName, QString& DisplayName) {
+		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+		if (!pBox)
+			return false;
+
+		DisplayName = GetBoxDisplayName(pBox);
+		return true;
+	};
+
+	const QStringList NoSuffix = QStringList() << "";
+	const QStringList ImageSuffix = QStringList() << "" << " *";
+	const QStringList ServiceSuffix = QStringList() << " (NtLoadDriver)" << " (StartService)";
+
+	auto FormatBracketedBox = [&](const QString& Value, const QStringList& AllowedSuffixes) {
+		const int OpenBracket = Value.lastIndexOf(" [");
+		if (OpenBracket <= 0)
+			return Value;
+
+		const int CloseBracket = Value.indexOf(']', OpenBracket + 2);
+		if (CloseBracket < 0)
+			return Value;
+
+		const QString Suffix = Value.mid(CloseBracket + 1);
+		if (!AllowedSuffixes.contains(Suffix))
+			return Value;
+
+		const QString BoxName = Value.mid(OpenBracket + 2, CloseBracket - OpenBracket - 2);
+		QString DisplayName;
+		if (!ResolveBoxDisplayName(BoxName, DisplayName))
+			return Value;
+
+		return Value.left(OpenBracket + 2) + DisplayName + Value.mid(CloseBracket);
+	};
+
+	auto FormatBracketedBoxWithValue = [&](const QString& Value) {
+		const int OpenBracket = Value.lastIndexOf(" [");
+		if (OpenBracket <= 0)
+			return Value;
+
+		const int ValueSeparator = Value.indexOf(" /", OpenBracket + 2);
+		if (ValueSeparator <= OpenBracket + 2)
+			return Value;
+
+		const int CloseBracket = Value.indexOf(']', ValueSeparator + 2);
+		if (CloseBracket < 0 || !Value.mid(CloseBracket + 1).isEmpty())
+			return Value;
+
+		const QString BoxName = Value.mid(OpenBracket + 2, ValueSeparator - OpenBracket - 2);
+		QString DisplayName;
+		if (!ResolveBoxDisplayName(BoxName, DisplayName))
+			return Value;
+
+		return Value.left(OpenBracket + 2) + DisplayName + Value.mid(ValueSeparator);
+	};
+
+	auto FormatLeadingBox = [&](const QString& Value, const QString& Separator) {
+		const int SeparatorPos = Value.indexOf(Separator);
+		if (SeparatorPos <= 0)
+			return Value;
+
+		const QString BoxName = Value.left(SeparatorPos);
+		QString DisplayName;
+		if (!ResolveBoxDisplayName(BoxName, DisplayName))
+			return Value;
+
+		return DisplayName + Value.mid(SeparatorPos);
+	};
+
 	if (MsgCode != 0) {
 		Message = theAPI->GetSbieMsgStr(MsgCode, m_LanguageId);
 		if (pLink) {
@@ -3452,7 +3522,42 @@ QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData,
 		Message = MsgData[0];
 
 	for (int i = 1; i < MsgData.size(); i++) {
-		Message = Message.arg(GetBoxDisplayName(MsgData[i]));
+		QString Value = MsgData[i];
+		if (i == 1) {
+			// These messages embed BoxName in their first formatted argument.
+			switch (MessageId) {
+			case 1307:
+			case 1308:
+			case 1313:
+				Value = FormatBracketedBox(Value, ImageSuffix);
+				break;
+			case 2102:
+			case 2113:
+			case 2114:
+			case 2115:
+				Value = FormatBracketedBoxWithValue(Value);
+				break;
+			case 2103:
+				Value = FormatBracketedBox(Value, ServiceSuffix);
+				break;
+			case 2104:
+			case 2219:
+			case 2224:
+				Value = FormatBracketedBox(Value, NoSuffix);
+				break;
+			case 2227:
+				Value = FormatLeadingBox(Value, " (");
+				break;
+			case 2230:
+				Value = FormatLeadingBox(Value, " [");
+				break;
+			default:
+				break;
+			}
+		}
+		if (Value == MsgData[i])
+			Value = GetBoxDisplayName(Value);
+		Message = Message.arg(Value);
 	}
 
 	if (ProcessName != "System") // if it's not from the driver, add the pid

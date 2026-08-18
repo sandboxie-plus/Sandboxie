@@ -4,16 +4,52 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.18.2 / 5.73.2] - 2026-08-16
 
-## [1.18.1 / 5.73.1] - 2026-07-??
+### Added
+- added outside sandboxed-window border modes (`onoutside`, `ttloutside`, and `alloutside`) in SandMan; these draw the configured border outside the application frame, while the new `BorderInsideMaximized=y` setting (enabled by default) moves the border and label inside maximized or snapped windows so they remain visible
+- added persistence for manually expanded and collapsed SandMan process-tree branches across task-list refreshes and UI restarts [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
+- added global `BoxAliasDisplayMode` controls for display-only sandbox names across SandMan, Start.exe, window titles, borders, tooltips, recovery logs, and messages, while preserving the real box name for paths and operations; Import Sandboxes can optionally read archived aliases [#5521](https://github.com/sandboxie-plus/Sandboxie/issues/5521)
+- added an optional literal search box to compact and non-compact SandMan tray menus for filtering sandboxes and groups
+- added a SandMan setting to restore either the active or default snapshot after automatic deletion, consistently across synchronous and asynchronous cleanup, with Snapshot Manager access and refresh controls
 
 ### Changed
-- updated Chromium_Elevation template now using specifig 'RunServiceAsSystem=...' instead of 'RunServicesAsSystem=y' and added more service names
+- changed SandMan's Auto Expand Tree to preserve explicit group, sandbox, and process expansion choices while using the toggle as the default for items without saved state; Find bar Expand All and Collapse All remain one-time actions, and `Options/LegacyAutoExpandTree=true` retains the previous behavior [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
+- validated compatibility with Windows build 29634 and updated DynData
+- changed SandMan Trace Log auto scrolling overriding manual scrolling; it now pauses away from the bottom and provides an in-list resume button
+
+### Fixed
+- fixed SandMan File Panel column widths resetting when switching between boxes [#5473](https://github.com/sandboxie-plus/Sandboxie/issues/5473)
+- fixed a bug that could cause the list of open handles to be reported incorrectly [#5502](https://github.com/sandboxie-plus/Sandboxie/pull/5502) (thanks NSShannon)
+- fixed SandMan File Panel and Browse Files blocking Recycle Bin deletion of expanded folder trees, made file-name sorting case-insensitive, and made folders sort before files [#5499](https://github.com/sandboxie-plus/Sandboxie/issues/5499)
+- fixed SandMan Box Groups collapsing during refreshes, restarts, and sandbox moves despite remembered group state [#5477](https://github.com/sandboxie-plus/Sandboxie/issues/5477)
+- fixed driver incompatibility with latest Windows Insider build
+- fixed SandMan File Panel treating registry hive log files such as `RegHive.LOG1` and `RegHive.LOG2` as descendants of `RegHive` because of their shared filename prefix, causing them to be omitted when deleting the selection together [#4788](https://github.com/sandboxie-plus/Sandboxie/issues/4788)
+- fixed `BoxNameTitle` prefix buffer sizing for long sandbox aliases and combined alias/name titles
+- fixed incorrect character and byte buffer-size handling in Start Menu shortcut data, window class-name queries, configuration reads, and SandMan driver-log retrieval [#5518](https://github.com/sandboxie-plus/Sandboxie/pull/5518)
+- fixed Start Menu shortcut icon-path IPC buffer handling [#5517](https://github.com/sandboxie-plus/Sandboxie/pull/5517)
+- fixed ApiTrace stack exhaustion on Cygwin and other alternate stacks by replacing callback-side formatting with a compact synchronous logging path, preserving legacy ordering and stack capture
+- improved early stack symbol loading by retrying unresolved addresses after process discovery and refreshing the DbgHelp module list when needed
+- fixed SandMan offering to install the DbgHelp add-on when enabling stack traces even though the add-on was already installed
+- fixed ConfidentialBox=y could trap the user on a black screen when trying to elevate a process.
+
+
+
+## [1.18.1 / 5.73.1] - 2026-07-26
+
+### Added
+- added `CopyNewer` file migration rules to refresh an existing sandbox copy from a newer host file, with SandMan rule editing support; it only applies to matching existing regular boxed files on normal opens, intentionally replacing their contents only when the host file has a newer last-write time
+  - it does not apply to initial migration, directories, write-only paths, deleted files, or create/overwrite operations
+- added option to use GUIDs as box name [5485](https://github.com/sandboxie-plus/Sandboxie/pull/5485)
+
+### Changed
+- updated Chromium_Elevation template now using specific 'RunServiceAsSystem=...' instead of 'RunServicesAsSystem=y' and added more service names
+- improved SandMan INI setting validation and auto-completion with disabled-setting aliases, localized descriptions, context-aware warnings, and template-specific metadata and tooltips
 
 ### Fixed
 - fixed incremental update mechanism fails to copy new files
 - fixed 'RunServiceAsSystem=...' conflicts with 'UseSecurityMode=y'
-- fixed 'cryptsvc' failing with 'RunServicesAsSystem=y'
+- fixed 'CryptSvc' failing with 'RunServicesAsSystem=y'
 - fixed SOCKS5 proxy password authentication failures caused by unsafe encrypted credential decoding, invalid credential length handling, locale-dependent encoding, and partial socket sends
 
 
@@ -81,7 +117,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - extended completion system with context-aware filtering, improved INI key resolution, regex updates, and tooltip placement enhancements [6db2a04](https://github.com/sandboxie-plus/Sandboxie/commit/6db2a04f805b49a049b309212bfa8e3a8497ad99)
 
 ### Fixed
-- fixed crash witch sandboxed VMware caused by NtQueryDirectoryObject hook returning non-null-terminated strings and uninitialised padding bytes in OBJECT_DIRECTORY_INFORMATION structures, which caused QueryDosDeviceW to crash in wcscmp [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
+- fixed crash which sandboxed VMware caused by NtQueryDirectoryObject hook returning non-null-terminated strings and uninitialised padding bytes in OBJECT_DIRECTORY_INFORMATION structures, which caused QueryDosDeviceW to crash in wcscmp [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
 - added short-name fallback cache and heuristics [#5404](https://github.com/sandboxie-plus/Sandboxie/pull/5404)
 - fixed add-on setup not working, introduced in a recent build
 - fixed bug causing Powershell to wait infinitely only in Sandboxes with Data Protection, starting with version 1.17.4 [#5408](https://github.com/sandboxie-plus/Sandboxie/issues/5408)

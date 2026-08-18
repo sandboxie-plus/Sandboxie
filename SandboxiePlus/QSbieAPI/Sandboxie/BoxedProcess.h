@@ -65,8 +65,11 @@ public:
 	virtual void			ResolveSymbols(const QVector<quint64>& Addresses);
 	virtual QString			GetSymbol(quint64 Address) { return m_Symbols.value(Address).Name; }
 
+signals:
+	void					SymbolChanged(quint64 Address);
+
 public slots:
-	virtual void			OnSymbol(quint64 Address, const QString& Name) { m_Symbols[Address].Name = Name; }
+	virtual void			OnSymbol(quint64 Address, const QString& Name);
 
 protected:
 	friend class CSbieAPI;

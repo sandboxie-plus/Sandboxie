@@ -45,6 +45,9 @@
 
 extern void Show_Error(WCHAR *Descr);
 
+extern const WCHAR* GetBoxDisplayName(const WCHAR* boxName, WCHAR* buffer,
+    SIZE_T bufferChars, BOOL compact);
+
 extern void DeleteSandbox(
     const WCHAR *BoxName, BOOL bLogoff, BOOL bSilent, int phase);
 
@@ -278,15 +281,19 @@ void Error(const WCHAR *Descr, NTSTATUS Status)
     if (! g_Silent) {
 
         WCHAR text[512];
-        wcscpy(text, SbieDll_FormatMessage1(MSG_3214, g_BoxName));
-        wcscat(text, Descr);
+        WCHAR boxdisplay[MAX_PATH + BOXNAME_COUNT + 4];
+        WCHAR* prefix = SbieDll_FormatMessage1(MSG_3214,
+            GetBoxDisplayName(g_BoxName, boxdisplay, ARRAYSIZE(boxdisplay), FALSE));
+        wcsncpy_s(text, ARRAYSIZE(text), prefix, _TRUNCATE);
+        LocalFree(prefix);
+        wcsncat_s(text, ARRAYSIZE(text), Descr, _TRUNCATE);
         if (Status) {
             if (Status == STATUS_ACCESS_DENIED ||
                 Status == STATUS_SHARING_VIOLATION)
             {
-                wcscat(text, L"\n\n");
-                wcscat(text,
-                    SbieDll_FormatMessage0(MSG_3215));
+                wcsncat_s(text, ARRAYSIZE(text), L"\n\n", _TRUNCATE);
+                wcsncat_s(text, ARRAYSIZE(text),
+                    SbieDll_FormatMessage0(MSG_3215), _TRUNCATE);
             }
             SetLastError(RtlNtStatusToDosError(Status));
         }

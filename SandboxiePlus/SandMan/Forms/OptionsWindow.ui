@@ -370,6 +370,16 @@
                  </property>
                 </widget>
                </item>
+               <item row="1" column="10" colspan="3">
+                <widget class="QCheckBox" name="chkBorderInsideMaximized">
+                 <property name="toolTip">
+                  <string>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</string>
+                 </property>
+                 <property name="text">
+                  <string>Inside when maximized or snapped</string>
+                 </property>
+                </widget>
+               </item>
                <item row="8" column="3" colspan="6">
                 <widget class="QComboBox" name="cmbBoxType"/>
                </item>
@@ -501,14 +511,20 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="5">
+               <item row="5" column="3">
                 <widget class="QToolButton" name="btnPassword">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
                   <string>Set Password</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1" colspan="4">
+               <item row="5" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkEncrypt">
                  <property name="text">
                   <string>Encrypt sandbox content</string>
@@ -4422,11 +4438,11 @@ The process match level has a higher priority than the specificity and describes
                </item>
                <item row="7" column="0" colspan="2">
                 <widget class="QCheckBox" name="chkUseIgnoreForQuick">
-                 <property name="text">
-                  <string>Use the above exclusion list to hide matching files from the Quick Recovery window</string>
-                 </property>
                  <property name="toolTip">
                   <string>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use the above exclusion list to hide matching files from the Quick Recovery window</string>
                  </property>
                  <property name="checked">
                   <bool>true</bool>
@@ -6336,6 +6352,7 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>tabs</tabstop>
   <tabstop>tabsGeneral</tabstop>
   <tabstop>cmbBoxIndicator</tabstop>
+  <tabstop>chkBorderInsideMaximized</tabstop>
   <tabstop>cmbBoxBorder</tabstop>
   <tabstop>chkShowForRun</tabstop>
   <tabstop>chkPinToTray</tabstop>

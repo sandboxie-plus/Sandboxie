@@ -12,8 +12,8 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Albanian|Yes|No|No|No|
 |Arabic|Yes|Yes - Nov 21, 2024|No|No|
 |Bulgarian|Yes|No|No|No|
-|Chinese Simplified|Yes - Nov 22, 2024|Yes - Jul 14, 2026|Yes - Jul 15, 2026|Yes - 2025|
-|Chinese Traditional|Yes - Sep 21, 2022|Yes - Feb 7, 2025|Yes - Jul 15, 2026|Yes - 2024|
+|Chinese Simplified|Yes - Nov 22, 2024|Yes - Aug 13, 2026|Yes - Aug 13, 2026|Yes - 2025|
+|Chinese Traditional|Yes - Aug 13, 2026|Yes - Aug 13, 2026|Yes - Aug 13, 2026|Yes - Aug 13, 2026|
 |Croatian|Yes|No|No|No|
 |Czech|Yes|No|No|No|
 |Danish|Yes|No|No|No|
@@ -23,7 +23,7 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Farsi|Yes|No|No|No|
 |Finnish|Yes|No|No|No|
 |French|Yes - Dec 19, 2024|Yes - Dec 19, 2024|Yes - Jul 15, 2026|Yes - 2024|
-|German|Yes - Apr 13, 2026|Yes - Jul 22, 2026|Yes - Jul 15, 2026|Yes - Mar 13, 2025|
+|German|Yes - Apr 13, 2026|Yes - Aug 17, 2026|Yes - Jul 15, 2026|Yes - Mar 13, 2025|
 |Greek|Yes|No|No|No|
 |Hebrew|Yes|No|No|No|
 |Hindi|No|Yes - Apr 2, 2026|Yes - Jul 15, 2026|Yes - Apr 2, 2026|
@@ -37,10 +37,10 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Polish|Yes|Yes - Apr 16, 2025|Yes - Jul 15, 2026|Yes - Apr 16, 2025|
 |Portuguese|Yes|Yes - Feb 2, 2025|Yes - Jul 15, 2026|Yes - 2024|
 |PortugueseBr|Yes - Feb 14, 2023|Yes - Feb 3, 2025|Yes - Jul 15, 2026|Yes - 2024|
-|Russian|Yes - Aug 26, 2024|Yes - Aug 26, 2024|Yes - Jul 15, 2026|Yes - 2024|
+|Russian|Yes - Aug 1, 2026|Yes - Aug 1, 2026|Yes - Aug 1, 2026|Yes - Aug 1, 2026|
 |Slovak|Yes|No|No|No|
 |Spanish|Yes|Yes - Jan 18, 2025|Yes - Jul 15, 2026|Yes - 2024|
 |Swedish|Yes - Aug 10, 2022|Yes - Apr 25, 2024|Yes - Jul 15, 2026|Yes - Mar 30, 2025|
 |Turkish|Yes - Apr 12, 2026|Yes - Jul 13, 2026|Yes - Jul 15, 2026|Yes - Apr 16, 2025|
-|Ukrainian|Yes - Jul 26, 2022|Yes - Jul 26, 2022|Yes - Jul 15, 2026|Yes - 2024|
+|Ukrainian|Yes - Aug 1, 2026|Yes - Aug 1, 2026|Yes - Aug 1, 2026|Yes - Aug 1, 2026|
 |Vietnamese|No|Yes - Nov 7, 2022|Yes - Jul 15, 2026|Yes - 2024|

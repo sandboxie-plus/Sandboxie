@@ -37,6 +37,7 @@ on:
       - '**/INSTALL*'
       - '**/AUTHORS'
       - '**/COPYING'
+
   pull_request:
     branches: [master, experimental]
     paths-ignore:
@@ -141,8 +142,20 @@ jobs:
       - name: Install Qt6 x64
         run: SandboxiePlus\install_qt.cmd x64
 
+      # Jom cache restore (and post-job save on miss)
+      - name: Cache jom archive
+        id: cache-jom
+        uses: actions/cache@v6.1.0
+        with:
+          path: jom_1_1_4.zip
+          key: jom-1.1.4-${{ runner.os }}
+          restore-keys: |
+            jom-1.1.4-
+            jom-
+          fail-on-cache-miss: false
+
       - name: Installing Jom
-      #  if: steps.cache-qt.outputs.cache-hit != 'true'
+        shell: cmd
         run: SandboxiePlus\install_jom.cmd
 
     #
@@ -203,8 +216,6 @@ jobs:
           retention-days: 60
 
 
-
-
   Build_ARM64_Qt6:
     runs-on: windows-2022
     timeout-minutes: 45
@@ -252,7 +263,7 @@ jobs:
           version: '${{ env.qt6_version }}'
       #    dir: ..
       #    arch:  ${{ matrix.qt-target }}
-          arch:  'win64_msvc2022_64'
+          arch: 'win64_msvc2022_64'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
           tools: 'tools_opensslv3_x64'
           cache: true
@@ -264,13 +275,25 @@ jobs:
           version: '${{ env.qt6_version }}'
       #    dir: ..
       #    arch:  ${{ matrix.qt-target }}
-          arch:  'win64_msvc2022_arm64_cross_compiled'
+          arch: 'win64_msvc2022_arm64_cross_compiled'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
           tools: 'tools_opensslv3_x64'
           cache: true
 
+      # Jom cache restore (and post-job save on miss)
+      - name: Cache jom archive
+        id: cache-jom
+        uses: actions/cache@v6.1.0
+        with:
+          path: jom_1_1_4.zip
+          key: jom-1.1.4-${{ runner.os }}
+          restore-keys: |
+            jom-1.1.4-
+            jom-
+          fail-on-cache-miss: false
+
       - name: Installing Jom
-      #  if: steps.cache-qt.outputs.cache-hit != 'true'
+        shell: cmd
         run: SandboxiePlus\install_jom.cmd
 
     #

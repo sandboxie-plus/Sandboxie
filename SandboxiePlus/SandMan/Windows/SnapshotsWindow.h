@@ -12,6 +12,7 @@ class CSnapshotsWindow : public QDialog
 public:
 	CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent = Q_NULLPTR);
 	~CSnapshotsWindow();
+	void Refresh();
 
 	virtual void accept() {}
 	virtual void reject() { this->close(); }

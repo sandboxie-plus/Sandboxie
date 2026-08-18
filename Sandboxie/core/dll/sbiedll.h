@@ -49,6 +49,7 @@ extern "C" {
 #define ENV_VAR_PFX            L"00000000_" SBIE L"_"
 #define DATA_SLOTS 5
 #define SESSION_PROCESS L"SboxSession"
+#define SBIE_DLL_HANDLE_PATH_BUFFER_BYTES 8192
 
 typedef struct _PROCESS_DATA {
     ULONG tid;
@@ -187,7 +188,7 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_IsDirectory(const WCHAR *PathW);
 SBIEDLL_EXPORT  void *SbieDll_InitPStore(void);
 
 SBIEDLL_EXPORT  ULONG SbieDll_GetHandlePath(
-    HANDLE FileHandle, WCHAR *OutWchar8192, BOOLEAN *IsBoxedPath);
+    HANDLE FileHandle, WCHAR *OutPath, BOOLEAN *IsBoxedPath);
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_RunFromHome(
     const WCHAR *pgmName, const WCHAR *pgmArgs,

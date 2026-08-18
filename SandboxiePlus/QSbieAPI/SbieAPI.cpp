@@ -67,6 +67,7 @@ struct SSbieAPI
 		traceBufferLen = 0;
 
 		SbieMsgDll = NULL;
+		ProcessListInitialized = false;
 
 		SvcLock = 0;
 	}
@@ -102,6 +103,7 @@ struct SSbieAPI
 	ULONG traceBufferLen;
 
 	HMODULE SbieMsgDll;
+	bool ProcessListInitialized;
 
 	mutable volatile LONG   SvcLock;
 	mutable MSG_HEADER*		SvcReq;
@@ -413,6 +415,7 @@ SB_STATUS CSbieAPI::Disconnect()
 
 	m_SandBoxes.clear();
 	m_BoxedProxesses.clear();
+	m->ProcessListInitialized = false;
 	m_bBoxesDirty = true;
 
 	emit StatusChanged();
@@ -1582,7 +1585,13 @@ SB_STATUS CSbieAPI::UpdateProcesses(int iKeep, bool bAllSessions)
 	}
 
 	delete[] boxed_pids;
+	m->ProcessListInitialized = true;
 	return SB_OK;
+}
+
+bool CSbieAPI::IsProcessListInitialized() const
+{
+	return m->ProcessListInitialized;
 }
 
 bool CSbieAPI::HasProcesses(const QString& BoxName)
@@ -2465,14 +2474,17 @@ bool CSbieAPI::TestSignature(const QByteArray& Data, const QByteArray& Signature
 
 bool CSbieAPI::GetLog()
 {
-	wchar_t* Buffer[4*1024];
-	ULONG Length = ARRAYSIZE(Buffer);
+	WCHAR Buffer[4 * 1024];
 
 	ULONG MsgCode = 0;
 	ULONG ProcessId = 0;
 	ULONG MessageNum = m->lastMessageNum;
 
-	__declspec(align(8)) UNICODE_STRING64 msgtext = { 0, (USHORT)Length, (ULONG64)Buffer };
+	__declspec(align(8)) UNICODE_STRING64 msgtext = {
+		0,
+		(USHORT)sizeof(Buffer),
+		(ULONG64)(ULONG_PTR)Buffer
+	};
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 	API_GET_MESSAGE_ARGS *args = (API_GET_MESSAGE_ARGS*)parms;
 

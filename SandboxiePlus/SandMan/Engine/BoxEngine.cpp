@@ -470,7 +470,7 @@ void CWizardEngine::OpenOptions(const QString& box, const QString& page)
         return;
     }
     
-    COptionsWindow* pOptionsWnd = new COptionsWindow(pBox, pBox->GetName());
+    COptionsWindow* pOptionsWnd = new COptionsWindow(pBox, CSandMan::GetBoxDisplayName(pBox));
 	connect(pOptionsWnd, &COptionsWindow::Closed, this, [=]() {
 		Continue(false);
 	});

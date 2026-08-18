@@ -10,7 +10,7 @@
 
 |      系统要求      |      发布说明      |     贡献指南      |      安全政策      |      行为准则       |
 |        :---:       |          :---:     |          :---:    |          :---:      |          :---:       |
-| Windows 7 或更高版本 (64位) | [CHANGELOG_zh_CN.md](./CHANGELOG_zh_CN.md) | [CONTRIBUTING.md](./CONTRIBUTING.md) | [SECURITY.md](./SECURITY.md) | [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) |
+| Windows 7 或更高版本 (64位) | [CHANGELOG_zh_CN.md](./CHANGELOG_zh_CN.md) | [CONTRIBUTING_zh_CN.md](./CONTRIBUTING_zh_CN.md) | [SECURITY.md](./SECURITY.md) | [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) |
 
 Sandboxie 是一种基于沙盒的隔离软件，适用于 Windows NT 操作系统。它创建了一个类似沙盒的隔离操作环境，在该环境中，可以运行或安装应用程序，而不对本地和映射驱动器及 Windows 注册表进行永久性修改。隔离的虚拟环境可以控制不受信任程序的测试和网络浏览。<br>
 
@@ -117,7 +117,7 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 
 ## 🤝 支持该项目
 
-如果您发现 Sandboxie 有用，请随时通过我们的 [贡献指南](./CONTRIBUTING.md) 进行贡献。
+如果您发现 Sandboxie 有用，请随时通过我们的 [贡献指南](./CONTRIBUTING_zh_CN.md) 进行贡献。
 
 ## 📑 感谢贡献者
 
@@ -186,7 +186,7 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 - SuperMaxusa、lufog、Nazar1ky - 乌克兰语
 - GunGunGun - 越南语
 
-所有译者在提交翻译前，建议先查看[本地化说明和提示](https://git.io/J9G19)。
+所有译者在提交翻译前，建议先查看[本地化说明和提示](https://github.com/sandboxie-plus/Sandboxie/discussions/1123)。
 
 ## 📚 文档翻译人员
 

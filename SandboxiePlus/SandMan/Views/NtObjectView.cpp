@@ -210,7 +210,7 @@ CNtObjectBrowserWindow::CNtObjectBrowserWindow(const CSandBoxPtr& pBox, QWidget 
     m_FileView->SetBox(pBox);
     m_pMainLayout->addWidget(m_FileView, 0, 0);
 
-	this->setWindowTitle(tr("%1 - NT Object Namespace").arg(pBox->GetName()));
+	this->setWindowTitle(tr("%1 - NT Object Namespace").arg(CSandMan::GetBoxDisplayName(pBox)));
 
 	
 	//statusBar();

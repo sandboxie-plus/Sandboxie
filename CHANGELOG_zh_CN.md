@@ -4,24 +4,73 @@
 
 
 
-
-
-
-## [1.17.10 / 5.72.10] - 2026-07-04
+## [1.18.2 / 5.73.2] - 2026-08-??
 
 ### 新增
-- 为 `RecoverFolder` 和 `AutoRecoverIgnore` 模式（`*`, `?`, `**`）添加了通配符支持，可在 DLL 和 SandMan 中跨 NT、DOS 和网络别名路径形式进行匹配 [#3761](https://github.com/sandboxie-plus/Sandboxie/issues/3761) [#5318](https://github.com/sandboxie-plus/Sandboxie/issues/5318)
-- 添加了 `UseAutoRecoverIgnoreForQuick=[y|n]`，用于将 `AutoRecoverIgnore` 模式应用于快速恢复窗口（默认：启用） [#5278](https://github.com/sandboxie-plus/Sandboxie/issues/5278)
+- 在沙盘管理器中新增了沙箱外窗口边框模式（`onoutside`、`ttloutside` 和 `alloutside`）；这些模式可将配置的边框绘制在应用程序框架之外，同时新增的 `BorderInsideMaximized=y` 设置（默认启用）可将边框和标签移至最大化或贴靠窗口的内部，使其保持可见
+- 为沙盘管理器进程树的手动展开和折叠状态增加了持久化功能，可在任务列表刷新和 UI 重启后保持不变 [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
 
 ### 变更
-- 更改了 SandMan 的自动删除恢复逻辑：重新使用已打开的恢复对话框作为删除确认对话框（无论过滤状态如何），而不是关闭它或静默继续执行沙盒删除
+- 修改了沙盘管理器的自动展开树功能，使其在展开沙箱组、沙箱和进程分支时，不会覆盖已保存的手动展开状态；如需恢复原有的全部展开/全部折叠行为，可将沙盘管理器 UI 配置选项 `Options/LegacyAutoExpandTree=true` [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
+- 验证了与 Windows 内部版本 29634 的兼容性，并更新了 DynData
 
 ### 修复
-- 修复了预期非用户 SID 配置文件和外壳查找噪音问题，通过抑制匹配的 SBIE1406/SBIE1412 及派生的 SBIE1204 FileRootPath 消息来实现 [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
-- 修复了在弹出通知中显示 NT 设备路径（`\Device\LanmanRedirector\...`）而非 UNC 格式的问题，该问题会导致显示乱码和错误的恢复目标 [#711](https://github.com/sandboxie-plus/Sandboxie/issues/711)
-- 修复了在没有进程运行时点击“关闭直到所有程序停止”会永久暂停恢复的问题
-- 修复了当新文件事件路径和扫描的恢复路径仅大小写不同（例如 `downloads` 和 `Downloads`）时，SandMan 即时恢复闪烁但不显示恢复窗口的问题
-- 在 Sbie 消息和通知大量涌入期间，通过批量更新 UI 和减少昂贵的逐行渲染，提高了 SandMan 的响应速度
+- 修复了在沙箱间切换时，沙盘管理器文件面板列宽被重置的问题 [#5473](https://github.com/sandboxie-plus/Sandboxie/issues/5473)
+- 修复了一个可能导致已打开句柄列表报告错误的问题 [#5502](https://github.com/sandboxie-plus/Sandboxie/pull/5502)（感谢 NSShannon）
+- 修复了沙盘管理器文件面板和浏览文件功能阻止回收站删除已展开文件夹树的问题，使文件名排序不区分大小写，并让文件夹排在文件之前 [#5499](https://github.com/sandboxie-plus/Sandboxie/issues/5499)
+- 修复了尽管已记住组状态，沙盘管理器沙箱组在刷新、重启和沙箱移动过程中仍会折叠的问题 [#5477](https://github.com/sandboxie-plus/Sandboxie/issues/5477)
+- 修复了驱动程序与最新 Windows Insider 版本的不兼容问题
+- 修复了沙盘管理器文件面板将注册表日志文件（如 `RegHive.LOG1` 和 `RegHive.LOG2`）误视为 `RegHive` 子项的问题（因其共享文件名前缀），导致在选择一并删除时被遗漏 [#4788](https://github.com/sandboxie-plus/Sandboxie/issues/4788)
+
+
+
+## [1.18.1 / 5.73.1] - 2026-07-26
+
+### 新增
+- 新增 `CopyNewer` 文件迁移规则，可在保留现有沙箱副本的同时，从较新的主机文件进行刷新；沙盘管理器支持对该规则进行编辑。该规则仅适用于普通打开操作中匹配到的现有常规沙箱文件，并且仅当主机文件的最后写入时间较新时，才会主动替换其内容
+  - 该规则不适用于初始迁移、目录、只读路径、已删除文件或创建/覆盖操作
+- 新增使用 GUID 作为沙箱名称的选项 [#5485](https://github.com/sandboxie-plus/Sandboxie/pull/5485)
+
+### 变更
+- 更新了 Chromium_Elevation 模板，现使用特定的 `RunServiceAsSystem=...` 替代 `RunServicesAsSystem=y`，并增加了更多服务名称
+- 改进了沙盘配置设置的验证和自动补全功能，增加了禁用设置的别名、本地化描述、上下文感知警告以及模板特定的元数据和工具提示
+
+### 修复
+- 修复了增量更新机制无法复制新文件的问题
+- 修复了 `RunServiceAsSystem=...` 与 `UseSecurityMode=y` 的冲突问题
+- 修复了 `CryptSvc` 在 `RunServicesAsSystem=y` 下失败的问题
+- 修复了 SOCKS5 代理密码认证失败的问题，原因包括不安全的加密凭据解码、凭据长度处理不当、依赖区域设置的编码以及套接字部分发送
+
+
+
+## [1.18.0 / 5.73.0] - 2026-07-12
+
+### 新增
+- 为 `RecoverFolder` 和 `AutoRecoverIgnore` 模式增加了通配符支持（`*`、`?`、`**`），可在 DLL 和沙盘管理器中匹配 NT、DOS 和网络别名路径形式 [#3761](https://github.com/sandboxie-plus/Sandboxie/issues/3761) [#5318](https://github.com/sandboxie-plus/Sandboxie/issues/5318)
+- 新增 `UseAutoRecoverIgnoreForQuick=[y|n]`，用于将 `AutoRecoverIgnore` 模式应用于快速恢复窗口（默认启用）[#5278](https://github.com/sandboxie-plus/Sandboxie/issues/5278)
+- 为沙盘管理器的选项和设置对话框增加了待应用变更高亮显示；用于指示尚未应用的更改，以及不会立即生效的控件变更
+  - `Options/HighlightPendingChanges`（默认启用），可在全局设置 > 界面配置 > 用户界面中进行配置
+
+### 变更
+- 重构了崩溃转储机制
+- 修改了沙盘管理器自动删除恢复功能，使其复用已打开的恢复对话框作为删除确认对话框（无论过滤器状态如何），而不是将其关闭或静默继续执行沙箱删除
+
+### 修复
+- 修复了 Win32 进程映像路径查询返回沙箱化路径的问题，该问题可能暴露进程正在沙箱中运行 [#5437](https://github.com/sandboxie-plus/Sandboxie/pull/5437)
+- 修复了预期外的非用户 SID 配置文件和 Shell 查找噪音问题，通过屏蔽对应的 SBIE1406/SBIE1412 及其衍生的 SBIE1204 FileRootPath 消息 [#5422](https://github.com/sandboxie-plus/Sandboxie/pull/5422)
+- 修复了弹出通知中显示 NT 设备路径（`\Device\LanmanRedirector\...`）而非 UNC 格式的问题，导致显示混乱和恢复目标错误 [#711](https://github.com/sandboxie-plus/Sandboxie/issues/711)
+- 修复了在没有进程运行时点击“关闭直至所有程序停止”会永久挂起恢复功能的问题
+- 修复了当新文件事件路径与扫描恢复路径仅大小写不同时（例如 `downloads` 与 `Downloads`），沙盘管理器即时恢复会闪烁但不显示恢复窗口的问题
+- 改进了沙盘管理器在 SBIE 消息和通知洪泛时的响应能力，通过批量处理 UI 更新并减少每行渲染开销
+- 为 Chrome 设置重置增加了临时解决方案，可通过 `UseChromeSecurePreferencesHack=n` 禁用它 [#5184](https://github.com/sandboxie-plus/Sandboxie/issues/5184) [#5286](https://github.com/sandboxie-plus/Sandboxie/issues/5286) [#5180](https://github.com/sandboxie-plus/Sandboxie/issues/5180)
+  - 这更像是一个临时方案而非优雅的解决方案，我们让 `IsOS(OS_DOMAINMEMBER)` 返回 true，并在访问主机的“安全首选项”时强制迁移到沙箱中，并移除所有 `*_encrypted_hash` 条目
+  - 注意：这仅适用于设置和扩展；主机凭据、Cookies、密码等仍无法从沙箱内访问
+  - 如果需要，可采用手动方案：`注册表添加 "HKLM\SOFTWARE\Policies\Google\Chrome" /v ApplicationBoundEncryptionEnabled /t REG_DWORD /d 0 /f`
+  - 适用于 Microsoft Edge（`SOFTWARE\Policies\Microsoft\Edge`）、Brave 等
+- 修复了在沙箱中以系统身份运行服务时的 DPAPI 问题，使得沙箱化后能够访问 Chrome 主机凭据、Cookies、密码等
+  - 这需要启用沙箱化的提权服务 `SandboxService=GoogleChromeElevationService`，以系统身份运行 `RunServicesAsSystem=y`，并打开 SAM 端点 `OpenSamEndpoint=y`
+  - 还提供了一个便捷模板 `Template=Chromium_Elevation`
+  - 注意：每个 Chromium 衍生版有不同的服务名称，例如：MicrosoftEdgeElevationService、MicrosoftEdgeDevElevationService、MicrosoftCopilotElevationService、GoogleChromeElevationService、GoogleChromeDevElevationService、BraveElevationService
 
 
 

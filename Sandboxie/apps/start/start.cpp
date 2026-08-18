@@ -56,6 +56,30 @@ int Terminate_All_Processes(BOOL all_boxes);
 int Unmount_All_Boxes(BOOL all_boxes);
 int Delete_All_Sandboxes();
 
+const WCHAR* GetBoxDisplayName(const WCHAR* boxName, WCHAR* buffer,
+    SIZE_T bufferChars, BOOL compact)
+{
+    ULONG mode = SbieApi_QueryConfNumber(
+        L"GlobalSettings", L"BoxAliasDisplayMode", 0);
+    WCHAR alias[MAX_PATH];
+
+    if (mode > 2)
+        mode = 0;
+    if (!boxName || !buffer || bufferChars == 0)
+        return boxName;
+    if (mode == 1 || !NT_SUCCESS(SbieApi_QueryConfAsIs(
+            boxName, L"BoxAlias", 0, alias, sizeof(alias))) || !*alias) {
+        wcsncpy_s(buffer, bufferChars, boxName, _TRUNCATE);
+    }
+    else if (mode == 2 && !compact && _wcsicmp(alias, boxName) != 0) {
+        swprintf_s(buffer, bufferChars, L"%s (%s)", alias, boxName);
+    }
+    else {
+        wcsncpy_s(buffer, bufferChars, alias, _TRUNCATE);
+    }
+    return buffer;
+}
+
 extern WCHAR *DoRunDialog(HINSTANCE hInstance);
 extern WCHAR *DoBoxDialog(void);
 extern bool DoAboutDialog(bool bReminder = false);
@@ -2096,11 +2120,14 @@ int Program_Start(void)
 
     if (! ok) {
 
+        keep_alive = FALSE; // disable keep alive when the process can't be started in the first place
+
+        if (run_elevated_2)
+            return err;
+
         WCHAR *errmsg = SbieDll_FormatMessage1(MSG_3205, cmdline);
         SetLastError(err);
         Show_Error(errmsg);
-
-        keep_alive = FALSE; // disable keep alive when the process can't be started in the first place
             
         return EXIT_FAILURE;
 
@@ -2514,8 +2541,16 @@ ULONG RestartInSandbox(void)
         if (WaitForSingleObject(pi.hProcess, INFINITE) == WAIT_OBJECT_0) {
 
             ok = GetExitCodeProcess(pi.hProcess, &err);
-            if (ok)
+            if (ok) {
+
+                if (run_elevated_2 && err != 0) {
+                    WCHAR* errmsg = SbieDll_FormatMessage1(MSG_3205, ChildCmdLine);
+                    SetLastError(err);
+                    Show_Error(errmsg);
+                }
+
                 return err;
+            }
         }
     }
 

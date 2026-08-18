@@ -79,6 +79,7 @@ static int CGetDisplayNumberForScreen(QScreen* screen)
 
 static constexpr int c_MonitorLabelBaseRole = Qt::UserRole + 100;
 static constexpr int c_MonitorLabelDefaultRole = Qt::UserRole + 101;
+
 static QString CBuildMonitorOptionLabel(const QString& baseLabel, bool isDefault, bool isFallback)
 {
 	QString label = baseLabel;
@@ -345,6 +346,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbOnClose->addItem(tr("Prompt before Close"), "Prompt");
 	ui.cmbOnClose->addItem(tr("Close"), "Close");
 	ui.cmbOnClose->addItem(tr("Hide (Run invisible in Background)"), "Hide");
+	ui.cmbBoxAliasDisplayMode->addItem(tr("Sandbox name"), 1);
+	ui.cmbBoxAliasDisplayMode->addItem(tr("Sandbox alias"), 0);
+	ui.cmbBoxAliasDisplayMode->addItem(tr("Sandbox alias and name"), 2);
+	ui.cmbBoxAliasDisplayMode->setCurrentIndex(1);
 
 	const QString sameAsMainLabel = tr("Same as main");
 	const QString keepCurrentLabel = tr("Keep current monitor");
@@ -523,6 +528,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkRecoveryTop, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 
 	connect(ui.chkUseW11Style, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkRandomGuidName, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	QOperatingSystemVersion current = QOperatingSystemVersion::current();
 	ui.chkUseW11Style->setEnabled(current.majorVersion() == 10 && current.microVersion() >= 22000); // Windows 10 22000+ (Windows 11)
 	//
@@ -557,6 +563,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkCompactTray, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbOnClose, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkBoxOpsNotify, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkTraySearch, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkMinimize, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkSingleShow, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkTrayIcons, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
@@ -688,6 +695,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkSbieLogon, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkSbieAll, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkSbieUAC, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.cmbBoxAliasDisplayMode, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	m_GeneralChanged = false;
 
 	connect(ui.chkWatchConfig, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged())); // not sbie ini
@@ -1466,6 +1474,7 @@ void CSettingsWindow::LoadSettings()
 	ui.cmbSysTray->setCurrentIndex(theConf->GetInt("Options/SysTrayIcon", 1));
 	ui.cmbTrayBoxes->setCurrentIndex(theConf->GetInt("Options/SysTrayFilter", 0));
 	ui.chkCompactTray->setChecked(theConf->GetBool("Options/CompactTray", false));
+	ui.chkTraySearch->setChecked(theConf->GetBool("Options/TraySearch", true));
 	ui.chkTrayIcons->setChecked(theConf->GetBool("Options/TrayIcons", true));
 	ui.chkTrayOverlayIcons->setChecked(theConf->GetBool("Options/TrayOverlayIcons", true));
 	ui.chkTrayUseAlias->setChecked(theConf->GetBool("Options/TrayUseAlias", true));
@@ -1543,6 +1552,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkSingleShow->setChecked(theConf->GetBool("Options/TraySingleClick", false));
 
 	ui.chkUseW11Style->setChecked(theConf->GetBool("Options/UseW11Style", false));
+	ui.chkRandomGuidName->setChecked(theConf->GetBool("Options/UseRandomBoxName", false));
 
 	OnLoadAddon();
 
@@ -1566,7 +1576,7 @@ void CSettingsWindow::LoadSettings()
 		
 		ui.cmbDefault->clear();
 		foreach(const CSandBoxPtr & pBox, theAPI->GetAllBoxes())
-			ui.cmbDefault->addItem(pBox.objectCast<CSandBoxPlus>()->GetDisplayName(), pBox->GetName());
+			ui.cmbDefault->addItem(pBox.objectCast<CSandBoxPlus>()->GetDisplayName(CSandBoxPlus::eDisplayCompact), pBox->GetName());
 		int pos = ui.cmbDefault->findData(theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox"));
 		if(pos == -1)
 			pos = ui.cmbDefault->findData("DefaultBox");
@@ -1599,6 +1609,10 @@ void CSettingsWindow::LoadSettings()
 		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", false));
 		ui.chkSbieAll->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieAllGroup", true));
 		ui.chkSbieUAC->setChecked(theAPI->GetGlobalSettings()->GetBool("UseSandboxieUAC", true));
+		int iBoxAliasDisplayMode = theAPI->GetGlobalSettings()->GetNum("BoxAliasDisplayMode", 2);
+		if (iBoxAliasDisplayMode < 0 || iBoxAliasDisplayMode > 2)
+			iBoxAliasDisplayMode = 2;
+		ui.cmbBoxAliasDisplayMode->setCurrentIndex(ui.cmbBoxAliasDisplayMode->findData(iBoxAliasDisplayMode));
 
 		ui.treeImport->clear();
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("ImportBox", false))
@@ -1663,8 +1677,8 @@ void CSettingsWindow::LoadSettings()
 				Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
 			else
 				Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
-			ui.cmbMoTWSandbox->addItem(Icon, pBoxEx->GetDisplayName(), pBox->GetName());
-			ui.cmbUsbSandbox->addItem(Icon, pBoxEx->GetDisplayName(), pBox->GetName());
+			ui.cmbMoTWSandbox->addItem(Icon, pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayCompact), pBox->GetName());
+			ui.cmbUsbSandbox->addItem(Icon, pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayCompact), pBox->GetName());
 		}
 		ui.cmbMoTWSandbox->setCurrentIndex(CurMoTWBox);
 		ui.cmbUsbSandbox->setCurrentIndex(CurUsbBox);
@@ -1691,6 +1705,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkSbieLogon->setEnabled(false);
 		ui.chkSbieAll->setEnabled(false);
 		ui.chkSbieUAC->setEnabled(false);
+		ui.cmbBoxAliasDisplayMode->setEnabled(false);
 		ui.regRoot->setEnabled(false);
 		ui.ipcRoot->setEnabled(false);
 		ui.chkRamDisk->setEnabled(false);
@@ -2115,6 +2130,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());
 	theConf->SetValue("Options/SysTrayFilter", ui.cmbTrayBoxes->currentIndex());
 	theConf->SetValue("Options/CompactTray", ui.chkCompactTray->isChecked());
+	theConf->SetValue("Options/TraySearch", ui.chkTraySearch->isChecked());
 	theConf->SetValue("Options/TrayIcons", ui.chkTrayIcons->isChecked());
 	theConf->SetValue("Options/TrayOverlayIcons", ui.chkTrayOverlayIcons->isChecked());
 	theConf->SetValue("Options/TrayUseAlias", ui.chkTrayUseAlias->isChecked());
@@ -2149,6 +2165,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/TraySingleClick", ui.chkSingleShow->isChecked());
 
 	theConf->SetValue("Options/UseW11Style", ui.chkUseW11Style->isChecked());
+	theConf->SetValue("Options/UseRandomBoxName", ui.chkRandomGuidName->isChecked());
 
 	if (theAPI->IsConnected())
 	{
@@ -2204,6 +2221,8 @@ void CSettingsWindow::SaveSettings()
 				WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "y", "");
 				WriteAdvancedCheck(ui.chkSbieAll, "SandboxieAllGroup", "", "n");
 				WriteAdvancedCheck(ui.chkSbieUAC, "UseSandboxieUAC", "", "n");
+				WriteText("BoxAliasDisplayMode", ui.cmbBoxAliasDisplayMode->currentData().toInt() == 2
+					? QString() : QString::number(ui.cmbBoxAliasDisplayMode->currentData().toInt()));
 
 				if (m_FeaturesChanged) {
 					m_FeaturesChanged = false;

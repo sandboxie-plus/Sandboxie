@@ -367,7 +367,7 @@ NTSTATUS ProcessServer::KillAllHelper(const WCHAR *BoxName, ULONG SessionId, BOO
             Sleep(100);
         }
 
-        for (i = 0; i <= count; ++i)
+        for (i = 0; i < count; ++i)
             KillProcess(pids[i]);
     }
 

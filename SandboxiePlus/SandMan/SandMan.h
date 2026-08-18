@@ -22,6 +22,7 @@ class CSbieTemplatesEx;
 class CTraceView;
 class CScriptManager;
 class CAddonManager;
+class QLineEdit;
 
 struct ToolBarAction {
 	// Identifier of action stored in ini. Empty for separator.
@@ -73,6 +74,8 @@ public:
 	void				CheckResults(QList<SB_STATUS> Results, QWidget* pParent, bool bAsync = false);
 
 	static QIcon		GetIcon(const QString& Name, int iAction = 1);
+	static QString		GetBoxDisplayName(const CSandBoxPtr& pBox, CSandBoxPlus::EDisplayNameContext Context = CSandBoxPlus::eDisplayNormal);
+	static QString		GetBoxDisplayName(const QString& BoxName, CSandBoxPlus::EDisplayNameContext Context = CSandBoxPlus::eDisplayNormal);
 
 	bool				IsFullyPortable();
 
@@ -294,6 +297,7 @@ private slots:
 	void				OnAbout();
 
 	void				OnShowHide();
+	void				OnTraySearch(const QString& Text);
 	void				OnSysTray(QSystemTrayIcon::ActivationReason Reason);
 
 	void				SetUITheme();
@@ -473,6 +477,7 @@ private:
 
 	QSystemTrayIcon*	m_pTrayIcon;
 	QMenu*				m_pTrayMenu;
+	QLineEdit*			m_pTraySearch;
 	QWidgetAction*		m_pTrayList;
 	QTreeWidget*		m_pTrayBoxes;
 	int					m_iTrayPos;

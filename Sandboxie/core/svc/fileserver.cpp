@@ -515,9 +515,11 @@ MSG_HEADER *FileServer::GetAllHandles(HANDLE idProcess)
 
         if (! rpl)
             status = STATUS_INSUFFICIENT_RESOURCES;
-        else {
+		else {
 
-            for (i = 0; i < info->Count; ++i) {
+			rpl->num_handles = 0;
+
+			for (i = 0; i < info->Count; ++i) {
 
                 if (info->HandleInfo[i].ProcessId == (ULONG_PTR)idProcess) {
 
@@ -1010,8 +1012,9 @@ MSG_HEADER *FileServer::OpenWow64Key(MSG_HEADER *msg, HANDLE idProcess)
         if (ok) {
             if (RegOpenUserClassesRoot(hToken, 0, KEY_READ, &hRootKey) != 0)
                 ok = FALSE;
+
+			CloseHandle( hToken );
         }
-        CloseHandle(hToken);
     }
 
     if (! ok)

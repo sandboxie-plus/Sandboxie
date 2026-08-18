@@ -9,6 +9,9 @@
 #include "..\..\MiscHelpers\Common\CheckableComboBox.h"
 #include "SbieView.h"
 #include <QtConcurrent>
+#include <QEvent>
+#include <QScrollBar>
+#include <QToolButton>
 
 //class CTraceFilterProxyModel : public CSortFilterProxyModel
 //{
@@ -333,6 +336,35 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 	m_pTrace->m_pAutoScroll->setChecked(theConf->GetBool("Options/TraceAutoScroll"));
 	m_pTrace->GetMenu()->insertAction(m_pTrace->GetMenu()->actions()[0], m_pTrace->m_pAutoScroll);
 
+	QWidget* pTraceViewport = m_pTrace->m_pTreeList->viewport();
+	m_pResumeAutoScroll = new QToolButton(pTraceViewport);
+	m_pResumeAutoScroll->setIcon(CSandMan::GetIcon("Down"));
+	m_pResumeAutoScroll->setText(tr("Resume Auto Scroll"));
+	m_pResumeAutoScroll->setToolTip(tr("Auto scrolling is paused. Click to resume."));
+	m_pResumeAutoScroll->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+	m_pResumeAutoScroll->setFocusPolicy(Qt::NoFocus);
+	m_pResumeAutoScroll->adjustSize();
+	m_pResumeAutoScroll->hide();
+	pTraceViewport->installEventFilter(this);
+
+	QScrollBar* pTraceScrollBar = m_pTrace->m_pTreeList->verticalScrollBar();
+	connect(m_pTrace->m_pAutoScroll, &QAction::toggled, this, [this](bool bEnabled) {
+		if (bEnabled)
+			m_pTrace->m_pTreeList->scrollToBottom();
+		UpdateAutoScrollIndicator();
+	});
+	connect(m_pResumeAutoScroll, &QToolButton::clicked, this, [this]() {
+		m_pTrace->m_pTreeList->scrollToBottom();
+		UpdateAutoScrollIndicator();
+	});
+	connect(pTraceScrollBar, &QScrollBar::valueChanged, this, [this](int) {
+		UpdateAutoScrollIndicator();
+	});
+	connect(pTraceScrollBar, &QScrollBar::rangeChanged, this, [this](int, int) {
+		UpdateAutoScrollIndicator();
+	});
+	UpdateAutoScrollIndicator();
+
 	if (bStandAlone) {
 		QAction* pAction = new QAction(tr("Cleanup Trace Log"));
 		connect(pAction, SIGNAL(triggered()), this, SLOT(Clear()));
@@ -370,6 +402,43 @@ void CTraceView::timerEvent(QTimerEvent* pEvent)
 	Refresh();
 }
 
+bool CTraceView::eventFilter(QObject* source, QEvent* event)
+{
+	if (source == m_pTrace->m_pTreeList->viewport()
+		&& (event->type() == QEvent::Resize || event->type() == QEvent::Show))
+		PositionAutoScrollIndicator();
+
+	return QWidget::eventFilter(source, event);
+}
+
+bool CTraceView::IsTraceAtBottom() const
+{
+	QScrollBar* pScrollBar = m_pTrace->m_pTreeList->verticalScrollBar();
+	return pScrollBar->value() == pScrollBar->maximum();
+}
+
+void CTraceView::PositionAutoScrollIndicator()
+{
+	QWidget* pViewport = m_pTrace->m_pTreeList->viewport();
+	const int iMargin = 8;
+	const int x = qMax(0, pViewport->width() - m_pResumeAutoScroll->width() - iMargin);
+	const int y = qMax(0, pViewport->height() - m_pResumeAutoScroll->height() - iMargin);
+	m_pResumeAutoScroll->move(x, y);
+	m_pResumeAutoScroll->raise();
+}
+
+void CTraceView::UpdateAutoScrollIndicator()
+{
+	bool bPaused = !m_pMonitorMode->isChecked()
+		&& m_pTrace->m_pAutoScroll->isChecked()
+		&& !IsTraceAtBottom();
+	if (bPaused) {
+		PositionAutoScrollIndicator();
+		m_pResumeAutoScroll->show();
+	} else
+		m_pResumeAutoScroll->hide();
+}
+
 void CTraceView::SetEnabled(bool bSet)
 {
 	setEnabled(bSet);
@@ -379,14 +448,21 @@ void CTraceView::SetEnabled(bool bSet)
 
 void CTraceView::OnShowStack()
 {
-	if (m_pShowStack->isChecked() && !theGUI->GetAddonManager()->GetAddon("DbgHelp", CAddonManager::eInstalled).isNull())
-        theGUI->GetAddonManager()->TryInstallAddon("DbgHelp", this, tr("To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?"));
+	if (m_pShowStack->isChecked()) {
+		theGUI->GetAddonManager()->GetAddons();
+		if (theGUI->GetAddonManager()->GetAddon("DbgHelp", CAddonManager::eInstalled).isNull())
+			theGUI->GetAddonManager()->TryInstallAddon("DbgHelp", this, tr("To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?"));
+	}
 	theAPI->GetGlobalSettings()->SetBool("MonitorStackTrace", m_pShowStack->isChecked());
 	m_pTrace->m_pStackView->setVisible(m_pShowStack->isChecked());
 }
 
 void CTraceView::Refresh()
 {
+	QScrollBar* pTraceScrollBar = m_pTrace->m_pTreeList->verticalScrollBar();
+	const bool bFollowTraceTail = m_pTrace->m_pAutoScroll->isChecked()
+		&& IsTraceAtBottom() && !pTraceScrollBar->isSliderDown();
+
 	QList<CSandBoxPtr>Boxes;
 	if(m_pAllBoxes && !m_pAllBoxes->isChecked())
 		Boxes = theGUI->GetBoxView()->GetSelectedBoxes();
@@ -549,15 +625,22 @@ void CTraceView::Refresh()
 		if (m_pTrace->m_pTraceModel->IsTree())
 		{
 			QTimer::singleShot(10, this, [this, NewBranches]() {
+				QScrollBar* pScrollBar = m_pTrace->m_pTreeList->verticalScrollBar();
+				const bool bFollowTraceTail = m_pTrace->m_pAutoScroll->isChecked()
+					&& IsTraceAtBottom() && !pScrollBar->isSliderDown();
 				quint64 start = GetCurCycle();
 				foreach(const QModelIndex& Index, NewBranches)
 					m_pTrace->GetTree()->expand(Index);
+				if (bFollowTraceTail)
+					m_pTrace->m_pTreeList->scrollToBottom();
+				UpdateAutoScrollIndicator();
 				qDebug() << "Expand took" << (GetCurCycle() - start) / 1000000.0 << "s";
 			});
 		}
 
-		if(m_pTrace->m_pAutoScroll->isChecked())
+		if (bFollowTraceTail)
 			m_pTrace->m_pTreeList->scrollToBottom();
+		UpdateAutoScrollIndicator();
 	}
 }
 
@@ -611,6 +694,7 @@ void CTraceView::OnSetMode()
 
 	m_FullRefresh = true;
 	Refresh();
+	UpdateAutoScrollIndicator();
 
 	theConf->SetValue("Options/UseMonitorMode", m_pMonitorMode->isChecked());
 }

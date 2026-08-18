@@ -563,7 +563,7 @@ void CPopUpWindow::AddFileToRecover(const QString& FilePath, QString BoxPath, co
 	CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
 
 	QString Message = tr("%1 is eligible for quick recovery from %2.\nThe file was written by: %3")
-		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(QString(pBox->GetName()).replace("_", " "))
+		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(CSandMan::GetBoxDisplayName(pBox))
 		.arg(pProcess.isNull() ? tr("an UNKNOWN process.") : tr("%1 (%2)").arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId()));
 
 	if (BoxPath.isEmpty()) // legacy case, no BoxName, no support for driver serial numbers
@@ -655,6 +655,7 @@ void CPopUpWindow::OnOpenRecovery()
 void CPopUpWindow::ShowProgress(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId)
 {
 	QString BoxName = MsgData.size() >= 2 ? MsgData[1] : tr("UNKNOWN");
+	QString BoxDisplayName = CSandMan::GetBoxDisplayName(BoxName);
 	QString FilePath = MsgData.size() >= 3 ? theAPI->Nt2DosPath(MsgData[2]) : tr("UNKNOWN");
 	quint64 SizeLeft = MsgData.size() >= 4 ? MsgData[3].toULongLong() : 0;
 
@@ -662,7 +663,7 @@ void CPopUpWindow::ShowProgress(quint32 MsgCode, const QStringList& MsgData, qui
 		return;
 
 	QString Message = tr("Migrating a large file %1 into the sandbox %2, %3 left.\nFull path: %4")
-		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(BoxName).arg(FormatSize(SizeLeft))
+		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(BoxDisplayName).arg(FormatSize(SizeLeft))
 		.arg(FilePath);
 
 	CPopUpProgress* pEntry = NULL;

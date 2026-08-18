@@ -654,13 +654,13 @@ bool CSbieUtils::GetStartMenuShortcut(CSbieAPI* pApi, QString &BoxName, QString 
 											//3072
 	} *lnk = (SLnk*)buf;
 
-	BoxName = QString::fromWCharArray(lnk->box_name, wcsnlen_s(lnk->box_name, sizeof(lnk->box_name)));
-	LinkPath = QString::fromWCharArray(lnk->link_path, wcsnlen_s(lnk->link_path, sizeof(lnk->link_path)));
+	BoxName = QString::fromWCharArray(lnk->box_name, wcsnlen_s(lnk->box_name, _countof(lnk->box_name)));
+	LinkPath = QString::fromWCharArray(lnk->link_path, wcsnlen_s(lnk->link_path, _countof(lnk->link_path)));
 	if (*lnk->icon_path) {
 		IconIndex = lnk->IconIndex;
-		IconPath = QString::fromWCharArray(lnk->icon_path, wcsnlen_s(lnk->icon_path, sizeof(lnk->icon_path)));
+		IconPath = QString::fromWCharArray(lnk->icon_path, wcsnlen_s(lnk->icon_path, _countof(lnk->icon_path)));
 	}
-	if (*lnk->work_dir)	WorkDir = QString::fromWCharArray(lnk->work_dir, wcsnlen_s(lnk->work_dir, sizeof(lnk->work_dir)));
+	if (*lnk->work_dir)	WorkDir = QString::fromWCharArray(lnk->work_dir, wcsnlen_s(lnk->work_dir, _countof(lnk->work_dir)));
 	else				WorkDir = LinkPath.left(LinkPath.lastIndexOf('\\'));
 
 	UnmapViewOfFile(buf);

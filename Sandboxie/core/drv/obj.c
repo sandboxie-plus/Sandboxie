@@ -590,134 +590,24 @@ _FX NTSTATUS Obj_GetNameOrFileName(
 //---------------------------------------------------------------------------
 
 
-#ifdef _M_ARM64
 _FX POBJECT_TYPE Obj_GetTypeObjectType(void)
 {
     static POBJECT_TYPE _TypeObjectType = NULL;
 
-    if (!_TypeObjectType) {
+    //
+    // ObGetObjectType returns the type of the given object; *PsProcessType
+    // is itself an object type object, so its type is ObpTypeObjectType,
+    // i.e. ObTypeIndexTable[2].  Not available before Windows 7, where
+    // ObOpenObjectByName does not need it anyway.
+    //
+
+    if ((Driver_OsVersion >= DRIVER_WINDOWS_7) && (! _TypeObjectType)) {
 
         _TypeObjectType = pObGetObjectType(*PsProcessType);
     }
 
     return _TypeObjectType;
 }
-#else
-_FX POBJECT_TYPE Obj_GetTypeObjectType(void)
-{
-    static POBJECT_TYPE _TypeObjectType = NULL;
-
-    //
-    // on Windows 7 we need to find ObpTypeObjectType.  it is not
-    // exported, but a new Windows 7 exported function, ObGetObjectType,
-    // references an object type table with the following instruction:
-    //          mov eax,dword ptr [nt!ObTypeIndexTable+eax*4]
-    // ObpTypeObjectType is the third pointer in the table
-
-    if ((Driver_OsVersion >= DRIVER_WINDOWS_7) && (! _TypeObjectType)) {
-
-        const ULONG status = STATUS_UNSUCCESSFUL;
-        static const WCHAR *TypeName = L"ObjectType";
-
-        POBJECT_TYPE pType;
-        UNICODE_STRING *Name;
-
-        //
-        // analyze ObGetObjectType to find ObTypeIndexTable
-        //
-
-        POBJECT_TYPE *pObTypeIndexTable = NULL;
-
-        UCHAR *ptr = (UCHAR *)pObGetObjectType;
-        if (ptr) {
-
-            ULONG i;
-
-#ifdef _WIN64
-            if (Driver_OsVersion < DRIVER_WINDOWS_10) {
-                for (i = 0; i < 16; ++i) {
-                    if (ptr[i + 0] == 0x48 &&       // lea rcx,nt!ObTypeIndexTable
-                        ptr[i + 1] == 0x8D &&
-                        ptr[i + 2] == 0x0D)
-                    {
-                        LONG offset = *(LONG *)(ptr + i + 3);
-                        pObTypeIndexTable =
-                            (POBJECT_TYPE *)(ptr + i + 7 + offset);
-                    }
-                }
-            }
-            else {
-                for (i = 0x1c; i < 0x2c; ++i) {
-                    if (ptr[i + 0] == 0x48 &&       // lea rcx,nt!ObTypeIndexTable
-                        ptr[i + 1] == 0x8D &&
-                        ptr[i + 2] == 0x0D)
-                    {
-                        LONG offset = *(LONG *)(ptr + i + 3);
-                        pObTypeIndexTable =
-                            (POBJECT_TYPE *)(ptr + i + 7 + offset);
-                    }
-                }
-            }
-#else ! _WIN64
-            UCHAR k = 0;
-            if (Driver_OsVersion >= DRIVER_WINDOWS_10) {
-                k = 0x1c;
-            }
-
-            for (i = k; i < (ULONG)16 + k; ++i) {
-                if (ptr[i + 0] == 0x8B &&       // mov eax,[...+eax*4]
-                    ptr[i + 1] == 0x04 &&
-                    ptr[i + 2] == 0x85)
-                {
-                    ULONG_PTR *ptr2 = (ULONG_PTR *)(ptr + i + 3);
-                    pObTypeIndexTable = (POBJECT_TYPE *)*ptr2;
-                }
-            }
-#endif _WIN64
-            //DbgPrint("pObTypeIndexTable = %p\n", pObTypeIndexTable);
-        }
-
-        if (! pObTypeIndexTable) {
-            Log_Status_Ex(MSG_OBJ_HOOK_ANY_PROC, 0x91, status, TypeName);
-            return FALSE;
-        }
-
-        //
-        // make sure ObTypeIndexTable[2] points to the "Type" object type
-        //
-
-        pType = pObTypeIndexTable[2];
-
-#ifdef _WIN64
-
-        if ((! pType) || ((ULONG_PTR)pType >= 0xFFFFFFFF00000000)) {
-            Log_Status_Ex(MSG_OBJ_HOOK_ANY_PROC, 0x92, status, TypeName);
-            return FALSE;
-        }
-
-#else ! _WIN64
-
-        if ((! pType) || ((ULONG_PTR)pType >= 0xFFFF0000)) {
-            Log_Status_Ex(MSG_OBJ_HOOK_ANY_PROC, 0x92, status, TypeName);
-            return FALSE;
-        }
-
-#endif _WIN64
-
-        Name = &((OBJECT_TYPE_VISTA_SP1 *)pType)->Name;
-        if (Name->Length != 8 ||
-                Name->Buffer[0] != L'T' || Name->Buffer[1] != L'y' ||
-                Name->Buffer[2] != L'p' || Name->Buffer[3] != L'e') {
-            Log_Status_Ex(MSG_OBJ_HOOK_ANY_PROC, 0x93, status, TypeName);
-            return FALSE;
-        }
-
-        _TypeObjectType = pType;
-    }
-
-    return _TypeObjectType;
-}
-#endif
 
 
 //---------------------------------------------------------------------------

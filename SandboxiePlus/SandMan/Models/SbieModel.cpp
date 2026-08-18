@@ -529,7 +529,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			QVariant Value;
 			switch(section)
 			{
-				case eName:				Value = pBoxEx->GetDisplayName(); break;
+				case eName:				Value = pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayNormal); break;
 				//case eName:				Value = pBox->GetName(); break;
 				case eStatus:			Value = pBox.objectCast<CSandBoxPlus>()->GetStatusStr(); break;
 				case eTitle:			break;

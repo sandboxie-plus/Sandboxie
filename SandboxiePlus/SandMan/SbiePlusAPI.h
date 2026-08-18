@@ -68,7 +68,15 @@ public:
 	CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual ~CSandBoxPlus();
 
-	virtual QString			GetDisplayName() const;
+	enum EDisplayNameContext
+	{
+		eDisplayNormal,
+		eDisplayCompact
+	};
+
+	virtual QString			GetDisplayName(EDisplayNameContext Context = eDisplayNormal) const;
+	static QString			FormatDisplayName(const QString& BoxName, const QString& BoxAlias, int DisplayMode, EDisplayNameContext Context = eDisplayNormal);
+	virtual QString			GetBoxToolTip() const;
 
 	SB_PROGRESS				CopyBox(const QString& DestDir);
 
@@ -166,7 +174,7 @@ public:
 	class CRecoveryWindow*	m_pRecoveryWnd;
 
 	bool					IsBoxBusy() const { return IsSizePending() || !m_JobQueue.isEmpty(); }
-	SB_STATUS				DeleteContentAsync(bool DeleteSnapshots = true, bool bOnAutoDelete = false);
+	SB_STATUS				DeleteContentAsync(bool DeleteSnapshots = true, bool UseCurrentSnapshot = false);
 
 	struct SLink {
 		SLink() :Url(false), IconIndex(0) {}
@@ -253,6 +261,7 @@ protected:
 	bool					m_NoForce;
 	QRgb					m_BoxColor;
 	QString					m_BoxAlias;
+	int						m_BoxAliasDisplayMode;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

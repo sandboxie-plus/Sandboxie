@@ -123,7 +123,7 @@ LRESULT CSetLayoutDialog::MyKeyboardHook(
         HWND hwnd = ::GetFocus();
         if (hwnd) {
             WCHAR clsnm[64];
-            if (GetClassName(hwnd, clsnm, 60 * sizeof(WCHAR))
+            if (GetClassName(hwnd, clsnm, _countof(clsnm))
                                         && _wcsicmp(clsnm, L"Button") != 0)
                 return 1;
         }

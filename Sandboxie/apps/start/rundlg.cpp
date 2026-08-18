@@ -34,6 +34,9 @@
 #include <guiddef.h>
 #include <commdlg.h>
 
+extern const WCHAR* GetBoxDisplayName(const WCHAR* boxName, WCHAR* buffer,
+    SIZE_T bufferChars, BOOL compact);
+
 
 //---------------------------------------------------------------------------
 // Types
@@ -350,6 +353,7 @@ void PrepareRunAsAdmin(HWND hwnd, const WCHAR *BoxName, BOOLEAN JustAdmin)
         ctrl = GetDlgItem(hwnd, IDRUNADMIN);
         if (ctrl) {
 
+            SetWindowText(ctrl, SbieDll_FormatMessage0(MSG_3414));
             SendMessage(ctrl, BM_SETCHECK,
                 run_elevated_2 ? BST_CHECKED : BST_UNCHECKED, 0);
             EnableWindow(ctrl, (! disable_button));
@@ -489,7 +493,10 @@ INT_PTR RunDialogProc(
     HWND ctrl;
     OPENFILENAME ofn;
     WCHAR boxname[BOXNAME_COUNT];
-    WCHAR title[128];
+    WCHAR boxdisplay[MAX_PATH + BOXNAME_COUNT + 4];
+    WCHAR dialogTitle[128];
+    WCHAR title[512];
+    const WCHAR* displayName;
     TOOLINFO ti;
 
     switch (uMsg) {
@@ -559,15 +566,17 @@ INT_PTR RunDialogProc(
             if (! SbieApi_QueryConfBool(NULL, L"BoxNameTitle", FALSE)) {
 
                 SbieApi_QueryProcess(NULL, boxname, NULL, NULL, NULL);
+                displayName = GetBoxDisplayName(boxname,
+                    boxdisplay, ARRAYSIZE(boxdisplay), FALSE);
 
                 if (layout_rtl) {
-                    wcscpy(title, boxname);
-                    wcscat(title, L" - ");
-                    GetWindowText(hwnd, title + wcslen(title), 100);
+                    GetWindowText(hwnd, dialogTitle, ARRAYSIZE(dialogTitle));
+                    swprintf_s(title, ARRAYSIZE(title), L"%s - %s",
+                        displayName, dialogTitle);
                 } else {
-                    GetWindowText(hwnd, title, 100);
-                    wcscat(title, L" - ");
-                    wcscat(title, boxname);
+                    GetWindowText(hwnd, dialogTitle, ARRAYSIZE(dialogTitle));
+                    swprintf_s(title, ARRAYSIZE(title), L"%s - %s",
+                        dialogTitle, displayName);
                 }
                 SetWindowText(hwnd, title);
             }

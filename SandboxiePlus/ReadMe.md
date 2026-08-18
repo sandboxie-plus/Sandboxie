@@ -15,7 +15,7 @@ Sandboxie Plus builds under Visual Studio 2019, as it offers the widest compatib
 6) Ok, now we are ready to build, we start with Sandboxie Classic, we open the Sandbox.sln, select our platform and build type, and run the build.
 	- If we build for x64, we will need to also build the SbieSvc and SbieDll for 32-bit.
 	- If we were building for ARM64, we would also need the ARM64EC version of SbieDll.
-7) And now we continue with building the SandMan UI to create Sandboxie Plus. Here we open the Sandboxie-Plus.sln, select our platform and build type, and run the build.
+7) And now we continue with building the SandMan UI to create Sandboxie Plus. Here we open the SandboxiePlus.sln, select our platform and build type, and run the build.
 8) Once that is done, we only need to combine the two and here it is: Sandboxie Plus is ready for service.
 
 At this point, you may wonder how to run this build. In the end, the driver is not signed and we did not touch the process of signing the user mode components either.

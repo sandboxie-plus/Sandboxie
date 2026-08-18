@@ -45,6 +45,7 @@ public:
 
 	virtual QTreeViewEx*		GetTree() { return m_pSbieTree; }
 	CSbieModel*					GetSbieModel() { return m_pSbieModel; }
+	void						SetAutoExpand(bool bExpand, bool bLegacy);
 
 	virtual QList<CSandBoxPtr>	GetSelectedBoxes();
 	virtual QList<CBoxedProcessPtr>	GetSelectedProcesses();
@@ -69,6 +70,7 @@ public:
 	virtual void				ShowOptions(const QString& Name);
 	virtual void				ShowOptions(const CSandBoxPtr& pBox);
 	virtual void				ShowBrowse(const CSandBoxPtr& pBox);
+	virtual void				ShowSnapshots(const CSandBoxPtr& pBox);
 
 	QMap<QString, QStringList>	GetGroups() { return m_Groups; }
 
@@ -81,7 +83,7 @@ public slots:
 	void						Clear();
 	void						Refresh();
 	void						ReloadUserConfig();
-	void						ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes = QMap<QString, CSandBoxPtr>());
+	void						ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes = QMap<QString, CSandBoxPtr>(), bool bBoxesLoaded = false);
 	void						SaveBoxGrouping();
 
 private slots:
@@ -125,7 +127,8 @@ protected:
 	void						OnMoveTo(const QString& Group);
 
 	QMap<QString, QStringList>	m_Groups;
-	QSet<QString>				m_Collapsed;
+	QHash<QString, bool>		m_BoxExpandState;
+	QHash<QString, bool>		m_ProcessExpandState;
 	bool						m_HoldExpand;
 
 private:
@@ -151,6 +154,12 @@ private:
 	bool					IsParentOf(const QString& Name, const QString& Group);
 
 	void					ChangeExpand(const QModelIndex& index, bool bExpand);
+	void					ApplyExpandState(bool bDefaultExpand, const QModelIndex& Parent = QModelIndex());
+	QString					GetExpandStateKey(const QModelIndex& ModelIndex) const;
+	QString					GetProcessExpandKey(const CBoxedProcessPtr& pProcess) const;
+	void					SaveBoxExpandState();
+	void					SaveProcessExpandState();
+	void					CleanupProcessExpandState();
 	QStringList				GetSelectedBoxNames();
 	void					RestoreBoxSelectionLater(const QStringList& Names, int Delay = 50);
 	void					RestoreNameSelectionLater(const QStringList& Names, int Delay = 50);

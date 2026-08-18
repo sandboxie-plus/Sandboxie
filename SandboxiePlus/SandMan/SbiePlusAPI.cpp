@@ -124,6 +124,7 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_BoxDel = false;
 	m_NoForce = false;
 	m_BoxColor = QColor(Qt::yellow).rgb();
+	m_BoxAliasDisplayMode = 0;
 }
 
 CSandBoxPlus::~CSandBoxPlus()
@@ -236,14 +237,45 @@ void CSandBoxPlus::UpdateDetails()
 	QStringList BorderCfg = GetText("BorderColor").split(",");
 	m_BoxColor = QColor("#" + BorderCfg[0].mid(5, 2) + BorderCfg[0].mid(3, 2) + BorderCfg[0].mid(1, 2)).rgb();
 
-	m_BoxAlias = GetText("BoxAlias");
+	m_BoxAlias = GetText("BoxAlias").trimmed();
+	m_BoxAliasDisplayMode = m_pAPI->GetGlobalSettings()->GetNum("BoxAliasDisplayMode", 2);
+	if (m_BoxAliasDisplayMode < 0 || m_BoxAliasDisplayMode > 2)
+		m_BoxAliasDisplayMode = 2;
 }
 
-QString CSandBoxPlus::GetDisplayName() const
+QString CSandBoxPlus::GetDisplayName(EDisplayNameContext Context) const
 {
-	if (!m_BoxAlias.isEmpty())
-		return m_BoxAlias;
-	return GetName().replace("_", " ");
+	return FormatDisplayName(GetName(), m_BoxAlias, m_BoxAliasDisplayMode, Context);
+}
+
+QString CSandBoxPlus::FormatDisplayName(const QString& BoxName, const QString& BoxAlias, int DisplayMode, EDisplayNameContext Context)
+{
+	if (DisplayMode < 0 || DisplayMode > 2)
+		DisplayMode = 2;
+	QString DisplayBoxName = QString(BoxName).replace("_", " ");
+	QString Alias = BoxAlias.trimmed();
+	if (DisplayMode == 1 || Alias.isEmpty())
+		return DisplayBoxName;
+	if (DisplayMode == 2 && Context == eDisplayNormal
+	 && Alias.compare(BoxName, Qt::CaseInsensitive) != 0)
+		return QString("%1 (%2)").arg(Alias, BoxName);
+	return Alias;
+}
+
+QString CSandBoxPlus::GetBoxToolTip() const
+{
+	QString ToolTip = GetName() + "\n";
+	if (!m_BoxAlias.isEmpty()
+	 && m_BoxAlias.compare(GetName(), Qt::CaseInsensitive) != 0)
+		ToolTip += CSandMan::tr("    Alias: %1\n").arg(m_BoxAlias);
+	ToolTip += CSandMan::tr("    File root: %1\n").arg(GetFileRoot());
+	ToolTip += CSandMan::tr("    Registry root: %1\n").arg(GetRegRoot());
+	ToolTip += CSandMan::tr("    IPC root: %1\n").arg(GetIpcRoot());
+	if (!GetMountRoot().isEmpty())
+		ToolTip += CSandMan::tr("    Disk root: %1\n").arg(GetMountRoot());
+	ToolTip += CSandMan::tr("Options:\n    ");
+	ToolTip += GetStatusStr().replace(", ", "\n    ");
+	return ToolTip;
 }
 
 bool CSandBoxPlus::IsBoxexPath(const QString& Path)
@@ -855,7 +887,7 @@ int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
 	return FindInStrList(Programs, ProgName) != Programs.end() ? 1 : 0; 
 }
 
-SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteSnapshots, bool bOnAutoDelete)
+SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteSnapshots, bool UseCurrentSnapshot)
 {
 	if (GetBool("NeverDelete", false))
 		return SB_ERR(SB_DeleteProtect);
@@ -870,7 +902,7 @@ SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteSnapshots, bool bOnAutoDel
 		AddJobToQueue(pJob);
 	}
 
-	CBoxJob* pJob = new CCleanUpJob(this, DeleteSnapshots, bOnAutoDelete);
+	CBoxJob* pJob = new CCleanUpJob(this, DeleteSnapshots, UseCurrentSnapshot);
 	AddJobToQueue(pJob);
 
 	return SB_OK;

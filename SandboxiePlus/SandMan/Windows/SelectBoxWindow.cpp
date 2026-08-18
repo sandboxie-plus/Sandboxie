@@ -77,7 +77,7 @@ void CBoxPicker::LoadBoxed(const QRegularExpression& Filter, const QString& Sele
 		QTreeWidgetItem* pParent = GetBoxParent(Groups, GroupItems, m_pTreeBoxes, pBox->GetName());
 
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
-		pItem->setText(0, pBoxEx->GetDisplayName());
+		pItem->setText(0, pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayCompact));
 		pItem->setData(0, Qt::UserRole, pBox->GetName());
 		QIcon Icon;
 		QString BoxIcon = pBox->GetText("BoxIcon");

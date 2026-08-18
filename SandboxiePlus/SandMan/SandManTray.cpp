@@ -153,6 +153,7 @@ void CSandMan::CreateTrayMenu()
 	QFont f = pShowHide->font();
 	f.setBold(true);
 	pShowHide->setFont(f);
+
 	m_pTrayMenu->addSeparator();
 
 	m_iTrayPos = m_pTrayMenu->actions().count();
@@ -204,6 +205,17 @@ void CSandMan::CreateTrayMenu()
 		connect(m_pTrayBoxes, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnBoxMenu(const QPoint&)));
 		connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
 		//m_pBoxMenu
+	}
+
+	m_pTraySearch = NULL;
+	if (theConf->GetBool("Options/TraySearch", true)) {
+		QWidgetAction* pTraySearchAction = new QWidgetAction(m_pTrayMenu);
+		m_pTraySearch = new QLineEdit();
+		m_pTraySearch->setPlaceholderText(tr("Find sandbox..."));
+		m_pTraySearch->setClearButtonEnabled(true);
+		pTraySearchAction->setDefaultWidget(m_pTraySearch);
+		m_pTrayMenu->addAction(pTraySearchAction);
+		connect(m_pTraySearch, SIGNAL(textChanged(const QString&)), this, SLOT(OnTraySearch(const QString&)));
 	}
 
 	m_pTrayMenu->addSeparator();
@@ -305,6 +317,46 @@ static QString CSandMan__GetTrayEmptyText(int iSysTrayFilter)
 	return CSandMan::tr("No sandboxes to show.");
 }
 
+static bool CSandMan__FilterTrayMenu(QMenu* pMenu, const QString& Filter, bool bParentMatch = false)
+{
+	bool bAnyMatch = false;
+	foreach(QAction* pAction, pMenu->actions()) {
+		QString Data = pAction->data().toString();
+		if (Data.startsWith("group:")) {
+			bool bGroupMatch = bParentMatch || pAction->text().contains(Filter, Qt::CaseInsensitive);
+			bool bChildMatch = pAction->menu() && CSandMan__FilterTrayMenu(pAction->menu(), Filter, bGroupMatch);
+			pAction->setVisible(bGroupMatch || bChildMatch);
+			bAnyMatch |= pAction->isVisible();
+		}
+		else if (Data.startsWith("box:")) {
+			QString DisplayName = pAction->property("tray_sort_name").toString();
+			bool bMatch = bParentMatch || DisplayName.contains(Filter, Qt::CaseInsensitive)
+				|| Data.mid(4).contains(Filter, Qt::CaseInsensitive);
+			pAction->setVisible(bMatch);
+			bAnyMatch |= bMatch;
+		}
+		else if (Data.startsWith("empty:")) {
+			bool bMatch = Filter.isEmpty();
+			pAction->setVisible(bMatch);
+			bAnyMatch |= bMatch;
+		}
+	}
+	return bAnyMatch;
+}
+
+static bool CSandMan__FilterTrayTreeItem(QTreeWidgetItem* pItem, const QString& Filter, bool bParentMatch = false)
+{
+	QString Name = pItem->data(0, Qt::UserRole).toString();
+	QString DisplayName = pItem->data(0, Qt::UserRole + 2).toString();
+	bool bMatch = Filter.isEmpty() || bParentMatch || Name.contains(Filter, Qt::CaseInsensitive)
+		|| DisplayName.contains(Filter, Qt::CaseInsensitive);
+	bool bChildMatch = false;
+	for (int i = 0; i < pItem->childCount(); ++i)
+		bChildMatch |= CSandMan__FilterTrayTreeItem(pItem->child(i), Filter, bMatch);
+	pItem->setHidden(!bMatch && !bChildMatch);
+	return bMatch || bChildMatch;
+}
+
 void CSandMan::OnShowHide()
 {
 	if (isVisible()) {
@@ -312,6 +364,16 @@ void CSandMan::OnShowHide()
 		hide();
 	} else
 		show();
+}
+
+void CSandMan::OnTraySearch(const QString& Text)
+{
+	if (m_pTrayBoxes) {
+		for (int i = 0; i < m_pTrayBoxes->topLevelItemCount(); ++i)
+			CSandMan__FilterTrayTreeItem(m_pTrayBoxes->topLevelItem(i), Text);
+	}
+	else if (m_pTrayMenu)
+		CSandMan__FilterTrayMenu(m_pTrayMenu, Text);
 }
 
 double CSandMan__GetBoxOrder(const QMap<QString, QStringList>& Groups, const QString& Name, double value = 0.0, int Depth = 0);
@@ -344,10 +406,27 @@ static bool CSandMan__IsBeforeBySortMode(const QString& left, const QString& rig
 			return l < r;
 	}
 
-	int cmp = QString::localeAwareCompare(left, right);
+	int cmp = QString::compare(left, right, Qt::CaseInsensitive);
 	if (sortMode < 0)
 		return cmp > 0;
 	return cmp < 0;
+}
+
+static QString CSandMan__GetTrayActionSortName(QAction* pAction, int sortMode)
+{
+	if (!pAction)
+		return QString();
+
+	if (sortMode == 0) {
+		QString data = pAction->data().toString();
+		if (data.startsWith("box:"))
+			return data.mid(4);
+		if (data.startsWith("group:"))
+			return data.mid(6);
+	}
+
+	QString sortName = pAction->property("tray_sort_name").toString();
+	return sortName.isEmpty() ? pAction->text() : sortName;
 }
 
 static QAction* CSandMan__InsertGroupMenuSorted(QMenu* pTargetMenu, QAction* pStopAction, QMenu* pGroupMenu, const QString& groupName, int sortMode, const QMap<QString, QStringList>& Groups)
@@ -360,10 +439,11 @@ static QAction* CSandMan__InsertGroupMenuSorted(QMenu* pTargetMenu, QAction* pSt
 		if (pStopAction && pAction == pStopAction)
 			break;
 
-		if (!pAction->data().toString().startsWith("group:"))
+		QString data = pAction->data().toString();
+		if (!data.startsWith("group:") && !data.startsWith("box:"))
 			continue;
 
-		if (CSandMan__IsBeforeBySortMode(groupName, pAction->text(), sortMode, Groups)) {
+		if (CSandMan__IsBeforeBySortMode(groupName, CSandMan__GetTrayActionSortName(pAction, sortMode), sortMode, Groups)) {
 			pBeforeAction = pAction;
 			break;
 		}
@@ -376,10 +456,45 @@ static QAction* CSandMan__InsertGroupMenuSorted(QMenu* pTargetMenu, QAction* pSt
 	return pTargetMenu->addMenu(pGroupMenu);
 }
 
-static QTreeWidgetItem* CSandMan__InsertGroupItemSorted(QTreeWidget* pTree, QTreeWidgetItem* pParentItem, QTreeWidgetItem* pGroupItem, const QString& groupName, int sortMode, const QMap<QString, QStringList>& Groups)
+static QAction* CSandMan__InsertBoxMenuSorted(QMenu* pTargetMenu, QAction* pStopAction, QAction* pBoxAction, int sortMode, const QMap<QString, QStringList>& Groups)
 {
-	if (!pTree || !pGroupItem)
-		return pGroupItem;
+	if (!pTargetMenu || !pBoxAction)
+		return pBoxAction;
+
+	QString boxName = pBoxAction->data().toString().mid(4);
+	QString displayName = pBoxAction->property("tray_sort_name").toString();
+	QAction* pBeforeAction = nullptr;
+	for (QAction* pAction : pTargetMenu->actions()) {
+		if (pStopAction && pAction == pStopAction)
+			break;
+
+		QString data = pAction->data().toString();
+		if (!data.startsWith("group:") && !data.startsWith("box:"))
+			continue;
+
+		QString left = sortMode == 0 ? boxName : displayName;
+		if (CSandMan__IsBeforeBySortMode(left, CSandMan__GetTrayActionSortName(pAction, sortMode), sortMode, Groups)) {
+			pBeforeAction = pAction;
+			break;
+		}
+	}
+
+	if (pBeforeAction) {
+		pTargetMenu->insertAction(pBeforeAction, pBoxAction);
+		return pBoxAction;
+	}
+	if (pStopAction) {
+		pTargetMenu->insertAction(pStopAction, pBoxAction);
+		return pBoxAction;
+	}
+	pTargetMenu->addAction(pBoxAction);
+	return pBoxAction;
+}
+
+static QTreeWidgetItem* CSandMan__InsertTreeItemSorted(QTreeWidget* pTree, QTreeWidgetItem* pParentItem, QTreeWidgetItem* pItem, const QString& displayName, const QString& itemName, int sortMode, const QMap<QString, QStringList>& Groups)
+{
+	if (!pTree || !pItem)
+		return pItem;
 
 	int insertIndex = pParentItem ? pParentItem->childCount() : pTree->topLevelItemCount();
 	int count = pParentItem ? pParentItem->childCount() : pTree->topLevelItemCount();
@@ -390,21 +505,24 @@ static QTreeWidgetItem* CSandMan__InsertGroupItemSorted(QTreeWidget* pTree, QTre
 			continue;
 
 		QString existingName = pExisting->data(0, Qt::UserRole).toString();
-		if (!Groups.contains(existingName))
-			continue;
+		QString existingDisplayName = pExisting->data(0, Qt::UserRole + 2).toString();
+		if (existingDisplayName.isEmpty())
+			existingDisplayName = pExisting->text(0);
 
-		if (CSandMan__IsBeforeBySortMode(groupName, existingName, sortMode, Groups)) {
+		QString left = sortMode == 0 ? itemName : displayName;
+		QString right = sortMode == 0 ? existingName : existingDisplayName;
+		if (CSandMan__IsBeforeBySortMode(left, right, sortMode, Groups)) {
 			insertIndex = i;
 			break;
 		}
 	}
 
 	if (pParentItem)
-		pParentItem->insertChild(insertIndex, pGroupItem);
+		pParentItem->insertChild(insertIndex, pItem);
 	else
-		pTree->insertTopLevelItem(insertIndex, pGroupItem);
+		pTree->insertTopLevelItem(insertIndex, pItem);
 
-	return pGroupItem;
+	return pItem;
 }
 
 static QTreeWidgetItem* CSandMan__GetBoxParentTree(const QMap<QString, QStringList>& Groups, QMap<QString, QTreeWidgetItem*>& GroupItems, QTreeWidget* pTree, const QString& Name, int sortMode, int Depth = 0)
@@ -432,9 +550,9 @@ static QTreeWidgetItem* CSandMan__GetBoxParentTree(const QMap<QString, QStringLi
 			pParent->setFont(0, fnt);
 
 			if (QTreeWidgetItem* pParent2 = CSandMan__GetBoxParentTree(Groups, GroupItems, pTree, I.key(), sortMode, Depth + 1))
-				CSandMan__InsertGroupItemSorted(pTree, pParent2, pParent, I.key(), sortMode, Groups);
+				CSandMan__InsertTreeItemSorted(pTree, pParent2, pParent, I.key(), I.key(), sortMode, Groups);
 			else
-				CSandMan__InsertGroupItemSorted(pTree, nullptr, pParent, I.key(), sortMode, Groups);
+				CSandMan__InsertTreeItemSorted(pTree, nullptr, pParent, I.key(), I.key(), sortMode, Groups);
 		}
 
 		return pParent;
@@ -493,27 +611,12 @@ double CSandMan__GetBoxOrder(const QMap<QString, QStringList>& Groups, const QSt
 	return 1000000000;
 }
 
-// Builds the rich status tooltip shown on sandbox items — matches the format used in the main sandbox tree view.
+// Builds the rich status tooltip shown on sandbox items, matches the format used in the main sandbox tree view.
 static QString CSandMan__BuildBoxTooltip(const CSandBoxPlus* pBoxEx)
 {
 	if (!pBoxEx)
 		return QString();
-
-	QString boxName = pBoxEx->GetName();
-	QString boxAlias = pBoxEx->GetText("BoxAlias").trimmed();
-	QString boxAliasDisabled = pBoxEx->GetText("BoxAliasDisabled");
-	bool aliasEnabled = !boxAlias.isEmpty() && boxAliasDisabled.isEmpty();
-	QString tip = boxName + "\n";
-	if (aliasEnabled && boxAlias.compare(boxName, Qt::CaseSensitive) != 0)
-		tip += CSandMan::tr("    Alias: %1\n").arg(boxAlias);
-	tip += CSandMan::tr("    File root: %1\n").arg(pBoxEx->GetFileRoot());
-	tip += CSandMan::tr("    Registry root: %1\n").arg(pBoxEx->GetRegRoot());
-	tip += CSandMan::tr("    IPC root: %1\n").arg(pBoxEx->GetIpcRoot());
-	if (!pBoxEx->GetMountRoot().isEmpty())
-		tip += CSandMan::tr("    Disk root: %1\n").arg(pBoxEx->GetMountRoot());
-	tip += CSandMan::tr("Options:\n    ");
-	tip += pBoxEx->GetStatusStr().replace(", ", "\n    ");
-	return tip;
+	return pBoxEx->GetBoxToolTip();
 }
 
 // Returns a cached custom icon (BoxIcon / DblClickAction). Falls back to null QIcon if none found.
@@ -568,7 +671,7 @@ QAction* CSandMan__MakeBoxEntry(QMenu* pMenu, CSandBoxPlus* pBoxEx, QFileIconPro
 	if (!pBoxEx) return nullptr;
 
 	bool bTrayUseAlias = theConf ? theConf->GetBool("Options/TrayUseAlias", true) : true;
-	QString displayNameRaw = bTrayUseAlias ? pBoxEx->GetDisplayName() : pBoxEx->GetName();
+	QString displayNameRaw = bTrayUseAlias ? pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayCompact) : pBoxEx->GetName();
 	bool truncated = false;
 	QString displayName = CTrayTreeWidget::MakeTrayDisplayText(displayNameRaw, CTrayTreeWidget::GetTrayAliasMaxChars(bTrayUseAlias), &truncated);
 	QAction* pBoxAction = new QAction(displayName);
@@ -595,6 +698,7 @@ QAction* CSandMan__MakeBoxEntry(QMenu* pMenu, CSandBoxPlus* pBoxEx, QFileIconPro
 	}
 	pBoxAction->setData("box:" + pBoxEx->GetName());
 	pBoxAction->setMenu(pEmptyMenu);
+	pBoxAction->setProperty("tray_sort_name", displayNameRaw);
 	// Always store rich tooltip; OnBoxMenuHover decides whether to display it.
 	// When status tooltip mode is disabled, keep full-name tooltip only for truncated labels.
 	QString fallbackTip = truncated ? displayNameRaw : QString();
@@ -682,9 +786,9 @@ void CSandMan::CreateBoxMenu(QMenu* pMenu, int iOffset, int iSysTrayFilter)
 		QAction* pBoxAction = CSandMan__MakeBoxEntry(pMenu, pBoxEx.data(), IconProvider, iNoIcons, ColorIcons);
 		if (!pBoxAction) continue;
 		if (pSubMenu)
-			pSubMenu->addAction(pBoxAction);
+			CSandMan__InsertBoxMenuSorted(pSubMenu, nullptr, pBoxAction, sortMode, Groups);
 		else
-			pMenu->insertAction(pPos, pBoxAction);
+			CSandMan__InsertBoxMenuSorted(pMenu, pPos, pBoxAction, sortMode, Groups);
 		bAnyBoxAdded = true;
 	}
 
@@ -737,7 +841,7 @@ void CSandMan::OnBoxMenuHover(QAction* action)
 		action->setMenu(pMenu);
 	}
 
-	// Show rich tooltip manually — QAction+submenu combos don't auto-show Qt tooltips
+	// Show rich tooltip manually, QAction+submenu combos don't auto-show Qt tooltips
 	QString statusTip = action->toolTip();
 	QString fallbackTip = action->property("tray_fallback_tip").toString();
 	QString tipToShow;
@@ -768,6 +872,8 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 				break;
 
 			int iSysTrayFilter = theConf->GetInt("Options/SysTrayFilter", 0);
+			if (m_pTraySearch)
+				m_pTraySearch->clear();
 
 			if(!m_pTrayBoxes)
 				CreateBoxMenu(m_pTrayMenu, m_iTrayPos, iSysTrayFilter);
@@ -824,11 +930,12 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					QTreeWidgetItem* pParent = CSandMan__GetBoxParentTree(Groups, GroupItems, m_pTrayBoxes, pBox->GetName(), sortMode);
 
 					QTreeWidgetItem* pItem = new QTreeWidgetItem();
-					QString displayNameRaw = bTrayUseAlias ? pBoxEx->GetDisplayName() : pBoxEx->GetName();
+					QString displayNameRaw = bTrayUseAlias ? pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayCompact) : pBoxEx->GetName();
 					bool truncated = false;
 					QString displayName = CTrayTreeWidget::MakeTrayDisplayText(displayNameRaw, iTrayAliasMaxChars, &truncated);
 					pItem->setText(0, displayName);
 					pItem->setData(0, Qt::UserRole, pBox->GetName());
+					pItem->setData(0, Qt::UserRole + 2, displayNameRaw);
 					QIcon Icon;
 					if (bTrayIcons) {
 						QString boxIconStr  = pBox->GetText("BoxIcon");
@@ -847,10 +954,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					// Store both status and truncation tooltips; view logic picks one by mode/modifier
 					pItem->setToolTip(0, CSandMan__BuildBoxTooltip(pBoxEx.data()));
 					pItem->setData(0, Qt::UserRole + 1, truncated ? displayNameRaw : QString());
-					if (pParent)
-						pParent->addChild(pItem);
-					else
-						m_pTrayBoxes->addTopLevelItem(pItem);
+					CSandMan__InsertTreeItemSorted(m_pTrayBoxes, pParent, pItem, displayNameRaw, pBox->GetName(), sortMode, Groups);
 
 					bHasVisibleBoxes = true;
 				}
@@ -901,7 +1005,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					{
 						pItem = new QTreeWidgetItem();
 						pItem->setData(0, Qt::UserRole, pBox->GetName());
-						pItem->setText(0, "  " + pBoxEx->GetDisplayName());
+						pItem->setText(0, "  " + pBoxEx->GetDisplayName(CSandBoxPlus::eDisplayCompact));
 						m_pTrayBoxes->addTopLevelItem(pItem);
 
 						bAdded = true;
@@ -957,7 +1061,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					// Ensure the tree widget paints icons at the same size we measure
 					m_pTrayBoxes->setIconSize(QSize(iconSize, iconSize));
 					int indent = m_pTrayBoxes->indentation();
-					// Gap between icon and text, and right margin — scale proportionally with DPI
+					// Gap between icon and text, and right margin, scale proportionally with DPI
 					int spacing = qRound(4 * dpiScale);
 					int maxItemWidth = 0;
 					for (QTreeWidgetItemIterator it(m_pTrayBoxes, QTreeWidgetItemIterator::All); *it; ++it) {
@@ -986,7 +1090,9 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 				}
 			}
 
-			m_pTrayMenu->popup(QCursor::pos());	
+			m_pTrayMenu->popup(QCursor::pos());
+			if (m_pTraySearch)
+				m_pTraySearch->setFocus();
 			break;
 		}
 		case QSystemTrayIcon::DoubleClick:

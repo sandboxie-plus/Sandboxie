@@ -1129,7 +1129,7 @@ void CSandMan::OnView(QAction* pAction)
 	if (iView == 1) { // files
 		m_pBoxCombo->clear();
 		foreach(const CSandBoxPtr & pBox, theAPI->GetAllBoxes())
-			m_pBoxCombo->addItem(tr("Sandbox %1").arg(pBox->GetName().replace("_", "")), pBox->GetName());
+			m_pBoxCombo->addItem(tr("Sandbox %1").arg(GetBoxDisplayName(pBox, CSandBoxPlus::eDisplayCompact)), pBox->GetName());
 		m_pBoxCombo->setCurrentIndex(m_pBoxCombo->findData(theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox")));
 	}
 }
@@ -2492,6 +2492,13 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 	}
 
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+	const bool UseAsyncDelete = theConf->GetBool("Options/UseAsyncBoxOps", false) || theGUI->IsSilentMode();
+	QString AutoDeleteSnapshotTarget = pBox->GetText("AutoDeleteSnapshotTarget", QString(), true, true, true);
+	if (AutoDeleteSnapshotTarget.compare("Current", Qt::CaseInsensitive) != 0
+	 && AutoDeleteSnapshotTarget.compare("Default", Qt::CaseInsensitive) != 0)
+		AutoDeleteSnapshotTarget = UseAsyncDelete ? "Default" : "Current";
+	const bool UseCurrentSnapshot = Mode == eAuto
+		&& AutoDeleteSnapshotTarget.compare("Current", Qt::CaseInsensitive) == 0;
 
 	if (pBoxEx->UseImageFile()) {
 		if (pBoxEx->GetMountRoot().isEmpty()) {
@@ -2514,8 +2521,8 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 		// schedule async OnBoxDelete triggers and clean up
 		//
 
-		if (theConf->GetBool("Options/UseAsyncBoxOps", false) || theGUI->IsSilentMode())
-			return pBoxEx->DeleteContentAsync(DeleteSnapshots);
+		if (UseAsyncDelete)
+			return pBoxEx->DeleteContentAsync(DeleteSnapshots, UseCurrentSnapshot);
 	}
 
 	m_iDeletingContent++;
@@ -2550,17 +2557,17 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 		//
 
 		SB_PROGRESS Status;
-		if (Mode != eForDelete && !DeleteSnapshots && pBox->HasSnapshots()) { // in auto delete mode always return to last snapshot
+		if (Mode != eForDelete && !DeleteSnapshots && pBox->HasSnapshots()) {
 			QString Current;
 			QString Default = pBox->GetDefaultSnapshot(&Current);
-			Status = pBox->SelectSnapshot(Mode == eAuto ? Current : Default);
+			Status = pBox->SelectSnapshot(UseCurrentSnapshot ? Current : Default);
 		}
 		else // if there are no snapshots just use the normal cleaning procedure
 			Status = pBox->CleanBox();
 
 		Ret = Status;
 		if (Status.GetStatus() == OP_ASYNC) {
-			Ret = AddAsyncOp(Status.GetValue(), true, tr("Auto Deleting %1 Content").arg(pBox->GetName()));
+			Ret = AddAsyncOp(Status.GetValue(), true, tr("Auto Deleting %1 Content").arg(GetBoxDisplayName(pBox)));
 			OnBoxCleaned(qobject_cast<CSandBoxPlus*>(pBox.data()));
 		}
 	}
@@ -2798,7 +2805,7 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 				return;
 
 			if (theConf->GetBool("Options/AutoBoxOpsNotify", false))
-				OnLogMessage(tr("Auto deleting content of %1").arg(pBox->GetName()), true);
+				OnLogMessage(tr("Auto deleting content of %1").arg(GetBoxDisplayName(pBox)), true);
 
 			DeleteBoxContent(pBox, eAuto, DeleteSnapshots);
 		}
@@ -2810,7 +2817,7 @@ void CSandMan::OnBoxCleaned(CSandBoxPlus* pBoxEx)
 	if (pBoxEx->GetBool("AutoRemove", false))
 	{
 		if (theConf->GetBool("Options/AutoBoxOpsNotify", false))
-			OnLogMessage(tr("Auto removing sandbox %1").arg(pBoxEx->GetName()), true);
+			OnLogMessage(tr("Auto removing sandbox %1").arg(pBoxEx->GetDisplayName()), true);
 
 		pBoxEx->RemoveBox();
 		return;
@@ -2921,7 +2928,7 @@ void CSandMan::OnStatusChanged()
 
 			auto AllBoxes = theAPI->GetAllBoxes();
 
-			m_pBoxView->ClearUserUIConfig(AllBoxes);
+			m_pBoxView->ClearUserUIConfig(AllBoxes, true);
 
 			foreach(const QString & Key, theConf->ListKeys("SizeCache")) {
 				if (!AllBoxes.contains(Key.toLower()) || !theConf->GetBool("Options/WatchBoxSize", false))
@@ -3444,8 +3451,9 @@ QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData,
 	else if(MsgData.size() > 0)
 		Message = MsgData[0];
 
-	for (int i = 1; i < MsgData.size(); i++)
-		Message = Message.arg(MsgData[i]);
+	for (int i = 1; i < MsgData.size(); i++) {
+		Message = Message.arg(GetBoxDisplayName(MsgData[i]));
+	}
 
 	if (ProcessName != "System") // if it's not from the driver, add the pid
 		Message.prepend(ProcessName + ": ");
@@ -3484,14 +3492,15 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 	if ((MsgCode & 0xFFFF) == 6004 || (MsgCode & 0xFFFF) == 6008 || (MsgCode & 0xFFFF) == 6009) // certificate error
 	{
 		QString Message;
+		QString BoxDisplayName = GetBoxDisplayName(MsgData[1]);
 		if ((MsgCode & 0xFFFF) == 6008)
 		{
-			Message = tr("The box %1 is configured to use features exclusively available to project supporters.").arg(MsgData[1]);
+			Message = tr("The box %1 is configured to use features exclusively available to project supporters.").arg(BoxDisplayName);
 			Message.append(tr("<br /><a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>"));
 		}
 		else if ((MsgCode & 0xFFFF) == 6009)
 		{
-			Message = tr("The box %1 is configured to use features which require an <b>advanced</b> supporter certificate.").arg(MsgData[1]);
+			Message = tr("The box %1 is configured to use features which require an <b>advanced</b> supporter certificate.").arg(BoxDisplayName);
 			if(g_CertInfo.active)
 				Message.append(tr("<br /><a href=\"https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert\">Upgrade your Certificate</a> to unlock advanced features."));
 			else
@@ -3504,9 +3513,9 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 				iLastCertWarning = QDateTime::currentDateTime().toSecsSinceEpoch();
 
 				if (!MsgData[2].isEmpty())
-					Message = tr("The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.").arg(MsgData[2]).arg(MsgData[1]);
+					Message = tr("The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.").arg(MsgData[2]).arg(BoxDisplayName);
 				else
-					Message = tr("The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.").arg(MsgData[1]);
+					Message = tr("The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.").arg(BoxDisplayName);
 				Message.append(tr("<br /><a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>"));
 
 				//bCertWarning = false;
@@ -3566,6 +3575,18 @@ void CSandMan::ShowMessageBox(QWidget* Widget, QMessageBox::Icon Icon, const QSt
 	msgBox.exec();
 }
 
+QString CSandMan::GetBoxDisplayName(const CSandBoxPtr& pBox, CSandBoxPlus::EDisplayNameContext Context)
+{
+	QSharedPointer<CSandBoxPlus> pBoxEx = pBox.objectCast<CSandBoxPlus>();
+	return pBoxEx ? pBoxEx->GetDisplayName(Context) : (pBox ? pBox->GetName() : QString());
+}
+
+QString CSandMan::GetBoxDisplayName(const QString& BoxName, CSandBoxPlus::EDisplayNameContext Context)
+{
+	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+	return pBox ? GetBoxDisplayName(pBox, Context) : BoxName;
+}
+
 void CSandMan::SaveMessageLog(QIODevice* pFile)
 {
 	foreach(const SSbieMsg& Msg, m_MessageLog)
@@ -3578,7 +3599,6 @@ bool CSandMan::SetCertificate(const QByteArray& Certificate)
 	SB_STATUS Status = theAPI->SetDatFile("Certificate.dat", Certificate);
 	return Status;
 }
-
 
 bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 {
@@ -4198,10 +4218,8 @@ void CSandMan::OnAutoExpand()
 {
 	theConf->SetValue("Options/AutoExpandTree", m_pAutoExpand->isChecked());
 
-	if (m_pAutoExpand->isChecked())
-		m_pBoxView->GetTree()->expandAll();
-	else
-		m_pBoxView->GetTree()->collapseAll();
+	m_pBoxView->SetAutoExpand(m_pAutoExpand->isChecked(),
+		theConf->GetBool("Options/LegacyAutoExpandTree", false));
 }
 
 void CSandMan::OnSettings()
@@ -4648,8 +4666,14 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	default:				return tr("Unknown Error Status: 0x%1").arg((quint32)Error.GetStatus(), 8, 16, QChar('0'));
 	}
 
-	foreach(const QVariant& Arg, Error.GetArgs())
-		Message = Message.arg(Arg.toString()); // todo: make quint32 hex and so on
+	int ArgIndex = 0;
+	foreach(const QVariant& Arg, Error.GetArgs()) {
+		QString Value = Arg.toString();
+		if (Error.GetMsgCode() == SB_DeleteFailed && ArgIndex == 0)
+			Value = GetBoxDisplayName(Value);
+		Message = Message.arg(Value); // todo: make quint32 hex and so on
+		ArgIndex++;
+	}
 
 	return Message;
 }

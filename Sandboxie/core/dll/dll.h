@@ -185,6 +185,7 @@ typedef struct _THREAD_DATA {
     //
 
     ULONG file_dont_strip_write_access;
+    ULONG file_dont_block_junction_raw_access;
 
     //
     // misc modules
@@ -505,6 +506,9 @@ BOOLEAN File_IsBlockedNetParam(const WCHAR *BoxName);
 void File_GetSetDeviceMap(WCHAR *DeviceMap96);
 
 void File_NotifyRecover(HANDLE FileHandle, void* CloseParams);
+
+BOOLEAN File_Junction_IsMappedSrc(const WCHAR *Path, ULONG PathLen);
+WCHAR *File_ApplyJunctionMap(THREAD_DATA *TlsData, WCHAR *TruePath);
 
 //---------------------------------------------------------------------------
 // Functions (key)

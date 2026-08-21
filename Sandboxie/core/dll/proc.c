@@ -857,7 +857,7 @@ BOOLEAN Proc_IsLikelyElectronProcess(const WCHAR *cmd)
 //}
 
 
-//
+//---------------------------------------------------------------------------
 // Starting with build 5.49.9 Proc_CreateProcessInternalW_RS5 and
 // Proc_CreateProcessInternalW have been unified in order to avoid duplicate code
 //

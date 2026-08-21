@@ -507,6 +507,7 @@ BOOLEAN Dll_UseChromeSecurePreferencesHack = FALSE;
 
 #include <winioctl.h>
 #include "file_link.c"
+#include "file_junction.c"
 #include "file_pipe.c"
 #include "file_del.c"
 #include "file_snapshots.c"
@@ -1539,6 +1540,59 @@ check_sandbox_prefix:
             }
 
             *name = L'\0';
+        }
+    }
+
+    //
+    // block raw (reverse) access to junction destination paths, unless
+    // it was disabled with JunctionBlockRawAccess=n.  the block applies
+    // only to path opens (objname_len != 0) of paths that are not already
+    // inside the sandbox, since a box copy path is the program's own
+    // sandboxed copy, not a direct access to the real destination.
+    // neither the block nor the forward mapping applies to paths under
+    // the Sandboxie home directory, to keep the sandbox's own binaries
+    // from being remapped.
+    //
+    // the forward mapping applies to any resolved true path, including
+    // paths derived from a file handle (objname_len == 0), so that a
+    // directory handle opened at a junction source path enumerates the
+    // junction target consistently with the way path opens are mapped.
+    // note that the junction entries are matched in both DOS form and
+    // NT device form, since the true path at this point is an NT
+    // device path while process creation checks may pass DOS paths
+    //
+
+    if (TruePath && ! File_Junction_IsHomePath(TruePath, wcslen(TruePath))) {
+
+        if (Dll_FileTrace) {
+            WCHAR dbg[512];
+            Sbie_snwprintf(dbg, 512, L"junction: TruePath=%s objname=%u boxed=%d",
+                TruePath, objname_len, (int)is_boxed_path);
+            SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
+        }
+
+        if (objname_len && !is_boxed_path &&
+                ! TlsData->file_dont_block_junction_raw_access &&
+                File_Junction_BlockRawAccessPath(TruePath, wcslen(TruePath))) {
+            if (Dll_FileTrace)
+                SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE,
+                    L"junction: blocked raw access");
+            status = STATUS_ACCESS_DENIED;
+            return status;
+        }
+
+        //
+        // apply junction path mapping, before the true path is
+        // converted into the sandbox copy path
+        //
+
+        WCHAR *JunctionPath = File_ApplyJunctionMap(TlsData, TruePath);
+        if (JunctionPath != TruePath) {
+            if (Dll_FileTrace)
+                SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE,
+                    L"junction: mapped to target");
+            TruePath = JunctionPath;
+            *OutTruePath = TruePath;
         }
     }
 
@@ -6502,6 +6556,22 @@ _FX NTSTATUS File_NtQueryInformationFile(
 
             if (SbieDll_TranslateNtToDosPath(TruePath)) {
                 TruePathLen = wcslen(TruePath);
+
+                //
+                // apply reverse junction path mapping so that the
+                // caller sees the virtual path it used to open the file
+                //
+
+                if (TruePathLen >= 3 && TruePath[1] == L':') {
+
+                    WCHAR *JunctionPath = File_ApplyJunctionMapReverse(
+                        TlsData, TruePath, TruePathLen);
+                    if (JunctionPath) {
+                        TruePath = JunctionPath;
+                        TruePathLen = wcslen(TruePath);
+                    }
+                }
+
                 if (TruePathLen >= 2 && TruePath[1] == L':') {
                     if (TruePathLen == 2)
                         TruePathLen = 0;
@@ -6861,6 +6931,24 @@ _FX ULONG File_GetFinalPathNameByHandleW(
         rc = __sys_GetFinalPathNameByHandleW(
                     hFile, lpszFilePath, cchFilePath, dwFlags);
         err = GetLastError();
+    }
+
+    //
+    // if the result is a DOS drive path, apply reverse junction
+    // path mapping so that the caller sees the virtual path
+    //
+
+    if (rc >= 6 && rc < cchFilePath &&
+            lpszFilePath[0] == L'\\' && lpszFilePath[1] == L'\\' &&
+            lpszFilePath[2] == L'?' && lpszFilePath[3] == L'\\' &&
+            (lpszFilePath[4] >= L'A' && lpszFilePath[4] <= L'Z' ||
+             lpszFilePath[4] >= L'a' && lpszFilePath[4] <= L'z') &&
+            lpszFilePath[5] == L':') {
+
+        ULONG JunctionLen = File_ApplyJunctionMapReverseInPlace(
+            lpszFilePath + 4, rc - 4, cchFilePath - 4);
+        if (JunctionLen)
+            rc = JunctionLen + 4;
     }
 
     if (Dll_ApiTrace || Dll_FileTrace) {
@@ -7507,6 +7595,7 @@ _FX NTSTATUS File_SetAttributes(
         RtlInitUnicodeString(&objname, TruePath);
 
         ++TlsData->file_dont_strip_write_access;
+        ++TlsData->file_dont_block_junction_raw_access;
 
         status = NtCreateFile(
             &FileHandle,
@@ -7514,6 +7603,7 @@ _FX NTSTATUS File_SetAttributes(
             &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
             FILE_OPEN_IF, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
 
+        --TlsData->file_dont_block_junction_raw_access;
         --TlsData->file_dont_strip_write_access;
 
         if (! NT_SUCCESS(status))
@@ -7961,6 +8051,7 @@ _FX NTSTATUS File_OpenForRenameFile(
     RtlInitUnicodeString(&objname, TruePath);
 
     ++TlsData->file_dont_strip_write_access;
+    ++TlsData->file_dont_block_junction_raw_access;
 
     status = NtCreateFile(
         pSourceHandle, FILE_GENERIC_WRITE | DELETE, &objattrs,
@@ -7986,6 +8077,7 @@ _FX NTSTATUS File_OpenForRenameFile(
             FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
     }
 
+    --TlsData->file_dont_block_junction_raw_access;
     --TlsData->file_dont_strip_write_access;
 
     return status;
@@ -8217,6 +8309,7 @@ _FX NTSTATUS File_RenameFile(
     RtlInitUnicodeString(&objname, TargetTruePath);
 
     ++TlsData->file_dont_strip_write_access;
+    ++TlsData->file_dont_block_junction_raw_access;
 
     status = NtCreateFile(
         &TargetHandle, FILE_GENERIC_WRITE, &objattrs,
@@ -8262,6 +8355,7 @@ _FX NTSTATUS File_RenameFile(
         }
     }
 
+    --TlsData->file_dont_block_junction_raw_access;
     --TlsData->file_dont_strip_write_access;
 
     *TargetFileName = save_char;

@@ -1,0 +1,15 @@
+name: "Check Is PR included deprecated terms"
+on: 
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+
+jobs:
+  check_pr:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check Is PR included deprecated terms
+      uses: JJ/github-pr-contains-action@releases/v14.1.2
+      with:
+        github-token: ${{github.token}}
+        diffDoesNotContain: "沙盒|沙箱|沙盘"
+        waivedUsers: "dependabot[bot]"

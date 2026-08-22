@@ -1,0 +1,38 @@
+name: "Check Is PR included deprecated terms"
+on: 
+  pull_request_target:
+    types: [opened, synchronize, ready_for_review]
+permissions:
+    pull-requests: write
+jobs:
+  check_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Is PR included deprecated terms
+        id: check
+        uses: JJ/github-pr-contains-action@releases/v14.1.2
+        with:
+          github-token: ${{ github.token }}
+          diffDoesNotContain: "沙箱|沙盘"
+          waivedUsers: "dependabot[bot]"
+
+      - name: Post comment on failure
+        if: failure() && steps.check.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚫 **Failed to pass the term check**
+
+              Your pull request diff was checked to contain the following terms:
+
+              "沙箱""沙盘"
+
+              Unless the PR author explicitly confirms that this change is necessary, or this pull request is unrelated to localization changes, maintainers should not merge it. 
+              For the discussion on the Chinese translation of 'Sandbox', please refer to #5546.
+             `
+            })

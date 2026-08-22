@@ -82,6 +82,8 @@ BOOLEAN WSA_InitNetDnsFilter(HMODULE module);
 
 static int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol);
 
+static BOOLEAN WSA_IsPrivateNet(const short *addr, int addrlen);
+
 static int WSA_WSAStartup(
     WORD wVersionRequested,
     void* lpWSAData);
@@ -335,6 +337,7 @@ static LIST             WSA_FwList;
 
 static BOOLEAN          WSA_WFPisEnabled      = FALSE;
 static BOOLEAN          WSA_WFPisBlocking     = FALSE;
+static BOOLEAN          WSA_BlockPrivateNet   = FALSE;
 
 static BOOLEAN          WSA_TraceFlag         = FALSE;
 
@@ -1159,6 +1162,48 @@ _FX int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol)
 
 
 //---------------------------------------------------------------------------
+// WSA_IsPrivateNet
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN WSA_IsPrivateNet(const short *addr, int addrlen)
+{
+    IP_ADDRESS ip;
+    if (!WSA_GetIP(addr, addrlen, &ip))
+        return FALSE;
+
+    // IPv4-mapped IPv6 address (::FFFF:x.x.x.x)
+    if (ip.Data32[0] == 0 && ip.Data32[1] == 0 && ip.Data32[2] == 0xFFFF0000)
+    {
+        ULONG ipv4_net = ((ULONG)ip.Data[12] << 24) |
+                         ((ULONG)ip.Data[13] << 16) |
+                         ((ULONG)ip.Data[14] << 8)  |
+                         ip.Data[15];
+
+        if ((ipv4_net & 0xFF000000) == 0x0A000000)      // 10.0.0.0/8
+            return TRUE;
+        if ((ipv4_net & 0xFFF00000) == 0xAC100000)      // 172.16.0.0/12
+            return TRUE;
+        if ((ipv4_net & 0xFFFF0000) == 0xC0A80000)      // 192.168.0.0/16
+            return TRUE;
+        if ((ipv4_net & 0xFFFF0000) == 0xA9FE0000)      // 169.254.0.0/16
+            return TRUE;
+        return FALSE;
+    }
+
+    // IPv6 unique local (FC00::/7)
+    if ((ip.Data[0] & 0xFE) == 0xFC)
+        return TRUE;
+
+    // IPv6 link-local (FE80::/10)
+    if (ip.Data[0] == 0xFE && (ip.Data[1] & 0xC0) == 0x80)
+        return TRUE;
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
 // WSA_BypassProxy
 //---------------------------------------------------------------------------
 
@@ -1341,6 +1386,11 @@ _FX int WSA_connect(
 		 return SOCKET_ERROR;
 	}
 
+    if (WSA_BlockPrivateNet && WSA_IsPrivateNet(name, namelen)) {
+        SetLastError(WSAECONNREFUSED);
+        return SOCKET_ERROR;
+    }
+
     // If BindIP is configured, try to bind the socket to the configured adapter
     // When StrictBindIP=n, we allow connections even if adapter is unavailable
     // When StrictBindIP=y, we block if adapter is down (security-first approach)
@@ -1422,6 +1472,11 @@ _FX int WSA_WSAConnect(
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
 
+    if (WSA_BlockPrivateNet && WSA_IsPrivateNet(name, namelen)) {
+        SetLastError(WSAECONNREFUSED);
+        return SOCKET_ERROR;
+    }
+
     // If BindIP is configured, try to bind the socket to the configured adapter
     // When StrictBindIP=n, we allow connections even if adapter is unavailable
     // When StrictBindIP=y, we block if adapter is down (security-first approach)
@@ -1502,6 +1557,11 @@ _FX int WSA_ConnectEx(
 {
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
+
+    if (WSA_BlockPrivateNet && WSA_IsPrivateNet(name, namelen)) {
+        SetLastError(WSAECONNREFUSED);
+        return SOCKET_ERROR;
+    }
 
     // If BindIP is configured, try to bind the socket to the configured adapter
     // When StrictBindIP=n, we allow connections even if adapter is unavailable
@@ -1680,6 +1740,11 @@ _FX int WSA_sendto(
     if (WSA_IsBlockedTraffic(to, tolen, IPPROTO_UDP))
         return SOCKET_ERROR;
 
+    if (WSA_BlockPrivateNet && WSA_IsPrivateNet(to, tolen)) {
+        SetLastError(WSAECONNREFUSED);
+        return SOCKET_ERROR;
+    }
+
     // If BindIP is configured, try to bind the socket
     // With StrictBindIP=n, allow sending even if adapter unavailable
     if (WSA_BindIP) {
@@ -1720,6 +1785,11 @@ _FX int WSA_WSASendTo(
 {
     if (WSA_IsBlockedTraffic(lpTo, iTolen, IPPROTO_UDP))
         return SOCKET_ERROR;
+
+    if (WSA_BlockPrivateNet && WSA_IsPrivateNet(lpTo, iTolen)) {
+        SetLastError(WSAECONNREFUSED);
+        return SOCKET_ERROR;
+    }
 
     // If BindIP is configured, try to bind the socket
     // With StrictBindIP=n, allow sending even if adapter unavailable
@@ -1787,6 +1857,9 @@ _FX int WSA_recvfrom(
     if (WSA_IsBlockedTraffic(from, *fromlen, IPPROTO_UDP))
         return SOCKET_ERROR;
 
+    if (WSA_BlockPrivateNet && WSA_IsPrivateNet(from, *fromlen))
+        return SOCKET_ERROR;
+
     return ret;
 }
 
@@ -1836,6 +1909,9 @@ _FX int WSA_WSARecvFrom(
         lpFlags, lpFrom, lpFromlen, lpOverlapped, lpCompletionRoutine);
 
     if (WSA_IsBlockedTraffic(lpFrom, *lpFromlen, IPPROTO_UDP))
+        return SOCKET_ERROR;
+
+    if (WSA_BlockPrivateNet && WSA_IsPrivateNet(lpFrom, *lpFromlen))
         return SOCKET_ERROR;
 
     return ret;
@@ -2629,8 +2705,10 @@ _FX BOOLEAN WSA_Init(HMODULE module)
     WSA_WFPisEnabled = (Dll_DriverFlags & SBIE_FEATURE_FLAG_WFP) != 0;
     if(WSA_WFPisEnabled)
         WSA_WFPisBlocking = !Config_GetSettingsForImageName_bool(L"AllowNetworkAccess", TRUE);
-    else // load rules only when the driver is not doing the filtering
+    else { // load rules only when the driver is not doing the filtering
         WSA_InitNetFwRules();
+        WSA_BlockPrivateNet = Config_GetSettingsForImageName_bool(L"BlockPrivateNet", FALSE);
+    }
 
     //
     // hook required WS2 functions

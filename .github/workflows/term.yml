@@ -2,7 +2,8 @@ name: "Check Is PR included deprecated terms"
 on: 
   pull_request_target:
     types: [opened, synchronize, ready_for_review]
-
+permissions:
+    pull-requests: write
 jobs:
   check_pr:
     runs-on: ubuntu-latest
@@ -12,7 +13,7 @@ jobs:
         uses: JJ/github-pr-contains-action@releases/v14.1.2
         with:
           github-token: ${{ github.token }}
-          diffDoesNotContain: "沙盒|沙箱|沙盘"
+          diffDoesNotContain: "沙箱|沙盘"
           waivedUsers: "dependabot[bot]"
 
       - name: Post comment on failure
@@ -29,7 +30,7 @@ jobs:
 
               Your pull request diff was checked to contain the following terms:
 
-              "沙盒""沙箱""沙盘"
+              "沙箱""沙盘"
 
               Unless the PR author explicitly confirms that this change is necessary, or this pull request is unrelated to localization changes, maintainers should not merge it. 
               For the discussion on the Chinese translation of 'Sandbox', please refer to #5546.

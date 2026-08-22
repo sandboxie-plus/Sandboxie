@@ -1319,6 +1319,7 @@ bool COptionsWindow::apply()
 	CloseNetFwEdit();
 	CloseAccessEdit();
 	CloseOptionEdit();
+	CloseCopyEdit();
     CloseNetProxyEdit();
 
 	if (!ui.btnEditIni->isEnabled())

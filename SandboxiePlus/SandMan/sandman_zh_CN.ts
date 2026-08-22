@@ -2891,22 +2891,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>该沙箱已被删除，因此无法保存配置。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1378"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1379"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>部分变更未保存，您确定要关闭这个选项窗口吗？</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1875"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1876"/>
         <source>Autocomplete Consent Required</source>
         <translation>需要同意启用自动完成</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1877"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1878"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>自动完成功能需要您的同意才能继续。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1879"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1880"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -2919,27 +2919,27 @@ Choose autocomplete mode:
 %1 输入时：在输入过程中显示自动补全建议。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1887"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1888"/>
         <source>Manual</source>
         <translation>手动</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1888"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1889"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>通过%1触发自动补全建议。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1890"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1891"/>
         <source>While Typing</source>
         <translation>输入时</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1891"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1892"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>输入时触发自动补全建议。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1894"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1895"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>保持自动补全建议处于禁用状态。</translation>
     </message>
@@ -2972,7 +2972,7 @@ Choose autocomplete mode:
         <translation type="vanished">在键入时启用自动完成并进行大小写更正</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1893"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1894"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -3025,8 +3025,8 @@ Do you wish to enable autocomplete?</source>
         <translation>请输入一则命令</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1416"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1434"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1417"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1435"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="739"/>
@@ -3043,7 +3043,7 @@ Do you wish to enable autocomplete?</source>
         <translation>请输入新组的名称</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1427"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1428"/>
         <source>Enter program:</source>
         <translation>请输入程序：</translation>
     </message>
@@ -3257,7 +3257,7 @@ Do you wish to enable autocomplete?</source>
         <translation>所有文件 (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1418"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1419"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="986"/>

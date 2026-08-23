@@ -872,7 +872,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="488"/>
         <source>Confidential Encrypted Box</source>
-        <translation>保密加密沙箱</translation>
+        <translation>机密型加密沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="616"/>
@@ -12819,7 +12819,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1728"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
-        <translation>Sandboxie-Plus 提供了许多选项，并支持广泛的扩展。在此页面上，您可以配置加载项、插件及其他第三方组件的集成。可选组件可以从网络下载，安装某些组件可能需要管理员权限。</translation>
+        <translation>Sandboxie-Plus 提供丰富的选项，并支持多种扩展。您可以在此页面配置加载项、插件及其他第三方组件的集成。可从网络下载可选组件，安装某些组件可能需要管理员权限。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1764"/>

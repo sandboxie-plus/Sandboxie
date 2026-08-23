@@ -322,7 +322,7 @@ ErrorRestartReplace=重新啟動電腦後取代檔案失敗:
 ErrorRenamingTemp=在目的資料夾變更檔案名稱時發生錯誤:
 ErrorRegisterServer=無法註冊 DLL/OCX 檔案: %1。
 ErrorRegSvr32Failed=RegSvr32 失敗；結束代碼 %1
-ErrorRegisterTypeLib=無法註冊類型庫: %1。
+ErrorRegisterTypeLib=無法註冊類型程式庫：%1
 
 ; *** Uninstall display name markings
 ; used for example as 'My Program (32-bit)'

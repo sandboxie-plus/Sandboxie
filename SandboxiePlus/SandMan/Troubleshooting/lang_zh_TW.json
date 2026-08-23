@@ -55,7 +55,7 @@
 "Select a sandbox to install into": "選取要安裝應用程式的沙箱",
 "This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "此沙箱已啟用 DropAdminRights，因此無法執行安裝程式。要停用此限制嗎？這會降低安全性等級。",
 "Disable DropAdminRights": "停用 DropAdminRights",
-"Enable FakeAdminRights": "使應用程式認為其已在權限提升狀態下執行",
+"Enable FakeAdminRights": "讓應用程式認為自己擁有系統管理員權限",
 "running installer, pid: %1 press NEXT once it finishes to continue": "正在執行安裝程式，PID：%1。完成後按「下一步」繼續",
 "Was the issue resolved?": "問題解決了嗎？",
 "no mitigation worked": "沒有任何修正措施奏效",

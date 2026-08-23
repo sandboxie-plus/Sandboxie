@@ -634,7 +634,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="104"/>
         <source>Show sandbox aliases (reads archive configuration)</source>
-        <translation>顯示沙箱別名（會讀取封存檔組態）</translation>
+        <translation>顯示沙箱別名（會讀取封存檔中的組態）</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="105"/>
@@ -7891,12 +7891,12 @@ Before sending you can review the logs in the main window.</oldsource>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="854"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
-        <translation>我們對您正在 Sandboxie-Plus 中面臨的不便深表歉意。 </translation>
+        <translation>對於您目前使用 Sandboxie-Plus 時遇到的不便，我們深感抱歉。&#x20;</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="861"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
-        <translation>不幸的是，自動化疑難排解流程失敗。 </translation>
+        <translation>很遺憾，自動疑難排解程序失敗。&#x20;</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="867"/>
@@ -10966,12 +10966,12 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
         &amp;nbsp;&amp;nbsp;→ 從跳出視窗中選擇以&lt;u&gt;自動套用&lt;/u&gt;正確的大小寫&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Enter/Return&lt;/code&gt; 確認選擇&lt;br&gt;
         &lt;br&gt;
-        • &lt;u&gt;手動修正&lt;/u&gt;: 在輸入設定後=&lt;br&gt;
+        • &lt;u&gt;手動修正&lt;/u&gt;：輸入「設定名稱=」後&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Ctrl+R&lt;/code&gt; 將跳出提示以進行大小寫修正&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;: 自動完成 + 大小寫修正&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;: 僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
+        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已勾選&lt;/span&gt;：自動完成 + 大小寫修正&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分勾選&lt;/span&gt;：僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;導覽:&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在跳出視窗中移動&lt;br&gt;
@@ -12680,12 +12680,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         &amp;nbsp;&amp;nbsp;→ 從跳出式視窗中選擇以&lt;u&gt;自動套用&lt;/u&gt;正確的大小寫&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Enter/Return&lt;/code&gt; 確認選擇&lt;br&gt;
         &lt;br&gt;
-        • &lt;u&gt;手動修正&lt;/u&gt;: 在輸入設定後=&lt;br&gt;
+        • &lt;u&gt;手動修正&lt;/u&gt;：輸入「設定名稱=」後&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Ctrl+R&lt;/code&gt; 將跳出提示以進行大小寫修正&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;: 自動完成 + 大小寫修正&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;: 僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
+        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已勾選&lt;/span&gt;：自動完成 + 大小寫修正&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分勾選&lt;/span&gt;：僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;導覽:&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在跳出式視窗中移動&lt;br&gt;

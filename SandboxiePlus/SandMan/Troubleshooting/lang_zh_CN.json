@@ -63,7 +63,7 @@
 "Webcam or Sound does not work when sandboxed": "网络摄像头或声音在沙箱中无法使用/不能播放",
 "This procedure enables webcam and sound support on Windows 11": "此过程将在 Windows 11 上启用摄像头和声音支持",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "要在 Windows 11 上启用网络摄像头支持，必须降低隔离级别。\n如果要继续，请按“下一步”并选择要修改的沙箱。\n",
-"Select which box to turn into a reduced isolation app compartment box.": "选择要转换为低隔离级别应用隔离型沙箱的沙箱。",
+"Select which box to turn into a reduced isolation app compartment box.": "选择要将哪个沙箱转换为低隔离级别的应用隔离型沙箱。",
 "The mitigation has been applied. Please try out the webcam in %1 and indicate if the issue has been resolved.": "已应用解决措施，请试用 %1 中的网络摄像头，并指示问题是否已解决。",
 "Webcam mitigation not successful": "网络摄像头解决措施不成功",
 
@@ -97,7 +97,7 @@
 "DACLs fix did not resolve the issue": "“DACL 条目修复” 未解决问题",
 
 "SBIE2189: Application is likely chromium based": "SBIE2189：应用程序可能基于 Chromium",
-"Application is likely chromium based but its image type is not set to chrome": "应用程序可能基于 Chromium，但其映像类型未设置为 Chrome",
+"Application is likely chromium based but its image type is not set to chrome": "应用程序可能基于 Chromium，但其映像类型未设置为 chrome",
 "The Process \"%1\" is likely chromium based but its image type is not set to chrome, it is likely to fail. Do you want to set its ImageType setting to chrome for this box?": "进程“%1”可能基于 Chromium，但其映像类型未设置为 Chrome，因此可能无法正常运行。是否要将此沙箱的 ImageType 设置为 chrome？",
 "Yes, add \"%1\" to Sandboxie.ini": "是的，将“%1”添加到 Sandboxie.ini",
 "No, report application to sbie devs": "否，向 Sandboxie 开发人员报告此应用程序",
@@ -148,5 +148,5 @@
 
 "Viber crashes on startup": "Viber 在启动时崩溃",
 "The Viber messenger crashes on startup": "Viber即时通讯软件在启动时崩溃了",
-"Viber is not compatible with the standard isolation yellow type Sandbox. However, it is known to work in a Green (App Compartment) type sandbox.": "Viber 与黄色的标准隔离型沙箱不兼容，但已知可在绿色（应用隔离）型沙箱中正常运行。"
+"Viber is not compatible with the standard isolation yellow type Sandbox. However, it is known to work in a Green (App Compartment) type sandbox.": "Viber 与黄色的标准隔离型沙箱不兼容，但已知可在绿色应用隔离型沙箱中正常运行。"
 }

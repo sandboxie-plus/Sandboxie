@@ -3,22 +3,24 @@
 - Please note: there is another [ReadMe.md](./install/ReadMe.md) file in the [install](./install/) folder that explains how to create the Sandboxie Classic installers.
 - Please note: the following instructions may lag behind the [CI workflow](../.github/workflows/main.yml), so be aware of any version change.
 
-Sandboxie Classic builds under Visual Studio 2019, as it offers the widest compatibility range, allowing us to build a driver which works with Windows 7 up to Windows 11.
+Sandboxie Classic builds under Visual Studio 2022.
 
-1) Download [Visual Studio 2019](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products)
-2) In the Visual Studio Installer, tick _Desktop development with C++_
-	- This includes the Windows 10 SDK 10.0.19041
-3) The _MFC for latest v142 build tools {architecture}_ is also needed. Select it from the side panel or from the individual components tab
-4) If you need to build for other platforms, install the corresponding components
-	- _MSVC v142 - VS 2019 C++ {architecture} build tools (Latest)_
-	- _MFC for latest v142 build tools {architecture}_
-5) Install the Windows Driver Kit (WDK) for Windows 10, version 2004 (10.0.19041):
-	https://go.microsoft.com/fwlink/?linkid=2128854
-6) The VS Solution File, Sandbox.sln, is in the source code root. Open this SLN in Visual Studio.
-7) If the WDK Extension doesn't install automatically, install it (can be found in <Windows Kits directory>\10\Vsix\VS2019)
-8) If you have a more recent Windows SDK version installed, retarget the solution to 10.0.19041
-	- This is for example necessary if VS 2022 is also installed with the default desktop C++ components
-9) To compile for x64, it's necessary to first compile `core/low/LowLevel.vcxproj` for Win32 (x86)
+1) Download [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
+2) In the Visual Studio Installer, select _Desktop development with C++_ and a current Windows SDK
+3) Install the _MSVC v143_ and _MFC_ components for each platform you want to build
+4) Install a matching [Windows Driver Kit (WDK)](https://learn.microsoft.com/windows-hardware/drivers/download-the-wdk)
+5) The WDK installer should also install its Visual Studio extension; rerun the WDK installer if the driver project is unavailable in Visual Studio
+6) The `Sandbox.sln` solution is in the `Sandboxie` directory
+7) Keep the toolsets selected by the project files; do not retarget every project or add WDK include paths manually
+8) To compile an x64 release, first build the required Win32 service and DLL components, then the x64 solution and driver:
+
+```bat
+msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
+msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
+msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
+```
+
+These commands can be run from a Visual Studio 2022 Developer Command Prompt in the repository root. For ARM64 and ARM64EC, see the current commands in the [CI workflow](../.github/workflows/main.yml).
 
 ### Source projects (in alphabetical order)
 

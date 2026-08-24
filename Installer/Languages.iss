@@ -145,7 +145,7 @@ ChineseSimplified.InstallImDisk=安装（或更新）ImDisk 3.0驱动程序（�
 ChineseSimplified.Qt6Win10Unsupported=Qt 6 框架不支持 Windows 10 版本 1507、1511 或 1607。%n请升级到 Windows 10 1809（版本 17763）或更高版本。%n详情请参阅问题 #5079：%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n您仍想继续安装吗？
 
 ; Chinese Traditional
-ChineseTraditional.AddSandboxedMenu=將「在沙箱中執行」加入環境選單
+ChineseTraditional.AddSandboxedMenu=將「在沙箱中執行」加入右鍵選單
 ChineseTraditional.AddSandboxedBrowser=在桌面建立用於在沙箱中啟動網頁瀏覽器的捷徑
 ChineseTraditional.SandboxieStartMenu1=在沙箱中執行任何程式
 ChineseTraditional.SandboxieStartMenu2=在沙箱中執行網頁瀏覽器

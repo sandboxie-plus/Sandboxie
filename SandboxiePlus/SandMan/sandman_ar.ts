@@ -1340,7 +1340,7 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="939"/>
+        <location filename="Views/FileView.cpp" line="1215"/>
         <source>%1 - Files</source>
         <translation>%1 - ملفات</translation>
     </message>
@@ -1348,49 +1348,49 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="619"/>
+        <location filename="Views/FileView.cpp" line="889"/>
         <source>Create Shortcut</source>
         <translation>إنشاء اختصار</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="642"/>
+        <location filename="Views/FileView.cpp" line="912"/>
         <source>Pin to Box Run Menu</source>
         <translation>تثبيت في قائمة تشغيل الصندوق</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="649"/>
+        <location filename="Views/FileView.cpp" line="919"/>
         <source>Recover to Any Folder</source>
         <translation>استرداد إلى أي مجلد</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="651"/>
+        <location filename="Views/FileView.cpp" line="921"/>
         <source>Recover to Same Folder</source>
         <translation>استرداد إلى نفس المجلد</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="655"/>
+        <location filename="Views/FileView.cpp" line="925"/>
         <source>Run Recovery Checks</source>
         <translation>تشغيل فحوصات الاسترداد</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="792"/>
+        <location filename="Views/FileView.cpp" line="1051"/>
         <source>Select Directory</source>
         <translation>حدد الدليل</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="863"/>
+        <location filename="Views/FileView.cpp" line="1139"/>
         <source>Delete Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="864"/>
+        <location filename="Views/FileView.cpp" line="1140"/>
         <source>The selected files could not be deleted.
 
 Error: 0x%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="893"/>
+        <location filename="Views/FileView.cpp" line="1169"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>إنشاء اختصار إلى صندوق العزل %1</translation>
     </message>

@@ -1397,7 +1397,7 @@ Você pode clicar em Concluir para fechar este assistente.</translation>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="939"/>
+        <location filename="Views/FileView.cpp" line="1215"/>
         <source>%1 - Files</source>
         <translation>%1 - Ficheiros</translation>
     </message>
@@ -1425,49 +1425,49 @@ Você pode clicar em Concluir para fechar este assistente.</translation>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="619"/>
+        <location filename="Views/FileView.cpp" line="889"/>
         <source>Create Shortcut</source>
         <translation>Criar atalho</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="642"/>
+        <location filename="Views/FileView.cpp" line="912"/>
         <source>Pin to Box Run Menu</source>
         <translation>Fixar no Menu Rodar da Caixa</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="649"/>
+        <location filename="Views/FileView.cpp" line="919"/>
         <source>Recover to Any Folder</source>
         <translation>Recuperar para qualquer directório</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="651"/>
+        <location filename="Views/FileView.cpp" line="921"/>
         <source>Recover to Same Folder</source>
         <translation>Recuperar para o mesmo directório</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="655"/>
+        <location filename="Views/FileView.cpp" line="925"/>
         <source>Run Recovery Checks</source>
         <translation>Rodar verificações de recuperação</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="792"/>
+        <location filename="Views/FileView.cpp" line="1051"/>
         <source>Select Directory</source>
         <translation>Seleccionar directório</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="863"/>
+        <location filename="Views/FileView.cpp" line="1139"/>
         <source>Delete Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="864"/>
+        <location filename="Views/FileView.cpp" line="1140"/>
         <source>The selected files could not be deleted.
 
 Error: 0x%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="893"/>
+        <location filename="Views/FileView.cpp" line="1169"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Criar atalho para a Caixa %1</translation>
     </message>

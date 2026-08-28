@@ -102,5 +102,5 @@ protected:
 
 	bool					TestHighLight(STreeNode* pNode) const;
 
-	static PoolAllocator<sizeof(STreeNode)> m_NodeAllocator;
+	PoolAllocator<sizeof(STreeNode)> m_NodeAllocator;
 };

@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed File Migration action dropdown changes being discarded when clicking Apply or OK while the editor still has focus [#5548](https://github.com/sandboxie-plus/Sandboxie/issues/5548)
 - fixed SandMan File Panel and Browse Files preserving expanded folders and restoring selection, keyboard focus, and scrolling to the nearest surviving item after deletion [#5499](https://github.com/sandboxie-plus/Sandboxie/issues/5499)
+- fixed Start.exe autorun handling for oversized registry values, bounded shortcut paths, paginated Startup directories, and dynamically sized launch command lines
 
 ## [1.18.2 / 5.73.2] - 2026-08-16
 

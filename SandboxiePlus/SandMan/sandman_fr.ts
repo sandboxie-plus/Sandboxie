@@ -718,7 +718,7 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="359"/>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias :</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="377"/>
@@ -1491,14 +1491,16 @@ Vous pouvez appuyer sur « Terminer » pour fermer cet assistant.</translation>
     <message>
         <location filename="Views/FileView.cpp" line="1139"/>
         <source>Delete Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de la suppression</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="1140"/>
         <source>The selected files could not be deleted.
 
 Error: 0x%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Les fichiers sélectionnés n&apos;ont pas pu être supprimés.
+
+Erreur : 0x%1</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="1169"/>
@@ -1602,7 +1604,7 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="52"/>
         <source>Clear search</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer la recherche</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="127"/>
@@ -1761,7 +1763,7 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2700"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -2970,22 +2972,22 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="67"/>
         <source> (outside)</source>
-        <translation type="unfinished"></translation>
+        <translation> (à l&apos;extérieur)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Active snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Instantané actif</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Default snapshot</source>
-        <translation type="unfinished">Instantané par défaut</translation>
+        <translation>Instantané par défaut</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Selects the snapshot restored by SandMan after automatic deletion. The active state may be the empty sandbox rather than a saved snapshot.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionne l&apos;instantané restauré par SandMan après la suppression automatique. L&apos;état actif peut être le bac vide plutôt qu&apos;un instantané enregistré.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="89"/>
@@ -3074,7 +3076,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsGeneral.cpp" line="708"/>
         <location filename="Windows/OptionsGeneral.cpp" line="815"/>
         <source>Copy newer</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier le nouveau</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="951"/>
@@ -8265,7 +8267,7 @@ Veuillez le soumettre à nouveau, sans joindre le journal.</translation>
         <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
         <source>
 The actual sandbox name is: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nom de bac actuel est : %1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1112"/>
@@ -8871,12 +8873,12 @@ Si vous êtes déjà « Great Supporter » sur Patreon, Sandboxie peut vérifier
     <message>
         <location filename="Views/TraceView.cpp" line="342"/>
         <source>Resume Auto Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Reprendre le défilement automatique</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="343"/>
         <source>Auto scrolling is paused. Click to resume.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le défilement automatique est en pause. Cliquez pour reprendre.</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="370"/>
@@ -9925,27 +9927,27 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lorsqu&apos;une bordure extérieure risquerait d&apos;être rognée par le bord de l&apos;écran, la dessiner plutôt à l&apos;intérieur des fenêtres maximisées ou alignées.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="379"/>
         <source>Inside when maximized or snapped</source>
-        <translation type="unfinished"></translation>
+        <translation>À l&apos;intérieur si maximisée ou alignée</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="407"/>
         <source>After automatic deletion, restore from snapshot:</source>
-        <translation type="unfinished"></translation>
+        <translation>Après la suppression automatique, restaurer depuis l&apos;instantané :</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="432"/>
         <source>Open Snapshot Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le gestionnaire d&apos;instantanés</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="435"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1471"/>
@@ -12564,7 +12566,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="71"/>
         <source>Use random GUID as sandbox name when creating new boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser un GUID aléatoire comme nom de bac lors de la création de nouveaux bacs</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="281"/>
@@ -12619,7 +12621,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1165"/>
         <source>Highlight unapplied changes in Options and Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Surligner les changements non appliqués dans les paramètres</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1234"/>
@@ -13492,7 +13494,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="176"/>
         <source>Refresh View</source>
-        <translation type="unfinished">Actualiser l&apos;affichage</translation>
+        <translation>Actualiser l&apos;affichage</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="195"/>

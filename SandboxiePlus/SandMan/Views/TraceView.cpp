@@ -366,8 +366,10 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 	UpdateAutoScrollIndicator();
 
 	if (bStandAlone) {
-		QAction* pAction = new QAction(tr("Cleanup Trace Log"));
+		m_pTraceToolBar->addSeparator();
+		QAction* pAction = new QAction(CSandMan::GetIcon("Clean"), tr("Cleanup Trace Log"), this);
 		connect(pAction, SIGNAL(triggered()), this, SLOT(Clear()));
+		m_pTraceToolBar->addAction(pAction);
 		m_pTrace->GetMenu()->insertAction(m_pTrace->GetMenu()->actions()[1], pAction);
 	}
 
@@ -473,6 +475,12 @@ void CTraceView::Refresh()
 	}
 
 	bool bMonitorMode = m_pMonitorMode->isChecked();
+	const QVector<CTraceEntryPtr> &ResourceLog = theAPI->GetTrace();
+
+	if (ResourceLog.count() < m_LastCount)
+		m_FullRefresh = true;
+	else if (m_LastCount > 0 && m_LastID != ResourceLog.at(m_LastCount - 1)->GetUID())
+		m_FullRefresh = true;
 
 	if (m_FullRefresh) 
 	{
@@ -487,8 +495,6 @@ void CTraceView::Refresh()
 		m_pMonitor->m_pMonitorModel->Clear();
 		m_FullRefresh = false;
 	}
-
-	const QVector<CTraceEntryPtr> &ResourceLog = theAPI->GetTrace();
 
 	bool bUpdateFilters = false;
 

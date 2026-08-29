@@ -2546,17 +2546,17 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="63"/>
         <source>Border disabled</source>
-        <translation>Granica wyłączona</translation>
+        <translation>Nie pokazuj</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>
         <location filename="Windows/OptionsGeneral.cpp" line="68"/>
         <source>Show only when title is in focus</source>
-        <translation>Pokazuj tylko wtedy, gdy klikniesz na tytuł okna</translation>
+        <translation>Pokazuj tylko wtedy, gdy najedziesz na tytuł okna</translation>
     </message>
     <message>
         <source>Always show</source>
-        <translation type="vanished">Zawsze pokasuj</translation>
+        <translation>Pokazuj zawsze</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="83"/>
@@ -2595,44 +2595,44 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Don&apos;t show in border</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie pokazuj</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="60"/>
         <source>Show within the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż pod obramowaniem</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="61"/>
         <source>Show above the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż nad obramowaniem</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <location filename="Windows/OptionsGeneral.cpp" line="69"/>
         <source>Always show (focused window only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokazuj zawsze (tylko aktywne okno)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
         <location filename="Windows/OptionsGeneral.cpp" line="70"/>
         <source>Show for all windows in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokazuj dla wszystkich okien w tym boksie</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="67"/>
         <source> (outside)</source>
-        <translation type="unfinished"></translation>
+        <translation> (na zewnątrz)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Active snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktywną migawkę</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Default snapshot</source>
-        <translation type="unfinished">Domyślna migawka</translation>
+        <translation>Domyślną migawkę</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
@@ -8976,7 +8976,7 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
     <message>
         <location filename="Forms/OptionsWindow.ui" line="222"/>
         <source>Sandboxed window border:</source>
-        <translation>Granica okien w piaskownicy:</translation>
+        <translation>Obramowanie okna w piaskownicy:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="175"/>
@@ -10130,37 +10130,37 @@ Ma to na celu uniemożliwienie nieuczciwym procesom w piaskownicy tworzenia kopi
     <message>
         <location filename="Forms/OptionsWindow.ui" line="294"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieprzezroczystość</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="366"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokazuje sam napis bez kolorowego obramowania (napis musi być włączony).</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="369"/>
         <source>Label only</source>
-        <translation type="unfinished"></translation>
+        <translation>Sam napis</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeśli zewnętrzne obramowanie byłoby przycięte przez brzeg ekranu, do którego podczepione jest okno, zamiast tego narysuj obramowanie wewnątrz.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="379"/>
         <source>Inside when maximized or snapped</source>
-        <translation type="unfinished"></translation>
+        <translation>Obramowanie wewnątrz, gdy okno podczepione do brzegu ekranu</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="407"/>
         <source>After automatic deletion, restore from snapshot:</source>
-        <translation type="unfinished"></translation>
+        <translation>Po automatycznym usunięciu przywróć migawkę:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="432"/>
         <source>Open Snapshot Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz Menedżer Migawek</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="435"/>
@@ -10314,7 +10314,7 @@ Aby określić proces, użyj jako ścieżki &apos;$:program.exe&apos;.</translat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4486"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj powyższej listy do ukrywania tych plików w oknie Szybkiego Przywracania</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4483"/>
@@ -11296,7 +11296,7 @@ Częściowo zaznaczone: Żadne grupy nie będą dodawane do nowo utworzonego tok
     <message>
         <location filename="Forms/OptionsWindow.ui" line="151"/>
         <source>Sandboxed window label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Napis przy górnym obramowaniu:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5501"/>

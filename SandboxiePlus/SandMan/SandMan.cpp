@@ -4630,6 +4630,8 @@ void CSandMan::OnMonitoring()
 	{
 		static CTraceWindow* pTraceWindow = NULL;
 		bool Status = m_pEnableMonitoring->isChecked();
+		if (!pTraceWindow && !Status && theAPI->IsMonitoring())
+			Status = true;
 
 		if (!theAPI->EnableMonitor(Status).IsError())
 			m_pEnableMonitoring->setChecked(Status);

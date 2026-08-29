@@ -286,9 +286,11 @@ void COptionsWindow::LoadAdvanced()
 	}
 
 	
-	ui.chkHostProtect->setChecked(m_pBox->GetBool("ProtectHostImages", false));
+	bool bGlobalHostProtect = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("ProtectHostImages", false);
+	ui.chkHostProtect->setChecked(m_pBox->GetBool("ProtectHostImages", bGlobalHostProtect));
 	ui.chkHostProtectMsg->setEnabled(ui.chkHostProtect->isChecked());
-	ui.chkHostProtectMsg->setChecked(m_pBox->GetBool("NotifyImageLoadDenied", true));
+	bool bGlobalHostProtectMsg = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("NotifyImageLoadDenied", true);
+	ui.chkHostProtectMsg->setChecked(m_pBox->GetBool("NotifyImageLoadDenied", bGlobalHostProtectMsg));
 
 	LoadOptionList();
 
@@ -543,8 +545,10 @@ void COptionsWindow::SaveAdvanced()
 	m_pBox->UpdateTextList("InjectDllARM64", InjectDllARM64, false);
 #endif
 
-	WriteAdvancedCheck(ui.chkHostProtect, "ProtectHostImages", "y", "");
-	WriteAdvancedCheck(ui.chkHostProtectMsg, "NotifyImageLoadDenied", "", "n");
+	bool bGlobalHostProtect = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("ProtectHostImages", false);
+	WriteAdvancedCheck(ui.chkHostProtect, "ProtectHostImages", bGlobalHostProtect ? "" : "y", bGlobalHostProtect ? "n" : "");
+	bool bGlobalHostProtectMsg = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("NotifyImageLoadDenied", true);
+	WriteAdvancedCheck(ui.chkHostProtectMsg, "NotifyImageLoadDenied", bGlobalHostProtectMsg ? "" : "y", bGlobalHostProtectMsg ? "n" : "");
 
 	bool bGlobalSbieLogon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieLogon", false);
 	WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", bGlobalSbieLogon ? "" : "y", bGlobalSbieLogon ? "n" : "");

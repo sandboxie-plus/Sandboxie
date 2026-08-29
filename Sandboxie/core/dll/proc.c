@@ -447,8 +447,7 @@ _FX BOOLEAN Proc_Init(void)
     // \Sessions\*\AppContainerNamedObjects\* is not open
     //
 
-    //if (!Dll_CompartmentMode)
-    if(Config_GetSettingsForImageName_bool(L"FakeAppContainerToken", Dll_CompartmentMode ? FALSE : TRUE))
+    if (!Dll_CompartmentMode)
     if (Dll_OsBuild >= 9600) // Windows 8.1 and later
     {
         void* CreateAppContainerToken = NULL;
@@ -639,10 +638,12 @@ _FX BOOL Proc_UpdateProcThreadAttribute(
 		}
 	}
 
-    if (!Config_GetSettingsForImageName_bool(L"FakeAppContainerToken", Dll_CompartmentMode ? FALSE : TRUE)) // see UserEnv_CreateAppContainerProfile
-    if (Attribute == 0x00020009) //PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES
+    //if (!Config_GetSettingsForImageName_bool(L"FakeAppContainerToken", Dll_CompartmentMode ? FALSE : TRUE)) // see UserEnv_CreateAppContainerProfile
+    if (!Dll_CompartmentMode)
+    if (Attribute == 0x00020009 //PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES
+     || Attribute == 0x0002000f)    //PROC_THREAD_ATTRIBUTE_ALL_APPLICATION_PACKAGES_POLICY
     {
-        SECURITY_CAPABILITIES* sc = lpValue;
+        //SECURITY_CAPABILITIES* sc = lpValue;
         return TRUE;
     }
 

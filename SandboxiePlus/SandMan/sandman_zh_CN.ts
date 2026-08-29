@@ -522,12 +522,12 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="104"/>
         <source>Show sandbox aliases (reads archive configuration)</source>
-        <translation type="unfinished"></translation>
+        <translation>显示沙箱别名（读取压缩包中的配置）</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="105"/>
         <source>Disabled by default because reading aliases requires opening and extracting configuration from every selected archive.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认禁用，因为读取别名需要打开每个选中的压缩包，并从中提取配置。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="112"/>
@@ -588,7 +588,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="376"/>
         <source>Sandbox name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱名称：%1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="497"/>
@@ -872,7 +872,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="488"/>
         <source>Confidential Encrypted Box</source>
-        <translation>保密加密沙箱</translation>
+        <translation>机密型加密沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="616"/>
@@ -985,7 +985,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="537"/>
         <source>Browser Executable (*.exe)</source>
-        <translation>浏览可执行文件 (*.exe)</translation>
+        <translation>浏览器可执行文件 (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="554"/>
@@ -1063,7 +1063,7 @@ Please browse to the correct user profile directory.</oldsource>
         <location filename="Wizards/TemplateWizard.cpp" line="354"/>
         <source>Browser executable (*.exe)</source>
         <oldsource>Browser Executable (*.exe)</oldsource>
-        <translation>浏览可执行程序 (*.exe)</translation>
+        <translation>浏览器可执行文件 (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="454"/>
@@ -1458,7 +1458,7 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="939"/>
+        <location filename="Views/FileView.cpp" line="1215"/>
         <source>%1 - Files</source>
         <translation>%1 - 文件</translation>
     </message>
@@ -1466,42 +1466,42 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="619"/>
+        <location filename="Views/FileView.cpp" line="889"/>
         <source>Create Shortcut</source>
         <translation>创建快捷方式</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="642"/>
+        <location filename="Views/FileView.cpp" line="912"/>
         <source>Pin to Box Run Menu</source>
         <translation>固定到在沙箱中运行菜单</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="649"/>
+        <location filename="Views/FileView.cpp" line="919"/>
         <source>Recover to Any Folder</source>
         <translation>恢复到任意文件夹</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="651"/>
+        <location filename="Views/FileView.cpp" line="921"/>
         <source>Recover to Same Folder</source>
         <translation>恢复到对应的目录</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="655"/>
+        <location filename="Views/FileView.cpp" line="925"/>
         <source>Run Recovery Checks</source>
         <translation>运行恢复检查</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="792"/>
+        <location filename="Views/FileView.cpp" line="1051"/>
         <source>Select Directory</source>
         <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="863"/>
+        <location filename="Views/FileView.cpp" line="1139"/>
         <source>Delete Failed</source>
         <translation>删除失败</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="864"/>
+        <location filename="Views/FileView.cpp" line="1140"/>
         <source>The selected files could not be deleted.
 
 Error: 0x%1</source>
@@ -1510,7 +1510,7 @@ Error: 0x%1</source>
 错误：0x%1</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="893"/>
+        <location filename="Views/FileView.cpp" line="1169"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>为沙箱 %1 创建快捷方式</translation>
     </message>
@@ -2686,17 +2686,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Active snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>当前快照</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Default snapshot</source>
-        <translation type="unfinished">默认快照</translation>
+        <translation>默认快照</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Selects the snapshot restored by SandMan after automatic deletion. The active state may be the empty sandbox rather than a saved snapshot.</source>
-        <translation type="unfinished"></translation>
+        <translation>选择 SandMan 在自动删除后要恢复到的快照。当前状态可能是空沙箱，而不是已保存的快照。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="89"/>
@@ -4615,7 +4615,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="849"/>
         <location filename="SandMan.cpp" line="999"/>
         <source>Run Sandboxed</source>
-        <translation>运行沙箱</translation>
+        <translation>在沙箱中运行</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="852"/>
@@ -4858,7 +4858,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandManTray.cpp" line="214"/>
         <source>Find sandbox...</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索沙箱…</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="228"/>
@@ -5305,7 +5305,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandManRecovery.cpp" line="314"/>
         <source>Sandbox name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱名称：%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3807"/>
@@ -7232,17 +7232,17 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="349"/>
         <source>Sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱名称</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="350"/>
         <source>Sandbox alias</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱别名</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="351"/>
         <source>Sandbox alias and name</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱别名和名称</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="354"/>
@@ -8629,42 +8629,42 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 <context>
     <name>CTraceModel</name>
     <message>
-        <location filename="Models/TraceModel.cpp" line="196"/>
+        <location filename="Models/TraceModel.cpp" line="194"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="175"/>
+        <location filename="Models/TraceModel.cpp" line="173"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="176"/>
+        <location filename="Models/TraceModel.cpp" line="174"/>
         <source>Process %1</source>
         <translation>进程 %1</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="179"/>
+        <location filename="Models/TraceModel.cpp" line="177"/>
         <source>Thread %1</source>
         <translation>线程 %1</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="333"/>
+        <location filename="Models/TraceModel.cpp" line="331"/>
         <source>Process</source>
         <translation>进程</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="335"/>
+        <location filename="Models/TraceModel.cpp" line="333"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="336"/>
+        <location filename="Models/TraceModel.cpp" line="334"/>
         <source>Status</source>
         <translation>状态</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="337"/>
+        <location filename="Models/TraceModel.cpp" line="335"/>
         <source>Value</source>
         <translation>值</translation>
     </message>
@@ -8697,8 +8697,8 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Views/TraceView.cpp" line="290"/>
         <location filename="Views/TraceView.cpp" line="291"/>
         <location filename="Views/TraceView.cpp" line="300"/>
-        <location filename="Views/TraceView.cpp" line="654"/>
-        <location filename="Views/TraceView.cpp" line="777"/>
+        <location filename="Views/TraceView.cpp" line="660"/>
+        <location filename="Views/TraceView.cpp" line="783"/>
         <source>[All]</source>
         <translation>[所有]</translation>
     </message>
@@ -8760,35 +8760,35 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="342"/>
         <source>Resume Auto Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>继续自动滚动</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="343"/>
         <source>Auto scrolling is paused. Click to resume.</source>
-        <translation type="unfinished"></translation>
+        <translation>自动滚动已暂停。单击可继续。</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="369"/>
+        <location filename="Views/TraceView.cpp" line="370"/>
         <source>Cleanup Trace Log</source>
         <translation>清理跟踪日志</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="454"/>
+        <location filename="Views/TraceView.cpp" line="456"/>
         <source>To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?</source>
         <translation>要使用堆栈跟踪功能，需要 DbgHelp.dll 和 SymSrv.dll ，是否要下载并安装它们？</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="820"/>
+        <location filename="Views/TraceView.cpp" line="826"/>
         <source>Save trace log to file</source>
         <translation>保存跟踪日志到文件</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="826"/>
+        <location filename="Views/TraceView.cpp" line="832"/>
         <source>Failed to open log file for writing</source>
         <translation>无法打开日志文件进行写入</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="846"/>
+        <location filename="Views/TraceView.cpp" line="852"/>
         <source>Saving TraceLog...</source>
         <translation>保存跟踪日志……</translation>
     </message>
@@ -8797,12 +8797,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="vanished">未知</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="730"/>
+        <location filename="Views/TraceView.cpp" line="736"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="743"/>
+        <location filename="Views/TraceView.cpp" line="749"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -8810,7 +8810,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="914"/>
+        <location filename="Views/TraceView.cpp" line="920"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - 跟踪监测</translation>
     </message>
@@ -11124,17 +11124,17 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="407"/>
         <source>After automatic deletion, restore from snapshot:</source>
-        <translation type="unfinished"></translation>
+        <translation>自动删除后，从以下快照恢复：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="432"/>
         <source>Open Snapshot Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>打开快照管理器</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="435"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>…</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4547"/>
@@ -11963,7 +11963,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="827"/>
         <source>Show search box in tray menu</source>
-        <translation type="unfinished"></translation>
+        <translation>在托盘菜单中显示搜索框</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="858"/>
@@ -11998,7 +11998,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1127"/>
         <source>Controls whether display-only text uses the sandbox name, alias, or both. Compact views may show only the alias. Paths and internal sandbox identifiers always use the sandbox name.</source>
-        <translation type="unfinished"></translation>
+        <translation>控制仅供显示的文本采用沙箱名称、别名还是同时采用两者。紧凑视图可能只显示别名。路径和沙箱的内部标识符始终使用沙箱名称。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1165"/>
@@ -12013,7 +12013,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1241"/>
         <source>Sandbox name display:</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱名称显示方式：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1305"/>
@@ -12819,7 +12819,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1728"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
-        <translation>Sandboxie-Plus 提供了许多选项，并支持广泛的扩展。在此页面上，您可以配置加载项、插件及其他第三方组件的集成。可选组件可以从网络下载，安装某些组件可能需要管理员权限。</translation>
+        <translation>Sandboxie-Plus 提供丰富的选项，并支持多种扩展。您可以在此页面配置加载项、插件及其他第三方组件的集成。可从网络下载可选组件，安装某些组件可能需要管理员权限。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1764"/>
@@ -13254,7 +13254,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="176"/>
         <source>Refresh View</source>
-        <translation type="unfinished">刷新视图</translation>
+        <translation>刷新视图</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="195"/>

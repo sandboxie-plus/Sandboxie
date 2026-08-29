@@ -231,6 +231,11 @@ CFileView::CFileView(QWidget *parent)
     m_pTreeView->setSortingEnabled(true);
     m_pTreeView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
+    m_pRestoreTimer = new QTimer(this);
+    m_pRestoreTimer->setSingleShot(true);
+    connect(m_pRestoreTimer, &QTimer::timeout, this,
+        &CFileView::FinalizeFocus);
+
 	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pTreeView->setStyle(pStyle);
     m_pTreeView->setItemDelegate(new CTreeItemDelegate());
@@ -270,8 +275,264 @@ void CFileView::SaveState()
         theConf->SetBlob("MainWindow/FileTree_Columns", m_pTreeView->header()->saveState());
 }
 
+static bool IsSameOrDescendantPath(const QString& Path, const QString& Parent)
+{
+    if (Path.compare(Parent, Qt::CaseInsensitive) == 0)
+        return true;
+
+    return Path.startsWith(Parent, Qt::CaseInsensitive) &&
+        (Parent.endsWith("\\") ||
+            (Path.length() > Parent.length() && Path.at(Parent.length()) == '\\'));
+}
+
+QStringList CFileView::GetExpandedPaths() const
+{
+    QStringList Paths;
+    if (!m_pFileModel || !m_pProxyModel)
+        return Paths;
+
+    QList<QModelIndex> Parents;
+    QModelIndex RootIndex = m_pTreeView->rootIndex();
+    if (!RootIndex.isValid())
+        return Paths;
+    Parents.append(RootIndex);
+
+    while (!Parents.isEmpty()) {
+        QModelIndex Parent = Parents.takeLast();
+        for (int Row = 0; Row < m_pProxyModel->rowCount(Parent); ++Row) {
+            QModelIndex Index = m_pProxyModel->index(Row, 0, Parent);
+            if (!Index.isValid() || !m_pTreeView->isExpanded(Index))
+                continue;
+
+            QModelIndex SourceIndex = m_pProxyModel->mapToSource(Index);
+            if (!SourceIndex.isValid())
+                continue;
+
+            Paths.append(m_pFileModel->filePath(SourceIndex));
+            Parents.append(Index);
+        }
+    }
+
+    return Paths;
+}
+
+QStringList CFileView::GetFocusPaths(const QStringList& RemovedPaths,
+    QString& FocusParentPath) const
+{
+    QStringList Paths;
+    FocusParentPath.clear();
+    if (!m_pFileModel || !m_pProxyModel || !m_pTreeView->selectionModel())
+        return Paths;
+
+    QModelIndex CurrentIndex = m_pTreeView->currentIndex();
+    QModelIndexList SelectedIndexes = m_pTreeView->selectionModel()->selectedIndexes();
+    if (CurrentIndex.isValid()
+        && m_pTreeView->selectionModel()->isSelected(CurrentIndex))
+        SelectedIndexes.prepend(CurrentIndex);
+    else
+        CurrentIndex = SelectedIndexes.isEmpty()
+            ? QModelIndex() : SelectedIndexes.first();
+
+    foreach (const QModelIndex& Index, SelectedIndexes) {
+        QModelIndex SourceIndex = m_pProxyModel->mapToSource(Index);
+        if (!SourceIndex.isValid())
+            continue;
+
+        QString Path = m_pFileModel->filePath(SourceIndex);
+        if (!Path.isEmpty() && !Paths.contains(Path, Qt::CaseInsensitive))
+            Paths.append(Path);
+    }
+
+    if (!CurrentIndex.isValid())
+        return Paths;
+
+    QStringList NormalizedRemovedPaths;
+    foreach (const QString& RemovedPath, RemovedPaths)
+        NormalizedRemovedPaths.append(
+            QDir::cleanPath(RemovedPath).replace("/", "\\"));
+
+    QModelIndex AnchorIndex = CurrentIndex;
+    QModelIndex CurrentSourceIndex = m_pProxyModel->mapToSource(CurrentIndex);
+    QString AnchorPath = m_pFileModel->filePath(CurrentSourceIndex);
+    QString NormalizedAnchorPath = QDir::cleanPath(AnchorPath).replace("/", "\\");
+    foreach (const QString& RemovedPath, NormalizedRemovedPaths) {
+        if (!IsSameOrDescendantPath(NormalizedAnchorPath, RemovedPath))
+            continue;
+
+        QModelIndex SourceIndex = m_pFileModel->index(RemovedPath);
+        QModelIndex RemovedIndex = m_pProxyModel->mapFromSource(SourceIndex);
+        if (RemovedIndex.isValid()) {
+            AnchorIndex = RemovedIndex;
+            AnchorPath = m_pFileModel->filePath(SourceIndex);
+        }
+        break;
+    }
+
+    FocusParentPath = QFileInfo(AnchorPath).absolutePath();
+    QModelIndex ParentIndex = AnchorIndex.parent();
+    int RowCount = m_pProxyModel->rowCount(ParentIndex);
+
+    auto AppendCandidate = [&](int Row) {
+        QModelIndex SourceIndex = m_pProxyModel->mapToSource(
+            m_pProxyModel->index(Row, 0, ParentIndex));
+        QString Path = m_pFileModel->filePath(SourceIndex);
+        QString CandidatePath = QDir::cleanPath(Path).replace("/", "\\");
+        foreach (const QString& RemovedPath, NormalizedRemovedPaths) {
+            if (IsSameOrDescendantPath(CandidatePath, RemovedPath))
+                return;
+        }
+        if (!Path.isEmpty() && !Paths.contains(Path, Qt::CaseInsensitive))
+            Paths.append(Path);
+    };
+
+    for (int Row = AnchorIndex.row() + 1; Row < RowCount; ++Row)
+        AppendCandidate(Row);
+    for (int Row = AnchorIndex.row() - 1; Row >= 0; --Row)
+        AppendCandidate(Row);
+
+    return Paths;
+}
+
+void CFileView::RestoreExpandedPaths(const QStringList& Paths,
+    const QStringList& FocusPaths, const QString& FocusParentPath)
+{
+    m_ExpandedPaths = Paths;
+    m_FocusPaths = FocusPaths;
+    m_FocusParentPath = FocusParentPath;
+    if ((m_ExpandedPaths.isEmpty() && m_FocusPaths.isEmpty()
+        && m_FocusParentPath.isEmpty()) || !m_pFileModel || !m_pProxyModel)
+        return;
+
+    RestoreExpandedPaths();
+    QTimer::singleShot(0, this, [this]() { RestoreExpandedPaths(); });
+}
+
+void CFileView::RestoreExpandedPaths()
+{
+    if (!m_pFileModel || !m_pProxyModel)
+        return;
+
+    for (int i = 0; i < m_ExpandedPaths.count();) {
+        const QString Path = m_ExpandedPaths.at(i);
+        if (!QFileInfo::exists(Path)) {
+            m_ExpandedPaths.removeAt(i);
+            continue;
+        }
+
+        QModelIndex SourceIndex = m_pFileModel->index(Path);
+        if (!SourceIndex.isValid()) {
+            QModelIndex SourceParent = m_pFileModel->index(
+                QFileInfo(Path).absolutePath());
+            if (SourceParent.isValid()
+                && m_pFileModel->canFetchMore(SourceParent))
+                m_pFileModel->fetchMore(SourceParent);
+            ++i;
+            continue;
+        }
+
+        QModelIndex ProxyIndex = m_pProxyModel->mapFromSource(SourceIndex);
+        if (!ProxyIndex.isValid()) {
+            QModelIndex SourceParent = m_pFileModel->index(
+                QFileInfo(Path).absolutePath());
+            if (SourceParent.isValid()
+                && m_pFileModel->canFetchMore(SourceParent))
+                m_pFileModel->fetchMore(SourceParent);
+            ++i;
+            continue;
+        }
+
+        m_pTreeView->expand(ProxyIndex);
+        m_ExpandedPaths.removeAt(i);
+    }
+
+    RestoreFocus();
+}
+
+void CFileView::RestoreFocus()
+{
+    if (m_FocusPaths.isEmpty() && m_FocusParentPath.isEmpty())
+        return;
+
+    QModelIndex FocusIndex;
+    foreach (const QString& Path, m_FocusPaths) {
+        if (!QFileInfo::exists(Path))
+            continue;
+
+        QModelIndex SourceIndex = m_pFileModel->index(Path);
+        FocusIndex = m_pProxyModel->mapFromSource(SourceIndex);
+        if (!FocusIndex.isValid()) {
+            QModelIndex SourceParent = m_pFileModel->index(
+                QFileInfo(Path).absolutePath());
+            if (SourceParent.isValid()
+                && m_pFileModel->canFetchMore(SourceParent))
+                m_pFileModel->fetchMore(SourceParent);
+            return;
+        }
+        break;
+    }
+
+    if (!FocusIndex.isValid() && !m_FocusParentPath.isEmpty()) {
+        if (!QFileInfo::exists(m_FocusParentPath)) {
+            m_RestoreFocusIndex = QPersistentModelIndex();
+            FinalizeFocus();
+            return;
+        }
+
+        QModelIndex SourceParent = m_pFileModel->index(m_FocusParentPath);
+        QModelIndex ParentIndex = m_pProxyModel->mapFromSource(SourceParent);
+
+        if (!ParentIndex.isValid())
+            return;
+
+        if (ParentIndex != m_pTreeView->rootIndex())
+            FocusIndex = ParentIndex;
+        else {
+            m_RestoreFocusIndex = QPersistentModelIndex();
+            FinalizeFocus();
+            return;
+        }
+    }
+
+    if (!FocusIndex.isValid() || !m_pTreeView->selectionModel())
+        return;
+
+    m_RestoreFocusIndex = FocusIndex;
+    m_pTreeView->setCurrentIndex(FocusIndex);
+    m_pTreeView->setFocus(Qt::OtherFocusReason);
+    m_pTreeView->scrollTo(FocusIndex, QAbstractItemView::PositionAtCenter);
+    m_pTreeView->selectionModel()->select(FocusIndex,
+        QItemSelectionModel::ClearAndSelect);
+    if (m_ExpandedPaths.isEmpty())
+        m_pRestoreTimer->start(250);
+}
+
+void CFileView::FinalizeFocus()
+{
+    m_pRestoreTimer->stop();
+
+    if (m_RestoreFocusIndex.isValid() && m_pTreeView->selectionModel()) {
+        m_pTreeView->doItemsLayout();
+        m_pTreeView->setCurrentIndex(m_RestoreFocusIndex);
+        m_pTreeView->selectionModel()->select(m_RestoreFocusIndex,
+            QItemSelectionModel::ClearAndSelect);
+        m_pTreeView->setFocus(Qt::OtherFocusReason);
+        m_pTreeView->scrollTo(m_RestoreFocusIndex,
+            QAbstractItemView::PositionAtCenter);
+    }
+
+    m_RestoreFocusIndex = QPersistentModelIndex();
+    m_FocusPaths.clear();
+    m_FocusParentPath.clear();
+}
+
 void CFileView::SetBox(const CSandBoxPtr& pBox)
 {
+    m_ExpandedPaths.clear();
+    m_FocusPaths.clear();
+    m_FocusParentPath.clear();
+    m_RestoreFocusIndex = QPersistentModelIndex();
+    m_pRestoreTimer->stop();
+
     if (!m_pBox.isNull()) disconnect(m_pBox.data(), SIGNAL(AboutToBeModified()), this, SLOT(OnAboutToBeModified()));
 
     m_pFinder->Close();
@@ -309,10 +570,19 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
 	}
     if (!Root.isEmpty()) {
         m_pFileModel = new QFileSystemModel(this);
+        connect(m_pFileModel, &QFileSystemModel::directoryLoaded, this,
+            [this](const QString&) { RestoreExpandedPaths(); },
+            Qt::QueuedConnection);
         m_pFileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files | QDir::Hidden | QDir::System);
 
 		m_pProxyModel = new CFileFilterProxyModel(this);
 		m_pProxyModel->setSourceModel(m_pFileModel);
+        connect(m_pProxyModel, &QAbstractItemModel::rowsInserted, this,
+            [this]() { RestoreExpandedPaths(); }, Qt::QueuedConnection);
+        connect(m_pProxyModel, &QAbstractItemModel::layoutChanged, this,
+            [this]() { RestoreExpandedPaths(); }, Qt::QueuedConnection);
+        connect(m_pProxyModel, &QAbstractItemModel::modelReset, this,
+            [this]() { RestoreExpandedPaths(); }, Qt::QueuedConnection);
         m_pProxyModel->setRecursiveFilteringEnabled(true); // make sure parents stay visible when children match
 
         // Connect to filterUpdated to restore root index after filter changes
@@ -735,17 +1005,6 @@ static HRESULT deleteShellItems(const QStringList& Files, HWND parentWindow)
     return SUCCEEDED(hr) && aborted ? HRESULT_FROM_WIN32(ERROR_CANCELLED) : hr;
 }
 
-static bool IsSameOrDescendantPath(const QString& Path, const QString& Parent)
-{
-    if (Path.compare(Parent, Qt::CaseInsensitive) == 0)
-        return true;
-
-    return Path.startsWith(Parent, Qt::CaseInsensitive) &&
-        (Parent.endsWith("\\") ||
-            (Path.length() > Parent.length() && Path.at(Parent.length()) == '\\'));
-}
-
-
 void CFileView::OnFileMenu(const QPoint&)
 {
     if (!m_pFileModel) return;
@@ -836,24 +1095,41 @@ void CFileView::OnFileMenu(const QPoint&)
         }
         case MENU_DELETE_FILE:
         {
+            struct SFileViewState {
+                QPointer<CFileView> View;
+                CSandBoxPtr Box;
+                QStringList ExpandedPaths;
+                QStringList FocusPaths;
+                QString FocusParentPath;
+            };
+
             CSandBoxPtr pBox = m_pBox;
             QString FileRoot = pBox->GetFileRoot();
-            QList<QPair<QPointer<CFileView>, CSandBoxPtr>> FileViews;
+            QList<SFileViewState> FileViews;
             foreach(CFileView* pFileView, s_Instances) {
                 if (!pFileView->m_pBox.isNull()
                     && pFileView->m_pBox->GetFileRoot().compare(
                         FileRoot, Qt::CaseInsensitive) == 0) {
-                    FileViews.append(qMakePair(
-                        QPointer<CFileView>(pFileView), pFileView->m_pBox));
+                    SFileViewState FileView = {
+                        QPointer<CFileView>(pFileView), pFileView->m_pBox,
+                        pFileView->GetExpandedPaths(),
+                        QStringList(), QString() };
+                    FileView.FocusPaths = pFileView->GetFocusPaths(Files,
+                        FileView.FocusParentPath);
+                    FileViews.append(FileView);
                     pFileView->SetBox(CSandBoxPtr());
                 }
             }
 
             HRESULT hr = deleteShellItems(Files, (HWND)window()->winId());
 
-            foreach(const auto& FileView, FileViews) {
-                if (FileView.first)
-                    FileView.first->SetBox(FileView.second);
+            foreach(const SFileViewState& FileView, FileViews) {
+                if (!FileView.View)
+                    continue;
+
+                FileView.View->SetBox(FileView.Box);
+                FileView.View->RestoreExpandedPaths(FileView.ExpandedPaths,
+                    FileView.FocusPaths, FileView.FocusParentPath);
             }
 
             if (FAILED(hr)

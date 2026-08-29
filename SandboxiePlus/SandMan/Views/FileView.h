@@ -7,6 +7,9 @@
 #include "SbiePlusAPI.h"
 #include <QFileSystemModel>
 #include <QSortFilterProxyModel>
+#include <QItemSelectionModel>
+#include <QPersistentModelIndex>
+#include <QTimer>
 #include <QThread>
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -114,6 +117,15 @@ protected:
 private:
 	static QSet<CFileView*>	s_Instances;
 
+	QStringList		GetFocusPaths(const QStringList& RemovedPaths,
+				QString& FocusParentPath) const;
+	void			RestoreExpandedPaths(const QStringList& Paths,
+				const QStringList& FocusPaths, const QString& FocusParentPath);
+	void			RestoreFocus();
+	void			FinalizeFocus();
+	QStringList		GetExpandedPaths() const;
+	void			RestoreExpandedPaths();
+
 	QGridLayout*		m_pMainLayout;
 	QTreeViewEx*		m_pTreeView;
 	QFileSystemModel*	m_pFileModel;
@@ -122,6 +134,11 @@ private:
 	QString				m_RootPath;
 	bool				m_bSearchPending = false;
 	CFileSearchThread*	m_pSearchThread = nullptr;
+	QStringList		m_ExpandedPaths;
+	QStringList		m_FocusPaths;
+	QString			m_FocusParentPath;
+	QPersistentModelIndex m_RestoreFocusIndex;
+	QTimer*			m_pRestoreTimer;
 };
 
 

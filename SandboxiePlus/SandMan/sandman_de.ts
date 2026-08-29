@@ -1316,7 +1316,7 @@ Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="939"/>
+        <location filename="Views/FileView.cpp" line="1215"/>
         <source>%1 - Files</source>
         <translation>%1 - Dateien</translation>
     </message>
@@ -1324,42 +1324,42 @@ Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="619"/>
+        <location filename="Views/FileView.cpp" line="889"/>
         <source>Create Shortcut</source>
         <translation>Verknüpfung erstellen</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="642"/>
+        <location filename="Views/FileView.cpp" line="912"/>
         <source>Pin to Box Run Menu</source>
         <translation>An das Starten-Menü anheften</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="649"/>
+        <location filename="Views/FileView.cpp" line="919"/>
         <source>Recover to Any Folder</source>
         <translation>Wiederherstellen in einen Ordner</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="651"/>
+        <location filename="Views/FileView.cpp" line="921"/>
         <source>Recover to Same Folder</source>
         <translation>Wiederherstellen in gleichen Ordner</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="655"/>
+        <location filename="Views/FileView.cpp" line="925"/>
         <source>Run Recovery Checks</source>
         <translation>Starte Wiederherstellungsüberprüfungen</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="792"/>
+        <location filename="Views/FileView.cpp" line="1051"/>
         <source>Select Directory</source>
         <translation>Ordner auswählen</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="863"/>
+        <location filename="Views/FileView.cpp" line="1139"/>
         <source>Delete Failed</source>
         <translation>Löschen fehlgeschlagen</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="864"/>
+        <location filename="Views/FileView.cpp" line="1140"/>
         <source>The selected files could not be deleted.
 
 Error: 0x%1</source>
@@ -1368,7 +1368,7 @@ Error: 0x%1</source>
 Fehler: 0x%1</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="893"/>
+        <location filename="Views/FileView.cpp" line="1169"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Verknüpfung zu Sandbox %1 erstellen</translation>
     </message>
@@ -7748,42 +7748,42 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
 <context>
     <name>CTraceModel</name>
     <message>
-        <location filename="Models/TraceModel.cpp" line="196"/>
+        <location filename="Models/TraceModel.cpp" line="194"/>
         <source>Unknown</source>
         <translation>Unbekannt</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="175"/>
+        <location filename="Models/TraceModel.cpp" line="173"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="176"/>
+        <location filename="Models/TraceModel.cpp" line="174"/>
         <source>Process %1</source>
         <translation>Prozess %1</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="179"/>
+        <location filename="Models/TraceModel.cpp" line="177"/>
         <source>Thread %1</source>
         <translation>Thread %1</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="333"/>
+        <location filename="Models/TraceModel.cpp" line="331"/>
         <source>Process</source>
         <translation>Prozess</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="335"/>
+        <location filename="Models/TraceModel.cpp" line="333"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="336"/>
+        <location filename="Models/TraceModel.cpp" line="334"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="Models/TraceModel.cpp" line="337"/>
+        <location filename="Models/TraceModel.cpp" line="335"/>
         <source>Value</source>
         <translation>Wert</translation>
     </message>
@@ -7816,8 +7816,8 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
         <location filename="Views/TraceView.cpp" line="290"/>
         <location filename="Views/TraceView.cpp" line="291"/>
         <location filename="Views/TraceView.cpp" line="300"/>
-        <location filename="Views/TraceView.cpp" line="654"/>
-        <location filename="Views/TraceView.cpp" line="777"/>
+        <location filename="Views/TraceView.cpp" line="660"/>
+        <location filename="Views/TraceView.cpp" line="783"/>
         <source>[All]</source>
         <translation>[Alle]</translation>
     </message>
@@ -7887,37 +7887,37 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
         <translation>Automatischer Bildlauf wurde angehalten. Klicken zum Fortsetzen.</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="369"/>
+        <location filename="Views/TraceView.cpp" line="370"/>
         <source>Cleanup Trace Log</source>
         <translation>Rückverfolgungsprotokoll aufräumen</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="454"/>
+        <location filename="Views/TraceView.cpp" line="456"/>
         <source>To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?</source>
         <translation>Um die Stacktracefunktion zu verwenden sind DbgHelp.dll und SymSrv.dll notwendig. Möchten Sie diese runterladen und installieren?</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="820"/>
+        <location filename="Views/TraceView.cpp" line="826"/>
         <source>Save trace log to file</source>
         <translation>Rückverfolgungsprotokoll in Datei speichern</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="826"/>
+        <location filename="Views/TraceView.cpp" line="832"/>
         <source>Failed to open log file for writing</source>
         <translation>Konnte die Protokolldatei nicht zum Schreiben öffnen</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="846"/>
+        <location filename="Views/TraceView.cpp" line="852"/>
         <source>Saving TraceLog...</source>
         <translation>Speichere Rückverfolgungsprotokoll...</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="730"/>
+        <location filename="Views/TraceView.cpp" line="736"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="743"/>
+        <location filename="Views/TraceView.cpp" line="749"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -7925,7 +7925,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="914"/>
+        <location filename="Views/TraceView.cpp" line="920"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - Rückverfolgungsmonitor</translation>
     </message>

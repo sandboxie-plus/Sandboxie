@@ -3,20 +3,30 @@
 - Please note: there is another [ReadMe.md](../Installer/ReadMe.md) file that explains how to create the Sandboxie Plus installers.
 - Please note: the following instructions may lag behind the [CI workflow](../.github/workflows/main.yml), so be aware of any version change.
 
-Sandboxie Plus builds under Visual Studio 2019, as it offers the widest compatibility range, allowing us to build a driver which works with Windows 7 up to Windows 11.
+Sandboxie Plus builds under Visual Studio 2022 and uses the Sandboxie Classic components.
 
-1) We will be installing Visual Studio Community Edition which is sufficient for our purposes, during the installation we need to take care of selecting a Windows SDK version which matches the WDK version we will be installing in the next step.
-	- If you have VS 2019 already installed, you can open the installer and check which SDK you have and add if necessary one matching the WDK.
-2) Next, we will install WDK 20xxx which is required to build the driver, the WDK installer installs the required VS plugin at the end.
-3) So far so good, at this point we already have all we need to build Sandboxie Classic. To build the SandMan UI of Sandboxie Plus, though, we also need the Qt Framework, we can use either 5.15.15 or 6.3.x, but since Qt 6.x does not support Windows 7 without custom patches to base components, we will stick with Qt 5.15.15 for this tutorial.
-	- Note: however, if you want to build SandMan UI for ARM64, you will need to use Qt 6.3.x or later.
-4) We use Qt's online installer and select all required components. I like to also install the source and debug information, but this is just for convenience when debugging and not needed for the build process.
-5) Last but not least, we have to install the VS extension for Qt and configure it to point to our Qt installation.
-6) Ok, now we are ready to build, we start with Sandboxie Classic, we open the Sandbox.sln, select our platform and build type, and run the build.
-	- If we build for x64, we will need to also build the SbieSvc and SbieDll for 32-bit.
-	- If we were building for ARM64, we would also need the ARM64EC version of SbieDll.
-7) And now we continue with building the SandMan UI to create Sandboxie Plus. Here we open the SandboxiePlus.sln, select our platform and build type, and run the build.
-8) Once that is done, we only need to combine the two and here it is: Sandboxie Plus is ready for service.
+1) Install Visual Studio 2022 with the Windows SDK and WDK required by the [Classic build instructions](../Sandboxie/ReadMe.md)
+2) Install the MSVC v142 build tools and Windows 10 SDK 10.0.19041.0 required by SbieShell
+3) Install 7-Zip in `C:\Program Files\7-Zip`
+4) Build Sandboxie Classic using the commands in the Classic build instructions
+5) The Qt version is defined in [`Installer\buildVariables.cmd`](../Installer/buildVariables.cmd); `install_qt.cmd` downloads the matching Qt 6 build
+   - The scripts use the Visual Studio 2022 Enterprise `vcvars*.bat` path used by CI; if you use Community or Professional, update that path in `qmake_plus.cmd` and `copy_build.cmd`
+6) From a Visual Studio 2022 Developer Command Prompt in the repository root, run:
+
+```bat
+SandboxiePlus\install_qt.cmd x64
+SandboxiePlus\install_jom.cmd
+SandboxiePlus\qmake_plus.cmd x64 build_qt6
+msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
+msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=x64 -maxcpucount:8
+Installer\fix_qt5_languages.cmd x64 build_qt6
+Installer\get_openssl.cmd
+Installer\get_7zip.cmd
+Installer\copy_build.cmd x64 build_qt6
+```
+
+7) The assembled x64 build is placed in `Installer\SbiePlus_x64`
+8) For ARM64, see the current commands in the [CI workflow](../.github/workflows/main.yml)
 
 At this point, you may wonder how to run this build. In the end, the driver is not signed and we did not touch the process of signing the user mode components either.
 

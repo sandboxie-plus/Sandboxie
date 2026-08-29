@@ -938,7 +938,6 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	}
 		m_pMenuView->addSeparator();
 		m_pEnableMonitoring = m_pMenuView->addAction(CSandMan::GetIcon("SetLogging"), tr("Trace Logging"), this, SLOT(OnMonitoring()));
-	if (bAdvanced)
 		m_pEnableMonitoring->setCheckable(true);
 	if (!bAdvanced)
 		m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Recovery Log"), this, SLOT(OnRecoveryLog()));
@@ -1014,6 +1013,7 @@ void CSandMan::CreateOldMenus()
 		m_pMenuFile->addSeparator();
 		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Is Window Sandboxed?"), this, SLOT(OnWndFinder()));
 		m_pEnableMonitoring = m_pMenuFile->addAction(CSandMan::GetIcon("SetLogging"), tr("Resource Access Monitor"), this, SLOT(OnMonitoring()));
+		m_pEnableMonitoring->setCheckable(true);
 
 		m_pMenuFile->addSeparator();
 
@@ -2208,16 +2208,19 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		m_pDisableForce->setChecked(bForceProcessDisabled);
 		m_pDisableForce2->setChecked(bForceProcessDisabled);
 
-		if (m_pTraceView)
 		{
 			bool bIsMonitoring = theAPI->IsMonitoring();
-			m_pEnableMonitoring->setChecked(bIsMonitoring);
-			int iTraceCount = theAPI->GetTraceCount();
-			if (!bIsMonitoring && iTraceCount > 0)
-				bIsMonitoring = true; // don't disable the view as long as there are entries shown
-			if (bIsMonitoring && m_pTraceView)
-				m_pTraceInfo->setText(QString::number(iTraceCount));
-			m_pTraceView->SetEnabled(bIsMonitoring);
+			if (m_pEnableMonitoring)
+				m_pEnableMonitoring->setChecked(bIsMonitoring);
+			if (m_pTraceView)
+			{
+				int iTraceCount = theAPI->GetTraceCount();
+				if (!bIsMonitoring && iTraceCount > 0)
+					bIsMonitoring = true; // don't disable the view as long as there are entries shown
+				if (bIsMonitoring)
+					m_pTraceInfo->setText(QString::number(iTraceCount));
+				m_pTraceView->SetEnabled(bIsMonitoring);
+			}
 		}
 
 		QMap<quint32, CBoxedProcessPtr> Processes = theAPI->GetAllProcesses();
@@ -4625,15 +4628,23 @@ void CSandMan::OnMonitoring()
 	}
 	else
 	{
-		theAPI->EnableMonitor(true);
-
 		static CTraceWindow* pTraceWindow = NULL;
+		bool Status = m_pEnableMonitoring->isChecked();
+
+		if (!theAPI->EnableMonitor(Status).IsError())
+			m_pEnableMonitoring->setChecked(Status);
+
+		if (!Status)
+			return;
+
 		if (!pTraceWindow) {
 			pTraceWindow = new CTraceWindow();
-			connect(this, SIGNAL(Closed()), pTraceWindow, SLOT(close()));
+			connect(this, &CSandMan::Closed, pTraceWindow, &CTraceWindow::CloseWithoutPrompt);
 			//pTraceWindow->setAttribute(Qt::WA_DeleteOnClose);
-			connect(pTraceWindow, &CTraceWindow::Closed, [&]() {
+			connect(pTraceWindow, &CTraceWindow::Closed, this, [this]() {
 				pTraceWindow = NULL;
+				if (theAPI && m_pEnableMonitoring)
+					m_pEnableMonitoring->setChecked(theAPI->IsMonitoring());
 			});
 			SafeShow(pTraceWindow);
 		}

@@ -10,6 +10,8 @@
 #include "SbieView.h"
 #include <QtConcurrent>
 #include <QEvent>
+#include <QMessageBox>
+#include <QPushButton>
 #include <QScrollBar>
 #include <QToolButton>
 
@@ -904,7 +906,7 @@ bool CTraceView::SaveToFile(QIODevice* pFile)
 // CTraceWindow
 
 CTraceWindow::CTraceWindow(QWidget *parent)
-	: QDialog(parent)
+	: QDialog(parent), m_bPromptOnClose(true)
 {
 	Qt::WindowFlags flags = windowFlags();
 	flags |= Qt::CustomizeWindowHint;
@@ -932,12 +934,40 @@ CTraceWindow::CTraceWindow(QWidget *parent)
 CTraceWindow::~CTraceWindow()
 {
 	theConf->SetBlob("TraceWindow/Window_Geometry", saveGeometry());
+}
 
-	if(!theAPI) theAPI->EnableMonitor(false);
+void CTraceWindow::CloseWithoutPrompt()
+{
+	m_bPromptOnClose = false;
+	close();
 }
 
 void CTraceWindow::closeEvent(QCloseEvent *e)
 {
+	if (m_bPromptOnClose && theAPI && theConf->GetInt("Options/ViewMode", 1) != 1 &&
+		theAPI->IsMonitoring())
+	{
+		QMessageBox MessageBox(QMessageBox::Question, "Sandboxie-Plus",
+			tr("Trace Logging is still active. What do you want to do?"),
+			QMessageBox::NoButton, this);
+		QPushButton* pStopAndClear = MessageBox.addButton(
+			tr("Stop and Clear"), QMessageBox::AcceptRole);
+		QPushButton* pDisableKeepLogs = MessageBox.addButton(
+			tr("Disable, Keep Logs"), QMessageBox::ActionRole);
+		QPushButton* pKeepLogging = MessageBox.addButton(
+			tr("Keep Logging"), QMessageBox::RejectRole);
+		MessageBox.setDefaultButton(pKeepLogging);
+		MessageBox.exec();
+
+		if (MessageBox.clickedButton() == pStopAndClear)
+		{
+			if (!theAPI->EnableMonitor(false).IsError())
+				theAPI->ClearTrace();
+		}
+		else if (MessageBox.clickedButton() == pDisableKeepLogs)
+			theAPI->EnableMonitor(false);
+	}
+
 	emit Closed();
 	this->deleteLater();
 }

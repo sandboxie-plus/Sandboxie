@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed SandMan Trace Log crashes and stale entries when clearing the log while integrated and standalone trace views are open
 - fixed standalone Trace Logging controls not reflecting the monitor state or disabling logging after the monitor window was closed; closing now offers stop-and-clear, disable-while-retaining logs, or continued logging
 - fixed Firefox 154 MFCDM AppContainer launch fails in Standard Isolation (SBIE2112; DLL/driver pipe-name mismatch) [#5549](https://github.com/sandboxie-plus/Sandboxie/issues/5549)
+- fixed box init issue for processws with an apcontainer token
 
 
 

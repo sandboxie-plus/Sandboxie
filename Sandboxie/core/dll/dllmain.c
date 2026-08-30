@@ -546,7 +546,7 @@ _FX void Dll_InitInjected(void)
 
     Dll_InitComplete = TRUE;
 
-    if (! Dll_RestrictedToken)
+    if (!Dll_RestrictedToken && !Dll_AppContainerToken)
         CustomizeSandbox();
 }
 

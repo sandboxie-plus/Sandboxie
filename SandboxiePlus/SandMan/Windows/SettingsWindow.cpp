@@ -321,6 +321,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 			QString Lang = Locale.nativeLanguageName();
 			ui.uiLang->addItem(Lang, Code);
 		}
+		ui.uiLang->addItem(tr("Arabic (Morocco) - LTR"), "ar_MA");
 		ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
 	}
 

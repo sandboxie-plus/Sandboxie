@@ -4678,7 +4678,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandManTray.cpp" line="214"/>
         <source>Find sandbox...</source>
-        <translation>Suche Sandbox...</translation>
+        <translation>Sandbox suchen...</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="228"/>
@@ -7864,7 +7864,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Views/TraceView.cpp" line="318"/>
         <source>Show Stack Trace</source>
-        <translation>Zeige Rückverfolgung</translation>
+        <translation>Zeige Stacktrace</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="323"/>
@@ -7932,22 +7932,22 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Views/TraceView.cpp" line="951"/>
         <source>Trace Logging is still active. What do you want to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Rückverfolgung ist noch aktiv. Was möchten Sie tun?</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="954"/>
         <source>Stop and Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppen und leeren</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="956"/>
         <source>Disable, Keep Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktivieren, Protokolle behalten</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="958"/>
         <source>Keep Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>Weiter protokollieren</translation>
     </message>
 </context>
 <context>

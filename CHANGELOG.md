@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed File Migration action dropdown changes being discarded when clicking Apply or OK while the editor still has focus [#5548](https://github.com/sandboxie-plus/Sandboxie/issues/5548)
 - fixed SandMan File Panel and Browse Files preserving expanded folders and restoring selection, keyboard focus, and scrolling to the nearest surviving item after deletion [#5499](https://github.com/sandboxie-plus/Sandboxie/issues/5499)
+- fixed Start.exe autorun handling for oversized registry values, bounded shortcut paths, paginated Startup directories, and dynamically sized launch command lines
 - fixed SandMan Trace Log crashes and stale entries when clearing the log while integrated and standalone trace views are open
 - fixed standalone Trace Logging controls not reflecting the monitor state or disabling logging after the monitor window was closed; closing now offers stop-and-clear, disable-while-retaining logs, or continued logging
 - fixed Firefox 154 MFCDM AppContainer launch fails in Standard Isolation (SBIE2112; DLL/driver pipe-name mismatch) [#5549](https://github.com/sandboxie-plus/Sandboxie/issues/5549)

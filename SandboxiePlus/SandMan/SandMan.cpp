@@ -5050,9 +5050,8 @@ void CSandMan::LoadLanguage()
 	LoadLanguage(m_Language, "sandman", 0);
 	LoadLanguage(m_Language, "qt", 1);
 
-	if (locale == QLocale("ar_MA")) {
-    	QApplication::setLayoutDirection(Qt::LeftToRight);
-	}
+	if (m_Language.compare("ar_MA", Qt::CaseInsensitive) == 0)
+    	qApp->setLayoutDirection(Qt::LeftToRight); // only for ar_ma
 
 	QTreeViewEx::m_ResetColumns = tr("Reset Columns");
 	CPanelView::m_CopyCell = tr("Copy Cell");

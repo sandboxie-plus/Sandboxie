@@ -8817,22 +8817,22 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="951"/>
         <source>Trace Logging is still active. What do you want to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>跟踪日志记录仍处于活动状态。要执行什么操作？</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="954"/>
         <source>Stop and Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>停止并清除</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="956"/>
         <source>Disable, Keep Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>停用并保留日志</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="958"/>
         <source>Keep Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>继续记录</translation>
     </message>
 </context>
 <context>

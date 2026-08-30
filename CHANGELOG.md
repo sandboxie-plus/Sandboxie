@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.18.3 / 5.73.3] - 2026-08-??
+## [1.18.3 / 5.73.3] - 2026-08-30
 
 ### Added
 - added a visible `Cleanup Trace Log` action to the standalone SandMan trace monitor

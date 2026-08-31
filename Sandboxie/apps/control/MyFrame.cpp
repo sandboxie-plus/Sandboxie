@@ -1728,6 +1728,11 @@ void CMyFrame::InitSandboxMenu1(
             }
         }
 
+        if (!ChildMenu.GetSafeHmenu()) {
+            order_entry = order_entry->next;
+            continue;
+        }
+
         if (MenuIndex <= 36) {
             title += L"\t          &";
             if (MenuIndex >= 1 && MenuIndex <= 10)

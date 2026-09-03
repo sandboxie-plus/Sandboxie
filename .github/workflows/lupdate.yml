@@ -31,7 +31,7 @@ jobs:
         shell: bash
         working-directory: SandboxiePlus/SandMan
         run: |
-          set +e
+          set -e
           lupdate SandMan.pri ../MiscHelpers/MiscHelpers.pri \
             -ts sandman_ar.ts \
             -ts sandman_de.ts \
@@ -56,8 +56,15 @@ jobs:
             -ts sandman_id.ts \
             -ts sandman_zh_CN.ts \
             -ts sandman_zh_TW.ts
-          git diff --exit-code
-          echo "deploy=$?" >> $GITHUB_OUTPUT
+          if git diff --exit-code; then
+            echo "deploy=0" >> "$GITHUB_OUTPUT"
+          else
+            diff_status=$?
+            if [ "$diff_status" -ne 1 ]; then
+              exit "$diff_status"
+            fi
+            echo "deploy=1" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Commit translations changes (if any)
         if: steps.check.outputs.deploy == '1'

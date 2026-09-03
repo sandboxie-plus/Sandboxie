@@ -1171,7 +1171,8 @@ void CFileView::OnFileMenu(const QPoint&)
 				return;
 
             QString StartExe = theAPI->GetSbiePath() + "\\SandMan.exe";
-			CSbieUtils::CreateShortcut(StartExe, Path, LinkName, BoxName, LinkPath, LinkPath);
+			QString WrkDir = QFileInfo(LinkPath).absoluteDir().path().replace("/", "\\");
+			CSbieUtils::CreateShortcut(StartExe, Path, LinkName, BoxName, LinkPath, LinkPath, 0, WrkDir);
 
             break;
         }

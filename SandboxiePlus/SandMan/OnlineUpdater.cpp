@@ -238,9 +238,23 @@ SB_PROGRESS COnlineUpdater::DownloadFile(const QString& Url, QObject* receiver, 
 
 void CGetFileJob::Finish(QNetworkReply* pReply)
 {
-	quint64 Size = pReply->bytesAvailable();
-
 	m_pProgress->SetProgress(-1);
+
+	if (m_pProgress->IsCanceled()) {
+		m_pProgress->Finish(SB_OK);
+		return;
+	}
+
+	const QString Url = pReply->request().url().toString();
+	if (pReply->error() != QNetworkReply::NoError) {
+		QString ErrorMessage = tr("Failed to download file from: %1").arg(Url);
+		if (!pReply->errorString().isEmpty())
+			ErrorMessage += "\n" + pReply->errorString();
+		m_pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << ErrorMessage));
+		return;
+	}
+
+	const qint64 Size = pReply->bytesAvailable();
 
 	QString FilePath = m_Params["path"].toString();
 	if (FilePath.isEmpty()) {
@@ -251,23 +265,47 @@ void CGetFileJob::Finish(QNetworkReply* pReply)
 	}
 
 	QFile File(FilePath);
-	if (File.open(QFile::WriteOnly)) {
-		while (pReply->bytesAvailable() > 0)
-			File.write(pReply->read(4096));
-		File.flush();
-		QDateTime Date = m_Params["setDate"].toDateTime();
-		if(Date.isValid())
-			File.setFileTime(Date, QFileDevice::FileModificationTime);
-		File.close();
-	}
-
-	m_pProgress->Finish(SB_OK);
-
-	if (File.size() != Size) {
-		QMessageBox::critical(theGUI, "Sandboxie-Plus", tr("Failed to download file from: %1").arg(pReply->request().url().toString()));
+	if (!File.open(QFile::WriteOnly)) {
+		const QString ErrorMessage = tr("Failed to download file from: %1").arg(Url)
+			+ "\n" + File.errorString();
+		m_pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << ErrorMessage));
 		return;
 	}
 
+	qint64 Written = 0;
+	bool WriteOk = true;
+	while (pReply->bytesAvailable() > 0) {
+		const QByteArray Chunk = pReply->read(4096);
+		if (Chunk.isEmpty()) {
+			WriteOk = false;
+			break;
+		}
+		const qint64 Result = File.write(Chunk);
+		if (Result != Chunk.size()) {
+			WriteOk = false;
+			break;
+		}
+		Written += Result;
+	}
+
+	if (!File.flush())
+		WriteOk = false;
+
+	const QDateTime Date = m_Params["setDate"].toDateTime();
+	if (WriteOk && Date.isValid())
+		File.setFileTime(Date, QFileDevice::FileModificationTime);
+
+	const qint64 FileSize = File.size();
+	File.close();
+
+	if (!WriteOk || Written != Size || FileSize != Size) {
+		QFile::remove(FilePath);
+		m_pProgress->Finish(SB_ERR(SB_OtherError,
+			QVariantList() << tr("Failed to download file from: %1").arg(Url)));
+		return;
+	}
+
+	m_pProgress->Finish(SB_OK);
 	emit Download(FilePath, m_Params);
 }
 
@@ -1062,6 +1100,14 @@ bool COnlineUpdater::DownloadInstaller(const QVariantMap& Release, bool bAndRun)
 	Params["signature"] = Installer["signature"];
     SB_PROGRESS Status = DownloadFile(DownloadUrl, this, SLOT(OnInstallerDownload(const QString&, const QVariantMap&)), Params);
 	if (Status.GetStatus() == OP_ASYNC) {
+		CSbieProgress* pProgress = Status.GetValue().data();
+		connect(pProgress, &CSbieProgress::Finished, this, [this, pProgress]() {
+			if (pProgress->GetStatus().IsError()) {
+				m_CheckMode = eInit;
+				theGUI->UpdateLabel();
+			}
+		});
+
 		theGUI->AddAsyncOp(Status.GetValue());
 		Status.GetValue()->ShowMessage(tr("Downloading installer..."));
 	}
@@ -1084,8 +1130,12 @@ void COnlineUpdater::OnInstallerDownload(const QString& Path, const QVariantMap&
 	theConf->SetValue("Updater/InstallerVersion", VersionStr);
 	theConf->SetValue("Updater/InstallerPath", Path);
 
-	if (bAndRun)
-		RunInstaller(false);
+	if (bAndRun) {
+		if (!RunInstaller(false)) {
+			m_CheckMode = eInit;
+			theGUI->UpdateLabel();
+		}
+	}
 	else 
 	{
 		HandleUpdate();
@@ -1113,6 +1163,7 @@ bool COnlineUpdater::RunInstaller(bool bSilent)
 			QFile::remove(FilePath);
 			QFile::remove(FilePath + ".sig");
 			theConf->DelValue("Updater/InstallerPath");
+			theConf->DelValue("Updater/InstallerVersion");
 			theGUI->UpdateLabel();
 		}
 		if (Ret != QMessageBox::Yes)

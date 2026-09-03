@@ -31,6 +31,9 @@
 #include "core/drv/api_defs.h"
 #include <psapi.h>
 #include <Shlwapi.h>
+#include <new>
+#include <set>
+#include <string>
 #include "common/SecDeskHelper.h"
 
 
@@ -2164,7 +2167,7 @@ int Program_Start(void)
 //---------------------------------------------------------------------------
 
 
-void StartAutoRun(const WCHAR* Name, const WCHAR* Cmd)
+void StartAutoRun(const WCHAR* Cmd)
 {
     SbieDll_RunStartExe(Cmd, NULL);
 }
@@ -2187,13 +2190,11 @@ void StartAutoRunKey(LPCWSTR lpKey)
 	OBJECT_ATTRIBUTES ObjectAttributes;
     UNICODE_STRING RegistryPath;
 	HANDLE hKey = NULL;
-    const ULONG BufferSize = sizeof(KEY_VALUE_FULL_INFORMATION) + MAX_PATH;
-	PUCHAR Buffer[BufferSize];
-    PKEY_VALUE_FULL_INFORMATION valueInfo = (PKEY_VALUE_FULL_INFORMATION)Buffer;
+    ULONG BufferSize = sizeof(KEY_VALUE_FULL_INFORMATION) + MAX_PATH * sizeof(WCHAR);
+	PUCHAR Buffer;
+    PKEY_VALUE_FULL_INFORMATION valueInfo;
 	ULONG RequiredSize;
 	ULONG i = 0;
-	UNICODE_STRING Name;
-	UNICODE_STRING Data;
 	NTSTATUS Status;
 
     // Get the native unhooked function in order to enumerate only the sandboxed entries
@@ -2206,26 +2207,62 @@ void StartAutoRunKey(LPCWSTR lpKey)
 	if (!NT_SUCCESS(Status))
 		return;
 
+	Buffer = (PUCHAR)HeapAlloc(GetProcessHeap(), 0, BufferSize);
+    if (!Buffer) {
+        NtClose(hKey);
+        return;
+    }
+    valueInfo = (PKEY_VALUE_FULL_INFORMATION)Buffer;
+
 	while (TRUE) {
-		Status = __sys_NtEnumerateValueKey(hKey, i++, KeyValueFullInformation, valueInfo, sizeof(Buffer), &RequiredSize);
-		if (Status == STATUS_BUFFER_OVERFLOW)
+		Status = __sys_NtEnumerateValueKey(
+            hKey, i, KeyValueFullInformation, valueInfo, BufferSize, &RequiredSize);
+		if (Status == STATUS_BUFFER_OVERFLOW || Status == STATUS_BUFFER_TOO_SMALL) {
+			ULONG NewBufferSize = RequiredSize;
+            if (NewBufferSize <= BufferSize) {
+                if (BufferSize > (ULONG)-1 - 128)
+                    break;
+                NewBufferSize = BufferSize + 128;
+            }
+
+            PUCHAR NewBuffer = (PUCHAR)HeapAlloc(
+                GetProcessHeap(), 0, NewBufferSize);
+            if (!NewBuffer)
+                break;
+
+            HeapFree(GetProcessHeap(), 0, Buffer);
+            Buffer = NewBuffer;
+            BufferSize = NewBufferSize;
+            valueInfo = (PKEY_VALUE_FULL_INFORMATION)Buffer;
 			continue;
-		else if (!NT_SUCCESS(Status))
+		}
+		if (!NT_SUCCESS(Status))
 			break;
-		else if (valueInfo->Type != REG_SZ)
+
+        ++i;
+        if (valueInfo->Type != REG_SZ)
 			continue;
 
-		Name.Length = Name.MaximumLength = (USHORT)valueInfo->NameLength;
-		Name.Buffer = valueInfo->Name;
+        if (valueInfo->DataLength == 0 ||
+            (valueInfo->DataLength % sizeof(WCHAR)) != 0 ||
+            valueInfo->DataOffset > BufferSize ||
+            valueInfo->DataLength > BufferSize - valueInfo->DataOffset)
+            continue;
 
-		Data.Length = Data.MaximumLength = (USHORT)valueInfo->DataLength;
-		Data.Buffer = (PWCHAR)((ULONG_PTR)valueInfo + valueInfo->DataOffset);
-		if (Data.Length > sizeof(WCHAR) && Data.Buffer[Data.Length / sizeof(WCHAR) - 1] == UNICODE_NULL)
-			Data.Length -= sizeof(WCHAR);
+        ULONG dataLength = valueInfo->DataLength;
+        WCHAR* command = (WCHAR*)MyHeapAlloc(dataLength + sizeof(WCHAR));
+        if (!command)
+            continue;
 
-		StartAutoRun(Name.Buffer, Data.Buffer);
+        memcpy(command,
+               (const UCHAR*)valueInfo + valueInfo->DataOffset,
+               dataLength);
+        command[dataLength / sizeof(WCHAR)] = UNICODE_NULL;
+        StartAutoRun(command);
+        MyHeapFree(command);
 	}
 
+	HeapFree(GetProcessHeap(), 0, Buffer);
 	NtClose(hKey);
 }
 
@@ -2235,13 +2272,39 @@ void StartAutoRunKey(LPCWSTR lpKey)
 //---------------------------------------------------------------------------
 
 
-void StartLink(const WCHAR* Path, const WCHAR* Name)
+void StartLink(const WCHAR* Path, const WCHAR* Name, ULONG NameLength)
 {
+    if (!Path || !Name || !NameLength ||
+        (NameLength % sizeof(WCHAR)) != 0)
+        return;
+
+    const WCHAR* pathName = Path;
+    if (wcsncmp(pathName, L"\\??\\", 4) != 0)
+        return;
+    pathName += 4;
+
     WCHAR path[MAX_PATH];
-    wcscpy(path, Path + 4); // skip \??\ prefix
-    if (path[wcslen(path)] != L'\\')
-        wcscat(path, L"\\");
-    wcscat(path, Name);
+    size_t pathLength = wcslen(pathName);
+    if (!pathLength || pathLength >= ARRAYSIZE(path))
+        return;
+
+    wmemcpy(path, pathName, pathLength);
+    if (path[pathLength - 1] != L'\\') {
+        if (pathLength >= ARRAYSIZE(path) - 1)
+            return;
+        path[pathLength++] = L'\\';
+    }
+
+    size_t nameLength = NameLength / sizeof(WCHAR);
+    if (pathLength >= ARRAYSIZE(path))
+        return;
+    if (nameLength > ARRAYSIZE(path) - pathLength - 1)
+        return;
+
+    wmemcpy(path + pathLength, Name, nameLength);
+    pathLength += nameLength;
+    path[pathLength] = L'\0';
+
 
     /*WCHAR *ptr = wcsrchr(path, L'.');
     if (! ptr)
@@ -2262,7 +2325,7 @@ void StartLink(const WCHAR* Path, const WCHAR* Name)
     HRESULT hr = pShellLink->GetPath(buf, buflen / sizeof(WCHAR) - 1, NULL, 0);
     if (SUCCEEDED(hr)) {
 
-        StartAutoRun(Name, buf);
+        StartAutoRun(buf);
     }
 
     MyHeapFree(buf);
@@ -2270,7 +2333,12 @@ void StartLink(const WCHAR* Path, const WCHAR* Name)
     pPersistFile->Release();
     pShellLink->Release();*/
 
-    StartAutoRun(Name, path); // we can use the link directly
+    WCHAR commandLine[MAX_PATH + 3];
+    commandLine[0] = L'"';
+    wmemcpy(commandLine + 1, path, pathLength);
+    commandLine[pathLength + 1] = L'"';
+    commandLine[pathLength + 2] = L'\0';
+    StartAutoRun(commandLine); // we can use the link directly
 }
 
 
@@ -2281,23 +2349,53 @@ void StartLink(const WCHAR* Path, const WCHAR* Name)
 
 void StartAutoAutoFolder(LPCWSTR lpPath)
 {
-    WCHAR* OutTruePath;
-    WCHAR* OutCopyPath;
+    const ULONG BufferSize = 65536;
+    const ULONG FileNameOffset =
+        (ULONG)FIELD_OFFSET(FILE_ID_BOTH_DIR_INFORMATION, FileName);
+    WCHAR* OutTruePath = NULL;
+    WCHAR* OutCopyPath = NULL;
     UNICODE_STRING objname;
-    RtlInitUnicodeString(&objname, lpPath);
-    File_GetName(NULL, &objname, &OutTruePath, &OutCopyPath, NULL);
-
     UNICODE_STRING RootDirectoryName;
 	OBJECT_ATTRIBUTES RootDirectoryAttributes;
 	NTSTATUS ntStatus = STATUS_SUCCESS;
-	HANDLE RootDirectoryHandle;
+	HANDLE RootDirectoryHandle = NULL;
+    HANDLE Event = NULL;
 	IO_STATUS_BLOCK Iosb;
-	//HANDLE Event;
-    PFILE_ID_BOTH_DIR_INFORMATION DirInformation;
+    ULONG DirectoryDataLength = 0;
+    PFILE_ID_BOTH_DIR_INFORMATION DirectoryBuffer = NULL;
+    PFILE_ID_BOTH_DIR_INFORMATION DirInformation = NULL;
+    struct START_AUTO_RUN_NAME_LESS {
+        bool operator()(const std::wstring& Left,
+                        const std::wstring& Right) const
+        {
+            UNICODE_STRING LeftName;
+            UNICODE_STRING RightName;
+            LeftName.Length = LeftName.MaximumLength =
+                (USHORT)(Left.length() * sizeof(WCHAR));
+            LeftName.Buffer = (PWCHAR)Left.c_str();
+            RightName.Length = RightName.MaximumLength =
+                (USHORT)(Right.length() * sizeof(WCHAR));
+            RightName.Buffer = (PWCHAR)Right.c_str();
+            return RtlCompareUnicodeString(&LeftName, &RightName, TRUE) < 0;
+        }
+    };
+    std::set<std::wstring, START_AUTO_RUN_NAME_LESS> SeenEntries;
+    volatile ULONG_PTR RootDirectoryHandleAddress = 0;
+    volatile ULONG_PTR EventHandleAddress = 0;
+    volatile ULONG_PTR DirectoryBufferAddress = 0;
+    BOOLEAN restartScan;
 
     // Get the native unhooked function in order to enumerate only the sandboxed entries
     P_NtCreateFile __sys_NtCreateFile = (P_NtCreateFile)SbieDll_GetSysFunction(L"NtCreateFile");
     P_NtQueryDirectoryFile __sys_NtQueryDirectoryFile = (P_NtQueryDirectoryFile)SbieDll_GetSysFunction(L"NtQueryDirectoryFile");
+
+    if (!lpPath || !__sys_NtCreateFile || !__sys_NtQueryDirectoryFile)
+        goto cleanup;
+
+    RtlInitUnicodeString(&objname, lpPath);
+    ntStatus = File_GetName(NULL, &objname, &OutTruePath, &OutCopyPath, NULL);
+    if (!NT_SUCCESS(ntStatus) || !OutCopyPath)
+        goto cleanup;
 	
 	RtlInitUnicodeString(&RootDirectoryName, OutCopyPath);
 	InitializeObjectAttributes(&RootDirectoryAttributes, &RootDirectoryName, OBJ_CASE_INSENSITIVE, 0, 0);
@@ -2305,39 +2403,149 @@ void StartAutoAutoFolder(LPCWSTR lpPath)
 		GENERIC_READ, &RootDirectoryAttributes, &Iosb, 0, FILE_ATTRIBUTE_DIRECTORY,
 		FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, FILE_OPEN, FILE_DIRECTORY_FILE, 0, 0);
 	if (!NT_SUCCESS(ntStatus))
-		return;
-	
-	//ntStatus = NtCreateEvent(&Event, GENERIC_ALL, 0, NotificationEvent, FALSE);
-	//if (!NT_SUCCESS(ntStatus))
-	//	return;
+		goto cleanup;
 
-    DirInformation = (PFILE_ID_BOTH_DIR_INFORMATION)MyHeapAlloc(65536);
+    RootDirectoryHandleAddress = (ULONG_PTR)RootDirectoryHandle;
+    Event = CreateEvent(NULL, TRUE, FALSE, NULL);
+    if (!Event)
+        goto cleanup;
+    EventHandleAddress = (ULONG_PTR)Event;
 
-	if (__sys_NtQueryDirectoryFile(RootDirectoryHandle, 0, //Event,
-		0, 0, &Iosb, DirInformation, 65536, FileIdBothDirectoryInformation, FALSE, NULL, FALSE) == STATUS_PENDING)
-	{
-		//ntStatus = NtWaitForSingleobject(Event, TRUE, 0);
-	}
-    if (NT_SUCCESS(ntStatus))
-    {
-        while (1)
-        {
-            UNICODE_STRING EntryName;
-            EntryName.MaximumLength = EntryName.Length = (USHORT)DirInformation->FileNameLength;
-            EntryName.Buffer = &DirInformation->FileName[0];
-            if ((DirInformation->FileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0)
-            {
-                StartLink(lpPath, EntryName.Buffer);
-            }
-            if (0 == DirInformation->NextEntryOffset)
+    DirectoryBuffer = (PFILE_ID_BOTH_DIR_INFORMATION)MyHeapAlloc(BufferSize);
+    if (!DirectoryBuffer)
+        goto cleanup;
+    DirectoryBufferAddress = (ULONG_PTR)DirectoryBuffer;
+
+    restartScan = TRUE;
+    for (;;) {
+        if (!ResetEvent(Event)) {
+            ntStatus = STATUS_UNSUCCESSFUL;
+            break;
+        }
+
+	    ntStatus = __sys_NtQueryDirectoryFile(
+            (HANDLE)(ULONG_PTR)RootDirectoryHandleAddress,
+            (HANDLE)(ULONG_PTR)EventHandleAddress,
+		    0, 0, &Iosb, (PVOID)(ULONG_PTR)DirectoryBufferAddress, BufferSize,
+		    FileIdBothDirectoryInformation, FALSE, NULL, restartScan);
+        RootDirectoryHandle = (HANDLE)(ULONG_PTR)RootDirectoryHandleAddress;
+        Event = (HANDLE)(ULONG_PTR)EventHandleAddress;
+        DirectoryBuffer = (PFILE_ID_BOTH_DIR_INFORMATION)(ULONG_PTR)DirectoryBufferAddress;
+        restartScan = FALSE;
+
+        if (ntStatus == STATUS_PENDING) {
+            if (WaitForSingleObject(Event, INFINITE) != WAIT_OBJECT_0) {
+                ntStatus = STATUS_UNSUCCESSFUL;
                 break;
-            else
-                DirInformation = (PFILE_ID_BOTH_DIR_INFORMATION)(((PUCHAR)DirInformation) + DirInformation->NextEntryOffset);
+            }
+            ntStatus = Iosb.Status;
+            if (ntStatus == STATUS_PENDING)
+                break;
+        }
+
+        if (ntStatus == STATUS_NO_MORE_FILES)
+            break;
+        if (ntStatus != STATUS_SUCCESS && ntStatus != STATUS_BUFFER_OVERFLOW)
+            break;
+
+        if (Iosb.Information > BufferSize) {
+            ntStatus = STATUS_INFO_LENGTH_MISMATCH;
+            break;
+        }
+        DirectoryDataLength = (ULONG)Iosb.Information;
+        if (!DirectoryDataLength) {
+            ntStatus = STATUS_INFO_LENGTH_MISMATCH;
+            break;
+        }
+
+        BOOLEAN recordValid = TRUE;
+        DirInformation = DirectoryBuffer;
+        while (DirInformation) {
+            ULONG bufferOffset =
+                (ULONG)((PUCHAR)DirInformation - (PUCHAR)DirectoryBuffer);
+            if (bufferOffset >= DirectoryDataLength) {
+                recordValid = FALSE;
+                break;
+            }
+
+            ULONG bytesRemaining = DirectoryDataLength - bufferOffset;
+            if (bytesRemaining < FileNameOffset) {
+                recordValid = FALSE;
+                break;
+            }
+
+            ULONG fileNameLength = DirInformation->FileNameLength;
+            if ((fileNameLength % sizeof(WCHAR)) != 0 ||
+                fileNameLength > bytesRemaining - FileNameOffset) {
+                recordValid = FALSE;
+                break;
+            }
+
+            ULONG recordSize = FileNameOffset + fileNameLength;
+            ULONG nextEntryOffset = DirInformation->NextEntryOffset;
+            if (nextEntryOffset &&
+                ((nextEntryOffset % sizeof(ULONG)) != 0 ||
+                 nextEntryOffset < recordSize ||
+                 nextEntryOffset >= bytesRemaining)) {
+                recordValid = FALSE;
+                break;
+            }
+
+            if (!nextEntryOffset)
+                break;
+            DirInformation = (PFILE_ID_BOTH_DIR_INFORMATION)(
+                (PUCHAR)DirInformation + nextEntryOffset);
+        }
+
+        if (!recordValid) {
+            ntStatus = STATUS_INFO_LENGTH_MISMATCH;
+            break;
+        }
+
+        BOOLEAN madeProgress = FALSE;
+        DirInformation = DirectoryBuffer;
+        while (DirInformation) {
+            BOOLEAN isNewEntry;
+            try {
+                isNewEntry = SeenEntries.emplace(
+                    DirInformation->FileName,
+                    DirInformation->FileNameLength / sizeof(WCHAR)).second;
+            }
+            catch (const std::bad_alloc&) {
+                recordValid = FALSE;
+                break;
+            }
+
+            if (isNewEntry) {
+                madeProgress = TRUE;
+                if ((DirInformation->FileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0)
+                    StartLink(lpPath, DirInformation->FileName,
+                              DirInformation->FileNameLength);
+            }
+
+            if (!DirInformation->NextEntryOffset)
+                break;
+            DirInformation = (PFILE_ID_BOTH_DIR_INFORMATION)(
+                (PUCHAR)DirInformation + DirInformation->NextEntryOffset);
+        }
+
+        if (!recordValid) {
+            ntStatus = STATUS_INSUFFICIENT_RESOURCES;
+            break;
+        }
+        if (!madeProgress) {
+            ntStatus = STATUS_NO_MORE_FILES;
+            break;
         }
     }
-    MyHeapFree(DirInformation);
 
-	NtClose(RootDirectoryHandle);
+cleanup:
+    if (Event)
+        CloseHandle(Event);
+    if (DirectoryBuffer)
+        MyHeapFree(DirectoryBuffer);
+	if (RootDirectoryHandle)
+		NtClose(RootDirectoryHandle);
 }
 
 
@@ -2366,12 +2574,12 @@ void StartAllAutoRunEntries()
     //HKLM\Software\Microsoft\Windows\CurrentVersion\RunServices
     //HKLM\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce
 
-    StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");
-    StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce");
-    //StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx");
-    StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Run");
-    StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce");
-    //StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx");
+    StartAutoRunKey(L"\\REGISTRY\\User\\Current\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");
+    StartAutoRunKey(L"\\REGISTRY\\User\\Current\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce");
+    //StartAutoRunKey(L"\\REGISTRY\\User\\Current\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx");
+    StartAutoRunKey(L"\\REGISTRY\\User\\Current\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Run");
+    StartAutoRunKey(L"\\REGISTRY\\User\\Current\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce");
+    //StartAutoRunKey(L"\\REGISTRY\\User\\Current\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx");
     //HKCU\Software\Microsoft\Windows NT\CurrentVersion\Windows\Run
 
     //HKCU\Software\Microsoft\Windows\CurrentVersion\RunServices

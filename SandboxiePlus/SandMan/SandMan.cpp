@@ -938,7 +938,6 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	}
 		m_pMenuView->addSeparator();
 		m_pEnableMonitoring = m_pMenuView->addAction(CSandMan::GetIcon("SetLogging"), tr("Trace Logging"), this, SLOT(OnMonitoring()));
-	if (bAdvanced)
 		m_pEnableMonitoring->setCheckable(true);
 	if (!bAdvanced)
 		m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Recovery Log"), this, SLOT(OnRecoveryLog()));
@@ -1014,6 +1013,7 @@ void CSandMan::CreateOldMenus()
 		m_pMenuFile->addSeparator();
 		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Is Window Sandboxed?"), this, SLOT(OnWndFinder()));
 		m_pEnableMonitoring = m_pMenuFile->addAction(CSandMan::GetIcon("SetLogging"), tr("Resource Access Monitor"), this, SLOT(OnMonitoring()));
+		m_pEnableMonitoring->setCheckable(true);
 
 		m_pMenuFile->addSeparator();
 
@@ -2208,16 +2208,19 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		m_pDisableForce->setChecked(bForceProcessDisabled);
 		m_pDisableForce2->setChecked(bForceProcessDisabled);
 
-		if (m_pTraceView)
 		{
 			bool bIsMonitoring = theAPI->IsMonitoring();
-			m_pEnableMonitoring->setChecked(bIsMonitoring);
-			int iTraceCount = theAPI->GetTraceCount();
-			if (!bIsMonitoring && iTraceCount > 0)
-				bIsMonitoring = true; // don't disable the view as long as there are entries shown
-			if (bIsMonitoring && m_pTraceView)
-				m_pTraceInfo->setText(QString::number(iTraceCount));
-			m_pTraceView->SetEnabled(bIsMonitoring);
+			if (m_pEnableMonitoring)
+				m_pEnableMonitoring->setChecked(bIsMonitoring);
+			if (m_pTraceView)
+			{
+				int iTraceCount = theAPI->GetTraceCount();
+				if (!bIsMonitoring && iTraceCount > 0)
+					bIsMonitoring = true; // don't disable the view as long as there are entries shown
+				if (bIsMonitoring)
+					m_pTraceInfo->setText(QString::number(iTraceCount));
+				m_pTraceView->SetEnabled(bIsMonitoring);
+			}
 		}
 
 		QMap<quint32, CBoxedProcessPtr> Processes = theAPI->GetAllProcesses();
@@ -3440,6 +3443,76 @@ void CSandMan::OnMessageLogDblClick(QTreeWidgetItem* pItem, int Column)
 QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData, QString ProcessName, QString* pLink)
 {
 	QString Message;
+	const quint32 MessageId = MsgCode & 0xFFFF;
+
+	auto ResolveBoxDisplayName = [this](const QString& BoxName, QString& DisplayName) {
+		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+		if (!pBox)
+			return false;
+
+		DisplayName = GetBoxDisplayName(pBox);
+		return true;
+	};
+
+	const QStringList NoSuffix = QStringList() << "";
+	const QStringList ImageSuffix = QStringList() << "" << " *";
+	const QStringList ServiceSuffix = QStringList() << " (NtLoadDriver)" << " (StartService)";
+
+	auto FormatBracketedBox = [&](const QString& Value, const QStringList& AllowedSuffixes) {
+		const int OpenBracket = Value.lastIndexOf(" [");
+		if (OpenBracket <= 0)
+			return Value;
+
+		const int CloseBracket = Value.indexOf(']', OpenBracket + 2);
+		if (CloseBracket < 0)
+			return Value;
+
+		const QString Suffix = Value.mid(CloseBracket + 1);
+		if (!AllowedSuffixes.contains(Suffix))
+			return Value;
+
+		const QString BoxName = Value.mid(OpenBracket + 2, CloseBracket - OpenBracket - 2);
+		QString DisplayName;
+		if (!ResolveBoxDisplayName(BoxName, DisplayName))
+			return Value;
+
+		return Value.left(OpenBracket + 2) + DisplayName + Value.mid(CloseBracket);
+	};
+
+	auto FormatBracketedBoxWithValue = [&](const QString& Value) {
+		const int OpenBracket = Value.lastIndexOf(" [");
+		if (OpenBracket <= 0)
+			return Value;
+
+		const int ValueSeparator = Value.indexOf(" /", OpenBracket + 2);
+		if (ValueSeparator <= OpenBracket + 2)
+			return Value;
+
+		const int CloseBracket = Value.indexOf(']', ValueSeparator + 2);
+		if (CloseBracket < 0 || !Value.mid(CloseBracket + 1).isEmpty())
+			return Value;
+
+		const QString BoxName = Value.mid(OpenBracket + 2, ValueSeparator - OpenBracket - 2);
+		QString DisplayName;
+		if (!ResolveBoxDisplayName(BoxName, DisplayName))
+			return Value;
+
+		return Value.left(OpenBracket + 2) + DisplayName + Value.mid(ValueSeparator);
+	};
+
+	auto FormatLeadingBox = [&](const QString& Value, const QString& Separator) {
+		const int SeparatorPos = Value.indexOf(Separator);
+		if (SeparatorPos <= 0)
+			return Value;
+
+		const QString BoxName = Value.left(SeparatorPos);
+		QString DisplayName;
+		if (!ResolveBoxDisplayName(BoxName, DisplayName))
+			return Value;
+
+		return DisplayName + Value.mid(SeparatorPos);
+	};
+
 	if (MsgCode != 0) {
 		Message = theAPI->GetSbieMsgStr(MsgCode, m_LanguageId);
 		if (pLink) {
@@ -3452,7 +3525,42 @@ QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData,
 		Message = MsgData[0];
 
 	for (int i = 1; i < MsgData.size(); i++) {
-		Message = Message.arg(GetBoxDisplayName(MsgData[i]));
+		QString Value = MsgData[i];
+		if (i == 1) {
+			// These messages embed BoxName in their first formatted argument.
+			switch (MessageId) {
+			case 1307:
+			case 1308:
+			case 1313:
+				Value = FormatBracketedBox(Value, ImageSuffix);
+				break;
+			case 2102:
+			case 2113:
+			case 2114:
+			case 2115:
+				Value = FormatBracketedBoxWithValue(Value);
+				break;
+			case 2103:
+				Value = FormatBracketedBox(Value, ServiceSuffix);
+				break;
+			case 2104:
+			case 2219:
+			case 2224:
+				Value = FormatBracketedBox(Value, NoSuffix);
+				break;
+			case 2227:
+				Value = FormatLeadingBox(Value, " (");
+				break;
+			case 2230:
+				Value = FormatLeadingBox(Value, " [");
+				break;
+			default:
+				break;
+			}
+		}
+		if (Value == MsgData[i])
+			Value = GetBoxDisplayName(Value);
+		Message = Message.arg(Value);
 	}
 
 	if (ProcessName != "System") // if it's not from the driver, add the pid
@@ -4520,15 +4628,25 @@ void CSandMan::OnMonitoring()
 	}
 	else
 	{
-		theAPI->EnableMonitor(true);
-
 		static CTraceWindow* pTraceWindow = NULL;
+		bool Status = m_pEnableMonitoring->isChecked();
+		if (!pTraceWindow && !Status && theAPI->IsMonitoring())
+			Status = true;
+
+		if (!theAPI->EnableMonitor(Status).IsError())
+			m_pEnableMonitoring->setChecked(Status);
+
+		if (!Status)
+			return;
+
 		if (!pTraceWindow) {
 			pTraceWindow = new CTraceWindow();
-			connect(this, SIGNAL(Closed()), pTraceWindow, SLOT(close()));
+			connect(this, &CSandMan::Closed, pTraceWindow, &CTraceWindow::CloseWithoutPrompt);
 			//pTraceWindow->setAttribute(Qt::WA_DeleteOnClose);
-			connect(pTraceWindow, &CTraceWindow::Closed, [&]() {
+			connect(pTraceWindow, &CTraceWindow::Closed, this, [this]() {
 				pTraceWindow = NULL;
+				if (theAPI && m_pEnableMonitoring)
+					m_pEnableMonitoring->setChecked(theAPI->IsMonitoring());
 			});
 			SafeShow(pTraceWindow);
 		}
@@ -4929,8 +5047,18 @@ void CSandMan::LoadLanguage()
 	if (!m_LanguageId)
 		m_LanguageId = 1033; // default to English
 
-	LoadLanguage(m_Language, "sandman", 0);
-	LoadLanguage(m_Language, "qt", 1);
+	QString translationFile = m_Language;
+	Qt::LayoutDirection layoutDir = QLocale(m_Language).textDirection();
+
+	if (m_Language.compare("ar_MA", Qt::CaseInsensitive) == 0 || m_Language.compare("ar-MA", Qt::CaseInsensitive) == 0) {
+		translationFile = "ar";         // Load standard Arabic translation
+		layoutDir = Qt::LeftToRight;    // But force LTR layout
+	}
+
+	LoadLanguage(translationFile, "sandman", 0);
+	LoadLanguage(translationFile, "qt", 1);
+
+	qApp->setLayoutDirection(layoutDir);
 
 	QTreeViewEx::m_ResetColumns = tr("Reset Columns");
 	CPanelView::m_CopyCell = tr("Copy Cell");

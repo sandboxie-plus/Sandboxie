@@ -772,7 +772,7 @@ struct tagGUI_KILL_JOB_REQ
 typedef struct tagGUI_KILL_JOB_REQ GUI_KILL_JOB_REQ;
 
 //---------------------------------------------------------------------------
-// Shell Notify Icon (tray icon proxy for OpenWinClass=* mode)
+// Shell Notify Icon (tray icon proxy)
 //---------------------------------------------------------------------------
 
 // Platform-neutral representation of NOTIFYICONDATAW fields

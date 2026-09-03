@@ -53,9 +53,9 @@ Sandboxie Plus 拥有基于现代 Qt 的用户界面，支持自项目开源以�
   * 保护沙盒免受主机影响，包括防止截图
   * 触发系统，当沙盒经历初始化、启动、终止或文件恢复等不同阶段时执行操作
   * 允许某进程不受沙盒限制，但其子进程受沙盒保护
-  * 将沙盒作为一种控制单元，强制程序自动使用 SOCKS5 代理
-  * DNS 解析控制，具有沙盒粒度的控制能力
-  * 限制沙盒中的进程数量及其占用的总内存空间，并且可以限制每个沙盒中的沙盒化进程总数
+  * 强制程序自动使用用户提供的 SOCKS5 代理
+  * 通过阻止或重定向实现 DNS 控制
+  * 可限制沙盒内单个进程占用的内存、所有进程占用的总内存，以及每个沙盒内的进程总数
   * 完全不同于 Sandboxie 开源前版本的令牌创建机制，使沙盒在系统中更具独立性
   * 加密沙盒 - 基于 AES 的可靠数据存储解决方案
   * 防止沙盒程序以常规方式生成不必要的唯一标识符
@@ -167,8 +167,8 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 ## 🌏 翻译人员
 
 - czoins - 阿拉伯语
-- yuhao2348732、0x391F、nkh0472、yfdyh000、gexgd0419、Zerorigin、UnnamedOrange、DevSplash、Becods、okrc、4rt3mi5、sepcnt、fzxx、Vstory、GT-Stardust、habatake - 简体中文
-- TragicLifeHu、Hulen、xiongsp、habatake - 繁体中文
+- yuhao2348732、0x391F、nkh0472、yfdyh000、gexgd0419、Zerorigin、UnnamedOrange、DevSplash、Becods、okrc、4rt3mi5、sepcnt、fzxx、Vstory、GT-Stardust、habatake、mihomoQ - 简体中文
+- TragicLifeHu、Hulen、xiongsp、habatake、mihomoQ - 繁体中文
 - RockyTDR - 荷兰语
 - clexanis、Mmoi-Fr、hippalectryon-0、Monsieur Pissou - 法语（通过电子邮件提供）
 - bastik-1001、APMichael - 德语

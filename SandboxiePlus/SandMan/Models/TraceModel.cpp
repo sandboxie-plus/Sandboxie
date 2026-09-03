@@ -125,8 +125,6 @@ void CTraceModel::Clear(bool bMem)
 	endResetModel();
 }
 
-PoolAllocator<sizeof(CTraceModel::STreeNode)> CTraceModel::m_NodeAllocator;
-
 CTraceModel::STreeNode*	CTraceModel::MkNode(quint64 Id) 
 { 
 	STreeNode* pNode = (STreeNode*)m_NodeAllocator.allocate(sizeof(STreeNode));

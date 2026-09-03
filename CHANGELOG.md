@@ -4,10 +4,36 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.18.3 / 5.73.3] - 2026-??-??
+## [1.18.4 / 5.73.4] - 2026-09-??
+
+### Added
+- added low-noise `SbieTrace` logging for `Shell_NotifyIconW` calls, including the message, icon identity (`NIF_GUID`/GUID or `HWND`/`uID`), and effective direct/proxy route
+- added the `Show Future Settings` editor setting (enabled by default) to include future-version settings in SandMan INI completion candidates
 
 ### Fixed
+- fixed stale INI completion-popup candidate tooltips during editing and limited `Template`/`TemplateReject` tooltips to setting-name text
+### Fixed
 - fixed SandMan File Panel "Create Shortcut" producing a shortcut without a working directory, so the sandboxed program inherited SandMan's current directory and applications that open their data files by relative path failed to find them [#5542](https://github.com/sandboxie-plus/Sandboxie/issues/5542)
+
+### Changed
+- changed `UseShellNotifyIconProxy` to remain enabled by default for `OpenWinClass=*` while allowing explicit use for other sandboxed processes; non-`OpenWinClass=*` cases default to direct routing
+- improved SandMan INI editor auto-completion with synchronized per-editor metadata, context-aware semantic ranking, fuzzy matching, and deferred refreshes during rapid typing or deletion
+- improved INI completion-popup tooltips jumping between sides or overlapping candidates when displaying large setting descriptions
+
+
+## [1.18.3 / 5.73.3] - 2026-08-30
+
+### Added
+- added a visible `Cleanup Trace Log` action to the standalone SandMan trace monitor
+
+### Fixed
+- fixed File Migration action dropdown changes being discarded when clicking Apply or OK while the editor still has focus [#5548](https://github.com/sandboxie-plus/Sandboxie/issues/5548)
+- fixed SandMan File Panel and Browse Files preserving expanded folders and restoring selection, keyboard focus, and scrolling to the nearest surviving item after deletion [#5499](https://github.com/sandboxie-plus/Sandboxie/issues/5499)
+- fixed Start.exe autorun handling for oversized registry values, bounded shortcut paths, paginated Startup directories, and dynamically sized launch command lines
+- fixed SandMan Trace Log crashes and stale entries when clearing the log while integrated and standalone trace views are open
+- fixed standalone Trace Logging controls not reflecting the monitor state or disabling logging after the monitor window was closed; closing now offers stop-and-clear, disable-while-retaining logs, or continued logging
+- fixed a Firefox 154 MFCDM AppContainer launch failure in Standard Isolation (SBIE2112; DLL/driver pipe-name mismatch) [#5549](https://github.com/sandboxie-plus/Sandboxie/issues/5549)
+- fixed a box initialisation issue for processes with an AppContainer token
 
 
 

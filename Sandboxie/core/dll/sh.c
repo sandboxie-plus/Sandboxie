@@ -59,6 +59,9 @@ static ULONG SH32_NotifyIconMaxChars(
 static BOOLEAN SH32_Shell_NotifyIcon_ProxyCall(
     DWORD dwMessage, PNOTIFYICONDATAW lpData, BOOL *ret);
 
+static void SH32_TraceShellNotifyIcon(
+    DWORD dwMessage, PNOTIFYICONDATAW lpData, BOOLEAN proxyRoute);
+
 //static HRESULT SH32_SHGetFolderPathW(
 //    HWND hwnd, int csidl, HANDLE hToken, DWORD dwFlags, LPWSTR pszPath);
 
@@ -739,6 +742,103 @@ static BOOLEAN SH32_Shell_NotifyIcon_ProxyCall(
 
 
 //---------------------------------------------------------------------------
+// SH32_TraceShellNotifyIcon
+//---------------------------------------------------------------------------
+
+
+static void SH32_TraceShellNotifyIcon(
+    DWORD dwMessage, PNOTIFYICONDATAW lpData, BOOLEAN proxyRoute)
+{
+    THREAD_DATA *TlsData;
+    ULONG lastError;
+    BOOLEAN guidField;
+    BOOLEAN guidActive;
+    ULONG hwnd;
+    ULONG uid;
+    WCHAR guid[64];
+    WCHAR msg[384];
+
+    if (!Dll_SbieTrace || !lpData)
+        return;
+
+    lastError = GetLastError();
+    TlsData = Dll_GetTlsData(NULL);
+    if (!TlsData || TlsData->sh32_notify_trace_active) {
+        SetLastError(lastError);
+        return;
+    }
+
+#if (NTDDI_VERSION >= NTDDI_VISTA)
+    guidField = lpData->cbSize >= (DWORD)NOTIFYICONDATAW_V3_SIZE;
+#else
+    guidField = lpData->cbSize >= (DWORD)(NOTIFYICONDATAW_V2_SIZE + sizeof(GUID));
+#endif
+    guidActive = guidField && ((lpData->uFlags & NIF_GUID) != 0);
+    hwnd = (ULONG)(ULONG_PTR)lpData->hWnd;
+    uid = (ULONG)lpData->uID;
+
+    if (TlsData->sh32_notify_trace_valid
+        && TlsData->sh32_notify_trace_message == dwMessage
+        && TlsData->sh32_notify_trace_cb_size == lpData->cbSize
+        && TlsData->sh32_notify_trace_flags == lpData->uFlags
+        && TlsData->sh32_notify_trace_proxy == proxyRoute
+        && TlsData->sh32_notify_trace_hwnd == hwnd
+        && TlsData->sh32_notify_trace_uid == uid
+        && TlsData->sh32_notify_trace_guid_valid == guidField
+        && (!guidField || memcmp(&TlsData->sh32_notify_trace_guid,
+                                 &lpData->guidItem, sizeof(GUID)) == 0)) {
+        SetLastError(lastError);
+        return;
+    }
+
+    TlsData->sh32_notify_trace_valid = TRUE;
+    TlsData->sh32_notify_trace_message = dwMessage;
+    TlsData->sh32_notify_trace_cb_size = lpData->cbSize;
+    TlsData->sh32_notify_trace_flags = lpData->uFlags;
+    TlsData->sh32_notify_trace_proxy = proxyRoute;
+    TlsData->sh32_notify_trace_hwnd = hwnd;
+    TlsData->sh32_notify_trace_uid = uid;
+    TlsData->sh32_notify_trace_guid_valid = guidField;
+    if (guidField)
+        TlsData->sh32_notify_trace_guid = lpData->guidItem;
+
+    if (guidField) {
+        Sbie_snwprintf(guid, ARRAYSIZE(guid),
+            L"{%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X}",
+            (unsigned)lpData->guidItem.Data1,
+            (unsigned)lpData->guidItem.Data2,
+            (unsigned)lpData->guidItem.Data3,
+            (unsigned)lpData->guidItem.Data4[0],
+            (unsigned)lpData->guidItem.Data4[1],
+            (unsigned)lpData->guidItem.Data4[2],
+            (unsigned)lpData->guidItem.Data4[3],
+            (unsigned)lpData->guidItem.Data4[4],
+            (unsigned)lpData->guidItem.Data4[5],
+            (unsigned)lpData->guidItem.Data4[6],
+            (unsigned)lpData->guidItem.Data4[7]);
+    } else
+        wcscpy(guid, L"<not-present>");
+
+    TlsData->sh32_notify_trace_active = TRUE;
+    Sbie_snwprintf(msg, ARRAYSIZE(msg),
+        L"Shell_NotifyIconW: msg=%lu cbSize=%lu flags=0x%08lX "
+        L"NIF_GUID=%u guid=%s hwnd=0x%08lX uid=%lu route=%s",
+        (ULONG)dwMessage,
+        (ULONG)lpData->cbSize,
+        (ULONG)lpData->uFlags,
+        guidActive ? 1 : 0,
+        guid,
+        hwnd,
+        uid,
+        proxyRoute ? L"proxy" : L"direct");
+    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
+    TlsData->sh32_notify_trace_active = FALSE;
+
+    SetLastError(lastError);
+}
+
+
+//---------------------------------------------------------------------------
 // SH32_Shell_NotifyIconW
 //---------------------------------------------------------------------------
 
@@ -748,6 +848,8 @@ _FX BOOL SH32_Shell_NotifyIconW(
 {
     BOOL ret = FALSE;
     HICON icon = NULL;
+    BOOLEAN useProxy;
+    BOOLEAN routedProxy = FALSE;
 
     if (dwMessage == NIM_ADD || dwMessage == NIM_MODIFY)
     {
@@ -805,23 +907,31 @@ _FX BOOL SH32_Shell_NotifyIconW(
         }
     }
 
-    if (Gui_OpenAllWinClasses && Gui_UseProxyService
-        && Config_GetSettingsForImageName_bool(SH32_UseShellNotifyIconProxy, TRUE)) {
+    useProxy = Gui_UseProxyService
+        // Image selectors for this setting are resolved via
+        // Config_MatchImageAndGetValue, including '!image' negation.
+        && Config_GetSettingsForImageName_bool(
+            SH32_UseShellNotifyIconProxy, Gui_OpenAllWinClasses);
+
+    if (useProxy) {
 
         //
-        // When OpenWinClass=* is set, FindWindowW/SendMessageW hooks are not
-        // installed, so Shell_NotifyIconW cannot locate Shell_TrayWnd on the
-        // Sandboxie desktop.  Route the call through the GUI proxy, which
-        // runs on the real desktop and can invoke Shell_NotifyIconW there.
+        // Route the call through the GUI proxy, which runs on the real desktop
+        // and can invoke Shell_NotifyIconW there.  This is enabled by default
+        // for OpenWinClass=* and can be enabled explicitly for other cases.
         //
 
-        if (! SH32_Shell_NotifyIcon_ProxyCall(dwMessage, lpData, &ret))
+        if (SH32_Shell_NotifyIcon_ProxyCall(dwMessage, lpData, &ret))
+            routedProxy = TRUE;
+        else
             ret = __sys_Shell_NotifyIconW(dwMessage, lpData);
 
     } else {
 
         ret = __sys_Shell_NotifyIconW(dwMessage, lpData);
     }
+
+    SH32_TraceShellNotifyIcon(dwMessage, lpData, routedProxy);
 
     if (icon) 
     {

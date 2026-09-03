@@ -2121,7 +2121,21 @@ void* SbieDll_GetSysFunction(const WCHAR* name)
 
 BOOL SbieDll_RunStartExe(const WCHAR* cmd, const wchar_t* boxname)
 {
-    WCHAR cmdline[MAX_PATH] = L"";
+    if (!cmd)
+        return FALSE;
+
+    SIZE_T cmdline_len = wcslen(cmd) + 1;
+    if (boxname)
+        cmdline_len += wcslen(boxname) + 6;
+    if (cmdline_len > (SIZE_T)((ULONG)-1) / sizeof(WCHAR))
+        return FALSE;
+
+    WCHAR *cmdline = (WCHAR *)HeapAlloc(
+        GetProcessHeap(), 0,
+        (ULONG)(cmdline_len * sizeof(WCHAR)));
+    if (!cmdline)
+        return FALSE;
+    cmdline[0] = L'\0';
 
     if (boxname) {
         wcscat(cmdline, L"/box:");
@@ -2145,5 +2159,6 @@ BOOL SbieDll_RunStartExe(const WCHAR* cmd, const wchar_t* boxname)
         CloseHandle(pi.hThread);
     }
 
+    HeapFree(GetProcessHeap(), 0, cmdline);
     return ret;
 }

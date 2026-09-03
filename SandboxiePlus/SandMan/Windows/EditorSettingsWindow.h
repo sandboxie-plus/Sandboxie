@@ -19,6 +19,7 @@ public:
 	bool GetAutoCompletionConsent() const;
 	int GetEnableAutoCompletion() const;
 	bool GetEnableFuzzyMatching() const;
+	bool GetShowFutureSettings() const;
 	bool GetValidateIniKeys() const;
 	int GetEnablePopupTooltips() const;
 
@@ -27,6 +28,7 @@ public:
 	void SetAutoCompletionConsent(bool enabled);
 	void SetEnableAutoCompletion(int state);
 	void SetEnableFuzzyMatching(bool enabled);
+	void SetShowFutureSettings(bool enabled);
 	void SetValidateIniKeys(bool enabled);
 	void SetEnablePopupTooltips(int state);
 
@@ -61,12 +63,14 @@ private:
 	QCheckBox* chkAutoCompletionConsent;
 	QCheckBox* chkEnableAutoCompletion;
 	QCheckBox* chkEnableFuzzyMatching;
+	QCheckBox* chkShowFutureSettings;
 	
 	// Store original values for restore on cancel
 	int m_originalEnableIniTooltips;
 	bool m_originalAutoCompletionConsent;
 	int m_originalEnableAutoCompletion;
 	bool m_originalEnableFuzzyMatching;
+	bool m_originalShowFutureSettings;
 	bool m_originalValidateIniKeys;
 	int m_originalEnablePopupTooltips;
 	
@@ -77,6 +81,7 @@ private:
 	bool m_resetAutoCompletionConsent;
 	bool m_resetEnableAutoCompletion;
 	bool m_resetEnableFuzzyMatching;
+	bool m_resetShowFutureSettings;
 	
 	// Persistent flags to track which settings were reset (not cleared by SaveSettings)
 	// These are used by OptionsWindow after dialog closes

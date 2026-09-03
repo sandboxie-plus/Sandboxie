@@ -313,7 +313,7 @@ MSG_HEADER *SbieIniServer::GetVersion(MSG_HEADER *msg)
     wsprintf(ver_str, L"%S", MY_VERSION_STRING);
 
     ULONG ver_len = wcslen(ver_str);
-    ULONG rpl_len = sizeof(SBIE_INI_GET_USER_RPL)
+    ULONG rpl_len = sizeof(SBIE_INI_GET_VERSION_RPL)
                   + (ver_len + 1) * sizeof(WCHAR);
     SBIE_INI_GET_VERSION_RPL *rpl =
         (SBIE_INI_GET_VERSION_RPL *)LONG_REPLY(rpl_len);

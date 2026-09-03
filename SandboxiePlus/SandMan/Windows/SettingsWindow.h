@@ -149,6 +149,7 @@ private slots:
 	void OnIniValidationToggled(int state);
 	void OnTooltipToggled(int state);
 	void OnAutoCompletionToggled(int state);
+	void OnAutoCompletionModeChanged(int state);
 	void OnSaveIni();
 	void OnIniChanged();
 	void OnCancelEdit();
@@ -197,6 +198,7 @@ protected:
 
 	// Autocompletion support
 	void UpdateAutoCompletion();
+	void ApplyAutoCompletionMode(int state);
 
 	void	InitSupport();
 

@@ -279,6 +279,7 @@ private slots:
 	void OnIniValidationToggled(int state);
 	void OnTooltipToggled(int state);
 	void OnAutoCompletionToggled(int state);
+	void OnAutoCompletionModeChanged(int state);
 	void OnEditorSettings();
 	void OnSaveIni();
 	void OnIniChanged();
@@ -577,6 +578,7 @@ protected:
 	
 	// Autocompletion support
 	void UpdateAutoCompletion();
+	void ApplyAutoCompletionMode(int state);
 
 	QString GetCategoryName(const QString& Category);
 

@@ -208,6 +208,21 @@ typedef struct _THREAD_DATA {
     ULONG           sh32_shell_execute;
 
     //
+    // shell module: notification trace de-duplication
+    //
+
+    BOOLEAN         sh32_notify_trace_active;
+    BOOLEAN         sh32_notify_trace_valid;
+    BOOLEAN         sh32_notify_trace_proxy;
+    BOOLEAN         sh32_notify_trace_guid_valid;
+    ULONG           sh32_notify_trace_message;
+    ULONG           sh32_notify_trace_cb_size;
+    ULONG           sh32_notify_trace_flags;
+    ULONG           sh32_notify_trace_hwnd;
+    ULONG           sh32_notify_trace_uid;
+    GUID            sh32_notify_trace_guid;
+
+    //
     // gui module
     //
 

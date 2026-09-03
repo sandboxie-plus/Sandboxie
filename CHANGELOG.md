@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.18.4 / 5.73.4] - 2026-09-??
+
+### Added
+- added low-noise `SbieTrace` logging for `Shell_NotifyIconW` calls, including the message, icon identity (`NIF_GUID`/GUID or `HWND`/`uID`), and effective direct/proxy route
+
+### Changed
+- changed `UseShellNotifyIconProxy` to remain enabled by default for `OpenWinClass=*` while allowing explicit use for other sandboxed processes; non-`OpenWinClass=*` cases default to direct routing
+
+
+
 ## [1.18.3 / 5.73.3] - 2026-08-30
 
 ### Added

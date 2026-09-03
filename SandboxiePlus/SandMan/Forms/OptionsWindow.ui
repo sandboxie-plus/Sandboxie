@@ -2043,40 +2043,46 @@
             <layout class="QGridLayout" name="gridLayout_26">
              <item row="0" column="1">
               <layout class="QGridLayout" name="gridLayout_2">
-               <item row="3" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkElevateRpcss">
+               <item row="4" column="4">
+                <widget class="QLabel" name="label_64">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
                  <property name="text">
-                  <string>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</string>
+                  <string>(Security Critical)</string>
                  </property>
                 </widget>
                </item>
-               <item row="12" column="1">
-                <spacer name="verticalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Orientation::Vertical</enum>
+               <item row="6" column="0" colspan="2">
+                <widget class="QLabel" name="lblToken">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>5</height>
-                  </size>
+                 <property name="toolTip">
+                  <string>Protect the sandbox integrity itself</string>
                  </property>
-                </spacer>
-               </item>
-               <item row="1" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkProtectSCM">
                  <property name="text">
-                  <string>Allow only privileged processes to access the Service Control Manager</string>
+                  <string>Sandboxie token</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="2" colspan="2">
-                <widget class="QLabel" name="label_74">
+               <item row="5" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkDropConHostIntegrity">
                  <property name="text">
-                  <string>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</string>
+                  <string>Drop ConHost.exe Process Integrity Level</string>
                  </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
+                </widget>
+               </item>
+               <item row="4" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkDropPrivileges">
+                 <property name="text">
+                  <string>Drop critical privileges from processes running with a SYSTEM token</string>
                  </property>
                 </widget>
                </item>
@@ -2096,7 +2102,14 @@
                  </property>
                 </widget>
                </item>
-               <item row="13" column="2">
+               <item row="2" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkRestrictServices">
+                 <property name="text">
+                  <string>Do not start sandboxed services using a system token (recommended)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="12" column="2">
                 <spacer name="horizontalSpacer_13">
                  <property name="orientation">
                   <enum>Qt::Orientation::Horizontal</enum>
@@ -2109,64 +2122,62 @@
                  </property>
                 </spacer>
                </item>
-               <item row="8" column="1" colspan="4">
+               <item row="10" column="1" colspan="4">
+                <widget class="QCheckBox" name="chkNotUntrusted">
+                 <property name="toolTip">
+                  <string>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
+Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="1">
+                <spacer name="verticalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkElevateRpcss">
+                 <property name="text">
+                  <string>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkProtectSCM">
+                 <property name="text">
+                  <string>Allow only privileged processes to access the Service Control Manager</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1" colspan="4">
                 <widget class="QCheckBox" name="chkSbieLogon">
                  <property name="text">
                   <string>Use a Sandboxie login instead of an anonymous token</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkRestrictServices">
+               <item row="8" column="2" colspan="2">
+                <widget class="QLabel" name="label_74">
                  <property name="text">
-                  <string>Do not start sandboxed services using a system token (recommended)</string>
+                  <string>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="4">
-                <widget class="QLabel" name="label_65">
-                 <property name="font">
-                  <font>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>(Security Critical)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="0" colspan="2">
-                <widget class="QLabel" name="lblToken">
-                 <property name="font">
-                  <font>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="toolTip">
-                  <string>Protect the sandbox integrity itself</string>
-                 </property>
-                 <property name="text">
-                  <string>Sandboxie token</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkDropPrivileges">
-                 <property name="text">
-                  <string>Drop critical privileges from processes running with a SYSTEM token</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkProtectSystem">
-                 <property name="text">
-                  <string>Protect sandboxed SYSTEM processes from unprivileged processes</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="1" colspan="4">
+               <item row="9" column="1" colspan="4">
                 <widget class="QCheckBox" name="chkCreateToken">
                  <property name="toolTip">
                   <string>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
@@ -2177,37 +2188,6 @@ Partially checked: No groups will be added to the newly created sandboxed token.
                  </property>
                  <property name="tristate">
                   <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkDropConHostIntegrity">
-                 <property name="text">
-                  <string>Drop ConHost.exe Process Integrity Level</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="4">
-                <widget class="QLabel" name="label_64">
-                 <property name="font">
-                  <font>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>(Security Critical)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="11" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkNotUntrusted">
-                 <property name="toolTip">
-                  <string>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
-Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</string>
-                 </property>
-                 <property name="text">
-                  <string>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</string>
                  </property>
                 </widget>
                </item>

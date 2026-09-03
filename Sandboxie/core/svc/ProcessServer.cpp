@@ -1008,9 +1008,9 @@ HANDLE ProcessServer::RunSandboxedGetToken(
         // then we want to adjust the DACL in the new token
         //
 
-		if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))
-			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_ALL, TRUE);
-        else if (SbieApi_QueryConfBool(boxname, L"AdjustBoxedSystem", TRUE))
+		//if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))
+		//	ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_ALL, TRUE);
+        //else if (SbieApi_QueryConfBool(boxname, L"AdjustBoxedSystem", TRUE))
             // OriginalToken BEGIN
             if(!CompartmentMode && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
             // OriginalToken END

@@ -418,9 +418,9 @@ ULONG ServiceServer::RunHandler2(
             ok = FALSE;
         else
         {
-            if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))
-                ok = ProcessServer::RunSandboxedSetDacl(hProcess, hNewToken, GENERIC_ALL, TRUE, idProcess);
-            else if (SbieApi_QueryConfBool(boxname, L"AdjustBoxedSystem", TRUE))
+            //if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))
+            //    ok = ProcessServer::RunSandboxedSetDacl(hProcess, hNewToken, GENERIC_ALL, TRUE, idProcess);
+            //else if (SbieApi_QueryConfBool(boxname, L"AdjustBoxedSystem", TRUE))
                 // OriginalToken BEGIN
                 if (!CompartmentMode && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
                 // OriginalToken END

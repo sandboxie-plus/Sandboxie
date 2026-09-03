@@ -831,7 +831,10 @@ static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 				Files.insert(ArcIndex, new QFileXProgress(TempPath, pProgress, &Archive));
 			} else {
 				// Regular file - extract to box root
-				Files.insert(ArcIndex, new QFileXProgress(CArchive::PrepareExtraction(FilePath, singleBoxRoot + "\\"), pProgress, &Archive));
+				QString TargetPath = CArchive::PrepareExtraction(FilePath, singleBoxRoot + "\\");
+				if (TargetPath.isEmpty()) // entry tried to escape the box root
+					continue;
+				Files.insert(ArcIndex, new QFileXProgress(TargetPath, pProgress, &Archive));
 			}
 		} else {
 			// Multi-box archive: check for new format (BoxName.ini) or old format (BoxName/...)
@@ -879,7 +882,10 @@ static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 				Files.insert(ArcIndex, new QFileXProgress(TempPath, pProgress, &Archive));
 			} else {
 				// Regular file - extract to box root
-				Files.insert(ArcIndex, new QFileXProgress(CArchive::PrepareExtraction(relPath, boxRoot + "\\"), pProgress, &Archive));
+				QString TargetPath = CArchive::PrepareExtraction(relPath, boxRoot + "\\");
+				if (TargetPath.isEmpty()) // entry tried to escape the box root
+					continue;
+				Files.insert(ArcIndex, new QFileXProgress(TargetPath, pProgress, &Archive));
 			}
 		}
 	}

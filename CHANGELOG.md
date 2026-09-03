@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed stale INI completion-popup candidate tooltips during editing and limited `Template`/`TemplateReject` tooltips to setting-name text
 - fixed SandMan File Panel "Create Shortcut" producing a shortcut without a working directory, so the sandboxed program inherited SandMan's current directory and applications that open their data files by relative path failed to find them [#5542](https://github.com/sandboxie-plus/Sandboxie/issues/5542)
 - fixed wrong return type ein sbiesvc
+- fixed archive path cleaning
 
 ### Changed
 - changed `UseShellNotifyIconProxy` to remain enabled by default for `OpenWinClass=*` while allowing explicit use for other sandboxed processes; non-`OpenWinClass=*` cases default to direct routing

@@ -995,6 +995,11 @@ finish:
 MSG_HEADER *SbieIniServer::GetSetting(MSG_HEADER *msg)
 {
     SBIE_INI_SETTING_REQ *req = (SBIE_INI_SETTING_REQ *)msg;
+    if (req->h.length < sizeof(SBIE_INI_SETTING_REQ))
+        return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+
+    req->section[ARRAYSIZE(req->section) - 1] = L'\0';
+    req->setting[ARRAYSIZE(req->setting) - 1] = L'\0';
 
     RevertToSelf();
 

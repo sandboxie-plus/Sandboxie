@@ -6,8 +6,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.18.4 / 5.73.4] - 2026-09-??
 
-### Fixed
-
 ### Added
 - added low-noise `SbieTrace` logging for `Shell_NotifyIconW` calls, including the message, icon identity (`NIF_GUID`/GUID or `HWND`/`uID`), and effective direct/proxy route
 - added the `Show Future Settings` editor setting (enabled by default) to include future-version settings in SandMan INI completion candidates
@@ -23,9 +21,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved SandMan INI editor auto-completion with synchronized per-editor metadata, context-aware semantic ranking, fuzzy matching, and deferred refreshes during rapid typing or deletion
 - improved INI completion-popup tooltips jumping between sides or overlapping candidates when displaying large setting descriptions
 
-### removed
+### Removed
 - removed 'ExposeBoxedSystem=y' option
-
 
 
 

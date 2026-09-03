@@ -5047,8 +5047,18 @@ void CSandMan::LoadLanguage()
 	if (!m_LanguageId)
 		m_LanguageId = 1033; // default to English
 
-	LoadLanguage(m_Language, "sandman", 0);
-	LoadLanguage(m_Language, "qt", 1);
+	QString translationFile = m_Language;
+	Qt::LayoutDirection layoutDir = QLocale(m_Language).textDirection();
+
+	if (m_Language.compare("ar_MA", Qt::CaseInsensitive) == 0 || m_Language.compare("ar-MA", Qt::CaseInsensitive) == 0) {
+		translationFile = "ar";         // Load standard Arabic translation
+		layoutDir = Qt::LeftToRight;    // But force LTR layout
+	}
+
+	LoadLanguage(translationFile, "sandman", 0);
+	LoadLanguage(translationFile, "qt", 1);
+
+	qApp->setLayoutDirection(layoutDir);
 
 	QTreeViewEx::m_ResetColumns = tr("Reset Columns");
 	CPanelView::m_CopyCell = tr("Copy Cell");

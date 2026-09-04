@@ -8,7 +8,7 @@ jobs:
   check_pr:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Is PR included deprecated terms
+      - name: Check if PR included deprecated terms
         id: check
         uses: JJ/github-pr-contains-action@releases/v14.1.2
         with:

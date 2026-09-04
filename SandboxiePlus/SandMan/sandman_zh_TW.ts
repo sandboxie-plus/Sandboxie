@@ -1435,17 +1435,17 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="46"/>
         <source>Show Future Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示未來版本設定</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>隱藏</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Shown (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示（預設）</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="58"/>
@@ -7183,12 +7183,12 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
         <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>Disabled</source>
-        <translation>啟用</translation>
+        <translation>停用</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="324"/>
         <source>Arabic (Morocco) - LTR</source>
-        <translation type="unfinished"></translation>
+        <translation>阿拉伯文（摩洛哥，從左至右）</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="588"/>

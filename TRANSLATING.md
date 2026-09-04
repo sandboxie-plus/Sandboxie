@@ -13,7 +13,7 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Arabic|Yes|Yes - Nov 21, 2024|No|No|
 |Bulgarian|Yes|No|No|No|
 |Chinese Simplified|Yes - Nov 22, 2024|Yes - Aug 30, 2026|Yes - Aug 23, 2026|Yes - 2025|
-|Chinese Traditional|Yes - Aug 13, 2026|Yes - Aug 31, 2026|Yes - Aug 23, 2026|Yes - Aug 23, 2026|
+|Chinese Traditional|Yes - Aug 13, 2026|Yes - Sep 4, 2026|Yes - Aug 23, 2026|Yes - Aug 23, 2026|
 |Croatian|Yes|No|No|No|
 |Czech|Yes|No|No|No|
 |Danish|Yes|No|No|No|

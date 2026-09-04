@@ -641,7 +641,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="497"/>
-        <location filename="BoxTransfer.cpp" line="1123"/>
+        <location filename="BoxTransfer.cpp" line="1129"/>
         <source>7-Zip library is not available.</source>
         <translation>7-Zip 라이브러리를 사용할 수 없습니다.</translation>
     </message>
@@ -700,43 +700,43 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <translation>샌드박스 내보내기</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1052"/>
+        <location filename="BoxTransfer.cpp" line="1058"/>
         <source>Password for %1</source>
         <translation>%1의 비밀번호</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1068"/>
+        <location filename="BoxTransfer.cpp" line="1074"/>
         <source>Failed to open archive (%1): %2</source>
         <translation>압축파일 (%1)를 열 수 없습니다: %2</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1128"/>
+        <location filename="BoxTransfer.cpp" line="1134"/>
         <source>Select Archives</source>
         <translation>압축파일 선택</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1129"/>
+        <location filename="BoxTransfer.cpp" line="1135"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
         <translation>7-Zip 압축파일 (*.7z);;Zip 압축파일 (*.zip);;모든 압축파일 (*.7z *.zip)</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1166"/>
+        <location filename="BoxTransfer.cpp" line="1172"/>
         <source>The selected archives do not contain any sandbox data.</source>
         <translation>선택한 압축파일에는 샌드박스 데이터가 포함되어 있지 않습니다.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1192"/>
+        <location filename="BoxTransfer.cpp" line="1198"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
         <translation>&apos;%1&apos;이라는 이름을 가진 여러 박스를 가져올 수 없습니다. 먼저 이름을 변경해 주세요.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1278"/>
-        <location filename="BoxTransfer.cpp" line="1286"/>
+        <location filename="BoxTransfer.cpp" line="1284"/>
+        <location filename="BoxTransfer.cpp" line="1292"/>
         <source>Importing: %1</source>
         <translation>가져오기: %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1058"/>
+        <location filename="BoxTransfer.cpp" line="1064"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>압축 파일을 열 수 없습니다. 비밀번호가 잘못되었습니까?</translation>
     </message>
@@ -749,12 +749,12 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <translation type="vanished">압축파일에는 샌드박스 데이터가 포함되어 있지 않습니다.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1180"/>
+        <location filename="BoxTransfer.cpp" line="1186"/>
         <source>Nothing selected for import.</source>
         <translation>가져오기에 선택된 항목이 없습니다.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1208"/>
+        <location filename="BoxTransfer.cpp" line="1214"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
         <translation>샌드박스 &apos;%1&apos;이 이미 존재합니다. 해당 구성이 덮어쓰게 됩니다. 계속하시겠습니까?</translation>
     </message>
@@ -1217,28 +1217,28 @@ Error: %1</source>
 <context>
     <name>CCodeEdit</name>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1069"/>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2260"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1302"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2581"/>
         <source>Find</source>
         <translation>찾기</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1074"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1307"/>
         <source>FindNext</source>
         <translation>다음 찾기</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1084"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1317"/>
         <source>GoTo</source>
         <translation>이동</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1538"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1735"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
         <translation>%1을 의미하셨나요? (Ctrl+R 키를 눌러 교체하세요)</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2260"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2581"/>
         <source>F3: Find Next
 + Shift: Backward
 + Ctrl: Case Sensitively
@@ -1253,7 +1253,7 @@ Find String:</source>
 찾을 문자열:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2286"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2607"/>
         <source>Go to Line:</source>
         <translation>줄로 가기:</translation>
     </message>
@@ -1423,53 +1423,68 @@ You can click Finish to close this wizard.</source>
         <translation>사용함</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="55"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="46"/>
+        <source>Show Future Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
+        <source>Shown (default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="58"/>
         <source>Editor Settings</source>
         <translation>편집기 설정</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="75"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="78"/>
         <source>Reset All to Defaults</source>
         <translation>모두 기본값으로 재설정</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="76"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="79"/>
         <source>Reset all settings to their default values and remove custom config entries.</source>
         <translation>모든 설정을 기본값으로 재설정하고 사용자 지정 구성 항목을 제거합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Setting</source>
         <translation>설정</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>State</source>
         <translation>상태</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Unchecked</source>
         <translation>선택되지 않음</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Partial</source>
         <translation>부분적</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Checked</source>
         <translation>선택됨</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="203"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="209"/>
         <source>Reset</source>
         <translation>재설정</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="204"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="210"/>
         <source>Reset this setting to default value</source>
         <translation>이 설정을 기본값으로 재설정</translation>
     </message>
@@ -1495,7 +1510,7 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="1215"/>
+        <location filename="Views/FileView.cpp" line="1216"/>
         <source>%1 - Files</source>
         <translation>%1 - 파일</translation>
     </message>
@@ -1736,7 +1751,9 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CGetFileJob</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="267"/>
+        <location filename="OnlineUpdater.cpp" line="250"/>
+        <location filename="OnlineUpdater.cpp" line="269"/>
+        <location filename="OnlineUpdater.cpp" line="304"/>
         <source>Failed to download file from: %1</source>
         <translation>파일 다운로드 실패 위치: %1</translation>
     </message>
@@ -1770,40 +1787,40 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CIniHighlighter</name>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="946"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1083"/>
         <source>Validate (Failed)</source>
         <translation>검증 (실패)</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1327"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1470"/>
         <source>Added in version</source>
         <translation>버전에 추가됨</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1328"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2659"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1471"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2803"/>
         <source>Removed in version</source>
         <translation>버전에서 제거됨</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1329"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1472"/>
         <source>Re-added in version</source>
         <translation>버전에서 다시 추가됨</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1330"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2658"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1473"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2802"/>
         <source>Renamed in version</source>
         <translation>버전으로 이름 변경됨</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1331"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2660"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1474"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2804"/>
         <source>Superseded by</source>
         <translation>대체됨</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2700"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2844"/>
         <source>Attention</source>
         <translation>주의</translation>
     </message>
@@ -1848,7 +1865,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="vanished">여러가지</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1963"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2106"/>
         <source>Category</source>
         <translation>범주</translation>
     </message>
@@ -1865,24 +1882,24 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="vanished">사용자 설정</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1964"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2107"/>
         <source>Context</source>
         <translation>문맥</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1965"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2108"/>
         <source>Requirements</source>
         <translation>요구 사항</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2175"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2685"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2318"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2829"/>
         <source>Syntax</source>
         <translation>구문</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2176"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2680"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2319"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2824"/>
         <source>Description</source>
         <translation>설명</translation>
     </message>
@@ -2234,7 +2251,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>COnlineUpdater</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="445"/>
+        <location filename="OnlineUpdater.cpp" line="483"/>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
@@ -2243,53 +2260,53 @@ Do you still want to update?</source>
 그래도 업데이트를 하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="476"/>
+        <location filename="OnlineUpdater.cpp" line="514"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>새 버전의 Sandboxie-Plus가 있는지 확인하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="477"/>
+        <location filename="OnlineUpdater.cpp" line="515"/>
         <source>Don&apos;t show this message again.</source>
         <translation>이 메시지를 다시 표시하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="504"/>
+        <location filename="OnlineUpdater.cpp" line="542"/>
         <source>To ensure optimal compatibility with your software, Sandboxie needs to update its compatibility templates. Do you want to proceed?</source>
         <translation>소프트웨어와의 최적 호환성을 보장하려면 Sandboxie에서 호환성 템플릿을 업데이트해야 합니다. 계속 진행하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="505"/>
+        <location filename="OnlineUpdater.cpp" line="543"/>
         <source>Enable auto template updates</source>
         <translation>자동 템플릿 업데이트 사용함</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="553"/>
+        <location filename="OnlineUpdater.cpp" line="591"/>
         <source>Checking for updates...</source>
         <translation>업데이트를 확인하는 중...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="560"/>
+        <location filename="OnlineUpdater.cpp" line="598"/>
         <source>server not reachable</source>
         <translation>서버에 연결할 수 없음</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="561"/>
-        <location filename="OnlineUpdater.cpp" line="563"/>
+        <location filename="OnlineUpdater.cpp" line="599"/>
+        <location filename="OnlineUpdater.cpp" line="601"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>업데이트를 확인하지 못했습니다. 오류: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="588"/>
+        <location filename="OnlineUpdater.cpp" line="626"/>
         <source>Update Check completed, no new updates</source>
         <translation>업데이트 확인 완료, 새 업데이트 없음</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="733"/>
+        <location filename="OnlineUpdater.cpp" line="771"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;설치 프로그램을 다운로드하시겠습니까?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="737"/>
+        <location filename="OnlineUpdater.cpp" line="775"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;업데이트를 다운로드하시겠습니까?&lt;/p&gt;</translation>
     </message>
@@ -2298,70 +2315,70 @@ Do you still want to update?</source>
         <translation type="vanished">&lt;p&gt;&lt;a href=&quot;%1&quot;&gt;업데이트 페이지&lt;/a&gt;로 이동하시겠습니까??&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="750"/>
+        <location filename="OnlineUpdater.cpp" line="788"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>이 업데이트를 더 이상 표시하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="878"/>
+        <location filename="OnlineUpdater.cpp" line="916"/>
         <source>Downloading updates...</source>
         <translation>업데이트 다운로드 중...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="904"/>
+        <location filename="OnlineUpdater.cpp" line="942"/>
         <source>invalid parameter</source>
         <translation>잘못된 매개변수</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="905"/>
+        <location filename="OnlineUpdater.cpp" line="943"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
         <translation>업데이트 정보를 다운로드하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="906"/>
+        <location filename="OnlineUpdater.cpp" line="944"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
         <translation>업데이트 json 파일을 불러오지 못했습니다</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="907"/>
+        <location filename="OnlineUpdater.cpp" line="945"/>
         <source>failed to download a particular file</source>
         <translation>특정 파일을 다운로드하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="908"/>
+        <location filename="OnlineUpdater.cpp" line="946"/>
         <source>failed to scan existing installation</source>
         <translation>기존 설치를 검색하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="909"/>
+        <location filename="OnlineUpdater.cpp" line="947"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
         <translation>업데이트 서명이 잘못되었습니다 !!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="910"/>
+        <location filename="OnlineUpdater.cpp" line="948"/>
         <source>downloaded file is corrupted</source>
         <translation>다운로드한 파일이 손상되었습니다</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="911"/>
+        <location filename="OnlineUpdater.cpp" line="949"/>
         <source>internal error</source>
         <translation>내부 오류</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="912"/>
+        <location filename="OnlineUpdater.cpp" line="950"/>
         <source>unknown error</source>
         <translation>알 수 없는 오류</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="937"/>
+        <location filename="OnlineUpdater.cpp" line="975"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>서버에서 업데이트를 다운로드하지 못했습니다, 오류 %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="961"/>
+        <location filename="OnlineUpdater.cpp" line="999"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sandboxie-Plus에 대한 업데이트가 다운로드되었습니다.&lt;/p&gt;&lt;p&gt;이 업데이트를 적용하시겠습니까? 샌드박스로 실행 중인 프로그램이 있으면 프로그램이 종료됩니다.&lt;/p&gt;</translation>
     </message>
@@ -2370,7 +2387,7 @@ Do you still want to update?</source>
         <translation type="vanished">파일 다운로드 실패 위치: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1066"/>
+        <location filename="OnlineUpdater.cpp" line="1112"/>
         <source>Downloading installer...</source>
         <translation>설치 프로그램을 다운로드하는 중...</translation>
     </message>
@@ -2379,22 +2396,22 @@ Do you still want to update?</source>
         <translation type="vanished">설치 관리자를 다운로드하지 못했습니다: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1109"/>
+        <location filename="OnlineUpdater.cpp" line="1159"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;새 Sandboxie-Plus 설치 관리자가 다음 위치에 다운로드되었습니다:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;설치를 시작하시겠습니까? 샌드박스로 실행 중인 프로그램이 있으면 종료됩니다.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1170"/>
+        <location filename="OnlineUpdater.cpp" line="1221"/>
         <source>There is a new Templates.ini available, do you want to download it?</source>
         <translation>새로운 Templates.ini를 사용할 수 있습니다. 다운로드하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1220"/>
+        <location filename="OnlineUpdater.cpp" line="1271"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt; &lt;a href=&quot;%1&quot;&gt;정보 페이지로 이동하시겠습니까&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1240"/>
+        <location filename="OnlineUpdater.cpp" line="1291"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>앞으로 이 공지사항을 표시하지 않습니다.</translation>
     </message>
@@ -2403,7 +2420,7 @@ Do you still want to update?</source>
         <translation type="vanished">&lt;p&gt;사용할 수 있는 새로운 버전의 Sandboxie-Plus가 있습니다.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;새 버전:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="719"/>
+        <location filename="OnlineUpdater.cpp" line="757"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;사용할 수 있는 새로운 버전의 Sandboxie-Plus가 있습니다.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;새 버전:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
@@ -2412,7 +2429,7 @@ Do you still want to update?</source>
         <translation type="vanished">&lt;p&gt;최신 버전을 다운로드하시겠습니까?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="741"/>
+        <location filename="OnlineUpdater.cpp" line="779"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt; &lt;a href=&quot;%1&quot;&gt;다운로드 페이지로 이동하시겠습니까&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
@@ -2421,7 +2438,7 @@ Do you still want to update?</source>
         <translation type="vanished">이 메시지를 더 이상 표시하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="592"/>
+        <location filename="OnlineUpdater.cpp" line="630"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
@@ -2457,9 +2474,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>COptionsWindow</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="565"/>
-        <location filename="Windows/OptionsWindow.cpp" line="571"/>
-        <location filename="Windows/OptionsWindow.cpp" line="586"/>
+        <location filename="Windows/OptionsWindow.cpp" line="552"/>
+        <location filename="Windows/OptionsWindow.cpp" line="558"/>
+        <location filename="Windows/OptionsWindow.cpp" line="573"/>
         <location filename="Windows/OptionsAccess.cpp" line="26"/>
         <source>Browse for File</source>
         <translation>파일 찾아보기</translation>
@@ -2611,7 +2628,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1419"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1407"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="990"/>
@@ -2627,8 +2644,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>모든 프로그램</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1417"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1435"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1405"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1423"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="739"/>
@@ -3457,62 +3474,62 @@ Please select a folder which contains this file.</source>
         <translation>그룹</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="657"/>
+        <location filename="Windows/OptionsWindow.cpp" line="644"/>
         <source>Add %1 Template</source>
         <translation>%1 템플릿 추가</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="780"/>
+        <location filename="Windows/OptionsWindow.cpp" line="767"/>
         <source>Search for options</source>
         <translation>옵션 검색</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1085"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1073"/>
         <source>Box: %1</source>
         <translation>박스: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1086"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1074"/>
         <source>Template: %1</source>
         <translation>템플릿: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1087"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1075"/>
         <source>Global: %1</source>
         <translation>전역: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1088"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1076"/>
         <source>Default: %1</source>
         <translation>기본값: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1314"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1302"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>이 샌드박스가 삭제되어 구성을 저장할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1379"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1367"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>일부 변경 사항이 아직 저장되지 않았습니다. 이 옵션 창을 닫으시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1428"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1416"/>
         <source>Enter program:</source>
         <translation>프로그램 입력:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1876"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1844"/>
         <source>Autocomplete Consent Required</source>
         <translation>자동 완성 동의 필요</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1878"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1846"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>자동 완성 기능을 사용하려면 사용자의 동의가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1880"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1848"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -3526,32 +3543,32 @@ Choose autocomplete mode:
 입력하는 동안 %1: 입력하는 동안 제안 사항을 자동으로 완료합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1888"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1856"/>
         <source>Manual</source>
         <translation>수동</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1889"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1857"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>%1로 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1891"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1859"/>
         <source>While Typing</source>
         <translation>타이핑하는 동안</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1892"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1860"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>입력하는 동안 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1895"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>자동 완성 제안을 비활성화합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1894"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1862"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
@@ -4109,22 +4126,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="5208"/>
+        <location filename="SandMan.cpp" line="5218"/>
         <source>Waiting for folder: %1</source>
         <translation>폴더 대기 중: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5209"/>
+        <location filename="SandMan.cpp" line="5219"/>
         <source>Deleting folder: %1</source>
         <translation>폴더 삭제 중: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5210"/>
+        <location filename="SandMan.cpp" line="5220"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>폴더 병합: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5211"/>
+        <location filename="SandMan.cpp" line="5221"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>스냅샷 병합을 완료하는 중...</translation>
     </message>
@@ -4225,22 +4242,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Sandboxie-Plus v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5053"/>
+        <location filename="SandMan.cpp" line="5063"/>
         <source>Reset Columns</source>
         <translation>열 재설정</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5054"/>
+        <location filename="SandMan.cpp" line="5064"/>
         <source>Copy Cell</source>
         <translation>셀 복사</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5055"/>
+        <location filename="SandMan.cpp" line="5065"/>
         <source>Copy Row</source>
         <translation>행 복사</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5056"/>
+        <location filename="SandMan.cpp" line="5066"/>
         <source>Copy Panel</source>
         <translation>패널 복사</translation>
     </message>
@@ -4531,7 +4548,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="SandMan.cpp" line="834"/>
-        <location filename="SandMan.cpp" line="5146"/>
+        <location filename="SandMan.cpp" line="5156"/>
         <source>About Sandboxie-Plus</source>
         <translation>Sandboxie-Plus 정보 - 번역: 비너스걸</translation>
     </message>
@@ -5097,32 +5114,32 @@ No will choose: %2</source>
         <translation>샌드박스 해제</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5057"/>
+        <location filename="SandMan.cpp" line="5067"/>
         <source>Case Sensitive</source>
         <translation>대소문자 구분</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5058"/>
+        <location filename="SandMan.cpp" line="5068"/>
         <source>RegExp</source>
         <translation>정규식</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5059"/>
+        <location filename="SandMan.cpp" line="5069"/>
         <source>Highlight</source>
         <translation>강조</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5060"/>
+        <location filename="SandMan.cpp" line="5070"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5061"/>
+        <location filename="SandMan.cpp" line="5071"/>
         <source>&amp;Find ...</source>
         <translation>찾기(&amp;F)...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5062"/>
+        <location filename="SandMan.cpp" line="5072"/>
         <source>All columns</source>
         <translation>모든 열</translation>
     </message>
@@ -5799,22 +5816,22 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>%1 항목에 대한 작업에 실패했습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5115"/>
+        <location filename="SandMan.cpp" line="5125"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
         <translation>&lt;h3&gt;Sandboxie-Plus 정보&lt;/h3&gt;&lt;p&gt;버전 %1&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5123"/>
+        <location filename="SandMan.cpp" line="5133"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
         <translation>이 Sandboxie-Plus 사본의 인증: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5125"/>
+        <location filename="SandMan.cpp" line="5135"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
         <translation>Sandboxie-Plus는 개인용 및 비상업용으로 무료입니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5129"/>
+        <location filename="SandMan.cpp" line="5139"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus는 Sandboxie의 오픈 소스 후속 버전입니다.&lt;br /&gt;더 많은 정보를 보려면 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt;을 방문하세요.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;기능: %3&lt;br /&gt;&lt;br /&gt;설치: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;아이콘 출처 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
@@ -6964,219 +6981,219 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">번역 안 함</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="327"/>
-        <location filename="Windows/SettingsWindow.cpp" line="331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="328"/>
+        <location filename="Windows/SettingsWindow.cpp" line="332"/>
         <source>Don&apos;t integrate links</source>
         <translation>링크 통합 안 함</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="328"/>
-        <location filename="Windows/SettingsWindow.cpp" line="332"/>
+        <location filename="Windows/SettingsWindow.cpp" line="329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="333"/>
         <source>As sub group</source>
         <translation>하위 그룹으로</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="329"/>
-        <location filename="Windows/SettingsWindow.cpp" line="333"/>
+        <location filename="Windows/SettingsWindow.cpp" line="330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="334"/>
         <source>Fully integrate</source>
         <translation>완전 통합</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="335"/>
+        <location filename="Windows/SettingsWindow.cpp" line="336"/>
         <source>Don&apos;t show any icon</source>
         <oldsource>Don&apos;t integrate links</oldsource>
         <translation>아무 아이콘도 표시하지 않음</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="337"/>
         <source>Show Plus icon</source>
         <translation>플러스 아이콘 표시</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="337"/>
+        <location filename="Windows/SettingsWindow.cpp" line="338"/>
         <source>Show Classic icon</source>
         <translation>클래식 아이콘 표시</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="339"/>
+        <location filename="Windows/SettingsWindow.cpp" line="340"/>
         <source>All Boxes</source>
         <translation>모든 박스</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="341"/>
         <source>Active + Pinned</source>
         <translation>활성 + 고정</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="342"/>
         <source>Pinned Only</source>
         <translation>고정만</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="342"/>
-        <location filename="Windows/SettingsWindow.cpp" line="586"/>
+        <location filename="Windows/SettingsWindow.cpp" line="343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="587"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>Shift</source>
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="345"/>
+        <location filename="Windows/SettingsWindow.cpp" line="346"/>
         <source>Close to Tray</source>
         <translation>트레이로 닫기</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="346"/>
+        <location filename="Windows/SettingsWindow.cpp" line="347"/>
         <source>Prompt before Close</source>
         <translation>닫기 전 프롬프트</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="347"/>
+        <location filename="Windows/SettingsWindow.cpp" line="348"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="348"/>
+        <location filename="Windows/SettingsWindow.cpp" line="349"/>
         <source>Hide (Run invisible in Background)</source>
         <translation>숨기기 (배경에서 보이지 않게 실행)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="349"/>
+        <location filename="Windows/SettingsWindow.cpp" line="350"/>
         <source>Sandbox name</source>
         <translation>샌드박스 이름</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="351"/>
         <source>Sandbox alias</source>
         <translation>샌드박스 별칭</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="351"/>
+        <location filename="Windows/SettingsWindow.cpp" line="352"/>
         <source>Sandbox alias and name</source>
         <translation>샌드박스 별칭 및 이름</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="354"/>
+        <location filename="Windows/SettingsWindow.cpp" line="355"/>
         <source>Same as main</source>
         <translation>기본과 동일</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="356"/>
         <source>Keep current monitor</source>
         <translation>현재 모니터 유지</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="357"/>
         <source>Active monitor</source>
         <translation>활성 모니터</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="358"/>
         <source>Primary monitor</source>
         <translation>기본 모니터</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="413"/>
+        <location filename="Windows/SettingsWindow.cpp" line="414"/>
         <source>Unknown Display</source>
         <translation>알 수 없는 디스플레이</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="415"/>
+        <location filename="Windows/SettingsWindow.cpp" line="416"/>
         <source>Display %1: %2</source>
         <translation>디스플레이 %1: %2</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="417"/>
+        <location filename="Windows/SettingsWindow.cpp" line="418"/>
         <source> (Primary)</source>
         <translation> (기본)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="438"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
         <translation>이전 상태 기억</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="438"/>
+        <location filename="Windows/SettingsWindow.cpp" line="439"/>
         <source>Expand all groups</source>
         <translation>모든 그룹 확장</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="439"/>
+        <location filename="Windows/SettingsWindow.cpp" line="440"/>
         <source>Collapse all groups</source>
         <translation>모든 그룹 축소</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="441"/>
+        <location filename="Windows/SettingsWindow.cpp" line="442"/>
         <source>None</source>
         <translation>없음</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="442"/>
+        <location filename="Windows/SettingsWindow.cpp" line="443"/>
         <source>Native</source>
         <translation>원본</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="443"/>
+        <location filename="Windows/SettingsWindow.cpp" line="444"/>
         <source>Qt</source>
         <translation>Qt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="445"/>
+        <location filename="Windows/SettingsWindow.cpp" line="446"/>
         <source>Every Day</source>
         <translation>매일</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="446"/>
+        <location filename="Windows/SettingsWindow.cpp" line="447"/>
         <source>Every Week</source>
         <translation>매주</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="447"/>
+        <location filename="Windows/SettingsWindow.cpp" line="448"/>
         <source>Every 2 Weeks</source>
         <translation>2주마다</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="449"/>
         <source>Every 30 days</source>
         <translation>30일마다</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="450"/>
+        <location filename="Windows/SettingsWindow.cpp" line="451"/>
         <source>Ignore</source>
         <translation>무시</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="462"/>
+        <location filename="Windows/SettingsWindow.cpp" line="463"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="587"/>
+        <location filename="Windows/SettingsWindow.cpp" line="588"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
         <translation>삼중 상태 동작: 선택 해제됨 = 절대 안 함, 부분적으로 선택됨 = %1이 유지되는 동안에만 (기본값), 선택됨 = 항상.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="764"/>
+        <location filename="Windows/SettingsWindow.cpp" line="765"/>
         <source>Add %1 Template</source>
         <translation>%1 템플릿 추가</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3743"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3711"/>
         <source>Autocomplete Consent Required</source>
         <translation>자동 완성 동의 필요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3745"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3713"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>자동 완성 기능을 사용하려면 사용자의 동의가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3747"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3715"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -7189,32 +7206,32 @@ Choose autocomplete mode:
 입력하는 동안 %1: 입력하는 동안 제안 사항을 자동으로 완료합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3755"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3723"/>
         <source>Manual</source>
         <translation>수동</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3756"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3724"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>%1로 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3758"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3726"/>
         <source>While Typing</source>
         <translation>타이핑하는 동안</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3759"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3727"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>입력하는 동안 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3762"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3730"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>자동 완성 제안을 비활성화합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3761"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3729"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
@@ -7227,18 +7244,18 @@ Do you wish to enable autocomplete?</source>
 자동 완성을 활성화하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3218"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3227"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3186"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3195"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3223"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3191"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(복사)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3236"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3204"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation>Sandboxie-Plus 버전: %1</translation>
     </message>
@@ -7247,93 +7264,93 @@ Do you wish to enable autocomplete?</source>
         <translation type="vanished">HwId: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="628"/>
-        <location filename="Windows/SettingsWindow.cpp" line="810"/>
+        <location filename="Windows/SettingsWindow.cpp" line="629"/>
+        <location filename="Windows/SettingsWindow.cpp" line="811"/>
         <source>Select font</source>
         <translation>글꼴 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="630"/>
-        <location filename="Windows/SettingsWindow.cpp" line="812"/>
+        <location filename="Windows/SettingsWindow.cpp" line="631"/>
+        <location filename="Windows/SettingsWindow.cpp" line="813"/>
         <source>Reset font</source>
         <translation>글꼴 재설정</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="951"/>
+        <location filename="Windows/SettingsWindow.cpp" line="939"/>
         <source>Search for settings</source>
         <translation>설정 검색</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="965"/>
+        <location filename="Windows/SettingsWindow.cpp" line="953"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1226"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1215"/>
         <source>Please enter message</source>
         <translation>메시지를 입력하세요</translation>
     </message>
     <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1334"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1335"/>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1346"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
         <source>Run &amp;Sandboxed</source>
         <translation>샌드박스에서 실행(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1795"/>
         <source>kilobytes (%1)</source>
         <translation>킬로바이트 (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1894"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1883"/>
         <source>Volume not attached</source>
         <translation>볼륨이 연결되지 않음</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3305"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3273"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>이 후원자 인증서가 만료되었습니다. &lt;href=&quot;%1&quot;&gt;업데이트된 인증서를 받아주세요&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3310"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3278"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;현재 빌드 플러스 기능은 계속 활성화되어 있지만&lt;/font&gt;, 호환성 업데이트와 온라인 문제 해결 데이터베이스를 포함한 Sandboxie 라이브 서비스에 더 이상 액세스할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3325"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>; 자격을 갖춘 후원자는 언제든지 xanasoft.com에서 &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;업데이트된 인증서&lt;/a&gt;를 받을 수 있습니다</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3385"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3353"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1/%2개의 평가 인증서를 사용했습니다. 더 이상 사용 가능한 인증서를 생성할 수 없습니다.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3355"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;무료 평가 인증서를 받고&lt;/a&gt; %1일 동안 모든 프리미엄 기능을 누리세요.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3388"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3356"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>하드웨어 ID당 %2회까지 무료 %1일 평가 인증서를 요청할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3644"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3612"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
 이것은 3개월 동안 유효한 임시 Patreon 인증서입니다. 만료 시점이 가까워지면 온라인에서 전체 기간 동안 유효한 새 인증서를 발급받을 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3682"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3650"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>Sandboxie-Plus 후원자 인증서에 대한 필수 보안 업데이트가 필요합니다. 지금 업데이트된 인증서를 다운로드하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3683"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3651"/>
         <source>Auto update in future</source>
         <translation>향후 자동 업데이트</translation>
     </message>
@@ -7342,7 +7359,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
         <translation type="vanished">하나의 하드웨어 ID에 대해 %1일 무료 평가 인증서를 %2회까지 요청할 수 있습니다</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3318"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3286"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>이 후원자 인증서는 %1일 후에 &lt;font color=&apos;red&apos;&gt;만료되며, &lt;a href=&quot;%2&quot;&gt;업데이트된 인증서를 받아주세요&lt;/a&gt;.</translation>
@@ -7360,118 +7377,123 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
         <translation type="vanished">만료 날짜: %1일</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3353"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3321"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>만료: %1일 전</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3323"/>
         <source>Expired: %1 days ago</source>
         <translation>만료일: %1일 전</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3369"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3337"/>
         <source>Options: %1</source>
         <translation>옵션: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3372"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>보안/개인 정보 보호 강화 및 앱 박스 (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3372"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3373"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>Enabled</source>
         <translation>사용함</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="374"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3372"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3373"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
+        <location filename="Windows/SettingsWindow.cpp" line="375"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>Disabled</source>
         <translation>사용 안 함</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3373"/>
+        <location filename="Windows/SettingsWindow.cpp" line="324"/>
+        <source>Arabic (Morocco) - LTR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>암호화된 샌드박스 (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <source>Network Interception (NetI): %1</source>
         <translation>네트워크 차단 (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Sandboxie 데스크톱 (데스크): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>이것은 Sandboxie-Plus 일련 번호처럼 보이지 않습니다.&lt;br /&gt;인증서의 UpdateKey 또는 서명을 입력하려고 시도했지만 올바르지 않은 경우, 위의 텍스트 영역에 전체 인증서를 대신 입력하세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3413"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3381"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>기존 후원자 인증서를 입력하지 않고 기능 업그레이드 키를 사용하려고 합니다. (&lt;b&gt;웹 사이트에 굵은 글씨로 명시되어 있는&lt;/b) 이 유형의 키는 기존 후원자 인증서가 있어야 하며, 인증서가 없으면 쓸모가 없습니다.&lt;br /&gt;고급 기능을 사용하려면 표준 인증서와 기능 업그레이드 키를 모두 받아야 합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3419"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3387"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>기존 후원자 인증서를 입력하지 않고 갱신 키를 사용하려고 합니다. (&lt;b&gt;웹사이트에 굵은 글씨로 명시되어 있는&lt;/b) 이 유형의 키는 기존 후원자 인증서가 있어야 하며, 해당 인증서가 없으면 쓸모가 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3424"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3392"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;제품 설명을 읽지 않고 실수로 이 키를 얻으신 경우 이메일 (홈페이지 제공)로 연락하여 이 문제를 해결해 주시기 바랍니다.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3439"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3467"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3696"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3407"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3435"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3664"/>
         <source>Retrieving certificate...</source>
         <translation>인증서 검색 중...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3455"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3423"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - 평가판 인증서 가져오기</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3455"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3423"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>%2로 발급되어 현재 하드웨어에 고정되는 무료 %1일 평가 인증서를 받으려면 이메일 주소를 입력하세요.
 고유 하드웨어 ID별로 최대 %3개의 평가 인증서를 요청할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3481"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3449"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>인증서를 검색하는 중 오류 발생: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3481"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3449"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>알 수 없는 오류 (아마도 네트워크 문제)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3508"/>
         <source>Developer</source>
         <translation>개발자</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3639"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3607"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>평가 인증서가 성공적으로 신청되었습니다. 무료 평가판을 즐기세요!</translation>
     </message>
@@ -7480,42 +7502,42 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">인증서를 가져오는 중...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3536"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3504"/>
         <source>Contributor</source>
         <translation>기여자</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3538"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3506"/>
         <source>Eternal</source>
         <translation>영구</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3542"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3510"/>
         <source>Business</source>
         <translation>비지니스</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3544"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3512"/>
         <source>Personal</source>
         <translation>개인</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3546"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3514"/>
         <source>Great Patreon</source>
         <translation>Great Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3548"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3516"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3550"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3518"/>
         <source>Family</source>
         <translation>패밀리</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3552"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3520"/>
         <source>Home</source>
         <translation>홈</translation>
     </message>
@@ -7524,12 +7546,12 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">기부</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3554"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3522"/>
         <source>Evaluation</source>
         <translation>평가</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3556"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3524"/>
         <source>Type %1</source>
         <translation>유형 %1</translation>
     </message>
@@ -7538,86 +7560,86 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">표준</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3586"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3554"/>
         <source>Advanced</source>
         <translation>고급</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3588"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3556"/>
         <source>Advanced (L)</source>
         <translation>고급 (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3590"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3558"/>
         <source>Max Level</source>
         <translation>최대 수준</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3592"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3560"/>
         <source>Level %1</source>
         <translation>수준 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1922"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1911"/>
         <source>Supporter certificate required for access</source>
         <translation>접근에 필요한 후원자 인증서</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1939"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1928"/>
         <source>Supporter certificate required for automation</source>
         <translation>자동화에 필요한 후원자 인증서</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3631"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3599"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>이 인증서는 현재 빌드에 유효하지 않습니다. 새 인증서를 가져오거나 이전 빌드로 다운그레이드해야 합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3633"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3601"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>이 인증서는 만료되었지만 현재 설치된 버전 및 기능에 대해서는 사용 가능한 상태로 유지됩니다. 그러나 호환성 업데이트 및 온라인 문제 해결 데이터베이스를 포함한  Sandboxie-Live 서비스에 더 이상 액세스할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3635"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3603"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>이 인증서는 만료되었습니다. 새 인증서를 받아야 합니다.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1377"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1366"/>
         <source>Sandboxed Web Browser</source>
         <translation>샌드박스 웹 브라우저</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="451"/>
-        <location filename="Windows/SettingsWindow.cpp" line="456"/>
+        <location filename="Windows/SettingsWindow.cpp" line="452"/>
+        <location filename="Windows/SettingsWindow.cpp" line="457"/>
         <source>Notify</source>
         <translation>알림</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="452"/>
-        <location filename="Windows/SettingsWindow.cpp" line="457"/>
+        <location filename="Windows/SettingsWindow.cpp" line="453"/>
+        <location filename="Windows/SettingsWindow.cpp" line="458"/>
         <source>Download &amp; Notify</source>
         <translation>다운로드하고 알림</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="453"/>
-        <location filename="Windows/SettingsWindow.cpp" line="458"/>
+        <location filename="Windows/SettingsWindow.cpp" line="454"/>
+        <location filename="Windows/SettingsWindow.cpp" line="459"/>
         <source>Download &amp; Install</source>
         <translation>다운로드하고 설치</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="643"/>
+        <location filename="Windows/SettingsWindow.cpp" line="644"/>
         <source>Browse for Program</source>
         <translation>프로그램 찾아보기</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3215"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3183"/>
         <source>Click to reveal</source>
         <translation>클릭하여 표시</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3216"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3184"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
@@ -7632,23 +7654,23 @@ Right-click to copy</oldsource>
         <translation type="vanished">HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1247"/>
         <source>Select Program</source>
         <translation>프로그램 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1247"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>실행 파일 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1262"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1278"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1251"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1267"/>
         <source>Please enter a menu title</source>
         <translation>메뉴 제목을 입력하세요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1274"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1263"/>
         <source>Please enter a command</source>
         <translation>명령을 입력하세요</translation>
     </message>
@@ -7657,7 +7679,7 @@ Right-click to copy</oldsource>
         <translation type="vanished">이 후원자 인증서가 만료되었습니다, &lt;a href=&quot;sbie://update/cert&quot;&gt;에서 업데이트된 인증서를 받으세요&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3308"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3276"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;%1일 후에 추가 기능이 비활성화됩니다.&lt;/font&gt;</translation>
     </message>
@@ -7666,7 +7688,7 @@ Right-click to copy</oldsource>
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;이 빌드 Plus 기능은 계속 사용 가능합니다.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3312"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3280"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus 기능이 더 이상 사용되지 않습니다.</translation>
     </message>
@@ -7684,22 +7706,22 @@ Right-click to copy</oldsource>
         <translation type="vanished">후원자 인증서 필요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2057"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2046"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>샌드박스 없이 실행(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2065"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2054"/>
         <source>Set Force in Sandbox</source>
         <translation>샌드박스에서 강제 설정</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2074"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2063"/>
         <source>Set Open Path in Sandbox</source>
         <translation>샌드박스에서 열린 경로 설정</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3614"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3582"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>인증서로 보이지 않습니다. 인증서 일부가 아닌 전체 인증서를 입력하세요.</translation>
     </message>
@@ -7712,7 +7734,7 @@ Right-click to copy</oldsource>
         <translation type="vanished">안타깝게도 이 인증서는 오래되었습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3642"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3610"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus 개발을 지원해 주셔서 감사합니다.</translation>
     </message>
@@ -7721,119 +7743,119 @@ Right-click to copy</oldsource>
         <translation type="vanished">이 후원 인증서는 유효하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2456"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2445"/>
         <source>Update Available</source>
         <translation>사용 가능한 업데이트</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2458"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2447"/>
         <source>Installed</source>
         <translation>설치됨</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2463"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2452"/>
         <source>by %1</source>
         <translation>%1까지</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2471"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2460"/>
         <source>(info website)</source>
         <translation>(정보 웹사이트)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2499"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2488"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>이 추가 기능은 필수 사항 제거할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2508"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2720"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2497"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2709"/>
         <source>Select Directory</source>
         <translation>디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2529"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;지금 확인&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2599"/>
         <source>Select Portable Box ini</source>
         <translation>Portable Box ini 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2620"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2609"/>
         <source>Ini Files (*.ini)</source>
         <translation>Ini 파일 (*.ini)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2620"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2609"/>
         <source>Save new Portable Box ini</source>
         <translation>새 Portable Box ini 저장</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2625"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2614"/>
         <source>File already exists, please select a different file name.</source>
         <translation>파일이 이미 존재합니다. 다른 파일 이름을 선택해 주세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2631"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2620"/>
         <source>Invalid box name</source>
         <translation>잘못된 박스 이름</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2652"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2641"/>
         <source>Select Root Folder</source>
         <translation>루트 폴더 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2680"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2669"/>
         <source>Please enter the new configuration password.</source>
         <translation>새 구성 비밀번호를 입력하세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2684"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2673"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>새 구성 비밀번호를 다시 입력하세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2689"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2678"/>
         <source>Passwords did not match, please retry.</source>
         <translation>비밀번호가 일치하지 않습니다. 다시 시도하세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2701"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2690"/>
         <source>Process</source>
         <translation>프로세스</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2701"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2690"/>
         <source>Folder</source>
         <translation>폴더</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2711"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2700"/>
         <source>Please enter a program file name</source>
         <translation>프로그램 파일 이름을 입력하세요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2779"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2768"/>
         <source>Please enter the template identifier</source>
         <translation>템플릿 식별자를 입력하세요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2787"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2776"/>
         <source>Error: %1</source>
         <translation>오류: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2819"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2808"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>선택한 로컬 템플릿을 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3142"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3110"/>
         <source>%1 (Current)</source>
         <translation>%1 (현재)</translation>
     </message>
@@ -9099,8 +9121,8 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="1418"/>
         <location filename="Forms/OptionsWindow.ui" line="1461"/>
         <location filename="Forms/OptionsWindow.ui" line="1828"/>
-        <location filename="Forms/OptionsWindow.ui" line="4217"/>
-        <location filename="Forms/OptionsWindow.ui" line="4240"/>
+        <location filename="Forms/OptionsWindow.ui" line="4197"/>
+        <location filename="Forms/OptionsWindow.ui" line="4220"/>
         <source>Protect the system from sandboxed processes</source>
         <translation>샌드박스 프로세스로부터 시스템 보호</translation>
     </message>
@@ -9110,13 +9132,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1209"/>
-        <location filename="Forms/OptionsWindow.ui" line="4045"/>
+        <location filename="Forms/OptionsWindow.ui" line="4025"/>
         <source>Move Up</source>
         <translation>위로 이동</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1228"/>
-        <location filename="Forms/OptionsWindow.ui" line="4056"/>
+        <location filename="Forms/OptionsWindow.ui" line="4036"/>
         <source>Move Down</source>
         <translation>아래로 이동</translation>
     </message>
@@ -9262,12 +9284,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>인쇄 제한</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4220"/>
+        <location filename="Forms/OptionsWindow.ui" line="4200"/>
         <source>Network restrictions</source>
         <translation>네트워크 제한</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4287"/>
+        <location filename="Forms/OptionsWindow.ui" line="4267"/>
         <source>Block network files and folders, unless specifically opened.</source>
         <translation>특별히 열지 않는 한 네트워크 파일 및 폴더를 차단합니다.</translation>
     </message>
@@ -9283,19 +9305,19 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1184"/>
-        <location filename="Forms/OptionsWindow.ui" line="2280"/>
-        <location filename="Forms/OptionsWindow.ui" line="2392"/>
-        <location filename="Forms/OptionsWindow.ui" line="2490"/>
-        <location filename="Forms/OptionsWindow.ui" line="2653"/>
-        <location filename="Forms/OptionsWindow.ui" line="2725"/>
-        <location filename="Forms/OptionsWindow.ui" line="2952"/>
-        <location filename="Forms/OptionsWindow.ui" line="3714"/>
-        <location filename="Forms/OptionsWindow.ui" line="4338"/>
-        <location filename="Forms/OptionsWindow.ui" line="4454"/>
-        <location filename="Forms/OptionsWindow.ui" line="4679"/>
-        <location filename="Forms/OptionsWindow.ui" line="5842"/>
-        <location filename="Forms/OptionsWindow.ui" line="6001"/>
-        <location filename="Forms/OptionsWindow.ui" line="6087"/>
+        <location filename="Forms/OptionsWindow.ui" line="2260"/>
+        <location filename="Forms/OptionsWindow.ui" line="2372"/>
+        <location filename="Forms/OptionsWindow.ui" line="2470"/>
+        <location filename="Forms/OptionsWindow.ui" line="2633"/>
+        <location filename="Forms/OptionsWindow.ui" line="2705"/>
+        <location filename="Forms/OptionsWindow.ui" line="2932"/>
+        <location filename="Forms/OptionsWindow.ui" line="3694"/>
+        <location filename="Forms/OptionsWindow.ui" line="4318"/>
+        <location filename="Forms/OptionsWindow.ui" line="4434"/>
+        <location filename="Forms/OptionsWindow.ui" line="4659"/>
+        <location filename="Forms/OptionsWindow.ui" line="5822"/>
+        <location filename="Forms/OptionsWindow.ui" line="5981"/>
+        <location filename="Forms/OptionsWindow.ui" line="6067"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
@@ -9312,99 +9334,99 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1141"/>
         <location filename="Forms/OptionsWindow.ui" line="1769"/>
-        <location filename="Forms/OptionsWindow.ui" line="2288"/>
-        <location filename="Forms/OptionsWindow.ui" line="2357"/>
-        <location filename="Forms/OptionsWindow.ui" line="2547"/>
-        <location filename="Forms/OptionsWindow.ui" line="2678"/>
-        <location filename="Forms/OptionsWindow.ui" line="2753"/>
-        <location filename="Forms/OptionsWindow.ui" line="2924"/>
-        <location filename="Forms/OptionsWindow.ui" line="3000"/>
-        <location filename="Forms/OptionsWindow.ui" line="3134"/>
-        <location filename="Forms/OptionsWindow.ui" line="3233"/>
-        <location filename="Forms/OptionsWindow.ui" line="3314"/>
-        <location filename="Forms/OptionsWindow.ui" line="3427"/>
-        <location filename="Forms/OptionsWindow.ui" line="3683"/>
-        <location filename="Forms/OptionsWindow.ui" line="3840"/>
-        <location filename="Forms/OptionsWindow.ui" line="3981"/>
-        <location filename="Forms/OptionsWindow.ui" line="4008"/>
-        <location filename="Forms/OptionsWindow.ui" line="4376"/>
-        <location filename="Forms/OptionsWindow.ui" line="4462"/>
-        <location filename="Forms/OptionsWindow.ui" line="4814"/>
-        <location filename="Forms/OptionsWindow.ui" line="4903"/>
-        <location filename="Forms/OptionsWindow.ui" line="5244"/>
-        <location filename="Forms/OptionsWindow.ui" line="5439"/>
-        <location filename="Forms/OptionsWindow.ui" line="5911"/>
+        <location filename="Forms/OptionsWindow.ui" line="2268"/>
+        <location filename="Forms/OptionsWindow.ui" line="2337"/>
+        <location filename="Forms/OptionsWindow.ui" line="2527"/>
+        <location filename="Forms/OptionsWindow.ui" line="2658"/>
+        <location filename="Forms/OptionsWindow.ui" line="2733"/>
+        <location filename="Forms/OptionsWindow.ui" line="2904"/>
+        <location filename="Forms/OptionsWindow.ui" line="2980"/>
+        <location filename="Forms/OptionsWindow.ui" line="3114"/>
+        <location filename="Forms/OptionsWindow.ui" line="3213"/>
+        <location filename="Forms/OptionsWindow.ui" line="3294"/>
+        <location filename="Forms/OptionsWindow.ui" line="3407"/>
+        <location filename="Forms/OptionsWindow.ui" line="3663"/>
+        <location filename="Forms/OptionsWindow.ui" line="3820"/>
+        <location filename="Forms/OptionsWindow.ui" line="3961"/>
+        <location filename="Forms/OptionsWindow.ui" line="3988"/>
+        <location filename="Forms/OptionsWindow.ui" line="4356"/>
+        <location filename="Forms/OptionsWindow.ui" line="4442"/>
+        <location filename="Forms/OptionsWindow.ui" line="4794"/>
+        <location filename="Forms/OptionsWindow.ui" line="4883"/>
+        <location filename="Forms/OptionsWindow.ui" line="5224"/>
+        <location filename="Forms/OptionsWindow.ui" line="5419"/>
+        <location filename="Forms/OptionsWindow.ui" line="5891"/>
         <source>Remove</source>
         <translation>제거</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2387"/>
-        <location filename="Forms/OptionsWindow.ui" line="2485"/>
-        <location filename="Forms/OptionsWindow.ui" line="3011"/>
-        <location filename="Forms/OptionsWindow.ui" line="3111"/>
-        <location filename="Forms/OptionsWindow.ui" line="3244"/>
-        <location filename="Forms/OptionsWindow.ui" line="3364"/>
-        <location filename="Forms/OptionsWindow.ui" line="3438"/>
-        <location filename="Forms/OptionsWindow.ui" line="5847"/>
+        <location filename="Forms/OptionsWindow.ui" line="2367"/>
+        <location filename="Forms/OptionsWindow.ui" line="2465"/>
+        <location filename="Forms/OptionsWindow.ui" line="2991"/>
+        <location filename="Forms/OptionsWindow.ui" line="3091"/>
+        <location filename="Forms/OptionsWindow.ui" line="3224"/>
+        <location filename="Forms/OptionsWindow.ui" line="3344"/>
+        <location filename="Forms/OptionsWindow.ui" line="3418"/>
+        <location filename="Forms/OptionsWindow.ui" line="5827"/>
         <source>Type</source>
         <translation>유형</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2224"/>
+        <location filename="Forms/OptionsWindow.ui" line="2204"/>
         <source>Program Groups</source>
         <translation>프로그램 그룹</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2252"/>
+        <location filename="Forms/OptionsWindow.ui" line="2232"/>
         <source>Add Group</source>
         <translation>그룹 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2259"/>
-        <location filename="Forms/OptionsWindow.ui" line="2642"/>
-        <location filename="Forms/OptionsWindow.ui" line="2746"/>
-        <location filename="Forms/OptionsWindow.ui" line="2897"/>
-        <location filename="Forms/OptionsWindow.ui" line="3669"/>
+        <location filename="Forms/OptionsWindow.ui" line="2239"/>
+        <location filename="Forms/OptionsWindow.ui" line="2622"/>
+        <location filename="Forms/OptionsWindow.ui" line="2726"/>
+        <location filename="Forms/OptionsWindow.ui" line="2877"/>
+        <location filename="Forms/OptionsWindow.ui" line="3649"/>
         <source>Add Program</source>
         <translation>프로그램 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2432"/>
+        <location filename="Forms/OptionsWindow.ui" line="2412"/>
         <source>Force Folder</source>
         <translation>강제 폴더</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3026"/>
-        <location filename="Forms/OptionsWindow.ui" line="3126"/>
-        <location filename="Forms/OptionsWindow.ui" line="3259"/>
+        <location filename="Forms/OptionsWindow.ui" line="3006"/>
+        <location filename="Forms/OptionsWindow.ui" line="3106"/>
+        <location filename="Forms/OptionsWindow.ui" line="3239"/>
         <source>Path</source>
         <translation>경로</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2376"/>
+        <location filename="Forms/OptionsWindow.ui" line="2356"/>
         <source>Force Program</source>
         <translation>강제 프로그램</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="777"/>
         <location filename="Forms/OptionsWindow.ui" line="1614"/>
-        <location filename="Forms/OptionsWindow.ui" line="2232"/>
-        <location filename="Forms/OptionsWindow.ui" line="2350"/>
-        <location filename="Forms/OptionsWindow.ui" line="2511"/>
-        <location filename="Forms/OptionsWindow.ui" line="2661"/>
-        <location filename="Forms/OptionsWindow.ui" line="2760"/>
-        <location filename="Forms/OptionsWindow.ui" line="2917"/>
-        <location filename="Forms/OptionsWindow.ui" line="2993"/>
-        <location filename="Forms/OptionsWindow.ui" line="3100"/>
-        <location filename="Forms/OptionsWindow.ui" line="3226"/>
-        <location filename="Forms/OptionsWindow.ui" line="3321"/>
-        <location filename="Forms/OptionsWindow.ui" line="3461"/>
-        <location filename="Forms/OptionsWindow.ui" line="3886"/>
-        <location filename="Forms/OptionsWindow.ui" line="4369"/>
-        <location filename="Forms/OptionsWindow.ui" line="4476"/>
-        <location filename="Forms/OptionsWindow.ui" line="4850"/>
-        <location filename="Forms/OptionsWindow.ui" line="5083"/>
-        <location filename="Forms/OptionsWindow.ui" line="5154"/>
+        <location filename="Forms/OptionsWindow.ui" line="2212"/>
+        <location filename="Forms/OptionsWindow.ui" line="2330"/>
+        <location filename="Forms/OptionsWindow.ui" line="2491"/>
+        <location filename="Forms/OptionsWindow.ui" line="2641"/>
+        <location filename="Forms/OptionsWindow.ui" line="2740"/>
+        <location filename="Forms/OptionsWindow.ui" line="2897"/>
+        <location filename="Forms/OptionsWindow.ui" line="2973"/>
+        <location filename="Forms/OptionsWindow.ui" line="3080"/>
+        <location filename="Forms/OptionsWindow.ui" line="3206"/>
+        <location filename="Forms/OptionsWindow.ui" line="3301"/>
+        <location filename="Forms/OptionsWindow.ui" line="3441"/>
+        <location filename="Forms/OptionsWindow.ui" line="3866"/>
+        <location filename="Forms/OptionsWindow.ui" line="4349"/>
+        <location filename="Forms/OptionsWindow.ui" line="4456"/>
+        <location filename="Forms/OptionsWindow.ui" line="4830"/>
+        <location filename="Forms/OptionsWindow.ui" line="5063"/>
+        <location filename="Forms/OptionsWindow.ui" line="5134"/>
         <source>Show Templates</source>
         <translation>템플릿 표시</translation>
     </message>
@@ -9454,7 +9476,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Windows 자격 증명 저장소 열기 (사용자 모드)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4227"/>
+        <location filename="Forms/OptionsWindow.ui" line="4207"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
         <translation>네트워크 및 방화벽 매개 변수 (사용자 모드) 변경 방지</translation>
     </message>
@@ -9464,7 +9486,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>프로세스 액세스이 거부되면 메시지 2111 발행</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2266"/>
+        <location filename="Forms/OptionsWindow.ui" line="2246"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
         <translation>프로그램을 그룹화하고 그룹 이름을 지정할 수 있습니다. 프로그램 그룹은 프로그램 이름 대신 일부 설정과 함께 사용할 수 있습니다. 박스에 대해 정의된 그룹은 템플릿에 정의된 덮어쓰기 그룹입니다.</translation>
     </message>
@@ -9473,13 +9495,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="vanished">강제 프로그램</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2340"/>
+        <location filename="Forms/OptionsWindow.ui" line="2320"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>여기에 입력된 프로그램 또는 입력된 위치에서 시작된 프로그램은 다른 샌드박스에서 명시적으로 시작하지 않는 한 이 샌드박스에 자동으로 저장됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2612"/>
-        <location filename="Forms/OptionsWindow.ui" line="2794"/>
+        <location filename="Forms/OptionsWindow.ui" line="2592"/>
+        <location filename="Forms/OptionsWindow.ui" line="2774"/>
         <source>Stop Behaviour</source>
         <translation>동작 중지</translation>
     </message>
@@ -9504,32 +9526,32 @@ If leader processes are defined, all others are treated as lingering processes.<
 대표 프로세스가 정의되면 다른 모든 프로세스는 남아있는 프로세스로 취급됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2851"/>
+        <location filename="Forms/OptionsWindow.ui" line="2831"/>
         <source>Start Restrictions</source>
         <translation>시작 제한</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2931"/>
+        <location filename="Forms/OptionsWindow.ui" line="2911"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>프로그램 시작 실패 시 메시지 1308 발생</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2881"/>
+        <location filename="Forms/OptionsWindow.ui" line="2861"/>
         <source>Allow only selected programs to start in this sandbox. *</source>
         <translation>이 샌드박스에서 선택한 프로그램만 시작하도록 허용합니다. *</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2888"/>
+        <location filename="Forms/OptionsWindow.ui" line="2868"/>
         <source>Prevent selected programs from starting in this sandbox.</source>
         <translation>선택한 프로그램이 이 샌드박스에서 시작되지 않도록 합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2874"/>
+        <location filename="Forms/OptionsWindow.ui" line="2854"/>
         <source>Allow all programs to start in this sandbox.</source>
         <translation>이 샌드박스에서 모든 프로그램을 시작할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2864"/>
+        <location filename="Forms/OptionsWindow.ui" line="2844"/>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
         <translation>* 참고: 이 샌드박스에 설치된 프로그램은 시작할 수 없습니다.</translation>
     </message>
@@ -9538,32 +9560,32 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation type="vanished">인터넷 제한</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3642"/>
+        <location filename="Forms/OptionsWindow.ui" line="3622"/>
         <source>Process Restrictions</source>
         <translation>프로세스 제한</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3662"/>
+        <location filename="Forms/OptionsWindow.ui" line="3642"/>
         <source>Issue message 1307 when a program is denied internet access</source>
         <translation>프로그램이 인터넷 액세스를 거부하면 메시지 1307 발행</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3676"/>
+        <location filename="Forms/OptionsWindow.ui" line="3656"/>
         <source>Prompt user whether to allow an exemption from the blockade.</source>
         <translation>차단 면제를 허용할지 여부를 사용자에게 묻습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3690"/>
+        <location filename="Forms/OptionsWindow.ui" line="3670"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
         <translation>참고: 이 샌드박스에 설치된 프로그램은 인터넷에 전혀 액세스할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3021"/>
-        <location filename="Forms/OptionsWindow.ui" line="3121"/>
-        <location filename="Forms/OptionsWindow.ui" line="3254"/>
-        <location filename="Forms/OptionsWindow.ui" line="3374"/>
-        <location filename="Forms/OptionsWindow.ui" line="3448"/>
-        <location filename="Forms/OptionsWindow.ui" line="3719"/>
+        <location filename="Forms/OptionsWindow.ui" line="3001"/>
+        <location filename="Forms/OptionsWindow.ui" line="3101"/>
+        <location filename="Forms/OptionsWindow.ui" line="3234"/>
+        <location filename="Forms/OptionsWindow.ui" line="3354"/>
+        <location filename="Forms/OptionsWindow.ui" line="3428"/>
+        <location filename="Forms/OptionsWindow.ui" line="3699"/>
         <source>Access</source>
         <translation>액세스</translation>
     </message>
@@ -9638,97 +9660,97 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>작업 개체</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2186"/>
+        <location filename="Forms/OptionsWindow.ui" line="2078"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
         <translation>ConHost.exe 프로세스 무결성 수준 삭제</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3394"/>
+        <location filename="Forms/OptionsWindow.ui" line="3374"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
         <translation>Windows 등 데스크톱 개체에 액세스할 수 있는 프로세스를 구성합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3729"/>
+        <location filename="Forms/OptionsWindow.ui" line="3709"/>
         <source>Set network/internet access for unlisted processes:</source>
         <translation>목록에 없는 프로세스에 대한 네트워크/인터넷 액세스 설정:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3779"/>
+        <location filename="Forms/OptionsWindow.ui" line="3759"/>
         <source>Test Rules, Program:</source>
         <translation>테스트 규칙, 프로그램:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3792"/>
+        <location filename="Forms/OptionsWindow.ui" line="3772"/>
         <source>Port:</source>
         <translation>포트:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3805"/>
+        <location filename="Forms/OptionsWindow.ui" line="3785"/>
         <source>IP:</source>
         <translation>IP:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3818"/>
+        <location filename="Forms/OptionsWindow.ui" line="3798"/>
         <source>Protocol:</source>
         <translation>프로토콜:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3831"/>
+        <location filename="Forms/OptionsWindow.ui" line="3811"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3847"/>
+        <location filename="Forms/OptionsWindow.ui" line="3827"/>
         <source>Add Rule</source>
         <translation>규칙 추가</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="793"/>
-        <location filename="Forms/OptionsWindow.ui" line="3016"/>
-        <location filename="Forms/OptionsWindow.ui" line="3116"/>
-        <location filename="Forms/OptionsWindow.ui" line="3249"/>
-        <location filename="Forms/OptionsWindow.ui" line="3369"/>
-        <location filename="Forms/OptionsWindow.ui" line="3443"/>
-        <location filename="Forms/OptionsWindow.ui" line="3858"/>
-        <location filename="Forms/OptionsWindow.ui" line="3963"/>
-        <location filename="Forms/OptionsWindow.ui" line="4092"/>
-        <location filename="Forms/OptionsWindow.ui" line="4837"/>
+        <location filename="Forms/OptionsWindow.ui" line="2996"/>
+        <location filename="Forms/OptionsWindow.ui" line="3096"/>
+        <location filename="Forms/OptionsWindow.ui" line="3229"/>
+        <location filename="Forms/OptionsWindow.ui" line="3349"/>
+        <location filename="Forms/OptionsWindow.ui" line="3423"/>
+        <location filename="Forms/OptionsWindow.ui" line="3838"/>
+        <location filename="Forms/OptionsWindow.ui" line="3943"/>
+        <location filename="Forms/OptionsWindow.ui" line="4072"/>
+        <location filename="Forms/OptionsWindow.ui" line="4817"/>
         <source>Program</source>
         <translation>프로그램</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="788"/>
         <location filename="Forms/OptionsWindow.ui" line="1724"/>
-        <location filename="Forms/OptionsWindow.ui" line="3863"/>
-        <location filename="Forms/OptionsWindow.ui" line="4990"/>
+        <location filename="Forms/OptionsWindow.ui" line="3843"/>
+        <location filename="Forms/OptionsWindow.ui" line="4970"/>
         <source>Action</source>
         <translation>동작</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3868"/>
-        <location filename="Forms/OptionsWindow.ui" line="4102"/>
+        <location filename="Forms/OptionsWindow.ui" line="3848"/>
+        <location filename="Forms/OptionsWindow.ui" line="4082"/>
         <source>Port</source>
         <translation>포트</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3873"/>
-        <location filename="Forms/OptionsWindow.ui" line="3973"/>
-        <location filename="Forms/OptionsWindow.ui" line="4097"/>
+        <location filename="Forms/OptionsWindow.ui" line="3853"/>
+        <location filename="Forms/OptionsWindow.ui" line="3953"/>
+        <location filename="Forms/OptionsWindow.ui" line="4077"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3878"/>
+        <location filename="Forms/OptionsWindow.ui" line="3858"/>
         <source>Protocol</source>
         <translation>프로토콜</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3899"/>
+        <location filename="Forms/OptionsWindow.ui" line="3879"/>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
         <translation>주의: Windows 필터링 플랫폼이 드라이버에서 사용할 수 없으므로 이 규칙은 사용자 모드에서만 적용되며 강제 적용할 수 없습니다!!! 즉, 악성 프로그램이 이를 무시할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2963"/>
+        <location filename="Forms/OptionsWindow.ui" line="2943"/>
         <source>Resource Access</source>
         <translation>리소스 액세스</translation>
     </message>
@@ -9745,7 +9767,7 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
 대신 &apos;모두 열기&apos;를 사용하여 모든 프로그램에 적용하거나 정책 탭에서 이 동작을 변경할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3046"/>
+        <location filename="Forms/OptionsWindow.ui" line="3026"/>
         <source>Add File/Folder</source>
         <translation>파일/폴더 추가</translation>
     </message>
@@ -9754,77 +9776,77 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
         <translation type="vanished">사용자 제거</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3340"/>
+        <location filename="Forms/OptionsWindow.ui" line="3320"/>
         <source>Add Wnd Class</source>
         <translation>창 클래스 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3219"/>
+        <location filename="Forms/OptionsWindow.ui" line="3199"/>
         <source>Add IPC Path</source>
         <translation>IPC 경로 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3153"/>
+        <location filename="Forms/OptionsWindow.ui" line="3133"/>
         <source>Add Reg Key</source>
         <translation>Reg 키 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3480"/>
+        <location filename="Forms/OptionsWindow.ui" line="3460"/>
         <source>Add COM Object</source>
         <translation>COM 개체 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4304"/>
+        <location filename="Forms/OptionsWindow.ui" line="4284"/>
         <source>File Recovery</source>
         <translation>파일 복구</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4383"/>
+        <location filename="Forms/OptionsWindow.ui" line="4363"/>
         <source>Add Folder</source>
         <translation>폴더 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4423"/>
+        <location filename="Forms/OptionsWindow.ui" line="4403"/>
         <source>Ignore Extension</source>
         <translation>확장자 무시</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4469"/>
+        <location filename="Forms/OptionsWindow.ui" line="4449"/>
         <source>Ignore Folder</source>
         <translation>폴더 무시</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4430"/>
+        <location filename="Forms/OptionsWindow.ui" line="4410"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>파일이 생성되는 즉시 복구할 수 있도록 즉시 복구 프롬프트를 실행합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4413"/>
+        <location filename="Forms/OptionsWindow.ui" line="4393"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
         <translation>즉시 복구에서 폴더 및 파일 유형 (또는 파일 확장자)을 제외할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4346"/>
+        <location filename="Forms/OptionsWindow.ui" line="4326"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
         <translation>빠른 복구 기능이 호출되면 샌드박스 내용에 대해 다음 폴더가 확인됩니다. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4759"/>
+        <location filename="Forms/OptionsWindow.ui" line="4739"/>
         <source>Advanced Options</source>
         <translation>고급 옵션</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4775"/>
+        <location filename="Forms/OptionsWindow.ui" line="4755"/>
         <source>Miscellaneous</source>
         <translation>기타</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3387"/>
+        <location filename="Forms/OptionsWindow.ui" line="3367"/>
         <source>Don&apos;t alter window class names created by sandboxed programs</source>
         <translation>샌드박스 프로그램에서 만든 창 클래스 이름 변경 안 함</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2122"/>
+        <location filename="Forms/OptionsWindow.ui" line="2108"/>
         <source>Do not start sandboxed services using a system token (recommended)</source>
         <translation>시스템 토큰을 사용하여 샌드박스 서비스를 시작하지 않음 (권장)</translation>
     </message>
@@ -9834,34 +9856,32 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
         <location filename="Forms/OptionsWindow.ui" line="1588"/>
         <location filename="Forms/OptionsWindow.ui" line="1660"/>
         <location filename="Forms/OptionsWindow.ui" line="1952"/>
-        <location filename="Forms/OptionsWindow.ui" line="2092"/>
-        <location filename="Forms/OptionsWindow.ui" line="2148"/>
-        <location filename="Forms/OptionsWindow.ui" line="4662"/>
+        <location filename="Forms/OptionsWindow.ui" line="2068"/>
+        <location filename="Forms/OptionsWindow.ui" line="2098"/>
+        <location filename="Forms/OptionsWindow.ui" line="4642"/>
         <source>Protect the sandbox integrity itself</source>
         <translation>샌드박스 무결성 자체 보호</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2158"/>
+        <location filename="Forms/OptionsWindow.ui" line="2085"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
         <translation>SYSTEM 토큰으로 실행 중인 프로세스에서 중요한 권한 삭제</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2135"/>
-        <location filename="Forms/OptionsWindow.ui" line="2199"/>
+        <location filename="Forms/OptionsWindow.ui" line="2055"/>
         <source>(Security Critical)</source>
         <translation>(보안 중요)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2165"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation>권한이 없는 프로세스로부터 샌드박스 SYSTEM 프로세스 보호</translation>
+        <translation type="vanished">권한이 없는 프로세스로부터 샌드박스 SYSTEM 프로세스 보호</translation>
     </message>
     <message>
         <source>Sandbox isolation</source>
         <translation type="vanished">샌드박스 격리</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4540"/>
+        <location filename="Forms/OptionsWindow.ui" line="4520"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
         <translation>사용자 지정 더미 매니페스트 파일 강제 사용 (레거시 동작)</translation>
     </message>
@@ -9874,34 +9894,34 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
         <translation type="vanished">리소스 액세스 정책</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3616"/>
+        <location filename="Forms/OptionsWindow.ui" line="3596"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
         <translation>규칙 특수성은 지정된 규칙이 특정 경로와 얼마나 잘 일치하는지 측정하는 것으로, 단순하게 말해서 특수성은 경로 시작부터 마지막 일치하는 비 와일드카드 하위 문자열까지 포함한 문자 길이입니다. &quot;*.tmp&quot;와 같은 파일 형식만 일치하는 규칙은 항상 전체 파일 경로와 일치하므로 가장 높은 특수성을 가집니다.
 프로세스 일치 수준은 특수성보다 높은 우선 순위를 가지며 규칙이 지정된 프로세스에 적용되는 방식을 설명합니다. 프로세스 이름 또는 그룹별로 적용되는 규칙은 일치 수준이 가장 강하고 부정에 의한 일치 수준 (즉, 지정된 프로세스를 제외한 모든 프로세스에 적용되는 규칙)이 그 뒤를 이으며, 가장 낮은 일치 수준에는 전역 일치, 즉 모든 프로세스에 적용되는 규칙이 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3550"/>
+        <location filename="Forms/OptionsWindow.ui" line="3530"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
         <translation>특수성 및 프로세스 일치 수준에 따라 규칙 우선 순위 지정</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3596"/>
+        <location filename="Forms/OptionsWindow.ui" line="3576"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
         <translation>개인 정보 보호 모드, 일반 시스템 위치를 제외한 모든 위치에 대한 파일 및 레지스트리 액세스 차단</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3576"/>
+        <location filename="Forms/OptionsWindow.ui" line="3556"/>
         <source>Access Mode</source>
         <translation>액세스 모드</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3540"/>
+        <location filename="Forms/OptionsWindow.ui" line="3520"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
         <translation>개인 정보 모드가 활성화된 경우 샌드박스 프로세스는 C:만 읽을 수 있습니다. \Windows\*, C:\Program Files\* 및 HKLM 레지스트리의 일부 다른 위치에서는 읽기 및/또는 쓰기 가능하려면 명시적 액세스 권한이 필요합니다. 이 모드에서는 규칙 특정성이 항상 활성화됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3609"/>
+        <location filename="Forms/OptionsWindow.ui" line="3589"/>
         <source>Rule Policies</source>
         <translation>규칙 정책</translation>
     </message>
@@ -9910,23 +9930,23 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">닫기 적용...=!&lt;프로그램&gt;,... 또한 규칙은 샌드박스에 있는 모든 이진 파일에 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3526"/>
+        <location filename="Forms/OptionsWindow.ui" line="3506"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
         <translation>샌드박스 외부에 있는 이진 파일에만 파일 및 키 열기 지시문을 적용합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2049"/>
+        <location filename="Forms/OptionsWindow.ui" line="2152"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
         <translation>SYSTEM 프로세스로 샌드박스 RpcS 시작 (권장하지 않음)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2069"/>
+        <location filename="Forms/OptionsWindow.ui" line="2159"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
         <translation>권한 있는 프로세스만 서비스 제어 관리자에 액세스할 수 있도록 허용</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4519"/>
-        <location filename="Forms/OptionsWindow.ui" line="4533"/>
+        <location filename="Forms/OptionsWindow.ui" line="4499"/>
+        <location filename="Forms/OptionsWindow.ui" line="4513"/>
         <source>Compatibility</source>
         <translation>호환성</translation>
     </message>
@@ -9940,7 +9960,7 @@ The process match level has a higher priority than the specificity and describes
         <translation>작업 개체에 샌드박스 프로세스 추가 (권장)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4554"/>
+        <location filename="Forms/OptionsWindow.ui" line="4534"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>모든 프로세스에 대해 샌드박스 창 스테이션 에뮬레이트</translation>
     </message>
@@ -10017,7 +10037,7 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">COM/RPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4618"/>
+        <location filename="Forms/OptionsWindow.ui" line="4598"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation>기본적으로 RpcMgmtSetComTimeout 사용 안 함 (호환성 문제가 해결될 수 있음)</translation>
     </message>
@@ -10046,41 +10066,41 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">액세스 격리</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4873"/>
+        <location filename="Forms/OptionsWindow.ui" line="4853"/>
         <source>Triggers</source>
         <translation>트리거</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4985"/>
+        <location filename="Forms/OptionsWindow.ui" line="4965"/>
         <source>Event</source>
         <translation>이벤트</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4935"/>
-        <location filename="Forms/OptionsWindow.ui" line="5076"/>
-        <location filename="Forms/OptionsWindow.ui" line="5121"/>
-        <location filename="Forms/OptionsWindow.ui" line="5140"/>
+        <location filename="Forms/OptionsWindow.ui" line="4915"/>
+        <location filename="Forms/OptionsWindow.ui" line="5056"/>
+        <location filename="Forms/OptionsWindow.ui" line="5101"/>
+        <location filename="Forms/OptionsWindow.ui" line="5120"/>
         <source>Run Command</source>
         <translation>명령 실행</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5102"/>
+        <location filename="Forms/OptionsWindow.ui" line="5082"/>
         <source>Start Service</source>
         <translation>서비스 시작</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5048"/>
+        <location filename="Forms/OptionsWindow.ui" line="5028"/>
         <source>These events are executed each time a box is started</source>
         <translation>이 이벤트는 박스가 시작될 때마다 실행됩니다</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5051"/>
+        <location filename="Forms/OptionsWindow.ui" line="5031"/>
         <source>On Box Start</source>
         <translation>박스 시작 시</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4910"/>
-        <location filename="Forms/OptionsWindow.ui" line="4968"/>
+        <location filename="Forms/OptionsWindow.ui" line="4890"/>
+        <location filename="Forms/OptionsWindow.ui" line="4948"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
         <translation>이 명령은 박스 내용이 삭제되기 직전에 UNBOXED로 실행됩니다</translation>
     </message>
@@ -10089,17 +10109,17 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">박스 삭제 시</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4942"/>
+        <location filename="Forms/OptionsWindow.ui" line="4922"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
         <translation>이러한 명령은 박스가 초기화될 때만 실행됩니다. 다시 실행하려면 박스 내용을 삭제해야 합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4945"/>
+        <location filename="Forms/OptionsWindow.ui" line="4925"/>
         <source>On Box Init</source>
         <translation>박스 초기화 시</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5016"/>
+        <location filename="Forms/OptionsWindow.ui" line="4996"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation>여기서 다양한 박스 이벤트에 대해 자동으로 실행할 동작을 지정할 수 있습니다.</translation>
     </message>
@@ -10108,12 +10128,12 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">프로세스 숨기기</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5251"/>
+        <location filename="Forms/OptionsWindow.ui" line="5231"/>
         <source>Add Process</source>
         <translation>프로세스 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5214"/>
+        <location filename="Forms/OptionsWindow.ui" line="5194"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>샌드박스에서 실행 중인 프로세스에서 호스트 프로세스를 숨깁니다.</translation>
     </message>
@@ -10162,33 +10182,33 @@ The process match level has a higher priority than the specificity and describes
         <translation>액세스 격리</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4665"/>
+        <location filename="Forms/OptionsWindow.ui" line="4645"/>
         <source>Image Protection</source>
         <translation>이미지 보호</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4703"/>
+        <location filename="Forms/OptionsWindow.ui" line="4683"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
         <translation>프로그램이 샌드박스된 dll을 로드하려고 할 때 1305 메시지 발생</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4696"/>
+        <location filename="Forms/OptionsWindow.ui" line="4676"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
         <translation>호스트에 설치된 샌드박스 프로그램이 샌드박스에서 DLL을 로드하지 못하도록 방지</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4635"/>
+        <location filename="Forms/OptionsWindow.ui" line="4615"/>
         <source>Dlls &amp;&amp; Extensions</source>
         <translation>Dll 및 확장자</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4684"/>
+        <location filename="Forms/OptionsWindow.ui" line="4664"/>
         <source>Description</source>
         <translation>설명</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4692"/>
+        <location filename="Forms/OptionsWindow.ui" line="4672"/>
         <source>Sandboxie&apos;s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. &apos;ClosedFilePath=!iexplore.exe,C:Users*&apos; will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the &quot;Access policies&quot; page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
@@ -10197,7 +10217,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
 이는 샌드박스 내부의 불량 프로세스가 자신의 이름이 변경된 복사본을 만들고 보호된 리소스에 액세스하는 것을 방지하기 위해 수행됩니다. 또 다른 악용 벡터는 권한 있는 프로세스에 라이브러리를 주입하여 액세스가 허용된 모든 것에 액세스하는 것입니다. 호스트 이미지 보호를 사용하면 샌드박스 내부에서 실행되는 응용 프로그램 (호스트에 설치)이 샌드박스 자체에서 라이브러리를 로드하는 것을 차단하여 이를 방지할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4716"/>
+        <location filename="Forms/OptionsWindow.ui" line="4696"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
         <translation>Sandboxies 기능은 SbieDll.dll에 의해 시작할 때 각 샌드박스 프로세스에 로드될 수 있는 옵션 DLL을 사용하여 향상될 수 있습니다. 전역 설정의 애드온 관리자는 몇 가지 유용한 확장 기능을 제공합니다. 일단 설치되면 현재 박스에 대해 활성화할 수 있습니다.</translation>
@@ -10218,57 +10238,57 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation>기타 격리</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2095"/>
+        <location filename="Forms/OptionsWindow.ui" line="2101"/>
         <source>Privilege isolation</source>
         <translation>권한 분리</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2151"/>
+        <location filename="Forms/OptionsWindow.ui" line="2071"/>
         <source>Sandboxie token</source>
         <translation>Sandboxie 토큰</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2076"/>
+        <location filename="Forms/OptionsWindow.ui" line="2173"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>사용자 정의 Sandboxie 토큰을 사용하면 개별 Sandboxie를 서로 더 잘 분리할 수 있으며, 작업 관리자의 사용자 열에 프로세스가 속한 박스의 이름이 표시됩니다. 그러나 일부 타사 보안 솔루션에는 사용자 지정 토큰에 문제가 있을 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2176"/>
+        <location filename="Forms/OptionsWindow.ui" line="2187"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
         <translation>원래 토큰을 제거하는 대신 새 샌드박스 토큰 생성</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2298"/>
+        <location filename="Forms/OptionsWindow.ui" line="2278"/>
         <source>Program Control</source>
         <translation>프로그램 제어</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2320"/>
+        <location filename="Forms/OptionsWindow.ui" line="2300"/>
         <source>Force Programs</source>
         <translation>강제 프로그램</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2400"/>
+        <location filename="Forms/OptionsWindow.ui" line="2380"/>
         <source>Disable forced Process and Folder for this sandbox</source>
         <translation>이 샌드박스에 대해 강제 프로세스 및 폴더 사용 안 함</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2451"/>
+        <location filename="Forms/OptionsWindow.ui" line="2431"/>
         <source>Force Children</source>
         <translation>강제 하위</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2461"/>
+        <location filename="Forms/OptionsWindow.ui" line="2441"/>
         <source>Breakout Programs</source>
         <translation>탈옥 프로그램</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2566"/>
+        <location filename="Forms/OptionsWindow.ui" line="2546"/>
         <source>Breakout Program</source>
         <translation>탈옥 프로그램</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2540"/>
+        <location filename="Forms/OptionsWindow.ui" line="2520"/>
         <source>Breakout Folder</source>
         <translation>탈옥 폴더</translation>
     </message>
@@ -10435,152 +10455,152 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation>%</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2115"/>
+        <location filename="Forms/OptionsWindow.ui" line="2166"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>익명 토큰 대신 샌드박스 로그인 사용</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2206"/>
+        <location filename="Forms/OptionsWindow.ui" line="2128"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
         <translation>기본적으로 샌드박스는 최대 격리를 위해 UNTRUSTED 무결성 토큰으로 프로세스를 실행합니다.
 이 옵션을 활성화하면 LOW 무결성 토큰이 사용되며, 이는 호환성을 향상시킬 수 있지만 샌드박스 격리 수준과 보안을 저하시킵니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2210"/>
+        <location filename="Forms/OptionsWindow.ui" line="2132"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
         <translation>UNTRUSTED 대신 LOW 무결성 토큰 사용(격리 수준 저하)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2518"/>
+        <location filename="Forms/OptionsWindow.ui" line="2498"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
         <translation>여기에 입력된 프로그램은 시작할 때 이 박스에서 벗어날 수 있습니다. 다른 박스에 캡처할 수 있습니다. 예를 들어 웹 브라우저를 항상 전용 박스에 열도록 합니다. 이 기능을 설치하려면 올바른 후원자 인증서를 설치해야 합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2585"/>
+        <location filename="Forms/OptionsWindow.ui" line="2565"/>
         <source>Breakout Document</source>
         <translation>분과 문서</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2592"/>
+        <location filename="Forms/OptionsWindow.ui" line="2572"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc...) extensions. Please review the security section for each option in the documentation before use.</source>
         <oldsource>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</oldsource>
         <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;보안 권고&lt;/font&gt;:&lt;/b&gt; &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; 및/또는 &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt;를 사용하면 Open[File/Pipe] 경로 지시어와 함께 사용하면 보안이 손상될 수 있으며, * 또는 안전하지 않은 (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;등...) 확장자를 허용하는 &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; 사용과 마찬가지로 보안이 손상될 수도 있습니다. 사용하기 전에 설명서의 각 옵션에 대한 보안 섹션을 검토하세요.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2622"/>
+        <location filename="Forms/OptionsWindow.ui" line="2602"/>
         <source>Lingering Programs</source>
         <translation>남은 프로그램</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2668"/>
+        <location filename="Forms/OptionsWindow.ui" line="2648"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.</source>
         <translation>남은 프로그램은 다른 모든 프로세스가 종료된 후에도 계속 실행 중인 경우 자동으로 종료됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2701"/>
+        <location filename="Forms/OptionsWindow.ui" line="2681"/>
         <source>Leader Programs</source>
         <translation>대표 프로그램</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2767"/>
+        <location filename="Forms/OptionsWindow.ui" line="2747"/>
         <source>If leader processes are defined, all others are treated as lingering processes.</source>
         <translation>대표 프로세스가 정의되어 있는 경우 다른 모든 프로세스는 계속 진행 중인 프로세스로 간주됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2780"/>
+        <location filename="Forms/OptionsWindow.ui" line="2760"/>
         <source>Stop Options</source>
         <translation>중지 옵션</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2801"/>
+        <location filename="Forms/OptionsWindow.ui" line="2781"/>
         <source>Use Linger Leniency</source>
         <translation>지연 시간 사용</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2811"/>
+        <location filename="Forms/OptionsWindow.ui" line="2791"/>
         <source>Don&apos;t stop lingering processes with windows</source>
         <translation>Windows에서 지속적인 프로세스 중지</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2938"/>
+        <location filename="Forms/OptionsWindow.ui" line="2918"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
         <translation>이 설정은 사용자가 모르거나 동의하지 않은 상태에서 샌드박스에서 프로그램이 실행되는 것을 방지하는 데 사용될 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2941"/>
+        <location filename="Forms/OptionsWindow.ui" line="2921"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
         <translation>외부 소스에서 샌드박스에서 프로세스를 시작하기 전에 팝업 경고 표시</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2973"/>
+        <location filename="Forms/OptionsWindow.ui" line="2953"/>
         <source>Files</source>
         <translation>파일</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3066"/>
+        <location filename="Forms/OptionsWindow.ui" line="3046"/>
         <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>파일, 폴더 및 파이프에 액세스할 수 있는 프로세스를 구성합니다. &apos;열기&apos; 액세스은 샌드박스 외부에 위치한 프로그램 이진 파일에만 적용되며, 대신 &apos;모두 열기&apos;를 사용하여 모든 프로그램에 적용하거나 정책 탭에서 이 동작을 변경할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3080"/>
+        <location filename="Forms/OptionsWindow.ui" line="3060"/>
         <source>Registry</source>
         <translation>레지스트리</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3173"/>
+        <location filename="Forms/OptionsWindow.ui" line="3153"/>
         <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>레지스트리에 액세스할 수 있는 프로세스를 구성합니다. &apos;열기&apos; 액세스은 샌드박스 외부에 위치한 프로그램 이진 파일에만 적용되며, 대신 &apos;모두 열기&apos;를 사용하여 모든 프로그램에 적용하거나 정책 탭에서 이 동작을 변경할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3187"/>
+        <location filename="Forms/OptionsWindow.ui" line="3167"/>
         <source>IPC</source>
         <translation>IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3280"/>
+        <location filename="Forms/OptionsWindow.ui" line="3260"/>
         <source>Configure which processes can access NT IPC objects like ALPC ports and other processes memory and context.
 To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>ALPC 포트 및 기타 프로세스 메모리 및 컨텍스트와 같은 NT IPC 개체에 액세스할 수 있는 프로세스를 구성합니다.
 프로세스를 지정하려면 &apos;$:program.exe&apos;를 경로로 사용합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3294"/>
+        <location filename="Forms/OptionsWindow.ui" line="3274"/>
         <source>Wnd</source>
         <translation>창</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3379"/>
+        <location filename="Forms/OptionsWindow.ui" line="3359"/>
         <source>Wnd Class</source>
         <translation>창 클래스</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4486"/>
+        <location filename="Forms/OptionsWindow.ui" line="4466"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
         <translation>위의 제외 목록을 사용하여 빠른 복구 창에서 일치하는 파일 숨기기</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4483"/>
+        <location filename="Forms/OptionsWindow.ui" line="4463"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
         <translation>복구 창에서 &quot;모두 표시&quot; 확인란을 선택 해제해야 합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4547"/>
+        <location filename="Forms/OptionsWindow.ui" line="4527"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
         <translation>PCA (프로그램 호환성 어시스턴트) 작업 개체 내에서 실행된 강제 프로세스 재시작</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4625"/>
+        <location filename="Forms/OptionsWindow.ui" line="4605"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
         <translation>휴리스틱을 사용하여 Electron/Chromium 기반 프로세스 식별</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6222"/>
+        <location filename="Forms/OptionsWindow.ui" line="6202"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
@@ -10631,7 +10651,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6290"/>
+        <location filename="Forms/OptionsWindow.ui" line="6270"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -10697,12 +10717,12 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6366"/>
+        <location filename="Forms/OptionsWindow.ui" line="6346"/>
         <source>Editor settings</source>
         <translation>편집기 설정</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6369"/>
+        <location filename="Forms/OptionsWindow.ui" line="6349"/>
         <source>⚙</source>
         <translation>⚙</translation>
     </message>
@@ -10793,7 +10813,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6313"/>
+        <location filename="Forms/OptionsWindow.ui" line="6293"/>
         <source>Complete</source>
         <translatorcomment>완성</translatorcomment>
         <translation>완성</translation>
@@ -10805,12 +10825,12 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 도구 설명에는 버전 정보, 구문 요구 사항, 설명이 포함되어 있어 각 설정을 이해하고 올바르게 구성하는 데 도움이 됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6240"/>
+        <location filename="Forms/OptionsWindow.ui" line="6220"/>
         <source>Tooltips</source>
         <translation>도구 설명</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6323"/>
+        <location filename="Forms/OptionsWindow.ui" line="6303"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
@@ -10856,7 +10876,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6340"/>
+        <location filename="Forms/OptionsWindow.ui" line="6320"/>
         <source>Validate</source>
         <translation>검증</translation>
     </message>
@@ -10866,127 +10886,127 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <translation type="vanished">Windows 등의 데스크탑 개체에 액세스스할 수 있는 프로세스를 구성합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3407"/>
+        <location filename="Forms/OptionsWindow.ui" line="3387"/>
         <source>COM</source>
         <translation>COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3453"/>
+        <location filename="Forms/OptionsWindow.ui" line="3433"/>
         <source>Class Id</source>
         <translation>클래스 Id</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3500"/>
+        <location filename="Forms/OptionsWindow.ui" line="3480"/>
         <source>Configure which processes can access COM objects.</source>
         <translation>COM 개체에 액세스할 수 있는 프로세스를 구성합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3512"/>
+        <location filename="Forms/OptionsWindow.ui" line="3492"/>
         <source>Don&apos;t use virtualized COM, Open access to hosts COM infrastructure (not recommended)</source>
         <translation>가상화된 COM 사용 안 함, 호스트 COM 인프라에 대한 액세스 열기 (권장하지 않음)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3520"/>
+        <location filename="Forms/OptionsWindow.ui" line="3500"/>
         <source>Access Policies</source>
         <translation>액세스 정책</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3533"/>
+        <location filename="Forms/OptionsWindow.ui" line="3513"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
         <translation>닫기 적용...=!&lt;프로그램&gt;,... 또한 샌드박스에 있는 모든 이진 파일에 대한 규칙도 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3632"/>
+        <location filename="Forms/OptionsWindow.ui" line="3612"/>
         <source>Network Options</source>
         <translation>네트워크 옵션</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4122"/>
+        <location filename="Forms/OptionsWindow.ui" line="4102"/>
         <source>Bypass IPs</source>
         <translation>우회 IP</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4143"/>
+        <location filename="Forms/OptionsWindow.ui" line="4123"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
         <translation>소켓을 직접 수정하는 대신 프로세스 중 프록시 릴레이 스레드 사용 (드물게 발생하는 호환성 문제 해결)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4153"/>
+        <location filename="Forms/OptionsWindow.ui" line="4133"/>
         <source>Other Options</source>
         <translation>기타 옵션</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4243"/>
+        <location filename="Forms/OptionsWindow.ui" line="4223"/>
         <source>Bind to Adapter IP</source>
         <translation>어댑터 IP에 바인딩</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4181"/>
+        <location filename="Forms/OptionsWindow.ui" line="4161"/>
         <source>IPv6:</source>
         <translation>IPv6:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4280"/>
+        <location filename="Forms/OptionsWindow.ui" line="4260"/>
         <source>Port Blocking</source>
         <translation>포트 차단</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4264"/>
+        <location filename="Forms/OptionsWindow.ui" line="4244"/>
         <source>IPv4:</source>
         <translation>IPv4:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4174"/>
+        <location filename="Forms/OptionsWindow.ui" line="4154"/>
         <source>0000:0000:0000:0000:0000:0000:0000:0000</source>
         <translation>0000:0000:0000:0000:0000:0000:0000:0000</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4250"/>
+        <location filename="Forms/OptionsWindow.ui" line="4230"/>
         <source>000.000.000.000</source>
         <translation>000.000.000.000</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4257"/>
+        <location filename="Forms/OptionsWindow.ui" line="4237"/>
         <source>Block common SAMBA ports</source>
         <translation>공통 SAMBA 포트 차단</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4204"/>
+        <location filename="Forms/OptionsWindow.ui" line="4184"/>
         <source>Block DNS, UDP port 53</source>
         <translation>DNS, UDP 포트 53 차단</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4314"/>
+        <location filename="Forms/OptionsWindow.ui" line="4294"/>
         <source>Quick Recovery</source>
         <translation>빠른 복구</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4393"/>
+        <location filename="Forms/OptionsWindow.ui" line="4373"/>
         <source>Immediate Recovery</source>
         <translation>즉시 복구</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4503"/>
+        <location filename="Forms/OptionsWindow.ui" line="4483"/>
         <source>Various Options</source>
         <translation>다양한 옵션</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4598"/>
+        <location filename="Forms/OptionsWindow.ui" line="4578"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
         <translation>ElevateCreateProcess 해결 방법 적용 (레거시 동작)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4591"/>
+        <location filename="Forms/OptionsWindow.ui" line="4571"/>
         <source>Use desktop object workaround for all processes</source>
         <translation>모든 프로세스에 대해 데스크톱 개체 해결 방법 사용</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4574"/>
+        <location filename="Forms/OptionsWindow.ui" line="4554"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
         <translation>전역 단축키를 짧게 3번 연속적으로 누르면 이 예외가 무시됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4577"/>
+        <location filename="Forms/OptionsWindow.ui" line="4557"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
         <translation>&quot;모든 프로세스 종료&quot;가 호출될 때 이 샌드박스가 종료되지 않도록 제외합니다.</translation>
     </message>
@@ -10995,38 +11015,38 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <translation type="vanished">이 명령은 샌드박스의 모든 프로세스가 완료된 후에 실행됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5006"/>
+        <location filename="Forms/OptionsWindow.ui" line="4986"/>
         <source>On Box Terminate</source>
         <translation>박스 종료 시</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5073"/>
+        <location filename="Forms/OptionsWindow.ui" line="5053"/>
         <source>This command will be run before the box content will be deleted</source>
         <translation>박스 내용이 삭제되기 전에 이 명령이 실행됩니다</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4913"/>
+        <location filename="Forms/OptionsWindow.ui" line="4893"/>
         <source>On File Recovery</source>
         <translation>파일 복구 시</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5038"/>
+        <location filename="Forms/OptionsWindow.ui" line="5018"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
         <translation>이 명령은 파일을 복구하기 전에 실행되며 파일 경로가 첫 번째 인수로 전달됩니다. 이 명령이 0이 아닌 다른 것을 반환하는 경우 복구가 차단됩니다</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5041"/>
+        <location filename="Forms/OptionsWindow.ui" line="5021"/>
         <source>Run File Checker</source>
         <translation>파일 검사 실행</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4971"/>
+        <location filename="Forms/OptionsWindow.ui" line="4951"/>
         <source>On Delete Content</source>
         <translation>콘텐츠 삭제 시</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5237"/>
+        <location filename="Forms/OptionsWindow.ui" line="5217"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>샌드박스 프로세스에서 다른 박스에서 실행 중인 프로세스 보기 허용 안 함</translation>
     </message>
@@ -11037,7 +11057,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1719"/>
-        <location filename="Forms/OptionsWindow.ui" line="5181"/>
+        <location filename="Forms/OptionsWindow.ui" line="5161"/>
         <source>Process</source>
         <translation>프로세스</translation>
     </message>
@@ -11046,22 +11066,22 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <translation type="vanished">이 샌드박스의 프로세스에 대한 읽기 액세스도 차단</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5391"/>
+        <location filename="Forms/OptionsWindow.ui" line="5371"/>
         <source>Users</source>
         <translation>사용자</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5409"/>
+        <location filename="Forms/OptionsWindow.ui" line="5389"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>리소스 액세스 모니터를 관리자로만 제한</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5416"/>
+        <location filename="Forms/OptionsWindow.ui" line="5396"/>
         <source>Add User</source>
         <translation>사용자 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5446"/>
+        <location filename="Forms/OptionsWindow.ui" line="5426"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
@@ -11070,23 +11090,23 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 참고: 샌드박스에 대한 강제 프로그램 및 강제 폴더 설정은 샌드박스를 사용할 수 없는 사용자 계정에는 적용되지 않습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4807"/>
+        <location filename="Forms/OptionsWindow.ui" line="4787"/>
         <source>Add Option</source>
         <translation>옵션 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4821"/>
+        <location filename="Forms/OptionsWindow.ui" line="4801"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
         <translation>여기서 호환성 향상 및/또는 샌드박스 동작을 사용자 정의하도록 고급 프로세스별 옵션을 구성할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4832"/>
+        <location filename="Forms/OptionsWindow.ui" line="4812"/>
         <source>Option</source>
         <translation>옵션</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5459"/>
+        <location filename="Forms/OptionsWindow.ui" line="5439"/>
         <source>Tracing</source>
         <translation>추적</translation>
     </message>
@@ -11096,22 +11116,22 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation type="vanished">API 호출 추적 (Sbie 디렉터리에 LogAPI를 설치해야 함)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5588"/>
+        <location filename="Forms/OptionsWindow.ui" line="5568"/>
         <source>Pipe Trace</source>
         <translation>파이프 추적</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5642"/>
+        <location filename="Forms/OptionsWindow.ui" line="5622"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translation>모든 SetError를 추적 로그에 기록 (많은 출력을 생성)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5548"/>
+        <location filename="Forms/OptionsWindow.ui" line="5528"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>추적 로그에 디버그 출력 기록</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5609"/>
+        <location filename="Forms/OptionsWindow.ui" line="5589"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -11134,42 +11154,42 @@ instead of &quot;*&quot;.</source>
         <translation type="vanished">Ntdll syscall 추적 (많은 출력을 생성합니다)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5602"/>
+        <location filename="Forms/OptionsWindow.ui" line="5582"/>
         <source>File Trace</source>
         <translation>파일 추적</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5467"/>
+        <location filename="Forms/OptionsWindow.ui" line="5447"/>
         <source>Disable Resource Access Monitor</source>
         <translation>리소스 액세스 모니터 사용 안 함</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5474"/>
+        <location filename="Forms/OptionsWindow.ui" line="5454"/>
         <source>IPC Trace</source>
         <translation>IPC 추적</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5508"/>
+        <location filename="Forms/OptionsWindow.ui" line="5488"/>
         <source>GUI Trace</source>
         <translation>GUI 추적</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5568"/>
+        <location filename="Forms/OptionsWindow.ui" line="5548"/>
         <source>Resource Access Monitor</source>
         <translation>리소스 액세스 모니터</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5521"/>
+        <location filename="Forms/OptionsWindow.ui" line="5501"/>
         <source>Access Tracing</source>
         <translation>액세스 추적</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5555"/>
+        <location filename="Forms/OptionsWindow.ui" line="5535"/>
         <source>COM Class Trace</source>
         <translation>COM 클래스 추적</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5649"/>
+        <location filename="Forms/OptionsWindow.ui" line="5629"/>
         <source>Key Trace</source>
         <translation>키 추적</translation>
     </message>
@@ -11188,124 +11208,124 @@ instead of &quot;*&quot;.</source>
         <translation>바이트</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2172"/>
+        <location filename="Forms/OptionsWindow.ui" line="2183"/>
         <source>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
 Partially checked: No groups will be added to the newly created sandboxed token.</source>
         <translation>표시됨: 새로 생성된 샌드박스 토큰에 로컬 그룹도 추가되어 모든 샌드박스 주소를 한 번에 지정할 수 있습니다. 정책 감사에 유용할 것입니다.
 일부 확인됨: 새로 생성된 샌드박스 토큰에 그룹이 추가되지 않습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3747"/>
-        <location filename="Forms/OptionsWindow.ui" line="5528"/>
+        <location filename="Forms/OptionsWindow.ui" line="3727"/>
+        <location filename="Forms/OptionsWindow.ui" line="5508"/>
         <source>Network Firewall</source>
         <translation>네트워크 방화벽</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5003"/>
+        <location filename="Forms/OptionsWindow.ui" line="4983"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
         <translation>이러한 명령은 샌드박스의 모든 프로세스가 완료된 후 언박스 상태로 실행됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5148"/>
+        <location filename="Forms/OptionsWindow.ui" line="5128"/>
         <source>Processes</source>
         <translation>프로세스</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5258"/>
+        <location filename="Forms/OptionsWindow.ui" line="5238"/>
         <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
         <translation>이 옵션은 레지스트리 경로 *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*를 숨기기 때문에 호스트에 설치된 소프트웨어를 샌드박스에 다시 설치할 수 있습니다. 그러나 소프트웨어별 파일과 폴더는 숨기지 않습니다. 설치 관리자에게 여전히 문제가 발생하는 경우 디스크에 관련 파일을 숨기려면 사용자 지정 WriteFilePath 항목을 정의해야 합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5261"/>
+        <location filename="Forms/OptionsWindow.ui" line="5241"/>
         <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
         <translation>호스트 소프트웨어의 제거 키 숨기기 (도구 설명 참조)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5275"/>
+        <location filename="Forms/OptionsWindow.ui" line="5255"/>
         <source>Privacy</source>
         <translation>개인 정보 보호</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5331"/>
+        <location filename="Forms/OptionsWindow.ui" line="5311"/>
         <source>Hide Network Adapter MAC Address</source>
         <translation>네트워크 어댑터 MAC 주소 숨기기</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5284"/>
+        <location filename="Forms/OptionsWindow.ui" line="5264"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
         <translation>펌웨어 정보 숨기기</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5291"/>
+        <location filename="Forms/OptionsWindow.ui" line="5271"/>
         <source>Hide Disk Serial Number</source>
         <translation>디스크 일련 번호 숨기기</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5298"/>
+        <location filename="Forms/OptionsWindow.ui" line="5278"/>
         <source>Obfuscate known unique identifiers in the registry</source>
         <translation>레지스트리에서 알려진 고유 식별자를 난독화</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5161"/>
+        <location filename="Forms/OptionsWindow.ui" line="5141"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
         <translation>일부 프로그램은 일반적인 방법 대신 WMI (Windows 기본 제공 데이터베이스)를 통해 시스템 세부 정보를 읽습니다. 예를 들어, &quot;HideOtherBoxes&quot;를 사용하더라도 &quot;tasklist.exe&quot;는 WMI에 액세스하여 전체 프로세스 목록을 가져올 수 있습니다. 이 옵션을 사용하면 이 동작을 중지할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5164"/>
+        <location filename="Forms/OptionsWindow.ui" line="5144"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
         <translation>샌드박스화된 프로세스가 WMI를 통해 시스템 세부 정보에 액세스하지 못하도록 방지 (자세한 내용은 도구 설명 참조)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5207"/>
+        <location filename="Forms/OptionsWindow.ui" line="5187"/>
         <source>Process Hiding</source>
         <translation>프로세스 숨김</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5351"/>
+        <location filename="Forms/OptionsWindow.ui" line="5331"/>
         <source>Use a custom Locale/LangID</source>
         <translation>사용자 지정 로케일/LangID 사용</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5344"/>
+        <location filename="Forms/OptionsWindow.ui" line="5324"/>
         <source>Data Protection</source>
         <translation>데이터 보호</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5318"/>
+        <location filename="Forms/OptionsWindow.ui" line="5298"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
         <translation>현재 펌웨어 테이블을 HKCU\System\SbieCustom에 덤프</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5321"/>
+        <location filename="Forms/OptionsWindow.ui" line="5301"/>
         <source>Dump FW Tables</source>
         <translation>FW 테이블 덤프</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5656"/>
+        <location filename="Forms/OptionsWindow.ui" line="5636"/>
         <source>API call Trace (traces all SBIE hooks)</source>
         <translation>API 호출 추적 (모든 SBIE 후크 추적)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5672"/>
+        <location filename="Forms/OptionsWindow.ui" line="5652"/>
         <source>Debug</source>
         <translation>디버그</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5721"/>
+        <location filename="Forms/OptionsWindow.ui" line="5701"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>경고, 이러한 옵션은 핵심 보안 보장을 비활성화하고 샌드박스 보안을 파괴할 수 있습니다!!!</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5731"/>
+        <location filename="Forms/OptionsWindow.ui" line="5711"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>이러한 옵션은 호환성 문제를 디버깅하기 위한 것이므로 프로덕션에서 사용하지 마세요. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5869"/>
+        <location filename="Forms/OptionsWindow.ui" line="5849"/>
         <source>App Templates</source>
         <translation>앱 템플릿</translation>
     </message>
@@ -11314,22 +11334,22 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <translation type="vanished">템플릿 호환성</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5947"/>
+        <location filename="Forms/OptionsWindow.ui" line="5927"/>
         <source>Filter Categories</source>
         <translation>필터 범주</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5937"/>
+        <location filename="Forms/OptionsWindow.ui" line="5917"/>
         <source>Text Filter</source>
         <translation>텍스트 필터</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5930"/>
+        <location filename="Forms/OptionsWindow.ui" line="5910"/>
         <source>Add Template</source>
         <translation>템플릿 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5979"/>
+        <location filename="Forms/OptionsWindow.ui" line="5959"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>이 목록에는 많은 양의 샌드박스 호환성 향상 템플릿이 포함되어 있습니다</translation>
     </message>
@@ -11338,17 +11358,17 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <translation type="vanished">템플릿 제거</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5996"/>
+        <location filename="Forms/OptionsWindow.ui" line="5976"/>
         <source>Category</source>
         <translation>범주</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6041"/>
+        <location filename="Forms/OptionsWindow.ui" line="6021"/>
         <source>Template Folders</source>
         <translation>템플릿 폴더</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6061"/>
+        <location filename="Forms/OptionsWindow.ui" line="6041"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -11357,79 +11377,79 @@ Please note that this values are currently user specific and saved globally for 
 이 값은 현재 사용자마다 다르며 모든 박스에 대해 전역으로 저장됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4842"/>
-        <location filename="Forms/OptionsWindow.ui" line="5852"/>
-        <location filename="Forms/OptionsWindow.ui" line="6092"/>
+        <location filename="Forms/OptionsWindow.ui" line="4822"/>
+        <location filename="Forms/OptionsWindow.ui" line="5832"/>
+        <location filename="Forms/OptionsWindow.ui" line="6072"/>
         <source>Value</source>
         <translation>값</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6103"/>
+        <location filename="Forms/OptionsWindow.ui" line="6083"/>
         <source>Accessibility</source>
         <translation>접근성</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6199"/>
+        <location filename="Forms/OptionsWindow.ui" line="6179"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>손실된 보호를 보상하려면 제한 설정 그룹의 삭제 권한 설정 페이지를 참조하세요.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6123"/>
+        <location filename="Forms/OptionsWindow.ui" line="6103"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>화면 판독기: JAWS, NVDA, Window-Eyes, 시스템 액세스</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3912"/>
+        <location filename="Forms/OptionsWindow.ui" line="3892"/>
         <source>DNS Filter</source>
         <translation>DNS 필터</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3952"/>
+        <location filename="Forms/OptionsWindow.ui" line="3932"/>
         <source>Add Filter</source>
         <translation>필터 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3929"/>
+        <location filename="Forms/OptionsWindow.ui" line="3909"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
         <translation>DNS 필터를 사용하면 개별 도메인을 프로세스 단위로 차단할 수 있습니다. 차단하려면 IP 열을 비워 두거나 리디렉션할 IP를 입력하세요.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3968"/>
+        <location filename="Forms/OptionsWindow.ui" line="3948"/>
         <source>Domain</source>
         <translation>도메인</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3991"/>
+        <location filename="Forms/OptionsWindow.ui" line="3971"/>
         <source>Internet Proxy</source>
         <translation>인터넷 프록시</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4081"/>
+        <location filename="Forms/OptionsWindow.ui" line="4061"/>
         <source>Add Proxy</source>
         <translation>프록시 추가</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4074"/>
+        <location filename="Forms/OptionsWindow.ui" line="4054"/>
         <source>Test Proxy</source>
         <translation>프록시 테스트</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4107"/>
+        <location filename="Forms/OptionsWindow.ui" line="4087"/>
         <source>Auth</source>
         <translation>인증</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4112"/>
+        <location filename="Forms/OptionsWindow.ui" line="4092"/>
         <source>Login</source>
         <translation>로그인</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4117"/>
+        <location filename="Forms/OptionsWindow.ui" line="4097"/>
         <source>Password</source>
         <translation>비밀번호</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4015"/>
+        <location filename="Forms/OptionsWindow.ui" line="3995"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
         <translation>샌드박스가 적용된 프로그램은 사전 설정된 SOCKS5 프록시를 사용하도록 강제할 수 있습니다.</translation>
     </message>
@@ -11443,7 +11463,7 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="vanished">&lt;b&gt;&lt;font color=&apos;red&apos;&gt;보안 권고&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; 및/또는 &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; 를 Open[File/Pipe]경로 지시문과 함께 사용하면 보안이 손상될 수 있습니다. 사용하기 전에 문서에서 각 옵션에 대한 보안 섹션을 검토하세요.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4067"/>
+        <location filename="Forms/OptionsWindow.ui" line="4047"/>
         <source>Resolve hostnames via proxy</source>
         <translation>프록시를 통해 호스트 이름 확인</translation>
     </message>
@@ -11479,12 +11499,12 @@ Please note that this values are currently user specific and saved globally for 
         <translation>단일 프로세스 메모리 제한:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4584"/>
+        <location filename="Forms/OptionsWindow.ui" line="4564"/>
         <source>Restart force process before they begin to execute</source>
         <translation>실행을 시작하기 전에 강제 실행 프로세스 다시 시작</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5194"/>
+        <location filename="Forms/OptionsWindow.ui" line="5174"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
         <translation>샌드박스된 프로세스가 박스 외부에서 실행되는 프로세스를 볼 수 없도록 합니다</translation>
     </message>
@@ -11499,83 +11519,83 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="vanished">일부 프로그램은 기존 방법을 사용하는 대신 내장된 Windows 데이터베이스인 WMI (Windows Management Instrumentation)를 통해 시스템 세부 정보를 검색합니다. 예를 들어, &apos;HideOtherBoxes&apos;를 활성화한 경우에도 &apos;tasklist.exe&apos;는 전체 프로세스 목록에 액세스할 수 있습니다. 이러한 동작을 방지하려면 이 옵션을 활성화합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5481"/>
+        <location filename="Forms/OptionsWindow.ui" line="5461"/>
         <source>DNS Request Logging</source>
         <oldsource>Dns Request Logging</oldsource>
         <translation>DNS 요청 로깅</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5501"/>
+        <location filename="Forms/OptionsWindow.ui" line="5481"/>
         <source>Trace function hooking by SbieDll</source>
         <translation>SbieDll에 의한 추적 기능 후킹</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5595"/>
+        <location filename="Forms/OptionsWindow.ui" line="5575"/>
         <source>Syscall Trace (creates a lot of output)</source>
         <translation>Syscall 추적 (출력이 많이 생성됨)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5697"/>
+        <location filename="Forms/OptionsWindow.ui" line="5677"/>
         <source>Debug Options</source>
         <translation>디버그 옵션</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5773"/>
+        <location filename="Forms/OptionsWindow.ui" line="5753"/>
         <source>Config Dump</source>
         <translation>구성 덤프</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5804"/>
+        <location filename="Forms/OptionsWindow.ui" line="5784"/>
         <source>No Templates</source>
         <translation>템플릿 없음</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5814"/>
+        <location filename="Forms/OptionsWindow.ui" line="5794"/>
         <source>No Global</source>
         <translation>전역 없음</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5824"/>
+        <location filename="Forms/OptionsWindow.ui" line="5804"/>
         <source>No Expand</source>
         <translation>확장 없음</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5834"/>
+        <location filename="Forms/OptionsWindow.ui" line="5814"/>
         <source>Refresh</source>
         <translation>새로 고침</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5879"/>
+        <location filename="Forms/OptionsWindow.ui" line="5859"/>
         <source>Templates</source>
         <translation>템플릿</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6015"/>
+        <location filename="Forms/OptionsWindow.ui" line="5995"/>
         <source>Open Template</source>
         <translation>템플릿 열기</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6163"/>
+        <location filename="Forms/OptionsWindow.ui" line="6143"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>다음 설정은 내게 필요한 옵션 소프트웨어와 함께 Sandboxie를 사용할 수 있도록 합니다. 이러한 설정이 적용되면 일부 Sandboxie 보호 기능이 손실됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6216"/>
+        <location filename="Forms/OptionsWindow.ui" line="6196"/>
         <source>Edit ini Section</source>
         <translation>이 섹션 편집</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6250"/>
+        <location filename="Forms/OptionsWindow.ui" line="6230"/>
         <source>Edit ini</source>
         <translation>ini 편집</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6276"/>
+        <location filename="Forms/OptionsWindow.ui" line="6256"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6353"/>
+        <location filename="Forms/OptionsWindow.ui" line="6333"/>
         <source>Save</source>
         <translation>저장</translation>
     </message>
@@ -11628,27 +11648,27 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="5198"/>
+        <location filename="SandMan.cpp" line="5208"/>
         <source>OK</source>
         <translation>확인</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5199"/>
+        <location filename="SandMan.cpp" line="5209"/>
         <source>Apply</source>
         <translation>적용</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5200"/>
+        <location filename="SandMan.cpp" line="5210"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5201"/>
+        <location filename="SandMan.cpp" line="5211"/>
         <source>&amp;Yes</source>
         <translation>예(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5202"/>
+        <location filename="SandMan.cpp" line="5212"/>
         <source>&amp;No</source>
         <translation>아니요(&amp;N)</translation>
     </message>

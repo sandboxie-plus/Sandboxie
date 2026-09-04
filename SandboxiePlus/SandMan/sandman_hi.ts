@@ -514,7 +514,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="497"/>
-        <location filename="BoxTransfer.cpp" line="1123"/>
+        <location filename="BoxTransfer.cpp" line="1129"/>
         <source>7-Zip library is not available.</source>
         <translation>7-ज़िप लाइब्रेरी उपलब्ध नहीं है.</translation>
     </message>
@@ -569,43 +569,43 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <translation type="unfinished">सैंडबॉक्स निर्यात करें</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1052"/>
+        <location filename="BoxTransfer.cpp" line="1058"/>
         <source>Password for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1068"/>
+        <location filename="BoxTransfer.cpp" line="1074"/>
         <source>Failed to open archive (%1): %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1128"/>
+        <location filename="BoxTransfer.cpp" line="1134"/>
         <source>Select Archives</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1129"/>
+        <location filename="BoxTransfer.cpp" line="1135"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1166"/>
+        <location filename="BoxTransfer.cpp" line="1172"/>
         <source>The selected archives do not contain any sandbox data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1192"/>
+        <location filename="BoxTransfer.cpp" line="1198"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1278"/>
-        <location filename="BoxTransfer.cpp" line="1286"/>
+        <location filename="BoxTransfer.cpp" line="1284"/>
+        <location filename="BoxTransfer.cpp" line="1292"/>
         <source>Importing: %1</source>
         <translation>आयात: %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1058"/>
+        <location filename="BoxTransfer.cpp" line="1064"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>संग्रह खोलने में विफल, गलत पासवर्ड?</translation>
     </message>
@@ -618,12 +618,12 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <translation type="vanished">संग्रह में कोई सैंडबॉक्स डेटा नहीं है.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1180"/>
+        <location filename="BoxTransfer.cpp" line="1186"/>
         <source>Nothing selected for import.</source>
         <translation>आयात के लिए कुछ भी चयनित नहीं.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1208"/>
+        <location filename="BoxTransfer.cpp" line="1214"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
         <translation>सैंडबॉक्स &apos;%1&apos; पहले से मौजूद है। इसका कॉन्फ़िगरेशन अधिलेखित कर दिया जाएगा. जारी रखना?</translation>
     </message>
@@ -1079,28 +1079,28 @@ Error: %1</source>
 <context>
     <name>CCodeEdit</name>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1069"/>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2260"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1302"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2581"/>
         <source>Find</source>
         <translation>खोजो</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1074"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1307"/>
         <source>FindNext</source>
         <translation>दूसरा खोजो</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1084"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1317"/>
         <source>GoTo</source>
         <translation>जाओ</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1538"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1735"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
         <translation>क्या आपका मतलब था: %1? (बदलने के लिए Ctrl+R दबाएँ)</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2260"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2581"/>
         <source>F3: Find Next
 + Shift: Backward
 + Ctrl: Case Sensitively
@@ -1115,7 +1115,7 @@ Find String:</source>
 स्ट्रिंग खोजें:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2286"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2607"/>
         <source>Go to Line:</source>
         <translation>लाइन पर जाएँ:</translation>
     </message>
@@ -1277,53 +1277,68 @@ You can click Finish to close this wizard.</source>
         <translation>सक्रिय</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="55"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="46"/>
+        <source>Show Future Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
+        <source>Shown (default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="58"/>
         <source>Editor Settings</source>
         <translation>संपादक सेटिंग्स</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="75"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="78"/>
         <source>Reset All to Defaults</source>
         <translation>सभी को डिफ़ॉल्ट पर रीसेट करें</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="76"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="79"/>
         <source>Reset all settings to their default values and remove custom config entries.</source>
         <translation>सभी सेटिंग्स को उनके डिफ़ॉल्ट मानों पर रीसेट करें और कस्टम कॉन्फ़िगरेशन प्रविष्टियाँ हटा दें।</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Setting</source>
         <translation>सेटिंग</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>State</source>
         <translation>राज्य</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Unchecked</source>
         <translation>अनियंत्रित</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Partial</source>
         <translation>आंशिक</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Checked</source>
         <translation>चेक किए गए</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="203"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="209"/>
         <source>Reset</source>
         <translation>रीसेट करें</translation>
     </message>
     <message>
-        <location filename="Windows/EditorSettingsWindow.cpp" line="204"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="210"/>
         <source>Reset this setting to default value</source>
         <translation>इस सेटिंग को डिफ़ॉल्ट मान पर रीसेट करें</translation>
     </message>
@@ -1349,7 +1364,7 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="1215"/>
+        <location filename="Views/FileView.cpp" line="1216"/>
         <source>%1 - Files</source>
         <translation>%1 - फ़ाइलें</translation>
     </message>
@@ -1586,7 +1601,9 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CGetFileJob</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="267"/>
+        <location filename="OnlineUpdater.cpp" line="250"/>
+        <location filename="OnlineUpdater.cpp" line="269"/>
+        <location filename="OnlineUpdater.cpp" line="304"/>
         <source>Failed to download file from: %1</source>
         <translation>%1 से फ़ाइल डाउनलोड करने में विफल</translation>
     </message>
@@ -1620,67 +1637,67 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CIniHighlighter</name>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="946"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1083"/>
         <source>Validate (Failed)</source>
         <translation>मान्य करें (असफल)</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1327"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1470"/>
         <source>Added in version</source>
         <translation>संस्करण में जोड़ा गया</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1328"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2659"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1471"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2803"/>
         <source>Removed in version</source>
         <translation>संस्करण में हटा दिया गया</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1329"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1472"/>
         <source>Re-added in version</source>
         <translation>संस्करण में पुनः जोड़ा गया</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1330"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2658"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1473"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2802"/>
         <source>Renamed in version</source>
         <translation>संस्करण में नाम बदला गया</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1331"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2660"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1474"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2804"/>
         <source>Superseded by</source>
         <translation>द्वारा अधिक्रमण किया गया</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1963"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2106"/>
         <source>Category</source>
         <translation>वर्ग</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1964"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2107"/>
         <source>Context</source>
         <translation>प्रसंग</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1965"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2108"/>
         <source>Requirements</source>
         <translation>आवश्यकताएं</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2175"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2685"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2318"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2829"/>
         <source>Syntax</source>
         <translation>सिंटेक्स</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2176"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2680"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2319"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2824"/>
         <source>Description</source>
         <translation>विवरण</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2700"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2844"/>
         <source>Attention</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1950,161 +1967,161 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>COnlineUpdater</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="476"/>
+        <location filename="OnlineUpdater.cpp" line="514"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>क्या आप जांचना चाहते हैं कि सैंडबॉक्सी-प्लस का कोई नया संस्करण है या नहीं?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="477"/>
+        <location filename="OnlineUpdater.cpp" line="515"/>
         <source>Don&apos;t show this message again.</source>
         <translation>यह संदेश दोबारा न दिखाएं.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="504"/>
+        <location filename="OnlineUpdater.cpp" line="542"/>
         <source>To ensure optimal compatibility with your software, Sandboxie needs to update its compatibility templates. Do you want to proceed?</source>
         <translation>आपके सॉफ़्टवेयर के साथ इष्टतम अनुकूलता सुनिश्चित करने के लिए, सैंडबॉक्सी को अपने अनुकूलता टेम्पलेट्स को अद्यतन करने की आवश्यकता है। क्या आपकी आगे बढ़ने की इच्छा है?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="505"/>
+        <location filename="OnlineUpdater.cpp" line="543"/>
         <source>Enable auto template updates</source>
         <translation>ऑटो टेम्प्लेट अपडेट सक्षम करें</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="553"/>
+        <location filename="OnlineUpdater.cpp" line="591"/>
         <source>Checking for updates...</source>
         <translation>अपडेट के लिए जांच कर रहा है...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="560"/>
+        <location filename="OnlineUpdater.cpp" line="598"/>
         <source>server not reachable</source>
         <translation>सर्वर पहुंच योग्य नहीं है</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="561"/>
-        <location filename="OnlineUpdater.cpp" line="563"/>
+        <location filename="OnlineUpdater.cpp" line="599"/>
+        <location filename="OnlineUpdater.cpp" line="601"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>अद्यतनों की जाँच करने में विफल, त्रुटि: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="588"/>
+        <location filename="OnlineUpdater.cpp" line="626"/>
         <source>Update Check completed, no new updates</source>
         <translation>अपडेट जांच पूरी हुई, कोई नया अपडेट नहीं</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="733"/>
+        <location filename="OnlineUpdater.cpp" line="771"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;क्या आप इंस्टॉलर डाउनलोड करना चाहते हैं?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="737"/>
+        <location filename="OnlineUpdater.cpp" line="775"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;क्या आप अपडेट डाउनलोड करना चाहते हैं?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="741"/>
+        <location filename="OnlineUpdater.cpp" line="779"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;क्या आप &lt;a href=&quot;%1&quot;&gt;डाउनलोड पेज&lt;/a&gt; पर जाना चाहते हैं?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="750"/>
+        <location filename="OnlineUpdater.cpp" line="788"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>अब यह अपडेट न दिखाएं.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="878"/>
+        <location filename="OnlineUpdater.cpp" line="916"/>
         <source>Downloading updates...</source>
         <translation>अद्यतन को डाउनलोड किया जा रहा हैं...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="904"/>
+        <location filename="OnlineUpdater.cpp" line="942"/>
         <source>invalid parameter</source>
         <translation>अमान्य पैरामीटर</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="905"/>
+        <location filename="OnlineUpdater.cpp" line="943"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
         <translation>अद्यतन जानकारी डाउनलोड करने में विफल</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="906"/>
+        <location filename="OnlineUpdater.cpp" line="944"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
         <translation>अद्यतन json फ़ाइल लोड करने में विफल</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="907"/>
+        <location filename="OnlineUpdater.cpp" line="945"/>
         <source>failed to download a particular file</source>
         <translation>किसी विशेष फ़ाइल को डाउनलोड करने में विफल</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="908"/>
+        <location filename="OnlineUpdater.cpp" line="946"/>
         <source>failed to scan existing installation</source>
         <translation>मौजूदा इंस्टॉलेशन को स्कैन करने में विफल</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="909"/>
+        <location filename="OnlineUpdater.cpp" line="947"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
         <translation>अद्यतन हस्ताक्षर अमान्य है!!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="910"/>
+        <location filename="OnlineUpdater.cpp" line="948"/>
         <source>downloaded file is corrupted</source>
         <translation>डाउनलोड की गई फ़ाइल दूषित है</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="911"/>
+        <location filename="OnlineUpdater.cpp" line="949"/>
         <source>internal error</source>
         <translation>आंतरिक त्रुटि</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="912"/>
+        <location filename="OnlineUpdater.cpp" line="950"/>
         <source>unknown error</source>
         <translation>अज्ञात त्रुटि</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="937"/>
+        <location filename="OnlineUpdater.cpp" line="975"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>सर्वर से अपडेट डाउनलोड करने में विफल, त्रुटि %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="961"/>
+        <location filename="OnlineUpdater.cpp" line="999"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;सैंडबॉक्सी-प्लस के लिए अपडेट डाउनलोड कर दिए गए हैं।&lt;/p&gt;&lt;p&gt;क्या आप ये अपडेट लागू करना चाहते हैं? यदि कोई प्रोग्राम सैंडबॉक्स में चल रहा है, तो उन्हें समाप्त कर दिया जाएगा।&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1066"/>
+        <location filename="OnlineUpdater.cpp" line="1112"/>
         <source>Downloading installer...</source>
         <translation>इंस्टॉलर डाउनलोड हो रहा है...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1109"/>
+        <location filename="OnlineUpdater.cpp" line="1159"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;A नया सैंडबॉक्सी-प्लस इंस्टॉलर निम्नलिखित स्थान पर डाउनलोड किया गया है:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;क्या आप इंस्टॉलेशन शुरू करना चाहते हैं? यदि कोई प्रोग्राम सैंडबॉक्स में चल रहा है, तो उन्हें समाप्त कर दिया जाएगा।&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1170"/>
+        <location filename="OnlineUpdater.cpp" line="1221"/>
         <source>There is a new Templates.ini available, do you want to download it?</source>
         <translation>एक नया Templates.ini उपलब्ध है, क्या आप इसे डाउनलोड करना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1220"/>
+        <location filename="OnlineUpdater.cpp" line="1271"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;क्या आप &lt;a href=&quot;%1&quot;&gt;info पेज&lt;/a&gt; पर जाना चाहते हैं?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1240"/>
+        <location filename="OnlineUpdater.cpp" line="1291"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>भविष्य में यह घोषणा न दिखाएं.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="719"/>
+        <location filename="OnlineUpdater.cpp" line="757"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt; सैंडबॉक्सी-प्लस का एक नया संस्करण उपलब्ध है।</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="445"/>
+        <location filename="OnlineUpdater.cpp" line="483"/>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
@@ -2113,7 +2130,7 @@ Do you still want to update?</source>
 क्या आप अब भी अपडेट करना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="592"/>
+        <location filename="OnlineUpdater.cpp" line="630"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
@@ -2125,9 +2142,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>COptionsWindow</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="565"/>
-        <location filename="Windows/OptionsWindow.cpp" line="571"/>
-        <location filename="Windows/OptionsWindow.cpp" line="586"/>
+        <location filename="Windows/OptionsWindow.cpp" line="552"/>
+        <location filename="Windows/OptionsWindow.cpp" line="558"/>
+        <location filename="Windows/OptionsWindow.cpp" line="573"/>
         <location filename="Windows/OptionsAccess.cpp" line="26"/>
         <source>Browse for File</source>
         <translation>फ़ाइल के लिए ब्राउज़ करें</translation>
@@ -2279,7 +2296,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>निर्देशिका का चयन करें</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1419"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1407"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="990"/>
@@ -2295,8 +2312,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>सभी कार्यक्रम</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1417"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1435"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1405"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1423"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="739"/>
@@ -3093,62 +3110,62 @@ Please select a folder which contains this file.</source>
         <translation>समूहन</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="657"/>
+        <location filename="Windows/OptionsWindow.cpp" line="644"/>
         <source>Add %1 Template</source>
         <translation>%1 टेम्पलेट जोड़ें</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="780"/>
+        <location filename="Windows/OptionsWindow.cpp" line="767"/>
         <source>Search for options</source>
         <translation>विकल्प खोजें</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1085"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1073"/>
         <source>Box: %1</source>
         <translation>बॉक्स: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1086"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1074"/>
         <source>Template: %1</source>
         <translation>टेम्पलेट: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1087"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1075"/>
         <source>Global: %1</source>
         <translation>वैश्विक: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1088"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1076"/>
         <source>Default: %1</source>
         <translation>डिफ़ॉल्ट: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1314"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1302"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>यह सैंडबॉक्स हटा दिया गया है इसलिए कॉन्फ़िगरेशन सहेजा नहीं जा सकता.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1379"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1367"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>कुछ परिवर्तन अभी तक सहेजे नहीं गए हैं, क्या आप सचमुच इस विकल्प विंडो को बंद करना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1428"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1416"/>
         <source>Enter program:</source>
         <translation>प्रोग्राम दर्ज करें:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1876"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1844"/>
         <source>Autocomplete Consent Required</source>
         <translation>स्वत: पूर्ण सहमति आवश्यक है</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1878"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1846"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>स्वत: पूर्ण सुविधा को आगे बढ़ने के लिए आपकी सहमति की आवश्यकता है।</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1880"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1848"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -3161,32 +3178,32 @@ Choose autocomplete mode:
 टाइप करते समय %1: टाइप करते समय स्वत: पूर्ण सुझाव।</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1888"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1856"/>
         <source>Manual</source>
         <translation>नियमावली</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1889"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1857"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>%1 के साथ स्वत: पूर्ण सुझावों को ट्रिगर करता है।</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1891"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1859"/>
         <source>While Typing</source>
         <translation>टाइप करते समय</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1892"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1860"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>टाइप करते समय स्वत: पूर्ण सुझावों को ट्रिगर करता है।</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1895"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>स्वतः पूर्ण सुझावों को अक्षम रखता है.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1894"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1862"/>
         <source>Cancel</source>
         <translation>रद्द करना</translation>
     </message>
@@ -3724,22 +3741,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="5208"/>
+        <location filename="SandMan.cpp" line="5218"/>
         <source>Waiting for folder: %1</source>
         <translation>फ़ोल्डर की प्रतीक्षा की जा रही है: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5209"/>
+        <location filename="SandMan.cpp" line="5219"/>
         <source>Deleting folder: %1</source>
         <translation>फ़ोल्डर हटाना: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5210"/>
+        <location filename="SandMan.cpp" line="5220"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>फ़ोल्डरों को मर्ज करना: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5211"/>
+        <location filename="SandMan.cpp" line="5221"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>स्नैपशॉट मर्ज समाप्त हो रहा है...</translation>
     </message>
@@ -3836,22 +3853,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>सैंडबॉक्सी-प्लस v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5053"/>
+        <location filename="SandMan.cpp" line="5063"/>
         <source>Reset Columns</source>
         <translation>कॉलम रीसेट करें</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5054"/>
+        <location filename="SandMan.cpp" line="5064"/>
         <source>Copy Cell</source>
         <translation>कॉपी सेल</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5055"/>
+        <location filename="SandMan.cpp" line="5065"/>
         <source>Copy Row</source>
         <translation>पंक्ति कॉपी करें</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5056"/>
+        <location filename="SandMan.cpp" line="5066"/>
         <source>Copy Panel</source>
         <translation>पैनल कॉपी करें</translation>
     </message>
@@ -4114,7 +4131,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="SandMan.cpp" line="834"/>
-        <location filename="SandMan.cpp" line="5146"/>
+        <location filename="SandMan.cpp" line="5156"/>
         <source>About Sandboxie-Plus</source>
         <translation>सैंडबॉक्सी-प्लस के बारे में</translation>
     </message>
@@ -4560,32 +4577,32 @@ No will choose: %2</source>
         <translation>सैंडबॉक्स नहीं किए गए</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5057"/>
+        <location filename="SandMan.cpp" line="5067"/>
         <source>Case Sensitive</source>
         <translation>अक्षर संवेदनशील</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5058"/>
+        <location filename="SandMan.cpp" line="5068"/>
         <source>RegExp</source>
         <translation>रेगुलर एक्सप्रेशन</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5059"/>
+        <location filename="SandMan.cpp" line="5069"/>
         <source>Highlight</source>
         <translation>प्रमुखता से दिखाना</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5060"/>
+        <location filename="SandMan.cpp" line="5070"/>
         <source>Close</source>
         <translation>बंद करना</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5061"/>
+        <location filename="SandMan.cpp" line="5071"/>
         <source>&amp;Find ...</source>
         <translation>&amp;ढूंढें...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5062"/>
+        <location filename="SandMan.cpp" line="5072"/>
         <source>All columns</source>
         <translation>सभी कॉलम</translation>
     </message>
@@ -5304,22 +5321,22 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>चुनाव बाद के लिए याद रखें।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5115"/>
+        <location filename="SandMan.cpp" line="5125"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
         <translation>&lt;h3&gt;Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;संस्करण %1&lt;/p&gt;&lt;p&gt; के बारे में</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5123"/>
+        <location filename="SandMan.cpp" line="5133"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
         <translation>सैंडबॉक्सी-प्लस की यह प्रति इसके लिए प्रमाणित है: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5125"/>
+        <location filename="SandMan.cpp" line="5135"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
         <translation>सैंडबॉक्सी-प्लस व्यक्तिगत और गैर-व्यावसायिक उपयोग के लिए निःशुल्क है।</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5129"/>
+        <location filename="SandMan.cpp" line="5139"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>सैंडबॉक्सी-प्लस सैंडबॉक्सी की एक ओपन सोर्स निरंतरता है।&lt;br /&gt; अधिक जानकारी के लिए &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; पर जाएं। %3&lt;br /&gt;&lt;br /&gt;स्थापना: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt; से प्रतीक</translation>
     </message>
@@ -6344,454 +6361,459 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>ऑटो डिटेक्शन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="327"/>
-        <location filename="Windows/SettingsWindow.cpp" line="331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="328"/>
+        <location filename="Windows/SettingsWindow.cpp" line="332"/>
         <source>Don&apos;t integrate links</source>
         <translation>लिंक एकीकृत न करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="328"/>
-        <location filename="Windows/SettingsWindow.cpp" line="332"/>
+        <location filename="Windows/SettingsWindow.cpp" line="329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="333"/>
         <source>As sub group</source>
         <translation>उप समूह के रूप में</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="329"/>
-        <location filename="Windows/SettingsWindow.cpp" line="333"/>
+        <location filename="Windows/SettingsWindow.cpp" line="330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="334"/>
         <source>Fully integrate</source>
         <translation>पूरी तरह से एकीकृत करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="335"/>
+        <location filename="Windows/SettingsWindow.cpp" line="336"/>
         <source>Don&apos;t show any icon</source>
         <oldsource>Don&apos;t integrate links</oldsource>
         <translation>कोई आइकन न दिखाएं</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="337"/>
         <source>Show Plus icon</source>
         <translation>प्लस आइकन दिखाएँ</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="337"/>
+        <location filename="Windows/SettingsWindow.cpp" line="338"/>
         <source>Show Classic icon</source>
         <translation>क्लासिक आइकन दिखाएँ</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="339"/>
+        <location filename="Windows/SettingsWindow.cpp" line="340"/>
         <source>All Boxes</source>
         <translation>सभी बक्से</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="341"/>
         <source>Active + Pinned</source>
         <translation>सक्रिय + पिन किया गया</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="342"/>
         <source>Pinned Only</source>
         <translation>केवल पिन किया गया</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="345"/>
+        <location filename="Windows/SettingsWindow.cpp" line="346"/>
         <source>Close to Tray</source>
         <translation>ट्रे के करीब</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="346"/>
+        <location filename="Windows/SettingsWindow.cpp" line="347"/>
         <source>Prompt before Close</source>
         <translation>बंद करने से पहले संकेत दें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="347"/>
+        <location filename="Windows/SettingsWindow.cpp" line="348"/>
         <source>Close</source>
         <translation>बंद करना</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="348"/>
+        <location filename="Windows/SettingsWindow.cpp" line="349"/>
         <source>Hide (Run invisible in Background)</source>
         <translation>छिपाएँ (पृष्ठभूमि में अदृश्य चलाएँ)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="441"/>
+        <location filename="Windows/SettingsWindow.cpp" line="442"/>
         <source>None</source>
         <translation>कोई नहीं</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="442"/>
+        <location filename="Windows/SettingsWindow.cpp" line="443"/>
         <source>Native</source>
         <translation>देशी</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="443"/>
+        <location filename="Windows/SettingsWindow.cpp" line="444"/>
         <source>Qt</source>
         <translation>क्यूटी</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="445"/>
+        <location filename="Windows/SettingsWindow.cpp" line="446"/>
         <source>Every Day</source>
         <translation>रोज रोज</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="446"/>
+        <location filename="Windows/SettingsWindow.cpp" line="447"/>
         <source>Every Week</source>
         <translation>हर हफ्ते</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="447"/>
+        <location filename="Windows/SettingsWindow.cpp" line="448"/>
         <source>Every 2 Weeks</source>
         <translation>प्रत्येक 2 हफ्ते</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="449"/>
         <source>Every 30 days</source>
         <translation>हर 30 दिन में</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="450"/>
+        <location filename="Windows/SettingsWindow.cpp" line="451"/>
         <source>Ignore</source>
         <translation>अनदेखा करना</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="462"/>
+        <location filename="Windows/SettingsWindow.cpp" line="463"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3743"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3711"/>
         <source>Autocomplete Consent Required</source>
         <translation>स्वत: पूर्ण सहमति आवश्यक है</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3218"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3227"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3186"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3195"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3223"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3191"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(कॉपी)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3236"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3204"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation>सैंडबॉक्सी-प्लस संस्करण: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="951"/>
+        <location filename="Windows/SettingsWindow.cpp" line="939"/>
         <source>Search for settings</source>
         <translation>सेटिंग्स खोजें</translation>
     </message>
     <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1334"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1335"/>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1346"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
         <source>Run &amp;Sandboxed</source>
         <translation>&amp;Sandboxed चलाएँ</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1795"/>
         <source>kilobytes (%1)</source>
         <translation>किलोबाइट (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1894"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1883"/>
         <source>Volume not attached</source>
         <translation>वॉल्यूम संलग्न नहीं है</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3305"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3273"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>यह समर्थक प्रमाणपत्र समाप्त हो गया है, कृपया &lt;a href=&quot;%1&quot;&gt; एक अद्यतन प्रमाणपत्र प्राप्त करें&lt;/a&gt;।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3385"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3353"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;आपने %1/%2 मूल्यांकन प्रमाणपत्रों का उपयोग किया है। कोई और निःशुल्क प्रमाणपत्र उत्पन्न नहीं किया जा सकता.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3355"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt; एक निःशुल्क मूल्यांकन प्रमाणपत्र प्राप्त करें&lt;/a&gt; और %1 दिनों के लिए सभी प्रीमियम सुविधाओं का आनंद लें।&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3318"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3286"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>यह समर्थक प्रमाणपत्र &lt;font color=&apos;red&apos;&gt;%1 दिनों&lt;/font&gt; में समाप्त हो जाएगा, कृपया &lt;a href=&quot;%2&quot;&gt; एक अद्यतन प्रमाणपत्र प्राप्त करें&lt;/a&gt;।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="438"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
         <translation>पिछली स्थिति याद रखें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="438"/>
+        <location filename="Windows/SettingsWindow.cpp" line="439"/>
         <source>Expand all groups</source>
         <translation>सभी समूहों का विस्तार करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="439"/>
+        <location filename="Windows/SettingsWindow.cpp" line="440"/>
         <source>Collapse all groups</source>
         <translation>सभी समूहों को संक्षिप्त करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3215"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3183"/>
         <source>Click to reveal</source>
         <translation>प्रकट करने के लिए क्लिक करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3216"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3184"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
         <translation>छिपाने के लिए क्लिक करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3353"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3321"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>समाप्ति तिथि: %1 दिन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3325"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>; पात्र संरक्षक हमेशा xanasoft.com से &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;&lt;/a&gt; अद्यतन प्रमाणपत्र प्राप्त कर सकते हैं</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3369"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3337"/>
         <source>Options: %1</source>
         <translation>विकल्प: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3372"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>सुरक्षा/गोपनीयता उन्नत और ऐप बॉक्स (एसबॉक्स): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3372"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3373"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>Enabled</source>
         <translation>सक्रिय</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="374"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3372"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3373"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
+        <location filename="Windows/SettingsWindow.cpp" line="375"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>Disabled</source>
         <translation>अक्षम</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="342"/>
-        <location filename="Windows/SettingsWindow.cpp" line="586"/>
+        <location filename="Windows/SettingsWindow.cpp" line="324"/>
+        <source>Arabic (Morocco) - LTR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="587"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>Shift</source>
         <translation>बदलाव</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="349"/>
+        <location filename="Windows/SettingsWindow.cpp" line="350"/>
         <source>Sandbox name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="351"/>
         <source>Sandbox alias</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="351"/>
+        <location filename="Windows/SettingsWindow.cpp" line="352"/>
         <source>Sandbox alias and name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="354"/>
+        <location filename="Windows/SettingsWindow.cpp" line="355"/>
         <source>Same as main</source>
         <translation>मुख्य के समान</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="356"/>
         <source>Keep current monitor</source>
         <translation>वर्तमान मॉनिटर रखें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="357"/>
         <source>Active monitor</source>
         <translation>सक्रिय मॉनिटर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="358"/>
         <source>Primary monitor</source>
         <translation>प्राथमिक मॉनिटर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="413"/>
+        <location filename="Windows/SettingsWindow.cpp" line="414"/>
         <source>Unknown Display</source>
         <translation>अज्ञात प्रदर्शन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="415"/>
+        <location filename="Windows/SettingsWindow.cpp" line="416"/>
         <source>Display %1: %2</source>
         <translation>प्रदर्शन %1: %2</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="417"/>
+        <location filename="Windows/SettingsWindow.cpp" line="418"/>
         <source> (Primary)</source>
         <translation> (प्राथमिक)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="587"/>
+        <location filename="Windows/SettingsWindow.cpp" line="588"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
         <translation>त्रि-स्थिति व्यवहार: अनचेक = कभी नहीं, आंशिक रूप से चेक किया गया = केवल तब जबकि %1 रखा गया है (डिफ़ॉल्ट), चेक किया गया = हमेशा।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3373"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>एन्क्रिप्टेड सैंडबॉक्स (ईबॉक्स): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <source>Network Interception (NetI): %1</source>
         <translation>नेटवर्क इंटरसेप्शन (नेटी): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>सैंडबॉक्सी डेस्कटॉप (डेस्क): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>यह सैंडबॉक्सी-प्लस सीरियल नंबर जैसा नहीं दिखता है।&lt;br /&gt;यदि आपने किसी प्रमाणपत्र से अपडेटकी या हस्ताक्षर दर्ज करने का प्रयास किया है, तो यह सही नहीं है, कृपया इसके बजाय पूरे प्रमाणपत्र को ऊपर के टेक्स्ट क्षेत्र में दर्ज करें।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3413"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3381"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>आप पहले से मौजूद समर्थक प्रमाणपत्र दर्ज किए बिना अपग्रेड-कुंजी सुविधा का उपयोग करने का प्रयास कर रहे हैं। कृपया ध्यान दें कि इस प्रकार की कुंजी (&lt;b&gt;जैसा कि वेबसाइट पर बोल्ड में स्पष्ट रूप से बताया गया है&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;यदि आप उन्नत सुविधाओं का उपयोग करना चाहते हैं, तो आपको उन्नत कार्यक्षमता को अनलॉक करने के लिए एक मानक प्रमाणपत्र और फीचर अपग्रेड कुंजी दोनों प्राप्त करने की आवश्यकता है।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3419"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3387"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>आप पहले से मौजूद समर्थक प्रमाणपत्र दर्ज किए बिना रिन्यू-कुंजी का उपयोग करने का प्रयास कर रहे हैं। कृपया ध्यान दें कि इस प्रकार की कुंजी (&lt;b&gt;जैसा कि वेबसाइट पर बोल्ड में स्पष्ट रूप से कहा गया है&lt;/b) के लिए आपके पास पहले से मौजूद वैध समर्थक प्रमाणपत्र होना आवश्यक है; इसके बिना यह बेकार है.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3424"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3392"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;यदि आपने उत्पाद विवरण नहीं पढ़ा है और गलती से यह कुंजी प्राप्त कर ली है, तो कृपया इस समस्या को हल करने के लिए ईमेल (हमारी वेबसाइट पर उपलब्ध) के माध्यम से हमसे संपर्क करें।&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3455"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3423"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>सैंडबॉक्सी-प्लस - मूल्यांकन प्रमाणपत्र प्राप्त करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3455"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3423"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>कृपया निःशुल्क %1-दिन मूल्यांकन प्रमाणपत्र प्राप्त करने के लिए अपना ईमेल पता दर्ज करें, जो %2 को जारी किया जाएगा और वर्तमान हार्डवेयर पर लॉक किया जाएगा।
 आप प्रत्येक अद्वितीय हार्डवेयर आईडी के लिए %3 मूल्यांकन प्रमाणपत्र तक का अनुरोध कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3481"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3449"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>प्रमाणपत्र पुनर्प्राप्त करने में त्रुटि: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3481"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3449"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>अज्ञात त्रुटि (संभवतः एक नेटवर्क समस्या)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3536"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3504"/>
         <source>Contributor</source>
         <translation>योगदानकर्ता</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3538"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3506"/>
         <source>Eternal</source>
         <translation>शाश्वत</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3508"/>
         <source>Developer</source>
         <translation>डेवलपर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3542"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3510"/>
         <source>Business</source>
         <translation>व्यापार</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3544"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3512"/>
         <source>Personal</source>
         <translation>निजी</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3546"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3514"/>
         <source>Great Patreon</source>
         <translation>महान पैट्रियन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3548"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3516"/>
         <source>Patreon</source>
         <translation>पैट्रियन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3550"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3518"/>
         <source>Family</source>
         <translation>परिवार</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3554"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3522"/>
         <source>Evaluation</source>
         <translation>मूल्यांकन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3556"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3524"/>
         <source>Type %1</source>
         <translation>%1 टाइप करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3586"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3554"/>
         <source>Advanced</source>
         <translation>विकसित</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3588"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3556"/>
         <source>Advanced (L)</source>
         <translation>उन्नत (एल)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3590"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3558"/>
         <source>Max Level</source>
         <translation>अधिकतम स्तर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3592"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3560"/>
         <source>Level %1</source>
         <translation>स्तर %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3745"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3713"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>स्वत: पूर्ण सुविधा को आगे बढ़ने के लिए आपकी सहमति की आवश्यकता है।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3747"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3715"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -6804,335 +6826,335 @@ Choose autocomplete mode:
 टाइप करते समय %1: टाइप करते समय स्वत: पूर्ण सुझाव।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3755"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3723"/>
         <source>Manual</source>
         <translation>नियमावली</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3756"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3724"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>%1 के साथ स्वत: पूर्ण सुझावों को ट्रिगर करता है।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3758"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3726"/>
         <source>While Typing</source>
         <translation>टाइप करते समय</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3759"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3727"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>टाइप करते समय स्वत: पूर्ण सुझावों को ट्रिगर करता है।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3762"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3730"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>स्वतः पूर्ण सुझावों को अक्षम रखता है.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3761"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3729"/>
         <source>Cancel</source>
         <translation>रद्द करना</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1922"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1911"/>
         <source>Supporter certificate required for access</source>
         <translation>पहुंच के लिए समर्थक प्रमाणपत्र आवश्यक है</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1939"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1928"/>
         <source>Supporter certificate required for automation</source>
         <translation>स्वचालन के लिए समर्थक प्रमाणपत्र आवश्यक है</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3631"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3599"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>दुर्भाग्य से यह प्रमाणपत्र वर्तमान बिल्ड के लिए मान्य नहीं है, आपको एक नया प्रमाणपत्र प्राप्त करना होगा या पुराने बिल्ड में डाउनग्रेड करना होगा।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3633"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3601"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>हालाँकि यह प्रमाणपत्र समाप्त हो चुका है, वर्तमान में स्थापित संस्करण के लिए प्लस सुविधाएँ सक्षम रहेंगी। हालाँकि, अब आपके पास संगतता अद्यतन और ऑनलाइन समस्या निवारण डेटाबेस सहित सैंडबॉक्सी-लाइव सेवाओं तक पहुंच नहीं होगी।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3635"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3603"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>यह प्रमाणपत्र दुर्भाग्य से समाप्त हो गया है, आपको एक नया प्रमाणपत्र प्राप्त करना होगा।</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1377"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1366"/>
         <source>Sandboxed Web Browser</source>
         <translation>सैंडबॉक्स्ड वेब ब्राउज़र</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="451"/>
-        <location filename="Windows/SettingsWindow.cpp" line="456"/>
+        <location filename="Windows/SettingsWindow.cpp" line="452"/>
+        <location filename="Windows/SettingsWindow.cpp" line="457"/>
         <source>Notify</source>
         <translation>सूचित करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="452"/>
-        <location filename="Windows/SettingsWindow.cpp" line="457"/>
+        <location filename="Windows/SettingsWindow.cpp" line="453"/>
+        <location filename="Windows/SettingsWindow.cpp" line="458"/>
         <source>Download &amp; Notify</source>
         <translation>डाउनलोड करें और सूचित करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="453"/>
-        <location filename="Windows/SettingsWindow.cpp" line="458"/>
+        <location filename="Windows/SettingsWindow.cpp" line="454"/>
+        <location filename="Windows/SettingsWindow.cpp" line="459"/>
         <source>Download &amp; Install</source>
         <translation>डाउनलोड करें और इंस्टॉल करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="643"/>
+        <location filename="Windows/SettingsWindow.cpp" line="644"/>
         <source>Browse for Program</source>
         <translation>प्रोग्राम के लिए ब्राउज़ करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="764"/>
+        <location filename="Windows/SettingsWindow.cpp" line="765"/>
         <source>Add %1 Template</source>
         <translation>%1 टेम्पलेट जोड़ें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="628"/>
-        <location filename="Windows/SettingsWindow.cpp" line="810"/>
+        <location filename="Windows/SettingsWindow.cpp" line="629"/>
+        <location filename="Windows/SettingsWindow.cpp" line="811"/>
         <source>Select font</source>
         <translation>फ़ॉन्ट चुनें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="630"/>
-        <location filename="Windows/SettingsWindow.cpp" line="812"/>
+        <location filename="Windows/SettingsWindow.cpp" line="631"/>
+        <location filename="Windows/SettingsWindow.cpp" line="813"/>
         <source>Reset font</source>
         <translation>फ़ॉन्ट रीसेट करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="965"/>
+        <location filename="Windows/SettingsWindow.cpp" line="953"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 पीटी</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1226"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1215"/>
         <source>Please enter message</source>
         <translation>कृपया संदेश दर्ज करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1247"/>
         <source>Select Program</source>
         <translation>प्रोग्राम चुनें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1247"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>निष्पादनयोग्य (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1262"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1278"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1251"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1267"/>
         <source>Please enter a menu title</source>
         <translation>कृपया एक मेनू शीर्षक दर्ज करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1274"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1263"/>
         <source>Please enter a command</source>
         <translation>कृपया एक आदेश दर्ज करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3310"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3278"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;वर्तमान बिल्ड के लिए प्लस सुविधाएं सक्षम रहती हैं&lt;/font&gt;, लेकिन अब आपके पास संगतता अपडेट और ऑनलाइन समस्या निवारण डेटाबेस सहित सैंडबॉक्सी-लाइव सेवाओं तक पहुंच नहीं है।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3388"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3356"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>आप प्रति हार्डवेयर आईडी पर %2 बार तक निःशुल्क %1-दिन मूल्यांकन प्रमाणपत्र का अनुरोध कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3308"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3276"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;प्लस सुविधाएं %1 दिनों में अक्षम कर दी जाएंगी।&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3312"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3280"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus सुविधाएँ अब सक्षम नहीं हैं।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3323"/>
         <source>Expired: %1 days ago</source>
         <translation>समाप्त: %1 दिन पहले</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3439"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3467"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3696"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3407"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3435"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3664"/>
         <source>Retrieving certificate...</source>
         <translation>प्रमाणपत्र पुनर्प्राप्त किया जा रहा है...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3552"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3520"/>
         <source>Home</source>
         <translation>घर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2057"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2046"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>&amp;Un-सैंडबॉक्स्ड चलाएँ</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2065"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2054"/>
         <source>Set Force in Sandbox</source>
         <translation>सैंडबॉक्स में फोर्स सेट करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2074"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2063"/>
         <source>Set Open Path in Sandbox</source>
         <translation>सैंडबॉक्स में ओपन पाथ सेट करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3614"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3582"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>यह प्रमाणपत्र जैसा नहीं दिखता. कृपया संपूर्ण प्रमाणपत्र दर्ज करें, न कि उसका केवल एक भाग।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3639"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3607"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>मूल्यांकन प्रमाणपत्र सफलतापूर्वक लागू कर दिया गया है. अपने निःशुल्क परीक्षण का आनंद लें!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3642"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3610"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>सैंडबॉक्सी-प्लस के विकास का समर्थन करने के लिए धन्यवाद।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3644"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3612"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
 यह एक अस्थायी पैट्रियन प्रमाणपत्र है, जो 3 महीने के लिए वैध है। एक बार जब यह समाप्ति के करीब आ जाए, तो आप ऑनलाइन एक नया प्रमाणपत्र प्राप्त कर सकते हैं जो पूरी अवधि के लिए वैध होगा।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3682"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3650"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>आपके सैंडबॉक्सी-प्लस सपोर्टर प्रमाणपत्र के लिए एक अनिवार्य सुरक्षा अद्यतन आवश्यक है। क्या आप अब अद्यतन प्रमाणपत्र डाउनलोड करना चाहेंगे?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3683"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3651"/>
         <source>Auto update in future</source>
         <translation>भविष्य में स्वतः अद्यतन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2456"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2445"/>
         <source>Update Available</source>
         <translation>उपलब्ध अद्यतन</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2458"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2447"/>
         <source>Installed</source>
         <translation>स्थापित</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2463"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2452"/>
         <source>by %1</source>
         <translation>%1 द्वारा</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2471"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2460"/>
         <source>(info website)</source>
         <translation>(जानकारी वेबसाइट)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2499"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2488"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>यह ऐड-ऑन अनिवार्य है और इसे हटाया नहीं जा सकता.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2508"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2720"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2497"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2709"/>
         <source>Select Directory</source>
         <translation>निर्देशिका का चयन करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2529"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;अभी जांचें&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2599"/>
         <source>Select Portable Box ini</source>
         <translation>पोर्टेबल बॉक्स ini का चयन करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2620"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2609"/>
         <source>Ini Files (*.ini)</source>
         <translation>आईएनआई फ़ाइलें (*.आईएनआई)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2620"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2609"/>
         <source>Save new Portable Box ini</source>
         <translation>नया पोर्टेबल बॉक्स सहेजें ini</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2625"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2614"/>
         <source>File already exists, please select a different file name.</source>
         <translation>फ़ाइल पहले से मौजूद है, कृपया कोई भिन्न फ़ाइल नाम चुनें।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2631"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2620"/>
         <source>Invalid box name</source>
         <translation>अमान्य बॉक्स नाम</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2652"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2641"/>
         <source>Select Root Folder</source>
         <translation>रूट फ़ोल्डर का चयन करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2680"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2669"/>
         <source>Please enter the new configuration password.</source>
         <translation>कृपया नया कॉन्फ़िगरेशन पासवर्ड दर्ज करें.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2684"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2673"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>कृपया नया कॉन्फ़िगरेशन पासवर्ड पुनः दर्ज करें.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2689"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2678"/>
         <source>Passwords did not match, please retry.</source>
         <translation>पासवर्ड मेल नहीं खाते, कृपया पुनः प्रयास करें।</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2701"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2690"/>
         <source>Process</source>
         <translation>प्रक्रिया</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2701"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2690"/>
         <source>Folder</source>
         <translation>फ़ोल्डर</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2711"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2700"/>
         <source>Please enter a program file name</source>
         <translation>कृपया प्रोग्राम फ़ाइल नाम दर्ज करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2779"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2768"/>
         <source>Please enter the template identifier</source>
         <translation>कृपया टेम्प्लेट पहचानकर्ता दर्ज करें</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2787"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2776"/>
         <source>Error: %1</source>
         <translation>त्रुटि: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2819"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2808"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>क्या आप सचमुच चयनित स्थानीय टेम्पलेट हटाना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3142"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3110"/>
         <source>%1 (Current)</source>
         <translation>%1 (वर्तमान)</translation>
     </message>
@@ -8261,8 +8283,8 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <location filename="Forms/OptionsWindow.ui" line="1418"/>
         <location filename="Forms/OptionsWindow.ui" line="1461"/>
         <location filename="Forms/OptionsWindow.ui" line="1828"/>
-        <location filename="Forms/OptionsWindow.ui" line="4217"/>
-        <location filename="Forms/OptionsWindow.ui" line="4240"/>
+        <location filename="Forms/OptionsWindow.ui" line="4197"/>
+        <location filename="Forms/OptionsWindow.ui" line="4220"/>
         <source>Protect the system from sandboxed processes</source>
         <translation>सिस्टम को सैंडबॉक्स्ड प्रक्रियाओं से सुरक्षित रखें</translation>
     </message>
@@ -8400,12 +8422,12 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>मुद्रण प्रतिबंध</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4220"/>
+        <location filename="Forms/OptionsWindow.ui" line="4200"/>
         <source>Network restrictions</source>
         <translation>नेटवर्क प्रतिबंध</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4287"/>
+        <location filename="Forms/OptionsWindow.ui" line="4267"/>
         <source>Block network files and folders, unless specifically opened.</source>
         <translation>नेटवर्क फ़ाइलों और फ़ोल्डरों को ब्लॉक करें, जब तक कि विशेष रूप से न खोला गया हो।</translation>
     </message>
@@ -8421,19 +8443,19 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1184"/>
-        <location filename="Forms/OptionsWindow.ui" line="2280"/>
-        <location filename="Forms/OptionsWindow.ui" line="2392"/>
-        <location filename="Forms/OptionsWindow.ui" line="2490"/>
-        <location filename="Forms/OptionsWindow.ui" line="2653"/>
-        <location filename="Forms/OptionsWindow.ui" line="2725"/>
-        <location filename="Forms/OptionsWindow.ui" line="2952"/>
-        <location filename="Forms/OptionsWindow.ui" line="3714"/>
-        <location filename="Forms/OptionsWindow.ui" line="4338"/>
-        <location filename="Forms/OptionsWindow.ui" line="4454"/>
-        <location filename="Forms/OptionsWindow.ui" line="4679"/>
-        <location filename="Forms/OptionsWindow.ui" line="5842"/>
-        <location filename="Forms/OptionsWindow.ui" line="6001"/>
-        <location filename="Forms/OptionsWindow.ui" line="6087"/>
+        <location filename="Forms/OptionsWindow.ui" line="2260"/>
+        <location filename="Forms/OptionsWindow.ui" line="2372"/>
+        <location filename="Forms/OptionsWindow.ui" line="2470"/>
+        <location filename="Forms/OptionsWindow.ui" line="2633"/>
+        <location filename="Forms/OptionsWindow.ui" line="2705"/>
+        <location filename="Forms/OptionsWindow.ui" line="2932"/>
+        <location filename="Forms/OptionsWindow.ui" line="3694"/>
+        <location filename="Forms/OptionsWindow.ui" line="4318"/>
+        <location filename="Forms/OptionsWindow.ui" line="4434"/>
+        <location filename="Forms/OptionsWindow.ui" line="4659"/>
+        <location filename="Forms/OptionsWindow.ui" line="5822"/>
+        <location filename="Forms/OptionsWindow.ui" line="5981"/>
+        <location filename="Forms/OptionsWindow.ui" line="6067"/>
         <source>Name</source>
         <translation>नाम</translation>
     </message>
@@ -8450,99 +8472,99 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1141"/>
         <location filename="Forms/OptionsWindow.ui" line="1769"/>
-        <location filename="Forms/OptionsWindow.ui" line="2288"/>
-        <location filename="Forms/OptionsWindow.ui" line="2357"/>
-        <location filename="Forms/OptionsWindow.ui" line="2547"/>
-        <location filename="Forms/OptionsWindow.ui" line="2678"/>
-        <location filename="Forms/OptionsWindow.ui" line="2753"/>
-        <location filename="Forms/OptionsWindow.ui" line="2924"/>
-        <location filename="Forms/OptionsWindow.ui" line="3000"/>
-        <location filename="Forms/OptionsWindow.ui" line="3134"/>
-        <location filename="Forms/OptionsWindow.ui" line="3233"/>
-        <location filename="Forms/OptionsWindow.ui" line="3314"/>
-        <location filename="Forms/OptionsWindow.ui" line="3427"/>
-        <location filename="Forms/OptionsWindow.ui" line="3683"/>
-        <location filename="Forms/OptionsWindow.ui" line="3840"/>
-        <location filename="Forms/OptionsWindow.ui" line="3981"/>
-        <location filename="Forms/OptionsWindow.ui" line="4008"/>
-        <location filename="Forms/OptionsWindow.ui" line="4376"/>
-        <location filename="Forms/OptionsWindow.ui" line="4462"/>
-        <location filename="Forms/OptionsWindow.ui" line="4814"/>
-        <location filename="Forms/OptionsWindow.ui" line="4903"/>
-        <location filename="Forms/OptionsWindow.ui" line="5244"/>
-        <location filename="Forms/OptionsWindow.ui" line="5439"/>
-        <location filename="Forms/OptionsWindow.ui" line="5911"/>
+        <location filename="Forms/OptionsWindow.ui" line="2268"/>
+        <location filename="Forms/OptionsWindow.ui" line="2337"/>
+        <location filename="Forms/OptionsWindow.ui" line="2527"/>
+        <location filename="Forms/OptionsWindow.ui" line="2658"/>
+        <location filename="Forms/OptionsWindow.ui" line="2733"/>
+        <location filename="Forms/OptionsWindow.ui" line="2904"/>
+        <location filename="Forms/OptionsWindow.ui" line="2980"/>
+        <location filename="Forms/OptionsWindow.ui" line="3114"/>
+        <location filename="Forms/OptionsWindow.ui" line="3213"/>
+        <location filename="Forms/OptionsWindow.ui" line="3294"/>
+        <location filename="Forms/OptionsWindow.ui" line="3407"/>
+        <location filename="Forms/OptionsWindow.ui" line="3663"/>
+        <location filename="Forms/OptionsWindow.ui" line="3820"/>
+        <location filename="Forms/OptionsWindow.ui" line="3961"/>
+        <location filename="Forms/OptionsWindow.ui" line="3988"/>
+        <location filename="Forms/OptionsWindow.ui" line="4356"/>
+        <location filename="Forms/OptionsWindow.ui" line="4442"/>
+        <location filename="Forms/OptionsWindow.ui" line="4794"/>
+        <location filename="Forms/OptionsWindow.ui" line="4883"/>
+        <location filename="Forms/OptionsWindow.ui" line="5224"/>
+        <location filename="Forms/OptionsWindow.ui" line="5419"/>
+        <location filename="Forms/OptionsWindow.ui" line="5891"/>
         <source>Remove</source>
         <translation>निकालना</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2387"/>
-        <location filename="Forms/OptionsWindow.ui" line="2485"/>
-        <location filename="Forms/OptionsWindow.ui" line="3011"/>
-        <location filename="Forms/OptionsWindow.ui" line="3111"/>
-        <location filename="Forms/OptionsWindow.ui" line="3244"/>
-        <location filename="Forms/OptionsWindow.ui" line="3364"/>
-        <location filename="Forms/OptionsWindow.ui" line="3438"/>
-        <location filename="Forms/OptionsWindow.ui" line="5847"/>
+        <location filename="Forms/OptionsWindow.ui" line="2367"/>
+        <location filename="Forms/OptionsWindow.ui" line="2465"/>
+        <location filename="Forms/OptionsWindow.ui" line="2991"/>
+        <location filename="Forms/OptionsWindow.ui" line="3091"/>
+        <location filename="Forms/OptionsWindow.ui" line="3224"/>
+        <location filename="Forms/OptionsWindow.ui" line="3344"/>
+        <location filename="Forms/OptionsWindow.ui" line="3418"/>
+        <location filename="Forms/OptionsWindow.ui" line="5827"/>
         <source>Type</source>
         <translation>प्रकार</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2224"/>
+        <location filename="Forms/OptionsWindow.ui" line="2204"/>
         <source>Program Groups</source>
         <translation>कार्यक्रम समूह</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2252"/>
+        <location filename="Forms/OptionsWindow.ui" line="2232"/>
         <source>Add Group</source>
         <translation>समूह जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2259"/>
-        <location filename="Forms/OptionsWindow.ui" line="2642"/>
-        <location filename="Forms/OptionsWindow.ui" line="2746"/>
-        <location filename="Forms/OptionsWindow.ui" line="2897"/>
-        <location filename="Forms/OptionsWindow.ui" line="3669"/>
+        <location filename="Forms/OptionsWindow.ui" line="2239"/>
+        <location filename="Forms/OptionsWindow.ui" line="2622"/>
+        <location filename="Forms/OptionsWindow.ui" line="2726"/>
+        <location filename="Forms/OptionsWindow.ui" line="2877"/>
+        <location filename="Forms/OptionsWindow.ui" line="3649"/>
         <source>Add Program</source>
         <translation>प्रोग्राम जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2432"/>
+        <location filename="Forms/OptionsWindow.ui" line="2412"/>
         <source>Force Folder</source>
         <translation>बलपूर्वक फ़ोल्डर</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3026"/>
-        <location filename="Forms/OptionsWindow.ui" line="3126"/>
-        <location filename="Forms/OptionsWindow.ui" line="3259"/>
+        <location filename="Forms/OptionsWindow.ui" line="3006"/>
+        <location filename="Forms/OptionsWindow.ui" line="3106"/>
+        <location filename="Forms/OptionsWindow.ui" line="3239"/>
         <source>Path</source>
         <translation>पथ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2376"/>
+        <location filename="Forms/OptionsWindow.ui" line="2356"/>
         <source>Force Program</source>
         <translation>बल कार्यक्रम</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="777"/>
         <location filename="Forms/OptionsWindow.ui" line="1614"/>
-        <location filename="Forms/OptionsWindow.ui" line="2232"/>
-        <location filename="Forms/OptionsWindow.ui" line="2350"/>
-        <location filename="Forms/OptionsWindow.ui" line="2511"/>
-        <location filename="Forms/OptionsWindow.ui" line="2661"/>
-        <location filename="Forms/OptionsWindow.ui" line="2760"/>
-        <location filename="Forms/OptionsWindow.ui" line="2917"/>
-        <location filename="Forms/OptionsWindow.ui" line="2993"/>
-        <location filename="Forms/OptionsWindow.ui" line="3100"/>
-        <location filename="Forms/OptionsWindow.ui" line="3226"/>
-        <location filename="Forms/OptionsWindow.ui" line="3321"/>
-        <location filename="Forms/OptionsWindow.ui" line="3461"/>
-        <location filename="Forms/OptionsWindow.ui" line="3886"/>
-        <location filename="Forms/OptionsWindow.ui" line="4369"/>
-        <location filename="Forms/OptionsWindow.ui" line="4476"/>
-        <location filename="Forms/OptionsWindow.ui" line="4850"/>
-        <location filename="Forms/OptionsWindow.ui" line="5083"/>
-        <location filename="Forms/OptionsWindow.ui" line="5154"/>
+        <location filename="Forms/OptionsWindow.ui" line="2212"/>
+        <location filename="Forms/OptionsWindow.ui" line="2330"/>
+        <location filename="Forms/OptionsWindow.ui" line="2491"/>
+        <location filename="Forms/OptionsWindow.ui" line="2641"/>
+        <location filename="Forms/OptionsWindow.ui" line="2740"/>
+        <location filename="Forms/OptionsWindow.ui" line="2897"/>
+        <location filename="Forms/OptionsWindow.ui" line="2973"/>
+        <location filename="Forms/OptionsWindow.ui" line="3080"/>
+        <location filename="Forms/OptionsWindow.ui" line="3206"/>
+        <location filename="Forms/OptionsWindow.ui" line="3301"/>
+        <location filename="Forms/OptionsWindow.ui" line="3441"/>
+        <location filename="Forms/OptionsWindow.ui" line="3866"/>
+        <location filename="Forms/OptionsWindow.ui" line="4349"/>
+        <location filename="Forms/OptionsWindow.ui" line="4456"/>
+        <location filename="Forms/OptionsWindow.ui" line="4830"/>
+        <location filename="Forms/OptionsWindow.ui" line="5063"/>
+        <location filename="Forms/OptionsWindow.ui" line="5134"/>
         <source>Show Templates</source>
         <translation>टेम्प्लेट दिखाएँ</translation>
     </message>
@@ -8592,83 +8614,83 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>विंडोज़ क्रेडेंशियल स्टोर खोलें (उपयोगकर्ता मोड)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4227"/>
+        <location filename="Forms/OptionsWindow.ui" line="4207"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
         <translation>नेटवर्क और फ़ायरवॉल पैरामीटर में परिवर्तन रोकें (उपयोगकर्ता मोड)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2266"/>
+        <location filename="Forms/OptionsWindow.ui" line="2246"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
         <translation>आप प्रोग्रामों को एक साथ समूहित कर सकते हैं और उन्हें एक समूह नाम दे सकते हैं।  प्रोग्राम समूहों का उपयोग प्रोग्राम नामों के बजाय कुछ सेटिंग्स के साथ किया जा सकता है। बॉक्स के लिए परिभाषित समूह टेम्प्लेट में परिभाषित समूहों को अधिलेखित कर देते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2340"/>
+        <location filename="Forms/OptionsWindow.ui" line="2320"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>यहां दर्ज किए गए प्रोग्राम, या दर्ज किए गए स्थानों से शुरू किए गए प्रोग्राम स्वचालित रूप से इस सैंडबॉक्स में डाल दिए जाएंगे, जब तक कि वे स्पष्ट रूप से किसी अन्य सैंडबॉक्स में शुरू न किए गए हों।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2612"/>
-        <location filename="Forms/OptionsWindow.ui" line="2794"/>
+        <location filename="Forms/OptionsWindow.ui" line="2592"/>
+        <location filename="Forms/OptionsWindow.ui" line="2774"/>
         <source>Stop Behaviour</source>
         <translation>व्यवहार बंद करो</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2851"/>
+        <location filename="Forms/OptionsWindow.ui" line="2831"/>
         <source>Start Restrictions</source>
         <translation>प्रतिबंध प्रारंभ करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2931"/>
+        <location filename="Forms/OptionsWindow.ui" line="2911"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>जब कोई प्रोग्राम प्रारंभ होने में विफल रहता है तो संदेश 1308 जारी करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2881"/>
+        <location filename="Forms/OptionsWindow.ui" line="2861"/>
         <source>Allow only selected programs to start in this sandbox. *</source>
         <translation>इस सैंडबॉक्स में केवल चयनित प्रोग्रामों को प्रारंभ करने की अनुमति दें। *</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2888"/>
+        <location filename="Forms/OptionsWindow.ui" line="2868"/>
         <source>Prevent selected programs from starting in this sandbox.</source>
         <translation>चयनित प्रोग्राम को इस सैंडबॉक्स में प्रारंभ होने से रोकें।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2874"/>
+        <location filename="Forms/OptionsWindow.ui" line="2854"/>
         <source>Allow all programs to start in this sandbox.</source>
         <translation>सभी प्रोग्रामों को इस सैंडबॉक्स में प्रारंभ करने की अनुमति दें।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2864"/>
+        <location filename="Forms/OptionsWindow.ui" line="2844"/>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
         <translation>* नोट: इस सैंडबॉक्स में इंस्टॉल किए गए प्रोग्राम बिल्कुल भी प्रारंभ नहीं हो पाएंगे।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3642"/>
+        <location filename="Forms/OptionsWindow.ui" line="3622"/>
         <source>Process Restrictions</source>
         <translation>प्रक्रिया प्रतिबंध</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3662"/>
+        <location filename="Forms/OptionsWindow.ui" line="3642"/>
         <source>Issue message 1307 when a program is denied internet access</source>
         <translation>जब किसी प्रोग्राम को इंटरनेट एक्सेस से वंचित किया जाता है तो संदेश 1307 जारी करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3676"/>
+        <location filename="Forms/OptionsWindow.ui" line="3656"/>
         <source>Prompt user whether to allow an exemption from the blockade.</source>
         <translation>उपयोगकर्ता को संकेत दें कि नाकाबंदी से छूट की अनुमति दी जाए या नहीं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3690"/>
+        <location filename="Forms/OptionsWindow.ui" line="3670"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
         <translation>ध्यान दें: इस सैंडबॉक्स में इंस्टॉल किए गए प्रोग्राम बिल्कुल भी इंटरनेट तक नहीं पहुंच पाएंगे।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3021"/>
-        <location filename="Forms/OptionsWindow.ui" line="3121"/>
-        <location filename="Forms/OptionsWindow.ui" line="3254"/>
-        <location filename="Forms/OptionsWindow.ui" line="3374"/>
-        <location filename="Forms/OptionsWindow.ui" line="3448"/>
-        <location filename="Forms/OptionsWindow.ui" line="3719"/>
+        <location filename="Forms/OptionsWindow.ui" line="3001"/>
+        <location filename="Forms/OptionsWindow.ui" line="3101"/>
+        <location filename="Forms/OptionsWindow.ui" line="3234"/>
+        <location filename="Forms/OptionsWindow.ui" line="3354"/>
+        <location filename="Forms/OptionsWindow.ui" line="3428"/>
+        <location filename="Forms/OptionsWindow.ui" line="3699"/>
         <source>Access</source>
         <translation>पहुँच</translation>
     </message>
@@ -8779,13 +8801,13 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1209"/>
-        <location filename="Forms/OptionsWindow.ui" line="4045"/>
+        <location filename="Forms/OptionsWindow.ui" line="4025"/>
         <source>Move Up</source>
         <translation>बढ़ाना</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1228"/>
-        <location filename="Forms/OptionsWindow.ui" line="4056"/>
+        <location filename="Forms/OptionsWindow.ui" line="4036"/>
         <source>Move Down</source>
         <translation>नीचे की ओर</translation>
     </message>
@@ -8846,53 +8868,53 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>प्रक्रिया से इनकार करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2115"/>
+        <location filename="Forms/OptionsWindow.ui" line="2166"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>अनाम टोकन के बजाय सैंडबॉक्सी लॉगिन का उपयोग करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3394"/>
+        <location filename="Forms/OptionsWindow.ui" line="3374"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
         <translation>कॉन्फ़िगर करें कि कौन सी प्रक्रियाएँ विंडोज़ जैसे डेस्कटॉप ऑब्जेक्ट तक पहुँच सकती हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4574"/>
+        <location filename="Forms/OptionsWindow.ui" line="4554"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
         <translation>जब वैश्विक हॉटकी को लगातार तीन बार दबाया जाता है तो इस अपवाद को नजरअंदाज कर दिया जाएगा।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4577"/>
+        <location filename="Forms/OptionsWindow.ui" line="4557"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
         <translation>&quot;सभी प्रक्रियाओं को समाप्त करें&quot; लागू होने पर इस सैंडबॉक्स को समाप्त होने से बाहर रखें।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4665"/>
+        <location filename="Forms/OptionsWindow.ui" line="4645"/>
         <source>Image Protection</source>
         <translation>छवि संरक्षण</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4703"/>
+        <location filename="Forms/OptionsWindow.ui" line="4683"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
         <translation>जब कोई प्रोग्राम सैंडबॉक्स वाले डीएलएल को लोड करने का प्रयास करता है तो संदेश 1305 जारी करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4696"/>
+        <location filename="Forms/OptionsWindow.ui" line="4676"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
         <translation>होस्ट पर स्थापित सैंडबॉक्स प्रोग्राम को सैंडबॉक्स से DLL लोड करने से रोकें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4635"/>
+        <location filename="Forms/OptionsWindow.ui" line="4615"/>
         <source>Dlls &amp;&amp; Extensions</source>
         <translation>Dlls &amp;&amp; एक्सटेंशन</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4684"/>
+        <location filename="Forms/OptionsWindow.ui" line="4664"/>
         <source>Description</source>
         <translation>विवरण</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4692"/>
+        <location filename="Forms/OptionsWindow.ui" line="4672"/>
         <source>Sandboxie&apos;s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. &apos;ClosedFilePath=!iexplore.exe,C:Users*&apos; will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the &quot;Access policies&quot; page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
@@ -8901,7 +8923,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
 ऐसा सैंडबॉक्स के अंदर दुष्ट प्रक्रियाओं को स्वयं की नामांकित प्रतिलिपि बनाने और संरक्षित संसाधनों तक पहुंचने से रोकने के लिए किया जाता है। एक अन्य शोषण वेक्टर एक लाइब्रेरी को एक अधिकृत प्रक्रिया में शामिल करना है ताकि वह हर चीज तक पहुंच प्राप्त कर सके जिसकी उसे अनुमति है। होस्ट इमेज प्रोटेक्शन का उपयोग करके, सैंडबॉक्स के अंदर चल रहे एप्लिकेशन (होस्ट पर इंस्टॉल) को सैंडबॉक्स से लाइब्रेरी लोड करने से रोककर इसे रोका जा सकता है।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4716"/>
+        <location filename="Forms/OptionsWindow.ui" line="4696"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
         <translation>सैंडबॉक्सी की कार्यक्षमता को वैकल्पिक डीएलएल का उपयोग करके बढ़ाया जा सकता है जिसे SbieDll.dll फ़ाइल द्वारा प्रारंभ में प्रत्येक सैंडबॉक्स प्रक्रिया में लोड किया जा सकता है, वैश्विक सेटिंग्स में ऐड-ऑन प्रबंधक कुछ उपयोगी एक्सटेंशन प्रदान करता है, एक बार इंस्टॉल होने के बाद उन्हें वर्तमान बॉक्स के लिए यहां सक्षम किया जा सकता है।</translation>
@@ -8918,42 +8940,42 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation>अन्य अलगाव</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2095"/>
+        <location filename="Forms/OptionsWindow.ui" line="2101"/>
         <source>Privilege isolation</source>
         <translation>विशेषाधिकार अलगाव</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2076"/>
+        <location filename="Forms/OptionsWindow.ui" line="2173"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>कस्टम सैंडबॉक्सी टोकन का उपयोग करने से अलग-अलग सैंडबॉक्स को एक-दूसरे से बेहतर ढंग से अलग किया जा सकता है, और यह कार्य प्रबंधकों के उपयोगकर्ता कॉलम में उस बॉक्स का नाम दिखाता है जिससे प्रक्रिया संबंधित है। हालाँकि, कुछ तृतीय पक्ष सुरक्षा समाधानों में कस्टम टोकन के साथ समस्याएँ हो सकती हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2298"/>
+        <location filename="Forms/OptionsWindow.ui" line="2278"/>
         <source>Program Control</source>
         <translation>कार्यक्रम नियंत्रण</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2320"/>
+        <location filename="Forms/OptionsWindow.ui" line="2300"/>
         <source>Force Programs</source>
         <translation>बल कार्यक्रम</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2400"/>
+        <location filename="Forms/OptionsWindow.ui" line="2380"/>
         <source>Disable forced Process and Folder for this sandbox</source>
         <translation>इस सैंडबॉक्स के लिए बाध्य प्रक्रिया और फ़ोल्डर को अक्षम करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2461"/>
+        <location filename="Forms/OptionsWindow.ui" line="2441"/>
         <source>Breakout Programs</source>
         <translation>ब्रेकआउट कार्यक्रम</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2566"/>
+        <location filename="Forms/OptionsWindow.ui" line="2546"/>
         <source>Breakout Program</source>
         <translation>ब्रेकआउट कार्यक्रम</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2540"/>
+        <location filename="Forms/OptionsWindow.ui" line="2520"/>
         <source>Breakout Folder</source>
         <translation>ब्रेकआउट फ़ोल्डर</translation>
     </message>
@@ -9007,7 +9029,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation>कार्य वस्तु</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2518"/>
+        <location filename="Forms/OptionsWindow.ui" line="2498"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
         <translation>यहां दर्ज किए गए प्रोग्रामों को प्रारंभ होने पर इस सैंडबॉक्स से बाहर निकलने की अनुमति दी जाएगी। उन्हें किसी अन्य सैंडबॉक्स में कैप्चर करना भी संभव है, उदाहरण के लिए आपका वेब ब्राउज़र हमेशा एक समर्पित बॉक्स में खुला रहता है।</translation>
@@ -9114,230 +9136,230 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation>बाइट्स</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2172"/>
+        <location filename="Forms/OptionsWindow.ui" line="2183"/>
         <source>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
 Partially checked: No groups will be added to the newly created sandboxed token.</source>
         <translation>जाँच की गई: नव निर्मित सैंडबॉक्स टोकन में एक स्थानीय समूह भी जोड़ा जाएगा, जो एक ही बार में सभी सैंडबॉक्स को संबोधित करने की अनुमति देता है। ऑडिटिंग नीतियों के लिए उपयोगी होगा।
 आंशिक रूप से जाँच की गई: नव निर्मित सैंडबॉक्स्ड टोकन में कोई समूह नहीं जोड़ा जाएगा।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2176"/>
+        <location filename="Forms/OptionsWindow.ui" line="2187"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
         <translation>मूल टोकन को हटाने के बजाय एक नया सैंडबॉक्स वाला टोकन बनाएं</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2186"/>
+        <location filename="Forms/OptionsWindow.ui" line="2078"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
         <translation>ConHost.exe प्रक्रिया अखंडता स्तर को गिराएं</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2206"/>
+        <location filename="Forms/OptionsWindow.ui" line="2128"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
         <translation>डिफ़ॉल्ट रूप से, सैंडबॉक्सी अधिकतम अलगाव के लिए एक अविश्वसनीय अखंडता टोकन के साथ प्रक्रियाएं चलाता है।
 इस विकल्प को सक्षम करने से इसके बजाय कम अखंडता टोकन का उपयोग होता है, जो संगतता में सुधार कर सकता है लेकिन सैंडबॉक्स अलगाव और सुरक्षा को कम कर देता है।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2210"/>
+        <location filename="Forms/OptionsWindow.ui" line="2132"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
         <translation>अविश्वसनीय के बजाय कम अखंडता टोकन का उपयोग करें (अलगाव कम करता है)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2451"/>
+        <location filename="Forms/OptionsWindow.ui" line="2431"/>
         <source>Force Children</source>
         <translation>बच्चों को मजबूर करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2585"/>
+        <location filename="Forms/OptionsWindow.ui" line="2565"/>
         <source>Breakout Document</source>
         <translation>ब्रेकआउट दस्तावेज़</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2592"/>
+        <location filename="Forms/OptionsWindow.ui" line="2572"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc...) extensions. Please review the security section for each option in the documentation before use.</source>
         <oldsource>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</oldsource>
         <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;सुरक्षा सलाहकार&lt;/font&gt;:&lt;/b&gt; ओपन[फ़ाइल/पाइप]पथ निर्देशों के संयोजन में &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; और/या &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; का उपयोग करने से समझौता हो सकता है सुरक्षा, जैसा कि &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; का उपयोग किसी भी * या असुरक्षित (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc...) एक्सटेंशन की अनुमति दे सकता है। कृपया उपयोग से पहले दस्तावेज़ में प्रत्येक विकल्प के लिए सुरक्षा अनुभाग की समीक्षा करें।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2622"/>
+        <location filename="Forms/OptionsWindow.ui" line="2602"/>
         <source>Lingering Programs</source>
         <translation>लंबे समय तक चलने वाले कार्यक्रम</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2668"/>
+        <location filename="Forms/OptionsWindow.ui" line="2648"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.</source>
         <translation>यदि अन्य सभी प्रक्रियाएं समाप्त होने के बाद भी वे चल रहे हैं तो लंबे समय तक चलने वाले कार्यक्रम स्वचालित रूप से समाप्त हो जाएंगे।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2701"/>
+        <location filename="Forms/OptionsWindow.ui" line="2681"/>
         <source>Leader Programs</source>
         <translation>नेता कार्यक्रम</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2767"/>
+        <location filename="Forms/OptionsWindow.ui" line="2747"/>
         <source>If leader processes are defined, all others are treated as lingering processes.</source>
         <translation>यदि नेतृत्व प्रक्रियाओं को परिभाषित किया जाता है, तो अन्य सभी को दीर्घकालिक प्रक्रियाओं के रूप में माना जाता है।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2780"/>
+        <location filename="Forms/OptionsWindow.ui" line="2760"/>
         <source>Stop Options</source>
         <translation>विकल्प रोकें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2801"/>
+        <location filename="Forms/OptionsWindow.ui" line="2781"/>
         <source>Use Linger Leniency</source>
         <translation>लंबे समय तक उदारता का प्रयोग करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2811"/>
+        <location filename="Forms/OptionsWindow.ui" line="2791"/>
         <source>Don&apos;t stop lingering processes with windows</source>
         <translation>विंडोज़ के साथ लंबित प्रक्रियाओं को न रोकें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2938"/>
+        <location filename="Forms/OptionsWindow.ui" line="2918"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
         <translation>इस सेटिंग का उपयोग उपयोगकर्ता की जानकारी या सहमति के बिना प्रोग्राम को सैंडबॉक्स में चलने से रोकने के लिए किया जा सकता है।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2941"/>
+        <location filename="Forms/OptionsWindow.ui" line="2921"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
         <translation>किसी बाहरी स्रोत से सैंडबॉक्स में प्रक्रिया शुरू करने से पहले एक पॉप-अप चेतावनी प्रदर्शित करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2973"/>
+        <location filename="Forms/OptionsWindow.ui" line="2953"/>
         <source>Files</source>
         <translation>फ़ाइलें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3066"/>
+        <location filename="Forms/OptionsWindow.ui" line="3046"/>
         <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>कॉन्फ़िगर करें कि कौन सी प्रक्रियाएँ फ़ाइलें, फ़ोल्डर और पाइप तक पहुँच सकती हैं। 
 &apos;ओपन&apos; एक्सेस केवल सैंडबॉक्स के बाहर स्थित प्रोग्राम बायनेरिज़ पर लागू होता है, आप इसे सभी प्रोग्रामों पर लागू करने के लिए &apos;ओपन फॉर ऑल&apos; का उपयोग कर सकते हैं, या नीतियाँ टैब में इस व्यवहार को बदल सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3080"/>
+        <location filename="Forms/OptionsWindow.ui" line="3060"/>
         <source>Registry</source>
         <translation>रजिस्ट्री</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3173"/>
+        <location filename="Forms/OptionsWindow.ui" line="3153"/>
         <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>कॉन्फ़िगर करें कि कौन सी प्रक्रियाएँ रजिस्ट्री तक पहुँच सकती हैं। 
 &apos;ओपन&apos; एक्सेस केवल सैंडबॉक्स के बाहर स्थित प्रोग्राम बायनेरिज़ पर लागू होता है, आप इसे सभी प्रोग्रामों पर लागू करने के लिए &apos;ओपन फॉर ऑल&apos; का उपयोग कर सकते हैं, या नीतियाँ टैब में इस व्यवहार को बदल सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3187"/>
+        <location filename="Forms/OptionsWindow.ui" line="3167"/>
         <source>IPC</source>
         <translation>भारतीय दंड संहिता</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3280"/>
+        <location filename="Forms/OptionsWindow.ui" line="3260"/>
         <source>Configure which processes can access NT IPC objects like ALPC ports and other processes memory and context.
 To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>कॉन्फ़िगर करें कि कौन सी प्रक्रियाएं एनटी आईपीसी ऑब्जेक्ट्स जैसे एएलपीसी पोर्ट और अन्य प्रक्रियाओं की मेमोरी और संदर्भ तक पहुंच सकती हैं।
 किसी प्रक्रिया को निर्दिष्ट करने के लिए पथ के रूप में &apos;$:program.exe&apos; का उपयोग करें।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3294"/>
+        <location filename="Forms/OptionsWindow.ui" line="3274"/>
         <source>Wnd</source>
         <translation>Wnd</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3379"/>
+        <location filename="Forms/OptionsWindow.ui" line="3359"/>
         <source>Wnd Class</source>
         <translation>Wnd क्लास</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3407"/>
+        <location filename="Forms/OptionsWindow.ui" line="3387"/>
         <source>COM</source>
         <translation>कॉम</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3453"/>
+        <location filename="Forms/OptionsWindow.ui" line="3433"/>
         <source>Class Id</source>
         <translation>कक्षा आईडी</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3500"/>
+        <location filename="Forms/OptionsWindow.ui" line="3480"/>
         <source>Configure which processes can access COM objects.</source>
         <translation>कॉन्फ़िगर करें कि कौन सी प्रक्रियाएँ COM ऑब्जेक्ट तक पहुंच सकती हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3512"/>
+        <location filename="Forms/OptionsWindow.ui" line="3492"/>
         <source>Don&apos;t use virtualized COM, Open access to hosts COM infrastructure (not recommended)</source>
         <translation>वर्चुअलाइज्ड COM का उपयोग न करें, होस्ट COM इंफ्रास्ट्रक्चर तक पहुंच खोलें (अनुशंसित नहीं)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3520"/>
+        <location filename="Forms/OptionsWindow.ui" line="3500"/>
         <source>Access Policies</source>
         <translation>पहुंच नीतियां</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3632"/>
+        <location filename="Forms/OptionsWindow.ui" line="3612"/>
         <source>Network Options</source>
         <translation>नेटवर्क विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3729"/>
+        <location filename="Forms/OptionsWindow.ui" line="3709"/>
         <source>Set network/internet access for unlisted processes:</source>
         <translation>असूचीबद्ध प्रक्रियाओं के लिए नेटवर्क/इंटरनेट एक्सेस सेट करें:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3779"/>
+        <location filename="Forms/OptionsWindow.ui" line="3759"/>
         <source>Test Rules, Program:</source>
         <translation>परीक्षण नियम, कार्यक्रम:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3792"/>
+        <location filename="Forms/OptionsWindow.ui" line="3772"/>
         <source>Port:</source>
         <translation>पत्तन:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3805"/>
+        <location filename="Forms/OptionsWindow.ui" line="3785"/>
         <source>IP:</source>
         <translation>आईपी:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3818"/>
+        <location filename="Forms/OptionsWindow.ui" line="3798"/>
         <source>Protocol:</source>
         <translation>शिष्टाचार:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3831"/>
+        <location filename="Forms/OptionsWindow.ui" line="3811"/>
         <source>X</source>
         <translation>एक्स</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3847"/>
+        <location filename="Forms/OptionsWindow.ui" line="3827"/>
         <source>Add Rule</source>
         <translation>नियम जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4483"/>
+        <location filename="Forms/OptionsWindow.ui" line="4463"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4486"/>
+        <location filename="Forms/OptionsWindow.ui" line="4466"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4547"/>
+        <location filename="Forms/OptionsWindow.ui" line="4527"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
         <translation>पीसीए (प्रोग्राम कम्पैटिबिलिटी असिस्टेंट) जॉब ऑब्जेक्ट के भीतर लॉन्च की गई मजबूर प्रक्रियाओं को पुनरारंभ करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4625"/>
+        <location filename="Forms/OptionsWindow.ui" line="4605"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6222"/>
+        <location filename="Forms/OptionsWindow.ui" line="6202"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
@@ -9388,7 +9410,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6290"/>
+        <location filename="Forms/OptionsWindow.ui" line="6270"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -9454,27 +9476,27 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6313"/>
+        <location filename="Forms/OptionsWindow.ui" line="6293"/>
         <source>Complete</source>
         <translation>पूरा</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6366"/>
+        <location filename="Forms/OptionsWindow.ui" line="6346"/>
         <source>Editor settings</source>
         <translation>संपादक सेटिंग</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6369"/>
+        <location filename="Forms/OptionsWindow.ui" line="6349"/>
         <source>⚙</source>
         <translation>⚙</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6240"/>
+        <location filename="Forms/OptionsWindow.ui" line="6220"/>
         <source>Tooltips</source>
         <translation>टूलटिप्स</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6323"/>
+        <location filename="Forms/OptionsWindow.ui" line="6303"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
@@ -9520,72 +9542,72 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6340"/>
+        <location filename="Forms/OptionsWindow.ui" line="6320"/>
         <source>Validate</source>
         <translation>मान्य</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="793"/>
-        <location filename="Forms/OptionsWindow.ui" line="3016"/>
-        <location filename="Forms/OptionsWindow.ui" line="3116"/>
-        <location filename="Forms/OptionsWindow.ui" line="3249"/>
-        <location filename="Forms/OptionsWindow.ui" line="3369"/>
-        <location filename="Forms/OptionsWindow.ui" line="3443"/>
-        <location filename="Forms/OptionsWindow.ui" line="3858"/>
-        <location filename="Forms/OptionsWindow.ui" line="3963"/>
-        <location filename="Forms/OptionsWindow.ui" line="4092"/>
-        <location filename="Forms/OptionsWindow.ui" line="4837"/>
+        <location filename="Forms/OptionsWindow.ui" line="2996"/>
+        <location filename="Forms/OptionsWindow.ui" line="3096"/>
+        <location filename="Forms/OptionsWindow.ui" line="3229"/>
+        <location filename="Forms/OptionsWindow.ui" line="3349"/>
+        <location filename="Forms/OptionsWindow.ui" line="3423"/>
+        <location filename="Forms/OptionsWindow.ui" line="3838"/>
+        <location filename="Forms/OptionsWindow.ui" line="3943"/>
+        <location filename="Forms/OptionsWindow.ui" line="4072"/>
+        <location filename="Forms/OptionsWindow.ui" line="4817"/>
         <source>Program</source>
         <translation>कार्यक्रम</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="788"/>
         <location filename="Forms/OptionsWindow.ui" line="1724"/>
-        <location filename="Forms/OptionsWindow.ui" line="3863"/>
-        <location filename="Forms/OptionsWindow.ui" line="4990"/>
+        <location filename="Forms/OptionsWindow.ui" line="3843"/>
+        <location filename="Forms/OptionsWindow.ui" line="4970"/>
         <source>Action</source>
         <translation>कार्रवाई</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3868"/>
-        <location filename="Forms/OptionsWindow.ui" line="4102"/>
+        <location filename="Forms/OptionsWindow.ui" line="3848"/>
+        <location filename="Forms/OptionsWindow.ui" line="4082"/>
         <source>Port</source>
         <translation>पत्तन</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3873"/>
-        <location filename="Forms/OptionsWindow.ui" line="3973"/>
-        <location filename="Forms/OptionsWindow.ui" line="4097"/>
+        <location filename="Forms/OptionsWindow.ui" line="3853"/>
+        <location filename="Forms/OptionsWindow.ui" line="3953"/>
+        <location filename="Forms/OptionsWindow.ui" line="4077"/>
         <source>IP</source>
         <translation>आई पी</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3878"/>
+        <location filename="Forms/OptionsWindow.ui" line="3858"/>
         <source>Protocol</source>
         <translation>शिष्टाचार</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3899"/>
+        <location filename="Forms/OptionsWindow.ui" line="3879"/>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
         <translation>सावधानी: विंडोज फ़िल्टरिंग प्लेटफ़ॉर्म ड्राइवर के साथ सक्षम नहीं है, इसलिए ये नियम केवल उपयोगकर्ता मोड में लागू होंगे और इन्हें लागू नहीं किया जा सकता है!!! इसका मतलब यह है कि दुर्भावनापूर्ण एप्लिकेशन उन्हें बायपास कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2963"/>
+        <location filename="Forms/OptionsWindow.ui" line="2943"/>
         <source>Resource Access</source>
         <translation>संसाधन पहुंच</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3046"/>
+        <location filename="Forms/OptionsWindow.ui" line="3026"/>
         <source>Add File/Folder</source>
         <translation>फ़ाइल/फ़ोल्डर जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3340"/>
+        <location filename="Forms/OptionsWindow.ui" line="3320"/>
         <source>Add Wnd Class</source>
         <translation>Wnd क्लास जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3219"/>
+        <location filename="Forms/OptionsWindow.ui" line="3199"/>
         <source>Add IPC Path</source>
         <translation>आईपीसी पथ जोड़ें</translation>
     </message>
@@ -9630,167 +9652,167 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>सैंडबॉक्स वाली प्रक्रियाओं को विंडो छवियों को कैप्चर करने से रोकें (प्रायोगिक, यूआई गड़बड़ियों का कारण हो सकता है)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2151"/>
+        <location filename="Forms/OptionsWindow.ui" line="2071"/>
         <source>Sandboxie token</source>
         <translation>सैंडबॉक्सी टोकन</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3153"/>
+        <location filename="Forms/OptionsWindow.ui" line="3133"/>
         <source>Add Reg Key</source>
         <translation>रेग कुंजी जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3480"/>
+        <location filename="Forms/OptionsWindow.ui" line="3460"/>
         <source>Add COM Object</source>
         <translation>COM ऑब्जेक्ट जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3533"/>
+        <location filename="Forms/OptionsWindow.ui" line="3513"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
         <translation>सैंडबॉक्स में स्थित सभी बायनेरिज़ पर भी बंद करें...=!&lt;program&gt;,... नियम लागू करें।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3912"/>
+        <location filename="Forms/OptionsWindow.ui" line="3892"/>
         <source>DNS Filter</source>
         <translation>डीएनएस फ़िल्टर</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3952"/>
+        <location filename="Forms/OptionsWindow.ui" line="3932"/>
         <source>Add Filter</source>
         <translation>फ़िल्टर जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3929"/>
+        <location filename="Forms/OptionsWindow.ui" line="3909"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
         <translation>DNS फ़िल्टर के साथ प्रत्येक प्रक्रिया के आधार पर अलग-अलग डोमेन को ब्लॉक किया जा सकता है। किसी आईपी को ब्लॉक करने या रीडायरेक्ट करने के लिए दर्ज करने के लिए आईपी कॉलम को खाली छोड़ दें।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3968"/>
+        <location filename="Forms/OptionsWindow.ui" line="3948"/>
         <source>Domain</source>
         <translation>कार्यक्षेत्र</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3991"/>
+        <location filename="Forms/OptionsWindow.ui" line="3971"/>
         <source>Internet Proxy</source>
         <translation>इंटरनेट प्रॉक्सी</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4081"/>
+        <location filename="Forms/OptionsWindow.ui" line="4061"/>
         <source>Add Proxy</source>
         <translation>प्रॉक्सी जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4074"/>
+        <location filename="Forms/OptionsWindow.ui" line="4054"/>
         <source>Test Proxy</source>
         <translation>प्रॉक्सी का परीक्षण करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4107"/>
+        <location filename="Forms/OptionsWindow.ui" line="4087"/>
         <source>Auth</source>
         <translation>प्रमाणीकरण</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4112"/>
+        <location filename="Forms/OptionsWindow.ui" line="4092"/>
         <source>Login</source>
         <translation>लॉग इन करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4117"/>
+        <location filename="Forms/OptionsWindow.ui" line="4097"/>
         <source>Password</source>
         <translation>पासवर्ड</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4015"/>
+        <location filename="Forms/OptionsWindow.ui" line="3995"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
         <translation>सैंडबॉक्स्ड प्रोग्राम को प्रीसेट SOCKS5 प्रॉक्सी का उपयोग करने के लिए बाध्य किया जा सकता है।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4067"/>
+        <location filename="Forms/OptionsWindow.ui" line="4047"/>
         <source>Resolve hostnames via proxy</source>
         <translation>प्रॉक्सी के माध्यम से होस्टनाम हल करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4153"/>
+        <location filename="Forms/OptionsWindow.ui" line="4133"/>
         <source>Other Options</source>
         <translation>अन्य विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4280"/>
+        <location filename="Forms/OptionsWindow.ui" line="4260"/>
         <source>Port Blocking</source>
         <translation>पोर्ट अवरोधन</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4257"/>
+        <location filename="Forms/OptionsWindow.ui" line="4237"/>
         <source>Block common SAMBA ports</source>
         <translation>सामान्य SAMBA पोर्ट को ब्लॉक करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4204"/>
+        <location filename="Forms/OptionsWindow.ui" line="4184"/>
         <source>Block DNS, UDP port 53</source>
         <translation>डीएनएस, यूडीपी पोर्ट 53 को ब्लॉक करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4304"/>
+        <location filename="Forms/OptionsWindow.ui" line="4284"/>
         <source>File Recovery</source>
         <translation>फ़ाइल पुनर्प्राप्ति</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4314"/>
+        <location filename="Forms/OptionsWindow.ui" line="4294"/>
         <source>Quick Recovery</source>
         <translation>जल्दी ठीक होना</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4383"/>
+        <location filename="Forms/OptionsWindow.ui" line="4363"/>
         <source>Add Folder</source>
         <translation>फ़ोल्डर जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4393"/>
+        <location filename="Forms/OptionsWindow.ui" line="4373"/>
         <source>Immediate Recovery</source>
         <translation>तत्काल पुनर्प्राप्ति</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4423"/>
+        <location filename="Forms/OptionsWindow.ui" line="4403"/>
         <source>Ignore Extension</source>
         <translation>एक्सटेंशन पर ध्यान न दें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4469"/>
+        <location filename="Forms/OptionsWindow.ui" line="4449"/>
         <source>Ignore Folder</source>
         <translation>फ़ोल्डर पर ध्यान न दें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4430"/>
+        <location filename="Forms/OptionsWindow.ui" line="4410"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>फ़ाइलों के बनते ही उन्हें पुनर्प्राप्त करने में सक्षम होने के लिए तत्काल पुनर्प्राप्ति संकेत सक्षम करें।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4413"/>
+        <location filename="Forms/OptionsWindow.ui" line="4393"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
         <translation>आप तत्काल पुनर्प्राप्ति से फ़ोल्डर और फ़ाइल प्रकार (या फ़ाइल एक्सटेंशन) को बाहर कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4346"/>
+        <location filename="Forms/OptionsWindow.ui" line="4326"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
         <translation>जब त्वरित पुनर्प्राप्ति फ़ंक्शन लागू किया जाता है, तो सैंडबॉक्स वाली सामग्री के लिए निम्नलिखित फ़ोल्डरों की जाँच की जाएगी। </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4759"/>
+        <location filename="Forms/OptionsWindow.ui" line="4739"/>
         <source>Advanced Options</source>
         <translation>उन्नत विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4775"/>
+        <location filename="Forms/OptionsWindow.ui" line="4755"/>
         <source>Miscellaneous</source>
         <translation>मिश्रित</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3387"/>
+        <location filename="Forms/OptionsWindow.ui" line="3367"/>
         <source>Don&apos;t alter window class names created by sandboxed programs</source>
         <translation>सैंडबॉक्स्ड प्रोग्राम द्वारा बनाए गए विंडो क्लास नामों में बदलाव न करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2122"/>
+        <location filename="Forms/OptionsWindow.ui" line="2108"/>
         <source>Do not start sandboxed services using a system token (recommended)</source>
         <translation>सिस्टम टोकन का उपयोग करके सैंडबॉक्स वाली सेवाएँ प्रारंभ न करें (अनुशंसित)</translation>
     </message>
@@ -9800,83 +9822,81 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <location filename="Forms/OptionsWindow.ui" line="1588"/>
         <location filename="Forms/OptionsWindow.ui" line="1660"/>
         <location filename="Forms/OptionsWindow.ui" line="1952"/>
-        <location filename="Forms/OptionsWindow.ui" line="2092"/>
-        <location filename="Forms/OptionsWindow.ui" line="2148"/>
-        <location filename="Forms/OptionsWindow.ui" line="4662"/>
+        <location filename="Forms/OptionsWindow.ui" line="2068"/>
+        <location filename="Forms/OptionsWindow.ui" line="2098"/>
+        <location filename="Forms/OptionsWindow.ui" line="4642"/>
         <source>Protect the sandbox integrity itself</source>
         <translation>सैंडबॉक्स की अखंडता को सुरक्षित रखें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2158"/>
+        <location filename="Forms/OptionsWindow.ui" line="2085"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
         <translation>सिस्टम टोकन के साथ चल रही प्रक्रियाओं से महत्वपूर्ण विशेषाधिकार हटा दें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2135"/>
-        <location filename="Forms/OptionsWindow.ui" line="2199"/>
+        <location filename="Forms/OptionsWindow.ui" line="2055"/>
         <source>(Security Critical)</source>
         <translation>(सुरक्षा महत्वपूर्ण)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2165"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation>सैंडबॉक्स्ड सिस्टम प्रक्रियाओं को विशेषाधिकार रहित प्रक्रियाओं से सुरक्षित रखें</translation>
+        <translation type="vanished">सैंडबॉक्स्ड सिस्टम प्रक्रियाओं को विशेषाधिकार रहित प्रक्रियाओं से सुरक्षित रखें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4540"/>
+        <location filename="Forms/OptionsWindow.ui" line="4520"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
         <translation>कस्टम डमी मेनिफेस्ट फ़ाइलों का बलपूर्वक उपयोग (विरासत व्यवहार)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3616"/>
+        <location filename="Forms/OptionsWindow.ui" line="3596"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
         <translation>नियम विशिष्टता एक माप है कि कोई दिया गया नियम किसी विशेष पथ से कितनी अच्छी तरह मेल खाता है, सीधे शब्दों में कहें तो विशिष्टता पथ की शुरुआत से लेकर अंतिम मिलान वाले गैर-वाइल्डकार्ड सबस्ट्रिंग तक वर्णों की लंबाई है। एक नियम जो केवल &quot;*.tmp&quot; जैसी फ़ाइल प्रकारों से मेल खाता है, उसकी विशिष्टता उच्चतम होगी क्योंकि यह हमेशा संपूर्ण फ़ाइल पथ से मेल खाएगा।
 प्रक्रिया मिलान स्तर की विशिष्टता की तुलना में उच्च प्राथमिकता होती है और यह बताता है कि किसी दिए गए प्रक्रिया पर नियम कैसे लागू होता है। प्रक्रिया के नाम या समूह द्वारा लागू होने वाले नियमों में सबसे मजबूत मिलान स्तर होता है, उसके बाद निषेध द्वारा मिलान होता है (यानी दी गई प्रक्रिया को छोड़कर सभी प्रक्रियाओं पर लागू होने वाले नियम), जबकि सबसे कम मिलान स्तर में वैश्विक मिलान होते हैं, यानी नियम जो किसी भी प्रक्रिया पर लागू होते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3550"/>
+        <location filename="Forms/OptionsWindow.ui" line="3530"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
         <translation>नियमों को उनकी विशिष्टता और प्रक्रिया मिलान स्तर के आधार पर प्राथमिकता दें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3596"/>
+        <location filename="Forms/OptionsWindow.ui" line="3576"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
         <translation>गोपनीयता मोड, सामान्य सिस्टम को छोड़कर सभी स्थानों पर फ़ाइल और रजिस्ट्री पहुंच को ब्लॉक करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3576"/>
+        <location filename="Forms/OptionsWindow.ui" line="3556"/>
         <source>Access Mode</source>
         <translation>एक्सेस मोड</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3540"/>
+        <location filename="Forms/OptionsWindow.ui" line="3520"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
         <translation>जब गोपनीयता मोड सक्षम होता है, तो सैंडबॉक्स वाली प्रक्रियाएं केवल C:\Windows\*, C:\Program Files\*, और HKLM रजिस्ट्री के कुछ हिस्सों को पढ़ सकेंगी, अन्य सभी स्थानों को पढ़ने योग्य और/या लिखने योग्य होने के लिए स्पष्ट पहुंच की आवश्यकता होगी। इस मोड में, नियम विशिष्टता हमेशा सक्षम होती है।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3609"/>
+        <location filename="Forms/OptionsWindow.ui" line="3589"/>
         <source>Rule Policies</source>
         <translation>नियम नीतियां</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3526"/>
+        <location filename="Forms/OptionsWindow.ui" line="3506"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
         <translation>फ़ाइल और कुंजी ओपन निर्देश केवल सैंडबॉक्स के बाहर स्थित बायनेरिज़ पर लागू करें।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2049"/>
+        <location filename="Forms/OptionsWindow.ui" line="2152"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
         <translation>सैंडबॉक्स्ड RpcSs को एक सिस्टम प्रक्रिया के रूप में प्रारंभ करें (अनुशंसित नहीं)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2069"/>
+        <location filename="Forms/OptionsWindow.ui" line="2159"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
         <translation>केवल विशेषाधिकार प्राप्त प्रक्रियाओं को सेवा नियंत्रण प्रबंधक तक पहुँचने की अनुमति दें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4519"/>
-        <location filename="Forms/OptionsWindow.ui" line="4533"/>
+        <location filename="Forms/OptionsWindow.ui" line="4499"/>
+        <location filename="Forms/OptionsWindow.ui" line="4513"/>
         <source>Compatibility</source>
         <translation>अनुकूलता</translation>
     </message>
@@ -9886,7 +9906,7 @@ The process match level has a higher priority than the specificity and describes
         <translation>जॉब ऑब्जेक्ट में सैंडबॉक्स वाली प्रक्रियाएँ जोड़ें (अनुशंसित)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4554"/>
+        <location filename="Forms/OptionsWindow.ui" line="4534"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>सभी प्रक्रियाओं के लिए सैंडबॉक्स्ड विंडो स्टेशन का अनुकरण करें</translation>
     </message>
@@ -9917,7 +9937,7 @@ The process match level has a higher priority than the specificity and describes
         <translation>सैंडबॉक्स न की गई प्रक्रियाओं की मेमोरी को पढ़ने की अनुमति दें (अनुशंसित नहीं)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4618"/>
+        <location filename="Forms/OptionsWindow.ui" line="4598"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation>डिफ़ॉल्ट रूप से RpcMgmtSetComTimeout का उपयोग अक्षम करें (इससे संगतता समस्याएं हल हो सकती हैं)</translation>
     </message>
@@ -9942,41 +9962,41 @@ The process match level has a higher priority than the specificity and describes
         <translation>जब आप व्यवस्थापक अधिकार नहीं देते हैं तो नीचे दिए गए विकल्पों का सुरक्षित रूप से उपयोग किया जा सकता है।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4873"/>
+        <location filename="Forms/OptionsWindow.ui" line="4853"/>
         <source>Triggers</source>
         <translation>चलाता है</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4985"/>
+        <location filename="Forms/OptionsWindow.ui" line="4965"/>
         <source>Event</source>
         <translation>आयोजन</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4935"/>
-        <location filename="Forms/OptionsWindow.ui" line="5076"/>
-        <location filename="Forms/OptionsWindow.ui" line="5121"/>
-        <location filename="Forms/OptionsWindow.ui" line="5140"/>
+        <location filename="Forms/OptionsWindow.ui" line="4915"/>
+        <location filename="Forms/OptionsWindow.ui" line="5056"/>
+        <location filename="Forms/OptionsWindow.ui" line="5101"/>
+        <location filename="Forms/OptionsWindow.ui" line="5120"/>
         <source>Run Command</source>
         <translation>आदेश चलाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5102"/>
+        <location filename="Forms/OptionsWindow.ui" line="5082"/>
         <source>Start Service</source>
         <translation>सेवा प्रारंभ करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5048"/>
+        <location filename="Forms/OptionsWindow.ui" line="5028"/>
         <source>These events are executed each time a box is started</source>
         <translation>ये ईवेंट हर बार किसी बॉक्स के प्रारंभ होने पर निष्पादित होते हैं</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5051"/>
+        <location filename="Forms/OptionsWindow.ui" line="5031"/>
         <source>On Box Start</source>
         <translation>बॉक्स प्रारंभ पर</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4910"/>
-        <location filename="Forms/OptionsWindow.ui" line="4968"/>
+        <location filename="Forms/OptionsWindow.ui" line="4890"/>
+        <location filename="Forms/OptionsWindow.ui" line="4948"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
         <translation>बॉक्स सामग्री को हटाए जाने से ठीक पहले ये कमांड अनबॉक्स किए गए चलाए जाते हैं</translation>
     </message>
@@ -9986,27 +10006,27 @@ The process match level has a higher priority than the specificity and describes
         <translation>नेस्टेड जॉब ऑब्जेक्ट के उपयोग की अनुमति दें (विंडोज 8 और बाद के संस्करण पर काम करता है)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4942"/>
+        <location filename="Forms/OptionsWindow.ui" line="4922"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
         <translation>ये कमांड केवल तभी निष्पादित होते हैं जब एक बॉक्स इनिशियलाइज़ किया जाता है। उन्हें फिर से चलाने के लिए, बॉक्स सामग्री को हटाना होगा।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4945"/>
+        <location filename="Forms/OptionsWindow.ui" line="4925"/>
         <source>On Box Init</source>
         <translation>बॉक्स इनिट पर</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5016"/>
+        <location filename="Forms/OptionsWindow.ui" line="4996"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation>यहां आप विभिन्न बॉक्स इवेंट पर स्वचालित रूप से निष्पादित होने वाली कार्रवाइयों को निर्दिष्ट कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5251"/>
+        <location filename="Forms/OptionsWindow.ui" line="5231"/>
         <source>Add Process</source>
         <translation>प्रक्रिया जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5214"/>
+        <location filename="Forms/OptionsWindow.ui" line="5194"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>होस्ट प्रक्रियाओं को सैंडबॉक्स में चल रही प्रक्रियाओं से छिपाएँ।</translation>
     </message>
@@ -10016,48 +10036,48 @@ The process match level has a higher priority than the specificity and describes
         <translation>प्रतिबंध</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4503"/>
+        <location filename="Forms/OptionsWindow.ui" line="4483"/>
         <source>Various Options</source>
         <translation>विभिन्न विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4598"/>
+        <location filename="Forms/OptionsWindow.ui" line="4578"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
         <translation>ElevateCreateProcess वर्कअराउंड लागू करें (विरासत व्यवहार)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4591"/>
+        <location filename="Forms/OptionsWindow.ui" line="4571"/>
         <source>Use desktop object workaround for all processes</source>
         <translation>सभी प्रक्रियाओं के लिए डेस्कटॉप ऑब्जेक्ट वर्कअराउंड का उपयोग करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5073"/>
+        <location filename="Forms/OptionsWindow.ui" line="5053"/>
         <source>This command will be run before the box content will be deleted</source>
         <translation>यह कमांड बॉक्स कंटेंट डिलीट होने से पहले चलाया जाएगा</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4913"/>
+        <location filename="Forms/OptionsWindow.ui" line="4893"/>
         <source>On File Recovery</source>
         <translation>फ़ाइल पुनर्प्राप्ति पर</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5038"/>
+        <location filename="Forms/OptionsWindow.ui" line="5018"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
         <translation>यह कमांड किसी फ़ाइल को पुनर्प्राप्त करने से पहले चलाया जाएगा और फ़ाइल पथ को पहले तर्क के रूप में पारित किया जाएगा। यदि यह आदेश 0 के अलावा कुछ भी लौटाता है, तो पुनर्प्राप्ति अवरुद्ध कर दी जाएगी</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5041"/>
+        <location filename="Forms/OptionsWindow.ui" line="5021"/>
         <source>Run File Checker</source>
         <translation>फ़ाइल चेकर चलाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4971"/>
+        <location filename="Forms/OptionsWindow.ui" line="4951"/>
         <source>On Delete Content</source>
         <translation>सामग्री हटाएँ पर</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5237"/>
+        <location filename="Forms/OptionsWindow.ui" line="5217"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>सैंडबॉक्स वाली प्रक्रियाओं को अन्य बॉक्स में चल रही प्रक्रियाओं को देखने की अनुमति न दें</translation>
     </message>
@@ -10068,27 +10088,27 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1719"/>
-        <location filename="Forms/OptionsWindow.ui" line="5181"/>
+        <location filename="Forms/OptionsWindow.ui" line="5161"/>
         <source>Process</source>
         <translation>प्रक्रिया</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5391"/>
+        <location filename="Forms/OptionsWindow.ui" line="5371"/>
         <source>Users</source>
         <translation>उपयोगकर्ताओं</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5409"/>
+        <location filename="Forms/OptionsWindow.ui" line="5389"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>रिसोर्स एक्सेस मॉनिटर को केवल प्रशासकों तक सीमित रखें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5416"/>
+        <location filename="Forms/OptionsWindow.ui" line="5396"/>
         <source>Add User</source>
         <translation>उपयोगकर्ता जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5446"/>
+        <location filename="Forms/OptionsWindow.ui" line="5426"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
@@ -10097,107 +10117,107 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 नोट: सैंडबॉक्स के लिए फोर्स्ड प्रोग्राम और फोर्स फोल्डर्स सेटिंग्स उन उपयोगकर्ता खातों पर लागू नहीं होती हैं जो सैंडबॉक्स का उपयोग नहीं कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4807"/>
+        <location filename="Forms/OptionsWindow.ui" line="4787"/>
         <source>Add Option</source>
         <translation>विकल्प जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4122"/>
+        <location filename="Forms/OptionsWindow.ui" line="4102"/>
         <source>Bypass IPs</source>
         <translation>बाईपास आईपी</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4821"/>
+        <location filename="Forms/OptionsWindow.ui" line="4801"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
         <translation>यहां आप अनुकूलता में सुधार और/या सैंडबॉक्सिंग व्यवहार को अनुकूलित करने के लिए प्रति प्रक्रिया उन्नत विकल्पों को कॉन्फ़िगर कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4832"/>
+        <location filename="Forms/OptionsWindow.ui" line="4812"/>
         <source>Option</source>
         <translation>विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5003"/>
+        <location filename="Forms/OptionsWindow.ui" line="4983"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
         <translation>सैंडबॉक्स में सभी प्रक्रियाएँ समाप्त होने के बाद ये कमांड UNBOXED चलाये जाते हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5275"/>
+        <location filename="Forms/OptionsWindow.ui" line="5255"/>
         <source>Privacy</source>
         <translation>गोपनीयता</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5284"/>
+        <location filename="Forms/OptionsWindow.ui" line="5264"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
         <translation>फ़र्मवेयर जानकारी छिपाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5161"/>
+        <location filename="Forms/OptionsWindow.ui" line="5141"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
         <translation>कुछ प्रोग्राम सामान्य तरीकों के बजाय WMI (एक विंडोज़ अंतर्निहित डेटाबेस) के माध्यम से सिस्टम विवरण पढ़ते हैं। उदाहरण के लिए, &quot;tasklist.exe&quot; WMI तक पहुंच के माध्यम से पूर्ण प्रक्रियाओं की सूची प्राप्त कर सकता है, भले ही &quot;HideOtherBoxes&quot; का उपयोग किया गया हो। इस व्यवहार को रोकने के लिए इस विकल्प को सक्षम करें।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5164"/>
+        <location filename="Forms/OptionsWindow.ui" line="5144"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
         <translation>सैंडबॉक्स वाली प्रक्रियाओं को WMI के माध्यम से सिस्टम विवरण तक पहुँचने से रोकें (अधिक जानकारी के लिए टूलटिप देखें)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5207"/>
+        <location filename="Forms/OptionsWindow.ui" line="5187"/>
         <source>Process Hiding</source>
         <translation>प्रक्रिया छिपाना</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5351"/>
+        <location filename="Forms/OptionsWindow.ui" line="5331"/>
         <source>Use a custom Locale/LangID</source>
         <translation>एक कस्टम लोकेल/लैंगआईडी का उपयोग करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5344"/>
+        <location filename="Forms/OptionsWindow.ui" line="5324"/>
         <source>Data Protection</source>
         <translation>डेटा सुरक्षा</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5318"/>
+        <location filename="Forms/OptionsWindow.ui" line="5298"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
         <translation>वर्तमान फ़र्मवेयर तालिकाओं को HKCU\System\SbieCustom पर डंप करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5321"/>
+        <location filename="Forms/OptionsWindow.ui" line="5301"/>
         <source>Dump FW Tables</source>
         <translation>परिवार कल्याण टेबल्स को डंप करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5459"/>
+        <location filename="Forms/OptionsWindow.ui" line="5439"/>
         <source>Tracing</source>
         <translation>अनुरेखण</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5588"/>
+        <location filename="Forms/OptionsWindow.ui" line="5568"/>
         <source>Pipe Trace</source>
         <translation>पाइप ट्रेस</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5656"/>
+        <location filename="Forms/OptionsWindow.ui" line="5636"/>
         <source>API call Trace (traces all SBIE hooks)</source>
         <translation>एपीआई कॉल ट्रेस (सभी एसबीआईई हुक का पता लगाता है)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5642"/>
+        <location filename="Forms/OptionsWindow.ui" line="5622"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translation>सभी SetError को ट्रेस लॉग में लॉग करें (बहुत सारा आउटपुट बनाता है)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5548"/>
+        <location filename="Forms/OptionsWindow.ui" line="5528"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>ट्रेस लॉग में डिबग आउटपुट लॉग करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5609"/>
+        <location filename="Forms/OptionsWindow.ui" line="5589"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -10216,108 +10236,108 @@ instead of &quot;*&quot;.</source>
 &quot;*&quot; के बजाय।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5602"/>
+        <location filename="Forms/OptionsWindow.ui" line="5582"/>
         <source>File Trace</source>
         <translation>फ़ाइल ट्रेस</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5467"/>
+        <location filename="Forms/OptionsWindow.ui" line="5447"/>
         <source>Disable Resource Access Monitor</source>
         <translation>रिसोर्स एक्सेस मॉनिटर को अक्षम करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5474"/>
+        <location filename="Forms/OptionsWindow.ui" line="5454"/>
         <source>IPC Trace</source>
         <translation>आईपीसी ट्रेस</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5508"/>
+        <location filename="Forms/OptionsWindow.ui" line="5488"/>
         <source>GUI Trace</source>
         <translation>जीयूआई ट्रेस</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5568"/>
+        <location filename="Forms/OptionsWindow.ui" line="5548"/>
         <source>Resource Access Monitor</source>
         <translation>संसाधन पहुंच मॉनिटर</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5521"/>
+        <location filename="Forms/OptionsWindow.ui" line="5501"/>
         <source>Access Tracing</source>
         <translation>एक्सेस ट्रेसिंग</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5555"/>
+        <location filename="Forms/OptionsWindow.ui" line="5535"/>
         <source>COM Class Trace</source>
         <translation>COM क्लास ट्रेस</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5649"/>
+        <location filename="Forms/OptionsWindow.ui" line="5629"/>
         <source>Key Trace</source>
         <translation>कुंजी ट्रेस</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6199"/>
+        <location filename="Forms/OptionsWindow.ui" line="6179"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>खोई हुई सुरक्षा की भरपाई के लिए, कृपया प्रतिबंध सेटिंग समूह में ड्रॉप राइट्स सेटिंग पृष्ठ से परामर्श लें।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3747"/>
-        <location filename="Forms/OptionsWindow.ui" line="5528"/>
+        <location filename="Forms/OptionsWindow.ui" line="3727"/>
+        <location filename="Forms/OptionsWindow.ui" line="5508"/>
         <source>Network Firewall</source>
         <translation>नेटवर्क फ़ायरवॉल</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5672"/>
+        <location filename="Forms/OptionsWindow.ui" line="5652"/>
         <source>Debug</source>
         <translation>डिबग</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5721"/>
+        <location filename="Forms/OptionsWindow.ui" line="5701"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>चेतावनी, ये विकल्प मुख्य सुरक्षा गारंटी को अक्षम कर सकते हैं और सैंडबॉक्स सुरक्षा को तोड़ सकते हैं!!!</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5731"/>
+        <location filename="Forms/OptionsWindow.ui" line="5711"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>ये विकल्प संगतता समस्याओं को डीबग करने के लिए हैं, कृपया इन्हें उत्पादन उपयोग में उपयोग न करें। </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5869"/>
+        <location filename="Forms/OptionsWindow.ui" line="5849"/>
         <source>App Templates</source>
         <translation>ऐप टेम्प्लेट</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5947"/>
+        <location filename="Forms/OptionsWindow.ui" line="5927"/>
         <source>Filter Categories</source>
         <translation>श्रेणियाँ फ़िल्टर करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5937"/>
+        <location filename="Forms/OptionsWindow.ui" line="5917"/>
         <source>Text Filter</source>
         <translation>पाठ फ़िल्टर</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5930"/>
+        <location filename="Forms/OptionsWindow.ui" line="5910"/>
         <source>Add Template</source>
         <translation>टेम्प्लेट जोड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5979"/>
+        <location filename="Forms/OptionsWindow.ui" line="5959"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>इस सूची में बड़ी मात्रा में सैंडबॉक्स अनुकूलता बढ़ाने वाले टेम्पलेट शामिल हैं</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5996"/>
+        <location filename="Forms/OptionsWindow.ui" line="5976"/>
         <source>Category</source>
         <translation>वर्ग</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6041"/>
+        <location filename="Forms/OptionsWindow.ui" line="6021"/>
         <source>Template Folders</source>
         <translation>टेम्पलेट फ़ोल्डर</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6061"/>
+        <location filename="Forms/OptionsWindow.ui" line="6041"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -10326,9 +10346,9 @@ Please note that this values are currently user specific and saved globally for 
 कृपया ध्यान दें कि ये मान वर्तमान में उपयोगकर्ता विशिष्ट हैं और सभी बक्सों के लिए विश्व स्तर पर सहेजे गए हैं।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4842"/>
-        <location filename="Forms/OptionsWindow.ui" line="5852"/>
-        <location filename="Forms/OptionsWindow.ui" line="6092"/>
+        <location filename="Forms/OptionsWindow.ui" line="4822"/>
+        <location filename="Forms/OptionsWindow.ui" line="5832"/>
+        <location filename="Forms/OptionsWindow.ui" line="6072"/>
         <source>Value</source>
         <translation>कीमत</translation>
     </message>
@@ -10360,47 +10380,47 @@ Please note that this values are currently user specific and saved globally for 
         <translation>एकल प्रक्रिया मेमोरी सीमा:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4584"/>
+        <location filename="Forms/OptionsWindow.ui" line="4564"/>
         <source>Restart force process before they begin to execute</source>
         <translation>उनके निष्पादित होने से पहले बल प्रक्रिया को पुनः आरंभ करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5006"/>
+        <location filename="Forms/OptionsWindow.ui" line="4986"/>
         <source>On Box Terminate</source>
         <translation>बॉक्स समाप्ति पर</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5291"/>
+        <location filename="Forms/OptionsWindow.ui" line="5271"/>
         <source>Hide Disk Serial Number</source>
         <translation>डिस्क सीरियल नंबर छिपाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5298"/>
+        <location filename="Forms/OptionsWindow.ui" line="5278"/>
         <source>Obfuscate known unique identifiers in the registry</source>
         <translation>रजिस्ट्री में ज्ञात विशिष्ट पहचानकर्ताओं को अस्पष्ट करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5194"/>
+        <location filename="Forms/OptionsWindow.ui" line="5174"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
         <translation>सैंडबॉक्स वाली प्रक्रियाओं को किसी भी बॉक्स के बाहर चल रही प्रक्रियाओं को देखने की अनुमति न दें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4243"/>
+        <location filename="Forms/OptionsWindow.ui" line="4223"/>
         <source>Bind to Adapter IP</source>
         <translation>एडॉप्टर आईपी से जुड़ें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4181"/>
+        <location filename="Forms/OptionsWindow.ui" line="4161"/>
         <source>IPv6:</source>
         <translation>आईपीवी6:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4264"/>
+        <location filename="Forms/OptionsWindow.ui" line="4244"/>
         <source>IPv4:</source>
         <translation>आईपीवी4:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4174"/>
+        <location filename="Forms/OptionsWindow.ui" line="4154"/>
         <source>0000:0000:0000:0000:0000:0000:0000:0000</source>
         <translation>0000:0000:0000:0000:0000:0000:0000:0000</translation>
     </message>
@@ -10410,122 +10430,122 @@ Please note that this values are currently user specific and saved globally for 
         <translation>सैंडबॉक्स्ड विंडो लेबल:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4143"/>
+        <location filename="Forms/OptionsWindow.ui" line="4123"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
         <translation>सॉकेट को सीधे संशोधित करने के बजाय इन-प्रोसेस प्रॉक्सी रिले थ्रेड का उपयोग करें (दुर्लभ अनुकूलता समस्याओं का समाधान करता है)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4250"/>
+        <location filename="Forms/OptionsWindow.ui" line="4230"/>
         <source>000.000.000.000</source>
         <translation>000.000.000.000</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5148"/>
+        <location filename="Forms/OptionsWindow.ui" line="5128"/>
         <source>Processes</source>
         <translation>प्रक्रियाओं</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5258"/>
+        <location filename="Forms/OptionsWindow.ui" line="5238"/>
         <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
         <translation>यह विकल्प रजिस्ट्री पथ *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\* को छुपाता है, जिससे होस्ट पर इंस्टॉल किए गए सॉफ़्टवेयर को सैंडबॉक्स में पुनः इंस्टॉल किया जा सकता है। हालाँकि, यह सॉफ़्टवेयर-विशिष्ट फ़ाइलों और फ़ोल्डरों को छिपाता नहीं है। यदि इंस्टॉलर अभी भी समस्याओं का सामना करता है, तो आपको डिस्क पर संबंधित फ़ाइलों को छिपाने के लिए कस्टम WriteFilePath प्रविष्टियों को परिभाषित करने की आवश्यकता होगी।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5261"/>
+        <location filename="Forms/OptionsWindow.ui" line="5241"/>
         <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
         <translation>होस्ट सॉफ़्टवेयर की अनइंस्टॉल कुंजी छुपाएं (टूलटिप देखें)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5331"/>
+        <location filename="Forms/OptionsWindow.ui" line="5311"/>
         <source>Hide Network Adapter MAC Address</source>
         <translation>नेटवर्क एडाप्टर मैक पता छिपाएँ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5481"/>
+        <location filename="Forms/OptionsWindow.ui" line="5461"/>
         <source>DNS Request Logging</source>
         <translation>डीएनएस अनुरोध लॉगिंग</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5501"/>
+        <location filename="Forms/OptionsWindow.ui" line="5481"/>
         <source>Trace function hooking by SbieDll</source>
         <translation>SbieDll द्वारा ट्रेस फ़ंक्शन हुकिंग</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5595"/>
+        <location filename="Forms/OptionsWindow.ui" line="5575"/>
         <source>Syscall Trace (creates a lot of output)</source>
         <translation>सिस्कल ट्रेस (बहुत सारा आउटपुट बनाता है)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5697"/>
+        <location filename="Forms/OptionsWindow.ui" line="5677"/>
         <source>Debug Options</source>
         <translation>डिबग विकल्प</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5773"/>
+        <location filename="Forms/OptionsWindow.ui" line="5753"/>
         <source>Config Dump</source>
         <translation>कॉन्फ़िग डंप</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5804"/>
+        <location filename="Forms/OptionsWindow.ui" line="5784"/>
         <source>No Templates</source>
         <translation>कोई टेम्पलेट नहीं</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5814"/>
+        <location filename="Forms/OptionsWindow.ui" line="5794"/>
         <source>No Global</source>
         <translation>कोई वैश्विक नहीं</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5824"/>
+        <location filename="Forms/OptionsWindow.ui" line="5804"/>
         <source>No Expand</source>
         <translation>कोई विस्तार नहीं</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5834"/>
+        <location filename="Forms/OptionsWindow.ui" line="5814"/>
         <source>Refresh</source>
         <translation>ताज़ा करना</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5879"/>
+        <location filename="Forms/OptionsWindow.ui" line="5859"/>
         <source>Templates</source>
         <translation>टेम्पलेट्स</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6015"/>
+        <location filename="Forms/OptionsWindow.ui" line="5995"/>
         <source>Open Template</source>
         <translation>टेम्प्लेट खोलें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6103"/>
+        <location filename="Forms/OptionsWindow.ui" line="6083"/>
         <source>Accessibility</source>
         <translation>सरल उपयोग</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6123"/>
+        <location filename="Forms/OptionsWindow.ui" line="6103"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>स्क्रीन रीडर: JAWS, NVDA, विंडो-आइज़, सिस्टम एक्सेस</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6163"/>
+        <location filename="Forms/OptionsWindow.ui" line="6143"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>निम्नलिखित सेटिंग्स एक्सेसिबिलिटी सॉफ़्टवेयर के संयोजन में सैंडबॉक्सी के उपयोग को सक्षम बनाती हैं।  कृपया ध्यान दें कि जब ये सेटिंग्स प्रभावी होती हैं तो सैंडबॉक्सी सुरक्षा का कुछ उपाय आवश्यक रूप से नष्ट हो जाता है।</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6216"/>
+        <location filename="Forms/OptionsWindow.ui" line="6196"/>
         <source>Edit ini Section</source>
         <translation>आईएनआई अनुभाग संपादित करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6250"/>
+        <location filename="Forms/OptionsWindow.ui" line="6230"/>
         <source>Edit ini</source>
         <translation>ini संपादित करें</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6276"/>
+        <location filename="Forms/OptionsWindow.ui" line="6256"/>
         <source>Cancel</source>
         <translation>रद्द करना</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6353"/>
+        <location filename="Forms/OptionsWindow.ui" line="6333"/>
         <source>Save</source>
         <translation>बचाना</translation>
     </message>
@@ -10578,27 +10598,27 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="5198"/>
+        <location filename="SandMan.cpp" line="5208"/>
         <source>OK</source>
         <translation>ठीक है</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5199"/>
+        <location filename="SandMan.cpp" line="5209"/>
         <source>Apply</source>
         <translation>आवेदन करना</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5200"/>
+        <location filename="SandMan.cpp" line="5210"/>
         <source>Cancel</source>
         <translation>रद्द करना</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5201"/>
+        <location filename="SandMan.cpp" line="5211"/>
         <source>&amp;Yes</source>
         <translation>&amp;हाँ</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5202"/>
+        <location filename="SandMan.cpp" line="5212"/>
         <source>&amp;No</source>
         <translation>&amp;No</translation>
     </message>

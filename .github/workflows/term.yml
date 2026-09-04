@@ -34,5 +34,5 @@ jobs:
 
               Unless the PR author explicitly confirms that this change is necessary, or this pull request is unrelated to localization changes, maintainers should not merge it. 
               For the discussion on the Chinese translation of 'Sandbox', please refer to #5546.
-             `
+              `
             })

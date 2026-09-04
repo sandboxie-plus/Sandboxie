@@ -33,6 +33,7 @@ HEADERS += ./stdafx.h \
     ./Windows/SnapshotsWindow.h \
     ./Windows/SettingsWindow.h \
     ./Windows/OptionsWindow.h \
+    ./Windows/SharedAccessWidget.h \
     ./Windows/PendingChanges.h \
     ./Windows/EditorSettingsWindow.h \
     ./Windows/SelectBoxWindow.h \
@@ -89,6 +90,7 @@ SOURCES += ./main.cpp \
     ./Helpers/TabOrder.cpp \
     ./Helpers/MiniDumpFilter.cpp \
     ./Windows/OptionsWindow.cpp \
+    ./Windows/SharedAccessWidget.cpp \
     ./Windows/EditorSettingsWindow.cpp \
     ./Windows/PopUpWindow.cpp \
     ./Windows/RecoveryWindow.cpp \

@@ -247,6 +247,9 @@
     <ClCompile Include="Windows\OptionsWindow.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\SharedAccessWidget.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
     <ClCompile Include="Helpers\IniHighlighter.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
@@ -327,6 +330,9 @@
       <Filter>SandMan</Filter>
     </QtMoc>
     <QtMoc Include="Windows\OptionsWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Windows\SharedAccessWidget.h">
       <Filter>Windows</Filter>
     </QtMoc>
     <QtMoc Include="Windows\SettingsWindow.h">

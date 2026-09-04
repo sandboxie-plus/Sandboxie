@@ -1246,17 +1246,17 @@ Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="46"/>
         <source>Show Future Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige zukünftige Einstellungen</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgeblendet</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Shown (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Angezeigt (Standard)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="58"/>
@@ -6447,7 +6447,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="324"/>
         <source>Arabic (Morocco) - LTR</source>
-        <translation type="unfinished"></translation>
+        <translation>Arabisch (Marokko) - LTR</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="343"/>
@@ -9748,10 +9748,6 @@ Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkei
         <location filename="Forms/OptionsWindow.ui" line="2055"/>
         <source>(Security Critical)</source>
         <translation>(Sicherheitskritisch)</translation>
-    </message>
-    <message>
-        <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation type="vanished">Schütze sandgeboxte SYSTEM-Prozesse vor unprivilegierten Prozessen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="208"/>

@@ -1,0 +1,107 @@
+name: Check deprecated Simplified Chinese terms
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, ready_for_review]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  check_pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check added Simplified Chinese translations
+        id: check
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const simplifiedChineseFiles = new Set([
+              'Sandboxie/msgs/Text-SimpChinese-2052.txt',
+              'SandboxiePlus/SandMan/sandman_zh_CN.ts',
+              'SandboxiePlus/SandMan/Troubleshooting/lang_zh_CN.json',
+              'Installer/isl/ChineseSimplified.isl',
+              'CONTRIBUTING_zh_CN.md' ,
+              'CHANGELOG_zh_CN.md'
+            ]);
+
+            let violations = [];
+
+            try {
+              const changedFiles = await github.paginate(
+                github.rest.pulls.listFiles,
+                {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.issue.number,
+                  per_page: 100,
+                },
+              );
+
+              const targetFiles = changedFiles.filter((file) =>
+                simplifiedChineseFiles.has(file.filename),
+              );
+
+              const filesWithoutPatch = targetFiles
+                .filter((file) => file.patch === undefined)
+                .map((file) => file.filename);
+
+              if (filesWithoutPatch.length > 0) {
+                core.setOutput('violations', '[]');
+                core.setFailed(
+                  `Unable to inspect the full diff for: ${filesWithoutPatch.join(', ')}`,
+                );
+                return;
+              }
+
+              for (const file of targetFiles) {
+                const addedLines = file.patch
+                  .split('\n')
+                  .filter(
+                    (line) => line.startsWith('+') && !line.startsWith('+++'),
+                  );
+
+                if (addedLines.some((line) => /沙箱|沙盘/.test(line))) {
+                  violations.push(file.filename);
+                }
+              }
+
+              core.setOutput('violations', JSON.stringify(violations));
+
+              if (violations.length > 0) {
+                core.setFailed(
+                  `Deprecated terms found in: ${violations.join(', ')}`,
+                );
+              }
+            } catch (error) {
+              core.setOutput('violations', '[]');
+              core.setFailed(`Failed to fetch changed files or process: ${error.message}`);
+              return;
+            }
+
+      - name: Post comment on deprecated terms
+        if: failure() && steps.check.outputs.violations != '[]'
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const violations = JSON.parse(
+              process.env.VIOLATIONS,
+            );
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: [
+                '🚫 **Deprecated Simplified Chinese term detected**',
+                '',
+                'The following Simplified Chinese localization file(s) add `沙箱` or `沙盘`:',
+                ...violations.map((file) => `- \`${file}\``),
+                '',
+                'Unless the author confirms that this usage is necessary, this pull request should not be merged.',
+                'For the terminology discussion, see #5546.',
+              ].join('\n'),
+            });
+        env:
+          VIOLATIONS: ${{ steps.check.outputs.violations }}

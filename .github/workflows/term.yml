@@ -1,38 +1,105 @@
-name: "Check if PR included deprecated terms"
-on: 
+name: Check deprecated Simplified Chinese terms
+
+on:
   pull_request_target:
     types: [opened, synchronize, ready_for_review]
+
 permissions:
-    pull-requests: write
+  pull-requests: write
+
 jobs:
   check_pr:
     runs-on: ubuntu-latest
-    steps:
-      - name: Check if PR included deprecated terms
-        id: check
-        uses: JJ/github-pr-contains-action@releases/v14.1.2
-        with:
-          github-token: ${{ github.token }}
-          diffDoesNotContain: "沙箱|沙盘"
-          waivedUsers: "dependabot[bot]"
 
-      - name: Post comment on failure
-        if: failure() && steps.check.outcome == 'failure'
+    steps:
+      - name: Check added Simplified Chinese translations
+        id: check
         uses: actions/github-script@v9
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
+            const simplifiedChineseFiles = new Set([
+              'Sandboxie/msgs/Text-SimpChinese-2052.txt',
+              'SandboxiePlus/SandMan/sandman_zh_CN.ts',
+              'SandboxiePlus/SandMan/Troubleshooting/lang_zh_CN.json',
+              'Installer/isl/ChineseSimplified.isl',
+            ]);
+
+            let violations = [];
+
+            try {
+              const changedFiles = await github.paginate(
+                github.rest.pulls.listFiles,
+                {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.issue.number,
+                  per_page: 100,
+                },
+              );
+
+              const targetFiles = changedFiles.filter((file) =>
+                simplifiedChineseFiles.has(file.filename),
+              );
+
+              const filesWithoutPatch = targetFiles
+                .filter((file) => file.patch === undefined)
+                .map((file) => file.filename);
+
+              if (filesWithoutPatch.length > 0) {
+                core.setOutput('violations', '[]');
+                core.setFailed(
+                  `Unable to inspect the full diff for: ${filesWithoutPatch.join(', ')}`,
+                );
+                return;
+              }
+
+              for (const file of targetFiles) {
+                const addedLines = file.patch
+                  .split('\n')
+                  .filter(
+                    (line) => line.startsWith('+') && !line.startsWith('+++'),
+                  );
+
+                if (addedLines.some((line) => /沙箱|沙盘/.test(line))) {
+                  violations.push(file.filename);
+                }
+              }
+
+              core.setOutput('violations', JSON.stringify(violations));
+
+              if (violations.length > 0) {
+                core.setFailed(
+                  `Deprecated terms found in: ${violations.join(', ')}`,
+                );
+              }
+            } catch (error) {
+              core.setOutput('violations', '[]');
+              core.setFailed(`Failed to fetch changed files or process: ${error.message}`);
+              return;
+            }
+
+      - name: Post comment on deprecated terms
+        if: failure() && steps.check.outputs.violations != '[]'
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const violations = JSON.parse(
+              process.env.VIOLATIONS,
+            );
+
+            await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `🚫 **Failed to pass the term check**
-
-              Your pull request diff was checked to contain the following terms:
-
-              "沙箱""沙盘"
-
-              Unless the PR author explicitly confirms that this change is necessary, or this pull request is unrelated to localization changes, maintainers should not merge it. 
-              For the discussion on the Chinese translation of 'Sandbox', please refer to #5546.
-              `
-            })
+              issue_number: context.issue.number,
+              body: [
+                '🚫 **Deprecated Simplified Chinese term detected**',
+                '',
+                'The following Simplified Chinese localization file(s) add `沙箱` or `沙盘`:',
+                ...violations.map((file) => `- \`${file}\``),
+                '',
+                'Unless the author confirms that this usage is necessary, this pull request should not be merged.',
+                'For the terminology discussion, see #5546.',
+              ].join('\n'),
+            });
+        env:
+          VIOLATIONS: ${{ steps.check.outputs.violations }}

@@ -168,7 +168,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="942"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation>此功能可能造成用户体验的下降，因为它也阻止正常的屏幕截图。</translation>
+        <translation>该功能可能降低用户体验，因为它也阻止正常的屏幕截图。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="947"/>
@@ -252,13 +252,13 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="237"/>
         <source>Welcome to the Troubleshooting Wizard for Sandboxie-Plus. This interactive assistant is designed to help you in resolving sandboxing issues.</source>
-        <translation>欢迎使用 Sandboxie-Plus 故障排除向导。这个交互式助手旨在帮助您解决沙盒问题。</translation>
+        <translation>欢迎使用 Sandboxie-Plus 故障排除向导。此交互式助手旨在帮助您解决沙盒问题。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="280"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerful. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retrieve the latest troubleshooting instructions.</source>
         <oldsource>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerfull. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retriev the latest troubleshooting instructions.</oldsource>
-        <translation>通过一张有效的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者证书&lt;/a&gt; 向导程序能变得更加强大。 其将能够访问 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;在线解决方案数据库&lt;/a&gt; 来获取最新的故障排除指导。</translation>
+        <translation>通过一张有效的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者证书&lt;/a&gt; 向导程序会更加强大。 它将能访问 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;在线解决方案数据库&lt;/a&gt; 来获取最新的故障排除指导。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="318"/>
@@ -2369,17 +2369,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="83"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>带数据保护的加固型沙盒</translation>
+        <translation>数据保护加固沙盒</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="84"/>
         <source>Security Hardened Sandbox</source>
-        <translation>安全防护加固型沙盒</translation>
+        <translation>安全防护加固沙盒</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="85"/>
         <source>Sandbox with Data Protection</source>
-        <translation>带数据保护功能的沙盒</translation>
+        <translation>数据保护沙盒</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="86"/>
@@ -2389,7 +2389,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="88"/>
         <source>Application Compartment with Data Protection</source>
-        <translation>带有数据保护功能的应用隔间</translation>
+        <translation>应用程序隔离沙盒（数据保护）</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="24"/>

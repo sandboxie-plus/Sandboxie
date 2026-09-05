@@ -159,10 +159,14 @@ class CTraceWindow : public QDialog
 public:
 	CTraceWindow(QWidget *parent = Q_NULLPTR);
 	~CTraceWindow();
+	void		CloseWithoutPrompt();
 
 signals:
 	void		Closed();
 
 protected:
 	void		closeEvent(QCloseEvent *e);
+
+private:
+	bool		m_bPromptOnClose;
 };

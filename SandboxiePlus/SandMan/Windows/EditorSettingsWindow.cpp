@@ -17,7 +17,7 @@ struct EditorSettingInfo {
 };
 
 // Define all settings in one place - this is the single source of truth
-#define SETTING_COUNT 6
+#define SETTING_COUNT 7
 
 // Get setting metadata - single source of truth for all settings
 // This is a file-scope function with internal linkage
@@ -41,7 +41,10 @@ static EditorSettingInfo GetSettingInfo(int index)
 		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Disabled (default)"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Manual"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "While Typing")},
 		// EnableFuzzyMatching
 		{"Options/EnableFuzzyMatching", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enable Fuzzy Matching"), false, 0,
-		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Disabled (default)"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enabled")}
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Disabled (default)"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enabled")},
+		// ShowFutureSettings
+		{"Options/ShowFutureSettings", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Show Future Settings"), false, 1,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Hidden"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Shown (default)")}
 	};
 	
 	return (index >= 0 && index < SETTING_COUNT) ? settings[index] : settings[0];
@@ -114,6 +117,7 @@ QCheckBox* CEditorSettingsWindow::GetCheckBoxByIndex(int index)
 		case 3: return chkAutoCompletionConsent;
 		case 4: return chkEnableAutoCompletion;
 		case 5: return chkEnableFuzzyMatching;
+		case 6: return chkShowFutureSettings;
 		default: return nullptr;
 	}
 }
@@ -128,6 +132,7 @@ bool* CEditorSettingsWindow::GetResetFlagByIndex(int index)
 		case 3: return &m_resetAutoCompletionConsent;
 		case 4: return &m_resetEnableAutoCompletion;
 		case 5: return &m_resetEnableFuzzyMatching;
+		case 6: return &m_resetShowFutureSettings;
 		default: return nullptr;
 	}
 }
@@ -179,6 +184,7 @@ void CEditorSettingsWindow::InitializeTable()
 	checkboxes[3] = chkAutoCompletionConsent = new QCheckBox(this);
 	checkboxes[4] = chkEnableAutoCompletion = new QCheckBox(this);
 	checkboxes[5] = chkEnableFuzzyMatching = new QCheckBox(this);
+	checkboxes[6] = chkShowFutureSettings = new QCheckBox(this);
 	
 	// Configure checkboxes and populate table using metadata
 	for (int i = 0; i < SETTING_COUNT; ++i) {
@@ -410,6 +416,7 @@ int CEditorSettingsWindow::GetOriginalValue(int index) const
 		case 3: return m_originalAutoCompletionConsent ? 1 : 0;
 		case 4: return m_originalEnableAutoCompletion;
 		case 5: return m_originalEnableFuzzyMatching ? 1 : 0;
+		case 6: return m_originalShowFutureSettings ? 1 : 0;
 		default: return 0;
 	}
 }
@@ -476,6 +483,7 @@ void CEditorSettingsWindow::StoreOriginalValues()
 	m_originalAutoCompletionConsent = chkAutoCompletionConsent->isChecked();
 	m_originalEnableAutoCompletion = static_cast<int>(chkEnableAutoCompletion->checkState());
 	m_originalEnableFuzzyMatching = chkEnableFuzzyMatching->isChecked();
+	m_originalShowFutureSettings = chkShowFutureSettings->isChecked();
 }
 
 void CEditorSettingsWindow::RestoreOriginalValues()
@@ -528,6 +536,11 @@ bool CEditorSettingsWindow::GetEnableFuzzyMatching() const
 	return chkEnableFuzzyMatching->isChecked();
 }
 
+bool CEditorSettingsWindow::GetShowFutureSettings() const
+{
+	return chkShowFutureSettings->isChecked();
+}
+
 bool CEditorSettingsWindow::GetValidateIniKeys() const
 {
 	return chkValidateIniKeys->isChecked();
@@ -557,6 +570,11 @@ void CEditorSettingsWindow::SetEnableAutoCompletion(int state)
 void CEditorSettingsWindow::SetEnableFuzzyMatching(bool enabled)
 {
 	chkEnableFuzzyMatching->setChecked(enabled);
+}
+
+void CEditorSettingsWindow::SetShowFutureSettings(bool enabled)
+{
+	chkShowFutureSettings->setChecked(enabled);
 }
 
 void CEditorSettingsWindow::SetValidateIniKeys(bool enabled)

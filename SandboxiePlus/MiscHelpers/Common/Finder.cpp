@@ -303,6 +303,8 @@ void CFinder::OnToggle(bool checked)
 
 bool CFinder::MatchString(const QString& value)
 {
+	if(!m_RegExp.isValid())
+		return false;
 	return value.contains(m_RegExp);
 }
 

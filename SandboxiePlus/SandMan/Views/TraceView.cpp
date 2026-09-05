@@ -10,6 +10,8 @@
 #include "SbieView.h"
 #include <QtConcurrent>
 #include <QEvent>
+#include <QMessageBox>
+#include <QPushButton>
 #include <QScrollBar>
 #include <QToolButton>
 
@@ -366,8 +368,10 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 	UpdateAutoScrollIndicator();
 
 	if (bStandAlone) {
-		QAction* pAction = new QAction(tr("Cleanup Trace Log"));
+		m_pTraceToolBar->addSeparator();
+		QAction* pAction = new QAction(CSandMan::GetIcon("Clean"), tr("Cleanup Trace Log"), this);
 		connect(pAction, SIGNAL(triggered()), this, SLOT(Clear()));
+		m_pTraceToolBar->addAction(pAction);
 		m_pTrace->GetMenu()->insertAction(m_pTrace->GetMenu()->actions()[1], pAction);
 	}
 
@@ -473,6 +477,12 @@ void CTraceView::Refresh()
 	}
 
 	bool bMonitorMode = m_pMonitorMode->isChecked();
+	const QVector<CTraceEntryPtr> &ResourceLog = theAPI->GetTrace();
+
+	if (ResourceLog.count() < m_LastCount)
+		m_FullRefresh = true;
+	else if (m_LastCount > 0 && m_LastID != ResourceLog.at(m_LastCount - 1)->GetUID())
+		m_FullRefresh = true;
 
 	if (m_FullRefresh) 
 	{
@@ -487,8 +497,6 @@ void CTraceView::Refresh()
 		m_pMonitor->m_pMonitorModel->Clear();
 		m_FullRefresh = false;
 	}
-
-	const QVector<CTraceEntryPtr> &ResourceLog = theAPI->GetTrace();
 
 	bool bUpdateFilters = false;
 
@@ -898,7 +906,7 @@ bool CTraceView::SaveToFile(QIODevice* pFile)
 // CTraceWindow
 
 CTraceWindow::CTraceWindow(QWidget *parent)
-	: QDialog(parent)
+	: QDialog(parent), m_bPromptOnClose(true)
 {
 	Qt::WindowFlags flags = windowFlags();
 	flags |= Qt::CustomizeWindowHint;
@@ -926,12 +934,40 @@ CTraceWindow::CTraceWindow(QWidget *parent)
 CTraceWindow::~CTraceWindow()
 {
 	theConf->SetBlob("TraceWindow/Window_Geometry", saveGeometry());
+}
 
-	if(!theAPI) theAPI->EnableMonitor(false);
+void CTraceWindow::CloseWithoutPrompt()
+{
+	m_bPromptOnClose = false;
+	close();
 }
 
 void CTraceWindow::closeEvent(QCloseEvent *e)
 {
+	if (m_bPromptOnClose && theAPI && theConf->GetInt("Options/ViewMode", 1) != 1 &&
+		theAPI->IsMonitoring())
+	{
+		QMessageBox MessageBox(QMessageBox::Question, "Sandboxie-Plus",
+			tr("Trace Logging is still active. What do you want to do?"),
+			QMessageBox::NoButton, this);
+		QPushButton* pStopAndClear = MessageBox.addButton(
+			tr("Stop and Clear"), QMessageBox::AcceptRole);
+		QPushButton* pDisableKeepLogs = MessageBox.addButton(
+			tr("Disable, Keep Logs"), QMessageBox::ActionRole);
+		QPushButton* pKeepLogging = MessageBox.addButton(
+			tr("Keep Logging"), QMessageBox::RejectRole);
+		MessageBox.setDefaultButton(pKeepLogging);
+		MessageBox.exec();
+
+		if (MessageBox.clickedButton() == pStopAndClear)
+		{
+			if (!theAPI->EnableMonitor(false).IsError())
+				theAPI->ClearTrace();
+		}
+		else if (MessageBox.clickedButton() == pDisableKeepLogs)
+			theAPI->EnableMonitor(false);
+	}
+
 	emit Closed();
 	this->deleteLater();
 }

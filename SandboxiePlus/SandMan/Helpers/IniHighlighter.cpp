@@ -268,6 +268,10 @@ namespace {
 		CustomCompletionResolutionPurpose purpose,
 		CustomCompletionResolution& result)
 	{
+		int bestPrefixLength = -1;
+		QString bestPrefix;
+		CustomCompletionResolution bestResult;
+
 		for (auto it = rules.constBegin(); it != rules.constEnd(); ++it) {
 			const QString prefix = normalizeCompletionPrefix(it.key());
 			if (!it.value().contains(QLatin1Char('v'), Qt::CaseInsensitive)
@@ -275,31 +279,44 @@ namespace {
 				continue;
 
 			const QString candidateValue = candidateKey.mid(prefix.length());
+			CustomCompletionResolution candidateResult;
+			candidateResult.prefix = prefix;
+			candidateResult.value = candidateValue;
 			if (purpose == CustomCompletionResolutionPurpose::Match) {
-				result.prefix = prefix;
-				result.value = candidateValue;
-				return true;
+				candidateResult.baseKey.clear();
+				candidateResult.trimCount = 0;
 			}
-
-			const int trimCount = getCustomCompletionTrimCount(it.value());
-			if (trimCount > prefix.length() || candidateValue.isEmpty())
-				continue;
-
-			QString canonicalKey;
-			if (purpose == CustomCompletionResolutionPurpose::ValueLookup) {
-				canonicalKey = resolveCustomCompletionBaseKey(prefix, it.value(), settings);
-				if (canonicalKey.isEmpty())
+			else {
+				const int trimCount = getCustomCompletionTrimCount(it.value());
+				if (trimCount > prefix.length() || candidateValue.isEmpty())
 					continue;
+
+				QString canonicalKey;
+				if (purpose == CustomCompletionResolutionPurpose::ValueLookup) {
+					canonicalKey = resolveCustomCompletionBaseKey(prefix, it.value(), settings);
+					if (canonicalKey.isEmpty())
+						continue;
+				}
+
+				candidateResult.baseKey = canonicalKey;
+				candidateResult.trimCount = trimCount;
 			}
 
-			result.prefix = prefix;
-			result.baseKey = canonicalKey;
-			result.value = candidateValue;
-			result.trimCount = trimCount;
-			return true;
+			const bool isBetter = prefix.length() > bestPrefixLength
+				|| (prefix.length() == bestPrefixLength
+					&& prefix.compare(bestPrefix, Qt::CaseSensitive) < 0);
+			if (isBetter) {
+				bestPrefixLength = prefix.length();
+				bestPrefix = prefix;
+				bestResult = candidateResult;
+			}
 		}
 
-		return false;
+		if (bestPrefixLength < 0)
+			return false;
+
+		result = bestResult;
+		return true;
 	}
 
 	static bool resolveCustomCompletionValue(const QString& candidateKey,
@@ -447,7 +464,10 @@ namespace {
 			if (!hasCompletionItemsForPrefix(canonicalPrefix, settings, metadata, it.value()))
 				continue;
 
-			if (canonicalPrefix.length() > longestMatch) {
+			const bool isBetter = canonicalPrefix.length() > longestMatch
+				|| (canonicalPrefix.length() == longestMatch
+					&& canonicalPrefix.compare(bestPrefix, Qt::CaseSensitive) < 0);
+			if (isBetter) {
 				longestMatch = canonicalPrefix.length();
 				bestPrefix = canonicalPrefix;
 				bestAction = it.value();
@@ -518,6 +538,8 @@ namespace {
 		const QHash<QString, SettingInfo>& metadata)
 	{
 		const QString normalizedInput = inputKey.trimmed();
+		int bestPrefixLength = -1;
+		QString bestPrefix;
 
 		for (auto it = customCompletionRules.constBegin(); it != customCompletionRules.constEnd(); ++it) {
 			if (!customGlobalHideApplies(it.value()))
@@ -540,12 +562,127 @@ namespace {
 			if (!isCustomCandidateForPrefix(candidateKey, canonicalPrefix, settings, metadata, it.value()))
 				continue;
 
-			if (normalizedInput.startsWith(canonicalPrefix, Qt::CaseInsensitive))
-				return false;
-
-			return true;
+			const bool isBetter = canonicalPrefix.length() > bestPrefixLength
+				|| (canonicalPrefix.length() == bestPrefixLength
+					&& canonicalPrefix.compare(bestPrefix, Qt::CaseSensitive) < 0);
+			if (isBetter) {
+				bestPrefixLength = canonicalPrefix.length();
+				bestPrefix = canonicalPrefix;
+			}
 		}
 
+		return bestPrefixLength >= 0
+			&& !normalizedInput.startsWith(bestPrefix, Qt::CaseInsensitive);
+	}
+
+	static QString getCompletionMatchTextUnlocked(const QString& candidateKey,
+		const QHash<QString, SettingInfo>& settings)
+	{
+		CustomCompletionResolution result;
+		if (resolveCustomCompletionRule(candidateKey, customCompletionRules, settings,
+			CustomCompletionResolutionPurpose::Match, result))
+			return result.value;
+
+		return candidateKey;
+	}
+
+	static QString getCompletionInitials(const QString& candidate)
+	{
+		QString initials;
+		bool atTokenStart = true;
+		for (int i = 0; i < candidate.length(); ++i) {
+			const QChar current = candidate.at(i);
+			if (current == QLatin1Char('_') || current == QLatin1Char('.')) {
+				atTokenStart = true;
+				continue;
+			}
+
+			const QChar previous = i > 0 ? candidate.at(i - 1) : QChar();
+			const QChar next = i + 1 < candidate.length() ? candidate.at(i + 1) : QChar();
+			if (atTokenStart || (current.isUpper() && previous.isLower())
+				|| (current.isUpper() && previous.isUpper() && next.isLower())) {
+				initials.append(current);
+				atTokenStart = false;
+			}
+		}
+
+		return initials;
+	}
+
+	static bool isCompletionSubsequence(const QString& input, const QString& candidate)
+	{
+		int inputIndex = 0;
+		for (const QChar& character : candidate) {
+			if (inputIndex < input.length() && input.at(inputIndex) == character)
+				++inputIndex;
+		}
+		return inputIndex == input.length();
+	}
+
+	static int getCompletionTextMatchStrength(const QString& inputKey, const QString& candidate)
+	{
+		const QString input = inputKey.trimmed().toCaseFolded();
+		const QString text = candidate.trimmed().toCaseFolded();
+		if (input.isEmpty() || text.isEmpty())
+			return 0;
+
+		if (text == input)
+			return 4;
+		if (text.startsWith(input))
+			return 3;
+		if (text.contains(input))
+			return 2;
+
+		const QString initials = getCompletionInitials(candidate).toCaseFolded();
+		if (initials == input)
+			return 4;
+		if (initials.startsWith(input))
+			return 3;
+		if (isCompletionSubsequence(input, text))
+			return 1;
+
+		return 0;
+	}
+
+	static const SettingInfo* findCompletionInfo(const QString& candidate,
+		const QHash<QString, SettingInfo>& settings,
+		const QHash<QString, SettingInfo>& metadata)
+	{
+		QString lookupKey = findCaseInsensitiveSettingKey(candidate, settings);
+		if (lookupKey.isEmpty())
+			lookupKey = findCaseInsensitiveSettingKey(resolveSettingLookupKey(candidate, settings), settings);
+		if (!lookupKey.isEmpty()) {
+			auto settingsIt = settings.constFind(lookupKey);
+			if (settingsIt != settings.constEnd())
+				return &settingsIt.value();
+		}
+
+		lookupKey = findCaseInsensitiveSettingKey(candidate, metadata);
+		if (!lookupKey.isEmpty()) {
+			auto metadataIt = metadata.constFind(lookupKey);
+			if (metadataIt != metadata.constEnd())
+				return &metadataIt.value();
+		}
+
+		QString baseKey;
+		if (resolveCustomCompletionValue(candidate, customCompletionRules, settings, &baseKey, nullptr)) {
+			lookupKey = findCaseInsensitiveSettingKey(baseKey, settings);
+			if (!lookupKey.isEmpty()) {
+				auto settingsIt = settings.constFind(lookupKey);
+				if (settingsIt != settings.constEnd())
+					return &settingsIt.value();
+			}
+		}
+
+		return nullptr;
+	}
+
+	static bool sharesCompletionCategory(const QString& first, const QString& second)
+	{
+		for (const QChar& firstCharacter : first) {
+			if (second.contains(firstCharacter))
+				return true;
+		}
 		return false;
 	}
 }
@@ -1112,6 +1249,12 @@ void CIniHighlighter::loadSettingsIni(const QString& filePath)
 		}
 		else if (key.compare("Requirements", Qt::CaseInsensitive) == 0)
 			currentInfo.requirements = value/*.toLower()*/.trimmed();
+		else if (key.compare("CompletionScore", Qt::CaseInsensitive) == 0) {
+			bool scoreValid = false;
+			const int score = value.trimmed().toInt(&scoreValid);
+			if (scoreValid)
+				currentInfo.completionScore = qBound(-100, score, 100);
+		}
 		else if (key.compare("Completion", Qt::CaseInsensitive) == 0) {
 			const QStringList completionItems = parseCompletionItems(value);
 			for (const QString& item : completionItems)
@@ -2312,6 +2455,7 @@ void CIniHighlighter::mergeMissingSettingInfo(SettingInfo& target, const Setting
 	if (target.syntax.isEmpty()) target.syntax = fallback.syntax;
 	if (target.description.isEmpty()) target.description = fallback.description;
 	if (target.requirements.isEmpty()) target.requirements = fallback.requirements;
+	if (target.completionScore == 0) target.completionScore = fallback.completionScore;
 
 	for (auto it = fallback.localizedSyntax.constBegin(); it != fallback.localizedSyntax.constEnd(); ++it) {
 		if (!target.localizedSyntax.contains(it.key()))
@@ -2889,13 +3033,118 @@ QString CIniHighlighter::GetCompletionInsertionText(const QString& candidateKey)
 QString CIniHighlighter::GetCompletionMatchText(const QString& candidateKey)
 {
 	QMutexLocker locker(&settingsMutex);
+	return getCompletionMatchTextUnlocked(candidateKey, validSettings);
+}
 
-	CustomCompletionResolution result;
-	if (resolveCustomCompletionRule(candidateKey, customCompletionRules, validSettings,
-		CustomCompletionResolutionPurpose::Match, result))
-		return result.value;
+QHash<QString, int> CIniHighlighter::GetCompletionScores(const QStringList& candidates, const QString& inputKey)
+{
+	QMutexLocker locker(&settingsMutex);
+	QHash<QString, int> scores;
+	if (!settingsLoaded || validSettings.isEmpty() || candidates.isEmpty())
+		return scores;
 
-	return candidateKey;
+	const QString input = getCompletionMatchTextUnlocked(inputKey.trimmed(), validSettings);
+	if (input.trimmed().isEmpty())
+		return scores;
+
+	struct CandidateMatch {
+		QString key;
+		QString category;
+		int strength;
+	};
+	QList<CandidateMatch> matches;
+	matches.reserve(candidates.size());
+	QHash<QString, QString> candidatesByName;
+	candidatesByName.reserve(candidates.size());
+	QHash<QString, int> configuredScores;
+	configuredScores.reserve(candidates.size());
+
+	for (const QString& candidate : candidates) {
+		if (candidate.isEmpty())
+			continue;
+		candidatesByName.insert(candidate.toCaseFolded(), candidate);
+
+		const QString matchText = getCompletionMatchTextUnlocked(candidate, validSettings);
+		const int strength = getCompletionTextMatchStrength(input, matchText);
+		const SettingInfo* info = findCompletionInfo(candidate, validSettings, templateMetadata);
+		matches.append(CandidateMatch{ candidate, info ? info->category : QString(), strength });
+
+		if (info && info->completionScore != 0) {
+			const int configuredScore = qBound(-100, info->completionScore, 100);
+			configuredScores.insert(candidate, configuredScore);
+			if (strength > 0)
+				scores.insert(candidate, configuredScore);
+		}
+	}
+
+	auto addScoreForCandidate = [&scores, &configuredScores, &candidatesByName](const QString& key, int delta) {
+		const QString candidate = candidatesByName.value(key.toCaseFolded());
+		if (candidate.isEmpty())
+			return;
+
+		const int currentScore = scores.contains(candidate)
+			? scores.value(candidate)
+			: configuredScores.value(candidate, 0);
+		scores.insert(candidate, qBound(-100, currentScore + delta, 100));
+	};
+
+	// A matched disabled/enabled pair is a strong signal in both directions.
+	for (auto it = disabledSettings.constBegin(); it != disabledSettings.constEnd(); ++it) {
+		const int disabledStrength = getCompletionTextMatchStrength(input, it.key());
+		const int enabledStrength = getCompletionTextMatchStrength(input, it.value().enabledKey);
+		if (disabledStrength >= 3)
+			addScoreForCandidate(it.value().enabledKey, 60);
+		if (enabledStrength >= 3)
+			addScoreForCandidate(it.key(), 60);
+	}
+
+	// Category affinity is deliberately weak and case-sensitive. This keeps
+	// Resource (r) separate from Restrictions (R).
+	QStringList matchedCategories;
+	for (const CandidateMatch& match : matches) {
+		if (match.strength >= 3 && !match.category.isEmpty()
+			&& !matchedCategories.contains(match.category))
+			matchedCategories.append(match.category);
+	}
+	for (const CandidateMatch& related : matches) {
+		if (related.strength <= 0 || related.category.isEmpty())
+			continue;
+		for (const QString& category : matchedCategories) {
+			if (sharesCompletionCategory(category, related.category)) {
+				addScoreForCandidate(related.key, 8);
+				break;
+			}
+		}
+	}
+
+	// Keep a small, lower-priority set of same-category candidates visible even
+	// when the category seed is the only textual match. This helps queries such
+	// as OFP discover other Resource settings without flooding the popup.
+	static constexpr int kMaxCategoryRelatedCandidates = 12;
+	int categoryRelatedCount = 0;
+	for (const CandidateMatch& related : matches) {
+		if (related.strength > 0 || related.category.isEmpty())
+			continue;
+
+		bool sameCategory = false;
+		for (const QString& category : matchedCategories) {
+			if (sharesCompletionCategory(category, related.category)) {
+				sameCategory = true;
+				break;
+			}
+		}
+		if (!sameCategory)
+			continue;
+
+		const bool alreadyScored = scores.contains(related.key);
+		if (alreadyScored || categoryRelatedCount < kMaxCategoryRelatedCandidates) {
+			addScoreForCandidate(related.key, 8);
+			if (!alreadyScored)
+				++categoryRelatedCount;
+		}
+	}
+
+	return scores;
 }
 
 QString CIniHighlighter::FindCaseCorrectedKey(const QString& wrongKey)
@@ -2939,24 +3188,37 @@ bool CIniHighlighter::IsKeyHiddenFromPopup(const QString& keyName)
 
 	// Then check the existing version-based logic
 	QMutexLocker locker(&settingsMutex);
-	if (!settingsLoaded || validSettings.isEmpty())
+	if (!settingsLoaded)
 		return false;
 
 	const QString lookupKey = resolveSettingLookupKey(keyName.trimmed(), validSettings);
 	auto it = validSettings.constFind(lookupKey);
-	if (it == validSettings.constEnd())
+	const SettingInfo* info = it != validSettings.constEnd() ? &it.value() : nullptr;
+	if (!info) {
+		const QString metadataKey = findCaseInsensitiveSettingKey(keyName.trimmed(), templateMetadata);
+		auto metadataIt = templateMetadata.constFind(metadataKey);
+		if (metadataIt != templateMetadata.constEnd())
+			info = &metadataIt.value();
+	}
+	if (!info)
 		return false;
 
-	const SettingInfo& info = it.value();
 	const QVersionNumber currentVersion = getCurrentVersion();
+	const bool showFutureSettings = theConf->GetBool("Options/ShowFutureSettings", true);
 
+	// Do not suggest future settings when the editor option is disabled.
+	if (!showFutureSettings && !info->addedVersion.isEmpty()) {
+		const QVersionNumber addedVer = QVersionNumber::fromString(info->addedVersion);
+		if (!addedVer.isNull() && currentVersion < addedVer)
+			return true;
+	}
 	// Check for removed
-	if (!info.removedVersion.isEmpty()) {
-		QVersionNumber removedVer = QVersionNumber::fromString(info.removedVersion);
+	if (!info->removedVersion.isEmpty()) {
+		QVersionNumber removedVer = QVersionNumber::fromString(info->removedVersion);
 		if (!removedVer.isNull() && currentVersion >= removedVer) {
 			// If readded, only hide if not readded yet
-			if (!info.readdedVersion.isEmpty()) {
-				QVersionNumber readdedVer = QVersionNumber::fromString(info.readdedVersion);
+			if (!info->readdedVersion.isEmpty()) {
+				QVersionNumber readdedVer = QVersionNumber::fromString(info->readdedVersion);
 				if (!readdedVer.isNull() && currentVersion < readdedVer)
 					return true;
 				if (!readdedVer.isNull() && currentVersion >= readdedVer)
@@ -2966,8 +3228,8 @@ bool CIniHighlighter::IsKeyHiddenFromPopup(const QString& keyName)
 		}
 	}
 	// Check for renamed
-	if (!info.renamedVersion.isEmpty()) {
-		QVersionNumber renamedVer = QVersionNumber::fromString(info.renamedVersion);
+	if (!info->renamedVersion.isEmpty()) {
+		QVersionNumber renamedVer = QVersionNumber::fromString(info->renamedVersion);
 		if (!renamedVer.isNull() && currentVersion >= renamedVer)
 			return true;
 	}

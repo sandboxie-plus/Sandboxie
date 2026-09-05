@@ -32,7 +32,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkProtectSCM, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkRestrictServices, SIGNAL(clicked(bool)), this, SLOT(OnSysSvcChanged()));
 	connect(ui.chkElevateRpcss, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
-	connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	//connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDropPrivileges, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDropConHostIntegrity, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -209,7 +209,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkProtectSCM->setChecked(!m_pBox->GetBool("UnrestrictedSCM", false));
 	ui.chkRestrictServices->setChecked(!m_pBox->GetBool("RunServicesAsSystem", false));
 	ui.chkElevateRpcss->setChecked(m_pBox->GetBool("RunRpcssAsSystem", false));
-	ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
+	//ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
 	ui.chkDropPrivileges->setChecked(m_pBox->GetBool("StripSystemPrivileges", true));
 	ui.chkDropConHostIntegrity->setChecked(m_pBox->GetBool("DropConHostIntegrity", false));
 
@@ -286,9 +286,11 @@ void COptionsWindow::LoadAdvanced()
 	}
 
 	
-	ui.chkHostProtect->setChecked(m_pBox->GetBool("ProtectHostImages", false));
+	bool bGlobalHostProtect = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("ProtectHostImages", false);
+	ui.chkHostProtect->setChecked(m_pBox->GetBool("ProtectHostImages", bGlobalHostProtect));
 	ui.chkHostProtectMsg->setEnabled(ui.chkHostProtect->isChecked());
-	ui.chkHostProtectMsg->setChecked(m_pBox->GetBool("NotifyImageLoadDenied", true));
+	bool bGlobalHostProtectMsg = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("NotifyImageLoadDenied", true);
+	ui.chkHostProtectMsg->setChecked(m_pBox->GetBool("NotifyImageLoadDenied", bGlobalHostProtectMsg));
 
 	LoadOptionList();
 
@@ -480,7 +482,7 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkRestrictServices, "RunServicesAsSystem", "", "y");
 	WriteAdvancedCheck(ui.chkElevateRpcss, "RunRpcssAsSystem", "y", "");
-	WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
+	//WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
 	WriteAdvancedCheck(ui.chkDropPrivileges, "StripSystemPrivileges", "", "n");
 	WriteAdvancedCheck(ui.chkDropConHostIntegrity, "DropConHostIntegrity", "y", "");
 
@@ -543,8 +545,10 @@ void COptionsWindow::SaveAdvanced()
 	m_pBox->UpdateTextList("InjectDllARM64", InjectDllARM64, false);
 #endif
 
-	WriteAdvancedCheck(ui.chkHostProtect, "ProtectHostImages", "y", "");
-	WriteAdvancedCheck(ui.chkHostProtectMsg, "NotifyImageLoadDenied", "", "n");
+	bool bGlobalHostProtect = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("ProtectHostImages", false);
+	WriteAdvancedCheck(ui.chkHostProtect, "ProtectHostImages", bGlobalHostProtect ? "" : "y", bGlobalHostProtect ? "n" : "");
+	bool bGlobalHostProtectMsg = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("NotifyImageLoadDenied", true);
+	WriteAdvancedCheck(ui.chkHostProtectMsg, "NotifyImageLoadDenied", bGlobalHostProtectMsg ? "" : "y", bGlobalHostProtectMsg ? "n" : "");
 
 	bool bGlobalSbieLogon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieLogon", false);
 	WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", bGlobalSbieLogon ? "" : "y", bGlobalSbieLogon ? "n" : "");

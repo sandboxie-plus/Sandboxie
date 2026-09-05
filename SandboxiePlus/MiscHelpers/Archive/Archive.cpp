@@ -167,7 +167,11 @@ bool CArchive::Extract(QString Path)
 		if(File.Properties["IsDir"].toBool())
 			continue;
 
-		Files.insert(File.ArcIndex, new QFile(PrepareExtraction(File.Properties["Path"].toString(), Path)));
+		QString FilePath = PrepareExtraction(File.Properties["Path"].toString(), Path);
+		if(FilePath.isEmpty()) // entry tried to escape the target directory
+			continue;
+
+		Files.insert(File.ArcIndex, new QFile(FilePath));
 	}
 
 	return Extract(&Files);
@@ -389,18 +393,28 @@ QString CArchive::PrepareExtraction(QString FileName, QString Path)
 	// Cleanup
 	FileName.replace("\\","/");
 	FileName.remove(QRegularExpression("[:*?<>|\"]"));
-	if(FileName.left(1) == "/")
+	while(FileName.left(1) == "/")
 		FileName.remove(0,1);
 
-	// Create Sub Paths if needed
-	QString SubPath = Path;
-	int Pos = FileName.lastIndexOf("/");
-	if(Pos != -1)
-		SubPath += FileName.left(Pos);
-	if(!QDir().exists(SubPath))
-		QDir().mkpath(SubPath);
+	// Resolve the path and make sure it stays within the target directory,
+	// an archive can name its entries "../../foo" and alike (zip slip)
+	QString Root = QDir::cleanPath(Path);
+	if(Root.right(1) != "/")
+		Root.append("/");
+	QString FilePath = QDir::cleanPath(Root + FileName);
+	if(!FilePath.startsWith(Root))
+		return QString();
 
-	return Path + FileName;
+	// Create Sub Paths if needed
+	int Pos = FilePath.lastIndexOf("/");
+	if(Pos != -1)
+	{
+		QString SubPath = FilePath.left(Pos);
+		if(!QDir().exists(SubPath))
+			QDir().mkpath(SubPath);
+	}
+
+	return FilePath;
 }
 
 QString CArchive::GetNextPart(QString FileName)

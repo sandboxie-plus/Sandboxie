@@ -193,7 +193,11 @@ void C7zWorker::OnExtractFiles(QStringList FileList)
 	{
 		int ArcIndex = FindByPath(Name);
 		if(ArcIndex != -1)
-			Files.insert(ArcIndex, new QFile(PrepareExtraction(Name, m_WorkingPath)));
+		{
+			QString FilePath = PrepareExtraction(Name, m_WorkingPath);
+			if(!FilePath.isEmpty()) // else the entry tried to escape the target directory
+				Files.insert(ArcIndex, new QFile(FilePath));
+		}
 		//else
 			//LogLine(LOG_DEBUG, tr("file %1 couldn't be find in archive %2").arg(Name, m_ArchivePath)); // should not happen
 	}

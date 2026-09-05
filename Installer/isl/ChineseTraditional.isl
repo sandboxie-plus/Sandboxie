@@ -322,7 +322,7 @@ ErrorRestartReplace=重新啟動電腦後取代檔案失敗:
 ErrorRenamingTemp=在目的資料夾變更檔案名稱時發生錯誤:
 ErrorRegisterServer=無法註冊 DLL/OCX 檔案: %1。
 ErrorRegSvr32Failed=RegSvr32 失敗；結束代碼 %1
-ErrorRegisterTypeLib=無法註冊類型庫: %1。
+ErrorRegisterTypeLib=無法註冊類型程式庫：%1
 
 ; *** Uninstall display name markings
 ; used for example as 'My Program (32-bit)'
@@ -354,7 +354,7 @@ UninstallDataCorrupted=檔案“%1”已經損毀，無法解除安裝。
 
 ; *** Uninstallation phase messages
 ConfirmDeleteSharedFileTitle=移除共用檔案
-ConfirmDeleteSharedFile2=系統顯示下列共用檔案已不再被任何程式所使用，您要移除這些檔案嗎?%n%n%1%n%n倘若您移除了以上檔案但仍有程式需要使用它們，將造成這些程式無法正常執行，因此您若無法確定請選擇 [否]。保留這些檔案在您的系統中不會造成任何損害。
+ConfirmDeleteSharedFile2=系統顯示下列共用檔案已不再由任何程式使用。您要讓解除安裝程式移除此共用檔案嗎？%n%n如果仍有程式使用此檔案，移除後該程式可能無法正常運作。如果您不確定，請選擇 [否]。將此檔案保留在系統中不會造成任何影響。
 SharedFileNameLabel=檔案名稱:
 SharedFileLocationLabel=位置:
 WizardUninstalling=解除安裝狀態

@@ -3,6 +3,7 @@
 #include <QSyntaxHighlighter>
 #include <QVersionNumber>
 #include <QCompleter>
+#include <QHash>
 #include <QStringListModel>
 
 #define INI_WITH_JSON
@@ -27,6 +28,7 @@ struct SettingInfo {
 	QMap<QString, QString> localizedDescriptions;
 	QString requirements;
 	QStringList completionItems;
+	int completionScore = 0;
 };
 
 struct DisabledSettingRule {
@@ -72,6 +74,7 @@ public:
 	static QStringList GetCompletionCandidates();
 	static QString GetCompletionInsertionText(const QString& candidateKey);
 	static QString GetCompletionMatchText(const QString& candidateKey);
+	static QHash<QString, int> GetCompletionScores(const QStringList& candidates, const QString& inputKey);
 	static QString FindCaseCorrectedKey(const QString& wrongKey);
 	static bool IsValidKey(const QString& keyName);
 	static bool IsKeyHiddenFromPopup(const QString& keyName);

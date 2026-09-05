@@ -13,7 +13,7 @@ jobs:
         uses: JJ/github-pr-contains-action@releases/v14.1.2
         with:
           github-token: ${{ github.token }}
-          diffDoesNotContain: "箱|盘"
+          diffDoesNotContain: "沙箱|沙盘"
           waivedUsers: "dependabot[bot]"
 
       - name: Post comment on failure

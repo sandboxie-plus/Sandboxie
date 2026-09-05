@@ -22,6 +22,8 @@ jobs:
               'SandboxiePlus/SandMan/sandman_zh_CN.ts',
               'SandboxiePlus/SandMan/Troubleshooting/lang_zh_CN.json',
               'Installer/isl/ChineseSimplified.isl',
+              'CONTRIBUTING_zh_CN.md'
+              'CHANGELOG_zh_CN.md'
             ]);
 
             let violations = [];

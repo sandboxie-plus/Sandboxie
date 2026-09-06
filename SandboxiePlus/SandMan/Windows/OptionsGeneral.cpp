@@ -263,6 +263,7 @@ void COptionsWindow::CreateGeneral()
 
 	connect(ui.chkProtectBox, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkAutoEmpty, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkAutoSnapCapture, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.cmbAutoDeleteSnapshot, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.chkRawDiskRead, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -450,6 +451,7 @@ void COptionsWindow::LoadGeneral()
 	else
 		ui.chkProtectBox->setCheckState(Qt::Unchecked);
 	ui.chkAutoEmpty->setChecked(m_pBox->GetBool("AutoDelete", false));
+	ui.chkAutoSnapCapture->setChecked(m_pBox->GetBool("AutoSnapCapture", false));
 	QString AutoDeleteSnapshotTarget = m_pBox->GetText("AutoDeleteSnapshotTarget", QString(), true, true, true);
 	if (AutoDeleteSnapshotTarget.compare("Current", Qt::CaseInsensitive) == 0)
 		AutoDeleteSnapshotTarget = "Current";
@@ -619,6 +621,7 @@ void COptionsWindow::SaveGeneral()
 		m_pBox->DelValue("NeverRemove");
 	}
 	WriteAdvancedCheck(ui.chkAutoEmpty, "AutoDelete", "y", "");
+	WriteAdvancedCheck(ui.chkAutoSnapCapture, "AutoSnapCapture", "y", "");
 	WriteText("AutoDeleteSnapshotTarget", ui.cmbAutoDeleteSnapshot->currentData().toString());
 
 	WriteAdvancedCheck(ui.chkRawDiskRead, "AllowRawDiskRead", "y", "");

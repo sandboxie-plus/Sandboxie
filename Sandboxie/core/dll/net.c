@@ -1001,7 +1001,8 @@ _FX int WSA_bind_ip(
         }
         // Double-check the structure is valid before binding
         if (WSA_BindIP4.sin_family == AF_INET) {
-            __sys_bind(s, &WSA_BindIP4, sizeof(WSA_BindIP4));
+            if (__sys_bind(s, &WSA_BindIP4, sizeof(WSA_BindIP4)) == SOCKET_ERROR)
+                return -1; // Preserve the bind error; never continue with an unbound socket.
             pSock->Bound = TRUE;
         }
     }
@@ -1025,7 +1026,8 @@ _FX int WSA_bind_ip(
         }
         // Double-check the structure is valid before binding
         if (WSA_BindIP6.sin6_family == AF_INET6) {
-            __sys_bind(s, &WSA_BindIP6, sizeof(WSA_BindIP6));
+            if (__sys_bind(s, &WSA_BindIP6, sizeof(WSA_BindIP6)) == SOCKET_ERROR)
+                return -1; // Preserve the bind error; never continue with an unbound socket.
             pSock->Bound = TRUE;
         }
     }

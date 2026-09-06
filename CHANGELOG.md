@@ -7,10 +7,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.18.4 / 5.73.4] - 2026-09-??
 
 ### Added
+- added a native proxy profile/tunnel review prototype in SandMan; tunnel activation remains disabled pending Windows routing and failure qualification
 - added low-noise `SbieTrace` logging for `Shell_NotifyIconW` calls, including the message, icon identity (`NIF_GUID`/GUID or `HWND`/`uID`), and effective direct/proxy route
 - added the `Show Future Settings` editor setting (enabled by default) to include future-version settings in SandMan INI completion candidates
 
 ### Fixed
+- preserved unavailable adapter bindings when saving unrelated network options
+- propagated socket bind errors before proceeding with a bound connection
 - fixed stale INI completion-popup candidate tooltips during editing and limited `Template`/`TemplateReject` tooltips to setting-name text
 - fixed SandMan File Panel "Create Shortcut" producing a shortcut without a working directory, so the sandboxed program inherited SandMan's current directory and applications that open their data files by relative path failed to find them [#5542](https://github.com/sandboxie-plus/Sandboxie/issues/5542)
 - fixed wrong return type ein sbiesvc

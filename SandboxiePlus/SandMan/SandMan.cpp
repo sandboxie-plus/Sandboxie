@@ -41,6 +41,7 @@
 #include "BoxTransfer.h"
 #include "Engine/ScriptManager.h"
 #include "AddonManager.h"
+#include "ProxyTunnels/ProxyIntegration.h"
 #include "Windows/PopUpWindow.h"
 #include "CustomStyles.h"
 #include <QElapsedTimer>
@@ -538,6 +539,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_SbieScripts = new CScriptManager(this);
 
 	m_AddonManager = new CAddonManager(this);
+	m_ProxyIntegration = new CProxyIntegration(this);
 
 
 	m_pMainWidget = new QWidget(this);
@@ -636,6 +638,8 @@ CSandMan::CSandMan(QWidget *parent)
 
 CSandMan::~CSandMan()
 {
+	delete m_ProxyIntegration;
+	m_ProxyIntegration = nullptr;
 	m_pPopUpWindow->close();
 	delete m_pPopUpWindow;
 
@@ -945,6 +949,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 
 	m_pMenuOptions = m_pMenuBar->addMenu(tr("&Options"));
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
+		m_pMenuOptions->addAction(tr("Proxy tunnels (experimental)"), this, [this]() { m_ProxyIntegration->Show(); });
 
 		m_pMenuOptions->addSeparator();
 		m_pDisableForce = m_pMenuOptions->addAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
@@ -1095,6 +1100,7 @@ void CSandMan::CreateOldMenus()
 
 	m_pMenuOptions = m_pMenuBar->addMenu(tr("&Configure"));
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
+		m_pMenuOptions->addAction(tr("Proxy tunnels (experimental)"), this, [this]() { m_ProxyIntegration->Show(); });
 		m_pMenuOptions->addSeparator();
 
 		QAction* m_pProgramAlert = m_pMenuOptions->addAction(CSandMan::GetIcon("Alarm"), tr("Program Alerts"), this, SLOT(OnSettingsAction()));

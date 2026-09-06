@@ -60,7 +60,7 @@ CProxyWindow::CProxyWindow(CProxyManager* Manager, QWidget* Parent) : QDialog(Pa
 	Layout->addWidget(m_Boxes, 2);
 	Buttons = new QHBoxLayout();
 	Layout->addLayout(Buttons);
-	AddButton(tr("Assign selected profile to selected sandboxes"), [this]() { Assign(false); });
+	m_ActivationButtons.append(AddButton(tr("Assign selected profile to selected sandboxes"), [this]() { Assign(false); }));
 	AddButton(tr("Detach selected sandboxes"), [this]() { Assign(true); });
 	AddButton(tr("Install dependencies"), [this]() { QString Message; if (!m_Manager->InstallDependencies(Message)) Error(Message); });
 	Buttons->addStretch();
@@ -100,6 +100,7 @@ QStringList CProxyWindow::Selected() const
 
 void CProxyWindow::Refresh()
 {
+	if (!isVisible()) return;
 	const QStringList ProfileSelection = Selected();
 	QStringList BoxSelection;
 	for (const auto Item : m_Boxes->selectedItems()) BoxSelection.append(Item->text(0));

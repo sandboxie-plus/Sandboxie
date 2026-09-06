@@ -79,6 +79,7 @@ a successful Sandboxie build or successful packet-flow test.
 | DNS matrix | GetAddrInfo, DNS APIs, resolver service, browser DoH/DoT, TCP/UDP 53 packet capture | Not executed |
 | IPv4/IPv6/UDP/QUIC/ICMP/raw | Explicit support/block coverage, including pre-existing and nonblocking sockets | Not executed |
 | Cert/WFP/admin/settings changes | Respect existing gates without a temporary direct-network escape | Source/fake-policy review only |
+| Managed detach recovery | Binding removal, local guard cleanup, inherited guard preservation, retry after partial failure | Manager gate covered with a fake hook; SandMan integration path not executed |
 | Offline adapter in options | Saving unrelated settings retains BindAdapter, including inherited/process cases | Code reviewed; Windows UI not run |
 | Stale adapter recovery | Automatic, ownership-proven recovery without manual adapter management | Not implemented/qualified |
 

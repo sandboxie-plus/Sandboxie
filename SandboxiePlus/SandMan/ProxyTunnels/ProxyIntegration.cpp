@@ -84,7 +84,7 @@ void CProxyIntegration::Show()
 QString CProxyIntegration::ActivationError() const
 {
 #ifndef SBIE_PROXY_TUNNELS_LAB
-	return CProxyWindow::tr("This review prototype does not enable tunnels or change sandbox bindings. Windows routing, ownership, DNS, and fail-closed qualification are still pending.");
+	return CProxyWindow::tr("This review prototype cannot start tunnels or create sandbox bindings. A stopped sandbox may detach a local managed binding to recover its configuration. Windows routing, ownership, DNS, and fail-closed qualification are still pending.");
 #else
 	if (!theAPI || !theAPI->IsConnected()) return CProxyWindow::tr("Sandboxie is not connected.");
 	if (!IsElevated()) return CProxyWindow::tr("Adapter setup requires an administrator. Restart SandMan using its existing elevation command.");

@@ -246,20 +246,22 @@ private slots:
 		QString SecondId; Input.Name = "Second profile"; QVERIFY(Manager.SaveProfile(Input, SecondId, Error));
 		CProxyWindow Window(&Manager);
 		BoxQueries = 0; Input.Name = "Shared profile updated"; QVERIFY(Manager.SaveProfile(Input, Id, Error));
-		QCOMPARE(BoxQueries, 1);
+		QCOMPARE(BoxQueries, 0);
+		Window.show(); QTest::qWait(20); QVERIFY(BoxQueries > 0);
 		const auto Trees = Window.findChildren<QTreeWidget*>();
 		QCOMPARE(Trees.size(), 2); QCOMPARE(Trees[0]->topLevelItemCount(), 2); QCOMPARE(Trees[1]->topLevelItemCount(), 2);
 		QCOMPARE(Trees[0]->topLevelItem(0)->text(4), QString("BoxA, BoxB"));
 		QVERIFY(Window.windowTitle().contains("experimental"));
 		int DisabledActions = 0;
 		for (auto Button : Window.findChildren<QPushButton*>()) {
-			if (Button->text() == "Start selected" || Button->text() == "Start all" || Button->text() == "Check exit IP") {
+			if (Button->text() == "Start selected" || Button->text() == "Start all" || Button->text() == "Check exit IP" || Button->text() == "Assign selected profile to selected sandboxes") {
 				QVERIFY(!Button->isEnabled());
 				++DisabledActions;
 			}
 		}
-		QCOMPARE(DisabledActions, 3);
-		Window.show(); QTest::qWait(20); BoxQueries = 0; Window.hide(); QTest::qWait(1100); QCOMPARE(BoxQueries, 0);
+		QCOMPARE(DisabledActions, 4);
+		Window.hide(); BoxQueries = 0; Input.Name = "Shared profile recovered"; QVERIFY(Manager.SaveProfile(Input, Id, Error)); QCOMPARE(BoxQueries, 0);
+		Window.show(); QTest::qWait(20); QVERIFY(BoxQueries > 0); QCOMPARE(Trees[0]->topLevelItem(0)->text(0), QString("Shared profile recovered"));
 	}
 	void absentIntegrationFailsClosed()
 	{

@@ -134,8 +134,11 @@ QString CProxyIntegration::ModificationError(const QString& Id) const
 
 bool CProxyIntegration::Assign(const QString& BoxName, const QString& Id, QString& Error)
 {
-	Error = ActivationError();
-	if (!Error.isEmpty()) return false;
+	if (!theAPI || !theAPI->IsConnected()) { Error = CProxyWindow::tr("Sandboxie is not connected."); return false; }
+	if (!Id.isEmpty()) {
+		Error = ActivationError();
+		if (!Error.isEmpty()) return false;
+	}
 	const auto Box = theAPI->GetBoxByName(BoxName);
 	if (!Box) { Error = CProxyWindow::tr("The sandbox no longer exists."); return false; }
 	if (Box->GetActiveProcessCount() != 0) { Error = CProxyWindow::tr("Stop all sandbox processes before changing its network association."); return false; }
@@ -145,8 +148,11 @@ bool CProxyIntegration::Assign(const QString& BoxName, const QString& Id, QStrin
 		Error = CProxyWindow::tr("Existing adapter bindings must be reviewed in sandbox options; they were not overwritten."); return false;
 	}
 	if (Id.isEmpty()) {
-		if (Bindings.isEmpty()) return true;
-		if (Box->DelValue("BindAdapter", Bindings.first()).IsError()) { Error = CProxyWindow::tr("Cannot remove the managed binding. Check Sandboxie configuration permissions."); return false; }
+		if (!Bindings.isEmpty() && Box->DelValue("BindAdapter", Bindings.first()).IsError()) { Error = CProxyWindow::tr("Cannot remove the managed binding. Check Sandboxie configuration permissions."); return false; }
+		if (!Box->GetTemplates().contains(Guard)) return true;
+		if (!Box->GetTextList("Template", false).contains(Guard)) {
+			Error = CProxyWindow::tr("The managed binding was removed, but the restrictive guard is inherited and was left unchanged."); return false;
+		}
 		if (Box->DelValue("Template", Guard).IsError()) { Error = CProxyWindow::tr("The binding was removed, but the restrictive guard remains. Review sandbox options."); return false; }
 		return true;
 	}

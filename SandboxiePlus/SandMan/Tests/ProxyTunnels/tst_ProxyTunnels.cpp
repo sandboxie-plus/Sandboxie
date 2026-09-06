@@ -2,6 +2,7 @@
 #include <QtTest>
 #include <QTemporaryDir>
 #include <QJsonDocument>
+#include <QPushButton>
 #include <QTreeWidget>
 #include "../../ProxyTunnels/ProxyWindow.h"
 #include <atomic>
@@ -198,6 +199,16 @@ private slots:
 		for (const auto& Id : Ids) QVERIFY(Manager.Start(Id, Error));
 		// Destruction must cancel and join each owned worker without detached processes.
 	}
+	void detachRemainsAvailableWhenActivationFails()
+	{
+		QTemporaryDir Dir; QString Error; bool Detached = false;
+		SProxyHooks Hooks;
+		Hooks.ActivationError = []() { return QString("Tunnel activation is unavailable"); };
+		Hooks.Assign = [&](const QString& Box, const QString& Id, QString&) { Detached = Box == "BoxA" && Id.isEmpty(); return Detached; };
+		CProxyManager Manager(Dir.filePath("profiles.json"), Hooks);
+		QVERIFY(Manager.Assign("BoxA", QString(), Error));
+		QVERIFY(Detached);
+	}
 	void importLimitsAndPartialCommit()
 	{
 		QList<SProxyImportError> Errors;
@@ -226,17 +237,29 @@ private slots:
 	}
 	void nativeWindowSmoke()
 	{
-		QTemporaryDir Dir; QString Error, Id; SProxyInput Input;
+		QTemporaryDir Dir; QString Error, Id; SProxyInput Input; int BoxQueries = 0;
 		SProxyHooks Hooks;
-		Hooks.Boxes = [&]() { return QList<SProxyBox>{{"BoxA", Id, "Saved / offline"}, {"BoxB", Id, "Saved / offline"}}; };
+		Hooks.Boxes = [&]() { ++BoxQueries; return QList<SProxyBox>{{"BoxA", Id, "Saved / offline"}, {"BoxB", Id, "Saved / offline"}}; };
 		CProxyManager Manager(Dir.filePath("profiles.json"), Hooks);
 		QVERIFY(ProxyProfiles::ParseLine("proxy.example:1080", Input, Error));
 		Input.Name = "Shared profile"; QVERIFY(Manager.SaveProfile(Input, Id, Error));
+		QString SecondId; Input.Name = "Second profile"; QVERIFY(Manager.SaveProfile(Input, SecondId, Error));
 		CProxyWindow Window(&Manager);
+		BoxQueries = 0; Input.Name = "Shared profile updated"; QVERIFY(Manager.SaveProfile(Input, Id, Error));
+		QCOMPARE(BoxQueries, 1);
 		const auto Trees = Window.findChildren<QTreeWidget*>();
-		QCOMPARE(Trees.size(), 2); QCOMPARE(Trees[0]->topLevelItemCount(), 1); QCOMPARE(Trees[1]->topLevelItemCount(), 2);
+		QCOMPARE(Trees.size(), 2); QCOMPARE(Trees[0]->topLevelItemCount(), 2); QCOMPARE(Trees[1]->topLevelItemCount(), 2);
 		QCOMPARE(Trees[0]->topLevelItem(0)->text(4), QString("BoxA, BoxB"));
 		QVERIFY(Window.windowTitle().contains("experimental"));
+		int DisabledActions = 0;
+		for (auto Button : Window.findChildren<QPushButton*>()) {
+			if (Button->text() == "Start selected" || Button->text() == "Start all" || Button->text() == "Check exit IP") {
+				QVERIFY(!Button->isEnabled());
+				++DisabledActions;
+			}
+		}
+		QCOMPARE(DisabledActions, 3);
+		Window.show(); QTest::qWait(20); BoxQueries = 0; Window.hide(); QTest::qWait(1100); QCOMPARE(BoxQueries, 0);
 	}
 	void absentIntegrationFailsClosed()
 	{

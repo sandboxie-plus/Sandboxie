@@ -114,8 +114,10 @@ bool CProxyManager::Remove(const QString& Id, QString& Error)
 
 bool CProxyManager::Assign(const QString& Box, const QString& Id, QString& Error)
 {
-	Error = ActivationError();
-	if (!Error.isEmpty()) return false;
+	if (!Id.isEmpty()) {
+		Error = ActivationError();
+		if (!Error.isEmpty()) return false;
+	}
 	if (!Id.isEmpty() && Find(Id) < 0) { Error = tr("The profile no longer exists."); return false; }
 	if (!m_Hooks.Assign) { Error = tr("Sandbox association is unavailable."); return false; }
 	if (!m_Hooks.Assign(Box, Id, Error)) return false;

@@ -1,6 +1,6 @@
 # Validation record — September 6, 2026
 
-## Executed locally
+## Packaged Qt result, not the current branch commit
 
 Environment: Debian 13, x86-64, GCC 14.2.0, Qt/QtTest 5.15.15. Qt development tools
 were acquired as official Debian packages using the fork's read-only Actions
@@ -10,8 +10,11 @@ Compiled the actual profile, controller, default-gated tunnel and widget sources
 with `-std=c++17 -fPIC -Wall -Wextra -Werror`, plus Qt meta-object output. Ran the
 Qt test executable with the offscreen widget platform.
 
-**Latest result: 44 passed, 0 failed, 1 skipped.** Qt's total includes setup and
-cleanup, data-driven parser rows and controller/widget cases; it is not a count
+The source-review package applied the patch to
+`00ae8850d681962cf1864055c551faaf3ba77770` before this branch added direct Qt
+includes and recovery/UI updates. Its result was **44 passed, 0 failed, 1
+skipped.** Qt's total includes setup and cleanup, data-driven parser rows and
+controller/widget cases; it is not a count
 of 44 independent Windows network experiments.
 
 Covered by executed tests:
@@ -41,6 +44,11 @@ Static checks executed: `git diff --check`; XML parsing of both Visual Studio
 project files; resolution of all ten new source/header entries in each; comparison
 of all six compiled dependency file-hash pins with the actual downloaded official
 artifacts. The patch was also checked for application to its clean baseline.
+
+The standalone CMake target does not compile `ProxyIntegration.cpp`, and it does
+not define `SBIE_PROXY_TUNNELS_LAB`; a successful run therefore does not compile
+the SandMan integration or the laboratory backend. Those paths require the full
+SandMan build and a separately enabled laboratory build.
 
 ## Executed using Windows Actions
 

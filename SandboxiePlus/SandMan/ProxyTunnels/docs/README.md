@@ -2,7 +2,9 @@
 
 **Status: experimental review prototype, not a completed feature.**
 The normal build exposes a native Qt profile panel, but deliberately refuses tunnel
-activation and sandbox reassignment. Do not present this code as leak protection.
+activation and new sandbox assignments. It permits a confirmed recovery detach for
+a stopped sandbox with a local managed binding. Do not present this code as leak
+protection.
 
 Baseline reviewed: `00ae8850d681962cf1864055c551faaf3ba77770` in
 `Kizuno18/sbxie` / `sandboxie-plus/Sandboxie`, September 6, 2026.
@@ -62,10 +64,12 @@ propagate `bind()` errors before marking the socket bound. The latter touches th
 user-mode hook DLL and still requires its Windows regression/build tests.
 
 `SBIE_PROXY_TUNNELS_LAB` is an intentionally absent compile-time definition. It is not
-an INI setting or a UI preference. A normal build cannot launch a tunnel or change
-box associations through this panel. The source behind that laboratory gate is a
-proposal for review on an isolated Windows test machine, not a supported opt-in
-feature. Do not ship with the gate enabled until the blockers below are resolved.
+an INI setting or a UI preference. A normal build cannot launch a tunnel or create
+new box associations through this panel; it only permits removal of a local managed
+association so a stopped sandbox can recover from a broken configuration. The
+source behind that laboratory gate is a proposal for review on an isolated Windows
+test machine, not a supported opt-in feature. Do not ship with the gate enabled
+until the blockers below are resolved.
 
 ### Blockers before activation can be enabled
 

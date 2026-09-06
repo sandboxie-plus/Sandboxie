@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QFormLayout>
+#include <QHostAddress>
 #include <QLineEdit>
 #include <QLabel>
 #include <QTreeWidget>
@@ -41,15 +42,16 @@ CProxyWindow::CProxyWindow(CProxyManager* Manager, QWidget* Parent) : QDialog(Pa
 		auto Button = new QPushButton(Text, this);
 		connect(Button, &QPushButton::clicked, this, [Action]() { Action(); });
 		Buttons->addWidget(Button);
+		return Button;
 	};
 	AddButton(tr("Add"), [this]() { Edit(true); });
 	AddButton(tr("Edit"), [this]() { Edit(false); });
 	AddButton(tr("Remove"), [this]() { Remove(); });
 	AddButton(tr("Import list"), [this]() { Import(); });
-	AddButton(tr("Start selected"), [this]() { Run(0, false); });
+	m_ActivationButtons.append(AddButton(tr("Start selected"), [this]() { Run(0, false); }));
 	AddButton(tr("Stop selected"), [this]() { Run(1, false); });
-	AddButton(tr("Check exit IP"), [this]() { Run(2, false); });
-	AddButton(tr("Start all"), [this]() { Run(0, true); });
+	m_ActivationButtons.append(AddButton(tr("Check exit IP"), [this]() { Run(2, false); }));
+	m_ActivationButtons.append(AddButton(tr("Start all"), [this]() { Run(0, true); }));
 	AddButton(tr("Stop all"), [this]() { Run(1, true); });
 	m_Boxes = new QTreeWidget(this);
 	m_Boxes->setHeaderLabels({tr("Sandbox"), tr("Proxy profile"), tr("Association status")});
@@ -65,8 +67,20 @@ CProxyWindow::CProxyWindow(CProxyManager* Manager, QWidget* Parent) : QDialog(Pa
 	AddButton(tr("Close"), [this]() { close(); });
 	connect(m_Manager, &CProxyManager::Changed, this, &CProxyWindow::Refresh);
 	connect(&m_Timer, &QTimer::timeout, this, &CProxyWindow::Refresh);
+	Refresh();
+}
+
+void CProxyWindow::showEvent(QShowEvent* Event)
+{
+	QDialog::showEvent(Event);
 	m_Timer.start(1000);
 	Refresh();
+}
+
+void CProxyWindow::hideEvent(QHideEvent* Event)
+{
+	m_Timer.stop();
+	QDialog::hideEvent(Event);
 }
 
 void CProxyWindow::Error(const QString& Message)
@@ -90,25 +104,36 @@ void CProxyWindow::Refresh()
 	QStringList BoxSelection;
 	for (const auto Item : m_Boxes->selectedItems()) BoxSelection.append(Item->text(0));
 	const QString Gate = m_Manager->ActivationError();
+	for (auto Button : m_ActivationButtons) {
+		Button->setEnabled(Gate.isEmpty());
+		Button->setToolTip(Gate);
+	}
 	m_Notice->setText(Gate.isEmpty()
 		? tr("Experimental IPv4 TCP tunnels. Profiles and associations are saved; running state is not. DNS/IPv6/UDP coverage is restricted. A successful IP check is not proof of leak protection.")
 		: tr("Activation unavailable: %1\nProfiles can still be reviewed. No tunnel is considered active just because its configuration is saved.").arg(Gate));
+	const QList<SProxyBox> Boxes = m_Manager->Boxes();
+	QMap<QString, QStringList> Users;
+	for (const SProxyBox& Box : Boxes) if (!Box.ProfileId.isEmpty()) Users[Box.ProfileId].append(Box.Name);
 	m_Profiles->clear();
 	QMap<QString, QString> Names;
 	for (const SProxyProfile& Profile : m_Manager->Profiles()) {
 		Names.insert(Profile.Id, Profile.Name);
 		const auto Runtime = m_Manager->Runtime(Profile.Id);
 		const QString Endpoint = Profile.Host.contains(':') ? QString("[%1]:%2").arg(Profile.Host).arg(Profile.Port) : QString("%1:%2").arg(Profile.Host).arg(Profile.Port);
+		const bool IPv6Only = QHostAddress(Profile.Host).protocol() == QAbstractSocket::IPv6Protocol;
+		const QString State = IPv6Only && Runtime.State == CProxyTunnel::Stopped
+			? tr("Stored only (laboratory backend requires IPv4 ingress)") : CProxyTunnel::StateText(Runtime.State);
 		QString Egress = Runtime.Egress;
 		if (!Egress.isEmpty()) Egress += "  " + Runtime.CheckedAt.toLocalTime().toString(Qt::ISODate);
 		auto Item = new QTreeWidgetItem(m_Profiles, {Profile.Name, Profile.Scheme + "://" + Endpoint,
-			CProxyTunnel::StateText(Runtime.State), Egress, m_Manager->Users(Profile.Id).join(", ")});
+			State, Egress, Users.value(Profile.Id).join(", ")});
 		Item->setData(0, Qt::UserRole, Profile.Id);
+		if (IPv6Only) Item->setToolTip(1, tr("This profile is valid for storage, but the laboratory backend requires an IPv4-reachable proxy endpoint."));
 		Item->setToolTip(2, Runtime.Detail.toHtmlEscaped());
 		Item->setSelected(ProfileSelection.contains(Profile.Id));
 	}
 	m_Boxes->clear();
-	for (const SProxyBox& Box : m_Manager->Boxes()) {
+	for (const SProxyBox& Box : Boxes) {
 		auto Item = new QTreeWidgetItem(m_Boxes, {Box.Name, Box.ProfileId.isEmpty() ? tr("Unassigned") : Names.value(Box.ProfileId, tr("Missing profile")), Box.Detail});
 		Item->setSelected(BoxSelection.contains(Box.Name));
 	}

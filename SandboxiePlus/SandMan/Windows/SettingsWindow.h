@@ -207,6 +207,7 @@ protected:
 	CPendingChanges m_PendingChanges{this, &m_HoldChange, -1, true};
 	bool	m_SkipSaveOnToggle; // Skip saving to config when applying reset settings
 	int 	m_CompatLoaded;
+	bool	m_SettingsDirty;
 	QString m_NewPassword;
 	bool	m_MessagesChanged;
 	bool	m_WarnProgsChanged;

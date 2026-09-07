@@ -55,6 +55,9 @@ struct SBoxPointer {
 	template<class T> T* objectCast() { return static_cast<T*>(Box); }
 };
 struct SGui {
+	struct Addons { void UpdateAddonsWhenNotCached() { CHECK(false); } } addons;
+	Addons* GetAddonManager() { return &addons; }
+	void CheckCompat(QWidget*, const char*) { CHECK(false); }
 	QList<SB_STATUS> Errors;
 	QWidget* ErrorParent = nullptr;
 	void CheckResults(const QList<SB_STATUS>& results, QWidget* parent)
@@ -64,6 +67,9 @@ struct SGui {
 } Gui;
 [[maybe_unused]] static SGui* theGUI = &Gui;
 static SStorage* theAPI = nullptr;
+struct SConfig { int GetInt(const char*, int) { CHECK(false); return 0; } } Conf;
+static SConfig* theConf = &Conf;
+template<class... Args> static void TryRefreshCert(Args...) { CHECK(false); }
 struct SMessageBox {
 	static int Criticals;
 	static void critical(QWidget*, const char*, const QString&) { ++Criticals; }
@@ -96,6 +102,12 @@ struct SEditorWindow : QDialog {
 		QPushButton* btnCancelEdit;
 		QCheckBox* chkEncrypt;
 		QDialogButtonBox* buttonBox;
+		QWidget* tabSupport = nullptr;
+		QWidget* tabAddons = nullptr;
+		QWidget* tabCompat = nullptr;
+		QPushButton* lblCurrent = nullptr;
+		QPushButton* lblUpdateAddons = nullptr;
+		QCheckBox* chkAutoUpdate = nullptr;
 	} ui;
 	SEditorWindow(bool tree)
 	{
@@ -144,6 +156,12 @@ public:
 };
 class CSettingsWindow : public SEditorWindow {
 public:
+	QWidget* m_pCurrentTab = nullptr;
+	int m_CompatLoaded = 0;
+	bool m_SettingsDirty = false;
+	static bool CertRefreshRequired() { CHECK(false); return false; }
+	void GetUpdates() { CHECK(false); }
+	void OnTab(QWidget*);
 	CSettingsWindow(bool tree) : SEditorWindow(tree) { theAPI = &Storage; }
 	~CSettingsWindow() { theAPI = nullptr; }
 	SETTINGSWINDOW_SAVEINISECTION_RESULT SaveIniSection();
@@ -154,7 +172,8 @@ public:
 	void OnIniChanged();
 	void OnCancelEdit();
 	void SaveSettings() { ++StructuredSaves; }
-	void LoadSettings() { ++Loads; }
+	QString StructuredCode = Storage.Persisted;
+	void LoadSettings() { ++Loads; StructuredCode = Storage.Persisted; }
 };
 
 #include "raw_ini_under_test.inc"
@@ -323,6 +342,23 @@ static void PartialCancelReload(bool tree)
 	CHECK(Window.Storage.Writes == 1 && Window.Closed == 0 && Gui.Errors.size() == 1);
 }
 
+static void GlobalPartialCancelReload(bool tree)
+{
+ CSettingsWindow Window(tree);
+ Window.SetIniEdit(true);
+ const QString Before = Window.StructuredCode;
+ Window.Storage.Fail = true;
+ Window.Storage.PartialWrite = true;
+ Window.OnSaveIni();
+ CHECK(Window.Storage.Persisted != Before);
+ CHECK(Window.Loads == 0);
+ Window.OnCancelEdit();
+ CHECK(Window.Code.GetCode() == Window.Storage.Persisted);
+ CHECK(Window.ui.btnEditIni->isEnabled());
+ Window.OnTab(Window.ui.tabs->widget(0));
+ CHECK(Window.StructuredCode == Window.Storage.Persisted);
+}
+
 int main(int argc, char** argv)
 {
 	QApplication App(argc, argv);
@@ -337,7 +373,7 @@ int main(int argc, char** argv)
 		{"global-offline", GlobalOffline}, {"global-empty", Empty<CSettingsWindow>},
 		{"global-cancel", Cancel<CSettingsWindow>}, {"global-structured", Structured},
 		{"box-partial", PartialFailureRetry<COptionsWindow>}, {"global-partial", PartialFailureRetry<CSettingsWindow>},
-		{"box-partial-cancel", PartialCancelReload}
+		{"box-partial-cancel", PartialCancelReload}, {"global-partial-cancel", GlobalPartialCancelReload}
 	};
 	if (argc != 2 || !Cases.contains(QString::fromUtf8(argv[1]))) return 2;
 	for (bool Tree : {false, true}) Cases.value(QString::fromUtf8(argv[1]))(Tree);

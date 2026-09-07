@@ -749,6 +749,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.btnAddCompat, SIGNAL(clicked(bool)), this, SLOT(OnAddCompat()));
 	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
 	m_CompatLoaded = 0;
+	m_SettingsDirty = false;
 	m_CompatChanged = false;
 	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
 
@@ -2543,7 +2544,13 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 		LoadIniSection();
 		//ui.txtIniSection->setReadOnly(true);
 	}
-	else if (pTab == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
+	else if (m_SettingsDirty)
+	{
+		m_SettingsDirty = false;
+		LoadSettings();
+	}
+
+	if (pTab == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
 	{
 		if(m_CompatLoaded == 0)
 			theGUI->CheckCompat(this, "OnCompat");
@@ -2985,6 +2992,7 @@ void CSettingsWindow::OnSaveIni()
 	if (!SaveIniSection())
 		return;
 	SetIniEdit(false);
+	m_SettingsDirty = false;
 	LoadSettings();
 }
 
@@ -3025,6 +3033,7 @@ bool CSettingsWindow::SaveIniSection()
 		return false;
 	}
 
+	m_SettingsDirty = true; // A reported failure can still leave partially applied changes.
 	SB_STATUS Status = theAPI->SbieIniSet("GlobalSettings", "", m_pCodeEdit->GetCode());
 	if (!Status) {
 		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);

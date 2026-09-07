@@ -67,7 +67,7 @@ struct SGui {
 } Gui;
 [[maybe_unused]] static SGui* theGUI = &Gui;
 static SStorage* theAPI = nullptr;
-struct SConfig { int GetInt(const char*, int) { CHECK(false); return 0; } } Conf;
+struct SConfig { int GetInt(const char*, int fallback) { return fallback; } } Conf;
 static SConfig* theConf = &Conf;
 template<class... Args> static void TryRefreshCert(Args...) { CHECK(false); }
 struct SMessageBox {
@@ -159,10 +159,18 @@ public:
 	QWidget* m_pCurrentTab = nullptr;
 	int m_CompatLoaded = 0;
 	bool m_SettingsDirty = false;
-	static bool CertRefreshRequired() { CHECK(false); return false; }
+	static bool CertRefreshRequired() { return false; }
 	void GetUpdates() { CHECK(false); }
 	void OnTab(QWidget*);
-	CSettingsWindow(bool tree) : SEditorWindow(tree) { theAPI = &Storage; }
+	QPushButton Current, UpdateAddons;
+	QCheckBox AutoUpdate, Pending;
+	CSettingsWindow(bool tree) : SEditorWindow(tree)
+	{
+		theAPI = &Storage;
+		ui.tabSupport = Tabs.widget(1); ui.tabAddons = Tabs.widget(2);
+		ui.lblCurrent = &Current; ui.lblUpdateAddons = &UpdateAddons; ui.chkAutoUpdate = &AutoUpdate;
+		Current.setText("synthetic current");
+	}
 	~CSettingsWindow() { theAPI = nullptr; }
 	SETTINGSWINDOW_SAVEINISECTION_RESULT SaveIniSection();
 	SETTINGSWINDOW_APPLY_RESULT apply();
@@ -173,7 +181,7 @@ public:
 	void OnCancelEdit();
 	void SaveSettings() { ++StructuredSaves; }
 	QString StructuredCode = Storage.Persisted;
-	void LoadSettings() { ++Loads; StructuredCode = Storage.Persisted; }
+	void LoadSettings() { ++Loads; StructuredCode = Storage.Persisted; Pending.setChecked(Storage.Persisted.contains("Pending=y")); }
 };
 
 #include "raw_ini_under_test.inc"
@@ -359,6 +367,45 @@ static void GlobalPartialCancelReload(bool tree)
  CHECK(Window.StructuredCode == Window.Storage.Persisted);
 }
 
+static void GlobalPendingAfterPartialCancel(bool tree, int detour)
+{
+	CSettingsWindow Window(tree);
+	Window.SetIniEdit(true);
+	Window.Storage.Fail = true;
+	Window.Storage.PartialWrite = true;
+	Window.OnSaveIni();
+	Window.OnCancelEdit();
+	CHECK(Window.Loads == 0 && !Window.Pending.isChecked());
+	Window.OnTab(Window.ui.tabs->widget(detour));
+	CHECK(Window.Loads == 1 && !Window.m_SettingsDirty);
+	Window.Pending.setChecked(true);
+	Window.OnTab(Window.ui.tabs->widget(0));
+	CHECK(Window.Loads == 1 && Window.Pending.isChecked());
+	CHECK(Window.StructuredCode == Window.Storage.Persisted);
+	CHECK(Window.Code.GetCode() == Window.Storage.Persisted);
+}
+static void GlobalSupportPending(bool tree) { GlobalPendingAfterPartialCancel(tree, 1); }
+static void GlobalAddonsPending(bool tree) { GlobalPendingAfterPartialCancel(tree, 2); }
+static void GlobalCommonPending(bool tree) { GlobalPendingAfterPartialCancel(tree, 3); }
+static void GlobalApplyClean(bool tree)
+{
+	CSettingsWindow Window(tree);
+	Window.SetIniEdit(true);
+	Window.apply();
+	CHECK(Window.Storage.Writes == 1 && Window.Loads == 1 && !Window.m_SettingsDirty);
+	Window.OnTab(Window.ui.tabs->widget(0));
+	CHECK(Window.Loads == 1);
+}
+static void GlobalSaveIniClean(bool tree)
+{
+	CSettingsWindow Window(tree);
+	Window.SetIniEdit(true);
+	Window.OnSaveIni();
+	CHECK(Window.Storage.Writes == 1 && Window.Loads == 1 && !Window.m_SettingsDirty);
+	Window.OnTab(Window.ui.tabs->widget(0));
+	CHECK(Window.Loads == 1);
+}
+
 int main(int argc, char** argv)
 {
 	QApplication App(argc, argv);
@@ -373,7 +420,10 @@ int main(int argc, char** argv)
 		{"global-offline", GlobalOffline}, {"global-empty", Empty<CSettingsWindow>},
 		{"global-cancel", Cancel<CSettingsWindow>}, {"global-structured", Structured},
 		{"box-partial", PartialFailureRetry<COptionsWindow>}, {"global-partial", PartialFailureRetry<CSettingsWindow>},
-		{"box-partial-cancel", PartialCancelReload}, {"global-partial-cancel", GlobalPartialCancelReload}
+		{"box-partial-cancel", PartialCancelReload}, {"global-partial-cancel", GlobalPartialCancelReload},
+		{"global-support-pending", GlobalSupportPending}, {"global-addons-pending", GlobalAddonsPending},
+		{"global-common-pending", GlobalCommonPending}, {"global-apply-clean", GlobalApplyClean},
+		{"global-saveini-clean", GlobalSaveIniClean}
 	};
 	if (argc != 2 || !Cases.contains(QString::fromUtf8(argv[1]))) return 2;
 	for (bool Tree : {false, true}) Cases.value(QString::fromUtf8(argv[1]))(Tree);

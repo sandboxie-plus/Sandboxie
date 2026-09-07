@@ -2395,6 +2395,7 @@ bool CSettingsWindow::apply()
 	}
 	else
 		SaveSettings();
+	m_SettingsDirty = false;
 	LoadSettings();
 	return true;
 }
@@ -2520,6 +2521,12 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 {
 	m_pCurrentTab = pTab;
 
+	if (pTab != ui.tabEdit && m_SettingsDirty)
+	{
+		m_SettingsDirty = false;
+		LoadSettings();
+	}
+
 	if (pTab == ui.tabSupport)
 	{
 		if (CSettingsWindow::CertRefreshRequired())
@@ -2544,13 +2551,7 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 		LoadIniSection();
 		//ui.txtIniSection->setReadOnly(true);
 	}
-	else if (m_SettingsDirty)
-	{
-		m_SettingsDirty = false;
-		LoadSettings();
-	}
-
-	if (pTab == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
+	else if (pTab == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
 	{
 		if(m_CompatLoaded == 0)
 			theGUI->CheckCompat(this, "OnCompat");

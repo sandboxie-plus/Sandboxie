@@ -42,3 +42,29 @@ enumeration, or propagation of errors hidden by other void-returning helpers
 promise that retrying every partially completed operation is safe. Actual
 service-denial and disk-write failure tests, plus the full SandMan build, remain
 separate from these injected regression tests.
+
+## Raw INI editor regressions
+
+A second executable, `raw_ini_test`, adds thirteen cases for the raw editor in
+both the sandbox options and global settings dialogs. Save, Apply and OK must
+retain the text, cursor selection, undo history and edit controls on a reported
+write failure. They must not reload or close the dialog. Reconnecting and retrying
+must submit the same Unicode text, comments, duplicate keys and ordering.
+A disconnected global editor rejects the save without a write attempt. The
+sandbox's structured-view dirty flag changes only after a successful raw write.
+Explicit Cancel and successful empty-section writes keep their existing behavior.
+Each case runs with tab navigation and tree navigation.
+
+`generate_raw_fixture.py --source-root <other-SandboxiePlus-directory> <output>`
+extracts both dialogs' raw save methods and their callers for before/after runs.
+The fixture uses real Qt text-edit, cursor and navigation widgets, but storage,
+message reporting and surrounding load callbacks are injected. It does not run
+CCodeEdit's completion/highlighting logic, the complete SandMan dialogs or SbieSvc.
+The fixtures model a reported failure, not a real disk fault or service outage.
+
+The raw helpers now report failure to every Save/Apply/OK caller. No raw section
+parser, format conversion, automatic retry, rollback or native publication API is
+added. This does not fix errors swallowed by the structured global
+`CSettingsWindow::SaveSettings` path, or guarantee that a service-reported failure
+left its cached or on-disk configuration unchanged. Window-manager close and the
+explicit Cancel operation are not recovery storage for unsaved text.

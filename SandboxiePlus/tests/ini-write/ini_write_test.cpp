@@ -112,7 +112,7 @@ public:
 	void close() { ++Closed; }
 	void TriggerPathReload() { ++PathReloads; }
 	void OnSetPassword() { CHECK(false); }
-	void SaveIniSection() { CHECK(false); }
+	bool SaveIniSection() { CHECK(false); return false; }
 	void LoadConfig() { ++Loads; }
 	void UpdateCurrentTab() { ++TabUpdates; }
 	void CloseINetEdit() {}

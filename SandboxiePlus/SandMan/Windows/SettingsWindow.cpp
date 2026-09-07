@@ -2386,20 +2386,22 @@ void CSettingsWindow::SaveSettings()
 }
 
 
-void CSettingsWindow::apply()
+bool CSettingsWindow::apply()
 {
-	if (!ui.btnEditIni->isEnabled())
-		SaveIniSection();
+	if (!ui.btnEditIni->isEnabled()) {
+		if (!SaveIniSection())
+			return false;
+	}
 	else
 		SaveSettings();
 	LoadSettings();
+	return true;
 }
 
 void CSettingsWindow::ok()
 {
-	apply();
-
-	this->close();
+	if (apply())
+		this->close();
 }
 
 void CSettingsWindow::reject()
@@ -2980,7 +2982,8 @@ void CSettingsWindow::OnAutoCompletionToggled(int state)
 
 void CSettingsWindow::OnSaveIni()
 {
-	SaveIniSection();
+	if (!SaveIniSection())
+		return;
 	SetIniEdit(false);
 	LoadSettings();
 }
@@ -3015,13 +3018,19 @@ void CSettingsWindow::LoadIniSection()
 	m_HoldChange = false;
 }
 
-void CSettingsWindow::SaveIniSection()
+bool CSettingsWindow::SaveIniSection()
 {
-	if(theAPI->IsConnected())
-		//theAPI->SbieIniSet("GlobalSettings", "", ui.txtIniSection->toPlainText());
-		theAPI->SbieIniSet("GlobalSettings", "", m_pCodeEdit->GetCode());
+	if (!theAPI->IsConnected()) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("Sandboxie is not connected."));
+		return false;
+	}
 
-	//LoadIniSection();
+	SB_STATUS Status = theAPI->SbieIniSet("GlobalSettings", "", m_pCodeEdit->GetCode());
+	if (!Status) {
+		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
+		return false;
+	}
+	return true;
 }
 
 QVariantMap GetRunEntry(const QString& sEntry)

@@ -1316,8 +1316,10 @@ bool COptionsWindow::apply()
 	CloseCopyEdit();
     CloseNetProxyEdit();
 
-	if (!ui.btnEditIni->isEnabled())
-		SaveIniSection();
+	if (!ui.btnEditIni->isEnabled()) {
+		if (!SaveIniSection())
+			return false;
+	}
 	else
 	{
 		if (m_GeneralChanged) {
@@ -1720,7 +1722,8 @@ void COptionsWindow::OnEditorSettings()
 
 void COptionsWindow::OnSaveIni()
 {
-	SaveIniSection();
+	if (!SaveIniSection())
+		return;
 	SetIniEdit(false);
 }
 
@@ -1760,47 +1763,16 @@ void COptionsWindow::LoadIniSection()
 	m_HoldChange = false;
 }
 
-void COptionsWindow::SaveIniSection()
+bool COptionsWindow::SaveIniSection()
 {
-	m_ConfigDirty = true;
-
-	/*m_pBox->SetRefreshOnChange(false);
-
-	// Note: an incremental update would be more elegant but it would change the entry order in the ini,
-	//			hence it's better for the user to fully rebuild the section each time.
-	//
-	for (QList<QPair<QString, QString>>::const_iterator I = m_Settings.begin(); I != m_Settings.end(); ++I)
-		m_pBox->DelValue(I->first, I->second);
-
-	//QList<QPair<QString, QString>> NewSettings;
-	//QList<QPair<QString, QString>> OldSettings = m_Settings;
-
-	QStringList Section = SplitStr(ui.txtIniSection->toPlainText(), "\n");
-	foreach(const QString& Line, Section)
-	{
-		if (Line.isEmpty())
-			return;
-		StrPair Settings = Split2(Line, "=");
-		
-		//if (!OldSettings.removeOne(Settings))
-		//	NewSettings.append(Settings);
-
-		m_pBox->AppendText(Settings.first, Settings.second);
+	SB_STATUS Status = m_pBox->SbieIniSet(m_pBox->GetName(), "", m_pCodeEdit->GetCode());
+	if (!Status) {
+		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
+		return false;
 	}
 
-	//for (QList<QPair<QString, QString>>::const_iterator I = OldSettings.begin(); I != OldSettings.end(); ++I)
-	//	m_pBox->DelValue(I->first, I->second);
-	//
-	//for (QList<QPair<QString, QString>>::const_iterator I = NewSettings.begin(); I != NewSettings.end(); ++I)
-	//	m_pBox->AppendText(I->first, I->second);
-
-	m_pBox->SetRefreshOnChange(true);
-	m_pBox->CommitIniChanges();*/
-
-	//m_pBox->GetAPI()->SbieIniSet(m_pBox->GetName(), "", ui.txtIniSection->toPlainText());
-	m_pBox->SbieIniSet(m_pBox->GetName(), "", m_pCodeEdit->GetCode());
-
-	//LoadIniSection();
+	m_ConfigDirty = true;
+	return true;
 }
 
 #include "OptionsAccess.cpp"

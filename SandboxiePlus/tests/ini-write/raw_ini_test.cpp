@@ -479,6 +479,25 @@ static void GlobalOfflineReconcile(bool tree, bool visitOffline)
 	CHECK(!window.m_SettingsDirty);
 }
 
+static void GlobalOfflineStructuredSave(bool tree, const QString& action, bool dirty, bool reconnect)
+{
+	CSettingsWindow window(tree);
+	if (dirty) PreparePartialBooleanCancel(window);
+	window.Storage.Connected = false;
+	if (reconnect) window.Storage.Connected = true;
+	Invoke(window, action);
+	std::printf("TRACE: offline %s nav=%s dirty=%d reconnect=%d saves=%d staleSaves=%d dirtyNow=%d closed=%d\n",
+		qPrintable(action), tree ? "tree" : "tabs", dirty, reconnect, window.StructuredSaves,
+		window.StaleStructuredSaves, window.m_SettingsDirty, window.Closed);
+	CHECK(window.StaleStructuredSaves == 0);
+	if (dirty && !reconnect) {
+		CHECK(window.StructuredSaves == 0 && window.m_SettingsDirty && window.Closed == 0);
+	} else {
+		CHECK(window.StructuredSaves == 1 && !window.m_SettingsDirty);
+		if (action == "ok") CHECK(window.Closed == 1);
+	}
+}
+
 int main(int argc, char** argv)
 {
 	QApplication App(argc, argv);
@@ -502,7 +521,11 @@ int main(int argc, char** argv)
 		{"global-dirty-offline-reconnect", [](bool tree) { GlobalOfflineReconcile(tree, true); }},
 		{"global-cancel-form-apply-control", [](bool tree) { GlobalCancelThenStructuredSave(tree, "apply", true); }},
 		{"global-cancel-form-ok-control", [](bool tree) { GlobalCancelThenStructuredSave(tree, "ok", true); }},
-		{"global-offline-no-tab-control", [](bool tree) { GlobalOfflineReconcile(tree, false); }}
+		{"global-offline-no-tab-control", [](bool tree) { GlobalOfflineReconcile(tree, false); }},
+		{"global-dirty-offline-apply", [](bool tree) { GlobalOfflineStructuredSave(tree, "apply", true, false); }},
+		{"global-dirty-offline-ok", [](bool tree) { GlobalOfflineStructuredSave(tree, "ok", true, false); }},
+		{"global-clean-offline-apply-control", [](bool tree) { GlobalOfflineStructuredSave(tree, "apply", false, false); }},
+		{"global-dirty-reconnect-ok-control", [](bool tree) { GlobalOfflineStructuredSave(tree, "ok", true, true); }}
 	};
 	if ((argc != 2 && argc != 3) || !Cases.contains(QString::fromUtf8(argv[1]))) return 2;
 	const QString mode = argc == 3 ? QString::fromUtf8(argv[2]) : "both";

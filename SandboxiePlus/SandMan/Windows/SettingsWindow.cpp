@@ -2395,6 +2395,8 @@ bool CSettingsWindow::apply()
 	}
 	else {
 		ReloadDirtySettings();
+		if (m_SettingsDirty)
+			return false;
 		SaveSettings();
 	}
 	m_SettingsDirty = false;

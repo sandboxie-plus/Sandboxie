@@ -22,7 +22,7 @@ the offscreen platform. On Windows the selected Qt DLL directory must be on
 | --- | --- | --- |
 | Simulated tests (this target) | 28 CTest cases over the real model, store, binding and dialog code with injected storage and box | Persistence, validation, atomic save, revision/staleness, two boxes, templates untouched, host untouched, dialog flows |
 | Build | `SandMan.exe` and `QSbieAPI.dll` built with MSVC from the same commit | The Advanced page integration, `.ui` widgets and project registration compile and link |
-| Runtime | Not part of this change | What a process inside a bound sandbox actually observes from `GetVolumeInformationByHandleW`, and that the host is unchanged, needs a probe run on Windows with Sandboxie installed |
+| Runtime | Manual, see [RUNTIME.md](RUNTIME.md) and `volume_probe.ps1` | What a process inside a bound sandbox actually observes from `GetVolumeInformationByHandleW`, and that the host is unchanged; run on Windows with Sandboxie installed |
 
 The cases: `normalize-device`, `normalize-serial`, `validate-invalid`,
 `json-corrupt`; `store-roundtrip` (second store instance stands in for a new

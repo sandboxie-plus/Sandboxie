@@ -433,6 +433,10 @@ bool CIdentityProfileBinding::Apply(CIdentityIniTarget& Target, const CIdentityP
 		if (pError) *pError = "failed to record the profile binding";
 		return false;
 	}
+	if (!Target.Flush()) {
+		if (pError) *pError = "failed to commit the configuration";
+		return false;
+	}
 
 	if (SortedCopy(Target.GetTextList(SerialSetting, false)) != SortedCopy(Wanted)
 	 || Target.GetText(ProfileSetting).trimmed() != Profile.Id
@@ -462,6 +466,14 @@ bool CIdentityProfileBinding::Unbind(CIdentityIniTarget& Target, QString* pError
 	}
 	if (!Target.DelValue(RevisionSetting) || !Target.DelValue(ProfileSetting)) {
 		if (pError) *pError = "failed to remove the profile binding";
+		return false;
+	}
+	if (!Target.Flush()) {
+		if (pError) *pError = "failed to commit the configuration";
+		return false;
+	}
+	if (!Target.GetText(ProfileSetting).trimmed().isEmpty() || !Target.GetTextList(SerialSetting, false).isEmpty()) {
+		if (pError) *pError = "configuration read back still contains the profile binding";
 		return false;
 	}
 	return true;

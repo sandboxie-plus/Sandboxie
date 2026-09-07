@@ -23,6 +23,11 @@ struct SFakeBox : public CIdentityIniTarget
 	int Processes = 0;
 	bool FailWrites = false;
 	int Writes = 0;
+	bool Deferred = false;		// writes land in Pending until Flush(), like SbieSvc with refresh disabled
+	bool DropOnFlush = false;	// Flush() discards the pending writes instead of publishing them
+	int Flushes = 0;
+	QMap<QString, QStringList> Pending;
+	bool HasPending = false;
 
 	QString GetText(const QString& Setting) const { return Values.value(Setting).value(0); }
 	QStringList GetTextList(const QString& Setting, bool withTemplates) const
@@ -31,24 +36,34 @@ struct SFakeBox : public CIdentityIniTarget
 		if (withTemplates) List.append(TemplateValues.value(Setting));
 		return List;
 	}
+	QMap<QString, QStringList>& Store() { if (Deferred) { if (!HasPending) { Pending = Values; HasPending = true; } return Pending; } return Values; }
 	bool SetText(const QString& Setting, const QString& Value)
 	{
 		++Writes; if (FailWrites) return false;
-		Values[Setting] = QStringList() << Value; return true;
+		Store()[Setting] = QStringList() << Value; return true;
 	}
 	bool AppendText(const QString& Setting, const QString& Value)
 	{
 		++Writes; if (FailWrites) return false;
-		Values[Setting].append(Value); return true;
+		Store()[Setting].append(Value); return true;
 	}
 	bool DelValue(const QString& Setting, const QString& Value)
 	{
 		++Writes; if (FailWrites) return false;
-		if (Value.isEmpty()) Values.remove(Setting);
-		else { Values[Setting].removeOne(Value); if (Values[Setting].isEmpty()) Values.remove(Setting); }
+		QMap<QString, QStringList>& S = Store();
+		if (Value.isEmpty()) S.remove(Setting);
+		else { S[Setting].removeOne(Value); if (S[Setting].isEmpty()) S.remove(Setting); }
 		return true;
 	}
 	int GetActiveProcessCount() const { return Processes; }
+	bool Flush()
+	{
+		++Flushes;
+		if (!Deferred) return true;
+		if (!DropOnFlush && HasPending) Values = Pending;
+		Pending.clear(); HasPending = false;
+		return true;
+	}
 };
 
 static CIdentityProfile MakeProfile(const QString& Name, int Volumes = 2)
@@ -551,6 +566,29 @@ static void HostUntouched()
 	CHECK(Box.Values.size() == 1 && Box.Values.contains("HideDiskSerialNumber"));
 }
 
+static void BindDeferredCommit()
+{
+	// SandMan's options dialog batches INI writes and the service publishes them on commit only;
+	// the read-back must run after Flush(), otherwise a correct apply is reported as a mismatch.
+	QTemporaryDir Dir; CHECK(Dir.isValid());
+	CIdentityProfileStore Store(Dir.path());
+	CIdentityProfile Profile = MakeProfile("deferred", 2);
+	CHECK(Store.Save(Profile));
+	SFakeBox Box; Box.Deferred = true;
+	QString Error;
+	CHECK(CIdentityProfileBinding::Apply(Box, Profile, &Error));
+	CHECK(Box.Flushes == 1 && !Box.HasPending);
+	CHECK(Sorted(Box.Values["DiskSerialNumber"]) == Sorted(Profile.DiskSerialNumberValues()));
+	CHECK(CIdentityProfileBinding::Read(Box, Store).State == SIdentityBindingState::eApplied);
+	CHECK(CIdentityProfileBinding::Unbind(Box, &Error));
+	CHECK(Box.Flushes == 2 && !Box.Values.contains("IdentityProfile") && !Box.Values.contains("DiskSerialNumber"));
+
+	// A commit that loses the writes is reported, not hidden.
+	SFakeBox Lossy; Lossy.Deferred = true; Lossy.DropOnFlush = true;
+	CHECK(!CIdentityProfileBinding::Apply(Lossy, Profile, &Error) && Error.contains("read back"));
+	CHECK(Lossy.Values.isEmpty());
+}
+
 //---------------------------------------------------------------------------
 
 static void DialogNewEdit()
@@ -677,7 +715,7 @@ int main(int argc, char** argv)
 		{"bind-stale-after-regenerate", BindStaleAfterRegenerate}, {"bind-diverged", BindDiverged},
 		{"bind-missing", BindMissing}, {"bind-unbind", BindUnbind},
 		{"bind-keeps-templates", BindKeepsTemplates}, {"bind-write-failure", BindWriteFailure},
-		{"host-untouched", HostUntouched},
+		{"host-untouched", HostUntouched}, {"bind-deferred-commit", BindDeferredCommit},
 		{"dialog-new-edit", DialogNewEdit}, {"dialog-clone-regenerate", DialogCloneRegenerate},
 		{"dialog-import-export", DialogImportExport}, {"dialog-delete-guard", DialogDeleteGuard}
 	};

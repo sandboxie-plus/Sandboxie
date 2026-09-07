@@ -20,7 +20,7 @@ the offscreen platform. On Windows the selected Qt DLL directory must be on
 
 | Evidence | What it is | What it proves |
 | --- | --- | --- |
-| Simulated tests (this target) | 27 CTest cases over the real model, store, binding and dialog code with injected storage and box | Persistence, validation, atomic save, revision/staleness, two boxes, templates untouched, host untouched, dialog flows |
+| Simulated tests (this target) | 28 CTest cases over the real model, store, binding and dialog code with injected storage and box | Persistence, validation, atomic save, revision/staleness, two boxes, templates untouched, host untouched, dialog flows |
 | Build | `SandMan.exe` and `QSbieAPI.dll` built with MSVC from the same commit | The Advanced page integration, `.ui` widgets and project registration compile and link |
 | Runtime | Not part of this change | What a process inside a bound sandbox actually observes from `GetVolumeInformationByHandleW`, and that the host is unchanged, needs a probe run on Windows with Sandboxie installed |
 
@@ -34,7 +34,9 @@ does), `clone-new-id`, `import-new-id`, `export-atomic`; `bind-apply`,
 re-applied boxes), `bind-refuses-running`, `bind-refuses-manual`,
 `bind-stale-after-regenerate`, `bind-diverged`, `bind-missing`, `bind-unbind`,
 `bind-keeps-templates`, `bind-write-failure`, `host-untouched` (only the
-profile directory and the box target change); `dialog-new-edit`,
+profile directory and the box target change), `bind-deferred-commit` (writes
+stay invisible until `Flush()`, as with SbieSvc while SandMan batches a save;
+a commit that drops them is reported); `dialog-new-edit`,
 `dialog-clone-regenerate`, `dialog-import-export`, `dialog-delete-guard`.
 
 A passing run here is not runtime validation of the hook, of SbieSvc

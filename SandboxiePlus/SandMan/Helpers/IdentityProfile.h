@@ -78,6 +78,8 @@ public:
 	virtual bool AppendText(const QString& Setting, const QString& Value) = 0;
 	virtual bool DelValue(const QString& Setting, const QString& Value = QString()) = 0;
 	virtual int GetActiveProcessCount() const = 0;
+	// Publish pending writes so that the reads below observe them; a no-op for synchronous targets.
+	virtual bool Flush() { return true; }
 };
 
 struct SIdentityBindingState

@@ -23,6 +23,8 @@ namespace
 		bool AppendText(const QString& Setting, const QString& Value) { return Track(m_pBox->AppendText(Setting, Value)); }
 		bool DelValue(const QString& Setting, const QString& Value) { return Track(m_pBox->DelValue(Setting, Value)); }
 		int GetActiveProcessCount() const { auto pBoxPlus = m_pBox.objectCast<CSandBoxPlus>(); return pBoxPlus ? pBoxPlus->GetActiveProcessCount() : 0; }
+		// SaveConfig() batches writes (SetRefreshOnChange(false)); the service only publishes them on commit, so read-back needs one.
+		bool Flush() { m_pBox->CommitIniChanges(); return true; }
 		SB_STATUS GetLastStatus() const { return m_LastStatus; }
 	private:
 		bool Track(const SB_STATUS& Status) { if (!Status) m_LastStatus = Status; return !!Status; }

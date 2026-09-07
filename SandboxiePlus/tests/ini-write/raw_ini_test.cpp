@@ -89,6 +89,7 @@ struct SEditorWindow : QDialog {
 	bool m_HoldChange = false;
 	int Loads = 0, IniLoads = 0, Closed = 0, TabUpdates = 0, StructuredSaves = 0;
 	struct {
+		QWidget* tabEdit;
 		QTabWidget* tabs;
 		QPushButton* btnEditIni;
 		QPushButton* btnSaveIni;
@@ -100,8 +101,9 @@ struct SEditorWindow : QDialog {
 	{
 		Gui.Errors.clear(); Gui.ErrorParent = nullptr; SMessageBox::Criticals = 0;
 		if (!tree) m_pTree = nullptr;
-		ui = {&Tabs, &EditIni, &SaveIni, &CancelEdit, &Encrypt, &Buttons};
+		ui = {nullptr, &Tabs, &EditIni, &SaveIni, &CancelEdit, &Encrypt, &Buttons};
 		for (int i = 0; i < 7; ++i) Tabs.addTab(new QWidget(), QString::number(i));
+		ui.tabEdit = Tabs.widget(Tabs.count() - 1);
 		Tabs.widget(5)->setEnabled(false);
 		ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
 		Code.SetCode(QString::fromUtf8("# synthetic \xc3\xa9\xe6\xbc\xa2\nEnabled=y\nTest=a\nTest=b\n\n"));
@@ -123,6 +125,9 @@ class COptionsWindow : public SEditorWindow {
 public:
 	using SEditorWindow::SEditorWindow;
 	SBoxPointer m_pBox{&Storage};
+	QWidget* m_pCurrentTab = nullptr;
+	QString StructuredCode = Storage.Persisted;
+	void OnTab(QWidget*);
 	bool m_Template = false, m_GeneralChanged = false, m_ConfigDirty = false;
 	QString m_Password;
 	qint64 m_ImageSize = 0;
@@ -135,7 +140,7 @@ public:
 	void OnCancelEdit();
 	void OnSetPassword() { CHECK(false); }
 	bool SaveConfig() { ++StructuredSaves; return true; }
-	void LoadConfig() { ++Loads; m_ConfigDirty = false; }
+	void LoadConfig() { ++Loads; m_ConfigDirty = false; StructuredCode = Storage.Persisted; }
 };
 class CSettingsWindow : public SEditorWindow {
 public:
@@ -216,7 +221,7 @@ static void BoxDirty(bool tree)
 	Window.SetIniEdit(true);
 	Window.Storage.Fail = true;
 	Window.OnSaveIni();
-	CHECK(!Window.m_ConfigDirty);
+	CHECK(Window.m_ConfigDirty);
 	Window.m_ConfigDirty = true;
 	Window.OnSaveIni();
 	CHECK(Window.m_ConfigDirty && Window.Storage.Writes == 2);
@@ -298,6 +303,26 @@ template<class T> static void PartialFailureRetry(bool tree)
 	}
 }
 
+static void PartialCancelReload(bool tree)
+{
+	COptionsWindow Window(tree);
+	Window.SetIniEdit(true);
+	const QString Pending = Window.Code.GetCode();
+	const QString Before = Window.StructuredCode;
+	Window.Storage.Fail = true;
+	Window.Storage.PartialWrite = true;
+	Window.OnSaveIni();
+	CHECK(Window.Storage.Writes == 1 && Window.Storage.Persisted != Before);
+	CHECK(Window.Code.GetCode() == Pending && Window.Loads == 0 && Window.Closed == 0);
+	CHECK(Gui.Errors.size() == 1 && Gui.Errors[0].Code == -123);
+	Window.OnCancelEdit();
+	CHECK(Window.Code.GetCode() == Window.Storage.Persisted && Window.Storage.Writes == 1);
+	Window.OnTab(Window.ui.tabs->widget(0));
+	CHECK(Window.Loads == 1 && Window.StructuredCode == Window.Storage.Persisted);
+	CHECK(Window.StructuredCode != Before && !Window.m_ConfigDirty);
+	CHECK(Window.Storage.Writes == 1 && Window.Closed == 0 && Gui.Errors.size() == 1);
+}
+
 int main(int argc, char** argv)
 {
 	QApplication App(argc, argv);
@@ -311,7 +336,8 @@ int main(int argc, char** argv)
 		{"global-ok", [](bool tree) { FailureRetry<CSettingsWindow>(tree, "ok"); }},
 		{"global-offline", GlobalOffline}, {"global-empty", Empty<CSettingsWindow>},
 		{"global-cancel", Cancel<CSettingsWindow>}, {"global-structured", Structured},
-		{"box-partial", PartialFailureRetry<COptionsWindow>}, {"global-partial", PartialFailureRetry<CSettingsWindow>}
+		{"box-partial", PartialFailureRetry<COptionsWindow>}, {"global-partial", PartialFailureRetry<CSettingsWindow>},
+		{"box-partial-cancel", PartialCancelReload}
 	};
 	if (argc != 2 || !Cases.contains(QString::fromUtf8(argv[1]))) return 2;
 	for (bool Tree : {false, true}) Cases.value(QString::fromUtf8(argv[1]))(Tree);

@@ -1765,13 +1765,13 @@ void COptionsWindow::LoadIniSection()
 
 bool COptionsWindow::SaveIniSection()
 {
+	m_ConfigDirty = true; // A reported failure can still leave partially applied changes.
 	SB_STATUS Status = m_pBox->SbieIniSet(m_pBox->GetName(), "", m_pCodeEdit->GetCode());
 	if (!Status) {
 		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
 		return false;
 	}
 
-	m_ConfigDirty = true;
 	return true;
 }
 

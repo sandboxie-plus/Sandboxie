@@ -20,6 +20,8 @@ def main() -> None:
             chunks.append(function)
             if method in ('SaveIniSection', 'apply'):
                 declarations.append('#define ' + name.upper() + '_' + method.upper() + '_RESULT ' + function.split()[0])
+    options = (args.source_root / "SandMan/Windows/OptionsWindow.cpp").read_text(encoding="utf-8-sig")
+    chunks.append(extract(options, re.escape("void COptionsWindow::OnTab(QWidget*")))
     args.output.mkdir(parents=True, exist_ok=True)
     (args.output / 'raw_ini_under_test.inc').write_text('\n\n'.join(chunks) + '\n', encoding='utf-8')
     (args.output / 'raw_ini_return.inc').write_text('\n'.join(declarations) + '\n', encoding='utf-8')

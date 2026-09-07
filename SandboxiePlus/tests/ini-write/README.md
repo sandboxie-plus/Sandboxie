@@ -45,15 +45,21 @@ separate from these injected regression tests.
 
 ## Raw INI editor regressions
 
-A second executable, `raw_ini_test`, adds thirteen cases for the raw editor in
+A second executable, `raw_ini_test`, adds sixteen cases for the raw editor in
 both the sandbox options and global settings dialogs. Save, Apply and OK must
 retain the text, cursor selection, undo history and edit controls on a reported
 write failure. They must not reload or close the dialog. Reconnecting and retrying
 must submit the same Unicode text, comments, duplicate keys and ordering.
 A disconnected global editor rejects the save without a write attempt. The
-sandbox's structured-view dirty flag changes only after a successful raw write.
+sandbox's structured view is invalidated before each raw write attempt, because
+a reported failure may still leave the backend partially changed.
 Explicit Cancel and successful empty-section writes keep their existing behavior.
-Each case runs with tab navigation and tree navigation.
+Each case runs with tab navigation and tree navigation. Partial-write fixtures
+verify that the pending text survives a reported error and can be resubmitted.
+A separate case cancels after a partial failure, changes to a structured tab
+and verifies that the existing tab handler reloads the current configuration.
+Invalidating the structured view does not report success or reload over the
+active raw editor; it prevents stale fields after leaving it.
 
 `generate_raw_fixture.py --source-root <other-SandboxiePlus-directory> <output>`
 extracts both dialogs' raw save methods and their callers for before/after runs.

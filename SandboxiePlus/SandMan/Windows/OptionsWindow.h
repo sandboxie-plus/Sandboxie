@@ -424,7 +424,7 @@ protected:
 	bool RunImBox(const QStringList& Arguments);
 
 	void LoadConfig();
-	void SaveConfig();
+	bool SaveConfig();
 	void UpdateCurrentTab();
 
 	void CreateGeneral();

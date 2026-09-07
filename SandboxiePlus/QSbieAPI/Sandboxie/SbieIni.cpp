@@ -72,8 +72,11 @@ SB_STATUS CSbieIni::SetBoolSafe(const QString& Setting, bool Value)
 			continue;
 		if (CurValue == StrValue)
 			bAdd = false;
-		else
-			DelValue(Setting, CurValue);
+		else {
+			SB_STATUS Status = DelValue(Setting, CurValue);
+			if (!Status)
+				return Status;
+		}
 	}
 	if(bAdd)
 		return AppendText(Setting, StrValue);
@@ -161,11 +164,17 @@ SB_STATUS CSbieIni::UpdateTextList(const QString &Setting, const QStringList& Li
 			NewSettings.append(Value);
 	}
 	// delete removed or changed settings
-	foreach(const QString& Value, OldSettings)
-		DelValue(Setting, Value);
+	foreach(const QString& Value, OldSettings) {
+		SB_STATUS Status = DelValue(Setting, Value);
+		if (!Status)
+			return Status;
+	}
 	// add new or changed settings
-	foreach(const QString& Value, NewSettings)
-		AppendText(Setting, Value);
+	foreach(const QString& Value, NewSettings) {
+		SB_STATUS Status = AppendText(Setting, Value);
+		if (!Status)
+			return Status;
+	}
 	return SB_OK;
 }
 

@@ -1177,8 +1177,11 @@ void COptionsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, 
 			continue;
 		if (!StrValue.isEmpty() && CurValue == StrValue)
 			StrValue.clear();
-		else
-			m_pBox->DelValue(Name, CurValue);
+		else {
+			SB_STATUS Status = m_pBox->DelValue(Name, CurValue);
+			if (!Status)
+				throw Status;
+		}
 	}
 
 	if (!StrValue.isEmpty()) {
@@ -1230,9 +1233,10 @@ QString COptionsWindow::ReadTextSafe(const QString& Name, const QString& Default
 	return Default;
 }
 
-void COptionsWindow::SaveConfig()
+bool COptionsWindow::SaveConfig()
 {
 	bool UpdatePaths = false;
+	bool Success = true;
 
 	m_pBox->SetRefreshOnChange(false);
 
@@ -1286,6 +1290,7 @@ void COptionsWindow::SaveConfig()
 	}
 	catch (SB_STATUS Status)
 	{
+		Success = false;
 		theGUI->CheckResults(QList<SB_STATUS>() << Status, theGUI);
 	}
 
@@ -1294,6 +1299,7 @@ void COptionsWindow::SaveConfig()
 
 	if (UpdatePaths)
 		TriggerPathReload();
+	return Success;
 }
 
 bool COptionsWindow::apply()
@@ -1325,7 +1331,8 @@ bool COptionsWindow::apply()
 			}
 		}
 
-		SaveConfig();
+		if (!SaveConfig())
+			return false;
 	}
 
 	LoadConfig();

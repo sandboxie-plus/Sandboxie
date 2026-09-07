@@ -27,6 +27,7 @@ struct SB_STATUS {
 struct SStorage {
 	bool Connected = true;
 	bool Fail = false;
+	bool PartialWrite = false;
 	QString Persisted = "# synthetic baseline\nEnabled=y\n";
 	QString Section, Setting, Submitted;
 	int Writes = 0;
@@ -34,7 +35,10 @@ struct SStorage {
 	{
 		++Writes;
 		Section = section; Setting = setting; Submitted = value;
-		if (Fail) return {-123, "synthetic_write_failure"};
+		if (Fail) {
+			if (PartialWrite) Persisted = "# synthetic partial write\nEnabled=y\n";
+			return {-123, "synthetic_write_failure"};
+		}
 		Persisted = value;
 		return {};
 	}
@@ -269,6 +273,31 @@ static void Structured(bool tree)
 	CHECK(Window.Storage.Writes == 0 && Gui.Errors.isEmpty());
 }
 
+template<class T> static void PartialFailureRetry(bool tree)
+{
+	for (const auto& Action : {"save", "apply", "ok"}) {
+		T Window(tree);
+		Window.SetIniEdit(true);
+		const QString Pending = Window.Code.GetCode();
+		const QString Before = Window.Storage.Persisted;
+		Window.Storage.Fail = true;
+		Window.Storage.PartialWrite = true;
+		Invoke(Window, Action);
+		CHECK(Window.Storage.Writes == 1 && Window.Storage.Persisted != Before);
+		CHECK(Window.Storage.Persisted != Pending && Window.Code.GetCode() == Pending);
+		CHECK(Window.Loads == 0 && Window.IniLoads == 0 && Window.Closed == 0);
+		CHECK(Window.StructuredSaves == 0 && Gui.Errors.size() == 1);
+		CHECK(Gui.Errors[0].Code == -123 && Gui.ErrorParent == &Window);
+		CheckEditing(Window);
+		Window.Storage.Fail = false;
+		Window.Storage.PartialWrite = false;
+		Invoke(Window, Action);
+		CHECK(Window.Storage.Writes == 2 && Window.Storage.Persisted == Pending);
+		CHECK(Window.Code.GetCode() == Pending && Gui.Errors.size() == 1);
+		CHECK(Window.StructuredSaves == 0 && Window.Closed == (QString(Action) == "ok" ? 1 : 0));
+	}
+}
+
 int main(int argc, char** argv)
 {
 	QApplication App(argc, argv);
@@ -281,7 +310,8 @@ int main(int argc, char** argv)
 		{"global-apply", [](bool tree) { FailureRetry<CSettingsWindow>(tree, "apply"); }},
 		{"global-ok", [](bool tree) { FailureRetry<CSettingsWindow>(tree, "ok"); }},
 		{"global-offline", GlobalOffline}, {"global-empty", Empty<CSettingsWindow>},
-		{"global-cancel", Cancel<CSettingsWindow>}, {"global-structured", Structured}
+		{"global-cancel", Cancel<CSettingsWindow>}, {"global-structured", Structured},
+		{"box-partial", PartialFailureRetry<COptionsWindow>}, {"global-partial", PartialFailureRetry<CSettingsWindow>}
 	};
 	if (argc != 2 || !Cases.contains(QString::fromUtf8(argv[1]))) return 2;
 	for (bool Tree : {false, true}) Cases.value(QString::fromUtf8(argv[1]))(Tree);

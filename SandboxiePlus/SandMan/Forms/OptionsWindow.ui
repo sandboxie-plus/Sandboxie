@@ -5292,6 +5292,23 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                </property>
               </spacer>
              </item>
+             <item row="3" column="4">
+              <widget class="QComboBox" name="cmbIdentityProfile">
+               <property name="toolTip">
+                <string>Bind a persistent identity profile to this sandbox; its volume serials are written as DiskSerialNumber entries</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="4">
+              <widget class="QToolButton" name="btnIdentityProfiles">
+               <property name="toolTip">
+                <string>Create, edit, clone, regenerate, import or export identity profiles</string>
+               </property>
+               <property name="text">
+                <string>Identity Profiles...</string>
+               </property>
+              </widget>
+             </item>
              <item row="1" column="4">
               <widget class="QToolButton" name="btnDumpFW">
                <property name="toolTip">
@@ -6593,6 +6610,8 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>btnDumpFW</tabstop>
   <tabstop>cmbLangID</tabstop>
   <tabstop>chkHideSerial</tabstop>
+  <tabstop>cmbIdentityProfile</tabstop>
+  <tabstop>btnIdentityProfiles</tabstop>
   <tabstop>chkHideMac</tabstop>
   <tabstop>chkHideUID</tabstop>
   <tabstop>lstUsers</tabstop>

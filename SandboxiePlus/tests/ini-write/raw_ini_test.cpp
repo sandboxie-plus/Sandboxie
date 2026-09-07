@@ -28,6 +28,7 @@ struct SStorage {
 	bool Connected = true;
 	bool Fail = false;
 	bool PartialWrite = false;
+	bool PartialBooleanWrite = false;
 	QString Persisted = "# synthetic baseline\nEnabled=y\n";
 	QString Section, Setting, Submitted;
 	int Writes = 0;
@@ -36,7 +37,10 @@ struct SStorage {
 		++Writes;
 		Section = section; Setting = setting; Submitted = value;
 		if (Fail) {
-			if (PartialWrite) Persisted = "# synthetic partial write\nEnabled=y\n";
+			if (PartialWrite) {
+				Persisted = "# synthetic partial write\nEnabled=y\n";
+				if (PartialBooleanWrite) Persisted += "ForceBoxDocs=y\n";
+			}
 			return {-123, "synthetic_write_failure"};
 		}
 		Persisted = value;
@@ -162,8 +166,10 @@ public:
 	static bool CertRefreshRequired() { return false; }
 	void GetUpdates() { CHECK(false); }
 	void OnTab(QWidget*);
+	void ReloadDirtySettings();
 	QPushButton Current, UpdateAddons;
-	QCheckBox AutoUpdate, Pending;
+	QCheckBox AutoUpdate, Pending, ForceBoxDocs;
+	int StaleStructuredSaves = 0;
 	CSettingsWindow(bool tree) : SEditorWindow(tree)
 	{
 		theAPI = &Storage;
@@ -179,9 +185,23 @@ public:
 	void SetIniEdit(bool);
 	void OnIniChanged();
 	void OnCancelEdit();
-	void SaveSettings() { ++StructuredSaves; }
+	void SaveSettings()
+	{
+		++StructuredSaves;
+		if (ForceBoxDocs.isChecked() != Storage.Persisted.contains("ForceBoxDocs=y"))
+			++StaleStructuredSaves;
+	}
 	QString StructuredCode = Storage.Persisted;
-	void LoadSettings() { ++Loads; StructuredCode = Storage.Persisted; Pending.setChecked(Storage.Persisted.contains("Pending=y")); }
+	void LoadSettings()
+	{
+		++Loads;
+		// Service-owned fields are not read while disconnected in the real loader.
+		if (Storage.IsConnected()) {
+			StructuredCode = Storage.Persisted;
+			ForceBoxDocs.setChecked(Storage.Persisted.contains("ForceBoxDocs=y"));
+		}
+		Pending.setChecked(Storage.Persisted.contains("Pending=y"));
+	}
 };
 
 #include "raw_ini_under_test.inc"
@@ -406,6 +426,59 @@ static void GlobalSaveIniClean(bool tree)
 	CHECK(Window.Loads == 1);
 }
 
+
+static void PreparePartialBooleanCancel(CSettingsWindow& window)
+{
+	window.ui.tabs->setCurrentWidget(window.ui.tabEdit);
+	window.SetIniEdit(true);
+	window.OnIniChanged();
+	window.Storage.Fail = true;
+	window.Storage.PartialWrite = true;
+	window.Storage.PartialBooleanWrite = true;
+	window.OnSaveIni();
+	CHECK(window.Storage.Persisted.contains("ForceBoxDocs=y"));
+	CHECK(!window.ForceBoxDocs.isChecked() && window.m_SettingsDirty);
+	CHECK(window.Loads == 0 && window.Storage.Writes == 1);
+	window.OnCancelEdit();
+	CHECK(window.ui.btnEditIni->isEnabled());
+	CHECK(window.ui.tabs->currentWidget() == window.ui.tabEdit);
+	CHECK(window.ui.buttonBox->button(QDialogButtonBox::Apply)->isEnabled());
+	CHECK(window.Code.GetCode() == window.Storage.Persisted);
+	window.Storage.Fail = false;
+	window.Storage.PartialWrite = false;
+}
+
+static void GlobalCancelThenStructuredSave(bool tree, const QString& action, bool visitForm)
+{
+	CSettingsWindow window(tree);
+	PreparePartialBooleanCancel(window);
+	if (visitForm) window.OnTab(window.ui.tabs->widget(0));
+	Invoke(window, action);
+	std::printf("TRACE: %s nav=%s formVisited=%d saves=%d staleSaves=%d loads=%d dirty=%d closed=%d\n",
+		qPrintable(action), tree ? "tree" : "tabs", visitForm, window.StructuredSaves,
+		window.StaleStructuredSaves, window.Loads, window.m_SettingsDirty, window.Closed);
+	CHECK(window.StaleStructuredSaves == 0);
+}
+
+static void GlobalOfflineReconcile(bool tree, bool visitOffline)
+{
+	CSettingsWindow window(tree);
+	PreparePartialBooleanCancel(window);
+	window.Storage.Connected = false;
+	if (visitOffline) window.OnTab(window.ui.tabs->widget(0));
+	const bool dirtyWhileOffline = window.m_SettingsDirty;
+	CHECK(!window.ForceBoxDocs.isChecked());
+	window.Storage.Connected = true;
+	window.OnTab(window.ui.tabs->widget(3));
+	std::printf("TRACE: reconnect nav=%s offlineVisit=%d dirtyOffline=%d dirtyNow=%d field=%d stored=%d loads=%d\n",
+		tree ? "tree" : "tabs", visitOffline, dirtyWhileOffline, window.m_SettingsDirty,
+		window.ForceBoxDocs.isChecked(), window.Storage.Persisted.contains("ForceBoxDocs=y"), window.Loads);
+	CHECK(dirtyWhileOffline);
+	CHECK(window.ForceBoxDocs.isChecked());
+	CHECK(window.StructuredCode == window.Storage.Persisted);
+	CHECK(!window.m_SettingsDirty);
+}
+
 int main(int argc, char** argv)
 {
 	QApplication App(argc, argv);
@@ -423,10 +496,21 @@ int main(int argc, char** argv)
 		{"box-partial-cancel", PartialCancelReload}, {"global-partial-cancel", GlobalPartialCancelReload},
 		{"global-support-pending", GlobalSupportPending}, {"global-addons-pending", GlobalAddonsPending},
 		{"global-common-pending", GlobalCommonPending}, {"global-apply-clean", GlobalApplyClean},
-		{"global-saveini-clean", GlobalSaveIniClean}
+		{"global-saveini-clean", GlobalSaveIniClean},
+		{"global-partial-cancel-apply", [](bool tree) { GlobalCancelThenStructuredSave(tree, "apply", false); }},
+		{"global-partial-cancel-ok", [](bool tree) { GlobalCancelThenStructuredSave(tree, "ok", false); }},
+		{"global-dirty-offline-reconnect", [](bool tree) { GlobalOfflineReconcile(tree, true); }},
+		{"global-cancel-form-apply-control", [](bool tree) { GlobalCancelThenStructuredSave(tree, "apply", true); }},
+		{"global-cancel-form-ok-control", [](bool tree) { GlobalCancelThenStructuredSave(tree, "ok", true); }},
+		{"global-offline-no-tab-control", [](bool tree) { GlobalOfflineReconcile(tree, false); }}
 	};
-	if (argc != 2 || !Cases.contains(QString::fromUtf8(argv[1]))) return 2;
-	for (bool Tree : {false, true}) Cases.value(QString::fromUtf8(argv[1]))(Tree);
-	std::printf("PASS: %s (tabs and tree)\n", argv[1]);
+	if ((argc != 2 && argc != 3) || !Cases.contains(QString::fromUtf8(argv[1]))) return 2;
+	const QString mode = argc == 3 ? QString::fromUtf8(argv[2]) : "both";
+	if (mode != "tabs" && mode != "tree" && mode != "both") return 2;
+	for (bool Tree : {false, true}) {
+		if (mode == "both" || (Tree ? mode == "tree" : mode == "tabs"))
+			Cases.value(QString::fromUtf8(argv[1]))(Tree);
+	}
+	std::printf("PASS: %s (%s)\n", argv[1], qPrintable(mode));
 	return 0;
 }

@@ -2393,8 +2393,10 @@ bool CSettingsWindow::apply()
 		if (!SaveIniSection())
 			return false;
 	}
-	else
+	else {
+		ReloadDirtySettings();
 		SaveSettings();
+	}
 	m_SettingsDirty = false;
 	LoadSettings();
 	return true;
@@ -2517,15 +2519,21 @@ void CSettingsWindow::OnTab()
 	OnTab(ui.tabs->currentWidget());
 }
 
+void CSettingsWindow::ReloadDirtySettings()
+{
+	// LoadSettings skips the service-backed fields while disconnected, so keep the invalidation until it can read them.
+	if (!m_SettingsDirty || !theAPI->IsConnected())
+		return;
+	m_SettingsDirty = false;
+	LoadSettings();
+}
+
 void CSettingsWindow::OnTab(QWidget* pTab)
 {
 	m_pCurrentTab = pTab;
 
-	if (pTab != ui.tabEdit && m_SettingsDirty)
-	{
-		m_SettingsDirty = false;
-		LoadSettings();
-	}
+	if (pTab != ui.tabEdit)
+		ReloadDirtySettings();
 
 	if (pTab == ui.tabSupport)
 	{

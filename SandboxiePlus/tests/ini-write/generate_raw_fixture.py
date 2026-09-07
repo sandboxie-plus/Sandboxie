@@ -24,6 +24,7 @@ def main() -> None:
     chunks.append(extract(options, re.escape("void COptionsWindow::OnTab(QWidget*")))
     settings = (args.source_root / "SandMan/Windows/SettingsWindow.cpp").read_text(encoding="utf-8-sig")
     chunks.append(extract(settings, re.escape("void CSettingsWindow::OnTab(QWidget*")))
+    chunks.append(extract(settings, re.escape("void CSettingsWindow::ReloadDirtySettings(")))
     args.output.mkdir(parents=True, exist_ok=True)
     (args.output / 'raw_ini_under_test.inc').write_text('\n\n'.join(chunks) + '\n', encoding='utf-8')
     (args.output / 'raw_ini_return.inc').write_text('\n'.join(declarations) + '\n', encoding='utf-8')

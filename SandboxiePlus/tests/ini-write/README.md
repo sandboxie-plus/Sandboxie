@@ -45,7 +45,7 @@ separate from these injected regression tests.
 
 ## Raw INI editor regressions
 
-A second executable, `raw_ini_test`, adds twenty-two cases for the raw editor in
+A second executable, `raw_ini_test`, adds twenty-eight cases for the raw editor in
 both the sandbox options and global settings dialogs. Save, Apply and OK must
 retain the text, cursor selection, undo history and edit controls on a reported
 write failure. They must not reload or close the dialog. Reconnecting and retrying
@@ -63,7 +63,11 @@ view is otherwise only reloaded after a successful raw save. The pending
 cases then detour through the support, add-ons or a common tab, change a
 real checkbox and move on: the reload must happen on the first structured
 tab, never later over the new edit, and a successful Apply or Save must
-leave no invalidation behind.
+leave no invalidation behind. Apply/OK straight after cancelling reconcile
+the form through `ReloadDirtySettings` before `SaveSettings`, so the stale
+`ForceBoxDocs` checkbox is not written back; while disconnected the
+invalidation is kept because the real loader skips service-backed fields.
+Every case also accepts a `tabs` or `tree` argument to run one mode alone.
 Invalidating the structured view does not report success or reload over the
 active raw editor; it prevents stale fields after leaving it.
 

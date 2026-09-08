@@ -424,7 +424,7 @@ protected:
 	bool RunImBox(const QStringList& Arguments);
 
 	void LoadConfig();
-	void SaveConfig();
+	bool SaveConfig();
 	void UpdateCurrentTab();
 
 	void CreateGeneral();
@@ -572,7 +572,7 @@ protected:
 	void SaveFolders();
 
 	void LoadIniSection();
-	void SaveIniSection();
+	bool SaveIniSection();
 
 	void ApplyIniEditFont();
 	

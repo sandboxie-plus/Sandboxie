@@ -749,6 +749,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.btnAddCompat, SIGNAL(clicked(bool)), this, SLOT(OnAddCompat()));
 	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
 	m_CompatLoaded = 0;
+	m_SettingsDirty = false;
 	m_CompatChanged = false;
 	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
 
@@ -2386,20 +2387,27 @@ void CSettingsWindow::SaveSettings()
 }
 
 
-void CSettingsWindow::apply()
+bool CSettingsWindow::apply()
 {
-	if (!ui.btnEditIni->isEnabled())
-		SaveIniSection();
-	else
+	if (!ui.btnEditIni->isEnabled()) {
+		if (!SaveIniSection())
+			return false;
+	}
+	else {
+		ReloadDirtySettings();
+		if (m_SettingsDirty)
+			return false;
 		SaveSettings();
+	}
+	m_SettingsDirty = false;
 	LoadSettings();
+	return true;
 }
 
 void CSettingsWindow::ok()
 {
-	apply();
-
-	this->close();
+	if (apply())
+		this->close();
 }
 
 void CSettingsWindow::reject()
@@ -2513,9 +2521,21 @@ void CSettingsWindow::OnTab()
 	OnTab(ui.tabs->currentWidget());
 }
 
+void CSettingsWindow::ReloadDirtySettings()
+{
+	// LoadSettings skips the service-backed fields while disconnected, so keep the invalidation until it can read them.
+	if (!m_SettingsDirty || !theAPI->IsConnected())
+		return;
+	m_SettingsDirty = false;
+	LoadSettings();
+}
+
 void CSettingsWindow::OnTab(QWidget* pTab)
 {
 	m_pCurrentTab = pTab;
+
+	if (pTab != ui.tabEdit)
+		ReloadDirtySettings();
 
 	if (pTab == ui.tabSupport)
 	{
@@ -2980,8 +3000,10 @@ void CSettingsWindow::OnAutoCompletionToggled(int state)
 
 void CSettingsWindow::OnSaveIni()
 {
-	SaveIniSection();
+	if (!SaveIniSection())
+		return;
 	SetIniEdit(false);
+	m_SettingsDirty = false;
 	LoadSettings();
 }
 
@@ -3015,13 +3037,20 @@ void CSettingsWindow::LoadIniSection()
 	m_HoldChange = false;
 }
 
-void CSettingsWindow::SaveIniSection()
+bool CSettingsWindow::SaveIniSection()
 {
-	if(theAPI->IsConnected())
-		//theAPI->SbieIniSet("GlobalSettings", "", ui.txtIniSection->toPlainText());
-		theAPI->SbieIniSet("GlobalSettings", "", m_pCodeEdit->GetCode());
+	if (!theAPI->IsConnected()) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("Sandboxie is not connected."));
+		return false;
+	}
 
-	//LoadIniSection();
+	m_SettingsDirty = true; // A reported failure can still leave partially applied changes.
+	SB_STATUS Status = theAPI->SbieIniSet("GlobalSettings", "", m_pCodeEdit->GetCode());
+	if (!Status) {
+		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
+		return false;
+	}
+	return true;
 }
 
 QVariantMap GetRunEntry(const QString& sEntry)

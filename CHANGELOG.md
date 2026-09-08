@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added the `Show Future Settings` editor setting (enabled by default) to include future-version settings in SandMan INI completion candidates
 
 ### Fixed
+- fixed stale identity profile edits overwriting newer serials and saves racing profile removal
 - fixed stale INI completion-popup candidate tooltips during editing and limited `Template`/`TemplateReject` tooltips to setting-name text
 - fixed SandMan File Panel "Create Shortcut" producing a shortcut without a working directory, so the sandboxed program inherited SandMan's current directory and applications that open their data files by relative path failed to find them [#5542](https://github.com/sandboxie-plus/Sandboxie/issues/5542)
 - fixed wrong return type ein sbiesvc

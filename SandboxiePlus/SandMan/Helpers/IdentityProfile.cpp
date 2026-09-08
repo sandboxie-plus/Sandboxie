@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QLockFile>
 #include <QRandomGenerator>
 #include <QRegularExpression>
 #include <QSaveFile>
@@ -231,6 +232,25 @@ bool CIdentityProfileStore::Save(CIdentityProfile& Profile, QString* pError)
 		if (pError) *pError = QString("cannot create %1").arg(m_Dir);
 		return false;
 	}
+	QLockFile Lock(PathFor(Profile.Id) + ".lock");
+	Lock.setStaleLockTime(0);
+	if (!Lock.tryLock(0)) {
+		if (pError) *pError = "cannot lock the identity profile for saving";
+		return false;
+	}
+	if (QFile::exists(PathFor(Profile.Id))) {
+		CIdentityProfile Current;
+		if (!Load(Profile.Id, Current, pError))
+			return false;
+		if (Current.Revision != Profile.Revision) {
+			if (pError) *pError = "the identity profile changed; reopen it before saving";
+			return false;
+		}
+	}
+	else if (Profile.Revision != 0) {
+		if (pError) *pError = "the identity profile was removed; reopen the profile list";
+		return false;
+	}
 	CIdentityProfile Next = Profile;
 	QString Now = QDateTime::currentDateTimeUtc().toString(Qt::ISODate);
 	if (Next.Created.isEmpty()) Next.Created = Now;
@@ -253,6 +273,12 @@ bool CIdentityProfileStore::Remove(const QString& Id, QString* pError)
 {
 	if (!CIdentityProfile::IsValidId(Id)) {
 		if (pError) *pError = "malformed profile id";
+		return false;
+	}
+	QLockFile Lock(PathFor(Id) + ".lock");
+	Lock.setStaleLockTime(0);
+	if (!Lock.tryLock(0)) {
+		if (pError) *pError = "cannot lock the identity profile for removal";
 		return false;
 	}
 	QFile File(PathFor(Id));

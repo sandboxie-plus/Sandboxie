@@ -21,6 +21,7 @@ target_link_libraries(identity_profile_test PRIVATE Qt${QT_VERSION_MAJOR}::Core 
 foreach(case
     normalize-device normalize-serial validate-invalid json-corrupt
     store-roundtrip store-atomic-failure store-list-skips-bad store-remove
+    store-stale-writer store-locked-writer
     regenerate-explicit clone-new-id import-new-id export-atomic
     bind-apply bind-two-boxes bind-refuses-running bind-refuses-manual
     bind-stale-after-regenerate bind-diverged bind-missing bind-unbind

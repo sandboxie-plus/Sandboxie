@@ -2,6 +2,7 @@
 #include <QDir>
 #include <QFile>
 #include <QJsonDocument>
+#include <QLockFile>
 #include <QMap>
 #include <QSet>
 #include <QTemporaryDir>
@@ -200,6 +201,42 @@ static void StoreRoundtrip()
 		CHECK(Store.Load(Profile.Id, Again) && Again.Name == "renamed" && Again.Revision == 2);
 		CHECK(Again.Volumes == Profile.Volumes);
 	}
+}
+
+static void StoreStaleWriter()
+{
+	QTemporaryDir Dir; CHECK(Dir.isValid());
+	CIdentityProfileStore First(Dir.path()), Second(Dir.path());
+	CIdentityProfile Profile = MakeProfile("original");
+	CHECK(First.Save(Profile));
+	CIdentityProfile Stale; CHECK(Second.Load(Profile.Id, Stale));
+	Profile.Volumes[0].Serial = "1234-5678";
+	CHECK(First.Save(Profile));
+	Stale.Name = "stale rename";
+	QString Error;
+	CHECK(!Second.Save(Stale, &Error) && Error.contains("changed"));
+	CIdentityProfile Loaded; CHECK(First.Load(Profile.Id, Loaded));
+	CHECK(Loaded.ToJson() == Profile.ToJson() && Stale.Revision == 1);
+	CHECK(Second.Load(Profile.Id, Stale));
+	Stale.Name = "fresh rename";
+	CHECK(Second.Save(Stale) && Stale.Revision == 3);
+	CHECK(First.Remove(Profile.Id));
+	CHECK(!Second.Save(Stale, &Error) && !QFile::exists(Second.PathFor(Profile.Id)));
+}
+
+static void StoreLockedWriter()
+{
+	QTemporaryDir Dir; CHECK(Dir.isValid());
+	CIdentityProfileStore Store(Dir.path());
+	CIdentityProfile Profile = MakeProfile("locked");
+	CHECK(Store.Save(Profile));
+	QLockFile Lock(Store.PathFor(Profile.Id) + ".lock");
+	CHECK(Lock.tryLock(0));
+	QString Error;
+	CHECK(!Store.Save(Profile, &Error) && !Error.isEmpty());
+	CHECK(!Store.Remove(Profile.Id, &Error));
+	Lock.unlock();
+	CHECK(Store.Save(Profile) && Profile.Revision == 2);
 }
 
 static void StoreAtomicFailure()
@@ -707,6 +744,7 @@ int main(int argc, char** argv)
 		{"normalize-device", NormalizeDevice}, {"normalize-serial", NormalizeSerial},
 		{"validate-invalid", ValidateInvalid}, {"json-corrupt", JsonCorrupt},
 		{"store-roundtrip", StoreRoundtrip}, {"store-atomic-failure", StoreAtomicFailure},
+		{"store-stale-writer", StoreStaleWriter}, {"store-locked-writer", StoreLockedWriter},
 		{"store-list-skips-bad", StoreListSkipsBad}, {"store-remove", StoreRemove},
 		{"regenerate-explicit", RegenerateExplicit}, {"clone-new-id", CloneNewId},
 		{"import-new-id", ImportNewId}, {"export-atomic", ExportAtomic},

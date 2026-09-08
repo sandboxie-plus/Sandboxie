@@ -20,14 +20,16 @@ the offscreen platform. On Windows the selected Qt DLL directory must be on
 
 | Evidence | What it is | What it proves |
 | --- | --- | --- |
-| Simulated tests (this target) | 28 CTest cases over the real model, store, binding and dialog code with injected storage and box | Persistence, validation, atomic save, revision/staleness, two boxes, templates untouched, host untouched, dialog flows |
+| Simulated tests (this target) | 30 CTest cases over the real model, store, binding and dialog code with injected storage and box | Persistence, validation, atomic save, revision/staleness, two boxes, templates untouched, host untouched, dialog flows |
 | Build | `SandMan.exe` and `QSbieAPI.dll` built with MSVC from the same commit | The Advanced page integration, `.ui` widgets and project registration compile and link |
 | Runtime | Manual, see [RUNTIME.md](RUNTIME.md) and `volume_probe.ps1` | What a process inside a bound sandbox actually observes from `GetVolumeInformationByHandleW`, and that the host is unchanged; run on Windows with Sandboxie installed |
 
 The cases: `normalize-device`, `normalize-serial`, `validate-invalid`,
 `json-corrupt`; `store-roundtrip` (second store instance stands in for a new
 process), `store-atomic-failure` (commit blocked, previous file intact, no
-temporaries left), `store-list-skips-bad`, `store-remove`;
+temporaries left), `store-list-skips-bad`, `store-remove`, `store-stale-writer`
+(a stale editor cannot overwrite a newer revision or recreate a deleted profile),
+`store-locked-writer` (save and remove refuse a competing profile lock);
 `regenerate-explicit` (edit+save never changes serials, only `Regenerate`
 does), `clone-new-id`, `import-new-id`, `export-atomic`; `bind-apply`,
 `bind-two-boxes` (two profiles, three boxes, regeneration only reaches

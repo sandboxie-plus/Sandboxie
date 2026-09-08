@@ -43,8 +43,12 @@ void CAddonManager::UpdateAddons()
 
 void CAddonManager::OnUpdateData(const QVariantMap& Data, const QVariantMap& Params)
 {
-    if (Data.isEmpty() || Data["error"].toBool())
+    if (Data.isEmpty() || Data["error"].toBool()) {
+        if (Data.contains("errorMsg"))
+            QMessageBox::warning(theGUI, "Sandboxie-Plus", 
+                tr("Updater failed to perform add-on operation, error: %1").arg(Data["errorMsg"].toString()));
         return;
+    }
 
     QVariantMap Addons = Data["addons"].toMap();
 

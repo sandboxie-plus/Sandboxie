@@ -15,7 +15,9 @@
 #include "Helpers/RedactedStackExport.h"
 
 #define CHECK(condition) do { if (!(condition)) { \
-	std::fprintf(stderr, "FAIL at line %d: %s\n", __LINE__, #condition); std::exit(1); \
+	std::fprintf(stdout, "FAIL at line %d: %s\n", __LINE__, #condition); \
+	std::fprintf(stderr, "FAIL at line %d: %s\n", __LINE__, #condition); \
+	std::fflush(stdout); std::fflush(stderr); std::exit(1); \
 } } while (0)
 
 //---------------------------------------------------------------------------

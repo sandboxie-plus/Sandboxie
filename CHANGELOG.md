@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.18.4 / 5.73.4] - 2026-09-06
 
 ### Added
+- added a redacted stack-trace export in the SandMan trace view: the local stack details stay in the dialog, `Copy` and `Save` produce a share view built from an allow-list (opaque per-report module ids, no paths, no absolute addresses/offsets, no module or symbol names) and the atomic writer never falls back to a direct write
 - added low-noise `SbieTrace` logging for `Shell_NotifyIconW` calls, including the message, icon identity (`NIF_GUID`/GUID or `HWND`/`uID`), and effective direct/proxy route
 - added the `Show Future Settings` editor setting (enabled by default) to include future-version settings in SandMan INI completion candidates
 

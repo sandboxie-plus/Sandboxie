@@ -29,6 +29,8 @@ public:
 	bool WithTemplates = false;
 	bool Refresh = true;
 	int Commits = 0;
+	CSbieIni* GetAPI() { return this; }
+	bool IsConnected() const { return true; }
 
 	SB_STATUS SetBoolSafe(const QString& Setting, bool Value);
 	SB_STATUS UpdateTextList(const QString& Setting, const QStringList& List, bool withTemplates);
@@ -83,6 +85,7 @@ public:
 	CSbieIni Box;
 	SBoxPointer m_pBox{&Box};
 	bool m_Template = false;
+	bool m_ConfigDirty = false;
 	QString m_Password;
 	qint64 m_ImageSize = 0;
 	QStringList Desired{"HarddiskVolume1,1234-ABCD"};

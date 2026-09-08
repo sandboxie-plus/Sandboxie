@@ -47,6 +47,7 @@ struct SStorage {
 		return {};
 	}
 	bool IsConnected() const { return Connected; }
+	SStorage* GetAPI() { return this; }
 	QString GetName() const { return "SyntheticBox"; }
 	QString GetText(const QString&) const { return "y"; }
 	QString GetBoxImagePath() const { return {}; }
@@ -143,6 +144,7 @@ public:
 	SBoxPointer m_pBox{&Storage};
 	QWidget* m_pCurrentTab = nullptr;
 	QString StructuredCode = Storage.Persisted;
+	int StaleStructuredSaves = 0;
 	void OnTab(QWidget*);
 	bool m_Template = false, m_GeneralChanged = false, m_ConfigDirty = false;
 	QString m_Password;
@@ -155,8 +157,12 @@ public:
 	void OnIniChanged();
 	void OnCancelEdit();
 	void OnSetPassword() { CHECK(false); }
-	bool SaveConfig() { ++StructuredSaves; return true; }
-	void LoadConfig() { ++Loads; m_ConfigDirty = false; StructuredCode = Storage.Persisted; }
+	bool SaveConfig() {
+		++StructuredSaves;
+		if (m_GeneralChanged && StructuredCode != Storage.Persisted) ++StaleStructuredSaves;
+		return true;
+	}
+	void LoadConfig() { ++Loads; m_ConfigDirty = false; m_GeneralChanged = false; StructuredCode = Storage.Persisted; }
 };
 class CSettingsWindow : public SEditorWindow {
 public:
@@ -370,6 +376,33 @@ static void PartialCancelReload(bool tree)
 	CHECK(Window.Storage.Writes == 1 && Window.Closed == 0 && Gui.Errors.size() == 1);
 }
 
+static void BoxCancelThenStructuredSave(bool tree, bool offline)
+{
+	for (const auto& Action : {"apply", "ok"}) {
+		COptionsWindow Window(tree);
+		Window.m_GeneralChanged = true;
+		Window.SetIniEdit(true);
+		Window.Storage.Fail = true;
+		Window.Storage.PartialWrite = true;
+		Window.OnSaveIni();
+		Window.OnCancelEdit();
+		Window.Storage.Fail = false;
+		Window.Storage.Connected = !offline;
+		Invoke(Window, Action);
+		CHECK(Window.StaleStructuredSaves == 0);
+		if (offline) {
+			CHECK(Window.StructuredSaves == 0 && Window.m_ConfigDirty && Window.Closed == 0);
+			Window.OnTab(Window.ui.tabs->widget(0));
+			CHECK(Window.m_ConfigDirty && Window.Loads == 0);
+			Window.Storage.Connected = true;
+			Invoke(Window, Action);
+		}
+		CHECK(Window.StaleStructuredSaves == 0 && !Window.m_ConfigDirty);
+		CHECK(Window.StructuredCode == Window.Storage.Persisted);
+		CHECK(Window.Closed == (QString(Action) == "ok" ? 1 : 0));
+	}
+}
+
 static void GlobalPartialCancelReload(bool tree)
 {
  CSettingsWindow Window(tree);
@@ -513,6 +546,8 @@ int main(int argc, char** argv)
 		{"global-cancel", Cancel<CSettingsWindow>}, {"global-structured", Structured},
 		{"box-partial", PartialFailureRetry<COptionsWindow>}, {"global-partial", PartialFailureRetry<CSettingsWindow>},
 		{"box-partial-cancel", PartialCancelReload}, {"global-partial-cancel", GlobalPartialCancelReload},
+		{"box-partial-cancel-save", [](bool tree) { BoxCancelThenStructuredSave(tree, false); }},
+		{"box-partial-cancel-offline", [](bool tree) { BoxCancelThenStructuredSave(tree, true); }},
 		{"global-support-pending", GlobalSupportPending}, {"global-addons-pending", GlobalAddonsPending},
 		{"global-common-pending", GlobalCommonPending}, {"global-apply-clean", GlobalApplyClean},
 		{"global-saveini-clean", GlobalSaveIniClean},

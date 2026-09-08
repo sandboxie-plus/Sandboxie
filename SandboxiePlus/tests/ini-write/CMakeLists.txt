@@ -27,6 +27,10 @@ add_custom_command(
     VERBATIM
 )
 add_executable(raw_ini_test raw_ini_test.cpp raw_ini_under_test.inc raw_ini_return.inc)
+foreach(case box-partial-cancel-save box-partial-cancel-offline)
+    add_test(NAME raw_ini_${case} COMMAND raw_ini_test ${case})
+    set_tests_properties(raw_ini_${case} PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+endforeach()
 set_target_properties(raw_ini_test PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED YES)
 target_include_directories(raw_ini_test PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
 target_link_libraries(raw_ini_test PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

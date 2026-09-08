@@ -1322,6 +1322,11 @@ bool COptionsWindow::apply()
 	}
 	else
 	{
+		if (m_ConfigDirty) {
+			if (!m_pBox->GetAPI()->IsConnected())
+				return false;
+			LoadConfig();
+		}
 		if (m_GeneralChanged) {
 			auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 			if (ui.chkEncrypt->isChecked() && !QFile::exists(pBoxEx->GetBoxImagePath())) {
@@ -1461,7 +1466,7 @@ void COptionsWindow::OnTab(QWidget* pTab)
 	}
 	else 
 	{
-		if (m_ConfigDirty)
+		if (m_ConfigDirty && m_pBox->GetAPI()->IsConnected())
 			LoadConfig();
 
 		UpdateCurrentTab();

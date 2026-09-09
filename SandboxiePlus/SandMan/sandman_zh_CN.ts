@@ -668,7 +668,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="1135"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation>7-Zip 压缩包 (*.7z);;Zip 压缩包 (*.zip);;所有 压缩包 (*.7z *.zip)</translation>
+        <translation>7-Zip 压缩包 (*.7z);;Zip 压缩包 (*.zip);;所有压缩包 (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1172"/>
@@ -1575,7 +1575,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="682"/>
         <source>Separate user folders</source>
-        <translation>隔离不同用户的文件夹</translation>
+        <translation>为每个用户创建单独的文件夹</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="687"/>
@@ -9890,7 +9890,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="481"/>
         <source>Separate user folders</source>
-        <translation>隔离不同用户的文件夹</translation>
+        <translation>为每个用户创建单独的文件夹</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="461"/>

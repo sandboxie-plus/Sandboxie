@@ -658,22 +658,22 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="1074"/>
         <source>Failed to open archive (%1): %2</source>
-        <translation>无法打开归档 (%1): %2</translation>
+        <translation>无法打开压缩包 (%1): %2</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1134"/>
         <source>Select Archives</source>
-        <translation>选择归档</translation>
+        <translation>选择压缩包</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1135"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation>7-Zip 归档 (*.7z);;Zip 归档 (*.zip);;所有 归档 (*.7z *.zip)</translation>
+        <translation>7-Zip 压缩包 (*.7z);;Zip 压缩包 (*.zip);;所有压缩包 (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1172"/>
         <source>The selected archives do not contain any sandbox data.</source>
-        <translation>选中的归档未包含沙盒数据。</translation>
+        <translation>选中的压缩包未包含沙盒数据。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1198"/>
@@ -1575,7 +1575,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="682"/>
         <source>Separate user folders</source>
-        <translation>区分用户文件夹</translation>
+        <translation>为每个用户创建单独的文件夹</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="687"/>
@@ -3307,7 +3307,7 @@ Do you wish to enable autocomplete?</source>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="576"/>
         <source>Don&apos;t ask in future</source>
-        <translation>以后不再询问</translation>
+        <translation>不再询问</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="585"/>
@@ -5567,7 +5567,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="1932"/>
         <source>This box will be &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;encrypted&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;access to sandboxed processes will be guarded&lt;/a&gt;.</source>
-        <translation>该沙盒将会被 &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;加密&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;，对沙盒内容的访问会被保护&lt;/a&gt;。</translation>
+        <translation>该沙盒将被&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;加密&lt;/a&gt;，且&lt;a href=&quot;sbie://docs/black-box&quot;&gt;对沙盒进程的访问会被保护&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2009"/>
@@ -8057,12 +8057,12 @@ Do you wish to enable autocomplete?</source>
     <message>
         <source>Sandboxing compatibility is reliant on the configuration hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
         <oldsource>Sandboxing compatybility is relyent on the configuration hence attaching the sandboxie.ini helps a lot with finding the issue.</oldsource>
-        <translation type="vanished">沙盒的兼容性取决于配置，因此附加 Sandboxe.ini 文件有助于发现问题。</translation>
+        <translation type="vanished">沙盒的兼容性取决于配置，因此附加 Sandboxie.ini 文件有助于发现问题。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="832"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
-        <translation>沙盒的兼容性取决于配置，因此附加 Sandboxe.ini 文件有助于发现问题。</translation>
+        <translation>沙盒的兼容性取决于配置，因此附加 Sandboxie.ini 文件有助于发现问题。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="835"/>
@@ -8945,7 +8945,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/CompressDialog.ui" line="48"/>
         <source>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</source>
-        <translation>固实压缩通过将多个文件视为单个连续数据块来提高压缩率。它是大量小文件的理想选择，会使归档更加紧凑，但可能会增加提取单个文件所需的时间。</translation>
+        <translation>固实压缩通过将多个文件视为单个连续数据块来提高压缩率。它是大量小文件的理想选择，会使压缩包更加紧凑，但可能会增加提取单个文件所需的时间。</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="51"/>
@@ -9890,7 +9890,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="481"/>
         <source>Separate user folders</source>
-        <translation>隔离不同用户的文件夹</translation>
+        <translation>为每个用户创建单独的文件夹</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="461"/>

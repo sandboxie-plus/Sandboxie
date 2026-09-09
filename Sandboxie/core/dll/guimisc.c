@@ -59,6 +59,24 @@ static BOOL Gui_BlockInput(BOOL fBlockIt);
 
 static UINT Gui_SendInput(ULONG nInputs, LPINPUT pInputs, ULONG cbInput);
 
+static HWND Gui_GetActiveWindow(void);
+
+static HWND Gui_GetForegroundWindow(void);
+
+static HWND Gui_GetFocus(void);
+
+static BOOL Gui_GetGUIThreadInfo(DWORD idThread, LPGUITHREADINFO lpgui);
+
+static void CALLBACK Gui_WinEventHookProc(
+    HWINEVENTHOOK hWinEventHook, DWORD event, HWND hwnd,
+    LONG idObject, LONG idChild, DWORD idEventThread, DWORD dwmsEventTime);
+
+static HWINEVENTHOOK Gui_SetWinEventHook(
+    UINT eventMin, UINT eventMax, HMODULE hmodWinEventProc,
+    WINEVENTPROC pfnWinEventProc, DWORD idProcess, DWORD idThread, DWORD dwFlags);
+
+static BOOL Gui_UnhookWinEvent(HWINEVENTHOOK hWinEventHook);
+
 static HDESK Gui_OpenInputDesktop(
     DWORD dwFlags, BOOL fInherit, ACCESS_MASK dwDesiredAccess);
 
@@ -177,6 +195,20 @@ static HANDLE Gui_DummyInputDesktopHandle = NULL;
 
        BOOLEAN Gui_DontAllowCoverTaskbar = FALSE;
 
+       BOOLEAN Gui_AlwaysActive = FALSE;
+
+typedef struct _GUI_WIN_EVENT_HOOK {
+
+    LIST_ELEM list_elem;
+    HWINEVENTHOOK hHook;
+    WINEVENTPROC origProc;
+
+} GUI_WIN_EVENT_HOOK;
+
+static CRITICAL_SECTION Gui_WinEventHooksCritSec;
+static LIST Gui_WinEventHooks;
+static BOOLEAN Gui_WinEventHooksInitialized = FALSE;
+
 
 //---------------------------------------------------------------------------
 // Gui_InitMisc
@@ -211,6 +243,23 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
         SBIEDLL_HOOK_GUI(BringWindowToTop);
         SBIEDLL_HOOK_GUI(SwitchToThisWindow);
         SBIEDLL_HOOK_GUI(SetActiveWindow);
+
+		if (Gui_AlwaysActive) {
+			InitializeCriticalSection(&Gui_WinEventHooksCritSec);
+			List_Init(&Gui_WinEventHooks);
+			Gui_WinEventHooksInitialized = TRUE;
+
+			SBIEDLL_HOOK_GUI(GetForegroundWindow);
+			SBIEDLL_HOOK_GUI(GetActiveWindow);
+			SBIEDLL_HOOK_GUI(GetFocus);
+			SBIEDLL_HOOK_GUI(GetGUIThreadInfo);
+			// SetWinEventHook is hooked so we can proxy the callback and
+			// filter out events that would reveal the boxed window is not
+			// really active; a pre-existing hook on the export is chained
+			// by SbieDll_Hook automatically
+			SBIEDLL_HOOK_GUI(SetWinEventHook);
+			SBIEDLL_HOOK_GUI(UnhookWinEvent);
+		}
 		
         if (Gui_UseBlockCapture) {
             SBIEDLL_HOOK_GUI(GetWindowDC);
@@ -1773,4 +1822,330 @@ _FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt)
 	if (Gui_BlockInterferenceControl)
 		return;
 	__sys_SwitchToThisWindow(hWnd, fAlt);
+}
+
+//---------------------------------------------------------------------------
+//Gui_GetActiveWindow
+//---------------------------------------------------------------------------
+HWND Gui_PreviousActiveWindow = NULL;
+static HWND Gui_GetActiveWindow(void)
+{
+	//
+	// GetActiveWindow is per-thread, so track the previous active window
+	// in the calling thread's TLS data rather than a process-global value
+	//
+
+	if (Gui_AlwaysActive) {
+		THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+		if (TlsData && TlsData->gui_active_window && __sys_IsWindow(TlsData->gui_active_window))
+			return TlsData->gui_active_window;
+	}
+	return __sys_GetActiveWindow();
+}
+
+static HWND Gui_GetForegroundWindow(void)
+{
+	if (Gui_AlwaysActive && Gui_PreviousActiveWindow && __sys_IsWindow(Gui_PreviousActiveWindow))
+		return Gui_PreviousActiveWindow;
+	return __sys_GetForegroundWindow();
+}
+
+static HWND Gui_GetFocus(void)
+{
+	HWND hwnd = __sys_GetFocus();
+	if (hwnd)
+		return hwnd;
+
+	//
+	// the calling thread currently has no keyboard focus; under AlwaysActive
+	// return the most recently focused window instead, provided it
+	// is still valid (otherwise fall back to NULL)
+	//
+
+	if (Gui_AlwaysActive) {
+		THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+		if (TlsData && TlsData->gui_focus_window && __sys_IsWindow(TlsData->gui_focus_window))
+			return TlsData->gui_focus_window;
+	}
+	return NULL;
+}
+
+static BOOL Gui_GetGUIThreadInfo(DWORD idThread, LPGUITHREADINFO lpgui)
+{
+	BOOLEAN bSubstitute = FALSE;
+	BOOL ret;
+
+	//
+	// an idThread of 0 queries the foreground thread; under AlwaysActive the
+	// boxed thread is not really foreground, so the real call reports no
+	// active window and leaks the deactivation.  Query the boxed thread's
+	// own info instead and overwrite the reported active/focus windows with
+	// the always-active window
+	//
+
+	if (Gui_AlwaysActive && idThread == 0 && lpgui) {
+
+		HWND hwnd = NULL;
+
+		THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+		if (TlsData && TlsData->gui_active_window && __sys_IsWindow(TlsData->gui_active_window))
+			hwnd = TlsData->gui_active_window;
+		else if (Gui_PreviousActiveWindow && __sys_IsWindow(Gui_PreviousActiveWindow))
+			hwnd = Gui_PreviousActiveWindow;
+
+		if (hwnd) {
+			ULONG tid = __sys_GetWindowThreadProcessId(hwnd, NULL);
+			if (tid) {
+				idThread = tid;
+				bSubstitute = TRUE;
+			}
+		}
+	}
+
+	ret = __sys_GetGUIThreadInfo(idThread, lpgui);
+
+	if (bSubstitute && ret && lpgui) {
+
+		THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+		HWND hwndActive = NULL;
+		HWND hwndFocus = NULL;
+
+		if (TlsData && TlsData->gui_active_window && __sys_IsWindow(TlsData->gui_active_window))
+			hwndActive = TlsData->gui_active_window;
+		else if (Gui_PreviousActiveWindow && __sys_IsWindow(Gui_PreviousActiveWindow))
+			hwndActive = Gui_PreviousActiveWindow;
+
+		if (TlsData && TlsData->gui_focus_window && __sys_IsWindow(TlsData->gui_focus_window))
+			hwndFocus = TlsData->gui_focus_window;
+
+		if (hwndActive) {
+			lpgui->hwndActive = hwndActive;
+			lpgui->hwndFocus = hwndFocus ? hwndFocus : hwndActive;
+		}
+	}
+
+	return ret;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_SetWinEventHook
+//---------------------------------------------------------------------------
+
+
+static HWINEVENTHOOK Gui_SetWinEventHook(
+    UINT eventMin, UINT eventMax, HMODULE hmodWinEventProc,
+    WINEVENTPROC pfnWinEventProc, DWORD idProcess, DWORD idThread, DWORD dwFlags)
+{
+    WINEVENTPROC proc = pfnWinEventProc;
+    GUI_WIN_EVENT_HOOK *ghk = NULL;
+
+    //
+    // use a proxy callback as the first stage handler:  inside the proxy we
+    // filter out events that would reveal that a boxed window lost activation
+    // and forward the rest to the original callback.  if the callback was
+    // already wrapped (e.g. re-registration), pass it through unchanged.
+    // note that if the SetWinEventHook export itself was already hooked by
+    // another component, SbieDll_Hook already chained to it when the hook
+    // was installed in Gui_InitMisc
+    //
+
+    if (Gui_AlwaysActive && (dwFlags & WINEVENT_INCONTEXT) == 0 &&
+            pfnWinEventProc && pfnWinEventProc != Gui_WinEventHookProc) {
+
+        //
+        // allocate the tracking entry before installing the proxy:  if the
+        // allocation fails, install the hook with the original callback so
+        // that no events are silently dropped
+        //
+
+        ghk = Dll_Alloc(sizeof(GUI_WIN_EVENT_HOOK));
+        if (ghk)
+            proc = Gui_WinEventHookProc;
+    }
+
+    HWINEVENTHOOK hHook = __sys_SetWinEventHook(
+        eventMin, eventMax, hmodWinEventProc, proc, idProcess, idThread, dwFlags);
+
+    if (hHook && ghk) {
+
+        ghk->hHook = hHook;
+        ghk->origProc = pfnWinEventProc;
+        EnterCriticalSection(&Gui_WinEventHooksCritSec);
+        List_Insert_After(&Gui_WinEventHooks, NULL, ghk);
+        LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+    }
+    else if (ghk)
+        Dll_Free(ghk);
+
+    return hHook;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_UnhookWinEvent
+//---------------------------------------------------------------------------
+
+
+static BOOL Gui_UnhookWinEvent(HWINEVENTHOOK hWinEventHook)
+{
+    GUI_WIN_EVENT_HOOK *ghk;
+    BOOL bRet;
+
+    //
+    // unhook first; only drop the tracking entry once the system hook is
+    // really gone, otherwise a failed unhook would leave a live hook with no
+    // mapping and its callbacks would be silently dropped
+    //
+
+    bRet = __sys_UnhookWinEvent(hWinEventHook);
+    if (! bRet)
+        return bRet;
+
+    EnterCriticalSection(&Gui_WinEventHooksCritSec);
+    for (ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
+            ghk; ghk = (GUI_WIN_EVENT_HOOK *)ghk->list_elem.next) {
+        if (ghk->hHook == hWinEventHook) {
+            List_Remove(&Gui_WinEventHooks, ghk);
+            Dll_Free(ghk);
+            break;
+        }
+    }
+    LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+
+    return bRet;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_WinEventHookProc
+//---------------------------------------------------------------------------
+
+
+static void CALLBACK Gui_WinEventHookProc(
+    HWINEVENTHOOK hWinEventHook, DWORD event, HWND hwnd,
+    LONG idObject, LONG idChild, DWORD idEventThread, DWORD dwmsEventTime)
+{
+    WINEVENTPROC origProc = NULL;
+    GUI_WIN_EVENT_HOOK *ghk;
+    BOOLEAN bFilter = FALSE;
+
+    EnterCriticalSection(&Gui_WinEventHooksCritSec);
+    for (ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
+            ghk; ghk = (GUI_WIN_EVENT_HOOK *)ghk->list_elem.next) {
+        if (ghk->hHook == hWinEventHook) {
+            origProc = ghk->origProc;
+            break;
+        }
+    }
+    LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+
+    if (! origProc)
+        return;
+
+    //
+    // under AlwaysActive, filter out activation/focus events that would
+    // reveal that the boxed window is not actually the active/foreground
+    // window.  Only events whose window belongs to a different process are
+    // filtered; intra-process focus changes (e.g. EVENT_OBJECT_FOCUS on a
+    // child window) must be passed through to the original callback
+    //
+
+    if (Gui_AlwaysActive && Gui_PreviousActiveWindow && hwnd) {
+
+        DWORD pid = 0;
+        BOOLEAN bExternal = (__sys_GetWindowThreadProcessId(hwnd, &pid)
+                             && pid != Dll_ProcessId);
+
+        switch (event) {
+        case EVENT_SYSTEM_FOREGROUND:
+        case EVENT_SYSTEM_SWITCHSTART:
+        case EVENT_SYSTEM_SWITCHEND:
+        case EVENT_OBJECT_FOCUS:
+            if (bExternal)
+                bFilter = TRUE;
+            break;
+        }
+    }
+
+    if (! bFilter)
+        origProc(hWinEventHook, event, hwnd, idObject, idChild, idEventThread, dwmsEventTime);
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_UninitMisc
+//---------------------------------------------------------------------------
+
+
+_FX VOID Gui_UninitMisc(void)
+{
+    GUI_WIN_EVENT_HOOK *ghk;
+    GUI_WIN_EVENT_HOOK *ghk_next;
+    HWINEVENTHOOK *handles;
+    ULONG count;
+    ULONG i;
+
+    //
+    // tear down the WinEvent hook tracking state initialized in Gui_InitMisc.
+    // Detach the entries from the list while holding the lock, but call user32
+    // (UnhookWinEvent) only after releasing it: unhooking can wait on an
+    // in-flight callback, and that callback needs the same critical section,
+    // so holding the lock across the unhook would deadlock
+    //
+
+    if (! Gui_WinEventHooksInitialized)
+        return;
+
+    handles = NULL;
+    count = 0;
+
+    EnterCriticalSection(&Gui_WinEventHooksCritSec);
+    count = List_Count(&Gui_WinEventHooks);
+    if (count) {
+        handles = Dll_Alloc(count * sizeof(HWINEVENTHOOK));
+        if (handles) {
+            i = 0;
+            for (ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
+                    ghk; ghk = ghk_next) {
+                ghk_next = (GUI_WIN_EVENT_HOOK *)List_Next(ghk);
+                handles[i++] = ghk->hHook;
+                List_Remove(&Gui_WinEventHooks, ghk);
+                Dll_Free(ghk);
+            }
+            count = i;
+        }
+    }
+    LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+
+    if (! handles && count) {
+        //
+        // Allocation failure: fall back to unhooking one-by-one without holding
+        // the critical section, so we don't leave live hooks after deleting it.
+        //
+        while (1) {
+            EnterCriticalSection(&Gui_WinEventHooksCritSec);
+            ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
+            if (ghk)
+                List_Remove(&Gui_WinEventHooks, ghk);
+            LeaveCriticalSection(&Gui_WinEventHooksCritSec);
+
+            if (! ghk)
+                break;
+
+            __sys_UnhookWinEvent(ghk->hHook);
+            Dll_Free(ghk);
+        }
+        count = 0;
+    }
+
+    Gui_WinEventHooksInitialized = FALSE;
+
+    if (handles) {
+        for (i = 0; i < count; i++)
+            __sys_UnhookWinEvent(handles[i]);
+        Dll_Free(handles);
+    }
+
+    DeleteCriticalSection(&Gui_WinEventHooksCritSec);
 }

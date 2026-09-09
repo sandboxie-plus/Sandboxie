@@ -97,6 +97,7 @@ typedef struct _WFP_PROCESS {
 	HANDLE ProcessId;
 	BOOLEAN LogTraffic;
 	BOOLEAN BlockInternet;
+	BOOLEAN BlockPrivateNet;
 	BOOLEAN BlockLoopback;
 	LIST NetFwRules;
 
@@ -141,6 +142,8 @@ void WFP_classify(
 	const FWPS_FILTER1 * filter, // FWPS_FILTER1 is the latest supported by windows 7
 	UINT64 flowContext,
 	FWPS_CLASSIFY_OUT * classifyOut);
+
+BOOLEAN WFP_isPrivateNet(const IP_ADDRESS* ip);
 
 /*	The "notifyFn" callout function for this Callout.
 This function manages setting up global resources and a worker thread
@@ -673,6 +676,77 @@ finish:
 
 
 //---------------------------------------------------------------------------
+// WFP_isPrivateNet
+//---------------------------------------------------------------------------
+/*static _FX ULONG WFP_htonl(ULONG x) {
+	return ((x & 0x000000FF) << 24) |
+		((x & 0x0000FF00) << 8) |
+		((x & 0x00FF0000) >> 8) |
+		((x & 0xFF000000) >> 24);
+}
+BOOLEAN WFP_isPrivateNet(const IP_ADDRESS* ip)
+{
+	if (ip->Data32[0] == 0 &&
+		ip->Data32[1] == 0 &&
+		ip->Data32[2] == 0xFFFF0000)
+	{
+		UINT32 ipv4_host = ip->Data32[3];  
+
+		if ((ipv4_host & 0xFF000000) == 0x0A000000)
+			return TRUE;
+		// 172.16.0.0/12
+		if ((ipv4_host & 0xFFF00000) == 0xAC100000)
+			return TRUE;
+		// 192.168.0.0/16
+		if ((ipv4_host & 0xFFFF0000) == 0xC0A80000)
+			return TRUE;
+		// ��·���� 169.254.0.0/16
+		if ((ipv4_host & 0xFFFF0000) == 0xA9FE0000)
+			return TRUE;
+		return FALSE;
+	}
+
+	if ((ip->Data[0] & 0xFE) == 0xFC)
+		return TRUE;
+
+	if (ip->Data[0] == 0xFE && (ip->Data[1] & 0xC0) == 0x80)
+		return TRUE;
+
+	return FALSE;
+}*/
+BOOLEAN WFP_isPrivateNet(const IP_ADDRESS* ip)
+{
+	// IPv4-mapped IPv6 address
+	if (ip->Data32[0] == 0 && ip->Data32[1] == 0 && ip->Data32[2] == 0xFFFF0000)
+	{
+		UINT32 ipv4_net = ((UINT32)ip->Data[12] << 24) |
+			((UINT32)ip->Data[13] << 16) |
+			((UINT32)ip->Data[14] << 8) |
+			ip->Data[15];
+
+		if ((ipv4_net & 0xFF000000) == 0x0A000000)      // 10.0.0.0/8
+			return TRUE;
+		if ((ipv4_net & 0xFFF00000) == 0xAC100000)      // 172.16.0.0/12
+			return TRUE;
+		if ((ipv4_net & 0xFFFF0000) == 0xC0A80000)      // 192.168.0.0/16
+			return TRUE;
+		if ((ipv4_net & 0xFFFF0000) == 0xA9FE0000)      // 169.254.0.0/16
+			return TRUE;
+		return FALSE;
+	}
+
+	// IPv6 unique local (FC00::/7)
+	if ((ip->Data[0] & 0xFE) == 0xFC)
+		return TRUE;
+
+	// IPv6 link-local (FE80::/10)
+	if (ip->Data[0] == 0xFE && (ip->Data[1] & 0xC0) == 0x80)
+		return TRUE;
+
+	return FALSE;
+}
+
+//---------------------------------------------------------------------------
 // WFP_UpdateProcess
 //---------------------------------------------------------------------------
 
@@ -688,6 +762,7 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 	HANDLE processId = proc->pid;
 	BOOLEAN LogTraffic = FALSE;
 	BOOLEAN BlockInternet = FALSE;
+	BOOLEAN BlockPrivateNet = FALSE;
 	BOOLEAN BlockLoopback = FALSE;
 	LIST NewNetFwRules, OldNetFwRules;
 	
@@ -710,6 +785,8 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 			BlockInternet = TRUE; // on roule failure we lust block everything
 			// todo: log error
 		}
+		BlockPrivateNet = Process_GetConf_bool(proc, L"BlockPrivateNet", FALSE);
+
 		
 		BlockLoopback = Process_GetConf_bool(proc, L"BlockLocalLoop", FALSE);
 	}
@@ -725,6 +802,7 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 
 		wfp_proc->LogTraffic = LogTraffic;
 		wfp_proc->BlockInternet = BlockInternet;
+		wfp_proc->BlockPrivateNet = BlockPrivateNet;
 		wfp_proc->BlockLoopback = BlockLoopback;
 
 		if (ok) {
@@ -878,6 +956,8 @@ void WFP_classify(
 
 		BOOLEAN log = FALSE;
 		BOOLEAN block = FALSE;
+		BOOLEAN private = FALSE;
+		BOOLEAN isprivate = FALSE;
 		BOOLEAN noloop = FALSE;
 		BOOLEAN isloopback = FALSE;
 
@@ -900,6 +980,12 @@ void WFP_classify(
 			noloop = wfp_proc->BlockLoopback;
 			isloopback = WFP_isLoopback(&remote_ip);
 			if (isloopback && noloop) {
+				block = TRUE;
+			}
+
+			private = wfp_proc->BlockPrivateNet;
+			isprivate = WFP_isPrivateNet(&remote_ip);
+			if (isprivate && private) {
 				block = TRUE;
 			}
 

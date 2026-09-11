@@ -10260,7 +10260,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4605"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
-        <translation>使用启发式方法识别基于 Electron/Chromium 的流程</translation>
+        <translation>使用启发式方法识别基于 Electron/Chromium 的进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5128"/>
@@ -12338,7 +12338,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="382"/>
         <source>Test 3: Proxy Server latency</source>
-        <translation>测试 3 ：代理服务器的链接延迟</translation>
+        <translation>测试 3 ：代理服务器的连接延迟</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="416"/>

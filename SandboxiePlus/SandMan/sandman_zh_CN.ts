@@ -2807,12 +2807,12 @@ Choose autocomplete mode:
         <location filename="Windows/OptionsForce.cpp" line="345"/>
         <source>For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets.</source>
         <oldsource>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</oldsource>
-        <translation>出于安全原因，不允许创建完全是通配符的BreakoutDocument预设。</translation>
+        <translation>出于安全原因，不允许创建完全是通配符的 BreakoutDocument 预设。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="355"/>
         <source>For security reasons the specified extension %1 should not be broken out.</source>
-        <translation>出于安全原因，不应分离指定的%1扩展名。</translation>
+        <translation>出于安全原因，不应分离指定的 %1 扩展名。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="412"/>

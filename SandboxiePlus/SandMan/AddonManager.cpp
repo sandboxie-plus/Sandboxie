@@ -7,6 +7,7 @@
 #include <QUrlQuery>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QSettings>
 #include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 #include <QtConcurrent>
 #include "../../SandboxieTools/UpdUtil/UpdUtil.h"
@@ -85,8 +86,9 @@ QList<CAddonInfoPtr> CAddonManager::GetAddons()
 			bool Installed = false;
 			
 			QString Key = pAddon->GetSpecificEntry("uninstallKey").toString();
-			if (!Key.isEmpty()) {
-				if(theGUI->GetCompat()->CheckRegistryKey(Key)) {
+			if (!Key.isEmpty() && theGUI->GetCompat()->CheckRegistryKey(Key)) {
+				QSettings reg(Key, QSettings::NativeFormat);
+				if (!reg.value("UninstallString").toString().isEmpty()) {
 					Installed = true;
 					m_Installed.append(CAddonPtr(new CAddon(pAddon->Data)));
 				}

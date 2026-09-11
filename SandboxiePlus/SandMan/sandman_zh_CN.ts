@@ -584,7 +584,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="1135"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation>7-Zip 归档 (*.7z);;Zip 归档 (*.zip);;所有 归档 (*.7z *.zip)</translation>
+        <translation>7-Zip 归档 (*.7z);;Zip 归档 (*.zip);;所有归档 (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1172"/>
@@ -605,7 +605,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="1064"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation>无法打开存档，密码不正确？</translation>
+        <translation>无法打开归档，密码不正确？</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1186"/>
@@ -615,7 +615,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="1214"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
-        <translation>沙盒“%1”已存在。 其配置将被覆盖。 继续？</translation>
+        <translation>沙盒“%1”已存在。其配置将被覆盖。继续吗？</translation>
     </message>
 </context>
 <context>
@@ -2812,7 +2812,7 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/OptionsForce.cpp" line="355"/>
         <source>For security reasons the specified extension %1 should not be broken out.</source>
-        <translation>出于安全原因，不应分离指定的加载项名%1。</translation>
+        <translation>出于安全原因，不应分离指定的%1扩展名。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="412"/>
@@ -3565,7 +3565,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="932"/>
         <source>%1 file(s) hidden by AutoRecoverIgnore</source>
-        <translation>%1个文件因 自动恢复忽略 所隐藏</translation>
+        <translation>%1 个文件因 自动恢复忽略 所隐藏</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="1283"/>
@@ -6054,7 +6054,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="261"/>
         <source>Disable Force Rules</source>
-        <translation>禁用“强制强制沙盒化规则”</translation>
+        <translation>禁用“强制沙盒化规则”</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="275"/>
@@ -7395,7 +7395,7 @@ Try submitting without the log attached.</source>
         <location filename="Wizards/BoxAssistant.cpp" line="1057"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
         <oldsource>Your issue report have been successfully submitted, thank you.</oldsource>
-        <translation>您的问题报告已成功提交，谢谢。</translation>
+        <translation>您的问题报告已成功提交，感谢。</translation>
     </message>
 </context>
 <context>
@@ -7408,7 +7408,7 @@ Try submitting without the log attached.</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1070"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
-        <translation>即将就绪, 点击完成按钮结束沙盒创建向导。</translation>
+        <translation>即将就绪，点击“完成”按钮结束沙盒创建向导。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1079"/>
@@ -7419,7 +7419,7 @@ Try submitting without the log attached.</source>
         <location filename="Wizards/NewBoxWizard.cpp" line="1090"/>
         <source>Skip this summary page when advanced options are not set</source>
         <oldsource>Don&apos;t show the summary page in future (unless advanced options were set)</oldsource>
-        <translation>以后不再显示总结页面 (除非启用高级选项)</translation>
+        <translation>以后不再显示总结页面（除非启用高级选项）</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
@@ -7516,7 +7516,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="163"/>
         <source>This is a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;exclusive Insider build&lt;/a&gt; of Sandboxie-Plus it is only available to &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Supporters&lt;/a&gt; on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.</source>
-        <translation>这是一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider独占版本构建&lt;/a&gt; 的Sandboxie-Plus。其仅对于等级更高的（如项目贡献者/HUGE/赞助者证书拥有者）的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 赞助者&lt;/a&gt; 可用。</translation>
+        <translation>这是一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider 独占版本构建&lt;/a&gt; 的 Sandboxie-Plus。其仅对于等级更高的（如项目贡献者/HUGE/赞助者证书拥有者）的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 赞助者&lt;/a&gt; 可用。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="169"/>
@@ -7527,7 +7527,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/SupportDialog.cpp" line="171"/>
         <source>&lt;b&gt;There seems to be however %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
         <oldsource>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</oldsource>
-        <translation>&lt;b&gt;似乎您的网络中存在了 %1个 Sandboxie-Plus 实例， &lt;font color=&apos;red&apos;&gt;您需要获得额外的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;赞助者证书&lt;/a&gt;&lt;/font&gt;。&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>&lt;b&gt;您的网络中似乎存在 %1 个 Sandboxie-Plus 实例， &lt;font color=&apos;red&apos;&gt;您需要获得额外的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;赞助者证书&lt;/a&gt;&lt;/font&gt;。&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="178"/>
@@ -7555,12 +7555,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/SupportDialog.cpp" line="191"/>
         <source>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</source>
         <oldsource>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should to be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</oldsource>
-        <translation>安装的赞助者证书&lt;b&gt;已过期&lt;/b&gt;，&lt;u&gt;应当更新&lt;/u&gt;。&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>安装的赞助者证书&lt;b&gt;已过期&lt;/b&gt;，&lt;u&gt;且需要更新&lt;/u&gt;。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="193"/>
         <source>&lt;b&gt;You have been using Sandboxie-Plus for more than %1 days now.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>&lt;b&gt;已经使用 Sandboxie-Plus 超过 %1 天了。&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>&lt;b&gt;您已使用 Sandboxie-Plus 超过 %1 天了。&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="196"/>
@@ -8752,7 +8752,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4403"/>
         <source>Ignore Extension</source>
-        <translation>忽略加载项名</translation>
+        <translation>忽略扩展名</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4449"/>
@@ -9074,18 +9074,18 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4683"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation>当一个程序试图加载一个沙盒内部的DLL 文件时，提示问题代码 SBIE1305</translation>
+        <translation>当一个程序试图加载一个沙盒内部的 DLL 文件时，提示问题代码 SBIE1305</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4676"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation>阻止安装在宿主上的沙盒程序从沙盒内部加载DLL(DLL)文件</translation>
+        <translation>阻止安装在宿主上的沙盒程序从沙盒内部加载 DLL 文件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4615"/>
         <source>Dlls &amp;&amp; Extensions</source>
-        <translation>Dll &amp;&amp; 扩展名</translation>
+        <translation>Dll &amp;&amp; 扩展</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4664"/>
@@ -9955,7 +9955,7 @@ SBIE2115：文件没有被迁移，文件将以只读方式打开</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4092"/>
         <source>Login</source>
-        <translation>登陆</translation>
+        <translation>登录</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4097"/>
@@ -12276,7 +12276,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="172"/>
         <source>Login:</source>
-        <translation>登陆：</translation>
+        <translation>登录：</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="179"/>

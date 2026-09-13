@@ -105,6 +105,11 @@ public:
 	static const char* HideSetting;
 	static const char* SerialSetting;
 
+	static bool WillApplyProfile(const QString& Selected, const QString& Bound, SIdentityBindingState::EState State)
+	{
+		return !Selected.isEmpty()
+			&& (Selected != Bound || State == SIdentityBindingState::eStale || State == SIdentityBindingState::eDiverged);
+	}
 	static SIdentityBindingState Read(const CIdentityIniTarget& Target, const CIdentityProfileStore& Store);
 	static bool Apply(CIdentityIniTarget& Target, const CIdentityProfile& Profile, QString* pError = nullptr);
 	static bool Unbind(CIdentityIniTarget& Target, QString* pError = nullptr);

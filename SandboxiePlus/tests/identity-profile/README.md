@@ -20,7 +20,7 @@ the offscreen platform. On Windows the selected Qt DLL directory must be on
 
 | Evidence | What it is | What it proves |
 | --- | --- | --- |
-| Simulated tests (this target) | 30 CTest cases over the real model, store, binding and dialog code with injected storage and box | Persistence, validation, atomic save, revision/staleness, two boxes, templates untouched, host untouched, dialog flows |
+| Simulated tests (this target) | 32 CTest cases over the real model, store, binding and dialog code with injected storage and box | Persistence, validation, atomic save, revision/staleness, two boxes, templates untouched, host untouched, dialog flows |
 | Build | `SandMan.exe` and `QSbieAPI.dll` built with MSVC from the same commit | The Advanced page integration, `.ui` widgets and project registration compile and link |
 | Runtime | Manual, see [RUNTIME.md](RUNTIME.md) and `volume_probe.ps1` | What a process inside a bound sandbox actually observes from `GetVolumeInformationByHandleW`, and that the host is unchanged; run on Windows with Sandboxie installed |
 
@@ -38,7 +38,11 @@ re-applied boxes), `bind-refuses-running`, `bind-refuses-manual`,
 `bind-keeps-templates`, `bind-write-failure`, `host-untouched` (only the
 profile directory and the box target change), `bind-deferred-commit` (writes
 stay invisible until `Flush()`, as with SbieSvc while SandMan batches a save;
-a commit that drops them is reported); `dialog-new-edit`,
+a commit that drops them is reported), `bind-deferred-checkbox-save` (selecting
+a profile in the same save as unchecking the serial checkbox preserves the
+profile-owned setting), `bind-missing-checkbox-save` (an unchanged missing
+binding leaves its editable checkbox under the standalone save path);
+`dialog-new-edit`,
 `dialog-clone-regenerate`, `dialog-import-export`, `dialog-delete-guard`.
 
 A passing run here is not runtime validation of the hook, of SbieSvc

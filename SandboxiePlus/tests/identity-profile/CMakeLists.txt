@@ -26,6 +26,7 @@ foreach(case
     bind-apply bind-two-boxes bind-refuses-running bind-refuses-manual
     bind-stale-after-regenerate bind-diverged bind-missing bind-unbind
     bind-keeps-templates bind-write-failure host-untouched bind-deferred-commit
+    bind-deferred-checkbox-save bind-missing-checkbox-save
     dialog-new-edit dialog-clone-regenerate dialog-import-export dialog-delete-guard)
     add_test(NAME identity_${case} COMMAND identity_profile_test ${case})
     set_tests_properties(identity_${case} PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")

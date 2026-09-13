@@ -676,7 +676,11 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkHideFirmware, "HideFirmwareInfo", "y", "");
 	WriteAdvancedCheck(ui.chkHideUID, "RandomRegUID", "y", "");
-	WriteAdvancedCheck(ui.chkHideSerial, "HideDiskSerialNumber", "y", "");
+	QString SelectedProfile = ui.cmbIdentityProfile->currentData().toString();
+	QString BoundProfile = ui.cmbIdentityProfile->property("boundId").toString();
+	SIdentityBindingState::EState BindingState = (SIdentityBindingState::EState)ui.cmbIdentityProfile->property("boundState").toInt();
+	if (m_Template || !CIdentityProfileBinding::WillApplyProfile(SelectedProfile, BoundProfile, BindingState))
+		WriteAdvancedCheck(ui.chkHideSerial, "HideDiskSerialNumber", "y", "");
 	SaveIdentityProfile();
 	WriteAdvancedCheck(ui.chkHideMac, "HideNetworkAdapterMAC", "y", "");
 

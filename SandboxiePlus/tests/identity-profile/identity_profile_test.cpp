@@ -41,6 +41,7 @@ struct SFakeBox : public CIdentityIniTarget
 	bool SetText(const QString& Setting, const QString& Value)
 	{
 		++Writes; if (FailWrites) return false;
+		if (Deferred && Values.value(Setting) == (QStringList() << Value)) return true;
 		Store()[Setting] = QStringList() << Value; return true;
 	}
 	bool AppendText(const QString& Setting, const QString& Value)
@@ -626,6 +627,54 @@ static void BindDeferredCommit()
 	CHECK(Lossy.Values.isEmpty());
 }
 
+static void BindDeferredCheckboxSave()
+{
+	QTemporaryDir Dir; CHECK(Dir.isValid());
+	CIdentityProfileStore Store(Dir.path());
+	CIdentityProfile Profile = MakeProfile("checkbox save", 2);
+	CHECK(Store.Save(Profile));
+
+	SFakeBox Legacy; Legacy.Deferred = true;
+	Legacy.Values["HideDiskSerialNumber"] = QStringList() << "y";
+	CHECK(Legacy.DelValue("HideDiskSerialNumber", QString()));
+	QString Error;
+	CHECK(!CIdentityProfileBinding::Apply(Legacy, Profile, &Error) && Error.contains("read back"));
+	CHECK(!Legacy.Values.contains("HideDiskSerialNumber"));
+
+	SFakeBox Box; Box.Deferred = true;
+	Box.Values["HideDiskSerialNumber"] = QStringList() << "y";
+	QString Selected = Profile.Id;
+	QString Bound;
+	bool HideSerialChecked = false;
+	if (!CIdentityProfileBinding::WillApplyProfile(Selected, Bound, SIdentityBindingState::eUnbound)) {
+		if (HideSerialChecked) CHECK(Box.SetText("HideDiskSerialNumber", "y"));
+		else CHECK(Box.DelValue("HideDiskSerialNumber", QString()));
+	}
+	CHECK(CIdentityProfileBinding::Apply(Box, Profile, &Error));
+	CHECK(Box.Values["HideDiskSerialNumber"] == (QStringList() << "y"));
+	CHECK(CIdentityProfileBinding::Read(Box, Store).State == SIdentityBindingState::eApplied);
+}
+
+static void BindMissingCheckboxSave()
+{
+	QTemporaryDir Dir; CHECK(Dir.isValid());
+	CIdentityProfileStore Store(Dir.path());
+	SFakeBox Box; Box.Deferred = true;
+	QString MissingId = CIdentityProfile::NewId();
+	Box.Values["IdentityProfile"] = QStringList() << MissingId;
+	Box.Values["HideDiskSerialNumber"] = QStringList() << "y";
+	SIdentityBindingState State = CIdentityProfileBinding::Read(Box, Store);
+	CHECK(State.State == SIdentityBindingState::eMissing);
+
+	QString Selected = State.ProfileId;
+	QString Bound = State.ProfileId;
+	if (!CIdentityProfileBinding::WillApplyProfile(Selected, Bound, State.State))
+		CHECK(Box.DelValue("HideDiskSerialNumber", QString()));
+	CHECK(Box.Flush());
+	CHECK(!Box.Values.contains("HideDiskSerialNumber"));
+	CHECK(Box.Values["IdentityProfile"] == (QStringList() << MissingId));
+}
+
 //---------------------------------------------------------------------------
 
 static void DialogNewEdit()
@@ -754,6 +803,8 @@ int main(int argc, char** argv)
 		{"bind-missing", BindMissing}, {"bind-unbind", BindUnbind},
 		{"bind-keeps-templates", BindKeepsTemplates}, {"bind-write-failure", BindWriteFailure},
 		{"host-untouched", HostUntouched}, {"bind-deferred-commit", BindDeferredCommit},
+		{"bind-deferred-checkbox-save", BindDeferredCheckboxSave},
+		{"bind-missing-checkbox-save", BindMissingCheckboxSave},
 		{"dialog-new-edit", DialogNewEdit}, {"dialog-clone-regenerate", DialogCloneRegenerate},
 		{"dialog-import-export", DialogImportExport}, {"dialog-delete-guard", DialogDeleteGuard}
 	};

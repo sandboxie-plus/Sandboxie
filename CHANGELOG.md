@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.18.4 / 5.73.4] - 2026-09-06
 
 ### Added
+- added per-sandbox identity profiles to SandMan (Advanced > Privacy): persistent, versioned volume serial profiles that are bound to a sandbox and written as `DiskSerialNumber`/`HideDiskSerialNumber`; covers the existing `GetVolumeInformationByHandleW` hook only. Saves take a per-profile lock and check the stored revision, so a stale editor cannot overwrite newer serials or recreate a removed profile
 - added low-noise `SbieTrace` logging for `Shell_NotifyIconW` calls, including the message, icon identity (`NIF_GUID`/GUID or `HWND`/`uID`), and effective direct/proxy route
 - added the `Show Future Settings` editor setting (enabled by default) to include future-version settings in SandMan INI completion candidates
 

@@ -8,7 +8,7 @@ From the repository root, with CMake and Visual Studio C++ Build Tools installed
 ```powershell
 cmake -S SandboxieTools/Tests/IniFile -B build/ini-file-x64 -A x64
 cmake --build build/ini-file-x64 --config Release
-ctest --test-dir build/ini-file-x64 -C Release --output-on-failure
+cmake -E chdir build/ini-file-x64 ctest -C Release --output-on-failure
 ```
 
 Use a separate build directory and `-A Win32` to test x86. To test the same cases

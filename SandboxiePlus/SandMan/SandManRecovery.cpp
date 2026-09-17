@@ -49,7 +49,7 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 		m_pPopUpWindow->AddFileToRecover(EffectiveFilePath, BoxPath, pBox, ProcessId);
 }
 
-bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool bCloseEmpty)
+bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool bCloseEmpty, bool* pbTakeSnapshot)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (!pBoxEx) return false;
@@ -58,10 +58,13 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool
 			return false;
 		if (bCloseEmpty) {
 			CRecoveryWindow* pRecoveryWnd = pBoxEx->m_pRecoveryWnd;
+			if (pBox->GetBool("AutoSnapCapture", false))
+				pRecoveryWnd->SetSnapAndDelete(true);
 			pRecoveryWnd->FindFiles();
 			if (SafeExec(pRecoveryWnd) != 1)
 				return false;
 			DeleteSnapshots = pRecoveryWnd->IsDeleteSnapshots();
+			if (pbTakeSnapshot) *pbTakeSnapshot = pRecoveryWnd->IsTakeSnapshot();
 			return true;
 		}
 		pBoxEx->m_pRecoveryWnd->close();
@@ -79,10 +82,13 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pRecoveryWnd = NULL;
 		});
+		if (bCloseEmpty && pBox->GetBool("AutoSnapCapture", false))
+			pRecoveryWnd->SetSnapAndDelete(true);
 		if (SafeExec(pBoxEx->m_pRecoveryWnd) != 1)
 			return false;
 	}
 	DeleteSnapshots = pRecoveryWnd->IsDeleteSnapshots();
+	if (pbTakeSnapshot) *pbTakeSnapshot = pRecoveryWnd->IsTakeSnapshot();
 	return true;
 }
 

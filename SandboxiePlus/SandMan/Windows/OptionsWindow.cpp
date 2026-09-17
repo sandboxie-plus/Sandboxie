@@ -511,7 +511,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		ui.chkShowStopTmpl->setEnabled(false);
 		ui.chkShowLeaderTmpl->setEnabled(false);
 		ui.chkShowStartTmpl->setEnabled(false);
-		ui.chkShowFilesTmpl->setEnabled(false);
 		ui.chkShowKeysTmpl->setEnabled(false);
 		ui.chkShowIPCTmpl->setEnabled(false);
 		ui.chkShowWndTmpl->setEnabled(false);
@@ -700,7 +699,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.treeNetFw->viewport()->installEventFilter(this);
 	ui.treeDns->viewport()->installEventFilter(this);
 	ui.treeProxy->viewport()->installEventFilter(this);
-	ui.treeFiles->viewport()->installEventFilter(this);
 	ui.treeKeys->viewport()->installEventFilter(this);
 	ui.treeIPC->viewport()->installEventFilter(this);
 	ui.treeWnd->viewport()->installEventFilter(this);
@@ -866,7 +864,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		&& (source == ui.treeCopy->viewport()
 			|| source == ui.treeINet->viewport() || source == ui.treeNetFw->viewport() 
 			// || source == ui.treeAccess->viewport()
-			|| source == ui.treeFiles->viewport() || source == ui.treeKeys->viewport() || source == ui.treeIPC->viewport() || source == ui.treeWnd->viewport() || source == ui.treeCOM->viewport() 
+			|| source == ui.treeKeys->viewport() || source == ui.treeIPC->viewport() || source == ui.treeWnd->viewport() || source == ui.treeCOM->viewport() 
 			|| (ui.treeOptions && source == ui.treeOptions->viewport())))
 	{
 		CloseCopyEdit(false);
@@ -912,7 +910,6 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		else if (isTreeViewport(ui.treeNetFw))		OnDelNetFwRule();
 		else if (isTreeViewport(ui.treeDns))			OnDelDnsFilter();
 		else if (isTreeViewport(ui.treeProxy))		OnDelNetProxy();
-		else if (isTreeViewport(ui.treeFiles))		OnDelFile();
 		else if (isTreeViewport(ui.treeKeys))			OnDelKey();
 		else if (isTreeViewport(ui.treeIPC))			OnDelIPC();
 		else if (isTreeViewport(ui.treeWnd))			OnDelWnd();
@@ -951,7 +948,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 	}
 
 	if (//source == ui.treeAccess->viewport() 
-		(source == ui.treeFiles->viewport() || source == ui.treeKeys->viewport() || source == ui.treeIPC->viewport() || source == ui.treeWnd->viewport() || source == ui.treeCOM->viewport())
+		(source == ui.treeKeys->viewport() || source == ui.treeIPC->viewport() || source == ui.treeWnd->viewport() || source == ui.treeCOM->viewport())
 		&& event->type() == QEvent::MouseButtonPress)
 	{
 		CloseAccessEdit();

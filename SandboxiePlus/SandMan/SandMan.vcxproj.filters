@@ -569,4 +569,36 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ProxyTunnels\ProxyProfile.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <ClInclude Include="ProxyTunnels\ProxyProfile.h">
+      <Filter>SandMan</Filter>
+    </ClInclude>
+    <ClCompile Include="ProxyTunnels\ProxyTunnel.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <QtMoc Include="ProxyTunnels\ProxyTunnel.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
+    <ClCompile Include="ProxyTunnels\ProxyManager.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <QtMoc Include="ProxyTunnels\ProxyManager.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
+    <ClCompile Include="ProxyTunnels\ProxyWindow.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <QtMoc Include="ProxyTunnels\ProxyWindow.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
+    <ClCompile Include="ProxyTunnels\ProxyIntegration.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <ClInclude Include="ProxyTunnels\ProxyIntegration.h">
+      <Filter>SandMan</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

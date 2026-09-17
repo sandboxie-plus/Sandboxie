@@ -117,6 +117,15 @@ void COptionsWindow::LoadNetwork()
 			ui.cmbNIC->setCurrentIndex(ui.cmbNIC->count() - 1);
 	}
 
+	// Keep a saved binding selectable when its adapter is temporarily absent.
+	// Otherwise saving unrelated options would silently replace it with "None".
+	if (!BindAdapter.isEmpty() && ui.cmbNIC->currentIndex() == 0) {
+		QVariantMap Missing;
+		Missing["Adapter"] = BindAdapter;
+		ui.cmbNIC->addItem(tr("%1 (unavailable; binding retained)").arg(BindAdapter), Missing);
+		ui.cmbNIC->setCurrentIndex(ui.cmbNIC->count() - 1);
+	}
+
 	OnAdapterChanged();
 
 	QStringList BindIPs = m_pBox->GetTextList("BindAdapterIP", false);

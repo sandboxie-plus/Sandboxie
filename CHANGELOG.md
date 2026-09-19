@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [Unreleased]
+
+### Fixed
+- fixed INI values with leading or trailing control characters not being deleted, causing entries to reappear after saving [#5552](https://github.com/sandboxie-plus/Sandboxie/issues/5552)
+
+
+
 ## [1.18.4 / 5.73.4] - 2026-09-06
 
 ### Added

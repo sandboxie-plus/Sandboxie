@@ -16,7 +16,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="157"/>
         <source>Protect Box Root from access by unsandboxed processes</source>
-        <translation>샌드박스 해제 프로세스에 의한 액세스로부터 박스 루트 보호</translation>
+        <translation>샌드박스 외부 프로세스의 접근으로부터 박스 루트 보호</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="103"/>
@@ -42,7 +42,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="34"/>
         <source>Repeat Password</source>
-        <translation>비밀번호 반복</translation>
+        <translation>비밀번호 확인</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="174"/>
@@ -52,7 +52,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="57"/>
         <source>Encryption Cipher</source>
-        <translation>암호화 암호</translation>
+        <translation>암호화 방식</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="83"/>
@@ -250,13 +250,13 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="934"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
-        <translation>호스트의 샌드박스된 프로그램이 샌드박스된 DLL을 로드하지 못하도록 방지</translation>
+        <translation>호스트에 설치된 샌드박스 프로그램이 샌드박스 내부의 DLL을 로드하지 못하도록 차단</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="935"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
         <oldsource>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</oldsource>
-        <translation>이 기능은 박스에 위치한 프로세스가 한 번 위치한 호스트에 기록되고 심지어 시작되는 것을 방지하기 때문에 호환성을 줄일 수 있습니다.</translation>
+        <translation>이 기능은 샌드박스 내부 프로세스가 호스트의 프로세스에 데이터를 쓰거나 해당 프로세스를 시작하는 것도 차단하므로 호환성이 떨어질 수 있습니다.</translation>
     </message>
     <message>
         <source>Prevents the sandboxed window from being captured.</source>
@@ -283,10 +283,10 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation>이 설정은 로컬 템플릿 또는 해당 설정을 샌드박스 구성에 추가하여 해당 템플릿의 설정이 sandboxes 간에 공유되도록 합니다.
-그러나 &apos;템플릿으로 사용&apos; 옵션을 공유 모드로 선택하면 사용자 인터페이스에 일부 설정이 반영되지 않을 수 있습니다.
-템플릿의 설정을 변경하려면 샌드박스 옵션 아래의 앱 템플릿 목록에서 &apos;%1&apos; 템플릿을 찾은 다음 해당 템플릿을 두 번 클릭하여 편집하기만 하면 됩니다.
-샌드박스에 대해 이 템플릿을 비활성화하려면 템플릿 목록에서 이 템플릿의 선택을 취소하기만 하면 됩니다.</translation>
+        <translation>이 설정은 로컬 템플릿 또는 해당 설정을 샌드박스 구성에 추가하여 여러 샌드박스에서 같은 설정을 공유하도록 합니다.
+단, 공유 모드에서 &apos;템플릿으로 사용&apos;을 선택하면 일부 설정이 사용자 인터페이스에 표시되지 않을 수 있습니다.
+템플릿 설정을 변경하려면 샌드박스 옵션의 앱 템플릿 목록에서 &apos;%1&apos; 템플릿을 찾아 두 번 클릭해 편집하세요.
+특정 샌드박스에서 이 템플릿을 사용하지 않으려면 템플릿 목록에서 선택을 해제하세요.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="955"/>
@@ -439,7 +439,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Engine/BoxEngine.cpp" line="202"/>
         <source>Uncaught exception at line %1: %2</source>
-        <translation>%1행에서 예외가 발견되지 않음: %2</translation>
+        <translation>%1행에서 처리되지 않은 예외 발생: %2</translation>
     </message>
 </context>
 <context>
@@ -489,9 +489,9 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
-        <translation>경고: 짧은 비밀번호는 단순한 강제 기술을 사용하여 해독하기 쉽습니다!
+        <translation>경고: 짧은 비밀번호는 무차별 대입 공격으로 쉽게 해독될 수 있습니다!
 
-20자 이상으로 구성된 비밀번호를 선택하는 것이 좋습니다. 짧은 비밀번호를 사용하시겠습니까?</translation>
+20자 이상의 비밀번호를 사용하는 것이 좋습니다. 그래도 짧은 비밀번호를 사용하시겠습니까?</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="150"/>
@@ -499,8 +499,8 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
         <translation>비밀번호는 최대 128자로 제한됩니다.
-이 길이는 실제 영어 단어로 구성된 암호로 약 384비트의 엔트로피를 허용합니다,
-리트 (L337) 음성 수정을 적용하면 512비트로 증가하며, 완전히 무작위로 인쇄할 수 있는 ASCII 문자로 구성된 경우 768비트를 초과합니다.</translation>
+실제 영어 단어로 구성된 암호문은 약 384비트의 엔트로피를 제공하며,
+리트(Leet, L337) 표기법을 적용하면 약 512비트, 완전히 무작위인 출력 가능한 ASCII 문자로 구성하면 768비트를 초과할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="167"/>
@@ -546,12 +546,12 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="89"/>
         <source>Import As</source>
-        <translation>다름 이름으로 가져오기</translation>
+        <translation>다른 이름으로 가져오기</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="89"/>
         <source>Conflict</source>
-        <translation>갈등</translation>
+        <translation>충돌</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="89"/>
@@ -692,7 +692,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="657"/>
         <source>Select Export Folder</source>
-        <translation>폴더 내보내기 선택</translation>
+        <translation>내보낼 폴더 선택</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="696"/>
@@ -756,7 +756,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="1214"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
-        <translation>샌드박스 &apos;%1&apos;이 이미 존재합니다. 해당 구성이 덮어쓰게 됩니다. 계속하시겠습니까?</translation>
+        <translation>샌드박스 &apos;%1&apos;이 이미 존재합니다. 기존 구성을 덮어씁니다. 계속하시겠습니까?</translation>
     </message>
 </context>
 <context>
@@ -769,7 +769,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="341"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
-        <translation>샌드박스는 호스트 시스템을 박스 내에서 실행되는 프로세스로부터 격리시켜 호스트 시스템이 컴퓨터의 다른 프로그램 및 데이터를 영구적으로 변경할 수 없도록 합니다. </translation>
+        <translation>샌드박스는 박스 내부에서 실행되는 프로세스를 호스트 시스템과 격리하여, 해당 프로세스가 컴퓨터의 다른 프로그램이나 데이터를 영구적으로 변경하지 못하도록 합니다. </translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="344"/>
@@ -813,7 +813,7 @@ The entire user profile remains hidden, ensuring maximum security.</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="438"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox</source>
-        <translation>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;보안 강화&lt;/a&gt; Sandbox</translation>
+        <translation>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;보안 강화&lt;/a&gt; 샌드박스</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="439"/>
@@ -898,7 +898,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="484"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation>표준 분리 샌드박스 (기본값)</translation>
+        <translation>표준 격리 샌드박스 (기본값)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="486"/>
@@ -956,7 +956,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="858"/>
         <source>Force the Web Browser to run in this sandbox</source>
-        <translation>이 샌드박스에서 웹 브라우저 실행</translation>
+        <translation>웹 브라우저를 이 샌드박스에서 강제로 실행</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="862"/>
@@ -3004,7 +3004,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="86"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation>표준 분리 샌드박스 (기본값)</translation>
+        <translation>표준 격리 샌드박스 (기본값)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="88"/>
@@ -4550,7 +4550,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="834"/>
         <location filename="SandMan.cpp" line="5156"/>
         <source>About Sandboxie-Plus</source>
-        <translation>Sandboxie-Plus 정보 - 번역: 비너스걸</translation>
+        <translation>Sandboxie-Plus 정보 - 번역: 꿈을꾸는 파랑새</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1078"/>
@@ -5032,7 +5032,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3972"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
-        <translation>모든 sandboxes의 모든 프로세스를 종료하시겠습니까?</translation>
+        <translation>모든 샌드박스에서 실행 중인 프로세스를 모두 종료하시겠습니까?</translation>
     </message>
     <message>
         <source>Terminate all without asking</source>
@@ -5146,7 +5146,7 @@ No will choose: %2</source>
     <message>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2024 by DavidXanatos&lt;/p&gt;</source>
         <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</oldsource>
-        <translation type="vanished">&lt;h3&gt;Sandboxie-Plus 정보 - 한국어: VenusGirl&lt;/h3&gt;&lt;p&gt;버전 %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2024 by DavidXanatos&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;h3&gt;Sandboxie-Plus 정보 - 한국어: 꿈을꾸는 파랑새&lt;/h3&gt;&lt;p&gt;버전 %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2024 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <source>This copy of Sandboxie+ is certified for: %1</source>
@@ -10220,7 +10220,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="4696"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
-        <translation>Sandboxies 기능은 SbieDll.dll에 의해 시작할 때 각 샌드박스 프로세스에 로드될 수 있는 옵션 DLL을 사용하여 향상될 수 있습니다. 전역 설정의 애드온 관리자는 몇 가지 유용한 확장 기능을 제공합니다. 일단 설치되면 현재 박스에 대해 활성화할 수 있습니다.</translation>
+        <translation>Sandboxie 기능은 SbieDll.dll이 샌드박스 프로세스 시작 시 불러오는 선택적 DLL을 통해 확장할 수 있습니다. 전역 설정의 추가 기능 관리자에서 유용한 확장 기능을 설치할 수 있으며, 설치한 뒤 현재 박스에서 활성화할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2041"/>
@@ -10250,12 +10250,12 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2173"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>사용자 정의 Sandboxie 토큰을 사용하면 개별 Sandboxie를 서로 더 잘 분리할 수 있으며, 작업 관리자의 사용자 열에 프로세스가 속한 박스의 이름이 표시됩니다. 그러나 일부 타사 보안 솔루션에는 사용자 지정 토큰에 문제가 있을 수 있습니다.</translation>
+        <translation>사용자 지정 Sandboxie 토큰을 사용하면 각 샌드박스를 서로 더 효과적으로 격리할 수 있으며, 작업 관리자의 사용자 열에 해당 프로세스가 속한 박스 이름이 표시됩니다. 다만 일부 타사 보안 솔루션에서는 사용자 지정 토큰과 호환성 문제가 발생할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2187"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
-        <translation>원래 토큰을 제거하는 대신 새 샌드박스 토큰 생성</translation>
+        <translation>기존 토큰의 권한을 축소하는 대신 새 샌드박스 토큰 생성</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2278"/>
@@ -12218,7 +12218,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="180"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation>샌드맨 시작 시 sandboxes의 자동 삭제 상태 확인</translation>
+        <translation>SandMan 시작 시 샌드박스의 자동 삭제 상태 확인</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="693"/>

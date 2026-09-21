@@ -23,6 +23,7 @@ CSetupWizard::CSetupWizard(int iOldLevel, QWidget *parent)
     }
     if (iOldLevel < SETUP_LVL_2)
         setPage(Page_Update, new CSBUpdate);
+    setPage(Page_Security, new CSecurityPage);
     setPage(Page_Finish, new CFinishPage);
 
     setWizardStyle(ModernStyle);
@@ -251,7 +252,7 @@ CCertificatePage::CCertificatePage(int iOldLevel, QWidget *parent)
     if (iOldLevel < SETUP_LVL_1)
         m_NextPage = CSetupWizard::Page_UI;
     else if (iOldLevel < SETUP_LVL_3)
-        m_NextPage = CSetupWizard::Page_Finish;
+        m_NextPage = CSetupWizard::Page_Security;
 
     QGridLayout *layout = new QGridLayout;
 
@@ -749,6 +750,44 @@ void CSBUpdate::UpdateOptions()
 }
 
 int CSBUpdate::nextId() const
+{
+    return CSetupWizard::Page_Security;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CSecurityPage
+// 
+
+CSecurityPage::CSecurityPage(QWidget *parent)
+    : QWizardPage(parent)
+{
+    setTitle(tr("Security Tips"));
+    setSubTitle(tr("Keep the following considerations in mind when configuring your sandboxes."));
+
+    QVBoxLayout *layout = new QVBoxLayout;
+
+    m_pTopLabel = new QLabel(tr("Please avoid configuring weak sandbox options as much as possible, as the isolation between sandboxes is not always reliable. "
+        "This is especially true when the 'Sandboxed Desktop' feature from the Insider version is not in use. "
+        "Even a malicious program running in a strongly configured sandbox may interact with a weakly configured sandbox and escape. "
+        "Always adhere to the barrel principle: the weakest configured sandbox defines the overall security baseline."));
+    m_pTopLabel->setWordWrap(true);
+    layout->addWidget(m_pTopLabel);
+
+    QWidget* pSpacer = new QWidget();
+    pSpacer->setMinimumHeight(24);
+    layout->addWidget(pSpacer);
+
+    m_pWarningLabel = new QLabel(tr("Always treat the weakest configured sandbox as your expected line of defense!"));
+    m_pWarningLabel->setWordWrap(true);
+    m_pWarningLabel->setStyleSheet("QLabel { color : red; font-weight : bold; }");
+    layout->addWidget(m_pWarningLabel);
+
+    layout->addStretch(1);
+
+    setLayout(layout);
+}
+
+int CSecurityPage::nextId() const
 {
     return CSetupWizard::Page_Finish;
 }

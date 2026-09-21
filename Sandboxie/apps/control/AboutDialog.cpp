@@ -156,7 +156,7 @@ BOOL CAboutDialog::OnInitDialog()
     //
     //
 
-    text.Format(L"%S\r\n%S", MY_COPYRIGHT_STRING, MY_COPYRIGHT_STRING_OLD);
+    text.Format(L"%s\r\n%s", _T(MY_COPYRIGHT_STRING), _T(MY_COPYRIGHT_STRING_OLD));
     GetDlgItem(ID_ABOUT_COPYRIGHT)->SetWindowText(text);
 
     __declspec(align(8)) SCertInfo CertInfo = { 0 };

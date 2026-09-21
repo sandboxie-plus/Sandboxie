@@ -397,7 +397,7 @@ _FX void *SbieDll_Hook_x86(
 
 #else ! WIN_64
 
-        func = Hook_CheckChromeHook((void *)target, (void*)GET_PEB_IMAGE_BASE);
+        func = Hook_CheckChromeHook((void *)target, (void*)GET_PEB_IMAGE_BASE, Dll_Ntdll);
         if (func && func != (UCHAR*)-1) {
             SourceFunc = func;
             goto skip_e9_rewrite;
@@ -1172,7 +1172,7 @@ _FX void *SbieDll_HookFunc(
     // Chrome sandbox support
     //
 
-    void* ChromeFunc = Hook_CheckChromeHook(SourceFunc, (void*)GET_PEB_IMAGE_BASE);
+    void* ChromeFunc = Hook_CheckChromeHook(SourceFunc, (void*)GET_PEB_IMAGE_BASE, Dll_Ntdll);
     if (ChromeFunc) {
         if (pHookStats) *pHookStats |= HOOK_STAT_CHROME;
         if (ChromeFunc != (void*)-1)

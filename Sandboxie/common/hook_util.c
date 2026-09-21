@@ -511,17 +511,71 @@ ULONGLONG* findChromeTarget(unsigned char* addr)
 
 #define MAX_FUNC_SIZE 0x76
 
-ULONGLONG * findChromeTarget(unsigned char* addr)
+static ULONGLONG* Hook_ReadChromePointer(P_NtQueryVirtualMemory QueryMemory, ULONG_PTR address)
 {
-    int i = 0;
+    // The complete pointer slot must fit in a committed readable region.
+    MEMORY_BASIC_INFORMATION info;
+    if (!NT_SUCCESS(QueryMemory(NtCurrentProcess(), (void*)address,
+            MemoryBasicInformation, &info, sizeof(info), NULL)) ||
+        info.State != MEM_COMMIT || (info.Protect & (PAGE_GUARD | PAGE_NOACCESS)) ||
+        !(info.Protect & (PAGE_READONLY | PAGE_READWRITE | PAGE_WRITECOPY |
+                         PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)) ||
+        info.RegionSize < sizeof(ULONG_PTR) || address < (ULONG_PTR)info.BaseAddress ||
+        address - (ULONG_PTR)info.BaseAddress > info.RegionSize - sizeof(ULONG_PTR))
+        return NULL;
+
+    return *(ULONGLONG**)address;
+}
+
+ULONGLONG * findChromeTarget(unsigned char* addr, void* NtdllBase)
+{
+    SIZE_T i = 0;
     ULONGLONG target;
     ULONGLONG * ChromeTarget = NULL;
-    if (!addr) return NULL;
+    if (!addr || !NtdllBase) return NULL;
 
-    //Look for mov rcx,[target 4 byte offset] or in some cases mov rax,[target 4 byte offset]
-    //So far the offset has been positive between 0xa00000 and 0xb00000 bytes;
-    //This may change in a future version of chrome
-    for (i = 0; i < MAX_FUNC_SIZE; i++) {
+    // Volatile byte stores avoid a pooled string outside the copied LowLevel code.
+    volatile UCHAR query_name[21];
+    query_name[0] = 'N';
+    query_name[1] = 't';
+    query_name[2] = 'Q';
+    query_name[3] = 'u';
+    query_name[4] = 'e';
+    query_name[5] = 'r';
+    query_name[6] = 'y';
+    query_name[7] = 'V';
+    query_name[8] = 'i';
+    query_name[9] = 'r';
+    query_name[10] = 't';
+    query_name[11] = 'u';
+    query_name[12] = 'a';
+    query_name[13] = 'l';
+    query_name[14] = 'M';
+    query_name[15] = 'e';
+    query_name[16] = 'm';
+    query_name[17] = 'o';
+    query_name[18] = 'r';
+    query_name[19] = 'y';
+    query_name[20] = 0;
+    P_NtQueryVirtualMemory QueryMemory = (P_NtQueryVirtualMemory)FindDllExport(NtdllBase, (const UCHAR*)query_name, NULL);
+    if (!QueryMemory) return NULL;
+
+    // Keep instruction reads inside the interceptor's readable code region.
+    MEMORY_BASIC_INFORMATION code_info;
+    if (!NT_SUCCESS(QueryMemory(NtCurrentProcess(), addr, MemoryBasicInformation,
+            &code_info, sizeof(code_info), NULL)) || code_info.State != MEM_COMMIT ||
+        (code_info.Protect & (PAGE_GUARD | PAGE_NOACCESS)) ||
+        !(code_info.Protect & (PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)) ||
+        (ULONG_PTR)addr < (ULONG_PTR)code_info.BaseAddress ||
+        (ULONG_PTR)addr - (ULONG_PTR)code_info.BaseAddress >= code_info.RegionSize)
+        return NULL;
+
+    SIZE_T scan_size = code_info.RegionSize - ((ULONG_PTR)addr - (ULONG_PTR)code_info.BaseAddress);
+    if (scan_size > MAX_FUNC_SIZE)
+        scan_size = MAX_FUNC_SIZE;
+
+    // Keep older rcx/rax loads; Chrome 153 also loads the original function into rdi.
+    for (i = 0; i + 7 <= scan_size; i++) {
 
         // some chromium 90+ derivatives replace the function with a return 1 stub
         // b8 01 00 00 00   mov eax,1
@@ -539,38 +593,50 @@ ULONGLONG * findChromeTarget(unsigned char* addr)
 
         if ((*(USHORT *)&addr[i] == 0x8b48)) {
 
-            //Look for mov rcx,[target 4 byte offset] or in some cases mov rax,[target 4 byte offset]
-            if ((addr[i + 2] == 0x0d || addr[i + 2] == 0x05)) {
+            // Look for mov rcx/rax/rdi, qword ptr [rip+disp32].
+            // The signed displacement is relative to the end of the 7-byte instruction.
+            if ((addr[i + 2] == 0x0d || addr[i + 2] == 0x05 || addr[i + 2] == 0x3d)) {
                 LONG delta;
+                MEMORY_BASIC_INFORMATION info;
                 target = (ULONG_PTR)(addr + i + 7);
                 delta = *(LONG *)&addr[i + 3];
 
-                //check if offset is close to the expected value (is positive and less than 0x100000 as of chrome 64) 
-        //      if (delta > 0 && delta < 0x100000 )  { //may need to check delta in a future version of chrome
                 target += delta;
-                ChromeTarget = *(ULONGLONG **)target;
+                ChromeTarget = Hook_ReadChromePointer(QueryMemory, (ULONG_PTR)target);
+                if (!ChromeTarget)
+                    continue;
 
-                // special case when compiled using mingw toolchain
+                // MinGW can load the original through another pointer; match its base register.
                 // mov rcx,qword ptr [rax+offset] or mov rcx,qword ptr [rcx+offset]
-                if ((*(USHORT *)&addr[i + 7] == 0x8B48)) 
+                // The offset is a signed 8-bit or 32-bit displacement.
+                if (i + 11 <= scan_size && (*(USHORT *)&addr[i + 7] == 0x8B48) &&
+                    ((addr[i + 2] == 0x05 && (addr[i + 9] == 0x48 || addr[i + 9] == 0x88)) ||
+                     (addr[i + 2] == 0x0d && (addr[i + 9] == 0x49 || addr[i + 9] == 0x89))))
                 {
                     if (addr[i + 9] == 0x48 || addr[i + 9] == 0x49)
-                        delta = addr[i + 10];
-                    else if (addr[i + 9] == 0x88 || addr[i + 9] == 0x89)
-                        delta = *(ULONG*)&addr[i + 10];
+                        delta = (signed char)addr[i + 10];
                     else
-                        break;
+                    {
+                        if (i + 14 > scan_size)
+                            continue;
+                        delta = *(LONG*)&addr[i + 10];
+                    }
                     target = (ULONGLONG)ChromeTarget + delta;
-                    ChromeTarget = *(ULONGLONG **)target;
+                    ChromeTarget = Hook_ReadChromePointer(QueryMemory, (ULONG_PTR)target);
                 }
 
-        //      }
-                break;
+                // A matching load can refer to an object, such as g_target_services.
+                // Only return committed executable memory, never a data-only target.
+                if (ChromeTarget && NT_SUCCESS(QueryMemory(NtCurrentProcess(), ChromeTarget,
+                        MemoryBasicInformation, &info, sizeof(info), NULL)) &&
+                    info.State == MEM_COMMIT && !(info.Protect & (PAGE_GUARD | PAGE_NOACCESS)) &&
+                    (info.Protect & (PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)))
+                    return ChromeTarget;
             }
         }
     }
 
-    return ChromeTarget;
+    return NULL;
 }
 
 ULONGLONG * findFirefoxTarget(unsigned char* addr, unsigned char* g_originals, ULONG MaxLen)
@@ -616,7 +682,7 @@ ULONGLONG * findFirefoxTarget(unsigned char* addr, unsigned char* g_originals, U
 }
 #endif
 
-_FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase)
+_FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase, void* NtdllBase)
 {
     if (!SourceFunc)
         return NULL;
@@ -644,7 +710,7 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase)
         func[2] == 0xb8) 
     {
         longlongs = *(ULONGLONG **)&func[3];
-        chrome64Target = findChromeTarget((unsigned char *)longlongs);
+        chrome64Target = findChromeTarget((unsigned char *)longlongs, NtdllBase);
     }
     // Chrome 49+ 64bit hook
     // mov rax, <target> 
@@ -670,7 +736,7 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase)
         if (g_originals)
             chrome64Target = findFirefoxTarget((unsigned char*)longlongs, g_originals, MaxLen);
         else
-            chrome64Target = findChromeTarget((unsigned char *)longlongs);
+            chrome64Target = findChromeTarget((unsigned char *)longlongs, NtdllBase);
     }
     // Firefox's winlauncher uses mov r11 but we don't care for this currently
     /*else if (func[0] == 0x49 && func[1] == 0xBB &&                //mov r11,<target>

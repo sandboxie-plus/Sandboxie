@@ -9089,6 +9089,11 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <translation>ConHost.exe 프로세스 무결성 수준 삭제</translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="551"/>
+        <source>The box structure can only be changed when the sandbox is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/OptionsWindow.ui" line="2128"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
@@ -11576,6 +11581,11 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Windows 11에서 새로운 SandMan 스타일 사용</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="446"/>
+        <source>Show recoverable files as notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>
         <source>Remember last used box</source>
         <translation>마지막으로 사용한 박스 기억</translation>
@@ -11892,7 +11902,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="vanished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상 입력 시 제안 팝업 표시&lt;br&gt;

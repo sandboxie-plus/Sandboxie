@@ -480,7 +480,7 @@ _FX ULONG Hook_GetSysCallFunc(ULONG* aCode, void** pHandleStubHijack)
 #ifdef _WIN64
 
 //
-// Shared validation helpers for the chrome hook target scanners.
+// Shared validation helpers for the browser hook target scanners.
 //
 // The scanners walk version specific interceptor layouts, so both the
 // instruction reads and the pointer slots they resolve can land outside any
@@ -494,7 +494,7 @@ _FX ULONG Hook_GetSysCallFunc(ULONG* aCode, void** pHandleStubHijack)
 
 static P_NtQueryVirtualMemory Hook_GetQueryMemory(void* NtdllBase)
 {
-    // Volatile byte stores avoid a pooled string outside the copied LowLevel code.
+    // Keep the export name local to the position-independent LowLevel code.
     volatile UCHAR query_name[] = { 'N','t','Q','u','e','r','y','V','i','r','t','u','a','l','M','e','m','o','r','y', 0 };
     if (!NtdllBase)
         return NULL;
@@ -621,6 +621,20 @@ ULONGLONG* findChromeTarget(unsigned char* addr, void* NtdllBase)
 #elif _WIN64
 
 #define MAX_FUNC_SIZE 0x76
+// Keep the old last instruction start while bounding its complete 7-byte read.
+#define MAX_FUNC_SCAN_SIZE (MAX_FUNC_SIZE + 6)
+
+static ULONG_PTR Hook_GetFirefoxImageBase(P_NtQueryVirtualMemory QueryMemory, void* address, int executable)
+{
+    MEMORY_BASIC_INFORMATION info;
+    if (!address || !NT_SUCCESS(QueryMemory(NtCurrentProcess(), address,
+            MemoryBasicInformation, &info, sizeof(info), NULL)) ||
+        info.State != MEM_COMMIT || info.Type != MEM_IMAGE ||
+        (info.Protect & (PAGE_GUARD | PAGE_NOACCESS)) ||
+        (executable && !Hook_IsExecRegion(&info)))
+        return 0;
+    return (ULONG_PTR)info.AllocationBase;
+}
 
 ULONGLONG * findChromeTarget(unsigned char* addr, void* NtdllBase)
 {
@@ -633,7 +647,7 @@ ULONGLONG * findChromeTarget(unsigned char* addr, void* NtdllBase)
     if (!QueryMemory) return NULL;
 
     // Keep instruction reads inside the interceptor's readable code region.
-    SIZE_T scan_size = Hook_GetCodeScanSize(QueryMemory, addr, MAX_FUNC_SIZE);
+    SIZE_T scan_size = Hook_GetCodeScanSize(QueryMemory, addr, MAX_FUNC_SCAN_SIZE);
     if (!scan_size) return NULL;
 
     // Keep older rcx/rax/rdi loads; Chrome 153 also loads saved originals into r15.
@@ -698,48 +712,114 @@ ULONGLONG * findChromeTarget(unsigned char* addr, void* NtdllBase)
     return NULL;
 }
 
-ULONGLONG * findFirefoxTarget(unsigned char* addr, unsigned char* g_originals, ULONG MaxLen)
+static ULONGLONG* Hook_FindFirefoxOriginal(unsigned char* addr, unsigned char* g_originals,
+    ULONG MaxLen, P_NtQueryVirtualMemory QueryMemory, ULONG_PTR image_base)
 {
-    if (!addr) 
-        return NULL;
-
+    SIZE_T scan_size;
+    ULONG_PTR originals_base;
     ULONGLONG * ChromeTarget = NULL;
 
+    if (!addr || !g_originals || MaxLen < sizeof(ULONG_PTR) || !QueryMemory)
+        return NULL;
+
+    scan_size = Hook_GetCodeScanSize(QueryMemory, addr, MAX_FUNC_SCAN_SIZE);
+    if (!scan_size)
+        return NULL;
+
+    originals_base = (ULONG_PTR)g_originals;
+
     //
-    // Look for one of the following loads
-    // mov rcx,[target 4 byte offset] 
-    // mov rax,[target 4 byte offset]
-    // mov rdi,[target 4 byte offset]
-    // mov r8,[target 4 byte offset]
-    // mov r9,[target 4 byte offset]
-    // mov r15,[target 4 byte offset]
-    // and check if they target it within the exported g_originals variable
-    // 
-    // This may change in a future version of firefox
+    // Look for one of these RIP-relative loads from the exported g_originals array:
+    // mov rcx, [rip+disp32]
+    // mov rax, [rip+disp32]
+    // mov rdi, [rip+disp32]
+    // mov r8,  [rip+disp32]
+    // mov r9,  [rip+disp32]
+    // mov r15, [rip+disp32]
+    // This layout may change in a future version of Firefox.
     //
+    for (SIZE_T i = 0; i + 7 <= scan_size; i++) {
+        ULONG_PTR target;
 
-    for (int i = 0; i < MAX_FUNC_SIZE; i++) {
+        if (((addr[i] != 0x48 && addr[i] != 0x4c) || addr[i + 1] != 0x8b) ||
+            (addr[i + 2] != 0x0d && addr[i + 2] != 0x05 && addr[i + 2] != 0x3d))
+            continue;
 
-        if ((*(USHORT *)&addr[i] == 0x8b48) || (*(USHORT *)&addr[i] == 0x8b4c)) {
+        target = (ULONG_PTR)(addr + i + 7);
+        target += *(LONG *)&addr[i + 3];
 
-            if ((addr[i + 2] == 0x0d) || (addr[i + 2] == 0x05) || (addr[i + 2] == 0x3d)) {
+        // The saved-original pointer must fit entirely within g_originals;
+        // use its exported size instead of a version-specific entry count.
+        if (target < originals_base || target - originals_base > MaxLen - sizeof(ULONG_PTR) ||
+            Hook_GetFirefoxImageBase(QueryMemory, (void*)target, 0) != image_base)
+            continue;
 
-                ULONG_PTR target = (ULONG_PTR)(addr + i + 7);
-                LONG delta = *(LONG *)&addr[i + 3];
-                target += delta;
-
-                // must point into g_originals which has INTERCEPTOR_MAX_ID entries (as of FF 138 it 53)
-                //if (target >= (ULONG_PTR)g_originals && target <= (ULONG_PTR)(g_originals + sizeof(ULONG_PTR) * 60)) {
-                if (target >= (ULONG_PTR)g_originals && target < (ULONG_PTR)(g_originals + MaxLen)) {
-
-                    ChromeTarget = *(ULONGLONG**)target;
-                    break;
-                }
-            }
-        }
+        ChromeTarget = Hook_ReadChromePointer(QueryMemory, target);
+        if (Hook_IsExecutableTarget(QueryMemory, ChromeTarget))
+            return ChromeTarget;
     }
 
-    return ChromeTarget;
+    return NULL;
+}
+
+ULONGLONG* findFirefoxTarget(unsigned char* addr, unsigned char* g_originals,
+    ULONG MaxLen, void* NtdllBase)
+{
+    P_NtQueryVirtualMemory QueryMemory;
+    ULONG_PTR image_base;
+    ULONG_PTR originals_base;
+    SIZE_T scan_size;
+    ULONGLONG* ChromeTarget;
+
+    if (!addr || !g_originals || MaxLen < sizeof(ULONG_PTR))
+        return NULL;
+
+    QueryMemory = Hook_GetQueryMemory(NtdllBase);
+    if (!QueryMemory)
+        return NULL;
+
+    originals_base = (ULONG_PTR)g_originals;
+    image_base = Hook_GetFirefoxImageBase(QueryMemory, addr, 1);
+    if (!image_base)
+        return NULL;
+
+    // Keep the direct g_originals match before following Firefox's freestanding stub.
+    ChromeTarget = Hook_FindFirefoxOriginal(addr, g_originals, MaxLen, QueryMemory, image_base);
+    if (ChromeTarget)
+        return ChromeTarget;
+
+    scan_size = Hook_GetCodeScanSize(QueryMemory, addr, MAX_FUNC_SCAN_SIZE);
+    if (!scan_size)
+        return NULL;
+
+    // Firefox may load one image-local stub pointer before reaching g_originals.
+    // Follow only the observed mov rax,[rip+disp32] form, and only one hop.
+    for (SIZE_T i = 0; i + 7 <= scan_size; i++) {
+        ULONG_PTR slot;
+        ULONGLONG* interceptor;
+
+        if (addr[i] != 0x48 || addr[i + 1] != 0x8b || addr[i + 2] != 0x05)
+            continue;
+
+        slot = (ULONG_PTR)(addr + i + 7);
+        slot += *(LONG *)&addr[i + 3];
+
+        if ((slot >= originals_base && slot - originals_base < MaxLen) ||
+            Hook_GetFirefoxImageBase(QueryMemory, (void*)slot, 0) != image_base)
+            continue;
+
+        interceptor = Hook_ReadChromePointer(QueryMemory, slot);
+        if (!interceptor || interceptor == (ULONGLONG*)addr ||
+            Hook_GetFirefoxImageBase(QueryMemory, interceptor, 1) != image_base)
+            continue;
+
+        ChromeTarget = Hook_FindFirefoxOriginal((unsigned char*)interceptor, g_originals,
+            MaxLen, QueryMemory, image_base);
+        if (ChromeTarget)
+            return ChromeTarget;
+    }
+
+    return NULL;
 }
 #endif
 
@@ -795,7 +875,7 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase, void* NtdllBase
         }
 #endif
         if (g_originals)
-            chrome64Target = findFirefoxTarget((unsigned char*)longlongs, g_originals, MaxLen);
+            chrome64Target = findFirefoxTarget((unsigned char*)longlongs, g_originals, MaxLen, NtdllBase);
         else
             chrome64Target = findChromeTarget((unsigned char *)longlongs, NtdllBase);
     }

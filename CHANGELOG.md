@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed Chromium-based browsers and Electron applications crashing in Application Compartment boxes due to incorrect hook target detection
+- fixed FileID queried through fsutil is not inverted like normal [#5612](https://github.com/sandboxie-plus/Sandboxie/issues/5612)
 
 
 

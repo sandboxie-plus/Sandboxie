@@ -636,7 +636,7 @@ ULONGLONG * findChromeTarget(unsigned char* addr, void* NtdllBase)
     SIZE_T scan_size = Hook_GetCodeScanSize(QueryMemory, addr, MAX_FUNC_SIZE);
     if (!scan_size) return NULL;
 
-    // Keep older rcx/rax loads; Chrome 153 also loads the original function into rdi.
+    // Keep older rcx/rax/rdi loads; Chrome 153 also loads saved originals into r15.
     for (i = 0; i + 7 <= scan_size; i++) {
 
         // some chromium 90+ derivatives replace the function with a return 1 stub
@@ -653,9 +653,10 @@ ULONGLONG * findChromeTarget(unsigned char* addr, void* NtdllBase)
         if (addr[i] == 0x66 && addr[i + 1] == 0xB8  && addr[i + 4] == 0xC3 && addr[i + 5] == 0xCC)
             return NULL;
 
-        if ((*(USHORT *)&addr[i] == 0x8b48)) {
+        if ((*(USHORT *)&addr[i] == 0x8b48) ||
+            (addr[i] == 0x4c && addr[i + 1] == 0x8b && addr[i + 2] == 0x3d)) {
 
-            // Look for mov rcx/rax/rdi, qword ptr [rip+disp32].
+            // Look for mov rcx/rax/rdi/r15, qword ptr [rip+disp32].
             // The signed displacement is relative to the end of the 7-byte instruction.
             if ((addr[i + 2] == 0x0d || addr[i + 2] == 0x05 || addr[i + 2] == 0x3d)) {
                 LONG delta;
@@ -705,10 +706,12 @@ ULONGLONG * findFirefoxTarget(unsigned char* addr, unsigned char* g_originals, U
     ULONGLONG * ChromeTarget = NULL;
 
     //
-    // Look for one fo the following opcodes
+    // Look for one of the following loads
     // mov rcx,[target 4 byte offset] 
     // mov rax,[target 4 byte offset]
     // mov rdi,[target 4 byte offset]
+    // mov r8,[target 4 byte offset]
+    // mov r9,[target 4 byte offset]
     // mov r15,[target 4 byte offset]
     // and check if they target it within the exported g_originals variable
     // 

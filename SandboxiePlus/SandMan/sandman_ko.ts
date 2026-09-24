@@ -9091,7 +9091,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="551"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스가 비어 있을 때만 박스 구조를 변경할 수 있습니다</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2128"/>
@@ -11583,7 +11583,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="446"/>
         <source>Show recoverable files as notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>복구 가능한 파일을 알림으로 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>

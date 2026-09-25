@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.18.5 / 5.73.5] - 2026-09-??
+## [1.18.5 / 5.73.5] - 2026-09-25
 
 ### Fixed
 - fixed Chromium-based browsers and Electron applications crashing in Application Compartment boxes due to incorrect hook target detection

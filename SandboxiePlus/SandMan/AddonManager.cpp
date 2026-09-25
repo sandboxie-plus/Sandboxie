@@ -7,6 +7,7 @@
 #include <QUrlQuery>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QSettings>
 #include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 #include <QtConcurrent>
 #include "../../SandboxieTools/UpdUtil/UpdUtil.h"
@@ -43,8 +44,12 @@ void CAddonManager::UpdateAddons()
 
 void CAddonManager::OnUpdateData(const QVariantMap& Data, const QVariantMap& Params)
 {
-    if (Data.isEmpty() || Data["error"].toBool())
+    if (Data.isEmpty() || Data["error"].toBool()) {
+        if (Data.contains("errorMsg"))
+            QMessageBox::warning(theGUI, "Sandboxie-Plus",
+                tr("Updater failed to perform add-on operation, error: %1").arg(Data["errorMsg"].toString()));
         return;
+    }
 
     QVariantMap Addons = Data["addons"].toMap();
 
@@ -81,8 +86,9 @@ QList<CAddonInfoPtr> CAddonManager::GetAddons()
 			bool Installed = false;
 			
 			QString Key = pAddon->GetSpecificEntry("uninstallKey").toString();
-			if (!Key.isEmpty()) {
-				if(theGUI->GetCompat()->CheckRegistryKey(Key)) {
+			if (!Key.isEmpty() && theGUI->GetCompat()->CheckRegistryKey(Key)) {
+				QSettings reg(Key, QSettings::NativeFormat);
+				if (!reg.value("UninstallString").toString().isEmpty()) {
 					Installed = true;
 					m_Installed.append(CAddonPtr(new CAddon(pAddon->Data)));
 				}

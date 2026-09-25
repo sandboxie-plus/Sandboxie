@@ -242,6 +242,19 @@ void CSelectBoxWindow::OnBoxType()
 	m_pBoxPicker->setEnabled(ui.radBoxed->isChecked() || (ui.chkFCP->isEnabled() && ui.chkFCP->isChecked()));
 }
 
+QStringList CSelectBoxWindow::MatchProgramInPath(const QStringList& list, const QString& name)
+{
+	QStringList matchedList;
+	QString target = name;
+	if (target.startsWith('"'))
+		target = target.mid(1);
+	foreach(const QString &path, list) {
+		if (target.startsWith(path, Qt::CaseInsensitive))
+			matchedList.append(path);
+	}
+	return matchedList;
+}
+
 void CSelectBoxWindow::OnRun()
 {
 	QStringList BoxNames;
@@ -272,6 +285,65 @@ void CSelectBoxWindow::OnRun()
 		if (BoxNames.isEmpty()) {
 			QMessageBox("Sandboxie-Plus", tr("Please select a sandbox."), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();
 			return;
+		}
+	}
+
+	//<Command,BoxName>
+	QList<QPair<QString,QString>> cannotAccessPrograms;
+	foreach(const QString & BoxName, BoxNames) {
+		//query the box file access control list
+		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+
+		if(pBox) {
+			QStringList closedPaths = pBox->GetTextList("ClosedFilePath", false);
+			QStringList writeOnlyPaths = pBox->GetTextList("WriteFilePath", false);
+
+			foreach(const QString & Command, m_Commands)
+			{
+				if(MatchProgramInPath(closedPaths,Command).size() > 0 || MatchProgramInPath(writeOnlyPaths,Command).size() > 0) {
+					cannotAccessPrograms.append(qMakePair(Command ,BoxName));
+				}
+			}
+		}
+	}
+	if(cannotAccessPrograms.size() > 0) {
+		QMessageBox confirmBox;
+		confirmBox.setWindowTitle(tr("Program access may be blocked in the selected sandboxes"));
+		QString listString = "";
+		foreach(auto & pair,cannotAccessPrograms) {
+			listString += pair.first;
+			listString += " in ";
+			listString += pair.second;
+			listString += "\r\n";
+		}
+		listString += "\r\n";
+		listString += tr("Do you want to allow access so your application can run?");
+		confirmBox.setText(listString);
+		confirmBox.setIcon(QMessageBox::Question);
+		QPushButton* ignoreBtn = confirmBox.addButton(tr("Ignore"), QMessageBox::RejectRole);
+		QPushButton* allowBtn = confirmBox.addButton(tr("Remove Rules"), QMessageBox::AcceptRole);
+		confirmBox.setDefaultButton(allowBtn);
+		confirmBox.exec();
+
+		if (confirmBox.clickedButton() == allowBtn) {
+			//scan and remove rules
+			foreach (auto & pair,cannotAccessPrograms) {
+				const QString &command = pair.first;
+				const QString &boxName = pair.second;
+
+				CSandBoxPtr pBox = theAPI->GetBoxByName(boxName);
+				if(pBox) {
+					QStringList closedPaths = MatchProgramInPath(pBox->GetTextList("ClosedFilePath", false),command);
+					QStringList writeOnlyPaths = MatchProgramInPath(pBox->GetTextList("WriteFilePath", false),command);
+					foreach(const QString & path,closedPaths) {
+						pBox->DelValue("ClosedFilePath",path);
+					}
+					foreach(const QString & path,writeOnlyPaths) {
+						pBox->DelValue("WriteFilePath",path);
+					}
+				}
+			}
+			theAPI->ReloadConfig(true);
 		}
 	}
 

@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved INI completion-popup tooltips jumping between sides or overlapping candidates when displaying large setting descriptions
 
 ### Fixed
+- fixed ignored INI list and boolean write errors and SandMan discarding pending options or raw INI edits after a reported save failure, including sandbox Apply/OK writing stale structured settings right after cancelling a partial raw save
 - fixed stale INI completion-popup candidate tooltips during editing and limited `Template`/`TemplateReject` tooltips to setting-name text
 - fixed SandMan File Panel "Create Shortcut" producing a shortcut without a working directory, so the sandboxed program inherited SandMan's current directory and applications that open their data files by relative path failed to find them [#5542](https://github.com/sandboxie-plus/Sandboxie/issues/5542)
 - fixed wrong return type ein sbiesvc

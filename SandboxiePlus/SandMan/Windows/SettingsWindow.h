@@ -75,7 +75,7 @@ signals:
 
 public slots:
 	void ok();
-	void apply();
+	bool apply();
 
 	void showTab(const QString& Name, bool bExclusive = false, bool bExec = false);
 
@@ -193,7 +193,7 @@ protected:
 	void	LoadTemplates();
 
 	void	LoadIniSection();
-	void	SaveIniSection();
+	bool	SaveIniSection();
 	void    ApplyIniEditFont();
 
 	// Autocompletion support
@@ -207,6 +207,8 @@ protected:
 	CPendingChanges m_PendingChanges{this, &m_HoldChange, -1, true};
 	bool	m_SkipSaveOnToggle; // Skip saving to config when applying reset settings
 	int 	m_CompatLoaded;
+	bool	m_SettingsDirty;
+	void	ReloadDirtySettings();
 	QString m_NewPassword;
 	bool	m_MessagesChanged;
 	bool	m_WarnProgsChanged;

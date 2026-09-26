@@ -160,7 +160,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;crypt32.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
@@ -182,7 +182,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;crypt32.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -207,7 +207,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS</AdditionalOptions>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;crypt32.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -229,7 +229,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;crypt32.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -250,7 +250,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;crypt32.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -274,7 +274,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS</AdditionalOptions>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;crypt32.lib;taskschd.lib;ws2_32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -621,4 +621,16 @@
   </ImportGroup>
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="ProxyTunnels\ProxyProfile.cpp" />
+    <ClCompile Include="ProxyTunnels\ProxyTunnel.cpp" />
+    <ClCompile Include="ProxyTunnels\ProxyManager.cpp" />
+    <ClCompile Include="ProxyTunnels\ProxyWindow.cpp" />
+    <ClCompile Include="ProxyTunnels\ProxyIntegration.cpp" />
+    <ClInclude Include="ProxyTunnels\ProxyProfile.h" />
+    <QtMoc Include="ProxyTunnels\ProxyTunnel.h" />
+    <QtMoc Include="ProxyTunnels\ProxyManager.h" />
+    <QtMoc Include="ProxyTunnels\ProxyWindow.h" />
+    <ClInclude Include="ProxyTunnels\ProxyIntegration.h" />
+  </ItemGroup>
 </Project>

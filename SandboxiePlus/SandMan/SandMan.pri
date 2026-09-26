@@ -155,3 +155,16 @@ TRANSLATIONS += sandman_ar.ts \
 
 
 RESOURCES += Resources/SandMan.qrc
+
+# Native proxy profile UI and experimental tunnel backend.
+HEADERS += ./ProxyTunnels/ProxyProfile.h \
+    ./ProxyTunnels/ProxyTunnel.h \
+    ./ProxyTunnels/ProxyManager.h \
+    ./ProxyTunnels/ProxyWindow.h \
+    ./ProxyTunnels/ProxyIntegration.h
+SOURCES += ./ProxyTunnels/ProxyProfile.cpp \
+    ./ProxyTunnels/ProxyTunnel.cpp \
+    ./ProxyTunnels/ProxyManager.cpp \
+    ./ProxyTunnels/ProxyWindow.cpp \
+    ./ProxyTunnels/ProxyIntegration.cpp
+win32:LIBS += -lcrypt32

@@ -22,6 +22,7 @@ class CSbieTemplatesEx;
 class CTraceView;
 class CScriptManager;
 class CAddonManager;
+class CProxyIntegration;
 class QLineEdit;
 
 struct ToolBarAction {
@@ -166,6 +167,7 @@ protected:
 
 	CScriptManager*		m_SbieScripts;
 	CAddonManager*		m_AddonManager;
+	CProxyIntegration*	m_ProxyIntegration;
 
 	QMap<CSbieProgress*, QPair<CSbieProgressPtr, QPointer<QWidget>>> m_pAsyncProgress;
 

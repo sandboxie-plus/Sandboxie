@@ -317,11 +317,11 @@ void CSelectBoxWindow::OnRun()
 			listString += "\r\n";
 		}
 		listString += "\r\n";
-		listString += tr("Do you want to allow access so your application can run?");
+		listString += tr("Do you want to disable the affected rules to allow the program to run?");
 		confirmBox.setText(listString);
 		confirmBox.setIcon(QMessageBox::Question);
 		QPushButton* ignoreBtn = confirmBox.addButton(tr("Ignore"), QMessageBox::RejectRole);
-		QPushButton* allowBtn = confirmBox.addButton(tr("Remove Rules"), QMessageBox::AcceptRole);
+		QPushButton* allowBtn = confirmBox.addButton(tr("Disable Rules"), QMessageBox::AcceptRole);
 		confirmBox.setDefaultButton(allowBtn);
 		confirmBox.exec();
 
@@ -336,9 +336,11 @@ void CSelectBoxWindow::OnRun()
 					QStringList closedPaths = MatchProgramInPath(pBox->GetTextList("ClosedFilePath", false),command);
 					QStringList writeOnlyPaths = MatchProgramInPath(pBox->GetTextList("WriteFilePath", false),command);
 					foreach(const QString & path,closedPaths) {
+						pBox->AppendText("ClosedFilePathDisabled", path);
 						pBox->DelValue("ClosedFilePath",path);
 					}
 					foreach(const QString & path,writeOnlyPaths) {
+						pBox->AppendText("WriteFilePathDisabled", path);
 						pBox->DelValue("WriteFilePath",path);
 					}
 				}

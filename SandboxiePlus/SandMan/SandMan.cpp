@@ -3515,11 +3515,8 @@ QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData,
 
 	if (MsgCode != 0) {
 		Message = theAPI->GetSbieMsgStr(MsgCode, m_LanguageId);
-		if (pLink) {
-			Message.insert(8, "</a>");
+		if (pLink)
 			*pLink = MakeSbieMsgLink(MsgCode, MsgData, ProcessName);
-			Message.prepend("<a href=\"" + *pLink + "\">");
-		}
 	}
 	else if(MsgData.size() > 0)
 		Message = MsgData[0];
@@ -3561,6 +3558,11 @@ QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData,
 		if (Value == MsgData[i])
 			Value = GetBoxDisplayName(Value);
 		Message = Message.arg(Value);
+	}
+
+	if (MsgCode != 0 && pLink) {
+		Message.insert(8, "</a>");
+		Message.prepend("<a href=\"" + pLink->toHtmlEscaped() + "\">");
 	}
 
 	if (ProcessName != "System") // if it's not from the driver, add the pid

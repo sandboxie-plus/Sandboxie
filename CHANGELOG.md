@@ -4,10 +4,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.18.6 / 5.73.6] - 2026-10-??
+
+### Fixed
+- fixed corrupted SBIE message links in SandMan when URL-encoded characters were interpreted as message placeholders
+
+
+
 ## [1.18.5 / 5.73.5] - 2026-09-25
 
 ### Fixed
-- fixed Chromium-based browsers and Electron applications crashing in Application Compartment boxes due to incorrect hook target detection
+- fixed Chromium-based browsers and Electron applications crashing in Application Compartment boxes due to incorrect hook target detection [#5609](https://github.com/sandboxie-plus/Sandboxie/issues/5609)
 - fixed FileID queried through fsutil is not inverted like normal [#5612](https://github.com/sandboxie-plus/Sandboxie/issues/5612)
 
 

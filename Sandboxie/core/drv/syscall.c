@@ -608,6 +608,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     SYSCALL_ENTRY *entry;
     ULONG syscall_index;
     NTSTATUS status;
+    THREAD_MUI_STATE mui_state = { 0 };
 #ifdef _M_AMD64
     volatile ULONG_PTR ret = 0;
     volatile ULONG_PTR UserStack = 0;
@@ -696,8 +697,10 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     }
     else
 #endif
-    if(!proc->is_locked_down || entry->approved)
+    if(!proc->is_locked_down || entry->approved) {
+        Thread_SaveMuiState(proc, &mui_state);
         Thread_SetThreadToken(proc);        // may set proc->terminated // does nothing if !proc->primary_token
+    }
 
     if (proc->terminated) {
 
@@ -937,6 +940,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     } else if(proc->primary_token) {
 
         Thread_ClearThreadToken();
+        Thread_RestoreMuiState(proc, &mui_state);
     }
 
     /*if (! NT_SUCCESS(status)) {

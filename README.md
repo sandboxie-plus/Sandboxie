@@ -163,6 +163,9 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - stdedos - Documentation additions
 - habatake - UI additions, Code fixes
 - Polyester6719 - Documentation additions
+- oddwatcher - Documentation additions & improvements
+- mihomoQ - Code fixes & documentation improvements
+- marcelodotnet - Documentation additions & improvements
 
 ## 🌏 Translators
 
@@ -190,6 +193,6 @@ All translators are encouraged to look at the [Localization notes and tips](http
 
 ## 📚 Documentation Translators
 
-- Vstory, GT-Stardust, wzxjohn, SOLEADO20, habatake - Simplified Chinese
+- Vstory, GT-Stardust, wzxjohn, SOLEADO20, habatake, YuHuanTin, darkskygit, oddwatcher - Simplified Chinese
 
 All documentation translators are encouraged to look at the [Multilingual Translation Contribution Guide](https://github.com/sandboxie-plus/sandboxie-docs/issues/175#issuecomment-2840258519) before sending a translation.

@@ -60,6 +60,7 @@ protected:
 	QString			m_WrkDir;
 
 private:
+    QStringList MatchProgramInPath(const QStringList& list, const QString& name);
 	Ui::SelectBoxWindow ui;
 	CBoxPicker*		m_pBoxPicker;
 };

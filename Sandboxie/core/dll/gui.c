@@ -1686,21 +1686,23 @@ static BOOLEAN Gui_AlwaysActiveMsg(
 
     if (uMsg == WM_KILLFOCUS) {
         //
-        // suppress focus loss only when the message receiver is a top-level
-        // window and the focus moves outside the current process (or to no
-        // window at all); intra-process focus changes are allowed
+        // clear the losing thread's cache for intra-process transfers;
+        // suppress external focus loss only for top-level windows
         //
-        if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
-            if (! wParam) {
-                *pResult = 0;
-                return TRUE;
-            } else {
-                DWORD pid = 0;
-                if (! (__sys_GetWindowThreadProcessId((HWND)wParam, &pid) && pid == Dll_ProcessId)) {
-                    *pResult = 0;
-                    return TRUE;
-                }
-            }
+        BOOLEAN bInternal = FALSE;
+        if (wParam) {
+            DWORD pid = 0;
+            if (__sys_GetWindowThreadProcessId((HWND)wParam, &pid) && pid == Dll_ProcessId)
+                bInternal = TRUE;
+        }
+        if (bInternal) {
+            THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+            if (threadData && hWnd == threadData->gui_focus_window)
+                threadData->gui_focus_window = NULL;
+        }
+        else if (!(__sys_GetWindowLongW(hWnd, GWL_STYLE) & WS_CHILD)) {
+            *pResult = 0;
+            return TRUE;
         }
     }
 
@@ -1712,8 +1714,12 @@ static BOOLEAN Gui_AlwaysActiveMsg(
         // state instead of relying on a flag set by WM_ACTIVATE
         //
         if (! wParam && hWnd == Gui_PreviousActiveWindow) {
-            *pResult = TRUE;
-            return TRUE;
+            DWORD pid = 0;
+            if (! (lParam && lParam != -1 &&
+                    __sys_GetWindowThreadProcessId((HWND)lParam, &pid) && pid == Dll_ProcessId)) {
+                *pResult = TRUE;
+                return TRUE;
+            }
         }
     }
 
@@ -1746,6 +1752,11 @@ static BOOLEAN Gui_AlwaysActiveMsg(
                 if (bSuppress) {
                     *pResult = 0;
                     return TRUE;
+                }
+                else {
+                    THREAD_DATA *threadData = Dll_GetTlsData(NULL);
+                    if (threadData && hWnd == threadData->gui_active_window)
+                        threadData->gui_active_window = NULL;
                 }
             }
             break;

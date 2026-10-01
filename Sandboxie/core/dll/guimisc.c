@@ -207,7 +207,6 @@ typedef struct _GUI_WIN_EVENT_HOOK {
 
 static CRITICAL_SECTION Gui_WinEventHooksCritSec;
 static LIST Gui_WinEventHooks;
-static BOOLEAN Gui_WinEventHooksInitialized = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -247,7 +246,6 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 		if (Gui_AlwaysActive) {
 			InitializeCriticalSection(&Gui_WinEventHooksCritSec);
 			List_Init(&Gui_WinEventHooks);
-			Gui_WinEventHooksInitialized = TRUE;
 
 			SBIEDLL_HOOK_GUI(GetForegroundWindow);
 			SBIEDLL_HOOK_GUI(GetActiveWindow);
@@ -1845,9 +1843,13 @@ static HWND Gui_GetActiveWindow(void)
 
 static HWND Gui_GetForegroundWindow(void)
 {
-	if (Gui_AlwaysActive && Gui_PreviousActiveWindow && __sys_IsWindow(Gui_PreviousActiveWindow))
+	HWND hwnd = __sys_GetForegroundWindow();
+	DWORD pid = 0;
+	if (Gui_AlwaysActive &&
+			! (__sys_GetWindowThreadProcessId(hwnd, &pid) && pid == Dll_ProcessId) &&
+			Gui_PreviousActiveWindow && __sys_IsWindow(Gui_PreviousActiveWindow))
 		return Gui_PreviousActiveWindow;
-	return __sys_GetForegroundWindow();
+	return hwnd;
 }
 
 static HWND Gui_GetFocus(void)
@@ -1876,16 +1878,19 @@ static BOOL Gui_GetGUIThreadInfo(DWORD idThread, LPGUITHREADINFO lpgui)
 	BOOL ret;
 
 	//
-	// an idThread of 0 queries the foreground thread; under AlwaysActive the
-	// boxed thread is not really foreground, so the real call reports no
-	// active window and leaks the deactivation.  Query the boxed thread's
-	// own info instead and overwrite the reported active/focus windows with
-	// the always-active window
+	// an idThread of 0 queries the foreground thread.  When the foreground
+	// moved outside the process, query the boxed thread's own info and
+	// overwrite the reported active/focus windows with the always-active window
 	//
 
 	if (Gui_AlwaysActive && idThread == 0 && lpgui) {
 
 		HWND hwnd = NULL;
+		HWND hwndForeground = __sys_GetForegroundWindow();
+		DWORD pid = 0;
+
+		if (__sys_GetWindowThreadProcessId(hwndForeground, &pid) && pid == Dll_ProcessId)
+			return __sys_GetGUIThreadInfo(idThread, lpgui);
 
 		THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 		if (TlsData && TlsData->gui_active_window && __sys_IsWindow(TlsData->gui_active_window))
@@ -2070,82 +2075,4 @@ static void CALLBACK Gui_WinEventHookProc(
 
     if (! bFilter)
         origProc(hWinEventHook, event, hwnd, idObject, idChild, idEventThread, dwmsEventTime);
-}
-
-
-//---------------------------------------------------------------------------
-// Gui_UninitMisc
-//---------------------------------------------------------------------------
-
-
-_FX VOID Gui_UninitMisc(void)
-{
-    GUI_WIN_EVENT_HOOK *ghk;
-    GUI_WIN_EVENT_HOOK *ghk_next;
-    HWINEVENTHOOK *handles;
-    ULONG count;
-    ULONG i;
-
-    //
-    // tear down the WinEvent hook tracking state initialized in Gui_InitMisc.
-    // Detach the entries from the list while holding the lock, but call user32
-    // (UnhookWinEvent) only after releasing it: unhooking can wait on an
-    // in-flight callback, and that callback needs the same critical section,
-    // so holding the lock across the unhook would deadlock
-    //
-
-    if (! Gui_WinEventHooksInitialized)
-        return;
-
-    handles = NULL;
-    count = 0;
-
-    EnterCriticalSection(&Gui_WinEventHooksCritSec);
-    count = List_Count(&Gui_WinEventHooks);
-    if (count) {
-        handles = Dll_Alloc(count * sizeof(HWINEVENTHOOK));
-        if (handles) {
-            i = 0;
-            for (ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
-                    ghk; ghk = ghk_next) {
-                ghk_next = (GUI_WIN_EVENT_HOOK *)List_Next(ghk);
-                handles[i++] = ghk->hHook;
-                List_Remove(&Gui_WinEventHooks, ghk);
-                Dll_Free(ghk);
-            }
-            count = i;
-        }
-    }
-    LeaveCriticalSection(&Gui_WinEventHooksCritSec);
-
-    if (! handles && count) {
-        //
-        // Allocation failure: fall back to unhooking one-by-one without holding
-        // the critical section, so we don't leave live hooks after deleting it.
-        //
-        while (1) {
-            EnterCriticalSection(&Gui_WinEventHooksCritSec);
-            ghk = (GUI_WIN_EVENT_HOOK *)List_Head(&Gui_WinEventHooks);
-            if (ghk)
-                List_Remove(&Gui_WinEventHooks, ghk);
-            LeaveCriticalSection(&Gui_WinEventHooksCritSec);
-
-            if (! ghk)
-                break;
-
-            __sys_UnhookWinEvent(ghk->hHook);
-            Dll_Free(ghk);
-        }
-        count = 0;
-    }
-
-    Gui_WinEventHooksInitialized = FALSE;
-
-    if (handles) {
-        for (i = 0; i < count; i++)
-            __sys_UnhookWinEvent(handles[i]);
-        Dll_Free(handles);
-    }
-
-    DeleteCriticalSection(&Gui_WinEventHooksCritSec);
 }

@@ -452,6 +452,8 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 	m_bTargetsChanged = false;
 	m_bReloadPending = false;
 	m_DeleteSnapshots = false;
+	m_SnapAndDelete = false;
+	m_TakeSnapshot = false;
 	m_UnfilteredFileCount = 0;
 	m_IgnoredFileCount = 0;
 
@@ -504,7 +506,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 	connect(ui.btnRecover, SIGNAL(clicked(bool)), this, SLOT(OnRecover()));
 	connect(ui.btnDelete, SIGNAL(clicked(bool)), this, SLOT(OnDelete()));
 	connect(ui.cmbRecover, SIGNAL(currentIndexChanged(int)), this, SLOT(OnTargetChanged()));
-	connect(ui.btnDeleteAll, SIGNAL(clicked(bool)), this, SLOT(OnDeleteAll()));
+	connect(ui.btnDeleteAll, SIGNAL(clicked(bool)), this, SLOT(OnDeleteAllClicked()));
 	connect(ui.btnClose, SIGNAL(clicked(bool)), this, SLOT(close()));
 
 	QMenu* pRecMenu = new QMenu(ui.btnRecover);
@@ -672,6 +674,30 @@ void CRecoveryWindow::OnDelete()
 		QFile::remove(FilePath);
 
 	FindFiles();
+}
+
+void CRecoveryWindow::SetSnapAndDelete(bool bEnable)
+{
+	if (m_SnapAndDelete == bEnable)
+		return;
+	m_SnapAndDelete = bEnable;
+
+	// in this mode the delete button becomes the primary "Take Snapshot and Delete"
+	// action, the plain deletion options move into its drop down menu
+	if (bEnable) {
+		ui.btnDeleteAll->setText(tr("Take Snapshot and Delete"));
+		QMenu* pDelMenu = ui.btnDeleteAll->menu();
+		pDelMenu->clear();
+		pDelMenu->addAction(tr("Delete Content"), this, SLOT(OnDeleteAll()));
+		pDelMenu->addAction(tr("Delete everything, including all snapshots"), this, SLOT(OnDeleteEverything()));
+	}
+}
+
+void CRecoveryWindow::OnDeleteAllClicked()
+{
+	if (m_SnapAndDelete)
+		m_TakeSnapshot = true;
+	OnDeleteAll();
 }
 
 void CRecoveryWindow::OnDeleteAll()

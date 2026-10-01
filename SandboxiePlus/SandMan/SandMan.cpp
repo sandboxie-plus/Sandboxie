@@ -2798,21 +2798,44 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 		pBox->UpdateTextList("Template", list, FALSE);
 	}
 
+	auto TakeAutoSnap = [this, pBox]() {
+		QString SnapName = tr("Auto-Snap %1").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd HH-mm-ss"));
+		SB_PROGRESS Status = pBox->TakeSnapshot(SnapName);
+		if (Status.IsError()) {
+			CheckResults(QList<SB_STATUS>() << Status, this);
+			return false;
+		}
+		if (theConf->GetBool("Options/AutoBoxOpsNotify", false))
+			OnLogMessage(tr("Auto capturing snapshot for %1").arg(pBox->GetName()), true);
+		return true;
+	};
+
+	bool bAutoSnap = pBox->GetBool("AutoSnapCapture", false);
+
 	if (!pBox->GetBool("NeverDelete", false))
 	{
 		if (pBox->GetBool("AutoDelete", false))
 		{
 			bool DeleteSnapshots = false;
-			// if this box auto deletes first show the recovry dialog with the option to abort deletion
-			if (!theGUI->OpenRecovery(pBox, DeleteSnapshots, true)) // unless no files are found than continue silently
+			bool TakeSnapshot = bAutoSnap;
+			// if this box auto deletes first show the recovry dialog with the option to abort deletion,
+			// the auto snapshot (if enabled) is taken after recovery, right before the content gets deleted
+			if (!theGUI->OpenRecovery(pBox, DeleteSnapshots, true, &TakeSnapshot)) // unless no files are found than continue silently
+				return;
+
+			if (TakeSnapshot && !TakeAutoSnap())
 				return;
 
 			if (theConf->GetBool("Options/AutoBoxOpsNotify", false))
 				OnLogMessage(tr("Auto deleting content of %1").arg(GetBoxDisplayName(pBox)), true);
 
 			DeleteBoxContent(pBox, eAuto, DeleteSnapshots);
+			return;
 		}
 	}
+
+	if (bAutoSnap)
+		TakeAutoSnap();
 }
 
 void CSandMan::OnBoxCleaned(CSandBoxPlus* pBoxEx)

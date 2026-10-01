@@ -525,7 +525,7 @@ _FX void File_InitJunctions(void)
     //
 
     File_Junction_BlockRawAccess = SbieApi_QueryConfBool(
-        Dll_BoxName, L"JunctionBlockRawAccess",FALSE);
+        Dll_BoxName, L"JunctionBlockRawAccess", FALSE);
 
     index = 0;
 
@@ -567,12 +567,16 @@ _FX void File_InitJunctions(void)
         }
 
         File_JunctionEntries = table;
-        entry = &File_JunctionEntries[File_JunctionCount++];
+        entry = &File_JunctionEntries[File_JunctionCount];
+        memset(entry, 0, sizeof(FILE_JUNCTION_ENTRY));
 
         entry->src = Dll_Alloc((src_len + 1) * sizeof(WCHAR));
         entry->dst = Dll_Alloc((dst_len + 1) * sizeof(WCHAR));
         if (! entry->src || ! entry->dst) {
-            File_JunctionCount = index - 1;
+            if (entry->src)
+                Dll_Free(entry->src);
+            if (entry->dst)
+                Dll_Free(entry->dst);
             break;
         }
 
@@ -702,6 +706,8 @@ _FX void File_InitJunctions(void)
 
         if (entry->src_nt && ! File_Junction_SourceExists(entry->src_nt))
             File_Junction_CreateSourceBoxCopy(entry->src_nt);
+
+        ++File_JunctionCount;
     }
 
     //
@@ -761,9 +767,19 @@ _FX WCHAR *File_ApplyJunctionMap(THREAD_DATA *TlsData, WCHAR *TruePath)
         dst_len = best->dst_nt_len;
     }
 
+    if (! src || ! dst)
+        return TruePath;
+
     NewPath_len = dst_len + (TruePath_len - src_len);
 
-    NewPath = Dll_AllocTemp((NewPath_len + 1) * sizeof(WCHAR));
+    //
+    // leave room for a trailing root separator that File_GetName may
+    // need to restore after the mapping
+    //
+
+    NewPath = Dll_AllocTemp((NewPath_len + 2) * sizeof(WCHAR));
+    if (! NewPath)
+        return TruePath;
 
     wmemmove(NewPath + dst_len, TruePath + src_len,
                 NewPath_len - dst_len + 1);
@@ -805,9 +821,14 @@ _FX WCHAR *File_ApplyJunctionMapReverse(
         dst_len = best->dst_nt_len;
     }
 
+    if (! src || ! dst)
+        return NULL;
+
     NewPath_len = src_len + (Path_len - dst_len);
 
     NewPath = Dll_AllocTemp((NewPath_len + 1) * sizeof(WCHAR));
+    if (! NewPath)
+        return NULL;
 
     wmemmove(NewPath + src_len, Path + dst_len,
                 NewPath_len - src_len + 1);
@@ -847,6 +868,9 @@ _FX ULONG File_ApplyJunctionMapReverseInPlace(
         dst = best->dst_nt;
         dst_len = best->dst_nt_len;
     }
+
+    if (! src || ! dst)
+        return 0;
 
     NewPath_len = src_len + (Path_len - dst_len);
     if (NewPath_len + 1 > MaxLen)

@@ -12,15 +12,15 @@ if %1 == Win32 (
     if exist %~dp0..\..\Qt\%qt_version%\msvc2022\bin\qmake.exe goto done
 
     curl -LsSO --output-dir %~dp0..\..\ https://github.com/%ghQtBuilds_user%/%ghQtBuilds_repo%/releases/download/v%qt_version%-ssl-lgpl/qt-everywhere-%qt_version%-Windows_7-MSVC2022-x86.7z
-    "C:\Program Files\7-Zip\7z.exe" x -aoa -o%~dp0..\..\Qt\ %~dp0..\..\qt-everywhere-%qt_version%-Windows_7-MSVC2022-x86.7z
-    certutil -hashfile %~dp0..\..\qt-everywhere-%qt_version%-Windows_7-MSVC2022-x86.7z SHA256 | find /i "%ghQtBuilds_hash_x86%"
+    call :extract_archive "%~dp0..\..\qt-everywhere-%qt_version%-Windows_7-MSVC2022-x86.7z" "%~dp0..\..\Qt"
+    certutil -hashfile %~dp0..\..\qt-everywhere-%qt_version%-Windows_7-MSVC2022-x86.7z SHA256 | "%windir%\System32\find.exe" /i "%ghQtBuilds_hash_x86%"
 )
 if %1 == x64 (
     if exist %~dp0..\..\Qt\%qt_version%\msvc2022_64\bin\qmake.exe goto done
 
     curl -LsSO --output-dir %~dp0..\..\ https://github.com/%ghQtBuilds_user%/%ghQtBuilds_repo%/releases/download/v%qt_version%-ssl-lgpl/qt-everywhere-%qt_version%-Windows_7-MSVC2022-x86_64.7z
-    "C:\Program Files\7-Zip\7z.exe" x -aoa -o%~dp0..\..\Qt\ %~dp0..\..\qt-everywhere-%qt_version%-Windows_7-MSVC2022-x86_64.7z
-    certutil -hashfile %~dp0..\..\qt-everywhere-%qt_version%-Windows_7-MSVC2022-x86_64.7z SHA256 | find /i "%ghQtBuilds_hash_x64%"
+    call :extract_archive "%~dp0..\..\qt-everywhere-%qt_version%-Windows_7-MSVC2022-x86_64.7z" "%~dp0..\..\Qt"
+    certutil -hashfile %~dp0..\..\qt-everywhere-%qt_version%-Windows_7-MSVC2022-x86_64.7z SHA256 | "%windir%\System32\find.exe" /i "%ghQtBuilds_hash_x64%"
 )
 
 if %ERRORLEVEL% == 1 exit /b 1
@@ -30,3 +30,16 @@ if %ERRORLEVEL% == 1 exit /b 1
 REM dir %~dp0..\..\
 REM dir %~dp0..\..\Qt
 REM dir %~dp0..\..\Qt\%qt_version%
+
+exit /b 0
+
+:extract_archive
+if not exist "%~2\" mkdir "%~2"
+if not exist "%~2\" exit /b 1
+
+if exist "C:\Program Files\7-Zip\7z.exe" (
+    "C:\Program Files\7-Zip\7z.exe" x -aoa -o"%~2" "%~1"
+) else (
+    "%windir%\System32\tar.exe" -xf "%~1" -C "%~2"
+)
+exit /b %ERRORLEVEL%

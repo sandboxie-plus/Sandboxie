@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed corrupted SBIE message links in SandMan when URL-encoded characters were interpreted as message placeholders
+- added Persian (Farsi) translations for SandMan, the Troubleshooting Wizard, and the installer [#5633](https://github.com/sandboxie-plus/Sandboxie/pull/5633) (thanks imalyzer)
 
 
 

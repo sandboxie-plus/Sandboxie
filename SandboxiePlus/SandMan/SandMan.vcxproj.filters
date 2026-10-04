@@ -500,43 +500,28 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\finder.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="sandman_cs.ts">
+      <Filter>Translation Files</Filter>
+    </None>
     <None Include="sandman_de.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_en.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_es.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_fa.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_fr.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_hi.ts">
-      <Filter>Translation Files</Filter>
-    </None>
-    <None Include="sandman_pt_BR.ts">
-      <Filter>Translation Files</Filter>
-    </None>
-    <None Include="sandman_pt_PT.ts">
-      <Filter>Translation Files</Filter>
-    </None>
-    <None Include="sandman_ru.ts">
-      <Filter>Translation Files</Filter>
-    </None>
-    <None Include="Resources\finder.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="sandman_tr.ts">
-      <Filter>Translation Files</Filter>
-    </None>
-    <None Include="sandman_zh_TW.ts">
-      <Filter>Translation Files</Filter>
-    </None>
-    <None Include="sandman_pl.ts">
-      <Filter>Translation Files</Filter>
-    </None>
-    <None Include="sandman_uk.ts">
-      <Filter>Translation Files</Filter>
-    </None>
-    <None Include="sandman_zh_CN.ts">
-      <Filter>Translation Files</Filter>
-    </None>
-    <None Include="sandman_es.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_it.ts">
@@ -551,16 +536,34 @@
     <None Include="sandman_nl.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_en.ts">
+    <None Include="sandman_pl.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_cs.ts">
+    <None Include="sandman_pt_BR.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_pt_PT.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_ru.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_sv_SE.ts">
       <Filter>Translation Files</Filter>
     </None>
+    <None Include="sandman_tr.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_uk.ts">
+      <Filter>Translation Files</Filter>
+    </None>
     <None Include="sandman_vi.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_zh_CN.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_zh_TW.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>

@@ -25,6 +25,7 @@
 #include <QRegularExpression>
 #include <QScreen>
 #include <QSet>
+#include <QDateTime>
 
 
 #include <windows.h>
@@ -108,6 +109,166 @@ static void CUpdateMonitorComboFallbackLabel(QComboBox* pCombo, int fallbackInde
 		bool isFallback = markFallback && i == fallbackIndex;
 		pCombo->setItemText(i, CBuildMonitorOptionLabel(baseLabel, isDefault, isFallback));
 	}
+}
+
+
+static bool CShellExtDebugEnabled()
+{
+	return !qgetenv("SBIE_SHELL_EXT_DEBUG").isEmpty();
+}
+
+static QString CShellExtDebugOutput(const QByteArray& output)
+{
+	QString text = QString::fromLocal8Bit(output);
+	text.replace('\r', "\\r");
+	text.replace('\n', "\\n");
+	if (text.size() > 2048)
+		text = text.left(2048) + "...";
+	return text;
+}
+
+static void CShellExtDebugLog(const QString& message)
+{
+	if (!CShellExtDebugEnabled())
+		return;
+
+	static constexpr qint64 kMaxDebugLogSize = 1024 * 1024;
+	QString line = QString("[%1 pid=%2] %3\r\n")
+		.arg(QDateTime::currentDateTime().toString(Qt::ISODateWithMs))
+		.arg(QCoreApplication::applicationPid())
+		.arg(message);
+	OutputDebugStringW(reinterpret_cast<LPCWSTR>(line.utf16()));
+
+	QByteArray utf8Line = line.toUtf8();
+	QFile file(QDir(QDir::tempPath()).filePath("SbieShellExt.log"));
+	if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {
+		qint64 logSize = file.size();
+		if (logSize < 0)
+			return;
+		if (logSize + utf8Line.size() > kMaxDebugLogSize && !file.resize(0))
+			return;
+		file.write(utf8Line);
+	}
+}
+
+static bool CRunShellExtPackageCommand(const QString& exportName, int waitMs)
+{
+	QProcess proc;
+	QString program = "rundll32.exe";
+	QStringList arguments = QStringList() << QString("SbieShellExt.dll,%1Rundll").arg(exportName);
+	CShellExtDebugLog(QString("package command start export=%1 program=%2 cwd=%3 arguments=%4")
+		.arg(exportName)
+		.arg(program)
+		.arg(QDir::currentPath())
+		.arg(arguments.join(" ")));
+	proc.start(program, arguments);
+	if (!proc.waitForStarted(5000)) {
+		CShellExtDebugLog(QString("package command start failed export=%1 error=%2")
+			.arg(exportName).arg(proc.errorString()));
+		return false;
+	}
+
+	qint64 processId = proc.processId();
+	bool finished = proc.waitForFinished(waitMs);
+	QByteArray standardOutput = proc.readAllStandardOutput();
+	QByteArray standardError = proc.readAllStandardError();
+	CShellExtDebugLog(QString("package command finish export=%1 pid=%2 finished=%3 exitStatus=%4 exitCode=%5 error=%6 stdout=%7 stderr=%8")
+		.arg(exportName)
+		.arg(processId)
+		.arg(finished)
+		.arg(static_cast<int>(proc.exitStatus()))
+		.arg(proc.exitCode())
+		.arg(proc.errorString())
+		.arg(CShellExtDebugOutput(standardOutput))
+		.arg(CShellExtDebugOutput(standardError)));
+	if (!finished)
+		return false;
+	return proc.exitStatus() == QProcess::NormalExit && proc.exitCode() == 0;
+}
+
+static QStringList CQuerySbieShellExtModuleHolders()
+{
+	QProcess proc;
+	proc.start("tasklist.exe", QStringList() << "/M" << "SbieShellExt.dll");
+	if (!proc.waitForStarted(5000) || !proc.waitForFinished(5000))
+		return QStringList();
+
+	QString output = QString::fromLocal8Bit(proc.readAllStandardOutput());
+	QStringList lines = output.split(QRegularExpression("[\\r\\n]+"), Qt::SkipEmptyParts);
+	QSet<QString> holders;
+
+	for (const QString& line : lines) {
+		QString trimmed = line.trimmed();
+		if (trimmed.isEmpty() || trimmed.startsWith("Image Name", Qt::CaseInsensitive) || trimmed.startsWith("=", Qt::CaseInsensitive) || trimmed.startsWith("INFO:", Qt::CaseInsensitive))
+			continue;
+
+		QString simplified = trimmed.simplified();
+		QStringList columns = simplified.split(' ', Qt::SkipEmptyParts);
+		if (columns.isEmpty())
+			continue;
+
+		QString imageName = columns.first();
+		if (imageName.endsWith(".exe", Qt::CaseInsensitive))
+			holders.insert(imageName);
+	}
+
+	QStringList result = holders.values();
+	result.sort();
+	return result;
+}
+
+static bool CRunShellExtPackageCommandWithRecovery(const QString& exportName, const QString& actionText, int waitMs)
+{
+	bool initialResult = CRunShellExtPackageCommand(exportName, waitMs);
+	if (initialResult)
+		return true;
+
+	QStringList holders = CQuerySbieShellExtModuleHolders();
+	QString holderText = holders.isEmpty() ? QObject::tr("(not available)") : holders.join(", ");
+	bool hasDllHost = holders.contains("dllhost.exe", Qt::CaseInsensitive);
+	bool hasRunDll = holders.contains("rundll32.exe", Qt::CaseInsensitive);
+	bool canOfferTerminate = hasDllHost || hasRunDll;
+	CShellExtDebugLog(QString("package command recovery export=%1 action=%2 holders=%3 canOfferTerminate=%4")
+		.arg(exportName).arg(actionText).arg(holderText).arg(canOfferTerminate));
+
+	if (canOfferTerminate) {
+		QMessageBox::StandardButton answer = QMessageBox::question(nullptr,
+			QObject::tr("Sandboxie Plus"),
+			QObject::tr("%1 did not finish in time.\n\n"
+			   "Processes currently holding SbieShellExt.dll:\n%2\n\n"
+			   "Terminate only rundll32.exe/dllhost.exe holders and retry?")
+				.arg(actionText)
+				.arg(holderText),
+			QMessageBox::Yes | QMessageBox::No,
+			QMessageBox::Yes);
+
+		if (answer == QMessageBox::Yes) {
+			CShellExtDebugLog(QString("package command recovery terminate and retry export=%1").arg(exportName));
+			QProcess::execute("taskkill.exe", QStringList() << "/IM" << "dllhost.exe" << "/FI" << "MODULES eq SbieShellExt.dll" << "/F");
+			QProcess::execute("taskkill.exe", QStringList() << "/IM" << "rundll32.exe" << "/FI" << "MODULES eq SbieShellExt.dll" << "/F");
+
+			bool retryResult = CRunShellExtPackageCommand(exportName, waitMs);
+			CShellExtDebugLog(QString("package command recovery retry result export=%1 result=%2")
+				.arg(exportName).arg(retryResult));
+			if (retryResult)
+				return true;
+
+			QMessageBox::warning(nullptr,
+				QObject::tr("Sandboxie Plus"),
+				QObject::tr("%1 still failed. Please close the listed holder processes or sign out and try again.")
+					.arg(actionText));
+		}
+	} else {
+		QMessageBox::warning(nullptr,
+			QObject::tr("Sandboxie Plus"),
+			QObject::tr("%1 did not finish in time.\n\n"
+			   "Processes currently holding SbieShellExt.dll:\n%2\n\n"
+			   "Sandboxie will not terminate these processes automatically. Please close them manually and try again.")
+				.arg(actionText)
+				.arg(holderText));
+	}
+
+	return false;
 }
 
 
@@ -1312,35 +1473,60 @@ Qt::CheckState CSettingsWindow::IsContextMenu()
 {
 	//QSettings Package("HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\PackagedCom\\Package", QSettings::NativeFormat);
 	QSettings Package("HKEY_CURRENT_USER\\Software\\Classes\\PackagedCom\\Package", QSettings::NativeFormat);
+	QString packageMatch;
 	foreach(const QString & Key, Package.childGroups()) {
-		if (Key.indexOf("SandboxieShell") == 0)
-			return Qt::Checked;
+		if (Key.indexOf("SandboxieShell") == 0) {
+			packageMatch = Key;
+			break;
+		}
 	}
 
 	QString cmd = CSbieUtils::GetContextMenuStartCmd();
-	if (cmd.contains("SandMan.exe", Qt::CaseInsensitive)) 
-		return Qt::Checked; // set up and sandman
-	if (!cmd.isEmpty()) // ... probably sbiectrl.exe
-		return Qt::PartiallyChecked; 
-	return Qt::Unchecked; // not set up
+	Qt::CheckState state = Qt::Unchecked;
+	if (!packageMatch.isEmpty())
+		state = Qt::Checked;
+	else if (cmd.contains("SandMan.exe", Qt::CaseInsensitive))
+		state = Qt::Checked; // set up and sandman
+	else if (!cmd.isEmpty()) // ... probably sbiectrl.exe
+		state = Qt::PartiallyChecked;
+
+	CShellExtDebugLog(QString("IsContextMenu build=%1 packageMatch=%2 legacyCommand=%3 state=%4")
+		.arg(QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat)
+			.value("CurrentBuild").toInt())
+		.arg(packageMatch.isEmpty() ? "<none>" : packageMatch)
+		.arg(cmd.isEmpty() ? "<empty>" : cmd)
+		.arg(static_cast<int>(state)));
+	return state;
 }
 
 void CSettingsWindow::AddContextMenu(bool bAlwaysClassic)
 {
 	QSettings CurrentVersion("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
-	if (CurrentVersion.value("CurrentBuild").toInt() >= 22000 && !bAlwaysClassic) // Windows 11
+	int currentBuild = CurrentVersion.value("CurrentBuild").toInt();
+	QString applicationDir = QCoreApplication::applicationDirPath().replace("/", "\\");
+	CShellExtDebugLog(QString("AddContextMenu alwaysClassic=%1 build=%2 applicationDir=%3")
+		.arg(bAlwaysClassic).arg(currentBuild).arg(applicationDir));
+	if (currentBuild >= 22000 && !bAlwaysClassic) // Windows 11
 	{
+		constexpr int kWaitMs = 15000;
 		QSettings MyReg("HKEY_CURRENT_USER\\SOFTWARE\\Xanasoft\\Sandboxie-Plus\\SbieShellExt\\Lang", QSettings::NativeFormat);
 		MyReg.setValue("Open Sandboxed", CSettingsWindow::tr("Run &Sandboxed"));
 		MyReg.setValue("Explore Sandboxed", CSettingsWindow::tr("Run &Sandboxed"));
 		
-		QDir::setCurrent(QCoreApplication::applicationDirPath());
-		QProcess Proc;
-		Proc.execute("rundll32.exe", QStringList() << "SbieShellExt.dll,RegisterPackage");
-		Proc.waitForFinished();
+		bool currentDirectoryResult = QDir::setCurrent(applicationDir);
+		CShellExtDebugLog(QString("AddContextMenu modern register requestedCwd=%1 cwdResult=%2 cwd=%3 openTitle=%4 exploreTitle=%5")
+			.arg(applicationDir)
+			.arg(currentDirectoryResult)
+			.arg(QDir::currentPath())
+			.arg(MyReg.value("Open Sandboxed").toString())
+			.arg(MyReg.value("Explore Sandboxed").toString()));
+		bool result = CRunShellExtPackageCommandWithRecovery("RegisterPackage", CSettingsWindow::tr("Adding shell integration"), kWaitMs);
+		CShellExtDebugLog(QString("AddContextMenu modern register result=%1").arg(result));
 		return;
 	}
 
+	QString startPath = applicationDir + "\\SandMan.exe";
+	CShellExtDebugLog(QString("AddContextMenu legacy register startPath=%1").arg(startPath));
 	CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
 		CSettingsWindow::tr("Run &Sandboxed")/*, //CSettingsWindow::tr("Explore &Sandboxed"),
 			QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe"*/);
@@ -1349,12 +1535,18 @@ void CSettingsWindow::AddContextMenu(bool bAlwaysClassic)
 void CSettingsWindow::RemoveContextMenu()
 {
 	QSettings CurrentVersion("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
-	if (CurrentVersion.value("CurrentBuild").toInt() >= 22000) // Windows 11
+	int currentBuild = CurrentVersion.value("CurrentBuild").toInt();
+	QString applicationDir = QCoreApplication::applicationDirPath().replace("/", "\\");
+	CShellExtDebugLog(QString("RemoveContextMenu build=%1 applicationDir=%2").arg(currentBuild).arg(applicationDir));
+	if (currentBuild >= 22000) // Windows 11
 	{
-		QDir::setCurrent(QCoreApplication::applicationDirPath());
-		QProcess Proc;
-		Proc.execute("rundll32.exe", QStringList() << "SbieShellExt.dll,RemovePackage");
-		Proc.waitForFinished();
+		constexpr int kWaitMs = 15000;
+		bool currentDirectoryResult = QDir::setCurrent(applicationDir);
+		CShellExtDebugLog(QString("RemoveContextMenu modern remove requestedCwd=%1 cwdResult=%2 cwd=%3")
+			.arg(applicationDir).arg(currentDirectoryResult).arg(QDir::currentPath()));
+
+		bool result = CRunShellExtPackageCommandWithRecovery("RemovePackage", CSettingsWindow::tr("Removing shell integration"), kWaitMs);
+		CShellExtDebugLog(QString("RemoveContextMenu modern remove result=%1").arg(result));
 	}
 
 	CSbieUtils::RemoveContextMenu();

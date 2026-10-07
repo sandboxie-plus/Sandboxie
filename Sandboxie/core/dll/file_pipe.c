@@ -56,6 +56,45 @@
 
 
 //---------------------------------------------------------------------------
+// Defines (HidePhysicalDiskSerial)
+//---------------------------------------------------------------------------
+
+
+//
+// declared locally, as most of these are only available in the SDK
+// headers for _WIN32_WINNT >= 0x0A00, which SbieDll does not target
+//
+
+#define FILE_IOCTL_STORAGE_QUERY_PROPERTY       0x002D1400  // CTL_CODE(IOCTL_STORAGE_BASE, 0x0500, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FILE_SMART_RCV_DRIVE_DATA               0x0007C088  // CTL_CODE(IOCTL_DISK_BASE, 0x0022, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+#define FILE_IOCTL_ATA_PASS_THROUGH             0x0004D02C  // CTL_CODE(IOCTL_SCSI_BASE, 0x040B, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+#define FILE_IOCTL_ATA_PASS_THROUGH_DIRECT      0x0004D030  // CTL_CODE(IOCTL_SCSI_BASE, 0x040C, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+
+#define FILE_STORAGE_DEVICE_PROPERTY                        0   // StorageDeviceProperty
+#define FILE_STORAGE_ADAPTER_PROTOCOL_SPECIFIC_PROPERTY     49  // StorageAdapterProtocolSpecificProperty
+#define FILE_STORAGE_DEVICE_PROTOCOL_SPECIFIC_PROPERTY      50  // StorageDeviceProtocolSpecificProperty
+#define FILE_PROPERTY_STANDARD_QUERY                        0   // PropertyStandardQuery
+
+#define FILE_PROTOCOL_TYPE_ATA                  2   // ProtocolTypeAta
+#define FILE_PROTOCOL_TYPE_NVME                 3   // ProtocolTypeNvme
+#define FILE_ATA_DATA_TYPE_IDENTIFY             1   // AtaDataTypeIdentify
+#define FILE_NVME_DATA_TYPE_IDENTIFY            1   // NVMeDataTypeIdentify
+#define FILE_NVME_IDENTIFY_CNS_CONTROLLER       1   // NVME_IDENTIFY_CNS_CONTROLLER
+
+#define FILE_ATA_ID_CMD                         0xEC    // IDENTIFY DEVICE
+#define FILE_ATAPI_ID_CMD                       0xA1    // IDENTIFY PACKET DEVICE
+#define FILE_ATA_TASK_FILE_COMMAND              6       // command register in the task file
+
+#define FILE_ATA_IDENTIFY_SERIAL_OFFSET         20      // words 10-19
+#define FILE_ATA_IDENTIFY_SERIAL_LENGTH         20
+#define FILE_NVME_IDENTIFY_SERIAL_OFFSET        4       // SN in the Identify Controller data
+#define FILE_NVME_IDENTIFY_SERIAL_LENGTH        20
+
+#define FILE_SMART_IN_COMMAND_REG_OFFSET        10      // SENDCMDINPARAMS.irDriveRegs.bCommandReg (packed)
+#define FILE_SMART_OUT_BUFFER_OFFSET            16      // SENDCMDOUTPARAMS.bBuffer (packed)
+
+
+//---------------------------------------------------------------------------
 // Structures
 //---------------------------------------------------------------------------
 
@@ -68,6 +107,74 @@ typedef struct _FILE_PIPE_WAIT_FOR_BUFFER {
     WCHAR           Name[1];
 
 } FILE_PIPE_WAIT_FOR_BUFFER;
+
+
+typedef struct _FILE_STORAGE_PROPERTY_QUERY {   // STORAGE_PROPERTY_QUERY
+
+    ULONG           PropertyId;
+    ULONG           QueryType;
+    UCHAR           AdditionalParameters[1];
+
+} FILE_STORAGE_PROPERTY_QUERY;
+
+
+typedef struct _FILE_STORAGE_DEVICE_DESCRIPTOR {    // STORAGE_DEVICE_DESCRIPTOR, up to SerialNumberOffset
+
+    ULONG           Version;
+    ULONG           Size;
+    UCHAR           DeviceType;
+    UCHAR           DeviceTypeModifier;
+    BOOLEAN         RemovableMedia;
+    BOOLEAN         CommandQueueing;
+    ULONG           VendorIdOffset;
+    ULONG           ProductIdOffset;
+    ULONG           ProductRevisionOffset;
+    ULONG           SerialNumberOffset;
+
+} FILE_STORAGE_DEVICE_DESCRIPTOR;
+
+
+typedef struct _FILE_STORAGE_PROTOCOL_SPECIFIC_DATA {   // STORAGE_PROTOCOL_SPECIFIC_DATA
+
+    ULONG           ProtocolType;
+    ULONG           DataType;
+    ULONG           ProtocolDataRequestValue;
+    ULONG           ProtocolDataRequestSubValue;
+    ULONG           ProtocolDataOffset;
+    ULONG           ProtocolDataLength;
+    ULONG           FixedProtocolReturnData;
+    ULONG           ProtocolDataRequestSubValue2;
+    ULONG           ProtocolDataRequestSubValue3;
+    ULONG           ProtocolDataRequestSubValue4;
+
+} FILE_STORAGE_PROTOCOL_SPECIFIC_DATA;
+
+
+typedef struct _FILE_STORAGE_PROTOCOL_DATA_DESCRIPTOR { // STORAGE_PROTOCOL_DATA_DESCRIPTOR
+
+    ULONG           Version;
+    ULONG           Size;
+    FILE_STORAGE_PROTOCOL_SPECIFIC_DATA ProtocolSpecificData;
+
+} FILE_STORAGE_PROTOCOL_DATA_DESCRIPTOR;
+
+
+typedef struct _FILE_ATA_PASS_THROUGH {     // ATA_PASS_THROUGH_EX and ATA_PASS_THROUGH_DIRECT
+
+    USHORT          Length;
+    USHORT          AtaFlags;
+    UCHAR           PathId;
+    UCHAR           TargetId;
+    UCHAR           Lun;
+    UCHAR           ReservedAsUchar;
+    ULONG           DataTransferLength;
+    ULONG           TimeOutValue;
+    ULONG           ReservedAsUlong;
+    ULONG_PTR       DataBuffer;             // DataBufferOffset or DataBuffer
+    UCHAR           PreviousTaskFile[8];
+    UCHAR           CurrentTaskFile[8];
+
+} FILE_ATA_PASS_THROUGH;
 
 
 //---------------------------------------------------------------------------
@@ -168,6 +275,10 @@ static NTSTATUS File_NtDeviceIoControlFile(
     OUT PVOID OutputBuffer OPTIONAL,
     IN ULONG OutputBufferLength);
 
+static void File_HidePhysicalDiskSerial(
+    ULONG IoControlCode, void *InputBuffer, ULONG InputBufferLength,
+    void *OutputBuffer, IO_STATUS_BLOCK *IoStatusBlock);
+
 
 //---------------------------------------------------------------------------
 // Variables
@@ -181,6 +292,9 @@ static const WCHAR *File_MailSlot  = L"\\device\\mailslot\\";
 
 static const WCHAR *File_ACON_tag = L"AppContainerNamedObjects\\";
 static const ULONG File_ACON_tag_len = 25;
+
+static BOOLEAN File_BlockNetParam = FALSE;
+static BOOLEAN File_HideDiskSerial = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -1449,8 +1563,9 @@ _FX NTSTATUS File_NtDeviceIoControlFile(
     // check if this is an IOCTL that we want to deny
     //
 
-    if (IoControlCode == 0x00128004 ||      /* via \Device\TCP on XP */
-        IoControlCode == 0x00120013)   {    /* via \Device\NSI on VISTA/7 */
+    if (File_BlockNetParam && (
+        IoControlCode == 0x00128004 ||      /* via \Device\TCP on XP */
+        IoControlCode == 0x00120013))  {    /* via \Device\NSI on VISTA/7 */
 
         ULONG LastError;
         THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
@@ -1514,5 +1629,253 @@ _FX NTSTATUS File_NtDeviceIoControlFile(
         IoControlCode, InputBuffer, InputBufferLength,
         OutputBuffer, OutputBufferLength);
 
+    //
+    // replace hardware serial numbers of physical disks, note: requests
+    // which complete asynchronously (STATUS_PENDING) are not handled
+    //
+
+    if (File_HideDiskSerial && status == STATUS_SUCCESS && OutputBuffer) {
+
+        File_HidePhysicalDiskSerial(IoControlCode,
+            InputBuffer, InputBufferLength, OutputBuffer, IoStatusBlock);
+    }
+
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+// File_FakeSerialChars
+//---------------------------------------------------------------------------
+
+
+_FX void File_FakeSerialChars(char *Serial, ULONG Length)
+{
+    //
+    // derive the replacement from the box name and the real serial number,
+    // so that it is stable across processes and restarts but differs per box,
+    // keep digits as digits and letters as letters to retain the format
+    //
+
+    ULONG Seed = 2166136261UL;    // FNV-1a
+    const UCHAR *ptr;
+    ULONG i, len;
+
+    ptr = (const UCHAR *)Dll_BoxName;
+    len = (ULONG)(wcslen(Dll_BoxName) * sizeof(WCHAR));
+    for (i = 0; i < len; i++)
+        Seed = (Seed ^ ptr[i]) * 16777619;
+    for (i = 0; i < Length; i++)
+        Seed = (Seed ^ (UCHAR)Serial[i]) * 16777619;
+    if (! Seed)
+        Seed = 1;
+
+    for (i = 0; i < Length; i++) {
+
+        char c = Serial[i];
+
+        Seed ^= Seed << 13;         // xorshift32
+        Seed ^= Seed >> 17;
+        Seed ^= Seed << 5;
+
+        if (c >= '0' && c <= '9')
+            Serial[i] = (char)('0' + Seed % 10);
+        else if (c >= 'A' && c <= 'Z')
+            Serial[i] = (char)('A' + Seed % 26);
+        else if (c >= 'a' && c <= 'z')
+            Serial[i] = (char)('a' + Seed % 26);
+    }
+}
+
+
+//---------------------------------------------------------------------------
+// File_FakeSerialString
+//---------------------------------------------------------------------------
+
+
+_FX void File_FakeSerialString(char *Serial, ULONG MaxLength)
+{
+    //
+    // serial numbers are often padded with spaces, only replace
+    // the actual serial number so that the padding is preserved
+    //
+
+    ULONG Start = 0, End = 0;
+
+    while (End < MaxLength && Serial[End])
+        End++;
+    while (Start < End && Serial[Start] == ' ')
+        Start++;
+    while (End > Start && Serial[End - 1] == ' ')
+        End--;
+
+    if (End > Start)
+        File_FakeSerialChars(Serial + Start, End - Start);
+}
+
+
+//---------------------------------------------------------------------------
+// File_FakeAtaSerial
+//---------------------------------------------------------------------------
+
+
+_FX void File_FakeAtaSerial(UCHAR *IdentifyData)
+{
+    //
+    // the serial number is stored in the words 10-19 of the ATA IDENTIFY data,
+    // with the bytes of each word swapped, unswap it first so that the result
+    // matches the serial number reported by IOCTL_STORAGE_QUERY_PROPERTY
+    //
+
+    UCHAR *Field = IdentifyData + FILE_ATA_IDENTIFY_SERIAL_OFFSET;
+    char Serial[FILE_ATA_IDENTIFY_SERIAL_LENGTH];
+    ULONG i;
+
+    for (i = 0; i < FILE_ATA_IDENTIFY_SERIAL_LENGTH; i += 2) {
+        Serial[i] = Field[i + 1];
+        Serial[i + 1] = Field[i];
+    }
+
+    File_FakeSerialString(Serial, FILE_ATA_IDENTIFY_SERIAL_LENGTH);
+
+    for (i = 0; i < FILE_ATA_IDENTIFY_SERIAL_LENGTH; i += 2) {
+        Field[i] = Serial[i + 1];
+        Field[i + 1] = Serial[i];
+    }
+}
+
+
+//---------------------------------------------------------------------------
+// File_HidePhysicalDiskSerial
+//---------------------------------------------------------------------------
+
+
+_FX void File_HidePhysicalDiskSerial(
+    ULONG IoControlCode, void *InputBuffer, ULONG InputBufferLength,
+    void *OutputBuffer, IO_STATUS_BLOCK *IoStatusBlock)
+{
+    ULONG_PTR OutputLength;
+
+    if (IoControlCode != FILE_IOCTL_STORAGE_QUERY_PROPERTY &&
+        IoControlCode != FILE_SMART_RCV_DRIVE_DATA &&
+        IoControlCode != FILE_IOCTL_ATA_PASS_THROUGH &&
+        IoControlCode != FILE_IOCTL_ATA_PASS_THROUGH_DIRECT)
+        return;
+
+    //
+    // the buffers belong to the caller, guard against invalid memory
+    //
+
+    __try {
+
+        OutputLength = IoStatusBlock->Information;
+
+        if (IoControlCode == FILE_IOCTL_STORAGE_QUERY_PROPERTY) {
+
+            FILE_STORAGE_PROPERTY_QUERY *Query = (FILE_STORAGE_PROPERTY_QUERY *)InputBuffer;
+
+            if (! Query || InputBufferLength < (ULONG)FIELD_OFFSET(FILE_STORAGE_PROPERTY_QUERY, AdditionalParameters))
+                __leave;
+            if (Query->QueryType != FILE_PROPERTY_STANDARD_QUERY)
+                __leave;
+
+            if (Query->PropertyId == FILE_STORAGE_DEVICE_PROPERTY) {
+
+                FILE_STORAGE_DEVICE_DESCRIPTOR *Desc = (FILE_STORAGE_DEVICE_DESCRIPTOR *)OutputBuffer;
+                ULONG Offset;
+
+                if (OutputLength < sizeof(FILE_STORAGE_DEVICE_DESCRIPTOR))
+                    __leave;
+                Offset = Desc->SerialNumberOffset;
+                if (Offset < sizeof(FILE_STORAGE_DEVICE_DESCRIPTOR) || Offset >= OutputLength)
+                    __leave;
+
+                File_FakeSerialString((char *)Desc + Offset, (ULONG)(OutputLength - Offset));
+
+            } else if (Query->PropertyId == FILE_STORAGE_ADAPTER_PROTOCOL_SPECIFIC_PROPERTY ||
+                       Query->PropertyId == FILE_STORAGE_DEVICE_PROTOCOL_SPECIFIC_PROPERTY) {
+
+                FILE_STORAGE_PROTOCOL_DATA_DESCRIPTOR *Desc = (FILE_STORAGE_PROTOCOL_DATA_DESCRIPTOR *)OutputBuffer;
+                FILE_STORAGE_PROTOCOL_SPECIFIC_DATA *Data = &Desc->ProtocolSpecificData;
+                ULONG_PTR DataOffset;
+
+                if (OutputLength < sizeof(FILE_STORAGE_PROTOCOL_DATA_DESCRIPTOR))
+                    __leave;
+
+                // ProtocolDataOffset is relative to ProtocolSpecificData
+                DataOffset = (ULONG_PTR)FIELD_OFFSET(FILE_STORAGE_PROTOCOL_DATA_DESCRIPTOR, ProtocolSpecificData) + (ULONG_PTR)Data->ProtocolDataOffset;
+
+                if (Data->ProtocolType == FILE_PROTOCOL_TYPE_NVME &&
+                        Data->DataType == FILE_NVME_DATA_TYPE_IDENTIFY &&
+                        Data->ProtocolDataRequestValue == FILE_NVME_IDENTIFY_CNS_CONTROLLER) {
+
+                    if (Data->ProtocolDataLength < FILE_NVME_IDENTIFY_SERIAL_OFFSET + FILE_NVME_IDENTIFY_SERIAL_LENGTH ||
+                            DataOffset + FILE_NVME_IDENTIFY_SERIAL_OFFSET + FILE_NVME_IDENTIFY_SERIAL_LENGTH > OutputLength)
+                        __leave;
+
+                    File_FakeSerialString((char *)Desc + DataOffset + FILE_NVME_IDENTIFY_SERIAL_OFFSET, FILE_NVME_IDENTIFY_SERIAL_LENGTH);
+
+                } else if (Data->ProtocolType == FILE_PROTOCOL_TYPE_ATA &&
+                        Data->DataType == FILE_ATA_DATA_TYPE_IDENTIFY) {
+
+                    if (Data->ProtocolDataLength < FILE_ATA_IDENTIFY_SERIAL_OFFSET + FILE_ATA_IDENTIFY_SERIAL_LENGTH ||
+                            DataOffset + FILE_ATA_IDENTIFY_SERIAL_OFFSET + FILE_ATA_IDENTIFY_SERIAL_LENGTH > OutputLength)
+                        __leave;
+
+                    File_FakeAtaSerial((UCHAR *)Desc + DataOffset);
+                }
+            }
+
+        } else if (IoControlCode == FILE_SMART_RCV_DRIVE_DATA) {
+
+            UCHAR Command;
+
+            if (! InputBuffer || InputBufferLength <= FILE_SMART_IN_COMMAND_REG_OFFSET)
+                __leave;
+            Command = ((UCHAR *)InputBuffer)[FILE_SMART_IN_COMMAND_REG_OFFSET];
+            if (Command != FILE_ATA_ID_CMD && Command != FILE_ATAPI_ID_CMD)
+                __leave;
+            if (OutputLength < FILE_SMART_OUT_BUFFER_OFFSET + FILE_ATA_IDENTIFY_SERIAL_OFFSET + FILE_ATA_IDENTIFY_SERIAL_LENGTH)
+                __leave;
+
+            File_FakeAtaSerial((UCHAR *)OutputBuffer + FILE_SMART_OUT_BUFFER_OFFSET);
+
+        } else { // FILE_IOCTL_ATA_PASS_THROUGH or FILE_IOCTL_ATA_PASS_THROUGH_DIRECT
+
+            FILE_ATA_PASS_THROUGH *AptIn = (FILE_ATA_PASS_THROUGH *)InputBuffer;
+            FILE_ATA_PASS_THROUGH *AptOut = (FILE_ATA_PASS_THROUGH *)OutputBuffer;
+            UCHAR *IdentifyData;
+
+            if (! AptIn || InputBufferLength < sizeof(FILE_ATA_PASS_THROUGH) ||
+                    OutputLength < sizeof(FILE_ATA_PASS_THROUGH))
+                __leave;
+
+            // the output task file contains the status, so check the input one
+            if (AptIn->CurrentTaskFile[FILE_ATA_TASK_FILE_COMMAND] != FILE_ATA_ID_CMD &&
+                    AptIn->CurrentTaskFile[FILE_ATA_TASK_FILE_COMMAND] != FILE_ATAPI_ID_CMD)
+                __leave;
+            if (AptOut->DataTransferLength < FILE_ATA_IDENTIFY_SERIAL_OFFSET + FILE_ATA_IDENTIFY_SERIAL_LENGTH)
+                __leave;
+
+            if (IoControlCode == FILE_IOCTL_ATA_PASS_THROUGH) {
+
+                // the data follows the structure within the output buffer
+                if (AptOut->DataBuffer < sizeof(FILE_ATA_PASS_THROUGH) ||
+                        AptOut->DataBuffer + FILE_ATA_IDENTIFY_SERIAL_OFFSET + FILE_ATA_IDENTIFY_SERIAL_LENGTH > OutputLength)
+                    __leave;
+                IdentifyData = (UCHAR *)AptOut + AptOut->DataBuffer;
+
+            } else {
+
+                // the data is in a separate caller provided buffer
+                IdentifyData = (UCHAR *)AptOut->DataBuffer;
+                if (! IdentifyData)
+                    __leave;
+            }
+
+            File_FakeAtaSerial(IdentifyData);
+        }
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+    }
 }

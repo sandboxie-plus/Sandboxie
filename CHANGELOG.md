@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Persian (Farsi) translations for SandMan, the Troubleshooting Wizard and the installer [#5633](https://github.com/sandboxie-plus/Sandboxie/pull/5633) (thanks imalyzer)
+- added `HidePhysicalDiskSerial=y` to replace the hardware serial numbers of physical disks returned by `IOCTL_STORAGE_QUERY_PROPERTY` (device descriptor, ATA and NVMe identify data), `SMART_RCV_DRIVE_DATA` and ATA pass-through IDENTIFY requests; `HideDiskSerialNumber` only covers volume serial numbers
 
 ### Fixed
 - fixed corrupted SBIE message links in SandMan when URL-encoded characters were interpreted as message placeholders

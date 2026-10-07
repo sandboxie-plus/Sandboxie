@@ -248,7 +248,11 @@ _FX BOOLEAN File_Init(void)
     SBIEDLL_HOOK(File_,NtFsControlFile);
 
     if (!Dll_CompartmentMode) // else ping does not work
-    if (File_IsBlockedNetParam(NULL)) {
+        File_BlockNetParam = File_IsBlockedNetParam(NULL);
+
+    File_HideDiskSerial = Config_GetSettingsForImageName_bool(L"HidePhysicalDiskSerial", FALSE);
+
+    if (File_BlockNetParam || File_HideDiskSerial) {
         SBIEDLL_HOOK(File_,NtDeviceIoControlFile);
     }
 

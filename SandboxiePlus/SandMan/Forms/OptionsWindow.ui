@@ -1386,7 +1386,7 @@
                <item row="6" column="1" colspan="3">
                 <widget class="QCheckBox" name="chkDropRights">
                  <property name="toolTip">
-                  <string>Per-process exceptions can be added under Advanced Options &gt; Miscellaneous using the DropAdminRights option. A process can only keep admin rights if the process starting it (e.g. start.exe) has them too.</string>
+                  <string>Per-process exceptions can be added under Advanced Options &gt; Miscellaneous using the DropAdminRights option. A process can only keep admin rights if the process starting it has them too, so start.exe is exempted automatically along with it.</string>
                  </property>
                  <property name="text">
                   <string>Drop rights from Administrators and Power Users groups</string>

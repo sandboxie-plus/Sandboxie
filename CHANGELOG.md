@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Persian (Farsi) translations for SandMan, the Troubleshooting Wizard and the installer [#5633](https://github.com/sandboxie-plus/Sandboxie/pull/5633) (thanks imalyzer)
-- added `DropAdminRights` to the per-process options in Sandbox Options > Advanced Options > Miscellaneous, so selected programs (e.g. a trusted uninstaller) can be exempted from dropped admin rights without editing the ini by hand (`DropAdminRights=program.exe,n`)
+- added `DropAdminRights` to the per-process options in Sandbox Options > Advanced Options > Miscellaneous, so selected programs (e.g. a trusted uninstaller) can be exempted from dropped admin rights without editing the ini by hand (`DropAdminRights=program.exe,n`, together with `DropAdminRights=start.exe,n` when the program is started through start.exe)
 
 ### Fixed
 - fixed corrupted SBIE message links in SandMan when URL-encoded characters were interpreted as message placeholders

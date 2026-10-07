@@ -73,7 +73,7 @@ void COptionsWindow::CreateAdvanced()
 	m_AdvOptions.insert("CopyBlockDenyWrite",			SAdvOption{eSpec, QStringList() << "y" << "n", tr("Makes a write open call to a file that won't be copied fail instead of turning it read-only.")});
 	m_AdvOptions.insert("UseSbieDeskHack",				SAdvOption{eOnlySpec, QStringList() << "n" << "y", tr("")});
 	m_AdvOptions.insert("UseSbieWndStation",			SAdvOption{eOnlySpec, QStringList() << "n" << "y", tr("")});
-	m_AdvOptions.insert("DropAdminRights",				SAdvOption{eOnlySpec, QStringList() << "n" << "y", tr("Override 'Drop rights from Administrators and Power Users groups' for specified processes, e.g. set 'n' to keep admin rights for a trusted uninstaller.")});
+	m_AdvOptions.insert("DropAdminRights",				SAdvOption{eOnlySpec, QStringList() << "n" << "y", tr("Override 'Drop rights from Administrators and Power Users groups' for specified processes. Note: a process can only keep admin rights if the process starting it has them too, so to keep them for a program started from SandMan, set 'n' for it and for start.exe.")});
 	m_AdvOptions.insert("FakeAdminRights",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Make specified processes think they have admin permissions.")});
 	m_AdvOptions.insert("WaitForDebugger",				SAdvOption{eList, QStringList(), tr("Force specified processes to wait for a debugger to attach.")});
 	m_AdvOptions.insert("BoxNameTitle",					SAdvOption{eOnlySpec, QStringList() << "y" << "n" << "-", tr("")});

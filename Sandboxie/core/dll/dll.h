@@ -742,6 +742,12 @@ BOOLEAN SH32_Init_UxTheme(HMODULE);
 
 BOOLEAN Kernel_Init();
 
+BOOLEAN Kernel_Init_AdvApi(HMODULE);
+
+BOOLEAN Kernel_Init_SspiCli(HMODULE);
+
+BOOLEAN Kernel_Init_Ws2_32(HMODULE);
+
 BOOLEAN Gui_Init(HMODULE);
 
 BOOLEAN Gui_Init_IMM32(HMODULE);

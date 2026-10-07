@@ -132,5 +132,12 @@ _FX BOOLEAN Lsa_Init_SspiCli(HMODULE module)
         return TRUE;
     }
 
-    return Lsa_Init_Common(DllName_sspicli, module);
+    if (! Lsa_Init_Common(DllName_sspicli, module))
+        return FALSE;
+
+    //
+    // CustomUserName / CustomComputerName
+    //
+
+    return Kernel_Init_SspiCli(module);
 }

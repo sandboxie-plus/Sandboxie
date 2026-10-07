@@ -227,6 +227,7 @@ private slots:
 	void OnDelAuto();
 
 	void OnDumpFW();
+	void OnRandomComputerName();
 
 	void OnAddProcess();
 	void OnDelProcess();
@@ -674,6 +675,10 @@ private:
 	QMap<QCheckBox*, SDbgOpt> m_DebugOptions;
 
 	void InitLangID();
+	void InitTimeZones();
+
+	QString GetGlobalText(const QString& Name);
+	void WriteGlobalText(const QString& Name, const QString& Value);
 
 	class CCodeEdit* m_pCodeEdit = nullptr;
 	class CIniHighlighter* m_pIniHighlighter = nullptr;

@@ -2810,6 +2810,13 @@ _FX BOOLEAN WSA_Init(HMODULE module)
 
     WSA_InitNetDnsFilter(module);
 
+    //
+    // CustomComputerName
+    //
+
+    if (! Kernel_Init_Ws2_32(module))
+        return FALSE;
+
     return TRUE;
 }
 

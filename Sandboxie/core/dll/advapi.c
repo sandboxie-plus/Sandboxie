@@ -289,6 +289,14 @@ _FX BOOLEAN AdvApi_Init(HMODULE module)
             }
         }
     }
+
+    //
+    // CustomUserName
+    //
+
+    if (! Kernel_Init_AdvApi(module))
+        return FALSE;
+
     return TRUE;
 }
 

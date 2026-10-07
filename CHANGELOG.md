@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Persian (Farsi) translations for SandMan, the Troubleshooting Wizard and the installer [#5633](https://github.com/sandboxie-plus/Sandboxie/pull/5633) (thanks imalyzer)
+- added `CustomComputerName=name` and `CustomUserName=name` to show a custom computer and user name to sandboxed processes (GetComputerName[Ex], gethostname/GetHostNameW, GetUserName[Ex] and the related environment variables)
+- added `CustomTimeZone=time zone key name` (e.g. `Tokyo Standard Time`) to show a custom time zone and local time to sandboxed processes (GetTimeZoneInformation, GetDynamicTimeZoneInformation, GetLocalTime, local time conversions)
+- added the corresponding options to Sandbox Options > Advanced Options > Privacy
 
 ### Fixed
 - fixed corrupted SBIE message links in SandMan when URL-encoded characters were interpreted as message placeholders

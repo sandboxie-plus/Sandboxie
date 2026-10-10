@@ -337,7 +337,7 @@ NTSTATUS FileServer::OpenBoxFile(
 {
     NTSTATUS status = CheckBoxFilePath(idProcess, request_path, L"\\");
     if (! NT_SUCCESS(status))
-        SHORT_REPLY(status);
+        return status;
 
     UNICODE_STRING objname;
     RtlInitUnicodeString(&objname, request_path);
@@ -1159,6 +1159,39 @@ MSG_HEADER *FileServer::CheckKeyExists(MSG_HEADER *msg, HANDLE idProcess)
 
 
 //---------------------------------------------------------------------------
+// PathHasDotDotComponent
+//---------------------------------------------------------------------------
+
+
+//
+// The sandbox-confinement check in CheckBoxFilePath / CheckBoxKeyPath only
+// compares a prefix; it does not canonicalize the path.  A request that starts
+// with the sandbox directory but then embeds a ".." component resolves (once
+// the object manager folds "..") to a file/key outside the sandbox, yet passes
+// the prefix compare.  Reject any ".." path component so such traversals are
+// denied before the path reaches NtCreateFile / the registry.
+//
+
+static BOOLEAN PathHasDotDotComponent(const WCHAR *path)
+{
+    const WCHAR *p = path;
+    while (p) {
+
+        // p points at the start of a path component
+        if (p[0] == L'.' && p[1] == L'.' &&
+                (p[2] == L'\0' || p[2] == L'\\' || p[2] == L'/'))
+            return TRUE;
+
+        // advance past the next separator to the start of the next component
+        while (*p && *p != L'\\' && *p != L'/')
+            ++p;
+        p = *p ? p + 1 : NULL;
+    }
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
 // CheckBoxFilePath
 //---------------------------------------------------------------------------
 
@@ -1166,6 +1199,9 @@ MSG_HEADER *FileServer::CheckKeyExists(MSG_HEADER *msg, HANDLE idProcess)
 NTSTATUS FileServer::CheckBoxFilePath(
     HANDLE idProcess, WCHAR *request_path, const WCHAR *extra_path)
 {
+    if (PathHasDotDotComponent(request_path))
+        return STATUS_ACCESS_DENIED;
+
     //
     // get the box file path for the calling process
     //
@@ -1219,6 +1255,9 @@ NTSTATUS FileServer::CheckBoxFilePath(
 NTSTATUS FileServer::CheckBoxKeyPath(
     HANDLE idProcess, WCHAR *request_path, const WCHAR *extra_path)
 {
+    if (PathHasDotDotComponent(request_path))
+        return STATUS_ACCESS_DENIED;
+
     //
     // get the box key path for the calling process
     //

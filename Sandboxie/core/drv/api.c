@@ -1122,8 +1122,9 @@ _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
 
 	if (proc) // is caller sandboxed?
 		return STATUS_NOT_IMPLEMENTED;
-    else if (!MyIsCallerSigned()) 
-        status = STATUS_ACCESS_DENIED;
+
+    if (!MyIsCallerSigned())
+        return STATUS_ACCESS_DENIED;
 
 	if (pArgs->process_id.val == 0)
 		return STATUS_INVALID_PARAMETER;

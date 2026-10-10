@@ -911,7 +911,9 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
 
     if (! ok) {
         Process_ReadyToSandbox = ReadyToSandbox;
-        Log_MsgP0(MSG_CANNOT_UNLOAD_DRIVER, proc->pid);
+        // proc is NULL for an unsandboxed (or service) caller, so fall back to
+        // the caller's own pid instead of dereferencing a NULL process block
+        Log_MsgP0(MSG_CANNOT_UNLOAD_DRIVER, proc ? proc->pid : PsGetCurrentProcessId());
         return STATUS_CONNECTION_IN_USE;
     }
 

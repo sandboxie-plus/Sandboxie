@@ -8,6 +8,32 @@
 #include "../MiscHelpers/Common/SettingsWidgets.h"
 #include "../AddonManager.h"
 #include "Helpers/WinAdmin.h"
+#include "Helpers/IdentityProfile.h"
+#include "IdentityProfilesDialog.h"
+
+namespace
+{
+	class CIdentityIniAdapter : public CIdentityIniTarget
+	{
+	public:
+		CIdentityIniAdapter(const QSharedPointer<CSbieIni>& pBox) : m_pBox(pBox) {}
+		QString GetText(const QString& Setting) const { return m_pBox->GetText(Setting); }
+		QStringList GetTextList(const QString& Setting, bool withTemplates) const { return m_pBox->GetTextList(Setting, withTemplates); }
+		bool SetText(const QString& Setting, const QString& Value) { return Track(m_pBox->SetText(Setting, Value)); }
+		bool AppendText(const QString& Setting, const QString& Value) { return Track(m_pBox->AppendText(Setting, Value)); }
+		bool DelValue(const QString& Setting, const QString& Value) { return Track(m_pBox->DelValue(Setting, Value)); }
+		int GetActiveProcessCount() const { auto pBoxPlus = m_pBox.objectCast<CSandBoxPlus>(); return pBoxPlus ? pBoxPlus->GetActiveProcessCount() : 0; }
+		// SaveConfig() batches writes (SetRefreshOnChange(false)); the service only publishes them on commit, so read-back needs one.
+		bool Flush() { m_pBox->CommitIniChanges(); return true; }
+		SB_STATUS GetLastStatus() const { return m_LastStatus; }
+	private:
+		bool Track(const SB_STATUS& Status) { if (!Status) m_LastStatus = Status; return !!Status; }
+		QSharedPointer<CSbieIni> m_pBox;
+		SB_STATUS m_LastStatus;
+	};
+
+	QString IdentityProfileDir() { return theConf->GetConfigDir() + "/IdentityProfiles"; }
+}
 
 void COptionsWindow::CreateAdvanced()
 {
@@ -126,6 +152,8 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkHideMac, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.cmbLangID, SIGNAL(currentIndexChanged(int)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.btnDumpFW, SIGNAL(clicked(bool)), this, SLOT(OnDumpFW()));
+	connect(ui.cmbIdentityProfile, SIGNAL(currentIndexChanged(int)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.btnIdentityProfiles, SIGNAL(clicked(bool)), this, SLOT(OnIdentityProfiles()));
 
 	connect(ui.chkHideOtherBoxes, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkHideNonSystemProcesses, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -344,6 +372,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkHideFirmware->setChecked(m_pBox->GetBool("HideFirmwareInfo", false));
 	ui.chkHideUID->setChecked(m_pBox->GetBool("RandomRegUID",false));
 	ui.chkHideSerial->setChecked(m_pBox->GetBool("HideDiskSerialNumber", false));
+	LoadIdentityProfile();
 	ui.chkHideMac->setChecked(m_pBox->GetBool("HideNetworkAdapterMAC", false));
 
 	ui.cmbLangID->setCurrentIndex(ui.cmbLangID->findData(m_pBox->GetNum("CustomLCID", 0)));
@@ -647,7 +676,12 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkHideFirmware, "HideFirmwareInfo", "y", "");
 	WriteAdvancedCheck(ui.chkHideUID, "RandomRegUID", "y", "");
-	WriteAdvancedCheck(ui.chkHideSerial, "HideDiskSerialNumber", "y", "");
+	QString SelectedProfile = ui.cmbIdentityProfile->currentData().toString();
+	QString BoundProfile = ui.cmbIdentityProfile->property("boundId").toString();
+	SIdentityBindingState::EState BindingState = (SIdentityBindingState::EState)ui.cmbIdentityProfile->property("boundState").toInt();
+	if (m_Template || !CIdentityProfileBinding::WillApplyProfile(SelectedProfile, BoundProfile, BindingState))
+		WriteAdvancedCheck(ui.chkHideSerial, "HideDiskSerialNumber", "y", "");
+	SaveIdentityProfile();
 	WriteAdvancedCheck(ui.chkHideMac, "HideNetworkAdapterMAC", "y", "");
 
 	int CustomLCID = ui.cmbLangID->currentData().toInt();
@@ -1791,4 +1825,94 @@ void COptionsWindow::InitLangID()
 	ui.cmbLangID->addItem("Yi (ii-CN)", 1144);
 	ui.cmbLangID->addItem("Yoruba (yo-NG)", 1130);
 	ui.cmbLangID->addItem("Zulu (zu-ZA)", 1077);
+}
+
+//---------------------------------------------------------------------------
+// Identity profiles
+//---------------------------------------------------------------------------
+
+void COptionsWindow::LoadIdentityProfile()
+{
+	CIdentityProfileStore Store(IdentityProfileDir());
+	CIdentityIniAdapter Target(m_pBox);
+	SIdentityBindingState State = CIdentityProfileBinding::Read(Target, Store);
+
+	ui.cmbIdentityProfile->blockSignals(true);
+	ui.cmbIdentityProfile->clear();
+	ui.cmbIdentityProfile->addItem(tr("No identity profile"), QString());
+	bool Found = State.ProfileId.isEmpty();
+	foreach(const CIdentityProfile& Profile, Store.List()) {
+		ui.cmbIdentityProfile->addItem(tr("%1 (revision %2)").arg(Profile.Name).arg(Profile.Revision), Profile.Id);
+		if (Profile.Id == State.ProfileId) {
+			ui.cmbIdentityProfile->setCurrentIndex(ui.cmbIdentityProfile->count() - 1);
+			Found = true;
+		}
+	}
+	if (!Found) {
+		ui.cmbIdentityProfile->addItem(tr("Missing profile %1").arg(State.ProfileId), State.ProfileId);
+		ui.cmbIdentityProfile->setCurrentIndex(ui.cmbIdentityProfile->count() - 1);
+	}
+	ui.cmbIdentityProfile->setEnabled(!m_Template);
+	ui.cmbIdentityProfile->setToolTip(State.Describe() + "\n\n" + CIdentityProfileBinding::CoverageText());
+	ui.cmbIdentityProfile->blockSignals(false);
+	ui.cmbIdentityProfile->setProperty("boundId", State.ProfileId);
+	ui.cmbIdentityProfile->setProperty("boundState", (int)State.State);
+
+	bool Managed = !State.ProfileId.isEmpty() && State.State != SIdentityBindingState::eMissing;
+	ui.chkHideSerial->setEnabled(!Managed);
+	ui.chkHideSerial->setToolTip(Managed ? tr("Managed by the selected identity profile") : QString());
+}
+
+void COptionsWindow::SaveIdentityProfile()
+{
+	if (m_Template)
+		return;
+	QString Selected = ui.cmbIdentityProfile->currentData().toString();
+	QString Bound = ui.cmbIdentityProfile->property("boundId").toString();
+	int BoundState = ui.cmbIdentityProfile->property("boundState").toInt();
+	bool Stale = BoundState == SIdentityBindingState::eStale || BoundState == SIdentityBindingState::eDiverged;
+	if (Selected == Bound && !Stale)
+		return;
+
+	CIdentityProfileStore Store(IdentityProfileDir());
+	CIdentityIniAdapter Target(m_pBox);
+	QString Error;
+	bool Ok;
+	if (Selected.isEmpty())
+		Ok = CIdentityProfileBinding::Unbind(Target, &Error);
+	else {
+		CIdentityProfile Profile;
+		Ok = Store.Load(Selected, Profile, &Error) && CIdentityProfileBinding::Apply(Target, Profile, &Error);
+	}
+	if (!Ok) {
+		if (Target.GetLastStatus().IsError())
+			throw Target.GetLastStatus();
+		throw SB_ERR(SB_Message, QVariantList() << tr("Identity profile not applied: %1").arg(Error));
+	}
+	LoadIdentityProfile();
+}
+
+QStringList COptionsWindow::GetIdentityProfileUsers(const QString& ProfileId)
+{
+	QStringList Users;
+	foreach(const CSandBoxPtr& pBox, theAPI->GetAllBoxes()) {
+		if (pBox->GetText(CIdentityProfileBinding::ProfileSetting).trimmed() == ProfileId)
+			Users.append(pBox->GetName());
+	}
+	return Users;
+}
+
+void COptionsWindow::OnIdentityProfiles()
+{
+	CIdentityProfileStore Store(IdentityProfileDir());
+	CIdentityProfilesDialog Dialog(Store, [this](const QString& Id) { return GetIdentityProfileUsers(Id); }, this);
+	Dialog.SelectId(ui.cmbIdentityProfile->currentData().toString());
+	Dialog.exec();
+	QString Selected = ui.cmbIdentityProfile->currentData().toString();
+	LoadIdentityProfile();
+	int Index = ui.cmbIdentityProfile->findData(Selected);
+	if (Index >= 0 && Index != ui.cmbIdentityProfile->currentIndex()) {
+		ui.cmbIdentityProfile->setCurrentIndex(Index);
+	}
+	OnAdvancedChanged();
 }

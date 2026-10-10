@@ -227,6 +227,7 @@ private slots:
 	void OnDelAuto();
 
 	void OnDumpFW();
+	void OnIdentityProfiles();
 
 	void OnAddProcess();
 	void OnDelProcess();
@@ -538,6 +539,9 @@ protected:
 	void CreateAdvanced();
 	void LoadAdvanced();
 	void SaveAdvanced();
+	void LoadIdentityProfile();
+	void SaveIdentityProfile();
+	QStringList GetIdentityProfileUsers(const QString& ProfileId);
 	void UpdateBoxIsolation();
 	void ShowTriggersTmpl(bool bUpdate = false);
 	void AddTriggerItem(const QString& Value, ETriggerAction Type, bool disabled = false, const QString& Template = QString());

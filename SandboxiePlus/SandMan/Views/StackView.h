@@ -27,6 +27,9 @@ public slots:
 
 	void					SetFilter(const QRegularExpression& Exp, int iOptions = 0, int Col = -1); // -1 = any
 
+private slots:
+	void					OnExportRedacted();
+
 protected:
 	//virtual void				OnMenu(const QPoint& Point);
 	virtual QTreeView*			GetView()	{ return m_pStackList; }

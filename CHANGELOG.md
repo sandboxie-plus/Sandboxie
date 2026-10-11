@@ -4,14 +4,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.18.6 / 5.73.6] - 2026-10-??
+## [1.18.6 / 5.73.6] - 2026-10-11
 
 ### Added
 - added Persian (Farsi) translations for SandMan, the Troubleshooting Wizard and the installer [#5633](https://github.com/sandboxie-plus/Sandboxie/pull/5633) (thanks imalyzer)
 
 ### Fixed
 - fixed corrupted SBIE message links in SandMan when URL-encoded characters were interpreted as message placeholders
-
+- fixed updater issues
+- fixed issues with transient excemption handling
+- fixed path handling issues
+- fixed possible null pointer exception when unloading driver
 
 
 ## [1.18.5 / 5.73.5] - 2026-09-25

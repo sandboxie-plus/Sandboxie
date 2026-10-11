@@ -640,3 +640,5 @@ arabic.UninstallTaskLabel5=إزالة ملفات الإعدادات و&بيئا�
 arabic.RefreshBuild=تنزيل أحدث ملفات Templates.ini والترجمات
 arabic.InstallImDisk=تثبيت (أو تحديث) برنامج تشغيل ImDisk 3.0 (لأقراص RAM وبيئات العزل المشفرة)
 arabic.Qt6Win10Unsupported=إطار عمل Qt 6 لا يدعم إصدارات Windows 10: 1507 أو 1511 أو 1607.%nيرجى التحديث إلى Windows 10 1809 (الإصدار 17763) أو أحدث.%nراجع المشكلة #5079 للتفاصيل:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nهل لا تزال ترغب في متابعة التثبيت؟
+;
+

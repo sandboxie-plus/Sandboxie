@@ -163,6 +163,9 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 - stdedos - 文档补充
 - habatake - 界面新增功能 / 代码修复
 - Polyester6719 - 文档补充
+- oddwatcher - 文档补充与改进
+- mihomoQ - 代码修复与文档改进
+- marcelodotnet - 文档补充与改进
 
 ## 🌏 翻译人员
 
@@ -170,6 +173,7 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 - yuhao2348732、0x391F、nkh0472、yfdyh000、gexgd0419、Zerorigin、UnnamedOrange、DevSplash、Becods、okrc、4rt3mi5、sepcnt、fzxx、Vstory、GT-Stardust、habatake、mihomoQ - 简体中文
 - TragicLifeHu、Hulen、xiongsp、habatake、mihomoQ - 繁体中文
 - RockyTDR - 荷兰语
+- imalyzer - 波斯语
 - clexanis、Mmoi-Fr、hippalectryon-0、Monsieur Pissou - 法语（通过电子邮件提供）
 - bastik-1001、APMichael - 德语
 - timinoun - 匈牙利语（通过电子邮件提供）
@@ -190,6 +194,6 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 
 ## 📚 文档翻译人员
 
-- Vstory、GT-Stardust、wzxjohn、SOLEADO20、habatake - 简体中文
+- Vstory、GT-Stardust、wzxjohn、SOLEADO20、habatake、YuHuanTin、darkskygit、oddwatcher - 简体中文
 
 所有文档译者在提交翻译前，建议先查看[多语言翻译贡献指南](https://github.com/sandboxie-plus/sandboxie-docs/issues/175#issuecomment-2840258519)。

@@ -538,6 +538,8 @@ typedef enum _FILE_INFORMATION_CLASS {
     FileLinkInformationExBypassAccessCheck,         // 73 - kernel mode only
     FileStorageReserveIdInformation,                // 74
     FileCaseSensitiveInformationForceAccessCheck,   // 75
+    FileKnownFolderInformation,                     // 76
+    FileStatBasicInformation,                       // 77
 
     FileMaximumInformation
 } FILE_INFORMATION_CLASS, *PFILE_INFORMATION_CLASS;

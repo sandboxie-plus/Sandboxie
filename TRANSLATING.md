@@ -20,7 +20,7 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Dutch|Yes - Jan 10, 2022|Yes - Feb 18, 2022|No|Yes - 2024|
 |English|Yes - latest|Yes - latest|Yes - latest|Yes - latest|
 |Estonian|Yes|No|No|No|
-|Farsi|Yes|No|No|No|
+|Farsi|Yes|Oct 4, 2026|Oct 4, 2026|Oct 4, 2026|
 |Finnish|Yes|No|No|No|
 |French|Yes - Dec 19, 2024|Yes - Dec 19, 2024|Yes - Jul 15, 2026|Yes - 2024|
 |German|Yes - Apr 13, 2026|Yes - Sep 4, 2026|Yes - Jul 15, 2026|Yes - Mar 13, 2025|

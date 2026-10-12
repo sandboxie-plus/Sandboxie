@@ -1228,6 +1228,7 @@ bool PipeServer::IsCallerAdmin()
 
 extern "C" {
     NTSTATUS VerifyFileSignature(const wchar_t* FilePath);
+    WINBASEAPI BOOL WINAPI QueryFullProcessImageNameW(HANDLE hProcess, DWORD dwFlags, LPWSTR lpExeName, PDWORD lpdwSize);
 }
 
 bool PipeServer::IsCallerSigned()
@@ -1240,8 +1241,9 @@ bool PipeServer::IsCallerSigned()
     ULONG processId = (ULONG)(ULONG_PTR)TlsData->PortMessage->ClientId.UniqueProcess;
     HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId);
     if (processHandle != NULL) {
-        TCHAR fileName[MAX_PATH];
-        if (GetModuleFileNameEx(processHandle, NULL, fileName, MAX_PATH)) {
+        WCHAR fileName[MAX_PATH];
+        DWORD fileNameLen = MAX_PATH;
+        if (QueryFullProcessImageNameW(processHandle, 0, fileName, &fileNameLen)) {
 
             status = VerifyFileSignature(fileName);
         }

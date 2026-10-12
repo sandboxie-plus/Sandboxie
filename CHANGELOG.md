@@ -11,22 +11,43 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.18.6 / 5.73.6] - 2026-10-11
+
+### Added
+- added Persian (Farsi) translations for SandMan, the Troubleshooting Wizard and the installer [#5633](https://github.com/sandboxie-plus/Sandboxie/pull/5633) (thanks imalyzer)
+
+### Fixed
+- fixed corrupted SBIE message links in SandMan when URL-encoded characters were interpreted as message placeholders
+- fixed updater issues
+- fixed issues with transient excemption handling
+- fixed path handling issues
+- fixed possible null pointer exception when unloading driver
+
+
+## [1.18.5 / 5.73.5] - 2026-09-25
+
+### Fixed
+- fixed Chromium-based browsers and Electron applications crashing in Application Compartment boxes due to incorrect hook target detection [#5609](https://github.com/sandboxie-plus/Sandboxie/issues/5609)
+- fixed FileID queried through fsutil is not inverted like normal [#5612](https://github.com/sandboxie-plus/Sandboxie/issues/5612)
+
+
+
 ## [1.18.4 / 5.73.4] - 2026-09-06
 
 ### Added
 - added low-noise `SbieTrace` logging for `Shell_NotifyIconW` calls, including the message, icon identity (`NIF_GUID`/GUID or `HWND`/`uID`), and effective direct/proxy route
 - added the `Show Future Settings` editor setting (enabled by default) to include future-version settings in SandMan INI completion candidates
 
-### Fixed
-- fixed stale INI completion-popup candidate tooltips during editing and limited `Template`/`TemplateReject` tooltips to setting-name text
-- fixed SandMan File Panel "Create Shortcut" producing a shortcut without a working directory, so the sandboxed program inherited SandMan's current directory and applications that open their data files by relative path failed to find them [#5542](https://github.com/sandboxie-plus/Sandboxie/issues/5542)
-- fixed wrong return type ein sbiesvc
-- fixed archive path cleaning
-
 ### Changed
 - changed `UseShellNotifyIconProxy` to remain enabled by default for `OpenWinClass=*` while allowing explicit use for other sandboxed processes; non-`OpenWinClass=*` cases default to direct routing
 - improved SandMan INI editor auto-completion with synchronized per-editor metadata, context-aware semantic ranking, fuzzy matching, and deferred refreshes during rapid typing or deletion
 - improved INI completion-popup tooltips jumping between sides or overlapping candidates when displaying large setting descriptions
+
+### Fixed
+- fixed stale INI completion-popup candidate tooltips during editing and limited `Template`/`TemplateReject` tooltips to setting-name text
+- fixed SandMan File Panel "Create Shortcut" producing a shortcut without a working directory, so the sandboxed program inherited SandMan's current directory and applications that open their data files by relative path failed to find them [#5542](https://github.com/sandboxie-plus/Sandboxie/issues/5542)
+- fixed wrong return type in SbieSvc
+- fixed archive path cleaning
 
 ### Removed
 - removed 'ExposeBoxedSystem=y' option
@@ -59,7 +80,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added a SandMan setting to restore either the active or default snapshot after automatic deletion, consistently across synchronous and asynchronous cleanup, with Snapshot Manager access and refresh controls
 
 ### Changed
-- changed SandMan's Auto Expand Tree to preserve explicit group, sandbox, and process expansion choices while using the toggle as the default for items without saved state; Find bar Expand All and Collapse All remain one-time actions, and `Options/LegacyAutoExpandTree=true` retains the previous behavior [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
+- changed SandMan's Auto Expand Tree to preserve explicit group, sandbox, and process expansion choices while using the toggle as the default for items without saved state; Find bar Expand All and Collapse All remain one-time actions, and `Options/LegacyAutoExpandTree=true` retains the previous behaviour [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
 - validated compatibility with Windows build 29634 and updated DynData
 - changed SandMan Trace Log auto scrolling overriding manual scrolling; it now pauses away from the bottom and provides an in-list resume button
 
@@ -76,7 +97,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed ApiTrace stack exhaustion on Cygwin and other alternate stacks by replacing callback-side formatting with a compact synchronous logging path, preserving legacy ordering and stack capture
 - improved early stack symbol loading by retrying unresolved addresses after process discovery and refreshing the DbgHelp module list when needed
 - fixed SandMan offering to install the DbgHelp add-on when enabling stack traces even though the add-on was already installed
-- fixed ConfidentialBox=y could trap the user on a black screen when trying to elevate a process.
+- fixed 'ConfidentialBox=y' could trap the user on a black screen when trying to elevate a process
 
 
 

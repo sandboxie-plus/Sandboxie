@@ -6452,7 +6452,6 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>chkProtectSCM</tabstop>
   <tabstop>chkRestrictServices</tabstop>
   <tabstop>chkElevateRpcss</tabstop>
-  <tabstop>chkProtectSystem</tabstop>
   <tabstop>chkDropPrivileges</tabstop>
   <tabstop>chkDropConHostIntegrity</tabstop>
   <tabstop>chkSbieLogon</tabstop>

@@ -400,10 +400,10 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
         //
         // in a chrome sandbox process, some syscalls are already hooked
         // by chrome at this point, and we want to hook the syscall stub
-        // saved by chrome, rather than the chrome hook itself (32-bit only)
+        // saved by chrome, rather than the chrome hook itself
         //
 
-        void* ChromeFunc = Hook_CheckChromeHook(ZwXxxPtr, (void*)GET_ADDR_OF_PROCESS_BASE);
+        void* ChromeFunc = Hook_CheckChromeHook(ZwXxxPtr, (void*)GET_ADDR_OF_PROCESS_BASE, (void*)data->ntdll_base);
         if (ChromeFunc != NULL) {
             if (ChromeFunc != (void*)-1)
                 ZwXxxPtr = ChromeFunc;

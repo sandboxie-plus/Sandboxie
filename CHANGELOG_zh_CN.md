@@ -4,6 +4,27 @@
 
 
 
+## [1.18.6 / 5.73.6] - 2026-10-11
+
+### 新增
+- 为 SandMan、故障排除向导和安装程序新增波斯语翻译 [#5633](https://github.com/sandboxie-plus/Sandboxie/pull/5633)（感谢 imalyzer）
+
+### 修复
+- 修复了 SandMan 将 URL 编码的字符误当作消息占位符，导致 SBIE 消息链接损坏的问题
+- 修复了更新器的问题
+- 修复了临时豁免的处理问题
+- 修复了路径处理问题
+- 修复了卸载驱动程序时可能发生的空指针异常
+
+
+## [1.18.5 / 5.73.5] - 2026-09-25
+
+### 修复
+- 修复了因钩子目标识别错误，导致基于 Chromium 的浏览器和 Electron 应用程序在应用程序隔离沙盒中崩溃的问题 [#5609](https://github.com/sandboxie-plus/Sandboxie/issues/5609)
+- 修复了通过 fsutil 查询的文件 ID 未按预期取反的问题 [#5612](https://github.com/sandboxie-plus/Sandboxie/issues/5612)
+
+
+
 ## [1.18.4 / 5.73.4] - 2026-09-06
 
 ### 新增

@@ -12,9 +12,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed corrupted SBIE message links in SandMan when URL-encoded characters were interpreted as message placeholders
 - fixed updater issues
-- fixed issues with transient excemption handling
+- fixed issues with transient exception handling
 - fixed path handling issues
 - fixed possible null pointer exception when unloading driver
+
 
 
 ## [1.18.5 / 5.73.5] - 2026-09-25

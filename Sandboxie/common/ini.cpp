@@ -40,6 +40,18 @@ static bool ContainsCRLF(const WCHAR* str)
     return false;
 }
 
+// Match the driver's value-edge trimming without changing characters inside a value.
+static std::wstring TrimValue(const WCHAR* value, size_t length)
+{
+    while (length && *value <= 32) {
+        ++value;
+        --length;
+    }
+    while (length && value[length - 1] <= 32)
+        --length;
+    return std::wstring(value, length);
+}
+
 CIniFile::CIniFile()
 {
 	m_Encoding = 0;
@@ -266,7 +278,7 @@ NTSTATUS CIniFile::SetValue(const WCHAR* section, const WCHAR* setting, const WC
             if (cpylen > CONF_LINE_LEN)
                 cpylen = CONF_LINE_LEN;
 
-            pSection->Entries.insert(pos, SIniEntry{ setting, std::wstring(ptr, cpylen) });
+            pSection->Entries.insert(pos, SIniEntry{ setting, TrimValue(ptr, cpylen) });
 
             ptr += skiplen;
         }
@@ -311,7 +323,7 @@ NTSTATUS CIniFile::AddValue(const WCHAR* section, const WCHAR* setting, const WC
     // add the value to the string list
     //
 
-    pSection->Entries.insert(pos, SIniEntry{ setting, value });
+    pSection->Entries.insert(pos, SIniEntry{ setting, TrimValue(value, wcslen(value)) });
 
     return STATUS_SUCCESS;
 }
@@ -326,13 +338,19 @@ NTSTATUS CIniFile::RemoveValue(const WCHAR* section, const WCHAR* setting, const
     if (!pSection)
         return STATUS_SUCCESS;
 
+    // Only an originally empty value means delete all, not one trimmed to empty.
+    const bool removeAll = !value || !*value;
+    std::wstring trimmedValue;
+    if (!removeAll)
+        trimmedValue = TrimValue(value, wcslen(value));
+
     //
     // discard setting with the matching the value
     //
 
     for (auto I = pSection->Entries.begin(); I != pSection->Entries.end();)
     {
-        if (_wcsicmp(I->Name.c_str(), setting) == 0 && (!value || !*value || _wcsicmp(I->Value.c_str(), value) == 0)) {
+        if (_wcsicmp(I->Name.c_str(), setting) == 0 && (removeAll || _wcsicmp(I->Value.c_str(), trimmedValue.c_str()) == 0)) {
             I = pSection->Entries.erase(I);
             // Note: we could break here, but let's finish in case there is a duplicate
         }
@@ -412,11 +430,8 @@ void CIniFile::ReadEntry(WCHAR* line, WCHAR* end, std::list<SIniEntry>& entries)
         while (name_end > name_start && (*(name_end-1) == L' ' || *(name_end-1) == L'\t')) name_end--; 
 
         WCHAR* value_start = separator+1;
-        // trim leading whitespaces
-        while (*value_start == L' ' || *value_start == L'\t') value_start++; 
-        WCHAR* value_end = end;
 
-        entries.push_back(SIniEntry{std::wstring(name_start, name_end - name_start), std::wstring(value_start, value_end - value_start)});
+        entries.push_back(SIniEntry{std::wstring(name_start, name_end - name_start), TrimValue(value_start, end - value_start)});
     }
 }
 

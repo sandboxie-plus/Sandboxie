@@ -41,6 +41,8 @@ public:
 
 	bool		IsDeleteDialog() const;
 	bool		IsDeleteSnapshots() { return m_DeleteSnapshots; }
+	bool		IsTakeSnapshot() const { return m_TakeSnapshot; }
+	void		SetSnapAndDelete(bool bEnable);
 	int			GetUnfilteredFileCount() const { return m_UnfilteredFileCount; }
 
 	static bool	IsFileIgnored(const CSandBoxPtr& pBox, const QString& diskPath, const QString& boxedPath);
@@ -64,6 +66,7 @@ private slots:
 	void		OnRecover();
 	void		OnDelete();
 	void		OnTargetChanged();
+	void		OnDeleteAllClicked();
 	void		OnDeleteAll();
 	void		OnDeleteEverything();
 	void		OnCloseUntil();
@@ -106,6 +109,8 @@ protected:
 	bool m_bTargetsChanged;
 	bool m_bReloadPending;
 	bool m_DeleteSnapshots;
+	bool m_SnapAndDelete;
+	bool m_TakeSnapshot;
 	bool m_bImmediate;
 	int m_UnfilteredFileCount;
 	int m_IgnoredFileCount;

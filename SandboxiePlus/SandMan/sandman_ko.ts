@@ -2500,7 +2500,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1472"/>
         <source>%1 (%2)</source>
-        <translation></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1527"/>

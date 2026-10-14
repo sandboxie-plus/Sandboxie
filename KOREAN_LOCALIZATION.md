@@ -27,7 +27,7 @@ I am checking both short interface labels and longer messages against the Englis
 
 ## Credits and reference
 
-**Korean localization maintenance:** M26Pershing90mm (Sakai).
+**Korean localization maintenance:** 꿈을꾸는 파랑새(Sakai).
 
 The earlier translators' historical contributions, copyright notices, and existing email addresses remain unchanged. The Inno Setup Korean translator credit is not reassigned.
 

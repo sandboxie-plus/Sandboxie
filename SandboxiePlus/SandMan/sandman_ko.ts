@@ -4121,7 +4121,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="834"/>
         <location filename="SandMan.cpp" line="5158"/>
         <source>About Sandboxie-Plus</source>
-        <translation>Sandboxie-Plus 정보 - 한국어 번역: Sakai</translation>
+        <translation>Sandboxie-Plus 정보 - 한국어 번역: 꿈을꾸는 파랑새(Sakai)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1078"/>

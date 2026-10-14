@@ -300,6 +300,7 @@
     <ClCompile Include="Helpers\IniHighlighter.cpp" />
     <ClCompile Include="Helpers\ReadDirectoryChanges.cpp" />
     <ClCompile Include="Helpers\ReadDirectoryChangesPrivate.cpp" />
+    <ClCompile Include="Helpers\RedactedStackExport.cpp" />
     <ClCompile Include="Helpers\StorageInfo.cpp" />
     <ClCompile Include="Helpers\TabOrder.cpp" />
     <ClCompile Include="Helpers\WinAdmin.cpp" />
@@ -383,6 +384,7 @@
     </ClCompile>
     <ClCompile Include="Windows\CompressDialog.cpp" />
     <ClCompile Include="Windows\ExtractDialog.cpp" />
+    <ClCompile Include="Windows\StackExportDialog.cpp" />
     <ClCompile Include="Windows\RenameSandboxDialog.cpp" />
     <ClCompile Include="Windows\OptionsAccess.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -510,6 +512,7 @@
     <QtMoc Include="Windows\ExtractDialog.h" />
     <QtMoc Include="Windows\TestProxyDialog.h" />
     <QtMoc Include="Windows\CompressDialog.h" />
+    <QtMoc Include="Windows\StackExportDialog.h" />
     <QtMoc Include="Windows\RenameSandboxDialog.h" />
     <QtMoc Include="Wizards\BoxAssistant.h" />
     <QtMoc Include="Windows\BoxImageWindow.h" />
@@ -551,6 +554,7 @@
     <QtMoc Include="Helpers\IniHighlighter.h" />
     <ClInclude Include="Helpers\ReadDirectoryChanges.h" />
     <ClInclude Include="Helpers\ReadDirectoryChangesPrivate.h" />
+    <ClInclude Include="Helpers\RedactedStackExport.h" />
     <ClInclude Include="Helpers\StorageInfo.h" />
     <ClInclude Include="Windows\PendingChanges.h" />
     <ClInclude Include="Helpers\TabOrder.h" />

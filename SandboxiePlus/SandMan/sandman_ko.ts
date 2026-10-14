@@ -4737,7 +4737,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <location filename="SbiePlusAPI.cpp" line="275"/>
         <source>    Disk root: %1
 </source>
-        <translation>    디스트 루트: %1
+        <translation>    디스크 루트: %1
 </translation>
     </message>
     <message>
@@ -4819,7 +4819,7 @@ Sandboxie 업데이트가 있는지 확인해 주세요.</translation>
     <message>
         <location filename="SandMan.cpp" line="3779"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
-        <translation>사용하려는 인증서가 차단되었습니다. 이는 해당 인증서가 원인으로 인해 무효화되었음을 의미합니다. 이 인증서를 사용하려는 시도는 사용 약관 위반에 해당합니다!</translation>
+        <translation>사용하려는 인증서가 규정 위반 등의 사유로 차단되어 무효화되었습니다. 이 인증서를 다시 사용하려는 시도는 이용 약관 위반에 해당합니다!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3973"/>
@@ -5050,7 +5050,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="4430"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
-        <translation>숨겨진 메시지 박스 (예)를 재설정하시겠습니까, 아니면 모든 로그 메시지 (아니요)만 재설정하시겠습니까?</translation>
+        <translation>숨긴 메시지 대화상자도 초기화하시겠습니까? [예]를 선택하면 숨긴 대화상자와 로그 메시지를 초기화하고, [아니요]를 선택하면 로그 메시지만 초기화합니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4534"/>
@@ -5095,17 +5095,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="4886"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
-        <translation>%1을 샌드박스 또는 샌드박스 해제된 웹 브라우저에서 열겠습니까?</translation>
+        <translation>%1을(를) 샌드박스에서 실행하는 웹 브라우저와 샌드박스 외부의 웹 브라우저 중 어디에서 여시겠습니까?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4890"/>
         <source>Sandboxed</source>
-        <translation>샌드박스</translation>
+        <translation>샌드박스에서 실행</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4891"/>
         <source>Unsandboxed</source>
-        <translation>샌드박스 해제</translation>
+        <translation>샌드박스 외부에서 실행</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="5067"/>
@@ -5189,13 +5189,13 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1014"/>
         <source>Is Window Sandboxed?</source>
         <oldsource>Is Window Sandboxed</oldsource>
-        <translation>샌드박스 창이 있습니까?</translation>
+        <translation>선택한 창이 샌드박스에서 실행 중인가요?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="516"/>
         <location filename="SandMan.cpp" line="2833"/>
         <source>Sandboxie-Plus Insider [%1]</source>
-        <translation>Sandboxie-Plus 내부자 [%1]</translation>
+        <translation>Sandboxie-Plus Insider [%1]</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="786"/>
@@ -5350,13 +5350,13 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="2009"/>
         <location filename="SandMan.cpp" line="2040"/>
         <source>Which box you want to add in?</source>
-        <translation>어떤 박스를 추가하시겠습니까?</translation>
+        <translation>어느 박스에 추가하시겠습니까?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2009"/>
         <location filename="SandMan.cpp" line="2040"/>
         <source>Type the box name which you are going to set:</source>
-        <translation>설정할 박스 이름을 입력합니다:</translation>
+        <translation>설정할 박스 이름을 입력하세요:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2026"/>
@@ -5384,7 +5384,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="2031"/>
         <location filename="SandMan.cpp" line="2047"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation>박스 이름을 잘못 입력했습니다! 아무것도 변경되지 않았습니다.</translation>
+        <translation>박스 이름을 잘못 입력했습니다. 변경 사항이 없습니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2035"/>
@@ -5395,7 +5395,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2257"/>
         <source>No Force Process</source>
-        <translation>강제 프로세스 없음</translation>
+        <translation>강제 실행할 프로세스 없음</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2330"/>
@@ -5405,7 +5405,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2417"/>
         <source>USB sandbox not found; creating: %1</source>
-        <translation>USB 샌드박스를 찾을 수 없습니다: 만들기: %1</translation>
+        <translation>USB 샌드박스를 찾지 못했습니다. 새로 만듭니다: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2655"/>
@@ -5463,8 +5463,7 @@ No will choose: %2</source>
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation>샌드맨이 지난번에 설치된 Windows 업데이트 열거를 완료하지 못해 중단된 것일 수 있습니다.
-소프트웨어 호환성 검색에서 Windows 업데이트 검색을 비활성화하시겠습니까?</translation>
+        <translation>지난 실행에서 SandMan이 설치된 Windows 업데이트 검색을 완료하지 못한 것으로 보입니다. 소프트웨어 호환성 검색에서 Windows 업데이트 확인을 비활성화하거나 잠시 후 다시 시도하세요.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3218"/>
@@ -5665,7 +5664,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4749"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
-        <translation>샌드박스 이름에는 공백으로 표시되는 문자, 숫자 및 밑줄만 포함될 수 있습니다.</translation>
+        <translation>샌드박스 이름에는 영문자, 숫자 및 밑줄(_)만 사용할 수 있습니다. 밑줄은 공백으로 표시됩니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4750"/>
@@ -5882,7 +5881,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="main.cpp" line="215"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation>Sandboxie 관리자는 샌드박스에서 실행을 할 수 없습니다!</translation>
+        <translation>Sandboxie 관리자는 샌드박스 내에서 실행할 수 없습니다!</translation>
     </message>
 </context>
 <context>
@@ -5940,7 +5939,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Models/SbieModel.cpp" line="843"/>
         <source>Path / Command Line</source>
-        <translation>명령 줄</translation>
+        <translation>경로 / 명령줄</translation>
     </message>
 </context>
 <context>
@@ -6112,7 +6111,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SbieProcess.cpp" line="100"/>
         <source>Suspended</source>
-        <translation>중지됨</translation>
+        <translation>일시 중단됨</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="104"/>
@@ -6132,12 +6131,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SbieProcess.cpp" line="110"/>
         <source> as System</source>
-        <translation> 시스템으로</translation>
+        <translation> (SYSTEM 계정)</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation> 가짜 관리자</translation>
+        <translation> (가상 관리자)</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -6287,7 +6286,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="243"/>
         <source>Ask for UAC Elevation</source>
-        <translation>UAC 상승 요청</translation>
+        <translation>UAC 관리자 권한 요청</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="244"/>
@@ -6297,7 +6296,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="245"/>
         <source>Emulate Admin Rights</source>
-        <translation>관리자 권한 에뮬레이트</translation>
+        <translation>관리자 권한이 있는 것처럼 실행</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="253"/>
@@ -6368,7 +6367,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="133"/>
         <location filename="Views/SbieView.cpp" line="297"/>
         <source>Pin to Run Menu</source>
-        <translation>실행할 메뉴 고정</translation>
+        <translation>실행 메뉴에 고정</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="178"/>
@@ -6410,12 +6409,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="307"/>
         <source>Set Linger Process</source>
-        <translation>링거 프로세스 설정</translation>
+        <translation>잔류 프로세스로 설정</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="309"/>
         <source>Set Leader Process</source>
-        <translation>지시자 프로세스 설정</translation>
+        <translation>대표 프로세스로 설정</translation>
     </message>
     <message>
         <source>    File root: %1
@@ -6674,7 +6673,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="1464"/>
         <source>... and %1 more</source>
-        <translation>... 및 %1개 이상</translation>
+        <translation>... 외 %1개</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1595"/>
@@ -6743,7 +6742,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="1422"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
-        <translation>샌드박스 이름 및 박스 그룹 이름에는 &apos;,(&apos;) 기호를 사용할 수 없습니다.</translation>
+        <translation>샌드박스 이름과 박스 그룹 이름에는 &apos;,()&apos; 및 제어 문자를 사용할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1427"/>
@@ -6801,7 +6800,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="222"/>
         <location filename="Views/SbieView.cpp" line="389"/>
         <source>Mount Box Image</source>
-        <translation>마운트 박스 이미지</translation>
+        <translation>박스 이미지 마운트</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="223"/>
@@ -6812,7 +6811,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="311"/>
         <source>Suspend</source>
-        <translation>일시중지</translation>
+        <translation>일시 중단</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="312"/>
@@ -6895,7 +6894,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="1994"/>
         <source>the selected processes</source>
-        <translation>선택된 과정</translation>
+        <translation>선택한 프로세스</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="2053"/>
@@ -6968,7 +6967,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="307"/>
         <source>Auto Detection</source>
-        <translation>자동 탐지</translation>
+        <translation>자동 감지</translation>
     </message>
     <message>
         <source>No Translation</source>
@@ -7042,7 +7041,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="347"/>
         <source>Prompt before Close</source>
-        <translation>닫기 전 프롬프트</translation>
+        <translation>닫기 전에 확인</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="348"/>
@@ -7052,7 +7051,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="349"/>
         <source>Hide (Run invisible in Background)</source>
-        <translation>숨기기 (배경에서 보이지 않게 실행)</translation>
+        <translation>숨기기(백그라운드에서 실행)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="350"/>
@@ -7128,7 +7127,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="443"/>
         <source>Native</source>
-        <translation>원본</translation>
+        <translation>기본 스타일</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="444"/>
@@ -7304,7 +7303,7 @@ Do you wish to enable autocomplete?</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3273"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>이 후원자 인증서가 만료되었습니다. &lt;href=&quot;%1&quot;&gt;업데이트된 인증서를 받아주세요&lt;/a&gt;.</translation>
+        <translation>이 후원자 인증서가 만료되었습니다. &lt;a href=&quot;%1&quot;&gt;갱신된 인증서 받기&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3278"/>
@@ -7374,7 +7373,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
         <location filename="Windows/SettingsWindow.cpp" line="3321"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
-        <translation>만료: %1일 전</translation>
+        <translation>만료까지 남은 기간: %1일</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3323"/>
@@ -7421,7 +7420,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <source>Network Interception (NetI): %1</source>
-        <translation>네트워크 차단 (NetI): %1</translation>
+        <translation>네트워크 가로채기(NetI): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3343"/>
@@ -7443,7 +7442,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
         <location filename="Windows/SettingsWindow.cpp" line="3387"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
-        <translation>기존 후원자 인증서를 입력하지 않고 갱신 키를 사용하려고 합니다. (&lt;b&gt;웹사이트에 굵은 글씨로 명시되어 있는&lt;/b) 이 유형의 키는 기존 후원자 인증서가 있어야 하며, 해당 인증서가 없으면 쓸모가 없습니다.</translation>
+        <translation>기존 후원자 인증서를 입력하지 않고 갱신 키를 사용하려고 합니다. 웹사이트에 &lt;b&gt;명확하게 안내되어 있듯이&lt;/b&gt; 이 키를 사용하려면 유효한 기존 후원자 인증서가 필요합니다. 기존 인증서가 없으면 사용할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3392"/>
@@ -7461,7 +7460,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3423"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
-        <translation>Sandboxie-Plus - 평가판 인증서 가져오기</translation>
+        <translation>Sandboxie-Plus - 평가용 인증서 받기</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3423"/>
@@ -7508,7 +7507,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3510"/>
         <source>Business</source>
-        <translation>비지니스</translation>
+        <translation>비즈니스</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3512"/>
@@ -7684,7 +7683,7 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3280"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
-        <translation>&lt;br /&gt;Plus 기능이 더 이상 사용되지 않습니다.</translation>
+        <translation>&lt;br /&gt;Plus 기능이 더 이상 활성화되지 않습니다.</translation>
     </message>
     <message>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
@@ -7749,7 +7748,7 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2452"/>
         <source>by %1</source>
-        <translation>%1까지</translation>
+        <translation>제작: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2460"/>
@@ -7759,7 +7758,7 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2488"/>
         <source>This Add-on is mandatory and can not be removed.</source>
-        <translation>이 추가 기능은 필수 사항 제거할 수 없습니다.</translation>
+        <translation>이 추가 기능은 필수 구성 요소이므로 제거할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2497"/>
@@ -7775,18 +7774,18 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2599"/>
         <source>Select Portable Box ini</source>
-        <translation>Portable Box ini 선택</translation>
+        <translation>포터블 박스 INI 파일 선택</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2599"/>
         <location filename="Windows/SettingsWindow.cpp" line="2609"/>
         <source>Ini Files (*.ini)</source>
-        <translation>Ini 파일 (*.ini)</translation>
+        <translation>INI 파일 (*.ini)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2609"/>
         <source>Save new Portable Box ini</source>
-        <translation>새 Portable Box ini 저장</translation>
+        <translation>새 포터블 박스 INI 파일 저장</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2614"/>
@@ -7881,12 +7880,12 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="48"/>
         <source>This help is likely not to be of any help.</source>
-        <translation>이 도움말은 도움이 되지 않을 것 같습니다.</translation>
+        <translation>이 도움말은 현재 상황에 별다른 도움이 되지 않을 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="52"/>
         <source>Sorry, I already gave all the help I could.</source>
-        <translation>죄송합니다. 이미 제가 할 수 있는 모든 도움을주었습니다.</translation>
+        <translation>죄송합니다. 제공할 수 있는 안내는 여기까지입니다.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="54"/>
@@ -7914,12 +7913,12 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="543"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>탐색기의 상황에 맞는 메뉴에 &apos;샌드박스에서 실행&apos; 추가</translation>
+        <translation>파일 탐색기의 오른쪽 클릭 메뉴에 &apos;샌드박스에서 실행&apos; 추가</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="548"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
-        <translation>Sandboxie에서 웹 브라우저를 시작하기 위한 바탕 화면 바로 가기 추가</translation>
+        <translation>Sandboxie에서 웹 브라우저를 실행하는 바탕 화면 바로 가기 추가</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="553"/>
@@ -8048,7 +8047,7 @@ Before sending you can review the logs in the main window.</oldsource>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="840"/>
         <source>Attach Crash Dumps</source>
-        <translation>충돌 덤프 연결</translation>
+        <translation>충돌 덤프 첨부</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="841"/>
@@ -8059,7 +8058,7 @@ Before sending you can review the logs in the main window.</oldsource>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="845"/>
         <source>Email address</source>
-        <translation>이메일주소</translation>
+        <translation>이메일 주소</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="846"/>
@@ -8175,7 +8174,7 @@ This box will DISCARD its content when its closed, its suitable only for tempora
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
-이 박스의 프로세스는 인터넷 또는 로컬 네트워크에 액세스할 수 없으므로 액세스된 모든 데이터가 기밀로 유지됩니다.</translation>
+이 박스에서 실행되는 프로세스는 인터넷이나 로컬 네트워크에 접근할 수 없으므로 네트워크를 통한 데이터 유출을 제한할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1121"/>
@@ -8191,7 +8190,7 @@ This box will run the MSIServer (*.msi installer service) with a system token, t
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
-이 박스의 프로세스는 관리자 권한 없이 실행되므로 보안 강화 박스에서도 설치 프로그램을 사용할 수 있습니다.</translation>
+이 박스의 프로세스는 실제 관리자 권한이 없어도 관리자 권한으로 실행되는 것처럼 인식하므로 보안 강화 박스에서도 설치 프로그램을 실행할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1125"/>
@@ -8216,14 +8215,14 @@ Processes in this box will be running with a custom process token indicating the
 If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate.</source>
         <oldsource>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</oldsource>
-        <translation>이 내부지 빌드에는 GREAT_PATREON, Personal-HUGER 또는 CONFIUTIOR 유형의 특수 인증서가 필요합니다.
-만약 당신이 이미 훌륭한 애국 지지자라면, sandboxie는 당신의 인증서의 업데이트를 온라인으로 확인할 수 있습니다.</translation>
+        <translation>이 Insider 빌드를 사용하려면 GREAT_PATREON, PERSONAL-HUGE 또는 CONTRIBUTOR 유형의 특별 인증서가 필요합니다.
+이미 Patreon의 Great Supporter라면 Sandboxie에서 인증서 업데이트가 있는지 온라인으로 확인할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="51"/>
         <location filename="Windows/SupportDialog.cpp" line="345"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.</source>
-        <translation>이 내부자 빌드에는 GREAT_PATREON, Personal-HUGER 또는 CONFIUTIOR 유형의 특수 인증서가 필요합니다.</translation>
+        <translation>이 Insider 빌드를 사용하려면 GREAT_PATREON, PERSONAL-HUGE 또는 CONTRIBUTOR 유형의 특별 인증서가 필요합니다.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="72"/>
@@ -8438,7 +8437,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="37"/>
         <source>N/A</source>
-        <translation>해당없음</translation>
+        <translation>해당 없음</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="42"/>
@@ -8548,7 +8547,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="266"/>
         <source>[%1] Failed to get proxy server latency.</source>
-        <translation>[%1] 프록시 서버 지연 시간을 가져오지 못했습니다.</translation>
+        <translation>[%1] 프록시 서버 지연 시간을 확인하지 못했습니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="295"/>
@@ -8612,7 +8611,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="387"/>
         <source>Invalid Ping Count value. Please enter a value between 1 and 10.</source>
-        <translation>잘못된 핑 카운트 값입니다. 1에서 10 사이의 값을 입력하세요.</translation>
+        <translation>핑 횟수가 올바르지 않습니다. 1에서 10 사이의 값을 입력하세요.</translation>
     </message>
 </context>
 <context>
@@ -8774,7 +8773,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="854"/>
         <source>Saving TraceLog...</source>
-        <translation>TraceLog 저장 중...</translation>
+        <translation>추적 로그 저장 중...</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -8918,13 +8917,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/CompressDialog.ui" line="51"/>
         <source>Create Solide Archive</source>
-        <translation>솔리드 압축파일 만들기</translation>
+        <translation>솔리드 압축 파일 만들기</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
         <source>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</source>
         <oldsource>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
-        <translation>샌드박스를 압축파일로 내보내고, 압축률을 선택하고, 추가 압축 설정을 사용자 지정합니다.</translation>
+        <translation>샌드박스를 압축 파일로 내보냅니다. 압축 수준을 선택하고 세부 옵션을 설정하세요.</translation>
     </message>
     <message>
         <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
@@ -9057,16 +9056,16 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="468"/>
         <source>Partially checked means prevent box removal but not content deletion.</source>
-        <translation>부분적으로 선택하면 박스는 제거되지만 내용은 삭제되지 않습니다.</translation>
+        <translation>부분적으로 선택하면 박스 삭제는 방지하지만 박스 내용 삭제는 허용합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="708"/>
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
-        <translation>2113: 마이그레이션된 파일의 내용이 삭제되었습니다
-2114: 파일이 마이그레이션되지 않았습니다. 파일에 대한 쓰기 액세스가 거부되었습니다
-2115: 파일이 마이그레이션되지 않았습니다. 읽기 전용으로 파일이 열립니다</translation>
+        <translation>2113: 복사된 파일의 내용이 버려졌습니다
+2114: 파일을 복사하지 못해 쓰기 접근이 거부되었습니다
+2115: 파일을 복사하지 못해 읽기 전용으로 열었습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="713"/>
@@ -9091,7 +9090,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="806"/>
         <source>Sandboxie does not allow writing to host files, unless permitted by the user. When a sandboxed application attempts to modify a file, the entire file must be copied into the sandbox, for large files this can take a significate amount of time. Sandboxie offers options for handling these cases, which can be configured on this page.</source>
-        <translation>Sandboxie는 사용자가 허용하지 않는 한 호스트 파일에 쓰는 것을 허용하지 않습니다. 샌드박스 응용 프로그램이 파일을 수정하려고 할 때 전체 파일을 샌드박스에 복사해야 합니다. 큰 파일의 경우 상당한 시간이 걸릴 수 있습니다. Sandboxie는 이 페이지에서 구성할 수 있는 이러한 사례를 처리하는 옵션을 제공합니다.</translation>
+        <translation>Sandboxie는 별도로 허용하지 않는 한 호스트 파일에 직접 쓰지 못하게 합니다. 샌드박스의 프로그램이 파일을 수정하면 일반적으로 해당 파일의 복사본을 샌드박스 내부에 만들어 변경 사항을 저장합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="816"/>
@@ -9144,7 +9143,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1389"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation>관리자 및 Power Users 그룹에서 권한 삭제</translation>
+        <translation>Administrators 및 Power Users 그룹 권한 제거</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="175"/>
@@ -9155,12 +9154,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1428"/>
         <source>Make applications think they are running elevated (allows to run installers safely)</source>
-        <translation>응용 프로그램이 높은 수준으로 실행되고 있다고 생각하도록 함 (설치 프로그램을 안전하게 실행할 수 있음)</translation>
+        <translation>실제 권한 상승 없이 관리자 권한으로 실행되는 것처럼 인식하게 함(설치 프로그램 호환성 지원)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1356"/>
         <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
-        <translation>주의: 기본 관리자에서 실행할 때 프로세스는 관리 권한을 삭제할 수 없습니다.</translation>
+        <translation>주의: 기본 제공 Administrator 계정으로 실행하는 프로세스에서는 관리자 권한을 제거할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="251"/>
@@ -9186,7 +9185,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="400"/>
         <source>Auto delete content changes when last sandboxed process terminates</source>
         <oldsource>Auto delete content when last sandboxed process terminates</oldsource>
-        <translation>마지막 샌드박스 처리가 종료될 때 내용 변경 자동 삭제</translation>
+        <translation>마지막 샌드박스 프로세스가 종료되면 변경된 내용 자동 삭제</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="681"/>
@@ -9285,7 +9284,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4267"/>
         <source>Block network files and folders, unless specifically opened.</source>
-        <translation>특별히 열지 않는 한 네트워크 파일 및 폴더를 차단합니다.</translation>
+        <translation>명시적으로 허용하지 않은 네트워크 파일과 폴더에 대한 접근 차단</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1111"/>
@@ -9427,7 +9426,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1372"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation>보안 참고 사항: 관리자 또는 시스템 토큰을 사용하여 샌드박스의 감독 하에 실행되는 고급 응용 프로그램은 분리를 우회하고 샌드박스 외부에서 시스템을 수정할 수 있는 기회가 더 많습니다.</translation>
+        <translation>보안 참고: 관리자 또는 SYSTEM 토큰으로 샌드박스에서 실행되는 권한 상승 프로그램은 격리를 우회하여 샌드박스 외부 시스템을 변경할 가능성이 더 높습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1343"/>
@@ -9457,7 +9456,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="90"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation>&lt;b&gt;더 많은 박스 유형&lt;/b&gt;은  &lt;u&gt;프로젝트 후원자&lt;/u&gt; 독점적으로 사용할 수 있으며, 개인 정보 보호 강화 박스는 샌드박스 프로그램에 의한 &lt;b&gt;&lt;font color=&apos;red&apos;&gt;불법 액세스으로부터 사용자 데이터를 보호&lt;/font&gt;&lt;/b&gt;합니다.&lt;br /&gt;아직 후원자가 아닌 경우 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원자 인증서&lt;/a&gt;를 받을 수 있도록 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;프로젝트 지원&lt;/a&gt;을 고려해 주시기 바랍니다.&lt;br /&gt;이러한 유형의 새 샌드박스를 만들어 다른 박스 유형을 테스트할 수 있지만, 이러한 유형의 프로세스는 5분 후에 자동으로 종료됩니다.</translation>
+        <translation>&lt;b&gt;추가 박스 유형&lt;/b&gt;은 &lt;u&gt;프로젝트 후원자&lt;/u&gt;만 사용할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="208"/>
@@ -9527,7 +9526,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2911"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>프로그램 시작 실패 시 메시지 1308 발생</translation>
+        <translation>프로그램 시작이 제한되면 SBIE1308 메시지 표시</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2861"/>
@@ -9596,7 +9595,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="959"/>
         <source>Prevent sandboxed processes from interfering with power operations (Experimental)</source>
-        <translation>샌드박스가 적용된 프로세스가 전원 운영을 방해하지 않도록 방지 (실험적)</translation>
+        <translation>샌드박스 내 프로세스가 전원 관련 작업을 방해하지 못하도록 차단(실험적)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="966"/>
@@ -9613,7 +9612,7 @@ If leader processes are defined, all others are treated as lingering processes.<
         <location filename="Forms/OptionsWindow.ui" line="976"/>
         <source>Allow sandboxed windows to cover the taskbar</source>
         <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
-        <translation>샌드박스된 창이 작업 표시줄을 덮을 수 있도록 허용</translation>
+        <translation>샌드박스 내 창이 작업 표시줄 위에 표시되도록 허용</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="983"/>
@@ -9656,7 +9655,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2078"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
-        <translation>ConHost.exe 프로세스 무결성 수준 삭제</translation>
+        <translation>ConHost.exe 프로세스의 무결성 수준 낮추기</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3374"/>
@@ -9859,7 +9858,7 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2085"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
-        <translation>SYSTEM 토큰으로 실행 중인 프로세스에서 중요한 권한 삭제</translation>
+        <translation>SYSTEM 토큰으로 실행되는 프로세스의 중요 권한 제거</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2055"/>
@@ -9902,7 +9901,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3576"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
-        <translation>개인 정보 보호 모드, 일반 시스템 위치를 제외한 모든 위치에 대한 파일 및 레지스트리 액세스 차단</translation>
+        <translation>개인정보 보호 모드: 일반 시스템 위치를 제외한 파일 및 레지스트리 접근 차단</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3556"/>
@@ -9931,7 +9930,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2152"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
-        <translation>SYSTEM 프로세스로 샌드박스 RpcS 시작 (권장하지 않음)</translation>
+        <translation>샌드박스 내 RpcSs를 SYSTEM 프로세스로 시작(권장하지 않음)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2159"/>
@@ -9972,7 +9971,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="1525"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it&apos;s no longer providing reliable security, just simple application compartmentalization.</source>
         <oldsource>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</oldsource>
-        <translation>엄격하게 제한된 프로세스 토큰을 사용하여 보안을 격리하는 것은 샌드박스 제한을 시행하는 샌드박스의 주요 수단입니다. 이를 사용하지 않도록 설정하면 해당 박스가 응용 프로그램 구획 모드로 작동합니다. 즉, 더 이상 안정적인 보안을 제공하지 않고 단순한 애플리케이션 구획만 제공합니다.</translation>
+        <translation>Sandboxie는 강하게 제한된 프로세스 토큰을 사용해 샌드박스의 보안 제한을 적용합니다. 이 보안 격리를 끄면 박스는 앱 구획 모드로 동작하므로 신뢰할 수 있는 보안 격리 대신 단순한 프로그램 분리만 제공합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1094"/>
@@ -10024,7 +10023,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="945"/>
         <source>Allow to read memory of unsandboxed processes (not recommended)</source>
-        <translation>샌드박스되지 않은 프로세스의 메모리 읽기 허용(권장하지 않음)</translation>
+        <translation>샌드박스 외부 프로세스의 메모리 읽기 허용(권장하지 않음)</translation>
     </message>
     <message>
         <source>COM/RPC</source>
@@ -10168,7 +10167,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1572"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation>다양한 분리 기능은 일부 응용 프로그램과의 호환성을 손상시킬 수 있습니다. 이 샌드박스를 &lt;b&gt;보안이 아닌&lt;/b&gt; 응용 프로그램 이동성을 위해 사용하는 경우 이러한 옵션을 변경하여 일부 보안을 희생하여 호환성을 복원할 수 있습니다.</translation>
+        <translation>일부 격리 기능은 프로그램 호환성을 떨어뜨릴 수 있습니다. 이 샌드박스를 &lt;b&gt;보안 목적이 아닌&lt;/b&gt; 프로그램의 포터블 실행 용도로 사용한다면, 일부 보안을 포기하는 대신 옵션을 조정하여 호환성을 개선할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1074"/>
@@ -10183,7 +10182,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4683"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation>프로그램이 샌드박스된 dll을 로드하려고 할 때 1305 메시지 발생</translation>
+        <translation>프로그램이 샌드박스의 DLL을 로드하려고 하면 SBIE1305 메시지 표시</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4676"/>
@@ -10194,7 +10193,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4615"/>
         <source>Dlls &amp;&amp; Extensions</source>
-        <translation>Dll 및 확장자</translation>
+        <translation>DLL 및 확장 기능</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4664"/>
@@ -10207,8 +10206,8 @@ The process match level has a higher priority than the specificity and describes
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</oldsource>
-        <translation>Sandboxie의 리소스 액세스 규칙은 종종 샌드박스 내부에 위치한 프로그램 바이너리를 차별합니다. OpenFilePath 및 OpenKeyPath는 기본적으로 호스트에 위치한 응용 프로그램 바이너리에 대해서만 작동합니다. 이 제한 없이 규칙을 정의하려면 OpenPipePath 또는 OpenConfPath를 사용해야 합니다. 마찬가지로 &apos;ClosedFilePath=!iexplore.exe,C:Users*&apos;와 같이 부정으로 정의되는 모든 Closed (File|Key|Ipc) 지침은 샌드박스 내부에 위치한 바이너리에 대해 항상 닫힙니다. 두 제한 정책은 모두 &quot;액세스 정책&quot; 페이지에서 비활성화할 수 있습니다.
-이는 샌드박스 내부의 불량 프로세스가 자신의 이름이 변경된 복사본을 만들고 보호된 리소스에 액세스하는 것을 방지하기 위해 수행됩니다. 또 다른 악용 벡터는 권한 있는 프로세스에 라이브러리를 주입하여 액세스가 허용된 모든 것에 액세스하는 것입니다. 호스트 이미지 보호를 사용하면 샌드박스 내부에서 실행되는 응용 프로그램 (호스트에 설치)이 샌드박스 자체에서 라이브러리를 로드하는 것을 차단하여 이를 방지할 수 있습니다.</translation>
+        <translation>Sandboxie의 리소스 접근 규칙은 샌드박스 내부에 설치된 프로그램 실행 파일과 호스트에 설치된 실행 파일을 구분합니다. OpenFilePath와 OpenKeyPath는 기본적으로 호스트의 실행 파일에만 적용됩니다. 이 제한을 피하려면 OpenPipePath 또는 OpenConfPath를 사용해야 합니다. 또한 &apos;ClosedFilePath=!iexplore.exe,C:Users*&apos;처럼 부정 조건을 사용하는 Closed(File|Key|Ipc)Path 규칙은 샌드박스 내부 실행 파일에는 항상 접근을 차단합니다. 두 제한 정책은 &quot;접근 정책&quot; 페이지에서 변경할 수 있습니다.
+이 제한은 악성 프로세스가 자신을 다른 이름으로 복사하여 보호된 리소스에 접근하지 못하도록 하기 위한 것입니다. 또 다른 공격 방법으로는 접근 권한이 있는 프로세스에 DLL을 주입하는 방식이 있습니다. 호스트 이미지 보호를 사용하면 호스트에 설치된 프로그램이 샌드박스에서 실행될 때 샌드박스 내부 DLL을 로드하지 못하게 하여 이러한 공격을 방어할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4696"/>
@@ -10274,17 +10273,17 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2441"/>
         <source>Breakout Programs</source>
-        <translation>탈옥 프로그램</translation>
+        <translation>샌드박스 이탈 허용 프로그램</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2546"/>
         <source>Breakout Program</source>
-        <translation>탈옥 프로그램</translation>
+        <translation>샌드박스 이탈 허용 프로그램</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2520"/>
         <source>Breakout Folder</source>
-        <translation>탈옥 폴더</translation>
+        <translation>샌드박스 이탈 허용 폴더</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="571"/>
@@ -10315,7 +10314,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1542"/>
         <source>Disable Security Isolation</source>
-        <translation>보안 분리 사용 안 함</translation>
+        <translation>보안 격리 사용 안 함</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1608"/>
@@ -10331,7 +10330,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1691"/>
         <source>Allow Process</source>
-        <translation>허용 프로세스</translation>
+        <translation>허용할 프로세스</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1621"/>
@@ -10346,7 +10345,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1670"/>
         <source>Deny Process</source>
-        <translation>거부 프로세스</translation>
+        <translation>차단할 프로세스</translation>
     </message>
     <message>
         <source>Prevent sandboxed processes from using public methods to capture window images</source>
@@ -10474,7 +10473,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2565"/>
         <source>Breakout Document</source>
-        <translation>분과 문서</translation>
+        <translation>샌드박스 이탈 허용 문서</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2572"/>
@@ -10510,12 +10509,12 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2781"/>
         <source>Use Linger Leniency</source>
-        <translation>지연 시간 사용</translation>
+        <translation>잔류 프로세스 종료 조건 완화</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2791"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation>Windows에서 지속적인 프로세스 중지</translation>
+        <translation>창이 있는 잔류 프로세스는 종료하지 않음</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2918"/>
@@ -10527,7 +10526,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
         <location filename="Forms/OptionsWindow.ui" line="2921"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
-        <translation>외부 소스에서 샌드박스에서 프로세스를 시작하기 전에 팝업 경고 표시</translation>
+        <translation>외부에서 샌드박스 내 프로세스를 시작할 때 경고 팝업 표시</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2953"/>
@@ -10909,7 +10908,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3513"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
-        <translation>닫기 적용...=!&lt;프로그램&gt;,... 또한 샌드박스에 있는 모든 이진 파일에 대한 규칙도 있습니다.</translation>
+        <translation>Close...=!&lt;program&gt;,... 규칙을 샌드박스 내부의 모든 실행 파일에도 적용</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3612"/>
@@ -10924,7 +10923,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4123"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
-        <translation>소켓을 직접 수정하는 대신 프로세스 중 프록시 릴레이 스레드 사용 (드물게 발생하는 호환성 문제 해결)</translation>
+        <translation>소켓을 직접 수정하는 대신 프로세스 내부 프록시 중계 스레드 사용(일부 호환성 문제 해결)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4133"/>
@@ -10984,12 +10983,12 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4483"/>
         <source>Various Options</source>
-        <translation>다양한 옵션</translation>
+        <translation>기타 옵션</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4578"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
-        <translation>ElevateCreateProcess 해결 방법 적용 (레거시 동작)</translation>
+        <translation>ElevateCreateProcess 호환성 해결 방법 적용(레거시 동작)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4571"/>
@@ -11044,7 +11043,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5217"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
-        <translation>샌드박스 프로세스에서 다른 박스에서 실행 중인 프로세스 보기 허용 안 함</translation>
+        <translation>샌드박스 내 프로세스가 다른 박스에서 실행 중인 프로세스를 보지 못하도록 차단</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1783"/>
@@ -11207,8 +11206,8 @@ instead of &quot;*&quot;.</source>
         <location filename="Forms/OptionsWindow.ui" line="2183"/>
         <source>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
 Partially checked: No groups will be added to the newly created sandboxed token.</source>
-        <translation>표시됨: 새로 생성된 샌드박스 토큰에 로컬 그룹도 추가되어 모든 샌드박스 주소를 한 번에 지정할 수 있습니다. 정책 감사에 유용할 것입니다.
-일부 확인됨: 새로 생성된 샌드박스 토큰에 그룹이 추가되지 않습니다.</translation>
+        <translation>선택: 새 샌드박스 토큰에 로컬 그룹도 추가하여 모든 샌드박스를 함께 지정할 수 있습니다. 정책 감사에 유용합니다.
+부분 선택: 새 샌드박스 토큰에 그룹을 추가하지 않습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3727"/>
@@ -11219,7 +11218,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4983"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation>이러한 명령은 샌드박스의 모든 프로세스가 완료된 후 언박스 상태로 실행됩니다.</translation>
+        <translation>이 명령은 샌드박스의 모든 프로세스가 종료된 후 샌드박스 외부에서 실행됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5128"/>
@@ -11387,7 +11386,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6179"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
-        <translation>손실된 보호를 보상하려면 제한 설정 그룹의 삭제 권한 설정 페이지를 참조하세요.</translation>
+        <translation>낮아진 보호 수준을 보완하려면 제한 설정의 '권한 제거' 페이지를 확인하세요.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6103"/>
@@ -11573,7 +11572,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6143"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
-        <translation>다음 설정은 내게 필요한 옵션 소프트웨어와 함께 Sandboxie를 사용할 수 있도록 합니다. 이러한 설정이 적용되면 일부 Sandboxie 보호 기능이 손실됩니다.</translation>
+        <translation>다음 옵션을 사용하면 Sandboxie와 화면 읽기 프로그램 등 접근성 소프트웨어를 함께 사용할 수 있습니다. 이러한 옵션을 활성화하면 일부 Sandboxie 보호 기능이 약해질 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6196"/>
@@ -11765,7 +11764,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
-        <translation>직접 자식을 샌드박스에 강제로 넣지만 DCOM 및 IPC 인터페이스를 통해 열리는 간접 자식 프로세스는 포함하지 않습니다.</translation>
+        <translation>직접 실행한 자식 프로세스는 샌드박스에서 실행하도록 강제하지만, DCOM 또는 IPC를 통해 시작된 간접 자식 프로세스에는 적용되지 않습니다.</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="108"/>
@@ -11780,7 +11779,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
         <source>Force Children</source>
-        <translation>강제 아동</translation>
+        <translation>자식 프로세스 강제 격리</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="59"/>
@@ -11824,7 +11823,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="131"/>
         <source>Open urls from this ui sandboxed</source>
-        <translation>이 UI 샌드박스에서 URL 열기</translation>
+        <translation>이 UI에서 연 URL을 샌드박스에서 열기</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="771"/>
@@ -11878,7 +11877,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="119"/>
         <source>Hotkey for terminating all boxed processes:</source>
-        <translation>박스화된 모든 프로세스를 종료하기 위한 단축키:</translation>
+        <translation>샌드박스 내 모든 프로세스 종료 단축키:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="406"/>
@@ -11913,7 +11912,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1251"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation>* 부분적으로 선택된 확인란은 보기 모드에서 확인할 동작을 남깁니다.</translation>
+        <translation>* 확인란을 부분 선택하면 보기 모드에 따라 동작이 결정됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2413"/>
@@ -11977,7 +11976,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="439"/>
         <source>Show file migration progress when copying large files into a sandbox</source>
-        <translation>대용량 파일을 샌드박스에 복사할 때 파일 마이그레이션 진행률 표시</translation>
+        <translation>대용량 파일을 샌드박스로 복사할 때 진행률 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="329"/>
@@ -11987,7 +11986,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="334"/>
         <source>Message Text (optional)</source>
-        <translation>메시지 텍스트 (선택사항)</translation>
+        <translation>메시지 내용(선택 사항)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="348"/>
@@ -12058,7 +12057,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1305"/>
         <source>Ini Editor Font</source>
-        <translation>Ini 편집기 글꼴</translation>
+        <translation>INI 편집기 글꼴</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1394"/>
@@ -12169,7 +12168,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1782"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update add-on list now&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;sbie://addons&quot;&gt;지금 추가 목록 업데이트&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;sbie://addons&quot;&gt;추가 기능 목록 지금 업데이트&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1792"/>
@@ -12224,12 +12223,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="700"/>
         <source>Switch to sandboxed desktop when starting a process</source>
-        <translation>프로세스를 시작할 때 샌드박스된 바탕 화면으로 전환</translation>
+        <translation>프로세스를 시작할 때 샌드박스 데스크톱으로 전환</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Switch to sandboxed desktop with double click</source>
-        <translation>더블 클릭으로 샌드박스로 전환</translation>
+        <translation>두 번 클릭하면 샌드박스 데스크톱으로 전환</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1483"/>
@@ -12264,7 +12263,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2096"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation>Sandboxie-Plus 프로젝트의 후원는 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원자 인증서&lt;/a&gt;를 받을 수 있습니다. 이것은 라이선스 키와 비슷하지만 오픈 소스 소프트웨어를 사용하는 멋진 사람들을 위한 것입니다. :-</translation>
+        <translation>Sandboxie-Plus 프로젝트를 후원하면 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원자 인증서&lt;/a&gt;를 받을 수 있습니다. 오픈 소스 프로젝트를 지원해 주시는 분들을 위한 라이선스 키와 비슷한 인증서입니다. :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1977"/>
@@ -12358,7 +12357,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2827"/>
         <source>Watch Sandboxie.ini for changes</source>
-        <translation>Sandboxie.ini에서 변경 내용 보기</translation>
+        <translation>Sandboxie.ini 변경 사항 감시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="274"/>
@@ -12554,7 +12553,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="2962"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
-        <translation>프로세스가 강제로 샌드박스에 들어갔을 때 메시지 1321을 발행합니다</translation>
+        <translation>프로세스를 샌드박스로 강제 실행하면 SBIE1321 메시지 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2972"/>
@@ -12569,12 +12568,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3003"/>
         <source>Force programs opening boxed files into their sandbox</source>
-        <translation>프로그램이 박스 파일을 샌드박스에 강제로 열기</translation>
+        <translation>박스 안의 파일을 여는 프로그램을 해당 샌드박스에서 강제 실행</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3010"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
-        <translation>웹 마크가 있는 파일을 샌드박스에 강제로 넣기</translation>
+        <translation>웹에서 다운로드한 파일(Mark of the Web)을 샌드박스에서 강제 실행</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3030"/>
@@ -12905,7 +12904,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="141"/>
         <source>Terminate all boxed processes when Sandman exits</source>
-        <translation>Sandman이 종료될 때 모든 박스 처리 종료</translation>
+        <translation>SandMan 종료 시 모든 샌드박스 프로세스 종료</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="680"/>
@@ -12999,7 +12998,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2586"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
-        <translation>GPU 가속을 활성화하기 위해 선택된 Win32k 시스템 호출 연결 (Chrome, Firefox 등에 필요)</translation>
+        <translation>GPU 가속을 지원하도록 선택한 Win32k 시스템 호출 후킹(Chrome, Firefox 등에 필요)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="161"/>
@@ -13076,7 +13075,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1175"/>
         <source>Alternate row background in lists</source>
-        <translation>목록의 대체 행 배경</translation>
+        <translation>목록의 행 배경색 번갈아 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1117"/>
@@ -13134,7 +13133,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2941"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>프로그램이 시작되지 않을 때 메시지 1308 발행</translation>
+        <translation>프로그램 시작이 제한되면 SBIE1308 메시지 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="202"/>
@@ -13379,7 +13378,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2246"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
-        <translation>설치된 버전의 핫패치, Templates.ini 및 변환에 대한 업데이트입니다.</translation>
+        <translation>설치된 버전의 핫패치와 Templates.ini 및 번역 업데이트</translation>
     </message>
     <message>
         <source>Version Revisions</source>
@@ -13485,7 +13484,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="104"/>
         <source>When deleting a snapshot content, it will be returned to this snapshot instead of none.</source>
-        <translation>스냅샷 내용을 삭제할 때 스냅샷이 없는 대신 이 스냅샷으로 반환됩니다.</translation>
+        <translation>스냅샷 내용을 삭제하면 빈 상태로 되돌리는 대신 이 스냅샷으로 복원합니다.</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="107"/>

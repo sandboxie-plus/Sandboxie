@@ -397,7 +397,7 @@ _FX void *SbieDll_Hook_x86(
 
 #else ! WIN_64
 
-        func = Hook_CheckChromeHook((void *)target, (void*)GET_PEB_IMAGE_BASE);
+        func = Hook_CheckChromeHook((void *)target, (void*)GET_PEB_IMAGE_BASE, Dll_Ntdll);
         if (func && func != (UCHAR*)-1) {
             SourceFunc = func;
             goto skip_e9_rewrite;
@@ -1165,6 +1165,50 @@ finish:
 #define HOOK_STAT_SYSCALL       0x00000200 // ARM64 EC only
 #define HOOK_STAT_INTERESTING   0x000000FF
 
+
+//---------------------------------------------------------------------------
+// Hook_IsCodeAddress
+//---------------------------------------------------------------------------
+
+
+//
+// The chromium/firefox thunk layouts which Hook_CheckChromeHook parses are
+// version specific, when the heuristic mis-identifies the location where the
+// original function bytes were preserved it returns a pointer to arbitrary
+// data. Building a trampoline from that data yields a broken trampoline and
+// the process crashes the first time the __sys_* pointer is invoked.
+//
+// Hook_CheckChromeHook validates its own result and should never hand out a
+// non code address, this is a last line of defense for the cases it can not
+// cover, like the ARM64 scanner, or a future layout change. When it triggers
+// we report SBIE2328 with code 2 so the bad detection is visible rather than
+// silently degrading, and fall back to hooking the already patched stub.
+//
+
+static BOOLEAN Hook_IsCodeAddress(void* address)
+{
+    MEMORY_BASIC_INFORMATION mbi;
+    ULONG prot;
+
+    if (! VirtualQuery(address, &mbi, sizeof(mbi)))
+        return FALSE;
+
+    if (mbi.State != MEM_COMMIT)
+        return FALSE;
+
+    prot = mbi.Protect & 0xFF;      // strip PAGE_GUARD/PAGE_NOCACHE/...
+
+    if (prot != PAGE_EXECUTE && prot != PAGE_EXECUTE_READ &&
+        prot != PAGE_EXECUTE_READWRITE && prot != PAGE_EXECUTE_WRITECOPY)
+        return FALSE;
+
+    if (mbi.Protect & (PAGE_GUARD | PAGE_NOACCESS))
+        return FALSE;
+
+    return TRUE;
+}
+
+
 _FX void *SbieDll_HookFunc(
     const char *SourceFuncName, void *SourceFunc, void *DetourFunc, HMODULE module, DWORD* pHookStats)
 {
@@ -1172,17 +1216,22 @@ _FX void *SbieDll_HookFunc(
     // Chrome sandbox support
     //
 
-    void* ChromeFunc = Hook_CheckChromeHook(SourceFunc, (void*)GET_PEB_IMAGE_BASE);
+    void* ChromeFunc = Hook_CheckChromeHook(SourceFunc, (void*)GET_PEB_IMAGE_BASE, Dll_Ntdll);
     if (ChromeFunc) {
+        ULONG ChromeError = 0;
         if (pHookStats) *pHookStats |= HOOK_STAT_CHROME;
-        if (ChromeFunc != (void*)-1)
+        if (ChromeFunc == (void*)-1)
+            ChromeError = 1;            // the scanner reported failure
+        else if (! Hook_IsCodeAddress(ChromeFunc))
+            ChromeError = 2;            // the scanner returned a non code address
+        if (! ChromeError)
             SourceFunc = ChromeFunc;
         else {
             //if ((Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD) && strcmp(SourceFuncName, "NtMapViewOfSection") == 0) {
             //    // skip hooking if we are a already pre hooked worker process
             //    return (void*)-1;
             //}
-            //SbieApi_Log(2328, _fmt1, SourceFuncName, 1);
+            SbieApi_Log(2328, _fmt1, SourceFuncName, ChromeError);
             if (pHookStats) *pHookStats |= HOOK_STAT_CHROME_FAIL;
         }
     }

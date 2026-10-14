@@ -37,6 +37,7 @@ jobs:
             -ts sandman_de.ts \
             -ts sandman_en.ts \
             -ts sandman_es.ts \
+            -ts sandman_fa.ts \
             -ts sandman_fr.ts \
             -ts sandman_hi.ts \
             -ts sandman_hu.ts \

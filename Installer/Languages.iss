@@ -37,6 +37,7 @@ Name: "vietnamese"; MessagesFile: "isl\Vietnamese.isl"
 ;Name: "hebrew"; MessagesFile: "compiler:Languages\Hebrew.isl"
 ;Name: "icelandic"; MessagesFile: "compiler:Languages\Icelandic.isl"
 Name: "norwegian"; MessagesFile: "compiler:Languages\Norwegian.isl"
+Name: "persian"; MessagesFile: "isl\Farsi.isl"
 ;Name: "slovak"; MessagesFile: "compiler:Languages\Slovak.isl"
 ;Name: "slovenian"; MessagesFile: "compiler:Languages\Slovenian.isl"
 ;Name: "indonesian"; MessagesFile: "compiler:Languages\Indonesian.isl"
@@ -588,3 +589,27 @@ vietnamese.Qt6Win10Unsupported=Khung Qt 6 không hỗ trợ các phiên bản Wi
 ;indonesian.RefreshBuild=Unduh Templates.ini dan terjemahan terbaru
 ;indonesian.InstallImDisk=Instal (atau Perbarui) driver ImDisk 3.0 (untuk RamDisk dan Sandbox Terenkripsi)
 ;indonesian.Qt6Win10Unsupported=Framework Qt 6 tidak mendukung Windows 10 versi 1507, 1511, atau 1607.%nSilakan perbarui ke Windows 10 1809 (build 17763) atau yang lebih baru.%nLihat isu #5079 untuk detail ;selengkapnya:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nApakah Anda tetap ingin melanjutkan instalasi?
+; Persian
+persian.AddSandboxedMenu=افزودن «اجرا در سندباکس» به منوی کلیک راست
+persian.AddSandboxedBrowser=افزودن میان‌بر دسکتاپ برای اجرای مرورگر وب با Sandboxie
+persian.SandboxieStartMenu1=اجرای هر برنامه‌ای در سندباکس
+persian.SandboxieStartMenu2=اجرای مرورگر وب در سندباکس
+persian.SandboxieStartMenu3=منوی استارت Sandboxie
+persian.SandboxedBrowser=مرورگر وب سندباکس‌شده
+persian.CustomPageLabel1=انتخاب نوع نصب
+persian.CustomPageLabel2=نصب چگونه انجام شود
+persian.CustomPageLabel3=حالت نصب را انتخاب کنید
+persian.CustomPageInstallMode=نصب {#MyAppName} روی این کامپیوتر
+persian.CustomPageUpgradeMode=به‌روزرسانی نصب موجود {#MyAppName}
+persian.CustomPagePortableMode=استخراج همه‌ی فایل‌ها در یک پوشه برای استفاده‌ی پرتابل
+persian.RequiresWin7OrLater=Sandboxie-Plus به ویندوز ۷ یا بالاتر نیاز دارد.
+persian.ClassicFound=نصب Sandboxie Classic شناسایی شد؛ باید ابتدا حذف شود. آیا اکنون می‌خواهید آن را حذف کنید؟
+persian.RunSandboxedMenu=اجرا در &سندباکس
+persian.UninstallTaskLabel1=انتخاب نوع حذف
+persian.UninstallTaskLabel2=چگونه می‌خواهید Sandboxie-Plus را حذف کنید؟
+persian.UninstallTaskLabel3=&نگه‌داشتن فایل‌های پیکربندی و جعبه‌ها%nاین توصیه‌شده‌ترین گزینه است اگر قصد دارید Sandboxie-Plus را دوباره نصب کنید و فایل‌های پیکربندی و جعبه‌هایتان را حفظ کنید.
+persian.UninstallTaskLabel4=حذف فایل‌های &پیکربندی%nاین گزینه را انتخاب کنید تا فایل‌های پیکربندی Sandboxie.ini و Sandboxie-Plus.ini حذف شوند، در حالی که جعبه‌ها بدون تغییر باقی می‌مانند.
+persian.UninstallTaskLabel5=حذف فایل‌های پیکربندی و &جعبه‌ها%nاین گزینه را انتخاب کنید تا همه‌ی فایل‌های پیکربندی و جعبه‌ها حذف شوند، از جمله پوشه‌ی Sandbox که در مسیرهای سفارشی با FileRootPath قرار دارد.
+persian.RefreshBuild=دانلود جدیدترین Templates.ini و ترجمه‌ها
+persian.InstallImDisk=نصب (یا به‌روزرسانی) درایور ImDisk 3.0 (برای RamDisk و جعبه‌های رمزنگاری‌شده)
+persian.Qt6Win10Unsupported=فریم‌ورک Qt 6 از نسخه‌های ۱۵۰۷، ۱۵۱۱ یا ۱۶۰۷ ویندوز ۱۰ پشتیبانی نمی‌کند.%nلطفاً به ویندوز ۱۰ نسخه‌ی ۱۸۰۹ (بیلد ۱۷۷۶۳) یا بالاتر به‌روزرسانی کنید.%nبرای جزئیات به issue شماره‌ی ۵۰۷۹ مراجعه کنید:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nآیا همچنان می‌خواهید نصب را ادامه دهید؟

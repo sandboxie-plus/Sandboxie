@@ -164,6 +164,14 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - habatake - UI additions, Code fixes
 - Polyester6719 - Documentation additions
 
+## Korean Localization Maintenance
+
+This fork includes an independent review of the Korean translations in Sandboxie Plus, the troubleshooting wizard, and the installer. The goal is to improve clarity and terminology in the Windows interface while preserving security-sensitive meanings, placeholders, links, and formatting.
+
+**Korean localization maintainer:** M26Pershing90mm (Sakai). Earlier translation work is credited in the project's history; the change to the current maintainer listing does not alter previous commits or translator email addresses.
+
+Details: [KOREAN_LOCALIZATION.md](./KOREAN_LOCALIZATION.md).
+
 ## 🌏 Translators
 
 - czoins - Arabic
@@ -175,7 +183,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - timinoun - Hungarian (provided by email)
 - isaak654, DerivativeOfLog7 - Italian
 - takahiro-itou, lllIIIlll - Japanese
-- VenusGirl - Korean
+- M26Pershing90mm (Sakai) - Korean
 - divinity76 - Norwegian Bokmål
 - 7zip, AndrzejRafalowski - Polish ([provided separately](https://forum.xanasoft.com/threads/polish-translation.4/page-2))
 - JNylson - Portuguese and Brazilian Portuguese

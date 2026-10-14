@@ -477,6 +477,16 @@ typedef BOOL (*P_SwitchDesktop)(HDESK hDesktop);
 typedef BOOL (*P_UserHandleGrantAccess)(
     HANDLE hUserHandle, HANDLE hJob, BOOL bGrant);
 
+typedef HWND (*P_GetActiveWindow)(void);
+
+typedef HWINEVENTHOOK (*P_SetWinEventHook)(
+    UINT eventMin, UINT eventMax, HMODULE hmodWinEventProc,
+    WINEVENTPROC pfnWinEventProc, DWORD idProcess, DWORD idThread, DWORD dwFlags);
+
+typedef BOOL (*P_UnhookWinEvent)(HWINEVENTHOOK hWinEventHook);
+
+typedef BOOL (*P_GetGUIThreadInfo)(DWORD idThread, LPGUITHREADINFO lpgui);
+
 //---------------------------------------------------------------------------
 
 typedef HMONITOR (*P_MonitorFromWindow)(HWND hWnd, DWORD dwFlags);
@@ -519,6 +529,10 @@ extern BOOLEAN Gui_UseBlockCapture;
 
 extern BOOLEAN Gui_BlockInterferenceControl;
 extern BOOLEAN Gui_DontAllowCoverTaskbar;
+
+extern BOOLEAN Gui_AlwaysActive;
+
+extern HWND Gui_PreviousActiveWindow;
 
 extern BOOLEAN Gui_UseProxyService;
 
@@ -647,6 +661,13 @@ GUI_SYS_VAR(GetWindowRect)
 GUI_SYS_VAR(GetForegroundWindow)
 GUI_SYS_VAR(SetForegroundWindow)
 
+GUI_SYS_VAR(GetActiveWindow)
+
+GUI_SYS_VAR(SetWinEventHook)
+GUI_SYS_VAR(UnhookWinEvent)
+
+GUI_SYS_VAR(GetGUIThreadInfo)
+
 GUI_SYS_VAR(MonitorFromWindow)
 GUI_SYS_VAR_2(DdeInitialize)
 
@@ -683,6 +704,8 @@ GUI_SYS_VAR_2(CreateWindowStation)
 extern  P_ExitWindowsEx             __sys_ExitWindowsEx;
 
 extern  P_EndTask                   __sys_EndTask;
+
+extern  P_GetFocus                  __sys_GetFocus;
 
 extern  P_ConsoleControl            __sys_ConsoleControl;
 

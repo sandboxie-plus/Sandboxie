@@ -1424,17 +1424,17 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="46"/>
         <source>Show Future Settings</source>
-        향후 설정 표시<translation type="unfinished"></translation>
+        <translation>향후 설정 표시</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Hidden</source>
-        숨김<translation type="unfinished"></translation>
+        <translation>숨김</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Shown (default)</source>
-        표시(기본값)<translation type="unfinished"></translation>
+        <translation>표시(기본값)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="58"/>
@@ -7416,7 +7416,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="324"/>
         <source>Arabic (Morocco) - LTR</source>
-        아랍어(모로코) - 왼쪽에서 오른쪽(LTR)<translation type="unfinished"></translation>
+        <translation>아랍어(모로코) - 왼쪽에서 오른쪽(LTR)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3341"/>
@@ -8811,22 +8811,22 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="951"/>
         <source>Trace Logging is still active. What do you want to do?</source>
-        추적 로그 기록이 아직 진행 중입니다. 어떻게 하시겠습니까?<translation type="unfinished"></translation>
+        <translation>추적 로그 기록이 아직 진행 중입니다. 어떻게 하시겠습니까?</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="954"/>
         <source>Stop and Clear</source>
-        로그 기록 중지 및 삭제<translation type="unfinished"></translation>
+        <translation>로그 기록 중지 및 삭제</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="956"/>
         <source>Disable, Keep Logs</source>
-        로그 기록 중지(기존 로그 유지)<translation type="unfinished"></translation>
+        <translation>로그 기록 중지(기존 로그 유지)</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="958"/>
         <source>Keep Logging</source>
-        로그 기록 계속<translation type="unfinished"></translation>
+        <translation>로그 기록 계속</translation>
     </message>
 </context>
 <context>

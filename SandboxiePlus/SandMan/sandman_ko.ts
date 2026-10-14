@@ -8231,7 +8231,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <location filename="Forms/OptionsWindow.ui" line="4197"/>
         <location filename="Forms/OptionsWindow.ui" line="4220"/>
         <source>Protect the system from sandboxed processes</source>
-        <translation></translation>
+        <translation>샌드박스 내 프로세스로부터 시스템 보호</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1405"/>
@@ -11916,16 +11916,16 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상 입력 시 제안 팝업 표시&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ 팝업에서 올바른 대문자로 &lt;u&gt;자동 적용&lt;/u&gt;로 선택&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; 키를 눌러 선택 확인.&lt;br&gt;
+        • &lt;u&gt;자동 완성&lt;/u&gt;: 2자 이상 입력하면 추천 항목 팝업 표시&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 팝업에서 항목을 선택하면 올바른 대소문자로 &lt;u&gt;자동 적용&lt;/u&gt;&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; 키를 눌러 선택 확인&lt;br&gt;
         &lt;br&gt;
         • &lt;u&gt;수동 수정&lt;/u&gt;: setting= 입력 후&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; 키로 눌러 대소문자 수정 프롬프트 표시&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; 키를 누르면 대소문자 수정 창 표시&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 자동 완성 + 대소문자 수정&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 수동은 &lt;code&gt;Ctrl+R&lt;/code&gt;로 보정만 가능&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 자동 완성 및 대소문자 수정&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: &lt;code&gt;Ctrl+R&lt;/code&gt;을 통한 수동 수정만 가능&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;탐색:&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 팝업을 통해 이동&lt;br&gt;

@@ -242,15 +242,63 @@ void CSelectBoxWindow::OnBoxType()
 	m_pBoxPicker->setEnabled(ui.radBoxed->isChecked() || (ui.chkFCP->isEnabled() && ui.chkFCP->isChecked()));
 }
 
-QStringList CSelectBoxWindow::MatchProgramInPath(const QStringList& list, const QString& name)
+static QString Nt2Dos(const QString& ntPath, const CSandBoxPtr& pBox)
+{
+	//if the nt2dos map cache unavailable,use QueryDosDeviceW
+	bool converted = false;
+	QString expanded = theAPI->Nt2DosPath(pBox->Expand(ntPath), &converted);
+	if (converted)
+		return expanded;
+
+	for (WCHAR ltr = L'A'; ltr <= L'Z'; ++ltr) {
+		WCHAR drv[3] = { ltr, L':', 0 };
+		WCHAR target[MAX_PATH];
+		if (!QueryDosDeviceW(drv, target, MAX_PATH))
+			continue;
+		QString prefix = QString::fromWCharArray(target) + "\\";
+		if (expanded.startsWith(prefix, Qt::CaseInsensitive))
+			return QString::fromWCharArray(drv) + "\\" + expanded.mid(prefix.length());
+	}
+	return expanded;
+}
+
+static bool MatchRuleWildcard(const QString& pattern, const QString& target)
+{
+	QString exp = QRegularExpression::escape(pattern);
+	exp.replace("\\*\\*", "[^\\\\]*").replace("\\*", ".*").replace("\\?", ".");
+	return QRegularExpression("\\A" + exp + "\\z", QRegularExpression::CaseInsensitiveOption).match(target).hasMatch();
+}
+
+QStringList CSelectBoxWindow::MatchProgramInPath(const CSandBoxPtr& pBox, const QStringList& list, const QString& name)
 {
 	QStringList matchedList;
 	QString target = name;
+
+	//remove '"'
 	if (target.startsWith('"'))
 		target = target.mid(1);
-	foreach(const QString &path, list) {
-		if (target.startsWith(path, Qt::CaseInsensitive))
-			matchedList.append(path);
+	if (target.endsWith('"'))
+		target.chop(1);
+
+	QString program = target.mid(qMax(target.lastIndexOf('\\'), target.lastIndexOf('/')) + 1);
+	foreach(const QString &entry, list) {
+		QString rule = entry;
+		int comma = rule.indexOf(',');
+		if (comma != -1) {
+			if (!MatchRuleWildcard(rule.left(comma), program) && !MatchRuleWildcard(rule.left(comma), target))
+				continue;
+			rule = rule.mid(comma + 1);
+		}
+		bool exact = rule.startsWith('|');
+		if (exact)
+			rule = rule.mid(1);
+
+		rule = Nt2Dos(rule, pBox);
+		rule.replace(QRegularExpression("\\\\+"), "\\");
+		if (!exact && !rule.contains('*'))
+			rule += '*';
+		if (MatchRuleWildcard(rule, target))
+			matchedList.append(entry);
 	}
 	return matchedList;
 }
@@ -290,6 +338,7 @@ void CSelectBoxWindow::OnRun()
 
 	//<Command,BoxName>
 	QList<QPair<QString,QString>> cannotAccessPrograms;
+	theAPI->UpdateDriveLetters();
 	foreach(const QString & BoxName, BoxNames) {
 		//query the box file access control list
 		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
@@ -300,7 +349,7 @@ void CSelectBoxWindow::OnRun()
 
 			foreach(const QString & Command, m_Commands)
 			{
-				if(MatchProgramInPath(closedPaths,Command).size() > 0 || MatchProgramInPath(writeOnlyPaths,Command).size() > 0) {
+				if(MatchProgramInPath(pBox,closedPaths,Command).size() > 0 || MatchProgramInPath(pBox,writeOnlyPaths,Command).size() > 0) {
 					cannotAccessPrograms.append(qMakePair(Command ,BoxName));
 				}
 			}
@@ -333,8 +382,8 @@ void CSelectBoxWindow::OnRun()
 
 				CSandBoxPtr pBox = theAPI->GetBoxByName(boxName);
 				if(pBox) {
-					QStringList closedPaths = MatchProgramInPath(pBox->GetTextList("ClosedFilePath", false),command);
-					QStringList writeOnlyPaths = MatchProgramInPath(pBox->GetTextList("WriteFilePath", false),command);
+					QStringList closedPaths = MatchProgramInPath(pBox,pBox->GetTextList("ClosedFilePath", false),command);
+					QStringList writeOnlyPaths = MatchProgramInPath(pBox,pBox->GetTextList("WriteFilePath", false),command);
 					foreach(const QString & path,closedPaths) {
 						pBox->AppendText("ClosedFilePathDisabled", path);
 						pBox->DelValue("ClosedFilePath",path);

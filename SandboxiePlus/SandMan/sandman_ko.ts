@@ -4373,7 +4373,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="495"/>
         <source>WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.</source>
-        <translation>샌드박스 가져오기</translation>
+        <translation>경고: %1의 Sandboxie-Plus.ini 파일에 쓸 수 없어 설정이 저장되지 않습니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2360"/>
@@ -4431,7 +4431,9 @@ No will choose: %2</source>
         <source>The file %1 failed a security check!
 
 %2</source>
-        <translation>%1 파일이 보안 검사에 실패했습니다!</translation>
+        <translation>%1 파일이 보안 검사에 실패했습니다!
+
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="159"/>
@@ -4446,7 +4448,9 @@ No will choose: %2</source>
         <oldsource>The file %1 failed a security check, do you want to recover it anyways?
 
 %2</oldsource>
-        <translation>%1 파일이 보안 검사에 실패했습니다. 그래도 복구하시겠습니까?</translation>
+        <translation>%1 파일이 보안 검사에 실패했습니다. 그래도 복구하시겠습니까?
+
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="281"/>

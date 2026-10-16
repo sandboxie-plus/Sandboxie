@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.18.7 / 5.73.7] - 2026-10-??
+## [1.18.7 / 5.73.7] - 2026-10-16
 
 
 ### Fixed

@@ -705,7 +705,8 @@ Applications can be run within this sandbox, ensuring they operate within a cont
         <location filename="Wizards/NewBoxWizard.cpp" line="450"/>
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
-        <translation>이 박스 유형은 일정 수준의 격리를 제공하면서 프로그램 호환성을 우선합니다. 서로 분리된 공간에서 신뢰할 수 있는 프로그램을 실행하는 용도로 설계되었으며, 표준 보안 격리와는 차이가 있습니다.</translation>
+        <translation>이 박스 유형은 적절한 수준의 격리를 제공하면서 프로그램 호환성을 우선합니다. 서로 분리된 공간에서 신뢰할 수 있는 프로그램을 실행하도록 설계되었습니다.
+다른 박스 유형에 비해 격리 수준은 낮지만, 다양한 프로그램과의 호환성이 향상되어 샌드박스 환경에서 원활하게 실행할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="449"/>

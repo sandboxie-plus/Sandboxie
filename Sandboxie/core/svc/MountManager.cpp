@@ -462,6 +462,9 @@ MSG_HEADER *MountManager::EnumHandler(MSG_HEADER *msg)
 
         rpl->h.status = ERROR_SUCCESS;
 
+        memset(rpl->reg_roots, 0,
+               rpl_len - FIELD_OFFSET(IMBOX_ENUM_RPL, reg_roots));
+
         WCHAR *reg_roots = rpl->reg_roots;
         for (auto I = m_RootMap.begin(); I != m_RootMap.end(); I++) {
             wcscpy(reg_roots, I->first.c_str());
@@ -521,6 +524,9 @@ MSG_HEADER *MountManager::QueryHandler(MSG_HEADER *msg)
         if (rpl) {
 
             rpl->h.status = ERROR_SUCCESS;
+
+            memset((UCHAR *)rpl + sizeof(MSG_HEADER), 0,
+                   rpl_len - sizeof(MSG_HEADER));
 
             //scscpy(rpl->boxname, pRoot
 

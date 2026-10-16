@@ -1115,6 +1115,9 @@ ULONG SbieIniServer::SetTemplate(MSG_HEADER *msg)
     if (req->h.length < sizeof(SBIE_INI_TEMPLATE_REQ))
         return STATUS_INVALID_PARAMETER;
 
+    req->varname[ARRAYSIZE(req->varname) - 1] = L'\0';
+    req->password[ARRAYSIZE(req->password) - 1] = L'\0';
+
     ULONG value_len = req->value_len * sizeof(WCHAR);
     if (value_len > PIPE_MAX_DATA_LEN)
         return STATUS_INVALID_PARAMETER;

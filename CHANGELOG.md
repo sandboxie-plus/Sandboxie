@@ -4,6 +4,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.18.7 / 5.73.7] - 2026-10-??
+
+
+### Fixed
+- fixed issues with root protect IOCTLs
+- fixed issue with set low label
+- fixed an issue with monitor api
+- fixed issues with base64 decoding
+- fixed issue with API_RENAME_FILE
+- fixed with template handling
+
+
+
+
 ## [1.18.6 / 5.73.6] - 2026-10-11
 
 ### Added

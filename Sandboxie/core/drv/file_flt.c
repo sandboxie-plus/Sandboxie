@@ -43,6 +43,9 @@ typedef struct _PROTECTED_ROOT {
 
 } PROTECTED_ROOT;
 
+#define FILE_MAX_ROOT_LEN           1024
+
+
 
 //---------------------------------------------------------------------------
 // Functions
@@ -989,14 +992,69 @@ _FX NTSTATUS File_CheckFileObject(
 
 
 //---------------------------------------------------------------------------
+// File_CaptureUserString
+//---------------------------------------------------------------------------
+
+
+// Captures a user mode string into buf, which must have room for max_chars
+// characters including the terminating NUL, and reports its length in
+// *out_len excluding the terminator.  Passing NULL for buf measures the
+// string without copying it.
+//
+// Returns FALSE for a NULL pointer, or when no terminator is found within
+// max_chars characters;  callers must reject such a request instead of
+// truncating it, as a non terminated field would otherwise be read past
+// its own bounds and into whatever follows it.
+//
+// Each character is read exactly once, so the result cannot disagree with
+// the data a subsequent copy would see, and is probed individually because
+// callers may pass a variable length string at the tail of a buffer, for
+// which probing the whole max_chars range would fail even when the string
+// itself is well formed.  Any exception raised here is handled by the SEH
+// frame established in Api_FastIo_DEVICE_CONTROL.
+
+static BOOLEAN File_CaptureUserString(
+    const WCHAR *user_str, WCHAR *buf, ULONG max_chars, ULONG *out_len)
+{
+    ULONG i;
+
+    if ((! user_str) || (! max_chars))
+        return FALSE;
+
+    for (i = 0; i < max_chars; ++i) {
+
+        WCHAR ch;
+
+        ProbeForRead((WCHAR *)(user_str + i), sizeof(WCHAR), sizeof(WCHAR));
+
+        ch = user_str[i];
+        if (buf)
+            buf[i] = ch;
+
+        if (ch == L'\0') {
+            *out_len = i;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
 // File_Api_ProtectRoot
 //---------------------------------------------------------------------------
 
 
 _FX NTSTATUS File_Api_ProtectRoot(PROCESS *proc, ULONG64 *parms)
 {
-    WCHAR* reg_root;
-    WCHAR* file_root;
+    WCHAR *reg_root;
+    WCHAR *file_root;
+    WCHAR reg_root_buf[MAX_REG_ROOT_LEN];
+    ULONG reg_root_len;
+    ULONG file_root_len;
+    ULONG len;
+    PROTECTED_ROOT *root;
     KIRQL irql;
 
     if (proc)
@@ -1014,30 +1072,62 @@ _FX NTSTATUS File_Api_ProtectRoot(PROCESS *proc, ULONG64 *parms)
     reg_root = (WCHAR *)parms[1];
     file_root = (WCHAR *)parms[2];
 
-    ULONG path_len = wcslen(file_root);
-    ULONG len = sizeof(PROTECTED_ROOT) + path_len * sizeof(WCHAR);
-    PROTECTED_ROOT *root = Mem_Alloc(Driver_Pool, len);
-    if (root) {
-        
-		root->admin_only = (parms[3] != 0);
+    //
+    // validate and capture both names before anything is allocated or
+    // inserted into the protected root list.  reg_root is copied into a
+    // fixed size field of MAX_REG_ROOT_LEN characters, so a name that is
+    // longer than that, or not terminated within it, is rejected here
+    // rather than silently truncated.  this check is kept in the driver
+    // even though the service validates the request as well
+    //
 
-        root->file_root_len = path_len;
-        wmemcpy(root->file_root, file_root, path_len);
-        root->file_root[path_len] = L'\0';
-        
-        path_len = wcslen(reg_root);
-        root->reg_root_len = path_len;
-        wmemcpy(root->reg_root, reg_root, path_len);
-        root->reg_root[path_len] = L'\0';
+    if (! File_CaptureUserString(
+                reg_root, reg_root_buf, MAX_REG_ROOT_LEN, &reg_root_len))
+        return STATUS_INVALID_PARAMETER;
 
-        KeRaiseIrql(APC_LEVEL, &irql);
-        ExAcquireResourceExclusiveLite(File_ProtectedRootsLock, TRUE);
-        
-        List_Insert_After(&File_ProtectedRoots, NULL, root);
-        
-        ExReleaseResourceLite(File_ProtectedRootsLock);
-        KeLowerIrql(irql);
+    if (! File_CaptureUserString(
+                file_root, NULL, FILE_MAX_ROOT_LEN, &file_root_len))
+        return STATUS_INVALID_PARAMETER;
+
+    len = sizeof(PROTECTED_ROOT) + file_root_len * sizeof(WCHAR);
+    root = Mem_Alloc(Driver_Pool, len);
+    if (! root)
+        return STATUS_INSUFFICIENT_RESOURCES;
+
+    root->admin_only = (parms[3] != 0);
+
+    //
+    // the length of file_root is known now, so it can be probed and copied
+    // as one bounded range;  should that still fault we must release the
+    // allocation ourselves rather than leak it out of the SEH frame
+    //
+
+    __try {
+
+        ProbeForRead(
+            file_root, (file_root_len + 1) * sizeof(WCHAR), sizeof(WCHAR));
+
+        root->file_root_len = file_root_len;
+        wmemcpy(root->file_root, file_root, file_root_len);
+        root->file_root[file_root_len] = L'\0';
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+
+        Mem_Free(root, len);
+        return GetExceptionCode();
     }
+
+    root->reg_root_len = reg_root_len;
+    wmemcpy(root->reg_root, reg_root_buf, reg_root_len);
+    root->reg_root[reg_root_len] = L'\0';
+
+    KeRaiseIrql(APC_LEVEL, &irql);
+    ExAcquireResourceExclusiveLite(File_ProtectedRootsLock, TRUE);
+
+    List_Insert_After(&File_ProtectedRoots, NULL, root);
+
+    ExReleaseResourceLite(File_ProtectedRootsLock);
+    KeLowerIrql(irql);
 
     return STATUS_SUCCESS;
 }
@@ -1068,9 +1158,15 @@ _FX NTSTATUS File_Api_UnprotectRoot(PROCESS* proc, ULONG64* parms)
         return STATUS_ACCESS_DENIED;
     }
 
-    reg_root_len = wcslen((WCHAR *)parms[1]);
-    wmemcpy(reg_root, (WCHAR *)parms[1], reg_root_len);
-    reg_root[reg_root_len] = L'\0';
+    //
+    // validate and capture the name before any state is modified;  it is
+    // copied into a fixed size buffer, so a name that is not terminated
+    // within MAX_REG_ROOT_LEN characters is rejected, not truncated
+    //
+
+    if (! File_CaptureUserString(
+                (WCHAR *)parms[1], reg_root, MAX_REG_ROOT_LEN, &reg_root_len))
+        return STATUS_INVALID_PARAMETER;
 
     status = STATUS_OBJECT_NAME_NOT_FOUND;
 

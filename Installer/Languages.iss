@@ -7,8 +7,8 @@
 
 [Languages]
 
-Name: "arabic"; MessagesFile: "isl\Arabic.isl"
 Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: "arabic"; MessagesFile: "isl\Arabic.isl"
 Name: "ChineseSimplified"; MessagesFile: "isl\ChineseSimplified.isl"
 Name: "ChineseTraditional"; MessagesFile: "isl\ChineseTraditional.isl"
 Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"

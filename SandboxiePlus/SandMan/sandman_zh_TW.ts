@@ -7300,7 +7300,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3514"/>
         <source>Great Patreon</source>
-        <translation>大型 Patreon</translation>
+        <translation>Great Patreon</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3516"/>
@@ -8077,7 +8077,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="163"/>
         <source>This is a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;exclusive Insider build&lt;/a&gt; of Sandboxie-Plus it is only available to &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Supporters&lt;/a&gt; on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.</source>
-        <translation>此為 Sandboxie-Plus &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;測試人員專屬組建&lt;/a&gt;，僅對更高階層的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 贊助者&lt;/a&gt;、專案貢獻者和大量贊助憑證的所有者提供。</translation>
+        <translation>此為 Sandboxie-Plus &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider 專屬組建&lt;/a&gt;，僅供較高等級的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 贊助者&lt;/a&gt;、專案貢獻者和 HUGE 等級贊助憑證持有人使用。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="169"/>

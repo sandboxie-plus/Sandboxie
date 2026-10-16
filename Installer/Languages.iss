@@ -320,29 +320,29 @@ japanese.InstallImDisk=ImDisk 3.0ドライバーをインストール（また�
 japanese.Qt6Win10Unsupported=Qt 6 フレームワークは Windows 10 のバージョン 1507、1511 または 1607をサポートしていません。%nWindows 10 1809（ビルド 17763）以降にアップデートしてください。%n問題 #5079 の詳細はこちら：%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nそれでもインストールを続行しますか？
 
 ; Korean
-Korean.AddSandboxedMenu=상황에 맞는 메뉴에 "샌드박스에서 실행" 추가
-Korean.AddSandboxedBrowser=Sandboxie에서 웹 브라우저를 시작하기 위한 바탕 화면 바로가기 추가
+Korean.AddSandboxedMenu=파일 탐색기의 오른쪽 클릭 메뉴에 "샌드박스에서 실행" 추가
+Korean.AddSandboxedBrowser=Sandboxie에서 웹 브라우저를 실행하는 바탕 화면 바로 가기 추가
 Korean.SandboxieStartMenu1=샌드박스에서 모든 프로그램 실행
 Korean.SandboxieStartMenu2=샌드박스에서 웹 브라우저 실행
 Korean.SandboxieStartMenu3=Sandboxie 시작 메뉴
-Korean.SandboxedBrowser=샌드박스에서 웹 브라우저
+Korean.SandboxedBrowser=샌드박스에서 실행하는 웹 브라우저
 Korean.CustomPageLabel1=설치 유형 선택
 Korean.CustomPageLabel2=설치 방법
 Korean.CustomPageLabel3=설치 모드 선택
 Korean.CustomPageInstallMode=이 컴퓨터에 {#MyAppName} 설치
 Korean.CustomPageUpgradeMode=기존 {#MyAppName} 설치 업데이트
-Korean.CustomPagePortableMode=포터블 사용을 위해 모든 파일을 디렉터리에 추출
+Korean.CustomPagePortableMode=포터블 모드로 사용하도록 모든 파일을 폴더에 압축 해제
 Korean.RequiresWin7OrLater=Sandboxie-Plus를 사용하려면 Windows 7 이상이 필요합니다.
-Korean.ClassicFound=Sandboxie Classic 설치가 탐지되었습니다. 먼저 제거해야 합니다. 지금 제거하시겠습니까?
+Korean.ClassicFound=Sandboxie Classic이 설치되어 있습니다. 계속하려면 먼저 제거해야 합니다. 지금 제거하시겠습니까?
 Korean.RunSandboxedMenu=샌드박스에서 실행(&S)
 Korean.UninstallTaskLabel1=제거 유형 선택
 Korean.UninstallTaskLabel2=Sandboxie-Plus를 제거하시겠습니까?
 Korean.UninstallTaskLabel3=구성 파일 및 샌드박스 유지(&K)%n구성 파일과 샌드박스를 유지하면서 Sandboxie-Plus를 다시 설치하려는 경우 이 옵션을 사용하는 것이 가장 좋습니다.
 Korean.UninstallTaskLabel4=구성 파일 제거(&C)%n샌드박스를 변경하지 않고 Sandboxie.ini 및 Sandboxie-Plus.ini 구성 파일을 제거하려면 이 옵션을 선택하세요.
 Korean.UninstallTaskLabel5=구성 파일 및 샌드박스 제거(&S)%nFileRootPath를 사용하여 사용자 지정 경로에 있는 샌드박스 폴더를 포함하여 모든 구성 파일과 샌드박스를 제거하려면 이 옵션을 선택하세요.
-Korean.RefreshBuild=최신 Templates.ini 및 번역 다운로드
-Korean.InstallImDisk=ImDisk 3.0 드라이버 설치 (또는 업데이트) (RamDisk 및 암호화된 샌드박스용)
-Korean.Qt6Win10Unsupported=Qt 6 프레임워크는 Windows 10 버전 1507, 1511 또는 1607을 지원하지 않습니다.%nWindows 10 1809 (빌드 17763) 이상으로 업데이트하십시오.%n자세한 내용은 이슈 #5079를 참조하세요:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n계속 그래도 설치를 진행하시겠습니까?
+Korean.RefreshBuild=최신 Templates.ini 및 번역 파일 다운로드
+Korean.InstallImDisk=ImDisk 3.0 드라이버 설치 또는 업데이트(RAM 디스크 및 암호화된 샌드박스용)
+Korean.Qt6Win10Unsupported=Qt 6 프레임워크는 Windows 10 버전 1507, 1511 또는 1607을 지원하지 않습니다.%nWindows 10 버전 1809(빌드 17763) 이상으로 업데이트하세요.%n자세한 내용은 이슈 #5079를 참조하세요:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n그래도 설치를 계속하시겠습니까?
 
 ; Polish
 polish.AddSandboxedMenu=Dodaj "Uruchom w piaskownicy" do menu kontekstowego

@@ -10,7 +10,7 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 | Language | Classic | Plus | Troubleshooting | Installer |
 |-|---------|------|---|---|
 |Albanian|Yes|No|No|No|
-|Arabic|Yes|Yes - Nov 21, 2024|No|No|
+|Arabic|Yes|Yes - Nov 21, 2024|Yes - Oct 11, 2026|Yes - Oct 11, 2026|
 |Bulgarian|Yes|No|No|No|
 |Chinese Simplified|Yes - Nov 22, 2024|Yes - Oct 13, 2026|Yes - Aug 23, 2026|Yes - 2025|
 |Chinese Traditional|Yes - Aug 13, 2026|Yes - Oct 13, 2026|Yes - Aug 23, 2026|Yes - Aug 23, 2026|

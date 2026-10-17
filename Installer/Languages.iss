@@ -8,6 +8,7 @@
 [Languages]
 
 Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: "arabic"; MessagesFile: "isl\Arabic.isl"
 Name: "ChineseSimplified"; MessagesFile: "isl\ChineseSimplified.isl"
 Name: "ChineseTraditional"; MessagesFile: "isl\ChineseTraditional.isl"
 Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
@@ -613,3 +614,31 @@ persian.UninstallTaskLabel5=حذف فایل‌های پیکربندی و &جعب
 persian.RefreshBuild=دانلود جدیدترین Templates.ini و ترجمه‌ها
 persian.InstallImDisk=نصب (یا به‌روزرسانی) درایور ImDisk 3.0 (برای RamDisk و جعبه‌های رمزنگاری‌شده)
 persian.Qt6Win10Unsupported=فریم‌ورک Qt 6 از نسخه‌های ۱۵۰۷، ۱۵۱۱ یا ۱۶۰۷ ویندوز ۱۰ پشتیبانی نمی‌کند.%nلطفاً به ویندوز ۱۰ نسخه‌ی ۱۸۰۹ (بیلد ۱۷۷۶۳) یا بالاتر به‌روزرسانی کنید.%nبرای جزئیات به issue شماره‌ی ۵۰۷۹ مراجعه کنید:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nآیا همچنان می‌خواهید نصب را ادامه دهید؟
+
+
+; Arabic
+arabic.AddSandboxedMenu=إضافة "تشغيل في بيئة معزولة" إلى قائمة السياق
+arabic.AddSandboxedBrowser=إضافة اختصار على سطح المكتب لبدء تشغيل متصفح الويب تحت Sandboxie
+arabic.SandboxieStartMenu1=تشغيل أي برنامج في بيئة معزولة
+arabic.SandboxieStartMenu2=تشغيل متصفح الويب في بيئة معزولة
+arabic.SandboxieStartMenu3=قائمة بدء تشغيل Sandboxie
+arabic.SandboxedBrowser=متصفح ويب في بيئة معزولة
+arabic.CustomPageLabel1=تحديد نوع التثبيت
+arabic.CustomPageLabel2=كيفية التثبيت
+arabic.CustomPageLabel3=اختر وضع التثبيت
+arabic.CustomPageInstallMode=تثبيت {#MyAppName} على هذا الكمبيوتر
+arabic.CustomPageUpgradeMode=تحديث تثبيت {#MyAppName} الحالي
+arabic.CustomPagePortableMode=استخراج جميع الملفات إلى مجلد للاستخدام المحمول
+arabic.RequiresWin7OrLater=يتطلب Sandboxie-Plus نظام Windows 7 أو أحدث.
+arabic.ClassicFound=تم اكتشاف تثبيت Sandboxie Classic، يجب إلغاء تثبيته أولاً، هل تريد إلغاء تثبيته الآن؟
+arabic.RunSandboxedMenu=تشغيل في بيئة &معزولة
+arabic.UninstallTaskLabel1=تحديد نوع إلغاء التثبيت
+arabic.UninstallTaskLabel2=كيف ترغب في إلغاء تثبيت Sandboxie-Plus؟
+arabic.UninstallTaskLabel3=&الاحتفاظ بملفات الإعدادات وبيئات العزل%nهذا هو الخيار الأكثر توصية به إذا كنت تخطط لإعادة تثبيت Sandboxie-Plus مع الاحتفاظ بملفات الإعدادات وبيئات العزل الخاصة بك.
+arabic.UninstallTaskLabel4=إزالة ملفات الإ&عدادات%nحدد هذا الخيار لإزالة ملفات الإعدادات Sandboxie.ini و Sandboxie-Plus.ini مع الحفاظ على بيئات العزل دون تغيير.
+arabic.UninstallTaskLabel5=إزالة ملفات الإعدادات و&بيئات العزل%nحدد هذا الخيار لإزالة جميع ملفات الإعدادات وبيئات العزل، بما في ذلك مجلد Sandbox الموجود في المسارات المخصصة باستخدام FileRootPath.
+arabic.RefreshBuild=تنزيل أحدث ملفات Templates.ini والترجمات
+arabic.InstallImDisk=تثبيت (أو تحديث) برنامج تشغيل ImDisk 3.0 (لأقراص RAM وبيئات العزل المشفرة)
+arabic.Qt6Win10Unsupported=إطار عمل Qt 6 لا يدعم إصدارات Windows 10: 1507 أو 1511 أو 1607.%nيرجى التحديث إلى Windows 10 1809 (الإصدار 17763) أو أحدث.%nراجع المشكلة #5079 للتفاصيل:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nهل لا تزال ترغب في متابعة التثبيت؟
+;
+

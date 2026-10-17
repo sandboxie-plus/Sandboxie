@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed the restricted stand in for an AppContainer token disabling every group, leaving it unable to open `\KnownDlls`
 - fixed an out-of-bounds read in the GUI proxy's MapWindowPoints handler leaking service heap to sandboxed callers
 - `UnRestrictAppContainerToken` no longer defaults to on for MSEdge, the stand in token works for it again
+- fixed Import Boxes not letting the user choose where the imported sandboxes are created [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)
 
 ### Added
 - added "fixboxdacls" command to KmdUtil.exe, it adds the AppContainer ACEs to already existing boxes

@@ -12,6 +12,7 @@
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QLabel>
 #include <QDialogButtonBox>
 #include <QHeaderView>
 #include <QFileDialog>
@@ -113,6 +114,40 @@ CBoxTransferDialog::CBoxTransferDialog(EMode mode, QWidget* parent)
 		pLayout->addWidget(m_pSeparateFiles);
 	}
 
+	//
+	// let the user say where the imported boxes are created, the same way the
+	// new box wizard does.  without this they always end up under the global
+	// FileRootPath of the importing machine, see issue #5657
+	//
+
+	m_pBoxLocation = nullptr;
+	if (mode == eImport) {
+		QHBoxLayout* pLocationRow = new QHBoxLayout();
+		pLocationRow->addWidget(new QLabel(tr("Create sandboxes in:"), this));
+
+		m_pBoxLocation = new QComboBox(this);
+		m_pBoxLocation->setEditable(true);
+		m_pBoxLocation->setToolTip(tr("Where the imported sandboxes are created. Keep %SANDBOX% in the path so that each box gets its own folder."));
+
+		QString Location = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
+		m_pBoxLocation->addItem(Location);
+		QStringList StdLocations = QStringList()
+			<< "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%"
+			<< "\\??\\%SystemDrive%\\Sandbox\\%SANDBOX%"
+			<< "\\??\\%SystemDrive%\\Users\\%USER%\\Sandbox\\%SANDBOX%";
+		foreach(const QString& StdLocation, StdLocations) {
+			if (StdLocation != Location)
+				m_pBoxLocation->addItem(StdLocation);
+		}
+		pLocationRow->addWidget(m_pBoxLocation, 1);
+
+		QPushButton* pBrowseLocation = new QPushButton(tr("Browse..."), this);
+		connect(pBrowseLocation, &QPushButton::clicked, this, &CBoxTransferDialog::OnBrowseLocation);
+		pLocationRow->addWidget(pBrowseLocation);
+
+		pLayout->addLayout(pLocationRow);
+	}
+
 	QHBoxLayout* pButtonRow = new QHBoxLayout();
 	m_pSelectAll = new QPushButton(tr("Select All"), this);
 	connect(m_pSelectAll, &QPushButton::clicked, this, &CBoxTransferDialog::OnSelectAll);
@@ -128,6 +163,73 @@ CBoxTransferDialog::CBoxTransferDialog(EMode mode, QWidget* parent)
 	connect(pButtons, &QDialogButtonBox::accepted, this, &QDialog::accept);
 	connect(pButtons, &QDialogButtonBox::rejected, this, &QDialog::reject);
 	pLayout->addWidget(pButtons);
+}
+
+QString CBoxTransferDialog::GetImportLocation() const
+{
+	if (!m_pBoxLocation)
+		return QString();
+
+	QString Location = m_pBoxLocation->currentText().trimmed();
+
+	//
+	// the first entry is the configured default, for which no per box
+	// FileRootPath is needed
+	//
+
+	if (Location.isEmpty() || Location == m_pBoxLocation->itemText(0))
+		return QString();
+
+	//
+	// several boxes can be imported at once, so each one needs its own folder
+	// below the selected location
+	//
+
+	if (!Location.contains("%SANDBOX%", Qt::CaseInsensitive)) {
+		while (Location.endsWith("\\"))
+			Location.chop(1);
+		Location += "\\%SANDBOX%";
+	}
+
+	return Location;
+}
+
+void CBoxTransferDialog::OnBrowseLocation()
+{
+	QString Location = QFileDialog::getExistingDirectory(this, tr("Select the folder to create the sandboxes in"));
+	if (Location.isEmpty())
+		return;
+
+	Location = QDir::toNativeSeparators(Location);
+	while (Location.endsWith("\\"))
+		Location.chop(1);
+
+	m_pBoxLocation->setCurrentText(Location + "\\%SANDBOX%");
+}
+
+void CBoxTransferDialog::accept()
+{
+	if (m_pBoxLocation) {
+
+		QString Location = m_pBoxLocation->currentText().trimmed();
+		if (!Location.isEmpty() && Location != m_pBoxLocation->itemText(0)) {
+
+			if (Location.left(2) == "\\\\") {
+				QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located on a network share, please select a local folder."));
+				return;
+			}
+
+			QString Folder = Location;
+			Folder.remove(QRegularExpression("\\\\?%SANDBOX%\\\\?$", QRegularExpression::CaseInsensitiveOption));
+			int offset = Folder.left(4) == "\\??\\" ? 4 : 0;
+			if (Folder.length() < offset + 4) {
+				QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located at the root of a partition, please select a folder."));
+				return;
+			}
+		}
+	}
+
+	QDialog::accept();
 }
 
 void CBoxTransferDialog::PopulateExportList(const QList<CSandBoxPtr>& SandBoxes)
@@ -1181,6 +1283,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 
 	QList<CBoxTransferDialog::SImportEntry> importEntries = dlg.GetImportEntries();
 	bool importGlobalConfig = dlg.ExportGlobalConfig();
+	QString importLocation = dlg.GetImportLocation();
 
 	if (importEntries.isEmpty() && !importGlobalConfig) {
 		QMessageBox::information(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("Nothing selected for import."));
@@ -1229,6 +1332,15 @@ QStringList ImportMultiBoxes(QWidget* parent)
 		CSandBoxPtr pBox = theAPI->GetBoxByName(entry.ImportName);
 		if (pBox) {
 			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+
+			//
+			// move the new box to the selected location before its root is
+			// read below, and before a box image is created inside it.  an
+			// already existing box keeps the location it has.
+			//
+
+			if (!importLocation.isEmpty())
+				pBox->SetFileRoot(importLocation);
 
 			if (!entry.Password.isEmpty())
 			{

@@ -12,6 +12,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed video playback in sandboxed Firefox on sites awaiting `mediaCapabilities.decodingInfo()`, like espn.com
 - fixed boxes lacking AppContainer ACEs, which made an AppContainer child of a boxed program die with `0xC0000022`
 - fixed the restricted stand in for an AppContainer token disabling every group, leaving it unable to open `\KnownDlls`
+- fixed boxed IPC objects lacking AppContainer ACEs, which crashed Firefox's media CDM process in app compartment boxes as it could not connect to the boxed epmapper
+- fixed "SBIE2204 Cannot start sandboxed service RpcSs (1341)" from AppContainer processes in app compartment boxes, they now find the already running boxed RpcSs
 - fixed an out-of-bounds read in the GUI proxy's MapWindowPoints handler leaking service heap to sandboxed callers
 - `UnRestrictAppContainerToken` no longer defaults to on for MSEdge, the stand in token works for it again
 - fixed Import Boxes not letting the user choose where the imported sandboxes are created [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)

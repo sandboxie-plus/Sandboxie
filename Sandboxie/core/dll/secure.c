@@ -366,10 +366,18 @@ void Secure_InitSecurityDescriptors(void)
     //
     // build Everyone Security Descriptor used for named pipes
     //
+    // this is also the descriptor of every boxed IPC object (ALPC ports,
+    // events, sections, ...), so it needs the AppContainer ACEs as well:
+    // without them a boxed AppContainer child cannot connect to the boxed
+    // epmapper port, CoInitializeSecurity fails with E_ACCESSDENIED and
+    // Firefox's media CDM process (-sandboxingKind 2) crashes
+    //
 
-    MyAllocAndInitACL(MyAcl, 128);
+    MyAllocAndInitACL(MyAcl, 256);
     MyAddAccessAllowedAce(MyAcl, &AuthenticatedUsersSid);
     MyAddAccessAllowedAce(MyAcl, &EveryoneSid);
+    MyAddAccessAllowedAce(MyAcl, &AllAppPkgSid);
+    MyAddAccessAllowedAce(MyAcl, &AllRestrAppPkgSid);
     //MyAddAccessAllowedAce(MyAcl, &RestrictedSid);
 
     MyAllocAndInitSD(Secure_EveryoneSD);

@@ -510,12 +510,12 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="BoxTransfer.cpp" line="104"/>
         <source>Show sandbox aliases (reads archive configuration)</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les alias du bac (lit la configuration de l&apos;archive)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="105"/>
         <source>Disabled by default because reading aliases requires opening and extracting configuration from every selected archive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactivé par défaut car lire les alias nécessite d&apos;ouvrir et d&apos;extraire la configuration de chaque archive sélectionnée.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="112"/>
@@ -576,7 +576,7 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="BoxTransfer.cpp" line="376"/>
         <source>Sandbox name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du bac : %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="497"/>
@@ -1361,17 +1361,17 @@ Vous pouvez appuyer sur « Terminer » pour fermer cet assistant.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="46"/>
         <source>Show Future Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Futurs paramètres</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Hidden</source>
-        <translation type="unfinished">Caché</translation>
+        <translation>Masqués</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Shown (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Affichés (par défaut)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="58"/>
@@ -3004,7 +3004,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Selects the snapshot restored by SandMan after automatic deletion. The active state may be the empty sandbox rather than a saved snapshot.</source>
-        <translation>Sélectionne l&apos;instantané restauré par SandMan après la suppression automatique. L&apos;état actif peut être le bac vide plutôt qu&apos;un instantané enregistré.</translation>
+        <translation>Sélectionne l&apos;instantané restauré par le gestionnaire de SandBoxie après la suppression automatique. L&apos;état actif peut être le bac vide plutôt qu&apos;un instantané enregistré.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="89"/>
@@ -5258,7 +5258,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandManTray.cpp" line="214"/>
         <source>Find sandbox...</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche de bac...</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="228"/>
@@ -5589,7 +5589,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandManRecovery.cpp" line="314"/>
         <source>Sandbox name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du bac : %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3917"/>
@@ -7230,17 +7230,17 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="350"/>
         <source>Sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du bac</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="351"/>
         <source>Sandbox alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias du bac</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="352"/>
         <source>Sandbox alias and name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom et alias du bac</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="355"/>
@@ -7735,7 +7735,7 @@ Ceci est un certificat Patreon temporaire, valable 3 mois. Une fois celui-ci pre
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="324"/>
         <source>Arabic (Morocco) - LTR</source>
-        <translation type="unfinished"></translation>
+        <translation>Arabe (Maroc) - De gauche à droite</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3341"/>
@@ -8956,22 +8956,22 @@ Si vous êtes déjà « Great Supporter » sur Patreon, Sandboxie peut vérifier
     <message>
         <location filename="Views/TraceView.cpp" line="951"/>
         <source>Trace Logging is still active. What do you want to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;enregistrement du traçage est toujours actif. Que voulez-vous faire ?</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="954"/>
         <source>Stop and Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter et nettoyer</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="956"/>
         <source>Disable, Keep Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver, en conservant les journaux</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="958"/>
         <source>Keep Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuer à enregistrer</translation>
     </message>
 </context>
 <context>
@@ -9162,7 +9162,7 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
     </message>
     <message>
         <source>Sandbox Name:</source>
-        <translation type="vanished">Nom du bac à sable :</translation>
+        <translation type="vanished">Nom du bac :</translation>
     </message>
 </context>
 <context>
@@ -12621,7 +12621,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="827"/>
         <source>Show search box in tray menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher une boite de recherche dans le menu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="858"/>
@@ -12656,7 +12656,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1127"/>
         <source>Controls whether display-only text uses the sandbox name, alias, or both. Compact views may show only the alias. Paths and internal sandbox identifiers always use the sandbox name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôle si le texte affiché utilise le nom du bac, son alias, ou les deux. Les vues compactes pourraient n&apos;afficher que l&apos;alias. Les chemins et les identifiants de bacs internes utilisent toujours le nom du bac.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1165"/>
@@ -12671,7 +12671,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1241"/>
         <source>Sandbox name display:</source>
-        <translation type="unfinished"></translation>
+        <translation>Affichage du nom du bac :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1490"/>

@@ -296,6 +296,30 @@ void Secure_InitSecurityDescriptors(void)
         0x00, 0x10   // SECURITY_MANDATORY_LOW_RID
     };
 
+    //
+    // an AppContainer (or LPAC) token is not served by the Authenticated Users
+    // or the user SID, it needs a package/capability ACE as well.  a sandboxed
+    // program that spawns an AppContainer child of its own would otherwise
+    // leave that child unable to read or write any boxed file or key.
+    // this mirrors the ACEs the driver puts on the box root, see
+    // Driver_InitPublicSecurity() in core/drv/driver.c
+    //
+
+    static UCHAR AllAppPkgSid[16] = {           // S-1-15-2-1
+        1,                                      // Revision
+        2,                                      // SubAuthorityCount
+        0,0,0,0,0,15, // SECURITY_APP_PACKAGE_AUTHORITY  // IdentifierAuthority
+        2,0,0,0,     // SECURITY_APP_PACKAGE_BASE_RID
+        1,0,0,0      // SECURITY_BUILTIN_PACKAGE_ANY_PACKAGE
+    };
+    static UCHAR AllRestrAppPkgSid[16] = {      // S-1-15-2-2
+        1,                                      // Revision
+        2,                                      // SubAuthorityCount
+        0,0,0,0,0,15, // SECURITY_APP_PACKAGE_AUTHORITY  // IdentifierAuthority
+        2,0,0,0,     // SECURITY_APP_PACKAGE_BASE_RID
+        2,0,0,0      // SECURITY_BUILTIN_PACKAGE_ANY_RESTRICTED_PACKAGE
+    };
+
     void *UserSid = NULL;
 
 #define MyAddAccessAllowedAce(dacl,owner)                                   \
@@ -326,6 +350,8 @@ void Secure_InitSecurityDescriptors(void)
     else {
         MyAllocAndInitACL(MyAcl, 256);
         MyAddAccessAllowedAce(MyAcl, &AuthenticatedUsersSid);
+        MyAddAccessAllowedAce(MyAcl, &AllAppPkgSid);
+        MyAddAccessAllowedAce(MyAcl, &AllRestrAppPkgSid);
     }
 
     if (Dll_SidString) {

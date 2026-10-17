@@ -5,6 +5,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.18.8 / 5.73.8] - 2026-10-17
+
+
+### Fixed
+- fixed video playback in sandboxed Firefox on sites awaiting `mediaCapabilities.decodingInfo()`, like espn.com
+- fixed boxes lacking AppContainer ACEs, which made an AppContainer child of a boxed program die with `0xC0000022`
+- fixed the restricted stand in for an AppContainer token disabling every group, leaving it unable to open `\KnownDlls`
+- fixed an out-of-bounds read in the GUI proxy's MapWindowPoints handler leaking service heap to sandboxed callers
+- `UnRestrictAppContainerToken` no longer defaults to on for MSEdge, the stand in token works for it again
+
+### Added
+- added "fixboxdacls" command to KmdUtil.exe, it adds the AppContainer ACEs to already existing boxes
+- added `KeepBroadGroupsInAppContainerToken=n` to restore the old all-deny-only AppContainer stand in token
+- added `NeutralizeLowBoxToken=n` to let a direct `NtCreateLowBoxToken` call through
+- `FakeAppContainerToken` is now evaluated, `=n` lets a boxed program create real AppContainer children
+
+
+
+
 ## [1.18.7 / 5.73.7] - 2026-10-16
 
 

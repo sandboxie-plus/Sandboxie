@@ -503,7 +503,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="615"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
-        <translation>'%1'을(를) 다시 마운트하기 위해 마운트 해제하지 못했습니다.</translation>
+        <translation>&apos;%1&apos;을(를) 다시 마운트하기 위해 마운트 해제하지 못했습니다.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="625"/>
@@ -1538,7 +1538,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="950"/>
         <source>Almost complete, click Finish to create a new  Web Browser Template and conclude the wizard.</source>
-        <translation>이제 거의 완료되었습니다. '마침'을 클릭하면 새 웹 브라우저 템플릿을 만들고 마법사를 종료합니다.</translation>
+        <translation>이제 거의 완료되었습니다. &apos;마침&apos;을 클릭하면 새 웹 브라우저 템플릿을 만들고 마법사를 종료합니다.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="968"/>
@@ -3586,13 +3586,13 @@ Full path: %4</source>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="615"/>
         <source>This troubleshooting procedure could not be initialized. You can click on next to submit an issue report.</source>
-        <translation>이 문제 해결 절차를 초기화하지 못했습니다. '다음'을 눌러 문제 보고서를 제출할 수 있습니다.</translation>
+        <translation>이 문제 해결 절차를 초기화하지 못했습니다. &apos;다음&apos;을 눌러 문제 보고서를 제출할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="728"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
         <oldsource>Somethign failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</oldsource>
-        <translation>내부 오류로 문제 해결 절차를 계속할 수 없습니다. '다음'을 눌러 문제 보고서를 제출할 수 있습니다.</translation>
+        <translation>내부 오류로 문제 해결 절차를 계속할 수 없습니다. &apos;다음&apos;을 눌러 문제 보고서를 제출할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="729"/>
@@ -10225,7 +10225,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6179"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
-        <translation>낮아진 보호 수준을 보완하려면 제한 설정의 '권한 제거' 페이지를 확인하세요.</translation>
+        <translation>낮아진 보호 수준을 보완하려면 제한 설정의 &apos;권한 제거&apos; 페이지를 확인하세요.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3727"/>

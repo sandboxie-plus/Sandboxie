@@ -41,15 +41,6 @@ extern "C" {
 #include "common/pattern.h"
 } // extern "C"
 
-
-//---------------------------------------------------------------------------
-// Defines
-//---------------------------------------------------------------------------
-
-
-#define MAX_RPL_BUF_SIZE    32768
-
-
 //---------------------------------------------------------------------------
 // Structures and Types
 //---------------------------------------------------------------------------
@@ -2362,6 +2353,19 @@ ULONG GuiServer::MapWindowPointsSlave(SlaveArgs *args)
               / sizeof(POINT);
         if (req->num_pts > max_points)
             return STATUS_INVALID_PARAMETER;
+
+        //
+        // the reply side was bounded by max_points, but the request side
+        // was not:  req_len was only checked against sizeof(REQ), which
+        // covers a single point, so a small request claiming many points
+        // made the memcpy below read the service's heap past the end of
+        // the request and hand it back to the caller.  num_pts is already
+        // bounded above, so this product cannot overflow
+        //
+
+        if (args->req_len < FIELD_OFFSET(GUI_MAP_WINDOW_POINTS_REQ, pts)
+                          + req->num_pts * sizeof(POINT))
+            return STATUS_INFO_LENGTH_MISMATCH;
 
         rpl_len += req->num_pts * sizeof(POINT);
 

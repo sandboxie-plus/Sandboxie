@@ -24,6 +24,7 @@
 #include "common/defines.h"
 #include "common/my_version.h"
 #include "core/dll/sbieapi.h"
+#include "core/dll/sbiedll.h"
 #include <string>
 #include <map>
 
@@ -212,4 +213,134 @@ extern "C" BOOL Kmd_FixDacls()
     LocalFree(pSid);
 
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Kmd_FixBoxDacls
+//---------------------------------------------------------------------------
+
+
+//
+// A box folder carries ALL APPLICATION PACKAGES (S-1-15-2-1) and ALL
+// RESTRICTED APPLICATION PACKAGES (S-1-15-2-2) ACEs so that an AppContainer
+// child of a boxed program can reach the box at all - an AppContainer token
+// gains nothing from the Authenticated Users or Everyone ACEs, it needs a
+// package ACE.  See Driver_InitPublicSecurity() in core/drv/driver.c.
+//
+// That security descriptor is handed to the kernel in OBJECT_ATTRIBUTES, so it
+// only applies when the box folder is *created*.  Boxes that already existed
+// keep their old DACL, and in a compartment box the AppContainer child then
+// dies with STATUS_ACCESS_DENIED - which for Firefox showed up as video never
+// playing, with no error anywhere.
+//
+// The ACEs are inheritable and everything inside a box inherits from the box
+// root, so granting them on the root is enough: the whole existing tree picks
+// them up. Measured - a stripped box fails, and a root-only grant fixes it.
+//
+
+static BOOL Kmd_HasFullAccess(const SDaclEntry& entry)
+{
+    //
+    // the driver asks for GENERIC_ALL, but generic rights are mapped when the
+    // ace is stored, so what we read back on a folder is FILE_ALL_ACCESS
+    //
+
+    return ((entry.AllowMask & FILE_ALL_ACCESS) == FILE_ALL_ACCESS)
+        || ((entry.AllowMask & GENERIC_ALL) != 0);
+}
+
+static BOOL Kmd_AddAppPackageAces(const wchar_t* folderPath)
+{
+    static const wchar_t* Sids[2] = { L"S-1-15-2-1", L"S-1-15-2-2" };
+    BOOL ok = TRUE;
+
+    //
+    // leave a box that already has both alone, so we do not rewrite the DACLs
+    // of boxes that are already correct
+    //
+
+    std::map<std::wstring, SDaclEntry> map = ListFolderDACLs(folderPath);
+    BOOL have_both = TRUE;
+    for (int i = 0; i < 2; ++i) {
+        std::map<std::wstring, SDaclEntry>::iterator I = map.find(Sids[i]);
+        if (I == map.end() || !Kmd_HasFullAccess(I->second))
+            have_both = FALSE;
+    }
+    if (have_both)
+        return TRUE;
+
+    for (int i = 0; i < 2; ++i) {
+
+        PSID pSid = NULL;
+        if (!ConvertStringSidToSidW(Sids[i], &pSid)) {
+            ok = FALSE;
+            continue;
+        }
+
+        EXPLICIT_ACCESS ea_set =
+        {
+            GENERIC_ALL,
+            SET_ACCESS,
+            SUB_CONTAINERS_AND_OBJECTS_INHERIT,
+            {
+                NULL,
+                NO_MULTIPLE_TRUSTEE,
+                TRUSTEE_IS_SID,
+                TRUSTEE_IS_GROUP,
+                reinterpret_cast<LPTSTR>(pSid)
+            }
+        };
+
+        if (!UpdateFolderDACLs(folderPath, &ea_set))
+            ok = FALSE;
+
+        LocalFree(pSid);
+    }
+
+    return ok;
+}
+
+extern "C" BOOL Kmd_FixBoxDacls()
+{
+    LONG index = -1;
+    BOOL ok = TRUE;
+
+    for (;;) {
+
+        WCHAR boxname[BOXNAME_COUNT];
+        WCHAR path[1024];
+        ULONG path_len = sizeof(path);        // UNICODE_STRING, so bytes
+
+        index = SbieApi_EnumBoxes(index, boxname);
+        if (index < 0)
+            break;
+
+        if (SbieApi_QueryBoxPath(
+                boxname, path, NULL, NULL, &path_len, NULL, NULL) != 0)
+            continue;
+        if (!*path)
+            continue;
+
+        //
+        // the api hands back an nt device path, e.g.
+        // \Device\HarddiskVolume3\Sandbox\DefaultBox
+        //
+
+        if (!SbieDll_TranslateNtToDosPath(path))
+            continue;
+
+        //
+        // a box whose folder was never created has nothing to migrate, and
+        // will get the right security descriptor when it is created
+        //
+
+        if (GetFileAttributesW(path) == INVALID_FILE_ATTRIBUTES)
+            continue;
+
+        if (!Kmd_AddAppPackageAces(path))
+            ok = FALSE;
+    }
+
+    return ok;
 }

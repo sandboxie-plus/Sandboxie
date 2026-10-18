@@ -42,6 +42,34 @@ _FX HANDLE Ipc_GetServerEvent(const WCHAR *service, BOOLEAN *create_flag)
     HANDLE hEvent;
 
     Sbie_snwprintf(event_name, 64, SBIE_BOXED_ L"ServiceInitComplete_%s", service);
+
+    //
+    // in an AppContainer process kernelbase resolves the name below
+    // AppContainerNamedObjects, so we would never see the event signaled by
+    // the boxed service.  open it by its BaseNamedObjects path instead, our
+    // NtOpenEvent hook maps that to the same boxed object everyone else uses.
+    // never create it: an AppContainer process cannot reach SbieSvc, so it
+    // could not start the service anyway
+    //
+
+    if (Dll_AppContainerToken) {
+
+        WCHAR path[128];
+        UNICODE_STRING objname;
+        OBJECT_ATTRIBUTES objattrs;
+
+        if (create_flag)
+            *create_flag = FALSE;
+
+        Sbie_snwprintf(path, 128, L"\\Sessions\\%d\\BaseNamedObjects\\%s", Dll_SessionId, event_name);
+        RtlInitUnicodeString(&objname, path);
+        InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+        if (! NT_SUCCESS(NtOpenEvent(&hEvent, SYNCHRONIZE, &objattrs)))
+            hEvent = NULL;
+        return hEvent;
+    }
+
     if (create_flag) {
         *create_flag = FALSE;
         hEvent = CreateEvent(NULL, TRUE, FALSE, event_name);

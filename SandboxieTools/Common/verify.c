@@ -236,7 +236,7 @@ NTSTATUS MyHashFileEx(
     // Determine access rights based on create options
     // SYNCHRONIZE is required for FILE_SYNCHRONOUS_IO_NONALERT
     ACCESS_MASK desiredAccess = FILE_READ_DATA | FILE_READ_ATTRIBUTES | SYNCHRONIZE;
-    ULONG shareAccess = FILE_SHARE_READ;
+    ULONG shareAccess = FILE_SHARE_READ | FILE_SHARE_WRITE;
     if (CreateOptions & FILE_DELETE_ON_CLOSE) {
         desiredAccess |= FILE_EXECUTE | DELETE;
         shareAccess |= FILE_SHARE_DELETE;

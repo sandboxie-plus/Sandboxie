@@ -4,10 +4,45 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
 ## [Unreleased]
 
 ### Fixed
 - fixed INI values with leading or trailing control characters not being deleted, causing entries to reappear after saving [#5552](https://github.com/sandboxie-plus/Sandboxie/issues/5552)
+
+
+
+## [1.18.8 / 5.73.8] - 2026-10-17
+
+### Fixed
+- fixed video playback in sandboxed Firefox on sites awaiting `mediaCapabilities.decodingInfo()`, like espn.com
+- fixed boxes lacking AppContainer ACEs, which made an AppContainer child of a boxed program die with `0xC0000022`
+- fixed the restricted stand in for an AppContainer token disabling every group, leaving it unable to open `\KnownDlls`
+- fixed boxed IPC objects lacking AppContainer ACEs, which crashed Firefox's media CDM process in app compartment boxes as it could not connect to the boxed epmapper
+- fixed "SBIE2204 Cannot start sandboxed service RpcSs (1341)" from AppContainer processes in app compartment boxes, they now find the already running boxed RpcSs
+- fixed an out-of-bounds read in the GUI proxy's MapWindowPoints handler leaking service heap to sandboxed callers
+- `UnRestrictAppContainerToken` no longer defaults to on for MSEdge, the stand in token works for it again
+- fixed Import Boxes not letting the user choose where the imported sandboxes are created [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)
+
+### Added
+- made it easier to choose a sandbox in Set Open and Set Force: select from a list showing sandbox names and aliases, or start typing a name or alias to see suggestions
+- added an option to skip the Set Open and Set Force dialogs when only one sandbox is available. Check "Skip this dialog when only one sandbox is enabled" to use that sandbox automatically. The dialog is shown by default [#5653](https://github.com/sandboxie-plus/Sandboxie/issues/5653)
+- added "fixboxdacls" command to KmdUtil.exe, it adds the AppContainer ACEs to already existing boxes
+- added `KeepBroadGroupsInAppContainerToken=n` to restore the old all-deny-only AppContainer stand in token
+- added `NeutralizeLowBoxToken=n` to let a direct `NtCreateLowBoxToken` call through
+- `FakeAppContainerToken` is now evaluated, `=n` lets a boxed program create real AppContainer children
+
+
+
+## [1.18.7 / 5.73.7] - 2026-10-16
+
+### Fixed
+- fixed issues with root protect IOCTLs
+- fixed issue with set low label
+- fixed an issue with monitor api
+- fixed issues with base64 decoding
+- fixed issue with API_RENAME_FILE
+- fixed with template handling
 
 
 
@@ -19,9 +54,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed corrupted SBIE message links in SandMan when URL-encoded characters were interpreted as message placeholders
 - fixed updater issues
-- fixed issues with transient excemption handling
+- fixed issues with transient exception handling
 - fixed path handling issues
 - fixed possible null pointer exception when unloading driver
+
 
 
 ## [1.18.5 / 5.73.5] - 2026-09-25

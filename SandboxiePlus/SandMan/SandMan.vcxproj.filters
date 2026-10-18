@@ -99,6 +99,9 @@
     <ClCompile Include="Windows\SelectBoxWindow.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\ShellBoxSelector.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
     <ClCompile Include="Windows\OptionsAccess.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
@@ -309,6 +312,9 @@
     <ClInclude Include="Windows\PendingChanges.h">
       <Filter>Windows</Filter>
     </ClInclude>
+    <ClInclude Include="Windows\ShellBoxSelector.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
     <ClInclude Include="Helpers\TabOrder.h">
       <Filter>Helpers</Filter>
     </ClInclude>
@@ -478,6 +484,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\SelectBoxWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\ShellBoxSelector.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\BoxImageWindow.ui">

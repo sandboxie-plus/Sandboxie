@@ -1193,6 +1193,10 @@ _FX NTSTATUS Session_Api_MonitorGet2(PROCESS *proc, ULONG64 *parms)
     ProbeForWrite(args->buffer_len.val, sizeof(ULONG), sizeof(ULONG));
     *args->buffer_len.val = 0;
 
+
+    if (buffer_len < sizeof(LOG_BUFFER_SIZE_T))
+        return STATUS_BUFFER_TOO_SMALL;
+
     ProbeForWrite(args->buffer_ptr.val, buffer_len, sizeof(UCHAR));
     buffer_ptr = (UCHAR*)args->buffer_ptr.val;
 
@@ -1223,7 +1227,9 @@ _FX NTSTATUS Session_Api_MonitorGet2(PROCESS *proc, ULONG64 *parms)
 
             LOG_BUFFER_SIZE_T entry_size = log_buffer_get_size(&read_ptr, session->monitor_log);
             LOG_BUFFER_SEQ_T seq_number = log_buffer_get_seq_num(&read_ptr, session->monitor_log);
-            if (entry_size > buffer_len - sizeof(LOG_BUFFER_SIZE_T)) {
+
+            if ((ULONG64)entry_size + (2 * sizeof(LOG_BUFFER_SIZE_T))
+                                                    > (ULONG64)buffer_len) {
                 status = STATUS_MORE_ENTRIES;
                 break;
             }

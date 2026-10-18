@@ -2056,7 +2056,8 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
     name[1] = L'\0';
 
     InitializeObjectAttributes(
-        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE,
+        NULL, NULL);
 
     RtlInitUnicodeString(&objname, path);
 
@@ -2119,7 +2120,7 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
         Mem_Free(info, info_len);
     }
 
-    NtClose(dir_handle);
+    ZwClose(dir_handle);
     Mem_Free(path, path_len);
     return status;
 }

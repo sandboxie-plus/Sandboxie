@@ -408,13 +408,41 @@ _FX BOOLEAN Driver_InitPublicSecurity(void)
         SECURITY_RESTRICTED_CODE_RID            // SubAuthority
     };
 
-    Driver_PublicAcl = Mem_AllocEx(Driver_Pool, 128, TRUE);
+    //
+    // an AppContainer (or LPAC) token gains nothing from the Authenticated Users
+    // or Everyone SIDs, it needs a package/capability ACE.  without these two a
+    // sandboxed program that spawns an AppContainer child of its own leaves that
+    // child unable to touch the sandbox at all: every access to the box path
+    // fails with STATUS_ACCESS_DENIED and the child dies with 0xC0000022.
+    // Firefox' "MF Media Engine CDM" utility process is one such child, and its
+    // death makes mediaCapabilities.decodingInfo() hang forever, which breaks
+    // video playback on sites that await it.
+    //
+
+    static UCHAR AllAppPkgSid[16] = {           // S-1-15-2-1
+        1,                                      // Revision
+        2,                                      // SubAuthorityCount
+        0,0,0,0,0,15, // SECURITY_APP_PACKAGE_AUTHORITY  // IdentifierAuthority
+        2,0,0,0,     // SECURITY_APP_PACKAGE_BASE_RID
+        1,0,0,0      // SECURITY_BUILTIN_PACKAGE_ANY_PACKAGE
+    };
+    static UCHAR AllRestrAppPkgSid[16] = {      // S-1-15-2-2
+        1,                                      // Revision
+        2,                                      // SubAuthorityCount
+        0,0,0,0,0,15, // SECURITY_APP_PACKAGE_AUTHORITY  // IdentifierAuthority
+        2,0,0,0,     // SECURITY_APP_PACKAGE_BASE_RID
+        2,0,0,0      // SECURITY_BUILTIN_PACKAGE_ANY_RESTRICTED_PACKAGE
+    };
+
+    Driver_PublicAcl = Mem_AllocEx(Driver_Pool, 256, TRUE);
     if (! Driver_PublicAcl)
         return FALSE;
 
-    RtlCreateAcl(Driver_PublicAcl, 128, ACL_REVISION);
+    RtlCreateAcl(Driver_PublicAcl, 256, ACL_REVISION);
     MyAddAccessAllowedAce(Driver_PublicAcl, &AuthSid);
     MyAddAccessAllowedAce(Driver_PublicAcl, &WorldSid);
+    MyAddAccessAllowedAce(Driver_PublicAcl, &AllAppPkgSid);
+    MyAddAccessAllowedAce(Driver_PublicAcl, &AllRestrAppPkgSid);
 
     Driver_PublicSd = Mem_AllocEx(Driver_Pool, 64, TRUE);
     if (! Driver_PublicSd)

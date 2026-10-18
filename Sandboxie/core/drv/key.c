@@ -1535,7 +1535,7 @@ _FX NTSTATUS Key_Api_SetLowLabel(PROCESS *proc, ULONG64 *parms)
     //
 
     RtlInitUnicodeString(&objname, path);
-    if (! Box_IsBoxedPath(proc->box, file, &objname))
+    if (Box_IsBoxedPath(proc->box, key, &objname))
         status = STATUS_SUCCESS;
     else
         status = STATUS_ACCESS_DENIED;

@@ -165,6 +165,49 @@ void MountManager::Shutdown()
 
 
 //---------------------------------------------------------------------------
+// ImBox_IsFieldTerminated
+//---------------------------------------------------------------------------
+
+
+// Returns true if the fixed size character field pField[count] contains a
+// terminating NUL.  A field that does not must be rejected before it is
+// used: every string operation applied to it would run on into the fields
+// that follow, and the driver copies reg_root into a fixed size buffer of
+// its own, where an over long name overflows kernel memory.
+
+static bool ImBox_IsFieldTerminated(const WCHAR *pField, size_t count)
+{
+    for (size_t i = 0; i < count; i++) {
+        if (pField[i] == L'\0')
+            return true;
+    }
+
+    return false;
+}
+
+
+//---------------------------------------------------------------------------
+// ImBox_IsTailTerminated
+//---------------------------------------------------------------------------
+
+
+// Returns true if the variable length string that starts at pTail is NUL
+// terminated before the end of the request message.  The length check each
+// handler performs only guarantees the first character of such a field.
+
+static bool ImBox_IsTailTerminated(const MSG_HEADER *msg, const WCHAR *pTail)
+{
+    const UCHAR *end = (const UCHAR *)msg + msg->length;
+    const UCHAR *ptr = (const UCHAR *)pTail;
+
+    if (ptr < (const UCHAR *)msg || ptr + sizeof(WCHAR) > end)
+        return false;
+
+    return ImBox_IsFieldTerminated(pTail, (end - ptr) / sizeof(WCHAR));
+}
+
+
+//---------------------------------------------------------------------------
 // Handler
 //---------------------------------------------------------------------------
 
@@ -221,11 +264,25 @@ MSG_HEADER *MountManager::CreateHandler(MSG_HEADER *msg)
     if (req->h.length < sizeof(IMBOX_CREATE_REQ))
         return SHORT_REPLY(ERROR_INVALID_PARAMETER);
 
+    //
+    // validate the caller supplied strings before any string use
+    //
+
+    if (! ImBox_IsFieldTerminated(req->password, ARRAYSIZE(req->password)))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    if (! ImBox_IsTailTerminated(msg, req->file_root))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    WCHAR *file_root_sep = wcsrchr(req->file_root, L'\\');
+    if (! file_root_sep)
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
     ULONG session_id = PipeServer::GetCallerSessionId();
 
     std::wstring ImageFile = GetImageFileName(req->file_root);
 
-    std::wstring RootPath(req->file_root, wcsrchr(req->file_root, L'\\'));
+    std::wstring RootPath(req->file_root, file_root_sep);
     HANDLE handle = OpenOrCreateNtFolder(RootPath.c_str());
     if (!handle)
         return SHORT_REPLY(ERROR_PATH_NOT_FOUND);
@@ -253,6 +310,20 @@ MSG_HEADER *MountManager::MountHandler(MSG_HEADER *msg)
 
     IMBOX_MOUNT_REQ *req = (IMBOX_MOUNT_REQ *)msg;
     if (req->h.length < sizeof(IMBOX_MOUNT_REQ))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    //
+    // validate the caller supplied strings before any string use, including
+    // the root lookup;  reg_root is also handed to the driver below
+    //
+
+    if (! ImBox_IsFieldTerminated(req->password, ARRAYSIZE(req->password)))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    if (! ImBox_IsFieldTerminated(req->reg_root, ARRAYSIZE(req->reg_root)))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    if (! ImBox_IsTailTerminated(msg, req->file_root))
         return SHORT_REPLY(ERROR_INVALID_PARAMETER);
 
     ULONG session_id = PipeServer::GetCallerSessionId();
@@ -327,6 +398,9 @@ MSG_HEADER *MountManager::UnmountHandler(MSG_HEADER *msg)
     if (req->h.length < sizeof(IMBOX_UNMOUNT_REQ))
         return SHORT_REPLY(ERROR_INVALID_PARAMETER);
 
+    if (! ImBox_IsFieldTerminated(req->reg_root, ARRAYSIZE(req->reg_root)))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
     ULONG session_id = PipeServer::GetCallerSessionId();
 
     std::shared_ptr<BOX_ROOT> pRoot = GetBoxRootLocked(req->reg_root, false, session_id);
@@ -373,14 +447,23 @@ MSG_HEADER *MountManager::EnumHandler(MSG_HEADER *msg)
 
     EnterCriticalSection(&m_CritSec);
 
+    //
+    // size the reply from the stored names rather than assuming each one
+    // fits MAX_REG_ROOT_LEN characters
+    //
+
     ULONG rpl_len = sizeof(IMBOX_ENUM_RPL) + sizeof(WCHAR);
 
-    rpl_len += (m_RootMap.size() * MAX_REG_ROOT_LEN) * sizeof(WCHAR);
+    for (auto I = m_RootMap.begin(); I != m_RootMap.end(); I++)
+        rpl_len += (ULONG)((I->first.size() + 1) * sizeof(WCHAR));
 
     IMBOX_ENUM_RPL *rpl = (IMBOX_ENUM_RPL *)LONG_REPLY(rpl_len);
     if (rpl) {
 
         rpl->h.status = ERROR_SUCCESS;
+
+        memset(rpl->reg_roots, 0,
+               rpl_len - FIELD_OFFSET(IMBOX_ENUM_RPL, reg_roots));
 
         WCHAR *reg_roots = rpl->reg_roots;
         for (auto I = m_RootMap.begin(); I != m_RootMap.end(); I++) {
@@ -414,6 +497,9 @@ MSG_HEADER *MountManager::QueryHandler(MSG_HEADER *msg)
     if (req->h.length < sizeof(IMBOX_QUERY_REQ))
         return SHORT_REPLY(ERROR_INVALID_PARAMETER);
 
+    if (! ImBox_IsFieldTerminated(req->reg_root, ARRAYSIZE(req->reg_root)))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
     if(!IsImDiskDriverReady())
         return SHORT_REPLY(ERROR_DEVICE_NOT_AVAILABLE);
 
@@ -438,6 +524,9 @@ MSG_HEADER *MountManager::QueryHandler(MSG_HEADER *msg)
         if (rpl) {
 
             rpl->h.status = ERROR_SUCCESS;
+
+            memset((UCHAR *)rpl + sizeof(MSG_HEADER), 0,
+                   rpl_len - sizeof(MSG_HEADER));
 
             //scscpy(rpl->boxname, pRoot
 

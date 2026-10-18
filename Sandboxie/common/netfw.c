@@ -467,10 +467,12 @@ int _inet_xton(const WCHAR* src, ULONG src_len, IP_ADDRESS *dst, USHORT *type)
     return ret;
 }
 
-int _wntoi(const WCHAR* str, ULONG max) 
+int _wntoi(const WCHAR* str, ULONG max)
 {
 	WCHAR tmp[12];
+	if (max > ARRAYSIZE(tmp) - 1) max = ARRAYSIZE(tmp) - 1;
 	wmemcpy(tmp, str, max);
+	tmp[max] = L'\0';
     return _wtoi(tmp);
 }
 

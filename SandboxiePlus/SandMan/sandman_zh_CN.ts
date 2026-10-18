@@ -503,32 +503,32 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="126"/>
         <source>Create sandboxes in:</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒创建位置：</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Where the imported sandboxes are created. Keep %SANDBOX% in the path so that each box gets its own folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>导入的沙盒将在此位置创建。请在路径中保留 %SANDBOX%，以便每个沙盒使用独立的文件夹。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="144"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>浏览...</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="199"/>
         <source>Select the folder to create the sandboxes in</source>
-        <translation type="unfinished"></translation>
+        <translation>选择用于创建沙盒的文件夹</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="218"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished">无法在网络共享上创建沙盒，请选择本地文件夹。</translation>
+        <translation>沙盒不能位于网络共享上，请选择本地文件夹。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="226"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished">无法在分区的根目录下创建沙盒，请选择其他文件夹。</translation>
+        <translation>沙盒不能位于分区根目录，请选择一个文件夹。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="368"/>
@@ -5112,7 +5112,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="53"/>
         <source>No enabled sandbox is available. Please create or enable a sandbox and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有已启用的沙盒。请创建或启用一个沙盒后重试。</translation>
     </message>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="63"/>
@@ -5122,7 +5122,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="106"/>
         <source>More than one sandbox has this alias. Select a sandbox from the list or type its actual name. Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>多个沙盒使用了此别名。请从列表中选择一个沙盒，或输入其实际名称。未进行任何更改。</translation>
     </message>
     <message>
         <source>Type the box name which you are going to set:</source>
@@ -12203,17 +12203,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="9"/>
         <source>Select a sandbox or type its name or alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>选择一个沙盒，或输入其名称或别名：</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="26"/>
         <source>Applies to both Set Open and Set Force. The dialog is always shown when more than one sandbox is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>同时适用于“设为沙盒开放路径”和“设置强制在沙盒中运行”。启用多个沙盒时，始终显示此对话框。</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="29"/>
         <source>Skip this dialog when only one sandbox is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>仅启用一个沙盒时跳过此对话框</translation>
     </message>
 </context>
 <context>

@@ -644,32 +644,32 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="126"/>
         <source>Create sandboxes in:</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱建立位置：</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Where the imported sandboxes are created. Keep %SANDBOX% in the path so that each box gets its own folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>匯入的沙箱將建立於此位置。請在路徑中保留 %SANDBOX%，讓每個沙箱都有獨立的資料夾。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="144"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>瀏覽...</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="199"/>
         <source>Select the folder to create the sandboxes in</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇用來建立沙箱的資料夾</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="218"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished">沙箱的位置不能被指定到網路共享，請選取本地資料夾。</translation>
+        <translation>沙箱不能位於網路共用位置，請選擇本機資料夾。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="226"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished">沙箱的位置不能被指定到分割區的根目錄，請選取一個資料夾。</translation>
+        <translation>沙箱不能位於分割區的根目錄，請選擇一個資料夾。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="368"/>
@@ -5349,7 +5349,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="53"/>
         <source>No enabled sandbox is available. Please create or enable a sandbox and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有已啟用的沙箱。請建立或啟用一個沙箱後再試一次。</translation>
     </message>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="63"/>
@@ -5359,7 +5359,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="106"/>
         <source>More than one sandbox has this alias. Select a sandbox from the list or type its actual name. Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>有多個沙箱使用此別名。請從清單選擇沙箱，或輸入其實際名稱。未進行任何變更。</translation>
     </message>
     <message>
         <source>Type the box name which you are going to set:</source>
@@ -7544,7 +7544,7 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2063"/>
         <source>Set Open Path in Sandbox</source>
-        <translation>設定在沙箱中開啟路徑</translation>
+        <translation>設為沙箱開放路徑</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3582"/>
@@ -11784,7 +11784,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="587"/>
         <source>Add &apos;Set Open Path in Sandbox&apos; to context menu</source>
-        <translation>加入「設定在沙箱中開啟路徑」至環境選單</translation>
+        <translation>加入「設為沙箱開放路徑」至環境選單</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="722"/>
@@ -12976,17 +12976,17 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="9"/>
         <source>Select a sandbox or type its name or alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇沙箱，或輸入其名稱或別名：</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="26"/>
         <source>Applies to both Set Open and Set Force. The dialog is always shown when more than one sandbox is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>同時適用於「設為沙箱開放路徑」和「設定強制沙箱化」。啟用多個沙箱時，一律顯示此對話方塊。</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="29"/>
         <source>Skip this dialog when only one sandbox is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>僅啟用一個沙箱時略過此對話方塊</translation>
     </message>
 </context>
 <context>

@@ -269,6 +269,37 @@ static bool MatchRuleWildcard(const QString& pattern, const QString& target)
 	return QRegularExpression("\\A" + exp + "\\z", QRegularExpression::CaseInsensitiveOption).match(target).hasMatch();
 }
 
+static bool MatchProcessGroup(const CSandBoxPtr& pBox, const QString& group, const QString& target, int depth)
+{
+	if (depth >= 6)
+		return false;
+	foreach(const QString &entry, pBox->GetTextList("ProcessGroup", true, true, true)) {
+		if (!entry.startsWith(group + ",", Qt::CaseInsensitive))
+			continue;
+		foreach(const QString &member, entry.mid(group.length() + 1).split(',')) {
+			if (member.startsWith('<')) {
+				if (MatchProcessGroup(pBox, member, target, depth + 1))
+					return true;
+			}
+			else if (MatchRuleWildcard(member, target))
+				return true;
+		}
+	}
+	return false;
+}
+
+static bool MatchSelector(const CSandBoxPtr& pBox, const QString& selector, const QString& target)
+{
+	bool inv = selector.startsWith('!');
+	QString sel = inv ? selector.mid(1) : selector;
+	bool hit;
+	if (sel.startsWith('<'))
+		hit = MatchProcessGroup(pBox, sel, target, 0);
+	else
+		hit = MatchRuleWildcard(sel, target);
+	return inv ? !hit : hit;
+}
+
 QStringList CSelectBoxWindow::MatchProgramInPath(const CSandBoxPtr& pBox, const QStringList& list, const QString& name)
 {
 	QStringList matchedList;
@@ -284,11 +315,12 @@ QStringList CSelectBoxWindow::MatchProgramInPath(const CSandBoxPtr& pBox, const 
 	foreach(const QString &entry, list) {
 		QString rule = entry;
 		int comma = rule.indexOf(',');
-		if (comma != -1) {
-			if (!MatchRuleWildcard(rule.left(comma), program) && !MatchRuleWildcard(rule.left(comma), target))
+		if (comma > 0) {
+			if (!MatchSelector(pBox, rule.left(comma), program))
 				continue;
-			rule = rule.mid(comma + 1);
 		}
+		if (comma != -1)
+			rule = rule.mid(comma + 1);
 		bool exact = rule.startsWith('|');
 		if (exact)
 			rule = rule.mid(1);

@@ -325,8 +325,8 @@ QStringList CSelectBoxWindow::MatchProgramInPath(const CSandBoxPtr& pBox, const 
 		if (exact)
 			rule = rule.mid(1);
 
-		rule = Nt2Dos(rule, pBox);
 		bool unc = rule.startsWith("\\\\");
+		rule = Nt2Dos(rule, pBox);
 		rule.replace(QRegularExpression("\\\\+"), "\\");
 		if (unc)
 			rule.prepend('\\');

@@ -311,6 +311,12 @@ QStringList CSelectBoxWindow::MatchProgramInPath(const CSandBoxPtr& pBox, const 
 			target = pBoxEx->GetCommandFile(target);
 	}
 
+	if (target.startsWith("\\\\")) {
+		target = target.mid(1);
+		target.replace(QRegularExpression("\\\\+"), "\\");
+		target = "\\Device\\LanmanRedirector" + target;
+	}
+
 	QString program = target.mid(qMax(target.lastIndexOf('\\'), target.lastIndexOf('/')) + 1);
 	foreach(const QString &entry, list) {
 		QString rule = entry;
@@ -325,11 +331,13 @@ QStringList CSelectBoxWindow::MatchProgramInPath(const CSandBoxPtr& pBox, const 
 		if (exact)
 			rule = rule.mid(1);
 
-		bool unc = rule.startsWith("\\\\");
 		rule = Nt2Dos(rule, pBox);
+		bool unc = rule.startsWith("\\\\");
+		if (unc)
+			rule = rule.mid(1);
 		rule.replace(QRegularExpression("\\\\+"), "\\");
 		if (unc)
-			rule.prepend('\\');
+			rule.prepend("\\Device\\LanmanRedirector");
 		if (!exact && !rule.contains('*'))
 			rule += '*';
 		if (MatchRuleWildcard(rule, target))

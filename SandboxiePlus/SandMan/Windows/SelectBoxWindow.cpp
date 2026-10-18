@@ -272,13 +272,13 @@ static bool MatchRuleWildcard(const QString& pattern, const QString& target)
 QStringList CSelectBoxWindow::MatchProgramInPath(const CSandBoxPtr& pBox, const QStringList& list, const QString& name)
 {
 	QStringList matchedList;
-	QString target = name;
+	QString target = name.trimmed();
 
-	//remove '"'
-	if (target.startsWith('"'))
-		target = target.mid(1);
-	if (target.endsWith('"'))
-		target.chop(1);
+	if (!QFileInfo::exists(target)) {
+		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+		if (pBoxEx)
+			target = pBoxEx->GetCommandFile(target);
+	}
 
 	QString program = target.mid(qMax(target.lastIndexOf('\\'), target.lastIndexOf('/')) + 1);
 	foreach(const QString &entry, list) {
@@ -294,7 +294,10 @@ QStringList CSelectBoxWindow::MatchProgramInPath(const CSandBoxPtr& pBox, const 
 			rule = rule.mid(1);
 
 		rule = Nt2Dos(rule, pBox);
+		bool unc = rule.startsWith("\\\\");
 		rule.replace(QRegularExpression("\\\\+"), "\\");
+		if (unc)
+			rule.prepend('\\');
 		if (!exact && !rule.contains('*'))
 			rule += '*';
 		if (MatchRuleWildcard(rule, target))

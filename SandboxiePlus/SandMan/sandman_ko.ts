@@ -2306,7 +2306,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1407"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1408"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="990"/>
@@ -2322,8 +2322,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>모든 프로그램</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1405"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1423"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1406"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1424"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="739"/>
@@ -3130,52 +3130,52 @@ Please select a folder which contains this file.</source>
         <translation>옵션 검색</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1073"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1074"/>
         <source>Box: %1</source>
         <translation>박스: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1074"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1075"/>
         <source>Template: %1</source>
         <translation>템플릿: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1075"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1076"/>
         <source>Global: %1</source>
         <translation>전역: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1076"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1077"/>
         <source>Default: %1</source>
         <translation>기본값: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1302"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1303"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>이미 삭제된 샌드박스이므로 설정을 저장할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1367"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1368"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>일부 변경 사항이 아직 저장되지 않았습니다. 이 옵션 창을 닫으시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1416"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1417"/>
         <source>Enter program:</source>
         <translation>프로그램 입력:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1844"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1845"/>
         <source>Autocomplete Consent Required</source>
         <translation>자동 완성 동의 필요</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1846"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1847"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>자동 완성 기능을 사용하려면 사용자의 동의가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1848"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1849"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -3189,32 +3189,32 @@ Choose autocomplete mode:
 입력하는 동안 %1: 입력하는 동안 제안 사항을 자동으로 완료합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1856"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1857"/>
         <source>Manual</source>
         <translation>수동</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1857"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1858"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>%1로 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1859"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1860"/>
         <source>While Typing</source>
         <translation>입력하는 동안</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1860"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1861"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>입력하는 동안 자동 완성 제안을 표시합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1864"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>자동 완성 제안을 비활성화합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1862"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
@@ -6463,23 +6463,23 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3711"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3712"/>
         <source>Autocomplete Consent Required</source>
         <translation>자동 완성 동의 필요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3186"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3195"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3187"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3196"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3191"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3192"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(복사)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3204"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3205"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation>Sandboxie-Plus 버전: %1</translation>
     </message>
@@ -6489,39 +6489,39 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>설정 검색</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1334"/>
         <location filename="Windows/SettingsWindow.cpp" line="1335"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1345"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1346"/>
         <source>Run &amp;Sandboxed</source>
         <translation>샌드박스에서 실행(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1795"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1796"/>
         <source>kilobytes (%1)</source>
         <translation>킬로바이트 (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1883"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1884"/>
         <source>Volume not attached</source>
         <translation>볼륨이 연결되지 않음</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3273"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3274"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>이 후원자 인증서가 만료되었습니다. &lt;a href=&quot;%1&quot;&gt;갱신된 인증서 받기&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3353"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3354"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1/%2개의 평가 인증서를 사용했습니다. 더 이상 사용 가능한 인증서를 생성할 수 없습니다.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3356"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;무료 평가 인증서를 받고&lt;/a&gt; %1일 동안 모든 프리미엄 기능을 누리세요.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3286"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3287"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>이 후원자 인증서는 %1일 후에 &lt;font color=&apos;red&apos;&gt;만료되며, &lt;a href=&quot;%2&quot;&gt;업데이트된 인증서를 받아주세요&lt;/a&gt;.</translation>
@@ -6543,52 +6543,52 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>모든 그룹 축소</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3183"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3184"/>
         <source>Click to reveal</source>
         <translation>클릭하여 표시</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3184"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3185"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
         <translation>숨기려면 클릭</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3321"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3322"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>만료까지 남은 기간: %1일</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3325"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3326"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>; 자격을 갖춘 후원자는 언제든지 xanasoft.com에서 &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;업데이트된 인증서&lt;/a&gt;를 받을 수 있습니다</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3337"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3338"/>
         <source>Options: %1</source>
         <translation>옵션: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>보안/개인 정보 보호 강화 및 앱 박스 (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
         <location filename="Windows/SettingsWindow.cpp" line="3341"/>
         <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <location filename="Windows/SettingsWindow.cpp" line="3343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
         <source>Enabled</source>
         <translation>사용함</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="375"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
         <location filename="Windows/SettingsWindow.cpp" line="3341"/>
         <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <location filename="Windows/SettingsWindow.cpp" line="3343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
         <source>Disabled</source>
         <translation>사용 안 함</translation>
     </message>
@@ -6664,143 +6664,143 @@ Right-click to copy</oldsource>
         <translation>삼중 상태 동작: 선택 해제됨 = 절대 안 함, 부분적으로 선택됨 = %1이 유지되는 동안에만 (기본값), 선택됨 = 항상.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>암호화된 샌드박스 (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>Network Interception (NetI): %1</source>
         <translation>네트워크 가로채기(NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Sandboxie 데스크톱 (데스크): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>이것은 Sandboxie-Plus 일련 번호처럼 보이지 않습니다.&lt;br /&gt;인증서의 UpdateKey 또는 서명을 입력하려고 시도했지만 올바르지 않은 경우, 위의 텍스트 영역에 전체 인증서를 대신 입력하세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3381"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3382"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>기존 지원 서버 인증서를 입력하지 않은 상태에서 Upgrade-Key 기능을 사용하려고 합니다. 이러한 유형의 키에 대해 유의해 주세요. (&lt;b&gt;;웹사이트에 굵은 글씨로 명시되어 있듯이&lt;/b) 이 유형의 키는 기존 후원자 인증서가 있어야 하며, 인증서가 없으면 쓸모가 없습니다.&lt;br /&gt;고급 기능을 사용하려면 표준 인증서와 기능 업그레이드 키를 모두 받아야 합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3388"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>기존 후원자 인증서를 입력하지 않고 갱신 키를 사용하려고 합니다. 웹사이트에 &lt;b&gt;명확하게 안내되어 있듯이&lt;/b&gt; 이 키를 사용하려면 유효한 기존 후원자 인증서가 필요합니다. 기존 인증서가 없으면 사용할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3392"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3393"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;제품 설명을 읽지 않고 실수로 이 키를 얻으신 경우 이메일 (홈페이지 제공)로 연락하여 이 문제를 해결해 주시기 바랍니다.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3423"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3424"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - 평가용 인증서 받기</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3423"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3424"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>%2로 발급되어 현재 하드웨어에 고정되는 무료 %1일 평가 인증서를 받으려면 이메일 주소를 입력하세요.
 고유 하드웨어 ID별로 최대 %3개의 평가 인증서를 요청할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3449"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3450"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>인증서를 가져오는 중 오류 발생: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3449"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3450"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>알 수 없는 오류 (아마도 네트워크 문제)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3504"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3505"/>
         <source>Contributor</source>
         <translation>기여자</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3506"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3507"/>
         <source>Eternal</source>
         <translation>영구</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3508"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3509"/>
         <source>Developer</source>
         <translation>개발자</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3510"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3511"/>
         <source>Business</source>
         <translation>비즈니스</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3512"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3513"/>
         <source>Personal</source>
         <translation>개인</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3514"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3515"/>
         <source>Great Patreon</source>
         <translation>Great Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3516"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3517"/>
         <source>Patreon</source>
         <translation>Great Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3518"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3519"/>
         <source>Family</source>
         <translation>패밀리</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3522"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3523"/>
         <source>Evaluation</source>
         <translation>평가</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3524"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3525"/>
         <source>Type %1</source>
         <translation>유형 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3554"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3555"/>
         <source>Advanced</source>
         <translation>고급</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3556"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3557"/>
         <source>Advanced (L)</source>
         <translation>고급 (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3558"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3559"/>
         <source>Max Level</source>
         <translation>최대 수준</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3560"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3561"/>
         <source>Level %1</source>
         <translation>수준 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3713"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3714"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>자동 완성 기능을 사용하려면 사용자의 동의가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3715"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3716"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -6813,63 +6813,63 @@ Choose autocomplete mode:
 %1 입력 중: 입력하는 동안 자동 완성 제안을 표시합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3723"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3724"/>
         <source>Manual</source>
         <translation>수동</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3724"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3725"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>%1로 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3726"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3727"/>
         <source>While Typing</source>
         <translation>타이핑하는 동안</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3727"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3728"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>입력하는 동안 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3730"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3731"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>자동 완성 제안을 비활성화합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3729"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3730"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1911"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1912"/>
         <source>Supporter certificate required for access</source>
         <translation>접근에 필요한 후원자 인증서</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1928"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1929"/>
         <source>Supporter certificate required for automation</source>
         <translation>자동화에 필요한 후원자 인증서</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3600"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>이 인증서는 현재 빌드에 유효하지 않습니다. 새 인증서를 가져오거나 이전 빌드로 다운그레이드해야 합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3601"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3602"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>이 인증서는 만료되었지만 현재 설치된 버전 및 기능에 대해서는 사용 가능한 상태로 유지됩니다. 그러나 호환성 업데이트 및 온라인 문제 해결 데이터베이스를 포함한  Sandboxie-Live 서비스에 더 이상 액세스할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3603"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3604"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>이 인증서는 만료되었습니다. 새 인증서를 받아야 합니다.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1366"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1367"/>
         <source>Sandboxed Web Browser</source>
         <translation>샌드박스 웹 브라우저</translation>
     </message>
@@ -6919,228 +6919,228 @@ Choose autocomplete mode:
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1215"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1216"/>
         <source>Please enter message</source>
         <translation>메시지를 입력하세요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1247"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1248"/>
         <source>Select Program</source>
         <translation>프로그램 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1247"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1248"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>실행 파일 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1251"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1267"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1252"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1268"/>
         <source>Please enter a menu title</source>
         <translation>메뉴 제목을 입력하세요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1263"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1264"/>
         <source>Please enter a command</source>
         <translation>명령을 입력하세요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3278"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3279"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;현재 빌드 플러스 기능은 계속 활성화되어 있지만&lt;/font&gt;, 호환성 업데이트와 온라인 문제 해결 데이터베이스를 포함한 Sandboxie 라이브 서비스에 더 이상 액세스할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3357"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>하드웨어 ID당 %2회까지 무료 %1일 평가 인증서를 요청할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3276"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3277"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;%1일 후에 추가 기능이 비활성화됩니다.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3280"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3281"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus 기능이 더 이상 활성화되지 않습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3323"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3324"/>
         <source>Expired: %1 days ago</source>
         <translation>만료일: %1일 전</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3407"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3435"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3664"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3408"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3436"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3665"/>
         <source>Retrieving certificate...</source>
         <translation>인증서 가져오는 중...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3520"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3521"/>
         <source>Home</source>
         <translation>홈</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2046"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2047"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>샌드박스 없이 실행(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2054"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2055"/>
         <source>Set Force in Sandbox</source>
         <translation>샌드박스에서 강제 설정</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2063"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2064"/>
         <source>Set Open Path in Sandbox</source>
         <translation>샌드박스에서 열린 경로 설정</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3582"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3583"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>인증서로 보이지 않습니다. 인증서 일부가 아닌 전체 인증서를 입력하세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3607"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3608"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>평가용 인증서가 정상적으로 적용되었습니다. 무료 체험을 시작할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3610"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3611"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus 개발을 지원해 주셔서 감사합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3612"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3613"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>이것은 3개월 동안 유효한 임시 Patreon 인증서입니다. 만료 시점이 가까워지면 온라인에서 전체 기간 동안 유효한 새 인증서를 발급받을 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3650"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3651"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>Sandboxie-Plus 후원자 인증서에 대한 필수 보안 업데이트가 필요합니다. 지금 업데이트된 인증서를 다운로드하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3651"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3652"/>
         <source>Auto update in future</source>
         <translation>향후 자동 업데이트</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2445"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2446"/>
         <source>Update Available</source>
         <translation>사용 가능한 업데이트</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2447"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2448"/>
         <source>Installed</source>
         <translation>설치됨</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2452"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2453"/>
         <source>by %1</source>
         <translation>제작: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2461"/>
         <source>(info website)</source>
         <translation>(정보 웹사이트)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2488"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2489"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>이 추가 기능은 필수 구성 요소이므로 제거할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2497"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2709"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2498"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2710"/>
         <source>Select Directory</source>
         <translation>디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2529"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2530"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;지금 확인&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2600"/>
         <source>Select Portable Box ini</source>
         <translation>포터블 박스 INI 파일 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2599"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2609"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2600"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
         <source>Ini Files (*.ini)</source>
         <translation>INI 파일 (*.ini)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2609"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
         <source>Save new Portable Box ini</source>
         <translation>새 포터블 박스 INI 파일 저장</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2614"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2615"/>
         <source>File already exists, please select a different file name.</source>
         <translation>파일이 이미 존재합니다. 다른 파일 이름을 선택해 주세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2620"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2621"/>
         <source>Invalid box name</source>
         <translation>잘못된 박스 이름</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2641"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2642"/>
         <source>Select Root Folder</source>
         <translation>루트 폴더 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2669"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2670"/>
         <source>Please enter the new configuration password.</source>
         <translation>새 구성 비밀번호를 입력하세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2673"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2674"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>새 구성 비밀번호를 다시 입력하세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2678"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2679"/>
         <source>Passwords did not match, please retry.</source>
         <translation>비밀번호가 일치하지 않습니다. 다시 시도하세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2690"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2691"/>
         <source>Process</source>
         <translation>프로세스</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2690"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2691"/>
         <source>Folder</source>
         <translation>폴더</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2700"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2701"/>
         <source>Please enter a program file name</source>
         <translation>프로그램 파일 이름을 입력하세요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2768"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2769"/>
         <source>Please enter the template identifier</source>
         <translation>템플릿 식별자를 입력하세요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2776"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2777"/>
         <source>Error: %1</source>
         <translation>오류: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2808"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2809"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>선택한 로컬 템플릿을 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3110"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3111"/>
         <source>%1 (Current)</source>
         <translation>%1 (현재)</translation>
     </message>

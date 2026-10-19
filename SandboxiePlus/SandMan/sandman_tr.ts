@@ -2235,8 +2235,8 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Sandboxie Plus - &apos;%1&apos; Ayarlar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1405"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1423"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1406"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1424"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="739"/>
@@ -2340,7 +2340,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Pencere başlığını değiştirme</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1407"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1408"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="990"/>
@@ -2361,7 +2361,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Klasör için Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1416"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1417"/>
         <source>Enter program:</source>
         <translation>Program girin:</translation>
     </message>
@@ -2406,47 +2406,47 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Seçeneklerde ara</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1073"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1074"/>
         <source>Box: %1</source>
         <translation>Alan: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1074"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1075"/>
         <source>Template: %1</source>
         <translation>Şablon: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1075"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1076"/>
         <source>Global: %1</source>
         <translation>Genel: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1076"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1077"/>
         <source>Default: %1</source>
         <translation>Varsayılan: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1302"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1303"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Bu korumalı alan silindi, bu nedenle yapılandırma kaydedilemiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1367"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1368"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Bazı değişiklikler henüz kaydedilmedi, bu seçenekler penceresini gerçekten kapatmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1844"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1845"/>
         <source>Autocomplete Consent Required</source>
         <translation>Otomatik Tamamlama Onayı Gerekli</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1846"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1847"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>Otomatik tamamlama özelliğinin kullanılabilmesi için onay vermeniz gerekmektedir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1848"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1849"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -2461,32 +2461,32 @@ Otomatik tamamlama modunu seçin:
 %1 Yazarken: Otomatik tamamlama önerileri yazarken görüntülenir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1856"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1857"/>
         <source>Manual</source>
         <translation>Elle</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1857"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1858"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>Otomatik tamamlama önerileri %1 ile görüntülenir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1859"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1860"/>
         <source>While Typing</source>
         <translation>Yazarken</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1860"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1861"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>Ootomatik tamamlama önerileri yazarken görüntülenir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1864"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>Otomatik tamamlama önerilerinin görüntülenmesini devre dışı bırakır.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1862"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
         <source>Cancel</source>
         <translation>İptal</translation>
     </message>
@@ -6296,28 +6296,28 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
 <context>
     <name>CSettingsWindow</name>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2669"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2670"/>
         <source>Please enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2497"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2709"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2498"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2710"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2700"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2701"/>
         <source>Please enter a program file name</source>
         <translation>Lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2690"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2691"/>
         <source>Folder</source>
         <translation>Klasör</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2690"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2691"/>
         <source>Process</source>
         <translation>İşlem</translation>
     </message>
@@ -6337,99 +6337,99 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <translation>Ayarlarda ara</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1795"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1796"/>
         <source>kilobytes (%1)</source>
         <translation>kilobayt (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1883"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1884"/>
         <source>Volume not attached</source>
         <translation>Birim eklenmedi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3353"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3354"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1/%2 deneme sertifikası kullandınız. Daha fazla ücretsiz sertifika oluşturulamaz.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3356"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Ücretsiz deneme sertifikası alın&lt;/a&gt; ve tüm premium özelliklerin %1 gün boyunca keyfini çıkarın.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3286"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3287"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikası &lt;font color=&apos;red&apos;&gt;%1 gün içinde sona erecek&lt;/font&gt;, lütfen &lt;a href=&quot;%2&quot;&gt;güncel bir sertifika edinin&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3711"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3712"/>
         <source>Autocomplete Consent Required</source>
         <translation>Otomatik Tamamlama Onayı Gerekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3183"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3184"/>
         <source>Click to reveal</source>
         <translation>Görüntülemek için tıklayın</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3184"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3185"/>
         <source>Click to hide</source>
         <translation>Gizlemek için tıklayın</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3276"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3277"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus özellikleri %1 gün içinde devre dışı bırakılacak.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3278"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3279"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Mevcut sürümde Plus özellikleri etkin kalmaya devam ediyor&lt;/font&gt;, ancak uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine artık erişiminiz yok.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3280"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3281"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus özellikleri artık etkin değil.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3321"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3322"/>
         <source>Expires in: %1 days</source>
         <translation>Kalan kullanım süresi: %1 gün</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3323"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3324"/>
         <source>Expired: %1 days ago</source>
         <translation>Süresi doldu: %1 gün önce</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3325"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3326"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>; Patreon aboneliği sürenler her zaman xanasoft.com üzerinden &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;güncel bir sertifika alabilirler&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3337"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3338"/>
         <source>Options: %1</source>
         <translation>Seçenekler: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>Gelişmiş Güvenlik/Gizlilik &amp; Uygulama Bölmeleri (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
         <location filename="Windows/SettingsWindow.cpp" line="3341"/>
         <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <location filename="Windows/SettingsWindow.cpp" line="3343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
         <source>Enabled</source>
         <translation>Etkin</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="375"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
         <location filename="Windows/SettingsWindow.cpp" line="3341"/>
         <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <location filename="Windows/SettingsWindow.cpp" line="3343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
         <source>Disabled</source>
         <translation>Devre dışı</translation>
     </message>
@@ -6505,139 +6505,139 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <translation>Üç durumlu davranış: işaretlenmemiş = asla, kısmen işaretlenmiş = yalnızca %1 basılı tutulduğu sürece (varsayılan), işaretlenmiş = her zaman.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>Şifreli Korumalı Alanlar (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>Network Interception (NetI): %1</source>
         <translation>Ağ Yakalama (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Sandboxie Masaüstü (Masa): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>Bu numara Sandboxie-Plus Seri Numarasına benzemiyor.&lt;br /&gt;Bir sertifikanın yalnızca UPDATEKEY veya SIGNATURE değerini girmeyi denediyseniz, bu doğru değildir Lütfen bunun yerine yukarıdaki metin alanına sertifikanın tamamını giriniz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3381"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3382"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <translation>Özellik yükseltme anahtarını mevcut bir destekçi sertifikası girmeden önce kullanmaya çalışıyorsunuz. Lütfen bu tür anahtarların (&lt;b&gt;web sitesinde kalın harflerle açıkça belirtildiği gibi&lt;/b&gt;) mevcut geçerli bir destekçi sertifikasına sahip olmanızı gerektirdiğini, sertifika olmadan hiçbir işe yaramadığını unutmayın.&lt;br /&gt;Gelişmiş özellikleri kullanmak için, hem standart bir sertifika hem de gelişmiş özelliklerin kilidini açacak bir özellik yükseltme anahtarı edinmeniz gerekir.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3388"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <translation>Yenileme anahtarını mevcut bir destekçi sertifikası girmeden önce kullanmaya çalışıyorsunuz. Lütfen bu tür anahtarların (&lt;b&gt;web sitesinde kalın harflerle açıkça belirtildiği gibi&lt;/b&gt;) mevcut geçerli bir destekçi sertifikasına sahip olmanızı gerektirdiğini, sertifika olmadan hiçbir işe yaramadığını unutmayın.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3392"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3393"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Ürün açıklamasını okumadan yanlışlıkla bu anahtarı aldıysanız, sorunu çözmek için lütfen e-posta (web sitemizde belirtilen) yoluyla bizimle iletişime geçin.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3423"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3424"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - DENEME Sertifikası Al</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3423"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3424"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>Lütfen %2 için verilecek ve geçerli donanıma kilitlenecek ücretsiz %1 günlük deneme sertifikası almak için e-posta adresinizi girin.
 Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3449"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3450"/>
         <source>Error retrieving certificate: %1</source>
         <translation>Sertifika alınırken hata oluştu: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3449"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3450"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>Bilinmeyen Hata (muhtemelen bir ağ sorunu)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3504"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3505"/>
         <source>Contributor</source>
         <translation>Katılımcı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3506"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3507"/>
         <source>Eternal</source>
         <translation>Sürekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3508"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3509"/>
         <source>Developer</source>
         <translation>Geliştirici</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3510"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3511"/>
         <source>Business</source>
         <translation>İş</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3512"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3513"/>
         <source>Personal</source>
         <translation>Kişisel</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3514"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3515"/>
         <source>Great Patreon</source>
         <translation>Büyük Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3516"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3517"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3518"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3519"/>
         <source>Family</source>
         <translation>Aile</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3522"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3523"/>
         <source>Evaluation</source>
         <translation>Deneme</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3524"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3525"/>
         <source>Type %1</source>
         <translation>Tür %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3554"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3555"/>
         <source>Advanced</source>
         <translation>Gelişmiş</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3556"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3557"/>
         <source>Advanced (L)</source>
         <translation>Gelişmiş (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3558"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3559"/>
         <source>Max Level</source>
         <translation>En Üst Düzey</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3560"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3561"/>
         <source>Level %1</source>
         <translation>Düzey %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3713"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3714"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>Otomatik tamamlama özelliğinin kullanılabilmesi için onay vermeniz gerekmektedir.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3715"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3716"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -6652,113 +6652,113 @@ Otomatik tamamlama modunu seçin:
 %1 Yazarken: Otomatik tamamlama önerileri yazarken görüntülenir.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3723"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3724"/>
         <source>Manual</source>
         <translation>Elle</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3724"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3725"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>Otomatik tamamlama önerileri %1 ile görüntülenir.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3726"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3727"/>
         <source>While Typing</source>
         <translation>Yazarken</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3727"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3728"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>Ootomatik tamamlama önerileri yazarken görüntülenir.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3730"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3731"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>Otomatik tamamlama önerilerinin görüntülenmesini devre dışı bırakır.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3729"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3730"/>
         <source>Cancel</source>
         <translation>İptal</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1911"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1912"/>
         <source>Supporter certificate required for access</source>
         <translation>Erişim için destekçi sertifikası gerekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1928"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1929"/>
         <source>Supporter certificate required for automation</source>
         <translation>Otomasyon için destekçi sertifikası gerekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3600"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Bu sertifika ne yazık ki mevcut derleme için geçerli değil, yeni bir sertifika almanız veya önceki bir derlemeye geçmeniz gerekiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3601"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3602"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Bu sertifikanın süresi dolmuş olsa da, şu anda yüklü olan sürüm için Plus özellikleri etkin durumda kalır. Ancak, bundan sonraki sürümlerde uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine erişiminiz olmayacak.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3603"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3604"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Bu sertifikanın süresi ne yazık ki dolmuş, yeni bir sertifika almanız gerekiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3607"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3608"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>Deneme sertifikası başarıyla uygulandı. Ücretsiz denemenizin tadını çıkarın!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3651"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3652"/>
         <source>Auto update in future</source>
         <translation>Gelecekte otomatik güncelle</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2529"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2530"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Şimdi Denetle&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2600"/>
         <source>Select Portable Box ini</source>
         <translation>Taşınabilir Alan INI dosyası seç</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2599"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2609"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2600"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
         <source>Ini Files (*.ini)</source>
         <translation>INI Dosyaları (*.ini)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2609"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
         <source>Save new Portable Box ini</source>
         <translation>Yeni Taşınabilir Alan INI dosyası kaydet</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2614"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2615"/>
         <source>File already exists, please select a different file name.</source>
         <translation>Dosya zaten mevcut, lütfen farklı bir dosya adı seçin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2620"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2621"/>
         <source>Invalid box name</source>
         <translation>Geçersiz alan adı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2641"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2642"/>
         <source>Select Root Folder</source>
         <translation>Kök Klasörü Seçin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2673"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2674"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını tekrar girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2678"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2679"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Parolalar eşleşmedi, lütfen tekrar deneyin.</translation>
     </message>
@@ -6768,7 +6768,7 @@ Otomatik tamamlama modunu seçin:
         <translation>Otomatik Algıla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3610"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3611"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus&apos;ın gelişimini desteklediğiniz için teşekkür ederiz.</translation>
     </message>
@@ -6906,18 +6906,18 @@ Otomatik tamamlama modunu seçin:
         <translation>%1 Şablonu Ekle</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3186"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3195"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3187"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3196"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3191"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3192"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(kopyala)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3204"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3205"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation>Sandboxie-Plus Sürüm: %1</translation>
     </message>
@@ -6939,35 +6939,35 @@ Otomatik tamamlama modunu seçin:
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1215"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1216"/>
         <source>Please enter message</source>
         <translation>Lütfen mesaj giriniz</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1247"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1248"/>
         <source>Select Program</source>
         <translation>Program Seç</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1247"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1248"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Yürütülebilir dosyalar (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1251"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1267"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1252"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1268"/>
         <source>Please enter a menu title</source>
         <translation>Lütfen bir menü başlığı girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1263"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1264"/>
         <source>Please enter a command</source>
         <translation>Lütfen bir komut girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1334"/>
         <location filename="Windows/SettingsWindow.cpp" line="1335"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1345"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1346"/>
         <source>Run &amp;Sandboxed</source>
         <translation>&amp;Korumalı Alanda Çalıştır</translation>
     </message>
@@ -6990,107 +6990,107 @@ Otomatik tamamlama modunu seçin:
         <translation>İndir &amp; Yükle</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3357"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>Donanım Kimliği başına %2 kereye kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3273"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3274"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikasının süresi doldu, lütfen &lt;a href=&quot;%1&quot;&gt;güncel bir sertifika edinin&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3407"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3435"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3664"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3408"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3436"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3665"/>
         <source>Retrieving certificate...</source>
         <translation>Sertifika alınıyor...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3520"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3521"/>
         <source>Home</source>
         <translation>Ev</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2046"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2047"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>&amp;Korumalı Alanın Dışında Çalıştır</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2054"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2055"/>
         <source>Set Force in Sandbox</source>
         <translation>Korumalı Alanda Zorlamaya Ayarla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2063"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2064"/>
         <source>Set Open Path in Sandbox</source>
         <translation>Korumalı Alanda Açık Erişime Ayarla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3612"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3613"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
 Bu, 3 ay geçerli geçici bir Patreon sertifikasıdır. Son kullanma tarihine yaklaştığında, tüm süre boyunca geçerli olacak yeni bir sertifikayı çevrimiçi olarak alabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3650"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3651"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>Sandboxie-Plus Destekçi Sertifikanız için zorunlu bir güvenlik güncelleştirmesi gerekiyor. Güncel sertifikayı şimdi indirmek ister misiniz?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2445"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2446"/>
         <source>Update Available</source>
         <translation>Güncelleme Mevcut</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2447"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2448"/>
         <source>Installed</source>
         <translation>Kurulu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2452"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2453"/>
         <source>by %1</source>
         <translation>%1 tarafından</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2461"/>
         <source>(info website)</source>
         <translation>(bilgi sitesi)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2488"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2489"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Bu Eklenti zorunludur ve kaldırılamaz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2768"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2769"/>
         <source>Please enter the template identifier</source>
         <translation>Lütfen şablon tanımlayıcısını girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2776"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2777"/>
         <source>Error: %1</source>
         <translation>Hata: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2808"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2809"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Seçili yerel şablonları gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3110"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3111"/>
         <source>%1 (Current)</source>
         <translation>%1 (Kullanılan)</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1366"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1367"/>
         <source>Sandboxed Web Browser</source>
         <translation>Korumalı Web Tarayıcısı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3582"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3583"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Bu bir sertifikaya benzemiyor. Lütfen sertifikanın sadece bir kısmını değil tamamını girin.</translation>
     </message>

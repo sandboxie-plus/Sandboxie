@@ -451,17 +451,17 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="BoxTransfer.cpp" line="126"/>
         <source>Create sandboxes in:</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle Sandboxen in:</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Where the imported sandboxes are created. Keep %SANDBOX% in the path so that each box gets its own folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier werden die importierten Sandboxen erstellt. Behalten Sie %SANDBOX% im Pfad bei, damit jede Sandbox einen eigenen Ordner erhält.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="144"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchsuchen...</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="152"/>
@@ -476,17 +476,17 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="BoxTransfer.cpp" line="199"/>
         <source>Select the folder to create the sandboxes in</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie den Ordner aus, in dem die Sandboxen erstellt werden sollen</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="218"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished">Eine Sandbox kann sich nicht auf einer Netzwerkfreigabe befinden, bitte wählen Sie einen lokalen Ordner aus.</translation>
+        <translation>Eine Sandbox kann sich nicht auf einer Netzwerkfreigabe befinden, bitte wählen Sie einen lokalen Ordner aus.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="226"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished">Eine Sandbox kann sich nicht im Stammverzeichnis einer Partition befinden, bitte wählen Sie einen Ordner aus.</translation>
+        <translation>Eine Sandbox kann sich nicht im Stammverzeichnis einer Partition befinden, bitte wählen Sie einen Ordner aus.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="252"/>
@@ -4327,7 +4327,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="53"/>
         <source>No enabled sandbox is available. Please create or enable a sandbox and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es ist keine aktivierte Sandbox verfügbar. Bitte erstellen oder aktivieren Sie eine Sandbox und versuchen Sie es erneut.</translation>
     </message>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="63"/>
@@ -4337,11 +4337,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="106"/>
         <source>More than one sandbox has this alias. Select a sandbox from the list or type its actual name. Nothing was changed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type the box name which you are going to set:</source>
-        <translation type="vanished">Geben Sie den Boxnamen ein, welchen Sie ändern möchten:</translation>
+        <translation>Mehr als eine Sandbox hat diesen Alias. Wählen Sie eine Sandbox aus der Liste aus oder geben Sie deren eigentlichen Namen ein. Es wurden keine Änderungen vorgenommen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2026"/>
@@ -11940,17 +11936,17 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="9"/>
         <source>Select a sandbox or type its name or alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie eine Sandbox aus oder geben Sie deren Namen oder Alias ein:</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="26"/>
         <source>Applies to both Set Open and Set Force. The dialog is always shown when more than one sandbox is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies gilt sowohl für &apos;Setze Öffne Pfad in Sandbox&apos; als auch für &apos;Setze Erzwinge in Sandbox&apos;. Der Dialog wird immer angezeigt, wenn mehr als eine Sandbox aktiviert ist.</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="29"/>
         <source>Skip this dialog when only one sandbox is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Überspringe diesen Dialog, wenn nur eine Sandbox aktiviert ist</translation>
     </message>
 </context>
 <context>

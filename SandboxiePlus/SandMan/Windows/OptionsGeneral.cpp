@@ -12,6 +12,7 @@
 #include "AddonManager.h"
 #include "../Views/SbieView.h"
 #include "../../../SandboxieTools/ImBox/ImBox.h"
+#include <QLineEdit>
 
 class CCertBadge: public QLabel
 {
@@ -186,6 +187,11 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkPinToTray, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.cmbDblClick, SIGNAL(currentIndexChanged(int)), this, SLOT(OnActionChanged()));
+	connect(ui.cmbDblClick, &QComboBox::currentTextChanged, this, [this](const QString& text) {
+		ui.cmbDblClick->setToolTip(text);
+		ui.cmbDblClick->lineEdit()->setToolTip(text);
+	});
+	connect(ui.cmbCtrlDblClick, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.chkSecurityMode, SIGNAL(clicked(bool)), this, SLOT(OnSecurityMode()));
 	connect(ui.chkLockDown, SIGNAL(clicked(bool)), this, SLOT(OnSecurityMode()));
@@ -378,6 +384,18 @@ void COptionsWindow::LoadGeneral()
 	ui.cmbDblClick->addItem(tr("Start File Recovery"), "!recovery");
 	ui.cmbDblClick->addItem(tr("Show Run Dialog"), "!run");
 	ui.cmbDblClick->insertSeparator(4);
+	ui.cmbCtrlDblClick->clear();
+	ui.cmbCtrlDblClick->addItem(tr("Open Box Options"), "!options");
+	ui.cmbCtrlDblClick->addItem(tr("Browse Content"), "!browse");
+	ui.cmbCtrlDblClick->addItem(tr("Start File Recovery"), "!recovery");
+	ui.cmbCtrlDblClick->addItem(tr("Show Run Dialog"), "!run");
+	QString CtrlAction = m_pBox->GetText("CtrlDblClickAction");
+	int ctrlPos = ui.cmbCtrlDblClick->findData(CtrlAction);
+	if (ctrlPos < 0 && !CtrlAction.isEmpty()) {
+		ui.cmbCtrlDblClick->addItem(CtrlAction, CtrlAction);
+		ctrlPos = ui.cmbCtrlDblClick->count() - 1;
+	}
+	ui.cmbCtrlDblClick->setCurrentIndex(ctrlPos < 0 ? 0 : ctrlPos);
 
 	ui.treeRun->clear();
 	foreach(const QString& Value, m_pBox->GetTextList("RunCommand", m_Template))
@@ -527,6 +545,9 @@ void COptionsWindow::SaveGeneral()
 	if (Action.isEmpty()) Action = ui.cmbDblClick->currentText();
 	if (Action == "!options") m_pBox->DelValue("DblClickAction");
 	else m_pBox->SetText("DblClickAction", Action);
+	QString CtrlAction = ui.cmbCtrlDblClick->currentData().toString();
+	if (CtrlAction == "!options") m_pBox->DelValue("CtrlDblClickAction");
+	else m_pBox->SetText("CtrlDblClickAction", CtrlAction);
 
 	WriteAdvancedCheck(ui.chkSecurityMode, "UseSecurityMode", "y", "");
 	WriteAdvancedCheck(ui.chkLockDown, "SysCallLockDown", "y", "");

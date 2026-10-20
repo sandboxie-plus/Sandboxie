@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [Unreleased]
+
+### Added
+- added a per-box Ctrl + double-click action setting in SandMan; existing boxes keep the Box Options shortcut by default [#5196](https://github.com/sandboxie-plus/Sandboxie/issues/5196)
+
+
 
 
 ## [1.18.8 / 5.73.8] - 2026-10-17

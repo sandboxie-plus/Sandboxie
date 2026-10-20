@@ -2134,11 +2134,17 @@ void CSbieView::OnDoubleClicked(const CSandBoxPtr &pBox)
 	if (pBox.isNull())
 		return;
 
-	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0) {
-		ShowOptions(pBox);
-		return;
+	Qt::KeyboardModifiers Modifiers = QGuiApplication::queryKeyboardModifiers();
+	QString Action;
+	if (Modifiers & Qt::ControlModifier) {
+		Action = pBox->GetText("CtrlDblClickAction");
+		if (Action.isEmpty())
+			Action = "!options";
+		if (Action.compare("!options", Qt::CaseInsensitive) == 0) {
+			ShowOptions(pBox);
+			return;
+		}
 	}
-
 
 	if (!pBox->IsEnabled())
 	{
@@ -2146,7 +2152,8 @@ void CSbieView::OnDoubleClicked(const CSandBoxPtr &pBox)
 			pBox->SetText("Enabled", "y");// Fix #3999
 	}
 	
-	QString Action = pBox->GetText("DblClickAction");
+	if (Action.isEmpty())
+		Action = pBox->GetText("DblClickAction");
 	if (Action.compare("!browse", Qt::CaseInsensitive) == 0)
 		ShowBrowse(pBox);
 	else if (Action.compare("!recovery", Qt::CaseInsensitive) == 0)

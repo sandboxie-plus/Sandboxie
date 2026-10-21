@@ -89,6 +89,32 @@ env:
 
 jobs:
 
+  Test_INI:
+    name: INI tests (${{ matrix.arch }})
+    runs-on: windows-2022
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x64, Win32]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Configure INI tests
+        run: cmake -S SandboxieTools/Tests/IniFile -B build/ini-file-${{ matrix.arch }} -A ${{ matrix.arch }}
+
+      - name: Build INI tests
+        run: cmake --build build/ini-file-${{ matrix.arch }} --config Release --parallel 2
+
+      - name: Run INI tests
+        run: cmake -E chdir build/ini-file-${{ matrix.arch }} ctest -C Release --output-on-failure
+
   Build_x64_Qt6:
     runs-on: windows-2022
     timeout-minutes: 45

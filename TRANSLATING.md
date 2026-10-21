@@ -5,6 +5,17 @@ Sandboxie caters to a diverse user base, from individual users to large corporat
 To achieve this goal, Sandboxie has established a translation program that enables users to volunteer their language skills to translate the software's user interface and documentation. 
 
 
+## Translation collaboration and attribution
+
+These guidelines apply to translations of the user interface, troubleshooting instructions, installer, Classic messages, and documentation.
+
+- **Preserve existing attribution.** Do not remove, replace, rename, or reassign existing contributor names, credits, or contact details without explicit project-maintainer approval. This includes About text, translation headers, and README credits. Propose acknowledgment of your own contributions separately, without overwriting previous contributors' attribution.
+- **Agree on substantial changes first.** Before changing established technical terminology, security-related meaning, or broadly rewriting an existing translation for style, discuss the proposal with the language maintainer and project maintainers. Agree on the terminology and scope before applying replacements throughout the translation.
+- **Explain the changes.** Include representative before/after examples and the technical reason for substantial changes in an issue, discussion, or pull request. Keep the meaning of the source text intact rather than substituting a preferred interpretation.
+- **Keep routine contributions straightforward.** Typo fixes, missing translations, and clear corrections do not require advance discussion. If a correction also changes established technical terminology or security-related meaning, follow the discussion requirement above.
+
+If the language maintainer is unavailable or agreement cannot be reached, ask the project maintainers to decide. Previous contributions do not give any translator exclusive ownership or a permanent veto over improvements.
+
 ## Available translations
 
 | Language | Classic | Plus | Troubleshooting | Installer |

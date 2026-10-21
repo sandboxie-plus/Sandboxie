@@ -190,7 +190,7 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 - SuperMaxusa、lufog、Nazar1ky - 乌克兰语
 - GunGunGun - 越南语
 
-所有译者在提交翻译前，建议先查看[本地化说明和提示](https://github.com/sandboxie-plus/Sandboxie/discussions/1123)。
+提交翻译前，请阅读[翻译协作与署名规范](./TRANSLATING.md#translation-collaboration-and-attribution)及[本地化说明和提示](https://github.com/sandboxie-plus/Sandboxie/discussions/1123)。
 
 ## 📚 文档翻译人员
 

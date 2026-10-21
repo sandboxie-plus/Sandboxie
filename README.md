@@ -190,7 +190,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - SuperMaxusa, lufog, Nazar1ky - Ukrainian
 - GunGunGun - Vietnamese
 
-All translators are encouraged to look at the [Localization notes and tips](https://github.com/sandboxie-plus/Sandboxie/discussions/1123) before sending a translation.
+Before submitting a translation, read the [translation collaboration and attribution guidelines](./TRANSLATING.md#translation-collaboration-and-attribution) and the [Localization notes and tips](https://github.com/sandboxie-plus/Sandboxie/discussions/1123).
 
 ## 📚 Documentation Translators
 

@@ -36,6 +36,8 @@ Examples of **non-trivial contributions** that qualify for a **contributor certi
 4. Providing new code that fix a specific Sandboxie issue or introducing a new functionality.
 5. Become a [collaborator](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-personal-account-settings/permission-levels-for-a-personal-account-repository#collaborator-access-for-a-repository-owned-by-a-personal-account) in the [Sandboxie-docs](https://github.com/sandboxie-plus/sandboxie-docs) / [Sandboxie](https://github.com/sandboxie-plus/Sandboxie) repositories, by offering your availability (proving your continued support with open issues and/or sufficient skills to manage pull requests).
 
+For translation contributions, read the [translation collaboration and attribution guidelines](./TRANSLATING.md#translation-collaboration-and-attribution) before submitting changes.
+
 If you are willing to become a new contributor or collaborator, please get in touch by [email](https://xanasoft.com/contact/) for further details.
 
 ## How to help with Sandboxie issues?

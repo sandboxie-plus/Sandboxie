@@ -451,87 +451,87 @@ aumenta a 512 bits con la aplicación de modificaciones en el lenguaje Leet (L33
     <message>
         <location filename="BoxTransfer.cpp" line="78"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar Sandboxes</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar Sandboxes</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="87"/>
         <source>Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del Sandbox</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="87"/>
         <source>Status</source>
-        <translation type="unfinished">Estado</translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="90"/>
         <source>Archive Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre original del Sandbox</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="90"/>
         <source>Import As</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar como</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="90"/>
         <source>Conflict</source>
-        <translation type="unfinished"></translation>
+        <translation>Conflicto</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="90"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Origen</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="100"/>
         <source>Export Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar configuración global</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="100"/>
         <source>Import Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar configuración global</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="113"/>
         <source>Export each box to its own file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar cada Sandbox a un archivo independiente</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="152"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar todo</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="156"/>
         <source>Select None</source>
-        <translation type="unfinished"></translation>
+        <translation>Deseleccionar todo</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="252"/>
         <source>Running</source>
-        <translation type="unfinished">Ejecutando</translation>
+        <translation>En ejecución</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="254"/>
         <source>Encrypted</source>
-        <translation type="unfinished"></translation>
+        <translation>Cifrado</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="256"/>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Vacío</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="364"/>
         <source>Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Ya existe!</translation>
     </message>
     <message>
         <source>Select file name</source>
@@ -540,161 +540,161 @@ aumenta a 512 bits con la aplicación de modificaciones en el lenguaje Leet (L33
     <message>
         <location filename="BoxTransfer.cpp" line="800"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished">Archivo 7-Zip (*.7z);;Archivo Zip (*.zip)</translation>
+        <translation>Archivo 7-Zip (*.7z);;Archivo ZIP (*.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="783"/>
         <location filename="BoxTransfer.cpp" line="793"/>
         <location filename="BoxTransfer.cpp" line="806"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished">Exportando: %1</translation>
+        <translation>Exportando: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="105"/>
         <source>Show sandbox aliases (reads archive configuration)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar los alias de los Sandboxes (lee la configuración de los archivos comprimidos)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="106"/>
         <source>Disabled by default because reading aliases requires opening and extracting configuration from every selected archive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivado de forma predeterminada porque, para leer los alias, hay que abrir cada archivo comprimido seleccionado y extraer su configuración.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="126"/>
         <source>Create sandboxes in:</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear los Sandboxes en:</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Where the imported sandboxes are created. Keep %SANDBOX% in the path so that each box gets its own folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubicación en la que se crearán los Sandboxes importados. Mantenga %SANDBOX% en la ruta para que cada Sandbox tenga su propia carpeta.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="144"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Examinar...</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="199"/>
         <source>Select the folder to create the sandboxes in</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione la carpeta en la que se crearán los Sandboxes</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="218"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished">Una sandbox no se puede situar en una ubicación en red, por favor elija una carpeta local.</translation>
+        <translation>Un Sandbox no puede estar ubicado en un recurso compartido de red. Seleccione una carpeta local.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="226"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished">Una sandbox no se puede ubicar en la raíz de una partición, por favor elija una carpeta.</translation>
+        <translation>Un Sandbox no puede estar ubicado en la raíz de una partición. Seleccione una carpeta.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="368"/>
         <source>Duplicate!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Duplicado!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="478"/>
         <source>Sandbox name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del Sandbox: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="599"/>
         <location filename="BoxTransfer.cpp" line="1231"/>
         <source>7-Zip library is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>La biblioteca de 7-Zip no está disponible.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="614"/>
         <source>Cannot export: Sandbox has running processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede exportar: hay procesos en ejecución en el Sandbox.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="633"/>
         <source>Nothing selected for export.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha seleccionado nada para exportar.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="638"/>
         <source>No boxes selected for separate file export.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha seleccionado ningún Sandbox para exportar a archivos independientes.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="685"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>El Sandbox «%1» tiene procesos en ejecución. ¿Quiere omitirlo?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="703"/>
         <source>Mount &apos;%1&apos; for Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Montar «%1» para exportarlo</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="706"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>El Sandbox cifrado «%1» no está montado. ¿Quiere omitirlo?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="717"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha podido desmontar «%1» para volver a montarlo.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="727"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha podido montar el Sandbox cifrado «%1».</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="759"/>
         <source>Select Export Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione la carpeta de exportación</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="798"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished">Exportar Sandbox</translation>
+        <translation>Exportar Sandbox</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1160"/>
         <source>Password for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraseña de %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1176"/>
         <source>Failed to open archive (%1): %2</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha podido abrir el archivo comprimido (%1): %2</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1236"/>
         <source>Select Archives</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione los archivos comprimidos</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1237"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo 7-Zip (*.7z);;Archivo ZIP (*.zip);;Todos los archivos comprimidos (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1274"/>
         <source>The selected archives do not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Los archivos comprimidos seleccionados no contienen datos de ningún Sandbox.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1301"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pueden importar varios Sandboxes con el mismo nombre «%1». Cámbieles el nombre primero.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1396"/>
         <location filename="BoxTransfer.cpp" line="1404"/>
         <source>Importing: %1</source>
-        <translation type="unfinished">Importando: %1</translation>
+        <translation>Importando: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1166"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation type="unfinished">Error al abrir archivador, ¿contraseña incorrecta?</translation>
+        <translation>No se ha podido abrir el archivo comprimido. ¿Es incorrecta la contraseña?</translation>
     </message>
     <message>
         <source>Failed to open archive (%1)!</source>
@@ -703,12 +703,12 @@ aumenta a 512 bits con la aplicación de modificaciones en el lenguaje Leet (L33
     <message>
         <location filename="BoxTransfer.cpp" line="1289"/>
         <source>Nothing selected for import.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha seleccionado nada para importar.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1317"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>El Sandbox «%1» ya existe. Se sobrescribirá su configuración. ¿Quiere continuar?</translation>
     </message>
 </context>
 <context>
@@ -731,7 +731,7 @@ aumenta a 512 bits con la aplicación de modificaciones en el lenguaje Leet (L33
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="359"/>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="377"/>
@@ -1280,157 +1280,157 @@ Puede hacer clic en Finalizar para cerrar este asistente.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="28"/>
         <source>Validate INI Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Validar claves INI</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>No validation</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin validación</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>Full validation (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Validación completa (predeterminada)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="31"/>
         <source>Enable INI Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar las descripciones emergentes de INI</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>No tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin descripciones emergentes</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Basic info (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Información básica (predeterminada)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Full details</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos los detalles</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="34"/>
         <source>Enable Popup Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar las descripciones emergentes de la lista de autocompletado</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="37"/>
         <source>Auto Completion Consent</source>
-        <translation type="unfinished"></translation>
+        <translation>Consentimiento para el autocompletado</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Not consented (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin consentimiento (predeterminado)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Consented</source>
-        <translation type="unfinished"></translation>
+        <translation>Consentimiento otorgado</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="40"/>
         <source>Enable Auto Completion</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar el autocompletado</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Disabled (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivado (predeterminado)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Mientras se escribe</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="43"/>
         <source>Enable Fuzzy Matching</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar la búsqueda aproximada</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Enabled</source>
-        <translation type="unfinished">Habilitado</translation>
+        <translation>Activado</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="46"/>
         <source>Show Future Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar ajustes de versiones futuras</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Hidden</source>
-        <translation type="unfinished">Oculto</translation>
+        <translation>Oculto</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Shown (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Visible (predeterminado)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="58"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes del editor</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="78"/>
         <source>Reset All to Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Restablecer todo a los valores predeterminados</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="79"/>
         <source>Reset all settings to their default values and remove custom config entries.</source>
-        <translation type="unfinished"></translation>
+        <translation>Restablecer todos los ajustes a sus valores predeterminados y eliminar las entradas de configuración personalizadas.</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuste</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Unchecked</source>
-        <translation type="unfinished"></translation>
+        <translation>Desmarcado</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>Parcialmente marcado</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <source>Checked</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcado</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="176"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="209"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Restablecer</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="210"/>
         <source>Reset this setting to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>Restablecer este ajuste a su valor predeterminado</translation>
     </message>
 </context>
 <context>
@@ -1514,14 +1514,16 @@ Puede hacer clic en Finalizar para cerrar este asistente.</translation>
     <message>
         <location filename="Views/FileView.cpp" line="1139"/>
         <source>Delete Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al eliminar</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="1140"/>
         <source>The selected files could not be deleted.
 
 Error: 0x%1</source>
-        <translation type="unfinished"></translation>
+        <translation>No se han podido eliminar los archivos seleccionados.
+
+Error: 0x%1</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="1169"/>
@@ -1620,17 +1622,17 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="52"/>
         <source>Clear search</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar búsqueda</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="127"/>
         <source>Expand all</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandir todo</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="133"/>
         <source>Collapse all</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraer todo</translation>
     </message>
 </context>
 <context>
@@ -1777,7 +1779,7 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2844"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Atención</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -2113,7 +2115,7 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="Views/NtObjectView.cpp" line="213"/>
         <source>%1 - NT Object Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Espacio de nombres de objetos NT</translation>
     </message>
 </context>
 <context>
@@ -2121,17 +2123,17 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="Models/NtObjectModel.cpp" line="726"/>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="727"/>
         <source>Type</source>
-        <translation type="unfinished">Tipo</translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="728"/>
         <source>Access</source>
-        <translation type="unfinished">Acceso</translation>
+        <translation>Acceso</translation>
     </message>
 </context>
 <context>
@@ -2436,7 +2438,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="837"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1011"/>
@@ -2609,49 +2611,49 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Don&apos;t show in border</source>
-        <translation type="unfinished"></translation>
+        <translation>No mostrar en el borde</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="60"/>
         <source>Show within the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar dentro del borde</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="61"/>
         <source>Show above the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar encima del borde</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <location filename="Windows/OptionsGeneral.cpp" line="69"/>
         <source>Always show (focused window only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar siempre (solo la ventana con el foco)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
         <location filename="Windows/OptionsGeneral.cpp" line="70"/>
         <source>Show for all windows in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar en todas las ventanas de este Sandbox</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="67"/>
         <source> (outside)</source>
-        <translation type="unfinished"></translation>
+        <translation> (fuera del borde)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Active snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Instantánea activa</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Default snapshot</source>
-        <translation type="unfinished">Instantánea por defecto</translation>
+        <translation>Instantánea predeterminada</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Selects the snapshot restored by SandMan after automatic deletion. The active state may be the empty sandbox rather than a saved snapshot.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona la instantánea que SandMan restaurará tras el borrado automático. El estado activo puede ser un Sandbox vacío en lugar de una instantánea guardada.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="89"/>
@@ -2740,7 +2742,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <location filename="Windows/OptionsGeneral.cpp" line="708"/>
         <location filename="Windows/OptionsGeneral.cpp" line="815"/>
         <source>Copy newer</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar si es más reciente</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1337"/>
@@ -2858,7 +2860,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1847"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>La función de autocompletado requiere su consentimiento para continuar.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1849"/>
@@ -2867,37 +2869,41 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si no tiene claro qué significan los ajustes que aparecen en la ventana de autocompletado, le recomendamos encarecidamente consultar la documentación o el código fuente del programa antes de continuar. Activar esta función sin comprenderla bien puede tener consecuencias imprevistas de las que asumirá toda la responsabilidad.
+
+Elija el modo de autocompletado:
+%1 Manual: muestra sugerencias al pulsar %2.
+%1 Mientras se escribe: muestra sugerencias mientras escribe.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1857"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1858"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Muestra sugerencias de autocompletado al pulsar %1.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1860"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Mientras se escribe</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1861"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Muestra sugerencias de autocompletado mientras escribe.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1864"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantiene desactivadas las sugerencias de autocompletado.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1863"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
@@ -3827,7 +3833,7 @@ Ruta completa: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="932"/>
         <source>%1 file(s) hidden by AutoRecoverIgnore</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivos ocultos por AutoRecoverIgnore: %1</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="1283"/>
@@ -3853,17 +3859,17 @@ Ruta completa: %4</translation>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="17"/>
         <source>Sandboxie-Plus - Rename Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Renombrar Sandbox</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="23"/>
         <source>When enabled, alias display is disabled for this sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuando se activa, se deja de mostrar el alias de este Sandbox.</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="24"/>
         <source>Hide alias input in this dialog. This preference is remembered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar el campo de alias en este cuadro de diálogo. Se recordará esta preferencia.</translation>
     </message>
 </context>
 <context>
@@ -4173,12 +4179,12 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SandMan.cpp" line="1081"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar Sandboxes</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1083"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar Sandboxes</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1426"/>
@@ -4188,7 +4194,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="53"/>
         <source>No enabled sandbox is available. Please create or enable a sandbox and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay ningún Sandbox activado disponible. Cree o active un Sandbox y vuelva a intentarlo.</translation>
     </message>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="89"/>
@@ -4198,7 +4204,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="106"/>
         <source>More than one sandbox has this alias. Select a sandbox from the list or type its actual name. Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hay más de un Sandbox con este alias. Seleccione un Sandbox de la lista o escriba su nombre real. No se ha cambiado nada.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2240"/>
@@ -4576,7 +4582,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SandMan.cpp" line="522"/>
         <source> (Administrator)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Administrador)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="787"/>
@@ -4591,12 +4597,12 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SandMan.cpp" line="845"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar Sandboxes</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="847"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar Sandboxes</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="851"/>
@@ -4624,7 +4630,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SandMan.cpp" line="926"/>
         <source>Auto Expand Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandir el árbol automáticamente</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="970"/>
@@ -4759,7 +4765,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SandMan.cpp" line="1515"/>
         <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxes: %1 (%2 activos)  |  Procesos: %3  |  Memoria: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1933"/>
@@ -5106,7 +5112,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandManTray.cpp" line="214"/>
         <source>Find sandbox...</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar Sandbox...</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="228"/>
@@ -5126,57 +5132,58 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandManTray.cpp" line="314"/>
         <source>No pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay Sandboxes fijados que mostrar.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="316"/>
         <source>No active or pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay Sandboxes activos ni fijados que mostrar.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="317"/>
         <source>No sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay Sandboxes que mostrar.</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="270"/>
         <source>    Alias: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Alias: %1
+</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="271"/>
         <source>    File root: %1
 </source>
-        <translation type="unfinished">    Raíz del archivo: %1
+        <translation>    Raíz de archivos: %1
 </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="272"/>
         <source>    Registry root: %1
 </source>
-        <translation type="unfinished">    Raíz del registro: %1
+        <translation>    Raíz del registro: %1
 </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="273"/>
         <source>    IPC root: %1
 </source>
-        <translation type="unfinished">    Raíz IPC: %1
+        <translation>    Raíz de IPC: %1
 </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="275"/>
         <source>    Disk root: %1
 </source>
-        <translation type="unfinished">    Raíz de disco: %1
+        <translation>    Raíz de disco: %1
 </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="276"/>
         <source>Options:
     </source>
-        <translation type="unfinished">Opciones:
+        <translation>Opciones:
     </translation>
     </message>
     <message>
@@ -5601,7 +5608,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="SandManRecovery.cpp" line="314"/>
         <source>Sandbox name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del Sandbox: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3900"/>
@@ -5957,17 +5964,17 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Models/SbieModel.cpp" line="840"/>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation>CPU</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="841"/>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Memoria</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="842"/>
         <source>Private Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Bytes privados</translation>
     </message>
     <message>
         <source>Start Time</source>
@@ -6251,7 +6258,7 @@ NO seleccionará: %2</translation>
         <location filename="Views/SbieView.cpp" line="178"/>
         <location filename="Views/SbieView.cpp" line="349"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar Sandboxes</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="192"/>
@@ -6295,7 +6302,7 @@ NO seleccionará: %2</translation>
         <location filename="Views/SbieView.cpp" line="265"/>
         <location filename="Views/SbieView.cpp" line="402"/>
         <source>Browse NT Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>Explorar el espacio de nombres NT</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="267"/>
@@ -6611,25 +6618,29 @@ NO seleccionará: %2</translation>
         <location filename="Views/SbieView.cpp" line="642"/>
         <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    CPU: %1  |  Memoria: %2  |  Bytes privados: %3
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="646"/>
         <source>    Sandbox: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Sandbox: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="648"/>
         <source>    Image: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Imagen: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="651"/>
         <source>    Start Time: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Hora de inicio: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="945"/>
@@ -6729,7 +6740,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="269"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar Sandboxes</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="472"/>
@@ -7111,17 +7122,17 @@ NO seleccionará: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="438"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Recordar el estado anterior</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="439"/>
         <source>Expand all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandir todos los grupos</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="440"/>
         <source>Collapse all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraer todos los grupos</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="442"/>
@@ -7269,12 +7280,12 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3274"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este certificado de patrocinador ha caducado. &lt;a href=&quot;%1&quot;&gt;Obtenga un certificado actualizado&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3326"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
-        <translation type="unfinished"></translation>
+        <translation>; los usuarios de Patreon que cumplan los requisitos siempre pueden &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtener un certificado actualizado&lt;/a&gt; en xanasoft.com</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3354"/>
@@ -7295,35 +7306,36 @@ NO seleccionará: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="3613"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Este es un certificado temporal de Patreon válido durante tres meses. Cuando se acerque su fecha de caducidad, podrá obtener en línea un certificado nuevo válido durante todo el periodo.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3651"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Es necesaria una actualización de seguridad obligatoria para su certificado de patrocinador de Sandboxie-Plus. ¿Quiere descargar ahora el certificado actualizado?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3652"/>
         <source>Auto update in future</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar automáticamente en el futuro</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3287"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
-        <translation type="unfinished">El certificado de patrocinador ha expirado, por favor &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;obten un certificado actualizado&lt;/a&gt;.</translation>
+        <translation>Este certificado de patrocinador &lt;font color=&apos;red&apos;&gt;caducará dentro de %1 días&lt;/font&gt;. &lt;a href=&quot;%2&quot;&gt;Obtenga un certificado actualizado&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3184"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Haga clic para mostrar</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3185"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Haga clic para ocultar</translation>
     </message>
     <message>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
@@ -7337,22 +7349,22 @@ Right-click to copy</oldsource>
         <location filename="Windows/SettingsWindow.cpp" line="3187"/>
         <location filename="Windows/SettingsWindow.cpp" line="3196"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3192"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copiar)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3205"/>
         <source>Sandboxie-Plus Version: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión de Sandboxie-Plus: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3279"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Las funciones Plus seguirán activadas en la versión actual&lt;/font&gt;, pero ya no tendrá acceso a los servicios Sandboxie-Live, incluidas las actualizaciones de compatibilidad y la base de datos de resolución de problemas en línea.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3322"/>
@@ -7395,73 +7407,73 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="324"/>
         <source>Arabic (Morocco) - LTR</source>
-        <translation type="unfinished"></translation>
+        <translation>Árabe (Marruecos) - De izquierda a derecha</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="343"/>
         <location filename="Windows/SettingsWindow.cpp" line="587"/>
         <source>Ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>Shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Mayús</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="350"/>
         <source>Sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del Sandbox</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="351"/>
         <source>Sandbox alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias del Sandbox</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="352"/>
         <source>Sandbox alias and name</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias y nombre del Sandbox</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="355"/>
         <source>Same as main</source>
-        <translation type="unfinished"></translation>
+        <translation>Igual que la ventana principal</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="356"/>
         <source>Keep current monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantener el monitor actual</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="357"/>
         <source>Active monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor activo</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="358"/>
         <source>Primary monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor principal</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="414"/>
         <source>Unknown Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla desconocida</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="416"/>
         <source>Display %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla %1: %2</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="418"/>
         <source> (Primary)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Principal)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="588"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Comportamiento de tres estados: desmarcado = nunca; parcialmente marcado = solo mientras se mantenga pulsada la tecla %1 (predeterminado); marcado = siempre.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3342"/>
@@ -7544,7 +7556,7 @@ Puede solicitar hasta %3 certificados de prueba por ID de hardware único.</tran
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3509"/>
         <source>Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>Desarrollador</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3511"/>
@@ -7609,7 +7621,7 @@ Puede solicitar hasta %3 certificados de prueba por ID de hardware único.</tran
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3714"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>La función de autocompletado requiere su consentimiento para continuar.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3716"/>
@@ -7618,37 +7630,41 @@ Puede solicitar hasta %3 certificados de prueba por ID de hardware único.</tran
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si no tiene claro qué significan los ajustes que aparecen en la ventana de autocompletado, le recomendamos encarecidamente consultar la documentación o el código fuente del programa antes de continuar. Activar esta función sin comprenderla bien puede tener consecuencias imprevistas de las que asumirá toda la responsabilidad.
+
+Elija el modo de autocompletado:
+%1 Manual: muestra sugerencias al pulsar %2.
+%1 Mientras se escribe: muestra sugerencias mientras escribe.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3724"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3725"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Muestra sugerencias de autocompletado al pulsar %1.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3727"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Mientras se escribe</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3728"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Muestra sugerencias de autocompletado mientras escribe.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3731"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantiene desactivadas las sugerencias de autocompletado.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3730"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1912"/>
@@ -7780,33 +7796,33 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2600"/>
         <source>Select Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione el archivo INI del Sandbox portátil</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2600"/>
         <location filename="Windows/SettingsWindow.cpp" line="2610"/>
         <source>Ini Files (*.ini)</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivos INI (*.ini)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2610"/>
         <source>Save new Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar el nuevo archivo INI del Sandbox portátil</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2615"/>
         <source>File already exists, please select a different file name.</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo ya existe. Seleccione otro nombre.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2621"/>
         <source>Invalid box name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de Sandbox no válido</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2642"/>
         <source>Select Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione la carpeta raíz</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2670"/>
@@ -7856,7 +7872,7 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3712"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished">Consentimiento de Autocompletar Requerido</translation>
+        <translation>Se requiere consentimiento para el autocompletado</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3111"/>
@@ -8130,7 +8146,8 @@ Pruebe a enviarlo sin adjuntar el registro.</translation>
         <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
         <source>
 The actual sandbox name is: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+El nombre real del Sandbox es: %1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1112"/>
@@ -8152,8 +8169,8 @@ Los contenidos de esta caja se DESCARTARÁN cuando se cierre, y la caja se elimi
 This box will DISCARD its content when it&apos;s closed, it&apos;s suitable only for temporary data.</source>
         <oldsource>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</oldsource>
-        <translation type="unfinished">
-Esta caja ELIMINARÁ sus contenidos cuando se cierre, al ser apropiada únicamente para datos temporales.</translation>
+        <translation>
+Este Sandbox DESCARTARÁ su contenido al cerrarse; solo es adecuado para datos temporales.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1119"/>
@@ -8727,12 +8744,12 @@ Si ya eres un Gran Patrocinador en Patreon, Sandboxie puede comprobar online por
     <message>
         <location filename="Views/TraceView.cpp" line="344"/>
         <source>Resume Auto Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Reanudar el desplazamiento automático</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="345"/>
         <source>Auto scrolling is paused. Click to resume.</source>
-        <translation type="unfinished"></translation>
+        <translation>El desplazamiento automático está en pausa. Haga clic para reanudarlo.</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="372"/>
@@ -8789,22 +8806,22 @@ Si ya eres un Gran Patrocinador en Patreon, Sandboxie puede comprobar online por
     <message>
         <location filename="Views/TraceView.cpp" line="951"/>
         <source>Trace Logging is still active. What do you want to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>El registro de trazas sigue activo. ¿Qué quiere hacer?</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="954"/>
         <source>Stop and Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Detener y borrar</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="956"/>
         <source>Disable, Keep Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar y conservar los registros</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="958"/>
         <source>Keep Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar registrando</translation>
     </message>
 </context>
 <context>
@@ -8894,12 +8911,12 @@ Si ya eres un Gran Patrocinador en Patreon, Sandboxie puede comprobar online por
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="14"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes del editor</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure Editor Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the checkboxes in the table to configure each setting. The table shows what each state means.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configurar los ajustes del editor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use las casillas de la tabla para configurar cada ajuste. La tabla muestra qué significa cada estado.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -10100,7 +10117,7 @@ Esto se hace para evitar que procesos maliciosos dentro de la sandbox creen una 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="151"/>
         <source>Sandboxed window label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta de la ventana aislada:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1489"/>
@@ -10121,22 +10138,22 @@ Esto se hace para evitar que procesos maliciosos dentro de la sandbox creen una 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1793"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuando la raíz del Sandbox esté protegida, exigir que SandMan se ejecute como administrador para acceder a los archivos</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1899"/>
         <source>Total CPU Rate Limit (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Límite total de uso de CPU (%):</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1915"/>
         <source>Leave it blank to disable the setting (1-100)</source>
-        <translation type="unfinished"></translation>
+        <translation>Déjelo en blanco para desactivar este ajuste (1-100)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1925"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2173"/>
@@ -10152,12 +10169,13 @@ Esto se hace para evitar que procesos maliciosos dentro de la sandbox creen una 
         <location filename="Forms/OptionsWindow.ui" line="2128"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
-        <translation type="unfinished"></translation>
+        <translation>De forma predeterminada, Sandboxie ejecuta los procesos con un token de integridad UNTRUSTED para lograr el máximo aislamiento.
+Si activa esta opción, se usará un token de integridad LOW, lo que puede mejorar la compatibilidad, pero reduce el aislamiento y la seguridad del Sandbox.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2132"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar un token de integridad LOW en lugar de UNTRUSTED (reduce el aislamiento)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2246"/>
@@ -10444,22 +10462,22 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4466"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar la lista de exclusiones anterior para ocultar los archivos coincidentes en la ventana de recuperación rápida</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4463"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
-        <translation type="unfinished"></translation>
+        <translation>La casilla «Mostrar todos los archivos» de la ventana de recuperación debe estar desmarcada.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4527"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar los procesos forzados iniciados dentro de un objeto de trabajo de PCA (Asistente para la compatibilidad de programas)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4605"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar heurísticas para identificar procesos basados en Electron o Chromium</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6202"/>
@@ -10495,7 +10513,22 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        Muestra descripciones detalladas al situar el puntero sobre los ajustes.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modos:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Marcado&lt;/span&gt;: Todos los detalles (versiones, sintaxis, descripción y más)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Parcialmente marcado&lt;/span&gt;: Solo la información esencial&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Ayudas de sintaxis:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Barra vertical&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separa valores alternativos&lt;br&gt;
+        • &lt;i&gt;Corchetes&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Indican parámetros opcionales&lt;br&gt;
+        • &lt;i&gt;Paréntesis&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Encierran opciones válidas&lt;br&gt;
+        • &lt;i&gt;Paréntesis angulares&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indican marcadores de posición sustituibles&lt;br&gt;
+        • &lt;i&gt;Valores en negrita&lt;/i&gt; — Representan los valores predeterminados (pueden omitirse)&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6270"/>
@@ -10541,27 +10574,47 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;b&gt;Autocompletado y corrección de mayúsculas y minúsculas&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Autocompletado&lt;/u&gt;: Aparece una lista de sugerencias a partir de dos caracteres&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Seleccione una sugerencia para &lt;u&gt;aplicarla automáticamente&lt;/u&gt; con las mayúsculas y minúsculas correctas&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Pulse &lt;code&gt;Enter/Return&lt;/code&gt; para confirmar la selección&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Corrección manual&lt;/u&gt;: Después de escribir setting=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Aparece una sugerencia de corrección; pulse &lt;code&gt;Ctrl+R&lt;/code&gt; para aplicarla&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modos:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Marcado&lt;/span&gt;: Autocompletado y corrección de mayúsculas y minúsculas&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Parcialmente marcado&lt;/span&gt;: Solo corrección manual con &lt;code&gt;Ctrl+R&lt;/code&gt;&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Navegación:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Desplazarse por la lista&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirmar la selección&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Forzar la apertura de las sugerencias&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Aplicar la primera sugerencia o confirmar la selección&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6293"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Autocompletar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6346"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes del editor</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6349"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6220"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripciones emergentes</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6303"/>
@@ -10593,12 +10646,26 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;Cuando se activa, los ajustes se comprueban y resaltan según el archivo INI. Desactívelo para dejar de comprobarlos y resaltarlos.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Texto negro, fondo amarillo, cursiva&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ajuste renombrado (el nombre anterior no es válido)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Texto blanco, fondo negro, tachado&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ajuste eliminado (ya no está disponible)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Texto cian oscuro, fondo blanco&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ajuste futuro (no disponible)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Subrayado rojo de corrección ortográfica&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ajuste no válido o desconocido&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Texto rojo oscuro o claro&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ajuste válido o conocido&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Nota&lt;/span&gt;: En esta versión solo funcionan los ajustes válidos y conocidos. Sin embargo, no se realiza ninguna validación global ni por Sandbox. Algunos ajustes pueden parecer válidos, pero no funcionar en todos los contextos.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6320"/>
         <source>Validate</source>
-        <translation type="unfinished"></translation>
+        <translation>Validar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="788"/>
@@ -10657,42 +10724,42 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
     <message>
         <location filename="Forms/OptionsWindow.ui" line="294"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Alfa</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="366"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuando se marca, se oculta el marco de color y solo se muestra el nombre o alias del Sandbox como etiqueta. Debe estar activada la opción de etiqueta.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="369"/>
         <source>Label only</source>
-        <translation type="unfinished"></translation>
+        <translation>Solo etiqueta</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si un borde exterior quedase recortado por el borde del monitor, dibujarlo dentro de las ventanas maximizadas o acopladas.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="379"/>
         <source>Inside when maximized or snapped</source>
-        <translation type="unfinished"></translation>
+        <translation>Dentro si la ventana está maximizada o acoplada</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="407"/>
         <source>After automatic deletion, restore from snapshot:</source>
-        <translation type="unfinished"></translation>
+        <translation>Después del borrado automático, restaurar desde la instantánea:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="432"/>
         <source>Open Snapshot Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir el Administrador de Instantáneas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="435"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="541"/>
@@ -10871,7 +10938,7 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4123"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar hilos de retransmisión del proxy dentro del proceso en lugar de modificar directamente el socket (resuelve problemas de compatibilidad poco frecuentes)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4133"/>
@@ -10881,12 +10948,12 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4223"/>
         <source>Bind to Adapter IP</source>
-        <translation type="unfinished"></translation>
+        <translation>Vincular a la IP del adaptador</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4161"/>
         <source>IPv6:</source>
-        <translation type="unfinished"></translation>
+        <translation>IPv6:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4260"/>
@@ -10896,17 +10963,17 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4244"/>
         <source>IPv4:</source>
-        <translation type="unfinished"></translation>
+        <translation>IPv4:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4154"/>
         <source>0000:0000:0000:0000:0000:0000:0000:0000</source>
-        <translation type="unfinished">0000:0000:0000:0000:0000:0000:0000:0000</translation>
+        <translation>0000:0000:0000:0000:0000:0000:0000:0000</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4230"/>
         <source>000.000.000.000</source>
-        <translation type="unfinished">000.000.000.000</translation>
+        <translation>000.000.000.000</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4237"/>
@@ -11428,7 +11495,7 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5481"/>
         <source>Trace function hooking by SbieDll</source>
-        <translation type="unfinished"></translation>
+        <translation>Registrar las interceptaciones de funciones realizadas por SbieDll</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5575"/>
@@ -11438,32 +11505,32 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5677"/>
         <source>Debug Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones de depuración</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5753"/>
         <source>Config Dump</source>
-        <translation type="unfinished"></translation>
+        <translation>Volcado de configuración</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5784"/>
         <source>No Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin plantillas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5794"/>
         <source>No Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin configuración global</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5804"/>
         <source>No Expand</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin expansión</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5814"/>
         <source>Refresh</source>
-        <translation type="unfinished">Actualizar</translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5859"/>
@@ -11534,17 +11601,17 @@ Por favor note que estos valores son especificos para usuario y guardados global
         <location filename="Windows/SettingsWindow.cpp" line="87"/>
         <location filename="Windows/SettingsWindow.cpp" line="89"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="87"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>predeterminado</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="89"/>
         <source>fallback</source>
-        <translation type="unfinished"></translation>
+        <translation>alternativo</translation>
     </message>
 </context>
 <context>
@@ -11586,7 +11653,7 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>Show Ignored Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar archivos ignorados</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
@@ -11647,27 +11714,27 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="20"/>
         <source>Rename Sandbox</source>
-        <translation type="unfinished">Renombrar Sandbox</translation>
+        <translation>Renombrar Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="31"/>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation type="unfinished">Por favor ingrese un nuevo nombre para la Sandbox.</translation>
+        <translation>Introduzca un nombre nuevo para el Sandbox.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="38"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="unfinished">Por favor introducza un nuevo alias para la Sandbox.</translation>
+        <translation>Introduzca un alias nuevo para el Sandbox.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="52"/>
         <source>Disable alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar alias</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="59"/>
         <source>Hide alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar alias</translation>
     </message>
 </context>
 <context>
@@ -12123,13 +12190,13 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
         <location filename="Forms/SettingsWindow.ui" line="2586"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
-        <translation type="unfinished">Enganchar llamadas de sistema Win32k seleccionadas para habilitar acceleración de GPU (experimental)</translation>
+        <translation>Interceptar determinadas llamadas al sistema Win32k para permitir la aceleración por GPU (opción necesaria para Chrome, Firefox y otros)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2447"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
         <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
-        <translation type="unfinished">Añadir grupo &quot;Sandboxie\All Sandboxes&quot; al token aislado (experimental)</translation>
+        <translation>Añadir el grupo &quot;Sandboxie\All Sandboxes&quot; al token aislado</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="274"/>
@@ -12336,7 +12403,7 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SettingsWindow.ui" line="71"/>
         <source>Use random GUID as sandbox name when creating new boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar un GUID aleatorio como nombre de Sandbox al crear Sandboxes nuevos</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="281"/>
@@ -12346,62 +12413,62 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>
         <source>Remember last used box</source>
-        <translation type="unfinished"></translation>
+        <translation>Recordar el último Sandbox utilizado</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="827"/>
         <source>Show search box in tray menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar un cuadro de búsqueda en el menú de la bandeja del sistema</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="858"/>
         <source>Show custom box icons in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar iconos personalizados de los Sandboxes en la lista de la bandeja</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="865"/>
         <source>Show overlay icons for boxes in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar iconos superpuestos de los Sandboxes en la lista de la bandeja</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="872"/>
         <source>Show box alias name instead of box name in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar el alias en lugar del nombre del Sandbox en la lista de la bandeja</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="879"/>
         <source>Maximum displayed characters for compact tray aliases. Ignored when alias display is disabled (name limit is fixed to 32).</source>
-        <translation type="unfinished"></translation>
+        <translation>Número máximo de caracteres que se muestran para los alias compactos de la bandeja. Se ignora si la visualización de alias está desactivada (el límite del nombre es de 32 caracteres).</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="895"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while Ctrl is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Comportamiento de tres estados: desmarcado = nunca; parcialmente marcado = solo mientras se mantenga pulsada la tecla Ctrl (predeterminado); marcado = siempre.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="898"/>
         <source>Show sandbox status as tooltip in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar el estado del Sandbox como descripción emergente en la lista de la bandeja</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1127"/>
         <source>Controls whether display-only text uses the sandbox name, alias, or both. Compact views may show only the alias. Paths and internal sandbox identifiers always use the sandbox name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Controla si el texto de solo visualización utiliza el nombre del Sandbox, el alias o ambos. Las vistas compactas pueden mostrar solo el alias. Las rutas y los identificadores internos del Sandbox siempre utilizan su nombre.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1165"/>
         <source>Highlight unapplied changes in Options and Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Resaltar los cambios no aplicados en las opciones del Sandbox y en la configuración global</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1234"/>
         <source>Group state on start</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado de los grupos al iniciar</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1241"/>
         <source>Sandbox name display:</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualización del nombre del Sandbox:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1476"/>
@@ -12426,47 +12493,47 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1550"/>
         <source>Window Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones de ventana</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1561"/>
         <source>Support Dialog:</source>
-        <translation type="unfinished"></translation>
+        <translation>Diálogo de patrocinio:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1574"/>
         <source>File Recovery:</source>
-        <translation type="unfinished"></translation>
+        <translation>Recuperación de archivos:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1587"/>
         <source>Fallback:</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor alternativo:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1632"/>
         <source>Non-main:</source>
-        <translation type="unfinished"></translation>
+        <translation>Otras ventanas:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1648"/>
         <source>Hint: Specific window settings override non-main settings. Fallback is used when the target monitor cannot be used; when disabled, each window falls back to its default current-monitor behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota: Los ajustes específicos de cada ventana prevalecen sobre los de «Otras ventanas». El monitor alternativo se usa cuando no se puede utilizar el monitor de destino; si está desactivado, cada ventana recurre a su comportamiento predeterminado (el monitor actual).</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1670"/>
         <source>Window Locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubicación de las ventanas</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1677"/>
         <source>Notifications:</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificaciones:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1690"/>
         <source>Main:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ventana principal:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2016"/>
@@ -12502,7 +12569,7 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
         <location filename="Forms/SettingsWindow.ui" line="2672"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished">Usar el mensaje de Cuentas de Usuario (UAC) mejorado propio de Sandboxie (experimental)</translation>
+        <translation>Usar el aviso de UAC mejorado de Sandboxie (recomendado)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2682"/>
@@ -12512,7 +12579,7 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2715"/>
         <source>Add Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir Sandbox portátil</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2745"/>
@@ -12541,7 +12608,7 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2729"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;La protección de la configuración solo se aplica a Sandboxie.ini. La configuración de los Sandboxes portátiles no está protegida por los mecanismos siguientes.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2688"/>
@@ -12562,27 +12629,27 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2972"/>
         <source>Force Process Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones de programas forzados</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3000"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar que los programas que abran archivos de un Sandbox se ejecuten en ese Sandbox.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3003"/>
         <source>Force programs opening boxed files into their sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar que los programas que abran archivos de un Sandbox se ejecuten en él</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3010"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar que los archivos con Marca de la Web se abran en un Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3030"/>
         <source>Sandbox for MoTW marked files</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox para archivos marcados con MoTW</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3049"/>
@@ -12623,7 +12690,7 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
         <location filename="Forms/SettingsWindow.ui" line="3151"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
         <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://templates&quot;&gt;Actualizar ahora las plantillas de compatibilidad&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3230"/>
@@ -12653,7 +12720,22 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        Muestra descripciones detalladas al situar el puntero sobre los ajustes.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modos:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Marcado&lt;/span&gt;: Todos los detalles (versiones, sintaxis, descripción y más)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Parcialmente marcado&lt;/span&gt;: Solo la información esencial&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Ayudas de sintaxis:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Barra vertical&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separa valores alternativos&lt;br&gt;
+        • &lt;i&gt;Corchetes&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Indican parámetros opcionales&lt;br&gt;
+        • &lt;i&gt;Paréntesis&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Encierran opciones válidas&lt;br&gt;
+        • &lt;i&gt;Paréntesis angulares&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indican marcadores de posición sustituibles&lt;br&gt;
+        • &lt;i&gt;Valores en negrita&lt;/i&gt; — Representan los valores predeterminados (pueden omitirse)&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3430"/>
@@ -12699,32 +12781,52 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;b&gt;Autocompletado y corrección de mayúsculas y minúsculas&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Autocompletado&lt;/u&gt;: Aparece una lista de sugerencias a partir de dos caracteres&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Seleccione una sugerencia para &lt;u&gt;aplicarla automáticamente&lt;/u&gt; con las mayúsculas y minúsculas correctas&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Pulse &lt;code&gt;Enter/Return&lt;/code&gt; para confirmar la selección&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Corrección manual&lt;/u&gt;: Después de escribir setting=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Aparece una sugerencia de corrección; pulse &lt;code&gt;Ctrl+R&lt;/code&gt; para aplicarla&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modos:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Marcado&lt;/span&gt;: Autocompletado y corrección de mayúsculas y minúsculas&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Parcialmente marcado&lt;/span&gt;: Solo corrección manual con &lt;code&gt;Ctrl+R&lt;/code&gt;&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Navegación:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Desplazarse por la lista&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirmar la selección&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Forzar la apertura de las sugerencias&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Aplicar la primera sugerencia o confirmar la selección&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3453"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Autocompletar</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3519"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes del editor</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3522"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3400"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripciones emergentes</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3503"/>
         <source>Validate</source>
-        <translation type="unfinished"></translation>
+        <translation>Validar</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3266"/>
@@ -12867,7 +12969,21 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;Cuando se activa, los ajustes se comprueban y resaltan según el archivo INI. Desactívelo para dejar de comprobarlos y resaltarlos.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Texto negro, fondo amarillo, cursiva&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ajuste renombrado (el nombre anterior no es válido)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Texto blanco, fondo negro, tachado&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ajuste eliminado (ya no está disponible)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Texto cian oscuro, fondo blanco&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ajuste futuro (no disponible)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Subrayado rojo de corrección ortográfica&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ajuste no válido o desconocido&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Texto rojo oscuro o claro&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ajuste válido o conocido&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Nota&lt;/span&gt;: En esta versión solo funcionan los ajustes válidos y conocidos. Sin embargo, no se realiza ninguna validación global ni por Sandbox. Algunos ajustes pueden parecer válidos, pero no funcionar en todos los contextos.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3466"/>
@@ -13174,17 +13290,17 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="9"/>
         <source>Select a sandbox or type its name or alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione un Sandbox o escriba su nombre o alias:</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="26"/>
         <source>Applies to both Set Open and Set Force. The dialog is always shown when more than one sandbox is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se aplica tanto a «Establecer Abrir Ruta en Sandbox» como a «Establecer Forzar en Sandbox». El diálogo se muestra siempre cuando hay más de un Sandbox activado.</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="29"/>
         <source>Skip this dialog when only one sandbox is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Omitir este diálogo cuando solo haya un Sandbox activado</translation>
     </message>
 </context>
 <context>
@@ -13228,7 +13344,7 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="176"/>
         <source>Refresh View</source>
-        <translation type="unfinished">Refrescar Vista</translation>
+        <translation>Actualizar vista</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="195"/>

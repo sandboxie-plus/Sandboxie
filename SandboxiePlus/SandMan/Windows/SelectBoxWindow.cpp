@@ -242,6 +242,110 @@ void CSelectBoxWindow::OnBoxType()
 	m_pBoxPicker->setEnabled(ui.radBoxed->isChecked() || (ui.chkFCP->isEnabled() && ui.chkFCP->isChecked()));
 }
 
+static QString Nt2Dos(const QString& ntPath, const CSandBoxPtr& pBox)
+{
+	//if the nt2dos map cache unavailable,use QueryDosDeviceW
+	bool converted = false;
+	QString expanded = theAPI->Nt2DosPath(pBox->Expand(ntPath), &converted);
+	if (converted)
+		return expanded;
+
+	for (WCHAR ltr = L'A'; ltr <= L'Z'; ++ltr) {
+		WCHAR drv[3] = { ltr, L':', 0 };
+		WCHAR target[MAX_PATH];
+		if (!QueryDosDeviceW(drv, target, MAX_PATH))
+			continue;
+		QString prefix = QString::fromWCharArray(target) + "\\";
+		if (expanded.startsWith(prefix, Qt::CaseInsensitive))
+			return QString::fromWCharArray(drv) + "\\" + expanded.mid(prefix.length());
+	}
+	return expanded;
+}
+
+static bool MatchRuleWildcard(const QString& pattern, const QString& target)
+{
+	QString exp = QRegularExpression::escape(pattern);
+	exp.replace("\\*\\*", "[^\\\\]*").replace("\\*", ".*").replace("\\?", ".");
+	return QRegularExpression("\\A" + exp + "\\z", QRegularExpression::CaseInsensitiveOption).match(target).hasMatch();
+}
+
+static bool MatchProcessGroup(const CSandBoxPtr& pBox, const QString& group, const QString& target, int depth)
+{
+	if (depth >= 6)
+		return false;
+	foreach(const QString &entry, pBox->GetTextList("ProcessGroup", true, true, true)) {
+		if (!entry.startsWith(group + ",", Qt::CaseInsensitive))
+			continue;
+		foreach(const QString &member, entry.mid(group.length() + 1).split(',')) {
+			if (member.startsWith('<')) {
+				if (MatchProcessGroup(pBox, member, target, depth + 1))
+					return true;
+			}
+			else if (MatchRuleWildcard(member, target))
+				return true;
+		}
+	}
+	return false;
+}
+
+static bool MatchSelector(const CSandBoxPtr& pBox, const QString& selector, const QString& target)
+{
+	bool inv = selector.startsWith('!');
+	QString sel = inv ? selector.mid(1) : selector;
+	bool hit;
+	if (sel.startsWith('<'))
+		hit = MatchProcessGroup(pBox, sel, target, 0);
+	else
+		hit = MatchRuleWildcard(sel, target);
+	return inv ? !hit : hit;
+}
+
+QStringList CSelectBoxWindow::MatchProgramInPath(const CSandBoxPtr& pBox, const QStringList& list, const QString& name)
+{
+	QStringList matchedList;
+	QString target = name.trimmed();
+
+	if (!QFileInfo::exists(target)) {
+		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+		if (pBoxEx)
+			target = pBoxEx->GetCommandFile(target);
+	}
+
+	if (target.startsWith("\\\\")) {
+		target = target.mid(1);
+		target.replace(QRegularExpression("\\\\+"), "\\");
+		target = "\\Device\\LanmanRedirector" + target;
+	}
+
+	QString program = target.mid(qMax(target.lastIndexOf('\\'), target.lastIndexOf('/')) + 1);
+	foreach(const QString &entry, list) {
+		QString rule = entry;
+		int comma = rule.indexOf(',');
+		if (comma > 0) {
+			if (!MatchSelector(pBox, rule.left(comma), program))
+				continue;
+		}
+		if (comma != -1)
+			rule = rule.mid(comma + 1);
+		bool exact = rule.startsWith('|');
+		if (exact)
+			rule = rule.mid(1);
+
+		rule = Nt2Dos(rule, pBox);
+		bool unc = rule.startsWith("\\\\");
+		if (unc)
+			rule = rule.mid(1);
+		rule.replace(QRegularExpression("\\\\+"), "\\");
+		if (unc)
+			rule.prepend("\\Device\\LanmanRedirector");
+		if (!exact && !rule.contains('*'))
+			rule += '*';
+		if (MatchRuleWildcard(rule, target))
+			matchedList.append(entry);
+	}
+	return matchedList;
+}
+
 void CSelectBoxWindow::OnRun()
 {
 	QStringList BoxNames;
@@ -272,6 +376,68 @@ void CSelectBoxWindow::OnRun()
 		if (BoxNames.isEmpty()) {
 			QMessageBox("Sandboxie-Plus", tr("Please select a sandbox."), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();
 			return;
+		}
+	}
+
+	//<Command,BoxName>
+	QList<QPair<QString,QString>> cannotAccessPrograms;
+	theAPI->UpdateDriveLetters();
+	foreach(const QString & BoxName, BoxNames) {
+		//query the box file access control list
+		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+
+		if(pBox) {
+			QStringList closedPaths = pBox->GetTextList("ClosedFilePath", false);
+			QStringList writeOnlyPaths = pBox->GetTextList("WriteFilePath", false);
+
+			foreach(const QString & Command, m_Commands)
+			{
+				if(MatchProgramInPath(pBox,closedPaths,Command).size() > 0 || MatchProgramInPath(pBox,writeOnlyPaths,Command).size() > 0) {
+					cannotAccessPrograms.append(qMakePair(Command ,BoxName));
+				}
+			}
+		}
+	}
+	if(cannotAccessPrograms.size() > 0) {
+		QMessageBox confirmBox;
+		confirmBox.setWindowTitle(tr("Program access may be blocked in the selected sandboxes"));
+		QString listString = "";
+		foreach(auto & pair,cannotAccessPrograms) {
+			listString += pair.first;
+			listString += " in ";
+			listString += pair.second;
+			listString += "\r\n";
+		}
+		listString += "\r\n";
+		listString += tr("Do you want to disable the affected rules to allow the program to run?");
+		confirmBox.setText(listString);
+		confirmBox.setIcon(QMessageBox::Question);
+		QPushButton* ignoreBtn = confirmBox.addButton(tr("Ignore"), QMessageBox::RejectRole);
+		QPushButton* allowBtn = confirmBox.addButton(tr("Disable Rules"), QMessageBox::AcceptRole);
+		confirmBox.setDefaultButton(allowBtn);
+		confirmBox.exec();
+
+		if (confirmBox.clickedButton() == allowBtn) {
+			//scan and remove rules
+			foreach (auto & pair,cannotAccessPrograms) {
+				const QString &command = pair.first;
+				const QString &boxName = pair.second;
+
+				CSandBoxPtr pBox = theAPI->GetBoxByName(boxName);
+				if(pBox) {
+					QStringList closedPaths = MatchProgramInPath(pBox,pBox->GetTextList("ClosedFilePath", false),command);
+					QStringList writeOnlyPaths = MatchProgramInPath(pBox,pBox->GetTextList("WriteFilePath", false),command);
+					foreach(const QString & path,closedPaths) {
+						pBox->AppendText("ClosedFilePathDisabled", path);
+						pBox->DelValue("ClosedFilePath",path);
+					}
+					foreach(const QString & path,writeOnlyPaths) {
+						pBox->AppendText("WriteFilePathDisabled", path);
+						pBox->DelValue("WriteFilePath",path);
+					}
+				}
+			}
+			theAPI->ReloadConfig(true);
 		}
 	}
 

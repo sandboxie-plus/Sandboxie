@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.19.0 / 5.74.0] - 2026-10-??
+## [1.19.0 / 5.74.0] - 2026-10-23
 
 ### Fixed
 - fixed kernel pool out-of-bounds write in `Api_CopyStringFromUser`, which placed the terminator one character past its allocation and copied two bytes beyond the caller's string (reached through `API_UPDATE_CONF`)

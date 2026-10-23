@@ -409,64 +409,93 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
                 ULONG ulOwnerPid = GetThreadTokenOwnerPid();
                 if (ulOwnerPid)
                 {
-                    proc = Process_Find((HANDLE)ulOwnerPid, NULL);  // is this a sandboxed process?
-                    if (proc && !proc->terminated && !proc->ipc_allowSpoolerPrintToFile)   // if process specifically allowed to use spooler print to file, we can skip everything below
+                    FLT_FILE_NAME_INFORMATION   *pTargetFileNameInfo = NULL;
+                    NTSTATUS    nameStatus;
+                    UCHAR       *pLogStr = NULL;     // built while 'proc' is pinned, logged after unlock
+                    int         logStrLen = 0;
+                    ULONG       logSessionId = 0;
+                    HANDLE      logPid = NULL;
+
+                    // Get normalized full path to target file.  This is the only blocking /
+                    // PASSIVE_LEVEL call here and it does not need the PROCESS, so do it BEFORE
+                    // taking the process list lock.
+                    // Occasionally, certain PDF apps will send in a short name (containing '~'). That will break all of our folder name checking below.
+                    nameStatus = FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED | FLT_FILE_NAME_QUERY_DEFAULT, &pTargetFileNameInfo);
+
+                    // spoolsv runs this create on behalf of a *different* boxed process
+                    // (identified by the sbox token owner pid) that may exit at any instant.
+                    // Hold Process_ListLock SHARED (at PASSIVE, via a critical region) across
+                    // every use of the PROCESS so Process_Delete - which needs it EXCLUSIVE -
+                    // cannot free it under us, instead of carrying a bare pointer across the
+                    // name query above.
                     {
-                        FLT_FILE_NAME_INFORMATION   *pTargetFileNameInfo = NULL;
-                        BOOLEAN     result = FALSE;
-
-                        // Get normalized full path to target file.
-                        // Occasionally, certain PDF apps will send in a short name (containing '~'). That will break all of our folder name checking below.
-                        if (FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED | FLT_FILE_NAME_QUERY_DEFAULT, &pTargetFileNameInfo) != STATUS_SUCCESS)
+                        PROCESS *spl_proc = Process_FindLockedShared((HANDLE)ulOwnerPid);  // is this a sandboxed process?
+                        if (spl_proc && !spl_proc->terminated && !spl_proc->ipc_allowSpoolerPrintToFile)   // if process specifically allowed to use spooler print to file, we can skip everything below
                         {
-                            status = STATUS_ACCESS_DENIED;      // if we can't get the name, just disallow the call
-                        }
-                        else if (!UnicodeStringStartsWith(&pTargetFileNameInfo->Name, proc->box->spooler_directory, TRUE) ) // spooler work folder is allowed.
-                        {
-                            // See if the operation is allowed by normal Sbie rules.
-                            // pTargetFileNameInfo has the device name at the start ("\device\harddisk2"). File_CreateOperation wants to add this itself deep in the code.
-                            // So, make a new UNICODE_STRING that does not include the device (volume) name.
-                            UNICODE_STRING      usTargetFile;
-
-                            if (pTargetFileNameInfo->Volume.Length > pTargetFileNameInfo->Name.Length) {
-                                status = STATUS_ACCESS_DENIED;
-                            }
-                            else {
-                                usTargetFile.Buffer = pTargetFileNameInfo->Name.Buffer + (pTargetFileNameInfo->Volume.Length / 2);
-                                usTargetFile.Length = pTargetFileNameInfo->Name.Length - pTargetFileNameInfo->Volume.Length;
-                                usTargetFile.MaximumLength = pTargetFileNameInfo->Name.MaximumLength - pTargetFileNameInfo->Volume.Length;
-                                status = File_CreateOperation(proc, Iopb, &usTargetFile);
-                            }
-                            if (status != STATUS_SUCCESS)
+                            if (nameStatus != STATUS_SUCCESS)
                             {
-                                UCHAR *pStr, *pStr2;
-                                int len;
-                                WCHAR   wcPid[32];
-
-                                status = STATUS_ACCESS_DENIED;  // disallow the call
-                                RtlStringCbPrintfW(wcPid, sizeof(wcPid), L"[%d]", ulOwnerPid);
-
-                                // create a string for the sandboxed proc name plus the blocked file name (plus a L", " plus NULL = 6)
-                                len = proc->image_name_len + pTargetFileNameInfo->Name.Length + 6;
-
-                                pStr = pStr2 = Mem_AllocEx(Driver_Pool, len, TRUE);
-                                memcpy(pStr2, proc->image_name, proc->image_name_len);
-                                pStr2 += proc->image_name_len - 2;  // subtract 2 bytes for the wchar NULL
-                                wcscpy((WCHAR*)pStr2, L", ");
-                                pStr2 += 4;             // bump past the L", "
-                                memcpy(pStr2, pTargetFileNameInfo->Name.Buffer, pTargetFileNameInfo->Name.Length);
-                                pStr2 += pTargetFileNameInfo->Name.Length;
-                                memset(pStr2, 0, 2);    // add a wchar NULL
-
-								Log_Msg_Process(MSG_1319, wcPid, (PWCHAR)pStr, proc->box->session_id, proc->pid);
-                                Mem_Free(pStr, len);
+                                status = STATUS_ACCESS_DENIED;      // if we can't get the name, just disallow the call
                             }
-                        }   // if (FltGetFileNameInformation)
+                            else if (!UnicodeStringStartsWith(&pTargetFileNameInfo->Name, spl_proc->box->spooler_directory, TRUE) ) // spooler work folder is allowed.
+                            {
+                                // See if the operation is allowed by normal Sbie rules.
+                                // pTargetFileNameInfo has the device name at the start ("\device\harddisk2"). File_CreateOperation wants to add this itself deep in the code.
+                                // So, make a new UNICODE_STRING that does not include the device (volume) name.
+                                UNICODE_STRING      usTargetFile;
 
-                        if (pTargetFileNameInfo != NULL) {
-                            FltReleaseFileNameInformation(pTargetFileNameInfo);
-                        }
-                    }   // if (proc)
+                                if (pTargetFileNameInfo->Volume.Length > pTargetFileNameInfo->Name.Length) {
+                                    status = STATUS_ACCESS_DENIED;
+                                }
+                                else {
+                                    usTargetFile.Buffer = pTargetFileNameInfo->Name.Buffer + (pTargetFileNameInfo->Volume.Length / 2);
+                                    usTargetFile.Length = pTargetFileNameInfo->Name.Length - pTargetFileNameInfo->Volume.Length;
+                                    usTargetFile.MaximumLength = pTargetFileNameInfo->Name.MaximumLength - pTargetFileNameInfo->Volume.Length;
+                                    status = File_CreateOperation(spl_proc, Iopb, &usTargetFile);
+                                }
+                                if (status != STATUS_SUCCESS)
+                                {
+                                    UCHAR *pStr2;
+
+                                    status = STATUS_ACCESS_DENIED;  // disallow the call
+
+                                    // Build the log string now, while spl_proc is still pinned; the
+                                    // actual Log_Msg_Process (which posts an LPC datagram to the
+                                    // service) runs after the unlock, in its original context.
+                                    // create a string for the sandboxed proc name plus the blocked file name (plus a L", " plus NULL = 6)
+                                    logStrLen = spl_proc->image_name_len + pTargetFileNameInfo->Name.Length + 6;
+
+                                    pLogStr = pStr2 = Mem_AllocEx(Driver_Pool, logStrLen, TRUE);
+                                    if (pLogStr)
+                                    {
+                                        memcpy(pStr2, spl_proc->image_name, spl_proc->image_name_len);
+                                        pStr2 += spl_proc->image_name_len - 2;  // subtract 2 bytes for the wchar NULL
+                                        wcscpy((WCHAR*)pStr2, L", ");
+                                        pStr2 += 4;             // bump past the L", "
+                                        memcpy(pStr2, pTargetFileNameInfo->Name.Buffer, pTargetFileNameInfo->Name.Length);
+                                        pStr2 += pTargetFileNameInfo->Name.Length;
+                                        memset(pStr2, 0, 2);    // add a wchar NULL
+
+                                        logSessionId = spl_proc->box->session_id;
+                                        logPid = spl_proc->pid;
+                                    }
+                                }
+                            }   // if (name resolved and outside spooler dir)
+                        }   // if (spl_proc restricted)
+
+                        Process_UnlockShared();
+                    }
+
+                    if (pLogStr)
+                    {
+                        WCHAR   wcPid[32];
+                        RtlStringCbPrintfW(wcPid, sizeof(wcPid), L"[%d]", ulOwnerPid);
+                        Log_Msg_Process(MSG_1319, wcPid, (PWCHAR)pLogStr, logSessionId, logPid);
+                        Mem_Free(pLogStr, logStrLen);
+                    }
+
+                    if (pTargetFileNameInfo != NULL) {
+                        FltReleaseFileNameInformation(pTargetFileNameInfo);
+                    }
                 }   // if (ulOwnerPid)
             }   // is this the print spooler process?
 
@@ -502,6 +531,14 @@ check:
             BOOLEAN protect_root = FALSE;
             BOOLEAN admin_only = FALSE;
 
+            // snapshot everything the post-lock code needs while the lock is
+            // held;  the matched node can be freed by File_Api_UnprotectRoot
+            // the moment the lock is dropped, and the reg_root compare below
+            // runs after several blocking calls - reading root there was a
+            // use-after-free
+            WCHAR reg_root_copy[MAX_REG_ROOT_LEN];
+            ULONG reg_root_copy_len = 0;
+
             KIRQL irql;
             KeRaiseIrql(APC_LEVEL, &irql);
             ExAcquireResourceExclusiveLite(File_ProtectedRootsLock, TRUE);
@@ -518,11 +555,15 @@ check:
 
                     protect_root = TRUE;
 					admin_only = root->admin_only;
+                    reg_root_copy_len = root->reg_root_len;
+                    wmemcpy(reg_root_copy, root->reg_root, root->reg_root_len + 1);
                     break;
                 }
 
                 root = List_Next(root);
             }
+
+            root = NULL; // the node is unsafe to touch once the lock is dropped
 
             ExReleaseResourceLite(File_ProtectedRootsLock);
             KeLowerIrql(irql);
@@ -542,8 +583,8 @@ check:
                         cur_proc = Process_Find(cur_pid, NULL);
 
                     if (cur_proc && !cur_proc->bHostInject) {
-                        if (cur_proc->box->key_path_len / sizeof(WCHAR) == root->reg_root_len + 1 &&
-                            _wcsnicmp(cur_proc->box->key_path, root->reg_root, root->reg_root_len) == 0) {
+                        if (cur_proc->box->key_path_len / sizeof(WCHAR) == reg_root_copy_len + 1 &&
+                            _wcsnicmp(cur_proc->box->key_path, reg_root_copy, reg_root_copy_len) == 0) {
                             protect_root = FALSE; // its the allowed box
                         }
                     }
@@ -706,6 +747,39 @@ check:
                     FltReleaseFileNameInformation(pTargetFileNameInfo);
                 }
             }
+            else
+            {
+                PUNICODE_STRING pRawName = &Data->Iopb->TargetFileObject->FileName;
+                BOOLEAN hasTilde = FALSE;
+                ULONG ti;
+                for (ti = 0; ti < pRawName->Length / sizeof(WCHAR); ++ti) {
+                    if (pRawName->Buffer[ti] == L'~') { hasTilde = TRUE; break; }
+                }
+
+                if (hasTilde)
+                {
+                    FLT_FILE_NAME_INFORMATION *pTargetFileNameInfo = NULL;
+                    if (FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED | FLT_FILE_NAME_QUERY_DEFAULT, &pTargetFileNameInfo) == STATUS_SUCCESS)
+                    {
+                        if (pTargetFileNameInfo && pTargetFileNameInfo->Name.Length > pTargetFileNameInfo->Volume.Length)
+                        {
+                            ULONG bodyLen = pTargetFileNameInfo->Name.Length - pTargetFileNameInfo->Volume.Length;
+                            nTempFullPathLen = bodyLen + sizeof(WCHAR);
+                            pTempFullPath = Mem_AllocEx(Driver_Pool, nTempFullPathLen, TRUE);
+                            if (pTempFullPath)
+                            {
+                                // strip the kernel volume name, as File_CreateOperation adds it itself
+                                memcpy(pTempFullPath, pTargetFileNameInfo->Name.Buffer + pTargetFileNameInfo->Volume.Length / 2, bodyLen);
+                                memset(pTempFullPath + bodyLen, 0, sizeof(WCHAR));
+                                RtlInitUnicodeString(&usFileName, (PCWSTR)pTempFullPath);
+                            }
+                        }
+                        FltReleaseFileNameInformation(pTargetFileNameInfo);
+                    }
+                    // if normalization was unavailable, fall through with the raw
+                    // name (pre-fix behaviour) rather than failing the create
+                }
+            }
         }
 
         status = File_CreateOperation(proc, Iopb, pTempFullPath ? &usFileName : NULL);
@@ -791,6 +865,9 @@ _FX NTSTATUS File_RenameOperation(
     PFILE_OBJECT FileObject;
     UNICODE_STRING FileName;
     MY_CONTEXT MyContext;
+    ULONG info_len;
+    ULONG name_off;
+    ULONG name_len;
 
     //
     // sandboxed programs always specify a root directory and file name
@@ -798,18 +875,27 @@ _FX NTSTATUS File_RenameOperation(
 
     Parms = &Iopb->Parameters;
 
+    info_len = Parms->SetFileInformation.Length;
+
     if(LinkOp) {
 
         FILE_LINK_INFORMATION *infoL;
 
         infoL = (FILE_LINK_INFORMATION *)Parms->SetFileInformation.InfoBuffer;
-    
+
         FileObject = Parms->SetFileInformation.ParentOfTarget;
 
-        if ((! FileObject) || (! infoL) || (! infoL->FileNameLength))
+        if ((! FileObject) || (! infoL))
             return STATUS_ACCESS_DENIED;
 
-        FileName.Length = (USHORT)infoL->FileNameLength;
+        name_off = FIELD_OFFSET(FILE_LINK_INFORMATION, FileName);
+        name_len = infoL->FileNameLength;
+
+        if (info_len < name_off || (! name_len) || (name_len & 1) ||
+                name_len > (info_len - name_off) || name_len > 0xFFFE)
+            return STATUS_ACCESS_DENIED;
+
+        FileName.Length = (USHORT)name_len;
         FileName.MaximumLength = FileName.Length;
         FileName.Buffer = infoL->FileName;
 
@@ -821,10 +907,17 @@ _FX NTSTATUS File_RenameOperation(
 
         FileObject = Parms->SetFileInformation.ParentOfTarget;
 
-        if ((! FileObject) || (! infoR) || (! infoR->FileNameLength))
+        if ((! FileObject) || (! infoR))
             return STATUS_ACCESS_DENIED;
 
-        FileName.Length = (USHORT)infoR->FileNameLength;
+        name_off = FIELD_OFFSET(FILE_RENAME_INFORMATION, FileName);
+        name_len = infoR->FileNameLength;
+
+        if (info_len < name_off || (! name_len) || (name_len & 1) ||
+                name_len > (info_len - name_off) || name_len > 0xFFFE)
+            return STATUS_ACCESS_DENIED;
+
+        FileName.Length = (USHORT)name_len;
         FileName.MaximumLength = FileName.Length;
         FileName.Buffer = infoR->FileName;
     }

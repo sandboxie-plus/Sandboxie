@@ -351,6 +351,41 @@ NTSTATUS FileServer::OpenBoxFile(
         out_handle, desired_access, &objattrs, &IoStatusBlock, NULL, 0,
         FILE_SHARE_VALID_FLAGS, FILE_OPEN, create_options, NULL, 0);
 
+    if (! NT_SUCCESS(status))
+        return status;
+
+    const ULONG name_len =
+        (ULONG)sizeof(OBJECT_NAME_INFORMATION) + 8192 * sizeof(WCHAR);
+    OBJECT_NAME_INFORMATION *name_info =
+        (OBJECT_NAME_INFORMATION *)MyAlloc(name_len);
+
+    BOOLEAN resolved_ok = FALSE;
+    if (name_info) {
+        ULONG ret_len = 0;
+        if (NT_SUCCESS(NtQueryObject(*out_handle, ObjectNameInformation,
+                                     name_info, name_len, &ret_len))
+                && name_info->Name.Buffer
+                && name_info->Name.Length
+                && (ULONG)sizeof(OBJECT_NAME_INFORMATION)
+                        + name_info->Name.Length + sizeof(WCHAR) <= name_len) {
+
+            WCHAR *resolved = name_info->Name.Buffer;
+            resolved[name_info->Name.Length / sizeof(WCHAR)] = L'\0';
+
+            // the resolved name is the \Device\HarddiskVolumeN form, the same
+            // namespace CheckBoxFilePath compares in, so reuse it verbatim
+            resolved_ok = NT_SUCCESS(
+                CheckBoxFilePath(idProcess, resolved, L"\\"));
+        }
+        MyFree(name_info);
+    }
+
+    if (! resolved_ok) {
+        NtClose(*out_handle);
+        *out_handle = NULL;
+        return STATUS_ACCESS_DENIED;
+    }
+
     return status;
 }
 
@@ -963,6 +998,12 @@ MSG_HEADER *FileServer::OpenWow64Key(MSG_HEADER *msg, HANDLE idProcess)
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);
 
     //
+    if (req->KeyPath_len < 18 * sizeof(WCHAR))
+        return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+    if (req->KeyPath[req->KeyPath_len / sizeof(WCHAR) - 1] != L'\0')
+        return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+
+    //
     // convert registry key path from NT form to Win32 form
     //
 
@@ -981,7 +1022,7 @@ MSG_HEADER *FileServer::OpenWow64Key(MSG_HEADER *msg, HANDLE idProcess)
         hRootKey = HKEY_CURRENT_USER;
         lpSubKey = req->KeyPath + 10 + 4;
         if (*lpSubKey != L'\\')
-            SHORT_REPLY(STATUS_INVALID_PARAMETER);
+            return SHORT_REPLY(STATUS_INVALID_PARAMETER);
         do {
             if (*lpSubKey == L'_') {
                 if (_wcsnicmp(lpSubKey + 1, L"classes", 7) == 0)

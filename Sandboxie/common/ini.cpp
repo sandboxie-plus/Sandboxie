@@ -40,6 +40,20 @@ static bool ContainsCRLF(const WCHAR* str)
     return false;
 }
 
+// A section name is written back as "[" + name + "]\r\n"; a name containing a
+// newline or a bracket could therefore forge additional [Section] headers and
+// settings when the ini is saved, bypassing a per-section EditAdminOnly lock.
+static bool IsInvalidSectionName(const WCHAR* s)
+{
+    if (!s || !*s)
+        return true;
+    for (const WCHAR* p = s; *p != L'\0'; ++p) {
+        if (*p == L'\r' || *p == L'\n' || *p == L'[' || *p == L']')
+            return true;
+    }
+    return false;
+}
+
 CIniFile::CIniFile()
 {
 	m_Encoding = 0;
@@ -188,8 +202,8 @@ NTSTATUS CIniFile::GetValue(const WCHAR* section, const WCHAR* setting, std::wst
 
 NTSTATUS CIniFile::SetValue(const WCHAR* section, const WCHAR* setting, const WCHAR* value, ULONG value_len)
 {
-    // Reject setting names containing CR or LF
-    if (ContainsCRLF(setting))
+    // Reject setting names containing CR or LF, and invalid section names
+    if (ContainsCRLF(setting) || IsInvalidSectionName(section))
         return STATUS_INVALID_PARAMETER;
 
 	if (value_len == -1)
@@ -277,8 +291,8 @@ NTSTATUS CIniFile::SetValue(const WCHAR* section, const WCHAR* setting, const WC
 
 NTSTATUS CIniFile::AddValue(const WCHAR* section, const WCHAR* setting, const WCHAR* value, bool bInsert)
 {
-    // Reject setting names and values containing CR or LF
-    if (ContainsCRLF(setting) || ContainsCRLF(value))
+    // Reject setting names and values containing CR or LF, and invalid sections
+    if (ContainsCRLF(setting) || ContainsCRLF(value) || IsInvalidSectionName(section))
         return STATUS_INVALID_PARAMETER;
 
     //

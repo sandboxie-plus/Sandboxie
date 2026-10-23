@@ -655,7 +655,9 @@ _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
 
         if (port == NULL) 
         {
-            port = Mem_AllocEx(Driver_Pool, sizeof(IPC_DYNAMIC_PORT) + sizeof(UCHAR) * pArgs->filter_num.val, TRUE);
+            ULONG port_len = sizeof(IPC_DYNAMIC_PORT)
+                           + sizeof(UCHAR) * pArgs->filter_num.val;
+            port = Mem_AllocEx(Driver_Pool, port_len, TRUE);
             if (!port)
                 Log_Msg0(MSG_1104);
             else
@@ -663,7 +665,7 @@ _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
                 wmemcpy(port->wstrPortId, portId, DYNAMIC_PORT_ID_CHARS);
                 wmemcpy(port->wstrPortName, portName, DYNAMIC_PORT_NAME_CHARS);
 
-                if (_wcsicmp(port->wstrPortId, L"spooler") == 0)
+                if (_wcsicmp(port->wstrPortId, SPOOLER_PORT_ID) == 0)
                     Ipc_Dynamic_Ports.pSpoolerPort = port;
 
                 port->FilterCount = pArgs->filter_num.val;
@@ -680,6 +682,14 @@ _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
 
                 if (NT_SUCCESS(status))
                     List_Insert_After(&Ipc_Dynamic_Ports.Ports, NULL, port);
+                else {
+
+                    if (Ipc_Dynamic_Ports.pSpoolerPort == port)
+                        Ipc_Dynamic_Ports.pSpoolerPort = NULL;
+
+                    Mem_Free(port, port_len);
+                    port = NULL;
+                }
             }
         }
 

@@ -1250,6 +1250,9 @@ _FX NTSTATUS Thread_Api_OpenProcess(PROCESS *proc, ULONG64 *parms)
 
     user_pid = args->process_id.val;
 
+    if (! user_pid || user_pid == PsGetCurrentProcessId())
+        return STATUS_INVALID_PARAMETER;
+
     user_handle = args->process_handle.val;
 
     ProbeForWrite(user_handle, sizeof(HANDLE), sizeof(ULONG_PTR));

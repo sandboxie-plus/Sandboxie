@@ -109,10 +109,20 @@ void NetFw_RuleAddPortRange(rbtree_t* tree, USHORT PortBegin, USHORT PortEnd, PO
 #else
 	NETFW_PORTS* node = Pool_Alloc(pool, sizeof(NETFW_PORTS));
 #endif
+	if (! node)
+		return;
 	node->tree_elem.key = &node->RangeBegin;
 	node->RangeBegin = PortBegin;
 	node->RangeEnd = PortEnd;
-	rbtree_insert(tree, (rbnode_t*)node);
+	if (rbtree_insert(tree, (rbnode_t*)node) == NULL) {
+		// duplicate RangeBegin - rbtree_insert did not link the node, so the
+		// allocation would otherwise leak (it is in no tree to be freed)
+#ifdef KERNEL_MODE
+		ExFreePoolWithTag(node, tzuk);
+#else
+		Pool_Free(node, sizeof(NETFW_PORTS));
+#endif
+	}
 }
 
 static void NetFw_FreePort(rbnode_t* node, void* arg) 
@@ -153,7 +163,14 @@ BOOLEAN NetFw_MergePortMaps(rbtree_t* dst, rbtree_t* src, POOL* pool)
 		
 		NETFW_PORTS* dst_node = NULL;
 		rbtree_find_less_equal(dst, &src_node->RangeBegin, (rbnode_t**)&dst_node);
-		if(dst_node && NetFw_PortCmp(&dst_node->RangeEnd, &src_node->RangeEnd) >= 0) // found overlap
+		// left neighbour (RangeBegin <= src.RangeBegin) overlaps iff its end reaches src.RangeBegin
+		if(dst_node && NetFw_PortCmp(&dst_node->RangeEnd, &src_node->RangeBegin) >= 0) // found overlap
+			return FALSE;
+		// right neighbour overlaps iff its begin is still within src.[Begin,End]
+		NETFW_PORTS* nb_node = dst_node
+			? (NETFW_PORTS*)rbtree_next((rbnode_t*)dst_node)
+			: (NETFW_PORTS*)rbtree_first(dst);
+		if(((rbnode_t*)nb_node) != RBTREE_NULL && NetFw_PortCmp(&nb_node->RangeBegin, &src_node->RangeEnd) <= 0) // found overlap
 			return FALSE;
 	}
 
@@ -202,10 +219,19 @@ void NetFw_RuleAddIpRange(rbtree_t* tree, IP_ADDRESS* IpBegin, IP_ADDRESS* IpEnd
 #else
 	NETFW_IPS* node = Pool_Alloc(pool, sizeof(NETFW_IPS));
 #endif
+	if (! node)
+		return;
 	node->tree_elem.key = &node->RangeBegin;
 	node->RangeBegin = *IpBegin;
 	node->RangeEnd = *IpEnd;
-	rbtree_insert(tree, (rbnode_t*)node);
+	if (rbtree_insert(tree, (rbnode_t*)node) == NULL) {
+		// duplicate RangeBegin - see NetFw_RuleAddPortRange
+#ifdef KERNEL_MODE
+		ExFreePoolWithTag(node, tzuk);
+#else
+		Pool_Free(node, sizeof(NETFW_IPS));
+#endif
+	}
 }
 
 static void NetFw_FreeIp(rbnode_t* node, void* arg) 
@@ -246,7 +272,14 @@ BOOLEAN NetFw_MergeIPMaps(rbtree_t* dst, rbtree_t* src, POOL* pool)
 		
 		NETFW_IPS* dst_node = NULL;
 		rbtree_find_less_equal(dst, &src_node->RangeBegin, (rbnode_t**)&dst_node);
-		if(dst_node && NetFw_IpCmp(&dst_node->RangeEnd, &src_node->RangeEnd) >= 0) // found overlap
+		// left neighbour (RangeBegin <= src.RangeBegin) overlaps iff its end reaches src.RangeBegin
+		if(dst_node && NetFw_IpCmp(&dst_node->RangeEnd, &src_node->RangeBegin) >= 0) // found overlap
+			return FALSE;
+		// right neighbour overlaps iff its begin is still within src.[Begin,End]
+		NETFW_IPS* nb_node = dst_node
+			? (NETFW_IPS*)rbtree_next((rbnode_t*)dst_node)
+			: (NETFW_IPS*)rbtree_first(dst);
+		if(((rbnode_t*)nb_node) != RBTREE_NULL && NetFw_IpCmp(&nb_node->RangeBegin, &src_node->RangeEnd) <= 0) // found overlap
 			return FALSE;
 	}
 
@@ -444,7 +477,9 @@ BOOLEAN NetFw_BlockTraffic(LIST* list, IP_ADDRESS* Ip, USHORT Port, int Protocol
 
 const WCHAR* wcsnchr(const WCHAR* str, size_t max, WCHAR ch)
 {
-    for (;*str != 0 && max > 0;str++, max--) {
+    if (! str)
+        return NULL;
+    for (;max > 0 && *str != 0;str++, max--) {
         if (*str == ch)
             return str;
     }
@@ -493,6 +528,8 @@ BOOLEAN NetFw_ParseRule(NETFW_RULE* rule, const WCHAR* found_value)
             const WCHAR* port_str1;
             ULONG port_len1;
             port_value = SbieDll_GetTagValue(port_value, port_end, &port_str1, &port_len1, L',');
+            if (! port_str1)
+                break;
 
             const WCHAR* port_str2 = wcsnchr(port_str1, port_len1, L'-');
             if (port_str2) {
@@ -519,6 +556,8 @@ BOOLEAN NetFw_ParseRule(NETFW_RULE* rule, const WCHAR* found_value)
             const WCHAR* ip_str1;
             ULONG ip_len1;
             ip_value = SbieDll_GetTagValue(ip_value, ip_end, &ip_str1, &ip_len1, L',');
+            if (! ip_str1)
+                break;
 
             const WCHAR* ip_str2 = wcsnchr(ip_str1, ip_len1, L'-');
             if (ip_str2) {

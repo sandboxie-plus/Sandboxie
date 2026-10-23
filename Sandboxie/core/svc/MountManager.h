@@ -41,6 +41,13 @@
 struct BOX_MOUNT;
 struct BOX_ROOT;
 
+enum EFolderImp
+{
+    eImpNone = 0,       // create as SYSTEM (path is service-chosen, e.g. inside the mounted disk)
+    eImpPipeCaller,     // impersonate the ImBox pipe caller (MSGID_IMBOX_CREATE / _MOUNT)
+    eImpSessionUser     // impersonate the session's interactive user (DriverAssist inject path - no pipe client)
+};
+
 class MountManager
 {
 
@@ -74,9 +81,9 @@ protected:
     std::wstring GetImageFileName(const WCHAR* file_root);
     std::wstring GetProxyName(const std::wstring& ImageFile);
 
-    HANDLE OpenOrCreateNtFolder(const WCHAR* NtPath);
+    HANDLE OpenOrCreateNtFolder(const WCHAR* NtPath, EFolderImp Imp = eImpNone, ULONG session_id = -1);
 
-    int CreateJunction(const std::wstring& TargetNtPath, const std::wstring& FileRootPath, ULONG session_id);
+    int CreateJunction(const std::wstring& TargetNtPath, const std::wstring& FileRootPath, ULONG session_id, EFolderImp Imp = eImpNone);
     bool RemoveJunction(const std::wstring& FileRootPath, ULONG session_id);
 
     std::shared_ptr<BOX_MOUNT> FindImDisk(const std::wstring& ImageFile, ULONG session_id);

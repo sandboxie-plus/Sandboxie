@@ -345,6 +345,8 @@ MSG_HEADER *NamedPipeServer::ReadHandler(MSG_HEADER *msg, HANDLE idProcess)
 
         rpl->data_len = req->read_len;
 
+        memzero(rpl->data, req->read_len);
+
         rpl->h.status = NtReadFile(
             ProxyPipe->hPipe, ProxyPipe->hEvent, NULL, NULL, &IoStatusBlock,
             rpl->data, rpl->data_len, &li, NULL);
@@ -552,6 +554,14 @@ MSG_HEADER *NamedPipeServer::LpcConnectHandler(
                 rpl->max_msg_len = max_msg_len;
                 rpl->info_len = req->info_len;
                 memcpy(rpl->info_data, req->info_data, req->info_len);
+
+            } else {                            // new alpc
+
+
+                rpl->max_msg_len = 0;
+                rpl->info_len = 0;
+                if (req->info_len)
+                    memzero(rpl->info_data, req->info_len);
             }
 
             status = STATUS_SUCCESS;
@@ -614,7 +624,7 @@ MSG_HEADER *NamedPipeServer::LpcRequestHandler(
         //
 
         offset = port_msg->u2.s2.DataInfoOffset;
-        if (offset >= (ULONG)port_msg->u1.s1.TotalLength)
+        if (offset + sizeof(PORT_DATA_INFO) > (ULONG)port_msg->u1.s1.TotalLength)
             goto finish;
         info = (PORT_DATA_INFO *)((UCHAR *)port_msg + offset);
         if (info->NumDataInfo != 1)

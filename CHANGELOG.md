@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+- fixed reversed Yes/No handling when enabling a disabled or user-restricted sandbox
+
 
 ## [1.19.0 / 5.74.0] - 2026-10-??
 

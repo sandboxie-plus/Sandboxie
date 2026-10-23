@@ -71,7 +71,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="8" column="0" colspan="3">
+               <item row="9" column="0" colspan="3">
                 <widget class="QLabel" name="label_57">
                  <property name="text">
                   <string>Box Type Preset:</string>
@@ -84,7 +84,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="11" column="1" colspan="13">
+               <item row="12" column="1" colspan="13">
                 <widget class="QLabel" name="lblSupportCert">
                  <property name="text">
                   <string>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color='red'&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</string>
@@ -122,7 +122,7 @@
                <item row="3" column="3" colspan="6">
                 <widget class="QComboBox" name="cmbBoxBorderText"/>
                </item>
-               <item row="14" column="2" colspan="5">
+               <item row="15" column="2" colspan="5">
                 <spacer name="horizontalSpacer_2">
                  <property name="orientation">
                   <enum>Qt::Orientation::Horizontal</enum>
@@ -135,7 +135,7 @@
                  </property>
                 </spacer>
                </item>
-               <item row="13" column="1" colspan="13">
+               <item row="14" column="1" colspan="13">
                 <widget class="QPlainTextEdit" name="txtNotes">
                  <property name="maximumSize">
                   <size>
@@ -182,14 +182,30 @@
                  </property>
                 </widget>
                </item>
-               <item row="6" column="3" colspan="11">
+               <item row="6" column="3" colspan="6">
                 <widget class="QComboBox" name="cmbDblClick">
                  <property name="editable">
                   <bool>true</bool>
                  </property>
                 </widget>
                </item>
-               <item row="12" column="0">
+               <item row="7" column="0" colspan="3">
+                <widget class="QLabel" name="lblCtrlDblClick">
+                 <property name="text">
+                  <string>Ctrl + double click:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbCtrlDblClick</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="3" colspan="6">
+                <widget class="QComboBox" name="cmbCtrlDblClick"/>
+               </item>
+               <item row="13" column="0">
                 <widget class="QLabel" name="lblNotes">
                  <property name="font">
                   <font>
@@ -308,7 +324,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="14" column="1">
+               <item row="15" column="1">
                 <spacer name="verticalSpacer_17">
                  <property name="orientation">
                   <enum>Qt::Orientation::Vertical</enum>
@@ -321,7 +337,7 @@
                  </property>
                 </spacer>
                </item>
-               <item row="7" column="0" colspan="3">
+               <item row="8" column="0" colspan="3">
                 <widget class="QLabel" name="lblBoxType">
                  <property name="font">
                   <font>
@@ -337,14 +353,14 @@
                <item row="2" column="3" colspan="6">
                 <widget class="QComboBox" name="cmbBoxBorder"/>
                </item>
-               <item row="9" column="1" colspan="13">
+               <item row="10" column="1" colspan="13">
                 <widget class="QLabel" name="label_58">
                  <property name="text">
                   <string/>
                  </property>
                 </widget>
                </item>
-               <item row="10" column="1" colspan="13">
+               <item row="11" column="1" colspan="13">
                 <widget class="QLabel" name="lblBoxInfo">
                  <property name="text">
                   <string>Box info</string>
@@ -380,7 +396,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="8" column="3" colspan="6">
+               <item row="9" column="3" colspan="6">
                 <widget class="QComboBox" name="cmbBoxType"/>
                </item>
               </layout>
@@ -6378,6 +6394,7 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>chkShowForRun</tabstop>
   <tabstop>chkPinToTray</tabstop>
   <tabstop>cmbDblClick</tabstop>
+  <tabstop>cmbCtrlDblClick</tabstop>
   <tabstop>cmbBoxType</tabstop>
   <tabstop>cmbVersion</tabstop>
   <tabstop>chkSeparateUserFolders</tabstop>

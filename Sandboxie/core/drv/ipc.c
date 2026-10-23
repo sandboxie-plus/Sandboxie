@@ -1267,6 +1267,11 @@ _FX NTSTATUS Ipc_CheckJobObject(
 // Ipc_Api_DuplicateObject
 //---------------------------------------------------------------------------
 
+NTSTATUS ObDuplicateObject(
+     PEPROCESS SourceProcess, HANDLE SourceHandle,
+     PEPROCESS TargetProcess, PHANDLE TargetHandle,
+     ACCESS_MASK DesiredAccess, ULONG HandleAttributes,
+     ULONG Options, KPROCESSOR_MODE PreviousMode);
 
 _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 {
@@ -1406,12 +1411,6 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
         // apply at all.  Requires a manual prototype (semi-documented export)
         // and keeping a reference on OtherProcessObject (move its
         // ObDereferenceObject to after this block).  Kept for reference only.
-        //
-        // NTSTATUS ObDuplicateObject(
-        //     PEPROCESS SourceProcess, HANDLE SourceHandle,
-        //     PEPROCESS TargetProcess, PHANDLE TargetHandle,
-        //     ACCESS_MASK DesiredAccess, ULONG HandleAttributes,
-        //     ULONG Options, KPROCESSOR_MODE PreviousMode);
         //
 
         PEPROCESS SourceProcessObject = IS_ARG_CURRENT_PROCESS(SourceProcessHandle)

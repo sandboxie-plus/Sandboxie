@@ -392,226 +392,256 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
 <context>
     <name>CBoxTransferDialog</name>
     <message>
-        <location filename="BoxTransfer.cpp" line="77"/>
+        <location filename="BoxTransfer.cpp" line="78"/>
         <source>Export Sandboxes</source>
         <translation>خروجی‌گرفتن از جعبه‌ها</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="79"/>
+        <location filename="BoxTransfer.cpp" line="80"/>
         <source>Import Sandboxes</source>
         <translation>وارد کردن جعبه‌ها</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="86"/>
+        <location filename="BoxTransfer.cpp" line="87"/>
         <source>Box Name</source>
         <translation>نام جعبه</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="86"/>
+        <location filename="BoxTransfer.cpp" line="87"/>
         <source>Status</source>
         <translation>وضعیت</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="89"/>
+        <location filename="BoxTransfer.cpp" line="90"/>
         <source>Archive Box Name</source>
         <translation>نام جعبه در آرشیو</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="89"/>
+        <location filename="BoxTransfer.cpp" line="90"/>
         <source>Import As</source>
         <translation>وارد کردن به‌عنوان</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="89"/>
+        <location filename="BoxTransfer.cpp" line="90"/>
         <source>Conflict</source>
         <translation>تعارض</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="89"/>
+        <location filename="BoxTransfer.cpp" line="90"/>
         <source>Source</source>
         <translation>مبدأ</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="99"/>
+        <location filename="BoxTransfer.cpp" line="100"/>
         <source>Export Global Configuration</source>
         <translation>خروجی‌گرفتن از پیکربندی سراسری</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="99"/>
+        <location filename="BoxTransfer.cpp" line="100"/>
         <source>Import Global Configuration</source>
         <translation>وارد کردن پیکربندی سراسری</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="104"/>
+        <location filename="BoxTransfer.cpp" line="105"/>
         <source>Show sandbox aliases (reads archive configuration)</source>
         <translation>نمایش نام‌های مستعار جعبه (پیکربندی آرشیو را می‌خواند)</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="105"/>
+        <location filename="BoxTransfer.cpp" line="106"/>
         <source>Disabled by default because reading aliases requires opening and extracting configuration from every selected archive.</source>
         <translation>به‌طور پیش‌فرض غیرفعال است، زیرا خواندن نام‌های مستعار نیازمند باز کردن و استخراج پیکربندی از هر آرشیو انتخاب‌شده است.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="112"/>
+        <location filename="BoxTransfer.cpp" line="113"/>
         <source>Export each box to its own file</source>
         <translation>خروجی‌گرفتن از هر جعبه در فایل جداگانه‌ی خودش</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="117"/>
+        <location filename="BoxTransfer.cpp" line="126"/>
+        <source>Create sandboxes in:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="130"/>
+        <source>Where the imported sandboxes are created. Keep %SANDBOX% in the path so that each box gets its own folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="144"/>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="152"/>
         <source>Select All</source>
         <translation>انتخاب همه</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="121"/>
+        <location filename="BoxTransfer.cpp" line="156"/>
         <source>Select None</source>
         <translation>لغو انتخاب همه</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="150"/>
+        <location filename="BoxTransfer.cpp" line="199"/>
+        <source>Select the folder to create the sandboxes in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="218"/>
+        <source>A sandbox cannot be located on a network share, please select a local folder.</source>
+        <translation type="unfinished">سندباکس نمی‌تواند روی یک اشتراک شبکه قرار گیرد؛ لطفاً یک پوشه‌ی محلی انتخاب کنید.</translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="226"/>
+        <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
+        <translation type="unfinished">سندباکس نمی‌تواند در ریشه‌ی یک پارتیشن قرار گیرد؛ لطفاً یک پوشه انتخاب کنید.</translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="252"/>
         <source>Running</source>
         <translation>در حال اجرا</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="152"/>
+        <location filename="BoxTransfer.cpp" line="254"/>
         <source>Encrypted</source>
         <translation>رمزنگاری‌شده</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="154"/>
+        <location filename="BoxTransfer.cpp" line="256"/>
         <source>Empty</source>
         <translation>خالی</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="262"/>
+        <location filename="BoxTransfer.cpp" line="364"/>
         <source>Exists!</source>
         <translation>موجود است!</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="376"/>
+        <location filename="BoxTransfer.cpp" line="478"/>
         <source>Sandbox name: %1</source>
         <translation>نام جعبه: %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="601"/>
+        <location filename="BoxTransfer.cpp" line="703"/>
         <source>Mount &apos;%1&apos; for Export</source>
         <translation>سوار کردن «%1» برای خروجی‌گرفتن</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="604"/>
+        <location filename="BoxTransfer.cpp" line="706"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
         <translation>جعبه‌ی رمزنگاری‌شده‌ی «%1» سوار نشده است. از آن صرف‌نظر شود؟</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="615"/>
+        <location filename="BoxTransfer.cpp" line="717"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
         <translation>پیاده‌کردن «%1» برای سوار کردن دوباره ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="625"/>
+        <location filename="BoxTransfer.cpp" line="727"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
         <translation>سوار کردن جعبه‌ی رمزنگاری‌شده‌ی «%1» ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="698"/>
+        <location filename="BoxTransfer.cpp" line="800"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>آرشیو 7-Zip (*.7z);;آرشیو Zip (*.zip)</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="681"/>
-        <location filename="BoxTransfer.cpp" line="691"/>
-        <location filename="BoxTransfer.cpp" line="704"/>
+        <location filename="BoxTransfer.cpp" line="783"/>
+        <location filename="BoxTransfer.cpp" line="793"/>
+        <location filename="BoxTransfer.cpp" line="806"/>
         <source>Exporting: %1</source>
         <translation>در حال خروجی‌گرفتن: %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="266"/>
+        <location filename="BoxTransfer.cpp" line="368"/>
         <source>Duplicate!</source>
         <translation>تکراری!</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="497"/>
-        <location filename="BoxTransfer.cpp" line="1129"/>
+        <location filename="BoxTransfer.cpp" line="599"/>
+        <location filename="BoxTransfer.cpp" line="1231"/>
         <source>7-Zip library is not available.</source>
         <translation>کتابخانه‌ی 7-Zip در دسترس نیست.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="512"/>
+        <location filename="BoxTransfer.cpp" line="614"/>
         <source>Cannot export: Sandbox has running processes.</source>
         <translation>امکان خروجی‌گرفتن نیست: جعبه دارای فرایندهای در حال اجراست.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="531"/>
+        <location filename="BoxTransfer.cpp" line="633"/>
         <source>Nothing selected for export.</source>
         <translation>چیزی برای خروجی‌گرفتن انتخاب نشده است.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="536"/>
+        <location filename="BoxTransfer.cpp" line="638"/>
         <source>No boxes selected for separate file export.</source>
         <translation>هیچ جعبه‌ای برای خروجی‌گرفتن در فایل جداگانه انتخاب نشده است.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="583"/>
+        <location filename="BoxTransfer.cpp" line="685"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
         <translation>جعبه‌ی «%1» دارای فرایندهای در حال اجراست. از آن صرف‌نظر شود؟</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="657"/>
+        <location filename="BoxTransfer.cpp" line="759"/>
         <source>Select Export Folder</source>
         <translation>انتخاب پوشه‌ی خروجی</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="696"/>
+        <location filename="BoxTransfer.cpp" line="798"/>
         <source>Export Sandbox</source>
         <translation>خروجی‌گرفتن از جعبه</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1058"/>
+        <location filename="BoxTransfer.cpp" line="1160"/>
         <source>Password for %1</source>
         <translation>گذرواژه برای %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1074"/>
+        <location filename="BoxTransfer.cpp" line="1176"/>
         <source>Failed to open archive (%1): %2</source>
         <translation>باز کردن آرشیو (%1) ناموفق بود: %2</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1134"/>
+        <location filename="BoxTransfer.cpp" line="1236"/>
         <source>Select Archives</source>
         <translation>انتخاب آرشیوها</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1135"/>
+        <location filename="BoxTransfer.cpp" line="1237"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
         <translation>آرشیو 7-Zip (*.7z);;آرشیو Zip (*.zip);;همه‌ی آرشیوها (*.7z *.zip)</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1172"/>
+        <location filename="BoxTransfer.cpp" line="1274"/>
         <source>The selected archives do not contain any sandbox data.</source>
         <translation>آرشیوهای انتخاب‌شده حاوی هیچ داده‌ی جعبه‌ای نیستند.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1198"/>
+        <location filename="BoxTransfer.cpp" line="1301"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
         <translation>امکان وارد کردن چند جعبه با نام یکسان «%1» نیست. لطفاً ابتدا نام آن‌ها را تغییر دهید.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1284"/>
-        <location filename="BoxTransfer.cpp" line="1292"/>
+        <location filename="BoxTransfer.cpp" line="1396"/>
+        <location filename="BoxTransfer.cpp" line="1404"/>
         <source>Importing: %1</source>
         <translation>در حال وارد کردن: %1</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1064"/>
+        <location filename="BoxTransfer.cpp" line="1166"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>باز کردن آرشیو ناموفق بود؛ گذرواژه اشتباه است؟</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1186"/>
+        <location filename="BoxTransfer.cpp" line="1289"/>
         <source>Nothing selected for import.</source>
         <translation>چیزی برای وارد کردن انتخاب نشده است.</translation>
     </message>
     <message>
-        <location filename="BoxTransfer.cpp" line="1214"/>
+        <location filename="BoxTransfer.cpp" line="1317"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
         <translation>جعبه‌ی «%1» از قبل وجود دارد. پیکربندی آن بازنویسی خواهد شد. ادامه می‌دهید؟</translation>
     </message>
@@ -2286,7 +2316,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>انتخاب پوشه</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1407"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1408"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="990"/>
@@ -2302,8 +2332,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>همه‌ی برنامه‌ها</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1405"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1423"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1406"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1424"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="739"/>
@@ -3110,52 +3140,52 @@ Please select a folder which contains this file.</source>
         <translation>جست‌وجوی گزینه‌ها</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1073"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1074"/>
         <source>Box: %1</source>
         <translation>جعبه: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1074"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1075"/>
         <source>Template: %1</source>
         <translation>قالب: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1075"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1076"/>
         <source>Global: %1</source>
         <translation>سراسری: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1076"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1077"/>
         <source>Default: %1</source>
         <translation>پیش‌فرض: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1302"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1303"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>این سندباکس حذف شده است؛ بنابراین امکان ذخیره‌ی پیکربندی نیست.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1367"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1368"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>برخی تغییرات هنوز ذخیره نشده‌اند؛ آیا واقعاً می‌خواهید این پنجره‌ی گزینه‌ها را ببندید؟</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1416"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1417"/>
         <source>Enter program:</source>
         <translation>برنامه را وارد کنید:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1844"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1845"/>
         <source>Autocomplete Consent Required</source>
         <translation>رضایت برای تکمیل خودکار لازم است</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1846"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1847"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>ویژگی تکمیل خودکار برای ادامه به رضایت شما نیاز دارد.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1848"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1849"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -3168,32 +3198,32 @@ Choose autocomplete mode:
 %1 هنگام تایپ: پیشنهادهای تکمیل خودکار هنگام تایپ.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1856"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1857"/>
         <source>Manual</source>
         <translation>دستی</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1857"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1858"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>پیشنهادهای تکمیل خودکار را با %1 فعال می‌کند.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1859"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1860"/>
         <source>While Typing</source>
         <translation>هنگام تایپ</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1860"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1861"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>پیشنهادهای تکمیل خودکار را هنگام تایپ فعال می‌کند.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1864"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>پیشنهادهای تکمیل خودکار را غیرفعال نگه می‌دارد.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1862"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
         <source>Cancel</source>
         <translation>لغو</translation>
     </message>
@@ -3731,22 +3761,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="5220"/>
+        <location filename="SandMan.cpp" line="5203"/>
         <source>Waiting for folder: %1</source>
         <translation>در انتظار پوشه: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5221"/>
+        <location filename="SandMan.cpp" line="5204"/>
         <source>Deleting folder: %1</source>
         <translation>در حال حذف پوشه: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5222"/>
+        <location filename="SandMan.cpp" line="5205"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>در حال ادغام پوشه‌ها: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5223"/>
+        <location filename="SandMan.cpp" line="5206"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>در حال پایان‌دادن به ادغام اسنپ‌شات...</translation>
     </message>
@@ -3837,43 +3867,43 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandMan</name>
     <message>
-        <location filename="SandMan.cpp" line="518"/>
-        <location filename="SandMan.cpp" line="2835"/>
+        <location filename="SandMan.cpp" line="519"/>
+        <location filename="SandMan.cpp" line="2818"/>
         <source>Sandboxie-Plus v%1</source>
         <translation>Sandboxie-Plus نسخه‌ی %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5065"/>
+        <location filename="SandMan.cpp" line="5048"/>
         <source>Reset Columns</source>
         <translation>بازنشانی ستون‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5066"/>
+        <location filename="SandMan.cpp" line="5049"/>
         <source>Copy Cell</source>
         <translation>کپی سلول</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5067"/>
+        <location filename="SandMan.cpp" line="5050"/>
         <source>Copy Row</source>
         <translation>کپی سطر</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5068"/>
+        <location filename="SandMan.cpp" line="5051"/>
         <source>Copy Panel</source>
         <translation>کپی پنل</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1595"/>
+        <location filename="SandMan.cpp" line="1596"/>
         <source>Time|Message</source>
         <translation>زمان|پیام</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1606"/>
+        <location filename="SandMan.cpp" line="1607"/>
         <source>Sbie Messages</source>
         <translation>پیام‌های Sbie</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1622"/>
+        <location filename="SandMan.cpp" line="1623"/>
         <source>Trace Log</source>
         <translation>گزارش ردیابی</translation>
     </message>
@@ -3883,319 +3913,319 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>نمایش/پنهان‌کردن</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="950"/>
-        <location filename="SandMan.cpp" line="952"/>
-        <location filename="SandMan.cpp" line="1002"/>
-        <location filename="SandMan.cpp" line="1004"/>
+        <location filename="SandMan.cpp" line="951"/>
+        <location filename="SandMan.cpp" line="953"/>
+        <location filename="SandMan.cpp" line="1003"/>
+        <location filename="SandMan.cpp" line="1005"/>
         <source>Pause Forcing Programs</source>
         <translation>توقف اجبار برنامه‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="841"/>
-        <location filename="SandMan.cpp" line="1073"/>
+        <location filename="SandMan.cpp" line="842"/>
+        <location filename="SandMan.cpp" line="1074"/>
         <source>&amp;Sandbox</source>
         <translation>&amp;سندباکس</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="842"/>
-        <location filename="SandMan.cpp" line="1344"/>
+        <location filename="SandMan.cpp" line="843"/>
         <location filename="SandMan.cpp" line="1345"/>
+        <location filename="SandMan.cpp" line="1346"/>
         <source>Create New Box</source>
         <translation>ساخت جعبه‌ی جدید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="843"/>
+        <location filename="SandMan.cpp" line="844"/>
         <source>Create Box Group</source>
         <translation>ساخت گروه جعبه</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="851"/>
-        <location filename="SandMan.cpp" line="1000"/>
+        <location filename="SandMan.cpp" line="852"/>
+        <location filename="SandMan.cpp" line="1001"/>
         <source>Terminate All Processes</source>
         <translation>پایان دادن به همه‌ی فرایندها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="956"/>
+        <location filename="SandMan.cpp" line="957"/>
         <source>Disable File Recovery</source>
         <translation>غیرفعال‌کردن بازیابی فایل</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="767"/>
+        <location filename="SandMan.cpp" line="768"/>
         <source>&amp;Maintenance</source>
         <translation>&amp;نگهداری</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="768"/>
+        <location filename="SandMan.cpp" line="769"/>
         <source>Connect</source>
         <translation>اتصال</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="769"/>
+        <location filename="SandMan.cpp" line="770"/>
         <source>Disconnect</source>
         <translation>قطع اتصال</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="771"/>
+        <location filename="SandMan.cpp" line="772"/>
         <source>Stop All</source>
         <translation>توقف همه</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="772"/>
+        <location filename="SandMan.cpp" line="773"/>
         <source>&amp;Advanced</source>
         <translation>&amp;پیشرفته</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="773"/>
+        <location filename="SandMan.cpp" line="774"/>
         <source>Install Driver</source>
         <translation>نصب درایور</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="774"/>
+        <location filename="SandMan.cpp" line="775"/>
         <source>Start Driver</source>
         <translation>شروع درایور</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="775"/>
+        <location filename="SandMan.cpp" line="776"/>
         <source>Stop Driver</source>
         <translation>توقف درایور</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="776"/>
+        <location filename="SandMan.cpp" line="777"/>
         <source>Uninstall Driver</source>
         <translation>حذف نصب درایور</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="778"/>
+        <location filename="SandMan.cpp" line="779"/>
         <source>Install Service</source>
         <translation>نصب سرویس</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="779"/>
+        <location filename="SandMan.cpp" line="780"/>
         <source>Start Service</source>
         <translation>شروع سرویس</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="780"/>
+        <location filename="SandMan.cpp" line="781"/>
         <source>Stop Service</source>
         <translation>توقف سرویس</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="781"/>
+        <location filename="SandMan.cpp" line="782"/>
         <source>Uninstall Service</source>
         <translation>حذف نصب سرویس</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="798"/>
+        <location filename="SandMan.cpp" line="799"/>
         <source>Setup Wizard</source>
         <translation>راهنمای تنظیم</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="801"/>
+        <location filename="SandMan.cpp" line="802"/>
         <source>Uninstall All</source>
         <translation>حذف نصب همه</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="880"/>
-        <location filename="SandMan.cpp" line="1042"/>
+        <location filename="SandMan.cpp" line="881"/>
+        <location filename="SandMan.cpp" line="1043"/>
         <source>Exit</source>
         <translation>خروج</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="883"/>
-        <location filename="SandMan.cpp" line="1044"/>
+        <location filename="SandMan.cpp" line="884"/>
+        <location filename="SandMan.cpp" line="1045"/>
         <source>&amp;View</source>
         <translation>&amp;نما</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="807"/>
+        <location filename="SandMan.cpp" line="808"/>
         <source>Simple View</source>
         <translation>نمای ساده</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="808"/>
+        <location filename="SandMan.cpp" line="809"/>
         <source>Advanced View</source>
         <translation>نمای پیشرفته</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="813"/>
+        <location filename="SandMan.cpp" line="814"/>
         <source>Always on Top</source>
         <translation>همیشه در بالا</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="890"/>
+        <location filename="SandMan.cpp" line="891"/>
         <source>Show Hidden Boxes</source>
         <translation>نمایش جعبه‌های پنهان</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="892"/>
+        <location filename="SandMan.cpp" line="893"/>
         <source>Show All Sessions</source>
         <translation>نمایش همه‌ی نشست‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="909"/>
+        <location filename="SandMan.cpp" line="910"/>
         <source>Refresh View</source>
         <translation>تازه‌سازی نما</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="915"/>
+        <location filename="SandMan.cpp" line="916"/>
         <source>Clean Up</source>
         <translation>پاک‌سازی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="916"/>
+        <location filename="SandMan.cpp" line="917"/>
         <source>Cleanup Processes</source>
         <translation>پاک‌سازی فرایندها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="918"/>
+        <location filename="SandMan.cpp" line="919"/>
         <source>Cleanup Message Log</source>
         <translation>پاک‌سازی گزارش پیام‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="919"/>
+        <location filename="SandMan.cpp" line="920"/>
         <source>Cleanup Trace Log</source>
         <translation>پاک‌سازی گزارش ردیابی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="920"/>
+        <location filename="SandMan.cpp" line="921"/>
         <source>Cleanup Recovery Log</source>
         <translation>پاک‌سازی گزارش بازیابی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="922"/>
+        <location filename="SandMan.cpp" line="923"/>
         <source>Keep terminated</source>
         <translation>نگه‌داشتن پایان‌یافته‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="946"/>
+        <location filename="SandMan.cpp" line="947"/>
         <source>&amp;Options</source>
         <translation>&amp;گزینه‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="947"/>
-        <location filename="SandMan.cpp" line="1097"/>
+        <location filename="SandMan.cpp" line="948"/>
+        <location filename="SandMan.cpp" line="1098"/>
         <source>Global Settings</source>
         <translation>تنظیمات سراسری</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="981"/>
-        <location filename="SandMan.cpp" line="1107"/>
+        <location filename="SandMan.cpp" line="982"/>
+        <location filename="SandMan.cpp" line="1108"/>
         <source>Reset all hidden messages</source>
         <translation>بازنشانی همه‌ی پیام‌های پنهان</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="982"/>
-        <location filename="SandMan.cpp" line="1108"/>
+        <location filename="SandMan.cpp" line="983"/>
+        <location filename="SandMan.cpp" line="1109"/>
         <source>Reset all GUI options</source>
         <translation>بازنشانی همه‌ی گزینه‌های رابط کاربری</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="940"/>
+        <location filename="SandMan.cpp" line="941"/>
         <source>Trace Logging</source>
         <translation>ثبت گزارش ردیابی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="819"/>
+        <location filename="SandMan.cpp" line="820"/>
         <source>&amp;Help</source>
         <translation>&amp;کمک</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="829"/>
+        <location filename="SandMan.cpp" line="830"/>
         <source>Visit Support Forum</source>
         <translation>مراجعه به انجمن پشتیبانی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="828"/>
+        <location filename="SandMan.cpp" line="829"/>
         <source>Online Documentation</source>
         <translation>مستندات آنلاین</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="831"/>
+        <location filename="SandMan.cpp" line="832"/>
         <source>Check for Updates</source>
         <translation>بررسی به‌روزرسانی‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="833"/>
+        <location filename="SandMan.cpp" line="834"/>
         <source>About the Qt Framework</source>
         <translation>درباره‌ی فریم‌ورک Qt</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="834"/>
-        <location filename="SandMan.cpp" line="5158"/>
+        <location filename="SandMan.cpp" line="835"/>
+        <location filename="SandMan.cpp" line="5141"/>
         <source>About Sandboxie-Plus</source>
         <translation>درباره‌ی Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1078"/>
+        <location filename="SandMan.cpp" line="1079"/>
         <source>Create New Sandbox</source>
         <translation>ساخت جعبه‌ی جدید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1079"/>
+        <location filename="SandMan.cpp" line="1080"/>
         <source>Create New Group</source>
         <translation>ساخت گروه جدید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1186"/>
-        <location filename="SandMan.cpp" line="1332"/>
+        <location filename="SandMan.cpp" line="1187"/>
         <location filename="SandMan.cpp" line="1333"/>
+        <location filename="SandMan.cpp" line="1334"/>
         <source>Cleanup</source>
         <translation>پاک‌سازی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1416"/>
+        <location filename="SandMan.cpp" line="1417"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release %1 ready&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;نسخه‌ی جدید %1 از Sandboxie-Plus آماده است&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1420"/>
+        <location filename="SandMan.cpp" line="1421"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update %1 ready&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;به‌روزرسانی جدید %1 برای Sandboxie-Plus آماده است&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1424"/>
+        <location filename="SandMan.cpp" line="1425"/>
         <source>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update v%1 available&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;به‌روزرسانی جدید v%1 برای Sandboxie-Plus موجود است&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1435"/>
+        <location filename="SandMan.cpp" line="1436"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;حمایت از Sandboxie-Plus در Patreon&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1436"/>
+        <location filename="SandMan.cpp" line="1437"/>
         <source>Click to open web browser</source>
         <translation>برای باز کردن مرورگر وب کلیک کنید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1632"/>
+        <location filename="SandMan.cpp" line="1633"/>
         <source>Time|Box Name|File Path</source>
         <translation>زمان|نام جعبه|مسیر فایل</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="943"/>
-        <location filename="SandMan.cpp" line="1055"/>
-        <location filename="SandMan.cpp" line="1642"/>
+        <location filename="SandMan.cpp" line="944"/>
+        <location filename="SandMan.cpp" line="1056"/>
+        <location filename="SandMan.cpp" line="1643"/>
         <source>Recovery Log</source>
         <translation>گزارش بازیابی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1417"/>
+        <location filename="SandMan.cpp" line="1418"/>
         <source>Click to run installer</source>
         <translation>برای اجرای نصب‌کننده کلیک کنید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1421"/>
+        <location filename="SandMan.cpp" line="1422"/>
         <source>Click to apply update</source>
         <translation>برای اعمال به‌روزرسانی کلیک کنید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1711"/>
+        <location filename="SandMan.cpp" line="1712"/>
         <source>Do you want to close Sandboxie Manager?</source>
         <translation>آیا می‌خواهید مدیر Sandboxie را ببندید؟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1728"/>
+        <location filename="SandMan.cpp" line="1729"/>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
@@ -4204,34 +4234,34 @@ Do you want to do the clean up?</source>
 آیا می‌خواهید پاک‌سازی انجام شود؟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1729"/>
-        <location filename="SandMan.cpp" line="2332"/>
-        <location filename="SandMan.cpp" line="2874"/>
-        <location filename="SandMan.cpp" line="4065"/>
-        <location filename="SandMan.cpp" line="4522"/>
-        <location filename="SandMan.cpp" line="4538"/>
+        <location filename="SandMan.cpp" line="1730"/>
+        <location filename="SandMan.cpp" line="2315"/>
+        <location filename="SandMan.cpp" line="2857"/>
+        <location filename="SandMan.cpp" line="4048"/>
+        <location filename="SandMan.cpp" line="4505"/>
+        <location filename="SandMan.cpp" line="4521"/>
         <source>Don&apos;t show this message again.</source>
         <translation>این پیام را دوباره نشان نده.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1921"/>
+        <location filename="SandMan.cpp" line="1922"/>
         <source>This box provides &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;enhanced security isolation&lt;/a&gt;, it is suitable to test untrusted software.</source>
         <oldsource>This box provides enhanced security isolation, it is suitable to test untrusted software.</oldsource>
         <translation>این جعبه &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;ایزوله‌سازی امنیتی پیشرفته&lt;/a&gt; فراهم می‌کند و برای آزمایش نرم‌افزارهای نامعتبر مناسب است.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1925"/>
+        <location filename="SandMan.cpp" line="1926"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
         <translation>این جعبه ایزوله‌سازی استاندارد فراهم می‌کند و برای اجرای نرم‌افزارهای شما جهت افزایش امنیت مناسب است.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1929"/>
+        <location filename="SandMan.cpp" line="1930"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
         <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
         <translation>این جعبه ایزوله‌سازی را اجرا نمی‌کند و صرفاً برای استفاده به‌عنوان یک &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;محفظه‌ی برنامه&lt;/a&gt; جهت مجازی‌سازی نرم‌افزار در نظر گرفته شده است.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1937"/>
+        <location filename="SandMan.cpp" line="1938"/>
         <source>&lt;br /&gt;&lt;br /&gt;This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</source>
         <oldsource>
 
@@ -4239,7 +4269,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>&lt;br /&gt;&lt;br /&gt;این جعبه &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;دسترسی به همه‌ی مکان‌های داده‌ی کاربر را مسدود می‌کند&lt;/a&gt;، مگر مواردی که به‌صراحت در گزینه‌های دسترسی به منابع مجاز شده باشند.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2107"/>
+        <location filename="SandMan.cpp" line="2090"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
         <translation>عملیات ناشناخته‌ی «%1» از طریق خط فرمان درخواست شد</translation>
     </message>
@@ -4321,74 +4351,74 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2548"/>
+        <location filename="SandMan.cpp" line="2531"/>
         <source>Executing OnBoxDelete: %1</source>
         <translation>در حال اجرای OnBoxDelete: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2573"/>
+        <location filename="SandMan.cpp" line="2556"/>
         <source>Auto Deleting %1 Content</source>
         <translation>در حال حذف خودکار محتوای %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2811"/>
+        <location filename="SandMan.cpp" line="2794"/>
         <source>Auto deleting content of %1</source>
         <translation>حذف خودکار محتوای %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2847"/>
+        <location filename="SandMan.cpp" line="2830"/>
         <source>%1 Directory: %2</source>
         <translation>پوشه‌ی %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2847"/>
+        <location filename="SandMan.cpp" line="2830"/>
         <source>Application</source>
         <translation>برنامه</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2847"/>
+        <location filename="SandMan.cpp" line="2830"/>
         <source>Installation</source>
         <translation>نصب</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2849"/>
+        <location filename="SandMan.cpp" line="2832"/>
         <source>Current Config: %1</source>
         <translation>پیکربندی فعلی: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3007"/>
+        <location filename="SandMan.cpp" line="2990"/>
         <source>Do you want the setup wizard to be omitted?</source>
         <translation>آیا می‌خواهید راهنمای تنظیم نادیده گرفته شود؟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4201"/>
-        <location filename="SandMan.cpp" line="4203"/>
-        <location filename="SandMan.cpp" line="4814"/>
+        <location filename="SandMan.cpp" line="4184"/>
+        <location filename="SandMan.cpp" line="4186"/>
+        <location filename="SandMan.cpp" line="4797"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - خطا</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4201"/>
+        <location filename="SandMan.cpp" line="4184"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>توقف همه‌ی اجزای Sandboxie ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4203"/>
+        <location filename="SandMan.cpp" line="4186"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>شروع اجزای لازم Sandboxie ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="495"/>
+        <location filename="SandMan.cpp" line="496"/>
         <source>WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.</source>
         <translation>هشدار: امکان نوشتن در Sandboxie-Plus.ini در %1 نیست؛ تنظیمات ذخیره نخواهند شد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2360"/>
+        <location filename="SandMan.cpp" line="2343"/>
         <source>Cleaned up removed templates...</source>
         <translation>قالب‌های حذف‌شده پاک‌سازی شدند...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2871"/>
+        <location filename="SandMan.cpp" line="2854"/>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
@@ -4397,17 +4427,17 @@ No will choose: %2</source>
 خیر یعنی: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2943"/>
+        <location filename="SandMan.cpp" line="2926"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>سندباکس پیش‌فرض پیدا نشد؛ در حال ساخت: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3024"/>
+        <location filename="SandMan.cpp" line="3007"/>
         <source>   -   NOT connected</source>
         <translation>   -   متصل نیست</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3738"/>
+        <location filename="SandMan.cpp" line="3721"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>این مجموعه ویژگیِ انتخاب‌شده فقط برای پشتیبانان پروژه در دسترس است. فرایندهایی که در جعبه‌ای با این مجموعه ویژگی فعال، بدون گواهی پشتیبانی شروع شوند، پس از ۵ دقیقه پایان خواهند یافت.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;از پروژه حمایت کنید&lt;/a&gt; و یک &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;گواهی پشتیبانی&lt;/a&gt; دریافت کنید</translation>
     </message>
@@ -4472,340 +4502,340 @@ No will choose: %2</source>
         <translation>نام سندباکس: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3917"/>
+        <location filename="SandMan.cpp" line="3900"/>
         <source>Only Administrators can change the config.</source>
         <translation>فقط مدیران می‌توانند پیکربندی را تغییر دهند.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3927"/>
+        <location filename="SandMan.cpp" line="3910"/>
         <source>Please enter the configuration password.</source>
         <translation>لطفاً گذرواژه‌ی پیکربندی را وارد کنید.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3935"/>
+        <location filename="SandMan.cpp" line="3918"/>
         <source>Login Failed: %1</source>
         <translation>ورود ناموفق بود: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3974"/>
+        <location filename="SandMan.cpp" line="3957"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>آیا می‌خواهید همه‌ی فرایندها را در همه‌ی سندباکس‌ها پایان دهید؟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4064"/>
+        <location filename="SandMan.cpp" line="4047"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus در حالت قابل‌حمل شروع شد و نیاز به ساخت سرویس‌های لازم دارد. این کار مجوز مدیریتی خواهد خواست.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4098"/>
+        <location filename="SandMan.cpp" line="4081"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>احتیاط: یک عامل دیگر (احتمالاً SbieCtrl.exe) در حال مدیریت این نشست Sandboxie است؛ لطفاً ابتدا آن را ببندید و برای در دست گرفتن دوباره اتصال برقرار کنید.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4230"/>
+        <location filename="SandMan.cpp" line="4213"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>در حال اجرای عملیات نگهداری، لطفاً صبر کنید...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4432"/>
+        <location filename="SandMan.cpp" line="4415"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>آیا می‌خواهید پیام‌های پنهان را نیز بازنشانی کنید (بله)، یا فقط همه‌ی پیام‌های گزارش را (خیر)؟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4536"/>
+        <location filename="SandMan.cpp" line="4519"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>تغییرات هرگاه فایل ذخیره شود، به‌طور خودکار اعمال خواهند شد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4537"/>
+        <location filename="SandMan.cpp" line="4520"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>تغییرات به محض بسته‌شدن ویرایشگر، به‌طور خودکار اعمال خواهند شد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4737"/>
+        <location filename="SandMan.cpp" line="4720"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>وضعیت خطا: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4738"/>
+        <location filename="SandMan.cpp" line="4721"/>
         <source>Unknown</source>
         <translation>ناشناخته</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4758"/>
+        <location filename="SandMan.cpp" line="4741"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>یک سندباکس باید پیش از حذف، خالی شود.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4763"/>
+        <location filename="SandMan.cpp" line="4746"/>
         <source>Failed to copy box data files</source>
         <translation>کپی فایل‌های داده‌ی جعبه ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4768"/>
+        <location filename="SandMan.cpp" line="4751"/>
         <source>Failed to remove old box data files</source>
         <translation>حذف فایل‌های داده‌ی قدیمیِ جعبه ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4786"/>
+        <location filename="SandMan.cpp" line="4769"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>وضعیت خطای ناشناخته: 0x%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4888"/>
+        <location filename="SandMan.cpp" line="4871"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
         <translation>آیا می‌خواهید %1 را در مرورگر وبِ جعبه‌شده یا بدون جعبه باز کنید؟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4892"/>
+        <location filename="SandMan.cpp" line="4875"/>
         <source>Sandboxed</source>
         <translation>جعبه‌شده</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4893"/>
+        <location filename="SandMan.cpp" line="4876"/>
         <source>Unsandboxed</source>
         <translation>بدون جعبه</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5069"/>
+        <location filename="SandMan.cpp" line="5052"/>
         <source>Case Sensitive</source>
         <translation>حساس به حروف بزرگ و کوچک</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5070"/>
+        <location filename="SandMan.cpp" line="5053"/>
         <source>RegExp</source>
         <translation>عبارت باقاعده</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5071"/>
+        <location filename="SandMan.cpp" line="5054"/>
         <source>Highlight</source>
         <translation>برجسته‌سازی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5072"/>
+        <location filename="SandMan.cpp" line="5055"/>
         <source>Close</source>
         <translation>بستن</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5073"/>
+        <location filename="SandMan.cpp" line="5056"/>
         <source>&amp;Find ...</source>
         <translation>&amp;جست‌وجو ...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5074"/>
+        <location filename="SandMan.cpp" line="5057"/>
         <source>All columns</source>
         <translation>همه‌ی ستون‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4740"/>
+        <location filename="SandMan.cpp" line="4723"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>برای این عملیات، مجوز مدیریتی لازم است.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="809"/>
+        <location filename="SandMan.cpp" line="810"/>
         <source>Vintage View (like SbieCtrl)</source>
         <translation>نمای کلاسیک (مانند SbieCtrl)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="826"/>
+        <location filename="SandMan.cpp" line="827"/>
         <source>Contribute to Sandboxie-Plus</source>
         <translation>مشارکت در Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="849"/>
-        <location filename="SandMan.cpp" line="998"/>
+        <location filename="SandMan.cpp" line="850"/>
+        <location filename="SandMan.cpp" line="999"/>
         <source>Run Sandboxed</source>
         <translation>اجرا در جعبه</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="959"/>
+        <location filename="SandMan.cpp" line="960"/>
         <source>Disable Message Popup</source>
         <translation>غیرفعال‌کردن پیام بازشو</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="854"/>
-        <location filename="SandMan.cpp" line="1014"/>
+        <location filename="SandMan.cpp" line="855"/>
+        <location filename="SandMan.cpp" line="1015"/>
         <source>Is Window Sandboxed?</source>
         <oldsource>Is Window Sandboxed</oldsource>
         <translation>آیا پنجره جعبه‌شده است؟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="516"/>
-        <location filename="SandMan.cpp" line="2833"/>
+        <location filename="SandMan.cpp" line="517"/>
+        <location filename="SandMan.cpp" line="2816"/>
         <source>Sandboxie-Plus Insider [%1]</source>
         <translation>Sandboxie-Plus Insider [%1]</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="827"/>
+        <location filename="SandMan.cpp" line="828"/>
         <source>Troubleshooting Wizard</source>
         <translation>راهنمای عیب‌یابی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="901"/>
+        <location filename="SandMan.cpp" line="902"/>
         <source>Show File Panel</source>
         <translation>نمایش پنل فایل</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="969"/>
-        <location filename="SandMan.cpp" line="1115"/>
-        <location filename="SandMan.cpp" line="1360"/>
+        <location filename="SandMan.cpp" line="970"/>
+        <location filename="SandMan.cpp" line="1116"/>
         <location filename="SandMan.cpp" line="1361"/>
+        <location filename="SandMan.cpp" line="1362"/>
         <source>Edit Sandboxie.ini</source>
         <translation>ویرایش Sandboxie.ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="972"/>
+        <location filename="SandMan.cpp" line="973"/>
         <source>Edit Templates.ini</source>
         <translation>ویرایش Templates.ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="974"/>
+        <location filename="SandMan.cpp" line="975"/>
         <source>Edit Sandboxie-Plus.ini</source>
         <translation>ویرایش Sandboxie-Plus.ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="978"/>
-        <location filename="SandMan.cpp" line="1118"/>
+        <location filename="SandMan.cpp" line="979"/>
+        <location filename="SandMan.cpp" line="1119"/>
         <source>Reload configuration</source>
         <translation>بارگذاری مجدد پیکربندی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="997"/>
+        <location filename="SandMan.cpp" line="998"/>
         <source>&amp;File</source>
         <translation>&amp;فایل</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1015"/>
+        <location filename="SandMan.cpp" line="1016"/>
         <source>Resource Access Monitor</source>
         <translation>نمایشگر دسترسی به منابع</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1050"/>
+        <location filename="SandMan.cpp" line="1051"/>
         <source>Programs</source>
         <translation>برنامه‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1051"/>
+        <location filename="SandMan.cpp" line="1052"/>
         <source>Files and Folders</source>
         <translation>فایل‌ها و پوشه‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1085"/>
+        <location filename="SandMan.cpp" line="1086"/>
         <source>Set Container Folder</source>
         <translation>تنظیم پوشه‌ی ظرف</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1088"/>
+        <location filename="SandMan.cpp" line="1089"/>
         <source>Set Layout and Groups</source>
         <translation>تنظیم چیدمان و گروه‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1090"/>
+        <location filename="SandMan.cpp" line="1091"/>
         <source>Reveal Hidden Boxes</source>
         <translation>آشکارسازی جعبه‌های پنهان</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1096"/>
+        <location filename="SandMan.cpp" line="1097"/>
         <source>&amp;Configure</source>
         <translation>&amp;پیکربندی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1100"/>
+        <location filename="SandMan.cpp" line="1101"/>
         <source>Program Alerts</source>
         <translation>هشدارهای برنامه</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1102"/>
+        <location filename="SandMan.cpp" line="1103"/>
         <source>Windows Shell Integration</source>
         <translation>یکپارچگی با پوسته‌ی ویندوز</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1104"/>
+        <location filename="SandMan.cpp" line="1105"/>
         <source>Software Compatibility</source>
         <translation>سازگاری نرم‌افزار</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1113"/>
+        <location filename="SandMan.cpp" line="1114"/>
         <source>Lock Configuration</source>
         <translation>قفل کردن پیکربندی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1132"/>
+        <location filename="SandMan.cpp" line="1133"/>
         <source>Sandbox %1</source>
         <translation>سندباکس %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1175"/>
+        <location filename="SandMan.cpp" line="1176"/>
         <source>New-Box Menu</source>
         <translation>منوی جعبه‌ی جدید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1195"/>
+        <location filename="SandMan.cpp" line="1196"/>
         <source>Edit-ini Menu</source>
         <translation>منوی ویرایش ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1241"/>
+        <location filename="SandMan.cpp" line="1242"/>
         <source>Toolbar Items</source>
         <translation>موارد نوار ابزار</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1243"/>
+        <location filename="SandMan.cpp" line="1244"/>
         <source>Reset Toolbar</source>
         <translation>بازنشانی نوار ابزار</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1425"/>
+        <location filename="SandMan.cpp" line="1426"/>
         <source>Click to download update</source>
         <translation>برای دانلود به‌روزرسانی کلیک کنید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2257"/>
+        <location filename="SandMan.cpp" line="2240"/>
         <source>No Force Process</source>
         <translation>بدون فرایند اجباری</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2655"/>
+        <location filename="SandMan.cpp" line="2638"/>
         <source>Removed Shortcut: %1</source>
         <translation>میان‌بر حذف شد: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2744"/>
+        <location filename="SandMan.cpp" line="2727"/>
         <source>Updated Shortcut to: %1</source>
         <translation>میان‌بر به‌روزرسانی شد به: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2746"/>
+        <location filename="SandMan.cpp" line="2729"/>
         <source>Added Shortcut to: %1</source>
         <translation>میان‌بر افزوده شد به: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2823"/>
+        <location filename="SandMan.cpp" line="2806"/>
         <source>Auto removing sandbox %1</source>
         <translation>در حال حذف خودکار سندباکس %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2848"/>
+        <location filename="SandMan.cpp" line="2831"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
         <translation>نسخه‌ی Sandboxie-Plus: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2850"/>
+        <location filename="SandMan.cpp" line="2833"/>
         <source>Data Directory: %1</source>
         <translation>پوشه‌ی داده: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2913"/>
+        <location filename="SandMan.cpp" line="2896"/>
         <source> for Personal use</source>
         <translation> برای استفاده‌ی شخصی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2915"/>
+        <location filename="SandMan.cpp" line="2898"/>
         <source>   -   for Non-Commercial use ONLY</source>
         <translation>   -   فقط برای استفاده‌ی غیرتجاری</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2980"/>
+        <location filename="SandMan.cpp" line="2963"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.</oldsource>
@@ -4813,122 +4843,129 @@ Please check if there is an update for sandboxie.</source>
 لطفاً بررسی کنید آیا به‌روزرسانی‌ای برای Sandboxie موجود است.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2989"/>
+        <location filename="SandMan.cpp" line="2972"/>
         <source>Don&apos;t show this message again for the current build.</source>
         <translation>این پیام را برای نسخه‌ی فعلی دوباره نشان نده.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2996"/>
+        <location filename="SandMan.cpp" line="2979"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
         <translation>نسخه‌ی %1 ویندوز شما از قابلیت‌های پشتیبانیِ شناخته‌شده‌ی فعلیِ نسخه‌ی Sandboxie شما فراتر رفته است؛ Sandboxie تلاش می‌کند از آخرین offset های شناخته‌شده استفاده کند که ممکن است باعث ناپایداری سیستم شود.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3393"/>
-        <location filename="SandMan.cpp" line="3397"/>
-        <location filename="SandMan.cpp" line="3403"/>
-        <location filename="SandMan.cpp" line="3405"/>
+        <location filename="SandMan.cpp" line="3376"/>
+        <location filename="SandMan.cpp" line="3380"/>
+        <location filename="SandMan.cpp" line="3386"/>
+        <location filename="SandMan.cpp" line="3388"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3626"/>
+        <location filename="SandMan.cpp" line="3609"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>برنامه‌ی %1 که در جعبه‌ی %2 شروع شده، تا ۵ دقیقه‌ی دیگر پایان خواهد یافت، زیرا این جعبه برای استفاده از ویژگی‌های اختصاصیِ پشتیبانان پروژه پیکربندی شده است.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3628"/>
+        <location filename="SandMan.cpp" line="3611"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>جعبه‌ی %1 برای استفاده از ویژگی‌های اختصاصیِ پشتیبانان پروژه پیکربندی شده است؛ این پیش‌تنظیم‌ها نادیده گرفته خواهند شد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3609"/>
-        <location filename="SandMan.cpp" line="3617"/>
-        <location filename="SandMan.cpp" line="3629"/>
-        <location filename="SandMan.cpp" line="3727"/>
+        <location filename="SandMan.cpp" line="3592"/>
+        <location filename="SandMan.cpp" line="3600"/>
+        <location filename="SandMan.cpp" line="3612"/>
+        <location filename="SandMan.cpp" line="3710"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;پشتیبان پروژه شوید&lt;/a&gt; و یک &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;گواهی پشتیبانی&lt;/a&gt; دریافت کنید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="521"/>
+        <location filename="SandMan.cpp" line="522"/>
         <source> (Administrator)</source>
         <translation> (مدیر)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="786"/>
+        <location filename="SandMan.cpp" line="787"/>
         <source>Virtual Disks</source>
         <translation>دیسک‌های مجازی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="844"/>
+        <location filename="SandMan.cpp" line="845"/>
         <source>Import Boxes</source>
         <translation>وارد کردن جعبه‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="846"/>
+        <location filename="SandMan.cpp" line="847"/>
         <source>Export Boxes</source>
         <translation>خروجی‌گرفتن از جعبه‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="850"/>
-        <location filename="SandMan.cpp" line="999"/>
+        <location filename="SandMan.cpp" line="851"/>
+        <location filename="SandMan.cpp" line="1000"/>
         <source>Suspend All Processes</source>
         <translation>تعلیق همه‌ی فرایندها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="852"/>
-        <location filename="SandMan.cpp" line="1001"/>
+        <location filename="SandMan.cpp" line="853"/>
+        <location filename="SandMan.cpp" line="1002"/>
         <source>Lock All Encrypted Boxes</source>
         <translation>قفل کردن همه‌ی جعبه‌های رمزنگاری‌شده</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="878"/>
-        <location filename="SandMan.cpp" line="1040"/>
+        <location filename="SandMan.cpp" line="879"/>
+        <location filename="SandMan.cpp" line="1041"/>
         <source>Restart As Admin</source>
         <translation>راه‌اندازی مجدد به‌عنوان مدیر</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="925"/>
+        <location filename="SandMan.cpp" line="926"/>
         <source>Auto Expand Tree</source>
         <translation>باز کردن خودکار درخت</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1080"/>
+        <location filename="SandMan.cpp" line="1081"/>
         <source>Import Sandboxes</source>
         <translation>وارد کردن جعبه‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1082"/>
+        <location filename="SandMan.cpp" line="1083"/>
         <source>Export Sandboxes</source>
         <translation>خروجی‌گرفتن از جعبه‌ها</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1514"/>
+        <location filename="SandMan.cpp" line="1515"/>
         <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
         <translation>جعبه‌ها: %1 (%2 فعال)  |  فرایندها: %3  |  حافظه: %4</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1932"/>
+        <location filename="SandMan.cpp" line="1933"/>
         <source>This box will be &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;encrypted&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;access to sandboxed processes will be guarded&lt;/a&gt;.</source>
         <translation>این جعبه &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;رمزنگاری&lt;/a&gt; خواهد شد و &lt;a href=&quot;sbie://docs/black-box&quot;&gt;دسترسی به فرایندهای جعبه‌شده محافظت خواهد شد&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2009"/>
-        <location filename="SandMan.cpp" line="2040"/>
+        <location filename="Windows/ShellBoxSelector.cpp" line="53"/>
+        <source>No enabled sandbox is available. Please create or enable a sandbox and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/ShellBoxSelector.cpp" line="63"/>
         <source>Which box you want to add in?</source>
         <translation>می‌خواهید به کدام جعبه اضافه کنید؟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2009"/>
-        <location filename="SandMan.cpp" line="2040"/>
+        <location filename="Windows/ShellBoxSelector.cpp" line="106"/>
+        <source>More than one sandbox has this alias. Select a sandbox from the list or type its actual name. Nothing was changed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Type the box name which you are going to set:</source>
-        <translation>نام جعبه‌ای را که می‌خواهید تنظیم کنید وارد کنید:</translation>
+        <translation type="vanished">نام جعبه‌ای را که می‌خواهید تنظیم کنید وارد کنید:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2026"/>
-        <location filename="SandMan.cpp" line="2031"/>
-        <location filename="SandMan.cpp" line="2035"/>
-        <location filename="SandMan.cpp" line="2047"/>
-        <location filename="SandMan.cpp" line="2051"/>
+        <location filename="Windows/ShellBoxSelector.cpp" line="52"/>
+        <location filename="Windows/ShellBoxSelector.cpp" line="89"/>
+        <location filename="Windows/ShellBoxSelector.cpp" line="105"/>
+        <location filename="Windows/ShellBoxSelector.cpp" line="113"/>
         <source>Sandboxie-Plus Warning</source>
         <translation>هشدار Sandboxie-Plus</translation>
     </message>
@@ -4938,34 +4975,32 @@ Please check if there is an update for sandboxie.</source>
         <translation>مقدار وارد شده یک پوشه یا فایل اجرایی موجود نیست.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2031"/>
-        <location filename="SandMan.cpp" line="2047"/>
+        <location filename="Windows/ShellBoxSelector.cpp" line="113"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
         <translation>نام جعبه‌ی اشتباهی وارد کردید! چیزی تغییر نکرد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2035"/>
-        <location filename="SandMan.cpp" line="2051"/>
+        <location filename="Windows/ShellBoxSelector.cpp" line="89"/>
         <source>User canceled this operation.</source>
         <translation>کاربر این عملیات را لغو کرد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2330"/>
+        <location filename="SandMan.cpp" line="2313"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
         <translation>برخی قالب‌های سازگاری وجود ندارند:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;احتمالاً حذف شده‌اند؛ آیا می‌خواهید آن‌ها را از همه‌ی جعبه‌ها حذف کنید؟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2417"/>
+        <location filename="SandMan.cpp" line="2400"/>
         <source>USB sandbox not found; creating: %1</source>
         <translation>سندباکس USB پیدا نشد؛ در حال ساخت: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2778"/>
+        <location filename="SandMan.cpp" line="2761"/>
         <source>Executing OnBoxTerminate: %1</source>
         <translation>در حال اجرای OnBoxTerminate: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3014"/>
+        <location filename="SandMan.cpp" line="2997"/>
         <source>Sandman did not finish enumerating installed windows updates last time, it probably hangs.
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
@@ -4974,127 +5009,127 @@ Do you want to disable Windows Updates scanning from the the software compatibil
 آیا می‌خواهید اسکن به‌روزرسانی‌های ویندوز را از تشخیص سازگاری نرم‌افزار غیرفعال کنید؟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3218"/>
+        <location filename="SandMan.cpp" line="3201"/>
         <source>Failed to configure hotkey %1, error: %2</source>
         <translation>پیکربندی کلید میانبر %1 ناموفق بود، خطا: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3608"/>
+        <location filename="SandMan.cpp" line="3591"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
         <translation>جعبه‌ی %1 برای استفاده از ویژگی‌های اختصاصیِ پشتیبانان پروژه پیکربندی شده است.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3613"/>
+        <location filename="SandMan.cpp" line="3596"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>جعبه‌ی %1 برای استفاده از ویژگی‌هایی پیکربندی شده که به یک گواهی پشتیبانیِ &lt;b&gt;پیشرفته&lt;/b&gt; نیاز دارند.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3615"/>
-        <location filename="SandMan.cpp" line="3725"/>
+        <location filename="SandMan.cpp" line="3598"/>
+        <location filename="SandMan.cpp" line="3708"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
         <translation>&lt;br /&gt;برای باز کردن ویژگی‌های پیشرفته، &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;گواهی خود را ارتقا دهید&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3721"/>
+        <location filename="SandMan.cpp" line="3704"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>ویژگی انتخاب‌شده به یک گواهی پشتیبانیِ &lt;b&gt;پیشرفته&lt;/b&gt; نیاز دارد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3723"/>
+        <location filename="SandMan.cpp" line="3706"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
         <translation>&lt;br /&gt;برای باز کردن این ویژگی باید در سطح Great Patreon یا بالاتر باشید.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3735"/>
+        <location filename="SandMan.cpp" line="3718"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>این مجموعه ویژگیِ انتخاب‌شده فقط برای پشتیبانان پروژه در دسترس است.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;از پروژه حمایت کنید&lt;/a&gt; و یک &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;گواهی پشتیبانی&lt;/a&gt; دریافت کنید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3781"/>
+        <location filename="SandMan.cpp" line="3764"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
         <translation>گواهی‌ای که در تلاش برای استفاده از آن هستید مسدود شده است؛ یعنی به‌دلیلی خاص باطل اعلام شده. هرگونه تلاش برای استفاده از آن، نقض شرایط استفاده محسوب می‌شود!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3793"/>
+        <location filename="SandMan.cpp" line="3776"/>
         <source>The Certificate Signature is invalid!</source>
         <translation>امضای گواهی نامعتبر است!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3794"/>
+        <location filename="SandMan.cpp" line="3777"/>
         <source>The Certificate is not suitable for this product.</source>
         <translation>این گواهی برای این محصول مناسب نیست.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3795"/>
+        <location filename="SandMan.cpp" line="3778"/>
         <source>The Certificate is node locked.</source>
         <translation>این گواهی به یک دستگاه خاص قفل شده است.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3799"/>
+        <location filename="SandMan.cpp" line="3782"/>
         <source>The support certificate is not valid.
 Error: %1</source>
         <translation>گواهی پشتیبانی معتبر نیست.
 خطا: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3863"/>
+        <location filename="SandMan.cpp" line="3846"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>دوره‌ی ارزیابی به پایان رسیده است!!!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3975"/>
-        <location filename="SandMan.cpp" line="4000"/>
+        <location filename="SandMan.cpp" line="3958"/>
+        <location filename="SandMan.cpp" line="3983"/>
         <source>Don&apos;t ask in future</source>
         <translation>دیگر پرسیده نشود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3999"/>
+        <location filename="SandMan.cpp" line="3982"/>
         <source>Do you want to terminate all processes in encrypted sandboxes, and unmount them?</source>
         <translation>آیا می‌خواهید همه‌ی فرایندها را در سندباکس‌های رمزنگاری‌شده پایان داده و آن‌ها را پیاده کنید؟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4025"/>
+        <location filename="SandMan.cpp" line="4008"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>لطفاً مدت‌زمان، برحسب ثانیه، برای غیرفعال‌کردن قوانین برنامه‌های اجباری را وارد کنید.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4040"/>
+        <location filename="SandMan.cpp" line="4023"/>
         <source>No Recovery</source>
         <translation>بدون بازیابی</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4046"/>
+        <location filename="SandMan.cpp" line="4029"/>
         <source>No Messages</source>
         <translation>بدون پیام</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4102"/>
+        <location filename="SandMan.cpp" line="4085"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation>&lt;b&gt;خطا:&lt;/b&gt; مدیر Sandboxie-Plus (SandMan.exe) امضای معتبری (SandMan.exe.sig) ندارد. لطفاً یک نسخه‌ی معتبر را از &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;صفحه‌ی دانلود رسمی&lt;/a&gt; دریافت کنید.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4205"/>
+        <location filename="SandMan.cpp" line="4188"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>عملیات نگهداری ناموفق بود (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4210"/>
+        <location filename="SandMan.cpp" line="4193"/>
         <source>Maintenance operation completed</source>
         <translation>عملیات نگهداری کامل شد</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4363"/>
+        <location filename="SandMan.cpp" line="4346"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>در رابط کاربری Plus، این قابلیت در نمای اصلی فهرست سندباکس‌ها ادغام شده است.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4364"/>
+        <location filename="SandMan.cpp" line="4347"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>با استفاده از منوی زمینه‌ی جعبه/گروه، می‌توانید جعبه‌ها و گروه‌ها را به گروه‌های دیگر منتقل کنید. همچنین می‌توانید از کشیدن و رها کردن برای جابه‌جایی موارد استفاده کنید. به‌طور جایگزین، می‌توانید با نگه‌داشتن ALT از کلیدهای جهت‌نما برای انتقال موارد به بالا و پایین درون گروهشان استفاده کنید.&lt;br /&gt;می‌توانید جعبه‌ها و گروه‌های جدید را از منوی سندباکس بسازید.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4520"/>
+        <location filename="SandMan.cpp" line="4503"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -5103,250 +5138,250 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 این فایل بخشی از Sandboxie است و هر تغییری روی آن، در به‌روزرسانیِ بعدیِ Sandboxie بازگردانده خواهد شد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4600"/>
+        <location filename="SandMan.cpp" line="4583"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>پیکربندی Sandboxie دوباره بارگذاری شد</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4741"/>
+        <location filename="SandMan.cpp" line="4724"/>
         <source>Failed to execute: %1</source>
         <translation>اجرای %1 ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4742"/>
+        <location filename="SandMan.cpp" line="4725"/>
         <source>Failed to connect to the driver</source>
         <translation>اتصال به درایور ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4743"/>
+        <location filename="SandMan.cpp" line="4726"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>ارتباط با سرویس Sandboxie ناموفق بود: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4744"/>
+        <location filename="SandMan.cpp" line="4727"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>یک Sandboxie %1 ناسازگار پیدا شد. نسخه‌های سازگار: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4745"/>
+        <location filename="SandMan.cpp" line="4728"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>مسیر نصب Sandboxie پیدا نشد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4746"/>
+        <location filename="SandMan.cpp" line="4729"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>کپی پیکربندی از سندباکس %1 ناموفق بود: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4747"/>
+        <location filename="SandMan.cpp" line="4730"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>سندباکسی با نام %1 از قبل وجود دارد</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4748"/>
+        <location filename="SandMan.cpp" line="4731"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>حذف سندباکس %1 ناموفق بود: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4749"/>
+        <location filename="SandMan.cpp" line="4732"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>نام سندباکس نمی‌تواند بیشتر از ۳۲ کاراکتر باشد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4750"/>
+        <location filename="SandMan.cpp" line="4733"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>نام سندباکس نمی‌تواند نام یک دستگاه باشد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4751"/>
+        <location filename="SandMan.cpp" line="4734"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>نام سندباکس فقط می‌تواند شامل حروف، ارقام و زیرخط باشد که به‌صورت فاصله نمایش داده می‌شوند.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4752"/>
+        <location filename="SandMan.cpp" line="4735"/>
         <source>Failed to terminate all processes</source>
         <translation>پایان دادن به همه‌ی فرایندها ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4753"/>
+        <location filename="SandMan.cpp" line="4736"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>محافظت در برابر حذف برای این سندباکس فعال است</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4754"/>
+        <location filename="SandMan.cpp" line="4737"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>پیش از حذف محتوای جعبه، باید همه‌ی فرایندهای سندباکس متوقف شوند</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4755"/>
+        <location filename="SandMan.cpp" line="4738"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>خطا در حذف پوشه‌ی سندباکس: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4756"/>
+        <location filename="SandMan.cpp" line="4739"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation>پیش از تغییرنام یک سندباکس، باید همه‌ی فرایندهای آن متوقف شوند.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4759"/>
+        <location filename="SandMan.cpp" line="4742"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>انتقال پوشه‌ی «%1» به «%2» ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4760"/>
+        <location filename="SandMan.cpp" line="4743"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>انتقال تصویر جعبه‌ی «%1» به «%2» ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4761"/>
+        <location filename="SandMan.cpp" line="4744"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>این عملیات اسنپ‌شات را نمی‌توان زمانی که فرایندها هنوز در حال اجرا در جعبه هستند انجام داد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4762"/>
+        <location filename="SandMan.cpp" line="4745"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>ساخت پوشه برای اسنپ‌شات جدید ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4764"/>
+        <location filename="SandMan.cpp" line="4747"/>
         <source>Snapshot not found</source>
         <translation>اسنپ‌شات پیدا نشد</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4765"/>
+        <location filename="SandMan.cpp" line="4748"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>خطا در ادغام پوشه‌های اسنپ‌شات «%1» با «%2»؛ اسنپ‌شات به‌طور کامل ادغام نشد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4766"/>
+        <location filename="SandMan.cpp" line="4749"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>حذف پوشه‌ی اسنپ‌شات قدیمیِ «%1» ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4767"/>
+        <location filename="SandMan.cpp" line="4750"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>امکان حذف اسنپ‌شاتی که بین چند اسنپ‌شات بعدی مشترک است وجود ندارد</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4769"/>
+        <location filename="SandMan.cpp" line="4752"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>شما مجاز به به‌روزرسانی پیکربندی در بخش «%1» نیستید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4770"/>
+        <location filename="SandMan.cpp" line="4753"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>تنظیم پیکربندیِ %1 در بخش %2 ناموفق بود: %3</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4771"/>
+        <location filename="SandMan.cpp" line="4754"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>امکان ساخت اسنپ‌شات از یک سندباکس خالی نیست</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4772"/>
+        <location filename="SandMan.cpp" line="4755"/>
         <source>A sandbox with that name already exists</source>
         <translation>سندباکسی با این نام از قبل وجود دارد</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4773"/>
+        <location filename="SandMan.cpp" line="4756"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>گذرواژه‌ی پیکربندی نباید بیشتر از ۶۴ کاراکتر باشد</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4774"/>
+        <location filename="SandMan.cpp" line="4757"/>
         <source>The operation was canceled by the user</source>
         <translation>این عملیات توسط کاربر لغو شد</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4775"/>
+        <location filename="SandMan.cpp" line="4758"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
         <translation>محتوای یک سندباکسِ پیاده‌شده قابل حذف نیست</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4777"/>
+        <location filename="SandMan.cpp" line="4760"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4779"/>
+        <location filename="SandMan.cpp" line="4762"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>وارد کردن/خروجی‌گرفتن در دسترس نیست؛ بارگذاری 7z.dll ممکن نشد</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4780"/>
+        <location filename="SandMan.cpp" line="4763"/>
         <source>Failed to create the box archive</source>
         <translation>ساخت آرشیو جعبه ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4781"/>
+        <location filename="SandMan.cpp" line="4764"/>
         <source>Failed to open the 7z archive</source>
         <translation>باز کردن آرشیو 7z ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4782"/>
+        <location filename="SandMan.cpp" line="4765"/>
         <source>Failed to unpack the box archive</source>
         <translation>استخراج آرشیو جعبه ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4783"/>
+        <location filename="SandMan.cpp" line="4766"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>فایل 7z انتخاب‌شده یک آرشیو جعبه نیست</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4784"/>
+        <location filename="SandMan.cpp" line="4767"/>
         <source>Failed to copy directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>کپی پوشه‌ی «%1» به «%2» ناموفق بود</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4816"/>
+        <location filename="SandMan.cpp" line="4799"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>این عملیات برای %1 مورد ناموفق بود.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4889"/>
+        <location filename="SandMan.cpp" line="4872"/>
         <source>Remember choice for later.</source>
         <translation>به‌خاطر سپردن این انتخاب برای بعد.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5127"/>
+        <location filename="SandMan.cpp" line="5110"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
         <translation>&lt;h3&gt;درباره‌ی Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;نسخه‌ی %1&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5135"/>
+        <location filename="SandMan.cpp" line="5118"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
         <translation>این نسخه از Sandboxie-Plus دارای گواهی برای: %1 است</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5137"/>
+        <location filename="SandMan.cpp" line="5120"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
         <translation>Sandboxie-Plus برای استفاده‌ی شخصی و غیرتجاری رایگان است.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5141"/>
+        <location filename="SandMan.cpp" line="5124"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus ادامه‌ی متن‌بازِ Sandboxie است.&lt;br /&gt;برای اطلاعات بیشتر به &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; مراجعه کنید.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;ویژگی‌ها: %3&lt;br /&gt;&lt;br /&gt;نصب: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;نمادها از &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3868"/>
+        <location filename="SandMan.cpp" line="3851"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>گواهی پشتیبانی برای این نسخه معتبر نیست؛ لطفاً یک گواهی به‌روز دریافت کنید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3871"/>
+        <location filename="SandMan.cpp" line="3854"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
         <translation>گواهی پشتیبانی منقضی شده است%1؛ لطفاً یک گواهی به‌روز دریافت کنید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3872"/>
+        <location filename="SandMan.cpp" line="3855"/>
         <source>, but it remains valid for the current build</source>
         <translation>، اما برای نسخه‌ی فعلی همچنان معتبر است</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3874"/>
+        <location filename="SandMan.cpp" line="3857"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>گواهی پشتیبانی تا %1 روز دیگر منقضی می‌شود؛ لطفاً یک گواهی به‌روز دریافت کنید</translation>
     </message>
@@ -6439,23 +6474,23 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3711"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3712"/>
         <source>Autocomplete Consent Required</source>
         <translation>نیاز به تأیید تکمیل خودکار</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3186"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3195"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3187"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3196"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3191"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3192"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(کپی)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3204"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3205"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation>نسخه‌ی Sandboxie-Plus: %1</translation>
     </message>
@@ -6465,39 +6500,39 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>جست‌وجو در تنظیمات</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1334"/>
         <location filename="Windows/SettingsWindow.cpp" line="1335"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1345"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1346"/>
         <source>Run &amp;Sandboxed</source>
         <translation>اجرا در &amp;سندباکس</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1795"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1796"/>
         <source>kilobytes (%1)</source>
         <translation>کیلوبایت (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1883"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1884"/>
         <source>Volume not attached</source>
         <translation>درایو متصل نشده است</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3273"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3274"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>این گواهی حامی منقضی شده است، لطفاً &lt;a href=&quot;%1&quot;&gt;یک گواهی به‌روزشده دریافت کنید&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3353"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3354"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;شما %1/%2 گواهی ارزیابی را استفاده کرده‌اید. امکان تولید گواهی رایگان دیگری وجود ندارد.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3356"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;یک گواهی ارزیابی رایگان دریافت کنید&lt;/a&gt; و به مدت %1 روز از همه‌ی امکانات ویژه بهره‌مند شوید.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3286"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3287"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>این گواهی حامی تا &lt;font color=&apos;red&apos;&gt;%1 روز دیگر منقضی می‌شود&lt;/font&gt;، لطفاً &lt;a href=&quot;%2&quot;&gt;یک گواهی به‌روزشده دریافت کنید&lt;/a&gt;.</translation>
@@ -6519,52 +6554,52 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>جمع کردن همه‌ی گروه‌ها</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3183"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3184"/>
         <source>Click to reveal</source>
         <translation>برای نمایش کلیک کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3184"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3185"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
         <translation>برای پنهان‌سازی کلیک کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3321"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3322"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>انقضا: %1 روز دیگر</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3325"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3326"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>؛ حامیان واجد شرایط Patreon همیشه می‌توانند &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;یک گواهی به‌روزشده دریافت کنند&lt;/a&gt; از xanasoft.com</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3337"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3338"/>
         <source>Options: %1</source>
         <translation>گزینه‌ها: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>جعبه‌های تقویت‌شده‌ی امنیت/حریم خصوصی و اپلیکیشن (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
         <location filename="Windows/SettingsWindow.cpp" line="3341"/>
         <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <location filename="Windows/SettingsWindow.cpp" line="3343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
         <source>Enabled</source>
         <translation>فعال</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="375"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3340"/>
         <location filename="Windows/SettingsWindow.cpp" line="3341"/>
         <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <location filename="Windows/SettingsWindow.cpp" line="3343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
         <source>Disabled</source>
         <translation>غیرفعال</translation>
     </message>
@@ -6640,143 +6675,143 @@ Right-click to copy</oldsource>
         <translation>رفتار سه‌حالته: تیک‌نخورده = هرگز، نیمه‌تیک‌خورده = فقط هنگام نگه‌داشتن %1 (پیش‌فرض)، تیک‌خورده = همیشه.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>جعبه‌های رمزنگاری‌شده (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>Network Interception (NetI): %1</source>
         <translation>رهگیری شبکه (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>دسکتاپ Sandboxie (Desk): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3375"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>این متن شبیه شماره‌ی سریال Sandboxie-Plus به نظر نمی‌رسد.&lt;br /&gt;اگر تلاش کرده‌اید UpdateKey یا امضای یک گواهی را وارد کنید، این کار درست نیست؛ در عوض کل گواهی را در کادر متنی بالا وارد کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3381"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3382"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>شما در حال تلاش برای استفاده از یک کلید ارتقای ویژگی (Upgrade-Key) هستید، بدون آنکه گواهی حامی از پیش موجودی وارد کرده باشید. لطفاً توجه داشته باشید که این نوع کلید (&lt;b&gt;همان‌طور که به‌صورت پررنگ در وب‌سایت ذکر شده است&lt;/b&gt;) به یک گواهی حامی معتبر از پیش موجود نیاز دارد؛ بدون آن بی‌فایده است.&lt;br /&gt;اگر می‌خواهید از ویژگی‌های پیشرفته استفاده کنید، باید هم یک گواهی استاندارد و هم کلید ارتقای ویژگی را برای باز کردن قابلیت‌های پیشرفته تهیه کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3388"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>شما در حال تلاش برای استفاده از یک کلید تمدید (Renew-Key) هستید، بدون آنکه گواهی حامی از پیش موجودی وارد کرده باشید. لطفاً توجه داشته باشید که این نوع کلید (&lt;b&gt;همان‌طور که به‌صورت پررنگ در وب‌سایت ذکر شده است&lt;/b&gt;) به یک گواهی حامی معتبر از پیش موجود نیاز دارد؛ بدون آن بی‌فایده است.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3392"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3393"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;اگر توضیحات محصول را نخوانده‌اید و این کلید را به اشتباه دریافت کرده‌اید، لطفاً برای رفع این مشکل از طریق ایمیل (که در وب‌سایت ما ارائه شده) با ما تماس بگیرید.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3423"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3424"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - دریافت گواهی ارزیابی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3423"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3424"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>لطفاً آدرس ایمیل خود را برای دریافت یک گواهی ارزیابی رایگان %1 روزه وارد کنید، که به نام %2 صادر شده و به سخت‌افزار فعلی قفل خواهد شد.
 شما می‌توانید تا %3 گواهی ارزیابی برای هر شناسه‌ی سخت‌افزاری یکتا درخواست کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3449"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3450"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>خطا در دریافت گواهی: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3449"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3450"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>خطای ناشناخته (احتمالاً یک مشکل شبکه)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3504"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3505"/>
         <source>Contributor</source>
         <translation>مشارکت‌کننده</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3506"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3507"/>
         <source>Eternal</source>
         <translation>همیشگی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3508"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3509"/>
         <source>Developer</source>
         <translation>توسعه‌دهنده</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3510"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3511"/>
         <source>Business</source>
         <translation>تجاری</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3512"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3513"/>
         <source>Personal</source>
         <translation>شخصی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3514"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3515"/>
         <source>Great Patreon</source>
         <translation>Patreon بزرگ</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3516"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3517"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3518"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3519"/>
         <source>Family</source>
         <translation>خانوادگی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3522"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3523"/>
         <source>Evaluation</source>
         <translation>ارزیابی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3524"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3525"/>
         <source>Type %1</source>
         <translation>نوع %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3554"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3555"/>
         <source>Advanced</source>
         <translation>پیشرفته</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3556"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3557"/>
         <source>Advanced (L)</source>
         <translation>پیشرفته (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3558"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3559"/>
         <source>Max Level</source>
         <translation>حداکثر سطح</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3560"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3561"/>
         <source>Level %1</source>
         <translation>سطح %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3713"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3714"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>ویژگی تکمیل خودکار برای ادامه نیاز به رضایت شما دارد.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3715"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3716"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -6789,63 +6824,63 @@ Choose autocomplete mode:
 %1 هنگام تایپ: پیشنهادهای تکمیل خودکار هنگام تایپ کردن.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3723"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3724"/>
         <source>Manual</source>
         <translation>دستی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3724"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3725"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>پیشنهادهای تکمیل خودکار را با %1 فعال می‌کند.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3726"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3727"/>
         <source>While Typing</source>
         <translation>هنگام تایپ</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3727"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3728"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>پیشنهادهای تکمیل خودکار را هنگام تایپ کردن فعال می‌کند.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3730"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3731"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>پیشنهادهای تکمیل خودکار را غیرفعال نگه می‌دارد.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3729"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3730"/>
         <source>Cancel</source>
         <translation>لغو</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1911"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1912"/>
         <source>Supporter certificate required for access</source>
         <translation>برای دسترسی به گواهی حامی نیاز است</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1928"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1929"/>
         <source>Supporter certificate required for automation</source>
         <translation>برای اتوماسیون به گواهی حامی نیاز است</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3600"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>متأسفانه این گواهی برای نسخه‌ی فعلی معتبر نیست؛ باید یک گواهی جدید تهیه کنید یا به نسخه‌ی قدیمی‌تری بازگردید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3601"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3602"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>اگرچه این گواهی منقضی شده است، امکانات Plus برای نسخه‌ی نصب‌شده‌ی فعلی همچنان فعال باقی می‌مانند. با این حال، دیگر به خدمات Sandboxie-Live، از جمله به‌روزرسانی‌های سازگاری و پایگاه داده‌ی آنلاین عیب‌یابی، دسترسی نخواهید داشت.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3603"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3604"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>متأسفانه این گواهی منقضی شده است؛ باید یک گواهی جدید تهیه کنید.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1366"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1367"/>
         <source>Sandboxed Web Browser</source>
         <translation>مرورگر وب سندباکس‌شده</translation>
     </message>
@@ -6895,229 +6930,229 @@ Choose autocomplete mode:
         <translation>%0، %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1215"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1216"/>
         <source>Please enter message</source>
         <translation>لطفاً پیام را وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1247"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1248"/>
         <source>Select Program</source>
         <translation>انتخاب برنامه</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1247"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1248"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>فایل‌های اجرایی (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1251"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1267"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1252"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1268"/>
         <source>Please enter a menu title</source>
         <translation>لطفاً یک عنوان منو وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1263"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1264"/>
         <source>Please enter a command</source>
         <translation>لطفاً یک دستور وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3278"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3279"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;امکانات Plus برای نسخه‌ی فعلی همچنان فعال باقی می‌مانند&lt;/font&gt;، اما دیگر به خدمات Sandboxie-Live، از جمله به‌روزرسانی‌های سازگاری و پایگاه داده‌ی آنلاین عیب‌یابی، دسترسی نخواهید داشت.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3357"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>می‌توانید یک گواهی ارزیابی رایگان %1 روزه را تا %2 بار برای هر شناسه‌ی سخت‌افزاری درخواست کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3276"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3277"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;امکانات Plus تا %1 روز دیگر غیرفعال خواهند شد.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3280"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3281"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;امکانات Plus دیگر فعال نیستند.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3323"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3324"/>
         <source>Expired: %1 days ago</source>
         <translation>منقضی‌شده: %1 روز پیش</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3407"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3435"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3664"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3408"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3436"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3665"/>
         <source>Retrieving certificate...</source>
         <translation>در حال دریافت گواهی...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3520"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3521"/>
         <source>Home</source>
         <translation>خانه</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2046"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2047"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>اجرا خارج از &amp;سندباکس</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2054"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2055"/>
         <source>Set Force in Sandbox</source>
         <translation>تنظیم اجبار در سندباکس</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2063"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2064"/>
         <source>Set Open Path in Sandbox</source>
         <translation>تنظیم مسیر باز در سندباکس</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3582"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3583"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>این متن شبیه یک گواهی به نظر نمی‌رسد. لطفاً کل گواهی را وارد کنید، نه فقط بخشی از آن را.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3607"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3608"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>گواهی ارزیابی با موفقیت اعمال شد. از دوره‌ی آزمایشی رایگان خود لذت ببرید!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3610"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3611"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>از شما بابت حمایت از توسعه‌ی Sandboxie-Plus سپاسگزاریم.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3612"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3613"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
 این یک گواهی موقت Patreon است که برای ۳ ماه اعتبار دارد. هنگامی که به زمان انقضا نزدیک شد، می‌توانید به‌صورت آنلاین گواهی جدیدی دریافت کنید که برای کل مدت اعتبار دارد.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3650"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3651"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>یک به‌روزرسانی امنیتی الزامی برای گواهی حامی Sandboxie-Plus شما لازم است. آیا می‌خواهید اکنون گواهی به‌روزشده را دانلود کنید؟</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3651"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3652"/>
         <source>Auto update in future</source>
         <translation>به‌روزرسانی خودکار در آینده</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2445"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2446"/>
         <source>Update Available</source>
         <translation>به‌روزرسانی موجود است</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2447"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2448"/>
         <source>Installed</source>
         <translation>نصب‌شده</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2452"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2453"/>
         <source>by %1</source>
         <translation>توسط %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2461"/>
         <source>(info website)</source>
         <translation>(وب‌سایت اطلاعات)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2488"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2489"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>این افزونه الزامی است و نمی‌توان آن را حذف کرد.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2497"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2709"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2498"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2710"/>
         <source>Select Directory</source>
         <translation>انتخاب پوشه</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2529"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2530"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;اکنون بررسی کنید&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2600"/>
         <source>Select Portable Box ini</source>
         <translation>انتخاب فایل ini جعبه‌ی پرتابل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2599"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2609"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2600"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
         <source>Ini Files (*.ini)</source>
         <translation>فایل‌های Ini (*.ini)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2609"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
         <source>Save new Portable Box ini</source>
         <translation>ذخیره‌ی فایل ini جدید جعبه‌ی پرتابل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2614"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2615"/>
         <source>File already exists, please select a different file name.</source>
         <translation>فایل از قبل وجود دارد؛ لطفاً نام فایل دیگری انتخاب کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2620"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2621"/>
         <source>Invalid box name</source>
         <translation>نام جعبه نامعتبر است</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2641"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2642"/>
         <source>Select Root Folder</source>
         <translation>انتخاب پوشه‌ی ریشه</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2669"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2670"/>
         <source>Please enter the new configuration password.</source>
         <translation>لطفاً گذرواژه‌ی جدید پیکربندی را وارد کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2673"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2674"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>لطفاً گذرواژه‌ی جدید پیکربندی را دوباره وارد کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2678"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2679"/>
         <source>Passwords did not match, please retry.</source>
         <translation>گذرواژه‌ها مطابقت نداشتند؛ لطفاً دوباره تلاش کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2690"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2691"/>
         <source>Process</source>
         <translation>فرایند</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2690"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2691"/>
         <source>Folder</source>
         <translation>پوشه</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2700"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2701"/>
         <source>Please enter a program file name</source>
         <translation>لطفاً نام فایل برنامه را وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2768"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2769"/>
         <source>Please enter the template identifier</source>
         <translation>لطفاً شناسه‌ی قالب را وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2776"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2777"/>
         <source>Error: %1</source>
         <translation>خطا: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2808"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2809"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>آیا واقعاً می‌خواهید قالب(های) محلی انتخاب‌شده را حذف کنید؟</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3110"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3111"/>
         <source>%1 (Current)</source>
         <translation>%1 (فعلی)</translation>
     </message>
@@ -10562,27 +10597,27 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="5210"/>
+        <location filename="SandMan.cpp" line="5193"/>
         <source>OK</source>
         <translation>تأیید</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5211"/>
+        <location filename="SandMan.cpp" line="5194"/>
         <source>Apply</source>
         <translation>اعمال</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5212"/>
+        <location filename="SandMan.cpp" line="5195"/>
         <source>Cancel</source>
         <translation>لغو</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5213"/>
+        <location filename="SandMan.cpp" line="5196"/>
         <source>&amp;Yes</source>
         <translation>&amp;بله</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5214"/>
+        <location filename="SandMan.cpp" line="5197"/>
         <source>&amp;No</source>
         <translation>&amp;خیر</translation>
     </message>
@@ -12119,6 +12154,24 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2112"/>
         <source>Enter the support certificate here</source>
         <translation>گواهی پشتیبانی را این‌جا وارد کنید</translation>
+    </message>
+</context>
+<context>
+    <name>ShellBoxSelector</name>
+    <message>
+        <location filename="Forms/ShellBoxSelector.ui" line="9"/>
+        <source>Select a sandbox or type its name or alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ShellBoxSelector.ui" line="26"/>
+        <source>Applies to both Set Open and Set Force. The dialog is always shown when more than one sandbox is enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ShellBoxSelector.ui" line="29"/>
+        <source>Skip this dialog when only one sandbox is enabled</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

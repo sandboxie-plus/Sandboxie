@@ -104,6 +104,12 @@ HASH_MAP Process_MapDfp;
 HASH_MAP Process_MapFcp;
 PERESOURCE Process_ListLock = NULL;
 
+// DRV-18: Process_MapDfp / Process_MapFcp are serialized by their own lock,
+// not by Process_ListLock, because the process-creation notify path holds the
+// list lock only SHARED while it mutates these maps.  Always acquired after
+// Process_ListLock (never before), so there is no lock-order inversion.
+PERESOURCE Process_DfpFcpLock = NULL;
+
 static BOOLEAN Process_NotifyImageInstalled = FALSE;
 static BOOLEAN Process_NotifyProcessInstalled = FALSE;
 
@@ -137,6 +143,9 @@ _FX BOOLEAN Process_Init(void)
 	map_resize(&Process_MapFcp, 128); // prepare some buckets for better performance
 
     if (! Mem_GetLockResource(&Process_ListLock, TRUE))
+        return FALSE;
+
+    if (! Mem_GetLockResource(&Process_DfpFcpLock, TRUE))
         return FALSE;
 
     if (! Process_Low_Init())
@@ -260,8 +269,10 @@ _FX void Process_Unload(BOOLEAN FreeLock)
 
     Process_Low_Unload();
 
-    if (FreeLock)
+    if (FreeLock) {
         Mem_FreeLockResource(&Process_ListLock);
+        Mem_FreeLockResource(&Process_DfpFcpLock);
+    }
 }
 
 
@@ -509,6 +520,51 @@ _FX PROCESS *Process_Find(HANDLE ProcessId, KIRQL *out_irql)
     }
 
     return proc;
+}
+
+//---------------------------------------------------------------------------
+// Process_FindLockedShared
+//---------------------------------------------------------------------------
+
+
+_FX PROCESS *Process_FindLockedShared(HANDLE ProcessId)
+{
+    PROCESS *proc;
+
+    //
+    // Find a PROCESS by pid and return it with Process_ListLock held SHARED,
+    // acquired inside a critical region so the caller stays at PASSIVE_LEVEL
+    // (unlike Process_Find, which raises to APC_LEVEL).  This lets the caller
+    // run PASSIVE_LEVEL-only code - e.g. ObQueryNameString reached through
+    // File_CreateOperation - while the returned pointer stays valid: a shared
+    // holder blocks Process_Delete, which must take the same lock EXCLUSIVE
+    // before it can unlink and free the block, so the PROCESS cannot be freed
+    // until the caller releases.
+    //
+    // The lock is held on return in ALL cases, including not-found (NULL) and
+    // a terminated entry (returned as-is, exactly like Process_Find(pid,...);
+    // PROCESS_TERMINATED is never synthesised here - the caller tests
+    // proc->terminated itself).  Every call MUST be paired with
+    // Process_UnlockShared().
+    //
+
+    KeEnterCriticalRegion();
+    ExAcquireResourceSharedLite(Process_ListLock, TRUE);
+
+    proc = map_get(&Process_Map, ProcessId);
+
+    return proc;
+}
+
+//---------------------------------------------------------------------------
+// Process_UnlockShared
+//---------------------------------------------------------------------------
+
+
+_FX void Process_UnlockShared(void)
+{
+    ExReleaseResourceLite(Process_ListLock);
+    KeLeaveCriticalRegion();
 }
 
 //---------------------------------------------------------------------------

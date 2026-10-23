@@ -4,6 +4,61 @@
 
 
 
+## [1.18.8 / 5.73.8] - 2026-10-17
+
+### 修复
+- 修复了沙盒内 Firefox 在等待 `mediaCapabilities.decodingInfo()` 返回结果的网站（如 espn.com）上的视频播放问题
+- 修复了沙盒缺少 AppContainer 访问控制项（ACE）的问题，该问题会导致沙盒内程序创建的 AppContainer 子进程以 `0xC0000022` 错误终止
+- 修复了受限的 AppContainer 替代令牌禁用所有组，导致无法打开 `\KnownDlls` 的问题
+- 修复了沙盒内 IPC 对象缺少 AppContainer 访问控制项（ACE）的问题；该问题导致应用隔间沙盒中的 Firefox 媒体 CDM 进程无法连接沙盒内的 epmapper，进而崩溃
+- 修复了应用隔间沙盒中的 AppContainer 进程触发“SBIE2204 Cannot start sandboxed service RpcSs (1341)”错误的问题；这些进程现在能找到已在沙盒内运行的 RpcSs
+- 修复了 GUI 代理的 MapWindowPoints 处理程序中会向沙盒内调用方泄露服务堆内存的越界读取问题
+- `UnRestrictAppContainerToken` 不再对 MSEdge 默认启用，替代令牌已能再次供其正常使用
+- 修复了导入沙盒时无法选择沙盒创建位置的问题 [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)
+
+### 新增
+- 改进了“设为沙盒开放路径”和“设置强制在沙盒中运行”操作中的沙盒选择：可从显示沙盒名称和别名的列表中选择，也可输入名称或别名以查看建议
+- 新增仅启用一个沙盒时跳过“设为沙盒开放路径”和“设置强制在沙盒中运行”对话框的选项。勾选“仅启用一个沙盒时跳过此对话框”，即可自动使用该沙盒。默认仍会显示对话框 [#5653](https://github.com/sandboxie-plus/Sandboxie/issues/5653)
+- 为 KmdUtil.exe 新增“fixboxdacls”命令，用于为已有沙盒添加 AppContainer 访问控制项（ACE）
+- 新增 `KeepBroadGroupsInAppContainerToken=n`，可恢复旧行为，将 AppContainer 替代令牌中的所有组设为仅用于拒绝访问
+- 新增 `NeutralizeLowBoxToken=n`，使直接发起的 `NtCreateLowBoxToken` 调用传递给原生实现
+- 现已读取并应用 `FakeAppContainerToken` 设置；使用 `=n` 可让沙盒内程序创建真正的 AppContainer 子进程
+
+
+
+## [1.18.7 / 5.73.7] - 2026-10-16
+
+### 修复
+- 修复了根目录保护 IOCTL 的问题
+- 修复了设置低完整性标签时的问题
+- 修复了监控 API 的一个问题
+- 修复了 base64 解码问题
+- 修复了 API_RENAME_FILE 的问题
+- 修复了模板处理问题
+
+
+
+## [1.18.6 / 5.73.6] - 2026-10-11
+
+### 新增
+- 为 SandMan、故障排除向导和安装程序新增波斯语翻译 [#5633](https://github.com/sandboxie-plus/Sandboxie/pull/5633)（感谢 imalyzer）
+
+### 修复
+- 修复了 SandMan 将 URL 编码的字符误当作消息占位符，导致 SBIE 消息链接损坏的问题
+- 修复了更新器的问题
+- 修复了临时豁免的处理问题
+- 修复了路径处理问题
+- 修复了卸载驱动程序时可能发生的空指针异常
+
+
+## [1.18.5 / 5.73.5] - 2026-09-25
+
+### 修复
+- 修复了因钩子目标识别错误，导致基于 Chromium 的浏览器和 Electron 应用程序在应用程序隔离沙盒中崩溃的问题 [#5609](https://github.com/sandboxie-plus/Sandboxie/issues/5609)
+- 修复了通过 fsutil 查询的文件 ID 未按预期取反的问题 [#5612](https://github.com/sandboxie-plus/Sandboxie/issues/5612)
+
+
+
 ## [1.18.4 / 5.73.4] - 2026-09-06
 
 ### 新增

@@ -156,6 +156,10 @@ protected:
 
     struct SClient
     {
+        SClient();
+        ~SClient();
+
+        HANDLE idProcess;       // owning process, for per-process end notification
         HANDLE idThread;
         BOOLEAN replying;
         volatile BOOLEAN in_use;
@@ -163,6 +167,10 @@ protected:
         HANDLE hPort;
         MSG_HEADER *buf_hdr;
         UCHAR *buf_ptr;
+
+        // serializes the requests of one connection, because the reassembly
+        // state above is per connection in this implementation
+        CRITICAL_SECTION req_lock;
     };
     typedef std::shared_ptr<SClient> SClientPtr;
 #endif

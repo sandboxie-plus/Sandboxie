@@ -3,14 +3,114 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.19.0 / 5.74.0] - 2026-10-23
 
-## [1.18.6 / 5.73.6] - 2026-10-??
+### Fixed
+- fixed kernel pool out-of-bounds write in `Api_CopyStringFromUser`, which placed the terminator one character past its allocation and copied two bytes beyond the caller's string (reached through `API_UPDATE_CONF`)
+- fixed `Session_ListLock` and the raised IRQL being leaked for the lifetime of the driver when the monitor put handlers faulted on a user mode string
+- fixed `API_MONITOR_GET_EX` copying eight bytes of the log buffer past each entry, and its bounds check being defeated by a USHORT cast and a signed underflow
+- fixed kernel stack buffer overflow in `_wntoi` when a box's `NetworkAccess` rule carried a long port token
+- fixed `BlockLocalLoop` never blocking IPv4 loopback, because `WFP_isLoopback` tested the last octet of the address instead of the first
+- fixed kernel pool over-read in the rename/link minifilter path, where `FileNameLength` out of the caller's information buffer was used as a length without being checked against that buffer
+- fixed the new LPC implementation leaking the per-connection port handle and any pending reassembly buffer on every disconnect
+- fixed concurrent requests on one LPC connection racing the shared reassembly state, which could free it twice
+- fixed stack buffer overflow in `MSGID_SBIE_INI_SET_DAT`, where the unterminated `setting` field was appended to a fixed size path buffer
+- fixed `SbieIniServer` abandoning its critical section when a handler faulted, which left every later INI request blocked on it
+- fixed `value_len` being truncated while scaled to bytes in the INI setting and template handlers, so a large value passed the bounds check and was then read far past the message
+- fixed `GUI_MAP_WINDOW_POINTS` copying more points out of a request than it actually carried, returning service heap to the caller
+- fixed `WndHookRegisterSlave` returning while holding `m_SlavesLock` on two caller reachable rejections, which wedged the GUI proxy for the rest of the session
+- fixed `GUI_GET_RAW_INPUT_DEVICE_INFO` truncating its size while scaling it to bytes, so an over large `cbSize` skipped both bounds checks and was handed to the OS as a buffer size
+- fixed the desktop `startExplorer` and `startRun` actions launching as LocalSystem rather than with the calling user's token
+- fixed `PORT_DATA_INFO` being read without requiring the whole structure to lie inside the LPC message
+- fixed the ALPC connect reply returning its uninitialised tail - up to `PIPE_MAX_DATA_LEN` of service heap - to the caller
+- fixed global ("asterisk") queue names having no session scoping, which let any unsandboxed process squat a well known name such as the interactive queue
+- fixed the UAC packet being accepted with no minimum length, and its string offsets being used without being checked against it
+- fixed the ICMP echo reply fix-up writing a whole `ICMP_ECHO_REPLY` past a caller sized reply buffer when the echo itself failed
+- fixed `request_size` not being checked against the message in the ICMP echo handler, which put up to 64 KB of service heap on the wire
+- fixed `m_WorkersList` being mutated without taking the lock that exists for it, so concurrent startup requests could close and free the same worker twice
+- fixed `UserServer::OpenFile` using unvalidated request offsets, and matching the box's file rules against a path that was not canonical
+- fixed a WCHAR/byte length confusion in the SbieDrv `API_GET_FILE_NAME` handler that over-read the file-object name into the caller's buffer
+- fixed two paged-pool leaks in the SbieDrv `API_RENAME_FILE` handler (an early return and a faulting user copy) reachable by a sandboxed process
+- fixed the SbieDrv `API_OPEN_FILE` handler not checking its allocation and leaking it when the user copy faulted
+- fixed the spooler ALPC message filter being dead code on Windows 8.1+ (the driver compared the port id against the wrong literal, so the filter never armed)
+- fixed a kernel NULL-pointer dereference and a NonPagedPool leak in the `NetworkAccess` firewall-rule parser (`netfw.c`)
+- fixed a wrong range-overlap test in the firewall-rule parser that could insert overlapping ranges and make a Block rule stop matching
+- fixed two paged-pool leaks on the error paths of the driver configuration variable expander (`Conf_Expand_2`)
+- fixed the SbieDrv `API_IS_BOX_ENABLED` handler dereferencing an unprobed user SID pointer in kernel mode
+- fixed `proc->file_lock` and the raised IRQL being leaked if `WFP_UpdateProcess` faulted in the SbieDrv `API_REFRESH_FILE_PATH_LIST` handler
+- fixed a use-after-free of a protected-root list entry in the file minifilter (the node was read after its lock was released)
+- fixed `proc->threads_lock` being leaked if the output write faulted in the `itok`/`ttok` paths of the SbieDrv process-query handler
+- fixed the duplicated-handle access re-validation being skipped for Directory/SymbolicLink/Job objects in `Syscall_DuplicateHandle_3` (a loop counter clobbered the type length before the suffix test)
+- fixed the SbieDrv `API_OPEN_PROCESS` handler dereferencing the terminated-process sentinel with a lock held when asked for PID 0
+- fixed two token references and a handle being leaked if the output write faulted in the SbieDrv `API_FILTER_TOKEN` handler
+- fixed a 32-bit truncation of the entry size in the driver monitor-log writer that could overflow the log buffer
+- fixed SandMan over-reading an unterminated file path out of a queue reply (`MAN_FILE_MIGRATION`), which a sandboxed process could use to crash the UI
+- fixed ini section names not being rejected for CR/LF or brackets, which let a caller forge additional sections/settings and bypass a per-section `EditAdminOnly` lock
+- fixed the SbieSvc `USER_SHELL_EXEC` handler using an unvalidated, possibly-unterminated wire path offset
+- fixed the SbieSvc `MSGID_SBIE_INI_SET_DAT` handler using an unvalidated `value_len` as the write length, reading past the request buffer
+- fixed the INI setting handlers not terminating their fixed-size `section`/`setting`/`password` wire fields before use
+- fixed a per-message heap leak in the SbieSvc log drain loop (`DriverAssist::LogMessage`)
+- fixed `GUI_CHANGE_DISPLAY_SETTINGS` passing an unterminated device name and an unbounded DEVMODE to the display API
+- fixed `GUI_GRANT_HANDLE` leaking the two bitmaps `GetIconInfo` creates on every call
+- fixed `GUI_GET_WINDOW_PROP` and `GUI_FIND_WINDOW` treating a caller-chosen value outside the atom range as a raw string pointer
+- fixed `GUI_SET_CLIPBOARD_DATA` not validating the request length and not bounding the caller-supplied data length
+- fixed the SbieSvc process-info handler disclosing any process's command line/image path to any local user (now restricted to the caller's session or administrators)
+- fixed the SbieSvc WOW64 registry-open handler indexing a fixed prefix of `KeyPath` without checking its length or termination
+- fixed the SbieSvc named-pipe read handler returning the uninitialised tail of its reply buffer (information disclosure)
+- fixed the SbieSvc terminal `GetName` handler leaking uninitialised stack into its reply and terminating the wrong buffer
+- fixed the four SbieSvc terminal query handlers having no caller gate and taking a session id off the wire, letting any user query other sessions as SYSTEM; `QUERY_INFO` now also allow-lists the information class
+- fixed the SbieSvc ImBox `QueryHandler` leaking its critical section (and deadlocking the mount subsystem) when the queried mount raced to NULL
+- fixed the SbieSvc queue server accepting an unbounded number of undrained requests (per-queue cap added)
+- fixed Import Boxes not letting the user choose where the imported sandboxes are created [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)
+
+
+
+
+## [1.18.8 / 5.73.8] - 2026-10-17
+
+### Added
+- made it easier to choose a sandbox in Set Open and Set Force dialog: select from a list showing sandbox names and aliases, or start typing a name or alias to see suggestions
+- added an option to skip the Set Open and Set Force dialog when only one sandbox is available. Check "Skip this dialog when only one sandbox is enabled" to use that sandbox automatically. The dialog is shown by default [#5653](https://github.com/sandboxie-plus/Sandboxie/issues/5653)
+- added "fixboxdacls" command to KmdUtil.exe, it adds the AppContainer ACEs to already existing boxes
+- added `KeepBroadGroupsInAppContainerToken=n` to restore the old all-deny-only AppContainer stand-in token
+- added `NeutralizeLowBoxToken=n` to let a direct `NtCreateLowBoxToken` call through
+- `FakeAppContainerToken` is now evaluated, `=n` lets a boxed program create real AppContainer children
+
+### Fixed
+- fixed video playback in sandboxed Firefox on sites awaiting `mediaCapabilities.decodingInfo()`, like espn.com
+- fixed boxes lacking AppContainer ACEs, which made an AppContainer child of a boxed program die with `0xC0000022`
+- fixed the restricted stand-in for an AppContainer token disabling every group, leaving it unable to open `\KnownDlls`
+- fixed boxed IPC objects lacking AppContainer ACEs, which crashed Firefox's media CDM process in app compartment boxes as it could not connect to the boxed epmapper
+- fixed "SBIE2204 Cannot start sandboxed service RpcSs (1341)" from AppContainer processes in app compartment boxes, they now find the already running boxed RpcSs
+- fixed an out-of-bounds read in the GUI proxy's MapWindowPoints handler leaking service heap to sandboxed callers
+- `UnRestrictAppContainerToken` no longer defaults to on for MS Edge, the stand-in token works for it again
+- fixed Import Boxes not letting the user choose where the imported sandboxes are created [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)
+
+
+
+## [1.18.7 / 5.73.7] - 2026-10-16
+
+### Fixed
+- fixed issues with root protect IOCTLs
+- fixed issue with set low label
+- fixed issue with monitor API
+- fixed issues with Base64 decoding
+- fixed issue with API_RENAME_FILE
+- fixed issue with template handling
+
+
+
+## [1.18.6 / 5.73.6] - 2026-10-11
 
 ### Added
 - added Persian (Farsi) translations for SandMan, the Troubleshooting Wizard and the installer [#5633](https://github.com/sandboxie-plus/Sandboxie/pull/5633) (thanks imalyzer)
 
 ### Fixed
 - fixed corrupted SBIE message links in SandMan when URL-encoded characters were interpreted as message placeholders
+- fixed updater issues
+- fixed issues with transient exception handling
+- fixed path handling issues
+- fixed possible null pointer exception when unloading driver
 
 
 

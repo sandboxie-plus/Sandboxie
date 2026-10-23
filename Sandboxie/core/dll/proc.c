@@ -69,6 +69,19 @@ static BOOL Proc_CreateAppContainerToken(
     PSECURITY_CAPABILITIES SecurityCapabilities,
     PHANDLE OutToken);
 
+static BOOLEAN Proc_IsBroadGroupSid(void *Sid);
+
+static NTSTATUS Proc_NtCreateLowBoxToken(
+    PHANDLE TokenHandle,
+    HANDLE ExistingTokenHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    PSID PackageSid,
+    ULONG CapabilityCount,
+    PSID_AND_ATTRIBUTES Capabilities,
+    ULONG HandleCount,
+    HANDLE *Handles);
+
 static BOOL Proc_AlternateCreateProcess(
     const WCHAR *lpApplicationName, WCHAR *lpCommandLine,
     void *lpCurrentDirectory, LPPROCESS_INFORMATION lpProcessInformation,
@@ -341,6 +354,8 @@ static P_SetProcessMitigationPolicy	__sys_SetProcessMitigationPolicy = NULL;
 
 static P_CreateAppContainerToken    __sys_CreateAppContainerToken   = NULL;
 
+static P_NtCreateLowBoxToken        __sys_NtCreateLowBoxToken       = NULL;
+
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -456,6 +471,20 @@ _FX BOOLEAN Proc_Init(void)
             Dll_KernelBase, &ansi, 0, (void**)&CreateAppContainerToken);
         if (NT_SUCCESS(status))
             SBIEDLL_HOOK(Proc_, CreateAppContainerToken);
+
+        //
+        // hooking CreateAppContainerToken alone leaves a gap: sandbox
+        // libraries like the ones in Firefox and Chromium call
+        // NtCreateLowBoxToken directly and never go through it, so
+        // neutralize that entry point as well
+        //
+
+        void* NtCreateLowBoxToken = NULL;
+        RtlInitString(&ansi, "NtCreateLowBoxToken");
+        status = LdrGetProcedureAddress(
+            Dll_Ntdll, &ansi, 0, (void**)&NtCreateLowBoxToken);
+        if (NT_SUCCESS(status))
+            SBIEDLL_HOOK(Proc_, NtCreateLowBoxToken);
     }
 
     //
@@ -638,8 +667,35 @@ _FX BOOL Proc_UpdateProcThreadAttribute(
 		}
 	}
 
-    //if (!Config_GetSettingsForImageName_bool(L"FakeAppContainerToken", Dll_CompartmentMode ? FALSE : TRUE)) // see UserEnv_CreateAppContainerProfile
+    //
+    // Swallowing this attribute is how AppContainer isolation used to be
+    // suppressed outside compartment mode.  It was never free: a caller that
+    // asks for an AppContainer child usually also builds that child's token
+    // with every group marked deny-only, because the package sid is what
+    // grants such a token access.  Take the AppContainer away and the token
+    // cannot match a single ACE - it fails to open even \KnownDlls.
+    //
+    // The box now carries AppContainer ACEs (Driver_InitPublicSecurity and
+    // Secure_InitSecurityDescriptors), so FakeAppContainerToken=n can pass the
+    // attribute through and let the child be a real AppContainer in the box.
+    // That is measurably worse though, so it stays off by default: the hang is
+    // fixed either way, but with a real AppContainer Firefox leaves its codec
+    // table reporting HEVC as playable where the host says it is not, and
+    // AppContainer isolation is no longer suppressed.  Chrome and MSEdge never
+    // set this attribute inside a box at all, so the setting only affects
+    // Firefox.
+    //
+    // In compartment mode the setting is deliberately not consulted at all:
+    // that is the one mode where real AppContainer isolation is supported, so
+    // the attribute must always pass through.  It could not be honoured there
+    // anyway - the CreateAppContainerToken and NtCreateLowBoxToken hooks are
+    // not installed in compartment mode (see Proc_Init), so swallowing the
+    // attribute would leave the child holding a real LowBox token without the
+    // matching process attribute.
+    //
+
     if (!Dll_CompartmentMode)
+    if (Config_GetSettingsForImageName_bool(L"FakeAppContainerToken", TRUE)) // see UserEnv_CreateAppContainerProfile
     if (Attribute == 0x00020009 //PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES
      || Attribute == 0x0002000f)    //PROC_THREAD_ATTRIBUTE_ALL_APPLICATION_PACKAGES_POLICY
     {
@@ -672,6 +728,43 @@ _FX BOOL Proc_SetProcessMitigationPolicy(
 
 
 //---------------------------------------------------------------------------
+// Proc_IsBroadGroupSid
+//---------------------------------------------------------------------------
+
+
+//
+// The groups that make an ordinary token able to reach ordinary objects:
+// Everyone, Users, Authenticated Users and INTERACTIVE.  These are the same
+// ones the Chromium sandbox keeps enabled for its own USER_LIMITED level.
+//
+
+_FX BOOLEAN Proc_IsBroadGroupSid(void *Sid)
+{
+    static UCHAR WorldSid[12] = {
+        1, 1, 0,0,0,0,0,1,                  // S-1-1-
+        SECURITY_WORLD_RID, 0, 0, 0 };      //      0
+    static UCHAR InteractiveSid[12] = {
+        1, 1, 0,0,0,0,0,5,                  // S-1-5-
+        SECURITY_INTERACTIVE_RID, 0, 0, 0 };//      4
+    static UCHAR AuthUsersSid[12] = {
+        1, 1, 0,0,0,0,0,5,                  // S-1-5-
+        SECURITY_AUTHENTICATED_USER_RID, 0, 0, 0 };  // 11
+    static UCHAR UsersSid[16] = {
+        1, 2, 0,0,0,0,0,5,                  // S-1-5-
+        0x20, 0, 0, 0,                      //      32-
+        0x21, 2, 0, 0 };                    //         545
+
+    if (! Sid)
+        return FALSE;
+
+    return RtlEqualSid(Sid, WorldSid)
+        || RtlEqualSid(Sid, InteractiveSid)
+        || RtlEqualSid(Sid, AuthUsersSid)
+        || RtlEqualSid(Sid, UsersSid);
+}
+
+
+//---------------------------------------------------------------------------
 // Proc_CreateAppContainerToken
 //---------------------------------------------------------------------------
 
@@ -685,16 +778,19 @@ _FX BOOL Proc_CreateAppContainerToken(
 
     //
     // Starting with MSEdge 112.x the use of a restricted token as a stand in for a appcontainer token 
-    // does no longer work, hence when we detect MSEdge we use a copy of our regular token instead.
+    // does no longer work, hence when we detect MSEdge we used a copy of our regular token instead.
+    //
+    // That was this bug: the stand-in disabled *every* group, which left a
+    // token nothing but its own user SID speaks for - see below.  Now that it
+    // keeps the broad groups enabled the stand-in works for MSEdge as well
+    // (measured), so prefer the more restricted token for everything and
+    // default this off.
+    //
+    // Set UnRestrictAppContainerToken=y to hand out a plain duplicate of the
+    // regular token instead.
     //
 
-    static int isEdge = -1;
-    if (isEdge == -1) {
-        isEdge = _wcsicmp(Dll_ImageName, L"msedge.exe") == 0;
-    }
-
-
-    if (Config_GetSettingsForImageName_bool(L"UnRestrictAppContainerToken", isEdge ? TRUE : FALSE)) {
+    if (Config_GetSettingsForImageName_bool(L"UnRestrictAppContainerToken", FALSE)) {
 
         OBJECT_ATTRIBUTES objattrs;
         SECURITY_QUALITY_OF_SERVICE QoS;
@@ -733,14 +829,93 @@ _FX BOOL Proc_CreateAppContainerToken(
             BYTE Buffer[0x400]; // we need less than 0x200 in pracis
             if (NT_SUCCESS(NtQueryInformationToken(hTokenReal, TokenGroups, Buffer, sizeof(Buffer), &returnLength))) {
                 PTOKEN_GROUPS Groups = (PTOKEN_GROUPS)Buffer;
+                ULONG GroupCount = Groups->GroupCount;
 
-                ret = __sys_CreateRestrictedToken(hTokenReal, DISABLE_MAX_PRIVILEGE, Groups->GroupCount, Groups->Groups, 0, NULL, 0, NULL, OutToken);
+                //
+                // Disabling *every* group leaves a token that nothing but its
+                // own user SID speaks for, and next to nothing is ACL'd to a
+                // bare user SID - such a token cannot open even \KnownDlls, so
+                // a child launched with it dies with STATUS_ACCESS_DENIED
+                // before SbieDll is injected, and the parent waits forever for
+                // a worker that never answers.  The real AppContainer token we
+                // are standing in for would have been served by its package
+                // SID; we have none, so keep the broad groups enabled instead.
+                // This is what broke Firefox's media CDM process, and very
+                // likely what MSEdge 112+ ran into as well.
+                //
+                // Set KeepBroadGroupsInAppContainerToken=n for the old
+                // behaviour of disabling every group.
+                //
+
+                if (Config_GetSettingsForImageName_bool(
+                            L"KeepBroadGroupsInAppContainerToken", TRUE)) {
+
+                    ULONG i, n;
+                    for (i = 0, n = 0; i < GroupCount; ++i) {
+                        if (Proc_IsBroadGroupSid(Groups->Groups[i].Sid))
+                            continue;
+                        Groups->Groups[n++] = Groups->Groups[i];
+                    }
+                    GroupCount = n;
+                }
+
+                ret = __sys_CreateRestrictedToken(hTokenReal, DISABLE_MAX_PRIVILEGE, GroupCount, Groups->Groups, 0, NULL, 0, NULL, OutToken);
             }
             NtClose(hTokenReal);
         }
     }
 
     return ret;
+}
+
+
+//---------------------------------------------------------------------------
+// Proc_NtCreateLowBoxToken
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Proc_NtCreateLowBoxToken(
+    PHANDLE TokenHandle,
+    HANDLE ExistingTokenHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    PSID PackageSid,
+    ULONG CapabilityCount,
+    PSID_AND_ATTRIBUTES Capabilities,
+    ULONG HandleCount,
+    HANDLE *Handles)
+{
+    //
+    // Outside of compartment mode Windows AppContainer isolation is not
+    // supported, see the CreateAppContainerToken hook in Proc_Init.  That hook
+    // alone leaves a gap: sandbox libraries such as the ones in Firefox and
+    // Chromium call NtCreateLowBoxToken directly and never go through it.
+    // Hand out a duplicate of the token the caller passed in, which is the
+    // same end result the CreateAppContainerToken hook produces.
+    //
+    // Set NeutralizeLowBoxToken=n to let the original call through.
+    //
+
+    if (Config_GetSettingsForImageName_bool(L"NeutralizeLowBoxToken", TRUE)) {
+
+        OBJECT_ATTRIBUTES objattrs;
+        SECURITY_QUALITY_OF_SERVICE QoS;
+
+        InitializeObjectAttributes(&objattrs, NULL, 0, NULL, NULL);
+        QoS.Length = sizeof(SECURITY_QUALITY_OF_SERVICE);
+        QoS.ImpersonationLevel = SecurityIdentification;
+        QoS.ContextTrackingMode = SECURITY_STATIC_TRACKING;
+        QoS.EffectiveOnly = FALSE;
+        objattrs.SecurityQualityOfService = &QoS;
+
+        return NtDuplicateToken(
+            ExistingTokenHandle, DesiredAccess ? DesiredAccess : MAXIMUM_ALLOWED,
+            &objattrs, FALSE, TokenPrimary, TokenHandle);
+    }
+
+    return __sys_NtCreateLowBoxToken(
+        TokenHandle, ExistingTokenHandle, DesiredAccess, ObjectAttributes,
+        PackageSid, CapabilityCount, Capabilities, HandleCount, Handles);
 }
 
 

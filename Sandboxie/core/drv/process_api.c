@@ -477,6 +477,12 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
                 KeRaiseIrql(APC_LEVEL, &irql2);
                 ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
+                // the *data stores below write user memory while this lock is
+                // held exclusive at APC_LEVEL;  a faulting store must release
+                // the lock and lower IRQL via __finally rather than unwind to
+                // the dispatcher __except, which would leak both
+                __try {
+
                 THREAD *thrd = Thread_GetOrCreate(proc, tid, FALSE);
 				if (thrd)
 				{
@@ -516,8 +522,10 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 				else
 					status = STATUS_NOT_FOUND;
 
-                ExReleaseResourceLite(proc->threads_lock);
-                KeLowerIrql(irql2);
+                } __finally {
+                    ExReleaseResourceLite(proc->threads_lock);
+                    KeLowerIrql(irql2);
+                }
 			}
 
 		} else if (args->info_type.val == 'ippt') { // is primary process token

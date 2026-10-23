@@ -1187,14 +1187,15 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 					break;
 			}
 
-			// Show tooltip if it's a valid setting
-			if (CIniHighlighter::IsValidTooltipContext(currentLine.left(endPos))) {
+			const int equalsIndex = currentLine.indexOf('=');
+			// Only show setting tooltips on the key side of the line.
+			if ((equalsIndex < 0 || endPos <= equalsIndex)
+				&& CIniHighlighter::IsValidTooltipContext(currentLine.left(endPos))) {
 				// Only try to show tooltips if settings are loaded
 				if (CIniHighlighter::IsSettingsLoaded()) {
 					QString settingName = currentLine.mid(startPos, endPos - startPos);
 					if (settingName.endsWith('='))
 						settingName.chop(1);
-					const int equalsIndex = currentLine.indexOf('=');
 					const QString settingValue = equalsIndex >= 0 ? currentLine.mid(equalsIndex + 1).trimmed() : QString();
 					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, 'g');
 					if (!tooltipText.isEmpty()) {

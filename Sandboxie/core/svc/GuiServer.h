@@ -27,6 +27,10 @@
 #include "common/list.h"
 
 
+
+#define MAX_RPL_BUF_SIZE    32768
+
+
 class GuiServer
 {
 

@@ -78,13 +78,9 @@ void DriverAssist::LogMessage(void *_msg)
     EnterCriticalSection(&m_LogMessage_CritSec);
 
     ULONG m_MessageLen = 4096;
-    void *m_MessageBuf = NULL;
+    void *m_MessageBuf = HeapAlloc(GetProcessHeap(), 0, m_MessageLen);
 
-    while (1) {
-
-        m_MessageBuf = HeapAlloc(GetProcessHeap(), 0, m_MessageLen);
-        if (! m_MessageBuf)
-            break;
+    while (m_MessageBuf) {
 
         ULONG len = m_MessageLen;
 		ULONG message_number = m_last_message_number;
@@ -94,8 +90,8 @@ void DriverAssist::LogMessage(void *_msg)
 
         if (status == STATUS_BUFFER_TOO_SMALL) {
             HeapFree(GetProcessHeap(), 0, m_MessageBuf);
-            m_MessageBuf = NULL;
             m_MessageLen += 4096;
+            m_MessageBuf = HeapAlloc(GetProcessHeap(), 0, m_MessageLen);
             continue;
         }
 

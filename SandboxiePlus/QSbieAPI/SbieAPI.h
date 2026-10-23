@@ -149,6 +149,14 @@ public:
 	// Other
 	virtual quint64			QueryProcessInfo(quint32 ProcessId, quint32 InfoClass = 0);
 
+	enum EBoxedState
+	{
+		eBoxedUnknown = 0,	// the query itself failed - refuse, do not interpret
+		eNotBoxed,			// driver holds no live sandboxed process with this PID
+		eBoxed,				// sandboxed; pBoxName receives the box name
+	};
+	virtual EBoxedState		QueryProcessBox(quint32 ProcessId, QString* pBoxName = NULL, quint32* pSessionId = NULL) const;
+
 	virtual QString			GetSbieMsgStr(quint32 code, quint32 Lang = 1033);
 
 	enum EStartFlags

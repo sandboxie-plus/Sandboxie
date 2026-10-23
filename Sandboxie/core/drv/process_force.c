@@ -1804,6 +1804,21 @@ finish:
 #endif
 
 //---------------------------------------------------------------------------
+// Process_DfpDelete_Locked
+//---------------------------------------------------------------------------
+
+
+// Caller must hold Process_DfpFcpLock exclusive.
+static void Process_DfpDelete_Locked(HANDLE ProcessId)
+{
+    FORCE_PROCESS_2 *proc;
+
+    if(map_take(&Process_MapDfp, ProcessId, &proc, 0))
+        Mem_Free(proc, sizeof(FORCE_PROCESS_2));
+}
+
+
+//---------------------------------------------------------------------------
 // Process_DfpInsert
 //---------------------------------------------------------------------------
 
@@ -1814,16 +1829,12 @@ _FX BOOLEAN Process_DfpInsert(HANDLE ParentId, HANDLE ProcessId)
     KIRQL irql;
     BOOLEAN added;
 
+    KeRaiseIrql(APC_LEVEL, &irql);
+    ExAcquireResourceExclusiveLite(Process_DfpFcpLock, TRUE);
+
+    Process_DfpDelete_Locked(ProcessId);
+
     if (ParentId == PROCESS_TERMINATED) {
-
-        //
-        // called by Session_Api_DisableForce, process list not locked
-        //
-
-        KeRaiseIrql(APC_LEVEL, &irql);
-        ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
-
-        Process_DfpDelete(ProcessId);
 
         proc = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS_2));
         proc->pid = ProcessId;
@@ -1831,18 +1842,9 @@ _FX BOOLEAN Process_DfpInsert(HANDLE ParentId, HANDLE ProcessId)
 
         map_insert(&Process_MapDfp, ProcessId, proc, 0);
 
-        ExReleaseResourceLite(Process_ListLock);
-        KeLowerIrql(irql);
-
         added = TRUE;
 
     } else {
-
-        //
-        // called by Process_NotifyProcess_Create, process list locked
-        //
-
-        Process_DfpDelete(ProcessId);
 
         added = FALSE;
 
@@ -1859,6 +1861,9 @@ _FX BOOLEAN Process_DfpInsert(HANDLE ParentId, HANDLE ProcessId)
         }
     }
 
+    ExReleaseResourceLite(Process_DfpFcpLock);
+    KeLowerIrql(irql);
+
     return added;
 }
 
@@ -1870,10 +1875,15 @@ _FX BOOLEAN Process_DfpInsert(HANDLE ParentId, HANDLE ProcessId)
 
 _FX void Process_DfpDelete(HANDLE ProcessId)
 {
-    FORCE_PROCESS_2 *proc;
+    KIRQL irql;
 
-    if(map_take(&Process_MapDfp, ProcessId, &proc, 0))
-        Mem_Free(proc, sizeof(FORCE_PROCESS_2));
+    KeRaiseIrql(APC_LEVEL, &irql);
+    ExAcquireResourceExclusiveLite(Process_DfpFcpLock, TRUE);
+
+    Process_DfpDelete_Locked(ProcessId);
+
+    ExReleaseResourceLite(Process_DfpFcpLock);
+    KeLowerIrql(irql);
 }
 
 
@@ -1889,7 +1899,7 @@ _FX BOOLEAN Process_DfpCheck(HANDLE ProcessId, BOOLEAN *silent)
     BOOLEAN found = FALSE;
 
     KeRaiseIrql(APC_LEVEL, &irql);
-    ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
+    ExAcquireResourceExclusiveLite(Process_DfpFcpLock, TRUE);
 
     proc = map_get(&Process_MapDfp, ProcessId);
     if (proc) {
@@ -1902,10 +1912,25 @@ _FX BOOLEAN Process_DfpCheck(HANDLE ProcessId, BOOLEAN *silent)
         found = TRUE;
     }
 
-    ExReleaseResourceLite(Process_ListLock);
+    ExReleaseResourceLite(Process_DfpFcpLock);
     KeLowerIrql(irql);
 
     return found;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_FcpDelete_Locked
+//---------------------------------------------------------------------------
+
+
+// Caller must hold Process_DfpFcpLock exclusive.
+static void Process_FcpDelete_Locked(HANDLE ProcessId)
+{
+    FORCE_PROCESS_3 *proc;
+
+    if(map_take(&Process_MapFcp, ProcessId, &proc, 0))
+        Mem_Free(proc, sizeof(FORCE_PROCESS_3));
 }
 
 
@@ -1920,13 +1945,14 @@ _FX VOID Process_FcpInsert(HANDLE ProcessId, const WCHAR* boxname)
     KIRQL irql;
 
     //
-    // called by Session_Api_ForceChildren, process list not locked
+    // called by Session_Api_ForceChildren.  Serialized by Process_DfpFcpLock
+    // (see Process_DfpInsert).
     //
 
     KeRaiseIrql(APC_LEVEL, &irql);
-    ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
+    ExAcquireResourceExclusiveLite(Process_DfpFcpLock, TRUE);
 
-    Process_FcpDelete(ProcessId);
+    Process_FcpDelete_Locked(ProcessId);
 
     proc = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS_3));
     proc->pid = ProcessId;
@@ -1934,10 +1960,8 @@ _FX VOID Process_FcpInsert(HANDLE ProcessId, const WCHAR* boxname)
 
     map_insert(&Process_MapFcp, ProcessId, proc, 0);
 
-    ExReleaseResourceLite(Process_ListLock);
+    ExReleaseResourceLite(Process_DfpFcpLock);
     KeLowerIrql(irql);
-
-
 }
 
 
@@ -1948,10 +1972,15 @@ _FX VOID Process_FcpInsert(HANDLE ProcessId, const WCHAR* boxname)
 
 _FX void Process_FcpDelete(HANDLE ProcessId)
 {
-    FORCE_PROCESS_3 *proc;
+    KIRQL irql;
 
-    if(map_take(&Process_MapFcp, ProcessId, &proc, 0))
-        Mem_Free(proc, sizeof(FORCE_PROCESS_3));
+    KeRaiseIrql(APC_LEVEL, &irql);
+    ExAcquireResourceExclusiveLite(Process_DfpFcpLock, TRUE);
+
+    Process_FcpDelete_Locked(ProcessId);
+
+    ExReleaseResourceLite(Process_DfpFcpLock);
+    KeLowerIrql(irql);
 }
 
 
@@ -1967,7 +1996,7 @@ _FX BOOLEAN Process_FcpCheck(HANDLE ProcessId, WCHAR* boxname)
     BOOLEAN found = FALSE;
 
     KeRaiseIrql(APC_LEVEL, &irql);
-    ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
+    ExAcquireResourceExclusiveLite(Process_DfpFcpLock, TRUE);
 
     proc = map_get(&Process_MapFcp, ProcessId);
     if (proc) {
@@ -1978,7 +2007,7 @@ _FX BOOLEAN Process_FcpCheck(HANDLE ProcessId, WCHAR* boxname)
         found = TRUE;
     }
 
-    ExReleaseResourceLite(Process_ListLock);
+    ExReleaseResourceLite(Process_DfpFcpLock);
     KeLowerIrql(irql);
 
     return found;

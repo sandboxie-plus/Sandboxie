@@ -1077,8 +1077,7 @@ MSG_HEADER *QueueServer::StartupHandler(MSG_HEADER *msg, HANDLE idProcess)
     //
 
     ULONG session_id;
-    //if (!NT_SUCCESS(SbieApi_QueryProcess(idProcess, NULL, NULL, NULL, &session_id))) {
-    if(!ProcessIdToSessionId((DWORD)(ULONG_PTR)idProcess, &session_id)) { 
+    if (!NT_SUCCESS(SbieApi_QueryProcess(idProcess, NULL, NULL, NULL, &session_id))) {
         status = STATUS_ACCESS_DENIED;
         goto finish;
     }

@@ -22,7 +22,7 @@
         <location filename="Forms/BoxImageWindow.ui" line="103"/>
         <location filename="Forms/BoxImageWindow.ui" line="134"/>
         <source>TextLabel</source>
-        <translation>اسم النص</translation>
+        <translation>تسمية نصية</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="187"/>
@@ -839,7 +839,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="858"/>
         <source>Force the Web Browser to run in this sandbox</source>
-        <translation>إجبار متصفح الويب على العمل في هذا صندوق العزل</translation>
+        <translation>إجبار متصفح الويب على العمل في صندوق العزل هذا</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="862"/>
@@ -5113,7 +5113,7 @@ Error: %1</source>
     <message>
         <location filename="SandMan.cpp" line="3982"/>
         <source>Do you want to terminate all processes in encrypted sandboxes, and unmount them?</source>
-        <translation>هل تريد إنهاء جميع العمليات في صناديق العزل المشفرة وإزالة تثبيتها؟</translation>
+        <translation>هل تريد إنهاء جميع العمليات في صناديق العزل المشفرة وإلغاء تحميلها؟</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4008"/>
@@ -5153,7 +5153,7 @@ Error: %1</source>
     <message>
         <location filename="SandMan.cpp" line="4347"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
-        <translation>باستخدام قائمة سياق الصندوق/المجموعة، يمكنك نقل الصندوقات والمجموعات إلى مجموعات أخرى. يمكنك أيضًا استخدام السحب والإفلات لتحريك العناصر. بدلاً من ذلك، يمكنك أيضًا استخدام مفاتيح الأسهم أثناء الضغط على مفتاح ALT لتحريك العناصر لأعلى ولأسفل داخل مجموعتها.&lt;br /&gt;يمكنك إنشاء صناديق ومجموعات جديدة من قائمة صندوق العزل.</translation>
+        <translation>باستخدام قائمة سياق الصندوق/المجموعة، يمكنك نقل الصناديق والمجموعات إلى مجموعات أخرى. يمكنك أيضًا استخدام السحب والإفلات لتحريك العناصر. بدلاً من ذلك، يمكنك أيضًا استخدام مفاتيح الأسهم أثناء الضغط على مفتاح ALT لتحريك العناصر لأعلى ولأسفل داخل مجموعتها.&lt;br /&gt;يمكنك إنشاء صناديق ومجموعات جديدة من قائمة صندوق العزل.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4503"/>
@@ -5268,7 +5268,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4745"/>
         <source>Failed to create directory for new snapshot</source>
-        <translation>فشل إنشاء دليل للقطة الجديدة</translation>
+        <translation>فشل إنشاء مجلد للقطة الجديدة</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4747"/>
@@ -7779,7 +7779,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="82"/>
         <source>Force %1 to run in this sandbox</source>
-        <translation>إجبار %1 على التشغيل في هذا صندوق العزل</translation>
+        <translation>إجبار %1 على التشغيل في صندوق العزل هذا</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="100"/>
@@ -8481,7 +8481,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="471"/>
         <source>Protect this sandbox from deletion or emptying</source>
-        <translation>حماية هذا صندوق العزل من الحذف أو التفريغ</translation>
+        <translation>حماية صندوق العزل هذا من الحذف أو التفريغ</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="661"/>
@@ -8754,7 +8754,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2320"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
-        <translation>سيتم وضع البرامج المدخلة هنا، أو البرامج التي يتم تشغيلها من المواقع المدخلة، في هذا صندوق العزل تلقائيًا، ما لم يتم تشغيلها صراحةً في صندوق عزل آخر.</translation>
+        <translation>سيتم وضع البرامج المدخلة هنا، أو البرامج التي يتم تشغيلها من المواقع المدخلة، في صندوق العزل هذا تلقائيًا، ما لم يتم تشغيلها صراحةً في صندوق عزل آخر.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2592"/>
@@ -8775,22 +8775,22 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2861"/>
         <source>Allow only selected programs to start in this sandbox. *</source>
-        <translation>السماح فقط للبرامج المحددة بالبدء في هذا صندوق العزل. *</translation>
+        <translation>السماح فقط للبرامج المحددة بالبدء في صندوق العزل هذا. *</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2868"/>
         <source>Prevent selected programs from starting in this sandbox.</source>
-        <translation>منع البرامج المحددة من البدء في هذا صندوق العزل.</translation>
+        <translation>منع البرامج المحددة من البدء في صندوق العزل هذا.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2854"/>
         <source>Allow all programs to start in this sandbox.</source>
-        <translation>السماح لجميع البرامج بالبدء في هذا صندوق العزل.</translation>
+        <translation>السماح لجميع البرامج بالبدء في صندوق العزل هذا.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2844"/>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
-        <translation>* ملاحظة: لن تتمكن البرامج المثبتة في هذا صندوق عزل من البدء على الإطلاق.</translation>
+        <translation>* ملاحظة: لن تتمكن البرامج المثبتة في هذا الصندوق من البدء على الإطلاق.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3622"/>
@@ -8810,7 +8810,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3670"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
-        <translation>ملاحظة: لن تتمكن البرامج المثبتة في هذا صندوق العزل من الوصول إلى الإنترنت على الإطلاق.</translation>
+        <translation>ملاحظة: لن تتمكن البرامج المثبتة في صندوق العزل هذا من الوصول إلى الإنترنت على الإطلاق.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3001"/>
@@ -8972,7 +8972,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1572"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation>يمكن لميزات العزل المختلفة أن تكسر التوافق مع بعض التطبيقات. إذا كنت تستخدم هذا صندوق العزل &lt;b&gt;ليس للأمان&lt;/b&gt; ولكن لقابلية نقل التطبيق، فبتغيير هذه الخيارات يمكنك استعادة التوافق من خلال التضحية ببعض الأمان.</translation>
+        <translation>يمكن لميزات العزل المختلفة أن تكسر التوافق مع بعض التطبيقات. إذا كنت تستخدم صندوق العزل هذا &lt;b&gt;ليس للأمان&lt;/b&gt; ولكن لقابلية نقل التطبيق، فبتغيير هذه الخيارات يمكنك استعادة التوافق من خلال التضحية ببعض الأمان.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1542"/>
@@ -9033,7 +9033,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4557"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
-        <translation>استثناء هذا صندوق العزل من الإنهاء عند استدعاء &quot;إنهاء كافة العمليات&quot;.</translation>
+        <translation>استثناء صندوق العزل هذا من الإنهاء عند استدعاء &quot;إنهاء كافة العمليات&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4645"/>
@@ -9169,7 +9169,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1698"/>
         <source>Only Administrator user accounts can make changes to this sandbox</source>
-        <translation>يمكن فقط لحسابات المستخدمين المسؤولين إجراء تغييرات على هذا صندوق العزل</translation>
+        <translation>يمكن فقط لحسابات المستخدمين المسؤولين إجراء تغييرات على صندوق العزل هذا</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1801"/>
@@ -9180,7 +9180,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="2498"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
-        <translation>سيتم السماح للبرامج المدخلة هنا بالخروج من هذا صندوق العزل عند بدء تشغيلها. ومن الممكن أيضًا إيداعها في صندوق عزلي آخر، على سبيل المثال، جعل متصفح الويب الخاص بك مفتوحًا دائمًا في صندوق مخصص.</translation>
+        <translation>سيتم السماح للبرامج المدخلة هنا بالخروج من صندوق العزل هذا عند بدء تشغيلها. ومن الممكن أيضًا إيداعها في صندوق عزلي آخر، على سبيل المثال، جعل متصفح الويب الخاص بك مفتوحًا دائمًا في صندوق مخصص.</translation>
     </message>
     <message>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security. Please review the security section for each option in the documentation before use.</source>
@@ -10818,12 +10818,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="59"/>
         <source>Sandbox</source>
-        <translation>صدوق العزل</translation>
+        <translation>صندوق العزل</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="84"/>
         <source>Run As UAC Administrator</source>
-        <translation>التشغيل كمسؤول والتحكم بحساب المستخدم (UAC)</translation>
+        <translation>التشغيل كمسؤول (UAC)</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="98"/>
@@ -11651,7 +11651,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2181"/>
         <source>Sandboxie Updater</source>
-        <translation>أداة تحديث ساندبوكسي</translation>
+        <translation>أداة تحديث Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2212"/>
@@ -12272,7 +12272,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="163"/>
         <source>Take Snapshot</source>
-        <translation>التقاط نسخة احتياطية سنابشوت</translation>
+        <translation>التقاط لقطة</translation>
     </message>
 </context>
 <context>

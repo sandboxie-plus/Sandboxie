@@ -459,17 +459,17 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="126"/>
         <source>Create sandboxes in:</source>
-        <translation type="unfinished"></translation>
+        <translation>ساخت جعبه‌ها در:</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Where the imported sandboxes are created. Keep %SANDBOX% in the path so that each box gets its own folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>محل ساخت جعبه‌های واردشده. %SANDBOX% را در مسیر نگه دارید تا هر جعبه پوشه‌ی مخصوص خودش را داشته باشد.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="144"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>مرور...</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="152"/>
@@ -484,17 +484,17 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="199"/>
         <source>Select the folder to create the sandboxes in</source>
-        <translation type="unfinished"></translation>
+        <translation>پوشه‌ای را که جعبه‌ها در آن ساخته می‌شوند انتخاب کنید</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="218"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished">سندباکس نمی‌تواند روی یک اشتراک شبکه قرار گیرد؛ لطفاً یک پوشه‌ی محلی انتخاب کنید.</translation>
+        <translation>سندباکس نمی‌تواند روی یک اشتراک شبکه قرار گیرد؛ لطفاً یک پوشه‌ی محلی انتخاب کنید.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="226"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished">سندباکس نمی‌تواند در ریشه‌ی یک پارتیشن قرار گیرد؛ لطفاً یک پوشه انتخاب کنید.</translation>
+        <translation>سندباکس نمی‌تواند در ریشه‌ی یک پارتیشن قرار گیرد؛ لطفاً یک پوشه انتخاب کنید.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="252"/>
@@ -1297,17 +1297,17 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="46"/>
         <source>Show Future Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش تنظیمات آینده</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>پنهان</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <source>Shown (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش داده‌شده (پیش‌فرض)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="58"/>
@@ -4944,7 +4944,7 @@ Please check if there is an update for sandboxie.</source>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="53"/>
         <source>No enabled sandbox is available. Please create or enable a sandbox and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>هیچ سندباکس فعالی در دسترس نیست. لطفاً یک سندباکس بسازید یا فعال کنید و دوباره تلاش کنید.</translation>
     </message>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="63"/>
@@ -4954,7 +4954,7 @@ Please check if there is an update for sandboxie.</source>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="106"/>
         <source>More than one sandbox has this alias. Select a sandbox from the list or type its actual name. Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>بیش از یک سندباکس این نام مستعار را دارد. یک سندباکس را از فهرست انتخاب کنید یا نام واقعی آن را وارد کنید. هیچ تغییری اعمال نشد.</translation>
     </message>
     <message>
         <source>Type the box name which you are going to set:</source>
@@ -6606,7 +6606,7 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="324"/>
         <source>Arabic (Morocco) - LTR</source>
-        <translation type="unfinished"></translation>
+        <translation>عربی (مراکش) - چپ‌به‌راست</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="343"/>
@@ -8081,22 +8081,22 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Views/TraceView.cpp" line="951"/>
         <source>Trace Logging is still active. What do you want to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>ثبت ردگیری هنوز فعال است. می‌خواهید چه کار کنید؟</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="954"/>
         <source>Stop and Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>توقف و پاک‌کردن</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="956"/>
         <source>Disable, Keep Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>غیرفعال‌کردن، نگه‌داشتن گزارش‌ها</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="958"/>
         <source>Keep Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>ادامه‌ی ثبت</translation>
     </message>
 </context>
 <context>
@@ -12161,17 +12161,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="9"/>
         <source>Select a sandbox or type its name or alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>یک سندباکس را انتخاب کنید یا نام یا نام مستعار آن را وارد کنید:</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="26"/>
         <source>Applies to both Set Open and Set Force. The dialog is always shown when more than one sandbox is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>برای هر دو «تنظیم باز» و «تنظیم اجبار» اعمال می‌شود. وقتی بیش از یک سندباکس فعال باشد، این پنجره همیشه نمایش داده می‌شود.</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="29"/>
         <source>Skip this dialog when only one sandbox is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>رد کردن این پنجره وقتی فقط یک سندباکس فعال است</translation>
     </message>
 </context>
 <context>

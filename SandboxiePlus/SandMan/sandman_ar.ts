@@ -1056,7 +1056,7 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="331"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation>يوفر &lt;b&gt;Sandboxie-Plus&lt;/b&gt; ميزات وأنواع صناديق إضافية حصريًا لـ &lt;u&gt;داعمي المشروع&lt;/u&gt;. تعمل الصندوقات مثل الصندوقات المعززة بالخصوصية &lt;b&gt;&lt;font color=&apos;red&apos;&gt;على حماية بيانات المستخدم من الوصول غير المشروع&lt;/font&gt;&lt;/b&gt; بواسطة البرامج المعزولة. إذا لم تكن من الداعمين بعد، فيرجى التفكير في &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;دعم المشروع&lt;/a&gt; لضمان مزيد من تطوير Sandboxie والحصول على &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;شهادة داعم&lt;/a&gt;.</translation>
+        <translation>يوفر &lt;b&gt;Sandboxie-Plus&lt;/b&gt; ميزات وأنواع صناديق إضافية حصريًا لـ &lt;u&gt;داعمي المشروع&lt;/u&gt;. تعمل الصناديق مثل الصناديق المعززة بالخصوصية &lt;b&gt;&lt;font color=&apos;red&apos;&gt;على حماية بيانات المستخدم من الوصول غير المشروع&lt;/font&gt;&lt;/b&gt; بواسطة البرامج المعزولة. إذا لم تكن من الداعمين بعد، فيرجى التفكير في &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;دعم المشروع&lt;/a&gt; لضمان مزيد من تطوير Sandboxie والحصول على &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;شهادة داعم&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="368"/>
@@ -2286,7 +2286,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="349"/>
         <source>Ignore UIPI restrictions for processes.</source>
-        <translation>تجاهل قيود واجهة المستخدم الرسومية (UIPI) للعمليات.</translation>
+        <translation>تجاهل قيود عزل امتيازات واجهة المستخدم (UIPI) للعمليات.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="358"/>
@@ -3592,7 +3592,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="932"/>
         <source>%1 file(s) hidden by AutoRecoverIgnore</source>
-        <translation type="unfinished">تم إخفاء %1 ملف بواسطة AutoRecoverIgnore</translation>
+        <translation>تم إخفاء %1 ملف بواسطة AutoRecoverIgnore</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="1283"/>
@@ -4070,7 +4070,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="891"/>
         <source>Show Hidden Boxes</source>
-        <translation>إظهار الصندوقات المخفية</translation>
+        <translation>إظهار الصناديق المخفية</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="893"/>
@@ -4429,7 +4429,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     </message>
     <message>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="vanished">بعض قوالب التوافق (%1) مفقودة، وربما تم حذفها، هل تريد إزالتها من جميع الصندوقات؟</translation>
+        <translation type="vanished">بعض قوالب التوافق (%1) مفقودة، وربما تم حذفها، هل تريد إزالتها من جميع الصناديق؟</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2343"/>
@@ -4759,7 +4759,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1091"/>
         <source>Reveal Hidden Boxes</source>
-        <translation>إظهار الصندوقات المخفية</translation>
+        <translation>إظهار الصناديق المخفية</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1097"/>
@@ -7104,7 +7104,7 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2047"/>
         <source>Run &amp;Un-Sandboxed</source>
-        <translation>تشغيل &amp;دون عزل</translation>
+        <translation>تشغيل &amp;خارج العزل</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2055"/>
@@ -7135,13 +7135,13 @@ Right-click to copy</oldsource>
         <location filename="Windows/SettingsWindow.cpp" line="3613"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
-        <translation type="unfinished">
+        <translation>
 هذه شهادة باتريون مؤقتة، صالحة لمدة 3 أشهر. عندما تقترب من انتهاء صلاحيتها، يمكنك الحصول على شهادة جديدة عبر الإنترنت ستكون صالحة للمدة الكاملة.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3651"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
-        <translation type="unfinished">يلزم تحديث أمني إلزامي لشهادة داعم Sandboxie-Plus. هل تريد تنزيل الشهادة المحدثة الآن؟</translation>
+        <translation>يلزم تحديث أمني إلزامي لشهادة داعم Sandboxie-Plus. هل تريد تنزيل الشهادة المحدثة الآن؟</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3652"/>
@@ -8132,7 +8132,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Views/TraceView.cpp" line="314"/>
         <source>Show All Boxes</source>
-        <translation>إظهار كل الصندوقات</translation>
+        <translation>إظهار كل الصناديق</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="318"/>
@@ -10382,7 +10382,7 @@ instead of &quot;*&quot;.</source>
 Please note that this values are currently user specific and saved globally for all boxes.</source>
         <translation>قم بتكوين مواقع المجلدات التي تستخدمها تطبيقاتك الأخرى.
 
-يرجى ملاحظة أن هذه القيم خاصة بالمستخدم حاليًا ويتم حفظها عالميًا لجميع الصندوقات.</translation>
+يرجى ملاحظة أن هذه القيم خاصة بالمستخدم حاليًا ويتم حفظها عالميًا لجميع الصناديق.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4822"/>
@@ -11307,7 +11307,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="804"/>
         <source>Use Compact Box List</source>
-        <translation>استخدم قائمة الصندوقات المضغوطة</translation>
+        <translation>استخدم قائمة الصناديق المضغوطة</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1066"/>
@@ -11317,17 +11317,17 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1141"/>
         <source>Make Box Icons match the Border Color</source>
-        <translation>جعل أيقونات الصندوقات تتطابق مع لون الحدود</translation>
+        <translation>جعل أيقونات الصناديق تتطابق مع لون الحدود</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1148"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
-        <translation>استخدم شجرة الصفحات في خيارات الصندوقات بدلاً من علامات التبويب المتداخلة *</translation>
+        <translation>استخدم شجرة الصفحات في خيارات الصناديق بدلاً من علامات التبويب المتداخلة *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1182"/>
         <source>Use large icons in box list *</source>
-        <translation>استخدم أيقونات كبيرة في قائمة الصندوقات *</translation>
+        <translation>استخدم أيقونات كبيرة في قائمة الصناديق *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1272"/>
@@ -11363,7 +11363,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="1084"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation>إظهار خلفية &quot;بيتزا&quot; في قائمة الصندوقات *</translation>
+        <translation>إظهار خلفية &quot;بيتزا&quot; في قائمة الصناديق *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1285"/>

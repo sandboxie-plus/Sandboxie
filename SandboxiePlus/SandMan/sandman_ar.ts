@@ -540,7 +540,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="478"/>
         <source>Sandbox name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">اسم صندوق العزل: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="599"/>

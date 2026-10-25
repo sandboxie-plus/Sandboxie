@@ -1819,6 +1819,8 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				if (!CheckStatus(Status))
 					return false;
 				Draft.AliasPending = false;
+				Refresh();
+				RestoreBoxSelectionLater(QStringList() << Draft.SavedName);
 			}
 			Draft.Name = QString(Draft.SavedName).replace("_", " ");
 			Draft.Alias = Draft.SavedAlias;

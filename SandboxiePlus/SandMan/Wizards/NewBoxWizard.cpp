@@ -350,6 +350,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
 
     layout->addWidget(new QLabel(tr("Enter box name:")), row++, 0);
     m_pBoxName = new QLineEdit();
+    m_pBoxName->setClearButtonEnabled(true);
     m_pBoxName->setMaxLength(38); // BOXNAME_COUNT
     m_ManualName = theAPI->MkNewName("New Box");
     m_pBoxName->setText(m_ManualName);
@@ -362,6 +363,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
 
     layout->addWidget(new QLabel(tr("Alias:")), row++, 0);
     m_pAlias = new QLineEdit();
+    m_pAlias->setClearButtonEnabled(true);
     m_pAlias->setMaxLength(38); // BOXNAME_COUNT
     layout->addWidget(m_pAlias, row++, 1, 1, 2);
 

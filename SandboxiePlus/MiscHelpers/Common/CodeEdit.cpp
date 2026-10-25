@@ -4,6 +4,11 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QTextDocument>
+#include <QAbstractTextDocumentLayout>
+#include <QTextBlock>
+#include <QPainter>
+#include <QPaintEvent>
+#include <QResizeEvent>
 #include <QVariant>
 #include <QtMath>
 
@@ -1266,6 +1271,114 @@ namespace {
 
 } // namespace
 
+namespace {
+
+class CLineNumberTextEdit : public QTextEdit
+{
+public:
+	CLineNumberTextEdit()
+		: m_pLineNumbers(new QWidget(this))
+	{
+		m_pLineNumbers->hide();
+		m_pLineNumbers->installEventFilter(this);
+		connect(document(), &QTextDocument::blockCountChanged, this, [this](int) {
+			UpdateLineNumberArea();
+		});
+		connect(document()->documentLayout(), &QAbstractTextDocumentLayout::update, this, [this](const QRectF&) {
+			m_pLineNumbers->update();
+		});
+		connect(this, &QTextEdit::cursorPositionChanged, this, [this]() {
+			if (m_HighlightedBlock.isValid() && textCursor().block() != m_HighlightedBlock) {
+				m_HighlightedBlock = QTextBlock();
+				m_pLineNumbers->update();
+			}
+		});
+	}
+
+	void SetLineNumbersVisible(bool bVisible)
+	{
+		m_LineNumbersVisible = bVisible;
+		UpdateLineNumberArea();
+	}
+
+	void HighlightCurrentLineNumber()
+	{
+		m_HighlightedBlock = textCursor().block();
+		m_pLineNumbers->update();
+	}
+
+protected:
+	bool eventFilter(QObject* obj, QEvent* event) override
+	{
+		if (obj == m_pLineNumbers && event->type() == QEvent::Paint) {
+			PaintLineNumbers(static_cast<QPaintEvent*>(event));
+			return true;
+		}
+		return QTextEdit::eventFilter(obj, event);
+	}
+
+	void resizeEvent(QResizeEvent* event) override
+	{
+		QTextEdit::resizeEvent(event);
+		UpdateLineNumberArea();
+	}
+
+	void changeEvent(QEvent* event) override
+	{
+		QTextEdit::changeEvent(event);
+		UpdateLineNumberArea();
+	}
+
+	void scrollContentsBy(int dx, int dy) override
+	{
+		QTextEdit::scrollContentsBy(dx, dy);
+		m_pLineNumbers->update();
+	}
+
+private:
+	void UpdateLineNumberArea()
+	{
+		const int digits = QString::number(document()->blockCount()).size();
+		const int width = m_LineNumbersVisible ? 10 + fontMetrics().horizontalAdvance(QLatin1Char('9')) * digits : 0;
+		if (viewportMargins().left() != width)
+			setViewportMargins(width, 0, 0, 0);
+		const QRect viewportRect = viewport()->geometry();
+		m_pLineNumbers->setGeometry(viewportRect.left() - width, viewportRect.top(), width, viewportRect.height());
+		m_pLineNumbers->setVisible(m_LineNumbersVisible);
+		m_pLineNumbers->update();
+	}
+
+	void PaintLineNumbers(QPaintEvent* event)
+	{
+		// Keep numbers outside the document so copying and saving only use the INI text.
+		QPainter painter(m_pLineNumbers);
+		painter.fillRect(event->rect(), palette().color(QPalette::AlternateBase));
+		painter.setFont(font());
+
+		QTextBlock block = cursorForPosition(QPoint(0, 0)).block();
+		while (block.isValid()) {
+			const QRect lineRect = cursorRect(QTextCursor(block));
+			if (lineRect.top() > event->rect().bottom())
+				break;
+			if (lineRect.bottom() >= event->rect().top()) {
+				const bool highlighted = block == m_HighlightedBlock;
+				if (highlighted)
+					painter.fillRect(0, lineRect.top(), m_pLineNumbers->width(), lineRect.height(), palette().color(QPalette::Highlight));
+				painter.setPen(palette().color(highlighted ? QPalette::HighlightedText : QPalette::Text));
+				painter.drawText(0, lineRect.top(), m_pLineNumbers->width() - 5, lineRect.height(),
+					Qt::AlignRight | Qt::AlignVCenter, QString::number(block.blockNumber() + 1));
+			}
+			block = block.next();
+		}
+	}
+
+	QWidget* m_pLineNumbers;
+	QTextBlock m_HighlightedBlock;
+	bool m_LineNumbersVisible = false;
+};
+
+} // namespace
+
 CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	: QWidget(pParent), m_pCompleter(nullptr), m_lastWordStart(-1), m_lastWordEnd(-1),
 	m_caseCorrectionInProgress(false), m_completionInsertInProgress(false),
@@ -1275,7 +1388,7 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	m_pMainLayout->setContentsMargins(0, 0, 0, 0);
 	setLayout(m_pMainLayout);
 
-	m_pSourceCode = new QTextEdit();
+	m_pSourceCode = new CLineNumberTextEdit();
 	QFont Font = m_pSourceCode->font();
 	Font.setFamily("Courier New");
 	Font.setPointSize(10);
@@ -2563,6 +2676,11 @@ void CCodeEdit::SetFont(const QFont& Font)
 	m_pSourceCode->setFont(Font);
 }
 
+void CCodeEdit::SetLineNumbersVisible(bool bVisible)
+{
+	static_cast<CLineNumberTextEdit*>(m_pSourceCode)->SetLineNumbersVisible(bVisible);
+}
+
 const QFont& CCodeEdit::GetFont() const
 {
 	return m_pSourceCode->font();
@@ -2614,6 +2732,7 @@ void CCodeEdit::OnGoTo()
 		Cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor);
 	//Cursor.select(QTextCursor::LineUnderCursor);
 	m_pSourceCode->setTextCursor(Cursor);
+	static_cast<CLineNumberTextEdit*>(m_pSourceCode)->HighlightCurrentLineNumber();
 }
 
 void CCodeEdit::ReplaceLastCorrection()

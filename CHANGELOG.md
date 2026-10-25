@@ -6,9 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.19.1 / 5.74.1] - 2026-10-??
 
+### Added
+- added line numbers to the built-in INI section editors, with an Advanced Editor Settings toggle and Ctrl+G destination highlighting; copying and saving exclude the line numbers
+
 ### Fixed
 - fixed misleading comment highlighting for INI lines starting with `;` without `=`; saving now shows a line-numbered error recommending `#` and preserves unsaved edits [#5685](https://github.com/sandboxie-plus/Sandboxie/issues/5685)
-
 
 
 ## [1.19.0 / 5.74.0] - 2026-10-23

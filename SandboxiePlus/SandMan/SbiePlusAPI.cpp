@@ -16,6 +16,8 @@ typedef long NTSTATUS;
 #include "../QSbieAPI/SbieUtils.h"
 #include "../MiscHelpers/Archive/Archive.h"
 #include <QtConcurrent>
+#include <QUuid>
+#include <QRegularExpression>
 #include "Helpers/WinHelper.h"
 
 #include "..\..\Sandboxie\common\win32_ntddk.h"
@@ -32,6 +34,25 @@ CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
 CSbiePlusAPI::~CSbiePlusAPI()
 {
 	delete m_BoxMonitor;
+}
+
+bool CSbiePlusAPI::IsGuidBoxName(const QString& Name)
+{
+	static const QRegularExpression GuidPattern(
+		"\\A(?:[0-9A-Fa-f]{32}|[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12})\\z");
+	QString Value = Name.trimmed();
+	if (Value.startsWith('{') && Value.endsWith('}'))
+		Value = Value.mid(1, Value.length() - 2);
+	return GuidPattern.match(Value).hasMatch();
+}
+
+QString CSbiePlusAPI::MkNewGuidName()
+{
+	QString Name;
+	do {
+		Name = QUuid::createUuid().toString(QUuid::WithoutBraces).replace("-", "");
+	} while (!GetBoxByName(Name).isNull());
+	return Name;
 }
 
 CSandBox* CSbiePlusAPI::NewSandBox(const QString& BoxName, class CSbieAPI* pAPI)

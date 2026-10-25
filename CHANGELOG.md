@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added line numbers to the built-in INI section editors, with an Advanced Editor Settings toggle and Ctrl+G destination highlighting; copying and saving exclude the line numbers
+- added per-dialog GUID name controls to Rename Sandbox and the New Box wizard, with alias overwrite confirmation; GUID-like names offer regeneration without being copied into aliases, and the global GUID option only supplies the wizard default
+- added batch sandbox name and alias editing with Previous/Next draft navigation; OK saves and advances, the final OK saves remaining drafts, and Cancel warns before discarding unsaved edits
 
 ### Fixed
 - fixed misleading comment highlighting for INI lines starting with `;` without `=`; saving now shows a line-numbered error recommending `#` and preserves unsaved edits [#5685](https://github.com/sandboxie-plus/Sandboxie/issues/5685)

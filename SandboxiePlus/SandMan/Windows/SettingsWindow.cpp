@@ -2387,20 +2387,22 @@ void CSettingsWindow::SaveSettings()
 }
 
 
-void CSettingsWindow::apply()
+bool CSettingsWindow::apply()
 {
-	if (!ui.btnEditIni->isEnabled())
-		SaveIniSection();
+	if (!ui.btnEditIni->isEnabled()) {
+		if (!SaveIniSection())
+			return false;
+	}
 	else
 		SaveSettings();
 	LoadSettings();
+	return true;
 }
 
 void CSettingsWindow::ok()
 {
-	apply();
-
-	this->close();
+	if (apply())
+		this->close();
 }
 
 void CSettingsWindow::reject()
@@ -2981,7 +2983,8 @@ void CSettingsWindow::OnAutoCompletionToggled(int state)
 
 void CSettingsWindow::OnSaveIni()
 {
-	SaveIniSection();
+	if (!SaveIniSection())
+		return;
 	SetIniEdit(false);
 	LoadSettings();
 }
@@ -3016,13 +3019,18 @@ void CSettingsWindow::LoadIniSection()
 	m_HoldChange = false;
 }
 
-void CSettingsWindow::SaveIniSection()
+bool CSettingsWindow::SaveIniSection()
 {
+	const QString Section = m_pCodeEdit->GetCode();
+	if (!CIniHighlighter::ValidateIniComments(Section, this))
+		return false;
+
 	if(theAPI->IsConnected())
 		//theAPI->SbieIniSet("GlobalSettings", "", ui.txtIniSection->toPlainText());
-		theAPI->SbieIniSet("GlobalSettings", "", m_pCodeEdit->GetCode());
+		theAPI->SbieIniSet("GlobalSettings", "", Section);
 
 	//LoadIniSection();
+	return true;
 }
 
 QVariantMap GetRunEntry(const QString& sEntry)

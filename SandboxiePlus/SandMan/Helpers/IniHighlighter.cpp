@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "IniHighlighter.h"
+#include <QMessageBox>
 #include "../MiscHelpers/Common/Settings.h"
 #include "../version.h"
 
@@ -128,7 +129,7 @@ namespace {
         static const QRegularExpression SECTION_REGEX(R"(^\[([^\]]+)\]\s*$)");
         static const QRegularExpression VERSION_REGEX("^[0-9]+\\.[0-9]+\\.[0-9]+$");
         static const QRegularExpression KEY_REGEX(R"(^\s*([^=]+?)\s*=)");
-        static const QRegularExpression COMMENT_REGEX(R"(^\s*[;#].*)");
+        static const QRegularExpression COMMENT_REGEX(R"(^\s*(?:#.*|;.*=.*))");
         static const QRegularExpression CLEAN_NAME_REGEX("[^a-zA-Z0-9_.]");
 		static const QRegularExpression SETTING_NAME_REGEX("^[a-zA-Z0-9_. ()-]+$");
 		static const QRegularExpression JSON_KEY_REGEX(R"("(?:(?:\\.)|[^"\\])*"(?=\s*:))");
@@ -710,9 +711,9 @@ CIniHighlighter::CIniHighlighter(bool bDarkMode, QTextDocument* parent, bool ena
     rule.format = sectionFormat;
     highlightRules.append(rule);
 
-    // Comments: ; comment or # comment
+    // Comments and semicolon-prefixed assignments
     commentFormat.setForeground(green);
-    rule.pattern = QRegularExpression("^\\s*[;#].*");
+    rule.pattern = CompiledRegex::COMMENT_REGEX;
     rule.format = commentFormat;
     highlightRules.append(rule);
 
@@ -2614,9 +2615,22 @@ SettingInfo CIniHighlighter::resolveSettingInfo(const QString& settingName, cons
 
 bool CIniHighlighter::IsCommentLine(const QString& line)
 {
-	// Skip lines that start with # or ; (after optional whitespace)
+	// Skip # lines and ; lines containing = (after optional whitespace).
 	QString trimmed = line.trimmed();
-	return trimmed.startsWith('#') || trimmed.startsWith(';');
+	return trimmed.startsWith('#') || (trimmed.startsWith(';') && trimmed.contains('='));
+}
+
+bool CIniHighlighter::ValidateIniComments(const QString& section, QWidget* parent)
+{
+	const QStringList lines = section.split('\n');
+	for (int i = 0; i < lines.size(); ++i) {
+		const QString line = lines.at(i).trimmed();
+		if (line.startsWith(';') && !line.contains('=')) {
+			QMessageBox::critical(parent, "Sandboxie-Plus", tr("Line %1: Semicolons (;) are not supported as comment markers. Use # instead.").arg(i + 1));
+			return false;
+		}
+	}
+	return true;
 }
 
 CIniHighlighter::TooltipMode CIniHighlighter::GetTooltipMode()

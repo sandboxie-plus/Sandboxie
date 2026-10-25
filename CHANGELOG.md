@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+## [1.19.1 / 5.74.1] - 2026-10-??
+
+### Fixed
+- fixed misleading comment highlighting for INI lines starting with `;` without `=`; saving now shows a line-numbered error recommending `#` and preserves unsaved edits [#5685](https://github.com/sandboxie-plus/Sandboxie/issues/5685)
+
+
+
 ## [1.19.0 / 5.74.0] - 2026-10-23
 
 ### Fixed

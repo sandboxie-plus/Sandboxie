@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed misleading comment highlighting for INI lines starting with `;` without `=`; saving now shows a line-numbered error recommending `#` and preserves unsaved edits [#5685](https://github.com/sandboxie-plus/Sandboxie/issues/5685)
 
 
+
 ## [1.19.0 / 5.74.0] - 2026-10-23
 
 ### Fixed
@@ -33,7 +34,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed the desktop `startExplorer` and `startRun` actions launching as LocalSystem rather than with the calling user's token
 - fixed `PORT_DATA_INFO` being read without requiring the whole structure to lie inside the LPC message
 - fixed the ALPC connect reply returning its uninitialised tail - up to `PIPE_MAX_DATA_LEN` of service heap - to the caller
-- fixed global ("asterisk") queue names having no session scoping, which let any unsandboxed process squat a well known name such as the interactive queue
+- fixed global ("asterisk") queue names having no session scoping, which let any unsandboxed process squat a well-known name such as the interactive queue
 - fixed the UAC packet being accepted with no minimum length, and its string offsets being used without being checked against it
 - fixed the ICMP echo reply fix-up writing a whole `ICMP_ECHO_REPLY` past a caller sized reply buffer when the echo itself failed
 - fixed `request_size` not being checked against the message in the ICMP echo handler, which put up to 64 KB of service heap on the wire
@@ -55,7 +56,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed two token references and a handle being leaked if the output write faulted in the SbieDrv `API_FILTER_TOKEN` handler
 - fixed a 32-bit truncation of the entry size in the driver monitor-log writer that could overflow the log buffer
 - fixed SandMan over-reading an unterminated file path out of a queue reply (`MAN_FILE_MIGRATION`), which a sandboxed process could use to crash the UI
-- fixed ini section names not being rejected for CR/LF or brackets, which let a caller forge additional sections/settings and bypass a per-section `EditAdminOnly` lock
+- fixed INI section names not being rejected for CR/LF or brackets, which let a caller forge additional sections/settings and bypass a per-section `EditAdminOnly` lock
 - fixed the SbieSvc `USER_SHELL_EXEC` handler using an unvalidated, possibly-unterminated wire path offset
 - fixed the SbieSvc `MSGID_SBIE_INI_SET_DAT` handler using an unvalidated `value_len` as the write length, reading past the request buffer
 - fixed the INI setting handlers not terminating their fixed-size `section`/`setting`/`password` wire fields before use
@@ -71,8 +72,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed the four SbieSvc terminal query handlers having no caller gate and taking a session id off the wire, letting any user query other sessions as SYSTEM; `QUERY_INFO` now also allow-lists the information class
 - fixed the SbieSvc ImBox `QueryHandler` leaking its critical section (and deadlocking the mount subsystem) when the queried mount raced to NULL
 - fixed the SbieSvc queue server accepting an unbounded number of undrained requests (per-queue cap added)
-- fixed Import Boxes not letting the user choose where the imported sandboxes are created [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)
-
 
 
 

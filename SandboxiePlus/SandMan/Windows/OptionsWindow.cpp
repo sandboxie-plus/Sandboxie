@@ -209,11 +209,12 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	ui.tabsGeneral->setCurrentIndex(0);
 	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Box"));
-	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Folder"));
-	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Move"));
-	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("NoAccess"));
-	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("EFence"));
-	ui.tabsGeneral->setTabIcon(5, CSandMan::GetIcon("Run"));
+	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Box"));
+	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Folder"));
+	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("Move"));
+	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("NoAccess"));
+	ui.tabsGeneral->setTabIcon(5, CSandMan::GetIcon("EFence"));
+	ui.tabsGeneral->setTabIcon(6, CSandMan::GetIcon("Run"));
 
 	ui.tabsSecurity->setCurrentIndex(0);
 	ui.tabsSecurity->setTabIcon(0, CSandMan::GetIcon("Shield7"));
@@ -301,9 +302,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->insertTab(1, pWidget, tr("File Options"));
 	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Folder"));
 
-	pTabWidget->addTab(ui.tabsGeneral->widget(1), ui.tabsGeneral->tabText(1));
+	pTabWidget->addTab(ui.tabsGeneral->widget(2), ui.tabsGeneral->tabText(2));
 	pTabWidget->setTabIcon(0, CSandMan::GetIcon("Files"));
-	pTabWidget->addTab(ui.tabsGeneral->widget(1), ui.tabsGeneral->tabText(1));
+	pTabWidget->addTab(ui.tabsGeneral->widget(2), ui.tabsGeneral->tabText(2));
 	pTabWidget->setTabIcon(1, CSandMan::GetIcon("Move"));
 	pTabWidget->addTab(ui.tabs->widget(9), ui.tabs->tabText(9));
 	pTabWidget->setTabIcon(2, CSandMan::GetIcon("Recover"));

@@ -1316,7 +1316,7 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="49"/>
         <source>Show INI Line Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>INI 줄 번호 표시</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="61"/>
@@ -1726,7 +1726,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2629"/>
         <source>Line %1: Semicolons (;) are not supported as comment markers. Use # instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 줄: 세미콜론 (;)은 주석 표시자로 지원되지 않습니다. 대신 #을 사용하세요.</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2858"/>

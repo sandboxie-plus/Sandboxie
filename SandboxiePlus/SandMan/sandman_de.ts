@@ -1293,7 +1293,7 @@ Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="49"/>
         <source>Show INI Line Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige INI-Zeilennummern</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="61"/>
@@ -1697,7 +1697,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2629"/>
         <source>Line %1: Semicolons (;) are not supported as comment markers. Use # instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeile %1: Semikolons (;) werden als Kommentarzeichen nicht unterstützt. Verwenden Sie stattdessen #.</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2858"/>

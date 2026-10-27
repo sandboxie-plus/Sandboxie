@@ -16,6 +16,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.19.1 / 5.74.1] - 2026-10-??
+
+### Changed
+- switched to qt 6.8.4
+
+
+
+
+
 ## [1.19.0 / 5.74.0] - 2026-10-23
 
 ### Fixed

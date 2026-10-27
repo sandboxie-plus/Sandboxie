@@ -13,15 +13,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed misleading comment highlighting for INI lines starting with `;` without `=`; saving now shows a line-numbered error recommending `#` and preserves unsaved edits [#5685](https://github.com/sandboxie-plus/Sandboxie/issues/5685)
 - fixed numeric fields retaining their pending-change highlight after keyboard editing and clicking Apply in sandbox options and global settings
-
-
-
-
-
-## [1.19.1 / 5.74.1] - 2026-10-??
+- Language corrupted after version 1.16.0 [#5079](https://github.com/sandboxie-plus/Sandboxie/issues/5079)
 
 ### Changed
-- switched to qt 6.8.4
+- switched x64 build to qt 6.8.4
 
 
 

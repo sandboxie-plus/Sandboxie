@@ -2,6 +2,8 @@
 #include "..\SandMan.h"
 #include "StackView.h"
 #include "..\..\MiscHelpers\Common\Common.h"
+#include "..\Helpers\RedactedStackExport.h"
+#include "..\Windows\StackExportDialog.h"
 
 CStackView::CStackView(QWidget *parent)
 	: CPanelView(parent)
@@ -32,6 +34,9 @@ CStackView::CStackView(QWidget *parent)
 	AddPanelItemsToMenu();
 
 	m_pStackList->header()->restoreState(theConf->GetBlob("MainWindow/StackView_Columns"));
+
+	m_pMenu->addSeparator();
+	m_pMenu->addAction(tr("Export Redacted..."), this, SLOT(OnExportRedacted()));
 }
 
 CStackView::~CStackView()
@@ -118,4 +123,30 @@ void CStackView::OnSymbolChanged(quint64 Address)
 void CStackView::SetFilter(const QRegularExpression& Exp, int iOptions, int Col)
 {
 	CPanelWidgetEx::ApplyFilter(m_pStackList, &m_pFinder->GetSearchExp());
+}
+
+void CStackView::OnExportRedacted()
+{
+	SStackCapture Capture;
+	Capture.state = SStackCapture::eComplete;
+	Capture.frames.reserve(m_CurrentStack.size());
+	for (int i = 0; i < m_CurrentStack.size(); ++i) {
+		quint64 Address = m_CurrentStack[i];
+		SStackFrame Frame;
+		Frame.address = Address;
+		if (!m_pCurrentProcess.isNull())
+			Frame.symbol = m_pCurrentProcess->GetSymbol(Address);
+		// Module grouping: use the resolver's module short name because the
+		// live diagnostic path does not expose a base address here. Two
+		// modules that share a base name inside one report collide by
+		// design; the dialog and the docs state so.
+		int bang = Frame.symbol.indexOf(QLatin1Char('!'));
+		int plus = Frame.symbol.indexOf(QLatin1Char('+'));
+		int split = (bang >= 0 && (plus < 0 || bang < plus)) ? bang : plus;
+		if (split > 0)
+			Frame.moduleKey = Frame.symbol.left(split);
+		Capture.frames.append(Frame);
+	}
+	CStackExportDialog dlg(Capture, this);
+	dlg.exec();
 }

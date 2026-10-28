@@ -903,8 +903,9 @@ SB_STATUS CSandBox::SbieIniSet(const QString& Section, const QString& Setting, c
 			return SB_ERR(status);
 
 		if (bRefresh) {
-			m_pIniFile->SaveIni((WCHAR*)m_PortablePath.utf16());
-			m_pAPI->ReloadConfig();
+			status = m_pIniFile->SaveIni((WCHAR*)m_PortablePath.utf16());
+			if (!NT_SUCCESS(status)) return SB_ERR(status);
+			return m_pAPI->ReloadConfig();
 		}
 
 		return SB_OK;

@@ -2392,83 +2392,82 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="61"/>
         <source>Show outside the border</source>
-        <oldsource>Show above the border</oldsource>
-        <translation type="unfinished">Oberhalb des Rahmens anzeigen</translation>
+        <translation>Außerhalb des Rahmens anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="62"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Oben</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="63"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Unten</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Links</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
         <source>Stacked upright letters</source>
-        <translation type="unfinished"></translation>
+        <translation>Buchstaben untereinander</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="67"/>
         <source>Rotated down</source>
-        <translation type="unfinished"></translation>
+        <translation>Gedreht nach unten</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="68"/>
         <source>Rotated up</source>
-        <translation type="unfinished"></translation>
+        <translation>Gedreht nach oben</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="69"/>
         <source>Adaptive (keep label visible)</source>
-        <translation type="unfinished"></translation>
+        <translation>Adaptiv (Beschriftung sichtbar halten)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="70"/>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixiert</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="71"/>
         <source>Use inherited/default setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende vererbte/vorgegebene Einstellung</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Avoid covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Vermeide die Taskleiste zu verdecken</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Allow covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube die Taskleiste zu verdecken</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Use inherited/automatic setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende vererbte/automatische Einstellung</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="75"/>
         <source>Hide border and label from capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberge Rahmen und Beschriftung bei Erstellung von Screenshots</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="76"/>
         <source>Include border and label in capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Erfasse Rahmen und Beschriftung bei Erstellung von Screenshots</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="80"/>
@@ -9443,102 +9442,102 @@ Teilweise angehakt: Dem neu erstellten sandgeboxten Token werden keine lokalen G
     <message>
         <location filename="Forms/OptionsWindow.ui" line="154"/>
         <source>Sandbox icon...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox Icon...</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="155"/>
         <source>Configure the sandbox icon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguriere das Sandbox Icon.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1152"/>
         <source>Box Border</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxrahmen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1163"/>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Rahmen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1190"/>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbe:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1303"/>
         <source>Sandbox label</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox-Beschriftung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1340"/>
         <source>Label font size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftgröße Beschriftung:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1369"/>
         <source>Edge:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rahmenseite:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1389"/>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Position:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1411"/>
         <source>0% is the start of the usable edge; 50% is centered; 100% is the end. Top/bottom run left to right; left/right run top to bottom.</source>
-        <translation type="unfinished"></translation>
+        <translation>0% ist der Anfang der nutzbaren Rahmenseite, 50% ist die Mitte, 100% ist das Ende. Oben/unten verläuft von links nach rechts, links/rechts verläuft von oben nach unten.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1424"/>
         <source>Side text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Seitlicher Text:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1437"/>
         <source>Stacked letters remain upright. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bei &apos;Buchstaben untereinander&apos; anordnen bleiben diese aufrecht stehen. &apos;Gedreht nach unten&apos; wird von oben nach unten gelesen, &apos;Gedreht nach oben&apos; wird von unten nach oben gelesen, jeweils auf beiden Rahmenseiten. Beschriftungen auf den Rahmenseiten oben und unten ignorieren diese Auswahl.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1447"/>
         <source>Movement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiebung:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1460"/>
         <source>Adaptive keeps the label inside monitor bounds and respects taskbar exclusion. Fixed disables that automatic fallback. The existing maximized/snapped setting remains separate.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;Adaptiv&apos; sorgt dafür, dass die Beschriftung innerhalb der Monitorgrenzen bleibt und berücksichtigt einen Ausschluss der Taskleiste. &apos;Fixiert&apos; deaktiviert diesen automatischen Ausweichmodus. Die bestehende Einstellung für maximierte/angedockte Fenster bleibt davon unberührt.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1470"/>
         <source>Side labels can be stacked or rotated. Stacked labels use vertical parentheses when the font supports them. Rotated down/up select the reading direction on either side. Adaptive placement moves clipped labels inward; labels that do not fit are clipped without shrinking the font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bei seitlichen Beschriftungen können entweder die einzelnen Buchstaben untereinander angeordnet oder der gesamte Text gedreht werden. Bei Beschriftungen mit untereinander angeordneten Buchstaben werden vertikale Klammern verwendet, sofern die Schriftart diese unterstützt. Durch Drehen nach unten bzw. oben wird die Leserichtung auf beiden Seiten festgelegt. Bei der adaptiven Platzierung werden abgeschnittene Beschriftungen nach innen verschoben. Beschriftungen, die nicht passen, werden abgeschnitten, ohne die Schriftgröße zu verringern.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1485"/>
         <source>Visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichtbarkeit</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1492"/>
         <source>Taskbar:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taskleiste:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1505"/>
         <source>Choose whether border overlays avoid taskbars and shell appbars. The inherited/default option follows the global setting, which defaults to avoiding taskbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie, ob Rahmenüberlagerungen auf Taskleisten und Shell-Appleisten vermieden werden sollen. Die Option &apos;vererbte/vorgegebene&apos; folgt der globalen Einstellung, bei der standardmäßig Taskleisten vermieden werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1515"/>
         <source>Screen capture:</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellung Screenshots:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1528"/>
         <source>Exclude the border and label from screen capture, not the application itself. When inherited and otherwise unset, CoverBoxedWindows determines the default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen den Rahmen und die Beschriftung bei der Erstellung von Screenshots aus, nicht jedoch die Anwendung selbst. Wenn vererbt und nicht anderweitig festgelegt, bestimmt &apos;CoverBoxedWindows&apos; den Standard.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2437"/>

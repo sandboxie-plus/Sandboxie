@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "OptionsWindow.h"
+#include "SharedAccessWidget.h"
 #include "SandMan.h"
 #include "SettingsWindow.h"
 #include "../MiscHelpers/Common/Settings.h"
@@ -21,14 +22,21 @@ void COptionsWindow::CreateAccess()
 	connect(ui.chkNoOpenForBox, SIGNAL(clicked(bool)), this, SLOT(OnAccessChangedEx()));
 	//
 
-	connect(ui.btnAddFile, SIGNAL(clicked(bool)), this, SLOT(OnAddFile()));
-	QMenu* pFileBtnMenu = new QMenu(ui.btnAddFile);
-	pFileBtnMenu->addAction(tr("Browse for File"), this, SLOT(OnBrowseFile()));
-	pFileBtnMenu->addAction(tr("Browse for Folder"), this, SLOT(OnBrowseFolder()));
-	ui.btnAddFile->setPopupMode(QToolButton::MenuButtonPopup);
-	ui.btnAddFile->setMenu(pFileBtnMenu);
-	connect(ui.chkShowFilesTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowFilesTmpl()));
-	connect(ui.btnDelFile, SIGNAL(clicked(bool)), this, SLOT(OnDelFile()));
+	m_FileAccess = new CSharedFileWidget(ui.wFileAccess);
+	((QGridLayout*)ui.wFileAccess->layout())->addWidget(m_FileAccess, 1, 0);
+	((QGridLayout*)ui.wFileAccess->layout())->setRowStretch(1, 1);
+	m_FileAccess->GetTree()->setObjectName("treeFiles");
+	m_FileAccess->SetConfig(m_pBox, m_Template);
+	if (m_Template)
+		m_FileAccess->SetTemplatesEnabled(false);
+	m_FileAccess->SetGroupsProvider([this]() -> QStringList { return GetCurrentGroups(); });
+	m_FileAccess->SetPrograms(m_Programs);
+	m_FileAccess->SetPathExpander([this](const QString& Path) { return ExpandPath(eFile, Path); });
+	connect(m_FileAccess, &CSharedAccessWidget::Changed, this, [this]() {
+		m_Programs.unite(m_FileAccess->GetPrograms());
+		OnAccessChanged();
+	});
+
 	connect(ui.btnAddKey, SIGNAL(clicked(bool)), this, SLOT(OnAddKey()));
 	connect(ui.chkShowKeysTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowKeysTmpl()));
 	connect(ui.btnDelKey, SIGNAL(clicked(bool)), this, SLOT(OnDelKey()));
@@ -44,7 +52,7 @@ void COptionsWindow::CreateAccess()
 	//connect(ui.chkShowAccessTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowAccessTmpl()));
 	//connect(ui.btnDelAccess, SIGNAL(clicked(bool)), this, SLOT(OnDelAccess()));
 
-	QTreeWidget* pTrees[] = { ui.treeFiles, ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
+	QTreeWidget* pTrees[] = { ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
 	for (QTreeWidget** pTree = pTrees; *pTree; pTree++) {
 		//connect(*pTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnAccessItemClicked(QTreeWidgetItem*, int)));
 		connect(*pTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnAccessItemDoubleClicked(QTreeWidgetItem*, int)));
@@ -168,12 +176,17 @@ void COptionsWindow::LoadAccessList()
 	ui.chkCloseForBox->setChecked(m_pBox->GetBool("AlwaysCloseForBoxed", true));
 	ui.chkNoOpenForBox->setChecked(m_pBox->GetBool("DontOpenForBoxed", true));
 
-	QTreeWidget* pTrees[] = { ui.treeFiles, ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
+	QTreeWidget* pTrees[] = { ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
 	for (QTreeWidget** pTree = pTrees; *pTree; pTree++)
 		(*pTree )->clear();
 
+	// File access entries are managed by the shared widget
 	for (int i = 0; i < eMaxAccessEntry; i++)
 	{
+		QPair<EAccessType, EAccessMode> Type = SplitAccessType((EAccessEntry)i);
+		if (Type.first == eFile)
+			continue;
+
 		foreach(const QString& Value, m_pBox->GetTextList(AccessTypeToName((EAccessEntry)i), m_Template))
 			ParseAndAddAccessEntry((EAccessEntry)i, Value);
 
@@ -183,6 +196,9 @@ void COptionsWindow::LoadAccessList()
 
 	LoadAccessListTmpl();
 
+	m_FileAccess->LoadAccessList();
+	m_Programs.unite(m_FileAccess->GetPrograms());
+
 	UpdateAccessPolicy();
 
 	m_AccessChanged = false;
@@ -191,10 +207,11 @@ void COptionsWindow::LoadAccessList()
 void COptionsWindow::LoadAccessListTmpl(bool bUpdate)
 {
 	for (int i = 0; i < eMaxAccessType; i++) {
+		if (i == eFile)
+			continue; // handled by the shared widget
 		QCheckBox* pCheck = NULL;
 		switch (i)
 		{
-		case eFile:	pCheck = ui.chkShowFilesTmpl; break;
 		case eKey:	pCheck = ui.chkShowKeysTmpl; break;
 		case eIPC:	pCheck = ui.chkShowIPCTmpl; break;
 		case eWnd:	pCheck = ui.chkShowWndTmpl; break;
@@ -209,7 +226,7 @@ QTreeWidget* COptionsWindow::GetAccessTree(EAccessType Type)
 	QTreeWidget* pTree = NULL;
 	switch (Type)
 	{
-	case eFile:	pTree = ui.treeFiles; break;
+	case eFile:	pTree = m_FileAccess ? m_FileAccess->GetTree() : NULL; break;
 	case eKey:	pTree = ui.treeKeys; break;
 	case eIPC:	pTree = ui.treeIPC; break;
 	case eWnd:	pTree = ui.treeWnd; break;
@@ -364,32 +381,6 @@ QString COptionsWindow::GetAccessTypeStr(EAccessType Type)
 	return tr("Unknown");
 }
 
-void COptionsWindow::OnBrowseFile()
-{
-	QString Value = QFileDialog::getOpenFileName(this, tr("Select File"), "", tr("All Files (*.*)")).replace("/", "\\");
-	if (Value.isEmpty())
-		return;
-
-	AddAccessEntry(eFile, eOpen, "", Value);
-
-	OnAccessChanged();
-}
-
-void COptionsWindow::OnBrowseFolder()
-{
-	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
-	if (Value.isEmpty())
-		return;
-
-	// Add a trailing backslash if it does not exist
-	if (!Value.endsWith("\\"))
-		Value.append("\\");
-
-	AddAccessEntry(eFile, eOpen, "", Value);
-
-	OnAccessChanged();
-}
-
 QString COptionsWindow::ExpandPath(EAccessType Type, const QString& Path)
 {
 	QString sPath = Path;
@@ -507,7 +498,10 @@ QString COptionsWindow::MakeAccessStr(EAccessType Type, EAccessMode Mode)
 
 void COptionsWindow::CloseAccessEdit(bool bSave)
 {
-	QTreeWidget* pTrees[] = { ui.treeFiles, ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
+	if (m_FileAccess)
+		m_FileAccess->CloseAccessEdit(bSave);
+
+	QTreeWidget* pTrees[] = { ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
 	for (QTreeWidget** pTree = pTrees; *pTree; pTree++) {
 		for (int i = 0; i < (*pTree)->topLevelItemCount(); i++)
 		{
@@ -710,8 +704,10 @@ void COptionsWindow::SaveAccessList()
 
 	CloseAccessEdit(true);
 
+	m_FileAccess->CloseAccessEdit(true);
+	m_FileAccess->SaveAccessList();
+
 	QStringList Keys = QStringList() 
-		<< "NormalFilePath" << "OpenFilePath" << "OpenPipePath" << "ClosedFilePath" << "ReadFilePath" << "WriteFilePath"
 		<< "NormalKeyPath" << "OpenKeyPath" << "OpenConfPath" << "ClosedKeyPath" << "ReadKeyPath" << "WriteKeyPath"
 		<< "NormalIpcPath"<< "OpenIpcPath" << "ClosedIpcPath" << "ReadIpcPath" 
 		<< "OpenWinClass" << "NoRenameWinClass"
@@ -720,7 +716,7 @@ void COptionsWindow::SaveAccessList()
 	QMap<QString, QList<QString>> AccessMap;
 
 
-	QTreeWidget* pTrees[] = { ui.treeFiles, ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
+	QTreeWidget* pTrees[] = { ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
 	for (QTreeWidget** pTree = pTrees; *pTree; pTree++)
 	{
 		for (int i = 0; i < (*pTree)->topLevelItemCount(); i++)

@@ -2713,82 +2713,82 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsGeneral.cpp" line="61"/>
         <source>Show outside the border</source>
         <oldsource>Show above the border</oldsource>
-        <translation type="unfinished">테두리 위에 표시함</translation>
+        <translation>테두리 바깥쪽 표시</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="62"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>상단</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="63"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>하단</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>왼쪽</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>오른쪽</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
         <source>Stacked upright letters</source>
-        <translation type="unfinished"></translation>
+        <translation>세로로 쌓은 글자들</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="67"/>
         <source>Rotated down</source>
-        <translation type="unfinished"></translation>
+        <translation>아래로 회전됨</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="68"/>
         <source>Rotated up</source>
-        <translation type="unfinished"></translation>
+        <translation>위로 회전됨</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="69"/>
         <source>Adaptive (keep label visible)</source>
-        <translation type="unfinished"></translation>
+        <translation>적응형 (레이블 표시 유지)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="70"/>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>고정</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="71"/>
         <source>Use inherited/default setting</source>
-        <translation type="unfinished"></translation>
+        <translation>상속된 기본/기본 설정 사용</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Avoid covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>작업 표시줄 가리기 방지</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Allow covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>작업 표시줄 가리기 허용</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Use inherited/automatic setting</source>
-        <translation type="unfinished"></translation>
+        <translation>상속됨/자동 설정 사용</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="75"/>
         <source>Hide border and label from capture</source>
-        <translation type="unfinished"></translation>
+        <translation>캡처에서 테두리 및 레이블 숨기기</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="76"/>
         <source>Include border and label in capture</source>
-        <translation type="unfinished"></translation>
+        <translation>캡처에 테두리 및 레이블 포함</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="80"/>
@@ -9246,102 +9246,102 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="154"/>
         <source>Sandbox icon...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox icon...</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="155"/>
         <source>Configure the sandbox icon.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 아이콘을 구성합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1152"/>
         <source>Box Border</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 테두리</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1163"/>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>프레임</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1190"/>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>색상:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1303"/>
         <source>Sandbox label</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 레이블</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1340"/>
         <source>Label font size:</source>
-        <translation type="unfinished"></translation>
+        <translation>레이블 글꼴 크기:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1369"/>
         <source>Edge:</source>
-        <translation type="unfinished"></translation>
+        <translation>모서리:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1389"/>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>위치:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1411"/>
         <source>0% is the start of the usable edge; 50% is centered; 100% is the end. Top/bottom run left to right; left/right run top to bottom.</source>
-        <translation type="unfinished"></translation>
+        <translation>0%는 사용 가능한 가장자리의 시작점, 50%는 중앙, 100%는 끝점을 나타냅니다. 위쪽/아래쪽은 왼쪽에서 오른쪽으로, 왼쪽/오른쪽은 위쪽에서 아래쪽으로 이어집니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1424"/>
         <source>Side text:</source>
-        <translation type="unfinished"></translation>
+        <translation>측면 텍스트:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1437"/>
         <source>Stacked letters remain upright. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
-        <translation type="unfinished"></translation>
+        <translation>쌓인 글자들이 똑바로 서 있습니다. 아래로 회전하면 위에서 아래로 읽히고, 위로 회전하면 양쪽에서 아래에서 위로 읽힙니다. 상단/하단 레이블은 이 선택을 무시합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1447"/>
         <source>Movement:</source>
-        <translation type="unfinished"></translation>
+        <translation>움직임:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1460"/>
         <source>Adaptive keeps the label inside monitor bounds and respects taskbar exclusion. Fixed disables that automatic fallback. The existing maximized/snapped setting remains separate.</source>
-        <translation type="unfinished"></translation>
+        <translation>적응형 모드는 레이블을 모니터 화면 범위 내에 유지하고 작업 표시줄 제외 설정을 준수합니다. 고정형 모드는 이러한 자동 대체 기능을 비활성화합니다. 기존의 최대화/스냅 설정은 별도로 유지됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1470"/>
         <source>Side labels can be stacked or rotated. Stacked labels use vertical parentheses when the font supports them. Rotated down/up select the reading direction on either side. Adaptive placement moves clipped labels inward; labels that do not fit are clipped without shrinking the font.</source>
-        <translation type="unfinished"></translation>
+        <translation>측면 레이블은 쌓거나 회전시킬 수 있습니다. 쌓인 레이블은 글꼴에서 지원하는 경우 세로 괄호를 사용합니다. 아래/위로 회전하면 양쪽 레이블의 읽기 방향을 선택할 수 있습니다. 적응형 배치는 잘린 레이블을 안쪽으로 이동시키고, 맞지 않는 레이블은 글꼴 크기를 줄이지 않고 잘립니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1485"/>
         <source>Visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>가시성</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1492"/>
         <source>Taskbar:</source>
-        <translation type="unfinished"></translation>
+        <translation>작업 표시줄:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1505"/>
         <source>Choose whether border overlays avoid taskbars and shell appbars. The inherited/default option follows the global setting, which defaults to avoiding taskbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>테두리 오버레이가 작업 표시줄 및 셸 앱 표시줄을 포함하지 않을지 선택합니다. 상속된 기본값 옵션은 전역 설정을 따르며, 기본값은 작업 표시줄을 사용하지 않도록 설정됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1515"/>
         <source>Screen capture:</source>
-        <translation type="unfinished"></translation>
+        <translation>화면 캡처:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1528"/>
         <source>Exclude the border and label from screen capture, not the application itself. When inherited and otherwise unset, CoverBoxedWindows determines the default.</source>
-        <translation type="unfinished"></translation>
+        <translation>응용 프로그램 자체가 아니라 화면 캡처에서 테두리와 레이블을 제외합니다. 상속되었고 그 외에 설정되지 않은 경우, CoverBoxedWindows가 기본값을 결정합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2437"/>

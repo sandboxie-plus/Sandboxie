@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "OptionsWindow.h"
+#include "BorderFontDialog.h"
 #include "SandMan.h"
 #include "SettingsWindow.h"
 #include "../MiscHelpers/Common/Settings.h"
@@ -12,6 +13,14 @@
 #include "AddonManager.h"
 #include "../Views/SbieView.h"
 #include "../../../SandboxieTools/ImBox/ImBox.h"
+#include "../QSbieAPI/Sandboxie/BoxBorder.h"
+#include <QFormLayout>
+#include <QDialogButtonBox>
+#include <QSignalBlocker>
+#include <QGuiApplication>
+#include <QSet>
+#include <QStyle>
+#include <functional>
 
 class CCertBadge: public QLabel
 {
@@ -64,10 +73,13 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBorderLabelPlacement->addItem(tr("Left"), "left");
 	ui.cmbBorderLabelPlacement->addItem(tr("Right"), "right");
 	ui.cmbBorderLabelText->addItem(tr("Stacked upright letters"), "stacked");
+	ui.cmbBorderLabelText->addItem(tr("Stacked (compact)"), "stacked-compact");
 	ui.cmbBorderLabelText->addItem(tr("Rotated down"), "rotated");
 	ui.cmbBorderLabelText->addItem(tr("Rotated up"), "mirrored");
-	ui.cmbBorderMovement->addItem(tr("Adaptive (keep label visible)"), "adaptive");
 	ui.cmbBorderMovement->addItem(tr("Fixed"), "fixed");
+	ui.cmbBorderMovement->addItem(tr("Adaptive (same edge)"), "adaptive");
+	ui.cmbBorderMovement->addItem(tr("Adaptive (opposite edge)"), "adaptive-opposite");
+	ui.cmbBorderMovement->addItem(tr("Adaptive (any edge)"), "adaptive-any");
 	ui.cmbBorderTaskbar->addItem(tr("Use inherited/default setting"), "");
 	ui.cmbBorderTaskbar->addItem(tr("Avoid covering the taskbar"), "y");
 	ui.cmbBorderTaskbar->addItem(tr("Allow covering the taskbar"), "n");
@@ -196,13 +208,24 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.cmbBorderLabelPlacement, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.spinBorderLabelPercent, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.cmbBorderLabelText, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
+	ui.btnBorderLabelHelp->setIcon(ui.btnBorderLabelHelp->style()->standardIcon(QStyle::SP_MessageBoxInformation));
+	ui.btnBorderLabelHelp->setToolTip("<qt>" + ui.btnBorderLabelHelp->toolTip().toHtmlEscaped() + "</qt>");
+	connect(ui.btnBorderLabelHelp, &QToolButton::clicked, this, [this]() {
+		QToolTip::showText(ui.btnBorderLabelHelp->mapToGlobal(QPoint(0, ui.btnBorderLabelHelp->height())),
+			ui.btnBorderLabelHelp->toolTip(), ui.btnBorderLabelHelp);
+	});
 	connect(ui.cmbBorderMovement, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.cmbBorderTaskbar, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.cmbBorderCapture, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.btnBorderColor, SIGNAL(clicked(bool)), this, SLOT(OnPickColor()));
 	connect(ui.spinBorderWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.spinBorderAlpha, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
-	connect(ui.spinLabelWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.spinLabelWidth, SIGNAL(valueChanged(double)), this, SLOT(OnBorderLabelSizeChanged(double)));
+	ui.btnBorderLabelFont->setIcon(CSandMan::GetIcon("Font"));
+	ui.btnResetBorderLabelFont->setIcon(CSandMan::GetIcon("ResetFont"));
+	ui.lblBorderLabelFont->installEventFilter(this);
+	connect(ui.btnBorderLabelFont, SIGNAL(clicked(bool)), this, SLOT(OnSelectBorderLabelFont()));
+	connect(ui.btnResetBorderLabelFont, SIGNAL(clicked(bool)), this, SLOT(OnResetBorderLabelFont()));
 	connect(ui.chkBorderLabelOnly, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkBorderInsideMaximized, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkShowForRun, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -354,27 +377,15 @@ void COptionsWindow::LoadGeneral()
 	int labelWidth = BorderCfg.count() >= 6 ? BorderCfg[5].toInt() : BorderWidth;
 	if (labelWidth <= 0)
 		labelWidth = BorderWidth;
-	ui.spinLabelWidth->setValue(labelWidth);
-	QStringList labelPosition = m_pBox->GetText("BorderLabelPosition", "top,50").split(",");
-	int edge = -1;
-	int percent = 50;
-	int textStyle = 0;
-	int movement = 0;
-	bool validPercent = false;
-	if (labelPosition.size() >= 2 && labelPosition.size() <= 4) {
-		edge = ui.cmbBorderLabelPlacement->findData(labelPosition[0].trimmed().toLower());
-		percent = labelPosition[1].trimmed().toInt(&validPercent);
-		if (labelPosition.size() >= 3)
-			textStyle = ui.cmbBorderLabelText->findData(labelPosition[2].trimmed().toLower());
-		if (labelPosition.size() >= 4)
-			movement = ui.cmbBorderMovement->findData(labelPosition[3].trimmed().toLower());
-	}
-	if (edge < 0 || !validPercent || percent < 0 || percent > 100 || textStyle < 0 || movement < 0) {
-		edge = 0;
-		percent = 50;
-		textStyle = 0;
-		movement = 0;
-	}
+	m_BorderLabelLegacySize = labelWidth;
+	QString labelFont = m_pBox->GetText("BorderLabelFont");
+	SetBorderLabelFont(labelFont);
+	ui.btnBorderLabelFont->setProperty("initialValue", labelFont);
+	const SBoxBorderLabelPosition labelPosition = SBoxBorderLabelPosition::Parse(m_pBox->GetText("BorderLabelPosition", "top,50"));
+	int edge = ui.cmbBorderLabelPlacement->findData(labelPosition.placement);
+	int percent = labelPosition.percent;
+	int textStyle = ui.cmbBorderLabelText->findData(labelPosition.text);
+	int movement = ui.cmbBorderMovement->findData(labelPosition.movement);
 	ui.cmbBorderLabelPlacement->setCurrentIndex(edge);
 	ui.spinBorderLabelPercent->setValue(percent);
 	ui.cmbBorderLabelText->setCurrentIndex(textStyle);
@@ -563,8 +574,18 @@ void COptionsWindow::SaveGeneral()
 	BorderCfg.append(QString::number(ui.spinBorderWidth->value()));
 	BorderCfg.append(QString::number(ui.spinBorderAlpha->value())); // Get alpha from spinner
 	BorderCfg.append(ui.cmbBoxBorderText->currentData().toString());
-	BorderCfg.append(QString::number(ui.spinLabelWidth->value()));
+	BorderCfg.append(QString::number(m_BorderLabelLegacySize));
 	WriteText("BorderColor", BorderCfg.join(","));
+	QString labelFont = ui.btnBorderLabelFont->property("fontValue").toString();
+	if (labelFont != ui.btnBorderLabelFont->property("initialValue").toString()) {
+		if (labelFont.isEmpty()) {
+			SB_STATUS status = m_pBox->DelValue("BorderLabelFont");
+			if (!status) throw status;
+		} else {
+			WriteText("BorderLabelFont", labelFont);
+		}
+		ui.btnBorderLabelFont->setProperty("initialValue", labelFont);
+	}
 	QString labelPosition = ui.cmbBorderLabelPlacement->currentData().toString() + "," + QString::number(ui.spinBorderLabelPercent->value()) + "," +
 		ui.cmbBorderLabelText->currentData().toString() + "," + ui.cmbBorderMovement->currentData().toString();
 	if (labelPosition != ui.cmbBorderLabelPlacement->property("initialValue").toString()) {
@@ -1011,6 +1032,79 @@ void COptionsWindow::OnDelCopyRule()
 }
 //
 
+void COptionsWindow::SetBorderLabelFont(const QString& value)
+{
+	ui.btnBorderLabelFont->setProperty("fontValue", value);
+	SBoxBorderFont font = CBoxBorder::ParseLabelFont(value);
+	ui.lblBorderLabelFont->setToolTip(font.family);
+	ui.lblBorderLabelFont->setAccessibleName(font.family);
+	UpdateBorderLabelFontName();
+	double points = font.pointSize;
+	QString error = font.error;
+	if (points <= 0 || !error.isEmpty()) {
+		HFONT native = CBoxBorder::CreateLabelFont(font, m_BorderLabelLegacySize, 96, &points, &error);
+		if (!native) native = CBoxBorder::CreateLabelFont(SBoxBorderFont(), m_BorderLabelLegacySize, 96, &points);
+		if (native) DeleteObject(native);
+	}
+	QSignalBlocker blocker(ui.spinLabelWidth);
+	ui.spinLabelWidth->setValue(points > 0 ? points : 1);
+	ui.btnBorderLabelFont->setToolTip(tr("Select the font, native style, writing system and point size.") + "\n" +
+		(value.isEmpty() ? tr("Default: Segoe UI Bold; legacy sizing") : value) + (error.isEmpty() ? QString() : "\n" + error));
+}
+
+void COptionsWindow::UpdateBorderLabelFontName()
+{
+	QLabel* label = ui.lblBorderLabelFont;
+	int width = qMax(0, label->contentsRect().width() - 2 * label->margin());
+	label->setText(label->fontMetrics().elidedText(label->toolTip(), Qt::ElideRight, width));
+}
+
+void COptionsWindow::OnSelectBorderLabelFont()
+{
+	std::function<SB_STATUS(const QString&)> applyFont;
+	bool readOnly = m_Template && m_pBox->GetName().mid(9, 6).compare("Local_", Qt::CaseInsensitive) != 0;
+	if (!readOnly) applyFont = [this](const QString& value) -> SB_STATUS {
+		try { WriteText("BorderLabelFont", value); }
+		catch (SB_STATUS status) { return status; }
+		SetBorderLabelFont(value);
+		ui.btnBorderLabelFont->setProperty("initialValue", value);
+		m_PendingChanges.CaptureValueBaseline(ui.spinLabelWidth);
+		ui.btnResetBorderLabelFont->setEnabled(ui.btnBorderLabelFont->isEnabled() && !value.isEmpty());
+		return SB_OK;
+	};
+	CBorderFontDialog dialog(CBoxBorder::ParseLabelFont(ui.btnBorderLabelFont->property("fontValue").toString()),
+		m_BorderLabelLegacySize, ui.spinLabelWidth->value(), ui.btnBorderLabelFont->property("initialValue").toString(), applyFont, this);
+	if (dialog.exec() != QDialog::Accepted) return;
+	QString value = CBoxBorder::SerializeLabelFont(dialog.Specification());
+	if (value == ui.btnBorderLabelFont->property("fontValue").toString()) return;
+	SetBorderLabelFont(value);
+	OnGeneralChanged();
+}
+
+void COptionsWindow::OnBorderLabelSizeChanged(double points)
+{
+	if (m_HoldChange) return;
+	QString current = ui.btnBorderLabelFont->property("fontValue").toString();
+	SBoxBorderFont font = CBoxBorder::ParseLabelFont(current);
+	font.pointSize = points;
+	QString error;
+	HFONT native = CBoxBorder::CreateLabelFont(font, m_BorderLabelLegacySize, 96, NULL, &error);
+	if (!native) {
+		SetBorderLabelFont(current);
+		QMessageBox::warning(this, tr("Border label font"), error);
+		return;
+	}
+	DeleteObject(native);
+	SetBorderLabelFont(CBoxBorder::SerializeLabelFont(font));
+	OnGeneralChanged();
+}
+
+void COptionsWindow::OnResetBorderLabelFont()
+{
+	SetBorderLabelFont(QString());
+	OnGeneralChanged();
+}
+
 void COptionsWindow::OnGeneralChanged()
 {
 	// Disable label-only checkbox when border is fully off, or when the label itself is disabled
@@ -1024,10 +1118,13 @@ void COptionsWindow::OnGeneralChanged()
 	ui.spinBorderAlpha->setEnabled(borderActive);
 	ui.cmbBoxBorderText->setEnabled(borderActive);
 	ui.spinLabelWidth->setEnabled(borderActive && labelEnabled);
+	ui.btnBorderLabelFont->setEnabled(borderActive && labelEnabled);
+	ui.btnResetBorderLabelFont->setEnabled(borderActive && labelEnabled && !ui.btnBorderLabelFont->property("fontValue").toString().isEmpty());
 	ui.cmbBorderLabelPlacement->setEnabled(borderActive && labelEnabled);
 	ui.spinBorderLabelPercent->setEnabled(borderActive && labelEnabled);
 	QString labelEdge = ui.cmbBorderLabelPlacement->currentData().toString();
-	ui.cmbBorderLabelText->setEnabled(borderActive && labelEnabled && (labelEdge == "left" || labelEdge == "right"));
+	ui.cmbBorderLabelText->setEnabled(borderActive && labelEnabled &&
+		(labelEdge == "left" || labelEdge == "right" || ui.cmbBorderMovement->currentData().toString() == "adaptive-any"));
 	ui.cmbBorderMovement->setEnabled(borderActive && labelEnabled);
 	ui.cmbBorderTaskbar->setEnabled(borderActive);
 	ui.cmbBorderCapture->setEnabled(borderActive);

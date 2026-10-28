@@ -111,6 +111,9 @@
     <ClCompile Include="Windows\OptionsForce.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\BorderFontDialog.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
     <ClCompile Include="Windows\OptionsGeneral.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
@@ -308,6 +311,9 @@
     </ClInclude>
     <ClInclude Include="CustomStyles.h">
       <Filter>SandMan</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\BorderFontDialog.h">
+      <Filter>Windows</Filter>
     </ClInclude>
     <ClInclude Include="Windows\PendingChanges.h">
       <Filter>Windows</Filter>

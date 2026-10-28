@@ -381,6 +381,7 @@
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
     <ClCompile Include="Windows\CompressDialog.cpp" />
+    <ClCompile Include="Windows\BorderFontDialog.cpp" />
     <ClCompile Include="Windows\ExtractDialog.cpp" />
     <ClCompile Include="Windows\RenameSandboxDialog.cpp" />
     <ClCompile Include="Windows\OptionsAccess.cpp">
@@ -533,6 +534,7 @@
     <QtMoc Include="Models\SbieModel.h" />
     <QtMoc Include="Models\TraceModel.h" />
     <QtMoc Include="BoxJob.h" />
+    <ClInclude Include="Windows\BorderFontDialog.h" />
     <ClInclude Include="..\version.h" />
     <QtMoc Include="BoxMonitor.h" />
     <QtMoc Include="Engine\BoxEngine.h" />

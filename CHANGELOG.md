@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added line numbers to the built-in INI section editors, with an Advanced Editor Settings toggle and Ctrl+G destination highlighting; copying and saving exclude the line numbers
 - added configurable sandbox border labels on all four window edges through `BorderLabelPosition`, with adjustable position, stacked or rotated side text, fixed/adaptive placement, and a dedicated Box Border tab in sandbox options
+- added customizable sandbox border label fonts with native style and writing-system selection, GDI preview, synchronized point size, immediate font-only Apply, and reset to legacy defaults
 
 ### Fixed
 - fixed misleading comment highlighting for INI lines starting with `;` without `=`; saving now shows a line-numbered error recommending `#` and preserves unsaved edits [#5685](https://github.com/sandboxie-plus/Sandboxie/issues/5685)

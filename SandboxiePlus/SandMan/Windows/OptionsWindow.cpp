@@ -373,6 +373,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	size *= (QApplication::desktop()->logicalDpiX() / 96.0); // todo Qt6
 #endif
 	AddIconToLabel(ui.lblAppearance, CSandMan::GetIcon("Design").pixmap(size,size));
+	AddIconToLabel(ui.lblBorderFrameTitle, CSandMan::GetIcon("Window").pixmap(size,size));
+	AddIconToLabel(ui.lblBorderLabelTitle, CSandMan::GetIcon("Font").pixmap(size,size));
+	AddIconToLabel(ui.lblBorderBehaviorTitle, CSandMan::GetIcon("Monitor").pixmap(size,size));
 	AddIconToLabel(ui.lblBoxType, CSandMan::GetIcon("Maintenance").pixmap(size,size));
 	AddIconToLabel(ui.lblNotes, CSandMan::GetIcon("EditIni").pixmap(size,size));
 	AddIconToLabel(ui.lblStructure, CSandMan::GetIcon("Structure").pixmap(size,size));
@@ -852,6 +855,9 @@ void COptionsWindow::closeEvent(QCloseEvent *e)
 
 bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 {
+	if (source == ui.lblBorderLabelFont && (event->type() == QEvent::Resize || event->type() == QEvent::FontChange))
+		UpdateBorderLabelFontName();
+
 	auto isTreeViewport = [source](QAbstractItemView* view) {
 		return view && source == view->viewport();
 	};

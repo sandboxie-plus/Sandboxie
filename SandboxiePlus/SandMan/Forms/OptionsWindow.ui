@@ -280,6 +280,503 @@
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="tabBoxBorder">
+            <attribute name="title">
+             <string>Box Border</string>
+            </attribute>
+            <layout class="QGridLayout" name="layoutBoxBorder">
+             <item row="0" column="0" colspan="3">
+              <widget class="QLabel" name="lblBorderFrameTitle">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Frame</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_21">
+               <property name="text">
+                <string>Sandboxed window border:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>cmbBoxBorder</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cmbBoxBorder">
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContents</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="lblBorderColor">
+               <property name="text">
+                <string>Color:</string>
+               </property>
+               <property name="buddy">
+                <cstring>btnBorderColor</cstring>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <layout class="QHBoxLayout" name="layoutBorderColorWidth">
+               <item>
+                <widget class="QToolButton" name="btnBorderColor">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string />
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_14">
+                 <property name="text">
+                  <string>px Width</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>spinBorderWidth</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="spinBorderWidth">
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10</number>
+                 </property>
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="spacerBorderColorWidth">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_75">
+               <property name="text">
+                <string>Alpha</string>
+               </property>
+               <property name="buddy">
+                <cstring>spinBorderAlpha</cstring>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" alignment="Qt::AlignmentFlag::AlignLeft">
+              <widget class="QSpinBox" name="spinBorderAlpha">
+               <property name="maximum">
+                <number>255</number>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1" alignment="Qt::AlignmentFlag::AlignLeft">
+              <widget class="QCheckBox" name="chkBorderInsideMaximized">
+               <property name="toolTip">
+                <string>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</string>
+               </property>
+               <property name="text">
+                <string>Inside when maximized or snapped</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0" colspan="3">
+              <widget class="QLabel" name="lblBorderLabelTitle">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Sandbox label</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_76">
+               <property name="text">
+                <string>Sandboxed window label:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>cmbBoxBorderText</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QComboBox" name="cmbBoxBorderText">
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContents</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1" alignment="Qt::AlignmentFlag::AlignLeft">
+              <widget class="QCheckBox" name="chkBorderLabelOnly">
+               <property name="toolTip">
+                <string>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</string>
+               </property>
+               <property name="text">
+                <string>Label only</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_78">
+               <property name="text">
+                <string>Label font size:</string>
+               </property>
+               <property name="buddy">
+                <cstring>spinLabelWidth</cstring>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <layout class="QHBoxLayout" name="layoutBorderLabelFont" stretch="0,0,0,1">
+               <item>
+                <widget class="QDoubleSpinBox" name="spinLabelWidth">
+                 <property name="toolTip">
+                  <string>Font size in points, synchronized with the font selector. Existing legacy sizing is retained until you explicitly change the font or size.</string>
+                 </property>
+                 <property name="suffix">
+                  <string> pt</string>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>512.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.500000000000000</double>
+                 </property>
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnBorderLabelFont">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="accessibleName">
+                  <string>Select border label font</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnResetBorderLabelFont">
+                 <property name="toolTip">
+                  <string>Reset font. Removes the custom font, point size and writing-system override, restoring Segoe UI Bold and legacy sizing.</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="accessibleName">
+                  <string>Reset border label font</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lblBorderLabelFont">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+                   <horstretch>1</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Segoe UI</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::PlainText</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="lblBorderLabelPlacement">
+               <property name="text">
+                <string>Edge:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cmbBorderLabelPlacement</cstring>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QComboBox" name="cmbBorderLabelPlacement">
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContents</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="lblBorderLabelPercent">
+               <property name="text">
+                <string>Position:</string>
+               </property>
+               <property name="buddy">
+                <cstring>spinBorderLabelPercent</cstring>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1" alignment="Qt::AlignmentFlag::AlignLeft">
+              <widget class="QSpinBox" name="spinBorderLabelPercent">
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="value">
+                <number>50</number>
+               </property>
+               <property name="suffix">
+                <string>%</string>
+               </property>
+               <property name="toolTip">
+                <string>0% is the start of the usable edge; 50% is centered; 100% is the end. Top/bottom run left to right; left/right run top to bottom.</string>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="lblBorderLabelText">
+               <property name="text">
+                <string>Side text:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cmbBorderLabelText</cstring>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QComboBox" name="cmbBorderLabelText">
+               <property name="toolTip">
+                <string>Stacked letters remain upright. Stacked (compact) removes the extra row gap and reduces top/bottom padding without shrinking the font. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</string>
+               </property>
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContents</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0">
+              <widget class="QLabel" name="lblBorderMovement">
+               <property name="text">
+                <string>Movement:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cmbBorderMovement</cstring>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="1">
+              <widget class="QComboBox" name="cmbBorderMovement">
+               <property name="toolTip">
+                <string>Fixed disables automatic fallback.
+Adaptive (same edge) moves clipped labels inward on the configured side.
+Adaptive (opposite edge) tries the opposite edge before that inward fallback.
+Adaptive (any edge), the default, also tries the best-fitting remaining edge.
+Edge changes preserve percentage and inside/outside placement where possible.
+Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separate.</string>
+               </property>
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContents</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="2" alignment="Qt::AlignmentFlag::AlignLeft">
+              <widget class="QToolButton" name="btnBorderLabelHelp">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::StrongFocus</enum>
+               </property>
+               <property name="toolTip">
+                <string>Side labels can be stacked or rotated. Both stacked modes use vertical parentheses when the font supports them. Stacked (compact) keeps the font size, removes the extra row gap and uses 1-pixel top/bottom padding. Rotated down/up select the reading direction on either side. Top/bottom labels use horizontal text. Adaptive movement can stay on the configured side, try its opposite, or try any edge before moving inward. Labels that do not fit are clipped without shrinking the font.</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="autoRaise">
+                <bool>true</bool>
+               </property>
+               <property name="accessibleName">
+                <string>Border label information</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0" colspan="3">
+              <widget class="QLabel" name="lblBorderBehaviorTitle">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Visibility</string>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="0">
+              <widget class="QLabel" name="lblBorderTaskbar">
+               <property name="text">
+                <string>Taskbar:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cmbBorderTaskbar</cstring>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="1">
+              <widget class="QComboBox" name="cmbBorderTaskbar">
+               <property name="toolTip">
+                <string>Choose whether border overlays avoid taskbars and shell appbars. The inherited/default option follows the global setting, which defaults to avoiding taskbars.</string>
+               </property>
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContents</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="0">
+              <widget class="QLabel" name="lblBorderCapture">
+               <property name="text">
+                <string>Screen capture:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cmbBorderCapture</cstring>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="1">
+              <widget class="QComboBox" name="cmbBorderCapture">
+               <property name="toolTip">
+                <string>Exclude the border and label from screen capture, not the application itself. When inherited and otherwise unset, CoverBoxedWindows determines the default.</string>
+               </property>
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContents</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <spacer name="spacerBoxBorderRight">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="16" column="0" colspan="3">
+              <spacer name="spacerBoxBorder">
+               <property name="orientation">
+                <enum>Qt::Orientation::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
            <widget class="QWidget" name="tabFile">
             <attribute name="title">
              <string>File Options</string>
@@ -1134,422 +1631,6 @@
              </item>
              <item row="6" column="1">
               <spacer name="verticalSpacer_38">
-               <property name="orientation">
-                <enum>Qt::Orientation::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="tabBoxBorder">
-            <attribute name="title">
-             <string>Box Border</string>
-            </attribute>
-            <layout class="QGridLayout" name="layoutBoxBorder">
-             <item row="0" column="0" colspan="3">
-              <widget class="QLabel" name="lblBorderFrameTitle">
-               <property name="font">
-                <font>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>Frame</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_21">
-               <property name="text">
-                <string>Sandboxed window border:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-               </property>
-               <property name="buddy">
-                <cstring>cmbBoxBorder</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="cmbBoxBorder">
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToContents</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="lblBorderColor">
-               <property name="text">
-                <string>Color:</string>
-               </property>
-               <property name="buddy">
-                <cstring>btnBorderColor</cstring>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <layout class="QHBoxLayout" name="layoutBorderColorWidth">
-               <item>
-                <widget class="QToolButton" name="btnBorderColor">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string />
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_14">
-                 <property name="text">
-                  <string>px Width</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-                 </property>
-                 <property name="buddy">
-                  <cstring>spinBorderWidth</cstring>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="spinBorderWidth">
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>10</number>
-                 </property>
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="spacerBorderColorWidth">
-                 <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_75">
-               <property name="text">
-                <string>Alpha</string>
-               </property>
-               <property name="buddy">
-                <cstring>spinBorderAlpha</cstring>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1" alignment="Qt::AlignmentFlag::AlignLeft">
-              <widget class="QSpinBox" name="spinBorderAlpha">
-               <property name="maximum">
-                <number>255</number>
-               </property>
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1" alignment="Qt::AlignmentFlag::AlignLeft">
-              <widget class="QCheckBox" name="chkBorderInsideMaximized">
-               <property name="toolTip">
-                <string>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</string>
-               </property>
-               <property name="text">
-                <string>Inside when maximized or snapped</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0" colspan="3">
-              <widget class="QLabel" name="lblBorderLabelTitle">
-               <property name="font">
-                <font>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>Sandbox label</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_76">
-               <property name="text">
-                <string>Sandboxed window label:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-               </property>
-               <property name="buddy">
-                <cstring>cmbBoxBorderText</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QComboBox" name="cmbBoxBorderText">
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToContents</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="1" alignment="Qt::AlignmentFlag::AlignLeft">
-              <widget class="QCheckBox" name="chkBorderLabelOnly">
-               <property name="toolTip">
-                <string>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</string>
-               </property>
-               <property name="text">
-                <string>Label only</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_78">
-               <property name="text">
-                <string>Label font size:</string>
-               </property>
-               <property name="buddy">
-                <cstring>spinLabelWidth</cstring>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="1" alignment="Qt::AlignmentFlag::AlignLeft">
-              <widget class="QSpinBox" name="spinLabelWidth">
-               <property name="minimum">
-                <number>1</number>
-               </property>
-               <property name="maximum">
-                <number>20</number>
-               </property>
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="lblBorderLabelPlacement">
-               <property name="text">
-                <string>Edge:</string>
-               </property>
-               <property name="buddy">
-                <cstring>cmbBorderLabelPlacement</cstring>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="1">
-              <widget class="QComboBox" name="cmbBorderLabelPlacement">
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToContents</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="0">
-              <widget class="QLabel" name="lblBorderLabelPercent">
-               <property name="text">
-                <string>Position:</string>
-               </property>
-               <property name="buddy">
-                <cstring>spinBorderLabelPercent</cstring>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="1" alignment="Qt::AlignmentFlag::AlignLeft">
-              <widget class="QSpinBox" name="spinBorderLabelPercent">
-               <property name="maximum">
-                <number>100</number>
-               </property>
-               <property name="value">
-                <number>50</number>
-               </property>
-               <property name="suffix">
-                <string>%</string>
-               </property>
-               <property name="toolTip">
-                <string>0% is the start of the usable edge; 50% is centered; 100% is the end. Top/bottom run left to right; left/right run top to bottom.</string>
-               </property>
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="lblBorderLabelText">
-               <property name="text">
-                <string>Side text:</string>
-               </property>
-               <property name="buddy">
-                <cstring>cmbBorderLabelText</cstring>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="1">
-              <widget class="QComboBox" name="cmbBorderLabelText">
-               <property name="toolTip">
-                <string>Stacked letters remain upright. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</string>
-               </property>
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToContents</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="0">
-              <widget class="QLabel" name="lblBorderMovement">
-               <property name="text">
-                <string>Movement:</string>
-               </property>
-               <property name="buddy">
-                <cstring>cmbBorderMovement</cstring>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="1">
-              <widget class="QComboBox" name="cmbBorderMovement">
-               <property name="toolTip">
-                <string>Adaptive keeps the label inside monitor bounds and respects taskbar exclusion. Fixed disables that automatic fallback. The existing maximized/snapped setting remains separate.</string>
-               </property>
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToContents</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="0" colspan="3">
-              <widget class="QLabel" name="lblBorderLabelHelp">
-               <property name="text">
-                <string>Side labels can be stacked or rotated. Stacked labels use vertical parentheses when the font supports them. Rotated down/up select the reading direction on either side. Adaptive placement moves clipped labels inward; labels that do not fit are clipped without shrinking the font.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="0" colspan="3">
-              <widget class="QLabel" name="lblBorderBehaviorTitle">
-               <property name="font">
-                <font>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>Visibility</string>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="0">
-              <widget class="QLabel" name="lblBorderTaskbar">
-               <property name="text">
-                <string>Taskbar:</string>
-               </property>
-               <property name="buddy">
-                <cstring>cmbBorderTaskbar</cstring>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="1">
-              <widget class="QComboBox" name="cmbBorderTaskbar">
-               <property name="toolTip">
-                <string>Choose whether border overlays avoid taskbars and shell appbars. The inherited/default option follows the global setting, which defaults to avoiding taskbars.</string>
-               </property>
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToContents</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="16" column="0">
-              <widget class="QLabel" name="lblBorderCapture">
-               <property name="text">
-                <string>Screen capture:</string>
-               </property>
-               <property name="buddy">
-                <cstring>cmbBorderCapture</cstring>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="16" column="1">
-              <widget class="QComboBox" name="cmbBorderCapture">
-               <property name="toolTip">
-                <string>Exclude the border and label from screen capture, not the application itself. When inherited and otherwise unset, CoverBoxedWindows determines the default.</string>
-               </property>
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToContents</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <spacer name="spacerBoxBorderRight">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="17" column="0" colspan="3">
-              <spacer name="spacerBoxBorder">
                <property name="orientation">
                 <enum>Qt::Orientation::Vertical</enum>
                </property>
@@ -6696,9 +6777,12 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>cmbBoxBorderText</tabstop>
   <tabstop>chkBorderLabelOnly</tabstop>
   <tabstop>spinLabelWidth</tabstop>
+  <tabstop>btnBorderLabelFont</tabstop>
+  <tabstop>btnResetBorderLabelFont</tabstop>
   <tabstop>cmbBorderLabelPlacement</tabstop>
   <tabstop>spinBorderLabelPercent</tabstop>
   <tabstop>cmbBorderLabelText</tabstop>
+  <tabstop>btnBorderLabelHelp</tabstop>
   <tabstop>cmbBorderMovement</tabstop>
   <tabstop>cmbBorderTaskbar</tabstop>
   <tabstop>cmbBorderCapture</tabstop>

@@ -29,6 +29,9 @@
 #include <map>
 #include <set>
 #include <unordered_map>
+#include <QSet>
+#include <QUrl>
+#include <QDebug>
 
 typedef HRESULT(WINAPI *P_DwmIsCompositionEnabled)(BOOL *enabled);
 typedef HRESULT(WINAPI *P_DwmGetWindowAttribute)(HWND hWnd, DWORD dwAttribute, void *pvAttribute, DWORD cbAttribute);
@@ -48,7 +51,13 @@ typedef BOOL(WINAPI *P_IsWindowArranged)(HWND hWnd);
 #endif
 
 enum EBorderLabelPlacement { eLabelTop, eLabelBottom, eLabelLeft, eLabelRight };
-enum EBorderLabelText { eLabelStacked, eLabelRotated, eLabelMirrored };
+enum EBorderLabelText { eLabelStacked, eLabelRotated, eLabelMirrored, eLabelStackedCompact = 3 };
+enum EBorderLabelMovement { eLabelFixed = 0, eLabelAdaptive = 1, eLabelAdaptiveOpposite = 2, eLabelAdaptiveAny = 3 };
+
+static bool IsStackedLabelText(EBorderLabelText text)
+{
+	return text == eLabelStacked || text == eLabelStackedCompact;
+}
 
 // Structure to hold border window data (used for both main and per-box borders)
 struct SBoxBorderWnd
@@ -60,19 +69,20 @@ struct SBoxBorderWnd
 	int labelBorderWidth;
 	bool visible;
 	std::wstring boxName;
+	std::wstring labelFontSpec;
 	HFONT labelFont;
 	int labelMode; // 0=disabled, -1=outside, 1=inside the selected edge
 	EBorderLabelPlacement labelPlacement;
+	EBorderLabelPlacement labelRenderPlacement;
 	int labelPercent;
 	EBorderLabelText labelText;
-	bool labelAdaptive;
+	EBorderLabelMovement labelMovement;
 	std::vector<std::wstring> labelRows;
 	int labelRowHeight;
 	int labelRowPadding;
 	RECT labelMonitorRect;
 	bool excludeTaskbar;
-	int labelWidth;
-	int labelHeight;
+	SIZE labelSizes[2]; // Horizontal and vertical layouts, cached with the font
 	int labelPadding;
 	bool outside;
 	std::vector<RECT> labelRects; // Label positions (one per window for per-box, one for main)
@@ -242,19 +252,20 @@ static void InitializeBorderWindowData(SBoxBorderWnd& bwnd)
 	bwnd.labelBorderWidth = 0;
 	bwnd.visible = false;
 	bwnd.boxName.clear();
+	bwnd.labelFontSpec.clear();
 	bwnd.labelFont = NULL;
 	bwnd.labelMode = 0;
 	bwnd.labelPlacement = eLabelTop;
+	bwnd.labelRenderPlacement = eLabelTop;
 	bwnd.labelPercent = 50;
 	bwnd.labelText = eLabelStacked;
-	bwnd.labelAdaptive = true;
+	bwnd.labelMovement = eLabelAdaptiveAny;
 	bwnd.labelRows.clear();
 	bwnd.labelRowHeight = 0;
 	bwnd.labelRowPadding = 2;
 	SetRectEmpty(&bwnd.labelMonitorRect);
 	bwnd.excludeTaskbar = true;
-	bwnd.labelWidth = 0;
-	bwnd.labelHeight = 0;
+	bwnd.labelSizes[0] = bwnd.labelSizes[1] = {};
 	bwnd.labelPadding = 8;
 	bwnd.outside = false;
 	bwnd.labelRects.clear();
@@ -313,26 +324,53 @@ static void RemoveAllModeOverlayForTarget(SBoxBorder* m, HWND targetWnd)
 	m->AllBorderWnds.erase(it);
 }
 
-// Position along the usable edge; adaptive labels fall inward at the available area.
-static RECT CalculateLabelRect(const RECT& windowRect, int borderWidth, const SBoxBorderWnd& bwnd, const RECT& monitorRect)
+struct SLabelGeometryInputs
 {
+	int labelMode;
+	EBorderLabelPlacement labelPlacement;
+	EBorderLabelText labelText;
+	EBorderLabelMovement labelMovement;
+	int labelPercent;
+	SIZE labelSizes[2];
+	int labelRowHeight;
+	int labelRowPadding;
+};
+
+static SLabelGeometryInputs GetLabelGeometryInputs(const SBoxBorderWnd& bwnd)
+{
+	return {
+		bwnd.labelMode,
+		bwnd.labelPlacement,
+		bwnd.labelText,
+		bwnd.labelMovement,
+		bwnd.labelPercent,
+		{ bwnd.labelSizes[0], bwnd.labelSizes[1] },
+		bwnd.labelRowHeight,
+		bwnd.labelRowPadding
+	};
+}
+
+// Position along the usable edge; adaptive modes keep labels within the available area.
+static RECT CalculateLabelRect(const RECT& windowRect, int borderWidth, const SLabelGeometryInputs& geometry, const RECT& monitorRect, EBorderLabelPlacement& renderedPlacement)
+{
+	renderedPlacement = geometry.labelPlacement;
 	RECT empty = { windowRect.left, windowRect.top, windowRect.left, windowRect.top };
-	if (!bwnd.labelMode || bwnd.labelWidth <= 0 || bwnd.labelHeight <= 0)
+	if (!geometry.labelMode)
 		return empty;
-	bool vertical = bwnd.labelPlacement == eLabelLeft || bwnd.labelPlacement == eLabelRight;
-	auto place = [&](const RECT& anchor, int mode) -> RECT
+	auto place = [&](const RECT& anchor, int mode, EBorderLabelPlacement placement) -> RECT
 	{
+		bool vertical = placement == eLabelLeft || placement == eLabelRight;
 		int available = (vertical ? anchor.bottom - anchor.top : anchor.right - anchor.left) - borderWidth * 2;
-		if (available <= 0)
+		int width = geometry.labelSizes[vertical ? 1 : 0].cx;
+		int height = geometry.labelSizes[vertical ? 1 : 0].cy;
+		if (available <= 0 || width <= 0 || height <= 0)
 			return empty;
-		int width = bwnd.labelWidth;
-		int height = bwnd.labelHeight;
 		if (vertical) {
-			if (bwnd.labelText == eLabelStacked) {
-				int padding = bwnd.labelRowPadding * 2;
-				if (bwnd.labelRowHeight <= 0 || available < bwnd.labelRowHeight + padding)
+			if (IsStackedLabelText(geometry.labelText)) {
+				int padding = geometry.labelRowPadding * 2;
+				if (geometry.labelRowHeight <= 0 || available < geometry.labelRowHeight + padding)
 					return empty;
-				height = qMin(height, ((available - padding) / bwnd.labelRowHeight) * bwnd.labelRowHeight + padding);
+				height = qMin(height, ((available - padding) / geometry.labelRowHeight) * geometry.labelRowHeight + padding);
 			} else {
 				height = qMin(height, available);
 			}
@@ -342,9 +380,9 @@ static RECT CalculateLabelRect(const RECT& windowRect, int borderWidth, const SB
 			width = qMin(width, available);
 		}
 		int travel = available - (vertical ? height : width);
-		int offset = borderWidth + int((LONGLONG)travel * bwnd.labelPercent / 100);
+		int offset = borderWidth + int((LONGLONG)travel * geometry.labelPercent / 100);
 		int left, top;
-		switch (bwnd.labelPlacement) {
+		switch (placement) {
 		case eLabelBottom:
 			left = anchor.left + offset;
 			top = mode == -1 ? anchor.bottom : anchor.bottom - borderWidth - height;
@@ -364,15 +402,463 @@ static RECT CalculateLabelRect(const RECT& windowRect, int borderWidth, const SB
 		}
 		return { left, top, left + width, top + height };
 	};
-	RECT label = place(windowRect, bwnd.labelMode);
-	if (bwnd.labelAdaptive && !IsRectEmpty(&label) && !IsRectEmpty(&monitorRect) &&
-		(label.left < monitorRect.left || label.top < monitorRect.top ||
-		 label.right > monitorRect.right || label.bottom > monitorRect.bottom)) {
+	auto fits = [&](const RECT& rect) -> bool
+	{
+		return !IsRectEmpty(&rect) && rect.left >= monitorRect.left && rect.top >= monitorRect.top &&
+			rect.right <= monitorRect.right && rect.bottom <= monitorRect.bottom;
+	};
+	RECT label = place(windowRect, geometry.labelMode, geometry.labelPlacement);
+	if (geometry.labelMovement != eLabelFixed && !IsRectEmpty(&monitorRect) && !fits(label) &&
+		(!IsRectEmpty(&label) || geometry.labelMovement == eLabelAdaptiveAny)) {
+		EBorderLabelPlacement opposite = geometry.labelPlacement == eLabelTop ? eLabelBottom :
+			geometry.labelPlacement == eLabelBottom ? eLabelTop : geometry.labelPlacement == eLabelLeft ? eLabelRight : eLabelLeft;
+		if (geometry.labelMovement == eLabelAdaptiveOpposite || geometry.labelMovement == eLabelAdaptiveAny) {
+			RECT candidate = place(windowRect, geometry.labelMode, opposite);
+			if (fits(candidate)) {
+				renderedPlacement = opposite;
+				return candidate;
+			}
+		}
+		if (geometry.labelMovement == eLabelAdaptiveAny) {
+			LONGLONG bestSpace = -1;
+			RECT best = empty;
+			for (int edge = eLabelTop; edge <= eLabelRight; ++edge) {
+				if (edge == geometry.labelPlacement || edge == opposite)
+					continue;
+				RECT candidate = place(windowRect, geometry.labelMode, (EBorderLabelPlacement)edge);
+				if (!fits(candidate))
+					continue;
+				LONGLONG space = edge == eLabelTop ? (LONGLONG)candidate.top - monitorRect.top :
+					edge == eLabelBottom ? (LONGLONG)monitorRect.bottom - candidate.bottom :
+					edge == eLabelLeft ? (LONGLONG)candidate.left - monitorRect.left : (LONGLONG)monitorRect.right - candidate.right;
+				if (space > bestSpace) {
+					bestSpace = space;
+					best = candidate;
+					renderedPlacement = (EBorderLabelPlacement)edge;
+				}
+			}
+			if (bestSpace >= 0)
+				return best;
+		}
 		RECT visibleAnchor;
 		if (IntersectRect(&visibleAnchor, &windowRect, &monitorRect))
-			label = place(visibleAnchor, 1);
+			label = place(visibleAnchor, 1, geometry.labelPlacement);
 	}
 	return label;
+}
+
+static const struct { const char* name; int weight; } BorderLabelFontWeights[] = {
+	{ "thin", FW_THIN }, { "extralight", FW_EXTRALIGHT }, { "light", FW_LIGHT },
+	{ "regular", FW_NORMAL }, { "medium", FW_MEDIUM }, { "demibold", FW_SEMIBOLD },
+	{ "bold", FW_BOLD }, { "extrabold", FW_EXTRABOLD }, { "black", FW_HEAVY }
+};
+
+SBoxBorderFont CBoxBorder::ParseLabelFont(const QString& value)
+{
+	SBoxBorderFont font;
+	QStringList parts = value.split(",");
+	QString family = parts.takeFirst().trimmed();
+	if (!family.isEmpty()) font.family = family;
+	QSet<QString> keys;
+	for (const QString& part : parts) {
+		QString token = part.trimmed();
+		int separator = token.indexOf('=');
+		if (separator >= 0) {
+			QString key = token.left(separator).trimmed().toLower();
+			if (key != "family" && key != "native" && key != "style" && key != "face" && key != "pt" && key != "script" && key != "weight")
+				continue;
+			if (keys.contains(key)) font.error = tr("Duplicate BorderLabelFont field: %1").arg(key);
+			keys.insert(key);
+			QString text = token.mid(separator + 1);
+			bool valid = true;
+			if (key == "pt") {
+				font.pointSize = text.toDouble(&valid);
+				valid = valid && font.pointSize >= 1 && font.pointSize <= 512;
+			} else if (key == "script") {
+				font.writingSystem = text.toInt(&valid);
+				valid = valid && font.writingSystem >= 0;
+			} else if (key == "weight") {
+				font.weight = text.toInt(&valid);
+				valid = valid && font.weight >= 1 && font.weight <= 1000;
+			} else {
+				QByteArray encoded = text.toUtf8();
+				for (int i = 0; i < encoded.size(); ++i) {
+					if (encoded[i] != '%') continue;
+					for (int j = 1; j <= 2; ++j) {
+						char c = i + j < encoded.size() ? encoded[i + j] : 0;
+						if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')))
+							valid = false;
+					}
+					i += 2;
+				}
+				QByteArray bytes = QByteArray::fromPercentEncoding(encoded);
+				QString decoded = QString::fromUtf8(bytes);
+				valid = valid && decoded.toUtf8() == bytes && !decoded.contains(QChar(0));
+				if (key == "family") { font.family = decoded; valid = valid && !decoded.isEmpty(); }
+				else if (key == "native") font.nativeFamily = decoded;
+				else if (key == "style") font.style = decoded;
+				else font.fullName = decoded;
+			}
+			if (!valid) font.error = tr("Invalid BorderLabelFont field: %1").arg(key);
+			continue;
+		}
+		QString style = token.toLower();
+		if (style == "italic") font.italic = true;
+		else if (style == "underline") font.underline = true;
+		else if (style == "strikeout") font.strikeout = true;
+		else {
+			for (const auto& entry : BorderLabelFontWeights) {
+				if (style == entry.name) { font.weight = entry.weight; break; }
+			}
+		}
+	}
+	return font;
+}
+
+QString CBoxBorder::SerializeLabelFont(const SBoxBorderFont& font)
+{
+	auto escapeName = [](const QString& text) {
+		int first = 0, last = text.size();
+		while (first < last && text.at(first).isSpace()) ++first;
+		while (last > first && text.at(last - 1).isSpace()) --last;
+		QString escaped;
+		escaped.reserve(text.size());
+		for (int i = 0; i < text.size();) {
+			QChar ch = text.at(i);
+			uint codePoint = ch.unicode();
+			int count = 1;
+			if (ch.isHighSurrogate() && i + 1 < text.size() && text.at(i + 1).isLowSurrogate()) {
+				codePoint = QChar::surrogateToUcs4(ch, text.at(i + 1));
+				count = 2;
+			}
+			QString character = text.mid(i, count);
+			QChar::Category category = QChar::category(codePoint);
+			if (ch == '%' || ch == ',' || i < first || i >= last ||
+				category == QChar::Other_Control || category == QChar::Other_Format ||
+				category == QChar::Separator_Line || category == QChar::Separator_Paragraph)
+				escaped += QString::fromLatin1(QUrl::toPercentEncoding(character));
+			else
+				escaped += character;
+			i += count;
+		}
+		return escaped;
+	};
+	QStringList parts;
+	bool namedWeight = false;
+	bool encodedFamily = escapeName(font.family) != font.family;
+	parts.append(encodedFamily ? QString() : font.family);
+	for (const auto& entry : BorderLabelFontWeights) {
+		if (entry.weight == font.weight) { parts.append(entry.name); namedWeight = true; break; }
+	}
+	if (!namedWeight) parts.append("weight=" + QString::number(font.weight));
+	if (font.italic) parts.append("italic");
+	if (font.underline) parts.append("underline");
+	if (font.strikeout) parts.append("strikeout");
+	auto appendName = [&](const char* key, const QString& text) {
+		if (!text.isEmpty()) parts.append(QString::fromLatin1(key) + "=" + escapeName(text));
+	};
+	if (encodedFamily) appendName("family", font.family);
+	appendName("native", font.nativeFamily);
+	appendName("style", font.style);
+	appendName("face", font.fullName);
+	if (font.pointSize > 0) parts.append("pt=" + QString::number(font.pointSize, 'f', 2));
+	parts.append("script=" + QString::number(font.writingSystem));
+	return parts.join(",");
+}
+
+struct SNativeLabelFontFace
+{
+	SBoxBorderFontFace face;
+	LOGFONTW logFont;
+};
+
+static void TraceLabelFont(const QString& message)
+{
+	DWORD lastError = GetLastError();
+	if (IsDebuggerPresent()) {
+		QString line = QString("[SbieBorderFont tid=%1] %2\r\n").arg(GetCurrentThreadId()).arg(message);
+		OutputDebugStringW(reinterpret_cast<LPCWSTR>(line.utf16()));
+	}
+	SetLastError(lastError);
+}
+
+struct SLabelFontEnumeration
+{
+	QList<SNativeLabelFontFace> faces;
+	QSet<QString> families;
+	int callbacks = 0, vertical = 0, unnamed = 0;
+};
+
+static int CALLBACK EnumLabelFontProc(const LOGFONTW* font, const TEXTMETRICW*, DWORD, LPARAM parameter)
+{
+	auto& query = *reinterpret_cast<SLabelFontEnumeration*>(parameter);
+	++query.callbacks;
+	const ENUMLOGFONTEXW* entry = reinterpret_cast<const ENUMLOGFONTEXW*>(font);
+	if (entry->elfLogFont.lfFaceName[0] == L'@') { ++query.vertical; return 1; }
+	SNativeLabelFontFace result;
+	result.logFont = entry->elfLogFont;
+	result.face.family = QString::fromWCharArray(entry->elfLogFont.lfFaceName);
+	query.families.insert(result.face.family);
+	result.face.style = QString::fromWCharArray(entry->elfStyle);
+	result.face.fullName = QString::fromWCharArray(entry->elfFullName);
+	if (result.face.fullName.isEmpty()) { ++query.unnamed; return 1; }
+	result.face.weight = entry->elfLogFont.lfWeight;
+	result.face.italic = entry->elfLogFont.lfItalic != 0;
+	auto& faces = query.faces;
+	for (const auto& existing : faces) {
+		if (existing.face.fullName == result.face.fullName && existing.face.style == result.face.style)
+			return 1;
+	}
+	faces.append(result);
+	return 1;
+}
+
+static SLabelFontEnumeration QueryLabelFontFamily(HDC dc, const QString& family)
+{
+	SLabelFontEnumeration result;
+	if (!dc || family.size() >= LF_FACESIZE || family.contains(QChar(0))) return result;
+	LOGFONTW query = {};
+	query.lfCharSet = DEFAULT_CHARSET;
+	std::wstring name = family.toStdWString();
+	std::copy(name.begin(), name.end(), query.lfFaceName);
+	EnumFontFamiliesExW(dc, &query, EnumLabelFontProc, reinterpret_cast<LPARAM>(&result), 0);
+	return result;
+}
+
+static QString ReportedLabelFontName(HDC dc, bool trace = true);
+
+static QSet<QString> LabelFontFamilyAliases(const QByteArray& table)
+{
+	QSet<QString> aliases;
+	if (table.size() < 6) return aliases;
+	auto word = [&table](int offset) -> int {
+		return (static_cast<uchar>(table[offset]) << 8) | static_cast<uchar>(table[offset + 1]);
+	};
+	int count = word(2), storage = word(4);
+	if (word(0) > 1 || count > (table.size() - 6) / 12 || storage < 6 + count * 12 || storage > table.size()) return aliases;
+	if (word(0) == 1) {
+		int tags = 6 + count * 12;
+		if (tags > table.size() - 2) return aliases;
+		int languages = word(tags);
+		if (languages > (table.size() - tags - 2) / 4 || storage < tags + 2 + languages * 4) return aliases;
+	}
+	for (int i = 0; i < count; ++i) {
+		int record = 6 + i * 12;
+		int platform = word(record), encoding = word(record + 2), id = word(record + 6);
+		if ((id != 1 && id != 16) || !((platform == 0 && encoding <= 6) || (platform == 3 && (encoding == 0 || encoding == 1 || encoding == 10)))) continue;
+		int length = word(record + 8), offset = word(record + 10);
+		if (!length || length % 2 || offset > table.size() - storage || length > table.size() - storage - offset) continue;
+		QString name;
+		name.reserve(length / 2);
+		for (int j = 0; j < length; j += 2) name.append(QChar(word(storage + offset + j)));
+		if (!name.contains(QChar(0))) aliases.insert(name.toCaseFolded());
+	}
+	return aliases;
+}
+
+static QSet<QString> NativeLabelFontFamilyAliases(HDC dc, const SNativeLabelFontFace& entry)
+{
+	QSet<QString> aliases;
+	HFONT font = CreateFontIndirectW(&entry.logFont);
+	if (!font) return aliases;
+	HGDIOBJ previous = SelectObject(dc, font);
+	if (previous && previous != HGDI_ERROR) {
+		if (!ReportedLabelFontName(dc, false).compare(entry.face.fullName, Qt::CaseInsensitive)) {
+			const DWORD nameTag = 0x656d616e; // GetFontData uses the byte order of 'name'.
+			DWORD size = GetFontData(dc, nameTag, 0, NULL, 0);
+			if (size >= 6 && size <= 1024 * 1024) {
+				QByteArray table((int)size, 0);
+				if (GetFontData(dc, nameTag, 0, table.data(), size) == size) aliases = LabelFontFamilyAliases(table);
+			}
+		}
+		SelectObject(dc, previous);
+	}
+	DeleteObject(font);
+	return aliases;
+}
+
+static QList<SNativeLabelFontFace> EnumNativeLabelFontFaces(const QString& family)
+{
+	QList<SNativeLabelFontFace> faces;
+	if (family.isEmpty() || family.contains(QChar(0))) return faces;
+	HDC dc = GetDC(NULL);
+	SLabelFontEnumeration direct = QueryLabelFontFamily(dc, family);
+	faces = direct.faces;
+	TraceLabelFont(QString("enumerate family=\"%1\" faces=%2 dcAvailable=%3 callbacks=%4 vertical=%5 unnamed=%6 nameLength=%7")
+		.arg(family).arg(faces.size()).arg(dc != NULL).arg(direct.callbacks).arg(direct.vertical).arg(direct.unnamed).arg(family.size()));
+	if (dc && faces.isEmpty()) {
+		// Qt may expose preferred family names that differ from GDI's native names.
+		SLabelFontEnumeration catalogue = QueryLabelFontFamily(dc, QString());
+		QStringList families = catalogue.families.values();
+		families.sort(Qt::CaseInsensitive);
+		QList<SNativeLabelFontFace> candidates;
+		for (const QString& nativeFamily : families) {
+			if (!nativeFamily.isEmpty()) candidates.append(QueryLabelFontFamily(dc, nativeFamily).faces);
+		}
+		for (const auto& entry : candidates) {
+			if (!entry.face.family.compare(family, Qt::CaseInsensitive) || !entry.face.fullName.compare(family, Qt::CaseInsensitive))
+				faces.append(entry);
+		}
+		QString mode = "exact-native-name";
+		int aliasFaces = 0;
+		if (faces.isEmpty()) {
+			mode = "name-table-family";
+			QString alias = family.toCaseFolded();
+			for (const auto& entry : candidates) {
+				QSet<QString> aliases = NativeLabelFontFamilyAliases(dc, entry);
+				if (!aliases.isEmpty()) ++aliasFaces;
+				if (aliases.contains(alias)) faces.append(entry);
+			}
+		}
+		TraceLabelFont(QString("resolve family=\"%1\" mode=%2 nativeFamilies=%3 candidates=%4 matches=%5 callbacks=%6 vertical=%7 unnamed=%8 aliasFaces=%9")
+			.arg(family).arg(mode).arg(families.size()).arg(candidates.size()).arg(faces.size())
+			.arg(catalogue.callbacks).arg(catalogue.vertical).arg(catalogue.unnamed).arg(aliasFaces));
+	}
+	if (dc) {
+		ReleaseDC(NULL, dc);
+	}
+	if (IsDebuggerPresent()) {
+		for (const auto& entry : faces)
+			TraceLabelFont(QString("enum family=\"%1\" style=\"%2\" full=\"%3\" weight=%4 italic=%5 charset=%6")
+				.arg(entry.face.family).arg(entry.face.style).arg(entry.face.fullName).arg(entry.face.weight).arg(entry.face.italic).arg(entry.logFont.lfCharSet));
+	}
+	return faces;
+}
+
+QList<SBoxBorderFontFace> CBoxBorder::EnumLabelFontFaces(const QString& family)
+{
+	QList<SBoxBorderFontFace> result;
+	for (const auto& entry : EnumNativeLabelFontFaces(family)) result.append(entry.face);
+	return result;
+}
+
+static QString ReportedLabelFontName(HDC dc, bool trace)
+{
+	UINT size = GetOutlineTextMetricsW(dc, 0, NULL);
+	if (size < sizeof(OUTLINETEXTMETRICW) || size > INT_MAX) {
+		if (trace) TraceLabelFont(QString("reject stage=outline-size bytes=%1").arg(size));
+		return QString();
+	}
+	QByteArray buffer((int)size, 0);
+	OUTLINETEXTMETRICW* metrics = reinterpret_cast<OUTLINETEXTMETRICW*>(buffer.data());
+	if (!GetOutlineTextMetricsW(dc, size, metrics) || metrics->otmSize < sizeof(OUTLINETEXTMETRICW) || metrics->otmSize > size) {
+		if (trace) TraceLabelFont(QString("reject stage=outline-data bytes=%1 declaredBytes=%2").arg(size).arg(metrics->otmSize));
+		return QString();
+	}
+	if (trace && IsDebuggerPresent()) {
+		auto readName = [&buffer, size](const void* value) -> QString {
+			ULONG_PTR offset = reinterpret_cast<ULONG_PTR>(value);
+			if (offset < sizeof(OUTLINETEXTMETRICW) || offset >= size || offset % sizeof(WCHAR)) return QString();
+			const WCHAR* name = reinterpret_cast<const WCHAR*>(buffer.constData() + offset);
+			size_t length = (size - offset) / sizeof(WCHAR);
+			for (size_t i = 0; i < length; ++i) {
+				if (!name[i]) return QString::fromWCharArray(name, (int)i);
+			}
+			return QString();
+		};
+		TraceLabelFont(QString("outline family=\"%1\" face=\"%2\" style=\"%3\" full=\"%4\"")
+			.arg(readName(metrics->otmpFamilyName)).arg(readName(metrics->otmpFaceName))
+			.arg(readName(metrics->otmpStyleName)).arg(readName(metrics->otmpFullName)));
+	}
+	ULONG_PTR offset = reinterpret_cast<ULONG_PTR>(metrics->otmpFaceName);
+	if (offset < sizeof(OUTLINETEXTMETRICW) || offset >= size || offset % sizeof(WCHAR)) return QString();
+	const WCHAR* name = reinterpret_cast<const WCHAR*>(buffer.constData() + offset);
+	size_t length = (size - offset) / sizeof(WCHAR);
+	for (size_t i = 0; i < length; ++i) {
+		if (!name[i]) return QString::fromWCharArray(name, (int)i);
+	}
+	return QString();
+}
+
+static bool InspectLabelFont(HFONT font, const QString& fullName, int dpi, double* points)
+{
+	HDC dc = GetDC(NULL);
+	if (!dc) { TraceLabelFont("reject stage=inspect-dc"); return false; }
+	HGDIOBJ previous = SelectObject(dc, font);
+	bool valid = previous && previous != HGDI_ERROR;
+	if (!valid) TraceLabelFont("reject stage=select-font");
+	if (valid) {
+		TEXTMETRICW metrics = {};
+		valid = GetTextMetricsW(dc, &metrics) != 0 && metrics.tmHeight > metrics.tmInternalLeading;
+		if (IsDebuggerPresent()) {
+			DWORD lastError = GetLastError();
+			WCHAR family[LF_FACESIZE] = {};
+			int length = GetTextFaceW(dc, LF_FACESIZE, family);
+			family[LF_FACESIZE - 1] = 0;
+			TraceLabelFont(QString("realized textFace=\"%1\" faceResult=%2 weight=%3 italic=%4 height=%5 internalLeading=%6 metricsValid=%7")
+				.arg(QString::fromWCharArray(family)).arg(length).arg(metrics.tmWeight).arg(metrics.tmItalic)
+				.arg(metrics.tmHeight).arg(metrics.tmInternalLeading).arg(valid));
+			SetLastError(lastError);
+		}
+		if (!valid) TraceLabelFont("reject stage=text-metrics");
+		if (valid && !fullName.isEmpty()) {
+			QString reported = ReportedLabelFontName(dc);
+			valid = reported.compare(fullName, Qt::CaseInsensitive) == 0;
+			TraceLabelFont(QString("identity expectedEnumFull=\"%1\" reportedOutlineFace=\"%2\" match=%3")
+				.arg(fullName).arg(reported).arg(valid));
+		}
+		if (valid && points) *points = (metrics.tmHeight - metrics.tmInternalLeading) * 72.0 / dpi;
+		SelectObject(dc, previous);
+	}
+	ReleaseDC(NULL, dc);
+	return valid;
+}
+
+HFONT__* CBoxBorder::CreateLabelFont(const SBoxBorderFont& font, int legacyReference, int dpi, double* realizedPoints, QString* error)
+{
+	if (IsDebuggerPresent())
+		TraceLabelFont(QString("request family=\"%1\" native=\"%2\" style=\"%3\" full=\"%4\" pt=%5 legacy=%6 dpi=%7 weight=%8 italic=%9 underline=%10 strikeout=%11 error=\"%12\"")
+			.arg(font.family).arg(font.nativeFamily).arg(font.style).arg(font.fullName).arg(font.pointSize)
+			.arg(legacyReference).arg(dpi).arg(font.weight).arg(font.italic).arg(font.underline).arg(font.strikeout).arg(font.error));
+	if (error) error->clear();
+	if (realizedPoints) *realizedPoints = 0;
+	if (!font.error.isEmpty()) { if (error) *error = font.error; return NULL; }
+	if ((font.pointSize != 0 && !(font.pointSize >= 1 && font.pointSize <= 512)) || legacyReference > INT_MAX - 8) {
+		if (error) *error = tr("Invalid border label font size.");
+		return NULL;
+	}
+	if (dpi <= 0) dpi = 96;
+	int height = font.pointSize > 0 ? -qMax(1, MulDiv(qRound(font.pointSize * 100), dpi, 7200)) : MulDiv(legacyReference + 8, dpi, 96);
+	TraceLabelFont(QString("create height=%1 dpi=%2").arg(height).arg(dpi));
+	if (font.style.isEmpty() && font.fullName.isEmpty()) {
+		HFONT result = CreateFontW(height, 0, 0, 0, font.weight, font.italic, font.underline, font.strikeout,
+			DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH | FF_SWISS,
+			(LPCWSTR)font.family.utf16());
+		if (!result) TraceLabelFont("reject stage=CreateFontW");
+		if (result && (!realizedPoints || InspectLabelFont(result, QString(), dpi, realizedPoints))) {
+			if (!realizedPoints && IsDebuggerPresent()) {
+				DWORD lastError = GetLastError();
+				InspectLabelFont(result, QString(), dpi, NULL);
+				SetLastError(lastError);
+			}
+			TraceLabelFont("accept path=family-only identityCheck=not-requested");
+			return reinterpret_cast<HFONT__*>(result);
+		}
+		if (result) DeleteObject(result);
+	} else {
+		QString family = font.nativeFamily.isEmpty() ? font.family : font.nativeFamily;
+		for (const auto& entry : EnumNativeLabelFontFaces(family)) {
+			if ((!font.style.isEmpty() && entry.face.style.compare(font.style, Qt::CaseInsensitive)) ||
+				(!font.fullName.isEmpty() && entry.face.fullName.compare(font.fullName, Qt::CaseInsensitive)) || entry.face.fullName.isEmpty()) continue;
+			LOGFONTW native = entry.logFont;
+			TraceLabelFont(QString("candidate style=\"%1\" full=\"%2\"").arg(entry.face.style).arg(entry.face.fullName));
+			native.lfHeight = height;
+			native.lfWidth = native.lfEscapement = native.lfOrientation = 0;
+			native.lfUnderline = font.underline;
+			native.lfStrikeOut = font.strikeout;
+			native.lfQuality = CLEARTYPE_QUALITY;
+			HFONT result = CreateFontIndirectW(&native);
+			if (!result) TraceLabelFont("reject stage=CreateFontIndirectW");
+			if (result && InspectLabelFont(result, entry.face.fullName, dpi, realizedPoints)) {
+				TraceLabelFont("accept path=exact-face");
+				return reinterpret_cast<HFONT__*>(result);
+			}
+			if (result) DeleteObject(result);
+		}
+	}
+	TraceLabelFont("reject stage=font-verification-exhausted");
+	if (error) *error = tr("The selected font face cannot be verified by GDI. Select another family or style.");
+	return NULL;
 }
 
 // Creates/updates the label font and calculates label dimensions for a border window
@@ -386,11 +872,10 @@ static void UpdateBorderLabelFont(SBoxBorderWnd& bwnd, HWND hWndForDC = NULL)
 	bwnd.labelRows.clear();
 	bwnd.labelRowHeight = 0;
 	bwnd.labelRowPadding = 2;
+	bwnd.labelSizes[0] = bwnd.labelSizes[1] = {};
 
 	// Skip if labels are disabled or no box name
 	if (bwnd.labelMode == 0 || bwnd.boxName.empty()) {
-		bwnd.labelWidth = 0;
-		bwnd.labelHeight = 0;
 		return;
 	}
 
@@ -399,8 +884,6 @@ static void UpdateBorderLabelFont(SBoxBorderWnd& bwnd, HWND hWndForDC = NULL)
 	HDC hdc = GetDC(hWndForDC);
 	if (!hdc) {
 		// GetDC failed (window hidden/not ready); report no label size.
-		bwnd.labelWidth = 0;
-		bwnd.labelHeight = 0;
 		return;
 	}
 
@@ -408,31 +891,36 @@ static void UpdateBorderLabelFont(SBoxBorderWnd& bwnd, HWND hWndForDC = NULL)
 	// size on every monitor regardless of the Windows scaling factor.
 	int dpi = GetDeviceCaps(hdc, LOGPIXELSY);
 	if (dpi <= 0) dpi = 96;
-	int fontHeight = MulDiv(bwnd.labelBorderWidth + 8, dpi, 96);
-
-	bwnd.labelFont = CreateFontW(fontHeight, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE,
-		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
-		CLEARTYPE_QUALITY, DEFAULT_PITCH | FF_SWISS, L"Segoe UI");
+	SBoxBorderFont font = CBoxBorder::ParseLabelFont(QString::fromStdWString(bwnd.labelFontSpec));
+	QString fontError;
+	bwnd.labelFont = CBoxBorder::CreateLabelFont(font, bwnd.labelBorderWidth, dpi, NULL, &fontError);
+	if (!bwnd.labelFont) {
+		qWarning().noquote() << "BorderLabelFont:" << fontError;
+		SBoxBorderFont fallback;
+		if (font.pointSize >= 1 && font.pointSize <= 512) fallback.pointSize = font.pointSize;
+		bwnd.labelFont = CBoxBorder::CreateLabelFont(fallback, bwnd.labelBorderWidth, dpi);
+	}
 
 	if (!bwnd.labelFont) {
 		ReleaseDC(hWndForDC, hdc);
-		bwnd.labelWidth = 0;
-		bwnd.labelHeight = 0;
 		return;
 	}
 
 	// Calculate text dimensions
 	HFONT hOldFont = (HFONT)SelectObject(hdc, bwnd.labelFont);
 	SIZE textSize = {};
-	bool vertical = bwnd.labelPlacement == eLabelLeft || bwnd.labelPlacement == eLabelRight;
-	if (vertical && bwnd.labelText == eLabelStacked) {
+	GetTextExtentPoint32W(hdc, bwnd.boxName.c_str(), (int)bwnd.boxName.length(), &textSize);
+	bwnd.labelSizes[0] = { textSize.cx + bwnd.labelPadding * 2, textSize.cy + 4 };
+	if (IsStackedLabelText(bwnd.labelText)) {
+		textSize = {};
 		QString text = QString::fromStdWString(bwnd.boxName);
 		QTextBoundaryFinder finder(QTextBoundaryFinder::Grapheme, text);
 		TEXTMETRICW metrics = {};
 		GetTextMetricsW(hdc, &metrics);
-		int rowGap = qMax(1L, metrics.tmHeight / 8);
+		bool compact = bwnd.labelText == eLabelStackedCompact;
+		int rowGap = compact ? 0 : qMax(1L, metrics.tmHeight / 8);
 		bwnd.labelRowHeight = qMax(1L, metrics.tmHeight) + rowGap;
-		bwnd.labelRowPadding = qMax(2, rowGap);
+		bwnd.labelRowPadding = compact ? 1 : qMax(2, rowGap);
 		int start = 0;
 		for (int end = finder.toNextBoundary(); end != -1; start = end, end = finder.toNextBoundary()) {
 			std::wstring row = text.mid(start, end - start).toStdWString();
@@ -449,16 +937,12 @@ static void UpdateBorderLabelFont(SBoxBorderWnd& bwnd, HWND hWndForDC = NULL)
 			bwnd.labelRows.push_back(row);
 		}
 		textSize.cy = (LONG)qMin<LONGLONG>(INT_MAX - bwnd.labelRowPadding * 2, (LONGLONG)bwnd.labelRows.size() * bwnd.labelRowHeight);
+		bwnd.labelSizes[1] = { textSize.cx + bwnd.labelPadding * 2, textSize.cy + bwnd.labelRowPadding * 2 };
 	} else {
-		GetTextExtentPoint32W(hdc, bwnd.boxName.c_str(), (int)bwnd.boxName.length(), &textSize);
+		bwnd.labelSizes[1] = { bwnd.labelSizes[0].cy, bwnd.labelSizes[0].cx };
 	}
 	SelectObject(hdc, hOldFont);
 	ReleaseDC(hWndForDC, hdc);
-
-	bwnd.labelWidth = textSize.cx + bwnd.labelPadding * 2;
-	bwnd.labelHeight = textSize.cy + (vertical && bwnd.labelText == eLabelStacked ? bwnd.labelRowPadding * 2 : 4);
-	if (vertical && bwnd.labelText != eLabelStacked)
-		std::swap(bwnd.labelWidth, bwnd.labelHeight);
 }
 
 static SBoxBorderWnd* GetBorderWndByHwnd(SBoxBorder* m, HWND hWnd)
@@ -772,8 +1256,8 @@ LRESULT CALLBACK CBoxBorder__WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM
 						SetBkMode(hdcMem, TRANSPARENT);
 						SetTextColor(hdcMem, textColor);
 						RECT rc = labelRect;
-						bool vertical = pBorder->labelPlacement == eLabelLeft || pBorder->labelPlacement == eLabelRight;
-						if (vertical && pBorder->labelText != eLabelStacked) {
+						bool vertical = pBorder->labelRenderPlacement == eLabelLeft || pBorder->labelRenderPlacement == eLabelRight;
+						if (vertical && !IsStackedLabelText(pBorder->labelText)) {
 							int saved = SaveDC(hdcMem);
 							if (saved && SetGraphicsMode(hdcMem, GM_ADVANCED)) {
 								bool upward = pBorder->labelText == eLabelMirrored;
@@ -1023,107 +1507,105 @@ void CBoxBorder::ThreadFunc()
 	}
 }
 
-static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, int& alpha, EBorderMode& mode, int& labelMode, int& labelWidth, bool& outside, EBorderLabelPlacement& placement, int& percent, EBorderLabelText& text, bool& adaptive)
+struct SBoxBorderSettings
 {
-	// Default values
-	color = RGB(255, 255, 0);
-	width = 6;
-	alpha = 192;
-	mode = eBorderNormal;
-	labelMode = 1; // Default to inside
-	labelWidth = 0;
-	outside = false;
-	placement = eLabelTop;
-	percent = 50;
-	text = eLabelStacked;
-	adaptive = true;
+	COLORREF color = RGB(255, 255, 0);
+	int width = 6;
+	int alpha = 192;
+	EBorderMode mode = eBorderNormal;
+	int labelMode = 1; // Default to inside
+	int labelWidth = 0;
+	bool outside = false;
+	EBorderLabelPlacement labelPlacement = eLabelTop;
+	int labelPercent = 50;
+	EBorderLabelText labelText = eLabelStacked;
+	EBorderLabelMovement labelMovement = eLabelAdaptiveAny;
+	std::wstring labelFontSpec;
+};
+
+static bool GetBoxBorderSettings(CSandBox* pBox, SBoxBorderSettings& settings, bool readFontSpec = true)
+{
+	settings = SBoxBorderSettings();
 
 	if (!pBox)
 		return false;
 
-	QStringList position = pBox->GetText("BorderLabelPosition", "top,50").split(",");
-	if (position.size() >= 2 && position.size() <= 4) {
-		const QStringList edges = { "top", "bottom", "left", "right" };
-		const QStringList texts = { "stacked", "rotated", "mirrored" };
-		int edge = edges.indexOf(position[0].trimmed().toLower());
-		int style = position.size() >= 3 ? texts.indexOf(position[2].trimmed().toLower()) : 0;
-		QString movement = position.size() >= 4 ? position[3].trimmed().toLower() : "adaptive";
-		bool valid = false;
-		int value = position[1].trimmed().toInt(&valid);
-		if (edge >= 0 && valid && value >= 0 && value <= 100 && style >= 0 && (movement == "fixed" || movement == "adaptive")) {
-			placement = (EBorderLabelPlacement)edge;
-			percent = value;
-			text = (EBorderLabelText)style;
-			adaptive = movement == "adaptive";
-		}
-	}
+	if (readFontSpec) settings.labelFontSpec = pBox->GetText("BorderLabelFont").toStdWString();
+	const SBoxBorderLabelPosition position = SBoxBorderLabelPosition::Parse(pBox->GetText("BorderLabelPosition", "top,50"));
+	settings.labelPlacement = position.placement == "top" ? eLabelTop : position.placement == "bottom" ? eLabelBottom :
+		position.placement == "left" ? eLabelLeft : eLabelRight;
+	settings.labelPercent = position.percent;
+	settings.labelText = position.text == "stacked" ? eLabelStacked : position.text == "rotated" ? eLabelRotated :
+		position.text == "mirrored" ? eLabelMirrored : eLabelStackedCompact;
+	settings.labelMovement = position.movement == "fixed" ? eLabelFixed : position.movement == "adaptive" ? eLabelAdaptive :
+		position.movement == "adaptive-opposite" ? eLabelAdaptiveOpposite : eLabelAdaptiveAny;
 
 	QStringList BorderCfg = pBox->GetText("BorderColor").split(",");
 	if (BorderCfg.first().left(1) != L'#')
 		return true; // Use defaults
 
 	bool ok = false;
-	color = BorderCfg.first().mid(1).toInt(&ok, 16);
+	settings.color = BorderCfg.first().mid(1).toInt(&ok, 16);
 	if (!ok) {
-		color = RGB(255, 255, 0);
+		settings.color = RGB(255, 255, 0);
 		return true;
 	}
 
 	if (BorderCfg.count() >= 2) {
 		QString StrMode = BorderCfg.at(1);
 		if (StrMode.endsWith("outside", Qt::CaseInsensitive)) {
-			outside = true;
+			settings.outside = true;
 			StrMode.chop(7);
 		}
 		if (StrMode.compare("off", Qt::CaseInsensitive) == 0) {
-			mode = eBorderOff;
+			settings.mode = eBorderOff;
 			return false; // Border disabled for this box
 		}
 		else if (StrMode.compare("ttl", Qt::CaseInsensitive) == 0)
-			mode = eBorderTitleOnly;
+			settings.mode = eBorderTitleOnly;
 		else if (StrMode.compare("ttllbl", Qt::CaseInsensitive) == 0)
-			mode = eBorderTitleOnlyLabelOnly;
+			settings.mode = eBorderTitleOnlyLabelOnly;
 		else if (StrMode.compare("all", Qt::CaseInsensitive) == 0)
-			mode = eBorderAllWindows;
+			settings.mode = eBorderAllWindows;
 		else if (StrMode.compare("alllbl", Qt::CaseInsensitive) == 0)
-			mode = eBorderAllWindowsLabelOnly;
+			settings.mode = eBorderAllWindowsLabelOnly;
 		else if (StrMode.compare("onlbl", Qt::CaseInsensitive) == 0)
-			mode = eBorderLabelOnly;
+			settings.mode = eBorderLabelOnly;
 		// else default is eBorderNormal
 	}
-	if (mode == eBorderLabelOnly || mode == eBorderTitleOnlyLabelOnly || mode == eBorderAllWindowsLabelOnly)
-		outside = false;
+	if (settings.mode == eBorderLabelOnly || settings.mode == eBorderTitleOnlyLabelOnly || settings.mode == eBorderAllWindowsLabelOnly)
+		settings.outside = false;
 
 	if (BorderCfg.count() >= 3) {
-		width = BorderCfg.at(2).toInt();
-		if (width <= 0) width = 6;  // reject zero and negative values
+		settings.width = BorderCfg.at(2).toInt();
+		if (settings.width <= 0) settings.width = 6;  // reject zero and negative values
 	}
 
 	if (BorderCfg.count() >= 4) {
 		bool alphaOk = false;
-		alpha = BorderCfg.at(3).toInt(&alphaOk);
-		if (!alphaOk || alpha < 0 || alpha > 255)
-			alpha = 192;
+		settings.alpha = BorderCfg.at(3).toInt(&alphaOk);
+		if (!alphaOk || settings.alpha < 0 || settings.alpha > 255)
+			settings.alpha = 192;
 	}
 
 	if (BorderCfg.count() >= 5) {
 		QString labelStr = BorderCfg.at(4);
 		if (labelStr.compare("no", Qt::CaseInsensitive) == 0)
-			labelMode = 0;
+			settings.labelMode = 0;
 		else if (labelStr.compare("out", Qt::CaseInsensitive) == 0)
-			labelMode = -1;
+			settings.labelMode = -1;
 		else // "in" or default
-			labelMode = 1;
+			settings.labelMode = 1;
 	}
 
 	if (BorderCfg.count() >= 6) {
-		labelWidth = BorderCfg.at(5).toInt();
-		if (labelWidth <= 0)
-			labelWidth = width;
+		settings.labelWidth = BorderCfg.at(5).toInt();
+		if (settings.labelWidth <= 0)
+			settings.labelWidth = settings.width;
 	}
 
-	if (labelWidth <= 0)
-		labelWidth = width;
+	if (settings.labelWidth <= 0)
+		settings.labelWidth = settings.width;
 
 	return true;
 }
@@ -1352,49 +1834,46 @@ void CBoxBorder::TimerProc()
 	}
 
 	// Get border settings for the focused window's box
-	COLORREF boxColor;
-	int boxWidth = 6, boxAlpha = 192, boxLabelMode = 1, boxLabelWidth = 6, boxLabelPercent = 50;
-	EBorderLabelPlacement boxLabelPlacement = eLabelTop;
-	EBorderLabelText boxLabelText = eLabelStacked;
-	bool boxLabelAdaptive = true;
-	EBorderMode boxMode = eBorderOff;
-	bool boxOutside = false;
+	SBoxBorderSettings boxSettings;
+	boxSettings.mode = eBorderOff;
+	boxSettings.labelWidth = boxSettings.width;
 	if (pProcessBox)
-		GetBoxBorderSettings(pProcessBox.data(), boxColor, boxWidth, boxAlpha, boxMode, boxLabelMode, boxLabelWidth, boxOutside, boxLabelPlacement, boxLabelPercent, boxLabelText, boxLabelAdaptive);
-	bool insideMaximizedOrArranged = IsBorderInsideMaximizedOrArranged(m, pProcessBox.data(), hWnd, boxOutside, boxLabelMode);
+		GetBoxBorderSettings(pProcessBox.data(), boxSettings);
+	bool insideMaximizedOrArranged = IsBorderInsideMaximizedOrArranged(m, pProcessBox.data(), hWnd, boxSettings.outside, boxSettings.labelMode);
 	if (insideMaximizedOrArranged) {
-		boxOutside = false;
-		if (boxLabelMode != 0)
-			boxLabelMode = 1;
+		boxSettings.outside = false;
+		if (boxSettings.labelMode != 0)
+			boxSettings.labelMode = 1;
 	}
 
-	bool outsideChanged = m->MainBorder.outside != boxOutside;
-	bool labelModeChanged = boxMode != eBorderAllWindows && boxMode != eBorderAllWindowsLabelOnly &&
-		m->MainBorder.labelMode != boxLabelMode;
-	bool usesFocusedBorder = pProcessBox && boxMode != eBorderOff &&
-		boxMode != eBorderAllWindows && boxMode != eBorderAllWindowsLabelOnly;
+	bool outsideChanged = m->MainBorder.outside != boxSettings.outside;
+	bool labelModeChanged = boxSettings.mode != eBorderAllWindows && boxSettings.mode != eBorderAllWindowsLabelOnly &&
+		m->MainBorder.labelMode != boxSettings.labelMode;
+	bool usesFocusedBorder = pProcessBox && boxSettings.mode != eBorderOff &&
+		boxSettings.mode != eBorderAllWindows && boxSettings.mode != eBorderAllWindowsLabelOnly;
 	std::wstring boxDisplayName = usesFocusedBorder ? GetBoxDisplayName(pProcessBox.data()) : std::wstring();
 	bool displayNameChanged = usesFocusedBorder && m->MainBorder.boxName != boxDisplayName;
+	bool labelFontChanged = usesFocusedBorder && m->MainBorder.labelFontSpec != boxSettings.labelFontSpec;
 	bool globalExcludeTaskbar = m_Api->GetGlobalSettings()->GetBool("BorderExcludeTaskbar", true);
 	bool excludeTaskbar = pProcessBox ? pProcessBox->GetBool("BorderExcludeTaskbar", globalExcludeTaskbar) : globalExcludeTaskbar;
-	bool labelPositionChanged = usesFocusedBorder && (m->MainBorder.labelPlacement != boxLabelPlacement || m->MainBorder.labelPercent != boxLabelPercent ||
-		m->MainBorder.labelText != boxLabelText || m->MainBorder.labelAdaptive != boxLabelAdaptive);
-	bool visualChanged = usesFocusedBorder && (m->MainBorder.color != boxColor || m->MainBorder.width != boxWidth ||
-		m->MainBorder.alpha != boxAlpha || m->MainBorder.labelBorderWidth != boxLabelWidth);
-	if (m->pCurrentBox != pProcessBox.data() || m->CachedFocusBoxMode != boxMode || outsideChanged || labelModeChanged || displayNameChanged || labelPositionChanged || visualChanged || m->MainBorder.excludeTaskbar != excludeTaskbar)
+	bool labelPositionChanged = usesFocusedBorder && (m->MainBorder.labelPlacement != boxSettings.labelPlacement || m->MainBorder.labelPercent != boxSettings.labelPercent ||
+		m->MainBorder.labelText != boxSettings.labelText || m->MainBorder.labelMovement != boxSettings.labelMovement);
+	bool visualChanged = usesFocusedBorder && (m->MainBorder.color != boxSettings.color || m->MainBorder.width != boxSettings.width ||
+		m->MainBorder.alpha != boxSettings.alpha || m->MainBorder.labelBorderWidth != boxSettings.labelWidth);
+	if (m->pCurrentBox != pProcessBox.data() || m->CachedFocusBoxMode != boxSettings.mode || outsideChanged || labelModeChanged || displayNameChanged || labelFontChanged || labelPositionChanged || visualChanged || m->MainBorder.excludeTaskbar != excludeTaskbar)
 	{
 		m->pCurrentBox = pProcessBox.data();
-		m->CachedFocusBoxMode = boxMode;
-		m->MainBorder.outside = boxOutside;
+		m->CachedFocusBoxMode = boxSettings.mode;
+		m->MainBorder.outside = boxSettings.outside;
 		m->MainBorder.excludeTaskbar = excludeTaskbar;
 		// Force full re-evaluation: reset cached position so the border is redrawn
 		m->ActiveWnd = NULL;
 		m->ActivePid = 0;
-		if (!m->pCurrentBox || boxMode == eBorderOff)
+		if (!m->pCurrentBox || boxSettings.mode == eBorderOff)
 		{
 			m->BorderMode = eBorderOff;
 		}
-		else if (boxMode == eBorderAllWindows || boxMode == eBorderAllWindowsLabelOnly)
+		else if (boxSettings.mode == eBorderAllWindows || boxSettings.mode == eBorderAllWindowsLabelOnly)
 		{
 			// This box uses "all"/"alllbl" mode, skip single-window border (handled by DrawAllSandboxedBorders)
 			m->BorderMode = eBorderOff;
@@ -1406,18 +1885,19 @@ void CBoxBorder::TimerProc()
 		else
 		{
 			// Normal, title-only, label-only, or title-only-label-only mode
-			m->BorderMode = (boxMode == eBorderTitleOnly) ? eBorderTitleOnly :
-				(boxMode == eBorderTitleOnlyLabelOnly) ? eBorderTitleOnlyLabelOnly :
-				(boxMode == eBorderLabelOnly) ? eBorderLabelOnly : eBorderNormal;
-			m->MainBorder.color = boxColor;
-			m->MainBorder.width = boxWidth;
-			m->MainBorder.labelBorderWidth = boxLabelWidth;
-			m->MainBorder.alpha = boxAlpha;
-			m->MainBorder.labelMode = boxLabelMode;
-			m->MainBorder.labelPlacement = boxLabelPlacement;
-			m->MainBorder.labelPercent = boxLabelPercent;
-			m->MainBorder.labelText = boxLabelText;
-			m->MainBorder.labelAdaptive = boxLabelAdaptive;
+			m->BorderMode = (boxSettings.mode == eBorderTitleOnly) ? eBorderTitleOnly :
+				(boxSettings.mode == eBorderTitleOnlyLabelOnly) ? eBorderTitleOnlyLabelOnly :
+				(boxSettings.mode == eBorderLabelOnly) ? eBorderLabelOnly : eBorderNormal;
+			m->MainBorder.color = boxSettings.color;
+			m->MainBorder.width = boxSettings.width;
+			m->MainBorder.labelBorderWidth = boxSettings.labelWidth;
+			m->MainBorder.labelFontSpec = boxSettings.labelFontSpec;
+			m->MainBorder.alpha = boxSettings.alpha;
+			m->MainBorder.labelMode = boxSettings.labelMode;
+			m->MainBorder.labelPlacement = boxSettings.labelPlacement;
+			m->MainBorder.labelPercent = boxSettings.labelPercent;
+			m->MainBorder.labelText = boxSettings.labelText;
+			m->MainBorder.labelMovement = boxSettings.labelMovement;
 
 			// Apply alpha transparency setting
 			SetLayeredWindowAttributes(m->MainBorder.hWnd, 0, m->MainBorder.alpha, LWA_ALPHA);
@@ -1514,7 +1994,8 @@ void CBoxBorder::TimerProc()
 		}
 		bool isLabelOnlyMode = (m->BorderMode == eBorderLabelOnly || m->BorderMode == eBorderTitleOnlyLabelOnly);
 		const RECT& labelArea = excludeTaskbar && !(ExStyle & WS_EX_TOPMOST) ? Monitor.rcWork : Monitor.rcMonitor;
-		RECT labelRectScr = CalculateLabelRect(frameRect, isLabelOnlyMode ? 0 : m->MainBorder.width, m->MainBorder, labelArea);
+		EBorderLabelPlacement renderedPlacement;
+		RECT labelRectScr = CalculateLabelRect(frameRect, isLabelOnlyMode ? 0 : m->MainBorder.width, GetLabelGeometryInputs(m->MainBorder), labelArea, renderedPlacement);
 		RECT windowRect = frameRect;
 		if (!IsRectEmpty(&labelRectScr))
 			UnionRect(&windowRect, &frameRect, &labelRectScr);
@@ -1543,8 +2024,7 @@ void CBoxBorder::TimerProc()
 		}
 
 		// Add label region if enabled
-		std::vector<RECT> prevLabelRects = m->MainBorder.labelRects;
-		m->MainBorder.labelRects.clear();
+		std::vector<RECT> newLabelRects;
 		if (!IsRectEmpty(&labelRectScr))
 		{
 			// Convert to window-relative coordinates
@@ -1554,7 +2034,7 @@ void CBoxBorder::TimerProc()
 			labelRect.top = labelRectScr.top - windowRect.top;
 			labelRect.bottom = labelRectScr.bottom - windowRect.top;
 
-			m->MainBorder.labelRects.push_back(labelRect);
+			newLabelRects.push_back(labelRect);
 
 			// Add label region to border
 			HRGN hrgnLabel = CreateRectRgn(labelRect.left, labelRect.top, labelRect.right, labelRect.bottom);
@@ -1610,8 +2090,15 @@ void CBoxBorder::TimerProc()
 		// Keep SWP_NOZORDER during stable focus mode so we don't permanently fight other
 		// always-on-top overlays.  Temporarily re-raise only for a short click/focus
 		// pulse after foreground changed.
-		if (!SetWindowRgn(m->MainBorder.hWnd, hrgnBorder, FALSE))
+		if (!SetWindowRgn(m->MainBorder.hWnd, hrgnBorder, FALSE)) {
 			DeleteObject(hrgnBorder); // SetWindowRgn only owns the region on success
+			m->ActiveWnd = NULL;
+			return;
+		}
+		bool labelRectsChanged = !RectVectorEquals(m->MainBorder.labelRects, newLabelRects);
+		bool labelEdgeChanged = m->MainBorder.labelRenderPlacement != renderedPlacement;
+		m->MainBorder.labelRects = newLabelRects;
+		m->MainBorder.labelRenderPlacement = renderedPlacement;
 		ApplyCaptureExclusionAffinity(m->MainBorder.hWnd, hideBordersFromCapture);
 		m->MainBorder.affinityEnabled = hideBordersFromCapture;
 		bool focusRaisePulseActive = m->FocusRaisePulseStartTick &&
@@ -1648,9 +2135,8 @@ void CBoxBorder::TimerProc()
 				mainSwpFlags);
 		}
 
-		bool labelRectsChanged = !RectVectorEquals(prevLabelRects, m->MainBorder.labelRects);
 		// Text style can change without changing the label rectangle.
-		if (!m->MainBorder.visible || needSetWindowPos || labelRectsChanged || labelPositionChanged)
+		if (!m->MainBorder.visible || needSetWindowPos || labelRectsChanged || labelEdgeChanged || labelPositionChanged || labelFontChanged || visualChanged)
 			InvalidateRect(m->MainBorder.hWnd, NULL, FALSE);
 
 		m->MainBorder.visible = true;
@@ -1788,16 +2274,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 	{
 		bool enabled;
 		bool labelOnly;
-		bool outside;
-		COLORREF color;
-		int width;
-		int alpha;
-		int labelMode;
-		int labelWidth;
-		EBorderLabelPlacement labelPlacement;
-		int labelPercent;
-		EBorderLabelText labelText;
-		bool labelAdaptive;
+		SBoxBorderSettings border;
 		std::wstring boxName;
 	};
 
@@ -1954,39 +2431,31 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		SAllStyle style = {};
 		style.enabled = false;
 		style.labelOnly = false;
-		style.color = RGB(255, 255, 0);
-		style.width = 6;
-		style.alpha = 192;
-		style.labelMode = 1;
-		style.labelWidth = style.width;
-		style.labelPlacement = eLabelTop;
-		style.labelPercent = 50;
-		style.labelText = eLabelStacked;
-		style.labelAdaptive = true;
+		style.border.labelWidth = style.border.width;
 
 		if (pBox)
 		{
-			EBorderMode mode = eBorderOff;
-			if (GetBoxBorderSettings(pBox, style.color, style.width, style.alpha, mode, style.labelMode, style.labelWidth, style.outside, style.labelPlacement, style.labelPercent, style.labelText, style.labelAdaptive) &&
-				(mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
+			if (GetBoxBorderSettings(pBox, style.border) &&
+				(style.border.mode == eBorderAllWindows || style.border.mode == eBorderAllWindowsLabelOnly))
 			{
 				style.enabled = true;
-				style.labelOnly = (mode == eBorderAllWindowsLabelOnly);
+				style.labelOnly = (style.border.mode == eBorderAllWindowsLabelOnly);
 				style.boxName = GetBoxDisplayName(pBox);
 
 				HashMix64(settingsHash, (ULONGLONG)(ULONG_PTR)pBox);
-				HashMix64(settingsHash, (ULONGLONG)style.color);
-				HashMix64(settingsHash, (ULONGLONG)style.width);
-				HashMix64(settingsHash, (ULONGLONG)style.alpha);
-				HashMix64(settingsHash, (ULONGLONG)style.labelMode);
-				HashMix64(settingsHash, (ULONGLONG)style.labelWidth);
-				HashMix64(settingsHash, (ULONGLONG)style.labelPlacement);
-				HashMix64(settingsHash, (ULONGLONG)style.labelPercent);
-				HashMix64(settingsHash, (ULONGLONG)style.labelText);
-				HashMix64(settingsHash, (ULONGLONG)style.labelAdaptive);
+				HashMix64(settingsHash, (ULONGLONG)style.border.color);
+				HashMix64(settingsHash, (ULONGLONG)style.border.width);
+				HashMix64(settingsHash, (ULONGLONG)style.border.alpha);
+				HashMix64(settingsHash, (ULONGLONG)style.border.labelMode);
+				HashMix64(settingsHash, (ULONGLONG)style.border.labelWidth);
+				HashMix64(settingsHash, (ULONGLONG)style.border.labelPlacement);
+				HashMix64(settingsHash, (ULONGLONG)style.border.labelPercent);
+				HashMix64(settingsHash, (ULONGLONG)style.border.labelText);
+				HashMix64(settingsHash, (ULONGLONG)style.border.labelMovement);
 				HashMix64(settingsHash, (ULONGLONG)style.labelOnly);
-				HashMix64(settingsHash, (ULONGLONG)style.outside);
+				HashMix64(settingsHash, (ULONGLONG)style.border.outside);
 				HashMixWString(settingsHash, style.boxName);
+				HashMixWString(settingsHash, style.border.labelFontSpec);
 			}
 		}
 
@@ -2015,7 +2484,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			HashMix64(sceneHash, (ULONGLONG)(style.labelOnly ? 1ULL : 0ULL));
 			if (style.enabled)
 			{
-				bool insideMaximizedOrArranged = IsBorderInsideMaximizedOrArranged(m, wnd.pBox, wnd.hWnd, style.outside, style.labelMode);
+				bool insideMaximizedOrArranged = IsBorderInsideMaximizedOrArranged(m, wnd.pBox, wnd.hWnd, style.border.outside, style.border.labelMode);
 				HashMix64(sceneHash, (ULONGLONG)(insideMaximizedOrArranged ? 1ULL : 0ULL));
 				bool coverForAffinity = IsCoverBoxedWindowsEnabled(m, wnd.pBox, nowEnum);
 				bool applyCaptureAffinity = wnd.pBox->GetBool("HideBordersFromCapture", coverForAffinity, true);
@@ -2094,9 +2563,9 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			bool coverForAffinity = IsCoverBoxedWindowsEnabled(m, wnd.pBox, nowEnum);
 			bool applyCaptureAffinity = wnd.pBox->GetBool("HideBordersFromCapture", coverForAffinity, true);
 			bool excludeTaskbar = wnd.pBox->GetBool("BorderExcludeTaskbar", globalBorderExcludeTaskbar);
-			bool insideMaximizedOrArranged = IsBorderInsideMaximizedOrArranged(m, wnd.pBox, wnd.hWnd, style.outside, style.labelMode);
-			bool effectiveOutside = style.outside && !insideMaximizedOrArranged;
-			int effectiveLabelMode = insideMaximizedOrArranged && style.labelMode != 0 ? 1 : style.labelMode;
+			bool insideMaximizedOrArranged = IsBorderInsideMaximizedOrArranged(m, wnd.pBox, wnd.hWnd, style.border.outside, style.border.labelMode);
+			bool effectiveOutside = style.border.outside && !insideMaximizedOrArranged;
+			int effectiveLabelMode = insideMaximizedOrArranged && style.border.labelMode != 0 ? 1 : style.border.labelMode;
 			enabledWindowCount++;
 			activeTargets.insert(wnd.hWnd);
 			bool overlayAvailable = true;
@@ -2161,15 +2630,15 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.rect.top);
 				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.rect.right);
 				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.rect.bottom);
-				HashMix64(perWindowHash, (ULONGLONG)style.color);
-				HashMix64(perWindowHash, (ULONGLONG)style.width);
-				HashMix64(perWindowHash, (ULONGLONG)style.alpha);
+				HashMix64(perWindowHash, (ULONGLONG)style.border.color);
+				HashMix64(perWindowHash, (ULONGLONG)style.border.width);
+				HashMix64(perWindowHash, (ULONGLONG)style.border.alpha);
 				HashMix64(perWindowHash, (ULONGLONG)effectiveLabelMode);
-				HashMix64(perWindowHash, (ULONGLONG)style.labelWidth);
-				HashMix64(perWindowHash, (ULONGLONG)style.labelPlacement);
-				HashMix64(perWindowHash, (ULONGLONG)style.labelPercent);
-				HashMix64(perWindowHash, (ULONGLONG)style.labelText);
-				HashMix64(perWindowHash, (ULONGLONG)style.labelAdaptive);
+				HashMix64(perWindowHash, (ULONGLONG)style.border.labelWidth);
+				HashMix64(perWindowHash, (ULONGLONG)style.border.labelPlacement);
+				HashMix64(perWindowHash, (ULONGLONG)style.border.labelPercent);
+				HashMix64(perWindowHash, (ULONGLONG)style.border.labelText);
+				HashMix64(perWindowHash, (ULONGLONG)style.border.labelMovement);
 				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.monitorInfo.rcMonitor.left);
 				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.monitorInfo.rcMonitor.top);
 				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.monitorInfo.rcMonitor.right);
@@ -2181,20 +2650,22 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				HashMix64(perWindowHash, (ULONGLONG)(style.labelOnly ? 1ULL : 0ULL));
 				HashMix64(perWindowHash, (ULONGLONG)(effectiveOutside ? 1ULL : 0ULL));
 				HashMixWString(perWindowHash, style.boxName);
+				HashMixWString(perWindowHash, style.border.labelFontSpec);
 				HashMix64(perWindowHash, rollingCoverageHash);
 				HashMix64(perWindowHash, (ULONGLONG)((wnd.exStyle & WS_EX_TOPMOST) ? 1ULL : 0ULL)); // force rebuild when topmost changes
 				HashMix64(perWindowHash, (ULONGLONG)(applyCaptureAffinity ? 1ULL : 0ULL)); // cover state change invalidates skip-rebuild
 				HashMix64(perWindowHash, (ULONGLONG)(excludeTaskbar ? 1ULL : 0ULL)); // per-box taskbar exclusion setting
 
-				bool fontDirty = (bwnd.boxName != style.boxName || bwnd.labelMode != effectiveLabelMode || bwnd.labelBorderWidth != style.labelWidth || bwnd.labelPlacement != style.labelPlacement || bwnd.labelText != style.labelText);
+				bool fontDirty = (bwnd.boxName != style.boxName || bwnd.labelMode != effectiveLabelMode || bwnd.labelBorderWidth != style.border.labelWidth || bwnd.labelPlacement != style.border.labelPlacement || bwnd.labelText != style.border.labelText || bwnd.labelFontSpec != style.border.labelFontSpec);
 				bwnd.boxName = style.boxName;
 				bwnd.labelMode = effectiveLabelMode;
-				bwnd.labelPlacement = style.labelPlacement;
-				bwnd.labelPercent = style.labelPercent;
-				bwnd.labelText = style.labelText;
-				bwnd.labelAdaptive = style.labelAdaptive;
-				bwnd.width = style.width;
-				bwnd.labelBorderWidth = style.labelWidth;
+				bwnd.labelPlacement = style.border.labelPlacement;
+				bwnd.labelPercent = style.border.labelPercent;
+				bwnd.labelText = style.border.labelText;
+				bwnd.labelMovement = style.border.labelMovement;
+				bwnd.width = style.border.width;
+				bwnd.labelBorderWidth = style.border.labelWidth;
+				bwnd.labelFontSpec = style.border.labelFontSpec;
 
 				if (fontDirty || !bwnd.labelFont)
 					UpdateBorderLabelFont(bwnd, wnd.hWnd);
@@ -2208,14 +2679,15 @@ void CBoxBorder::DrawAllSandboxedBorders()
 					// Rect normalization (desktop edge clipping + taskbar workaround).
 					RECT adjustedRect = wnd.rect;
 					if (wnd.monitorInfo.cbSize != 0)
-						adjustedRect = AdjustRectToDesktop(wnd.rect, wnd.monitorInfo, style.width);
+						adjustedRect = AdjustRectToDesktop(wnd.rect, wnd.monitorInfo, style.border.width);
 
 					RECT frameRect = adjustedRect;
 					if (effectiveOutside)
-						InflateRect(&frameRect, style.width, style.width);
+						InflateRect(&frameRect, style.border.width, style.border.width);
 					RECT boundingRect = frameRect;
 					const RECT& labelArea = excludeTaskbar && !(wnd.exStyle & WS_EX_TOPMOST) ? wnd.monitorInfo.rcWork : wnd.monitorInfo.rcMonitor;
-					RECT labelRectScr = CalculateLabelRect(frameRect, style.labelOnly ? 0 : style.width, bwnd, labelArea);
+					EBorderLabelPlacement renderedPlacement;
+					RECT labelRectScr = CalculateLabelRect(frameRect, style.labelOnly ? 0 : style.border.width, GetLabelGeometryInputs(bwnd), labelArea, renderedPlacement);
 					if (!IsRectEmpty(&labelRectScr))
 						UnionRect(&boundingRect, &frameRect, &labelRectScr);
 
@@ -2247,7 +2719,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 						// Border frame contribution (disabled in label-only mode), clipped by coverage above.
 						if (!style.labelOnly)
 						{
-							HRGN hrgnFrame = CreateBorderRegion(&frameRect, style.width);
+							HRGN hrgnFrame = CreateBorderRegion(&frameRect, style.border.width);
 							if (hrgnFrame)
 							{
 								if (CombineRgn(hrgnFrame, hrgnFrame, hrgnEffective, RGN_DIFF) == ERROR)
@@ -2296,13 +2768,13 @@ void CBoxBorder::DrawAllSandboxedBorders()
 							}
 						}
 
-						if (bwnd.color != style.color)
-							bwnd.color = style.color;
+						if (bwnd.color != style.border.color)
+							bwnd.color = style.border.color;
 
-						if (bwnd.alpha != style.alpha)
+						if (bwnd.alpha != style.border.alpha)
 						{
-							SetLayeredWindowAttributes(bwnd.hWnd, 0, style.alpha, LWA_ALPHA);
-							bwnd.alpha = style.alpha;
+							SetLayeredWindowAttributes(bwnd.hWnd, 0, style.border.alpha, LWA_ALPHA);
+							bwnd.alpha = style.border.alpha;
 						}
 
 						if (rgnFailed || !hasDrawableContent)
@@ -2312,10 +2784,15 @@ void CBoxBorder::DrawAllSandboxedBorders()
 							bwnd.labelRects.clear();
 							bwnd.sceneHash = perWindowHash;
 						}
+						else if (!SetWindowRgn(bwnd.hWnd, hrgnOverlay, FALSE))
+						{
+							DeleteObject(hrgnOverlay);
+						}
 						else
 						{
-							if (!SetWindowRgn(bwnd.hWnd, hrgnOverlay, FALSE))
-								DeleteObject(hrgnOverlay);
+							bool labelRectsChanged = !RectVectorEquals(bwnd.labelRects, newLabelRects);
+							bwnd.labelRects = newLabelRects;
+							bwnd.labelRenderPlacement = renderedPlacement;
 							ApplyCaptureExclusionAffinity(bwnd.hWnd, applyCaptureAffinity);
 							bwnd.affinityEnabled = applyCaptureAffinity;
 
@@ -2355,11 +2832,9 @@ void CBoxBorder::DrawAllSandboxedBorders()
 									swpFlags);
 							}
 
-							bool labelRectsChanged = !RectVectorEquals(bwnd.labelRects, newLabelRects);
 							if (labelRectsChanged || !bwnd.visible || !skipRebuild)
 								InvalidateRect(bwnd.hWnd, NULL, FALSE);
 
-							bwnd.labelRects = newLabelRects;
 							bwnd.visible = true;
 							bwnd.sceneHash = perWindowHash;
 						}
@@ -2452,15 +2927,8 @@ bool CBoxBorder::CheckGlobalAllBordersMode()
 
 		checkedBoxes.insert(pBox);
 
-		COLORREF color;
-		int width, alpha, labelMode, labelWidth, labelPercent;
-		EBorderLabelPlacement labelPlacement;
-		EBorderLabelText labelText;
-		bool labelAdaptive;
-		bool outside;
-		EBorderMode mode;
-
-		if (GetBoxBorderSettings(pBox, color, width, alpha, mode, labelMode, labelWidth, outside, labelPlacement, labelPercent, labelText, labelAdaptive) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
+		SBoxBorderSettings settings;
+		if (GetBoxBorderSettings(pBox, settings, false) && (settings.mode == eBorderAllWindows || settings.mode == eBorderAllWindowsLabelOnly))
 			return true;
 	}
 

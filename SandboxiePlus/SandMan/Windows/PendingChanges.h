@@ -202,6 +202,13 @@ public:
 			ClearHighlights(pExcludedTree);
 	}
 
+	void CaptureValueBaseline(QAbstractSpinBox* pSpinBox)
+	{
+		if (!pSpinBox || IsValueExcluded(pSpinBox)) return;
+		SetValueHighlight(pSpinBox, false);
+		pSpinBox->setProperty(ValueBaselineProperty, SpinBoxValue(pSpinBox));
+	}
+
 	void CaptureValueBaselines()
 	{
 		foreach(QComboBox* pCombo, m_pRoot->findChildren<QComboBox*>()) {
@@ -241,8 +248,7 @@ public:
 		foreach(QAbstractSpinBox* pSpinBox, m_pRoot->findChildren<QAbstractSpinBox*>()) {
 			if (IsValueExcluded(pSpinBox))
 				continue;
-			SetValueHighlight(pSpinBox, false);
-			pSpinBox->setProperty(ValueBaselineProperty, SpinBoxValue(pSpinBox));
+			CaptureValueBaseline(pSpinBox);
 			if (!pSpinBox->property(ValueConnectionProperty).toBool()) {
 				pSpinBox->setProperty(ValueConnectionProperty, true);
 				if (QSpinBox* pSpin = qobject_cast<QSpinBox*>(pSpinBox))

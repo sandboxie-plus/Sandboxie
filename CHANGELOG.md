@@ -17,8 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - switched x64 build to qt 6.8.4
-
-
+- changed pending-change tracking to support individually applied numeric fields without clearing unrelated pending highlights
 
 
 

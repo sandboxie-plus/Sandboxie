@@ -19,6 +19,8 @@
 #include "stdafx.h"
 #include "BoxBorder.h"
 #include "../SbieAPI.h"
+#include <QTextBoundaryFinder>
+#include <climits>
 
 #include <wtypes.h>
 #include <string>
@@ -45,6 +47,9 @@ typedef BOOL(WINAPI *P_IsWindowArranged)(HWND hWnd);
 #define WDA_EXCLUDEFROMCAPTURE 0x00000011
 #endif
 
+enum EBorderLabelPlacement { eLabelTop, eLabelBottom, eLabelLeft, eLabelRight };
+enum EBorderLabelText { eLabelStacked, eLabelRotated, eLabelMirrored };
+
 // Structure to hold border window data (used for both main and per-box borders)
 struct SBoxBorderWnd
 {
@@ -56,7 +61,16 @@ struct SBoxBorderWnd
 	bool visible;
 	std::wstring boxName;
 	HFONT labelFont;
-	int labelMode; // 0=disabled, -1=outside (above border), 1=inside (below border line)
+	int labelMode; // 0=disabled, -1=outside, 1=inside the selected edge
+	EBorderLabelPlacement labelPlacement;
+	int labelPercent;
+	EBorderLabelText labelText;
+	bool labelAdaptive;
+	std::vector<std::wstring> labelRows;
+	int labelRowHeight;
+	int labelRowPadding;
+	RECT labelMonitorRect;
+	bool excludeTaskbar;
 	int labelWidth;
 	int labelHeight;
 	int labelPadding;
@@ -230,6 +244,15 @@ static void InitializeBorderWindowData(SBoxBorderWnd& bwnd)
 	bwnd.boxName.clear();
 	bwnd.labelFont = NULL;
 	bwnd.labelMode = 0;
+	bwnd.labelPlacement = eLabelTop;
+	bwnd.labelPercent = 50;
+	bwnd.labelText = eLabelStacked;
+	bwnd.labelAdaptive = true;
+	bwnd.labelRows.clear();
+	bwnd.labelRowHeight = 0;
+	bwnd.labelRowPadding = 2;
+	SetRectEmpty(&bwnd.labelMonitorRect);
+	bwnd.excludeTaskbar = true;
 	bwnd.labelWidth = 0;
 	bwnd.labelHeight = 0;
 	bwnd.labelPadding = 8;
@@ -290,47 +313,66 @@ static void RemoveAllModeOverlayForTarget(SBoxBorder* m, HWND targetWnd)
 	m->AllBorderWnds.erase(it);
 }
 
-// Calculates centered label rect for a window, clamped to border width
-// windowRect: the window rectangle (can be in any coordinate system)
-// borderWidth: width of the border
-// labelWidth, labelHeight: dimensions of the label
-// labelMode: -1=outside (above), 1=inside (below top border)
-// Returns: label rect in same coordinate system as windowRect
-static RECT CalculateLabelRect(const RECT& windowRect, int borderWidth, int labelWidth, int labelHeight, int labelMode)
+// Position along the usable edge; adaptive labels fall inward at the available area.
+static RECT CalculateLabelRect(const RECT& windowRect, int borderWidth, const SBoxBorderWnd& bwnd, const RECT& monitorRect)
 {
-	int winWidth = windowRect.right - windowRect.left;
-
-	// Calculate centered horizontal position, clamped to available space
-	int availLeft  = windowRect.left  + borderWidth;
-	int availRight = windowRect.right - borderWidth;
-
-	// Window narrower than 2*borderWidth: no room for a label.
-	if (availLeft >= availRight)
-		return { windowRect.left, windowRect.top, windowRect.left, windowRect.top }; // empty rect
-
-	int labelLeft = windowRect.left + (winWidth - labelWidth) / 2;
-	if (labelLeft < availLeft)
-		labelLeft = availLeft;
-	int labelRight = labelLeft + labelWidth;
-	if (labelRight > availRight) {
-		labelRight = availRight;
-		// Pull left back to preserve full label width when possible
-		labelLeft = labelRight - labelWidth;
-		if (labelLeft < availLeft)
-			labelLeft = availLeft; // window too narrow; clip both sides
+	RECT empty = { windowRect.left, windowRect.top, windowRect.left, windowRect.top };
+	if (!bwnd.labelMode || bwnd.labelWidth <= 0 || bwnd.labelHeight <= 0)
+		return empty;
+	bool vertical = bwnd.labelPlacement == eLabelLeft || bwnd.labelPlacement == eLabelRight;
+	auto place = [&](const RECT& anchor, int mode) -> RECT
+	{
+		int available = (vertical ? anchor.bottom - anchor.top : anchor.right - anchor.left) - borderWidth * 2;
+		if (available <= 0)
+			return empty;
+		int width = bwnd.labelWidth;
+		int height = bwnd.labelHeight;
+		if (vertical) {
+			if (bwnd.labelText == eLabelStacked) {
+				int padding = bwnd.labelRowPadding * 2;
+				if (bwnd.labelRowHeight <= 0 || available < bwnd.labelRowHeight + padding)
+					return empty;
+				height = qMin(height, ((available - padding) / bwnd.labelRowHeight) * bwnd.labelRowHeight + padding);
+			} else {
+				height = qMin(height, available);
+			}
+			if (mode != -1)
+				width = qMin(width, qMax(0, int(anchor.right - anchor.left) - borderWidth * 2));
+		} else {
+			width = qMin(width, available);
+		}
+		int travel = available - (vertical ? height : width);
+		int offset = borderWidth + int((LONGLONG)travel * bwnd.labelPercent / 100);
+		int left, top;
+		switch (bwnd.labelPlacement) {
+		case eLabelBottom:
+			left = anchor.left + offset;
+			top = mode == -1 ? anchor.bottom : anchor.bottom - borderWidth - height;
+			break;
+		case eLabelLeft:
+			left = mode == -1 ? anchor.left - width : anchor.left + borderWidth;
+			top = anchor.top + offset;
+			break;
+		case eLabelRight:
+			left = mode == -1 ? anchor.right : anchor.right - borderWidth - width;
+			top = anchor.top + offset;
+			break;
+		default:
+			left = anchor.left + offset;
+			top = mode == -1 ? anchor.top - height : anchor.top + borderWidth;
+			break;
+		}
+		return { left, top, left + width, top + height };
+	};
+	RECT label = place(windowRect, bwnd.labelMode);
+	if (bwnd.labelAdaptive && !IsRectEmpty(&label) && !IsRectEmpty(&monitorRect) &&
+		(label.left < monitorRect.left || label.top < monitorRect.top ||
+		 label.right > monitorRect.right || label.bottom > monitorRect.bottom)) {
+		RECT visibleAnchor;
+		if (IntersectRect(&visibleAnchor, &windowRect, &monitorRect))
+			label = place(visibleAnchor, 1);
 	}
-
-	// Calculate vertical position based on label mode
-	int labelTop, labelBottom;
-	if (labelMode == -1) { // outside (above window)
-		labelTop = windowRect.top - labelHeight;
-		labelBottom = windowRect.top;
-	} else { // inside (below top border)
-		labelTop = windowRect.top + borderWidth;
-		labelBottom = labelTop + labelHeight;
-	}
-
-	return { labelLeft, labelTop, labelRight, labelBottom };
+	return label;
 }
 
 // Creates/updates the label font and calculates label dimensions for a border window
@@ -341,6 +383,9 @@ static void UpdateBorderLabelFont(SBoxBorderWnd& bwnd, HWND hWndForDC = NULL)
 		DeleteObject(bwnd.labelFont);
 		bwnd.labelFont = NULL;
 	}
+	bwnd.labelRows.clear();
+	bwnd.labelRowHeight = 0;
+	bwnd.labelRowPadding = 2;
 
 	// Skip if labels are disabled or no box name
 	if (bwnd.labelMode == 0 || bwnd.boxName.empty()) {
@@ -378,13 +423,42 @@ static void UpdateBorderLabelFont(SBoxBorderWnd& bwnd, HWND hWndForDC = NULL)
 
 	// Calculate text dimensions
 	HFONT hOldFont = (HFONT)SelectObject(hdc, bwnd.labelFont);
-	SIZE textSize;
-	GetTextExtentPoint32W(hdc, bwnd.boxName.c_str(), (int)bwnd.boxName.length(), &textSize);
+	SIZE textSize = {};
+	bool vertical = bwnd.labelPlacement == eLabelLeft || bwnd.labelPlacement == eLabelRight;
+	if (vertical && bwnd.labelText == eLabelStacked) {
+		QString text = QString::fromStdWString(bwnd.boxName);
+		QTextBoundaryFinder finder(QTextBoundaryFinder::Grapheme, text);
+		TEXTMETRICW metrics = {};
+		GetTextMetricsW(hdc, &metrics);
+		int rowGap = qMax(1L, metrics.tmHeight / 8);
+		bwnd.labelRowHeight = qMax(1L, metrics.tmHeight) + rowGap;
+		bwnd.labelRowPadding = qMax(2, rowGap);
+		int start = 0;
+		for (int end = finder.toNextBoundary(); end != -1; start = end, end = finder.toNextBoundary()) {
+			std::wstring row = text.mid(start, end - start).toStdWString();
+			if (row == L"(" || row == L")") {
+				WCHAR verticalParenthesis = row == L"(" ? L'\xFE35' : L'\xFE36';
+				WORD glyph = 0xffff;
+				// Substitute only the cached display row when the selected font supports it.
+				if (GetGlyphIndicesW(hdc, &verticalParenthesis, 1, &glyph, GGI_MARK_NONEXISTING_GLYPHS) == 1 && glyph != 0xffff)
+					row.assign(1, verticalParenthesis);
+			}
+			SIZE rowSize = {};
+			GetTextExtentPoint32W(hdc, row.c_str(), (int)row.length(), &rowSize);
+			textSize.cx = qMax(textSize.cx, rowSize.cx);
+			bwnd.labelRows.push_back(row);
+		}
+		textSize.cy = (LONG)qMin<LONGLONG>(INT_MAX - bwnd.labelRowPadding * 2, (LONGLONG)bwnd.labelRows.size() * bwnd.labelRowHeight);
+	} else {
+		GetTextExtentPoint32W(hdc, bwnd.boxName.c_str(), (int)bwnd.boxName.length(), &textSize);
+	}
 	SelectObject(hdc, hOldFont);
 	ReleaseDC(hWndForDC, hdc);
 
 	bwnd.labelWidth = textSize.cx + bwnd.labelPadding * 2;
-	bwnd.labelHeight = textSize.cy + 4;
+	bwnd.labelHeight = textSize.cy + (vertical && bwnd.labelText == eLabelStacked ? bwnd.labelRowPadding * 2 : 4);
+	if (vertical && bwnd.labelText != eLabelStacked)
+		std::swap(bwnd.labelWidth, bwnd.labelHeight);
 }
 
 static SBoxBorderWnd* GetBorderWndByHwnd(SBoxBorder* m, HWND hWnd)
@@ -639,6 +713,16 @@ LRESULT CALLBACK CBoxBorder__WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM
 		return DefWindowProc(hwnd, uMsg, wParam, lParam);
 
 	SBoxBorder* m = This->GetBorderData();
+	if (uMsg == WM_DISPLAYCHANGE || uMsg == WM_DPICHANGED || uMsg == WM_SETTINGCHANGE) {
+		m->ActiveWnd = NULL;
+		SetRectEmpty(&m->MainBorder.labelMonitorRect);
+		m->LastAllBordersSceneHash = 0;
+		m->LastAllBordersEnumTick = 0;
+		for (auto& entry : m->AllBorderWnds) {
+			entry.second.sceneHash = 0;
+			SetRectEmpty(&entry.second.labelMonitorRect);
+		}
+	}
 
 	// Suppress the default system erase; all painting is done atomically in WM_PAINT.
 	if (uMsg == WM_ERASEBKGND)
@@ -688,7 +772,33 @@ LRESULT CALLBACK CBoxBorder__WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM
 						SetBkMode(hdcMem, TRANSPARENT);
 						SetTextColor(hdcMem, textColor);
 						RECT rc = labelRect;
-						DrawTextW(hdcMem, pBorder->boxName.c_str(), -1, &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+						bool vertical = pBorder->labelPlacement == eLabelLeft || pBorder->labelPlacement == eLabelRight;
+						if (vertical && pBorder->labelText != eLabelStacked) {
+							int saved = SaveDC(hdcMem);
+							if (saved && SetGraphicsMode(hdcMem, GM_ADVANCED)) {
+								bool upward = pBorder->labelText == eLabelMirrored;
+								XFORM transform = upward ?
+									XFORM{ 0, -1, 1, 0, (FLOAT)rc.left, (FLOAT)rc.bottom } :
+									XFORM{ 0, 1, -1, 0, (FLOAT)rc.right, (FLOAT)rc.top };
+								if (SetWorldTransform(hdcMem, &transform)) {
+									RECT logical = { 0, 0, rc.bottom - rc.top, rc.right - rc.left };
+									DrawTextW(hdcMem, pBorder->boxName.c_str(), -1, &logical, DT_CENTER | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX);
+								}
+							}
+							if (saved)
+								RestoreDC(hdcMem, saved);
+						} else if (vertical) {
+							rc.top += pBorder->labelRowPadding;
+							for (const std::wstring& row : pBorder->labelRows) {
+								if (rc.top + pBorder->labelRowHeight > labelRect.bottom - pBorder->labelRowPadding)
+									break;
+								rc.bottom = rc.top + pBorder->labelRowHeight;
+								DrawTextW(hdcMem, row.c_str(), (int)row.length(), &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX);
+								rc.top = rc.bottom;
+							}
+						} else {
+							DrawTextW(hdcMem, pBorder->boxName.c_str(), -1, &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+						}
 						SelectObject(hdcMem, hOldFont);
 					}
 				}
@@ -913,7 +1023,7 @@ void CBoxBorder::ThreadFunc()
 	}
 }
 
-static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, int& alpha, EBorderMode& mode, int& labelMode, int& labelWidth, bool& outside)
+static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, int& alpha, EBorderMode& mode, int& labelMode, int& labelWidth, bool& outside, EBorderLabelPlacement& placement, int& percent, EBorderLabelText& text, bool& adaptive)
 {
 	// Default values
 	color = RGB(255, 255, 0);
@@ -923,9 +1033,30 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 	labelMode = 1; // Default to inside
 	labelWidth = 0;
 	outside = false;
+	placement = eLabelTop;
+	percent = 50;
+	text = eLabelStacked;
+	adaptive = true;
 
 	if (!pBox)
 		return false;
+
+	QStringList position = pBox->GetText("BorderLabelPosition", "top,50").split(",");
+	if (position.size() >= 2 && position.size() <= 4) {
+		const QStringList edges = { "top", "bottom", "left", "right" };
+		const QStringList texts = { "stacked", "rotated", "mirrored" };
+		int edge = edges.indexOf(position[0].trimmed().toLower());
+		int style = position.size() >= 3 ? texts.indexOf(position[2].trimmed().toLower()) : 0;
+		QString movement = position.size() >= 4 ? position[3].trimmed().toLower() : "adaptive";
+		bool valid = false;
+		int value = position[1].trimmed().toInt(&valid);
+		if (edge >= 0 && valid && value >= 0 && value <= 100 && style >= 0 && (movement == "fixed" || movement == "adaptive")) {
+			placement = (EBorderLabelPlacement)edge;
+			percent = value;
+			text = (EBorderLabelText)style;
+			adaptive = movement == "adaptive";
+		}
+	}
 
 	QStringList BorderCfg = pBox->GetText("BorderColor").split(",");
 	if (BorderCfg.first().left(1) != L'#')
@@ -1222,11 +1353,14 @@ void CBoxBorder::TimerProc()
 
 	// Get border settings for the focused window's box
 	COLORREF boxColor;
-	int boxWidth, boxAlpha, boxLabelMode, boxLabelWidth;
+	int boxWidth = 6, boxAlpha = 192, boxLabelMode = 1, boxLabelWidth = 6, boxLabelPercent = 50;
+	EBorderLabelPlacement boxLabelPlacement = eLabelTop;
+	EBorderLabelText boxLabelText = eLabelStacked;
+	bool boxLabelAdaptive = true;
 	EBorderMode boxMode = eBorderOff;
 	bool boxOutside = false;
 	if (pProcessBox)
-		GetBoxBorderSettings(pProcessBox.data(), boxColor, boxWidth, boxAlpha, boxMode, boxLabelMode, boxLabelWidth, boxOutside);
+		GetBoxBorderSettings(pProcessBox.data(), boxColor, boxWidth, boxAlpha, boxMode, boxLabelMode, boxLabelWidth, boxOutside, boxLabelPlacement, boxLabelPercent, boxLabelText, boxLabelAdaptive);
 	bool insideMaximizedOrArranged = IsBorderInsideMaximizedOrArranged(m, pProcessBox.data(), hWnd, boxOutside, boxLabelMode);
 	if (insideMaximizedOrArranged) {
 		boxOutside = false;
@@ -1241,11 +1375,18 @@ void CBoxBorder::TimerProc()
 		boxMode != eBorderAllWindows && boxMode != eBorderAllWindowsLabelOnly;
 	std::wstring boxDisplayName = usesFocusedBorder ? GetBoxDisplayName(pProcessBox.data()) : std::wstring();
 	bool displayNameChanged = usesFocusedBorder && m->MainBorder.boxName != boxDisplayName;
-	if (m->pCurrentBox != pProcessBox.data() || m->CachedFocusBoxMode != boxMode || outsideChanged || labelModeChanged || displayNameChanged)
+	bool globalExcludeTaskbar = m_Api->GetGlobalSettings()->GetBool("BorderExcludeTaskbar", true);
+	bool excludeTaskbar = pProcessBox ? pProcessBox->GetBool("BorderExcludeTaskbar", globalExcludeTaskbar) : globalExcludeTaskbar;
+	bool labelPositionChanged = usesFocusedBorder && (m->MainBorder.labelPlacement != boxLabelPlacement || m->MainBorder.labelPercent != boxLabelPercent ||
+		m->MainBorder.labelText != boxLabelText || m->MainBorder.labelAdaptive != boxLabelAdaptive);
+	bool visualChanged = usesFocusedBorder && (m->MainBorder.color != boxColor || m->MainBorder.width != boxWidth ||
+		m->MainBorder.alpha != boxAlpha || m->MainBorder.labelBorderWidth != boxLabelWidth);
+	if (m->pCurrentBox != pProcessBox.data() || m->CachedFocusBoxMode != boxMode || outsideChanged || labelModeChanged || displayNameChanged || labelPositionChanged || visualChanged || m->MainBorder.excludeTaskbar != excludeTaskbar)
 	{
 		m->pCurrentBox = pProcessBox.data();
 		m->CachedFocusBoxMode = boxMode;
 		m->MainBorder.outside = boxOutside;
+		m->MainBorder.excludeTaskbar = excludeTaskbar;
 		// Force full re-evaluation: reset cached position so the border is redrawn
 		m->ActiveWnd = NULL;
 		m->ActivePid = 0;
@@ -1273,6 +1414,10 @@ void CBoxBorder::TimerProc()
 			m->MainBorder.labelBorderWidth = boxLabelWidth;
 			m->MainBorder.alpha = boxAlpha;
 			m->MainBorder.labelMode = boxLabelMode;
+			m->MainBorder.labelPlacement = boxLabelPlacement;
+			m->MainBorder.labelPercent = boxLabelPercent;
+			m->MainBorder.labelText = boxLabelText;
+			m->MainBorder.labelAdaptive = boxLabelAdaptive;
 
 			// Apply alpha transparency setting
 			SetLayeredWindowAttributes(m->MainBorder.hWnd, 0, m->MainBorder.alpha, LWA_ALPHA);
@@ -1346,6 +1491,10 @@ void CBoxBorder::TimerProc()
 			HideBorderWindow(m->MainBorder);
 			return;
 		}
+		if (!RectEquals(m->MainBorder.labelMonitorRect, Monitor.rcMonitor)) {
+			UpdateBorderLabelFont(m->MainBorder, hWnd);
+			m->MainBorder.labelMonitorRect = Monitor.rcMonitor;
+		}
 
 		if (m->BorderMode == eBorderTitleOnly || m->BorderMode == eBorderTitleOnlyLabelOnly) {
 			const RECT* Desktop = &Monitor.rcMonitor;
@@ -1358,24 +1507,20 @@ void CBoxBorder::TimerProc()
 
 		// Use shared helper for edge clipping and taskbar adjustment
 		RECT adjustedRect = AdjustRectToDesktop(rect, Monitor, m->MainBorder.width);
-		int rectWidth = adjustedRect.right - adjustedRect.left;
-		int rectHeight = adjustedRect.bottom - adjustedRect.top;
-
-		// Calculate window rect (may extend upward for outside label mode)
+		// Include the actual label on any edge in the overlay bounds.
 		RECT frameRect = adjustedRect;
-		int labelOffset = 0;
 		if (m->MainBorder.outside) {
 			InflateRect(&frameRect, m->MainBorder.width, m->MainBorder.width);
 		}
+		bool isLabelOnlyMode = (m->BorderMode == eBorderLabelOnly || m->BorderMode == eBorderTitleOnlyLabelOnly);
+		const RECT& labelArea = excludeTaskbar && !(ExStyle & WS_EX_TOPMOST) ? Monitor.rcWork : Monitor.rcMonitor;
+		RECT labelRectScr = CalculateLabelRect(frameRect, isLabelOnlyMode ? 0 : m->MainBorder.width, m->MainBorder, labelArea);
 		RECT windowRect = frameRect;
-		if (m->MainBorder.labelMode == -1 && m->MainBorder.labelHeight > 0) {
-			windowRect.top -= m->MainBorder.labelHeight;
-			labelOffset += m->MainBorder.labelHeight;
-		}
+		if (!IsRectEmpty(&labelRectScr))
+			UnionRect(&windowRect, &frameRect, &labelRectScr);
 
 		// For label-only modes with no label configured, nothing to show
-		bool isLabelOnlyMode = (m->BorderMode == eBorderLabelOnly || m->BorderMode == eBorderTitleOnlyLabelOnly);
-		if (isLabelOnlyMode && (m->MainBorder.labelMode == 0 || m->MainBorder.labelHeight <= 0))
+		if (isLabelOnlyMode && IsRectEmpty(&labelRectScr))
 		{
 			HideBorderWindow(m->MainBorder);
 			return;
@@ -1386,10 +1531,9 @@ void CBoxBorder::TimerProc()
 		if (isLabelOnlyMode) {
 			hrgnBorder = CreateRectRgn(0, 0, 0, 0); // No frame; only the label rect will be added below
 		} else {
-			int frameWidth = rectWidth + (m->MainBorder.outside ? m->MainBorder.width * 2 : 0);
-			int frameHeight = rectHeight + (m->MainBorder.outside ? m->MainBorder.width * 2 : 0);
-			RECT frameRect = { 0, labelOffset, frameWidth, labelOffset + frameHeight };
-			hrgnBorder = CreateBorderRegion(&frameRect, m->MainBorder.width);
+			RECT frameRectWnd = frameRect;
+			OffsetRect(&frameRectWnd, -windowRect.left, -windowRect.top);
+			hrgnBorder = CreateBorderRegion(&frameRectWnd, m->MainBorder.width);
 		}
 
 		if (!hrgnBorder)
@@ -1401,14 +1545,8 @@ void CBoxBorder::TimerProc()
 		// Add label region if enabled
 		std::vector<RECT> prevLabelRects = m->MainBorder.labelRects;
 		m->MainBorder.labelRects.clear();
-		if (m->MainBorder.labelMode != 0 && m->MainBorder.labelHeight > 0)
+		if (!IsRectEmpty(&labelRectScr))
 		{
-			// Calculate label rect in screen coordinates using shared helper
-			// In label-only modes there is no border frame, so don't offset by border width
-			int lblBorderWidth = isLabelOnlyMode ? 0 : m->MainBorder.width;
-			const RECT& labelAnchor = m->MainBorder.outside ? frameRect : adjustedRect;
-			RECT labelRectScr = CalculateLabelRect(labelAnchor, lblBorderWidth, m->MainBorder.labelWidth, m->MainBorder.labelHeight, m->MainBorder.labelMode);
-
 			// Convert to window-relative coordinates
 			RECT labelRect;
 			labelRect.left = labelRectScr.left - windowRect.left;
@@ -1439,8 +1577,6 @@ void CBoxBorder::TimerProc()
 		// Skip when the window is topmost: topmost windows sit above the taskbar, so
 		// clipping the border region would misalign it with the window edge.
 		{
-			bool globalBorderExcludeTaskbar = m_Api->GetGlobalSettings()->GetBool("BorderExcludeTaskbar", true);
-			bool excludeTaskbar = pProcessBox ? pProcessBox->GetBool("BorderExcludeTaskbar", globalBorderExcludeTaskbar) : globalBorderExcludeTaskbar;
 			if (excludeTaskbar && !(ExStyle & WS_EX_TOPMOST))
 			{
 				HRGN hrgnTaskbar = CreateRectRgn(0, 0, 0, 0);
@@ -1513,7 +1649,8 @@ void CBoxBorder::TimerProc()
 		}
 
 		bool labelRectsChanged = !RectVectorEquals(prevLabelRects, m->MainBorder.labelRects);
-		if (!m->MainBorder.visible || needSetWindowPos || labelRectsChanged)
+		// Text style can change without changing the label rectangle.
+		if (!m->MainBorder.visible || needSetWindowPos || labelRectsChanged || labelPositionChanged)
 			InvalidateRect(m->MainBorder.hWnd, NULL, FALSE);
 
 		m->MainBorder.visible = true;
@@ -1657,6 +1794,10 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		int alpha;
 		int labelMode;
 		int labelWidth;
+		EBorderLabelPlacement labelPlacement;
+		int labelPercent;
+		EBorderLabelText labelText;
+		bool labelAdaptive;
 		std::wstring boxName;
 	};
 
@@ -1818,11 +1959,15 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		style.alpha = 192;
 		style.labelMode = 1;
 		style.labelWidth = style.width;
+		style.labelPlacement = eLabelTop;
+		style.labelPercent = 50;
+		style.labelText = eLabelStacked;
+		style.labelAdaptive = true;
 
 		if (pBox)
 		{
 			EBorderMode mode = eBorderOff;
-			if (GetBoxBorderSettings(pBox, style.color, style.width, style.alpha, mode, style.labelMode, style.labelWidth, style.outside) &&
+			if (GetBoxBorderSettings(pBox, style.color, style.width, style.alpha, mode, style.labelMode, style.labelWidth, style.outside, style.labelPlacement, style.labelPercent, style.labelText, style.labelAdaptive) &&
 				(mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
 			{
 				style.enabled = true;
@@ -1835,6 +1980,10 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				HashMix64(settingsHash, (ULONGLONG)style.alpha);
 				HashMix64(settingsHash, (ULONGLONG)style.labelMode);
 				HashMix64(settingsHash, (ULONGLONG)style.labelWidth);
+				HashMix64(settingsHash, (ULONGLONG)style.labelPlacement);
+				HashMix64(settingsHash, (ULONGLONG)style.labelPercent);
+				HashMix64(settingsHash, (ULONGLONG)style.labelText);
+				HashMix64(settingsHash, (ULONGLONG)style.labelAdaptive);
 				HashMix64(settingsHash, (ULONGLONG)style.labelOnly);
 				HashMix64(settingsHash, (ULONGLONG)style.outside);
 				HashMixWString(settingsHash, style.boxName);
@@ -2017,6 +2166,18 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				HashMix64(perWindowHash, (ULONGLONG)style.alpha);
 				HashMix64(perWindowHash, (ULONGLONG)effectiveLabelMode);
 				HashMix64(perWindowHash, (ULONGLONG)style.labelWidth);
+				HashMix64(perWindowHash, (ULONGLONG)style.labelPlacement);
+				HashMix64(perWindowHash, (ULONGLONG)style.labelPercent);
+				HashMix64(perWindowHash, (ULONGLONG)style.labelText);
+				HashMix64(perWindowHash, (ULONGLONG)style.labelAdaptive);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.monitorInfo.rcMonitor.left);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.monitorInfo.rcMonitor.top);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.monitorInfo.rcMonitor.right);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.monitorInfo.rcMonitor.bottom);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.monitorInfo.rcWork.left);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.monitorInfo.rcWork.top);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.monitorInfo.rcWork.right);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.monitorInfo.rcWork.bottom);
 				HashMix64(perWindowHash, (ULONGLONG)(style.labelOnly ? 1ULL : 0ULL));
 				HashMix64(perWindowHash, (ULONGLONG)(effectiveOutside ? 1ULL : 0ULL));
 				HashMixWString(perWindowHash, style.boxName);
@@ -2025,14 +2186,21 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				HashMix64(perWindowHash, (ULONGLONG)(applyCaptureAffinity ? 1ULL : 0ULL)); // cover state change invalidates skip-rebuild
 				HashMix64(perWindowHash, (ULONGLONG)(excludeTaskbar ? 1ULL : 0ULL)); // per-box taskbar exclusion setting
 
-				bool fontDirty = (bwnd.boxName != style.boxName || bwnd.labelMode != effectiveLabelMode || bwnd.labelBorderWidth != style.labelWidth);
+				bool fontDirty = (bwnd.boxName != style.boxName || bwnd.labelMode != effectiveLabelMode || bwnd.labelBorderWidth != style.labelWidth || bwnd.labelPlacement != style.labelPlacement || bwnd.labelText != style.labelText);
 				bwnd.boxName = style.boxName;
 				bwnd.labelMode = effectiveLabelMode;
+				bwnd.labelPlacement = style.labelPlacement;
+				bwnd.labelPercent = style.labelPercent;
+				bwnd.labelText = style.labelText;
+				bwnd.labelAdaptive = style.labelAdaptive;
 				bwnd.width = style.width;
 				bwnd.labelBorderWidth = style.labelWidth;
 
 				if (fontDirty || !bwnd.labelFont)
-					UpdateBorderLabelFont(bwnd, bwnd.hWnd);
+					UpdateBorderLabelFont(bwnd, wnd.hWnd);
+				else if (!RectEquals(bwnd.labelMonitorRect, wnd.monitorInfo.rcMonitor))
+					UpdateBorderLabelFont(bwnd, wnd.hWnd);
+				bwnd.labelMonitorRect = wnd.monitorInfo.rcMonitor;
 
 				bool skipRebuild = (bwnd.sceneHash == perWindowHash) && bwnd.visible;
 				if (!skipRebuild)
@@ -2046,8 +2214,10 @@ void CBoxBorder::DrawAllSandboxedBorders()
 					if (effectiveOutside)
 						InflateRect(&frameRect, style.width, style.width);
 					RECT boundingRect = frameRect;
-					if (bwnd.labelMode == -1 && bwnd.labelHeight > 0)
-						boundingRect.top -= bwnd.labelHeight;
+					const RECT& labelArea = excludeTaskbar && !(wnd.exStyle & WS_EX_TOPMOST) ? wnd.monitorInfo.rcWork : wnd.monitorInfo.rcMonitor;
+					RECT labelRectScr = CalculateLabelRect(frameRect, style.labelOnly ? 0 : style.width, bwnd, labelArea);
+					if (!IsRectEmpty(&labelRectScr))
+						UnionRect(&boundingRect, &frameRect, &labelRectScr);
 
 					// Build effective clip region: hrgnCovered plus taskbar areas if BorderExcludeTaskbar is set for this box.
 					HRGN hrgnEffective = hrgnCovered;
@@ -2094,14 +2264,10 @@ void CBoxBorder::DrawAllSandboxedBorders()
 
 						std::vector<RECT> newLabelRects;
 						bool hasDrawableContent = !style.labelOnly && !rgnFailed;
-						if (!rgnFailed && bwnd.labelMode != 0 && bwnd.labelHeight > 0 && bwnd.labelFont)
+						if (!rgnFailed && !IsRectEmpty(&labelRectScr) && bwnd.labelFont)
 						{
 							hasDrawableContent = true;
 							// One label per overlay (since this is now per-target-window mode).
-							int lblBorderWidth = style.labelOnly ? 0 : style.width;
-							const RECT& labelAnchor = effectiveOutside ? frameRect : adjustedRect;
-							RECT labelRectScr = CalculateLabelRect(labelAnchor, lblBorderWidth, bwnd.labelWidth, bwnd.labelHeight, bwnd.labelMode);
-
 							HRGN hrgnLabel = CreateRectRgn(labelRectScr.left, labelRectScr.top, labelRectScr.right, labelRectScr.bottom);
 							if (hrgnLabel)
 							{
@@ -2287,11 +2453,14 @@ bool CBoxBorder::CheckGlobalAllBordersMode()
 		checkedBoxes.insert(pBox);
 
 		COLORREF color;
-		int width, alpha, labelMode, labelWidth;
+		int width, alpha, labelMode, labelWidth, labelPercent;
+		EBorderLabelPlacement labelPlacement;
+		EBorderLabelText labelText;
+		bool labelAdaptive;
 		bool outside;
 		EBorderMode mode;
 
-		if (GetBoxBorderSettings(pBox, color, width, alpha, mode, labelMode, labelWidth, outside) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
+		if (GetBoxBorderSettings(pBox, color, width, alpha, mode, labelMode, labelWidth, outside, labelPlacement, labelPercent, labelText, labelAdaptive) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
 			return true;
 	}
 

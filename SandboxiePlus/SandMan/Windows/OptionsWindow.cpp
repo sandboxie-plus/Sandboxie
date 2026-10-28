@@ -209,11 +209,12 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	ui.tabsGeneral->setCurrentIndex(0);
 	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Box"));
-	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Folder"));
-	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Move"));
-	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("NoAccess"));
-	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("EFence"));
-	ui.tabsGeneral->setTabIcon(5, CSandMan::GetIcon("Run"));
+	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Box"));
+	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Folder"));
+	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("Move"));
+	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("NoAccess"));
+	ui.tabsGeneral->setTabIcon(5, CSandMan::GetIcon("EFence"));
+	ui.tabsGeneral->setTabIcon(6, CSandMan::GetIcon("Run"));
 
 	ui.tabsSecurity->setCurrentIndex(0);
 	ui.tabsSecurity->setTabIcon(0, CSandMan::GetIcon("Shield7"));
@@ -301,9 +302,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->insertTab(1, pWidget, tr("File Options"));
 	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Folder"));
 
-	pTabWidget->addTab(ui.tabsGeneral->widget(1), ui.tabsGeneral->tabText(1));
+	pTabWidget->addTab(ui.tabsGeneral->widget(2), ui.tabsGeneral->tabText(2));
 	pTabWidget->setTabIcon(0, CSandMan::GetIcon("Files"));
-	pTabWidget->addTab(ui.tabsGeneral->widget(1), ui.tabsGeneral->tabText(1));
+	pTabWidget->addTab(ui.tabsGeneral->widget(2), ui.tabsGeneral->tabText(2));
 	pTabWidget->setTabIcon(1, CSandMan::GetIcon("Move"));
 	pTabWidget->addTab(ui.tabs->widget(9), ui.tabs->tabText(9));
 	pTabWidget->setTabIcon(2, CSandMan::GetIcon("Recover"));
@@ -443,6 +444,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	// Create initial highlighter and editor
 	m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, nullptr, m_IniValidationEnabled);
 	m_pCodeEdit = new CCodeEdit(m_pIniHighlighter);
+	m_pCodeEdit->SetLineNumbersVisible(theConf->GetBool("Options/ShowIniLineNumbers", true));
 	m_pCodeEdit->installEventFilter(this);
 	ui.txtIniSection->parentWidget()->layout()->replaceWidget(ui.txtIniSection, m_pCodeEdit);
 	delete ui.txtIniSection;
@@ -1010,14 +1012,15 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 					break;
 			}
 
-			// Show tooltip if it's a valid setting
-			if (CIniHighlighter::IsValidTooltipContext(currentLine.left(endPos))) {
+			const int equalsIndex = currentLine.indexOf('=');
+			// Only show setting tooltips on the key side of the line.
+			if ((equalsIndex < 0 || endPos <= equalsIndex)
+				&& CIniHighlighter::IsValidTooltipContext(currentLine.left(endPos))) {
 				// Only try to show tooltips if settings are loaded
 				if (CIniHighlighter::IsSettingsLoaded()) {
 					QString settingName = currentLine.mid(startPos, endPos - startPos);
 					if (settingName.endsWith('='))
 						settingName.chop(1);
-					const int equalsIndex = currentLine.indexOf('=');
 					const QString settingValue = equalsIndex >= 0 ? currentLine.mid(equalsIndex + 1).trimmed() : QString();
 					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, currentContext);
 					if (!tooltipText.isEmpty()) {
@@ -1303,6 +1306,9 @@ bool COptionsWindow::apply()
 		return false;
 	}
 
+	if (!ui.btnEditIni->isEnabled() && !CIniHighlighter::ValidateIniComments(m_pCodeEdit->GetCode(), this))
+		return false;
+
 	CloseINetEdit();
 	CloseNetFwEdit();
 	CloseAccessEdit();
@@ -1310,8 +1316,10 @@ bool COptionsWindow::apply()
 	CloseCopyEdit();
     CloseNetProxyEdit();
 
-	if (!ui.btnEditIni->isEnabled())
-		SaveIniSection();
+	if (!ui.btnEditIni->isEnabled()) {
+		if (!SaveIniSection())
+			return false;
+	}
 	else
 	{
 		if (m_GeneralChanged) {
@@ -1651,8 +1659,8 @@ void COptionsWindow::OnEditorSettings()
 		// - ValidateIniKeys (ui.chkValidateIniKeys)
 		// - EnableIniTooltips (ui.chkEnableTooltips)
 		// - EnableAutoCompletion (ui.chkEnableAutoCompletion)
-		// The other 4 settings (EnablePopupTooltips, EnableFuzzyMatching, AutoCompletionConsent,
-		// ShowFutureSettings)
+		// The other 5 settings (EnablePopupTooltips, EnableFuzzyMatching, AutoCompletionConsent,
+		// ShowFutureSettings, ShowIniLineNumbers)
 		// are managed by EditorSettings but don't have corresponding UI in OptionsWindow
 		
 		// Block signals while updating checkboxes to prevent toggle handlers from being called prematurely
@@ -1705,6 +1713,7 @@ void COptionsWindow::OnEditorSettings()
 		// These are managed via EditorSettings only
 		bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
 		m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
+		m_pCodeEdit->SetLineNumbersVisible(theConf->GetBool("Options/ShowIniLineNumbers", true));
 		
 		// Always update autocompletion list regardless of reset status
 		UpdateAutoCompletion();
@@ -1713,7 +1722,8 @@ void COptionsWindow::OnEditorSettings()
 
 void COptionsWindow::OnSaveIni()
 {
-	SaveIniSection();
+	if (!SaveIniSection())
+		return;
 	SetIniEdit(false);
 }
 
@@ -1753,8 +1763,12 @@ void COptionsWindow::LoadIniSection()
 	m_HoldChange = false;
 }
 
-void COptionsWindow::SaveIniSection()
+bool COptionsWindow::SaveIniSection()
 {
+	const QString Section = m_pCodeEdit->GetCode();
+	if (!CIniHighlighter::ValidateIniComments(Section, this))
+		return false;
+
 	m_ConfigDirty = true;
 
 	/*m_pBox->SetRefreshOnChange(false);
@@ -1791,9 +1805,10 @@ void COptionsWindow::SaveIniSection()
 	m_pBox->CommitIniChanges();*/
 
 	//m_pBox->GetAPI()->SbieIniSet(m_pBox->GetName(), "", ui.txtIniSection->toPlainText());
-	m_pBox->SbieIniSet(m_pBox->GetName(), "", m_pCodeEdit->GetCode());
+	m_pBox->SbieIniSet(m_pBox->GetName(), "", Section);
 
 	//LoadIniSection();
+	return true;
 }
 
 #include "OptionsAccess.cpp"

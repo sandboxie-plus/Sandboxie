@@ -88,7 +88,7 @@ _FX HANDLE *Syscall_ReplaceTargetHandle(
     RandomIndex = (ULONG)
             (((ULONG_PTR)PsGetCurrentThread() * time.LowPart) % 64);
 
-    // $Offset$ - Hard Offset Dependency
+    // $Offset$ - TlsSlots is defined in TEB within winternl.h
 #ifdef _M_ARM64
     Teb = (*((ULONG_PTR*)(__getReg(18) + 0x30)));
     TlsSlots = (ULONG_PTR *)(Teb + 0x1480);
@@ -928,19 +928,20 @@ _FX SYSCALL_ENTRY *Syscall_DuplicateHandle_3(
 
     } else if (TypeLength <= 24) {
 
+        USHORT orig_len = TypeLength;
+
         memcpy(SyscallName, "Open", 4);
-        do {
-            --TypeLength;
-            SyscallName[TypeLength + 4] = (UCHAR)TypeBuffer[TypeLength];
-        } while (TypeLength);
+        for (USHORT i = 0; i < orig_len; ++i)
+            SyscallName[i + 4] = (UCHAR)TypeBuffer[i];
+        SyscallName[orig_len + 4] = '\0';
 
         //
         // Job, SymbolicLink, Directory functions have the suffix Object
         //
 
-        if ((TypeLength == 3 && wmemcmp(TypeBuffer, _Job, 3) == 0)
-         || (TypeLength == 12 && wmemcmp(TypeBuffer, _SymLink, 12) == 0)
-         || (TypeLength == 9 && wmemcmp(TypeBuffer, _Directory, 9) == 0)){
+        if ((orig_len == 3 && wmemcmp(TypeBuffer, _Job, 3) == 0)
+         || (orig_len == 12 && wmemcmp(TypeBuffer, _SymLink, 12) == 0)
+         || (orig_len == 9 && wmemcmp(TypeBuffer, _Directory, 9) == 0)){
 
             strcat(SyscallName, "Object");
         }

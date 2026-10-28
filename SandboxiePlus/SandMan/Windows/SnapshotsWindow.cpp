@@ -94,6 +94,7 @@ void CSnapshotsWindow::closeEvent(QCloseEvent *e)
 
 void CSnapshotsWindow::Refresh()
 {
+	this->setWindowTitle(tr("%1 - Snapshots").arg(CSandMan::GetBoxDisplayName(m_pBox)));
 	OnSaveInfo();
 	UpdateSnapshots(true);
 }

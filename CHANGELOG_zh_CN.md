@@ -2,6 +2,129 @@
 本项目的所有重要更改均将记录在此文件中。
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
+## [1.19.1 / 5.74.1] - 2026-10-??
+
+### 新增
+- 内置的 INI 分区编辑器现已支持显示行号，并提供「高级编辑器设置」开关与 Ctrl+G 跳转高亮功能；复制和保存时会排除行号
+
+### 修复
+- 修复了以 `;` 开头且不含 `=` 的 INI 行被错误地当作注释高亮的问题；保存时现在会显示带行号的错误提示并建议改用 `#`，同时保留未保存的编辑内容 [#5685](https://github.com/sandboxie-plus/Sandboxie/issues/5685)
+
+
+## [1.19.0 / 5.74.0] - 2026-10-23
+
+### 修复
+- 修复了 `Api_CopyStringFromUser` 中的内核池越界写入问题：该函数将终止符放置在分配范围之后一个字符处，并越过了调用方字符串末尾两个字节（可通过 `API_UPDATE_CONF` 触发）
+- 修复了当监视器 put 处理程序在用户态字符串上触发异常时，`Session_ListLock` 与其提升后的 IRQL 在驱动整个生命周期内被泄漏的问题
+- 修复了 `API_MONITOR_GET_EX` 在每个条目之后多复制八个字节日志缓冲区的问题，以及其边界检查因被转换为 USHORT 并发生有符号下溢而失效的问题
+- 修复了当沙盒的 `NetworkAccess` 规则携带过长端口标记时，`_wntoi` 中的内核栈缓冲区溢出问题
+- 修复了 `BlockLocalLoop` 从未拦截 IPv4 回环地址的问题：原因是 `WFP_isLoopback` 检测的是地址的最后一个字节而非第一个字节
+- 修复了重命名/链接微过滤器路径中的内核池越界读取问题：此处将调用方信息缓冲区中的 `FileNameLength` 直接用作长度，而未与其在缓冲区中的实际大小进行校验
+- 修复了新的 LPC 实现在每次断开连接时泄漏每连接端口句柄及所有待处理的重组缓冲区的问题
+- 修复了同一 LPC 连接上并发请求争用共享重组状态、导致其被重复释放的问题
+- 修复了 `MSGID_SBIE_INI_SET_DAT` 中的栈缓冲区溢出问题：此处将未终止的 `setting` 字段追加到固定大小的路径缓冲区中
+- 修复了 `SbieIniServer` 在某个处理程序发生异常时放弃其临界区、导致此后所有 INI 请求被阻塞的问题
+- 修复了 INI 设置与模板处理程序中将 `value_len` 缩放为字节数时被截断的问题：这使得超大值能通过边界检查，随后被读取到远超消息末尾的位置
+- 修复了 `GUI_MAP_WINDOW_POINTS` 从请求中复制超出其实际携带数量的点、从而将服务堆内存返回给调用方的问题
+- 修复了 `WndHookRegisterSlave` 在两处调用方可触发的拒绝路径上持着 `m_SlavesLock` 返回、导致 GUI 代理在此后会话中完全阻塞的问题
+- 修复了 `GUI_GET_RAW_INPUT_DEVICE_INFO` 在将其尺寸缩放为字节数时发生截断、使得过大的 `cbSize` 同时绕过两项边界检查并被当作缓冲区大小交给操作系统的问题
+- 修复了桌面 `startExplorer` 与 `startRun` 操作以 LocalSystem 身份而非调用方用户令牌启动的问题
+- 修复了未要求整个 `PORT_DATA_INFO` 结构完整位于 LPC 消息内部即进行读取的问题
+- 修复了 ALPC 连接回复返回其未初始化尾部（最多 `PIPE_MAX_DATA_LEN` 字节的服务堆内存）给调用方的问题
+- 修复了全局（「星号」）队列名称缺乏会话作用域的问题：这使任何未沙盒化的进程都能抢占诸如交互式队列之类的已知名称
+- 修复了 UAC 数据包在校验最小长度前即被接受、且其字符串偏移量未经核对就被使用的问题
+- 修复了 ICMP 回显回复修正逻辑在回显本身失败时，将完整的 `ICMP_ECHO_REPLY` 写入超出调用方所设定大小的回复缓冲区的问题
+- 修复了 ICMP 回显处理程序中未将 `request_size` 与消息实际大小校验、导致最多 64 KB 服务堆内存被发送到网络上的问题
+- 修复了 `m_WorkersList` 在未获取其专用锁的情况下被修改，导致并发启动请求可能重复关闭并释放同一 worker 的问题
+- 修复了 `UserServer::OpenFile` 使用未经验证的请求偏移量，以及以非规范化路径匹配沙盒文件规则的问题
+- 修复了 SbieDrv `API_GET_FILE_NAME` 处理程序中 WCHAR 与字节长度混淆、将文件对象名越界读入调用方缓冲区的问题
+- 修复了 SbieDrv `API_RENAME_FILE` 处理程序中两处分页池泄漏（一处在提前返回路径，一处在用户副本异常路径），沙盒内进程可触发
+- 修复了 SbieDrv `API_OPEN_FILE` 处理程序未检查其内存分配、并在用户副本异常时泄漏的问题
+- 修复了打印后台程序 ALPC 消息过滤器在 Windows 8.1+ 上成为死代码的问题（驱动将端口 ID 与错误的字面量比较，导致过滤器从未生效）
+- 修复了 `NetworkAccess` 防火墙规则解析器（`netfw.c`）中的内核空指针解引用与 NonPagedPool 泄漏问题
+- 修复了防火墙规则解析器中错误的范围重叠检测：该缺陷可能插入重叠范围，使拦截规则停止匹配
+- 修复了驱动配置变量展开器（`Conf_Expand_2`）错误路径上的两处分页池泄漏
+- 修复了 SbieDrv `API_IS_BOX_ENABLED` 处理程序在内核模式下解引用未经探测的用户 SID 指针的问题
+- 修复了当 `WFP_UpdateProcess` 在 SbieDrv `API_REFRESH_FILE_PATH_LIST` 处理程序中发生异常时，`proc->file_lock` 与被提升的 IRQL 被泄漏的问题
+- 修复了文件微过滤器中受保护根列表条目的释放后使用问题（该节点在其锁被释放后仍被读取）
+- 修复了在 SbieDrv 进程查询处理程序的 `itok`/`ttok` 路径中，输出写入异常导致 `proc->threads_lock` 被泄漏的问题
+- 修复了 `Syscall_DuplicateHandle_3` 中对目录/符号链接/作业对象的重复句柄访问重新校验被跳过的问题（循环计数器在类型后缀检测之前破坏了长度值）
+- 修复了 SbieDrv `API_OPEN_PROCESS` 处理程序在请求 PID 0 时、于持锁状态下解引用已终止进程哨兵值的问题
+- 修复了 SbieDrv `API_FILTER_TOKEN` 处理程序中输出写入异常导致两个令牌引用和一个句柄被泄漏的问题
+- 修复了驱动监视器日志写入器中条目大小的 32 位截断、可能导致日志缓冲区溢出的问题
+- 修复了 SandMan 从队列回复（`MAN_FILE_MIGRATION`）中越界读取未终止文件路径的问题，沙盒内进程可利用该缺陷使界面崩溃
+- 修复了 INI 分区名称未拒绝 CR/LF 或方括号的问题：这使调用方能够伪造额外的分区/设置并绕过按分区的 `EditAdminOnly` 锁定
+- 修复了 SbieSvc `USER_SHELL_EXEC` 处理程序使用未经校验、可能未终止的线上路径偏移量的问题
+- 修复了 SbieSvc `MSGID_SBIE_INI_SET_DAT` 处理程序将未经验证的 `value_len` 用作写入长度、从而读取超出请求缓冲区的问题
+- 修复了 INI 设置处理程序在使用前未终止其固定大小的 `section`/`setting`/`password` 线上字段的问题
+- 修复了 SbieSvc 日志抽取循环（`DriverAssist::LogMessage`）中按消息泄漏堆内存的问题
+- 修复了 `GUI_CHANGE_DISPLAY_SETTINGS` 将未终止的设备名和无长度限制的 DEVMODE 传递给显示 API 的问题
+- 修复了 `GUI_GRANT_HANDLE` 在每次调用时泄漏 `GetIconInfo` 所创建的两个位图的问题
+- 修复了 `GUI_GET_WINDOW_PROP` 与 `GUI_FIND_WINDOW` 将超出 atom 范围的调用方指定值当作裸字符串指针处理的问题
+- 修复了 `GUI_SET_CLIPBOARD_DATA` 未校验请求长度、且未限制调用方所提供数据长度的问题
+- 修复了 SbieSvc 进程信息处理程序向任意本地用户泄露任意进程命令行/映像路径的问题（现限制为调用方所在会话或管理员）
+- 修复了 SbieSvc WOW64 注册表打开处理程序在未检查长度或终止状态的情况下索引 `KeyPath` 固定前缀的问题
+- 修复了 SbieSvc 命名管道读取处理程序返回其回复缓冲区未初始化尾部（信息泄露）的问题
+- 修复了 SbieSvc 终端 `GetName` 处理程序将未初始化栈内容泄漏到其回复中、并终止了错误缓冲区的问题
+- 修复了四个 SbieSvc 终端查询处理程序缺乏调用方门禁、直接从线上取用会话 ID，使任何用户都能以 SYSTEM 身份查询其他会话的问题；`QUERY_INFO` 现同时会对信息类别进行白名单校验
+- 修复了 SbieSvc ImBox `QueryHandler` 在查询的挂载点竞态归零时泄漏其临界区（并导致挂载子系统死锁）的问题
+- 修复了 SbieSvc 队列服务端接受无限数量未抽取请求的问题（现增加每队列上限）
+- 修复了「导入沙盒」功能不允许用户选择导入沙盒创建位置的问题 [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)
+
+
+## [1.18.8 / 5.73.8] - 2026-10-17
+
+### 修复
+- 修复了沙盒内 Firefox 在等待 `mediaCapabilities.decodingInfo()` 返回结果的网站（如 espn.com）上的视频播放问题
+- 修复了沙盒缺少 AppContainer 访问控制项（ACE）的问题，该问题会导致沙盒内程序创建的 AppContainer 子进程以 `0xC0000022` 错误终止
+- 修复了受限的 AppContainer 替代令牌禁用所有组，导致无法打开 `\KnownDlls` 的问题
+- 修复了沙盒内 IPC 对象缺少 AppContainer 访问控制项（ACE）的问题；该问题导致应用隔间沙盒中的 Firefox 媒体 CDM 进程无法连接沙盒内的 epmapper，进而崩溃
+- 修复了应用隔间沙盒中的 AppContainer 进程触发“SBIE2204 Cannot start sandboxed service RpcSs (1341)”错误的问题；这些进程现在能找到已在沙盒内运行的 RpcSs
+- 修复了 GUI 代理的 MapWindowPoints 处理程序中会向沙盒内调用方泄露服务堆内存的越界读取问题
+- `UnRestrictAppContainerToken` 不再对 MSEdge 默认启用，替代令牌已能再次供其正常使用
+- 修复了导入沙盒时无法选择沙盒创建位置的问题 [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)
+
+### 新增
+- 改进了“设为沙盒开放路径”和“设置强制在沙盒中运行”操作中的沙盒选择：可从显示沙盒名称和别名的列表中选择，也可输入名称或别名以查看建议
+- 新增仅启用一个沙盒时跳过“设为沙盒开放路径”和“设置强制在沙盒中运行”对话框的选项。勾选“仅启用一个沙盒时跳过此对话框”，即可自动使用该沙盒。默认仍会显示对话框 [#5653](https://github.com/sandboxie-plus/Sandboxie/issues/5653)
+- 为 KmdUtil.exe 新增“fixboxdacls”命令，用于为已有沙盒添加 AppContainer 访问控制项（ACE）
+- 新增 `KeepBroadGroupsInAppContainerToken=n`，可恢复旧行为，将 AppContainer 替代令牌中的所有组设为仅用于拒绝访问
+- 新增 `NeutralizeLowBoxToken=n`，使直接发起的 `NtCreateLowBoxToken` 调用传递给原生实现
+- 现已读取并应用 `FakeAppContainerToken` 设置；使用 `=n` 可让沙盒内程序创建真正的 AppContainer 子进程
+
+
+
+## [1.18.7 / 5.73.7] - 2026-10-16
+
+### 修复
+- 修复了根目录保护 IOCTL 的问题
+- 修复了设置低完整性标签时的问题
+- 修复了监控 API 的一个问题
+- 修复了 base64 解码问题
+- 修复了 API_RENAME_FILE 的问题
+- 修复了模板处理问题
+
+
+
+## [1.18.6 / 5.73.6] - 2026-10-11
+
+### 新增
+- 为 SandMan、故障排除向导和安装程序新增波斯语翻译 [#5633](https://github.com/sandboxie-plus/Sandboxie/pull/5633)（感谢 imalyzer）
+
+### 修复
+- 修复了 SandMan 将 URL 编码的字符误当作消息占位符，导致 SBIE 消息链接损坏的问题
+- 修复了更新器的问题
+- 修复了临时豁免的处理问题
+- 修复了路径处理问题
+- 修复了卸载驱动程序时可能发生的空指针异常
+
+
+## [1.18.5 / 5.73.5] - 2026-09-25
+
+### 修复
+- 修复了因钩子目标识别错误，导致基于 Chromium 的浏览器和 Electron 应用程序在应用程序隔离沙盒中崩溃的问题 [#5609](https://github.com/sandboxie-plus/Sandboxie/issues/5609)
+- 修复了通过 fsutil 查询的文件 ID 未按预期取反的问题 [#5612](https://github.com/sandboxie-plus/Sandboxie/issues/5612)
+
 
 
 ## [1.18.4 / 5.73.4] - 2026-09-06

@@ -168,6 +168,18 @@ MSG_HEADER *TerminalServer::Handler(void *_this, MSG_HEADER *msg)
 //---------------------------------------------------------------------------
 
 
+static ULONG TerminalServer__CheckCaller(ULONG req_session_id)
+{
+    ULONG caller_session;
+    HANDLE idProcess = (HANDLE)(ULONG_PTR)PipeServer::GetCallerProcessId();
+    if (0 != SbieApi_QueryProcess(idProcess, NULL, NULL, NULL, &caller_session))
+        return ERROR_ACCESS_DENIED;
+    if (req_session_id != caller_session)
+        return ERROR_ACCESS_DENIED;
+    return 0;
+}
+
+
 MSG_HEADER *TerminalServer::QueryInfo(MSG_HEADER *msg)
 {
     TERMINAL_QUERY_INFO_RPL *rpl = NULL;
@@ -189,12 +201,23 @@ MSG_HEADER *TerminalServer::QueryInfo(MSG_HEADER *msg)
         goto finish;
     }
 
+    error = TerminalServer__CheckCaller(req->session_id);
+    if (error)
+        goto finish;
+
+    // only WinStationInformation (8) is ever needed; refuse every other
+    // class so an arbitrary WINSTATIONINFOCLASS cannot be driven as SYSTEM
+    if (req->info_class != WinStationInformation) {
+        error = ERROR_INVALID_PARAMETER;
+        goto finish;
+    }
+
     //
     // issue request
     //
 
     ULONG data_len = req->data_len;
-    void *data = HeapAlloc(GetProcessHeap(), 0, data_len);
+    void *data = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, data_len);
     if (! data)
         error = ERROR_OUTOFMEMORY;
     else {
@@ -259,6 +282,10 @@ MSG_HEADER *TerminalServer::CheckType(MSG_HEADER *msg)
         error = ERROR_INVALID_PARAMETER;
         goto finish;
     }
+
+    error = TerminalServer__CheckCaller(req->session_id);
+    if (error)
+        goto finish;
 
     //
     // execute request
@@ -337,11 +364,16 @@ MSG_HEADER *TerminalServer::GetName(MSG_HEADER *msg)
         goto finish;
     }
 
+    error = TerminalServer__CheckCaller(req->session_id);
+    if (error)
+        goto finish;
+
     //
     // issue request
     //
 
-    WCHAR name[128];
+    // stack into the reply
+    WCHAR name[128] = { 0 };
     BOOLEAN ok = pWinStationNameFromLogonId(
                             SERVERNAME_CURRENT, req->session_id, name);
     if (! ok) {
@@ -356,7 +388,7 @@ MSG_HEADER *TerminalServer::GetName(MSG_HEADER *msg)
     else {
 
         wmemcpy(rpl->name, name, 120);
-        name[120] = L'\0';
+        rpl->name[120] = L'\0';   // terminate the REPLY, not the local 'name'
     }
 
     //
@@ -396,6 +428,10 @@ MSG_HEADER *TerminalServer::GetProperty(MSG_HEADER *msg)
         error = ERROR_INVALID_PARAMETER;
         goto finish;
     }
+
+    error = TerminalServer__CheckCaller(req->session_id);
+    if (error)
+        goto finish;
 
     //
     // issue request

@@ -572,7 +572,7 @@ protected:
 	void SaveFolders();
 
 	void LoadIniSection();
-	void SaveIniSection();
+	bool SaveIniSection();
 
 	void ApplyIniEditFont();
 	

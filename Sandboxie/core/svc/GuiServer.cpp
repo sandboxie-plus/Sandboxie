@@ -41,15 +41,6 @@ extern "C" {
 #include "common/pattern.h"
 } // extern "C"
 
-
-//---------------------------------------------------------------------------
-// Defines
-//---------------------------------------------------------------------------
-
-
-#define MAX_RPL_BUF_SIZE    32768
-
-
 //---------------------------------------------------------------------------
 // Structures and Types
 //---------------------------------------------------------------------------
@@ -1943,8 +1934,11 @@ ULONG GuiServer::GetWindowPropSlave(SlaveArgs *args)
     if (req->prop_is_text) {
         req->prop_text[RTL_NUMBER_OF_V1(req->prop_text) - 1] = L'\0';
         prop = req->prop_text;
-    } else
+    } else {
+        if (req->prop_atom == 0 || req->prop_atom > 0xFFFF)
+            return STATUS_INVALID_PARAMETER;
         prop = (WCHAR *)(ULONG_PTR)req->prop_atom;
+    }
 
     SetLastError(req->error);
 
@@ -2121,6 +2115,11 @@ ULONG GuiServer::GrantHandleSlave(SlaveArgs *args)
         if (! GetIconInfo((HICON)user_handle, &icon_info))
             return STATUS_OBJECT_TYPE_MISMATCH;
 
+        if (icon_info.hbmColor)
+            DeleteObject(icon_info.hbmColor);
+        if (icon_info.hbmMask)
+            DeleteObject(icon_info.hbmMask);
+
     } else
         return STATUS_INVALID_PARAMETER;
 
@@ -2267,8 +2266,11 @@ ULONG GuiServer::FindWindowSlave(SlaveArgs *args)
     if (req->class_is_text) {
         req->class_text[RTL_NUMBER_OF_V1(req->class_text) - 1] = L'\0';
         class_w = req->class_text;
-    } else
+    } else {
+        if (req->class_atom > 0xFFFF)
+            return STATUS_INVALID_PARAMETER;
         class_w = (WCHAR *)(ULONG_PTR)req->class_atom;
+    }
     char *class_a = (char *)class_w;
 
     WCHAR *title_w;
@@ -2362,6 +2364,19 @@ ULONG GuiServer::MapWindowPointsSlave(SlaveArgs *args)
               / sizeof(POINT);
         if (req->num_pts > max_points)
             return STATUS_INVALID_PARAMETER;
+
+        //
+        // the reply side was bounded by max_points, but the request side
+        // was not:  req_len was only checked against sizeof(REQ), which
+        // covers a single point, so a small request claiming many points
+        // made the memcpy below read the service's heap past the end of
+        // the request and hand it back to the caller.  num_pts is already
+        // bounded above, so this product cannot overflow
+        //
+
+        if (args->req_len < FIELD_OFFSET(GUI_MAP_WINDOW_POINTS_REQ, pts)
+                          + req->num_pts * sizeof(POINT))
+            return STATUS_INFO_LENGTH_MISMATCH;
 
         rpl_len += req->num_pts * sizeof(POINT);
 
@@ -3493,6 +3508,20 @@ ULONG GuiServer::ChangeDisplaySettingsSlave(SlaveArgs *args)
     if (req->flags & ~(CDS_UNKNOWNFLAG | CDS_RESET | CDS_FULLSCREEN | CDS_TEST))
         return STATUS_INVALID_PARAMETER;
 
+    // devname is a fixed WCHAR[64] passed to the API as a C string; terminate
+    // the field so wcslen/strlen cannot run past it.  terminating the last
+    // WCHAR bounds both the wide (<=63 chars) and the ansi (<=126 bytes) view
+    if (req->have_devname)
+        req->devname[ARRAYSIZE(req->devname) - 1] = L'\0';
+
+    // bound what ChangeDisplaySettingsEx reads past the fixed devmode struct:
+    // it reads dmSize + dmDriverExtra bytes, both caller-controlled
+    if (req->have_devmode) {
+        req->devmode.dmDriverExtra = 0;
+        req->devmode.dmSize = req->unicode
+            ? (WORD)sizeof(DEVMODEW) : (WORD)sizeof(DEVMODEA);
+    }
+
     void *devname = (req->have_devname ? req->devname : NULL);
     void *devmode = (req->have_devmode ? &req->devmode : NULL);
 
@@ -3652,6 +3681,10 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
 
     ULONG lenData = 0;
     if (reqData && req->cbSize > 0) {
+
+        if (req->cbSize > MAX_RPL_BUF_SIZE)
+            return STATUS_INVALID_PARAMETER;
+
         lenData = req->cbSize;
         if (req->uiCommand == RIDI_DEVICENAME && req->unicode) {
             lenData *= sizeof(WCHAR);
@@ -3662,7 +3695,7 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
     if (lenData > max_data)
         return STATUS_INVALID_PARAMETER;
 
-    if (reqData && lenData > 0) {
+    if (reqData) {
         if (args->req_len < sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ) + lenData)
             return STATUS_INFO_LENGTH_MISMATCH;
     }
@@ -3805,16 +3838,24 @@ ULONG GuiServer::WndHookRegisterSlave(SlaveArgs* args)
     {
         // Validate thread ownership - reject if hthread is not in the caller's process
         HANDLE hThread = OpenThread(THREAD_QUERY_LIMITED_INFORMATION, FALSE, req->hthread);
-        if (!hThread) 
+        if (!hThread) {
+            LeaveCriticalSection(&m_SlavesLock);
             return STATUS_UNSUCCESSFUL;
+        }
         DWORD ownerPid = pGetProcessIdOfThread ? pGetProcessIdOfThread(hThread) : -1;
         CloseHandle(hThread);
-        if (ownerPid != args->pid)
+        if (ownerPid != args->pid) {
+            LeaveCriticalSection(&m_SlavesLock);
             return STATUS_ACCESS_DENIED;
+        }
 
         if (!whk) // add if not already added
         {
             whk = (WND_HOOK *)HeapAlloc(GetProcessHeap(), 0, sizeof(WND_HOOK));
+            if (!whk) {
+                LeaveCriticalSection(&m_SlavesLock);
+                return STATUS_INSUFFICIENT_RESOURCES;
+            }
             whk->pid = args->pid;
             whk->hthread = req->hthread;
             whk->hproc = req->hproc;

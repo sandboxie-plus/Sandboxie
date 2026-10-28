@@ -503,7 +503,11 @@ MSG_HEADER *QueueServer::PutReqHandler(MSG_HEADER *msg, HANDLE idProcess)
 
     //
     //
-    //
+
+    if (List_Count(&QueueObj->requests) >= 65536) {
+        status = STATUS_INSUFFICIENT_RESOURCES;
+        goto finish;
+    }
 
     status = DuplicateEvent(hProcess, req->event_handle, &hEvent);
     if (! NT_SUCCESS(status))
@@ -731,6 +735,56 @@ LONG QueueServer::DuplicateEvent(
 
 
 //---------------------------------------------------------------------------
+// GetProxyNameSessionId
+//---------------------------------------------------------------------------
+
+
+static BOOLEAN GetProxyNameSessionId(
+    const WCHAR *req_name, ULONG *out_session_id)
+{
+    //
+    // the proxy queue names the service builds for itself are
+    // *GUIPROXY_<8 hex digits> and *USERPROXY_<8 hex digits>, with the
+    // target session id as the suffix.  require that exact shape
+    //
+
+    const WCHAR *suffix;
+
+    if (_wcsnicmp(req_name, L"*GUIPROXY_", 10) == 0)
+        suffix = req_name + 10;
+    else if (_wcsnicmp(req_name, L"*USERPROXY_", 11) == 0)
+        suffix = req_name + 11;
+    else
+        return FALSE;
+
+    ULONG session_id = 0;
+
+    for (ULONG i = 0; i < 8; ++i) {
+
+        WCHAR c = suffix[i];
+        ULONG digit;
+
+        if (c >= L'0' && c <= L'9')
+            digit = (ULONG)(c - L'0');
+        else if (c >= L'A' && c <= L'F')
+            digit = (ULONG)(c - L'A' + 10);
+        else if (c >= L'a' && c <= L'f')
+            digit = (ULONG)(c - L'a' + 10);
+        else
+            return FALSE;
+
+        session_id = (session_id << 4) | digit;
+    }
+
+    if (suffix[8] != L'\0')
+        return FALSE;
+
+    *out_session_id = session_id;
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
 // MakeQueueName
 //---------------------------------------------------------------------------
 
@@ -758,15 +812,30 @@ WCHAR *QueueServer::MakeQueueName(
         // and check if caller is inside sandbox
         //
 
-        name = (WCHAR *)HeapAlloc(m_heap, 0, req_name_len + 8);
+
+        ULONG name_session_id;
+
+        if ((ULONG)(ULONG_PTR)idProcess == GetCurrentProcessId()) {
+
+            if (! GetProxyNameSessionId(req_name, &name_session_id)) {
+                *out_status = STATUS_OBJECT_NAME_INVALID;
+                return NULL;
+            }
+
+        } else if (! ProcessIdToSessionId(
+                        (DWORD)(ULONG_PTR)idProcess, &name_session_id)) {
+            *out_status = STATUS_ACCESS_DENIED;
+            return NULL;
+        }
+
+        name = (WCHAR *)HeapAlloc(m_heap, 0, req_name_len + 32);
         if (! name) {
             *out_status = STATUS_INSUFFICIENT_RESOURCES;
             return NULL;
         }
 
-        name[0] = L'*';
-        name[1] = L'\\';
-        memcpy(name + 2, req_name, req_name_len);
+        wsprintf(name, L"*\\%08X\\", name_session_id);
+        memcpy(name + wcslen(name), req_name, req_name_len);
 
         *out_status = (boxed_caller ? STATUS_ACCESS_DENIED : STATUS_SUCCESS);
 

@@ -36,6 +36,8 @@ struct DisabledSettingRule {
 	QString actions;
 };
 
+class QWidget;
+
 class CIniHighlighter : public QSyntaxHighlighter
 {
     Q_OBJECT
@@ -62,6 +64,7 @@ public:
 	static QString GetSettingTooltipForPopup(const QString& settingName, const QString& settingValue = QString(), char currentContext = '\0');
 	static bool IsSettingsLoaded() { return settingsLoaded; }
 	static bool IsCommentLine(const QString& line);
+	static bool ValidateIniComments(const QString& section, QWidget* parent);
 
 	static void ClearLanguageCache();
 	static void ClearHideConfCache();

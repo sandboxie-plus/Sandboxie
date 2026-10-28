@@ -75,7 +75,7 @@ signals:
 
 public slots:
 	void ok();
-	void apply();
+	bool apply();
 
 	void showTab(const QString& Name, bool bExclusive = false, bool bExec = false);
 
@@ -193,7 +193,7 @@ protected:
 	void	LoadTemplates();
 
 	void	LoadIniSection();
-	void	SaveIniSection();
+	bool	SaveIniSection();
 	void    ApplyIniEditFont();
 
 	// Autocompletion support

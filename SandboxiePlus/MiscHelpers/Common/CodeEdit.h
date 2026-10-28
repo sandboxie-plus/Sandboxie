@@ -37,6 +37,7 @@ public:
 
 	void SetFont(const QFont& Font);
 	const QFont& GetFont() const;
+	void SetLineNumbersVisible(bool bVisible);
 
 	void SetCaseCorrectionCallback(std::function<QString(const QString&)> callback);
 	void SetCompletionFilterCallback(std::function<bool(const QString&, const QString&)> callback);

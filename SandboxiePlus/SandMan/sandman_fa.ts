@@ -2174,9 +2174,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>COptionsWindow</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="554"/>
-        <location filename="Windows/OptionsWindow.cpp" line="560"/>
-        <location filename="Windows/OptionsWindow.cpp" line="575"/>
+        <location filename="Windows/OptionsWindow.cpp" line="557"/>
+        <location filename="Windows/OptionsWindow.cpp" line="563"/>
+        <location filename="Windows/OptionsWindow.cpp" line="578"/>
         <location filename="Windows/OptionsAccess.cpp" line="26"/>
         <source>Browse for File</source>
         <translation>مرور برای فایل</translation>
@@ -2328,13 +2328,13 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>انتخاب پوشه</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1415"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1421"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="990"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="1065"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="811"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="914"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="832"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="935"/>
         <location filename="Windows/OptionsNetwork.cpp" line="641"/>
         <location filename="Windows/OptionsNetwork.cpp" line="735"/>
         <location filename="Windows/OptionsNetwork.cpp" line="848"/>
@@ -2344,12 +2344,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>همه‌ی برنامه‌ها</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1413"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1431"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1419"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1437"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="816"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="918"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="837"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="939"/>
         <location filename="Windows/OptionsNetwork.cpp" line="358"/>
         <location filename="Windows/OptionsNetwork.cpp" line="646"/>
         <location filename="Windows/OptionsNetwork.cpp" line="739"/>
@@ -2384,7 +2384,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="628"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="1041"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="884"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="905"/>
         <location filename="Windows/OptionsGrouping.cpp" line="236"/>
         <location filename="Windows/OptionsGrouping.cpp" line="260"/>
         <location filename="Windows/OptionsNetwork.cpp" line="714"/>
@@ -2639,336 +2639,361 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>اجبار ورودی مشخص‌شده به احتمال زیاد ویندوز را خراب خواهد کرد؛ آیا مطمئنید می‌خواهید ادامه دهید؟</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="26"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="35"/>
         <source>This option requires an active supporter certificate</source>
         <oldsource>This option requires a valid supporter certificate</oldsource>
         <translation>این گزینه به یک گواهی پشتیبانیِ فعال نیاز دارد</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="55"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="64"/>
         <source>Don&apos;t alter the window title</source>
         <translation>عنوان پنجره را تغییر نده</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="56"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Display [#] indicator only</source>
         <translation>فقط نمایش نشانگر [#]</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="57"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="66"/>
         <source>Display box name in title</source>
         <translation>نمایش نام جعبه در عنوان</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="78"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="76"/>
+        <source>Stacked (compact)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="90"/>
         <source>Border disabled</source>
         <translation>حاشیه غیرفعال</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="79"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="83"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="91"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="95"/>
         <source>Show only when title is in focus</source>
         <translation>فقط هنگامی که عنوان در فوکوس است نشان بده</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="98"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="110"/>
         <source>Hardened Sandbox with Data Protection</source>
         <translation>سندباکسِ تقویت‌شده با حفاظت از داده‌ها</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="99"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="111"/>
         <source>Security Hardened Sandbox</source>
         <translation>سندباکسِ تقویت‌شده از نظر امنیتی</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="100"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="112"/>
         <source>Sandbox with Data Protection</source>
         <translation>سندباکس با حفاظت از داده‌ها</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="101"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="113"/>
         <source>Standard Isolation Sandbox (Default)</source>
         <translation>سندباکسِ ایزوله‌سازی استاندارد (پیش‌فرض)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="103"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="115"/>
         <source>Application Compartment with Data Protection</source>
         <translation>محفظه‌ی برنامه با حفاظت از داده‌ها</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="24"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="33"/>
         <source>This option requires an active &lt;b&gt;advanced&lt;/b&gt; supporter certificate</source>
         <translation>این گزینه به یک گواهی پشتیبانیِ &lt;b&gt;پیشرفته&lt;/b&gt;ی فعال نیاز دارد</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="59"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="68"/>
         <source>Don&apos;t show in border</source>
         <translation>در حاشیه نشان نده</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="60"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="69"/>
         <source>Show within the border</source>
         <translation>در داخل حاشیه نشان بده</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="61"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="70"/>
         <source>Show outside the border</source>
         <oldsource>Show above the border</oldsource>
         <translation type="unfinished">بالای حاشیه نشان بده</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="62"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="71"/>
         <source>Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="63"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="64"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="65"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="66"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="75"/>
         <source>Stacked upright letters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="67"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="77"/>
         <source>Rotated down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="68"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="78"/>
         <source>Rotated up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="69"/>
-        <source>Adaptive (keep label visible)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="70"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="79"/>
         <source>Fixed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="71"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="80"/>
+        <source>Adaptive (same edge)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="81"/>
+        <source>Adaptive (opposite edge)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="82"/>
+        <source>Adaptive (any edge)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="83"/>
         <source>Use inherited/default setting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="72"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="84"/>
         <source>Avoid covering the taskbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="73"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="85"/>
         <source>Allow covering the taskbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="74"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="86"/>
         <source>Use inherited/automatic setting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="75"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="87"/>
         <source>Hide border and label from capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="76"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="88"/>
         <source>Include border and label in capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="80"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="84"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="92"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="96"/>
         <source>Always show (focused window only)</source>
         <translation>همیشه نشان بده (فقط پنجره‌ی فوکوس‌شده)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="81"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="85"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="93"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="97"/>
         <source>Show for all windows in this box</source>
         <translation>برای همه‌ی پنجره‌های این جعبه نشان بده</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="82"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="94"/>
         <source> (outside)</source>
         <translation> (خارج)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="87"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="99"/>
         <source>Active snapshot</source>
         <translation>اسنپ‌شات فعال</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="88"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="100"/>
         <source>Default snapshot</source>
         <translation>اسنپ‌شات پیش‌فرض</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="89"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="101"/>
         <source>Selects the snapshot restored by SandMan after automatic deletion. The active state may be the empty sandbox rather than a saved snapshot.</source>
         <translation>اسنپ‌شاتی را که SandMan پس از حذف خودکار بازیابی می‌کند انتخاب می‌کند. وضعیت فعال ممکن است سندباکس خالی باشد، نه یک اسنپ‌شات ذخیره‌شده.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="104"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="116"/>
         <source>Application Compartment</source>
         <translation>محفظه‌ی برنامه</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="160"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="172"/>
         <source>Custom icon</source>
         <translation>نماد سفارشی</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="236"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="259"/>
         <source>Version 1</source>
         <translation>نسخه‌ی ۱</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="237"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="260"/>
         <source>Version 2</source>
         <translation>نسخه‌ی ۲</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="298"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="321"/>
         <source>Browse for Program</source>
         <translation>مرور برای برنامه</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="433"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="444"/>
         <source>Open Box Options</source>
         <translation>باز کردن گزینه‌های جعبه</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="434"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="445"/>
         <source>Browse Content</source>
         <translation>مرور محتوا</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="435"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="446"/>
         <source>Start File Recovery</source>
         <translation>شروع بازیابی فایل</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="436"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="447"/>
         <source>Show Run Dialog</source>
         <translation>نمایش پنجره‌ی اجرا</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="464"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="475"/>
         <source>Indeterminate</source>
         <translation>نامشخص</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="484"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="495"/>
         <source>Backup Image Header</source>
         <translation>پشتیبان‌گیری از سرآیند تصویر</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="485"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="496"/>
         <source>Restore Image Header</source>
         <translation>بازیابی سرآیند تصویر</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="489"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="500"/>
         <source>Change Password</source>
         <translation>تغییر گذرواژه</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="782"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="889"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="803"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="910"/>
         <source>Always copy</source>
         <translation>همیشه کپی کن</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="783"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="890"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="804"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="911"/>
         <source>Don&apos;t copy</source>
         <translation>کپی نکن</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="784"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="891"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="805"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="912"/>
         <source>Copy empty</source>
         <translation>کپی خالی</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="785"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="892"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="806"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="913"/>
         <source>Copy newer</source>
         <translation>کپی جدیدتر</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1039"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1051"/>
+        <source>Select the font, native style, writing system and point size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1052"/>
+        <source>Default: Segoe UI Bold; legacy sizing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1136"/>
         <source>kilobytes (%1)</source>
         <translation>کیلوبایت (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1150"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1247"/>
         <source>Select color</source>
         <translation>انتخاب رنگ</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1237"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1334"/>
         <source>Select Program</source>
         <translation>انتخاب برنامه</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1424"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1521"/>
         <source>The image file does not exist</source>
         <translation>فایل تصویر وجود ندارد</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1425"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1522"/>
         <source>The password is wrong</source>
         <translation>گذرواژه اشتباه است</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1426"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1523"/>
         <source>Unexpected error: %1</source>
         <translation>خطای غیرمنتظره: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1454"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1551"/>
         <source>Image Password Changed</source>
         <translation>گذرواژه‌ی تصویر تغییر کرد</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1456"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1553"/>
         <source>Failed to Change Password</source>
         <translation>تغییر گذرواژه ناموفق بود</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1465"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1562"/>
         <source>Backup Image Header for %1</source>
         <translation>پشتیبان‌گیری از سرآیند تصویر برای %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1473"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1570"/>
         <source>Image Header Backuped</source>
         <translation>از سرآیند تصویر پشتیبان‌گیری شد</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1480"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
         <source>Restore Image Header for %1</source>
         <translation>بازیابی سرآیند تصویر برای %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1488"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1585"/>
         <source>Image Header Restored</source>
         <translation>سرآیند تصویر بازیابی شد</translation>
     </message>
@@ -2978,18 +3003,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>لطفاً یک شناسه‌ی سرویس وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1237"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1334"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>فایل‌های اجرایی (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1241"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="1262"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1338"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1359"/>
         <source>Please enter a menu title</source>
         <translation>لطفاً یک عنوان منو وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1258"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1355"/>
         <source>Please enter a command</source>
         <translation>لطفاً یک فرمان وارد کنید</translation>
     </message>
@@ -3004,10 +3029,92 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>لطفاً ابتدا یک گروه انتخاب کنید.</translation>
     </message>
     <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="128"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1094"/>
+        <source>Border label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="133"/>
         <location filename="Windows/OptionsNetwork.cpp" line="55"/>
         <location filename="Windows/OptionsNetwork.cpp" line="769"/>
         <source>Any</source>
         <translation>هر</translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="138"/>
+        <source>Unavailable writing system (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="142"/>
+        <source>&amp;Writing system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="152"/>
+        <source>Font &amp;family:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="154"/>
+        <source>Font st&amp;yle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="159"/>
+        <source> pt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="161"/>
+        <source>&amp;Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="162"/>
+        <source>&amp;Underline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="164"/>
+        <source>Stri&amp;keout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="173"/>
+        <source>Native font preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="182"/>
+        <source>Save only this font and size immediately. Other pending box options are not applied. Cancel keeps the last applied font.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="183"/>
+        <source>This template is read-only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="291"/>
+        <source>The saved selection is unavailable. Choose an installed family and a native style.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="325"/>
+        <source>Sandbox name</source>
+        <translation type="unfinished">نام جعبه</translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="340"/>
+        <source>Unable to create the native font preview.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="342"/>
+        <source>Native GDI preview. Writing system filters the font list; it does not change label language or direction.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="56"/>
@@ -3218,62 +3325,62 @@ Please select a folder which contains this file.</source>
         <translation>گروه‌بندی</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="646"/>
+        <location filename="Windows/OptionsWindow.cpp" line="649"/>
         <source>Add %1 Template</source>
         <translation>افزودن قالب %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="769"/>
+        <location filename="Windows/OptionsWindow.cpp" line="772"/>
         <source>Search for options</source>
         <translation>جست‌وجوی گزینه‌ها</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1076"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1082"/>
         <source>Box: %1</source>
         <translation>جعبه: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1077"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1083"/>
         <source>Template: %1</source>
         <translation>قالب: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1078"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1084"/>
         <source>Global: %1</source>
         <translation>سراسری: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1079"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1085"/>
         <source>Default: %1</source>
         <translation>پیش‌فرض: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1305"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1311"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>این سندباکس حذف شده است؛ بنابراین امکان ذخیره‌ی پیکربندی نیست.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1375"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1381"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>برخی تغییرات هنوز ذخیره نشده‌اند؛ آیا واقعاً می‌خواهید این پنجره‌ی گزینه‌ها را ببندید؟</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1424"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1430"/>
         <source>Enter program:</source>
         <translation>برنامه را وارد کنید:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1859"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1865"/>
         <source>Autocomplete Consent Required</source>
         <translation>رضایت برای تکمیل خودکار لازم است</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1861"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1867"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>ویژگی تکمیل خودکار برای ادامه به رضایت شما نیاز دارد.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1869"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -3286,32 +3393,32 @@ Choose autocomplete mode:
 %1 هنگام تایپ: پیشنهادهای تکمیل خودکار هنگام تایپ.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1871"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1877"/>
         <source>Manual</source>
         <translation>دستی</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1872"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1878"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>پیشنهادهای تکمیل خودکار را با %1 فعال می‌کند.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1874"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1880"/>
         <source>While Typing</source>
         <translation>هنگام تایپ</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1875"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1881"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>پیشنهادهای تکمیل خودکار را هنگام تایپ فعال می‌کند.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1878"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1884"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>پیشنهادهای تکمیل خودکار را غیرفعال نگه می‌دارد.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1877"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1883"/>
         <source>Cancel</source>
         <translation>لغو</translation>
     </message>
@@ -8335,7 +8442,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>نشانگر جعبه در عنوان:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1170"/>
+        <location filename="Forms/OptionsWindow.ui" line="303"/>
         <source>Sandboxed window border:</source>
         <translation>حاشیه‌ی پنجره‌ی سندباکس‌شده:</translation>
     </message>
@@ -8345,59 +8452,59 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>عملکرد دابل‌کلیک:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="374"/>
+        <location filename="Forms/OptionsWindow.ui" line="871"/>
         <source>Separate user folders</source>
         <translation>پوشه‌های کاربر جداگانه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="354"/>
+        <location filename="Forms/OptionsWindow.ui" line="851"/>
         <source>Box Structure</source>
         <translation>ساختار جعبه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1572"/>
+        <location filename="Forms/OptionsWindow.ui" line="1653"/>
         <source>Security Options</source>
         <translation>تنظیمات امنیتی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1582"/>
+        <location filename="Forms/OptionsWindow.ui" line="1663"/>
         <source>Security Hardening</source>
         <translation>تقویت امنیتی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="745"/>
-        <location filename="Forms/OptionsWindow.ui" line="788"/>
-        <location filename="Forms/OptionsWindow.ui" line="1711"/>
-        <location filename="Forms/OptionsWindow.ui" line="1727"/>
-        <location filename="Forms/OptionsWindow.ui" line="1770"/>
-        <location filename="Forms/OptionsWindow.ui" line="2137"/>
-        <location filename="Forms/OptionsWindow.ui" line="4506"/>
-        <location filename="Forms/OptionsWindow.ui" line="4529"/>
+        <location filename="Forms/OptionsWindow.ui" line="1242"/>
+        <location filename="Forms/OptionsWindow.ui" line="1285"/>
+        <location filename="Forms/OptionsWindow.ui" line="1792"/>
+        <location filename="Forms/OptionsWindow.ui" line="1808"/>
+        <location filename="Forms/OptionsWindow.ui" line="1851"/>
+        <location filename="Forms/OptionsWindow.ui" line="2218"/>
+        <location filename="Forms/OptionsWindow.ui" line="4587"/>
+        <location filename="Forms/OptionsWindow.ui" line="4610"/>
         <source>Protect the system from sandboxed processes</source>
         <translation>محافظت از سیستم در برابر فرایندهای سندباکس‌شده</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1714"/>
+        <location filename="Forms/OptionsWindow.ui" line="1795"/>
         <source>Elevation restrictions</source>
         <translation>محدودیت‌های ارتقای سطح دسترسی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1698"/>
+        <location filename="Forms/OptionsWindow.ui" line="1779"/>
         <source>Drop rights from Administrators and Power Users groups</source>
         <translation>حذف دسترسی‌های گروه‌های Administrators و Power Users</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1218"/>
+        <location filename="Forms/OptionsWindow.ui" line="351"/>
         <source>px Width</source>
         <translation>عرض به پیکسل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1737"/>
+        <location filename="Forms/OptionsWindow.ui" line="1818"/>
         <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation>وانمود کردن به برنامه‌ها که با سطح دسترسی بالا اجرا می‌شوند (امکان اجرای امن نصب‌کننده‌ها را فراهم می‌کند)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1665"/>
+        <location filename="Forms/OptionsWindow.ui" line="1746"/>
         <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
         <translation>احتیاط: هنگام اجرا تحت حساب مدیر داخلی سیستم، فرایندها نمی‌توانند امتیازات مدیریتی را کنار بگذارند.</translation>
     </message>
@@ -8407,7 +8514,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>ظاهر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1750"/>
+        <location filename="Forms/OptionsWindow.ui" line="1831"/>
         <source>(Recommended)</source>
         <translation>(توصیه‌شده)</translation>
     </message>
@@ -8417,256 +8524,256 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>نمایش این جعبه در پنجره‌ی انتخاب «اجرا در جعبه»</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="285"/>
+        <location filename="Forms/OptionsWindow.ui" line="782"/>
         <source>File Options</source>
         <translation>تنظیمات فایل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="293"/>
+        <location filename="Forms/OptionsWindow.ui" line="790"/>
         <source>Auto delete content changes when last sandboxed process terminates</source>
         <oldsource>Auto delete content when last sandboxed process terminates</oldsource>
         <translation>حذف خودکار تغییرات محتوا هنگام پایان یافتن آخرین فرایند سندباکس‌شده</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="574"/>
+        <location filename="Forms/OptionsWindow.ui" line="1071"/>
         <source>Copy file size limit:</source>
         <translation>محدودیت اندازه‌ی فایل برای کپی:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="403"/>
+        <location filename="Forms/OptionsWindow.ui" line="900"/>
         <source>Box Delete options</source>
         <translation>گزینه‌های حذف جعبه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="364"/>
+        <location filename="Forms/OptionsWindow.ui" line="861"/>
         <source>Protect this sandbox from deletion or emptying</source>
         <translation>محافظت از این جعبه در برابر حذف یا خالی شدن</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="554"/>
-        <location filename="Forms/OptionsWindow.ui" line="594"/>
+        <location filename="Forms/OptionsWindow.ui" line="1051"/>
+        <location filename="Forms/OptionsWindow.ui" line="1091"/>
         <source>File Migration</source>
         <translation>انتقال فایل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="491"/>
+        <location filename="Forms/OptionsWindow.ui" line="988"/>
         <source>Allow elevated sandboxed applications to read the harddrive</source>
         <translation>اجازه به برنامه‌های سندباکس‌شده‌ی دارای سطح دسترسی بالا برای خواندن هارددرایو</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="471"/>
+        <location filename="Forms/OptionsWindow.ui" line="968"/>
         <source>Warn when an application opens a harddrive handle</source>
         <translation>هشدار هنگامی که یک برنامه یک هندل هارددرایو باز می‌کند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="623"/>
+        <location filename="Forms/OptionsWindow.ui" line="1120"/>
         <source>kilobytes</source>
         <translation>کیلوبایت</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="716"/>
+        <location filename="Forms/OptionsWindow.ui" line="1213"/>
         <source>Issue message 2102 when a file is too large</source>
         <translation>نمایش پیام ۲۱۰۲ هنگامی که یک فایل خیلی بزرگ است</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="581"/>
+        <location filename="Forms/OptionsWindow.ui" line="1078"/>
         <source>Prompt user for large file migration</source>
         <translation>پرسیدن از کاربر برای انتقال فایل‌های بزرگ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="775"/>
+        <location filename="Forms/OptionsWindow.ui" line="1272"/>
         <source>Allow the print spooler to print to files outside the sandbox</source>
         <translation>اجازه به اسپولر چاپ برای چاپ در فایل‌های خارج از سندباکس</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="762"/>
+        <location filename="Forms/OptionsWindow.ui" line="1259"/>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
         <translation>حذف محدودیت اسپولر؛ چاپگرها می‌توانند خارج از سندباکس نصب شوند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="831"/>
+        <location filename="Forms/OptionsWindow.ui" line="1328"/>
         <source>Block read access to the clipboard</source>
         <translation>مسدود کردن دسترسی خواندن به کلیپ‌بورد</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="798"/>
+        <location filename="Forms/OptionsWindow.ui" line="1295"/>
         <source>Open System Protected Storage</source>
         <translation>باز کردن Windows Protected Storage</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="755"/>
+        <location filename="Forms/OptionsWindow.ui" line="1252"/>
         <source>Block access to the printer spooler</source>
         <translation>مسدود کردن دسترسی به اسپولر چاپگر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="791"/>
+        <location filename="Forms/OptionsWindow.ui" line="1288"/>
         <source>Other restrictions</source>
         <translation>محدودیت‌های دیگر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="748"/>
+        <location filename="Forms/OptionsWindow.ui" line="1245"/>
         <source>Printing restrictions</source>
         <translation>محدودیت‌های چاپ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4509"/>
+        <location filename="Forms/OptionsWindow.ui" line="4590"/>
         <source>Network restrictions</source>
         <translation>محدودیت‌های شبکه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4576"/>
+        <location filename="Forms/OptionsWindow.ui" line="4657"/>
         <source>Block network files and folders, unless specifically opened.</source>
         <translation>مسدود کردن فایل‌ها و پوشه‌های شبکه، مگر آنکه به‌طور خاص باز شده باشند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1004"/>
+        <location filename="Forms/OptionsWindow.ui" line="1501"/>
         <source>Run Menu</source>
         <translation>منوی اجرا</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1128"/>
+        <location filename="Forms/OptionsWindow.ui" line="1625"/>
         <source>You can configure custom entries for the sandbox run menu.</source>
         <translation>می‌توانید ورودی‌های سفارشی برای منوی اجرای سندباکس پیکربندی کنید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1077"/>
-        <location filename="Forms/OptionsWindow.ui" line="2569"/>
-        <location filename="Forms/OptionsWindow.ui" line="2681"/>
-        <location filename="Forms/OptionsWindow.ui" line="2779"/>
-        <location filename="Forms/OptionsWindow.ui" line="2942"/>
-        <location filename="Forms/OptionsWindow.ui" line="3014"/>
-        <location filename="Forms/OptionsWindow.ui" line="3241"/>
-        <location filename="Forms/OptionsWindow.ui" line="4003"/>
-        <location filename="Forms/OptionsWindow.ui" line="4627"/>
-        <location filename="Forms/OptionsWindow.ui" line="4743"/>
-        <location filename="Forms/OptionsWindow.ui" line="4968"/>
-        <location filename="Forms/OptionsWindow.ui" line="6131"/>
-        <location filename="Forms/OptionsWindow.ui" line="6290"/>
-        <location filename="Forms/OptionsWindow.ui" line="6376"/>
+        <location filename="Forms/OptionsWindow.ui" line="1574"/>
+        <location filename="Forms/OptionsWindow.ui" line="2650"/>
+        <location filename="Forms/OptionsWindow.ui" line="2762"/>
+        <location filename="Forms/OptionsWindow.ui" line="2860"/>
+        <location filename="Forms/OptionsWindow.ui" line="3023"/>
+        <location filename="Forms/OptionsWindow.ui" line="3095"/>
+        <location filename="Forms/OptionsWindow.ui" line="3322"/>
+        <location filename="Forms/OptionsWindow.ui" line="4084"/>
+        <location filename="Forms/OptionsWindow.ui" line="4708"/>
+        <location filename="Forms/OptionsWindow.ui" line="4824"/>
+        <location filename="Forms/OptionsWindow.ui" line="5049"/>
+        <location filename="Forms/OptionsWindow.ui" line="6212"/>
+        <location filename="Forms/OptionsWindow.ui" line="6371"/>
+        <location filename="Forms/OptionsWindow.ui" line="6457"/>
         <source>Name</source>
         <translation>نام</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1082"/>
+        <location filename="Forms/OptionsWindow.ui" line="1579"/>
         <source>Command Line</source>
         <translation>خط فرمان</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1053"/>
+        <location filename="Forms/OptionsWindow.ui" line="1550"/>
         <source>Add program</source>
         <translation>افزودن برنامه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1034"/>
-        <location filename="Forms/OptionsWindow.ui" line="2078"/>
-        <location filename="Forms/OptionsWindow.ui" line="2577"/>
-        <location filename="Forms/OptionsWindow.ui" line="2646"/>
-        <location filename="Forms/OptionsWindow.ui" line="2836"/>
-        <location filename="Forms/OptionsWindow.ui" line="2967"/>
-        <location filename="Forms/OptionsWindow.ui" line="3042"/>
-        <location filename="Forms/OptionsWindow.ui" line="3213"/>
-        <location filename="Forms/OptionsWindow.ui" line="3289"/>
-        <location filename="Forms/OptionsWindow.ui" line="3423"/>
-        <location filename="Forms/OptionsWindow.ui" line="3522"/>
+        <location filename="Forms/OptionsWindow.ui" line="1531"/>
+        <location filename="Forms/OptionsWindow.ui" line="2159"/>
+        <location filename="Forms/OptionsWindow.ui" line="2658"/>
+        <location filename="Forms/OptionsWindow.ui" line="2727"/>
+        <location filename="Forms/OptionsWindow.ui" line="2917"/>
+        <location filename="Forms/OptionsWindow.ui" line="3048"/>
+        <location filename="Forms/OptionsWindow.ui" line="3123"/>
+        <location filename="Forms/OptionsWindow.ui" line="3294"/>
+        <location filename="Forms/OptionsWindow.ui" line="3370"/>
+        <location filename="Forms/OptionsWindow.ui" line="3504"/>
         <location filename="Forms/OptionsWindow.ui" line="3603"/>
-        <location filename="Forms/OptionsWindow.ui" line="3716"/>
-        <location filename="Forms/OptionsWindow.ui" line="3972"/>
-        <location filename="Forms/OptionsWindow.ui" line="4129"/>
-        <location filename="Forms/OptionsWindow.ui" line="4270"/>
-        <location filename="Forms/OptionsWindow.ui" line="4297"/>
-        <location filename="Forms/OptionsWindow.ui" line="4665"/>
-        <location filename="Forms/OptionsWindow.ui" line="4751"/>
-        <location filename="Forms/OptionsWindow.ui" line="5103"/>
-        <location filename="Forms/OptionsWindow.ui" line="5192"/>
-        <location filename="Forms/OptionsWindow.ui" line="5533"/>
-        <location filename="Forms/OptionsWindow.ui" line="5728"/>
-        <location filename="Forms/OptionsWindow.ui" line="6200"/>
+        <location filename="Forms/OptionsWindow.ui" line="3684"/>
+        <location filename="Forms/OptionsWindow.ui" line="3797"/>
+        <location filename="Forms/OptionsWindow.ui" line="4053"/>
+        <location filename="Forms/OptionsWindow.ui" line="4210"/>
+        <location filename="Forms/OptionsWindow.ui" line="4351"/>
+        <location filename="Forms/OptionsWindow.ui" line="4378"/>
+        <location filename="Forms/OptionsWindow.ui" line="4746"/>
+        <location filename="Forms/OptionsWindow.ui" line="4832"/>
+        <location filename="Forms/OptionsWindow.ui" line="5184"/>
+        <location filename="Forms/OptionsWindow.ui" line="5273"/>
+        <location filename="Forms/OptionsWindow.ui" line="5614"/>
+        <location filename="Forms/OptionsWindow.ui" line="5809"/>
+        <location filename="Forms/OptionsWindow.ui" line="6281"/>
         <source>Remove</source>
         <translation>حذف</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2676"/>
-        <location filename="Forms/OptionsWindow.ui" line="2774"/>
-        <location filename="Forms/OptionsWindow.ui" line="3300"/>
-        <location filename="Forms/OptionsWindow.ui" line="3400"/>
-        <location filename="Forms/OptionsWindow.ui" line="3533"/>
-        <location filename="Forms/OptionsWindow.ui" line="3653"/>
-        <location filename="Forms/OptionsWindow.ui" line="3727"/>
-        <location filename="Forms/OptionsWindow.ui" line="6136"/>
+        <location filename="Forms/OptionsWindow.ui" line="2757"/>
+        <location filename="Forms/OptionsWindow.ui" line="2855"/>
+        <location filename="Forms/OptionsWindow.ui" line="3381"/>
+        <location filename="Forms/OptionsWindow.ui" line="3481"/>
+        <location filename="Forms/OptionsWindow.ui" line="3614"/>
+        <location filename="Forms/OptionsWindow.ui" line="3734"/>
+        <location filename="Forms/OptionsWindow.ui" line="3808"/>
+        <location filename="Forms/OptionsWindow.ui" line="6217"/>
         <source>Type</source>
         <translation>نوع</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2513"/>
+        <location filename="Forms/OptionsWindow.ui" line="2594"/>
         <source>Program Groups</source>
         <translation>گروه‌های برنامه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2541"/>
+        <location filename="Forms/OptionsWindow.ui" line="2622"/>
         <source>Add Group</source>
         <translation>افزودن گروه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2548"/>
-        <location filename="Forms/OptionsWindow.ui" line="2931"/>
-        <location filename="Forms/OptionsWindow.ui" line="3035"/>
-        <location filename="Forms/OptionsWindow.ui" line="3186"/>
-        <location filename="Forms/OptionsWindow.ui" line="3958"/>
+        <location filename="Forms/OptionsWindow.ui" line="2629"/>
+        <location filename="Forms/OptionsWindow.ui" line="3012"/>
+        <location filename="Forms/OptionsWindow.ui" line="3116"/>
+        <location filename="Forms/OptionsWindow.ui" line="3267"/>
+        <location filename="Forms/OptionsWindow.ui" line="4039"/>
         <source>Add Program</source>
         <translation>افزودن برنامه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2721"/>
+        <location filename="Forms/OptionsWindow.ui" line="2802"/>
         <source>Force Folder</source>
         <translation>اجبار پوشه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3315"/>
-        <location filename="Forms/OptionsWindow.ui" line="3415"/>
-        <location filename="Forms/OptionsWindow.ui" line="3548"/>
+        <location filename="Forms/OptionsWindow.ui" line="3396"/>
+        <location filename="Forms/OptionsWindow.ui" line="3496"/>
+        <location filename="Forms/OptionsWindow.ui" line="3629"/>
         <source>Path</source>
         <translation>مسیر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2665"/>
+        <location filename="Forms/OptionsWindow.ui" line="2746"/>
         <source>Force Program</source>
         <translation>اجبار برنامه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="670"/>
-        <location filename="Forms/OptionsWindow.ui" line="1923"/>
-        <location filename="Forms/OptionsWindow.ui" line="2521"/>
-        <location filename="Forms/OptionsWindow.ui" line="2639"/>
-        <location filename="Forms/OptionsWindow.ui" line="2800"/>
-        <location filename="Forms/OptionsWindow.ui" line="2950"/>
-        <location filename="Forms/OptionsWindow.ui" line="3049"/>
-        <location filename="Forms/OptionsWindow.ui" line="3206"/>
-        <location filename="Forms/OptionsWindow.ui" line="3282"/>
-        <location filename="Forms/OptionsWindow.ui" line="3389"/>
-        <location filename="Forms/OptionsWindow.ui" line="3515"/>
-        <location filename="Forms/OptionsWindow.ui" line="3610"/>
-        <location filename="Forms/OptionsWindow.ui" line="3750"/>
-        <location filename="Forms/OptionsWindow.ui" line="4175"/>
-        <location filename="Forms/OptionsWindow.ui" line="4658"/>
-        <location filename="Forms/OptionsWindow.ui" line="4765"/>
-        <location filename="Forms/OptionsWindow.ui" line="5139"/>
-        <location filename="Forms/OptionsWindow.ui" line="5372"/>
-        <location filename="Forms/OptionsWindow.ui" line="5443"/>
+        <location filename="Forms/OptionsWindow.ui" line="1167"/>
+        <location filename="Forms/OptionsWindow.ui" line="2004"/>
+        <location filename="Forms/OptionsWindow.ui" line="2602"/>
+        <location filename="Forms/OptionsWindow.ui" line="2720"/>
+        <location filename="Forms/OptionsWindow.ui" line="2881"/>
+        <location filename="Forms/OptionsWindow.ui" line="3031"/>
+        <location filename="Forms/OptionsWindow.ui" line="3130"/>
+        <location filename="Forms/OptionsWindow.ui" line="3287"/>
+        <location filename="Forms/OptionsWindow.ui" line="3363"/>
+        <location filename="Forms/OptionsWindow.ui" line="3470"/>
+        <location filename="Forms/OptionsWindow.ui" line="3596"/>
+        <location filename="Forms/OptionsWindow.ui" line="3691"/>
+        <location filename="Forms/OptionsWindow.ui" line="3831"/>
+        <location filename="Forms/OptionsWindow.ui" line="4256"/>
+        <location filename="Forms/OptionsWindow.ui" line="4739"/>
+        <location filename="Forms/OptionsWindow.ui" line="4846"/>
+        <location filename="Forms/OptionsWindow.ui" line="5220"/>
+        <location filename="Forms/OptionsWindow.ui" line="5453"/>
+        <location filename="Forms/OptionsWindow.ui" line="5524"/>
         <source>Show Templates</source>
         <translation>نمایش قالب‌ها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1681"/>
+        <location filename="Forms/OptionsWindow.ui" line="1762"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
         <translation>نکته‌ی امنیتی: برنامه‌های دارای سطح دسترسی بالا که تحت نظارت Sandboxie با توکن مدیر یا سیستم اجرا می‌شوند، فرصت‌های بیشتری برای دور زدن ایزوله‌سازی و تغییر سیستم خارج از سندباکس دارند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1652"/>
+        <location filename="Forms/OptionsWindow.ui" line="1733"/>
         <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
         <translation>اجازه به MSIServer برای اجرا با توکن سیستم سندباکس‌شده و اعمال استثناهای دیگر در صورت نیاز</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1597"/>
+        <location filename="Forms/OptionsWindow.ui" line="1678"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
         <translation>نکته: معافیت‌های نصب‌کننده‌ی Msi معمولاً نباید لازم باشند، اما اگر در نصب یک بسته‌ی msi که به آن اعتماد دارید مشکلی داشتید، این گزینه می‌تواند به تکمیل موفق نصب کمک کند. همچنین می‌توانید غیرفعال کردن حذف دسترسی‌های مدیر را امتحان کنید.</translation>
     </message>
@@ -8696,149 +8803,149 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>همیشه این جعبه را در فهرست سینی سیستم نشان بده (سنجاق‌شده)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="824"/>
+        <location filename="Forms/OptionsWindow.ui" line="1321"/>
         <source>Open Windows Credentials Store (user mode)</source>
         <translation>باز کردن Windows Credentials Store (حالت کاربر)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4516"/>
+        <location filename="Forms/OptionsWindow.ui" line="4597"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
         <translation>جلوگیری از تغییر پارامترهای شبکه و فایروال (حالت کاربر)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2555"/>
+        <location filename="Forms/OptionsWindow.ui" line="2636"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
         <translation>می‌توانید برنامه‌ها را با هم گروه‌بندی کرده و یک نام گروه به آن‌ها بدهید. گروه‌های برنامه می‌توانند به‌جای نام برنامه‌ها در برخی تنظیمات استفاده شوند. گروه‌های تعریف‌شده برای جعبه، گروه‌های تعریف‌شده در قالب‌ها را بازنویسی می‌کنند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2629"/>
+        <location filename="Forms/OptionsWindow.ui" line="2710"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>برنامه‌هایی که اینجا وارد شده‌اند، یا برنامه‌هایی که از مکان‌های واردشده اجرا می‌شوند، به‌طور خودکار در این جعبه قرار می‌گیرند، مگر آنکه صراحتاً در جعبه‌ی دیگری اجرا شده باشند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2901"/>
-        <location filename="Forms/OptionsWindow.ui" line="3083"/>
+        <location filename="Forms/OptionsWindow.ui" line="2982"/>
+        <location filename="Forms/OptionsWindow.ui" line="3164"/>
         <source>Stop Behaviour</source>
         <translation>رفتار توقف</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3140"/>
+        <location filename="Forms/OptionsWindow.ui" line="3221"/>
         <source>Start Restrictions</source>
         <translation>محدودیت‌های شروع</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3220"/>
+        <location filename="Forms/OptionsWindow.ui" line="3301"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>نمایش پیام 1308 هنگامی که یک برنامه نمی‌تواند اجرا شود</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3170"/>
+        <location filename="Forms/OptionsWindow.ui" line="3251"/>
         <source>Allow only selected programs to start in this sandbox. *</source>
         <translation>فقط اجازه بده برنامه‌های انتخاب‌شده در این جعبه اجرا شوند. *</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3177"/>
+        <location filename="Forms/OptionsWindow.ui" line="3258"/>
         <source>Prevent selected programs from starting in this sandbox.</source>
         <translation>از اجرای برنامه‌های انتخاب‌شده در این جعبه جلوگیری کن.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3163"/>
+        <location filename="Forms/OptionsWindow.ui" line="3244"/>
         <source>Allow all programs to start in this sandbox.</source>
         <translation>اجازه بده همه‌ی برنامه‌ها در این جعبه اجرا شوند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3153"/>
+        <location filename="Forms/OptionsWindow.ui" line="3234"/>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
         <translation>* نکته: برنامه‌های نصب‌شده در این جعبه اصلاً قادر به اجرا نخواهند بود.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3931"/>
+        <location filename="Forms/OptionsWindow.ui" line="4012"/>
         <source>Process Restrictions</source>
         <translation>محدودیت‌های فرایند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3951"/>
+        <location filename="Forms/OptionsWindow.ui" line="4032"/>
         <source>Issue message 1307 when a program is denied internet access</source>
         <translation>نمایش پیام 1307 هنگامی که به یک برنامه دسترسی اینترنت داده نمی‌شود</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3965"/>
+        <location filename="Forms/OptionsWindow.ui" line="4046"/>
         <source>Prompt user whether to allow an exemption from the blockade.</source>
         <translation>از کاربر بپرس که آیا یک استثنا از محاصره اجازه داده شود یا خیر.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3979"/>
+        <location filename="Forms/OptionsWindow.ui" line="4060"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
         <translation>نکته: برنامه‌های نصب‌شده در این جعبه اصلاً به اینترنت دسترسی نخواهند داشت.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3310"/>
-        <location filename="Forms/OptionsWindow.ui" line="3410"/>
-        <location filename="Forms/OptionsWindow.ui" line="3543"/>
-        <location filename="Forms/OptionsWindow.ui" line="3663"/>
-        <location filename="Forms/OptionsWindow.ui" line="3737"/>
-        <location filename="Forms/OptionsWindow.ui" line="4008"/>
+        <location filename="Forms/OptionsWindow.ui" line="3391"/>
+        <location filename="Forms/OptionsWindow.ui" line="3491"/>
+        <location filename="Forms/OptionsWindow.ui" line="3624"/>
+        <location filename="Forms/OptionsWindow.ui" line="3744"/>
+        <location filename="Forms/OptionsWindow.ui" line="3818"/>
+        <location filename="Forms/OptionsWindow.ui" line="4089"/>
         <source>Access</source>
         <translation>دسترسی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="427"/>
+        <location filename="Forms/OptionsWindow.ui" line="924"/>
         <source>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</source>
         <translation>استفاده از شماره‌های سریال حجم برای درایوها، مانند: \drive\C~1234-ABCD</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="444"/>
+        <location filename="Forms/OptionsWindow.ui" line="941"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
         <translation>ساختار جعبه فقط زمانی قابل تغییر است که سندباکس خالی باشد</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="504"/>
+        <location filename="Forms/OptionsWindow.ui" line="1001"/>
         <source>Disk/File access</source>
         <translation>دسترسی دیسک/فایل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="464"/>
+        <location filename="Forms/OptionsWindow.ui" line="961"/>
         <source>Encrypt sandbox content</source>
         <translation>رمزنگاری محتوای سندباکس</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="478"/>
+        <location filename="Forms/OptionsWindow.ui" line="975"/>
         <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box&apos;s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
         <oldsource>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</oldsource>
         <translation>وقتی &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;رمزنگاری جعبه&lt;/a&gt; فعال باشد، پوشه‌ی ریشه‌ی جعبه، از جمله رجیستری آن، در یک تصویر دیسک رمزنگاری‌شده با استفاده از پیاده‌سازی AES-XTS شرکت &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&lt;/a&gt; ذخیره می‌شود.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="361"/>
+        <location filename="Forms/OptionsWindow.ui" line="858"/>
         <source>Partially checked means prevent box removal but not content deletion.</source>
         <translation>تیک نیمه‌زده به این معناست که از حذف جعبه جلوگیری می‌شود اما حذف محتوا مانعی ندارد.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="420"/>
+        <location filename="Forms/OptionsWindow.ui" line="917"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
         <translation>برای فعال‌سازی پشتیبانی از Ram Disk و تصویر دیسک، درایور &lt;a href=&quot;addon://ImDisk&quot;&gt;ImDisk را نصب کنید&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="524"/>
+        <location filename="Forms/OptionsWindow.ui" line="1021"/>
         <source>Store the sandbox content in a Ram Disk</source>
         <translation>ذخیره‌ی محتوای سندباکس در یک Ram Disk</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="457"/>
+        <location filename="Forms/OptionsWindow.ui" line="954"/>
         <source>Set Password</source>
         <translation>تنظیم گذرواژه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="434"/>
+        <location filename="Forms/OptionsWindow.ui" line="931"/>
         <source>Virtualization scheme</source>
         <translation>طرح مجازی‌سازی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="544"/>
+        <location filename="Forms/OptionsWindow.ui" line="1041"/>
         <source>Allow sandboxed processes to open files protected by EFS</source>
         <translation>اجازه به فرایندهای سندباکس‌شده برای باز کردن فایل‌های محافظت‌شده با EFS</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="601"/>
+        <location filename="Forms/OptionsWindow.ui" line="1098"/>
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
@@ -8847,161 +8954,161 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
 2115: فایل مهاجرت نکرد، فایل به‌صورت فقط‌خواندنی باز خواهد شد</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="606"/>
+        <location filename="Forms/OptionsWindow.ui" line="1103"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
         <translation>نمایش پیام 2113/2114/2115 هنگامی که یک فایل به‌طور کامل مهاجرت نمی‌کند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="630"/>
+        <location filename="Forms/OptionsWindow.ui" line="1127"/>
         <source>Add Pattern</source>
         <translation>افزودن الگو</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="637"/>
+        <location filename="Forms/OptionsWindow.ui" line="1134"/>
         <source>Remove Pattern</source>
         <translation>حذف الگو</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="691"/>
+        <location filename="Forms/OptionsWindow.ui" line="1188"/>
         <source>Pattern</source>
         <translation>الگو</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="699"/>
+        <location filename="Forms/OptionsWindow.ui" line="1196"/>
         <source>Sandboxie does not allow writing to host files, unless permitted by the user. When a sandboxed application attempts to modify a file, the entire file must be copied into the sandbox, for large files this can take a significate amount of time. Sandboxie offers options for handling these cases, which can be configured on this page.</source>
         <translation>Sandboxie اجازه‌ی نوشتن روی فایل‌های میزبان را نمی‌دهد، مگر آنکه کاربر اجازه داده باشد. وقتی یک برنامه‌ی سندباکس‌شده تلاش می‌کند فایلی را تغییر دهد، کل فایل باید به داخل سندباکس کپی شود؛ برای فایل‌های بزرگ این کار می‌تواند زمان قابل‌توجهی ببرد. Sandboxie گزینه‌هایی برای مدیریت این موارد ارائه می‌دهد که می‌توان آن‌ها را در این صفحه پیکربندی کرد.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="709"/>
+        <location filename="Forms/OptionsWindow.ui" line="1206"/>
         <source>Using wildcard patterns file specific behavior can be configured in the list below:</source>
         <translation>با استفاده از الگوهای عام‌نویسه (wildcard) می‌توان رفتار مخصوص فایل را در فهرست زیر پیکربندی کرد:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="723"/>
+        <location filename="Forms/OptionsWindow.ui" line="1220"/>
         <source>When a file cannot be migrated, open it in read-only mode instead</source>
         <translation>وقتی یک فایل نمی‌تواند مهاجرت کند، به‌جای آن آن را در حالت فقط‌خواندنی باز کن</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="994"/>
+        <location filename="Forms/OptionsWindow.ui" line="1491"/>
         <source>Open access to Proxy Configurations</source>
         <translation>باز کردن دسترسی به پیکربندی‌های پراکسی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1102"/>
-        <location filename="Forms/OptionsWindow.ui" line="4334"/>
+        <location filename="Forms/OptionsWindow.ui" line="1599"/>
+        <location filename="Forms/OptionsWindow.ui" line="4415"/>
         <source>Move Up</source>
         <translation>انتقال به بالا</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1121"/>
-        <location filename="Forms/OptionsWindow.ui" line="4345"/>
+        <location filename="Forms/OptionsWindow.ui" line="1618"/>
+        <location filename="Forms/OptionsWindow.ui" line="4426"/>
         <source>Move Down</source>
         <translation>انتقال به پایین</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1730"/>
+        <location filename="Forms/OptionsWindow.ui" line="1811"/>
         <source>File ACLs</source>
         <translation>ACL های فایل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1790"/>
+        <location filename="Forms/OptionsWindow.ui" line="1871"/>
         <source>Security Isolation</source>
         <translation>ایزوله‌سازی امنیتی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1881"/>
+        <location filename="Forms/OptionsWindow.ui" line="1962"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
         <translation>برخی ویژگی‌های ایزوله‌سازی می‌توانند سازگاری با بعضی برنامه‌ها را مختل کنند. اگر از این جعبه &lt;b&gt;نه برای امنیت&lt;/b&gt; بلکه برای قابلیت جابه‌جایی برنامه استفاده می‌کنید، می‌توانید با تغییر این گزینه‌ها و صرف‌نظر کردن از مقداری امنیت، سازگاری را بازگردانید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1851"/>
+        <location filename="Forms/OptionsWindow.ui" line="1932"/>
         <source>Disable Security Isolation</source>
         <translation>غیرفعال کردن ایزوله‌سازی امنیتی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="967"/>
+        <location filename="Forms/OptionsWindow.ui" line="1464"/>
         <source>Access Isolation</source>
         <translation>ایزوله‌سازی دسترسی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1917"/>
-        <location filename="Forms/OptionsWindow.ui" line="1972"/>
+        <location filename="Forms/OptionsWindow.ui" line="1998"/>
+        <location filename="Forms/OptionsWindow.ui" line="2053"/>
         <source>Box Protection</source>
         <translation>محافظت از جعبه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1993"/>
+        <location filename="Forms/OptionsWindow.ui" line="2074"/>
         <source>Protect processes within this box from host processes</source>
         <translation>محافظت از فرایندهای داخل این جعبه در برابر فرایندهای میزبان</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2000"/>
+        <location filename="Forms/OptionsWindow.ui" line="2081"/>
         <source>Allow Process</source>
         <translation>اجازه به فرایند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1930"/>
+        <location filename="Forms/OptionsWindow.ui" line="2011"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
         <translation>نمایش پیام 1318/1317 هنگامی که یک فرایند میزبان تلاش می‌کند به یک فرایند سندباکس‌شده/ریشه‌ی جعبه دسترسی پیدا کند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2014"/>
+        <location filename="Forms/OptionsWindow.ui" line="2095"/>
         <source>Sandboxie-Plus is able to create confidential sandboxes that provide robust protection against unauthorized surveillance or tampering by host processes. By utilizing an encrypted sandbox image, this feature delivers the highest level of operational confidentiality, ensuring the safety and integrity of sandboxed processes.</source>
         <translation>Sandboxie-Plus قادر است جعبه‌های محرمانه بسازد که محافظت قوی در برابر نظارت غیرمجاز یا دستکاری توسط فرایندهای میزبان فراهم می‌کنند. با استفاده از یک تصویر سندباکس رمزنگاری‌شده، این ویژگی بالاترین سطح محرمانگی عملیاتی را ارائه می‌دهد و ایمنی و یکپارچگی فرایندهای سندباکس‌شده را تضمین می‌کند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1979"/>
+        <location filename="Forms/OptionsWindow.ui" line="2060"/>
         <source>Deny Process</source>
         <translation>رد کردن فرایند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2475"/>
+        <location filename="Forms/OptionsWindow.ui" line="2556"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>استفاده از یک ورود (login) اختصاصی Sandboxie به‌جای یک توکن ناشناس</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3683"/>
+        <location filename="Forms/OptionsWindow.ui" line="3764"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
         <translation>پیکربندی این‌که کدام فرایندها می‌توانند به اشیای دسکتاپ مانند پنجره‌ها و مواردی مشابه دسترسی داشته باشند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4863"/>
+        <location filename="Forms/OptionsWindow.ui" line="4944"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
         <translation>وقتی کلید میان‌بر سراسری ۳ بار پشت سر هم فشرده شود، این استثنا نادیده گرفته خواهد شد.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4866"/>
+        <location filename="Forms/OptionsWindow.ui" line="4947"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
         <translation>این سندباکس را از پایان‌یافتن هنگام فراخوانی «پایان‌دادن به همه‌ی فرایندها» مستثنا کن.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4954"/>
+        <location filename="Forms/OptionsWindow.ui" line="5035"/>
         <source>Image Protection</source>
         <translation>محافظت از تصویر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4992"/>
+        <location filename="Forms/OptionsWindow.ui" line="5073"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
         <translation>نمایش پیام 1305 هنگامی که یک برنامه تلاش می‌کند یک dll سندباکس‌شده را بارگذاری کند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4985"/>
+        <location filename="Forms/OptionsWindow.ui" line="5066"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
         <translation>جلوگیری از بارگذاری DLL از سندباکس توسط برنامه‌های سندباکس‌شده‌ای که روی میزبان نصب شده‌اند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4924"/>
+        <location filename="Forms/OptionsWindow.ui" line="5005"/>
         <source>Dlls &amp;&amp; Extensions</source>
         <translation>DLL ها و افزونه‌ها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4973"/>
+        <location filename="Forms/OptionsWindow.ui" line="5054"/>
         <source>Description</source>
         <translation>توضیحات</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4981"/>
+        <location filename="Forms/OptionsWindow.ui" line="5062"/>
         <source>Sandboxie&apos;s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. &apos;ClosedFilePath=!iexplore.exe,C:Users*&apos; will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the &quot;Access policies&quot; page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
@@ -9010,122 +9117,122 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
 هدف از این کار جلوگیری از این است که فرایندهای مخرب داخل سندباکس یک نسخه‌ی تغییرنام‌یافته از خود بسازند و به منابع محافظت‌شده دسترسی پیدا کنند. یک بردار سوءاستفاده‌ی دیگر، تزریق یک کتابخانه به داخل یک فرایند مجاز است تا به هر چیزی که آن فرایند اجازه‌ی دسترسی به آن را دارد دسترسی پیدا شود. با استفاده از محافظت از تصویر میزبان، می‌توان از این کار جلوگیری کرد؛ به این صورت که برنامه‌های نصب‌شده روی میزبان که داخل یک سندباکس اجرا می‌شوند، از بارگذاری کتابخانه‌ها از خودِ سندباکس منع می‌شوند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5005"/>
+        <location filename="Forms/OptionsWindow.ui" line="5086"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
         <translation>قابلیت‌های Sandboxie را می‌توان با استفاده از DLL های اختیاری گسترش داد که در ابتدای اجرا توسط فایل SbieDll.dll در هر فرایند سندباکس‌شده بارگذاری می‌شوند؛ مدیر افزونه در تنظیمات سراسری چند افزونه‌ی مفید ارائه می‌دهد که پس از نصب می‌توان آن‌ها را اینجا برای جعبه‌ی فعلی فعال کرد.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2350"/>
+        <location filename="Forms/OptionsWindow.ui" line="2431"/>
         <source>Advanced Security</source>
         <oldsource>Adcanced Security</oldsource>
         <translation>امنیت پیشرفته</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2264"/>
+        <location filename="Forms/OptionsWindow.ui" line="2345"/>
         <source>Other isolation</source>
         <translation>ایزوله‌سازی دیگر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2410"/>
+        <location filename="Forms/OptionsWindow.ui" line="2491"/>
         <source>Privilege isolation</source>
         <translation>ایزوله‌سازی امتیاز</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2482"/>
+        <location filename="Forms/OptionsWindow.ui" line="2563"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>استفاده از یک توکن سفارشی Sandboxie اجازه می‌دهد سندباکس‌های مختلف بهتر از یکدیگر ایزوله شوند، و در ستون کاربر مدیر وظیفه‌ها نام جعبه‌ای که یک فرایند به آن تعلق دارد نشان داده می‌شود. با این حال، برخی راهکارهای امنیتی شخص ثالث ممکن است با توکن‌های سفارشی مشکل داشته باشند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2587"/>
+        <location filename="Forms/OptionsWindow.ui" line="2668"/>
         <source>Program Control</source>
         <translation>کنترل برنامه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2609"/>
+        <location filename="Forms/OptionsWindow.ui" line="2690"/>
         <source>Force Programs</source>
         <translation>اجبار برنامه‌ها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2689"/>
+        <location filename="Forms/OptionsWindow.ui" line="2770"/>
         <source>Disable forced Process and Folder for this sandbox</source>
         <translation>غیرفعال کردن اجبار فرایند و پوشه برای این سندباکس</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2750"/>
+        <location filename="Forms/OptionsWindow.ui" line="2831"/>
         <source>Breakout Programs</source>
         <translation>برنامه‌های خروج (Breakout)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2855"/>
+        <location filename="Forms/OptionsWindow.ui" line="2936"/>
         <source>Breakout Program</source>
         <translation>برنامه‌ی خروج</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2829"/>
+        <location filename="Forms/OptionsWindow.ui" line="2910"/>
         <source>Breakout Folder</source>
         <translation>پوشه‌ی خروج</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="410"/>
+        <location filename="Forms/OptionsWindow.ui" line="907"/>
         <source>Force protection on mount</source>
         <translation>اجبار محافظت هنگام mount</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1986"/>
+        <location filename="Forms/OptionsWindow.ui" line="2067"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
         <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
         <translation>جلوگیری از گرفتن تصویر پنجره‌ها از پنجره‌های سندباکس‌شده توسط سایر فرایندها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2085"/>
+        <location filename="Forms/OptionsWindow.ui" line="2166"/>
         <source>Allow useful Windows processes access to protected processes</source>
         <translation>اجازه به فرایندهای مفید ویندوز برای دسترسی به فرایندهای محافظت‌شده</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="876"/>
+        <location filename="Forms/OptionsWindow.ui" line="1373"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
         <translation>این ویژگی همه‌ی روش‌های گرفتن تصویر صفحه را مسدود نمی‌کند، فقط چند روش رایج را.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="859"/>
+        <location filename="Forms/OptionsWindow.ui" line="1356"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
         <translation>جلوگیری از جابه‌جایی ماوس، آوردن به جلو، و عملیات مشابه؛ این کار احتمالاً با بازی‌ها مشکل ایجاد می‌کند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="869"/>
+        <location filename="Forms/OptionsWindow.ui" line="1366"/>
         <source>Allow sandboxed windows to cover the taskbar</source>
         <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
         <translation>اجازه به پنجره‌های سندباکس‌شده برای پوشاندن نوار وظیفه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="913"/>
+        <location filename="Forms/OptionsWindow.ui" line="1410"/>
         <source>Isolation</source>
         <translation>ایزوله‌سازی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2007"/>
+        <location filename="Forms/OptionsWindow.ui" line="2088"/>
         <source>Only Administrator user accounts can make changes to this sandbox</source>
         <translation>فقط حساب‌های کاربری مدیر می‌توانند در این سندباکس تغییر ایجاد کنند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2110"/>
+        <location filename="Forms/OptionsWindow.ui" line="2191"/>
         <source>Job Object</source>
         <translation>شیء کار (Job Object)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2807"/>
+        <location filename="Forms/OptionsWindow.ui" line="2888"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
         <translation>برنامه‌هایی که اینجا وارد شده‌اند، هنگام شروع اجازه‌ی خروج از این سندباکس را خواهند داشت. همچنین امکان دارد آن‌ها را در سندباکس دیگری گرفت (capture)، مثلاً برای این‌که مرورگر وب شما همیشه در یک جعبه‌ی اختصاصی باز شود.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2156"/>
-        <location filename="Forms/OptionsWindow.ui" line="2201"/>
-        <location filename="Forms/OptionsWindow.ui" line="2227"/>
-        <location filename="Forms/OptionsWindow.ui" line="2310"/>
+        <location filename="Forms/OptionsWindow.ui" line="2237"/>
+        <location filename="Forms/OptionsWindow.ui" line="2282"/>
+        <location filename="Forms/OptionsWindow.ui" line="2308"/>
+        <location filename="Forms/OptionsWindow.ui" line="2391"/>
         <source>unlimited</source>
         <translation>نامحدود</translation>
     </message>
@@ -9135,108 +9242,108 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation>یادداشت‌های جعبه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1262"/>
+        <location filename="Forms/OptionsWindow.ui" line="395"/>
         <source>Alpha</source>
         <translation>آلفا</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1330"/>
+        <location filename="Forms/OptionsWindow.ui" line="463"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
         <translation>وقتی تیک زده شود، قاب حاشیه‌ی رنگی پنهان می‌شود و فقط نام یا نام مستعار سندباکس به‌عنوان برچسب نمایش داده می‌شود. نیازمند فعال بودن گزینه‌ی برچسب است.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1333"/>
+        <location filename="Forms/OptionsWindow.ui" line="466"/>
         <source>Label only</source>
         <translation>فقط برچسب</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1288"/>
+        <location filename="Forms/OptionsWindow.ui" line="421"/>
         <source>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</source>
         <translation>وقتی یک حاشیه‌ی بیرونی توسط لبه‌ی مانیتور برش بخورد، به‌جای آن، آن را داخل پنجره‌های بیشینه‌شده یا چسبیده رسم کن.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1291"/>
+        <location filename="Forms/OptionsWindow.ui" line="424"/>
         <source>Inside when maximized or snapped</source>
         <translation>داخل، هنگام بیشینه یا چسبیده</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="300"/>
+        <location filename="Forms/OptionsWindow.ui" line="797"/>
         <source>After automatic deletion, restore from snapshot:</source>
         <translation>پس از حذف خودکار، بازیابی از عکس فوری:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="325"/>
+        <location filename="Forms/OptionsWindow.ui" line="822"/>
         <source>Open Snapshot Manager</source>
         <translation>باز کردن مدیر عکس فوری</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="328"/>
+        <location filename="Forms/OptionsWindow.ui" line="825"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1780"/>
+        <location filename="Forms/OptionsWindow.ui" line="1861"/>
         <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
         <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
         <translation>استفاده از Access Control Entry های اصلی برای فایل‌ها و پوشه‌های داخل جعبه (برای MSIServer فعال‌سازی استثناها)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1798"/>
+        <location filename="Forms/OptionsWindow.ui" line="1879"/>
         <source>Run Processes on an own Sandboxed Desktop</source>
         <translation>اجرای فرایندها روی یک دسکتاپ سندباکس‌شده‌ی مستقل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1900"/>
+        <location filename="Forms/OptionsWindow.ui" line="1981"/>
         <source>Desktop Isolation</source>
         <translation>ایزوله‌سازی دسکتاپ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1907"/>
+        <location filename="Forms/OptionsWindow.ui" line="1988"/>
         <source>Open Window Station (improves compatibility by reducing desktop isolation)</source>
         <oldsource>Open Window Station (improves compatybility by reducing desktop isolation)</oldsource>
         <translation>باز کردن Window Station (سازگاری را با کاهش ایزوله‌سازی دسکتاپ بهبود می‌دهد)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2102"/>
+        <location filename="Forms/OptionsWindow.ui" line="2183"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
         <translation>وقتی ریشه‌ی جعبه محافظت‌شده است، برای دسترسی به فایل‌ها نیاز است SandMan با دسترسی مدیر اجرا شود</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2208"/>
+        <location filename="Forms/OptionsWindow.ui" line="2289"/>
         <source>Total CPU Rate Limit (%):</source>
         <translation>حداکثر نرخ مصرف کل پردازنده (٪):</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2224"/>
+        <location filename="Forms/OptionsWindow.ui" line="2305"/>
         <source>Leave it blank to disable the setting (1-100)</source>
         <translation>برای غیرفعال کردن این تنظیم، خالی بگذارید (۱ تا ۱۰۰)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1408"/>
-        <location filename="Forms/OptionsWindow.ui" line="2234"/>
+        <location filename="Forms/OptionsWindow.ui" line="602"/>
+        <location filename="Forms/OptionsWindow.ui" line="2315"/>
         <source>%</source>
         <translation>٪</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2294"/>
-        <location filename="Forms/OptionsWindow.ui" line="2327"/>
+        <location filename="Forms/OptionsWindow.ui" line="2375"/>
+        <location filename="Forms/OptionsWindow.ui" line="2408"/>
         <source>bytes</source>
         <translation>بایت</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2492"/>
+        <location filename="Forms/OptionsWindow.ui" line="2573"/>
         <source>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
 Partially checked: No groups will be added to the newly created sandboxed token.</source>
         <translation>تیک‌خورده: یک گروه محلی نیز به توکن سندباکس‌شده‌ی تازه‌ساخته‌شده اضافه خواهد شد که امکان خطاب قرار دادن همه‌ی سندباکس‌ها را با هم فراهم می‌کند. برای ممیزی سیاست‌ها مفید است.
 نیمه‌تیک‌خورده: هیچ گروهی به توکن سندباکس‌شده‌ی تازه‌ساخته‌شده اضافه نخواهد شد.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2496"/>
+        <location filename="Forms/OptionsWindow.ui" line="2577"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
         <translation>ساخت یک توکن سندباکس‌شده‌ی جدید به‌جای کاستن از توکن اصلی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2387"/>
+        <location filename="Forms/OptionsWindow.ui" line="2468"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
         <translation>کاهش سطح یکپارچگی فرایند ConHost.exe</translation>
     </message>
@@ -9251,303 +9358,288 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1152"/>
+        <location filename="Forms/OptionsWindow.ui" line="285"/>
         <source>Box Border</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1163"/>
+        <location filename="Forms/OptionsWindow.ui" line="296"/>
         <source>Frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1190"/>
+        <location filename="Forms/OptionsWindow.ui" line="323"/>
         <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1303"/>
+        <location filename="Forms/OptionsWindow.ui" line="436"/>
         <source>Sandbox label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1340"/>
+        <location filename="Forms/OptionsWindow.ui" line="473"/>
         <source>Label font size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1369"/>
+        <location filename="Forms/OptionsWindow.ui" line="563"/>
         <source>Edge:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1389"/>
+        <location filename="Forms/OptionsWindow.ui" line="583"/>
         <source>Position:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1411"/>
+        <location filename="Forms/OptionsWindow.ui" line="605"/>
         <source>0% is the start of the usable edge; 50% is centered; 100% is the end. Top/bottom run left to right; left/right run top to bottom.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1424"/>
+        <location filename="Forms/OptionsWindow.ui" line="618"/>
         <source>Side text:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1437"/>
-        <source>Stacked letters remain upright. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1447"/>
+        <location filename="Forms/OptionsWindow.ui" line="641"/>
         <source>Movement:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1460"/>
-        <source>Adaptive keeps the label inside monitor bounds and respects taskbar exclusion. Fixed disables that automatic fallback. The existing maximized/snapped setting remains separate.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1470"/>
-        <source>Side labels can be stacked or rotated. Stacked labels use vertical parentheses when the font supports them. Rotated down/up select the reading direction on either side. Adaptive placement moves clipped labels inward; labels that do not fit are clipped without shrinking the font.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1485"/>
+        <location filename="Forms/OptionsWindow.ui" line="699"/>
         <source>Visibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1492"/>
+        <location filename="Forms/OptionsWindow.ui" line="706"/>
         <source>Taskbar:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1505"/>
+        <location filename="Forms/OptionsWindow.ui" line="719"/>
         <source>Choose whether border overlays avoid taskbars and shell appbars. The inherited/default option follows the global setting, which defaults to avoiding taskbars.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1515"/>
+        <location filename="Forms/OptionsWindow.ui" line="729"/>
         <source>Screen capture:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1528"/>
+        <location filename="Forms/OptionsWindow.ui" line="742"/>
         <source>Exclude the border and label from screen capture, not the application itself. When inherited and otherwise unset, CoverBoxedWindows determines the default.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2437"/>
+        <location filename="Forms/OptionsWindow.ui" line="2518"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
         <translation>به‌طور پیش‌فرض، Sandboxie فرایندها را با یک توکن سطح یکپارچگی UNTRUSTED برای حداکثر ایزوله‌سازی اجرا می‌کند.
 فعال کردن این گزینه به‌جای آن از توکن سطح یکپارچگی LOW استفاده می‌کند که ممکن است سازگاری را بهبود دهد اما ایزوله‌سازی و امنیت سندباکس را کاهش می‌دهد.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2441"/>
+        <location filename="Forms/OptionsWindow.ui" line="2522"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
         <translation>استفاده از توکن سطح یکپارچگی LOW به‌جای UNTRUSTED (ایزوله‌سازی را کاهش می‌دهد)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2740"/>
+        <location filename="Forms/OptionsWindow.ui" line="2821"/>
         <source>Force Children</source>
         <translation>اجبار فرزندان</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2874"/>
+        <location filename="Forms/OptionsWindow.ui" line="2955"/>
         <source>Breakout Document</source>
         <translation>سند خروج</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2881"/>
+        <location filename="Forms/OptionsWindow.ui" line="2962"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc...) extensions. Please review the security section for each option in the documentation before use.</source>
         <oldsource>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</oldsource>
         <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;هشدار امنیتی&lt;/font&gt;:&lt;/b&gt; استفاده از &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; و/یا &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; همراه با دستورهای Open[File/Pipe]Path می‌تواند امنیت را به خطر بیندازد، همان‌طور که استفاده از &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; با اجازه دادن به هر پسوند * یا ناامن (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;و غیره...) نیز همین خطر را دارد. لطفاً پیش از استفاده، بخش امنیتی هر گزینه را در مستندات مطالعه کنید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2911"/>
+        <location filename="Forms/OptionsWindow.ui" line="2992"/>
         <source>Lingering Programs</source>
         <translation>برنامه‌های باقی‌مانده</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2957"/>
+        <location filename="Forms/OptionsWindow.ui" line="3038"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.</source>
         <translation>برنامه‌های باقی‌مانده در صورتی که پس از پایان‌یافتن همه‌ی فرایندهای دیگر همچنان در حال اجرا باشند، به‌طور خودکار پایان داده خواهند شد.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2990"/>
+        <location filename="Forms/OptionsWindow.ui" line="3071"/>
         <source>Leader Programs</source>
         <translation>برنامه‌های راهبر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3056"/>
+        <location filename="Forms/OptionsWindow.ui" line="3137"/>
         <source>If leader processes are defined, all others are treated as lingering processes.</source>
         <translation>اگر فرایندهای راهبر تعریف شده باشند، همه‌ی فرایندهای دیگر به‌عنوان فرایند باقی‌مانده در نظر گرفته می‌شوند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3069"/>
+        <location filename="Forms/OptionsWindow.ui" line="3150"/>
         <source>Stop Options</source>
         <translation>گزینه‌های توقف</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3090"/>
+        <location filename="Forms/OptionsWindow.ui" line="3171"/>
         <source>Use Linger Leniency</source>
         <translation>استفاده از اغماض در پایان‌دادن برنامه‌های باقی‌مانده</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3100"/>
+        <location filename="Forms/OptionsWindow.ui" line="3181"/>
         <source>Don&apos;t stop lingering processes with windows</source>
         <translation>فرایندهای باقی‌مانده‌ی دارای پنجره را متوقف نکن</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3227"/>
+        <location filename="Forms/OptionsWindow.ui" line="3308"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
         <translation>این تنظیم می‌تواند برای جلوگیری از اجرای برنامه‌ها در سندباکس بدون آگاهی یا رضایت کاربر استفاده شود.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3230"/>
+        <location filename="Forms/OptionsWindow.ui" line="3311"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
         <translation>نمایش یک هشدار پاپ‌آپ پیش از شروع یک فرایند در سندباکس از یک منبع خارجی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3262"/>
+        <location filename="Forms/OptionsWindow.ui" line="3343"/>
         <source>Files</source>
         <translation>فایل‌ها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3355"/>
+        <location filename="Forms/OptionsWindow.ui" line="3436"/>
         <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>پیکربندی این‌که کدام فرایندها می‌توانند به فایل‌ها، پوشه‌ها و پایپ‌ها دسترسی داشته باشند. 
 دسترسی «Open» فقط برای فایل‌های اجرایی برنامه‌ی واقع در بیرون از سندباکس اعمال می‌شود؛ می‌توانید به‌جای آن از «Open for All» استفاده کنید تا برای همه‌ی برنامه‌ها اعمال شود، یا این رفتار را در برگه‌ی سیاست‌ها تغییر دهید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3369"/>
+        <location filename="Forms/OptionsWindow.ui" line="3450"/>
         <source>Registry</source>
         <translation>رجیستری</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3462"/>
+        <location filename="Forms/OptionsWindow.ui" line="3543"/>
         <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>پیکربندی این‌که کدام فرایندها می‌توانند به رجیستری دسترسی داشته باشند. 
 دسترسی «Open» فقط برای فایل‌های اجرایی برنامه‌ی واقع در بیرون از سندباکس اعمال می‌شود؛ می‌توانید به‌جای آن از «Open for All» استفاده کنید تا برای همه‌ی برنامه‌ها اعمال شود، یا این رفتار را در برگه‌ی سیاست‌ها تغییر دهید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3476"/>
+        <location filename="Forms/OptionsWindow.ui" line="3557"/>
         <source>IPC</source>
         <translation>IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3569"/>
+        <location filename="Forms/OptionsWindow.ui" line="3650"/>
         <source>Configure which processes can access NT IPC objects like ALPC ports and other processes memory and context.
 To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>پیکربندی این‌که کدام فرایندها می‌توانند به اشیای IPC ویندوز NT مانند پورت‌های ALPC و حافظه و زمینه‌ی فرایندهای دیگر دسترسی داشته باشند.
 برای مشخص کردن یک فرایند، از مسیر &apos;$:program.exe&apos; استفاده کنید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3583"/>
+        <location filename="Forms/OptionsWindow.ui" line="3664"/>
         <source>Wnd</source>
         <translation>پنجره</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3668"/>
+        <location filename="Forms/OptionsWindow.ui" line="3749"/>
         <source>Wnd Class</source>
         <translation>کلاس پنجره</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3696"/>
+        <location filename="Forms/OptionsWindow.ui" line="3777"/>
         <source>COM</source>
         <translation>COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3742"/>
+        <location filename="Forms/OptionsWindow.ui" line="3823"/>
         <source>Class Id</source>
         <translation>شناسه‌ی کلاس</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3789"/>
+        <location filename="Forms/OptionsWindow.ui" line="3870"/>
         <source>Configure which processes can access COM objects.</source>
         <translation>پیکربندی این‌که کدام فرایندها می‌توانند به اشیای COM دسترسی داشته باشند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3801"/>
+        <location filename="Forms/OptionsWindow.ui" line="3882"/>
         <source>Don&apos;t use virtualized COM, Open access to hosts COM infrastructure (not recommended)</source>
         <translation>عدم استفاده از COM مجازی‌سازی‌شده، باز کردن دسترسی به زیرساخت COM میزبان (توصیه نمی‌شود)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3809"/>
+        <location filename="Forms/OptionsWindow.ui" line="3890"/>
         <source>Access Policies</source>
         <translation>سیاست‌های دسترسی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3921"/>
+        <location filename="Forms/OptionsWindow.ui" line="4002"/>
         <source>Network Options</source>
         <translation>گزینه‌های شبکه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4018"/>
+        <location filename="Forms/OptionsWindow.ui" line="4099"/>
         <source>Set network/internet access for unlisted processes:</source>
         <translation>تنظیم دسترسی شبکه/اینترنت برای فرایندهای فهرست‌نشده:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4068"/>
+        <location filename="Forms/OptionsWindow.ui" line="4149"/>
         <source>Test Rules, Program:</source>
         <translation>آزمایش قوانین، برنامه:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4081"/>
+        <location filename="Forms/OptionsWindow.ui" line="4162"/>
         <source>Port:</source>
         <translation>درگاه:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4094"/>
+        <location filename="Forms/OptionsWindow.ui" line="4175"/>
         <source>IP:</source>
         <translation>IP:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4107"/>
+        <location filename="Forms/OptionsWindow.ui" line="4188"/>
         <source>Protocol:</source>
         <translation>پروتکل:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4120"/>
+        <location filename="Forms/OptionsWindow.ui" line="4201"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4136"/>
+        <location filename="Forms/OptionsWindow.ui" line="4217"/>
         <source>Add Rule</source>
         <translation>افزودن قانون</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4775"/>
+        <location filename="Forms/OptionsWindow.ui" line="4856"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
         <translation>استفاده از فهرست استثنای بالا برای پنهان‌کردن فایل‌های منطبق از پنجره‌ی بازیابی سریع</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4772"/>
+        <location filename="Forms/OptionsWindow.ui" line="4853"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
         <translation>نیازمند غیرفعال بودن گزینه‌ی «نمایش همه» در پنجره‌ی بازیابی است.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4836"/>
+        <location filename="Forms/OptionsWindow.ui" line="4917"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
         <translation>راه‌اندازی مجدد فرایندهای اجباری‌ای که درون یک job object مربوط به PCA (دستیار سازگاری برنامه) اجرا شده بودند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4914"/>
+        <location filename="Forms/OptionsWindow.ui" line="4995"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
         <translation>استفاده از الگوریتم‌های حدسی برای شناسایی فرایندهای مبتنی بر Electron/Chromium</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6511"/>
+        <location filename="Forms/OptionsWindow.ui" line="6592"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
@@ -9598,7 +9690,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6579"/>
+        <location filename="Forms/OptionsWindow.ui" line="6660"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -9664,27 +9756,27 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6602"/>
+        <location filename="Forms/OptionsWindow.ui" line="6683"/>
         <source>Complete</source>
         <translation>کامل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6655"/>
+        <location filename="Forms/OptionsWindow.ui" line="6736"/>
         <source>Editor settings</source>
         <translation>تنظیمات ویرایشگر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6658"/>
+        <location filename="Forms/OptionsWindow.ui" line="6739"/>
         <source>⚙</source>
         <translation>⚙</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6529"/>
+        <location filename="Forms/OptionsWindow.ui" line="6610"/>
         <source>Tooltips</source>
         <translation>راهنمای ابزار</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6612"/>
+        <location filename="Forms/OptionsWindow.ui" line="6693"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
@@ -9730,299 +9822,299 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6629"/>
+        <location filename="Forms/OptionsWindow.ui" line="6710"/>
         <source>Validate</source>
         <translation>اعتبارسنجی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="686"/>
-        <location filename="Forms/OptionsWindow.ui" line="3305"/>
-        <location filename="Forms/OptionsWindow.ui" line="3405"/>
-        <location filename="Forms/OptionsWindow.ui" line="3538"/>
-        <location filename="Forms/OptionsWindow.ui" line="3658"/>
-        <location filename="Forms/OptionsWindow.ui" line="3732"/>
-        <location filename="Forms/OptionsWindow.ui" line="4147"/>
-        <location filename="Forms/OptionsWindow.ui" line="4252"/>
-        <location filename="Forms/OptionsWindow.ui" line="4381"/>
-        <location filename="Forms/OptionsWindow.ui" line="5126"/>
+        <location filename="Forms/OptionsWindow.ui" line="1183"/>
+        <location filename="Forms/OptionsWindow.ui" line="3386"/>
+        <location filename="Forms/OptionsWindow.ui" line="3486"/>
+        <location filename="Forms/OptionsWindow.ui" line="3619"/>
+        <location filename="Forms/OptionsWindow.ui" line="3739"/>
+        <location filename="Forms/OptionsWindow.ui" line="3813"/>
+        <location filename="Forms/OptionsWindow.ui" line="4228"/>
+        <location filename="Forms/OptionsWindow.ui" line="4333"/>
+        <location filename="Forms/OptionsWindow.ui" line="4462"/>
+        <location filename="Forms/OptionsWindow.ui" line="5207"/>
         <source>Program</source>
         <translation>برنامه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="681"/>
-        <location filename="Forms/OptionsWindow.ui" line="2033"/>
-        <location filename="Forms/OptionsWindow.ui" line="4152"/>
-        <location filename="Forms/OptionsWindow.ui" line="5279"/>
+        <location filename="Forms/OptionsWindow.ui" line="1178"/>
+        <location filename="Forms/OptionsWindow.ui" line="2114"/>
+        <location filename="Forms/OptionsWindow.ui" line="4233"/>
+        <location filename="Forms/OptionsWindow.ui" line="5360"/>
         <source>Action</source>
         <translation>عملکرد</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4157"/>
-        <location filename="Forms/OptionsWindow.ui" line="4391"/>
+        <location filename="Forms/OptionsWindow.ui" line="4238"/>
+        <location filename="Forms/OptionsWindow.ui" line="4472"/>
         <source>Port</source>
         <translation>درگاه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4162"/>
-        <location filename="Forms/OptionsWindow.ui" line="4262"/>
-        <location filename="Forms/OptionsWindow.ui" line="4386"/>
+        <location filename="Forms/OptionsWindow.ui" line="4243"/>
+        <location filename="Forms/OptionsWindow.ui" line="4343"/>
+        <location filename="Forms/OptionsWindow.ui" line="4467"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4167"/>
+        <location filename="Forms/OptionsWindow.ui" line="4248"/>
         <source>Protocol</source>
         <translation>پروتکل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4188"/>
+        <location filename="Forms/OptionsWindow.ui" line="4269"/>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
         <translation>احتیاط: پلتفرم فیلترینگ ویندوز (WFP) با درایور فعال نشده است، بنابراین این قوانین فقط در حالت کاربر اعمال می‌شوند و قابل اجبار نیستند!!! این یعنی برنامه‌های مخرب ممکن است از آن‌ها عبور کنند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3252"/>
+        <location filename="Forms/OptionsWindow.ui" line="3333"/>
         <source>Resource Access</source>
         <translation>دسترسی به منابع</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3335"/>
+        <location filename="Forms/OptionsWindow.ui" line="3416"/>
         <source>Add File/Folder</source>
         <translation>افزودن فایل/پوشه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3629"/>
+        <location filename="Forms/OptionsWindow.ui" line="3710"/>
         <source>Add Wnd Class</source>
         <translation>افزودن کلاس پنجره</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3508"/>
+        <location filename="Forms/OptionsWindow.ui" line="3589"/>
         <source>Add IPC Path</source>
         <translation>افزودن مسیر IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1757"/>
+        <location filename="Forms/OptionsWindow.ui" line="1838"/>
         <source>Use the original token only for approved NT system calls</source>
         <translation>استفاده از توکن اصلی فقط برای فراخوانی‌های سیستمی NT تأییدشده</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1691"/>
+        <location filename="Forms/OptionsWindow.ui" line="1772"/>
         <source>Enable all security enhancements (make security hardened box)</source>
         <translation>فعال کردن همه‌ی تقویت‌های امنیتی (ساخت جعبه‌ی امنیتی تقویت‌شده)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1590"/>
+        <location filename="Forms/OptionsWindow.ui" line="1671"/>
         <source>Restrict driver/device access to only approved ones</source>
         <translation>محدود کردن دسترسی درایور/دستگاه فقط به موارد تأییدشده</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1773"/>
+        <location filename="Forms/OptionsWindow.ui" line="1854"/>
         <source>Security enhancements</source>
         <translation>تقویت‌های امنیتی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="845"/>
+        <location filename="Forms/OptionsWindow.ui" line="1342"/>
         <source>Issue message 2111 when a process access is denied</source>
         <translation>صدور پیام ۲۱۱۱ هنگام رد دسترسی یک فرایند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="852"/>
+        <location filename="Forms/OptionsWindow.ui" line="1349"/>
         <source>Prevent sandboxed processes from interfering with power operations (Experimental)</source>
         <translation>جلوگیری از دخالت فرایندهای سندباکس‌شده در عملیات‌های مربوط به برق (آزمایشی)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="862"/>
+        <location filename="Forms/OptionsWindow.ui" line="1359"/>
         <source>Prevent interference with the user interface (Experimental)</source>
         <translation>جلوگیری از دخالت در رابط کاربری (آزمایشی)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="879"/>
+        <location filename="Forms/OptionsWindow.ui" line="1376"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
         <translation>جلوگیری از گرفتن تصویر پنجره‌ها توسط فرایندهای سندباکس‌شده (آزمایشی، ممکن است باعث اختلال در رابط کاربری شود)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2380"/>
+        <location filename="Forms/OptionsWindow.ui" line="2461"/>
         <source>Sandboxie token</source>
         <translation>توکن Sandboxie</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3442"/>
+        <location filename="Forms/OptionsWindow.ui" line="3523"/>
         <source>Add Reg Key</source>
         <translation>افزودن کلید رجیستری</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3769"/>
+        <location filename="Forms/OptionsWindow.ui" line="3850"/>
         <source>Add COM Object</source>
         <translation>افزودن شیء COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3822"/>
+        <location filename="Forms/OptionsWindow.ui" line="3903"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
         <translation>اعمال قوانین Close...=!&lt;program&gt;,... روی همه‌ی فایل‌های اجرایی واقع در سندباکس نیز.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4201"/>
+        <location filename="Forms/OptionsWindow.ui" line="4282"/>
         <source>DNS Filter</source>
         <translation>فیلتر DNS</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4241"/>
+        <location filename="Forms/OptionsWindow.ui" line="4322"/>
         <source>Add Filter</source>
         <translation>افزودن فیلتر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4218"/>
+        <location filename="Forms/OptionsWindow.ui" line="4299"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
         <translation>با فیلتر DNS می‌توان دامنه‌های خاص را به‌صورت جداگانه برای هر فرایند مسدود کرد. برای مسدودسازی، ستون IP را خالی بگذارید یا یک IP برای هدایت مجدد وارد کنید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4257"/>
+        <location filename="Forms/OptionsWindow.ui" line="4338"/>
         <source>Domain</source>
         <translation>دامنه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4280"/>
+        <location filename="Forms/OptionsWindow.ui" line="4361"/>
         <source>Internet Proxy</source>
         <translation>پراکسی اینترنت</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4370"/>
+        <location filename="Forms/OptionsWindow.ui" line="4451"/>
         <source>Add Proxy</source>
         <translation>افزودن پراکسی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4363"/>
+        <location filename="Forms/OptionsWindow.ui" line="4444"/>
         <source>Test Proxy</source>
         <translation>آزمایش پراکسی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4396"/>
+        <location filename="Forms/OptionsWindow.ui" line="4477"/>
         <source>Auth</source>
         <translation>احراز هویت</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4401"/>
+        <location filename="Forms/OptionsWindow.ui" line="4482"/>
         <source>Login</source>
         <translation>نام کاربری</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4406"/>
+        <location filename="Forms/OptionsWindow.ui" line="4487"/>
         <source>Password</source>
         <translation>گذرواژه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4304"/>
+        <location filename="Forms/OptionsWindow.ui" line="4385"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
         <translation>برنامه‌های سندباکس‌شده می‌توانند مجبور به استفاده از یک پراکسی SOCKS5 از پیش‌تعیین‌شده شوند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4356"/>
+        <location filename="Forms/OptionsWindow.ui" line="4437"/>
         <source>Resolve hostnames via proxy</source>
         <translation>تفکیک نام میزبان از طریق پراکسی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4442"/>
+        <location filename="Forms/OptionsWindow.ui" line="4523"/>
         <source>Other Options</source>
         <translation>گزینه‌های دیگر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4569"/>
+        <location filename="Forms/OptionsWindow.ui" line="4650"/>
         <source>Port Blocking</source>
         <translation>مسدودسازی درگاه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4546"/>
+        <location filename="Forms/OptionsWindow.ui" line="4627"/>
         <source>Block common SAMBA ports</source>
         <translation>مسدودسازی درگاه‌های رایج SAMBA</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4493"/>
+        <location filename="Forms/OptionsWindow.ui" line="4574"/>
         <source>Block DNS, UDP port 53</source>
         <translation>مسدودسازی DNS، درگاه UDP شماره‌ی ۵۳</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4593"/>
+        <location filename="Forms/OptionsWindow.ui" line="4674"/>
         <source>File Recovery</source>
         <translation>بازیابی فایل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4603"/>
+        <location filename="Forms/OptionsWindow.ui" line="4684"/>
         <source>Quick Recovery</source>
         <translation>بازیابی سریع</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4672"/>
+        <location filename="Forms/OptionsWindow.ui" line="4753"/>
         <source>Add Folder</source>
         <translation>افزودن پوشه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4682"/>
+        <location filename="Forms/OptionsWindow.ui" line="4763"/>
         <source>Immediate Recovery</source>
         <translation>بازیابی فوری</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4712"/>
+        <location filename="Forms/OptionsWindow.ui" line="4793"/>
         <source>Ignore Extension</source>
         <translation>نادیده‌گرفتن پسوند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4758"/>
+        <location filename="Forms/OptionsWindow.ui" line="4839"/>
         <source>Ignore Folder</source>
         <translation>نادیده‌گرفتن پوشه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4719"/>
+        <location filename="Forms/OptionsWindow.ui" line="4800"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>فعال کردن پیام بازیابی فوری برای امکان بازیابی فایل‌ها به‌محض ایجادشان.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4702"/>
+        <location filename="Forms/OptionsWindow.ui" line="4783"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
         <translation>می‌توانید پوشه‌ها و انواع فایل (یا پسوندهای فایل) را از بازیابی فوری مستثنا کنید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4635"/>
+        <location filename="Forms/OptionsWindow.ui" line="4716"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
         <translation>هنگام فراخوانی عملکرد بازیابی سریع، پوشه‌های زیر برای محتوای سندباکس‌شده بررسی خواهند شد. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5048"/>
+        <location filename="Forms/OptionsWindow.ui" line="5129"/>
         <source>Advanced Options</source>
         <translation>گزینه‌های پیشرفته</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5064"/>
+        <location filename="Forms/OptionsWindow.ui" line="5145"/>
         <source>Miscellaneous</source>
         <translation>متفرقه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3676"/>
+        <location filename="Forms/OptionsWindow.ui" line="3757"/>
         <source>Don&apos;t alter window class names created by sandboxed programs</source>
         <translation>تغییر ندادن نام کلاس‌های پنجره‌ی ساخته‌شده توسط برنامه‌های سندباکس‌شده</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2417"/>
+        <location filename="Forms/OptionsWindow.ui" line="2498"/>
         <source>Do not start sandboxed services using a system token (recommended)</source>
         <translation>آغازنکردن سرویس‌های سندباکس‌شده با توکن سیستمی (توصیه‌شده)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="964"/>
-        <location filename="Forms/OptionsWindow.ui" line="1824"/>
-        <location filename="Forms/OptionsWindow.ui" line="1897"/>
-        <location filename="Forms/OptionsWindow.ui" line="1969"/>
-        <location filename="Forms/OptionsWindow.ui" line="2261"/>
-        <location filename="Forms/OptionsWindow.ui" line="2377"/>
-        <location filename="Forms/OptionsWindow.ui" line="2407"/>
-        <location filename="Forms/OptionsWindow.ui" line="4951"/>
+        <location filename="Forms/OptionsWindow.ui" line="1461"/>
+        <location filename="Forms/OptionsWindow.ui" line="1905"/>
+        <location filename="Forms/OptionsWindow.ui" line="1978"/>
+        <location filename="Forms/OptionsWindow.ui" line="2050"/>
+        <location filename="Forms/OptionsWindow.ui" line="2342"/>
+        <location filename="Forms/OptionsWindow.ui" line="2458"/>
+        <location filename="Forms/OptionsWindow.ui" line="2488"/>
+        <location filename="Forms/OptionsWindow.ui" line="5032"/>
         <source>Protect the sandbox integrity itself</source>
         <translation>حفاظت از یکپارچگی خود سندباکس</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2394"/>
+        <location filename="Forms/OptionsWindow.ui" line="2475"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
         <translation>کاهش امتیازهای حیاتی از فرایندهایی که با توکن SYSTEM اجرا می‌شوند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2364"/>
+        <location filename="Forms/OptionsWindow.ui" line="2445"/>
         <source>(Security Critical)</source>
         <translation>(حیاتی از نظر امنیتی)</translation>
     </message>
@@ -10031,272 +10123,272 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation type="vanished">حفاظت از فرایندهای SYSTEM سندباکس‌شده در برابر فرایندهای بدون امتیاز</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4829"/>
+        <location filename="Forms/OptionsWindow.ui" line="4910"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
         <translation>اجبار استفاده از فایل‌های Manifest ساختگی سفارشی (رفتار قدیمی)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3905"/>
+        <location filename="Forms/OptionsWindow.ui" line="3986"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
         <translation>خاص‌بودگی یک قانون معیاری از میزان تطابق آن قانون با یک مسیر خاص است؛ به‌بیان ساده، خاص‌بودگی طول کاراکترهای از ابتدای مسیر تا آخرین زیررشته‌ی غیر-wildcard منطبق است. قانونی که فقط با انواع فایل مانند «*.tmp» تطبیق دارد بالاترین خاص‌بودگی را دارد چون همیشه با کل مسیر فایل تطبیق می‌کند.
 سطح تطابق فرایند اولویت بالاتری نسبت به خاص‌بودگی دارد و توصیف می‌کند که یک قانون چگونه روی یک فرایند خاص اعمال می‌شود. قوانینی که با نام یا گروه فرایند اعمال می‌شوند قوی‌ترین سطح تطابق را دارند، پس از آن‌ها تطابق بر اساس نفی (یعنی قوانینی که روی همه‌ی فرایندها به‌جز فرایند مشخص‌شده اعمال می‌شوند)، و پایین‌ترین سطح تطابق مربوط به تطابق‌های سراسری است، یعنی قوانینی که روی هر فرایندی اعمال می‌شوند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3839"/>
+        <location filename="Forms/OptionsWindow.ui" line="3920"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
         <translation>اولویت‌بندی قوانین بر اساس خاص‌بودگی و سطح تطابق فرایند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3885"/>
+        <location filename="Forms/OptionsWindow.ui" line="3966"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
         <translation>حالت حریم خصوصی، مسدودسازی دسترسی فایل و رجیستری به همه‌ی مکان‌ها به‌جز مکان‌های عمومی سیستم</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3865"/>
+        <location filename="Forms/OptionsWindow.ui" line="3946"/>
         <source>Access Mode</source>
         <translation>حالت دسترسی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3829"/>
+        <location filename="Forms/OptionsWindow.ui" line="3910"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
         <translation>وقتی حالت حریم خصوصی فعال است، فرایندهای سندباکس‌شده فقط می‌توانند C:\Windows\*، C:\Program Files\* و بخش‌هایی از رجیستری HKLM را بخوانند؛ همه‌ی مکان‌های دیگر برای خواندنی/نوشتنی بودن نیازمند دسترسی صریح هستند. در این حالت، خاص‌بودگی قانون همیشه فعال است.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3898"/>
+        <location filename="Forms/OptionsWindow.ui" line="3979"/>
         <source>Rule Policies</source>
         <translation>سیاست‌های قانون</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3815"/>
+        <location filename="Forms/OptionsWindow.ui" line="3896"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
         <translation>اعمال دستورهای File and Key Open فقط روی فایل‌های اجرایی واقع در بیرون سندباکس.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2461"/>
+        <location filename="Forms/OptionsWindow.ui" line="2542"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
         <translation>آغاز RpcSs سندباکس‌شده به‌عنوان فرایند SYSTEM (توصیه نمی‌شود)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2468"/>
+        <location filename="Forms/OptionsWindow.ui" line="2549"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
         <translation>اجازه‌ی دسترسی به مدیر کنترل سرویس فقط به فرایندهای دارای امتیاز</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4808"/>
-        <location filename="Forms/OptionsWindow.ui" line="4822"/>
+        <location filename="Forms/OptionsWindow.ui" line="4889"/>
+        <location filename="Forms/OptionsWindow.ui" line="4903"/>
         <source>Compatibility</source>
         <translation>سازگاری</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2248"/>
+        <location filename="Forms/OptionsWindow.ui" line="2329"/>
         <source>Add sandboxed processes to job objects (recommended)</source>
         <translation>افزودن فرایندهای سندباکس‌شده به job objectها (توصیه‌شده)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4843"/>
+        <location filename="Forms/OptionsWindow.ui" line="4924"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>شبیه‌سازی window station سندباکس‌شده برای همه‌ی فرایندها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1834"/>
+        <location filename="Forms/OptionsWindow.ui" line="1915"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it&apos;s no longer providing reliable security, just simple application compartmentalization.</source>
         <oldsource>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</oldsource>
         <translation>ایزوله‌سازی امنیتی از طریق استفاده از یک توکن فرایند به‌شدت محدودشده، ابزار اصلی Sandboxie برای اجبار محدودیت‌های سندباکس است؛ وقتی این غیرفعال باشد، جعبه در حالت محفظه‌ی برنامه اجرا می‌شود، یعنی دیگر امنیت قابل‌اعتمادی فراهم نمی‌کند، فقط یک تفکیک ساده‌ی برنامه است.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="987"/>
+        <location filename="Forms/OptionsWindow.ui" line="1484"/>
         <source>Allow sandboxed programs to manage Hardware/Devices</source>
         <translation>اجازه‌ی مدیریت سخت‌افزار/دستگاه‌ها به برنامه‌های سندباکس‌شده</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="938"/>
+        <location filename="Forms/OptionsWindow.ui" line="1435"/>
         <source>Open access to Windows Security Account Manager</source>
         <translation>باز کردن دسترسی به Windows Security Account Manager</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="931"/>
+        <location filename="Forms/OptionsWindow.ui" line="1428"/>
         <source>Open access to Windows Local Security Authority</source>
         <translation>باز کردن دسترسی به Windows Local Security Authority</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="838"/>
+        <location filename="Forms/OptionsWindow.ui" line="1335"/>
         <source>Allow to read memory of unsandboxed processes (not recommended)</source>
         <translation>اجازه‌ی خواندن حافظه‌ی فرایندهای غیر-سندباکس‌شده (توصیه نمی‌شود)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4907"/>
+        <location filename="Forms/OptionsWindow.ui" line="4988"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation>غیرفعال کردن استفاده از RpcMgmtSetComTimeout به‌طور پیش‌فرض (ممکن است مشکلات سازگاری را برطرف کند)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1827"/>
+        <location filename="Forms/OptionsWindow.ui" line="1908"/>
         <source>Security Isolation &amp; Filtering</source>
         <translation>ایزوله‌سازی و فیلترینگ امنیتی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1844"/>
+        <location filename="Forms/OptionsWindow.ui" line="1925"/>
         <source>Disable Security Filtering (not recommended)</source>
         <translation>غیرفعال کردن فیلترینگ امنیتی (توصیه نمی‌شود)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1858"/>
+        <location filename="Forms/OptionsWindow.ui" line="1939"/>
         <source>Security Filtering used by Sandboxie to enforce filesystem and registry access restrictions, as well as to restrict process access.</source>
         <translation>فیلترینگ امنیتی که Sandboxie برای اجبار محدودیت‌های دسترسی فایل‌سیستم و رجیستری، و همچنین محدود کردن دسترسی فرایند استفاده می‌کند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="921"/>
+        <location filename="Forms/OptionsWindow.ui" line="1418"/>
         <source>The below options can be used safely when you don&apos;t grant admin rights.</source>
         <translation>گزینه‌های زیر را می‌توان با خیال راحت استفاده کرد اگر دسترسی مدیر اعطا نکنید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5162"/>
+        <location filename="Forms/OptionsWindow.ui" line="5243"/>
         <source>Triggers</source>
         <translation>محرک‌ها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5274"/>
+        <location filename="Forms/OptionsWindow.ui" line="5355"/>
         <source>Event</source>
         <translation>رویداد</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5224"/>
-        <location filename="Forms/OptionsWindow.ui" line="5365"/>
-        <location filename="Forms/OptionsWindow.ui" line="5410"/>
-        <location filename="Forms/OptionsWindow.ui" line="5429"/>
+        <location filename="Forms/OptionsWindow.ui" line="5305"/>
+        <location filename="Forms/OptionsWindow.ui" line="5446"/>
+        <location filename="Forms/OptionsWindow.ui" line="5491"/>
+        <location filename="Forms/OptionsWindow.ui" line="5510"/>
         <source>Run Command</source>
         <translation>اجرای فرمان</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5391"/>
+        <location filename="Forms/OptionsWindow.ui" line="5472"/>
         <source>Start Service</source>
         <translation>آغاز سرویس</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5337"/>
+        <location filename="Forms/OptionsWindow.ui" line="5418"/>
         <source>These events are executed each time a box is started</source>
         <translation>این رویدادها هر بار که یک جعبه آغاز می‌شود اجرا می‌شوند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5340"/>
+        <location filename="Forms/OptionsWindow.ui" line="5421"/>
         <source>On Box Start</source>
         <translation>هنگام آغاز جعبه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5199"/>
-        <location filename="Forms/OptionsWindow.ui" line="5257"/>
+        <location filename="Forms/OptionsWindow.ui" line="5280"/>
+        <location filename="Forms/OptionsWindow.ui" line="5338"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
         <translation>این فرمان‌ها درست پیش از حذف محتوای جعبه، خارج از سندباکس اجرا می‌شوند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2241"/>
+        <location filename="Forms/OptionsWindow.ui" line="2322"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
         <translation>اجازه‌ی استفاده از job objectهای تودرتو (روی ویندوز ۸ و بالاتر کار می‌کند)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5231"/>
+        <location filename="Forms/OptionsWindow.ui" line="5312"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
         <translation>این فرمان‌ها فقط هنگام مقداردهی اولیه‌ی جعبه اجرا می‌شوند. برای اجرای دوباره‌شان، باید محتوای جعبه حذف شود.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5234"/>
+        <location filename="Forms/OptionsWindow.ui" line="5315"/>
         <source>On Box Init</source>
         <translation>هنگام مقداردهی اولیه‌ی جعبه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5305"/>
+        <location filename="Forms/OptionsWindow.ui" line="5386"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation>در این‌جا می‌توانید اقداماتی را مشخص کنید که به‌طور خودکار در رویدادهای مختلف جعبه اجرا شوند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5540"/>
+        <location filename="Forms/OptionsWindow.ui" line="5621"/>
         <source>Add Process</source>
         <translation>افزودن فرایند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5503"/>
+        <location filename="Forms/OptionsWindow.ui" line="5584"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>پنهان‌کردن فرایندهای میزبان از فرایندهای درحال‌اجرا در سندباکس.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="733"/>
+        <location filename="Forms/OptionsWindow.ui" line="1230"/>
         <source>Restrictions</source>
         <translation>محدودیت‌ها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4792"/>
+        <location filename="Forms/OptionsWindow.ui" line="4873"/>
         <source>Various Options</source>
         <translation>گزینه‌های گوناگون</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4887"/>
+        <location filename="Forms/OptionsWindow.ui" line="4968"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
         <translation>اعمال راه‌حل موقت ElevateCreateProcess (رفتار قدیمی)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4880"/>
+        <location filename="Forms/OptionsWindow.ui" line="4961"/>
         <source>Use desktop object workaround for all processes</source>
         <translation>استفاده از راه‌حل موقت شیء دسکتاپ برای همه‌ی فرایندها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5362"/>
+        <location filename="Forms/OptionsWindow.ui" line="5443"/>
         <source>This command will be run before the box content will be deleted</source>
         <translation>این فرمان پیش از حذف محتوای جعبه اجرا خواهد شد</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5202"/>
+        <location filename="Forms/OptionsWindow.ui" line="5283"/>
         <source>On File Recovery</source>
         <translation>هنگام بازیابی فایل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5327"/>
+        <location filename="Forms/OptionsWindow.ui" line="5408"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
         <translation>این فرمان پیش از بازیابی یک فایل اجرا خواهد شد و مسیر فایل به‌عنوان اولین آرگومان ارسال می‌شود. اگر این فرمان چیزی جز ۰ برگرداند، بازیابی مسدود خواهد شد</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5330"/>
+        <location filename="Forms/OptionsWindow.ui" line="5411"/>
         <source>Run File Checker</source>
         <translation>اجرای بررسی‌کننده‌ی فایل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5260"/>
+        <location filename="Forms/OptionsWindow.ui" line="5341"/>
         <source>On Delete Content</source>
         <translation>هنگام حذف محتوا</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5526"/>
+        <location filename="Forms/OptionsWindow.ui" line="5607"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>اجازه ندادن به فرایندهای سندباکس‌شده برای دیدن فرایندهای درحال‌اجرا در جعبه‌های دیگر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2092"/>
+        <location filename="Forms/OptionsWindow.ui" line="2173"/>
         <source>Protect processes in this box from being accessed by specified unsandboxed host processes.</source>
         <translation>حفاظت از فرایندهای این جعبه در برابر دسترسی توسط فرایندهای میزبان غیر-سندباکس‌شده‌ی مشخص‌شده.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2028"/>
-        <location filename="Forms/OptionsWindow.ui" line="5470"/>
+        <location filename="Forms/OptionsWindow.ui" line="2109"/>
+        <location filename="Forms/OptionsWindow.ui" line="5551"/>
         <source>Process</source>
         <translation>فرایند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5680"/>
+        <location filename="Forms/OptionsWindow.ui" line="5761"/>
         <source>Users</source>
         <translation>کاربران</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5698"/>
+        <location filename="Forms/OptionsWindow.ui" line="5779"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>محدود کردن مانیتور دسترسی به منابع فقط به مدیران</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5705"/>
+        <location filename="Forms/OptionsWindow.ui" line="5786"/>
         <source>Add User</source>
         <translation>افزودن کاربر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5735"/>
+        <location filename="Forms/OptionsWindow.ui" line="5816"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
@@ -10305,107 +10397,107 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 توجه: تنظیمات برنامه‌های اجباری و پوشه‌های اجباری برای یک سندباکس روی حساب‌های کاربری‌ای که نمی‌توانند از سندباکس استفاده کنند اعمال نمی‌شود.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5096"/>
+        <location filename="Forms/OptionsWindow.ui" line="5177"/>
         <source>Add Option</source>
         <translation>افزودن گزینه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4411"/>
+        <location filename="Forms/OptionsWindow.ui" line="4492"/>
         <source>Bypass IPs</source>
         <translation>دورزدن IP ها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5110"/>
+        <location filename="Forms/OptionsWindow.ui" line="5191"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
         <translation>در این‌جا می‌توانید گزینه‌های پیشرفته‌ی هر فرایند را برای بهبود سازگاری و/یا سفارشی‌سازی رفتار سندباکس پیکربندی کنید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5121"/>
+        <location filename="Forms/OptionsWindow.ui" line="5202"/>
         <source>Option</source>
         <translation>گزینه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5292"/>
+        <location filename="Forms/OptionsWindow.ui" line="5373"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
         <translation>این فرمان‌ها پس از پایان همه‌ی فرایندهای موجود در سندباکس، خارج از سندباکس اجرا می‌شوند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5564"/>
+        <location filename="Forms/OptionsWindow.ui" line="5645"/>
         <source>Privacy</source>
         <translation>حریم خصوصی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5573"/>
+        <location filename="Forms/OptionsWindow.ui" line="5654"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
         <translation>پنهان‌کردن اطلاعات فرم‌ور</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5450"/>
+        <location filename="Forms/OptionsWindow.ui" line="5531"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
         <translation>برخی برنامه‌ها جزئیات سیستم را از طریق WMI (یک پایگاه‌داده‌ی توکار ویندوز) به‌جای روش‌های عادی می‌خوانند. برای مثال، «tasklist.exe» می‌تواند فهرست کامل فرایندها را با دسترسی به WMI به‌دست آورد، حتی اگر «HideOtherBoxes» استفاده شده باشد. این گزینه را فعال کنید تا این رفتار متوقف شود.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5453"/>
+        <location filename="Forms/OptionsWindow.ui" line="5534"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
         <translation>جلوگیری از دسترسی فرایندهای سندباکس‌شده به جزئیات سیستم از طریق WMI (برای اطلاعات بیشتر به راهنمای ابزار مراجعه کنید)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5496"/>
+        <location filename="Forms/OptionsWindow.ui" line="5577"/>
         <source>Process Hiding</source>
         <translation>پنهان‌سازی فرایند</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5640"/>
+        <location filename="Forms/OptionsWindow.ui" line="5721"/>
         <source>Use a custom Locale/LangID</source>
         <translation>استفاده از منطقه/شناسه‌ی زبان سفارشی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5633"/>
+        <location filename="Forms/OptionsWindow.ui" line="5714"/>
         <source>Data Protection</source>
         <translation>حفاظت داده</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5607"/>
+        <location filename="Forms/OptionsWindow.ui" line="5688"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
         <translation>تخلیه‌ی جداول فرم‌ور فعلی به HKCU\System\SbieCustom</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5610"/>
+        <location filename="Forms/OptionsWindow.ui" line="5691"/>
         <source>Dump FW Tables</source>
         <translation>تخلیه‌ی جداول FW</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5748"/>
+        <location filename="Forms/OptionsWindow.ui" line="5829"/>
         <source>Tracing</source>
         <translation>ردیابی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5877"/>
+        <location filename="Forms/OptionsWindow.ui" line="5958"/>
         <source>Pipe Trace</source>
         <translation>ردیابی پایپ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5945"/>
+        <location filename="Forms/OptionsWindow.ui" line="6026"/>
         <source>API call Trace (traces all SBIE hooks)</source>
         <translation>ردیابی فراخوانی API (تمام هوک‌های SBIE را ردیابی می‌کند)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5931"/>
+        <location filename="Forms/OptionsWindow.ui" line="6012"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translation>ثبت همه‌ی SetError ها در گزارش ردیابی (خروجی زیادی ایجاد می‌کند)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5837"/>
+        <location filename="Forms/OptionsWindow.ui" line="5918"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>ثبت خروجی اشکال‌زدایی در گزارش ردیابی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5898"/>
+        <location filename="Forms/OptionsWindow.ui" line="5979"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -10424,108 +10516,108 @@ instead of &quot;*&quot;.</source>
 به‌جای «*».</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5891"/>
+        <location filename="Forms/OptionsWindow.ui" line="5972"/>
         <source>File Trace</source>
         <translation>ردیابی فایل</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5756"/>
+        <location filename="Forms/OptionsWindow.ui" line="5837"/>
         <source>Disable Resource Access Monitor</source>
         <translation>غیرفعال کردن مانیتور دسترسی به منابع</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5763"/>
+        <location filename="Forms/OptionsWindow.ui" line="5844"/>
         <source>IPC Trace</source>
         <translation>ردیابی IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5797"/>
+        <location filename="Forms/OptionsWindow.ui" line="5878"/>
         <source>GUI Trace</source>
         <translation>ردیابی رابط کاربری</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5857"/>
+        <location filename="Forms/OptionsWindow.ui" line="5938"/>
         <source>Resource Access Monitor</source>
         <translation>مانیتور دسترسی به منابع</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5810"/>
+        <location filename="Forms/OptionsWindow.ui" line="5891"/>
         <source>Access Tracing</source>
         <translation>ردیابی دسترسی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5844"/>
+        <location filename="Forms/OptionsWindow.ui" line="5925"/>
         <source>COM Class Trace</source>
         <translation>ردیابی کلاس COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5938"/>
+        <location filename="Forms/OptionsWindow.ui" line="6019"/>
         <source>Key Trace</source>
         <translation>ردیابی کلید</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6488"/>
+        <location filename="Forms/OptionsWindow.ui" line="6569"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>برای جبران حفاظت ازدست‌رفته، لطفاً صفحه‌ی تنظیمات کاهش امتیازها را در گروه تنظیمات محدودیت‌ها ببینید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4036"/>
-        <location filename="Forms/OptionsWindow.ui" line="5817"/>
+        <location filename="Forms/OptionsWindow.ui" line="4117"/>
+        <location filename="Forms/OptionsWindow.ui" line="5898"/>
         <source>Network Firewall</source>
         <translation>فایروال شبکه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5961"/>
+        <location filename="Forms/OptionsWindow.ui" line="6042"/>
         <source>Debug</source>
         <translation>اشکال‌زدایی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6010"/>
+        <location filename="Forms/OptionsWindow.ui" line="6091"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>هشدار، این گزینه‌ها می‌توانند تضمین‌های اصلی امنیتی را غیرفعال کرده و امنیت سندباکس را بشکنند!!!</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6020"/>
+        <location filename="Forms/OptionsWindow.ui" line="6101"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>این گزینه‌ها برای اشکال‌زدایی مشکلات سازگاری در نظر گرفته شده‌اند؛ لطفاً از آن‌ها در استفاده‌ی واقعی استفاده نکنید. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6158"/>
+        <location filename="Forms/OptionsWindow.ui" line="6239"/>
         <source>App Templates</source>
         <translation>قالب‌های برنامه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6236"/>
+        <location filename="Forms/OptionsWindow.ui" line="6317"/>
         <source>Filter Categories</source>
         <translation>دسته‌بندی‌های فیلتر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6226"/>
+        <location filename="Forms/OptionsWindow.ui" line="6307"/>
         <source>Text Filter</source>
         <translation>فیلتر متنی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6219"/>
+        <location filename="Forms/OptionsWindow.ui" line="6300"/>
         <source>Add Template</source>
         <translation>افزودن قالب</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6268"/>
+        <location filename="Forms/OptionsWindow.ui" line="6349"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>این فهرست شامل تعداد زیادی قالب برای بهبود سازگاری سندباکس است</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6285"/>
+        <location filename="Forms/OptionsWindow.ui" line="6366"/>
         <source>Category</source>
         <translation>دسته</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6330"/>
+        <location filename="Forms/OptionsWindow.ui" line="6411"/>
         <source>Template Folders</source>
         <translation>پوشه‌های قالب</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6350"/>
+        <location filename="Forms/OptionsWindow.ui" line="6431"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -10534,206 +10626,261 @@ Please note that this values are currently user specific and saved globally for 
 لطفاً توجه داشته باشید که این مقادیر در حال حاضر مخصوص کاربر هستند و به‌صورت سراسری برای همه‌ی جعبه‌ها ذخیره می‌شوند.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5131"/>
-        <location filename="Forms/OptionsWindow.ui" line="6141"/>
-        <location filename="Forms/OptionsWindow.ui" line="6381"/>
+        <location filename="Forms/OptionsWindow.ui" line="5212"/>
+        <location filename="Forms/OptionsWindow.ui" line="6222"/>
+        <location filename="Forms/OptionsWindow.ui" line="6462"/>
         <source>Value</source>
         <translation>مقدار</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2140"/>
+        <location filename="Forms/OptionsWindow.ui" line="2221"/>
         <source>Limit restrictions</source>
         <translation>محدودیت‌های حداکثر</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2153"/>
-        <location filename="Forms/OptionsWindow.ui" line="2198"/>
-        <location filename="Forms/OptionsWindow.ui" line="2307"/>
+        <location filename="Forms/OptionsWindow.ui" line="2234"/>
+        <location filename="Forms/OptionsWindow.ui" line="2279"/>
+        <location filename="Forms/OptionsWindow.ui" line="2388"/>
         <source>Leave it blank to disable the setting</source>
         <translation>برای غیرفعال کردن این تنظیم، خالی بگذارید</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2182"/>
+        <location filename="Forms/OptionsWindow.ui" line="2263"/>
         <source>Total Processes Number Limit:</source>
         <translation>محدودیت تعداد کل فرایندها:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2317"/>
+        <location filename="Forms/OptionsWindow.ui" line="2398"/>
         <source>Total Processes Memory Limit:</source>
         <translation>محدودیت حافظه‌ی کل فرایندها:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2271"/>
+        <location filename="Forms/OptionsWindow.ui" line="2352"/>
         <source>Single Process Memory Limit:</source>
         <translation>محدودیت حافظه‌ی هر فرایند:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4873"/>
+        <location filename="Forms/OptionsWindow.ui" line="4954"/>
         <source>Restart force process before they begin to execute</source>
         <translation>راه‌اندازی مجدد فرایند اجباری پیش از شروع اجرایشان</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5295"/>
+        <location filename="Forms/OptionsWindow.ui" line="5376"/>
         <source>On Box Terminate</source>
         <translation>هنگام پایان‌دادن جعبه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5580"/>
+        <location filename="Forms/OptionsWindow.ui" line="5661"/>
         <source>Hide Disk Serial Number</source>
         <translation>پنهان‌کردن شماره‌ی سریال دیسک</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5587"/>
+        <location filename="Forms/OptionsWindow.ui" line="5668"/>
         <source>Obfuscate known unique identifiers in the registry</source>
         <translation>مبهم‌سازی شناسه‌های یکتای شناخته‌شده در رجیستری</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5483"/>
+        <location filename="Forms/OptionsWindow.ui" line="5564"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
         <translation>اجازه ندادن به فرایندهای سندباکس‌شده برای دیدن فرایندهای درحال‌اجرا خارج از هر جعبه‌ای</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4532"/>
+        <location filename="Forms/OptionsWindow.ui" line="4613"/>
         <source>Bind to Adapter IP</source>
         <translation>اتصال به IP آداپتور</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4470"/>
+        <location filename="Forms/OptionsWindow.ui" line="4551"/>
         <source>IPv6:</source>
         <translation>IPv6:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4553"/>
+        <location filename="Forms/OptionsWindow.ui" line="4634"/>
         <source>IPv4:</source>
         <translation>IPv4:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4463"/>
+        <location filename="Forms/OptionsWindow.ui" line="4544"/>
         <source>0000:0000:0000:0000:0000:0000:0000:0000</source>
         <translation>0000:0000:0000:0000:0000:0000:0000:0000</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1310"/>
+        <location filename="Forms/OptionsWindow.ui" line="443"/>
         <source>Sandboxed window label:</source>
         <translation>برچسب پنجره‌ی سندباکس‌شده:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4432"/>
+        <location filename="Forms/OptionsWindow.ui" line="488"/>
+        <source>Font size in points, synchronized with the font selector. Existing legacy sizing is retained until you explicitly change the font or size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="491"/>
+        <source> pt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="519"/>
+        <source>Select border label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="526"/>
+        <source>Reset font. Removes the custom font, point size and writing-system override, restoring Segoe UI Bold and legacy sizing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="532"/>
+        <source>Reset border label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="551"/>
+        <source>Segoe UI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="631"/>
+        <source>Stacked letters remain upright. Stacked (compact) removes the extra row gap and reduces top/bottom padding without shrinking the font. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="654"/>
+        <source>Fixed disables automatic fallback.
+Adaptive (same edge) moves clipped labels inward on the configured side.
+Adaptive (opposite edge) tries the opposite edge before that inward fallback.
+Adaptive (any edge), the default, also tries the best-fitting remaining edge.
+Edge changes preserve percentage and inside/outside placement where possible.
+Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separate.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="678"/>
+        <source>Side labels can be stacked or rotated. Both stacked modes use vertical parentheses when the font supports them. Stacked (compact) keeps the font size, removes the extra row gap and uses 1-pixel top/bottom padding. Rotated down/up select the reading direction on either side. Top/bottom labels use horizontal text. Adaptive movement can stay on the configured side, try its opposite, or try any edge before moving inward. Labels that do not fit are clipped without shrinking the font.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="687"/>
+        <source>Border label information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="4513"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
         <translation>استفاده از رشته‌های رله‌ی پراکسی درون‌فرایندی به‌جای تغییر مستقیم سوکت (برخی مشکلات نادر سازگاری را برطرف می‌کند)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4539"/>
+        <location filename="Forms/OptionsWindow.ui" line="4620"/>
         <source>000.000.000.000</source>
         <translation>000.000.000.000</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5437"/>
+        <location filename="Forms/OptionsWindow.ui" line="5518"/>
         <source>Processes</source>
         <translation>فرایندها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5547"/>
+        <location filename="Forms/OptionsWindow.ui" line="5628"/>
         <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
         <translation>این گزینه مسیر رجیستری *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\* را پنهان می‌کند و اجازه می‌دهد نرم‌افزار نصب‌شده روی میزبان در سندباکس دوباره نصب شود. با این حال، فایل‌ها و پوشه‌های مخصوص نرم‌افزار را پنهان نمی‌کند. اگر نصب‌کننده هنوز با مشکل مواجه شد، باید ورودی‌های WriteFilePath سفارشی برای پنهان‌کردن فایل‌های مربوطه روی دیسک تعریف کنید.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5550"/>
+        <location filename="Forms/OptionsWindow.ui" line="5631"/>
         <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
         <translation>پنهان‌کردن کلید حذف‌نصب نرم‌افزار میزبان (به راهنمای ابزار مراجعه کنید)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5620"/>
+        <location filename="Forms/OptionsWindow.ui" line="5701"/>
         <source>Hide Network Adapter MAC Address</source>
         <translation>پنهان‌کردن آدرس MAC آداپتور شبکه</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5770"/>
+        <location filename="Forms/OptionsWindow.ui" line="5851"/>
         <source>DNS Request Logging</source>
         <translation>ثبت درخواست‌های DNS</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5790"/>
+        <location filename="Forms/OptionsWindow.ui" line="5871"/>
         <source>Trace function hooking by SbieDll</source>
         <translation>ردیابی هوک‌کردن توابع توسط SbieDll</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5884"/>
+        <location filename="Forms/OptionsWindow.ui" line="5965"/>
         <source>Syscall Trace (creates a lot of output)</source>
         <translation>ردیابی سیستم‌فراخوان (خروجی زیادی ایجاد می‌کند)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5986"/>
+        <location filename="Forms/OptionsWindow.ui" line="6067"/>
         <source>Debug Options</source>
         <translation>گزینه‌های اشکال‌زدایی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6062"/>
+        <location filename="Forms/OptionsWindow.ui" line="6143"/>
         <source>Config Dump</source>
         <translation>تخلیه‌ی پیکربندی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6093"/>
+        <location filename="Forms/OptionsWindow.ui" line="6174"/>
         <source>No Templates</source>
         <translation>بدون قالب‌ها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6103"/>
+        <location filename="Forms/OptionsWindow.ui" line="6184"/>
         <source>No Global</source>
         <translation>بدون سراسری</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6113"/>
+        <location filename="Forms/OptionsWindow.ui" line="6194"/>
         <source>No Expand</source>
         <translation>بدون گسترش</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6123"/>
+        <location filename="Forms/OptionsWindow.ui" line="6204"/>
         <source>Refresh</source>
         <translation>بازخوانی</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6168"/>
+        <location filename="Forms/OptionsWindow.ui" line="6249"/>
         <source>Templates</source>
         <translation>قالب‌ها</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6304"/>
+        <location filename="Forms/OptionsWindow.ui" line="6385"/>
         <source>Open Template</source>
         <translation>باز کردن قالب</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6392"/>
+        <location filename="Forms/OptionsWindow.ui" line="6473"/>
         <source>Accessibility</source>
         <translation>دسترس‌پذیری</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6412"/>
+        <location filename="Forms/OptionsWindow.ui" line="6493"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>صفحه‌خوان‌ها: JAWS، NVDA، Window-Eyes، System Access</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6452"/>
+        <location filename="Forms/OptionsWindow.ui" line="6533"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>تنظیمات زیر استفاده از Sandboxie را همراه با نرم‌افزار دسترس‌پذیری امکان‌پذیر می‌سازد. لطفاً توجه داشته باشید که هنگام فعال‌بودن این تنظیمات، بخشی از حفاظت Sandboxie ناگزیر از دست می‌رود.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6505"/>
+        <location filename="Forms/OptionsWindow.ui" line="6586"/>
         <source>Edit ini Section</source>
         <translation>ویرایش بخش ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6539"/>
+        <location filename="Forms/OptionsWindow.ui" line="6620"/>
         <source>Edit ini</source>
         <translation>ویرایش ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6565"/>
+        <location filename="Forms/OptionsWindow.ui" line="6646"/>
         <source>Cancel</source>
         <translation>لغو</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6642"/>
+        <location filename="Forms/OptionsWindow.ui" line="6723"/>
         <source>Save</source>
         <translation>ذخیره</translation>
     </message>

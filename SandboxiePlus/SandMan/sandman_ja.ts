@@ -2173,60 +2173,60 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>グループ化</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="554"/>
-        <location filename="Windows/OptionsWindow.cpp" line="560"/>
-        <location filename="Windows/OptionsWindow.cpp" line="575"/>
+        <location filename="Windows/OptionsWindow.cpp" line="557"/>
+        <location filename="Windows/OptionsWindow.cpp" line="563"/>
+        <location filename="Windows/OptionsWindow.cpp" line="578"/>
         <location filename="Windows/OptionsAccess.cpp" line="26"/>
         <source>Browse for File</source>
         <translation>ファイルを参照</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="646"/>
+        <location filename="Windows/OptionsWindow.cpp" line="649"/>
         <source>Add %1 Template</source>
         <translation>%1 テンプレートを追加</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="769"/>
+        <location filename="Windows/OptionsWindow.cpp" line="772"/>
         <source>Search for options</source>
         <translation>オプションを検索</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1076"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1082"/>
         <source>Box: %1</source>
         <translation>ボックス: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1077"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1083"/>
         <source>Template: %1</source>
         <translation>テンプレート: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1078"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1084"/>
         <source>Global: %1</source>
         <translation>グローバル: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1079"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1085"/>
         <source>Default: %1</source>
         <translation>デフォルト: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1305"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1311"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>このサンドボックスは削除されたため、設定を保存できません。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1375"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1381"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>一部の変更がまだ保存されていません。本当にこのオプションウィンドウを閉じますか？</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1413"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1431"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1419"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1437"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="816"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="918"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="837"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="939"/>
         <location filename="Windows/OptionsNetwork.cpp" line="358"/>
         <location filename="Windows/OptionsNetwork.cpp" line="646"/>
         <location filename="Windows/OptionsNetwork.cpp" line="739"/>
@@ -2234,13 +2234,13 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>グループ: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1415"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1421"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="990"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="1065"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="811"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="914"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="832"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="935"/>
         <location filename="Windows/OptionsNetwork.cpp" line="641"/>
         <location filename="Windows/OptionsNetwork.cpp" line="735"/>
         <location filename="Windows/OptionsNetwork.cpp" line="848"/>
@@ -2250,22 +2250,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>すべてのプログラム</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1424"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1430"/>
         <source>Enter program:</source>
         <translation>プログラムを入力:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1859"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1865"/>
         <source>Autocomplete Consent Required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1861"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1867"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1863"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1869"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -2274,32 +2274,32 @@ Choose autocomplete mode:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1871"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1877"/>
         <source>Manual</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1872"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1878"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1874"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1880"/>
         <source>While Typing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1875"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1881"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1878"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1884"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1877"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1883"/>
         <source>Cancel</source>
         <translation type="unfinished">キャンセル</translation>
     </message>
@@ -2477,7 +2477,7 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="628"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="1041"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="884"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="905"/>
         <location filename="Windows/OptionsGrouping.cpp" line="236"/>
         <location filename="Windows/OptionsGrouping.cpp" line="260"/>
         <location filename="Windows/OptionsNetwork.cpp" line="714"/>
@@ -2741,129 +2741,144 @@ Choose autocomplete mode:
         <translation>指定されたエントリを強制すると、Windowsが破損する可能性が非常に高いです。続行しますか？</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="24"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="33"/>
         <source>This option requires an active &lt;b&gt;advanced&lt;/b&gt; supporter certificate</source>
         <translation>このオプションには、有効な&lt;b&gt;上級&lt;/b&gt;サポーター証明書が必要です</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="26"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="35"/>
         <source>This option requires an active supporter certificate</source>
         <translation>このオプションには、有効なサポーター証明書が必要です</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="55"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="64"/>
         <source>Don&apos;t alter the window title</source>
         <translation>ウィンドウタイトルを変更しない</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="56"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Display [#] indicator only</source>
         <translation>[#] インジケーターのみ表示</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="57"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="66"/>
         <source>Display box name in title</source>
         <translation>タイトルにボックス名を表示</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="59"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="68"/>
         <source>Don&apos;t show in border</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="60"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="69"/>
         <source>Show within the border</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="61"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="70"/>
         <source>Show outside the border</source>
         <oldsource>Show above the border</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="62"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="71"/>
         <source>Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="63"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="64"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="65"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="66"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="75"/>
         <source>Stacked upright letters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="67"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="76"/>
+        <source>Stacked (compact)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="77"/>
         <source>Rotated down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="68"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="78"/>
         <source>Rotated up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="69"/>
-        <source>Adaptive (keep label visible)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="70"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="79"/>
         <source>Fixed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="71"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="80"/>
+        <source>Adaptive (same edge)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="81"/>
+        <source>Adaptive (opposite edge)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="82"/>
+        <source>Adaptive (any edge)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="83"/>
         <source>Use inherited/default setting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="72"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="84"/>
         <source>Avoid covering the taskbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="73"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="85"/>
         <source>Allow covering the taskbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="74"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="86"/>
         <source>Use inherited/automatic setting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="75"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="87"/>
         <source>Hide border and label from capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="76"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="88"/>
         <source>Include border and label in capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="78"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="90"/>
         <source>Border disabled</source>
         <translation>枠線なし</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="79"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="83"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="91"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="95"/>
         <source>Show only when title is in focus</source>
         <translation>タイトルがフォーカスされている時のみ表示</translation>
     </message>
@@ -2872,224 +2887,234 @@ Choose autocomplete mode:
         <translation type="vanished">常に表示</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="80"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="84"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="92"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="96"/>
         <source>Always show (focused window only)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="81"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="85"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="93"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="97"/>
         <source>Show for all windows in this box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="82"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="94"/>
         <source> (outside)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="87"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="99"/>
         <source>Active snapshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="88"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="100"/>
         <source>Default snapshot</source>
         <translation type="unfinished">デフォルトのスナップショット</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="89"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="101"/>
         <source>Selects the snapshot restored by SandMan after automatic deletion. The active state may be the empty sandbox rather than a saved snapshot.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="98"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="110"/>
         <source>Hardened Sandbox with Data Protection</source>
         <translation>データ保護付き強化サンドボックス</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="99"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="111"/>
         <source>Security Hardened Sandbox</source>
         <translation>セキュリティ強化サンドボックス</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="100"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="112"/>
         <source>Sandbox with Data Protection</source>
         <translation>データ保護付きサンドボックス</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="101"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="113"/>
         <source>Standard Isolation Sandbox (Default)</source>
         <translation>標準的な分離サンドボックス (デフォルト)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="103"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="115"/>
         <source>Application Compartment with Data Protection</source>
         <translation>データ保護付きアプリケーションコンパートメント</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="104"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="116"/>
         <source>Application Compartment</source>
         <translation>アプリケーションコンパートメント</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="160"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="172"/>
         <source>Custom icon</source>
         <translation>カスタムアイコン</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="236"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="259"/>
         <source>Version 1</source>
         <translation>バージョン 1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="237"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="260"/>
         <source>Version 2</source>
         <translation>バージョン 2</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="298"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="321"/>
         <source>Browse for Program</source>
         <translation>プログラムを参照</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="433"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="444"/>
         <source>Open Box Options</source>
         <translation>ボックスのオプションを開く</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="434"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="445"/>
         <source>Browse Content</source>
         <translation>コンテンツを参照</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="435"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="446"/>
         <source>Start File Recovery</source>
         <translation>ファイルの復元を開始</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="436"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="447"/>
         <source>Show Run Dialog</source>
         <translation>実行ダイアログの表示</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="464"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="475"/>
         <source>Indeterminate</source>
         <translation>不確定</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="484"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="495"/>
         <source>Backup Image Header</source>
         <translation>イメージヘッダーをバックアップ</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="485"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="496"/>
         <source>Restore Image Header</source>
         <translation>イメージヘッダーを復元</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="489"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="500"/>
         <source>Change Password</source>
         <translation>パスワードを変更</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="782"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="889"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="803"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="910"/>
         <source>Always copy</source>
         <translation>常にコピー</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="783"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="890"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="804"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="911"/>
         <source>Don&apos;t copy</source>
         <translation>コピーしない</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="784"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="891"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="805"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="912"/>
         <source>Copy empty</source>
         <translation>空にしてコピー</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="785"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="892"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="806"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="913"/>
         <source>Copy newer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1039"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1051"/>
+        <source>Select the font, native style, writing system and point size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1052"/>
+        <source>Default: Segoe UI Bold; legacy sizing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1136"/>
         <source>kilobytes (%1)</source>
         <translation>キロバイト (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1150"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1247"/>
         <source>Select color</source>
         <translation>色を選択</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1237"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1334"/>
         <source>Select Program</source>
         <translation>プログラムを選択</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1237"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1334"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>実行可能ファイル (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1241"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="1262"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1338"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1359"/>
         <source>Please enter a menu title</source>
         <translation>メニュータイトルを入力してください</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1258"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1355"/>
         <source>Please enter a command</source>
         <translation>コマンドを入力してください</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1424"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1521"/>
         <source>The image file does not exist</source>
         <translation>イメージファイルが存在しません</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1425"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1522"/>
         <source>The password is wrong</source>
         <translation>パスワードが間違っています</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1426"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1523"/>
         <source>Unexpected error: %1</source>
         <translation>予期せぬエラー: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1454"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1551"/>
         <source>Image Password Changed</source>
         <translation>イメージのパスワードが変更されました</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1456"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1553"/>
         <source>Failed to Change Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1465"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1562"/>
         <source>Backup Image Header for %1</source>
         <translation>%1 のイメージヘッダーをバックアップ</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1473"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1570"/>
         <source>Image Header Backuped</source>
         <translation>イメージヘッダーがバックアップされました</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1480"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
         <source>Restore Image Header for %1</source>
         <translation>%1 のイメージヘッダーを復元</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1488"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1585"/>
         <source>Image Header Restored</source>
         <translation>イメージヘッダーが復元されました</translation>
     </message>
@@ -3104,10 +3129,92 @@ Choose autocomplete mode:
         <translation>最初にグループを選択してください。</translation>
     </message>
     <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="128"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1094"/>
+        <source>Border label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="133"/>
         <location filename="Windows/OptionsNetwork.cpp" line="55"/>
         <location filename="Windows/OptionsNetwork.cpp" line="769"/>
         <source>Any</source>
         <translation>任意</translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="138"/>
+        <source>Unavailable writing system (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="142"/>
+        <source>&amp;Writing system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="152"/>
+        <source>Font &amp;family:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="154"/>
+        <source>Font st&amp;yle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="159"/>
+        <source> pt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="161"/>
+        <source>&amp;Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="162"/>
+        <source>&amp;Underline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="164"/>
+        <source>Stri&amp;keout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="173"/>
+        <source>Native font preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="182"/>
+        <source>Save only this font and size immediately. Other pending box options are not applied. Cancel keeps the last applied font.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="183"/>
+        <source>This template is read-only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="291"/>
+        <source>The saved selection is unavailable. Choose an installed family and a native style.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="325"/>
+        <source>Sandbox name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="340"/>
+        <source>Unable to create the native font preview.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BorderFontDialog.cpp" line="342"/>
+        <source>Native GDI preview. Writing system filters the font list; it does not change label language or direction.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="56"/>
@@ -8364,7 +8471,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>タイトル内のサンドボックスインジケーター:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1170"/>
+        <location filename="Forms/OptionsWindow.ui" line="303"/>
         <source>Sandboxed window border:</source>
         <translation>サンドボックス化されたウィンドウの枠線:</translation>
     </message>
@@ -8389,7 +8496,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>ボックスタイププリセット:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1218"/>
+        <location filename="Forms/OptionsWindow.ui" line="351"/>
         <source>px Width</source>
         <translation>px 幅</translation>
     </message>
@@ -8409,115 +8516,115 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>ダブルクリック時の動作:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="285"/>
+        <location filename="Forms/OptionsWindow.ui" line="782"/>
         <source>File Options</source>
         <translation>ファイルオプション</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="504"/>
+        <location filename="Forms/OptionsWindow.ui" line="1001"/>
         <source>Disk/File access</source>
         <translation>ディスク/ファイルアクセス</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="427"/>
+        <location filename="Forms/OptionsWindow.ui" line="924"/>
         <source>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</source>
         <translation>ドライブにボリュームシリアル番号を使用する (例: \drive\C~1234-ABCD)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="464"/>
+        <location filename="Forms/OptionsWindow.ui" line="961"/>
         <source>Encrypt sandbox content</source>
         <translation>サンドボックスのコンテンツを暗号化する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="293"/>
+        <location filename="Forms/OptionsWindow.ui" line="790"/>
         <source>Auto delete content changes when last sandboxed process terminates</source>
         <oldsource>Auto delete content when last sandboxed process terminates</oldsource>
         <translation>最後のサンドボックス化されたプロセスが終了すると、コンテンツの変更を自動削除します</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="478"/>
+        <location filename="Forms/OptionsWindow.ui" line="975"/>
         <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box&apos;s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
         <oldsource>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</oldsource>
         <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;ボックスの暗号化&lt;/a&gt;が有効な場合、ボックスのルートフォルダーは、そのレジストリハイブを含め、&lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&lt;/a&gt;のAES-XTS実装を使用した暗号化ディスクイメージに保存されます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="403"/>
+        <location filename="Forms/OptionsWindow.ui" line="900"/>
         <source>Box Delete options</source>
         <translation>ボックスの削除オプション</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="491"/>
+        <location filename="Forms/OptionsWindow.ui" line="988"/>
         <source>Allow elevated sandboxed applications to read the harddrive</source>
         <translation>昇格されたサンドボックス化アプリケーションがハードドライブを読み取ることを許可する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="361"/>
+        <location filename="Forms/OptionsWindow.ui" line="858"/>
         <source>Partially checked means prevent box removal but not content deletion.</source>
         <translation>中間チェック状態は、ボックスの削除を防ぎますが、コンテンツの削除は防ぎません。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="364"/>
+        <location filename="Forms/OptionsWindow.ui" line="861"/>
         <source>Protect this sandbox from deletion or emptying</source>
         <translation>このサンドボックスを削除や内容の消去から保護する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="420"/>
+        <location filename="Forms/OptionsWindow.ui" line="917"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
         <translation>&lt;a href=&quot;addon://ImDisk&quot;&gt;ImDisk&lt;/a&gt; ドライバーをインストールして、ラムディスクとディスクイメージのサポートを有効にします。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="374"/>
+        <location filename="Forms/OptionsWindow.ui" line="871"/>
         <source>Separate user folders</source>
         <translation>ユーザーフォルダーを分離する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="354"/>
+        <location filename="Forms/OptionsWindow.ui" line="851"/>
         <source>Box Structure</source>
         <translation>ボックスの構造</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="524"/>
+        <location filename="Forms/OptionsWindow.ui" line="1021"/>
         <source>Store the sandbox content in a Ram Disk</source>
         <translation>サンドボックスのコンテンツをラムディスクに保存する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="471"/>
+        <location filename="Forms/OptionsWindow.ui" line="968"/>
         <source>Warn when an application opens a harddrive handle</source>
         <translation>アプリケーションがハードドライブハンドルを開いたときに警告する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="457"/>
+        <location filename="Forms/OptionsWindow.ui" line="954"/>
         <source>Set Password</source>
         <translation>パスワードを設定</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="434"/>
+        <location filename="Forms/OptionsWindow.ui" line="931"/>
         <source>Virtualization scheme</source>
         <translation>仮想化スキーム</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="444"/>
+        <location filename="Forms/OptionsWindow.ui" line="941"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
         <translation>ボックスの構造は、サンドボックスが空の場合にのみ変更できます</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="554"/>
-        <location filename="Forms/OptionsWindow.ui" line="594"/>
+        <location filename="Forms/OptionsWindow.ui" line="1051"/>
+        <location filename="Forms/OptionsWindow.ui" line="1091"/>
         <source>File Migration</source>
         <translation>ファイルの移行</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="574"/>
+        <location filename="Forms/OptionsWindow.ui" line="1071"/>
         <source>Copy file size limit:</source>
         <translation>コピーファイルサイズの上限:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="581"/>
+        <location filename="Forms/OptionsWindow.ui" line="1078"/>
         <source>Prompt user for large file migration</source>
         <translation>大きなファイルの移行時にユーザーに確認する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="601"/>
+        <location filename="Forms/OptionsWindow.ui" line="1098"/>
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
@@ -8526,483 +8633,483 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
 2115: ファイルは移行されませんでした。ファイルは読み取り専用で開かれます</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="606"/>
+        <location filename="Forms/OptionsWindow.ui" line="1103"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
         <translation>ファイルが完全に移行されない場合にメッセージ 2113/2114/2115 を表示する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="623"/>
+        <location filename="Forms/OptionsWindow.ui" line="1120"/>
         <source>kilobytes</source>
         <translation>キロバイト</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="630"/>
+        <location filename="Forms/OptionsWindow.ui" line="1127"/>
         <source>Add Pattern</source>
         <translation>パターンを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="637"/>
+        <location filename="Forms/OptionsWindow.ui" line="1134"/>
         <source>Remove Pattern</source>
         <translation>パターンを削除</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="670"/>
-        <location filename="Forms/OptionsWindow.ui" line="1923"/>
-        <location filename="Forms/OptionsWindow.ui" line="2521"/>
-        <location filename="Forms/OptionsWindow.ui" line="2639"/>
-        <location filename="Forms/OptionsWindow.ui" line="2800"/>
-        <location filename="Forms/OptionsWindow.ui" line="2950"/>
-        <location filename="Forms/OptionsWindow.ui" line="3049"/>
-        <location filename="Forms/OptionsWindow.ui" line="3206"/>
-        <location filename="Forms/OptionsWindow.ui" line="3282"/>
-        <location filename="Forms/OptionsWindow.ui" line="3389"/>
-        <location filename="Forms/OptionsWindow.ui" line="3515"/>
-        <location filename="Forms/OptionsWindow.ui" line="3610"/>
-        <location filename="Forms/OptionsWindow.ui" line="3750"/>
-        <location filename="Forms/OptionsWindow.ui" line="4175"/>
-        <location filename="Forms/OptionsWindow.ui" line="4658"/>
-        <location filename="Forms/OptionsWindow.ui" line="4765"/>
-        <location filename="Forms/OptionsWindow.ui" line="5139"/>
-        <location filename="Forms/OptionsWindow.ui" line="5372"/>
-        <location filename="Forms/OptionsWindow.ui" line="5443"/>
+        <location filename="Forms/OptionsWindow.ui" line="1167"/>
+        <location filename="Forms/OptionsWindow.ui" line="2004"/>
+        <location filename="Forms/OptionsWindow.ui" line="2602"/>
+        <location filename="Forms/OptionsWindow.ui" line="2720"/>
+        <location filename="Forms/OptionsWindow.ui" line="2881"/>
+        <location filename="Forms/OptionsWindow.ui" line="3031"/>
+        <location filename="Forms/OptionsWindow.ui" line="3130"/>
+        <location filename="Forms/OptionsWindow.ui" line="3287"/>
+        <location filename="Forms/OptionsWindow.ui" line="3363"/>
+        <location filename="Forms/OptionsWindow.ui" line="3470"/>
+        <location filename="Forms/OptionsWindow.ui" line="3596"/>
+        <location filename="Forms/OptionsWindow.ui" line="3691"/>
+        <location filename="Forms/OptionsWindow.ui" line="3831"/>
+        <location filename="Forms/OptionsWindow.ui" line="4256"/>
+        <location filename="Forms/OptionsWindow.ui" line="4739"/>
+        <location filename="Forms/OptionsWindow.ui" line="4846"/>
+        <location filename="Forms/OptionsWindow.ui" line="5220"/>
+        <location filename="Forms/OptionsWindow.ui" line="5453"/>
+        <location filename="Forms/OptionsWindow.ui" line="5524"/>
         <source>Show Templates</source>
         <translation>テンプレートを表示</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="681"/>
-        <location filename="Forms/OptionsWindow.ui" line="2033"/>
-        <location filename="Forms/OptionsWindow.ui" line="4152"/>
-        <location filename="Forms/OptionsWindow.ui" line="5279"/>
+        <location filename="Forms/OptionsWindow.ui" line="1178"/>
+        <location filename="Forms/OptionsWindow.ui" line="2114"/>
+        <location filename="Forms/OptionsWindow.ui" line="4233"/>
+        <location filename="Forms/OptionsWindow.ui" line="5360"/>
         <source>Action</source>
         <translation>アクション</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="686"/>
-        <location filename="Forms/OptionsWindow.ui" line="3305"/>
-        <location filename="Forms/OptionsWindow.ui" line="3405"/>
-        <location filename="Forms/OptionsWindow.ui" line="3538"/>
-        <location filename="Forms/OptionsWindow.ui" line="3658"/>
-        <location filename="Forms/OptionsWindow.ui" line="3732"/>
-        <location filename="Forms/OptionsWindow.ui" line="4147"/>
-        <location filename="Forms/OptionsWindow.ui" line="4252"/>
-        <location filename="Forms/OptionsWindow.ui" line="4381"/>
-        <location filename="Forms/OptionsWindow.ui" line="5126"/>
+        <location filename="Forms/OptionsWindow.ui" line="1183"/>
+        <location filename="Forms/OptionsWindow.ui" line="3386"/>
+        <location filename="Forms/OptionsWindow.ui" line="3486"/>
+        <location filename="Forms/OptionsWindow.ui" line="3619"/>
+        <location filename="Forms/OptionsWindow.ui" line="3739"/>
+        <location filename="Forms/OptionsWindow.ui" line="3813"/>
+        <location filename="Forms/OptionsWindow.ui" line="4228"/>
+        <location filename="Forms/OptionsWindow.ui" line="4333"/>
+        <location filename="Forms/OptionsWindow.ui" line="4462"/>
+        <location filename="Forms/OptionsWindow.ui" line="5207"/>
         <source>Program</source>
         <translation>プログラム</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="691"/>
+        <location filename="Forms/OptionsWindow.ui" line="1188"/>
         <source>Pattern</source>
         <translation>パターン</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="699"/>
+        <location filename="Forms/OptionsWindow.ui" line="1196"/>
         <source>Sandboxie does not allow writing to host files, unless permitted by the user. When a sandboxed application attempts to modify a file, the entire file must be copied into the sandbox, for large files this can take a significate amount of time. Sandboxie offers options for handling these cases, which can be configured on this page.</source>
         <translation>Sandboxieは、ユーザーに許可されない限り、ホストファイルへの書き込みを許可しません。サンドボックス化されたアプリケーションがファイルを変更しようとすると、ファイル全体をサンドボックスにコピーする必要があります。大きなファイルの場合、これにはかなりの時間がかかることがあります。Sandboxieはこれらのケースを処理するためのオプションを提供しており、このページで設定できます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="709"/>
+        <location filename="Forms/OptionsWindow.ui" line="1206"/>
         <source>Using wildcard patterns file specific behavior can be configured in the list below:</source>
         <translation>ワイルドカードパターンを使用すると、ファイル固有の動作を以下のリストで設定できます:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="716"/>
+        <location filename="Forms/OptionsWindow.ui" line="1213"/>
         <source>Issue message 2102 when a file is too large</source>
         <translation>ファイルが大きすぎる場合にメッセージ 2102 を表示する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="723"/>
+        <location filename="Forms/OptionsWindow.ui" line="1220"/>
         <source>When a file cannot be migrated, open it in read-only mode instead</source>
         <translation>ファイルを移行できない場合は、代わりに読み取り専用モードで開きます</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="733"/>
+        <location filename="Forms/OptionsWindow.ui" line="1230"/>
         <source>Restrictions</source>
         <translation>制限</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="852"/>
+        <location filename="Forms/OptionsWindow.ui" line="1349"/>
         <source>Prevent sandboxed processes from interfering with power operations (Experimental)</source>
         <translation>サンドボックス化されたプロセスが電源操作を妨害するのを防ぎます (実験的)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="824"/>
+        <location filename="Forms/OptionsWindow.ui" line="1321"/>
         <source>Open Windows Credentials Store (user mode)</source>
         <translation>Windows 資格情報ストアを開く (ユーザーモード)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="831"/>
+        <location filename="Forms/OptionsWindow.ui" line="1328"/>
         <source>Block read access to the clipboard</source>
         <translation>クリップボードへの読み取りアクセスをブロックする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4516"/>
+        <location filename="Forms/OptionsWindow.ui" line="4597"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
         <translation>ネットワークとファイアウォールのパラメーターの変更を防ぐ (ユーザーモード)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="838"/>
+        <location filename="Forms/OptionsWindow.ui" line="1335"/>
         <source>Allow to read memory of unsandboxed processes (not recommended)</source>
         <translation>サンドボックス化されていないプロセスのメモリの読み取りを許可する (非推奨)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="755"/>
+        <location filename="Forms/OptionsWindow.ui" line="1252"/>
         <source>Block access to the printer spooler</source>
         <translation>プリンタースプーラーへのアクセスをブロックする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="775"/>
+        <location filename="Forms/OptionsWindow.ui" line="1272"/>
         <source>Allow the print spooler to print to files outside the sandbox</source>
         <translation>プリンタースプーラーがサンドボックス外のファイルに印刷するのを許可する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4576"/>
+        <location filename="Forms/OptionsWindow.ui" line="4657"/>
         <source>Block network files and folders, unless specifically opened.</source>
         <translation>特別に開かれている場合を除き、ネットワークのファイルとフォルダーをブロックする。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="762"/>
+        <location filename="Forms/OptionsWindow.ui" line="1259"/>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
         <translation>スプーラーの制限を解除し、サンドボックス外へのプリンターのインストールを許可します</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="798"/>
+        <location filename="Forms/OptionsWindow.ui" line="1295"/>
         <source>Open System Protected Storage</source>
         <translation>システム保護ストレージを開く</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="845"/>
+        <location filename="Forms/OptionsWindow.ui" line="1342"/>
         <source>Issue message 2111 when a process access is denied</source>
         <translation>プロセスアクセスが拒否されたときにメッセージ 2111 を表示する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="745"/>
-        <location filename="Forms/OptionsWindow.ui" line="788"/>
-        <location filename="Forms/OptionsWindow.ui" line="1711"/>
-        <location filename="Forms/OptionsWindow.ui" line="1727"/>
-        <location filename="Forms/OptionsWindow.ui" line="1770"/>
-        <location filename="Forms/OptionsWindow.ui" line="2137"/>
-        <location filename="Forms/OptionsWindow.ui" line="4506"/>
-        <location filename="Forms/OptionsWindow.ui" line="4529"/>
+        <location filename="Forms/OptionsWindow.ui" line="1242"/>
+        <location filename="Forms/OptionsWindow.ui" line="1285"/>
+        <location filename="Forms/OptionsWindow.ui" line="1792"/>
+        <location filename="Forms/OptionsWindow.ui" line="1808"/>
+        <location filename="Forms/OptionsWindow.ui" line="1851"/>
+        <location filename="Forms/OptionsWindow.ui" line="2218"/>
+        <location filename="Forms/OptionsWindow.ui" line="4587"/>
+        <location filename="Forms/OptionsWindow.ui" line="4610"/>
         <source>Protect the system from sandboxed processes</source>
         <translation>サンドボックス化されたプロセスからシステムを保護する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="791"/>
+        <location filename="Forms/OptionsWindow.ui" line="1288"/>
         <source>Other restrictions</source>
         <translation>その他の制限</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="748"/>
+        <location filename="Forms/OptionsWindow.ui" line="1245"/>
         <source>Printing restrictions</source>
         <translation>印刷の制限</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4509"/>
+        <location filename="Forms/OptionsWindow.ui" line="4590"/>
         <source>Network restrictions</source>
         <translation>ネットワークの制限</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1004"/>
+        <location filename="Forms/OptionsWindow.ui" line="1501"/>
         <source>Run Menu</source>
         <translation>実行メニュー</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1034"/>
-        <location filename="Forms/OptionsWindow.ui" line="2078"/>
-        <location filename="Forms/OptionsWindow.ui" line="2577"/>
-        <location filename="Forms/OptionsWindow.ui" line="2646"/>
-        <location filename="Forms/OptionsWindow.ui" line="2836"/>
-        <location filename="Forms/OptionsWindow.ui" line="2967"/>
-        <location filename="Forms/OptionsWindow.ui" line="3042"/>
-        <location filename="Forms/OptionsWindow.ui" line="3213"/>
-        <location filename="Forms/OptionsWindow.ui" line="3289"/>
-        <location filename="Forms/OptionsWindow.ui" line="3423"/>
-        <location filename="Forms/OptionsWindow.ui" line="3522"/>
+        <location filename="Forms/OptionsWindow.ui" line="1531"/>
+        <location filename="Forms/OptionsWindow.ui" line="2159"/>
+        <location filename="Forms/OptionsWindow.ui" line="2658"/>
+        <location filename="Forms/OptionsWindow.ui" line="2727"/>
+        <location filename="Forms/OptionsWindow.ui" line="2917"/>
+        <location filename="Forms/OptionsWindow.ui" line="3048"/>
+        <location filename="Forms/OptionsWindow.ui" line="3123"/>
+        <location filename="Forms/OptionsWindow.ui" line="3294"/>
+        <location filename="Forms/OptionsWindow.ui" line="3370"/>
+        <location filename="Forms/OptionsWindow.ui" line="3504"/>
         <location filename="Forms/OptionsWindow.ui" line="3603"/>
-        <location filename="Forms/OptionsWindow.ui" line="3716"/>
-        <location filename="Forms/OptionsWindow.ui" line="3972"/>
-        <location filename="Forms/OptionsWindow.ui" line="4129"/>
-        <location filename="Forms/OptionsWindow.ui" line="4270"/>
-        <location filename="Forms/OptionsWindow.ui" line="4297"/>
-        <location filename="Forms/OptionsWindow.ui" line="4665"/>
-        <location filename="Forms/OptionsWindow.ui" line="4751"/>
-        <location filename="Forms/OptionsWindow.ui" line="5103"/>
-        <location filename="Forms/OptionsWindow.ui" line="5192"/>
-        <location filename="Forms/OptionsWindow.ui" line="5533"/>
-        <location filename="Forms/OptionsWindow.ui" line="5728"/>
-        <location filename="Forms/OptionsWindow.ui" line="6200"/>
+        <location filename="Forms/OptionsWindow.ui" line="3684"/>
+        <location filename="Forms/OptionsWindow.ui" line="3797"/>
+        <location filename="Forms/OptionsWindow.ui" line="4053"/>
+        <location filename="Forms/OptionsWindow.ui" line="4210"/>
+        <location filename="Forms/OptionsWindow.ui" line="4351"/>
+        <location filename="Forms/OptionsWindow.ui" line="4378"/>
+        <location filename="Forms/OptionsWindow.ui" line="4746"/>
+        <location filename="Forms/OptionsWindow.ui" line="4832"/>
+        <location filename="Forms/OptionsWindow.ui" line="5184"/>
+        <location filename="Forms/OptionsWindow.ui" line="5273"/>
+        <location filename="Forms/OptionsWindow.ui" line="5614"/>
+        <location filename="Forms/OptionsWindow.ui" line="5809"/>
+        <location filename="Forms/OptionsWindow.ui" line="6281"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1053"/>
+        <location filename="Forms/OptionsWindow.ui" line="1550"/>
         <source>Add program</source>
         <translation>プログラムを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1077"/>
-        <location filename="Forms/OptionsWindow.ui" line="2569"/>
-        <location filename="Forms/OptionsWindow.ui" line="2681"/>
-        <location filename="Forms/OptionsWindow.ui" line="2779"/>
-        <location filename="Forms/OptionsWindow.ui" line="2942"/>
-        <location filename="Forms/OptionsWindow.ui" line="3014"/>
-        <location filename="Forms/OptionsWindow.ui" line="3241"/>
-        <location filename="Forms/OptionsWindow.ui" line="4003"/>
-        <location filename="Forms/OptionsWindow.ui" line="4627"/>
-        <location filename="Forms/OptionsWindow.ui" line="4743"/>
-        <location filename="Forms/OptionsWindow.ui" line="4968"/>
-        <location filename="Forms/OptionsWindow.ui" line="6131"/>
-        <location filename="Forms/OptionsWindow.ui" line="6290"/>
-        <location filename="Forms/OptionsWindow.ui" line="6376"/>
+        <location filename="Forms/OptionsWindow.ui" line="1574"/>
+        <location filename="Forms/OptionsWindow.ui" line="2650"/>
+        <location filename="Forms/OptionsWindow.ui" line="2762"/>
+        <location filename="Forms/OptionsWindow.ui" line="2860"/>
+        <location filename="Forms/OptionsWindow.ui" line="3023"/>
+        <location filename="Forms/OptionsWindow.ui" line="3095"/>
+        <location filename="Forms/OptionsWindow.ui" line="3322"/>
+        <location filename="Forms/OptionsWindow.ui" line="4084"/>
+        <location filename="Forms/OptionsWindow.ui" line="4708"/>
+        <location filename="Forms/OptionsWindow.ui" line="4824"/>
+        <location filename="Forms/OptionsWindow.ui" line="5049"/>
+        <location filename="Forms/OptionsWindow.ui" line="6212"/>
+        <location filename="Forms/OptionsWindow.ui" line="6371"/>
+        <location filename="Forms/OptionsWindow.ui" line="6457"/>
         <source>Name</source>
         <translation>名前</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1082"/>
+        <location filename="Forms/OptionsWindow.ui" line="1579"/>
         <source>Command Line</source>
         <translation>コマンドライン</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1102"/>
-        <location filename="Forms/OptionsWindow.ui" line="4334"/>
+        <location filename="Forms/OptionsWindow.ui" line="1599"/>
+        <location filename="Forms/OptionsWindow.ui" line="4415"/>
         <source>Move Up</source>
         <translation>上へ移動</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1121"/>
-        <location filename="Forms/OptionsWindow.ui" line="4345"/>
+        <location filename="Forms/OptionsWindow.ui" line="1618"/>
+        <location filename="Forms/OptionsWindow.ui" line="4426"/>
         <source>Move Down</source>
         <translation>下へ移動</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1128"/>
+        <location filename="Forms/OptionsWindow.ui" line="1625"/>
         <source>You can configure custom entries for the sandbox run menu.</source>
         <translation>サンドボックスの実行メニューにカスタムエントリを設定できます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1572"/>
+        <location filename="Forms/OptionsWindow.ui" line="1653"/>
         <source>Security Options</source>
         <translation>セキュリティオプション</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1582"/>
+        <location filename="Forms/OptionsWindow.ui" line="1663"/>
         <source>Security Hardening</source>
         <translation>セキュリティ強化</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1757"/>
+        <location filename="Forms/OptionsWindow.ui" line="1838"/>
         <source>Use the original token only for approved NT system calls</source>
         <translation>承認されたNTシステムコールに対してのみ元のトークンを使用する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1691"/>
+        <location filename="Forms/OptionsWindow.ui" line="1772"/>
         <source>Enable all security enhancements (make security hardened box)</source>
         <translation>すべてのセキュリティ強化を有効にする (セキュリティ強化ボックスを作成する)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1714"/>
+        <location filename="Forms/OptionsWindow.ui" line="1795"/>
         <source>Elevation restrictions</source>
         <translation>昇格の制限</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1737"/>
+        <location filename="Forms/OptionsWindow.ui" line="1818"/>
         <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation>アプリケーションに昇格して実行されていると思わせる (インストーラーを安全に実行できる)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1750"/>
+        <location filename="Forms/OptionsWindow.ui" line="1831"/>
         <source>(Recommended)</source>
         <translation>(推奨)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1590"/>
+        <location filename="Forms/OptionsWindow.ui" line="1671"/>
         <source>Restrict driver/device access to only approved ones</source>
         <translation>ドライバー/デバイスへのアクセスを承認されたもののみに制限する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1773"/>
+        <location filename="Forms/OptionsWindow.ui" line="1854"/>
         <source>Security enhancements</source>
         <translation>セキュリティ強化</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1652"/>
+        <location filename="Forms/OptionsWindow.ui" line="1733"/>
         <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
         <translation>MSIServerをサンドボックス化されたシステムトークンで実行し、必要に応じて他の例外を適用することを許可する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1698"/>
+        <location filename="Forms/OptionsWindow.ui" line="1779"/>
         <source>Drop rights from Administrators and Power Users groups</source>
         <translation>管理者およびPower Usersグループから権限を削除する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1665"/>
+        <location filename="Forms/OptionsWindow.ui" line="1746"/>
         <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
         <translation>注意: 組み込みの管理者で実行している場合、プロセスは管理者権限を削除できません。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1597"/>
+        <location filename="Forms/OptionsWindow.ui" line="1678"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
         <translation>注意: MSIインストーラーの除外は不要なはずですが、信頼できるMSIパッケージのインストールで問題が発生した場合、このオプションがインストールの正常な完了に役立つことがあります。管理者権限の削除を無効にすることも試せます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1681"/>
+        <location filename="Forms/OptionsWindow.ui" line="1762"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
         <translation>セキュリティノート: Sandboxieの監視下で、管理者またはシステムトークンを使用して実行される昇格されたアプリケーションは、分離をバイパスしてサンドボックス外のシステムを変更する機会が多くなります。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1790"/>
+        <location filename="Forms/OptionsWindow.ui" line="1871"/>
         <source>Security Isolation</source>
         <translation>セキュリティ分離</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1881"/>
+        <location filename="Forms/OptionsWindow.ui" line="1962"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
         <translation>様々な分離機能は、一部のアプリケーションとの互換性を損なう可能性があります。このサンドボックスを&lt;b&gt;セキュリティ目的ではなく&lt;/b&gt;、アプリケーションのポータビリティのために使用している場合、これらのオプションを変更することで、いくらかのセキュリティを犠牲にして互換性を回復できます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1851"/>
+        <location filename="Forms/OptionsWindow.ui" line="1932"/>
         <source>Disable Security Isolation</source>
         <translation>セキュリティ分離を無効にする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="938"/>
+        <location filename="Forms/OptionsWindow.ui" line="1435"/>
         <source>Open access to Windows Security Account Manager</source>
         <translation>Windows セキュリティアカウントマネージャーへのアクセスを開く</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1844"/>
+        <location filename="Forms/OptionsWindow.ui" line="1925"/>
         <source>Disable Security Filtering (not recommended)</source>
         <translation>セキュリティフィルタリングを無効にする (非推奨)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1858"/>
+        <location filename="Forms/OptionsWindow.ui" line="1939"/>
         <source>Security Filtering used by Sandboxie to enforce filesystem and registry access restrictions, as well as to restrict process access.</source>
         <translation>セキュリティフィルタリングは、Sandboxieがファイルシステムとレジストリへのアクセス制限を強制し、プロセスアクセスを制限するために使用します。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1834"/>
+        <location filename="Forms/OptionsWindow.ui" line="1915"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it&apos;s no longer providing reliable security, just simple application compartmentalization.</source>
         <oldsource>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</oldsource>
         <translation>厳しく制限されたプロセストークンの使用によるセキュリティ分離は、Sandboxieがサンドボックスの制限を強制する主要な手段です。これが無効になると、ボックスはアプリケーションコンパートメントモードで動作します。つまり、信頼性の高いセキュリティはもはや提供されず、単純なアプリケーションの区画化のみとなります。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="931"/>
+        <location filename="Forms/OptionsWindow.ui" line="1428"/>
         <source>Open access to Windows Local Security Authority</source>
         <translation>Windows ローカルセキュリティ機関へのアクセスを開く</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="964"/>
-        <location filename="Forms/OptionsWindow.ui" line="1824"/>
-        <location filename="Forms/OptionsWindow.ui" line="1897"/>
-        <location filename="Forms/OptionsWindow.ui" line="1969"/>
-        <location filename="Forms/OptionsWindow.ui" line="2261"/>
-        <location filename="Forms/OptionsWindow.ui" line="2377"/>
-        <location filename="Forms/OptionsWindow.ui" line="2407"/>
-        <location filename="Forms/OptionsWindow.ui" line="4951"/>
+        <location filename="Forms/OptionsWindow.ui" line="1461"/>
+        <location filename="Forms/OptionsWindow.ui" line="1905"/>
+        <location filename="Forms/OptionsWindow.ui" line="1978"/>
+        <location filename="Forms/OptionsWindow.ui" line="2050"/>
+        <location filename="Forms/OptionsWindow.ui" line="2342"/>
+        <location filename="Forms/OptionsWindow.ui" line="2458"/>
+        <location filename="Forms/OptionsWindow.ui" line="2488"/>
+        <location filename="Forms/OptionsWindow.ui" line="5032"/>
         <source>Protect the sandbox integrity itself</source>
         <translation>サンドボックス自体の整合性を保護する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1827"/>
+        <location filename="Forms/OptionsWindow.ui" line="1908"/>
         <source>Security Isolation &amp; Filtering</source>
         <translation>セキュリティ分離とフィルタリング</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="967"/>
+        <location filename="Forms/OptionsWindow.ui" line="1464"/>
         <source>Access Isolation</source>
         <translation>アクセス分離</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="987"/>
+        <location filename="Forms/OptionsWindow.ui" line="1484"/>
         <source>Allow sandboxed programs to manage Hardware/Devices</source>
         <translation>サンドボックス化されたプログラムにハードウェア/デバイスの管理を許可する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="921"/>
+        <location filename="Forms/OptionsWindow.ui" line="1418"/>
         <source>The below options can be used safely when you don&apos;t grant admin rights.</source>
         <translation>以下のオプションは、管理者権限を付与しない場合に安全に使用できます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1917"/>
-        <location filename="Forms/OptionsWindow.ui" line="1972"/>
+        <location filename="Forms/OptionsWindow.ui" line="1998"/>
+        <location filename="Forms/OptionsWindow.ui" line="2053"/>
         <source>Box Protection</source>
         <translation>ボックスの保護</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1979"/>
+        <location filename="Forms/OptionsWindow.ui" line="2060"/>
         <source>Deny Process</source>
         <translation>プロセスを拒否</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1930"/>
+        <location filename="Forms/OptionsWindow.ui" line="2011"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
         <translation>ホストプロセスがサンドボックス化されたプロセス/ボックスルートにアクセスしようとしたときにメッセージ 1318/1317 を表示する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2028"/>
-        <location filename="Forms/OptionsWindow.ui" line="5470"/>
+        <location filename="Forms/OptionsWindow.ui" line="2109"/>
+        <location filename="Forms/OptionsWindow.ui" line="5551"/>
         <source>Process</source>
         <translation>プロセス</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2014"/>
+        <location filename="Forms/OptionsWindow.ui" line="2095"/>
         <source>Sandboxie-Plus is able to create confidential sandboxes that provide robust protection against unauthorized surveillance or tampering by host processes. By utilizing an encrypted sandbox image, this feature delivers the highest level of operational confidentiality, ensuring the safety and integrity of sandboxed processes.</source>
         <translation>Sandboxie-Plusは、ホストプロセスによる不正な監視や改ざんに対して堅牢な保護を提供する、機密性の高いサンドボックスを作成できます。暗号化されたサンドボックスイメージを利用することで、この機能は最高レベルの運用上の機密性を提供し、サンドボックス化されたプロセスの安全性と整合性を保証します。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2000"/>
+        <location filename="Forms/OptionsWindow.ui" line="2081"/>
         <source>Allow Process</source>
         <translation>プロセスを許可</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2092"/>
+        <location filename="Forms/OptionsWindow.ui" line="2173"/>
         <source>Protect processes in this box from being accessed by specified unsandboxed host processes.</source>
         <translation>このボックス内のプロセスを、指定されたサンドボックス化されていないホストプロセスによるアクセスから保護します。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2085"/>
+        <location filename="Forms/OptionsWindow.ui" line="2166"/>
         <source>Allow useful Windows processes access to protected processes</source>
         <translation>有用なWindowsプロセスに保護されたプロセスへのアクセスを許可する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1993"/>
+        <location filename="Forms/OptionsWindow.ui" line="2074"/>
         <source>Protect processes within this box from host processes</source>
         <translation>このボックス内のプロセスをホストプロセスから保護する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="410"/>
+        <location filename="Forms/OptionsWindow.ui" line="907"/>
         <source>Force protection on mount</source>
         <translation>マウント時に保護を強制する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1986"/>
+        <location filename="Forms/OptionsWindow.ui" line="2067"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
         <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
         <translation>プロセスがサンドボックス化されたウィンドウからウィンドウイメージをキャプチャするのを防ぎます</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2350"/>
+        <location filename="Forms/OptionsWindow.ui" line="2431"/>
         <source>Advanced Security</source>
         <translation>高度なセキュリティ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2475"/>
+        <location filename="Forms/OptionsWindow.ui" line="2556"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>匿名トークンの代わりにSandboxieログインを使用する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2264"/>
+        <location filename="Forms/OptionsWindow.ui" line="2345"/>
         <source>Other isolation</source>
         <translation>その他の分離</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2461"/>
+        <location filename="Forms/OptionsWindow.ui" line="2542"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
         <translation>サンドボックス化されたRpcSsをSYSTEMプロセスとして開始する (非推奨)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2410"/>
+        <location filename="Forms/OptionsWindow.ui" line="2491"/>
         <source>Privilege isolation</source>
         <translation>権限の分離</translation>
     </message>
@@ -9011,318 +9118,318 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation type="vanished">サンドボックス化されたSYSTEMプロセスを権限のないプロセスから保護する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2380"/>
+        <location filename="Forms/OptionsWindow.ui" line="2461"/>
         <source>Sandboxie token</source>
         <translation>Sandboxie トークン</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2364"/>
+        <location filename="Forms/OptionsWindow.ui" line="2445"/>
         <source>(Security Critical)</source>
         <translation>(セキュリティ上重要)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2394"/>
+        <location filename="Forms/OptionsWindow.ui" line="2475"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
         <translation>SYSTEMトークンで実行されているプロセスから重要な権限を削除する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2417"/>
+        <location filename="Forms/OptionsWindow.ui" line="2498"/>
         <source>Do not start sandboxed services using a system token (recommended)</source>
         <translation>サンドボックス化されたサービスをシステムトークンを使用して開始しない (推奨)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2468"/>
+        <location filename="Forms/OptionsWindow.ui" line="2549"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
         <translation>特権プロセスのみにサービスコントロールマネージャーへのアクセスを許可する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2248"/>
+        <location filename="Forms/OptionsWindow.ui" line="2329"/>
         <source>Add sandboxed processes to job objects (recommended)</source>
         <translation>サンドボックス化されたプロセスをジョブオブジェクトに追加する (推奨)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2482"/>
+        <location filename="Forms/OptionsWindow.ui" line="2563"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>カスタムのSandboxieトークンを使用すると、個々のサンドボックスを互いにより良く分離でき、タスクマネージャーのユーザー列にプロセスが属するボックスの名前が表示されます。ただし、一部のサードパーティ製セキュリティソリューションでは、カスタムトークンで問題が発生する可能性があります。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2513"/>
+        <location filename="Forms/OptionsWindow.ui" line="2594"/>
         <source>Program Groups</source>
         <translation>プログラムグループ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2541"/>
+        <location filename="Forms/OptionsWindow.ui" line="2622"/>
         <source>Add Group</source>
         <translation>グループを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2548"/>
-        <location filename="Forms/OptionsWindow.ui" line="2931"/>
-        <location filename="Forms/OptionsWindow.ui" line="3035"/>
-        <location filename="Forms/OptionsWindow.ui" line="3186"/>
-        <location filename="Forms/OptionsWindow.ui" line="3958"/>
+        <location filename="Forms/OptionsWindow.ui" line="2629"/>
+        <location filename="Forms/OptionsWindow.ui" line="3012"/>
+        <location filename="Forms/OptionsWindow.ui" line="3116"/>
+        <location filename="Forms/OptionsWindow.ui" line="3267"/>
+        <location filename="Forms/OptionsWindow.ui" line="4039"/>
         <source>Add Program</source>
         <translation>プログラムを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2555"/>
+        <location filename="Forms/OptionsWindow.ui" line="2636"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
         <translation>プログラムをグループ化してグループ名をつけることができます。プログラムグループは、一部の設定でプログラム名の代わりに使用できます。ボックスに定義されたグループは、テンプレートに定義されたグループを上書きします。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2587"/>
+        <location filename="Forms/OptionsWindow.ui" line="2668"/>
         <source>Program Control</source>
         <translation>プログラム制御</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2609"/>
+        <location filename="Forms/OptionsWindow.ui" line="2690"/>
         <source>Force Programs</source>
         <translation>強制プログラム</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2629"/>
+        <location filename="Forms/OptionsWindow.ui" line="2710"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>ここに入力されたプログラム、または入力された場所から開始されたプログラムは、別のサンドボックスで明示的に開始されない限り、自動的にこのサンドボックスに入れられます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2721"/>
+        <location filename="Forms/OptionsWindow.ui" line="2802"/>
         <source>Force Folder</source>
         <translation>強制フォルダー</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2676"/>
-        <location filename="Forms/OptionsWindow.ui" line="2774"/>
-        <location filename="Forms/OptionsWindow.ui" line="3300"/>
-        <location filename="Forms/OptionsWindow.ui" line="3400"/>
-        <location filename="Forms/OptionsWindow.ui" line="3533"/>
-        <location filename="Forms/OptionsWindow.ui" line="3653"/>
-        <location filename="Forms/OptionsWindow.ui" line="3727"/>
-        <location filename="Forms/OptionsWindow.ui" line="6136"/>
+        <location filename="Forms/OptionsWindow.ui" line="2757"/>
+        <location filename="Forms/OptionsWindow.ui" line="2855"/>
+        <location filename="Forms/OptionsWindow.ui" line="3381"/>
+        <location filename="Forms/OptionsWindow.ui" line="3481"/>
+        <location filename="Forms/OptionsWindow.ui" line="3614"/>
+        <location filename="Forms/OptionsWindow.ui" line="3734"/>
+        <location filename="Forms/OptionsWindow.ui" line="3808"/>
+        <location filename="Forms/OptionsWindow.ui" line="6217"/>
         <source>Type</source>
         <translation>種類</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2665"/>
+        <location filename="Forms/OptionsWindow.ui" line="2746"/>
         <source>Force Program</source>
         <translation>強制プログラム</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2689"/>
+        <location filename="Forms/OptionsWindow.ui" line="2770"/>
         <source>Disable forced Process and Folder for this sandbox</source>
         <translation>このサンドボックスの強制プロセスとフォルダーを無効にする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2750"/>
+        <location filename="Forms/OptionsWindow.ui" line="2831"/>
         <source>Breakout Programs</source>
         <translation>ブレイクアウトプログラム</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2807"/>
+        <location filename="Forms/OptionsWindow.ui" line="2888"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <translation>ここに入力されたプログラムは、開始時にこのサンドボックスからブレイクアウトすることが許可されます。例えば、ウェブブラウザを常に専用のボックスで開くように、別のサンドボックスにキャプチャすることも可能です。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2829"/>
+        <location filename="Forms/OptionsWindow.ui" line="2910"/>
         <source>Breakout Folder</source>
         <translation>ブレイクアウトフォルダー</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2855"/>
+        <location filename="Forms/OptionsWindow.ui" line="2936"/>
         <source>Breakout Program</source>
         <translation>ブレイクアウトプログラム</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="876"/>
+        <location filename="Forms/OptionsWindow.ui" line="1373"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
         <translation>この機能は、スクリーンキャプチャを取得するすべての手段をブロックするわけではなく、一般的な手段の一部のみをブロックします。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="859"/>
+        <location filename="Forms/OptionsWindow.ui" line="1356"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
         <translation>マウスの移動、前面への表示、および同様の操作を禁止します。これはゲームで問題を引き起こす可能性があります。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="913"/>
+        <location filename="Forms/OptionsWindow.ui" line="1410"/>
         <source>Isolation</source>
         <translation>分離</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2007"/>
+        <location filename="Forms/OptionsWindow.ui" line="2088"/>
         <source>Only Administrator user accounts can make changes to this sandbox</source>
         <translation>管理者ユーザーアカウントのみがこのサンドボックスに変更を加えることができます</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2901"/>
-        <location filename="Forms/OptionsWindow.ui" line="3083"/>
+        <location filename="Forms/OptionsWindow.ui" line="2982"/>
+        <location filename="Forms/OptionsWindow.ui" line="3164"/>
         <source>Stop Behaviour</source>
         <translation>停止動作</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2911"/>
+        <location filename="Forms/OptionsWindow.ui" line="2992"/>
         <source>Lingering Programs</source>
         <translation>残留プログラム</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2957"/>
+        <location filename="Forms/OptionsWindow.ui" line="3038"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.</source>
         <translation>残留プログラムは、他のすべてのプロセスが終了した後も実行されている場合、自動的に終了させられます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2990"/>
+        <location filename="Forms/OptionsWindow.ui" line="3071"/>
         <source>Leader Programs</source>
         <translation>リーダープログラム</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3056"/>
+        <location filename="Forms/OptionsWindow.ui" line="3137"/>
         <source>If leader processes are defined, all others are treated as lingering processes.</source>
         <translation>リーダープロセスが定義されている場合、他のすべてのプロセスは残留プロセスとして扱われます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3069"/>
+        <location filename="Forms/OptionsWindow.ui" line="3150"/>
         <source>Stop Options</source>
         <translation>停止オプション</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3090"/>
+        <location filename="Forms/OptionsWindow.ui" line="3171"/>
         <source>Use Linger Leniency</source>
         <translation>残留の猶予を使用</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3100"/>
+        <location filename="Forms/OptionsWindow.ui" line="3181"/>
         <source>Don&apos;t stop lingering processes with windows</source>
         <translation>ウィンドウを持つ残留プロセスを停止しない</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3140"/>
+        <location filename="Forms/OptionsWindow.ui" line="3221"/>
         <source>Start Restrictions</source>
         <translation>起動制限</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3220"/>
+        <location filename="Forms/OptionsWindow.ui" line="3301"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>プログラムの起動に失敗した場合にメッセージ 1308 を表示する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3170"/>
+        <location filename="Forms/OptionsWindow.ui" line="3251"/>
         <source>Allow only selected programs to start in this sandbox. *</source>
         <translation>選択されたプログラムのみ、このサンドボックスでの起動を許可する。 *</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3177"/>
+        <location filename="Forms/OptionsWindow.ui" line="3258"/>
         <source>Prevent selected programs from starting in this sandbox.</source>
         <translation>選択されたプログラムがこのサンドボックスで起動するのを防ぐ。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3163"/>
+        <location filename="Forms/OptionsWindow.ui" line="3244"/>
         <source>Allow all programs to start in this sandbox.</source>
         <translation>すべてのプログラムがこのサンドボックスで起動するのを許可する。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1262"/>
+        <location filename="Forms/OptionsWindow.ui" line="395"/>
         <source>Alpha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1330"/>
+        <location filename="Forms/OptionsWindow.ui" line="463"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1333"/>
+        <location filename="Forms/OptionsWindow.ui" line="466"/>
         <source>Label only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1288"/>
+        <location filename="Forms/OptionsWindow.ui" line="421"/>
         <source>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1291"/>
+        <location filename="Forms/OptionsWindow.ui" line="424"/>
         <source>Inside when maximized or snapped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="300"/>
+        <location filename="Forms/OptionsWindow.ui" line="797"/>
         <source>After automatic deletion, restore from snapshot:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="325"/>
+        <location filename="Forms/OptionsWindow.ui" line="822"/>
         <source>Open Snapshot Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="328"/>
+        <location filename="Forms/OptionsWindow.ui" line="825"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="544"/>
+        <location filename="Forms/OptionsWindow.ui" line="1041"/>
         <source>Allow sandboxed processes to open files protected by EFS</source>
         <translation>サンドボックス化されたプロセスがEFSで保護されたファイルを開くことを許可する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="994"/>
+        <location filename="Forms/OptionsWindow.ui" line="1491"/>
         <source>Open access to Proxy Configurations</source>
         <translation>プロキシ設定へのアクセスを開く</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1730"/>
+        <location filename="Forms/OptionsWindow.ui" line="1811"/>
         <source>File ACLs</source>
         <translation>ファイル ACL</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2102"/>
+        <location filename="Forms/OptionsWindow.ui" line="2183"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2110"/>
+        <location filename="Forms/OptionsWindow.ui" line="2191"/>
         <source>Job Object</source>
         <translation>ジョブオブジェクト</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2156"/>
-        <location filename="Forms/OptionsWindow.ui" line="2201"/>
-        <location filename="Forms/OptionsWindow.ui" line="2227"/>
-        <location filename="Forms/OptionsWindow.ui" line="2310"/>
+        <location filename="Forms/OptionsWindow.ui" line="2237"/>
+        <location filename="Forms/OptionsWindow.ui" line="2282"/>
+        <location filename="Forms/OptionsWindow.ui" line="2308"/>
+        <location filename="Forms/OptionsWindow.ui" line="2391"/>
         <source>unlimited</source>
         <translation>無制限</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2208"/>
+        <location filename="Forms/OptionsWindow.ui" line="2289"/>
         <source>Total CPU Rate Limit (%):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2224"/>
+        <location filename="Forms/OptionsWindow.ui" line="2305"/>
         <source>Leave it blank to disable the setting (1-100)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1408"/>
-        <location filename="Forms/OptionsWindow.ui" line="2234"/>
+        <location filename="Forms/OptionsWindow.ui" line="602"/>
+        <location filename="Forms/OptionsWindow.ui" line="2315"/>
         <source>%</source>
         <translation type="unfinished">%</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2294"/>
-        <location filename="Forms/OptionsWindow.ui" line="2327"/>
+        <location filename="Forms/OptionsWindow.ui" line="2375"/>
+        <location filename="Forms/OptionsWindow.ui" line="2408"/>
         <source>bytes</source>
         <translation>バイト</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2492"/>
+        <location filename="Forms/OptionsWindow.ui" line="2573"/>
         <source>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
 Partially checked: No groups will be added to the newly created sandboxed token.</source>
         <translation>チェック状態: 新しく作成されたサンドボックス化トークンにローカルグループも追加されます。これにより、すべてのサンドボックスを一度にアドレス指定できます。監査ポリシーに役立ちます。
 中間チェック状態: 新しく作成されたサンドボックス化トークンにグループは追加されません。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2387"/>
+        <location filename="Forms/OptionsWindow.ui" line="2468"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
         <translation>ConHost.exeプロセスの整合性レベルを低下させる</translation>
     </message>
@@ -9337,289 +9444,274 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1152"/>
+        <location filename="Forms/OptionsWindow.ui" line="285"/>
         <source>Box Border</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1163"/>
+        <location filename="Forms/OptionsWindow.ui" line="296"/>
         <source>Frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1190"/>
+        <location filename="Forms/OptionsWindow.ui" line="323"/>
         <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1303"/>
+        <location filename="Forms/OptionsWindow.ui" line="436"/>
         <source>Sandbox label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1340"/>
+        <location filename="Forms/OptionsWindow.ui" line="473"/>
         <source>Label font size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1369"/>
+        <location filename="Forms/OptionsWindow.ui" line="563"/>
         <source>Edge:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1389"/>
+        <location filename="Forms/OptionsWindow.ui" line="583"/>
         <source>Position:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1411"/>
+        <location filename="Forms/OptionsWindow.ui" line="605"/>
         <source>0% is the start of the usable edge; 50% is centered; 100% is the end. Top/bottom run left to right; left/right run top to bottom.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1424"/>
+        <location filename="Forms/OptionsWindow.ui" line="618"/>
         <source>Side text:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1437"/>
-        <source>Stacked letters remain upright. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1447"/>
+        <location filename="Forms/OptionsWindow.ui" line="641"/>
         <source>Movement:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1460"/>
-        <source>Adaptive keeps the label inside monitor bounds and respects taskbar exclusion. Fixed disables that automatic fallback. The existing maximized/snapped setting remains separate.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1470"/>
-        <source>Side labels can be stacked or rotated. Stacked labels use vertical parentheses when the font supports them. Rotated down/up select the reading direction on either side. Adaptive placement moves clipped labels inward; labels that do not fit are clipped without shrinking the font.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1485"/>
+        <location filename="Forms/OptionsWindow.ui" line="699"/>
         <source>Visibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1492"/>
+        <location filename="Forms/OptionsWindow.ui" line="706"/>
         <source>Taskbar:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1505"/>
+        <location filename="Forms/OptionsWindow.ui" line="719"/>
         <source>Choose whether border overlays avoid taskbars and shell appbars. The inherited/default option follows the global setting, which defaults to avoiding taskbars.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1515"/>
+        <location filename="Forms/OptionsWindow.ui" line="729"/>
         <source>Screen capture:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1528"/>
+        <location filename="Forms/OptionsWindow.ui" line="742"/>
         <source>Exclude the border and label from screen capture, not the application itself. When inherited and otherwise unset, CoverBoxedWindows determines the default.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2437"/>
+        <location filename="Forms/OptionsWindow.ui" line="2518"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2441"/>
+        <location filename="Forms/OptionsWindow.ui" line="2522"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2874"/>
+        <location filename="Forms/OptionsWindow.ui" line="2955"/>
         <source>Breakout Document</source>
         <translation>ブレイクアウトドキュメント</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2881"/>
+        <location filename="Forms/OptionsWindow.ui" line="2962"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc...) extensions. Please review the security section for each option in the documentation before use.</source>
         <oldsource>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</oldsource>
         <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;セキュリティ勧告&lt;/font&gt;:&lt;/b&gt; &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; や &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; を Open[File/Pipe]Path ディレクティブと組み合わせて使用すること、また、&lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; で * や安全でない拡張子 (.exe;.dll;.ocx;.cmd;.bat;.lnk;.pif;.url;*.ps1;など) を許可することは、セキュリティを侵害する可能性があります。使用する前に、ドキュメントで各オプションのセキュリティに関するセクションを確認してください。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3153"/>
+        <location filename="Forms/OptionsWindow.ui" line="3234"/>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
         <translation>* 注意: このサンドボックスにインストールされたプログラムは一切起動できなくなります。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3227"/>
+        <location filename="Forms/OptionsWindow.ui" line="3308"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
         <translation>この設定は、ユーザーの知識や同意なしにプログラムがサンドボックス内で実行されるのを防ぐために使用できます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3230"/>
+        <location filename="Forms/OptionsWindow.ui" line="3311"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
         <translation>外部ソースからサンドボックス内でプロセスを開始する前に、ポップアップ警告を表示する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3252"/>
+        <location filename="Forms/OptionsWindow.ui" line="3333"/>
         <source>Resource Access</source>
         <translation>リソースアクセス</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3262"/>
+        <location filename="Forms/OptionsWindow.ui" line="3343"/>
         <source>Files</source>
         <translation>ファイル</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3310"/>
-        <location filename="Forms/OptionsWindow.ui" line="3410"/>
-        <location filename="Forms/OptionsWindow.ui" line="3543"/>
-        <location filename="Forms/OptionsWindow.ui" line="3663"/>
-        <location filename="Forms/OptionsWindow.ui" line="3737"/>
-        <location filename="Forms/OptionsWindow.ui" line="4008"/>
+        <location filename="Forms/OptionsWindow.ui" line="3391"/>
+        <location filename="Forms/OptionsWindow.ui" line="3491"/>
+        <location filename="Forms/OptionsWindow.ui" line="3624"/>
+        <location filename="Forms/OptionsWindow.ui" line="3744"/>
+        <location filename="Forms/OptionsWindow.ui" line="3818"/>
+        <location filename="Forms/OptionsWindow.ui" line="4089"/>
         <source>Access</source>
         <translation>アクセス</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3315"/>
-        <location filename="Forms/OptionsWindow.ui" line="3415"/>
-        <location filename="Forms/OptionsWindow.ui" line="3548"/>
+        <location filename="Forms/OptionsWindow.ui" line="3396"/>
+        <location filename="Forms/OptionsWindow.ui" line="3496"/>
+        <location filename="Forms/OptionsWindow.ui" line="3629"/>
         <source>Path</source>
         <translation>パス</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3335"/>
+        <location filename="Forms/OptionsWindow.ui" line="3416"/>
         <source>Add File/Folder</source>
         <translation>ファイル/フォルダーを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3355"/>
+        <location filename="Forms/OptionsWindow.ui" line="3436"/>
         <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>どのプロセスがファイル、フォルダー、パイプにアクセスできるかを設定します。
 「オープン」アクセスはサンドボックス外にあるプログラムバイナリにのみ適用されます。すべてのプログラムに適用するには、代わりに「すべてにオープン」を使用するか、「ポリシー」タブでこの動作を変更できます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3369"/>
+        <location filename="Forms/OptionsWindow.ui" line="3450"/>
         <source>Registry</source>
         <translation>レジストリ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3442"/>
+        <location filename="Forms/OptionsWindow.ui" line="3523"/>
         <source>Add Reg Key</source>
         <translation>レジストリキーを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3462"/>
+        <location filename="Forms/OptionsWindow.ui" line="3543"/>
         <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>どのプロセスがレジストリにアクセスできるかを設定します。
 「オープン」アクセスはサンドボックス外にあるプログラムバイナリにのみ適用されます。すべてのプログラムに適用するには、代わりに「すべてにオープン」を使用するか、「ポリシー」タブでこの動作を変更できます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3476"/>
+        <location filename="Forms/OptionsWindow.ui" line="3557"/>
         <source>IPC</source>
         <translation>IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3508"/>
+        <location filename="Forms/OptionsWindow.ui" line="3589"/>
         <source>Add IPC Path</source>
         <translation>IPCパスを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3569"/>
+        <location filename="Forms/OptionsWindow.ui" line="3650"/>
         <source>Configure which processes can access NT IPC objects like ALPC ports and other processes memory and context.
 To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>どのプロセスがALPCポートや他のプロセスのメモリ、コンテキストなどのNT IPCオブジェクトにアクセスできるかを設定します。
 プロセスを指定するには、パスとして「$:program.exe」を使用します。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3583"/>
+        <location filename="Forms/OptionsWindow.ui" line="3664"/>
         <source>Wnd</source>
         <translation>Wnd</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3629"/>
+        <location filename="Forms/OptionsWindow.ui" line="3710"/>
         <source>Add Wnd Class</source>
         <translation>Wndクラスを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3668"/>
+        <location filename="Forms/OptionsWindow.ui" line="3749"/>
         <source>Wnd Class</source>
         <translation>Wnd クラス</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3676"/>
+        <location filename="Forms/OptionsWindow.ui" line="3757"/>
         <source>Don&apos;t alter window class names created by sandboxed programs</source>
         <translation>サンドボックス化されたプログラムによって作成されたウィンドウクラス名を変更しない</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3683"/>
+        <location filename="Forms/OptionsWindow.ui" line="3764"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
         <translation>どのプロセスがウィンドウなどのデスクトップオブジェクトにアクセスできるかを設定します。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3696"/>
+        <location filename="Forms/OptionsWindow.ui" line="3777"/>
         <source>COM</source>
         <translation>COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3742"/>
+        <location filename="Forms/OptionsWindow.ui" line="3823"/>
         <source>Class Id</source>
         <translation>クラスID</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3769"/>
+        <location filename="Forms/OptionsWindow.ui" line="3850"/>
         <source>Add COM Object</source>
         <translation>COMオブジェクトを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3789"/>
+        <location filename="Forms/OptionsWindow.ui" line="3870"/>
         <source>Configure which processes can access COM objects.</source>
         <translation>どのプロセスがCOMオブジェクトにアクセスできるかを設定します。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3801"/>
+        <location filename="Forms/OptionsWindow.ui" line="3882"/>
         <source>Don&apos;t use virtualized COM, Open access to hosts COM infrastructure (not recommended)</source>
         <translation>仮想化されたCOMを使用せず、ホストのCOMインフラストラクチャへのアクセスを開く (非推奨)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3809"/>
+        <location filename="Forms/OptionsWindow.ui" line="3890"/>
         <source>Access Policies</source>
         <translation>アクセスポリシー</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3898"/>
+        <location filename="Forms/OptionsWindow.ui" line="3979"/>
         <source>Rule Policies</source>
         <translation>ルールポリシー</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4775"/>
+        <location filename="Forms/OptionsWindow.ui" line="4856"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4772"/>
+        <location filename="Forms/OptionsWindow.ui" line="4853"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4836"/>
+        <location filename="Forms/OptionsWindow.ui" line="4917"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4914"/>
+        <location filename="Forms/OptionsWindow.ui" line="4995"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6511"/>
+        <location filename="Forms/OptionsWindow.ui" line="6592"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
@@ -9655,7 +9747,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6579"/>
+        <location filename="Forms/OptionsWindow.ui" line="6660"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -9701,27 +9793,27 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6602"/>
+        <location filename="Forms/OptionsWindow.ui" line="6683"/>
         <source>Complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6655"/>
+        <location filename="Forms/OptionsWindow.ui" line="6736"/>
         <source>Editor settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6658"/>
+        <location filename="Forms/OptionsWindow.ui" line="6739"/>
         <source>⚙</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6529"/>
+        <location filename="Forms/OptionsWindow.ui" line="6610"/>
         <source>Tooltips</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6612"/>
+        <location filename="Forms/OptionsWindow.ui" line="6693"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
@@ -9753,44 +9845,44 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6629"/>
+        <location filename="Forms/OptionsWindow.ui" line="6710"/>
         <source>Validate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3822"/>
+        <location filename="Forms/OptionsWindow.ui" line="3903"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
         <translation>クローズ...=!&lt;program&gt;,... ルールを、サンドボックス内にあるすべてのバイナリにも適用します。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3839"/>
+        <location filename="Forms/OptionsWindow.ui" line="3920"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
         <translation>ルールの特異性とプロセスマッチレベルに基づいてルールを優先順位付けする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3815"/>
+        <location filename="Forms/OptionsWindow.ui" line="3896"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
         <translation>ファイルとキーのオープンディレクティブを、サンドボックス外にあるバイナリにのみ適用する。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3865"/>
+        <location filename="Forms/OptionsWindow.ui" line="3946"/>
         <source>Access Mode</source>
         <translation>アクセスモード</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3905"/>
+        <location filename="Forms/OptionsWindow.ui" line="3986"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
         <translation>ルールの特異性とは、あるルールが特定のパスにどれだけよく一致するかを示す尺度です。簡単に言えば、特異性とは、パスの先頭から、最後に一致する非ワイルドカード部分文字列までを含む文字の長さです。「*.tmp」のようにファイルタイプのみに一致するルールは、常にファイルパス全体に一致するため、最も高い特異性を持ちます。
 プロセスマッチレベルは特異性よりも高い優先順位を持ち、ルールが特定のプロセスにどのように適用されるかを記述します。プロセス名またはグループによって適用されるルールが最も強いマッチレベルを持ち、次に否定によるマッチ（つまり、指定されたものを除くすべてのプロセスに適用されるルール）が続きます。最も低いマッチレベルは、グローバルマッチ（つまり、任意のプロセスに適用されるルール）です。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3885"/>
+        <location filename="Forms/OptionsWindow.ui" line="3966"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
         <translation>プライバシーモード、一般的なシステムの場所以外のすべての場所へのファイルおよびレジストリアクセスをブロックする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1310"/>
+        <location filename="Forms/OptionsWindow.ui" line="443"/>
         <source>Sandboxed window label:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9800,397 +9892,452 @@ The process match level has a higher priority than the specificity and describes
         <translation>ボックスのメモ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1780"/>
+        <location filename="Forms/OptionsWindow.ui" line="488"/>
+        <source>Font size in points, synchronized with the font selector. Existing legacy sizing is retained until you explicitly change the font or size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="491"/>
+        <source> pt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="519"/>
+        <source>Select border label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="526"/>
+        <source>Reset font. Removes the custom font, point size and writing-system override, restoring Segoe UI Bold and legacy sizing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="532"/>
+        <source>Reset border label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="551"/>
+        <source>Segoe UI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="631"/>
+        <source>Stacked letters remain upright. Stacked (compact) removes the extra row gap and reduces top/bottom padding without shrinking the font. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="654"/>
+        <source>Fixed disables automatic fallback.
+Adaptive (same edge) moves clipped labels inward on the configured side.
+Adaptive (opposite edge) tries the opposite edge before that inward fallback.
+Adaptive (any edge), the default, also tries the best-fitting remaining edge.
+Edge changes preserve percentage and inside/outside placement where possible.
+Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separate.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="678"/>
+        <source>Side labels can be stacked or rotated. Both stacked modes use vertical parentheses when the font supports them. Stacked (compact) keeps the font size, removes the extra row gap and uses 1-pixel top/bottom padding. Rotated down/up select the reading direction on either side. Top/bottom labels use horizontal text. Adaptive movement can stay on the configured side, try its opposite, or try any edge before moving inward. Labels that do not fit are clipped without shrinking the font.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="687"/>
+        <source>Border label information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="1861"/>
         <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
         <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
         <translation>ボックス化されたファイルとフォルダーに元のアクセス制御エントリを使用する（MSIServerの除外を有効にする）</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1798"/>
+        <location filename="Forms/OptionsWindow.ui" line="1879"/>
         <source>Run Processes on an own Sandboxed Desktop</source>
         <translation>独自のサンドボックス化されたデスクトップでプロセスを実行する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1900"/>
+        <location filename="Forms/OptionsWindow.ui" line="1981"/>
         <source>Desktop Isolation</source>
         <translation>デスクトップの分離</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1907"/>
+        <location filename="Forms/OptionsWindow.ui" line="1988"/>
         <source>Open Window Station (improves compatibility by reducing desktop isolation)</source>
         <oldsource>Open Window Station (improves compatybility by reducing desktop isolation)</oldsource>
         <translation>ウィンドウステーションを開く (デスクトップの分離を減らして互換性を向上させる)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2496"/>
+        <location filename="Forms/OptionsWindow.ui" line="2577"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
         <translation>元のトークンを削る代わりに、新しいサンドボックス化トークンを作成する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2740"/>
+        <location filename="Forms/OptionsWindow.ui" line="2821"/>
         <source>Force Children</source>
         <translation>子プロセスの強制</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3829"/>
+        <location filename="Forms/OptionsWindow.ui" line="3910"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
         <translation>プライバシーモードが有効な場合、サンドボックス化されたプロセスは C:\Windows*、C:\Program Files*、およびHKLMレジストリの一部のみを読み取ることができます。他のすべての場所は、読み書き可能にするために明示的なアクセスが必要になります。このモードでは、ルールの特異性は常に有効です。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3921"/>
+        <location filename="Forms/OptionsWindow.ui" line="4002"/>
         <source>Network Options</source>
         <translation>ネットワークオプション</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3931"/>
+        <location filename="Forms/OptionsWindow.ui" line="4012"/>
         <source>Process Restrictions</source>
         <translation>プロセス制限</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3951"/>
+        <location filename="Forms/OptionsWindow.ui" line="4032"/>
         <source>Issue message 1307 when a program is denied internet access</source>
         <translation>プログラムのインターネットアクセスが拒否された場合にメッセージ 1307 を表示する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3965"/>
+        <location filename="Forms/OptionsWindow.ui" line="4046"/>
         <source>Prompt user whether to allow an exemption from the blockade.</source>
         <translation>ブロックの例外を許可するかどうかをユーザーに確認する。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3979"/>
+        <location filename="Forms/OptionsWindow.ui" line="4060"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
         <translation>注意: このサンドボックスにインストールされたプログラムは、一切インターネットにアクセスできなくなります。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4018"/>
+        <location filename="Forms/OptionsWindow.ui" line="4099"/>
         <source>Set network/internet access for unlisted processes:</source>
         <translation>リストにないプロセスのネットワーク/インターネットアクセスを設定します:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4036"/>
-        <location filename="Forms/OptionsWindow.ui" line="5817"/>
+        <location filename="Forms/OptionsWindow.ui" line="4117"/>
+        <location filename="Forms/OptionsWindow.ui" line="5898"/>
         <source>Network Firewall</source>
         <translation>ネットワークファイアウォール</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4068"/>
+        <location filename="Forms/OptionsWindow.ui" line="4149"/>
         <source>Test Rules, Program:</source>
         <translation>ルールのテスト、プログラム:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4081"/>
+        <location filename="Forms/OptionsWindow.ui" line="4162"/>
         <source>Port:</source>
         <translation>ポート:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4094"/>
+        <location filename="Forms/OptionsWindow.ui" line="4175"/>
         <source>IP:</source>
         <translation>IP:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4107"/>
+        <location filename="Forms/OptionsWindow.ui" line="4188"/>
         <source>Protocol:</source>
         <translation>プロトコル:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4120"/>
+        <location filename="Forms/OptionsWindow.ui" line="4201"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4136"/>
+        <location filename="Forms/OptionsWindow.ui" line="4217"/>
         <source>Add Rule</source>
         <translation>ルールを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4157"/>
-        <location filename="Forms/OptionsWindow.ui" line="4391"/>
+        <location filename="Forms/OptionsWindow.ui" line="4238"/>
+        <location filename="Forms/OptionsWindow.ui" line="4472"/>
         <source>Port</source>
         <translation>ポート</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4162"/>
-        <location filename="Forms/OptionsWindow.ui" line="4262"/>
-        <location filename="Forms/OptionsWindow.ui" line="4386"/>
+        <location filename="Forms/OptionsWindow.ui" line="4243"/>
+        <location filename="Forms/OptionsWindow.ui" line="4343"/>
+        <location filename="Forms/OptionsWindow.ui" line="4467"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4167"/>
+        <location filename="Forms/OptionsWindow.ui" line="4248"/>
         <source>Protocol</source>
         <translation>プロトコル</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4188"/>
+        <location filename="Forms/OptionsWindow.ui" line="4269"/>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
         <translation>注意: Windows Filtering Platform がドライバーで有効になっていないため、これらのルールはユーザーモードでのみ適用され、強制することはできません!!! これは、悪意のあるアプリケーションがこれらをバイパスする可能性があることを意味します。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4201"/>
+        <location filename="Forms/OptionsWindow.ui" line="4282"/>
         <source>DNS Filter</source>
         <translation>DNSフィルター</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4241"/>
+        <location filename="Forms/OptionsWindow.ui" line="4322"/>
         <source>Add Filter</source>
         <translation>フィルターを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4218"/>
+        <location filename="Forms/OptionsWindow.ui" line="4299"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
         <translation>DNSフィルターを使用すると、プロセスごとに個別のドメインをブロックできます。ブロックするにはIPカラムを空にするか、リダイレクトするにはIPを入力します。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4257"/>
+        <location filename="Forms/OptionsWindow.ui" line="4338"/>
         <source>Domain</source>
         <translation>ドメイン</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4280"/>
+        <location filename="Forms/OptionsWindow.ui" line="4361"/>
         <source>Internet Proxy</source>
         <translation>インターネットプロキシ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4370"/>
+        <location filename="Forms/OptionsWindow.ui" line="4451"/>
         <source>Add Proxy</source>
         <translation>プロキシを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4363"/>
+        <location filename="Forms/OptionsWindow.ui" line="4444"/>
         <source>Test Proxy</source>
         <translation>プロキシをテスト</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4396"/>
+        <location filename="Forms/OptionsWindow.ui" line="4477"/>
         <source>Auth</source>
         <translation>認証</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4401"/>
+        <location filename="Forms/OptionsWindow.ui" line="4482"/>
         <source>Login</source>
         <translation>ログイン</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4406"/>
+        <location filename="Forms/OptionsWindow.ui" line="4487"/>
         <source>Password</source>
         <translation>パスワード</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4304"/>
+        <location filename="Forms/OptionsWindow.ui" line="4385"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
         <translation>サンドボックス化されたプログラムに、プリセットされたSOCKS5プロキシの使用を強制できます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4356"/>
+        <location filename="Forms/OptionsWindow.ui" line="4437"/>
         <source>Resolve hostnames via proxy</source>
         <translation>プロキシ経由でホスト名を解決する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4442"/>
+        <location filename="Forms/OptionsWindow.ui" line="4523"/>
         <source>Other Options</source>
         <translation>その他のオプション</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4569"/>
+        <location filename="Forms/OptionsWindow.ui" line="4650"/>
         <source>Port Blocking</source>
         <translation>ポートのブロック</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4546"/>
+        <location filename="Forms/OptionsWindow.ui" line="4627"/>
         <source>Block common SAMBA ports</source>
         <translation>一般的なSAMBAポートをブロックする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="869"/>
+        <location filename="Forms/OptionsWindow.ui" line="1366"/>
         <source>Allow sandboxed windows to cover the taskbar</source>
         <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
         <translation>サンドボックス化されたウィンドウがタスクバーを覆うことを許可する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4493"/>
+        <location filename="Forms/OptionsWindow.ui" line="4574"/>
         <source>Block DNS, UDP port 53</source>
         <translation>DNS、UDPポート53をブロックする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4593"/>
+        <location filename="Forms/OptionsWindow.ui" line="4674"/>
         <source>File Recovery</source>
         <translation>ファイルの復元</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4603"/>
+        <location filename="Forms/OptionsWindow.ui" line="4684"/>
         <source>Quick Recovery</source>
         <translation>クイックリカバリー</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4635"/>
+        <location filename="Forms/OptionsWindow.ui" line="4716"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
         <translation>クイックリカバリー機能が呼び出されると、次のフォルダーでサンドボックス化されたコンテンツがチェックされます。 </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4672"/>
+        <location filename="Forms/OptionsWindow.ui" line="4753"/>
         <source>Add Folder</source>
         <translation>フォルダーを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4682"/>
+        <location filename="Forms/OptionsWindow.ui" line="4763"/>
         <source>Immediate Recovery</source>
         <translation>即時復元</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4702"/>
+        <location filename="Forms/OptionsWindow.ui" line="4783"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
         <translation>即時復元からフォルダーとファイルの種類 (またはファイル拡張子) を除外できます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4712"/>
+        <location filename="Forms/OptionsWindow.ui" line="4793"/>
         <source>Ignore Extension</source>
         <translation>拡張子を無視</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4719"/>
+        <location filename="Forms/OptionsWindow.ui" line="4800"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>ファイルが作成されるとすぐに復元できるように、即時復元のプロンプトを有効にします。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4758"/>
+        <location filename="Forms/OptionsWindow.ui" line="4839"/>
         <source>Ignore Folder</source>
         <translation>フォルダーを無視</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4792"/>
+        <location filename="Forms/OptionsWindow.ui" line="4873"/>
         <source>Various Options</source>
         <translation>様々なオプション</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4808"/>
-        <location filename="Forms/OptionsWindow.ui" line="4822"/>
+        <location filename="Forms/OptionsWindow.ui" line="4889"/>
+        <location filename="Forms/OptionsWindow.ui" line="4903"/>
         <source>Compatibility</source>
         <translation>互換性</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4887"/>
+        <location filename="Forms/OptionsWindow.ui" line="4968"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
         <translation>ElevateCreateProcessの回避策を適用する (レガシーな動作)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4843"/>
+        <location filename="Forms/OptionsWindow.ui" line="4924"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>すべてのプロセスに対してサンドボックス化されたウィンドウステーションをエミュレートする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4907"/>
+        <location filename="Forms/OptionsWindow.ui" line="4988"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation>デフォルトでRpcMgmtSetComTimeoutの使用を無効にする (これにより互換性の問題が解決する場合があります)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4829"/>
+        <location filename="Forms/OptionsWindow.ui" line="4910"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
         <translation>カスタムダミーマニフェストファイルを強制的に使用する (レガシーな動作)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4880"/>
+        <location filename="Forms/OptionsWindow.ui" line="4961"/>
         <source>Use desktop object workaround for all processes</source>
         <translation>すべてのプロセスにデスクトップオブジェクトの回避策を使用する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2241"/>
+        <location filename="Forms/OptionsWindow.ui" line="2322"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
         <translation>ネストされたジョブオブジェクトの使用を許可する (Windows 8 以降で動作)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4863"/>
+        <location filename="Forms/OptionsWindow.ui" line="4944"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
         <translation>グローバルホットキーが短時間に3回連続で押されると、この例外は無視されます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4866"/>
+        <location filename="Forms/OptionsWindow.ui" line="4947"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
         <translation>「すべてのプロセスを終了」が呼び出されたときに、このサンドボックスを終了対象から除外します。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2140"/>
+        <location filename="Forms/OptionsWindow.ui" line="2221"/>
         <source>Limit restrictions</source>
         <translation>リソース制限</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2153"/>
-        <location filename="Forms/OptionsWindow.ui" line="2198"/>
-        <location filename="Forms/OptionsWindow.ui" line="2307"/>
+        <location filename="Forms/OptionsWindow.ui" line="2234"/>
+        <location filename="Forms/OptionsWindow.ui" line="2279"/>
+        <location filename="Forms/OptionsWindow.ui" line="2388"/>
         <source>Leave it blank to disable the setting</source>
         <translation>空白のままにすると設定が無効になります</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2182"/>
+        <location filename="Forms/OptionsWindow.ui" line="2263"/>
         <source>Total Processes Number Limit:</source>
         <translation>合計プロセス数の上限:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2317"/>
+        <location filename="Forms/OptionsWindow.ui" line="2398"/>
         <source>Total Processes Memory Limit:</source>
         <translation>合計プロセスメモリの上限:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2271"/>
+        <location filename="Forms/OptionsWindow.ui" line="2352"/>
         <source>Single Process Memory Limit:</source>
         <translation>単一プロセスメモリの上限:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4411"/>
+        <location filename="Forms/OptionsWindow.ui" line="4492"/>
         <source>Bypass IPs</source>
         <translation>バイパスするIP</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4532"/>
+        <location filename="Forms/OptionsWindow.ui" line="4613"/>
         <source>Bind to Adapter IP</source>
         <translation>アダプターのIPにバインドする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4470"/>
+        <location filename="Forms/OptionsWindow.ui" line="4551"/>
         <source>IPv6:</source>
         <translation>IPv6:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4553"/>
+        <location filename="Forms/OptionsWindow.ui" line="4634"/>
         <source>IPv4:</source>
         <translation>IPv4:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4463"/>
+        <location filename="Forms/OptionsWindow.ui" line="4544"/>
         <source>0000:0000:0000:0000:0000:0000:0000:0000</source>
         <translation>0000:0000:0000:0000:0000:0000:0000:0000</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4432"/>
+        <location filename="Forms/OptionsWindow.ui" line="4513"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
         <translation>ソケットを直接変更する代わりに、インプロセスのプロキシリレースレッドを使用する (まれな互換性の問題を解決します)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4539"/>
+        <location filename="Forms/OptionsWindow.ui" line="4620"/>
         <source>000.000.000.000</source>
         <translation>000.000.000.000</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4873"/>
+        <location filename="Forms/OptionsWindow.ui" line="4954"/>
         <source>Restart force process before they begin to execute</source>
         <translation>強制プロセスを実行開始前に再起動する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4924"/>
+        <location filename="Forms/OptionsWindow.ui" line="5005"/>
         <source>Dlls &amp;&amp; Extensions</source>
         <translation>DLLと拡張機能</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4954"/>
+        <location filename="Forms/OptionsWindow.ui" line="5035"/>
         <source>Image Protection</source>
         <translation>イメージ保護</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4973"/>
+        <location filename="Forms/OptionsWindow.ui" line="5054"/>
         <source>Description</source>
         <translation>説明</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4981"/>
+        <location filename="Forms/OptionsWindow.ui" line="5062"/>
         <source>Sandboxie&apos;s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. &apos;ClosedFilePath=!iexplore.exe,C:Users*&apos; will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the &quot;Access policies&quot; page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
@@ -10199,228 +10346,228 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
 これは、サンドボックス内の不正なプロセスが、名前を変更した自身のコピーを作成して保護されたリソースにアクセスするのを防ぐために行われます。もう一つのエクスプロイトベクターは、承認されたプロセスにライブラリをインジェクションして、そのプロセスがアクセスを許可されているすべてのものへのアクセス権を取得することです。ホストイメージ保護を使用すると、サンドボックス内で実行されている（ホストにインストールされた）アプリケーションがサンドボックス自体からライブラリを読み込むのをブロックすることで、これを防ぐことができます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4985"/>
+        <location filename="Forms/OptionsWindow.ui" line="5066"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
         <translation>ホスト上のサンドボックス化プログラムがサンドボックスからDLLを読み込むのを防ぐ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4992"/>
+        <location filename="Forms/OptionsWindow.ui" line="5073"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
         <translation>プログラムがサンドボックス化されたDLLを読み込もうとしたときにメッセージ 1305 を表示する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5005"/>
+        <location filename="Forms/OptionsWindow.ui" line="5086"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <translation>Sandboxieの機能は、SbieDll.dllファイルによって開始時に各サンドボックス化プロセスに読み込まれるオプションのDLLを使用することで強化できます。グローバル設定のアドオンマネージャーは、いくつか便利な拡張機能を提供しており、インストールされると、現在のボックスに対してここで有効にできます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5048"/>
+        <location filename="Forms/OptionsWindow.ui" line="5129"/>
         <source>Advanced Options</source>
         <translation>高度なオプション</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5064"/>
+        <location filename="Forms/OptionsWindow.ui" line="5145"/>
         <source>Miscellaneous</source>
         <translation>その他</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5096"/>
+        <location filename="Forms/OptionsWindow.ui" line="5177"/>
         <source>Add Option</source>
         <translation>オプションを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5110"/>
+        <location filename="Forms/OptionsWindow.ui" line="5191"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <translation>ここでは、互換性の向上やサンドボックスの動作をカスタマイズするために、プロセスごとの高度なオプションを設定できます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5121"/>
+        <location filename="Forms/OptionsWindow.ui" line="5202"/>
         <source>Option</source>
         <translation>オプション</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5131"/>
-        <location filename="Forms/OptionsWindow.ui" line="6141"/>
-        <location filename="Forms/OptionsWindow.ui" line="6381"/>
+        <location filename="Forms/OptionsWindow.ui" line="5212"/>
+        <location filename="Forms/OptionsWindow.ui" line="6222"/>
+        <location filename="Forms/OptionsWindow.ui" line="6462"/>
         <source>Value</source>
         <translation>値</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5162"/>
+        <location filename="Forms/OptionsWindow.ui" line="5243"/>
         <source>Triggers</source>
         <translation>トリガー</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5295"/>
+        <location filename="Forms/OptionsWindow.ui" line="5376"/>
         <source>On Box Terminate</source>
         <translation>ボックス終了時</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5362"/>
+        <location filename="Forms/OptionsWindow.ui" line="5443"/>
         <source>This command will be run before the box content will be deleted</source>
         <translation>このコマンドは、ボックスのコンテンツが削除される前に実行されます</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5224"/>
-        <location filename="Forms/OptionsWindow.ui" line="5365"/>
-        <location filename="Forms/OptionsWindow.ui" line="5410"/>
-        <location filename="Forms/OptionsWindow.ui" line="5429"/>
+        <location filename="Forms/OptionsWindow.ui" line="5305"/>
+        <location filename="Forms/OptionsWindow.ui" line="5446"/>
+        <location filename="Forms/OptionsWindow.ui" line="5491"/>
+        <location filename="Forms/OptionsWindow.ui" line="5510"/>
         <source>Run Command</source>
         <translation>コマンドを実行</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5274"/>
+        <location filename="Forms/OptionsWindow.ui" line="5355"/>
         <source>Event</source>
         <translation>イベント</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5199"/>
-        <location filename="Forms/OptionsWindow.ui" line="5257"/>
+        <location filename="Forms/OptionsWindow.ui" line="5280"/>
+        <location filename="Forms/OptionsWindow.ui" line="5338"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
         <translation>これらのコマンドは、ボックスのコンテンツが削除される直前にサンドボックス外で実行されます</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5202"/>
+        <location filename="Forms/OptionsWindow.ui" line="5283"/>
         <source>On File Recovery</source>
         <translation>ファイル復元時</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5327"/>
+        <location filename="Forms/OptionsWindow.ui" line="5408"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <translation>このコマンドは、ファイルが復元される前に実行され、ファイルパスが最初の引数として渡されます。このコマンドが0以外を返した場合、復元はブロックされます</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5330"/>
+        <location filename="Forms/OptionsWindow.ui" line="5411"/>
         <source>Run File Checker</source>
         <translation>ファイルチェッカーを実行</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5231"/>
+        <location filename="Forms/OptionsWindow.ui" line="5312"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
         <translation>これらのコマンドは、ボックスが初期化されたときにのみ実行されます。再度実行させるには、ボックスのコンテンツを削除する必要があります。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5234"/>
+        <location filename="Forms/OptionsWindow.ui" line="5315"/>
         <source>On Box Init</source>
         <translation>ボックス初期化時</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5305"/>
+        <location filename="Forms/OptionsWindow.ui" line="5386"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation>ここでは、様々なボックスイベントで自動的に実行されるアクションを指定できます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5337"/>
+        <location filename="Forms/OptionsWindow.ui" line="5418"/>
         <source>These events are executed each time a box is started</source>
         <translation>これらのイベントは、ボックスが開始されるたびに実行されます</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5340"/>
+        <location filename="Forms/OptionsWindow.ui" line="5421"/>
         <source>On Box Start</source>
         <translation>ボックス開始時</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5391"/>
+        <location filename="Forms/OptionsWindow.ui" line="5472"/>
         <source>Start Service</source>
         <translation>サービスを開始</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5260"/>
+        <location filename="Forms/OptionsWindow.ui" line="5341"/>
         <source>On Delete Content</source>
         <translation>コンテンツ削除時</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="862"/>
+        <location filename="Forms/OptionsWindow.ui" line="1359"/>
         <source>Prevent interference with the user interface (Experimental)</source>
         <translation>ユーザーインターフェースへの干渉を防ぐ (実験的)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="879"/>
+        <location filename="Forms/OptionsWindow.ui" line="1376"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
         <translation>サンドボックス化されたプロセスがウィンドウイメージをキャプチャするのを防ぐ (実験的、UIの不具合を引き起こす可能性があります)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5540"/>
+        <location filename="Forms/OptionsWindow.ui" line="5621"/>
         <source>Add Process</source>
         <translation>プロセスを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5526"/>
+        <location filename="Forms/OptionsWindow.ui" line="5607"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>サンドボックス化されたプロセスが他のボックスで実行中のプロセスを参照するのを許可しない</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5503"/>
+        <location filename="Forms/OptionsWindow.ui" line="5584"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>サンドボックス内で実行中のプロセスからホストプロセスを隠す。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5564"/>
+        <location filename="Forms/OptionsWindow.ui" line="5645"/>
         <source>Privacy</source>
         <translation>プライバシー</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5573"/>
+        <location filename="Forms/OptionsWindow.ui" line="5654"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
         <translation>ファームウェア情報を隠す</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5450"/>
+        <location filename="Forms/OptionsWindow.ui" line="5531"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
         <translation>一部のプログラムは、通常の方法ではなく、WMI（Windowsに組み込まれたデータベース）を介してシステムの詳細を読み取ります。例えば、「tasklist.exe」は「HideOtherBoxes」が使用されていても、WMIにアクセスすることで完全なプロセスリストを取得できます。この動作を停止するには、このオプションを有効にします。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5453"/>
+        <location filename="Forms/OptionsWindow.ui" line="5534"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
         <translation>サンドボックス化されたプロセスがWMIを介してシステムの詳細にアクセスするのを防ぐ (詳細はツールチップを参照)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5496"/>
+        <location filename="Forms/OptionsWindow.ui" line="5577"/>
         <source>Process Hiding</source>
         <translation>プロセスの非表示</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5640"/>
+        <location filename="Forms/OptionsWindow.ui" line="5721"/>
         <source>Use a custom Locale/LangID</source>
         <translation>カスタムのロケール/LangIDを使用する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5633"/>
+        <location filename="Forms/OptionsWindow.ui" line="5714"/>
         <source>Data Protection</source>
         <translation>データ保護</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5607"/>
+        <location filename="Forms/OptionsWindow.ui" line="5688"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
         <translation>現在のファームウェアテーブルを HKCU\System\SbieCustom にダンプする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5610"/>
+        <location filename="Forms/OptionsWindow.ui" line="5691"/>
         <source>Dump FW Tables</source>
         <translation>FWテーブルをダンプ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5680"/>
+        <location filename="Forms/OptionsWindow.ui" line="5761"/>
         <source>Users</source>
         <translation>ユーザー</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5698"/>
+        <location filename="Forms/OptionsWindow.ui" line="5779"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>リソースアクセスモニターを管理者のみに制限する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5705"/>
+        <location filename="Forms/OptionsWindow.ui" line="5786"/>
         <source>Add User</source>
         <translation>ユーザーを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5735"/>
+        <location filename="Forms/OptionsWindow.ui" line="5816"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
@@ -10429,52 +10576,52 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 注意: サンドボックスの強制プログラムおよび強制フォルダーの設定は、そのサンドボックスを使用できないユーザーアカウントには適用されません。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5748"/>
+        <location filename="Forms/OptionsWindow.ui" line="5829"/>
         <source>Tracing</source>
         <translation>トレース</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5945"/>
+        <location filename="Forms/OptionsWindow.ui" line="6026"/>
         <source>API call Trace (traces all SBIE hooks)</source>
         <translation>APIコールトレース (すべてのSBIEフックをトレース)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5938"/>
+        <location filename="Forms/OptionsWindow.ui" line="6019"/>
         <source>Key Trace</source>
         <translation>キートレース</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5770"/>
+        <location filename="Forms/OptionsWindow.ui" line="5851"/>
         <source>DNS Request Logging</source>
         <translation>DNSリクエストのロギング</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5797"/>
+        <location filename="Forms/OptionsWindow.ui" line="5878"/>
         <source>GUI Trace</source>
         <translation>GUIトレース</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5837"/>
+        <location filename="Forms/OptionsWindow.ui" line="5918"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>デバッグ出力をトレースログに記録する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5931"/>
+        <location filename="Forms/OptionsWindow.ui" line="6012"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translation>すべてのSetErrorをトレースログに記録する (大量の出力が生成されます)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5810"/>
+        <location filename="Forms/OptionsWindow.ui" line="5891"/>
         <source>Access Tracing</source>
         <translation>アクセストレース</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5884"/>
+        <location filename="Forms/OptionsWindow.ui" line="5965"/>
         <source>Syscall Trace (creates a lot of output)</source>
         <translation>Syscallトレース (大量の出力が生成されます)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5898"/>
+        <location filename="Forms/OptionsWindow.ui" line="5979"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -10493,172 +10640,172 @@ iniファイルで以下を指定することで、ロギングをカスタマ�
 「*」の代わりに。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5857"/>
+        <location filename="Forms/OptionsWindow.ui" line="5938"/>
         <source>Resource Access Monitor</source>
         <translation>リソースアクセスモニター</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5844"/>
+        <location filename="Forms/OptionsWindow.ui" line="5925"/>
         <source>COM Class Trace</source>
         <translation>COMクラストレース</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5877"/>
+        <location filename="Forms/OptionsWindow.ui" line="5958"/>
         <source>Pipe Trace</source>
         <translation>パイプトレース</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5891"/>
+        <location filename="Forms/OptionsWindow.ui" line="5972"/>
         <source>File Trace</source>
         <translation>ファイルトレース</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5756"/>
+        <location filename="Forms/OptionsWindow.ui" line="5837"/>
         <source>Disable Resource Access Monitor</source>
         <translation>リソースアクセスモニターを無効にする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5763"/>
+        <location filename="Forms/OptionsWindow.ui" line="5844"/>
         <source>IPC Trace</source>
         <translation>IPCトレース</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5292"/>
+        <location filename="Forms/OptionsWindow.ui" line="5373"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
         <translation>これらのコマンドは、サンドボックス内のすべてのプロセスが終了した後に、サンドボックス外で実行されます。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5961"/>
+        <location filename="Forms/OptionsWindow.ui" line="6042"/>
         <source>Debug</source>
         <translation>デバッグ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6010"/>
+        <location filename="Forms/OptionsWindow.ui" line="6091"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>警告: これらのオプションは、中核となるセキュリティ保証を無効にし、サンドボックスのセキュリティを破壊する可能性があります!!!</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6020"/>
+        <location filename="Forms/OptionsWindow.ui" line="6101"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>これらのオプションは互換性の問題をデバッグするためのものです。本番環境では使用しないでください。 </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6158"/>
+        <location filename="Forms/OptionsWindow.ui" line="6239"/>
         <source>App Templates</source>
         <translation>アプリテンプレート</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6168"/>
+        <location filename="Forms/OptionsWindow.ui" line="6249"/>
         <source>Templates</source>
         <translation>テンプレート</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6268"/>
+        <location filename="Forms/OptionsWindow.ui" line="6349"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>このリストには、サンドボックスの互換性を向上させるテンプレートが多数含まれています</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6226"/>
+        <location filename="Forms/OptionsWindow.ui" line="6307"/>
         <source>Text Filter</source>
         <translation>テキストフィルター</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6219"/>
+        <location filename="Forms/OptionsWindow.ui" line="6300"/>
         <source>Add Template</source>
         <translation>テンプレートを追加</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6236"/>
+        <location filename="Forms/OptionsWindow.ui" line="6317"/>
         <source>Filter Categories</source>
         <translation>カテゴリをフィルター</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5580"/>
+        <location filename="Forms/OptionsWindow.ui" line="5661"/>
         <source>Hide Disk Serial Number</source>
         <translation>ディスクのシリアル番号を隠す</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5587"/>
+        <location filename="Forms/OptionsWindow.ui" line="5668"/>
         <source>Obfuscate known unique identifiers in the registry</source>
         <translation>レジストリ内の既知のユニークな識別子を難読化する</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5483"/>
+        <location filename="Forms/OptionsWindow.ui" line="5564"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
         <translation>サンドボックス化されたプロセスが、ボックス外で実行中のプロセスを参照することを許可しない</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5437"/>
+        <location filename="Forms/OptionsWindow.ui" line="5518"/>
         <source>Processes</source>
         <translation>プロセス</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5547"/>
+        <location filename="Forms/OptionsWindow.ui" line="5628"/>
         <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
         <translation>このオプションはレジストリパス「\Software\Microsoft\Windows\CurrentVersion\Uninstall*」を隠し、ホストにインストールされたソフトウェアをサンドボックス内に再インストールできるようにします。ただし、ソフトウェア固有のファイルやフォルダーは隠しません。インストーラーが依然として問題に遭遇する場合は、ディスク上の関連ファイルを隠すためにカスタムのWriteFilePathエントリを定義する必要があります。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5550"/>
+        <location filename="Forms/OptionsWindow.ui" line="5631"/>
         <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
         <translation>ホストソフトウェアのアンインストールキーを隠す (ツールチップ参照)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5620"/>
+        <location filename="Forms/OptionsWindow.ui" line="5701"/>
         <source>Hide Network Adapter MAC Address</source>
         <translation>ネットワークアダプターのMACアドレスを隠す</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5790"/>
+        <location filename="Forms/OptionsWindow.ui" line="5871"/>
         <source>Trace function hooking by SbieDll</source>
         <translation>SbieDllによる関数フックをトレースする</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5986"/>
+        <location filename="Forms/OptionsWindow.ui" line="6067"/>
         <source>Debug Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6062"/>
+        <location filename="Forms/OptionsWindow.ui" line="6143"/>
         <source>Config Dump</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6093"/>
+        <location filename="Forms/OptionsWindow.ui" line="6174"/>
         <source>No Templates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6103"/>
+        <location filename="Forms/OptionsWindow.ui" line="6184"/>
         <source>No Global</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6113"/>
+        <location filename="Forms/OptionsWindow.ui" line="6194"/>
         <source>No Expand</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6123"/>
+        <location filename="Forms/OptionsWindow.ui" line="6204"/>
         <source>Refresh</source>
         <translation type="unfinished">更新</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6285"/>
+        <location filename="Forms/OptionsWindow.ui" line="6366"/>
         <source>Category</source>
         <translation>カテゴリ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6304"/>
+        <location filename="Forms/OptionsWindow.ui" line="6385"/>
         <source>Open Template</source>
         <translation>テンプレートを開く</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6330"/>
+        <location filename="Forms/OptionsWindow.ui" line="6411"/>
         <source>Template Folders</source>
         <translation>テンプレートフォルダー</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6350"/>
+        <location filename="Forms/OptionsWindow.ui" line="6431"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -10667,42 +10814,42 @@ Please note that this values are currently user specific and saved globally for 
 これらの値は現在ユーザー固有のものであり、すべてのボックスに対してグローバルに保存されることに注意してください。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6392"/>
+        <location filename="Forms/OptionsWindow.ui" line="6473"/>
         <source>Accessibility</source>
         <translation>アクセシビリティ</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6412"/>
+        <location filename="Forms/OptionsWindow.ui" line="6493"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>スクリーンリーダー: JAWS, NVDA, Window-Eyes, System Access</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6452"/>
+        <location filename="Forms/OptionsWindow.ui" line="6533"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>以下の設定は、Sandboxieをアクセシビリティソフトウェアと組み合わせて使用することを可能にします。これらの設定が有効な場合、Sandboxieの保護機能が必然的にある程度失われることに注意してください。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6488"/>
+        <location filename="Forms/OptionsWindow.ui" line="6569"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>失われた保護を補うために、「制限」設定グループ内の「権限の削除」設定ページを参照してください。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6505"/>
+        <location filename="Forms/OptionsWindow.ui" line="6586"/>
         <source>Edit ini Section</source>
         <translation>iniセクションを編集</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6539"/>
+        <location filename="Forms/OptionsWindow.ui" line="6620"/>
         <source>Edit ini</source>
         <translation>iniを編集</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6565"/>
+        <location filename="Forms/OptionsWindow.ui" line="6646"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6642"/>
+        <location filename="Forms/OptionsWindow.ui" line="6723"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>

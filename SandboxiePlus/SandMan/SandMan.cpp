@@ -1683,11 +1683,6 @@ void CSandMan::OnRestartAsAdmin()
 void CSandMan::OnExit()
 {
 	m_bExit = true;
-	if (theConf->GetBool("Options/TerminateWhenExit", false)) {
-		if (theAPI->IsConnected()) {
-			theAPI->TerminateAll(!theConf->GetBool("Options/ExceptWhenAutoTerminate", false));
-		}
-	}
 	close();
 }
 
@@ -1718,11 +1713,10 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		}
 	}
 
-	emit Closed();
-
+	int PortableStop = 0;
 	if (IsFullyPortable() && theAPI->IsConnected())
 	{
-		int PortableStop = theConf->GetInt("Options/PortableStop", -1);
+		PortableStop = theConf->GetInt("Options/PortableStop", -1);
 		if (PortableStop == -1)
 		{
 			bool State = false;
@@ -1740,11 +1734,16 @@ void CSandMan::closeEvent(QCloseEvent *e)
 			if (State)
 				theConf->SetValue("Options/PortableStop", PortableStop);
 		}
+	}
 
-		if (PortableStop == 1) {
-			SB_RESULT(void*) Status = StopSbie(true);
-			// don't care for Status we quit here anyway
-		}
+	emit Closed();
+
+	if (PortableStop == 1) {
+		SB_RESULT(void*) Status = StopSbie(true);
+		// don't care for Status we quit here anyway
+	}
+	else if (theAPI->IsConnected() && theConf->GetBool("Options/TerminateWhenExit", false)) {
+		theAPI->TerminateAll(!theConf->GetBool("Options/ExceptWhenAutoTerminate", false));
 	}
 
 	QApplication::quit();

@@ -2661,7 +2661,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="76"/>
         <source>Stacked (compact)</source>
-        <translation type="unfinished"></translation>
+        <translation>적층형 (콤팩트)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="90"/>
@@ -2712,98 +2712,98 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="69"/>
         <source>Show within the border</source>
-        <translation>테두리 안에 표시함</translation>
+        <translation>테두리 안쪽에 표시</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="70"/>
         <source>Show outside the border</source>
         <oldsource>Show above the border</oldsource>
-        <translation type="unfinished">테두리 위에 표시함</translation>
+        <translation>테두리 바깥쪽에 표시</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="71"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>상단</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>하단</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>왼쪽</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>오른쪽</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="75"/>
         <source>Stacked upright letters</source>
-        <translation type="unfinished"></translation>
+        <translation>글자를 세로로 쌓아서 표시</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="77"/>
         <source>Rotated down</source>
-        <translation type="unfinished"></translation>
+        <translation>아래로 회전</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="78"/>
         <source>Rotated up</source>
-        <translation type="unfinished"></translation>
+        <translation>위로 회전</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="79"/>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>고정</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="80"/>
         <source>Adaptive (same edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>적응형 (같은 가장자리)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="81"/>
         <source>Adaptive (opposite edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>적응형 (반대쪽 가장자리)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="82"/>
         <source>Adaptive (any edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>적응형(임의의 가장자리)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="83"/>
         <source>Use inherited/default setting</source>
-        <translation type="unfinished"></translation>
+        <translation>상속된/기본 설정 사용</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="84"/>
         <source>Avoid covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>작업 표시줄 가리기 방지</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="85"/>
         <source>Allow covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>작업 표시줄 가리기 허용</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="86"/>
         <source>Use inherited/automatic setting</source>
-        <translation type="unfinished"></translation>
+        <translation>상속된/자동 설정 사용</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="87"/>
         <source>Hide border and label from capture</source>
-        <translation type="unfinished"></translation>
+        <translation>캡처에서 테두리 및 레이블 숨기기</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="88"/>
         <source>Include border and label in capture</source>
-        <translation type="unfinished"></translation>
+        <translation>캡처에 테두리 및 레이블 포함</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="92"/>
@@ -2929,12 +2929,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1051"/>
         <source>Select the font, native style, writing system and point size.</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴, 고유 스타일, 문자 체계 및 포인트 크기를 선택하세요.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1052"/>
         <source>Default: Segoe UI Bold; legacy sizing</source>
-        <translation type="unfinished"></translation>
+        <translation>기본값: Segoe UI Bold, 이전 방식의 크기 조정</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1136"/>
@@ -3031,7 +3031,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/BorderFontDialog.cpp" line="128"/>
         <location filename="Windows/OptionsGeneral.cpp" line="1094"/>
         <source>Border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>테두리 레이블 글꼴</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="133"/>
@@ -3043,77 +3043,77 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="138"/>
         <source>Unavailable writing system (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>사용할 수 없는 문자 체계 (%1)</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="142"/>
         <source>&amp;Writing system:</source>
-        <translation type="unfinished"></translation>
+        <translation>문자 체계(&amp;W):</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="152"/>
         <source>Font &amp;family:</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴 모음(&amp;F):</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="154"/>
         <source>Font st&amp;yle:</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴 스타일(&amp;Y):</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="159"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation> pt</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="161"/>
         <source>&amp;Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>크기(&amp;S):</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="162"/>
         <source>&amp;Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>밑줄(&amp;U)</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="164"/>
         <source>Stri&amp;keout</source>
-        <translation type="unfinished"></translation>
+        <translation>취소선(&amp;K)</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="173"/>
         <source>Native font preview</source>
-        <translation type="unfinished"></translation>
+        <translation>고유 글꼴 미리 보기</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="182"/>
         <source>Save only this font and size immediately. Other pending box options are not applied. Cancel keeps the last applied font.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 글꼴과 크기만 즉시 저장합니다. 다른 보류 중인 박스 옵션은 적용되지 않습니다. &apos;취소&apos;를 누르면 마지막으로 적용된 글꼴이 유지됩니다.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="183"/>
         <source>This template is read-only.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 템플릿은 읽기 전용입니다.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="291"/>
         <source>The saved selection is unavailable. Choose an installed family and a native style.</source>
-        <translation type="unfinished"></translation>
+        <translation>저장된 선택 항목을 사용할 수 없습니다. 설치된 글꼴 모음과 고유 스타일을 선택하세요.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="325"/>
         <source>Sandbox name</source>
-        <translation type="unfinished">샌드박스 이름</translation>
+        <translation>샌드박스 이름</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="340"/>
         <source>Unable to create the native font preview.</source>
-        <translation type="unfinished"></translation>
+        <translation>고유 글꼴을 미리 볼 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="342"/>
         <source>Native GDI preview. Writing system filters the font list; it does not change label language or direction.</source>
-        <translation type="unfinished"></translation>
+        <translation>고유 GDI 미리 보기. 문자 체계는 글꼴 목록을 필터링하는 용도이며, 레이블의 언어나 방향은 변경하지 않습니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="56"/>
@@ -9353,87 +9353,88 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="154"/>
         <source>Sandbox icon...</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 아이콘...</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="155"/>
         <source>Configure the sandbox icon.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 아이콘을 구성합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="285"/>
         <source>Box Border</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 테두리</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="296"/>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>프레임</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="323"/>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>색상:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="436"/>
         <source>Sandbox label</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 레이블</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="473"/>
         <source>Label font size:</source>
-        <translation type="unfinished"></translation>
+        <translation>레이블 글꼴 크기:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="563"/>
         <source>Edge:</source>
-        <translation type="unfinished"></translation>
+        <translation>가장 자리:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="583"/>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>위치:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="605"/>
         <source>0% is the start of the usable edge; 50% is centered; 100% is the end. Top/bottom run left to right; left/right run top to bottom.</source>
-        <translation type="unfinished"></translation>
+        <translation>0%는 사용 가능한 가장자리의 시작점; 50%는 중앙; 100%는 끝점을 나타냅니다. 위쪽/아래쪽은 왼쪽에서 오른쪽으로, 왼쪽/오른쪽은 위쪽에서 아래쪽으로 이어집니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="618"/>
         <source>Side text:</source>
-        <translation type="unfinished"></translation>
+        <translation>측면 텍스트:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="641"/>
         <source>Movement:</source>
-        <translation type="unfinished"></translation>
+        <translation>움직임:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="699"/>
         <source>Visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>가시성</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="706"/>
         <source>Taskbar:</source>
-        <translation type="unfinished"></translation>
+        <translation>작업 표시줄:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="719"/>
         <source>Choose whether border overlays avoid taskbars and shell appbars. The inherited/default option follows the global setting, which defaults to avoiding taskbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>테두리 오버레이가 작업 표시줄 및 셸 앱바를 피하도록 설정할지 선택합니다. &apos;상속/기본값&apos; 옵션은 전역 설정을 따르며, 기본적으로 작업 표시줄을 피하도록 구성되어 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="729"/>
         <source>Screen capture:</source>
-        <translation type="unfinished"></translation>
+        <translation>화면 캡처:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="742"/>
         <source>Exclude the border and label from screen capture, not the application itself. When inherited and otherwise unset, CoverBoxedWindows determines the default.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>응용 프로그램 자체가 아닌, 테두리와 레이블을 스크린샷에서 제외합니다. 상속되었거나 별도로 설정되지 않은 경우, CoverBoxedWindows가 기본값을 결정합니다.</translatorcomment>
+        <translation>화면 캡처 시 테두리와 레이블을 제외합니다(애플리케이션 자체는 제외되지 않습니다). &apos;상속됨&apos;으로 설정되어 있거나 별도로 지정된 값이 없는 경우, CoverBoxedWindows의 기본 설정이 적용됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2518"/>
@@ -10712,37 +10713,37 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="488"/>
         <source>Font size in points, synchronized with the font selector. Existing legacy sizing is retained until you explicitly change the font or size.</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴 크기는 포인트 단위로 표시되며, 글꼴 선택 도구와 동기화됩니다. 기존에 설정된 크기는 사용자가 글꼴이나 크기를 명시적으로 변경하기 전까지 그대로 유지됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="491"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation> pt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="519"/>
         <source>Select border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>테두리 레이블 글꼴 선택</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="526"/>
         <source>Reset font. Removes the custom font, point size and writing-system override, restoring Segoe UI Bold and legacy sizing.</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴 재설정. 사용자 지정 글꼴, 글자 크기 및 문자 체계 설정을 제거하고, Segoe UI Bold 글꼴과 기존 크기 설정으로 되돌립니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="532"/>
         <source>Reset border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>테두리 레이블 글꼴 재설정</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="551"/>
         <source>Segoe UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Segoe UI</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="631"/>
         <source>Stacked letters remain upright. Stacked (compact) removes the extra row gap and reduces top/bottom padding without shrinking the font. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
-        <translation type="unfinished"></translation>
+        <translation>쌓인 글자는 수직으로 유지됩니다. 쌓기 (압축) 모드는 여분의 행 간격을 제거하고, 글꼴 크기를 줄이지 않으면서 상하 패딩을 줄여줍니다. ‘아래로 회전’은 양쪽 모두 위에서 아래로 읽히며, ‘위로 회전’은 양쪽 모두 아래에서 위로 읽힙니다. 상하 레이블은 이 설정을 무시합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="654"/>
@@ -10752,17 +10753,22 @@ Adaptive (opposite edge) tries the opposite edge before that inward fallback.
 Adaptive (any edge), the default, also tries the best-fitting remaining edge.
 Edge changes preserve percentage and inside/outside placement where possible.
 Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separate.</source>
-        <translation type="unfinished"></translation>
+        <translation>고정은 자동 대체 기능을 비활성화합니다.
+적응형 (동일 가장자리)은 잘린 레이블을 구성된 쪽 안쪽으로 이동합니다.
+적응형 (반대쪽 가장자리)은 안쪽으로 대체하기 전에 반대쪽 가장자리를 시도합니다.
+적응형 (임의의 가장자리)은 기본값으로, 나머지 가장자리 중 가장 적합한 가장자리도 시도합니다.
+가장자리 변경 시 가능한 경우 백분율 및 안쪽/바깥쪽 배치를 유지합니다.
+적응형 모드는 작업 표시줄 제외를 준수합니다. 최대화/스냅 동작은 별도로 유지됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="678"/>
         <source>Side labels can be stacked or rotated. Both stacked modes use vertical parentheses when the font supports them. Stacked (compact) keeps the font size, removes the extra row gap and uses 1-pixel top/bottom padding. Rotated down/up select the reading direction on either side. Top/bottom labels use horizontal text. Adaptive movement can stay on the configured side, try its opposite, or try any edge before moving inward. Labels that do not fit are clipped without shrinking the font.</source>
-        <translation type="unfinished"></translation>
+        <translation>측면 레이블은 쌓거나 회전할 수 있습니다. 두 가지 쌓기 모드 모두 글꼴에서 지원하는 경우 세로 괄호를 사용합니다. 쌓기(콤팩트)는 글꼴 크기를 유지하고 추가 행 간격을 제거하며 위/아래에 1픽셀 여백을 사용합니다. 아래/위로 회전하면 양쪽에서 읽기 방향을 선택할 수 있습니다. 위/아래 레이블은 가로 텍스트를 사용합니다. 적응형 이동은 구성된 쪽에 머물거나, 반대쪽을 시도하거나, 안쪽으로 이동하기 전에 모든 가장자리를 시도할 수 있습니다. 맞지 않는 레이블은 글꼴 크기를 줄이지 않고 잘립니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="687"/>
         <source>Border label information</source>
-        <translation type="unfinished"></translation>
+        <translation>테두리 레이블 정보</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4513"/>

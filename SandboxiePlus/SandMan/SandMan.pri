@@ -32,6 +32,7 @@ HEADERS += ./stdafx.h \
     ./Windows/PopUpWindow.h \
     ./Windows/SnapshotsWindow.h \
     ./Windows/SettingsWindow.h \
+    ./Windows/BorderFontDialog.h \
     ./Windows/OptionsWindow.h \
     ./Windows/PendingChanges.h \
     ./Windows/EditorSettingsWindow.h \
@@ -89,6 +90,7 @@ SOURCES += ./main.cpp \
     ./Helpers/WindowFromPointEx.cpp \
     ./Helpers/TabOrder.cpp \
     ./Helpers/MiniDumpFilter.cpp \
+    ./Windows/BorderFontDialog.cpp \
     ./Windows/OptionsWindow.cpp \
     ./Windows/EditorSettingsWindow.cpp \
     ./Windows/PopUpWindow.cpp \

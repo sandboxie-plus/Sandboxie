@@ -202,6 +202,13 @@ public:
 			ClearHighlights(pExcludedTree);
 	}
 
+	void CaptureValueBaseline(QAbstractSpinBox* pSpinBox)
+	{
+		if (!pSpinBox || IsValueExcluded(pSpinBox)) return;
+		SetValueHighlight(pSpinBox, false);
+		pSpinBox->setProperty(ValueBaselineProperty, SpinBoxValue(pSpinBox));
+	}
+
 	void CaptureValueBaselines()
 	{
 		foreach(QComboBox* pCombo, m_pRoot->findChildren<QComboBox*>()) {
@@ -241,8 +248,7 @@ public:
 		foreach(QAbstractSpinBox* pSpinBox, m_pRoot->findChildren<QAbstractSpinBox*>()) {
 			if (IsValueExcluded(pSpinBox))
 				continue;
-			SetValueHighlight(pSpinBox, false);
-			pSpinBox->setProperty(ValueBaselineProperty, SpinBoxValue(pSpinBox));
+			CaptureValueBaseline(pSpinBox);
 			if (!pSpinBox->property(ValueConnectionProperty).toBool()) {
 				pSpinBox->setProperty(ValueConnectionProperty, true);
 				if (QSpinBox* pSpin = qobject_cast<QSpinBox*>(pSpinBox))
@@ -259,7 +265,7 @@ public:
 		}
 
 		foreach(QLineEdit* pLineEdit, m_pRoot->findChildren<QLineEdit*>()) {
-			if (IsComboLineEdit(pLineEdit))
+			if (IsEmbeddedLineEdit(pLineEdit))
 				continue;
 			if (IsValueExcluded(pLineEdit))
 				continue;
@@ -391,11 +397,14 @@ private:
 		pLineEdit->setStyle(pStyle);
 		pLineEdit->setProperty(ValueEditorStyleProperty, true);
 	}
-	static bool IsComboLineEdit(const QLineEdit* pLineEdit)
+	static bool IsEmbeddedLineEdit(const QLineEdit* pLineEdit)
 	{
+		// Composite controls manage their own editor highlights.
 		for (const QWidget* pParent = pLineEdit->parentWidget(); pParent; pParent = pParent->parentWidget()) {
 			if (const QComboBox* pCombo = qobject_cast<const QComboBox*>(pParent))
 				return pCombo->lineEdit() == pLineEdit;
+			if (const QAbstractSpinBox* pSpinBox = qobject_cast<const QAbstractSpinBox*>(pParent))
+				return pSpinBox->findChild<QLineEdit*>() == pLineEdit;
 		}
 		return false;
 	}
@@ -421,7 +430,7 @@ private:
 		foreach(QAbstractSpinBox* pSpinBox, m_pRoot->findChildren<QAbstractSpinBox*>())
 			if (!IsValueExcluded(pSpinBox)) SetValueHighlight(pSpinBox, false);
 		foreach(QLineEdit* pLineEdit, m_pRoot->findChildren<QLineEdit*>())
-			if (!IsComboLineEdit(pLineEdit) && !IsValueExcluded(pLineEdit)) SetValueHighlight(pLineEdit, false);
+			if (!IsEmbeddedLineEdit(pLineEdit) && !IsValueExcluded(pLineEdit)) SetValueHighlight(pLineEdit, false);
 		foreach(QPlainTextEdit* pTextEdit, m_pRoot->findChildren<QPlainTextEdit*>())
 			if (!IsValueExcluded(pTextEdit)) SetValueHighlight(pTextEdit, false);
 		if (m_bTrackKeySequences)
@@ -785,6 +794,8 @@ private:
 			if (Baseline.isValid()) SetValueHighlight(pSpinBox, Baseline.toString() != SpinBoxValue(pSpinBox));
 		}
 		else if (QLineEdit* pLineEdit = qobject_cast<QLineEdit*>(pSource)) {
+			if (IsEmbeddedLineEdit(pLineEdit))
+				return;
 			QVariant Baseline = pLineEdit->property(ValueBaselineProperty);
 			if (Baseline.isValid()) SetValueHighlight(pLineEdit, pLineEdit->isModified() && Baseline.toString() != pLineEdit->text());
 		}
@@ -807,7 +818,7 @@ private:
 		foreach(QAbstractSpinBox* pSpinBox, m_pRoot->findChildren<QAbstractSpinBox*>())
 			if (!IsValueExcluded(pSpinBox) && (bAll || pSpinBox->property(ValuePaletteProperty).isValid())) UpdateValueHighlight(pSpinBox);
 		foreach(QLineEdit* pLineEdit, m_pRoot->findChildren<QLineEdit*>())
-			if (!IsComboLineEdit(pLineEdit) && !IsValueExcluded(pLineEdit) && (bAll || pLineEdit->property(ValuePaletteProperty).isValid())) UpdateValueHighlight(pLineEdit);
+			if (!IsEmbeddedLineEdit(pLineEdit) && !IsValueExcluded(pLineEdit) && (bAll || pLineEdit->property(ValuePaletteProperty).isValid())) UpdateValueHighlight(pLineEdit);
 		foreach(QPlainTextEdit* pTextEdit, m_pRoot->findChildren<QPlainTextEdit*>())
 			if (!IsValueExcluded(pTextEdit) && (bAll || pTextEdit->property(ValuePaletteProperty).isValid())) UpdateValueHighlight(pTextEdit);
 		if (m_bTrackKeySequences)

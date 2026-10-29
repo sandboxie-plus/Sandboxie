@@ -2,6 +2,10 @@
 
 set "qt_version=6.8.4"
 set "qt6_version=6.8.3"
+rem CodeQL uses stock Qt, pinned to a version with public MSVC binaries.
+rem Do not track custom or commercial LTS patch releases automatically:
+rem install-qt-action may not be able to download those versions.
+set "qt_codeql_version=6.8.3"
 set "openssl_version=3.4.0"
 set "ghSsl_user=xanasoft"
 set "ghSsl_repo=openssl-builds"

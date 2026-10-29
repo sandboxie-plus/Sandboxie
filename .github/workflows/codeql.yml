@@ -73,7 +73,7 @@ jobs:
       run: |
         @echo on
         call "${{ github.workspace }}\Installer\buildVariables.cmd" build_qt6
-        echo qt6_version=%qt6_version% >> "%GITHUB_OUTPUT%"
+        echo qt_codeql_version=%qt_codeql_version% >> "%GITHUB_OUTPUT%"
 
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v3
@@ -81,12 +81,25 @@ jobs:
     - name: Install Qt6 x64
       uses: jurplel/install-qt-action@v4
       with:
-         version: ${{ steps.vars.outputs.qt6_version }}
+         version: ${{ steps.vars.outputs.qt_codeql_version }}
          arch:  'win64_msvc2022_64'
          tools: 'tools_opensslv3_x64'
          cache: true
 
+    # Jom archive cache, shared with the main CI workflow.
+    - name: Cache jom archive
+      id: cache-jom
+      uses: actions/cache@v6.1.0
+      with:
+        path: jom_1_1_4.zip
+        key: jom-1.1.4-${{ runner.os }}
+        restore-keys: |
+          jom-1.1.4-
+          jom-
+        fail-on-cache-miss: false
+
     - name: Installing Jom
+      shell: cmd
       run: SandboxiePlus\install_jom.cmd
 
     - name: Build Sandboxie x86 (DLLs & svc)
@@ -99,7 +112,7 @@ jobs:
       run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
 
     - name: Build Sandboxie-Plus x64
-      run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
+      run: SandboxiePlus\qmake_plus.cmd x64 build_qt6 --codeql
 
     - name: Build SbieShell x64
       run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64

@@ -12,7 +12,45 @@
 #include "../Windows/BoxImageWindow.h"
 #include "../AddonManager.h"
 #include <QElapsedTimer>
+#include "../../../Sandboxie/core/drv/api_flags.h"
 #include <QUuid>
+
+
+static QString ExpandPathVariables(const QString& Path, const QString& BoxName)
+{
+    QString Value2 = Path;
+    QRegularExpression rx("%([\\{\\}\\-a-zA-Z0-9 ]+)%");
+    for (int pos = 0; ; ) {
+        auto result = rx.match(Path, pos);
+        if (!result.hasMatch())
+            break;
+        pos = result.capturedStart();
+        QString var = result.captured(1);
+        QString val;
+        if (var.compare("SbieHome", Qt::CaseInsensitive) == 0)
+            val = theAPI->GetSbiePath();
+        else if (var.compare("BoxName", Qt::CaseInsensitive) == 0 || var.compare("SANDBOX", Qt::CaseInsensitive) == 0)
+            val = BoxName;
+        else if (var.compare("USER", Qt::CaseInsensitive) == 0 || var.compare("SESSION", Qt::CaseInsensitive) == 0)
+            val = theAPI->SbieIniGet(BoxName, "%" + var + "%", CONF_JUST_EXPAND); // non-path Sandboxie vars
+        else {
+            val = qEnvironmentVariable(var.toUtf8().constData()); // OS env vars in DOS form
+            if (val.isEmpty())
+                val = theAPI->SbieIniGet(BoxName, "%" + var + "%", CONF_JUST_EXPAND); // Sandboxie-specific tokens (e.g. %Sid%, %{...}%)
+        }
+        Value2.replace("%" + var + "%", val);
+        pos += result.capturedLength();
+    }
+    return Value2;
+}
+
+static QString DosizePath(const QString& Path)
+{
+    QString p = Path;
+    if (p.left(4) == "\\??\\")
+        p = p.mid(4);
+    return theAPI->Nt2DosPath(p);
+}
 
 
 CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
@@ -58,12 +96,13 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 {
     QString BoxName = field("boxName").toString();
     BoxName.replace(" ", "_");
-	int BoxType = field("boxType").toInt();
+    int BoxType = field("boxType").toInt();
 #ifndef USE_COMBO
     bool BlackBox = field("blackBox").toBool();
 #else
     bool BlackBox = CSandBoxPlus::ePrivate;
 #endif
+    bool bPortable = field("portableBox").toBool();
 
     QString Password;
     quint64 ImageSize = 0;
@@ -94,12 +133,73 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             return SB_ERR(SB_Canceled);
     }
 
-	SB_STATUS Status = theAPI->CreateBox(BoxName, true);
+    SB_STATUS Status;
+    CSandBoxPtr pBox;
 
-	if (!Status.IsError())
-	{
-		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+    if (bPortable)
+    {
+        QString portableDir;
+        QString portableIniPath;
 
+        if (!m_bAdvanced) {
+            portableDir = QFileDialog::getExistingDirectory(this,
+                tr("Select Portable Sandbox Folder"),
+                QString(),
+                QFileDialog::ShowDirsOnly);
+            if (portableDir.isEmpty())
+                return SB_ERR(SB_Canceled);
+            portableDir = portableDir.replace("/", "\\");
+            portableIniPath = portableDir + "\\" + BoxName + ".ini";
+        }
+        else {
+            QString Location = field("boxLocation").toString();
+            portableDir = Location.isEmpty() ? GetDefaultLocation() : DosizePath(ExpandPathVariables(Location, BoxName));
+            QDir().mkpath(portableDir);
+            portableIniPath = portableDir + "\\" + BoxName + ".ini";
+        }
+
+        // Create the external .ini file skeleton
+        QFile file(portableIniPath);
+        if (!file.open(QFile::WriteOnly))
+            return SB_ERR(SB_Generic);
+        file.write("#\n");
+        file.write("# Portable sandbox configuration file\n");
+        file.write("#\n");
+        file.write("\n");
+        file.write("[" + BoxName.toLatin1() + "]\n");
+        file.write("Enabled=y\n");
+        file.close();
+
+        // Add ImportBox only – no [BoxName] in Sandboxie.ini, so no collision
+        SB_STATUS importStatus = theAPI->GetGlobalSettings()->AppendText("ImportBox", portableIniPath);
+        if (importStatus.IsError()) {
+            QFile::remove(portableIniPath);
+            return importStatus;
+        }
+        theAPI->ReloadConfig();
+        theAPI->ReloadBoxes();
+
+        pBox = theAPI->GetBoxByName(BoxName);
+        if (!pBox) {
+            QStringList Imports = theAPI->GetGlobalSettings()->GetTextList("ImportBox", false);
+            Imports.removeAll(portableIniPath);
+            theAPI->GetGlobalSettings()->UpdateTextList("ImportBox", Imports, false);
+            theAPI->ReloadConfig();
+            QFile::remove(portableIniPath);
+            return SB_ERR(SB_Generic);
+        }
+
+        Status = SB_OK;
+    }
+    else
+    {
+        Status = theAPI->CreateBox(BoxName, true);
+        if (!Status.IsError())
+            pBox = theAPI->GetBoxByName(BoxName);
+    }
+
+    if (!Status.IsError() && pBox)
+    {
         if (m_bUseRandomName)
         {
             QString alias = field("boxNameAlias").toString().trimmed();
@@ -228,7 +328,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 
 
             QString Location = field("boxLocation").toString();
-            if (!Location.isEmpty()) {
+            if (!bPortable && !Location.isEmpty()) {
                 pBox->SetText("FileRootPath", Location);
                 theAPI->UpdateBoxPaths(pBox.data());
             }
@@ -312,10 +412,8 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 
 QString CNewBoxWizard::GetDefaultLocation()
 {
-    QString DefaultPath = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%", false, false);
-    // HACK HACK: globally %SANDBOX% evaluates to GlobalSettings
-    DefaultPath.replace("\\GlobalSettings", "\\" + field("boxName").toString().replace(" ", "_"));
-    return theAPI->Nt2DosPath(DefaultPath);
+    QString DefaultPath = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%", false, true);
+    return DosizePath(ExpandPathVariables(DefaultPath, field("boxName").toString().replace(" ", "_")));
 }
 
 
@@ -468,6 +566,12 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     registerField("blackBox", pBlackBox);
     connect(pBlackBox, SIGNAL(toggled(bool)), this, SLOT(OnBoxTypChanged()));
 
+    QCheckBox* pPortable = new QCheckBox(tr("Create portable sandbox"));
+    pPortable->setToolTip(tr("A portable sandbox stores its configuration in a separate .ini file, allowing it to be easily moved, backed up, or shared. "
+        "The sandbox data and configuration will be placed together in a directory of your choice."));
+    layout->addWidget(pPortable, row, 1, 1, 2);
+    registerField("portableBox", pPortable);
+    row++;
 
     //QCheckBox* pMore = new QCheckBox(tr("Show More Types"));
     //layout->addWidget(pMore, 4, 3);
@@ -1103,13 +1207,17 @@ void CSummaryPage::initializePage()
 {
     m_pSummary->setText(theGUI->GetBoxDescription(wizard()->field("boxType").toInt()));
 
+    if (field("portableBox").toBool()) {
+        m_pSummary->append(tr("\nPortable sandbox: configuration will be stored in an external .ini file."));
+    } else {
+        QString Location = field("boxLocation").toString();
+        if (Location.isEmpty())
+            Location = ((CNewBoxWizard*)wizard())->GetDefaultLocation();
+        m_pSummary->append(tr("\nThis Sandbox will be saved to: %1").arg(Location));
+    }
+
     if (((CNewBoxWizard*)wizard())->m_bUseRandomName)
         m_pSummary->append(tr("\nThe actual sandbox name is: %1").arg(wizard()->field("boxName").toString()));
-
-    QString Location = field("boxLocation").toString();
-    if (Location.isEmpty())
-        Location = ((CNewBoxWizard*)wizard())->GetDefaultLocation();
-    m_pSummary->append(tr("\nThis Sandbox will be saved to: %1").arg(Location));
 
     if (field("autoRemove").toBool()) 
         m_pSummary->append(tr("\nThis box's content will be DISCARDED when it's closed, and the box will be removed."));

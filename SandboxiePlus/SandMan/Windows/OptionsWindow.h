@@ -22,6 +22,10 @@ public:
 
 	QStringList		GetCurrentGroups();
 	QSet<QString>	GetPrograms() { return  m_Programs; }
+	bool			IsRuleExtensionsEnabled() const;
+	QSet<int>		GetUsedRulePriorities(const QTreeWidgetItem* pExclude) const;
+	QMap<int, QStringList>	GetUsedRulePrioritySources(const QTreeWidgetItem* pExclude) const;
+	QSet<QString>	GetUsedRuleRecursiveValues(const QTreeWidgetItem* pExclude) const;
 
 	static void		TriggerPathReload();
 
@@ -49,6 +53,7 @@ public slots:
 	bool apply();
 
 	void showTab(const QString& Name);
+	void showForceBreakoutTab(bool breakout);
 
 private slots:
 
@@ -101,6 +106,7 @@ private slots:
 	void OnShowForceTmpl()			{ LoadForcedTmpl(true); }
 	void OnForcedChanged();
 	void OnForcedChanged(QTreeWidgetItem *pItem, int);
+	void OnRuleExtensionsToggled(int state);
 
 	void OnBreakoutProg();
 	void OnBreakoutBrowse();
@@ -109,6 +115,8 @@ private slots:
 	void OnDelBreakout();
 	void OnShowBreakoutTmpl()		{ LoadBreakoutTmpl(true); }
 	void OnBreakoutChanged(QTreeWidgetItem *pItem, int);
+	void OnBreakoutUseTargetDirToggled(int state);
+	void OnManageForceBreakoutPriority();
 
 	void OnAddLingering();
 	void OnDelStopProg();

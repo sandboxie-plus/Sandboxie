@@ -90,6 +90,7 @@ public:
 	virtual SB_STATUS				RenameSection(const QString& NewName, bool deleteOld = true);
 	virtual SB_STATUS				RemoveSection();
 	virtual void					CommitIniChanges();
+	SB_STATUS						CommitIniChangesEx();
 
 	virtual SB_STATUS				SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate, bool bRefresh = true);
 	virtual QString					SbieIniGet(const QString& Section, const QString& Setting, quint32 Index, qint32* ErrCode = NULL, quint32* pType = NULL) const;

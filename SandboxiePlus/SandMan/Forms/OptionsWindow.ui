@@ -2762,12 +2762,49 @@ Partially checked: No groups will be added to the newly created sandboxed token.
                    <string>Name</string>
                   </property>
                  </column>
+                 <column>
+                  <property name="text">
+                   <string>Priority</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Recursive</string>
+                  </property>
+                 </column>
                 </widget>
                </item>
                <item row="8" column="0">
                 <widget class="QCheckBox" name="chkDisableForced">
                  <property name="text">
                   <string>Disable forced Process and Folder for this sandbox</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="1">
+                <widget class="QPushButton" name="btnForcePriorities">
+                 <property name="toolTip">
+                  <string>Open the combined Force/Breakout priority manager.</string>
+                 </property>
+                 <property name="text">
+                  <string>Priorities</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkUseForceBreakoutRuleExtensions">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="toolTip">
+                  <string>Enable Force/Breakout rule extensions (Priority, Recursive, TargetBox).
+When enabled, sandboxed and unsandboxed launch paths parse these extensions.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use Force/Breakout rule extensions</string>
                  </property>
                 </widget>
                </item>
@@ -2858,6 +2895,21 @@ Partially checked: No groups will be added to the newly created sandboxed token.
                  <column>
                   <property name="text">
                    <string>Name</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Priority</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Recursive</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Target Box</string>
                   </property>
                  </column>
                 </widget>
@@ -2956,7 +3008,46 @@ Partially checked: No groups will be added to the newly created sandboxed token.
                  </property>
                 </widget>
                </item>
-               <item row="8" column="0" colspan="2">
+               <item row="8" column="0">
+                <widget class="QCheckBox" name="chkDisableBreakout">
+                 <property name="text">
+                  <string>Disable all Breakout rules for this sandbox</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="1">
+                <widget class="QPushButton" name="btnBreakoutPriorities">
+                 <property name="toolTip">
+                  <string>Open the combined Force/Breakout priority manager.</string>
+                 </property>
+                 <property name="text">
+                  <string>Priorities</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkBreakoutUseTargetDir">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="toolTip">
+                  <string>When breakout is allowed, use the target executable's directory as working directory when available, even if the caller supplied one.
+When disabled, retain the upstream working-directory selection.
+
+A partially checked state removes the unscoped box value and uses the inherited value (Template -&gt; Global -&gt; Default).</string>
+                 </property>
+                 <property name="text">
+                  <string>Use breakout target directory as working directory</string>
+                 </property>
+                 <property name="tristate">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="0" colspan="2">
                 <widget class="QLabel" name="lblBreakOut">
                  <property name="text">
                   <string>&lt;b&gt;&lt;font color='red'&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc...) extensions. Please review the security section for each option in the documentation before use.</string>
@@ -6876,10 +6967,15 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>chkShowForceTmpl</tabstop>
   <tabstop>btnDelForce</tabstop>
   <tabstop>chkDisableForced</tabstop>
+  <tabstop>btnForcePriorities</tabstop>
+  <tabstop>chkUseForceBreakoutRuleExtensions</tabstop>
   <tabstop>treeBreakout</tabstop>
   <tabstop>btnBreakoutProg</tabstop>
   <tabstop>btnBreakoutDir</tabstop>
   <tabstop>chkShowBreakoutTmpl</tabstop>
+  <tabstop>chkDisableBreakout</tabstop>
+  <tabstop>btnBreakoutPriorities</tabstop>
+  <tabstop>chkBreakoutUseTargetDir</tabstop>
   <tabstop>btnDelBreakout</tabstop>
   <tabstop>tabsStop</tabstop>
   <tabstop>treeStop</tabstop>

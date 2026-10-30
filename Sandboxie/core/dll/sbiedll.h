@@ -166,6 +166,10 @@ SBIEDLL_EXPORT  ULONG SbieDll_QueueGetRpl(
 SBIEDLL_EXPORT  void *SbieDll_CallProxySvr(
     WCHAR *QueueName, void *req, ULONG req_len, ULONG rpl_min_len, DWORD timeout_sec);
 
+SBIEDLL_EXPORT  void *SbieDll_CallProxySvrEx(
+    WCHAR *QueueName, void *req, ULONG req_len, ULONG rpl_min_len,
+    DWORD timeout_sec, ULONG *out_rpl_len);
+
 SBIEDLL_EXPORT  ULONG SbieDll_UpdateConf(
     WCHAR OpCode, const WCHAR *Password, const WCHAR *Section,
     const WCHAR *Setting, const WCHAR *Value);
@@ -236,6 +240,7 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* te
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetStringForStringList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, WCHAR* value, ULONG value_size);
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetStringsForStringList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, int pos, WCHAR* value, ULONG value_size);
+// For BreakoutProcess, entries in the form "image.exe|TargetBox=BoxName" are matched by image name.
 SBIEDLL_EXPORT  BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting);
 SBIEDLL_EXPORT  BOOLEAN SbieDll_CheckStringInListA(const char* string, const WCHAR* boxname, const WCHAR* setting);
 

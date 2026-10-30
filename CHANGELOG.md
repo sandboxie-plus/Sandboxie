@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added line numbers to the built-in INI section editors, with an Advanced Editor Settings toggle and Ctrl+G destination highlighting; copying and saving exclude the line numbers
 - added configurable sandbox border labels on all four window edges through `BorderLabelPosition`, with adjustable position, stacked or rotated side text, fixed/adaptive placement, and a dedicated Box Border tab in sandbox options
 - added customizable sandbox border label fonts with native style and writing-system selection, GDI preview, synchronized point size, immediate font-only Apply, and reset to legacy defaults
+- added Force/Breakout rule extensions for priority, folder recursion and target sandbox routing, with a combined priority manager
 
 ### Changed
 - switched x64 build to qt 6.8.4
@@ -21,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Language corrupted after version 1.16.0 [#5079](https://github.com/sandboxie-plus/Sandboxie/issues/5079)
 - fixed immediate portable sandbox configuration updates reporting success when saving the INI file or reloading the configuration fails
 - fixed boxed processes not terminating when closing the SandMan window with termination-on-exit enabled, and prevented premature termination when canceling portable cleanup [#5696](https://github.com/sandboxie-plus/Sandboxie/issues/5696)
+- fixed incomplete Force/Breakout policy evaluation allowing unintended unboxed routing
 
 
 

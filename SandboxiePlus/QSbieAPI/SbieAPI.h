@@ -87,6 +87,7 @@ public:
 	virtual SB_STATUS		ReloadConfig(bool ReconfigureDrv = false);
 	virtual SB_STATUS		ReloadCert();
 	virtual void			CommitIniChanges();
+	SB_STATUS				CommitIniChangesEx();
 	virtual QString			SbieIniGet(const QString& Section, const QString& Setting, quint32 Index = 0, qint32* ErrCode = NULL, quint32* pType = NULL);
 	virtual QString			SbieIniGet2(const QString& Section, const QString& Setting, quint32 Index = 0, bool bWithGlobal = false, bool bNoExpand = true, bool withTemplates = false);
 	virtual QString			SbieIniGetEx(const QString& Section, const QString& Setting);
@@ -163,7 +164,8 @@ public:
 	{
 		eStartDefault = 0,
 		eStartElevated = 1,
-		eStartFCP = 2
+		eStartFCP = 2,
+		eStartIgnoreBreakout = 4
 	};
 
 	virtual SB_RESULT(quint32) RunStart(const QString& BoxName, const QString& Command, EStartFlags Flags = eStartDefault, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);

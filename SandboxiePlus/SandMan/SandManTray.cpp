@@ -225,6 +225,7 @@ void CSandMan::CreateTrayMenu()
 	m_pTrayMenu->addAction(m_pDisableForce2);
 	if(m_pDisableRecovery) m_pTrayMenu->addAction(m_pDisableRecovery);
 	if(m_pDisableMessages) m_pTrayMenu->addAction(m_pDisableMessages);
+	if(m_pDisableBreakout2) m_pTrayMenu->addAction(m_pDisableBreakout2);
 	m_pDismissUpdate = m_pTrayMenu->addAction(tr("Dismiss Update Notification"), this, SLOT(OnDismissUpdate()));
 	m_pDismissUpdate->setCheckable(true);
 	m_pDismissUpdate->setVisible(false);

@@ -25,6 +25,8 @@ public:
 	virtual bool			IsRunningAsAdmin();
 
 	virtual bool			IsBusy() const { return m_JobCount > 0; }
+	QString					MkNewGuidName();
+	static bool				IsGuidBoxName(const QString& Name);
 
 	virtual void			StopMonitor();
 
@@ -173,7 +175,7 @@ public:
 	class COptionsWindow*	m_pOptionsWnd;
 	class CRecoveryWindow*	m_pRecoveryWnd;
 
-	bool					IsBoxBusy() const { return IsSizePending() || !m_JobQueue.isEmpty(); }
+	bool					IsBoxBusy(bool IncludeSizeScan = true) const { return (IncludeSizeScan && IsSizePending()) || !m_JobQueue.isEmpty(); }
 	SB_STATUS				DeleteContentAsync(bool DeleteSnapshots = true, bool UseCurrentSnapshot = false);
 
 	struct SLink {

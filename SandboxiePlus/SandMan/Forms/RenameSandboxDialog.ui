@@ -23,7 +23,11 @@
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="4" column="0" colspan="3">
-      <widget class="QLineEdit" name="txtBoxAlias"/>
+      <widget class="QLineEdit" name="txtBoxAlias">
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="0" column="0">
       <widget class="QLabel" name="lblNamePrompt">
@@ -40,7 +44,21 @@
       </widget>
      </item>
      <item row="1" column="0" colspan="3">
-      <widget class="QLineEdit" name="txtBoxName"/>
+      <widget class="QLineEdit" name="txtBoxName">
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="3">
+      <widget class="QCheckBox" name="chkGuidName">
+       <property name="text">
+        <string>Use a random GUID as sandbox name</string>
+       </property>
+       <property name="toolTip">
+        <string>Generate a new GUID. A non-GUID name can be copied to the alias field. Uncheck to restore the previous name; alias edits are kept.</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -85,13 +103,70 @@
      </item>
     </layout>
    </item>
+   <item>
+    <widget class="QWidget" name="widgetNavigation" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayoutNavigation">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="btnPrevious">
+        <property name="text">
+         <string>&amp;Previous</string>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="toolTip">
+         <string>Keep edits as a draft and show the previous sandbox. Drafts are saved on the final OK.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblPosition">
+        <property name="text">
+         <string notr="true">1 / 1</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnNext">
+        <property name="text">
+         <string>&amp;Next</string>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="toolTip">
+         <string>Keep edits as a draft and show the next sandbox. Drafts are saved on the final OK.</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>txtBoxName</tabstop>
+  <tabstop>chkGuidName</tabstop>
   <tabstop>chkAliasDisabled</tabstop>
   <tabstop>chkHideAlias</tabstop>
   <tabstop>txtBoxAlias</tabstop>
+  <tabstop>btnPrevious</tabstop>
+  <tabstop>btnNext</tabstop>
  </tabstops>
  <resources/>
  <connections/>

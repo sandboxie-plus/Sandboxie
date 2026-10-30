@@ -1093,6 +1093,8 @@ SB_RESULT(quint32) CSbieAPI::RunStart(const QString& BoxName, const QString& Com
 		StartArgs += "/elevated ";
 	if (Flags & eStartFCP)
 		StartArgs += "/fcp ";
+	if (Flags & eStartIgnoreBreakout)
+		StartArgs += "/ignore_breakout ";
 
 	if (!BoxName.isEmpty())
 		StartArgs += "/box:" + BoxName + " ";
@@ -1340,13 +1342,19 @@ SB_STATUS CSbieAPI::SbieIniSetDrv(const QString& Section, const QString& Setting
 
 void CSbieAPI::CommitIniChanges()
 {
+	CommitIniChangesEx();
+}
+
+SB_STATUS CSbieAPI::CommitIniChangesEx()
+{
 	bool bRemoved = m_IniWatcher.removePath(m_IniPath);
 			
-	SbieIniSet("", "", ""); // commit and refresh
+	SB_STATUS status = SbieIniSet("", "", ""); // commit and refresh
 
 	if (bRemoved) m_IniWatcher.addPath(m_IniPath);
 
 	m_bBoxesDirty = true;
+	return status;
 }
 
 QString CSbieAPI::SbieIniGetEx(const QString& Section, const QString& Setting)

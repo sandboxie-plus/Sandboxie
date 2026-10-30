@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include <QSharedPointer>
 
 #include "../qsbieapi_global.h"
 
@@ -28,6 +29,8 @@ public:
 
 	virtual QStringList GetTextList(const QString &Setting, bool withTemplates, bool bExpand = false, bool bWithGlobal = false) const;
 	virtual SB_STATUS	UpdateTextList(const QString &Setting, const QStringList& List, bool withTemplates);
+	SB_STATUS			RestoreTextList(const QString& setting, const QStringList& values);
+	static void			CollectTemplateNames(const QSharedPointer<CSbieIni>& pIni, QMap<QString, QString>& names);
 	virtual QStringList GetTemplates() const;
 	virtual QStringList GetTextListTmpl(const QString &Setting, const QString& Template) const;
 

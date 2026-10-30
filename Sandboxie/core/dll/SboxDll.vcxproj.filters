@@ -110,6 +110,9 @@
     <ClCompile Include="..\..\common\pattern.c">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\program_control_runtime.c">
+      <Filter>common</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\common\pool.c">
       <Filter>common</Filter>
     </ClCompile>
@@ -529,5 +532,13 @@
     <Object Include="..\..\common\NtCRT\a64\libcmt\atomics.obj">
       <Filter>common\NtCRT\libcmt</Filter>
     </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\common\program_control_rule.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\program_control_runtime.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

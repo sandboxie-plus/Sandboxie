@@ -6,9 +6,10 @@
 # Remove it when you are finished editing this file.
 message("You are running qmake on a generated .pro file. This may not work!")
 
-
 TEMPLATE = subdirs
-SUBDIRS += SandMan/SandMan.qc.pro \
+
+# CLI-only fork: keep the backend libraries and drop the SandMan GUI stack.
+# Qt GUI components and SandMan are intentionally excluded from the default build.
+SUBDIRS += \
     QSbieAPI/QSbieAPI.qc.pro \
-    MiscHelpers/MiscHelpers.qc.pro \
-    QtSingleApp/qtsingleapp/qtsingleapp/qtsingleapp.qc.pro
+    MiscHelpers/MiscHelpers.qc.pro

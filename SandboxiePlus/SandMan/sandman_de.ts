@@ -2340,7 +2340,7 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="76"/>
         <source>Stacked (compact)</source>
-        <translation type="unfinished"></translation>
+        <translation>Buchstaben untereinander (kompakt)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="90"/>
@@ -2397,93 +2397,92 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="70"/>
         <source>Show outside the border</source>
-        <oldsource>Show above the border</oldsource>
-        <translation type="unfinished">Oberhalb des Rahmens anzeigen</translation>
+        <translation>Außerhalb des Rahmens anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="71"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Oben</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Unten</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Links</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="75"/>
         <source>Stacked upright letters</source>
-        <translation type="unfinished"></translation>
+        <translation>Buchstaben untereinander</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="77"/>
         <source>Rotated down</source>
-        <translation type="unfinished"></translation>
+        <translation>Text gedreht nach unten</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="78"/>
         <source>Rotated up</source>
-        <translation type="unfinished"></translation>
+        <translation>Text gedreht nach oben</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="79"/>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixiert</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="80"/>
         <source>Adaptive (same edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>Adaptiv (gleiche Seite)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="81"/>
         <source>Adaptive (opposite edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>Adaptiv (gegenüberliegende Seite)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="82"/>
         <source>Adaptive (any edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>Adaptiv (jede Seite)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="83"/>
         <source>Use inherited/default setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende vererbte/vorgegebene Einstellung</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="84"/>
         <source>Avoid covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Vermeide die Taskleiste zu verdecken</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="85"/>
         <source>Allow covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube die Taskleiste zu verdecken</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="86"/>
         <source>Use inherited/automatic setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende vererbte/automatische Einstellung</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="87"/>
         <source>Hide border and label from capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberge Rahmen und Beschriftung bei Erstellung von Screenshots</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="88"/>
         <source>Include border and label in capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Erfasse Rahmen und Beschriftung bei Erstellung von Screenshots</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="92"/>
@@ -2609,12 +2608,12 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1051"/>
         <source>Select the font, native style, writing system and point size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie die Schriftart, den Schriftstil, das Schriftsystem und die Schriftgröße aus.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1052"/>
         <source>Default: Segoe UI Bold; legacy sizing</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard: Segoe UI Bold; ursprüngliche Schriftgröße</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1521"/>
@@ -3211,7 +3210,7 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
         <location filename="Windows/BorderFontDialog.cpp" line="128"/>
         <location filename="Windows/OptionsGeneral.cpp" line="1094"/>
         <source>Border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart Rahmenbeschriftung</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="133"/>
@@ -3223,77 +3222,77 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="138"/>
         <source>Unavailable writing system (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht verfügbares Schriftsystem (%1)</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="142"/>
         <source>&amp;Writing system:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftsystem:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="152"/>
         <source>Font &amp;family:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="154"/>
         <source>Font st&amp;yle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftstil:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="159"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation> pt</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="161"/>
         <source>&amp;Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="162"/>
         <source>&amp;Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterstrichen</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="164"/>
         <source>Stri&amp;keout</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchgestrichen</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="173"/>
         <source>Native font preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftvorschau</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="182"/>
         <source>Save only this font and size immediately. Other pending box options are not applied. Cancel keeps the last applied font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichert nur diese Schriftart und -größe sofort. Andere noch nicht übernommene Boxoptionen werden nicht angewendet. Mit &apos;Abbrechen&apos; bleibt die zuletzt angewendete Schriftart erhalten.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="183"/>
         <source>This template is read-only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Vorlage ist schreibgeschützt.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="291"/>
         <source>The saved selection is unavailable. Choose an installed family and a native style.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die gespeicherte Auswahl ist nicht verfügbar. Wählen Sie eine installierte Schriftart und einen dafür vorhandenen Schriftstil aus.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="325"/>
         <source>Sandbox name</source>
-        <translation type="unfinished">Sandboxname</translation>
+        <translation>Sandboxname</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="340"/>
         <source>Unable to create the native font preview.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Schriftvorschau kann nicht erstellt werden.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="342"/>
         <source>Native GDI preview. Writing system filters the font list; it does not change label language or direction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Native GDI-Vorschau. Das Schriftsystem filtert die Schriftartenliste. Die Sprache oder Schreibrichtung der Beschriftungen wird dabei nicht geändert.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="56"/>
@@ -9550,87 +9549,87 @@ Teilweise angehakt: Dem neu erstellten sandgeboxten Token werden keine lokalen G
     <message>
         <location filename="Forms/OptionsWindow.ui" line="154"/>
         <source>Sandbox icon...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox Icon...</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="155"/>
         <source>Configure the sandbox icon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguriere das Sandbox Icon.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="285"/>
         <source>Box Border</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxrahmen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="296"/>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Rahmen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="323"/>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbe:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="436"/>
         <source>Sandbox label</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox-Beschriftung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="473"/>
         <source>Label font size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftgröße Beschriftung:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="563"/>
         <source>Edge:</source>
-        <translation type="unfinished"></translation>
+        <translation>Seite:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="583"/>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Position:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="605"/>
         <source>0% is the start of the usable edge; 50% is centered; 100% is the end. Top/bottom run left to right; left/right run top to bottom.</source>
-        <translation type="unfinished"></translation>
+        <translation>0% ist der Anfang der nutzbaren Seite, 50% ist die Mitte, 100% ist das Ende. Oben/unten verläuft von links nach rechts, links/rechts verläuft von oben nach unten.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="618"/>
         <source>Side text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Seitlicher Text:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="641"/>
         <source>Movement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiebung:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="699"/>
         <source>Visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichtbarkeit</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="706"/>
         <source>Taskbar:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taskleiste:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="719"/>
         <source>Choose whether border overlays avoid taskbars and shell appbars. The inherited/default option follows the global setting, which defaults to avoiding taskbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie, ob Rahmenüberlagerungen auf Taskleisten und Shell-Appleisten vermieden werden sollen. Die Option &apos;vererbte/vorgegebene&apos; folgt der globalen Einstellung, bei der standardmäßig Taskleisten vermieden werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="729"/>
         <source>Screen capture:</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellung Screenshots:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="742"/>
         <source>Exclude the border and label from screen capture, not the application itself. When inherited and otherwise unset, CoverBoxedWindows determines the default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließt den Rahmen und die Beschriftung bei der Erstellung von Screenshots aus, nicht jedoch die Anwendung selbst. Wenn vererbt und nicht anderweitig festgelegt, bestimmt &apos;CoverBoxedWindows&apos; den Standard.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2518"/>
@@ -10556,37 +10555,37 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="488"/>
         <source>Font size in points, synchronized with the font selector. Existing legacy sizing is retained until you explicitly change the font or size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Schriftgröße in Punkt wird mit der Schriftartauswahl synchronisiert. Die ursprüngliche Schriftgröße bleibt erhalten, bis Sie die Schriftart oder die Größe explizit ändern.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="491"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation> pt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="519"/>
         <source>Select border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart Rahmenbeschriftung auswählen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="526"/>
         <source>Reset font. Removes the custom font, point size and writing-system override, restoring Segoe UI Bold and legacy sizing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart zurücksetzen. Entfernt die benutzerdefinierte Schriftart, Schriftgröße und die Überschreibung des Schriftsystems und stellt &apos;Segoe UI Bold&apos; sowie die ursprüngliche Schriftgröße wieder her.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="532"/>
         <source>Reset border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart Rahmenbeschriftung zurücksetzen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="551"/>
         <source>Segoe UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Segoe UI</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="631"/>
         <source>Stacked letters remain upright. Stacked (compact) removes the extra row gap and reduces top/bottom padding without shrinking the font. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bei &apos;Buchstaben untereinander&apos; anordnen bleiben diese aufrecht stehen. &apos;Buchstaben untereinander (kompakt)&apos; entfernt den zusätzlichen Zeilenabstand und verringert den oberen und unteren Abstand, ohne die Schriftgröße zu verkleinern. &apos;Gedreht nach unten&apos; wird von oben nach unten gelesen, &apos;Gedreht nach oben&apos; wird von unten nach oben gelesen, jeweils auf beiden Seiten. Beschriftungen auf der oberen und unteren Seite ignorieren diese Auswahl.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="654"/>
@@ -10596,17 +10595,22 @@ Adaptive (opposite edge) tries the opposite edge before that inward fallback.
 Adaptive (any edge), the default, also tries the best-fitting remaining edge.
 Edge changes preserve percentage and inside/outside placement where possible.
 Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separate.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;Fixiert&apos; deaktiviert die adaptive Verschiebung.
+&apos;Adaptiv (gleiche Seite)&apos; verschiebt abgeschnittene Beschriftungen auf der konfigurierten Seite nach innen.
+&apos;Adaptiv (gegenüberliegende Seite)&apos; testet die gegenüberliegende Seite, bevor nach innen verschoben wird.
+&apos;Adaptiv (jede Seite)&apos;, die Standardeinstellung, testet alle verbleibenden Seiten, bevor nach innen verschoben wird.
+Seitenwechsel behalten, soweit möglich, den Prozentsatz und die Platzierung innen/außen bei.
+Die adaptiven Modi berücksichtigen einen Ausschluss der Taskleiste. Das Verhalten für maximierte/angedockte Fenster bleibt davon unberührt.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="678"/>
         <source>Side labels can be stacked or rotated. Both stacked modes use vertical parentheses when the font supports them. Stacked (compact) keeps the font size, removes the extra row gap and uses 1-pixel top/bottom padding. Rotated down/up select the reading direction on either side. Top/bottom labels use horizontal text. Adaptive movement can stay on the configured side, try its opposite, or try any edge before moving inward. Labels that do not fit are clipped without shrinking the font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bei seitlichen Beschriftungen können entweder die einzelnen Buchstaben untereinander angeordnet oder der gesamte Text gedreht werden. Bei Beschriftungen mit untereinander angeordneten Buchstaben werden vertikale Klammern verwendet, sofern die Schriftart diese unterstützt. Die kompakte Darstellung behält die Schriftgröße bei, entfernt den zusätzlichen Zeilenabstand und verwendet einen Abstand von 1 Pixel oben und unten. Durch Drehen nach unten bzw. oben wird die Leserichtung auf beiden Seiten festgelegt. Beschriftungen auf der oberen und unteren Seite sind horizontal ausgerichtet. Mit adaptiver Verschiebung können Beschriftungen auf der konfigurierten Seite verbleiben oder es werden die entgegengesetzte oder jede verbleibende Seite ausprobiert, bevor Beschriftungen nach innen verschoben werden. Beschriftungen, die nicht passen, werden abgeschnitten, ohne die Schriftgröße zu verringern.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="687"/>
         <source>Border label information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informationen Rahmenbeschriftung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4513"/>

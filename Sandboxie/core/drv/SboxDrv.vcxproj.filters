@@ -41,6 +41,9 @@
     <ClCompile Include="..\..\common\pattern.c">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\program_control_runtime.c">
+      <Filter>common</Filter>
+    </ClCompile>
     <ClCompile Include="..\dll\hook_inst.c">
       <Filter>hook</Filter>
     </ClCompile>
@@ -290,5 +293,13 @@
     <Filter Include="obj">
       <UniqueIdentifier>{494a34c9-6083-404b-8ae2-d257ad50af60}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\common\program_control_rule.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\program_control_runtime.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

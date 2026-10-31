@@ -1189,10 +1189,14 @@ _FX BOOLEAN Process_NotifyProcess_Create(
     BOOLEAN parent_was_start_exe = FALSE;
     BOOLEAN parent_had_rights_dropped = FALSE;
     BOOLEAN parent_was_image_from_box = FALSE;
+    BOOLEAN parent_was_sandboxed = FALSE;
+    BOOLEAN parent_was_forced_by_children = FALSE;
     BOOLEAN process_is_forced = FALSE;
     BOOLEAN add_process_to_job = FALSE;
 	BOOLEAN create_terminated = FALSE;
     BOOLEAN bHostInject = FALSE;
+    BOOLEAN forced_by_children = FALSE;
+    WCHAR *parent_image_path_copy = NULL;
     KIRQL irql;
 
     //
@@ -1214,6 +1218,9 @@ _FX BOOLEAN Process_NotifyProcess_Create(
         Process_GetProcessName(
                 Driver_Pool, (ULONG_PTR)ProcessId, &nbuf1, &nlen1, &nptr1);
     if (! nbuf1) {
+
+        if (parent_image_path_copy)
+            Mem_FreeString(parent_image_path_copy);
 
         Process_CreateTerminated(ProcessId, -1);
         return FALSE;
@@ -1307,6 +1314,8 @@ _FX BOOLEAN Process_NotifyProcess_Create(
                 box = Box_Clone(Driver_Pool, parent_proc->box);
                 if (box) {
 
+                    parent_was_sandboxed = TRUE;
+
                     if (parent_proc->is_start_exe)
                         parent_was_start_exe = TRUE;
 
@@ -1315,6 +1324,12 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 
                     if (parent_proc->image_from_box)
                         parent_was_image_from_box = TRUE;
+
+                    if (parent_proc->forced_by_children)
+                        parent_was_forced_by_children = TRUE;
+
+                    if (parent_proc->image_path && !parent_was_forced_by_children)
+                        parent_image_path_copy = Mem_AllocString(Driver_Pool, parent_proc->image_path);
 
                 } else
                     create_terminated = TRUE;
@@ -1342,6 +1357,31 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
+
+        if (parent_was_sandboxed && box && parent_image_path_copy
+                && _wcsicmp(nptr1, L"SandMan.exe") != 0) {
+            BOOLEAN evaluation_failed = FALSE;
+            const WCHAR *parent_image_name = wcsrchr(parent_image_path_copy, L'\\');
+            if (parent_image_name && parent_image_name[1])
+                ++parent_image_name;
+            else
+                parent_image_name = parent_image_path_copy;
+
+            if (Process_MatchForceChildrenRule(
+                    box,
+                    parent_image_name,
+                    parent_image_path_copy,
+                    NULL,
+                    NULL,
+                    &evaluation_failed)) {
+                parent_was_forced_by_children = TRUE;
+            }
+            if (evaluation_failed) {
+                Box_Free(box);
+                box = NULL;
+                create_terminated = TRUE;
+            }
+        }
 
 #ifdef DRV_BREAKOUT
         //
@@ -1383,7 +1423,11 @@ _FX BOOLEAN Process_NotifyProcess_Create(
             if (breakout_box)
                 pSidString = breakout_box->sid;
 #endif
-            box = Process_GetForcedStartBox(ProcessId, ParentId, ImagePath, &bHostInject, pSidString);
+            box = Process_GetForcedStartBox(ProcessId, ParentId, ImagePath, &bHostInject, pSidString, &forced_by_children);
+
+            // Inherit forced_by_children flag from parent if parent was forced by ForceChildren
+            if (parent_was_forced_by_children)
+                forced_by_children = TRUE;
 
             if (box == (BOX *)-1) {
 
@@ -1494,6 +1538,8 @@ _FX BOOLEAN Process_NotifyProcess_Create(
             new_proc->parent_was_start_exe = parent_was_start_exe;
             new_proc->rights_dropped = parent_had_rights_dropped;
             new_proc->forced_process = process_is_forced;
+            // Inherit forced_by_children flag from parent if not already set
+            new_proc->forced_by_children = forced_by_children || parent_was_forced_by_children;
 
             if (! bHostInject) {
 
@@ -1604,6 +1650,9 @@ _FX BOOLEAN Process_NotifyProcess_Create(
     }
 
     Mem_Free(nbuf1, nlen1);
+
+    if (parent_image_path_copy)
+        Mem_FreeString(parent_image_path_copy);
 
     return create_terminated == FALSE;
 }

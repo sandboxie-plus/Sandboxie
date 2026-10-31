@@ -67,16 +67,36 @@ SB_STATUS CSbieIni::SetBoolSafe(const QString& Setting, bool Value)
 	QString StrValue = Value ? "y" : "n";
 	bool bAdd = true;
 	QStringList Values = GetTextList(Setting, false);
+	auto RestoreValues = [this, &Setting, &Values]() {
+		SB_STATUS Status = DelValue(Setting);
+		if (!Status)
+			return Status;
+		foreach(const QString& Value, Values) {
+			Status = AppendText(Setting, Value);
+			if (!Status)
+				return Status;
+		}
+		return SB_OK;
+	};
 	foreach(const QString & CurValue, Values) {
 		if (CurValue.contains(","))
 			continue;
 		if (CurValue == StrValue)
 			bAdd = false;
-		else
-			DelValue(Setting, CurValue);
+		else {
+			SB_STATUS Status = DelValue(Setting, CurValue);
+			if (!Status) {
+				RestoreValues();
+				return Status;
+			}
+		}
 	}
-	if(bAdd)
-		return AppendText(Setting, StrValue);
+	if(bAdd) {
+		SB_STATUS Status = AppendText(Setting, StrValue);
+		if (!Status)
+			RestoreValues();
+		return Status;
+	}
 	return SB_OK;
 }
 
@@ -155,6 +175,32 @@ QStringList CSbieIni::GetTextList(const QString &Setting, bool withTemplates, bo
 SB_STATUS CSbieIni::UpdateTextList(const QString &Setting, const QStringList& List, bool withTemplates)
 {
 	QStringList OldSettings = GetTextList(Setting, withTemplates);
+	if (!withTemplates) {
+		if (OldSettings == List)
+			return SB_OK;
+
+		SB_STATUS Status = DelValue(Setting);
+		if (!Status)
+			return Status;
+
+		foreach(const QString& Value, List) {
+			Status = AppendText(Setting, Value);
+			if (Status)
+				continue;
+
+			SB_STATUS RestoreStatus = DelValue(Setting);
+			if (RestoreStatus) {
+				foreach(const QString& OldValue, OldSettings) {
+					RestoreStatus = AppendText(Setting, OldValue);
+					if (!RestoreStatus)
+						break;
+				}
+			}
+			return Status;
+		}
+		return SB_OK;
+	}
+
 	QStringList NewSettings;
 	foreach(const QString& Value, List) {
 		if (!OldSettings.removeOne(Value))
@@ -162,11 +208,54 @@ SB_STATUS CSbieIni::UpdateTextList(const QString &Setting, const QStringList& Li
 	}
 	// delete removed or changed settings
 	foreach(const QString& Value, OldSettings)
-		DelValue(Setting, Value);
+	{
+		SB_STATUS Status = DelValue(Setting, Value);
+		if (!Status)
+			return Status;
+	}
 	// add new or changed settings
-	foreach(const QString& Value, NewSettings)
-		AppendText(Setting, Value);
+	foreach(const QString& Value, NewSettings) {
+		SB_STATUS Status = AppendText(Setting, Value);
+		if (!Status)
+			return Status;
+	}
 	return SB_OK;
+}
+
+SB_STATUS CSbieIni::RestoreTextList(const QString& setting, const QStringList& values)
+{
+	// Driver reads still expose the old list while service refresh is deferred.
+	SB_STATUS status = DelValue(setting);
+	if (!status)
+		return status;
+	for (const QString& value : values) {
+		status = AppendText(setting, value);
+		if (!status)
+			return status;
+	}
+	return SB_OK;
+}
+
+void CSbieIni::CollectTemplateNames(const QSharedPointer<CSbieIni>& pIni,
+	QMap<QString, QString>& names)
+{
+	if (pIni.isNull())
+		return;
+
+	QStringList pending = pIni->GetTextList("Template",
+		pIni->GetName().startsWith("Template_", Qt::CaseInsensitive));
+	for (int index = 0; index < pending.size(); ++index) {
+		QString name = pending[index].trimmed();
+		if (name.startsWith("Template_", Qt::CaseInsensitive))
+			name = name.mid(9);
+		if (name.isEmpty() || names.contains(name.toLower()))
+			continue;
+		names.insert(name.toLower(), name);
+
+		// Follow configured references, visiting each template only once.
+		CSbieIni referencedTemplate("Template_" + name, pIni->GetAPI());
+		pending.append(referencedTemplate.GetTextList("Template", true));
+	}
 }
 
 QStringList CSbieIni::GetTemplates() const
@@ -273,7 +362,14 @@ QList<CSbieIni::SbieIniValue> CSbieIni::GetIniSection(qint32* pStatus, bool with
 	if (!withTemplates)
 		uFlags |= CONF_GET_NO_TEMPLS;
 
-	QSet<QString> Names;
+	QSet<QString> NameSet;
+	QStringList Names;
+	auto AddName = [&NameSet, &Names](const QString& Name) {
+		if (NameSet.contains(Name))
+			return;
+		NameSet.insert(Name);
+		Names.append(Name);
+	};
 
 	if (withGlobals)
 	{
@@ -287,7 +383,7 @@ QList<CSbieIni::SbieIniValue> CSbieIni::GetIniSection(qint32* pStatus, bool with
 			if (status != STATUS_SUCCESS)
 				break;
 
-			Names.insert(Name);
+			AddName(Name);
 		}
 	}
 
@@ -301,7 +397,7 @@ QList<CSbieIni::SbieIniValue> CSbieIni::GetIniSection(qint32* pStatus, bool with
 		if (status != STATUS_SUCCESS)
 			break;
 
-		Names.insert(Name);
+		AddName(Name);
 	}
 
 	QList<CSbieIni::SbieIniValue> Settings;

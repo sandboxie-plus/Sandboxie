@@ -799,6 +799,15 @@ _FX ULONG SbieDll_QueueGetRpl(const WCHAR *QueueName,
 _FX void *SbieDll_CallProxySvr(
     WCHAR *QueueName, void *req, ULONG req_len, ULONG rpl_min_len, DWORD timeout_sec)
 {
+    return SbieDll_CallProxySvrEx(
+        QueueName, req, req_len, rpl_min_len, timeout_sec, NULL);
+}
+
+
+_FX void *SbieDll_CallProxySvrEx(
+    WCHAR *QueueName, void *req, ULONG req_len, ULONG rpl_min_len,
+    DWORD timeout_sec, ULONG *out_rpl_len)
+{
     //static ULONG _Ticks = 0;
     //static ULONG _Ticks1 = 0;
     NTSTATUS status;
@@ -806,6 +815,9 @@ _FX void *SbieDll_CallProxySvr(
     ULONG data_len;
     void *data;
     HANDLE event;
+
+    if (out_rpl_len)
+        *out_rpl_len = 0;
 
     //ULONG Ticks0 = GetTickCount();
 
@@ -841,6 +853,9 @@ _FX void *SbieDll_CallProxySvr(
                 status = *(ULONG *)data;
 
             } else if (data_len >= rpl_min_len) {
+
+                if (out_rpl_len)
+                    *out_rpl_len = data_len;
 
                 /*_Ticks += GetTickCount() - Ticks0;
                 if (_Ticks > _Ticks1 + 1000) {

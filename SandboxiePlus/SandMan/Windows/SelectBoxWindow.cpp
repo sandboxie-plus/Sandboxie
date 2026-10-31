@@ -205,6 +205,7 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 	connect(ui.chkFCP, SIGNAL(clicked(bool)), this, SLOT(OnBoxType()));
 	ui.chkFCP->setEnabled(false);
 	ui.chkFCP->setVisible(false);
+	ui.chkIgnoreBreakout->setChecked(true);
 
 	connect(ui.buttonBox, SIGNAL(accepted()), SLOT(OnRun()));
 	connect(ui.buttonBox, SIGNAL(rejected()), SLOT(reject()));
@@ -239,6 +240,7 @@ void CSelectBoxWindow::closeEvent(QCloseEvent *e)
 void CSelectBoxWindow::OnBoxType()
 {
 	ui.chkFCP->setEnabled(ui.radUnBoxed->isChecked());
+	ui.chkIgnoreBreakout->setEnabled(!ui.radUnBoxed->isChecked());
 	m_pBoxPicker->setEnabled(ui.radBoxed->isChecked() || (ui.chkFCP->isEnabled() && ui.chkFCP->isChecked()));
 }
 
@@ -248,6 +250,8 @@ void CSelectBoxWindow::OnRun()
 	int Flags = CSbieAPI::eStartDefault;
 	if (ui.chkAdmin->isChecked())
 		Flags |= CSbieAPI::eStartElevated;
+	if (ui.chkIgnoreBreakout->isChecked() && !ui.radUnBoxed->isChecked())
+		Flags |= CSbieAPI::eStartIgnoreBreakout;
 	if (ui.radUnBoxed->isChecked())
 	{
 		if (QMessageBox("Sandboxie-Plus", tr("Are you sure you want to run the program outside the sandbox?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)

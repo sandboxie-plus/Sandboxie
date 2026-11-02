@@ -262,10 +262,12 @@
     <ClCompile Include="dns_filter.c">
       <Filter>net</Filter>
     </ClCompile>
+    <ClCompile Include="cmdline.c" />
     <ClCompile Include="kernel.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advapi.h" />
+    <ClInclude Include="cmdline.h" />
     <ClInclude Include="dll.h" />
     <ClInclude Include="hook.h">
       <Filter>hook</Filter>

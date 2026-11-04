@@ -836,6 +836,10 @@ BOOLEAN Config_MatchImage(
     const WCHAR* pat_str, ULONG pat_len, const WCHAR* test_str,
     ULONG depth);
 
+BOOLEAN Config_MatchImageEx(
+    const WCHAR* pat_str, ULONG pat_len, const WCHAR* test_str,
+    ULONG depth, ULONG image_type);
+
 WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, ULONG* pMode);
 
 BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, LIST* list, BOOLEAN dos);

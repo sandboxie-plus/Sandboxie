@@ -953,6 +953,12 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pDisableForce2 = new QAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"));
 		m_pDisableForce2->setCheckable(true);
 		connect(m_pDisableForce2, SIGNAL(triggered()), this, SLOT(OnDisableForce2()));
+		m_pDisableBreakout = new QAction(CSandMan::GetIcon("DisableBreakout"), tr("Disable Breakout Rules"), this);
+		m_pDisableBreakout->setCheckable(true);
+		m_pDisableBreakout2 = new QAction(CSandMan::GetIcon("DisableBreakout"), tr("Disable Breakout Rules"));
+		m_pDisableBreakout2->setCheckable(true);
+		connect(m_pDisableBreakout, SIGNAL(triggered()), this, SLOT(OnDisableBreakout()));
+		connect(m_pDisableBreakout2, SIGNAL(triggered()), this, SLOT(OnDisableBreakout2()));
 	if(bAdvanced) {
 		m_pDisableRecovery = m_pMenuOptions->addAction(GetIcon("DisableRecovery"), tr("Disable File Recovery"), this, SLOT(OnDisablePopUp()));
 		m_pDisableRecovery->setCheckable(true);
@@ -960,6 +966,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pDisableMessages = m_pMenuOptions->addAction(GetIcon("DisableMessagePopup"), tr("Disable Message Popup"), this, SLOT(OnDisablePopUp()));
 		m_pDisableMessages->setCheckable(true);
 		m_pDisableMessages->setChecked(theConf->GetBool("UIConfig/DisableMessages", false));
+		m_pMenuOptions->addAction(m_pDisableBreakout);
 	}
 	else {
 		m_pDisableRecovery = NULL;
@@ -1005,6 +1012,11 @@ void CSandMan::CreateOldMenus()
 		m_pDisableForce2 = new QAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"));
 		m_pDisableForce2->setCheckable(true);
 		connect(m_pDisableForce2, SIGNAL(triggered()), this, SLOT(OnDisableForce2()));
+		m_pDisableBreakout = m_pMenuFile->addAction(CSandMan::GetIcon("DisableBreakout"), tr("Disable Breakout Rules"), this, SLOT(OnDisableBreakout()));
+		m_pDisableBreakout->setCheckable(true);
+		m_pDisableBreakout2 = new QAction(CSandMan::GetIcon("DisableBreakout"), tr("Disable Breakout Rules"));
+		m_pDisableBreakout2->setCheckable(true);
+		connect(m_pDisableBreakout2, SIGNAL(triggered()), this, SLOT(OnDisableBreakout2()));
 		//m_pDisableRecovery = m_pMenuFile->addAction(tr("Disable File Recovery"));
 		//m_pDisableRecovery->setCheckable(true);
 		m_pDisableRecovery = NULL;
@@ -1202,6 +1214,7 @@ QList<ToolBarAction> CSandMan::GetAvailableToolBarActions()
 			ToolBarAction{ "EnableMonitor", m_pEnableMonitoring },
 			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "DisableForce", m_pDisableForce2},
+			ToolBarAction{ "DisableBreakout", m_pDisableBreakout2 },
 			ToolBarAction{ "DisableRecovery", m_pDisableRecovery },
 			ToolBarAction{ "DisableMessages", m_pDisableMessages },
 			ToolBarAction{ "", nullptr },        // separator
@@ -2189,6 +2202,9 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		bForceProcessDisabled = theAPI->AreForceProcessDisabled();
 		m_pDisableForce->setChecked(bForceProcessDisabled);
 		m_pDisableForce2->setChecked(bForceProcessDisabled);
+		bool bBreakoutRulesDisabled = theAPI->GetGlobalSettings()->GetBool("DisableBreakoutRules", false);
+		m_pDisableBreakout->setChecked(bBreakoutRulesDisabled);
+		m_pDisableBreakout2->setChecked(bBreakoutRulesDisabled);
 
 		{
 			bool bIsMonitoring = theAPI->IsMonitoring();
@@ -3090,6 +3106,8 @@ void CSandMan::UpdateState()
 	m_pLockAll->setEnabled(isConnected);
 	m_pDisableForce->setEnabled(isConnected);
 	m_pDisableForce2->setEnabled(isConnected);
+	m_pDisableBreakout->setEnabled(isConnected);
+	m_pDisableBreakout2->setEnabled(isConnected);
 
 	m_pEditIni->setEnabled(isConnected);
 	if(m_pEditIni2) m_pEditIni2->setEnabled(isConnected);
@@ -4009,6 +4027,18 @@ void CSandMan::OnDisableForce()
 			return;
 	}
 	theAPI->DisableForceProcess(Status, Seconds);
+}
+
+void CSandMan::OnDisableBreakout()
+{
+	bool Status = m_pDisableBreakout->isChecked();
+	theAPI->GetGlobalSettings()->SetBool("DisableBreakoutRules", Status);
+}
+
+void CSandMan::OnDisableBreakout2()
+{
+	bool Status = m_pDisableBreakout2->isChecked();
+	theAPI->GetGlobalSettings()->SetBool("DisableBreakoutRules", Status);
 }
 
 void CSandMan::OnDisableForce2()

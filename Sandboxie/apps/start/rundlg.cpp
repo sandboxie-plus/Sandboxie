@@ -76,6 +76,7 @@ static const WCHAR *RunHistory = L"RunHistory";
 const WCHAR *Sandboxie = SANDBOXIE;
 
 extern BOOL run_elevated_2;
+extern BOOL ignore_breakout_on_this_program;
 
 extern BOOLEAN layout_rtl;
 
@@ -294,6 +295,23 @@ void DeleteHistoryItem(
 
 
 //---------------------------------------------------------------------------
+// PrepareIgnoreBreakout
+//---------------------------------------------------------------------------
+
+
+void PrepareIgnoreBreakout(HWND hwnd)
+{
+    HWND ctrl = GetDlgItem(hwnd, IDIGNOREBREAKOUT);
+    if (ctrl) {
+        SetWindowText(ctrl, SbieDll_FormatMessage0(MSG_3418));
+        SendMessage(ctrl, BM_SETCHECK,
+            ignore_breakout_on_this_program ? BST_CHECKED : BST_UNCHECKED, 0);
+        ShowWindow(ctrl, SW_SHOW);
+    }
+}
+
+
+//---------------------------------------------------------------------------
 // PrepareRunAsAdmin
 //---------------------------------------------------------------------------
 
@@ -431,6 +449,29 @@ void ClickRunAsAdmin(HWND hwnd)
         lResult = BST_UNCHECKED;
     } else {
         run_elevated_2 = TRUE;
+        lResult = BST_CHECKED;
+    }
+    SendMessage(ctrl, BM_SETCHECK, lResult, 0);
+}
+
+
+//---------------------------------------------------------------------------
+// ClickIgnoreBreakout
+//---------------------------------------------------------------------------
+
+
+void ClickIgnoreBreakout(HWND hwnd)
+{
+    HWND ctrl;
+    LRESULT lResult;
+
+    ctrl = GetDlgItem(hwnd, IDIGNOREBREAKOUT);
+    lResult = SendMessage(ctrl, BM_GETCHECK, 0, 0);
+    if (lResult == BST_CHECKED) {
+        ignore_breakout_on_this_program = FALSE;
+        lResult = BST_UNCHECKED;
+    } else {
+        ignore_breakout_on_this_program = TRUE;
         lResult = BST_CHECKED;
     }
     SendMessage(ctrl, BM_SETCHECK, lResult, 0);
@@ -614,6 +655,13 @@ INT_PTR RunDialogProc(
             AddToolTipForRunAsAdmin(hwnd, hwndToolTip);
 
             //
+            // ignore breakout
+            //
+
+            ignore_breakout_on_this_program = TRUE;
+            PrepareIgnoreBreakout(hwnd);
+
+            //
             // end dialog initialization
             //
 
@@ -688,6 +736,10 @@ INT_PTR RunDialogProc(
             } else if (LOWORD(wParam) == IDRUNADMIN) {
 
                 ClickRunAsAdmin(hwnd);
+
+            } else if (LOWORD(wParam) == IDIGNOREBREAKOUT) {
+
+                ClickIgnoreBreakout(hwnd);
             }
 
             break;

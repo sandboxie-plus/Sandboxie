@@ -1349,6 +1349,10 @@ Resource Access &Monitor
 E&xit
 .
 
+3418;txt;01
+Ignore &Breakout
+.
+
 3421;txt;01
 &View
 .

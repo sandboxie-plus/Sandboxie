@@ -458,6 +458,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\common\program_control_runtime.c">
+    </ClCompile>
     <ClCompile Include="..\..\common\pool.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
@@ -729,6 +731,8 @@
     <ClInclude Include="..\..\common\netfw.h" />
     <ClInclude Include="..\..\common\pattern.h" />
     <ClInclude Include="..\..\common\pool.h" />
+    <ClInclude Include="..\..\common\program_control_rule.h" />
+    <ClInclude Include="..\..\common\program_control_runtime.h" />
     <ClInclude Include="..\..\common\rbtree.h" />
     <ClInclude Include="..\..\common\stream.h" />
     <ClInclude Include="..\..\common\str_util.h" />

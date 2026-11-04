@@ -445,7 +445,7 @@ reg_done:
 
 void CShellDialog::CreateAssoc(WCHAR *path, const WCHAR *classname)
 {
-    static const WCHAR *boxask = L"/box:__ask__ ";
+    static const WCHAR *boxask = L"/box:__ask__ /ignore_breakout ";
     HKEY hkey;
     LONG rc;
     ULONG path_len;

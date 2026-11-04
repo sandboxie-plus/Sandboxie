@@ -877,6 +877,23 @@ void CSandBox::CommitIniChanges()
 	CSbieIni::CommitIniChanges();
 }
 
+SB_STATUS CSandBox::CommitIniChangesEx()
+{
+	if (m_pIniFile)
+	{
+		NTSTATUS status = m_pIniFile->SaveIni((WCHAR*)m_PortablePath.utf16());
+		if (!NT_SUCCESS(status))
+			return SB_ERR(status);
+		SB_STATUS reloadStatus = m_pAPI->ReloadConfig();
+		if (!reloadStatus)
+			return reloadStatus;
+		delete m_pIniFile;
+		m_pIniFile = NULL;
+		return SB_OK;
+	}
+	return m_pAPI->CommitIniChangesEx();
+}
+
 SB_STATUS CSandBox::SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode, bool bRefresh)
 {
 	if (!m_IsVirtual && !m_PortablePath.isEmpty())

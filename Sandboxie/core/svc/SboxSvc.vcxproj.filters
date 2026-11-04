@@ -48,6 +48,7 @@
     <ClCompile Include="iphlpserver.cpp" />
     <ClCompile Include="namedpipeserver.cpp" />
     <ClCompile Include="ProcessServer.cpp" />
+    <ClCompile Include="RuntimeRuleHelpers.cpp" />
     <ClCompile Include="pstoreserver.cpp" />
     <ClCompile Include="queueserver.cpp" />
     <ClCompile Include="sbieiniserver.cpp" />
@@ -64,6 +65,9 @@
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\pattern.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\program_control_runtime.c">
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\stream.c">
@@ -134,6 +138,7 @@
     <ClInclude Include="namedpipeserver.h" />
     <ClInclude Include="namedpipewire.h" />
     <ClInclude Include="ProcessServer.h" />
+    <ClInclude Include="RuntimeRuleHelpers.h" />
     <ClInclude Include="pstoreserver.h" />
     <ClInclude Include="pstorewire.h" />
     <ClInclude Include="queueserver.h" />
@@ -173,6 +178,12 @@
     </ClInclude>
     <ClInclude Include="MountManager.h">
       <Filter>MountManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\program_control_rule.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\program_control_runtime.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

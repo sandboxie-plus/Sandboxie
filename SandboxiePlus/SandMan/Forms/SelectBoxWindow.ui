@@ -61,7 +61,7 @@
      </column>
     </widget>
    </item>
-   <item row="4" column="0" colspan="2">
+    <item row="4" column="0">
     <widget class="QRadioButton" name="radBoxedNew">
      <property name="text">
       <string>Run in a new Sandbox</string>
@@ -71,6 +71,19 @@
      </property>
     </widget>
    </item>
+    <item row="4" column="1">
+     <widget class="QCheckBox" name="chkIgnoreBreakout">
+      <property name="toolTip">
+        <string>Ignore Breakout* rules for this launch and keep the process sandboxed.</string>
+      </property>
+      <property name="text">
+        <string>Ignore Breakout</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
    <item row="7" column="0" colspan="2">
     <widget class="Line" name="line">
      <property name="orientation">
@@ -118,6 +131,7 @@
   <tabstop>radBoxed</tabstop>
   <tabstop>treeBoxes</tabstop>
   <tabstop>radBoxedNew</tabstop>
+  <tabstop>chkIgnoreBreakout</tabstop>
   <tabstop>radUnBoxed</tabstop>
   <tabstop>chkFCP</tabstop>
   <tabstop>chkAdmin</tabstop>

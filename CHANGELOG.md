@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Language corrupted after version 1.16.0 [#5079](https://github.com/sandboxie-plus/Sandboxie/issues/5079)
 - fixed immediate portable sandbox configuration updates reporting success when saving the INI file or reloading the configuration fails
 - fixed boxed processes not terminating when closing the SandMan window with termination-on-exit enabled, and prevented premature termination when canceling portable cleanup [#5696](https://github.com/sandboxie-plus/Sandboxie/issues/5696)
+- fixed sandbox options not showing the default sandbox icon on opening when no custom icon is configured
 
 
 

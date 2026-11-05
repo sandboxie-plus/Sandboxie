@@ -2958,47 +2958,47 @@ Merk: Oppdateringskontrollen ligger ofte bak den nyeste GitHub-utgivelsen for å
         <translation>Velg program</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1521"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1528"/>
         <source>The image file does not exist</source>
         <translation>Bildefilen eksisterer ikke</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1522"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1529"/>
         <source>The password is wrong</source>
         <translation>Passordet er feil</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1523"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1530"/>
         <source>Unexpected error: %1</source>
         <translation>Uventet feil: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1551"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1558"/>
         <source>Image Password Changed</source>
         <translation>Bildepassord endret</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1553"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1560"/>
         <source>Failed to Change Password</source>
         <translation>Klarte ikke å endre passord</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1562"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1569"/>
         <source>Backup Image Header for %1</source>
         <translation>Sikkerhetskopier bildehode for %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1570"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
         <source>Image Header Backuped</source>
         <translation>Bildetopptekst sikkerhetskopiert</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1584"/>
         <source>Restore Image Header for %1</source>
         <translation>Gjenopprett bildehode for %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1585"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1592"/>
         <source>Image Header Restored</source>
         <translation>Bildehode gjenopprettet</translation>
     </message>

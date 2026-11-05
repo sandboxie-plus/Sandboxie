@@ -2952,47 +2952,47 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>프로그램 선택</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1521"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1528"/>
         <source>The image file does not exist</source>
         <translation>이미지 파일이 없습니다</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1522"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1529"/>
         <source>The password is wrong</source>
         <translation>비밀번호가 잘못되었습니다</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1523"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1530"/>
         <source>Unexpected error: %1</source>
         <translation>예기치 않은 오류: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1551"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1558"/>
         <source>Image Password Changed</source>
         <translation>이미지 비밀번호 변경됨</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1553"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1560"/>
         <source>Failed to Change Password</source>
         <translation>비밀번호 변경에 실패했습니다</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1562"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1569"/>
         <source>Backup Image Header for %1</source>
         <translation>%1에 대한 이미지 헤더 백업</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1570"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
         <source>Image Header Backuped</source>
         <translation>이미지 헤더 백업됨</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1584"/>
         <source>Restore Image Header for %1</source>
         <translation>%1에 대한 이미지 헤더 복원</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1585"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1592"/>
         <source>Image Header Restored</source>
         <translation>이미지 헤더 복원됨</translation>
     </message>

@@ -2963,47 +2963,47 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>प्रोग्राम चुनें</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1521"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1528"/>
         <source>The image file does not exist</source>
         <translation>छवि फ़ाइल मौजूद नहीं है</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1522"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1529"/>
         <source>The password is wrong</source>
         <translation>पासवर्ड ग़लत है</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1523"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1530"/>
         <source>Unexpected error: %1</source>
         <translation>अनपेक्षित त्रुटि: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1551"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1558"/>
         <source>Image Password Changed</source>
         <translation>छवि पासवर्ड बदला गया</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1553"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1560"/>
         <source>Failed to Change Password</source>
         <translation>पासवर्ड बदलने में विफल</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1562"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1569"/>
         <source>Backup Image Header for %1</source>
         <translation>%1 के लिए बैकअप इमेज हेडर</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1570"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
         <source>Image Header Backuped</source>
         <translation>छवि शीर्षलेख का बैकअप लिया गया</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1584"/>
         <source>Restore Image Header for %1</source>
         <translation>%1 के लिए छवि शीर्षलेख पुनर्स्थापित करें</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1585"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1592"/>
         <source>Image Header Restored</source>
         <translation>छवि शीर्षलेख पुनर्स्थापित किया गया</translation>
     </message>

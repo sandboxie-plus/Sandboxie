@@ -2616,47 +2616,47 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
         <translation>Standard: Segoe UI Bold; ursprüngliche Schriftgröße</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1521"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1528"/>
         <source>The image file does not exist</source>
         <translation>Die Abbilddatei existiert nicht</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1522"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1529"/>
         <source>The password is wrong</source>
         <translation>Das Passwort ist falsch</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1523"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1530"/>
         <source>Unexpected error: %1</source>
         <translation>Unerwarteter Fehler: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1551"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1558"/>
         <source>Image Password Changed</source>
         <translation>Abbildpasswort geändert</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1553"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1560"/>
         <source>Failed to Change Password</source>
         <translation>Passwort konnte nicht geändert werden</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1562"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1569"/>
         <source>Backup Image Header for %1</source>
         <translation>Sichere Abbildheader für %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1570"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
         <source>Image Header Backuped</source>
         <translation>Abbildheader gesichert</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1584"/>
         <source>Restore Image Header for %1</source>
         <translation>Stelle Abbildheader wieder her für %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1585"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1592"/>
         <source>Image Header Restored</source>
         <translation>Abbildheader wiederhergestellt</translation>
     </message>

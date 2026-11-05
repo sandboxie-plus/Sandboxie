@@ -3292,47 +3292,47 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>選擇程式</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1521"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1528"/>
         <source>The image file does not exist</source>
         <translation>映像檔案不存在</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1522"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1529"/>
         <source>The password is wrong</source>
         <translation>密碼錯誤</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1523"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1530"/>
         <source>Unexpected error: %1</source>
         <translation>預期外錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1551"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1558"/>
         <source>Image Password Changed</source>
         <translation>映像密碼已變更</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1553"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1560"/>
         <source>Failed to Change Password</source>
         <translation>密碼變更失敗</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1562"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1569"/>
         <source>Backup Image Header for %1</source>
         <translation>為 %1 備份映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1570"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
         <source>Image Header Backuped</source>
         <translation>已備份映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1577"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1584"/>
         <source>Restore Image Header for %1</source>
         <translation>為 %1 復原映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1585"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1592"/>
         <source>Image Header Restored</source>
         <translation>已復原映像標頭</translation>
     </message>

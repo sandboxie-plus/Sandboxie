@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added line numbers to the built-in INI section editors, with an Advanced Editor Settings toggle and Ctrl+G destination highlighting; copying and saving exclude the line numbers
 - added configurable sandbox border labels on all four window edges through `BorderLabelPosition`, with adjustable position, stacked or rotated side text, fixed/adaptive placement, and a dedicated Box Border tab in sandbox options
 - added customizable sandbox border label fonts with native style and writing-system selection, GDI preview, synchronized point size, immediate font-only Apply, and reset to legacy defaults
+- added opt-in, per-process `FakeProcessMitigations` compatibility reporting for dynamic-code and extension-point restrictions without changing actual Windows mitigation enforcement
 
 ### Changed
 - switched x64 build to qt 6.8.4

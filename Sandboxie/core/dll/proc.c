@@ -64,6 +64,12 @@ static BOOL Proc_SetProcessMitigationPolicy(
     _In_reads_bytes_(dwLength) PVOID lpBuffer,
     _In_ SIZE_T dwLength);
 
+static BOOL WINAPI Proc_GetProcessMitigationPolicy(
+    _In_ HANDLE hProcess,
+    _In_ PROCESS_MITIGATION_POLICY MitigationPolicy,
+    _Out_writes_bytes_(dwLength) PVOID lpBuffer,
+    _In_ SIZE_T dwLength);
+
 static BOOL Proc_CreateAppContainerToken(
     HANDLE TokenHandle,
     PSECURITY_CAPABILITIES SecurityCapabilities,
@@ -309,6 +315,12 @@ typedef BOOL (*P_SetProcessMitigationPolicy)(
     _In_reads_bytes_(dwLength) PVOID lpBuffer,
     _In_ SIZE_T dwLength);
 
+typedef BOOL (WINAPI *P_GetProcessMitigationPolicy)(
+    _In_ HANDLE hProcess,
+    _In_ PROCESS_MITIGATION_POLICY MitigationPolicy,
+    _Out_writes_bytes_(dwLength) PVOID lpBuffer,
+    _In_ SIZE_T dwLength);
+
 typedef BOOL(*P_CreateAppContainerToken)(
     HANDLE TokenHandle,
     PSECURITY_CAPABILITIES SecurityCapabilities,
@@ -351,6 +363,8 @@ static P_GetLengthSid				__sys_GetLengthSid				= NULL;*/
 static P_UpdateProcThreadAttribute	__sys_UpdateProcThreadAttribute = NULL;
 
 static P_SetProcessMitigationPolicy	__sys_SetProcessMitigationPolicy = NULL;
+
+static P_GetProcessMitigationPolicy  __sys_GetProcessMitigationPolicy = NULL;
 
 static P_CreateAppContainerToken    __sys_CreateAppContainerToken   = NULL;
 
@@ -452,6 +466,16 @@ _FX BOOLEAN Proc_Init(void)
             Dll_KernelBase, &ansi, 0, (void**)&SetProcessMitigationPolicy);
         if (NT_SUCCESS(status))
             SBIEDLL_HOOK(Proc_, SetProcessMitigationPolicy);
+
+        if (Config_GetSettingsForImageName_bool(L"FakeProcessMitigations", FALSE)) {
+            void* GetProcessMitigationPolicy = NULL;
+            RtlInitString(&ansi, "GetProcessMitigationPolicy");
+            status = LdrGetProcedureAddress(
+                Dll_KernelBase, &ansi, 0, (void**)&GetProcessMitigationPolicy);
+            if (NT_SUCCESS(status)) {
+                SBIEDLL_HOOK(Proc_, GetProcessMitigationPolicy);
+            }
+        }
     }
 
     //
@@ -724,6 +748,35 @@ _FX BOOL Proc_SetProcessMitigationPolicy(
         return TRUE;
 
     return __sys_SetProcessMitigationPolicy(MitigationPolicy, lpBuffer, dwLength);
+}
+
+
+//---------------------------------------------------------------------------
+// Proc_GetProcessMitigationPolicy
+//---------------------------------------------------------------------------
+
+
+_FX BOOL WINAPI Proc_GetProcessMitigationPolicy(
+    _In_ HANDLE hProcess,
+    _In_ PROCESS_MITIGATION_POLICY MitigationPolicy,
+    _Out_writes_bytes_(dwLength) PVOID lpBuffer,
+    _In_ SIZE_T dwLength)
+{
+    BOOL result = __sys_GetProcessMitigationPolicy(
+        hProcess, MitigationPolicy, lpBuffer, dwLength);
+
+    if (result && hProcess == NtCurrentProcess()
+            && lpBuffer && dwLength >= sizeof(ULONG)) {
+        ULONG *flags = (ULONG *)lpBuffer;
+
+        // Only the reported flags change; Windows mitigation enforcement is unchanged.
+        if (MitigationPolicy == ProcessDynamicCodePolicy)
+            *flags = (*flags & ~7u) | 1u;
+        else if (MitigationPolicy == ProcessExtensionPointDisablePolicy)
+            *flags |= 1u;
+    }
+
+    return result;
 }
 
 

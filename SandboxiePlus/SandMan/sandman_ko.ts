@@ -2167,7 +2167,9 @@ Do you still want to update?</source>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
-        <translation></translation>
+        <translation>새로운 업데이트가 없습니다. Sandboxie-Plus는 최신 버전입니다.
+
+참고: 테스트를 거친 업데이트만 제공하기 위해 업데이트 확인 결과는 GitHub에 게시된 최신 릴리스보다 늦게 반영될 수 있습니다.</translation>
     </message>
 </context>
 <context>

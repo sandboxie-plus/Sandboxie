@@ -63,6 +63,21 @@ public:
 	static QString GetSettingTooltip(const QString& settingName, const QString& settingValue = QString(), char currentContext = '\0');
 	static QString GetSettingTooltipForPopup(const QString& settingName, const QString& settingValue = QString(), char currentContext = '\0');
 	static bool IsSettingsLoaded() { return settingsLoaded; }
+
+	//
+	// Read-only access to the settings schema for callers that are not an
+	// editor - the MCP server needs to answer "is this a real setting" and
+	// "what does Sandboxie say about it" without a text document in sight.
+	//
+	// The schema is already static and already parsed from SbieSettings.ini
+	// here, including the .user.ini overrides, so these expose what exists
+	// rather than introducing a second parser that could disagree with the
+	// highlighter about what is valid.
+	//
+	static bool EnsureSettingsLoaded();
+	static bool IsValidSetting(const QString& settingName);
+	static QStringList GetSettingNames();
+	static bool GetSettingInfo(const QString& settingName, SettingInfo* pInfo);
 	static bool IsCommentLine(const QString& line);
 	static bool ValidateIniComments(const QString& section, QWidget* parent);
 

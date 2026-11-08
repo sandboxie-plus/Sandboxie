@@ -17,11 +17,11 @@ jobs:
       contents: write
 
     steps:
-      - name: Install Qt 5 packages
+      - name: Install Qt 6 translation tools
         shell: bash
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends qtbase5-dev qttools5-dev-tools
+          sudo apt-get install --no-install-recommends qt6-base-dev qt6-tools-dev-tools
 
       - name: Checkout repo
         uses: actions/checkout@v7
@@ -32,31 +32,31 @@ jobs:
         working-directory: SandboxiePlus/SandMan
         run: |
           set -e
-          lupdate SandMan.pri ../MiscHelpers/MiscHelpers.pri \
+          /usr/lib/qt6/bin/lupdate SandMan.pri ../MiscHelpers/MiscHelpers.pri \
             -ts sandman_ar.ts \
-            -ts sandman_de.ts \
-            -ts sandman_en.ts \
-            -ts sandman_es.ts \
-            -ts sandman_fa.ts \
-            -ts sandman_fr.ts \
-            -ts sandman_hi.ts \
-            -ts sandman_hu.ts \
-            -ts sandman_it.ts \
-            -ts sandman_ja.ts \
-            -ts sandman_ko.ts \
-            -ts sandman_nb_NO.ts \
-            -ts sandman_nl.ts \
-            -ts sandman_pl.ts \
-            -ts sandman_pt_BR.ts \
-            -ts sandman_pt_PT.ts \
-            -ts sandman_ru.ts \
-            -ts sandman_sv_SE.ts \
-            -ts sandman_tr.ts \
-            -ts sandman_uk.ts \
-            -ts sandman_vi.ts \
-            -ts sandman_id.ts \
-            -ts sandman_zh_CN.ts \
-            -ts sandman_zh_TW.ts
+                sandman_de.ts \
+                sandman_en.ts \
+                sandman_es.ts \
+                sandman_fa.ts \
+                sandman_fr.ts \
+                sandman_hi.ts \
+                sandman_hu.ts \
+                sandman_it.ts \
+                sandman_ja.ts \
+                sandman_ko.ts \
+                sandman_nb_NO.ts \
+                sandman_nl.ts \
+                sandman_pl.ts \
+                sandman_pt_BR.ts \
+                sandman_pt_PT.ts \
+                sandman_ru.ts \
+                sandman_sv_SE.ts \
+                sandman_tr.ts \
+                sandman_uk.ts \
+                sandman_vi.ts \
+                sandman_id.ts \
+                sandman_zh_CN.ts \
+                sandman_zh_TW.ts
           if git diff --exit-code; then
             echo "deploy=0" >> "$GITHUB_OUTPUT"
           else

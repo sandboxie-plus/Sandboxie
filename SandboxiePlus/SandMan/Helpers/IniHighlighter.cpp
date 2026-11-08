@@ -1052,6 +1052,57 @@ static QString ResolveTooltipStyleColor(const QString& colorValue)
 	return lightColor.isEmpty() ? darkColor : lightColor;
 }
 
+//
+// The schema is loaded by the constructor, and a highlighter with a null
+// document is already how the options and settings windows build one before
+// they have a text edit to attach (see OptionsWindow.cpp). Constructing a
+// throwaway is therefore the existing, supported way to populate the static
+// schema, and it reuses the real load path - version handling, user-ini
+// overrides and all - instead of reimplementing it.
+//
+bool CIniHighlighter::EnsureSettingsLoaded()
+{
+	if (settingsLoaded)
+		return true;
+	CIniHighlighter Probe(false, nullptr, true);
+	return settingsLoaded;
+}
+
+bool CIniHighlighter::IsValidSetting(const QString& settingName)
+{
+	QMutexLocker locker(&settingsMutex);
+	// The same resolution the highlighter itself uses: the Ovr./Reg. prefixes
+	// map onto one schema entry, and the keys are stored as written rather than
+	// folded, so matching has to be case-insensitive explicitly.
+	return !findCaseInsensitiveSettingKey(resolveSettingLookupKey(settingName, validSettings), validSettings).isEmpty();
+}
+
+QStringList CIniHighlighter::GetSettingNames()
+{
+	QMutexLocker locker(&settingsMutex);
+	QStringList Names;
+	Names.reserve(validSettings.count());
+	// The key, not Info.name: aliases are inserted under their own key and some
+	// entries carry no name of their own.
+	for (auto I = validSettings.constBegin(); I != validSettings.constEnd(); ++I)
+		Names.append(I.key());
+	Names.sort(Qt::CaseInsensitive);
+	return Names;
+}
+
+bool CIniHighlighter::GetSettingInfo(const QString& settingName, SettingInfo* pInfo)
+{
+	QMutexLocker locker(&settingsMutex);
+	const QString Key = findCaseInsensitiveSettingKey(resolveSettingLookupKey(settingName, validSettings), validSettings);
+	if (Key.isEmpty())
+		return false;
+	auto I = validSettings.constFind(Key);
+	if (I == validSettings.constEnd())
+		return false;
+	if (pInfo) *pInfo = I.value();
+	return true;
+}
+
 // Load settings from SbieSettings.ini
 void CIniHighlighter::loadSettingsIni(const QString& filePath)
 {

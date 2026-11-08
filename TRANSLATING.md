@@ -34,7 +34,7 @@ If the language maintainer is unavailable or agreement cannot be reached, ask th
 |Farsi|Yes|Oct 4, 2026|Oct 4, 2026|Oct 4, 2026|
 |Finnish|Yes|No|No|No|
 |French|Yes - Dec 19, 2024|Yes - Dec 19, 2024|Yes - Jul 15, 2026|Yes - 2024|
-|German|Yes - Apr 13, 2026|Yes - Oct 26, 2026|Yes - Jul 15, 2026|Yes - Mar 13, 2025|
+|German|Yes - Apr 13, 2026|Yes - Oct 30, 2026|Yes - Jul 15, 2026|Yes - Mar 13, 2025|
 |Greek|Yes|No|No|No|
 |Hebrew|Yes|No|No|No|
 |Hindi|No|Yes - Apr 2, 2026|Yes - Jul 15, 2026|Yes - Apr 2, 2026|

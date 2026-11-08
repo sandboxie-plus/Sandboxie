@@ -1416,6 +1416,13 @@ void COptionsWindow::UpdateBoxType()
 
 	ui.lblBoxInfo->setText(theGUI->GetBoxDescription(BoxType));
 
+	if (!m_pUseIcon->isChecked()) {
+		if (theConf->GetBool("Options/ColorBoxIcons", false))
+			ui.btnBoxIcon->setIcon(theGUI->GetColorIcon(m_BorderColor, true));
+		else
+			ui.btnBoxIcon->setIcon(theGUI->GetBoxIcon(BoxType));
+	}
+
 	if (m_HoldBoxType)
 		return;
 

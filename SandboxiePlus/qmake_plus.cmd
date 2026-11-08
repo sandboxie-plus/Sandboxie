@@ -1,5 +1,15 @@
 call "%~dp0..\Installer\buildVariables.cmd" %*
 
+REM Use the pinned stock Qt build only when CodeQL explicitly requests it.
+IF /I "%~3"=="--codeql" (
+  IF NOT DEFINED qt_codeql_version (
+    echo ERROR: qt_codeql_version is not configured
+    exit /b 1
+  )
+  setlocal
+  set "qt_version=%qt_codeql_version%"
+)
+
 REM @echo off
 REM echo Current dir: %cd%
 REM echo folder: %~dp0

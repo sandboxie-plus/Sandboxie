@@ -38,6 +38,12 @@
 #include "../QSbieAPI/Helpers/DbgHelper.h"
 #include "Windows/BoxImageWindow.h"
 #include "Wizards/BoxAssistant.h"
+#include "Boxes/BoxReport.h"
+#include "Mcp/McpServer.h"
+#include "Mcp/McpSession.h"
+#include "Mcp/McpConnectDialog.h"
+#include "Mcp/McpSessionWindow.h"
+#include "Mcp/McpOperate.h"
 #include "Engine/BoxEngine.h"
 #include "BoxTransfer.h"
 #include "Engine/ScriptManager.h"
@@ -393,7 +399,7 @@ static void CApplyConfiguredMonitorPlacement(QWidget* pWidget)
 		int newY = qBound(minY, frame.top(), maxY);
 		pWidget->move(newX, newY);
 		return;
-}
+	}
 
 	QScreen* pTargetScreen = NULL;
 	if (monitorSetting == -2) {
@@ -528,6 +534,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pBoxBorder = new CBoxBorder(theAPI, this);
 
 	m_SbieTemplates = new CSbieTemplatesEx(theAPI, this);
+	m_pMcpServerImpl = NULL;
 
 
 	m_bConnectPending = false;
@@ -562,7 +569,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_pSummaryInfo = new QLabel();
 	m_pSummaryInfo->setContentsMargins(4, 0, 8, 0);
-	statusBar()->addPermanentWidget(m_pSummaryInfo, 1); // stretch=1 → left-aligned summary
+	statusBar()->addPermanentWidget(m_pSummaryInfo, 1); // stretch=1 -> left-aligned summary
 
 	m_pTraceInfo = new QLabel();
 	m_pDisabledForce = new QLabel();
@@ -710,6 +717,7 @@ void CSandMan::CreateUI()
 	m_pNewBoxButton = nullptr;
 	m_pCleanUpButton = nullptr;
 	m_pEditIniButton = nullptr;
+	m_pMcpButton = nullptr;
 
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 
@@ -826,6 +834,10 @@ void CSandMan::CreateHelpMenu(bool bAdvanced)
 		//}
 		m_pContribution = m_pMenuHelp->addAction(CSandMan::GetIcon("Support"), tr("Contribute to Sandboxie-Plus"), this, SLOT(OnHelp()));
 		m_pBoxAssistant = m_pMenuHelp->addAction(CSandMan::GetIcon("FirstAid"), tr("Troubleshooting Wizard"), this, SLOT(OnBoxAssistant()));
+		m_pMcpHelp = m_pMenuHelp->addAction(CSandMan::GetIcon("ChatBot"),
+			tr("Troubleshoot with an AI Agent"), this, SLOT(OnMcpHelp()));
+		m_pMcpHelp->setToolTip(tr("Set up an AI agent to look at a sandbox with you - which "
+			"clients are supported, and the exact configuration each one needs."));
 		m_pManual = m_pMenuHelp->addAction(CSandMan::GetIcon("Help"), tr("Online Documentation"), this, SLOT(OnHelp()));
 		m_pForum = m_pMenuHelp->addAction(CSandMan::GetIcon("Forum"), tr("Visit Support Forum"), this, SLOT(OnHelp()));
 		m_pMenuHelp->addSeparator();
@@ -939,6 +951,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	}
 		m_pMenuView->addSeparator();
 		m_pEnableMonitoring = m_pMenuView->addAction(CSandMan::GetIcon("SetLogging"), tr("Trace Logging"), this, SLOT(OnMonitoring()));
+	if (bAdvanced)
 		m_pEnableMonitoring->setCheckable(true);
 	if (!bAdvanced)
 		m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Recovery Log"), this, SLOT(OnRecoveryLog()));
@@ -965,6 +978,15 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pDisableRecovery = NULL;
 		m_pDisableMessages = NULL;
 	}
+
+		m_pMenuOptions->addSeparator();
+		m_pMcpServer = m_pMenuOptions->addAction(CSandMan::GetIcon("ChatBot"),
+			tr("AI Agent Connection (MCP)"), this, SLOT(OnToggleMcpServer()));
+		m_pMcpServer->setCheckable(true);
+		m_pMcpServer->setToolTip(tr("Let a local AI agent inspect this Sandboxie installation. Off until you turn it on, and unreachable from inside a sandbox."));
+		m_pMcpWindowAction = m_pMenuOptions->addAction(CSandMan::GetIcon("ChatBot"),
+			tr("AI Agent Session Window"), this, SLOT(OnMcpShowWindow()));
+		m_pMcpWindowAction->setToolTip(tr("Everything the agent has asked for and what you answered. Opens on its own when an agent connects."));
 
 		m_pMenuOptions->addSeparator();
 		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor"), tr("Edit Sandboxie.ini"), this, SLOT(OnEditIni()));
@@ -1211,6 +1233,7 @@ QList<ToolBarAction> CSandMan::GetAvailableToolBarActions()
 			// ToolBarAction{"SetupWizard", m_pSetupWizard},
 			// ToolBarAction{"UninstallAll", m_pUninstallAll}, // removed because not always valid in menu system
 			ToolBarAction{ "", nullptr },        // separator
+			ToolBarAction{ "McpServer", m_pMcpServer, tr("AI Agent") },  //tr: Name of the button in the toolbar for the AI agent actions
 			ToolBarAction{ "Troubleshooting", m_pBoxAssistant },
 			ToolBarAction{ "CheckForUpdates", m_pUpdate },
 			ToolBarAction{ "About", m_pAbout },
@@ -1295,6 +1318,7 @@ void CSandMan::CreateToolBar(bool rebuild)
 		m_pNewBoxButton = nullptr;  // deleted by pOldToolBar
 		m_pEditIniButton = nullptr;
 		m_pCleanUpButton = nullptr;
+		m_pMcpButton = nullptr;
 	}
 
 	auto items = GetToolBarItemsConfig();
@@ -1322,7 +1346,40 @@ void CSandMan::CreateToolBar(bool rebuild)
 
 		latestIsAction = true;
 
-		if (sa.action)
+		if (sa.scriptName == "McpServer" && m_pMcpServer)
+		{
+			// A split button whose face follows the state, because what someone
+			// reaching for it wants depends entirely on that state: with no
+			// connection open they want to set an agent up, and with one open they
+			// want the session window - the setup instructions they have already
+			// read are the last thing they need. UpdateMcpAction swaps it.
+			//
+			// Everything is in the menu as well, so neither is ever unreachable:
+			// the switch, the setup, and the window. The switch reads its own state
+			// there - a checkable entry shows a proper check mark now that
+			// CheckableMenuItemStyle stops the icon from displacing it.
+			//
+			// setDefaultAction rather than copying the icon and text across, so
+			// the tooltip and the greying when an administrator has disabled the
+			// feature follow the action instead of having to be mirrored.
+			auto but = new QToolButton();
+			but->setPopupMode(QToolButton::MenuButtonPopup);
+
+			auto menu = new QMenu(but);
+			menu->addAction(m_pMcpServer);
+			menu->addSeparator();
+			menu->addAction(m_pMcpHelp);
+			menu->addAction(m_pMcpWindowAction);
+			but->setMenu(menu);
+
+			m_pMcpButton = but;
+			// The face, set now rather than at the next state change: the toolbar can
+			// be rebuilt at any time, and a split button with no default action has
+			// no icon and does nothing when clicked.
+			UpdateMcpAction();
+			m_pToolBar->addWidget(but);
+		}
+		else if (sa.action)
 		{
 			m_pToolBar->addAction(sa.action);
 		}
@@ -2085,6 +2142,26 @@ void CSandMan::OnMessage(const QString& MsgData)
 			Status = StopSbie();
 		else if (Op == "EmptyAll")
 			Status = theAPI->TerminateAll();
+		else if (Op == "McpActivate" || Op.startsWith("McpActivate:")) {
+			// Not a maintenance operation and it must not raise one: this is a
+			// question for the user, and the only capability it has is asking.
+			const int Colon = Op.indexOf(':');
+			OnMcpActivate(Colon == -1 ? QString() : Op.mid(Colon + 1).trimmed());
+			return;
+		}
+		else if (Op == "McpOn" || Op == "McpOff") {
+			// Scripted arming, for testing the agent interface without a hand on
+			// the menu - same purpose as the Desktop commands below. It is not a
+			// way around anything: arming only opens the pipe, and a connection
+			// still has to be authorised with a code shown on screen. Anyone able
+			// to run this could click the menu item anyway.
+			const bool bOn = (Op == "McpOn");
+			if (bOn) StartMcpServer(); else StopMcpServer();
+			UpdateMcpAction();
+			OnLogMessage(tr("MCP: %1 requested via command line, now %2")
+				.arg(Op).arg(IsMcpServerRunning() ? tr("on") : tr("off")));
+			return;
+		}
 		else
 			Status = SB_ERR(SB_Message, QVariantList () << (tr("Unknown operation '%1' requested via command line").arg(Op)));
 
@@ -2911,6 +2988,29 @@ void CSandMan::OnStatusChanged()
 		Status = theAPI->ReloadBoxes(true);
 		if (Status) {
 
+			// A shadow is discarded by its owner being destroyed, so a crash - or a
+			// client that went away without a tidy exit - leaves the section behind.
+			// Swept once per connection, before anything can legitimately own one;
+			// this covers the troubleshooting wizard too, which leaks them the same
+			// way.
+			//
+			// Placed between the reload and the box list below, and both halves of
+			// that matter. After ReloadBoxes, because the sweep walks GetAllBoxes()
+			// and earlier in this same function that list is still empty for this
+			// connection - a sweep up there finds nothing and reports success, which
+			// is how shadows came to survive restarts. Before AllBoxes is taken,
+			// because the sweep removes sections, and a list captured first would
+			// name boxes that no longer exist.
+			UpdateMcpAction();
+
+			if (!m_bSweptShadows) {
+				m_bSweptShadows = true;
+				const int Swept = McpOperate::SweepOrphanShadows();
+				if (Swept)
+					OnLogMessage(tr("Removed %1 leftover sandbox configuration copies from an "
+						"interrupted troubleshooting session").arg(Swept));
+			}
+
 			auto AllBoxes = theAPI->GetAllBoxes();
 
 			m_pBoxView->ClearUserUIConfig(AllBoxes, true);
@@ -3249,6 +3349,339 @@ void CSandMan::OnHotKey(size_t id)
 	}
 }
 
+//
+// The MCP listener is off until a human turns it on, and goes away again when
+// they turn it off - there is no "start with SandMan" default, by design.
+//
+bool CSandMan::StartMcpServer()
+{
+	if (IsMcpServerRunning())
+		return true;
+
+	if (!m_pMcpServerImpl) {
+		m_pMcpServerImpl = new CMcpServer(this);
+		connect(m_pMcpServerImpl, SIGNAL(LogMessage(int, const QString&)), this, SLOT(OnMcpLogMessage(int, const QString&)));
+		CMcpSessionManager* pSessions = m_pMcpServerImpl->GetSessions();
+		connect(pSessions, SIGNAL(PairingCodeMinted(const QString&, const QString&, const QString&, int)), this, SLOT(OnMcpPairingCode(const QString&, const QString&, const QString&, int)));
+		connect(pSessions, SIGNAL(PairingSucceeded(const QString&)), this, SLOT(OnMcpPaired(const QString&)));
+		connect(pSessions, SIGNAL(PairingFailed(const QString&, const QString&)), this, SLOT(OnMcpPairingFailed(const QString&, const QString&)));
+		connect(pSessions, SIGNAL(SessionSuspended(const QString&)), this, SLOT(OnMcpSuspended(const QString&)));
+		connect(pSessions, SIGNAL(SessionStarted(const QString&, const QString&)), this, SLOT(OnMcpSessionStarted(const QString&, const QString&)));
+	}
+
+	// The user's own switch, which is separate from arming: arming is "right
+	// now", this is "at all". With it off the menu entry does nothing and a
+	// doorbell from a client is dropped without troubling anybody.
+	if (!theConf->GetBool("Options/McpEnabled", true)) {
+		OnLogMessage(tr("The AI agent connection is turned off in the settings"));
+		return false;
+	}
+
+	// The administrator's veto, and it lives in Sandboxie.ini rather than here
+	// on purpose. Sandboxie-Plus.ini is the GUI's own per-user file and anything
+	// running as the user can rewrite it; Sandboxie.ini is covered by the
+	// service's configuration protection and EditAdminOnly. A switch that says
+	// "this machine does not do this" has to be in the file that cannot be
+	// flipped by whatever it is meant to restrain.
+	if (theAPI && theAPI->IsConnected()
+		&& !theAPI->GetGlobalSettings()->GetBool("AllowAiAgent", true)) {
+		OnLogMessage(tr("The AI agent connection is disabled by AllowAiAgent=n in Sandboxie.ini"));
+		return false;
+	}
+
+	// A pipe name by default. The name has to be stable because a client config
+	// is written once and cannot learn a per-session one.
+	//
+	// Sandboxie.ini wins where it is set, for the same reason as above: an
+	// administrator who pins the name should not be overridden by a per-user
+	// file. The listener validates whatever comes out of this either way.
+	QString Endpoint = theAPI && theAPI->IsConnected()
+		? theAPI->GetGlobalSettings()->GetText("AiAgentEndpoint", QString()) : QString();
+	if (Endpoint.isEmpty())
+		Endpoint = theConf->GetString("Options/McpEndpoint", "SbieMcp");
+	if (!m_pMcpServerImpl->Start(Endpoint))
+		return false;
+
+	OnLogMessage(tr("An AI agent can now connect to Sandboxie on %1%2").arg(Endpoint).arg(CMcpServer::kEndpointPath), true);
+	return true;
+}
+
+void CSandMan::StopMcpServer()
+{
+	if (!m_pMcpServerImpl)
+		return;
+	const bool bWas = m_pMcpServerImpl->IsListening();
+	m_pMcpServerImpl->Stop();
+	if (bWas)
+		OnLogMessage(tr("The AI agent connection is closed"));
+
+	// Here rather than only in the toggle handler, because the session window
+	// now stops the server too - and a toolbar button still showing "on" over a
+	// listener that is off is worse than no button at all.
+	UpdateMcpAction();
+
+	// The window belongs to the connection: with the connection closed, its
+	// history, its pairing code and its pending write-up all describe something
+	// that is over. Kept, they would greet the next agent with the last one's
+	// session - and the questions it had already answered.
+	//
+	// Only if it exists; stopping a server that was never started must not
+	// build a window to tell it so.
+	if (bWas && m_pMcpWindow)
+		m_pMcpWindow->ResetAll();
+}
+
+bool CSandMan::IsMcpServerRunning() const
+{
+	return m_pMcpServerImpl && m_pMcpServerImpl->IsListening();
+}
+
+//
+// The toolbar button and the menu entry are the same QAction, so this is
+// also what the button shows. Three states, not two: on, off, and "off and
+// not yours to turn on" - which has to look different from merely off, or a
+// user whose administrator disabled the feature just clicks a button that
+// never does anything.
+//
+void CSandMan::UpdateMcpAction()
+{
+	if (!m_pMcpServer)
+		return;
+
+	const bool bRunning = IsMcpServerRunning();
+	const bool bUserEnabled = theConf->GetBool("Options/McpEnabled", true);
+	const bool bAdminAllows = !theAPI || !theAPI->IsConnected()
+		|| theAPI->GetGlobalSettings()->GetBool("AllowAiAgent", true);
+
+	m_pMcpServer->setChecked(bRunning);
+	m_pMcpServer->setEnabled(bRunning || (bUserEnabled && bAdminAllows));
+
+	if (!bAdminAllows)
+		m_pMcpServer->setToolTip(tr("Turned off for this machine by AllowAiAgent=n in Sandboxie.ini."));
+	else if (!bUserEnabled)
+		m_pMcpServer->setToolTip(tr("Turned off in Settings, under General Config, AI Agent."));
+	else if (bRunning)
+		m_pMcpServer->setToolTip(tr("An AI agent can connect. Click to close the connection."));
+	else
+		m_pMcpServer->setToolTip(tr("Let a local AI agent inspect this Sandboxie installation. "
+			"Off until you turn it on, and unreachable from inside a sandbox."));
+
+	// Left enabled even when the connection is closed: the window holds what
+	// the last agent did, and that is worth reading afterwards rather than
+	// only while it is still connected.
+	if (m_pMcpWindowAction)
+		m_pMcpWindowAction->setEnabled(true);
+
+	// The toolbar button's primary click, which is whichever of the two is
+	// useful now: the session window while an agent can reach us, the setup
+	// instructions while one cannot. Both stay in the menu either way.
+	if (m_pMcpButton) {
+		QAction* pFace = bRunning ? m_pMcpWindowAction : m_pMcpHelp;
+		if (!pFace)
+			pFace = m_pMcpServer;
+		if (pFace && m_pMcpButton->defaultAction() != pFace)
+			m_pMcpButton->setDefaultAction(pFace);
+	}
+
+	// This one fronts the toolbar button, so its state is the button's state.
+	// Greyed only where an administrator has forbidden the feature, because
+	// that is the case the user can do nothing about. When they have merely
+	// turned it off themselves it stays available - the dialog is how someone
+	// finds out what this is in the first place.
+	if (m_pMcpHelp) {
+		m_pMcpHelp->setEnabled(bAdminAllows);
+		if (!bAdminAllows)
+			m_pMcpHelp->setToolTip(tr("Turned off for this machine by AllowAiAgent=n in Sandboxie.ini."));
+	}
+}
+
+void CSandMan::OnToggleMcpServer()
+{
+	if (IsMcpServerRunning())
+		StopMcpServer();
+	else if (!StartMcpServer())
+		QMessageBox::warning(this, "Sandboxie-Plus", tr("The AI agent connection could not be opened. The message log has the reason."));
+
+	UpdateMcpAction();
+}
+
+//
+// Created on demand rather than at startup: most SandMan runs never connect an
+// agent, and a window nobody asked for is a window nobody wants.
+//
+CMcpSessionWindow* CSandMan::GetMcpWindow()
+{
+	if (!m_pMcpWindow)
+		m_pMcpWindow = new CMcpSessionWindow(this);
+	return m_pMcpWindow;
+}
+
+void CSandMan::OnMcpShowWindow()
+{
+	GetMcpWindow()->Appear();
+}
+
+void CSandMan::OnMcpSessionStarted(const QString& ClientName, const QString& Identity)
+{
+	const QString Who = ClientName.isEmpty() ? tr("An unidentified program") : ClientName;
+
+	CMcpSessionWindow* pWnd = GetMcpWindow();
+	pWnd->RefreshConsentMode(true);
+	// A new agent gets to ask about its own report, even if the last one was
+	// turned down - a decline is final for that conversation, not for ever.
+	pWnd->NoteSessionStarted();
+	pWnd->SetStatus(tr("connected, waiting to be authorised"), Who);
+	pWnd->AddEntry(CMcpSessionWindow::eInfo, tr("%1 connected").arg(Who), Identity);
+	// Opened before the agent has asked for anything, so the first thing the user
+	// sees is a window they can read at their own pace rather than a question
+	// that arrived on its own.
+	pWnd->Appear();
+}
+
+void CSandMan::OnMcpActivate(const QString& ClientName)
+{
+	if (IsMcpServerRunning())
+		return;	// already armed - the bridge only has to retry
+
+	// Turned off means not asked about. A prompt for a feature the user has
+	// disabled is just a way of nagging them to re-enable it.
+	if (!theConf->GetBool("Options/McpEnabled", true))
+		return;
+
+	if (m_bMcpPrompting)
+		return;	// a prompt is already on screen
+
+	if (m_McpPromptCooldown.isValid() && QDateTime::currentDateTime() < m_McpPromptCooldown) {
+		OnLogMessage(tr("MCP: ignored a connection request from %1 (asked too recently)")
+			.arg(ClientName.isEmpty() ? tr("an unidentified application") : ClientName));
+		return;
+	}
+
+	const QString Who = ClientName.isEmpty() ? tr("An application") : ClientName;
+
+	CMcpSessionWindow* pWnd = GetMcpWindow();
+	pWnd->SetStatus(tr("asking to connect"), Who);
+	pWnd->AddEntry(CMcpSessionWindow::eInfo, tr("%1 is asking to connect").arg(Who));
+
+	m_bMcpPrompting = true;
+	const bool bAccepted = pWnd->AskPrompt(
+		tr("%1 is asking to connect an AI agent to Sandboxie-Plus.").arg(Who),
+		tr("Allowing this lets the agent read Sandboxie's own documentation straight away.\n\n"
+		   "To look at YOUR sandboxes - what exists, what is running, what was blocked - it "
+		   "then has to ask you for a code, which this window will show you. To change "
+		   "anything, start anything or stop anything, it has to ask you again, every time.\n\n"
+		   "It is not reachable from inside a sandbox.\n\n"
+		   "If you did not just ask an AI assistant to look at Sandboxie, refuse this."),
+		tr("Allow the Connection"));
+	m_bMcpPrompting = false;
+
+	if (!bAccepted) {
+		// A single No is usually a misclick or a change of mind, and making the
+		// user wait a minute to correct it would be its own bug - so the next
+		// attempt is allowed immediately. Only a run of refusals looks like a
+		// client in a retry loop, and that is what the cooldown is for.
+		const int kDeniesBeforeCooldown = 5;
+		m_McpDenyStreak++;
+		pWnd->AddEntry(CMcpSessionWindow::eRefused, tr("the connection was refused"));
+		pWnd->SetStatus(tr("not connected"), Who);
+		if (m_McpDenyStreak >= kDeniesBeforeCooldown) {
+			m_McpPromptCooldown = QDateTime::currentDateTime().addSecs(60);
+			OnLogMessage(tr("MCP: declined a connection request from %1 (%2 in a row - further requests ignored for a minute)")
+				.arg(Who).arg(m_McpDenyStreak));
+		}
+		else
+			OnLogMessage(tr("MCP: declined a connection request from %1").arg(Who));
+		return;
+	}
+
+	m_McpDenyStreak = 0;
+	m_McpPromptCooldown = QDateTime();
+	pWnd->AddEntry(CMcpSessionWindow::eAllowed, tr("the connection was allowed"));
+	if (!StartMcpServer())
+		QMessageBox::warning(g_GUIParent, "Sandboxie-Plus",
+			tr("The AI agent connection could not be opened. The message log has the reason."));
+	UpdateMcpAction();
+}
+
+//
+// The entry point for someone who has not done this before: what it is, how to
+// point a client at it, and the switch to turn it on. The full
+// connect-an-agent flow with per-client config writing comes later; what makes
+// this usable now is the exact command line, because every stdio client takes
+// one and getting the path right by hand is the only hard part.
+//
+void CSandMan::OnMcpHelp()
+{
+	CMcpConnectDialog Dialog(this);
+	SafeExec(&Dialog);
+}
+
+//
+// The code is shown in the session window rather than in a box of its own: the
+// user has to read it to the agent, which means looking away and typing
+// somewhere else, and a dialog that has to survive that is not a dialog.
+//
+void CSandMan::OnMcpPairingCode(const QString& ClientName, const QString& Identity, const QString& Code, int ValidSeconds)
+{
+	m_McpPendingIdentity = Identity;
+
+	const QString Who = ClientName.isEmpty() ? tr("An AI agent") : ClientName;
+	CMcpSessionWindow* pWnd = GetMcpWindow();
+	pWnd->SetStatus(tr("waiting for the code below to be read to it"), Who);
+	pWnd->AddEntry(CMcpSessionWindow::eInfo, tr("%1 asked to be authorised").arg(Who), Identity);
+	// Never the code itself in the history or the log - it would outlive the
+	// exchange it was meant to protect.
+	pWnd->ShowCode(Code, ValidSeconds, Identity);
+
+	OnLogMessage(tr("MCP: %1 is asking to connect; a pairing code is displayed").arg(Who));
+}
+
+void CSandMan::OnMcpPaired(const QString& ClientName)
+{
+	const QString Who = ClientName.isEmpty() ? tr("an AI agent") : ClientName;
+	CMcpSessionWindow* pWnd = GetMcpWindow();
+
+	// Read the checkbox before the code area that holds it is cleared.
+	if (pWnd->IsRememberChecked() && !m_McpPendingIdentity.isEmpty()) {
+		CMcpClients::Remember(m_McpPendingIdentity);
+		pWnd->AddEntry(CMcpSessionWindow::eWarning,
+			tr("this program will be authorised without asking from now on"), m_McpPendingIdentity);
+		OnLogMessage(tr("MCP: %1 will be authorised without asking from now on").arg(m_McpPendingIdentity));
+	}
+	m_McpPendingIdentity.clear();
+
+	pWnd->ClearCode();
+	pWnd->NoteAuthorised();
+	pWnd->SetStatus(tr("authorised - it can read freely, and must ask for anything else"), Who);
+	pWnd->AddEntry(CMcpSessionWindow::eAllowed, tr("%1 is now authorised").arg(Who));
+	OnLogMessage(tr("MCP: %1 is now authorised").arg(Who), true);
+}
+
+void CSandMan::OnMcpPairingFailed(const QString& ClientName, const QString& Reason)
+{
+	const QString Who = ClientName.isEmpty() ? tr("an AI agent") : ClientName;
+	GetMcpWindow()->AddEntry(CMcpSessionWindow::eWarning,
+		tr("%1 failed to authorise (%2)").arg(Who).arg(Reason));
+	OnLogMessage(tr("MCP: %1 failed to authorise (%2)").arg(Who).arg(Reason));
+}
+
+void CSandMan::OnMcpSuspended(const QString& ClientName)
+{
+	const QString Who = ClientName.isEmpty() ? tr("an AI agent") : ClientName;
+	CMcpSessionWindow* pWnd = GetMcpWindow();
+	pWnd->SetStatus(tr("suspended after an hour idle - it must be authorised again"), Who);
+	pWnd->AddEntry(CMcpSessionWindow::eInfo, tr("the session for %1 was suspended after an hour idle").arg(Who));
+	OnLogMessage(tr("MCP: the session for %1 was suspended after an hour idle; it can be resumed by authorising again").arg(Who));
+}
+
+void CSandMan::OnMcpLogMessage(int Level, const QString& Message)
+{
+	// Debug chatter stays out of the user-facing log unless they asked for it.
+	if (Level >= CHttpServer::eLogDebug && !theConf->GetBool("Options/McpVerbose", false))
+		return;
+	OnLogMessage(tr("MCP: %1").arg(Message));
+}
+
 void CSandMan::OnLogMessage(const QString& Message, bool bNotify)
 {
 	AddLogMessage(Message);
@@ -3261,10 +3694,25 @@ void CSandMan::OnLogMessage(const QString& Message, bool bNotify)
 
 void CSandMan::AddLogMessage(const QString& Message)
 {
+	// Recorded before the early return and before the view is consulted: a
+	// notice raised while the log tab does not exist yet still happened, and it
+	// used to be lost.
+	AppendMessageLog(SSbieMsg{ QDateTime::currentDateTime(), 0, QStringList() << Message,
+		QString(), QString(), SSbieMsg::eNotice });
+
 	if (!m_pMessageLog)
 		return;
 
 	AddLogMessage(QDateTime::currentDateTime(), Message);
+}
+
+void CSandMan::AppendMessageLog(const SSbieMsg& Msg)
+{
+	m_MessageLog.append(Msg);
+	// Oldest first. The recent past is what a diagnosis needs, and an unbounded
+	// list is a slow leak.
+	if (m_MessageLog.count() > m_MessageLogLimit)
+		m_MessageLog.remove(0, m_MessageLog.count() - m_MessageLogLimit);
 }
 
 void CSandMan::AddLogMessage(const QDateTime& TimeStamp, const QString& Message, const QString& Link)
@@ -3497,8 +3945,11 @@ QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData,
 
 	if (MsgCode != 0) {
 		Message = theAPI->GetSbieMsgStr(MsgCode, m_LanguageId);
-		if (pLink)
+		if (pLink) {
+			Message.insert(8, "</a>");
 			*pLink = MakeSbieMsgLink(MsgCode, MsgData, ProcessName);
+			Message.prepend("<a href=\"" + *pLink + "\">");
+		}
 	}
 	else if(MsgData.size() > 0)
 		Message = MsgData[0];
@@ -4940,7 +5391,9 @@ void CSandMan::SetUITheme()
 		int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 		QApplication::setStyle(QStyleFactory::create((bDark || iViewMode == 2) ? "Windows" : m_DefaultStyle));
 	}
-	QApplication::setStyle(new KeepSubMenusVisibleStyle(new CustomTabStyle(QApplication::style())));
+	// Application wide, so every menu gets it - the main menu bar, the box
+	// context menus and the tray.
+	QApplication::setStyle(new KeepSubMenusVisibleStyle(new CheckableMenuItemStyle(new CustomTabStyle(QApplication::style()))));
 
 
 	CTreeItemModel::SetDarkMode(bDark);

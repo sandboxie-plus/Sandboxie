@@ -4,6 +4,7 @@
 #include "../../QSbieAPI/SbieAPI.h"
 
 #include "JSEngineExt.h"
+#include "../Boxes/BoxShadows.h"
 
 class CBoxEngine : public QThread
 {
@@ -109,12 +110,18 @@ public:
 
 	QVariantMap GetReport() { return m_Report; }
 
-	bool		ApplyShadowChanges();
+	// The shadow lifecycle itself lives in CBoxShadows, held below - it needs
+	// no engine, no thread and no script state, so an agent session can own one
+	// without inheriting a JS interpreter. These forward, which keeps the JS
+	// shadow objects and the wizard calling exactly what they always did.
+	CBoxShadows& Shadows()	{ return m_Shadows; }
 
-	QSharedPointer<CSbieIni> MakeShadow(const QSharedPointer<CSbieIni>& pIni);
-	void		AddShadow(const QSharedPointer<CSbieIni>& pIni);
-	void		SetApplyShadow(const QString& OriginalName, bool bApply = true);
-	bool		IsNoAppliedShadow(const QString& OriginalName);
+	bool		ApplyShadowChanges()										{ return m_Shadows.ApplyShadowChanges(); }
+
+	QSharedPointer<CSbieIni> MakeShadow(const QSharedPointer<CSbieIni>& pIni)	{ return m_Shadows.MakeShadow(pIni); }
+	void		AddShadow(const QSharedPointer<CSbieIni>& pIni)				{ m_Shadows.AddShadow(pIni); }
+	void		SetApplyShadow(const QString& OriginalName, bool bApply = true)	{ m_Shadows.SetApplyShadow(OriginalName, bApply); }
+	bool		IsNoAppliedShadow(const QString& OriginalName)				{ return m_Shadows.IsNoAppliedShadow(OriginalName); }
 
 	static int	GetInstanceCount() { return m_InstanceCount; }
 
@@ -130,14 +137,10 @@ protected:
 
 	QVariantMap m_Report;
 
-	struct SBoxShadow {
-		SBoxShadow() : iApplyChanges(0) {}
-		QSharedPointer<CSbieIni> pShadow;
-		QSharedPointer<CSbieIni> pOriginal;
-		int iApplyChanges;
-	};
-
-	QMap<QString, SBoxShadow> m_Shadows;
+	// Destroyed with the engine, and its destructor discards every shadow that
+	// was not applied - the same behaviour ~CWizardEngine used to implement
+	// inline.
+	CBoxShadows m_Shadows;
 
 	static int			m_InstanceCount;
 };

@@ -49,6 +49,12 @@
     <Filter Include="Wizards">
       <UniqueIdentifier>{4bf40c7e-2ce4-4528-813c-3b48b8c56155}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mcp">
+      <UniqueIdentifier>{b48e2d71-5c93-4a06-8f17-2d9e5b0c4713}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Boxes">
+      <UniqueIdentifier>{3f1c6a92-8d47-4be5-9a21-6c0e74d3b815}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{7f2e2eea-0d08-44d4-af39-01390e441438}</UniqueIdentifier>
     </Filter>
@@ -201,6 +207,60 @@
     <ClCompile Include="Wizards\BoxAssistant.cpp">
       <Filter>Wizards</Filter>
     </ClCompile>
+    <ClCompile Include="Mcp\McpClientSetup.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpConnectDialog.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpSessionWindow.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpSubmitDialog.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpReport.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpKnowledge.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpAudit.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpStream.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpConsent.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpOperate.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpDocs.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpSession.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpRedact.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpProtocol.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpServer.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcp\McpTools.cpp">
+      <Filter>Mcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Boxes\BoxReport.cpp">
+      <Filter>Boxes</Filter>
+    </ClCompile>
+    <ClCompile Include="Boxes\BoxShadows.cpp">
+      <Filter>Boxes</Filter>
+    </ClCompile>
     <ClCompile Include="Engine\BoxEngine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -249,7 +309,6 @@
     <ClCompile Include="Views\TraceView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
-
     <ClCompile Include="Windows\OptionsWindow.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
@@ -306,6 +365,60 @@
     <ClInclude Include="Helpers\StorageInfo.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Mcp\McpClientSetup.h">
+      <Filter>Mcp</Filter>
+    </ClInclude>
+    <QtMoc Include="Mcp\McpConnectDialog.h">
+      <Filter>Mcp</Filter>
+    </QtMoc>
+    <QtMoc Include="Mcp\McpSessionWindow.h">
+      <Filter>Mcp</Filter>
+    </QtMoc>
+    <QtMoc Include="Mcp\McpSubmitDialog.h">
+      <Filter>Mcp</Filter>
+    </QtMoc>
+    <ClInclude Include="Mcp\McpAudit.h">
+      <Filter>Mcp</Filter>
+    </ClInclude>
+    <QtMoc Include="Mcp\McpStream.h">
+      <Filter>Mcp</Filter>
+    </QtMoc>
+    <ClInclude Include="Mcp\McpOperate.h">
+      <Filter>Mcp</Filter>
+    </ClInclude>
+    <ClInclude Include="Mcp\McpReport.h">
+      <Filter>Mcp</Filter>
+    </ClInclude>
+    <ClInclude Include="Mcp\McpKnowledge.h">
+      <Filter>Mcp</Filter>
+    </ClInclude>
+    <QtMoc Include="Mcp\McpConsent.h">
+      <Filter>Mcp</Filter>
+    </QtMoc>
+    <ClInclude Include="Mcp\McpDocs.h">
+      <Filter>Mcp</Filter>
+    </ClInclude>
+    <ClInclude Include="Mcp\McpRedact.h">
+      <Filter>Mcp</Filter>
+    </ClInclude>
+    <ClInclude Include="Mcp\McpProtocol.h">
+      <Filter>Mcp</Filter>
+    </ClInclude>
+    <ClInclude Include="Mcp\McpTools.h">
+      <Filter>Mcp</Filter>
+    </ClInclude>
+    <QtMoc Include="Mcp\McpSession.h">
+      <Filter>Mcp</Filter>
+    </QtMoc>
+    <QtMoc Include="Mcp\McpServer.h">
+      <Filter>Mcp</Filter>
+    </QtMoc>
+    <ClInclude Include="Boxes\BoxReport.h">
+      <Filter>Boxes</Filter>
+    </ClInclude>
+    <ClInclude Include="Boxes\BoxShadows.h">
+      <Filter>Boxes</Filter>
+    </ClInclude>
     <ClInclude Include="Engine\V4ScriptDebuggerApi.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -359,7 +472,6 @@
     <QtMoc Include="Views\TraceView.h">
       <Filter>Views</Filter>
     </QtMoc>
-
     <QtMoc Include="Windows\SelectBoxWindow.h">
       <Filter>Windows</Filter>
     </QtMoc>

@@ -329,7 +329,11 @@ QJsonArray Describe()
 			"confirm it before anything runs, so write the command you actually mean: it is not "
 			"summarised or rewritten.\n\n"
 			"This is how a fix gets tested rather than described - start the program that was "
+#ifdef SBIE_HAS_DIAG_EVENTS
 			"failing, then read trace_query and box_diagnostics to see whether it still fails. "
+#else
+			"failing, then read trace_query to see whether it still fails. "
+#endif
 			"The call returns as soon as the program has started: it does not wait for it to exit "
 			"and captures no output, so get the pid from box_processes.\n\n"
 			"The settings in effect are the sandbox's CURRENT ones. A change staged with "
@@ -954,7 +958,11 @@ static QJsonObject CallBoxRun(const QJsonObject& Arguments, CMcpSession* pSessio
 		"Launched in %1. The pid is not reported because the program is started through "
 		"Sandboxie's launcher, which exits immediately - its pid is not the program's. "
 		"Call box_processes on %2 to get the real pid and to confirm it is still running, "
+#ifdef SBIE_HAS_DIAG_EVENTS
 		"and trace_query or box_diagnostics to see what it did. Nothing is waited for and no "
+#else
+		"and trace_query to see what it did. Nothing is waited for and no "
+#endif
 		"output is captured.").arg(Where).arg(RunIn), Data);
 }
 

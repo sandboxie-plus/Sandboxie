@@ -38,7 +38,9 @@ void SetDocs(CMcpDocs* pDocs)
 static const int kMaxBoxes = 200;
 static const int kMaxSettings = 500;
 static const int kMaxProcesses = 200;
+#ifdef SBIE_HAS_DIAG_EVENTS
 static const int kMaxDiagEvents = 200;
+#endif
 // A trace is effectively unbounded - a few seconds of a browser starting runs to
 // tens of thousands of entries - so this is a page, not a limit on what exists.
 static const int kMaxTraceRows = 300;
@@ -313,12 +315,14 @@ QJsonArray Describe()
 			"rather than a running-program problem."),
 		BoxNameSchema(QObject::tr("Name or alias of the sandbox."))));
 
+#ifdef SBIE_HAS_DIAG_EVENTS
 	Tools.append(Tool("box_diagnostics", QObject::tr("Sandbox diagnostic events"),
 		QObject::tr("Diagnostic events Sandboxie has recorded for a sandbox - the same ones the "
 			"troubleshooting wizard reports. These are the driver saying what it refused "
 			"or had trouble with, so read them before guessing at a cause. Paths and "
 			"account names are redacted."),
 		BoxNameSchema(QObject::tr("Name or alias of the sandbox."))));
+#endif
 
 	Tools.append(Tool("log_query", QObject::tr("Search the message log"),
 		QObject::tr("Everything Sandboxie-Plus has reported this session: driver and service "
@@ -418,7 +422,11 @@ bool Exists(const QString& Name)
 {
 	return Name == "sandboxie_version" || Name == "box_list" || Name == "box_get_config"
 		|| Name == "config_schema"
-		|| Name == "box_processes" || Name == "box_diagnostics" || Name == "trace_query"
+		|| Name == "box_processes"
+#ifdef SBIE_HAS_DIAG_EVENTS
+		|| Name == "box_diagnostics"
+#endif
+		|| Name == "trace_query"
 		|| Name == "log_query"
 		|| Name == "docs_search" || Name == "docs_get" || Name == "docs_for_setting"
 		|| Name == "kb_search" || Name == "kb_get" || Name == "kb_match";
@@ -873,14 +881,24 @@ static QJsonObject CallBoxProcesses(const QJsonObject& Arguments)
 	if (!Shown) {
 		// An empty list is a finding, not a dead end, and saying which way to
 		// look next is cheaper than letting the model guess.
+#ifdef SBIE_HAS_DIAG_EVENTS
 		Text = QObject::tr("Nothing is running in '%1' right now. If a program was expected, it "
 			"started and exited - look at box_diagnostics and trace_query rather than at "
 			"the process list.").arg(BoxDisplayName(pBox));
+#else
+		Text = QObject::tr("Nothing is running in '%1' right now. If a program was expected, it "
+			"started and exited - look at log_query and trace_query rather than at "
+			"the process list.").arg(BoxDisplayName(pBox));
+#endif
 	}
 
 	return MakeTextResult(Text, Data);
 }
 
+// Only where there is a per-box diagnostic event list to read; see
+// SBIE_HAS_DIAG_EVENTS in SbiePlusAPI.h. Where there is not, the tool is not
+// listed either, so an agent is never offered something that cannot answer.
+#ifdef SBIE_HAS_DIAG_EVENTS
 static QJsonObject CallBoxDiagnostics(const QJsonObject& Arguments)
 {
 	const QString BoxName = Arguments.value("box").toString();
@@ -941,6 +959,7 @@ static QJsonObject CallBoxDiagnostics(const QJsonObject& Arguments)
 
 	return MakeTextResult(Text, Data);
 }
+#endif
 
 static QJsonObject CallTraceQuery(const QJsonObject& Arguments)
 {
@@ -1325,8 +1344,10 @@ QJsonObject Call(const QString& Name, const QJsonObject& Arguments)
 		return CallKbMatch(Arguments);
 	if (Name == "box_processes")
 		return CallBoxProcesses(Arguments);
+#ifdef SBIE_HAS_DIAG_EVENTS
 	if (Name == "box_diagnostics")
 		return CallBoxDiagnostics(Arguments);
+#endif
 	if (Name == "trace_query")
 		return CallTraceQuery(Arguments);
 	if (Name == "log_query")

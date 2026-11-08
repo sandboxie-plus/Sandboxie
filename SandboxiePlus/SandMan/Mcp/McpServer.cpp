@@ -578,9 +578,15 @@ QString CMcpServer::Instructions() const
 		"that had no effect.\n"
 		"\n"
 		"When something does not work in a sandbox, the order that pays off is: "
+#ifdef SBIE_HAS_DIAG_EVENTS
 		"box_processes to see whether it is even running, box_diagnostics for what "
 		"Sandboxie itself objected to, then trace_query filtered to that box for the "
 		"accesses that were denied. If tracing is off, trace_query says so - ask the user "
+#else
+		"box_processes to see whether it is even running, then log_query for what "
+		"Sandboxie itself reported, then trace_query filtered to that box for the "
+		"accesses that were denied. If tracing is off, trace_query says so - ask the user "
+#endif
 		"to enable it and reproduce the problem rather than reasoning from an empty "
 		"trace.\n"
 		"\n"

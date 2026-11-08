@@ -22,6 +22,12 @@ QNetworkReply* CBoxReport::SubmitReport(const QString& BoxName)
 
 QString CBoxReport::AssembleDiagData(const QString& BoxName)
 {
+#ifndef SBIE_HAS_DIAG_EVENTS
+    // Nothing records diagnostic events in this build, so there is no section
+    // to write rather than an empty heading to explain. See SBIE_HAS_DIAG_EVENTS.
+    Q_UNUSED(BoxName);
+    return QString();
+#else
     auto pBoxEx = theAPI->GetBoxByName(BoxName).objectCast<CSandBoxPlus>();
     if (!pBoxEx) return QString();
 
@@ -45,6 +51,7 @@ QString CBoxReport::AssembleDiagData(const QString& BoxName)
     // belongs, after a submission is known to have succeeded.
 
     return Report;
+#endif
 }
 
 QString CBoxReport::AssembleDiagInfo()

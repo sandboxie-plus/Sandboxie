@@ -4076,18 +4076,23 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 		// return;
 	}
 
+	QString BoxName;
 	QString ProcessName;
 	if (ProcessId == 4)
 		ProcessName = "System";
 	else {
 		CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
-		if (!pProcess.isNull())
+		if (!pProcess.isNull()) {
 			ProcessName = pProcess->GetProcessName();
+			BoxName = pProcess->GetBoxName();
+		}
 		else
 			ProcessName = QString("PID: %1").arg(ProcessId);
 	}
 
-	m_MessageLog.append(SSbieMsg{ QDateTime::currentDateTime(), MsgCode, MsgData, ProcessName });
+	// Through the helper, and with the box it came from: the helper is what caps
+	// the log, and a message with no box cannot be filtered by the one asking.
+	AppendMessageLog(SSbieMsg{ QDateTime::currentDateTime(), MsgCode, MsgData, ProcessName, BoxName, SSbieMsg::eSbieMessage });
 
 	if (m_pMessageLog) {
 		QString Link, Message = FormatSbieMessage(MsgCode, MsgData, ProcessName, &Link);
@@ -4132,8 +4137,12 @@ QString CSandMan::GetBoxDisplayName(const QString& BoxName, CSandBoxPlus::EDispl
 
 void CSandMan::SaveMessageLog(QIODevice* pFile)
 {
-	foreach(const SSbieMsg& Msg, m_MessageLog)
-		pFile->write((Msg.TimeStamp.toString("dd.MM.yyyy hh:mm:ss.zzz")  + "\t" + FormatSbieMessage(Msg.MsgCode, Msg.MsgData, Msg.ProcessName)).toLatin1() + "\n");
+	foreach(const SSbieMsg& Msg, m_MessageLog) {
+		const QString Text = (Msg.Kind == SSbieMsg::eNotice)
+			? Msg.MsgData.value(0)
+			: FormatSbieMessage(Msg.MsgCode, Msg.MsgData, Msg.ProcessName);
+		pFile->write((Msg.TimeStamp.toString("dd.MM.yyyy hh:mm:ss.zzz")  + "\t" + Text).toLatin1() + "\n");
+	}
 }
 
 bool CSandMan::SetCertificate(const QByteArray& Certificate)

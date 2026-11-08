@@ -464,6 +464,115 @@
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="tab_2">
+            <attribute name="title">
+             <string>AI Integration</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_47">
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_44">
+               <item row="3" column="2">
+                <widget class="QComboBox" name="cmbMcpConsent">
+                 <property name="toolTip">
+                  <string>Where each session starts. The agent window can raise or lower it for that session alone.
+
+Diagnostic data an agent reads can contain text written by programs inside a sandbox, so a confirmation is also what stands between a misled agent and a silent change. Whatever is chosen here, everything the agent does is recorded.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1" colspan="3">
+                <spacer name="horizontalSpacer_27">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="3">
+                <spacer name="horizontalSpacer_28">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="lblMcpConsent">
+                 <property name="text">
+                  <string>Before changing anything, the agent:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkMcpEnabled">
+                 <property name="toolTip">
+                  <string>Allows an AI agent to connect to Sandboxie-Plus over a local named pipe. Turning this off removes the option entirely: the connection cannot be armed, and a request from an agent is ignored rather than shown to you.</string>
+                 </property>
+                 <property name="text">
+                  <string>Allow an AI agent to connect (MCP)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkMcpPairing">
+                 <property name="toolTip">
+                  <string>Sandboxie-Plus shows a six-digit code that you read to the agent before it can see anything about your machine. Without it, any program running as you that finds the pipe is treated as authorised - which includes programs you did not start on purpose. Sandboxed programs are refused either way.</string>
+                 </property>
+                 <property name="text">
+                  <string>Require a code before an agent may look at this machine</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblAI">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Graphic Options</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <spacer name="verticalSpacer_23">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="4" column="1" colspan="3">
+                <widget class="QLabel" name="lblMcpNote">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </item>
         </layout>

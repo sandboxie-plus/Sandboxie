@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SettingsWindow.h"
+#include "../Mcp/McpConsent.h"
 #include "EditorSettingsWindow.h"
 #include "SandMan.h"
 #include "../MiscHelpers/Common/Settings.h"
@@ -16,6 +17,7 @@
 #include "../Wizards/TemplateWizard.h"
 #include "../AddonManager.h"
 #include <qfontdialog.h>
+#include <QJsonDocument>
 #include <QJsonObject>
 #include "Helpers/TabOrder.h"
 #include "../MiscHelpers/Common/CodeEdit.h"
@@ -227,6 +229,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.tabsGeneral->setCurrentIndex(0);
 	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Presets"));
 	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Notification"));
+	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("ChatBot"));
 
 	ui.tabsShell->setCurrentIndex(0);
 	ui.tabsShell->setTabIcon(0, CSandMan::GetIcon("Windows"));
@@ -267,6 +270,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	AddIconToLabel(ui.lblNotify, CSandMan::GetIcon("Notification").pixmap(size,size));
 	AddIconToLabel(ui.lblMessages, CSandMan::GetIcon("Email").pixmap(size,size));
 	//AddIconToLabel(ui.lblMessages, CSandMan::GetIcon("Filter").pixmap(size,size));
+	AddIconToLabel(ui.lblAI, CSandMan::GetIcon("ChatBot").pixmap(size,size));
 
 	AddIconToLabel(ui.lblStartUp, CSandMan::GetIcon("Start").pixmap(size,size));
 	AddIconToLabel(ui.lblRunBoxed, CSandMan::GetIcon("Run").pixmap(size,size));
@@ -1778,6 +1782,41 @@ void CSettingsWindow::LoadSettings()
 	m_PendingChanges.CaptureCheckboxBaselines();
 	m_PendingChanges.CaptureRadioButtonBaselines();
 	m_PendingChanges.CaptureValueBaselines();
+
+
+
+	// The AI agent tab. Three settings, and each one removes a different
+	// thing: the feature, the authentication, or the questions.
+	ui.chkMcpEnabled->setChecked(theConf->GetBool("Options/McpEnabled", true));
+	ui.chkMcpPairing->setChecked(theConf->GetBool("Options/McpRequirePairing", true));
+	for (int i = CMcpConsent::eReadOnly; i <= CMcpConsent::eAskNever; i++) {
+		ui.cmbMcpConsent->addItem(CMcpConsent::ModeName((CMcpConsent::EMode)i), i);
+		ui.cmbMcpConsent->setItemData(ui.cmbMcpConsent->count() - 1,
+			CMcpConsent::ModeDescription((CMcpConsent::EMode)i), Qt::ToolTipRole);
+	}
+	ui.cmbMcpConsent->setCurrentIndex(ui.cmbMcpConsent->findData(
+		theConf->GetInt("Options/McpConsentMode", CMcpConsent::eAskAlways)));
+
+	// Where an administrator has decided, say so rather than showing a
+	// control that silently does nothing.
+	{
+		QStringList Notes;
+		if (theAPI && theAPI->IsConnected()
+			&& !theAPI->GetGlobalSettings()->GetBool("AllowAiAgent", true)) {
+			Notes.append(tr("AllowAiAgent=n in Sandboxie.ini disables this on the whole machine."));
+			ui.chkMcpEnabled->setEnabled(false);
+		}
+		if (theAPI && theAPI->IsConnected()
+			&& theAPI->GetGlobalSettings()->GetBool("AiAgentRequirePairing", false)) {
+			Notes.append(tr("AiAgentRequirePairing=y in Sandboxie.ini means the code cannot be waived."));
+			ui.chkMcpPairing->setChecked(true);
+			ui.chkMcpPairing->setEnabled(false);
+		}
+		if (CMcpConsent::IsConfirmationRequired())
+			Notes.append(tr("AiAgentRequireConfirmation=y in Sandboxie.ini keeps the confirmations on."));
+		ui.lblMcpNote->setText(Notes.join(" "));
+	}
+
 }
 
 void CSettingsWindow::OnRamDiskChange()
@@ -2383,6 +2422,10 @@ void CSettingsWindow::SaveSettings()
 	//theConf->SetValue("Options/CheckForTemplates", CSettingsWindow__Chk2Int(ui.chkUpdateTemplates->checkState()));
 	theConf->SetValue("Options/CheckForAddons", CSettingsWindow__Chk2Int(ui.chkUpdateAddons->checkState()));
 	theConf->SetValue("Options/CheckForIssues", CSettingsWindow__Chk2Int(ui.chkUpdateIssues->checkState()));
+
+	theConf->SetValue("Options/McpEnabled", ui.chkMcpEnabled->isChecked());
+	theConf->SetValue("Options/McpRequirePairing", ui.chkMcpPairing->isChecked());
+	theConf->SetValue("Options/McpConsentMode", ui.cmbMcpConsent->currentData().toInt());
 
 	emit OptionsChanged(m_bRebuildUI);
 }

@@ -244,6 +244,10 @@
         <file>Actions/FakeShield.png</file>
         <file>Actions/Expand.png</file>
         <file>Actions/Quit.png</file>
+        <file>Actions/Fake2Shield.png</file>
+        <file>Actions/Fake3Shield.png</file>
+        <file>Actions/GBO.png</file>
+        <file>Actions/ChatBot.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Busy">Boxes/BusyOverlay.png</file>

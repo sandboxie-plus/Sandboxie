@@ -26,6 +26,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtSingleApp", "QtSingleApp\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UGlobalHotkey", "UGlobalHotkey\uglobalhotkey.vcxproj", "{E647D210-1860-340F-A7B7-4137A60B2483}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SbieMcp", "SbieMcp\SbieMcp.vcxproj", "{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -98,6 +100,18 @@ Global
 		{E647D210-1860-340F-A7B7-4137A60B2483}.Release|Win32.Build.0 = Release|Win32
 		{E647D210-1860-340F-A7B7-4137A60B2483}.Release|x64.ActiveCfg = Release|x64
 		{E647D210-1860-340F-A7B7-4137A60B2483}.Release|x64.Build.0 = Release|x64
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Debug|ARM.ActiveCfg = Debug|Win32
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Debug|Win32.Build.0 = Debug|Win32
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Debug|x64.ActiveCfg = Debug|x64
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Debug|x64.Build.0 = Debug|x64
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Release|ARM.ActiveCfg = Release|Win32
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Release|ARM64.ActiveCfg = Release|ARM64
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Release|Win32.ActiveCfg = Release|Win32
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Release|Win32.Build.0 = Release|Win32
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Release|x64.ActiveCfg = Release|x64
+		{7C3A1E55-9D24-41B8-B6F0-2A5E8C71D409}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

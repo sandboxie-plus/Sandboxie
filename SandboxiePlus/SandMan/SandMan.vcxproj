@@ -288,6 +288,24 @@
     </ClCompile>
     <ClCompile Include="BoxJob.cpp" />
     <ClCompile Include="BoxMonitor.cpp" />
+    <ClCompile Include="Mcp\McpClientSetup.cpp" />
+    <ClCompile Include="Mcp\McpConnectDialog.cpp" />
+    <ClCompile Include="Mcp\McpSessionWindow.cpp" />
+    <ClCompile Include="Mcp\McpSubmitDialog.cpp" />
+    <ClCompile Include="Mcp\McpReport.cpp" />
+    <ClCompile Include="Mcp\McpKnowledge.cpp" />
+    <ClCompile Include="Mcp\McpAudit.cpp" />
+    <ClCompile Include="Mcp\McpStream.cpp" />
+    <ClCompile Include="Mcp\McpConsent.cpp" />
+    <ClCompile Include="Mcp\McpOperate.cpp" />
+    <ClCompile Include="Mcp\McpDocs.cpp" />
+    <ClCompile Include="Mcp\McpProtocol.cpp" />
+    <ClCompile Include="Mcp\McpRedact.cpp" />
+    <ClCompile Include="Mcp\McpSession.cpp" />
+    <ClCompile Include="Mcp\McpServer.cpp" />
+    <ClCompile Include="Mcp\McpTools.cpp" />
+    <ClCompile Include="Boxes\BoxReport.cpp" />
+    <ClCompile Include="Boxes\BoxShadows.cpp" />
     <ClCompile Include="Engine\BoxEngine.cpp" />
     <ClCompile Include="Engine\BoxObject.cpp" />
     <ClCompile Include="Engine\IniObject.cpp" />
@@ -349,7 +367,20 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Views\FileView.cpp" />
+    <ClCompile Include="Views\FileView.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <ClCompile Include="Views\NtObjectView.cpp" />
     <ClCompile Include="Views\SbieView.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">input</DynamicSource>
@@ -546,6 +577,24 @@
     <QtMoc Include="Engine\JSEngineExt.h" />
     <QtMoc Include="Engine\ScriptManager.h" />
     <ClInclude Include="CustomStyles.h" />
+    <ClInclude Include="Mcp\McpClientSetup.h" />
+    <QtMoc Include="Mcp\McpConnectDialog.h" />
+    <QtMoc Include="Mcp\McpSessionWindow.h" />
+    <QtMoc Include="Mcp\McpSubmitDialog.h" />
+    <ClInclude Include="Mcp\McpAudit.h" />
+    <QtMoc Include="Mcp\McpStream.h" />
+    <ClInclude Include="Mcp\McpOperate.h" />
+    <ClInclude Include="Mcp\McpReport.h" />
+    <ClInclude Include="Mcp\McpKnowledge.h" />
+    <QtMoc Include="Mcp\McpConsent.h" />
+    <ClInclude Include="Mcp\McpDocs.h" />
+    <ClInclude Include="Mcp\McpProtocol.h" />
+    <ClInclude Include="Mcp\McpRedact.h" />
+    <ClInclude Include="Mcp\McpTools.h" />
+    <QtMoc Include="Mcp\McpServer.h" />
+    <QtMoc Include="Mcp\McpSession.h" />
+    <ClInclude Include="Boxes\BoxReport.h" />
+    <ClInclude Include="Boxes\BoxShadows.h" />
     <ClInclude Include="Engine\V4ScriptDebuggerApi.h" />
     <ClInclude Include="Helpers\FindTool.h" />
     <ClInclude Include="Helpers\FullScreen.h" />

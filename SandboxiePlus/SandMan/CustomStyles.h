@@ -64,6 +64,54 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+// Gives checkable menu entries their check mark back when they also carry an icon
+//
+
+class CheckableMenuItemStyle : public QProxyStyle
+{
+public:
+	CheckableMenuItemStyle(QStyle* pStyle = 0) : QProxyStyle(pStyle) {}
+
+	virtual void drawControl(ControlElement element, const QStyleOption* pOption, QPainter* pPainter, const QWidget* pWidget) const
+	{
+		//
+		// A checkable menu entry that also has an icon silently loses its check
+		// mark, and the same QAction on the toolbar shows its state perfectly.
+		// That is not a theme bug so much as a choice Qt makes for us: given an
+		// icon, the style skips the check box entirely and instead paints a
+		// sunken panel behind the icon to mean "on". On a flat theme that panel
+		// is all but invisible, so a toggle looks identical in both states - and
+		// an entry whose state you cannot read is worse than one with no icon.
+		//
+		// Dropping the icon for this one painting puts the entry back on the
+		// plain-text path, which draws a real check box. The QAction keeps its
+		// icon, so toolbars and anywhere else it appears are untouched, and the
+		// same action can be reused in both places without a second copy of it.
+		//
+		// Deliberately applied to every checkable entry rather than only the
+		// checked ones: an empty check box is how someone learns the entry is a
+		// toggle at all, and an entry that swapped between an icon and a box as
+		// it toggled would be worse than either.
+		//
+		if (element == CE_MenuItem) {
+			if (const QStyleOptionMenuItem* pMenuItem = qstyleoption_cast<const QStyleOptionMenuItem*>(pOption)) {
+				if (pMenuItem->checkType != QStyleOptionMenuItem::NotCheckable && !pMenuItem->icon.isNull()) {
+					QStyleOptionMenuItem Copy(*pMenuItem);
+					Copy.icon = QIcon();
+					// The size is left alone on purpose: sizeFromContents still sees
+					// the icon, so the column keeps its width and the check box is
+					// not cramped into a narrower one than its neighbours.
+					QProxyStyle::drawControl(element, &Copy, pPainter, pWidget);
+					return;
+				}
+			}
+		}
+		QProxyStyle::drawControl(element, pOption, pPainter, pWidget);
+	}
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 // Implements nice flat buttons
 //
 

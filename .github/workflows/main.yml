@@ -197,6 +197,18 @@ jobs:
       - name: Collect installer assets
         run: Installer\get_assets.cmd
 
+      # The offline documentation the MCP server serves to an agent. It is
+      # architecture independent, so it is built once here and travels in the
+      # Assets artifact rather than being cloned and packed in every build job.
+      # --force because a pack is only worth shipping if it matches the docs as
+      # they are now: stale settings documentation is something an agent cannot
+      # recognise as stale. Not allowed to fail the build - a docs clone that
+      # times out costs the agent its reference, not the release.
+      - name: Build agent documentation pack
+        continue-on-error: true
+        shell: cmd
+        run: Installer\build_docs_pack.cmd --force --out "%GITHUB_WORKSPACE%\Installer\Assets\docs.7z"
+
       - name: Upload installer assets
         #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
         uses: actions/upload-artifact@v7.0.2

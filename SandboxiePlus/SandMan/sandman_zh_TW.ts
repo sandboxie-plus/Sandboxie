@@ -529,6 +529,35 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     </message>
 </context>
 <context>
+    <name>CBoxReport</name>
+    <message>
+        <location filename="Boxes/BoxReport.cpp" line="122"/>
+        <source>Compressing Logs</source>
+        <translation type="unfinished">正在壓縮日誌</translation>
+    </message>
+    <message>
+        <location filename="Boxes/BoxReport.cpp" line="150"/>
+        <source>Compressing Dumps</source>
+        <translation type="unfinished">正在壓縮傾印檔案</translation>
+    </message>
+    <message>
+        <location filename="Boxes/BoxReport.cpp" line="187"/>
+        <source>Submitting report...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Boxes/BoxReport.cpp" line="250"/>
+        <source>Failed to submit report, error %1
+Try submitting without the log attached.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Boxes/BoxReport.cpp" line="252"/>
+        <source>Your issue report has been successfully submitted, thank you.</source>
+        <translation type="unfinished">您的問題回報已成功提交，非常感謝。</translation>
+    </message>
+</context>
+<context>
     <name>CBoxTransferDialog</name>
     <message>
         <location filename="BoxTransfer.cpp" line="78"/>
@@ -1834,47 +1863,158 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
 </context>
 <context>
+    <name>CHttpServer</name>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="25"/>
+        <source>empty endpoint name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="37"/>
+        <source>&apos;%1&apos; looks like a bracketed IPv6 endpoint but is not one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="66"/>
+        <source>&apos;%1&apos; is not a valid port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="73"/>
+        <source>&apos;%1&apos; is not a valid IP address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="92"/>
+        <source>empty local socket name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="100"/>
+        <source>local socket name is too long (%1 characters, 247 max)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="105"/>
+        <source>local socket name must not contain a path separator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="110"/>
+        <source>&apos;%1&apos; is not a usable local socket name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="117"/>
+        <source>local socket name must not contain control characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="135"/>
+        <source>Failed to listen on %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="143"/>
+        <source>Invalid local socket name &apos;%1&apos;: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="150"/>
+        <source>Invalid endpoint &apos;%1&apos;: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="196"/>
+        <source>Failed to listen on local socket %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="325"/>
+        <source>recived new request, befoure the previouse response was completly sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CHttpSocket</name>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
+        <source>recived invalid HTTP request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="99"/>
+        <source>recived unsupported HTTP request %1 from %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="127"/>
+        <source>recived invalid POST request %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="146"/>
+        <source>recived POST/PUT request without Content-Length !!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="176"/>
+        <source>recived GET request with attached data ?!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="292"/>
+        <source>recived a POST payload before any part header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="429"/>
+        <source>Error While Sending response</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CIniHighlighter</name>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1084"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1135"/>
         <source>Validate (Failed)</source>
         <translation>驗證 (失敗)</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1471"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1522"/>
         <source>Added in version</source>
         <translation>引入於版本</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1472"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2817"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1523"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2868"/>
         <source>Removed in version</source>
         <translation>移除於版本</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1473"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1524"/>
         <source>Re-added in version</source>
         <translation>重新引入於版本</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1474"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2816"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1525"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2867"/>
         <source>Renamed in version</source>
         <translation>重新命名於版本</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1475"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2818"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1526"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2869"/>
         <source>Superseded by</source>
         <translation>取代為</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2629"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2680"/>
         <source>Line %1: Semicolons (;) are not supported as comment markers. Use # instead.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2858"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2909"/>
         <source>Attention</source>
         <translation>注意</translation>
     </message>
@@ -1919,7 +2059,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="obsolete">其他</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2107"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2158"/>
         <source>Category</source>
         <translation>類別</translation>
     </message>
@@ -1932,24 +2072,24 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="obsolete">使用者設定</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2108"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2159"/>
         <source>Context</source>
         <translation>上下文</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2109"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2160"/>
         <source>Requirements</source>
         <translation>需求</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2319"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2843"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2370"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2894"/>
         <source>Syntax</source>
         <translation>語法</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="2320"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="2838"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2371"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="2889"/>
         <source>Description</source>
         <translation>描述</translation>
     </message>
@@ -2156,6 +2296,940 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/BoxAssistant.cpp" line="526"/>
         <source>None of the above</source>
         <translation>以上皆非</translation>
+    </message>
+</context>
+<context>
+    <name>CMcpConnectDialog</name>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="17"/>
+        <source>Connect an AI Agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="22"/>
+        <source>An AI agent can read your sandbox configuration, the bundled documentation and diagnostic data, and help you work out why something does not run in a sandbox.
+
+It is off until you turn it on, it is not reachable from inside a sandbox, and it has to be authorised with a code shown on your screen before it can do anything.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="34"/>
+        <source>Which client do you want to use?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="50"/>
+        <location filename="Mcp/McpConnectDialog.cpp" line="144"/>
+        <source>Configure It For Me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="51"/>
+        <source>Start It For Me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="52"/>
+        <location filename="Mcp/McpConnectDialog.cpp" line="219"/>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="91"/>
+        <source>   (found, already configured)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="93"/>
+        <source>   (found)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="95"/>
+        <source>   (not found)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="102"/>
+        <source>Turn Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="102"/>
+        <source>Turn On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="106"/>
+        <source>The connection is ON. A client can connect now.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="107"/>
+        <source>The connection is OFF. Turn it on here, or let the client ask for it - Sandboxie-Plus will offer when something tries to connect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="Mcp/McpConnectDialog.cpp" line="112"/>
+        <source>Forget %1 Remembered Program(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="115"/>
+        <source>SbieMcp.exe was not found next to SandMan, so this installation cannot accept agent connections.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="138"/>
+        <source>Configuration file:
+%1
+
+Your other servers are kept; only the Sandboxie entry is added or updated, and the file is backed up first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="144"/>
+        <source>Update It For Me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="149"/>
+        <source>%1
+
+Or let Sandboxie-Plus start it for you, in a folder of its own:
+%2
+
+The configuration written there reaches that one session and nothing else you do with it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="180"/>
+        <source>%1 is configured. Restart it if it is running, so it picks up the change.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="182"/>
+        <source>
+
+The previous configuration was kept as:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="185"/>
+        <source>MCP: wrote the agent configuration for %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="207"/>
+        <source>MCP: started %1 in %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="218"/>
+        <source>Copied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="232"/>
+        <source>Forget these programs? Each will have to be authorised with a code again.
+
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConnectDialog.cpp" line="238"/>
+        <source>MCP: the remembered agent programs were forgotten</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMcpConsent</name>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="62"/>
+        <source>Look, do not touch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="63"/>
+        <source>Ask only for risky things</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="64"/>
+        <source>Do not ask, just tell me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="65"/>
+        <source>Ask before every change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="73"/>
+        <source>The agent can read and diagnose, and every attempt to change anything is refused without asking you.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="76"/>
+        <source>Ordinary setting changes happen without interrupting you. You are still asked before anything that cannot be undone, runs a program, sends something off this computer, or opens a sandbox up.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="80"/>
+        <source>The agent acts without asking. Everything it does is still listed here and written to the audit log - you are not asked, but you are told.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="83"/>
+        <source>Nothing changes, starts or stops until you say so.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="107"/>
+        <source>refused, because the agent is set to look but not touch: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="108"/>
+        <source>refused: the agent may not change anything</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="117"/>
+        <source>done without asking: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="118"/>
+        <source>allowed automatically (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="128"/>
+        <source>another confirmation was already open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="142"/>
+        <source>allowed: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="142"/>
+        <source>refused: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="144"/>
+        <source>allowed by the user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="144"/>
+        <source>refused by the user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="151"/>
+        <location filename="Mcp/McpConsent.cpp" line="204"/>
+        <source>An AI agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="153"/>
+        <source>%1 wants to change the configuration of sandbox %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="159"/>
+        <source>
+
+Its reason, in its own words:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="162"/>
+        <source>
+
+These are the changes:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="171"/>
+        <source>
+  remove  %1 = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="173"/>
+        <source>
+  add     %1 = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="175"/>
+        <source>
+  change  %1 = %2   (was %3)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="178"/>
+        <source>   &lt;- not a known setting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="184"/>
+        <source>
+
+Warning: at least one of these is not a setting Sandboxie recognises. Unknown settings are ignored silently rather than reported as an error, so such a change would appear to work and have no effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="197"/>
+        <source>Confirm configuration change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="197"/>
+        <source>Apply These Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="198"/>
+        <source>change %1 setting(s) on %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpConsent.cpp" line="205"/>
+        <source>%1 wants to do the following.
+
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMcpServer</name>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="94"/>
+        <source>released a session whose client exited, discarding its test copies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="98"/>
+        <source>the agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="100"/>
+        <source>disconnected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="103"/>
+        <source>%1 exited; its test copies were discarded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="104"/>
+        <source>%1 exited</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="142"/>
+        <source>refusing to listen on &apos;%1&apos;: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="153"/>
+        <source>MCP server could not listen on &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="163"/>
+        <source>documentation pack mounted: %1 pages from %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="166"/>
+        <source>no documentation pack found - docs lookups will be unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="180"/>
+        <source>knowledge base: %1 entries from %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="183"/>
+        <source>no troubleshooting knowledge base found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="192"/>
+        <source>audit log: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="203"/>
+        <source>MCP server listening on &apos;%1%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="272"/>
+        <source>the connecting process could not be identified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="283"/>
+        <source>process %1 is sandboxed, in box &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="288"/>
+        <source>box membership of process %1 could not be established</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="297"/>
+        <source>refused an MCP connection: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="299"/>
+        <source>Refused: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="307"/>
+        <source>refused an MCP connection from origin &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="308"/>
+        <source>Origin not allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="315"/>
+        <source>The MCP endpoint accepts POST only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="344"/>
+        <source>rejected an MCP message: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="414"/>
+        <source>authorised without a code, because asking for one is turned off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="448"/>
+        <source>asked for %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="467"/>
+        <source>Your write-up is now out of date - this is not in it. Call report_compose again so that what the user is offered describes what you have actually done.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="469"/>
+        <source>You have changed something on this machine and nothing is written up yet. Call report_compose now, with what you know so far - the symptom and what you have ruled out is already worth having - and again as you learn more. The user is offered whatever you composed last, and they may close the agent window at any moment.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="492"/>
+        <source>Method not found: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="529"/>
+        <source>This server exposes the local Sandboxie-Plus installation on this machine.
+
+You can read the documentation and the settings schema straight away - those tools need no authorisation, because they return what Sandboxie ships rather than anything about this machine.
+
+To look at the machine itself - which sandboxes exist, what is running, what was denied - authorise first. Call &apos;pair&apos; with no arguments, and Sandboxie-Plus shows the user a six-digit code; ask the user for that code and call &apos;pair&apos; again with it. Do not guess the code.
+
+Every tool is listed from the start, including the ones you cannot use yet: those refuse until you have paired, and say so when they do. Nothing appears or disappears from the list, so there is no need to refresh it - and no point asking the user to reconnect.
+
+One standing rule, and it is not optional: keep a written report going at all times, with report_compose. Compose one as soon as you have a symptom and a suspicion - before you have a cause, let alone a fix - and compose again after every single thing you change, run or rule out. It replaces the previous one, so there is no cost to doing it often and no partial state to manage.
+
+And find out whether it worked. When the user tells you their problem is gone - or that it is not - compose again with confirmed_by_user set, which records that the verdict is theirs rather than yours. If they have not said, ask: &apos;is it working now?&apos; is worth one turn, and it is the single most valuable line in the report. Until that flag is set Sandboxie-Plus assumes the run is unfinished: it shows the user buttons to end it themselves, and asks them the question itself before anything is sent.
+
+Treat it as part of the work rather than as paperwork at the end. Sandboxie-Plus keeps your latest write-up and offers it to the user when they close the agent window, which they may do at any moment - and if you have composed nothing, nothing is offered and everything you worked out is lost to the project. Finishing a run having fixed something and written nothing up is a failed run, however pleased the user is.
+
+Then read before acting: sandboxie_version first, because settings and fixes differ between builds, then box_list, then box_get_config for the box in question. Note that box_get_config shows only what is set on that box - values inherited from templates and global defaults are not listed, so an absent setting is not necessarily inactive.
+
+Two separate sources of truth about settings, and they disagree about most of the surface. config_schema is the authority on whether a setting exists, what its syntax is, and which version added or removed it. The bundled documentation (docs_search, docs_get, docs_for_setting) explains what a setting means, but covers only about two in five of them. If the documentation says nothing about a setting, that is not evidence the setting does not exist - check config_schema before telling the user it is not real. Conversely, never invent a setting name: the driver ignores an unknown name silently instead of reporting an error, so a typo looks exactly like a setting that had no effect.
+
+When something does not work in a sandbox, the order that pays off is: box_processes to see whether it is even running, box_diagnostics for what Sandboxie itself objected to, then trace_query filtered to that box for the accesses that were denied. If tracing is off, trace_query says so - ask the user box_processes to see whether it is even running, then log_query for what Sandboxie itself reported, then trace_query filtered to that box for the accesses that were denied. If tracing is off, trace_query says so - ask the user to enable it and reproduce the problem rather than reasoning from an empty trace.
+
+Boxes usually have an alias, and that is what the user calls them. Refer to a box the way box_list shows in displayName; either the name or the alias is accepted as input.
+
+Paths and account names in diagnostic output are replaced with tokens such as %User% and %Computer%. That is deliberate - do not ask the user to undo it, and do not treat a token as a literal path.
+
+Some tools change things, and every one of them shows the user exactly what will change and waits for them to approve it. You cannot change anything silently, so do not try to minimise what you are asking for - a clear explanation gets approved and a vague one does not.
+
+For a fix you are unsure about, test it first: shadow_begin clones the configuration to a disposable copy that shares the real file set, shadow_set changes the copy, and then shadow_commit copies the differences back - one confirmation for the whole fix - or shadow_discard throws it away. A fix you have actually tried is worth far more than one you believe in. Note that only configuration is disposable: files written while testing land in the real sandbox, and a discard does not undo them.
+
+For a change you are confident about, or an everyday request such as forcing a program into a sandbox, use box_apply_changes directly. Run config_validate first either way.
+
+If you are about to change files rather than settings, offer snapshot_create first - it is near-instant and makes the change undoable - but it only works while nothing is running in the sandbox, so it has to come before you start anything.
+
+To see whether a fix actually worked, box_run starts a program inside a sandbox. The user is shown the command line exactly as you write it and has to agree before anything runs, so write what you mean. Note that it runs against the sandbox&apos;s current settings: a change staged with shadow_set is not in effect, so commit it first if the run is meant to test it.
+
+Nothing here deletes a sandbox or its contents, deliberately.
+
+Keep a running write-up as you go, with report_compose, rather than saving it for the end. Compose as soon as you know something worth reporting - the symptom and what you have ruled out is already worth having - and compose again whenever you learn more. Each call replaces the last.
+
+The reason is not bookkeeping. Sandboxie-Plus keeps your latest write-up and offers it to the user when they close the agent window, which they may do at any moment - your console closing does not wait for you to finish a thought. If you have composed nothing, nothing is offered and the whole run is lost to the project. A rough write-up that gets sent beats a polished one that never existed.
+
+Compose on a success as readily as on a failure. A failure report tells the project what is still broken; a success report tells it what the fix was, and that is the one it almost never receives.
+
+You do not send it - that is the user&apos;s, and you have no tool for it. When you are done, tell them to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: it opens your report for them to read, correct and send to the project&apos;s own tracker, which needs no account of any kind. Say once that sending it is worth doing and why, then leave it with them - they may say no, and that is a normal answer.
+
+Fill in what you ruled out, not only what you concluded. A cause is made identifiable by what it is not, and that is the field that turns one report into something that recognises the same fault on somebody else&apos;s machine.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="788"/>
+        <source>That needs authorisation: it reads this machine rather than the documentation. Call the pair tool, read the code Sandboxie-Plus displays to the user, and submit it. The documentation and schema tools work without it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="807"/>
+        <source>Unknown tool: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="817"/>
+        <source>This connection is already authorised.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="825"/>
+        <source>Sandboxie-Plus is now showing a six-digit code. Ask the user to read it to you, then call pair again with that code. It is valid for five minutes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="835"/>
+        <source>an agent was authorised: %1 (process %2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="836"/>
+        <source>unidentified client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="843"/>
+        <source>Authorised. Every tool you can see will now answer, including the ones that were refusing. Changes still need the user to confirm them one at a time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="848"/>
+        <source>No code has been requested. Call pair with no arguments first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="852"/>
+        <source>That code has expired. Call pair with no arguments to request a new one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="856"/>
+        <source>Too many incorrect attempts; the code has been invalidated. Call pair with no arguments to request a new one, and ask the user to read it again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="861"/>
+        <source>That code is not correct. Ask the user to read it again from the Sandboxie-Plus window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="906"/>
+        <source>the user allowed: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="907"/>
+        <source>the user refused: %1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMcpSessionManager</name>
+    <message>
+        <location filename="Mcp/McpSession.cpp" line="253"/>
+        <source>no code had been requested</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSession.cpp" line="254"/>
+        <source>wrong code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSession.cpp" line="255"/>
+        <source>the code had expired</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSession.cpp" line="256"/>
+        <source>too many attempts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSession.cpp" line="257"/>
+        <source>refused</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMcpSessionWindow</name>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="41"/>
+        <location filename="Mcp/McpSessionWindow.cpp" line="470"/>
+        <source>AI Agent Session - Sandboxie-Plus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="56"/>
+        <source>For this session:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="80"/>
+        <source>Give the agent this code:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="101"/>
+        <source>Do not ask again for this program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="107"/>
+        <source>What this agent has done:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="111"/>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="111"/>
+        <source>What happened</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="118"/>
+        <location filename="Mcp/McpSessionWindow.cpp" line="422"/>
+        <source>Waiting for you</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="121"/>
+        <source>Nothing is waiting. Once authorised the agent can read your sandboxes freely; anything it wants to change, start or stop will appear here first, and nothing happens until you answer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="145"/>
+        <source>Allow</source>
+        <translation type="unfinished">允許</translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="146"/>
+        <source>Refuse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="177"/>
+        <source>Cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="178"/>
+        <source>Finish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="183"/>
+        <source>End this session without sending anything.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="206"/>
+        <source>Sandboxie-Plus was closing, so the request was refused</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="211"/>
+        <location filename="Mcp/McpSessionWindow.cpp" line="580"/>
+        <source>No agent is connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="258"/>
+        <source>%1 Asking cannot be turned off on this machine: AiAgentRequireConfirmation is set in Sandboxie.ini.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="266"/>
+        <source>this session starts at: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="282"/>
+        <source>you set this session to: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="372"/>
+        <source>Valid for %1 minutes. Until it is entered the agent can do nothing. If you did not ask for this, ignore it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="382"/>
+        <source>Skips this code next time. Anything able to run from %1 will then be authorised without asking.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="433"/>
+        <source>Waiting for you - please answer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="443"/>
+        <source>AI Agent Session - waiting for you</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="517"/>
+        <source>recorded that you confirmed the result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="523"/>
+        <source>wrote up what it has found - press Finish when you are done to read and send it</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="524"/>
+        <source>updated its write-up of what it has found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="560"/>
+        <source>Wrap up: read what the agent wrote and decide whether to send it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="561"/>
+        <source>The agent has not written anything up yet. Ask it to write up what it found - it has a tool for that - and this becomes available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="570"/>
+        <source>the connection closed while a request was waiting, so it was refused</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="589"/>
+        <source>the session was finished while a request was waiting, so it was refused</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="633"/>
+        <source>Close this window - and the agent connection with it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="637"/>
+        <source>The agent has written up what it found, and closing does not send it. Finish instead - the green tick - to read it and decide; it is the only way what happened here reaches anyone else. Nothing is lost either way: the write-up is kept, and you can reopen this window and finish later.
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="643"/>
+        <source>A request is waiting for an answer, and closing refuses it.
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="648"/>
+        <source>Disconnecting closes the agent connection as well: nothing can connect again until you turn it back on. Staying connected leaves it open, so the agent can carry on and this window comes back the next time it needs you.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="654"/>
+        <source>Close and Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="655"/>
+        <source>Close, Stay Connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="656"/>
+        <source>Keep Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="677"/>
+        <source>the window was closed while a request was waiting, so it was refused</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="681"/>
+        <source>the window was closed, so the write-up was not sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="713"/>
+        <source>the report was sent to the Sandboxie-Plus issue tracker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSessionWindow.cpp" line="729"/>
+        <source>the report was not sent - press Finish again if you change your mind</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMcpSubmitDialog</name>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="32"/>
+        <source>Send this to the Sandboxie-Plus project?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="42"/>
+        <source>The agent wrote this up while it worked.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="43"/>
+        <source>%1 wrote this up while it worked.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="50"/>
+        <source>Sending it is how what happened here reaches the people who maintain Sandboxie. A fix that worked tells them what to recommend to the next person with the same problem - and that is the report they almost never get. One that did not work tells them what is still broken.
+
+Nothing is sent unless you choose to, and nothing goes without you reading it. Edit or delete anything below first - the second half was written by the agent and can contain anything it saw.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="84"/>
+        <source>Detailed issue description</source>
+        <translation type="unfinished">詳細問題說明</translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="92"/>
+        <source>Is the problem actually gone?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="95"/>
+        <source>The agent did not establish this, and it is the single most useful line in the report - it is what tells the project whether the fix it is reading about actually works. Answering is optional.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="101"/>
+        <source>Yes - the problem is fixed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="102"/>
+        <source>No - it is still there</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="114"/>
+        <source>Attach Sandboxie.ini</source>
+        <translation type="unfinished">附加 Sandboxie.ini</translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="118"/>
+        <source>Attach Logs</source>
+        <translation type="unfinished">附加日誌</translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="127"/>
+        <source>Email address</source>
+        <translation type="unfinished">電郵地址</translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="138"/>
+        <source>Don&apos;t Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="140"/>
+        <source>Send Report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="186"/>
+        <source>The report could not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="229"/>
+        <source>the Sandboxie-Plus message log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="230"/>
+        <source>the resource trace - everything every sandboxed program touched while it was on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="232"/>
+        <source>your whole Sandboxie.ini, which describes every sandbox you have</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="237"/>
+        <source>any contact address, so nobody can reply to you about it</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="239"/>
+        <source>your address %1, so a maintainer can reply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="241"/>
+        <source>Selecting the partially checked state sends the message log but not the resource trace. Both can be read in the main window before you send.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="244"/>
+        <source>Sent with the report:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="246"/>
+        <source>nothing but the text above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpSubmitDialog.cpp" line="249"/>
+        <source>Left out:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4311,22 +5385,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="5202"/>
+        <location filename="SandMan.cpp" line="5664"/>
         <source>Waiting for folder: %1</source>
         <translation>正在等待資料夾: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5203"/>
+        <location filename="SandMan.cpp" line="5665"/>
         <source>Deleting folder: %1</source>
         <translation>正在刪除資料夾: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5204"/>
+        <location filename="SandMan.cpp" line="5666"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>正在合併資料夾: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5205"/>
+        <location filename="SandMan.cpp" line="5667"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>正在完成快照合併...</translation>
     </message>
@@ -4421,48 +5495,48 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandMan</name>
     <message>
-        <location filename="SandMan.cpp" line="519"/>
-        <location filename="SandMan.cpp" line="2817"/>
+        <location filename="SandMan.cpp" line="525"/>
+        <location filename="SandMan.cpp" line="2894"/>
         <source>Sandboxie-Plus v%1</source>
         <translation>Sandboxie-Plus v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5047"/>
+        <location filename="SandMan.cpp" line="5509"/>
         <source>Reset Columns</source>
         <translation>重設欄</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1515"/>
+        <location filename="SandMan.cpp" line="1572"/>
         <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
         <translation>沙箱：%1（%2 個活躍）  |  處理程序：%3  |  記憶體：%4</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5048"/>
+        <location filename="SandMan.cpp" line="5510"/>
         <source>Copy Cell</source>
         <translation>複製單元格</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5049"/>
+        <location filename="SandMan.cpp" line="5511"/>
         <source>Copy Row</source>
         <translation>複製列</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5050"/>
+        <location filename="SandMan.cpp" line="5512"/>
         <source>Copy Panel</source>
         <translation>複製表格</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1596"/>
+        <location filename="SandMan.cpp" line="1653"/>
         <source>Time|Message</source>
         <translation>時間|訊息</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1607"/>
+        <location filename="SandMan.cpp" line="1664"/>
         <source>Sbie Messages</source>
         <translation>SBIE 訊息</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1623"/>
+        <location filename="SandMan.cpp" line="1680"/>
         <source>Trace Log</source>
         <translation>追蹤日誌</translation>
     </message>
@@ -4472,319 +5546,350 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>顯示/隱藏</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="951"/>
-        <location filename="SandMan.cpp" line="953"/>
-        <location filename="SandMan.cpp" line="1003"/>
-        <location filename="SandMan.cpp" line="1005"/>
+        <location filename="SandMan.cpp" line="964"/>
+        <location filename="SandMan.cpp" line="966"/>
+        <location filename="SandMan.cpp" line="1025"/>
+        <location filename="SandMan.cpp" line="1027"/>
         <source>Pause Forcing Programs</source>
         <translation>暫停強制沙箱程式</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="842"/>
-        <location filename="SandMan.cpp" line="1074"/>
+        <location filename="SandMan.cpp" line="854"/>
+        <location filename="SandMan.cpp" line="1096"/>
         <source>&amp;Sandbox</source>
         <translation>沙箱(&amp;S)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="843"/>
-        <location filename="SandMan.cpp" line="1345"/>
-        <location filename="SandMan.cpp" line="1346"/>
+        <location filename="SandMan.cpp" line="855"/>
+        <location filename="SandMan.cpp" line="1402"/>
+        <location filename="SandMan.cpp" line="1403"/>
         <source>Create New Box</source>
         <translation>建立新沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="844"/>
+        <location filename="SandMan.cpp" line="856"/>
         <source>Create Box Group</source>
         <translation>建立沙箱群組</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="852"/>
-        <location filename="SandMan.cpp" line="1001"/>
+        <location filename="SandMan.cpp" line="864"/>
+        <location filename="SandMan.cpp" line="1023"/>
         <source>Terminate All Processes</source>
         <translation>終止所有處理程序</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="957"/>
+        <location filename="SandMan.cpp" line="970"/>
         <source>Disable File Recovery</source>
         <translation>停用檔案復原</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="768"/>
+        <location filename="SandMan.cpp" line="776"/>
         <source>&amp;Maintenance</source>
         <translation>維護(&amp;M)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="769"/>
+        <location filename="SandMan.cpp" line="777"/>
         <source>Connect</source>
         <translation>連線</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="770"/>
+        <location filename="SandMan.cpp" line="778"/>
         <source>Disconnect</source>
         <translation>中斷連線</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="772"/>
+        <location filename="SandMan.cpp" line="780"/>
         <source>Stop All</source>
         <translation>全部停止</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="773"/>
+        <location filename="SandMan.cpp" line="781"/>
         <source>&amp;Advanced</source>
         <translation>進階(&amp;A)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="774"/>
+        <location filename="SandMan.cpp" line="782"/>
         <source>Install Driver</source>
         <translation>安裝驅動程式</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="775"/>
+        <location filename="SandMan.cpp" line="783"/>
         <source>Start Driver</source>
         <translation>啟動驅動程式</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="776"/>
+        <location filename="SandMan.cpp" line="784"/>
         <source>Stop Driver</source>
         <translation>停止驅動程式</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="777"/>
+        <location filename="SandMan.cpp" line="785"/>
         <source>Uninstall Driver</source>
         <translation>解除安裝驅動程式</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="779"/>
+        <location filename="SandMan.cpp" line="787"/>
         <source>Install Service</source>
         <translation>安裝服務</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="780"/>
+        <location filename="SandMan.cpp" line="788"/>
         <source>Start Service</source>
         <translation>啟動服務</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="781"/>
+        <location filename="SandMan.cpp" line="789"/>
         <source>Stop Service</source>
         <translation>停止服務</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="782"/>
+        <location filename="SandMan.cpp" line="790"/>
         <source>Uninstall Service</source>
         <translation>解除安裝服務</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="799"/>
+        <location filename="SandMan.cpp" line="807"/>
         <source>Setup Wizard</source>
         <translation>設定精靈</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="802"/>
+        <location filename="SandMan.cpp" line="810"/>
         <source>Uninstall All</source>
         <translation>全部解除安裝</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="881"/>
-        <location filename="SandMan.cpp" line="1043"/>
+        <location filename="SandMan.cpp" line="838"/>
+        <source>Troubleshoot with an AI Agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="839"/>
+        <source>Set up an AI agent to look at a sandbox with you - which clients are supported, and the exact configuration each one needs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="893"/>
+        <location filename="SandMan.cpp" line="1065"/>
         <source>Exit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="884"/>
-        <location filename="SandMan.cpp" line="1045"/>
+        <location filename="SandMan.cpp" line="896"/>
+        <location filename="SandMan.cpp" line="1067"/>
         <source>&amp;View</source>
         <translation>檢視(&amp;V)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="808"/>
+        <location filename="SandMan.cpp" line="816"/>
         <source>Simple View</source>
         <translation>簡易檢視</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="809"/>
+        <location filename="SandMan.cpp" line="817"/>
         <source>Advanced View</source>
         <translation>進階檢視</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="814"/>
+        <location filename="SandMan.cpp" line="822"/>
         <source>Always on Top</source>
         <translation>保持視窗置頂</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="891"/>
+        <location filename="SandMan.cpp" line="903"/>
         <source>Show Hidden Boxes</source>
         <translation>顯示隱藏沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="893"/>
+        <location filename="SandMan.cpp" line="905"/>
         <source>Show All Sessions</source>
         <translation>顯示所有工作階段</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="910"/>
+        <location filename="SandMan.cpp" line="922"/>
         <source>Refresh View</source>
         <translation>重新整理檢視</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="916"/>
+        <location filename="SandMan.cpp" line="928"/>
         <source>Clean Up</source>
         <translation>清理</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="917"/>
+        <location filename="SandMan.cpp" line="929"/>
         <source>Cleanup Processes</source>
         <translation>清理處理程序</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="919"/>
+        <location filename="SandMan.cpp" line="931"/>
         <source>Cleanup Message Log</source>
         <translation>清理訊息日誌</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="920"/>
+        <location filename="SandMan.cpp" line="932"/>
         <source>Cleanup Trace Log</source>
         <translation>清理追蹤日誌</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="921"/>
+        <location filename="SandMan.cpp" line="933"/>
         <source>Cleanup Recovery Log</source>
         <translation>清理復原日誌</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="923"/>
+        <location filename="SandMan.cpp" line="935"/>
         <source>Keep terminated</source>
         <translation>保持終止</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="947"/>
+        <location filename="SandMan.cpp" line="960"/>
         <source>&amp;Options</source>
         <translation>選項(&amp;O)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="948"/>
-        <location filename="SandMan.cpp" line="1098"/>
+        <location filename="SandMan.cpp" line="961"/>
+        <location filename="SandMan.cpp" line="1120"/>
         <source>Global Settings</source>
         <translation>全域設定</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="982"/>
-        <location filename="SandMan.cpp" line="1108"/>
+        <location filename="SandMan.cpp" line="984"/>
+        <source>AI Agent Connection (MCP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="986"/>
+        <location filename="SandMan.cpp" line="3466"/>
+        <source>Let a local AI agent inspect this Sandboxie installation. Off until you turn it on, and unreachable from inside a sandbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="988"/>
+        <source>AI Agent Session Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="989"/>
+        <source>Everything the agent has asked for and what you answered. Opens on its own when an agent connects.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1004"/>
+        <location filename="SandMan.cpp" line="1130"/>
         <source>Reset all hidden messages</source>
         <translation>重設所有已隱藏訊息</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="983"/>
-        <location filename="SandMan.cpp" line="1109"/>
+        <location filename="SandMan.cpp" line="1005"/>
+        <location filename="SandMan.cpp" line="1131"/>
         <source>Reset all GUI options</source>
         <translation>重設所有 GUI 設定選項</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="941"/>
+        <location filename="SandMan.cpp" line="953"/>
         <source>Trace Logging</source>
         <translation>啟用追蹤日誌</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="820"/>
+        <location filename="SandMan.cpp" line="828"/>
         <source>&amp;Help</source>
         <translation>說明(&amp;H)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="830"/>
+        <location filename="SandMan.cpp" line="842"/>
         <source>Visit Support Forum</source>
         <translation>造訪支援論壇</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="829"/>
+        <location filename="SandMan.cpp" line="841"/>
         <source>Online Documentation</source>
         <translation>線上文件</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="832"/>
+        <location filename="SandMan.cpp" line="844"/>
         <source>Check for Updates</source>
         <translation>檢查更新</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="834"/>
+        <location filename="SandMan.cpp" line="846"/>
         <source>About the Qt Framework</source>
         <translation>關於 Qt 框架</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="835"/>
-        <location filename="SandMan.cpp" line="5140"/>
+        <location filename="SandMan.cpp" line="847"/>
+        <location filename="SandMan.cpp" line="5602"/>
         <source>About Sandboxie-Plus</source>
         <translation>關於 Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1079"/>
+        <location filename="SandMan.cpp" line="1101"/>
         <source>Create New Sandbox</source>
         <translation>建立新沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1080"/>
+        <location filename="SandMan.cpp" line="1102"/>
         <source>Create New Group</source>
         <translation>建立新群組</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1187"/>
-        <location filename="SandMan.cpp" line="1333"/>
-        <location filename="SandMan.cpp" line="1334"/>
+        <location filename="SandMan.cpp" line="1209"/>
+        <location filename="SandMan.cpp" line="1390"/>
+        <location filename="SandMan.cpp" line="1391"/>
         <source>Cleanup</source>
         <translation>清理</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1417"/>
+        <location filename="SandMan.cpp" line="1474"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release %1 ready&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;有一個新的 Sandboxie-Plus 版本 %1 準備就緒&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1421"/>
+        <location filename="SandMan.cpp" line="1478"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update %1 ready&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;有一個 Sandboxie-Plus 更新 v%1 準備就緒&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1425"/>
+        <location filename="SandMan.cpp" line="1482"/>
         <source>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update v%1 available&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;有一個 Sandboxie-Plus 更新 v%1 可用&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1436"/>
+        <location filename="SandMan.cpp" line="1493"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在 Patreon 上支援 Sandboxie-Plus&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1437"/>
+        <location filename="SandMan.cpp" line="1494"/>
         <source>Click to open web browser</source>
         <translation>按一下以開啟網頁瀏覽器</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1633"/>
+        <location filename="SandMan.cpp" line="1690"/>
         <source>Time|Box Name|File Path</source>
         <translation>時間|沙箱名稱|檔案路徑</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="944"/>
-        <location filename="SandMan.cpp" line="1056"/>
-        <location filename="SandMan.cpp" line="1643"/>
+        <location filename="SandMan.cpp" line="957"/>
+        <location filename="SandMan.cpp" line="1078"/>
+        <location filename="SandMan.cpp" line="1700"/>
         <source>Recovery Log</source>
         <translation>復原日誌</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1418"/>
+        <location filename="SandMan.cpp" line="1475"/>
         <source>Click to run installer</source>
         <translation>按一下以執行安裝程式</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1422"/>
+        <location filename="SandMan.cpp" line="1479"/>
         <source>Click to apply update</source>
         <translation>按一下以套用更新</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1707"/>
+        <location filename="SandMan.cpp" line="1764"/>
         <source>Do you want to close Sandboxie Manager?</source>
         <translation>您確定要關閉 Sandboxie 管理員？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1723"/>
+        <location filename="SandMan.cpp" line="1780"/>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
@@ -4793,34 +5898,34 @@ Do you want to do the clean up?</source>
 是否確認清理？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1724"/>
-        <location filename="SandMan.cpp" line="2314"/>
-        <location filename="SandMan.cpp" line="2856"/>
-        <location filename="SandMan.cpp" line="4047"/>
-        <location filename="SandMan.cpp" line="4504"/>
-        <location filename="SandMan.cpp" line="4520"/>
+        <location filename="SandMan.cpp" line="1781"/>
+        <location filename="SandMan.cpp" line="2391"/>
+        <location filename="SandMan.cpp" line="2933"/>
+        <location filename="SandMan.cpp" line="4507"/>
+        <location filename="SandMan.cpp" line="4964"/>
+        <location filename="SandMan.cpp" line="4980"/>
         <source>Don&apos;t show this message again.</source>
         <translation>不再顯示此訊息。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1921"/>
+        <location filename="SandMan.cpp" line="1978"/>
         <source>This box provides &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;enhanced security isolation&lt;/a&gt;, it is suitable to test untrusted software.</source>
         <oldsource>This box provides enhanced security isolation, it is suitable to test untrusted software.</oldsource>
         <translation>此類沙箱提供了&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;強化安全性隔離&lt;/a&gt;，它適用於測試不受信任的軟體。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1925"/>
+        <location filename="SandMan.cpp" line="1982"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
         <translation>此類沙箱提供了標準的隔離，它適用於以增強的安全性來執行您的軟體。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1929"/>
+        <location filename="SandMan.cpp" line="1986"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
         <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
         <translation>此類沙箱不執行隔離，它只是用來作為軟體虛擬化的&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;應用程式區間&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1937"/>
+        <location filename="SandMan.cpp" line="1994"/>
         <source>&lt;br /&gt;&lt;br /&gt;This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</source>
         <oldsource>
 
@@ -4828,7 +5933,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>&lt;br /&gt;&lt;br /&gt;此類沙箱會&lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;阻止存取所有使用者資料&lt;/a&gt;的位置，除非在資源存取選項中明確授權。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2089"/>
+        <location filename="SandMan.cpp" line="2166"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
         <translation>透過命令列請求的未知作業「%1」</translation>
     </message>
@@ -4910,42 +6015,42 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2530"/>
+        <location filename="SandMan.cpp" line="2607"/>
         <source>Executing OnBoxDelete: %1</source>
         <translation>在刪除沙箱時執行: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2555"/>
+        <location filename="SandMan.cpp" line="2632"/>
         <source>Auto Deleting %1 Content</source>
         <translation>自動刪除 %1 的內容</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2793"/>
+        <location filename="SandMan.cpp" line="2870"/>
         <source>Auto deleting content of %1</source>
         <translation>自動刪除 %1 的內容</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2829"/>
+        <location filename="SandMan.cpp" line="2906"/>
         <source>%1 Directory: %2</source>
         <translation>%1 目錄: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2829"/>
+        <location filename="SandMan.cpp" line="2906"/>
         <source>Application</source>
         <translation>應用程式</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2829"/>
+        <location filename="SandMan.cpp" line="2906"/>
         <source>Installation</source>
         <translation>安裝</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2831"/>
+        <location filename="SandMan.cpp" line="2908"/>
         <source>Current Config: %1</source>
         <translation>目前組態: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2962"/>
+        <location filename="SandMan.cpp" line="3062"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
@@ -4954,39 +6059,39 @@ Please check if there is an update for sandboxie.</oldsource>
 請檢查 Sandboxie 是否有更新。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2971"/>
+        <location filename="SandMan.cpp" line="3071"/>
         <source>Don&apos;t show this message again for the current build.</source>
         <translation>不再於目前組建中顯示此訊息。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2978"/>
+        <location filename="SandMan.cpp" line="3078"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
         <translation>您的 Windows 組建版本 %1 超出了 Sandboxie 版本目前已知的支援能力，Sandboxie 將嘗試使用最後已知的偏移值，這可能會導致系統不穩定。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2989"/>
+        <location filename="SandMan.cpp" line="3089"/>
         <source>Do you want the setup wizard to be omitted?</source>
         <translation>是否略過設定精靈？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4183"/>
-        <location filename="SandMan.cpp" line="4185"/>
-        <location filename="SandMan.cpp" line="4796"/>
+        <location filename="SandMan.cpp" line="4643"/>
+        <location filename="SandMan.cpp" line="4645"/>
+        <location filename="SandMan.cpp" line="5256"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - 錯誤</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4183"/>
+        <location filename="SandMan.cpp" line="4643"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>停止所有 Sandboxie 元件失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4185"/>
+        <location filename="SandMan.cpp" line="4645"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>啟動所需 Sandboxie 元件失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="496"/>
+        <location filename="SandMan.cpp" line="502"/>
         <source>WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.</source>
         <translation>警告: 無法寫入 %1 中的 Sandboxie-Plus.ini，設定將不會被儲存。</translation>
     </message>
@@ -4995,12 +6100,12 @@ Please check if there is an update for sandboxie.</oldsource>
         <translation type="vanished">部分相容性範本 (%1) 已遺失，可能是已被刪除，是否將其從所有沙箱中移除？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2342"/>
+        <location filename="SandMan.cpp" line="2419"/>
         <source>Cleaned up removed templates...</source>
         <translation>清理已刪除的範本...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2853"/>
+        <location filename="SandMan.cpp" line="2930"/>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
@@ -5009,12 +6114,12 @@ No will choose: %2</source>
 「否」將選擇: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2925"/>
+        <location filename="SandMan.cpp" line="3025"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>未找到預設沙箱; 建立中: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3006"/>
+        <location filename="SandMan.cpp" line="3106"/>
         <source>   -   NOT connected</source>
         <translation>   -   未連線</translation>
     </message>
@@ -5027,7 +6132,7 @@ No will choose: %2</source>
         <translation type="vanished">%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3720"/>
+        <location filename="SandMan.cpp" line="4180"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>選取的功能只對專案贊助者可用。如果沒有贊助者憑證，在啟用此功能的沙箱內啟動的處理程序，將在 5 分鐘後自動終止。&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成為專案贊助者&lt;/a&gt;，以取得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;</translation>
     </message>
@@ -5092,22 +6197,22 @@ No will choose: %2</source>
         <translation>沙箱名稱：%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3899"/>
+        <location filename="SandMan.cpp" line="4359"/>
         <source>Only Administrators can change the config.</source>
         <translation>僅管理員可變更此組態。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3909"/>
+        <location filename="SandMan.cpp" line="4369"/>
         <source>Please enter the configuration password.</source>
         <translation>請輸入組態的密碼。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3917"/>
+        <location filename="SandMan.cpp" line="4377"/>
         <source>Login Failed: %1</source>
         <translation>登入失敗: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3956"/>
+        <location filename="SandMan.cpp" line="4416"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>確定要終止所有沙箱中的所有處理程序嗎？</translation>
     </message>
@@ -5116,107 +6221,107 @@ No will choose: %2</source>
         <translation type="vanished">終止全部並不再詢問</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4046"/>
+        <location filename="SandMan.cpp" line="4506"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus 已於便攜模式中啟動，需建立必要的服務。這將需要管理員權限。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4080"/>
+        <location filename="SandMan.cpp" line="4540"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>注意: 另一個代理 (可能是 SbieCtrl.exe) 已經在管理這個 Sandboxie 工作階段，請先關閉其它代理並重新連線進行接管控制。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4212"/>
+        <location filename="SandMan.cpp" line="4672"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>正在執行維護作業，請稍候...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4414"/>
+        <location filename="SandMan.cpp" line="4874"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>請確認是否要重設已隱藏的訊息框 (選「是」)，或者僅重設所有日誌訊息 (選「否」)？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4518"/>
+        <location filename="SandMan.cpp" line="4978"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>當檔案儲存後變更將自動套用。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4519"/>
+        <location filename="SandMan.cpp" line="4979"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>變更將在編輯器關閉後自動套用。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4719"/>
+        <location filename="SandMan.cpp" line="5179"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>錯誤狀態碼: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4720"/>
+        <location filename="SandMan.cpp" line="5180"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4740"/>
+        <location filename="SandMan.cpp" line="5200"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>刪除沙箱前必須先清空。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4745"/>
+        <location filename="SandMan.cpp" line="5205"/>
         <source>Failed to copy box data files</source>
         <translation>複製沙箱資料檔案失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4750"/>
+        <location filename="SandMan.cpp" line="5210"/>
         <source>Failed to remove old box data files</source>
         <translation>移除舊沙箱資料檔案失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4768"/>
+        <location filename="SandMan.cpp" line="5228"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>未知錯誤狀態: 0x%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4870"/>
+        <location filename="SandMan.cpp" line="5330"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
         <translation>是否在沙箱化或非沙箱化網頁瀏覽器中開啟 %1？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4874"/>
+        <location filename="SandMan.cpp" line="5334"/>
         <source>Sandboxed</source>
         <translation>沙箱化</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4875"/>
+        <location filename="SandMan.cpp" line="5335"/>
         <source>Unsandboxed</source>
         <translation>非沙箱化</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5051"/>
+        <location filename="SandMan.cpp" line="5513"/>
         <source>Case Sensitive</source>
         <translation>區分大小寫</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5052"/>
+        <location filename="SandMan.cpp" line="5514"/>
         <source>RegExp</source>
         <translation>正規表示式</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5053"/>
+        <location filename="SandMan.cpp" line="5515"/>
         <source>Highlight</source>
         <translation>強調顯示</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5054"/>
+        <location filename="SandMan.cpp" line="5516"/>
         <source>Close</source>
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5055"/>
+        <location filename="SandMan.cpp" line="5517"/>
         <source>&amp;Find ...</source>
         <translation>尋找(&amp;F)...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5056"/>
+        <location filename="SandMan.cpp" line="5518"/>
         <source>All columns</source>
         <translation>所有欄</translation>
     </message>
@@ -5238,17 +6343,17 @@ No will choose: %2</source>
         <translation type="vanished">Sandboxie-Plus 是著名程式 Sandboxie 自開源以來的一個延續。&lt;br /&gt;造訪 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 來了解更多資訊。&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;驅動版本: %1&lt;br /&gt;功能: %2&lt;br /&gt;&lt;br /&gt;圖示來源 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4722"/>
+        <location filename="SandMan.cpp" line="5182"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>此作業需要管理員權限。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="810"/>
+        <location filename="SandMan.cpp" line="818"/>
         <source>Vintage View (like SbieCtrl)</source>
         <translation>經典檢視 (類似 SbieCtrl)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="827"/>
+        <location filename="SandMan.cpp" line="835"/>
         <source>Contribute to Sandboxie-Plus</source>
         <translation>為 Sandboxie 做出貢獻</translation>
     </message>
@@ -5257,80 +6362,80 @@ No will choose: %2</source>
         <translation type="vanished">匯入沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="850"/>
-        <location filename="SandMan.cpp" line="999"/>
+        <location filename="SandMan.cpp" line="862"/>
+        <location filename="SandMan.cpp" line="1021"/>
         <source>Run Sandboxed</source>
         <translation>在沙箱內執行</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="960"/>
+        <location filename="SandMan.cpp" line="973"/>
         <source>Disable Message Popup</source>
         <translation>停用訊息快顯視窗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="855"/>
-        <location filename="SandMan.cpp" line="1015"/>
+        <location filename="SandMan.cpp" line="867"/>
+        <location filename="SandMan.cpp" line="1037"/>
         <source>Is Window Sandboxed?</source>
         <oldsource>Is Window Sandboxed</oldsource>
         <translation>視窗是否在沙箱中？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="517"/>
-        <location filename="SandMan.cpp" line="2815"/>
+        <location filename="SandMan.cpp" line="523"/>
+        <location filename="SandMan.cpp" line="2892"/>
         <source>Sandboxie-Plus Insider [%1]</source>
         <translation>Sandboxie-Plus 測試人員 [%1]</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="828"/>
+        <location filename="SandMan.cpp" line="836"/>
         <source>Troubleshooting Wizard</source>
         <translation>疑難排解精靈</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="902"/>
+        <location filename="SandMan.cpp" line="914"/>
         <source>Show File Panel</source>
         <translation>顯示檔案面板</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="970"/>
-        <location filename="SandMan.cpp" line="1116"/>
-        <location filename="SandMan.cpp" line="1361"/>
-        <location filename="SandMan.cpp" line="1362"/>
+        <location filename="SandMan.cpp" line="992"/>
+        <location filename="SandMan.cpp" line="1138"/>
+        <location filename="SandMan.cpp" line="1418"/>
+        <location filename="SandMan.cpp" line="1419"/>
         <source>Edit Sandboxie.ini</source>
         <translation>編輯 Sandboxie.ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="973"/>
+        <location filename="SandMan.cpp" line="995"/>
         <source>Edit Templates.ini</source>
         <translation>編輯 Templates.ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="975"/>
+        <location filename="SandMan.cpp" line="997"/>
         <source>Edit Sandboxie-Plus.ini</source>
         <translation>編輯 Sandboxie-Plus.ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="979"/>
-        <location filename="SandMan.cpp" line="1119"/>
+        <location filename="SandMan.cpp" line="1001"/>
+        <location filename="SandMan.cpp" line="1141"/>
         <source>Reload configuration</source>
         <translation>重新載入組態</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="998"/>
+        <location filename="SandMan.cpp" line="1020"/>
         <source>&amp;File</source>
         <translation>檔案(&amp;F)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1016"/>
+        <location filename="SandMan.cpp" line="1038"/>
         <source>Resource Access Monitor</source>
         <translation>資源存取監控</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1051"/>
+        <location filename="SandMan.cpp" line="1073"/>
         <source>Programs</source>
         <translation>程式</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1052"/>
+        <location filename="SandMan.cpp" line="1074"/>
         <source>Files and Folders</source>
         <translation>檔案和資料夾</translation>
     </message>
@@ -5339,117 +6444,137 @@ No will choose: %2</source>
         <translation type="vanished">匯入沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1086"/>
+        <location filename="SandMan.cpp" line="1108"/>
         <source>Set Container Folder</source>
         <translation>設定沙箱容器資料夾</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1089"/>
+        <location filename="SandMan.cpp" line="1111"/>
         <source>Set Layout and Groups</source>
         <translation>設定外觀和群組</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1091"/>
+        <location filename="SandMan.cpp" line="1113"/>
         <source>Reveal Hidden Boxes</source>
         <translation>顯示隱藏的沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1097"/>
+        <location filename="SandMan.cpp" line="1119"/>
         <source>&amp;Configure</source>
         <translation>組態(&amp;C)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1101"/>
+        <location filename="SandMan.cpp" line="1123"/>
         <source>Program Alerts</source>
         <translation>程式警報</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1103"/>
+        <location filename="SandMan.cpp" line="1125"/>
         <source>Windows Shell Integration</source>
         <translation>Windows 殼層整合</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1105"/>
+        <location filename="SandMan.cpp" line="1127"/>
         <source>Software Compatibility</source>
         <translation>軟體相容性</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1114"/>
+        <location filename="SandMan.cpp" line="1136"/>
         <source>Lock Configuration</source>
         <translation>鎖定組態</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1133"/>
+        <location filename="SandMan.cpp" line="1155"/>
         <source>Sandbox %1</source>
         <translation>沙箱 %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1176"/>
+        <location filename="SandMan.cpp" line="1198"/>
         <source>New-Box Menu</source>
         <translation>新-沙箱選單</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1196"/>
+        <location filename="SandMan.cpp" line="1218"/>
         <source>Edit-ini Menu</source>
         <translation>編輯-INI 選單</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1242"/>
+        <location filename="SandMan.cpp" line="1236"/>
+        <source>AI Agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1265"/>
         <source>Toolbar Items</source>
         <translation>工具列項目</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1244"/>
+        <location filename="SandMan.cpp" line="1267"/>
         <source>Reset Toolbar</source>
         <translation>重設工具列</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1426"/>
+        <location filename="SandMan.cpp" line="1483"/>
         <source>Click to download update</source>
         <translation>按一下以下載更新</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2239"/>
+        <location filename="SandMan.cpp" line="2161"/>
+        <source>MCP: %1 requested via command line, now %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2162"/>
+        <source>on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2162"/>
+        <source>off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2316"/>
         <source>No Force Process</source>
         <translation>沒有強制沙箱程序</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2637"/>
+        <location filename="SandMan.cpp" line="2714"/>
         <source>Removed Shortcut: %1</source>
         <translation>已移除捷徑: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2726"/>
+        <location filename="SandMan.cpp" line="2803"/>
         <source>Updated Shortcut to: %1</source>
         <translation>已更新捷徑至: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2728"/>
+        <location filename="SandMan.cpp" line="2805"/>
         <source>Added Shortcut to: %1</source>
         <translation>加入捷徑至: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2805"/>
+        <location filename="SandMan.cpp" line="2882"/>
         <source>Auto removing sandbox %1</source>
         <translation>自動刪除沙箱 %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2830"/>
+        <location filename="SandMan.cpp" line="2907"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
         <translation>Sandboxie-Plus 版本: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2832"/>
+        <location filename="SandMan.cpp" line="2909"/>
         <source>Data Directory: %1</source>
         <translation>資料目錄: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2895"/>
+        <location filename="SandMan.cpp" line="2972"/>
         <source> for Personal use</source>
         <translation> 個人使用</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2897"/>
+        <location filename="SandMan.cpp" line="2974"/>
         <source>   -   for Non-Commercial use ONLY</source>
         <translation>   -   僅用於非商業用途</translation>
     </message>
@@ -5458,86 +6583,86 @@ No will choose: %2</source>
         <translation type="vanished">是否略過設定精靈？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3375"/>
-        <location filename="SandMan.cpp" line="3379"/>
-        <location filename="SandMan.cpp" line="3385"/>
-        <location filename="SandMan.cpp" line="3387"/>
+        <location filename="SandMan.cpp" line="3823"/>
+        <location filename="SandMan.cpp" line="3827"/>
+        <location filename="SandMan.cpp" line="3833"/>
+        <location filename="SandMan.cpp" line="3835"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3608"/>
+        <location filename="SandMan.cpp" line="4059"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>在沙箱 %2 中啟動的程式 %1 將在 5 分鐘之後自動終止，因為此沙箱被設定為使用專案贊助者的專有功能。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3610"/>
+        <location filename="SandMan.cpp" line="4061"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>沙箱 %1 被設定為使用專案贊助者專有的沙箱類型，這些預設選項將被忽略。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3591"/>
-        <location filename="SandMan.cpp" line="3599"/>
-        <location filename="SandMan.cpp" line="3611"/>
-        <location filename="SandMan.cpp" line="3709"/>
+        <location filename="SandMan.cpp" line="4042"/>
+        <location filename="SandMan.cpp" line="4050"/>
+        <location filename="SandMan.cpp" line="4062"/>
+        <location filename="SandMan.cpp" line="4169"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成為專案贊助者&lt;/a&gt;，以取得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="522"/>
+        <location filename="SandMan.cpp" line="528"/>
         <source> (Administrator)</source>
         <translation> （系統管理員）</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="787"/>
+        <location filename="SandMan.cpp" line="795"/>
         <source>Virtual Disks</source>
         <translation>虛擬磁碟</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="845"/>
+        <location filename="SandMan.cpp" line="857"/>
         <source>Import Boxes</source>
         <translation>匯入沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="847"/>
+        <location filename="SandMan.cpp" line="859"/>
         <source>Export Boxes</source>
         <translation>匯出沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="851"/>
-        <location filename="SandMan.cpp" line="1000"/>
+        <location filename="SandMan.cpp" line="863"/>
+        <location filename="SandMan.cpp" line="1022"/>
         <source>Suspend All Processes</source>
         <translation>暫停全部處理程序</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="853"/>
-        <location filename="SandMan.cpp" line="1002"/>
+        <location filename="SandMan.cpp" line="865"/>
+        <location filename="SandMan.cpp" line="1024"/>
         <source>Lock All Encrypted Boxes</source>
         <translation>鎖定全部加密沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="879"/>
-        <location filename="SandMan.cpp" line="1041"/>
+        <location filename="SandMan.cpp" line="891"/>
+        <location filename="SandMan.cpp" line="1063"/>
         <source>Restart As Admin</source>
         <translation>以管理員權限重新啟動</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="926"/>
+        <location filename="SandMan.cpp" line="938"/>
         <source>Auto Expand Tree</source>
         <translation>自動展開樹狀結構</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1081"/>
+        <location filename="SandMan.cpp" line="1103"/>
         <source>Import Sandboxes</source>
         <translation>匯入沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1083"/>
+        <location filename="SandMan.cpp" line="1105"/>
         <source>Export Sandboxes</source>
         <translation>匯出沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1932"/>
+        <location filename="SandMan.cpp" line="1989"/>
         <source>This box will be &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;encrypted&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;access to sandboxed processes will be guarded&lt;/a&gt;.</source>
         <translation>此沙箱將被&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;加密&lt;/a&gt;，且&lt;a href=&quot;sbie://docs/black-box&quot;&gt;對沙箱化處理程序的存取將受到保護&lt;/a&gt;。</translation>
     </message>
@@ -5561,7 +6686,7 @@ No will choose: %2</source>
         <translation type="vanished">輸入你將要進行設定的沙箱之名稱:</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2025"/>
+        <location filename="SandMan.cpp" line="2082"/>
         <location filename="Windows/ShellBoxSelector.cpp" line="52"/>
         <location filename="Windows/ShellBoxSelector.cpp" line="89"/>
         <location filename="Windows/ShellBoxSelector.cpp" line="105"/>
@@ -5570,7 +6695,7 @@ No will choose: %2</source>
         <translation>Sandboxie-Plus 警告</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2025"/>
+        <location filename="SandMan.cpp" line="2082"/>
         <source>The value is not an existing directory or executable.</source>
         <translation>該目錄不存在或不可執行</translation>
     </message>
@@ -5585,22 +6710,27 @@ No will choose: %2</source>
         <translation>使用者取消了此作業。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2312"/>
+        <location filename="SandMan.cpp" line="2389"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
         <translation>一些相容性範本目前缺失中: &lt;br /&gt; &lt;br /&gt;%1 &lt;br /&gt;可能已被刪除，是否將其自所有沙箱中移除？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2399"/>
+        <location filename="SandMan.cpp" line="2476"/>
         <source>USB sandbox not found; creating: %1</source>
         <translation>找不到 USB 沙箱; 建立中: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2760"/>
+        <location filename="SandMan.cpp" line="2837"/>
         <source>Executing OnBoxTerminate: %1</source>
         <translation>執行 沙箱終止階段 中: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2996"/>
+        <location filename="SandMan.cpp" line="3010"/>
+        <source>Removed %1 leftover sandbox configuration copies from an interrupted troubleshooting session</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3096"/>
         <source>Sandman did not finish enumerating installed windows updates last time, it probably hangs.
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
@@ -5609,127 +6739,337 @@ Do you want to disable Windows Updates scanning from the the software compatibil
 您是否要在軟體相容性偵測中禁用 Windows 更新掃描？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3200"/>
+        <location filename="SandMan.cpp" line="3300"/>
         <source>Failed to configure hotkey %1, error: %2</source>
         <translation>設定快速鍵組態 %1 失敗，錯誤: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3590"/>
+        <location filename="SandMan.cpp" line="3376"/>
+        <source>The AI agent connection is turned off in the settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3388"/>
+        <source>The AI agent connection is disabled by AllowAiAgent=n in Sandboxie.ini</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3405"/>
+        <source>An AI agent can now connect to Sandboxie on %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3416"/>
+        <source>The AI agent connection is closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3460"/>
+        <location filename="SandMan.cpp" line="3494"/>
+        <source>Turned off for this machine by AllowAiAgent=n in Sandboxie.ini.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3462"/>
+        <source>Turned off in Settings, under General Config, AI Agent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3464"/>
+        <source>An AI agent can connect. Click to close the connection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3503"/>
+        <location filename="SandMan.cpp" line="3602"/>
+        <source>The AI agent connection could not be opened. The message log has the reason.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3526"/>
+        <source>An unidentified program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3533"/>
+        <source>connected, waiting to be authorised</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3534"/>
+        <source>%1 connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3555"/>
+        <source>MCP: ignored a connection request from %1 (asked too recently)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3556"/>
+        <source>an unidentified application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3560"/>
+        <source>An application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3563"/>
+        <source>asking to connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3564"/>
+        <source>%1 is asking to connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3568"/>
+        <source>%1 is asking to connect an AI agent to Sandboxie-Plus.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3569"/>
+        <source>Allowing this lets the agent read Sandboxie&apos;s own documentation straight away.
+
+To look at YOUR sandboxes - what exists, what is running, what was blocked - it then has to ask you for a code, which this window will show you. To change anything, start anything or stop anything, it has to ask you again, every time.
+
+It is not reachable from inside a sandbox.
+
+If you did not just ask an AI assistant to look at Sandboxie, refuse this.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3575"/>
+        <source>Allow the Connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3585"/>
+        <source>the connection was refused</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3586"/>
+        <source>not connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3589"/>
+        <source>MCP: declined a connection request from %1 (%2 in a row - further requests ignored for a minute)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3593"/>
+        <source>MCP: declined a connection request from %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3599"/>
+        <source>the connection was allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3628"/>
+        <source>An AI agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3630"/>
+        <source>waiting for the code below to be read to it</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3631"/>
+        <source>%1 asked to be authorised</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3636"/>
+        <source>MCP: %1 is asking to connect; a pairing code is displayed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3641"/>
+        <location filename="SandMan.cpp" line="3662"/>
+        <location filename="SandMan.cpp" line="3670"/>
+        <source>an AI agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3648"/>
+        <source>this program will be authorised without asking from now on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3649"/>
+        <source>MCP: %1 will be authorised without asking from now on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3655"/>
+        <source>authorised - it can read freely, and must ask for anything else</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3656"/>
+        <source>%1 is now authorised</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3657"/>
+        <source>MCP: %1 is now authorised</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3664"/>
+        <source>%1 failed to authorise (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3665"/>
+        <source>MCP: %1 failed to authorise (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3672"/>
+        <source>suspended after an hour idle - it must be authorised again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3673"/>
+        <source>the session for %1 was suspended after an hour idle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3674"/>
+        <source>MCP: the session for %1 was suspended after an hour idle; it can be resumed by authorising again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="3682"/>
+        <source>MCP: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="4041"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
         <translation>沙箱 %1 之組態設定為使用專案贊助者獨有的功能。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3595"/>
+        <location filename="SandMan.cpp" line="4046"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>沙箱 %1 之組態設定為使用需要&lt;b&gt;進階&lt;/b&gt;贊助者憑證的功能。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3597"/>
-        <location filename="SandMan.cpp" line="3707"/>
+        <location filename="SandMan.cpp" line="4048"/>
+        <location filename="SandMan.cpp" line="4167"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;升級憑證&lt;/a&gt;以解鎖進階功能。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3703"/>
+        <location filename="SandMan.cpp" line="4163"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>選定的功能需要&lt;b&gt;進階&lt;/b&gt;贊助者憑證。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3705"/>
+        <location filename="SandMan.cpp" line="4165"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
         <translation>&lt;br /&gt;你需要在 Great Patreon 或更高等級以解鎖這個功能。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3717"/>
+        <location filename="SandMan.cpp" line="4177"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>所選功能集僅供專案贊助者使用。&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成為專案贊助者&lt;/a&gt;，並取得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3763"/>
+        <location filename="SandMan.cpp" line="4223"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
         <translation>您正在嘗試使用的憑證已被封鎖，這意味著其已因某些原因而失效。任何試圖使用它的行為都違反了使用條款！</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3775"/>
+        <location filename="SandMan.cpp" line="4235"/>
         <source>The Certificate Signature is invalid!</source>
         <translation>憑證數位簽章無效！</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3776"/>
+        <location filename="SandMan.cpp" line="4236"/>
         <source>The Certificate is not suitable for this product.</source>
         <translation>憑證不適用於此產品。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3777"/>
+        <location filename="SandMan.cpp" line="4237"/>
         <source>The Certificate is node locked.</source>
         <translation>憑證已被節點鎖定。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3781"/>
+        <location filename="SandMan.cpp" line="4241"/>
         <source>The support certificate is not valid.
 Error: %1</source>
         <translation>贊助憑證無效。
 錯誤: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3845"/>
+        <location filename="SandMan.cpp" line="4305"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>評估時段已逾期!!!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3957"/>
-        <location filename="SandMan.cpp" line="3982"/>
+        <location filename="SandMan.cpp" line="4417"/>
+        <location filename="SandMan.cpp" line="4442"/>
         <source>Don&apos;t ask in future</source>
         <translation>此後不再詢問</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3981"/>
+        <location filename="SandMan.cpp" line="4441"/>
         <source>Do you want to terminate all processes in encrypted sandboxes, and unmount them?</source>
         <translation>是否終止所有加密沙箱中的所有處理程序並將其全部卸載？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4007"/>
+        <location filename="SandMan.cpp" line="4467"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>請輸入「停用強制沙箱程式規則」的持續時間 (單位：秒)。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4022"/>
+        <location filename="SandMan.cpp" line="4482"/>
         <source>No Recovery</source>
         <translation>沒有復原檔案</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4028"/>
+        <location filename="SandMan.cpp" line="4488"/>
         <source>No Messages</source>
         <translation>沒有訊息</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4084"/>
+        <location filename="SandMan.cpp" line="4544"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation>&lt;b&gt;錯誤:&lt;/b&gt; Sandboxie-Plus 管理員 (SandMan.exe) 沒有有效的數位簽章 (SandMan.exe.sig)。請從&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;官方下載頁面&lt;/a&gt;下載可信賴的版本。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4187"/>
+        <location filename="SandMan.cpp" line="4647"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>維護作業執行失敗 (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4192"/>
+        <location filename="SandMan.cpp" line="4652"/>
         <source>Maintenance operation completed</source>
         <translation>維護作業完成</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4345"/>
+        <location filename="SandMan.cpp" line="4805"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>在 Plus UI 中，此功能已被整合到主沙箱清單檢視中。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4346"/>
+        <location filename="SandMan.cpp" line="4806"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>使用「沙箱/群組」環境選單可以將沙箱和群組移動至其它群組。同時，您可以透過滑鼠拖曳移動項目。此外，您也可以使用 Alt + 方向鍵將項目在群組內上下移動。&lt;br /&gt;您可以透過沙箱選單新增沙箱和群組。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4502"/>
+        <location filename="SandMan.cpp" line="4962"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -5738,224 +7078,224 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 因為該檔案是 Sandboxie 的一部分並且所有的變更會在下次 Sandboxie 更新時被還原。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4582"/>
+        <location filename="SandMan.cpp" line="5042"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>已重新載入 Sandboxie 組態</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4723"/>
+        <location filename="SandMan.cpp" line="5183"/>
         <source>Failed to execute: %1</source>
         <translation>執行失敗: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4724"/>
+        <location filename="SandMan.cpp" line="5184"/>
         <source>Failed to connect to the driver</source>
         <translation>連線驅動程式失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4725"/>
+        <location filename="SandMan.cpp" line="5185"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>無法與 Sandboxie 服務建立聯絡: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4726"/>
+        <location filename="SandMan.cpp" line="5186"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>已發現不相容的 Sandboxie %1。相容版本為: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4727"/>
+        <location filename="SandMan.cpp" line="5187"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>無法找到 Sandboxie 安裝路徑。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4728"/>
+        <location filename="SandMan.cpp" line="5188"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>複製沙箱組態 %1: %2 失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4729"/>
+        <location filename="SandMan.cpp" line="5189"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>沙箱名稱 %1 已存在</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4730"/>
+        <location filename="SandMan.cpp" line="5190"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>刪除沙箱 %1: %2 失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4731"/>
+        <location filename="SandMan.cpp" line="5191"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>沙箱名稱不能超過 32 個字元。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4732"/>
+        <location filename="SandMan.cpp" line="5192"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>沙箱名稱不能為裝置名稱。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4733"/>
+        <location filename="SandMan.cpp" line="5193"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>沙箱名稱不能為空白，只能包含字母、數字和下劃線。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4734"/>
+        <location filename="SandMan.cpp" line="5194"/>
         <source>Failed to terminate all processes</source>
         <translation>終止所有處理程序失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4735"/>
+        <location filename="SandMan.cpp" line="5195"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>沙箱的刪除保護已被啟用</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4736"/>
+        <location filename="SandMan.cpp" line="5196"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>在刪除沙箱內容之前，必須先停止所有沙箱處理程序</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4737"/>
+        <location filename="SandMan.cpp" line="5197"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>刪除沙箱資料夾錯誤: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4738"/>
+        <location filename="SandMan.cpp" line="5198"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation>在重新命名沙箱前，所有處理程序都應被停止。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4741"/>
+        <location filename="SandMan.cpp" line="5201"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>移動目錄「%1」至「%2」失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4742"/>
+        <location filename="SandMan.cpp" line="5202"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>移動沙箱映像「%1」至「%2」失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4743"/>
+        <location filename="SandMan.cpp" line="5203"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>因處理程序正在沙箱中執行，無法開展此快照作業。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4744"/>
+        <location filename="SandMan.cpp" line="5204"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>為新快照建立目錄失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4746"/>
+        <location filename="SandMan.cpp" line="5206"/>
         <source>Snapshot not found</source>
         <translation>未發現快照</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4747"/>
+        <location filename="SandMan.cpp" line="5207"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>合併快照目錄「%1」和「%2」錯誤，快照沒有被完全合併。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4748"/>
+        <location filename="SandMan.cpp" line="5208"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>移除舊快照的目錄「%1」失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4749"/>
+        <location filename="SandMan.cpp" line="5209"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>無法刪除由多個後續快照共享的快照</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4751"/>
+        <location filename="SandMan.cpp" line="5211"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>您未被授權在區段「%1」更新組態</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4752"/>
+        <location filename="SandMan.cpp" line="5212"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>在 %2: %3 中設定組態選項 %1 失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4753"/>
+        <location filename="SandMan.cpp" line="5213"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>無法為空的沙箱建立快照</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4754"/>
+        <location filename="SandMan.cpp" line="5214"/>
         <source>A sandbox with that name already exists</source>
         <translation>已存在同名沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4755"/>
+        <location filename="SandMan.cpp" line="5215"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>組態密碼不得超過 64 個字元</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4756"/>
+        <location filename="SandMan.cpp" line="5216"/>
         <source>The operation was canceled by the user</source>
         <translation>此作業已被使用者取消</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4757"/>
+        <location filename="SandMan.cpp" line="5217"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
         <translation>未被裝載的沙箱之內容不可被刪除</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4759"/>
+        <location filename="SandMan.cpp" line="5219"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4761"/>
+        <location filename="SandMan.cpp" line="5221"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>匯入/匯出無法使用，無法載入 7z.dll</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4762"/>
+        <location filename="SandMan.cpp" line="5222"/>
         <source>Failed to create the box archive</source>
         <translation>無法建立沙箱封存檔案</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4763"/>
+        <location filename="SandMan.cpp" line="5223"/>
         <source>Failed to open the 7z archive</source>
         <translation>無法開啟 7z 封存檔案</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4764"/>
+        <location filename="SandMan.cpp" line="5224"/>
         <source>Failed to unpack the box archive</source>
         <translation>無法解壓縮沙箱封存檔案</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4765"/>
+        <location filename="SandMan.cpp" line="5225"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>所選的 7z 檔案不是沙箱封存檔案</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4766"/>
+        <location filename="SandMan.cpp" line="5226"/>
         <source>Failed to copy directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>複製目錄「%1」至「%2」失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4798"/>
+        <location filename="SandMan.cpp" line="5258"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>%1 項操作失敗。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5109"/>
+        <location filename="SandMan.cpp" line="5571"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
         <translation>&lt;h3&gt;關於 Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;版本 %1&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5117"/>
+        <location filename="SandMan.cpp" line="5579"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
         <translation>這一份 Sandboxie-Plus 已授權給: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5119"/>
+        <location filename="SandMan.cpp" line="5581"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
         <translation>Sandboxie-Plus 可免費用於個人和其它非商業用途。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5123"/>
+        <location filename="SandMan.cpp" line="5585"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus 是 Sandboxie 的一個開源延續。&lt;br /&gt;造訪 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 了解更多資訊。&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;可用特性: %3&lt;br /&gt;&lt;br /&gt;安裝於: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;圖示來自於 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
@@ -5964,28 +7304,28 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">是否在沙箱化網頁瀏覽器開啟連結 %1 ？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4871"/>
+        <location filename="SandMan.cpp" line="5331"/>
         <source>Remember choice for later.</source>
         <translation>記住選擇供之後使用。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3850"/>
+        <location filename="SandMan.cpp" line="4310"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>此贊助者憑證對此版本沙箱無效，請取得更新的憑證</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3853"/>
+        <location filename="SandMan.cpp" line="4313"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
         <translation>此贊助者憑證已逾期%1，請取得更新的憑證</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3854"/>
+        <location filename="SandMan.cpp" line="4314"/>
         <source>, but it remains valid for the current build</source>
         <translation>，但它對目前組建的沙箱版本仍然有效</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3856"/>
+        <location filename="SandMan.cpp" line="4316"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>此贊助者憑證將在 %1 天後逾期，請取得更新的憑證</translation>
     </message>
@@ -7068,13 +8408,13 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CSettingsWindow</name>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="205"/>
+        <location filename="Windows/SettingsWindow.cpp" line="207"/>
         <source>Sandboxie Plus - Global Settings</source>
         <oldsource>Sandboxie Plus - Settings</oldsource>
         <translation>Sandboxie Plus - 全域設定</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="307"/>
+        <location filename="Windows/SettingsWindow.cpp" line="311"/>
         <source>Auto Detection</source>
         <translation>自動偵測</translation>
     </message>
@@ -7083,193 +8423,193 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">無翻譯</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="328"/>
         <location filename="Windows/SettingsWindow.cpp" line="332"/>
+        <location filename="Windows/SettingsWindow.cpp" line="336"/>
         <source>Don&apos;t integrate links</source>
         <translation>不整合連結</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="329"/>
         <location filename="Windows/SettingsWindow.cpp" line="333"/>
+        <location filename="Windows/SettingsWindow.cpp" line="337"/>
         <source>As sub group</source>
         <translation>作為次級群組</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="330"/>
         <location filename="Windows/SettingsWindow.cpp" line="334"/>
+        <location filename="Windows/SettingsWindow.cpp" line="338"/>
         <source>Fully integrate</source>
         <translation>完全整合</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="340"/>
         <source>Don&apos;t show any icon</source>
         <oldsource>Don&apos;t integrate links</oldsource>
         <translation>不顯示任何圖示</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="337"/>
+        <location filename="Windows/SettingsWindow.cpp" line="341"/>
         <source>Show Plus icon</source>
         <translation>顯示 Plus 版圖示</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="338"/>
+        <location filename="Windows/SettingsWindow.cpp" line="342"/>
         <source>Show Classic icon</source>
         <translation>顯示經典版圖示</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>All Boxes</source>
         <translation>所有沙箱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="345"/>
         <source>Active + Pinned</source>
         <translation>啟用中和已釘選的沙箱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="346"/>
         <source>Pinned Only</source>
         <translation>僅已釘選的沙箱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="343"/>
-        <location filename="Windows/SettingsWindow.cpp" line="587"/>
+        <location filename="Windows/SettingsWindow.cpp" line="347"/>
+        <location filename="Windows/SettingsWindow.cpp" line="591"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="344"/>
+        <location filename="Windows/SettingsWindow.cpp" line="348"/>
         <source>Shift</source>
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="346"/>
+        <location filename="Windows/SettingsWindow.cpp" line="350"/>
         <source>Close to Tray</source>
         <translation>關閉至系統匣</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="347"/>
+        <location filename="Windows/SettingsWindow.cpp" line="351"/>
         <source>Prompt before Close</source>
         <translation>關閉前提醒</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="348"/>
+        <location filename="Windows/SettingsWindow.cpp" line="352"/>
         <source>Close</source>
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="349"/>
+        <location filename="Windows/SettingsWindow.cpp" line="353"/>
         <source>Hide (Run invisible in Background)</source>
         <translation>隐藏 (在背景執行)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="354"/>
         <source>Sandbox name</source>
         <translation>沙箱名稱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="351"/>
+        <location filename="Windows/SettingsWindow.cpp" line="355"/>
         <source>Sandbox alias</source>
         <translation>沙箱別名</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="352"/>
+        <location filename="Windows/SettingsWindow.cpp" line="356"/>
         <source>Sandbox alias and name</source>
         <translation>沙箱別名與名稱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="359"/>
         <source>Same as main</source>
         <translation>與主要視窗相同</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="360"/>
         <source>Keep current monitor</source>
         <translation>保留目前的顯示器</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="361"/>
         <source>Active monitor</source>
         <translation>目前使用中的顯示器</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="358"/>
+        <location filename="Windows/SettingsWindow.cpp" line="362"/>
         <source>Primary monitor</source>
         <translation>主顯示器</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="414"/>
+        <location filename="Windows/SettingsWindow.cpp" line="418"/>
         <source>Unknown Display</source>
         <translation>未知顯示器</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="416"/>
+        <location filename="Windows/SettingsWindow.cpp" line="420"/>
         <source>Display %1: %2</source>
         <translation>顯示器 %1：%2</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="418"/>
+        <location filename="Windows/SettingsWindow.cpp" line="422"/>
         <source> (Primary)</source>
         <translation> （主要顯示器）</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="438"/>
+        <location filename="Windows/SettingsWindow.cpp" line="442"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
         <translation>記住之前的狀態</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="439"/>
+        <location filename="Windows/SettingsWindow.cpp" line="443"/>
         <source>Expand all groups</source>
         <translation>展開全部分組</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="440"/>
+        <location filename="Windows/SettingsWindow.cpp" line="444"/>
         <source>Collapse all groups</source>
         <translation>摺疊全部分組</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="442"/>
+        <location filename="Windows/SettingsWindow.cpp" line="446"/>
         <source>None</source>
         <translation>無</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="443"/>
+        <location filename="Windows/SettingsWindow.cpp" line="447"/>
         <source>Native</source>
         <translation>原生</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="444"/>
+        <location filename="Windows/SettingsWindow.cpp" line="448"/>
         <source>Qt</source>
         <translation>Qt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="446"/>
+        <location filename="Windows/SettingsWindow.cpp" line="450"/>
         <source>Every Day</source>
         <translation>每天</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="447"/>
+        <location filename="Windows/SettingsWindow.cpp" line="451"/>
         <source>Every Week</source>
         <translation>每週</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="452"/>
         <source>Every 2 Weeks</source>
         <translation>每2週</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="449"/>
+        <location filename="Windows/SettingsWindow.cpp" line="453"/>
         <source>Every 30 days</source>
         <translation>每30天</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="451"/>
+        <location filename="Windows/SettingsWindow.cpp" line="455"/>
         <source>Ignore</source>
         <translation>忽略</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="463"/>
+        <location filename="Windows/SettingsWindow.cpp" line="467"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
         <translation>%1</translation>
@@ -7279,93 +8619,93 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">硬體ID: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="940"/>
+        <location filename="Windows/SettingsWindow.cpp" line="944"/>
         <source>Search for settings</source>
         <translation>搜尋設定</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1336"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1337"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1340"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1351"/>
         <source>Run &amp;Sandboxed</source>
         <translation>在沙箱內執行(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1797"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1836"/>
         <source>kilobytes (%1)</source>
         <translation>KB (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1885"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1924"/>
         <source>Volume not attached</source>
         <translation>未附加磁碟區</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3283"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3326"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此贊助者憑證已逾期，請&lt;a href=&quot;%1&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3288"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3331"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;對於目前版本，Plus 功能仍然啟用&lt;/font&gt;，但您無法再存取 Sandboxie-Live 服務，包括相容性更新和疑難排解資料庫。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3335"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3378"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>; 符合資格的 Patreon 贊助者總是可以從 xanasoft.com &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;取得一個更新的憑證&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3363"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3406"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;您已經使用了%1/%2個評估憑證。無法生成更多免費憑證了。&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3365"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3408"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;取得一個免費評估憑證&lt;/a&gt;並享受所有高級功能 %1 天。&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3366"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3409"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>對於每個硬體ID，您最多可以請求%2次免費的%1天評估憑證。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3622"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3665"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
 這是一個臨時的 Patreon 憑證，有效期為3個月。憑證鄰近逾期時，您可以從線上取得一份具有完整有效期限的新憑證。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3660"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3703"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>您的 Sandboxie-Plus 贊助者憑證需要進行一次強制安全性更新。是否現在下載已更新的憑證？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3661"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3704"/>
         <source>Auto update in future</source>
         <translation>在未來自動更新</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3296"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3339"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>此贊助者憑證將&lt;font color=&apos;red&apos;&gt;在 %1 天後逾期&lt;/font&gt;，請&lt;a href=&quot;%2&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3196"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3205"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3239"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3248"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation>硬體ID: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3201"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3244"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation>硬體ID: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(複製)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3214"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3257"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation>Sandboxie-Plus 版本: %1</translation>
     </message>
@@ -7378,128 +8718,143 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
         <translation type="vanished">此贊助者憑證將&lt;font color=&apos;red&apos;&gt;在 %1 天後逾期&lt;/font&gt;，請&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert &quot; &gt;取得更新的憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3374"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>逾期於: %1天後</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3333"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3376"/>
         <source>Expired: %1 days ago</source>
         <translation>已逾期: %1天前</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3347"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3390"/>
         <source>Options: %1</source>
         <translation>可用選項: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3393"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>隱私/安全性增強 &amp; 應用程式沙箱 (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3350"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3351"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3352"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3353"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3393"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3394"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3395"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3396"/>
         <source>Enabled</source>
         <translation>啟用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="375"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3350"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3351"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3352"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3353"/>
+        <location filename="Windows/SettingsWindow.cpp" line="379"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3393"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3394"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3395"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3396"/>
         <source>Disabled</source>
         <translation>停用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="324"/>
+        <location filename="Windows/SettingsWindow.cpp" line="328"/>
         <source>Arabic (Morocco) - LTR</source>
         <translation>阿拉伯文（摩洛哥，從左至右）</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="588"/>
+        <location filename="Windows/SettingsWindow.cpp" line="592"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
         <translation>三態行為：未勾選 = 永不，部分勾選 = 僅在按住 %1 時（預設），已勾選 = 永遠。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3351"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1806"/>
+        <source>AllowAiAgent=n in Sandboxie.ini disables this on the whole machine.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1811"/>
+        <source>AiAgentRequirePairing=y in Sandboxie.ini means the code cannot be waived.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1816"/>
+        <source>AiAgentRequireConfirmation=y in Sandboxie.ini keeps the confirmations on.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="3394"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>加密沙箱 (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3352"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3395"/>
         <source>Network Interception (NetI): %1</source>
         <translation>網路監聽 (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3353"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3396"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Sandboxie 桌面 (Desk): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3384"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3427"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>這看起來不像是一個 Sandboxie-Plus 序號。&lt;br /&gt;如果您嘗試的是輸入憑證的更新金鑰或簽章，這不是正確的操作，請在上方文字區域中輸入完整憑證。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3391"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3434"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>您正嘗試在未輸入作為前置條件的贊助者憑證的情況下使用功能升級金鑰。請注意，這種類型的金鑰 (&lt;b&gt;正如網站上以粗體明確說明的那樣&lt;/b&gt;) 要求您預先擁有一個有效的贊助者憑證；&lt;br /&gt;如果您想使用進階功能，您需要同時取得標準憑證和功能升級金鑰來解鎖進階功能。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3397"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3440"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>您正嘗試在未輸入作為前置條件的贊助者憑證的情況下使用續期金鑰。請注意，這種類型的金鑰 (&lt;b&gt;正如網站上以粗體明確說明的那樣&lt;/b&gt;) 要求您預先擁有一個有效的贊助者憑證；沒有前者的情況下此金鑰完全無效。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3402"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3445"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;如果您沒有閱讀產品說明並錯誤地取得了此金鑰，請透過電子郵件 (在我們的網站上提供) 聯絡我們以解決此問題。&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3417"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3445"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3674"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3488"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3717"/>
         <source>Retrieving certificate...</source>
         <translation>取得憑證中...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3433"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3476"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - 取得評估憑證</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3433"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3476"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>請輸入您的電郵地址以接收免費的%1天評估憑證，此憑證將頒發給 %2 並鎖定至目前硬體。
 您最多可以為每個唯一硬體ID請求%3個評估憑證。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3459"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3502"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>取得憑證錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3459"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3502"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>未知錯誤 (可能是網際網路問題)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3518"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3561"/>
         <source>Developer</source>
         <translation>開發人員</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3617"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3660"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>評估憑證套用成功。 請享受你的免費試用！</translation>
     </message>
@@ -7508,141 +8863,141 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">取得憑證中...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3514"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3557"/>
         <source>Contributor</source>
         <translation>貢獻者</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3516"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3559"/>
         <source>Eternal</source>
         <translation>永恆</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3520"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3563"/>
         <source>Business</source>
         <translation>商業</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3522"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3565"/>
         <source>Personal</source>
         <translation>個人</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3524"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3567"/>
         <source>Great Patreon</source>
         <translation>Great Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3526"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3569"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3528"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3571"/>
         <source>Family</source>
         <translation>家庭</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3530"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3573"/>
         <source>Home</source>
         <translation>家用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3532"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3575"/>
         <source>Evaluation</source>
         <translation>評估</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3534"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3577"/>
         <source>Type %1</source>
         <translation>類型 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3564"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3607"/>
         <source>Advanced</source>
         <translation>進階</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3566"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3609"/>
         <source>Advanced (L)</source>
         <translation>進階 (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3568"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3611"/>
         <source>Max Level</source>
         <translation>最高等級</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3570"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3613"/>
         <source>Level %1</source>
         <translation>等級 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1913"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1952"/>
         <source>Supporter certificate required for access</source>
         <translation>需要贊助者憑證以存取</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1930"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1969"/>
         <source>Supporter certificate required for automation</source>
         <translation>需要贊助者憑證以自動作業</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3609"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3652"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>不幸的是，此憑證對於目前版本無效，您需要取得新憑證或降級至早期版本。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3611"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3654"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>儘管此憑證已逾期，但對於目前安裝的版本 Plus 功能仍保持啟用狀態。但是，您將無法再存取 Sandboxie-Live 服務，包括相容性更新和線上疑難排解資料庫。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3613"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3656"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>不幸的是，此憑證已逾期，您需要取得新憑證。</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1368"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1372"/>
         <source>Sandboxed Web Browser</source>
         <translation>沙箱化網頁瀏覽器</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="452"/>
-        <location filename="Windows/SettingsWindow.cpp" line="457"/>
+        <location filename="Windows/SettingsWindow.cpp" line="456"/>
+        <location filename="Windows/SettingsWindow.cpp" line="461"/>
         <source>Notify</source>
         <translation>通知</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="453"/>
-        <location filename="Windows/SettingsWindow.cpp" line="458"/>
+        <location filename="Windows/SettingsWindow.cpp" line="457"/>
+        <location filename="Windows/SettingsWindow.cpp" line="462"/>
         <source>Download &amp; Notify</source>
         <translation>下載並通知</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="454"/>
-        <location filename="Windows/SettingsWindow.cpp" line="459"/>
+        <location filename="Windows/SettingsWindow.cpp" line="458"/>
+        <location filename="Windows/SettingsWindow.cpp" line="463"/>
         <source>Download &amp; Install</source>
         <translation>下載並安裝</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="644"/>
+        <location filename="Windows/SettingsWindow.cpp" line="648"/>
         <source>Browse for Program</source>
         <translation>瀏覽程式</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="765"/>
+        <location filename="Windows/SettingsWindow.cpp" line="769"/>
         <source>Add %1 Template</source>
         <translation>加入 %1 範本</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3193"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3236"/>
         <source>Click to reveal</source>
         <translation>點選以揭示</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3194"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3237"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
@@ -7657,45 +9012,45 @@ Right-click to copy</oldsource>
         <translation type="vanished">硬體ID: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="629"/>
-        <location filename="Windows/SettingsWindow.cpp" line="811"/>
+        <location filename="Windows/SettingsWindow.cpp" line="633"/>
+        <location filename="Windows/SettingsWindow.cpp" line="815"/>
         <source>Select font</source>
         <translation>選取字型</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="631"/>
-        <location filename="Windows/SettingsWindow.cpp" line="813"/>
+        <location filename="Windows/SettingsWindow.cpp" line="635"/>
+        <location filename="Windows/SettingsWindow.cpp" line="817"/>
         <source>Reset font</source>
         <translation>重設字型</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="954"/>
+        <location filename="Windows/SettingsWindow.cpp" line="958"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1217"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1221"/>
         <source>Please enter message</source>
         <translation>請輸入訊息</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1249"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1253"/>
         <source>Select Program</source>
         <translation>選擇程式</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1249"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1253"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>可執行檔案 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1253"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1269"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1257"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1273"/>
         <source>Please enter a menu title</source>
         <translation>請輸入一個選單標題</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1265"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1269"/>
         <source>Please enter a command</source>
         <translation>請輸入一則命令</translation>
     </message>
@@ -7704,7 +9059,7 @@ Right-click to copy</oldsource>
         <translation type="vanished">此贊助者憑證已逾期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3286"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3329"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus 功能將在 %1 天後被停用。&lt;/font&gt;</translation>
     </message>
@@ -7713,7 +9068,7 @@ Right-click to copy</oldsource>
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;在此版本中，Plus 附加的進階功能仍是可用的。&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3290"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3333"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus 功能已不再啟用。</translation>
     </message>
@@ -7727,22 +9082,22 @@ Right-click to copy</oldsource>
         <translation type="vanished">需要贊助者憑證</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2048"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2087"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>在沙箱外執行(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2056"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2095"/>
         <source>Set Force in Sandbox</source>
         <translation>設定強制沙箱化</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2065"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2104"/>
         <source>Set Open Path in Sandbox</source>
         <translation>設為沙箱開放路徑</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3592"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3635"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>這看起來不像是一份憑證。請輸入完整的憑證，而不僅僅是其中的一部分。</translation>
     </message>
@@ -7755,7 +9110,7 @@ Right-click to copy</oldsource>
         <translation type="vanished">很不幸此憑證已廢止。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3620"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3663"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>感謝您對 Sandboxie-Plus 開發工作的支持。</translation>
     </message>
@@ -7764,129 +9119,129 @@ Right-click to copy</oldsource>
         <translation type="vanished">此贊助者憑證無效。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2449"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2492"/>
         <source>Update Available</source>
         <translation>更新可用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2451"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2494"/>
         <source>Installed</source>
         <translation>已安裝</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2456"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2499"/>
         <source>by %1</source>
         <translation>by %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2464"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2507"/>
         <source>(info website)</source>
         <translation>(資訊網站)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2492"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2535"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>此附加元件具有強制性且不可被移除。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2501"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2713"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2544"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2756"/>
         <source>Select Directory</source>
         <translation>選擇目錄</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2533"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2576"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;立即檢查&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2603"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2646"/>
         <source>Select Portable Box ini</source>
         <translation>選取可攜式沙箱 ini</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2603"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2613"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2646"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2656"/>
         <source>Ini Files (*.ini)</source>
         <translation>ini 檔案 (*.ini)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2613"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2656"/>
         <source>Save new Portable Box ini</source>
         <translation>儲存新可攜式沙箱 ini</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2618"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2661"/>
         <source>File already exists, please select a different file name.</source>
         <translation>檔案已存在，請使用不同的檔名。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2624"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2667"/>
         <source>Invalid box name</source>
         <translation>無效的沙箱名稱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2645"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2688"/>
         <source>Select Root Folder</source>
         <translation>選取根資料夾</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2673"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2716"/>
         <source>Please enter the new configuration password.</source>
         <translation>請輸入新組態密碼。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2677"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2720"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>請再次輸入新組態密碼。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2682"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2725"/>
         <source>Passwords did not match, please retry.</source>
         <translation>密碼不匹配，請重新輸入。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2694"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2737"/>
         <source>Process</source>
         <translation>處理程序</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2694"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2737"/>
         <source>Folder</source>
         <translation>資料夾</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2704"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2747"/>
         <source>Please enter a program file name</source>
         <translation>請輸入一個程式檔案名稱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2772"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2815"/>
         <source>Please enter the template identifier</source>
         <translation>請輸入範本識別碼</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2780"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2823"/>
         <source>Error: %1</source>
         <translation>錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2812"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2855"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>要刪除所選取的本機範本嗎？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3721"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3764"/>
         <source>Autocomplete Consent Required</source>
         <translation>需要同意啟用自動完成</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3723"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3766"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>自動完成功能需要您的同意以繼續。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3725"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3768"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -7899,32 +9254,32 @@ Choose autocomplete mode:
 %1 輸入時: 當輸入時自動完成建議。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3733"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3776"/>
         <source>Manual</source>
         <translation>手動</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3734"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3777"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>使用 %1 觸發自動完成建議。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3736"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3779"/>
         <source>While Typing</source>
         <translation>輸入時</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3737"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3780"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>當輸入時觸發自動完成建議。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3740"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3783"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>保持自動完成建議為停用狀態。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3739"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3782"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -7936,7 +9291,7 @@ Do you wish to enable autocomplete?</source>
 是否繼續啟用自動補全？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3120"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3163"/>
         <source>%1 (Current)</source>
         <translation>%1 (目前)</translation>
     </message>
@@ -11670,46 +13025,1825 @@ Please note that this values are currently user specific and saved globally for 
         <translation>錯誤</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="87"/>
         <location filename="Windows/SettingsWindow.cpp" line="89"/>
+        <location filename="Windows/SettingsWindow.cpp" line="91"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="87"/>
+        <location filename="Windows/SettingsWindow.cpp" line="89"/>
         <source>default</source>
         <translation>預設</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="89"/>
+        <location filename="Windows/SettingsWindow.cpp" line="91"/>
         <source>fallback</source>
         <translation>備用</translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="67"/>
+        <source>Claude Desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="79"/>
+        <source>Claude Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="82"/>
+        <source>Claude Code manages its own configuration; run this command instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="91"/>
+        <source>Visual Studio Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="93"/>
+        <source>Add it per workspace or to your user settings - we do not write into a workspace, because that file lives in your repository.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="101"/>
+        <source>Another client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="103"/>
+        <source>Most clients take a command to run. Use the path or the snippet below.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="120"/>
+        <source>%1 could not be opened for reading.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="137"/>
+        <source>%1 is not valid JSON (%2), so it was left untouched. Add the configuration by hand instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="169"/>
+        <source>This client has to be configured by hand.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="173"/>
+        <location filename="Mcp/McpClientSetup.cpp" line="247"/>
+        <source>SbieMcp.exe was not found next to SandMan.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="187"/>
+        <source>%1 could not be backed up, so it was left untouched.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="193"/>
+        <source>%1 could not be created.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="210"/>
+        <source>%1 could not be written.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="218"/>
+        <source>%1 could not be replaced; the new configuration is in %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="252"/>
+        <source>This folder could not be created:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="264"/>
+        <source>This file could not be read:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="275"/>
+        <source>This file is not the JSON this expects, so it was left alone:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="293"/>
+        <source>This file could not be written:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="307"/>
+        <source>Claude Code was not found. Install it, or open a terminal yourself and run the command shown above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpClientSetup.cpp" line="342"/>
+        <source>Claude Code could not be started (error %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpDocs.cpp" line="151"/>
+        <source>the documentation pack is not available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpDocs.cpp" line="159"/>
+        <source>&apos;%1&apos; is not a page in the documentation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpDocs.cpp" line="165"/>
+        <source>&apos;%1&apos; could not be read from the pack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpKnowledge.cpp" line="301"/>
+        <source>message SBIE%1 was seen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpKnowledge.cpp" line="313"/>
+        <source>a blocked resource matched %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpKnowledge.cpp" line="330"/>
+        <source>%1 is not set on the sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpKnowledge.cpp" line="339"/>
+        <source>%1 is set on the sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="63"/>
+        <source>The &apos;changes&apos; argument must be a non-empty array of {setting, value} objects.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="69"/>
+        <source>That is %1 changes at once. Propose at most 50, so the user can actually read what they are agreeing to.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="79"/>
+        <source>Every entry in &apos;changes&apos; needs a &apos;setting&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="85"/>
+        <source>&apos;%1&apos; is not a usable setting name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="91"/>
+        <source>The value for &apos;%1&apos; contains a line break, which cannot be stored in Sandboxie.ini.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="119"/>
+        <source>Changes cannot be confirmed right now, so nothing was changed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="125"/>
+        <source>A confirmation is already waiting for the user. Nothing was changed - wait for them to answer the previous request before asking again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="174"/>
+        <source>Name or alias of the sandbox to run in.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="178"/>
+        <source>The command line to start, exactly as it should run. Quote paths containing spaces. It has to be a single plain line - a command carrying line breaks is refused, because the user must be able to read what they are approving as one command.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="185"/>
+        <source>Working directory for the program. Optional.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="189"/>
+        <source>Why this needs to run, in one sentence. Shown to the user as your words, next to the command. A request with no reason given is a harder one to agree to.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="214"/>
+        <source>The Sandboxie.ini setting name. Check it with config_schema first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="218"/>
+        <source>The value to set. Omit or leave empty to remove the setting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="230"/>
+        <source>The changes, at most 50.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="235"/>
+        <location filename="Mcp/McpOperate.cpp" line="313"/>
+        <location filename="Mcp/McpOperate.cpp" line="319"/>
+        <location filename="Mcp/McpOperate.cpp" line="324"/>
+        <location filename="Mcp/McpTools.cpp" line="316"/>
+        <location filename="Mcp/McpTools.cpp" line="324"/>
+        <source>Name or alias of the sandbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="248"/>
+        <source>Why these changes should help. Shown to the user verbatim when they are asked to approve, so write it for them and not for yourself.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="265"/>
+        <source>Check a change set before proposing it</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="266"/>
+        <source>Checks proposed settings against what Sandboxie actually accepts, without changing anything and without asking the user. Always call this before box_apply_changes: an unknown setting name is ignored silently by the driver, so a typo produces a change that appears to work and does nothing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="272"/>
+        <source>Change sandbox settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="273"/>
+        <source>Proposes configuration changes to one sandbox. The user is shown a diff of current against proposed values and must approve it; nothing is written if they decline. Use this for a fix you are confident about, and for everyday requests such as adding a forced program.
+
+If you want to test a fix before asking the user to accept it, use shadow_begin instead - that lets you try it against a disposable copy of the configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="282"/>
+        <source>Start testing a fix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="283"/>
+        <source>Clones a sandbox configuration to a disposable copy that shares the real file set, so a fix can be tried without touching the sandbox. Returns the name of the copy; change it with shadow_set, then either shadow_commit to copy the differences back - which asks the user once - or shadow_discard to throw them away.
+
+Note what is shared: files written while testing land in the real sandbox and a discard does not undo them. Only configuration is disposable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="290"/>
+        <source>Name or alias of the sandbox to test against.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="292"/>
+        <source>Change a setting in the test copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="293"/>
+        <source>Applies changes to the disposable copy. No confirmation is needed because nothing real is affected yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="297"/>
+        <source>Keep the tested fix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="298"/>
+        <source>Copies the differences from the test copy back onto the real sandbox, after showing the user what they are. This is the one confirmation on the troubleshooting path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="301"/>
+        <location filename="Mcp/McpOperate.cpp" line="306"/>
+        <source>Name or alias of the sandbox being tested.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="303"/>
+        <source>Abandon the tested fix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="304"/>
+        <source>Deletes the test copy. Nothing to roll back, because the real sandbox was never changed. Call this when a hypothesis turns out to be wrong.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="308"/>
+        <source>Take a rollback point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="309"/>
+        <source>Takes a snapshot of a sandbox so file and registry changes can be undone later. Near-instant regardless of sandbox size, but it refuses while anything is running in the box - so take it before starting anything. Not offered for empty sandboxes or RAM-disk sandboxes, where it would be meaningless.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="315"/>
+        <source>Roll a sandbox back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="316"/>
+        <source>Reverts a sandbox to a snapshot, discarding file and registry changes made since. Terminates whatever is running in the box first, because the operation requires it. This throws work away and cannot be undone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="321"/>
+        <source>Stop everything in a sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="322"/>
+        <source>Terminates all processes in a sandbox. Unsaved work in those programs is lost, which is why the user is asked.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="326"/>
+        <source>Run a program inside a sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="327"/>
+        <source>Starts a command inside a sandbox, at the privileges Sandboxie-Plus itself has - never elevated. The user is shown the command line exactly as given and has to confirm it before anything runs, so write the command you actually mean: it is not summarised or rewritten.
+
+This is how a fix gets tested rather than described - start the program that was failing, then read trace_query and box_diagnostics to see whether it still fails. failing, then read trace_query to see whether it still fails. The call returns as soon as the program has started: it does not wait for it to exit and captures no output, so get the pid from box_processes.
+
+The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with shadow_set is not in effect here - a test copy shares the real sandbox&apos;s file root, so a program started against it runs in the real sandbox with the real settings. To test a configuration change by running something, apply it first with shadow_commit, or write it directly with box_apply_changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="346"/>
+        <source>Create a sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="347"/>
+        <source>Creates a new, empty sandbox with default settings. The user is asked first. Settings can then be applied with box_apply_changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="349"/>
+        <source>Name for the new sandbox. Letters, digits and underscores.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="374"/>
+        <location filename="Mcp/McpOperate.cpp" line="493"/>
+        <location filename="Mcp/McpOperate.cpp" line="503"/>
+        <location filename="Mcp/McpOperate.cpp" line="538"/>
+        <location filename="Mcp/McpOperate.cpp" line="559"/>
+        <location filename="Mcp/McpOperate.cpp" line="671"/>
+        <location filename="Mcp/McpOperate.cpp" line="690"/>
+        <location filename="Mcp/McpOperate.cpp" line="742"/>
+        <location filename="Mcp/McpOperate.cpp" line="794"/>
+        <location filename="Mcp/McpOperate.cpp" line="897"/>
+        <location filename="Mcp/McpReport.cpp" line="468"/>
+        <location filename="Mcp/McpReport.cpp" line="619"/>
+        <location filename="Mcp/McpTools.cpp" line="1257"/>
+        <source>No sandbox called &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="399"/>
+        <source>  ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="399"/>
+        <source>  NOT A KNOWN SETTING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="401"/>
+        <source>  (superseded by %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="403"/>
+        <source>  (removed in %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="414"/>
+        <source>
+The settings reference could not be loaded, so none of this was verified.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="416"/>
+        <source>
+%1 of these are not settings Sandboxie recognises. Fix them before proposing the change - an unknown name is ignored silently rather than reported, so it would look like a fix that did nothing.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="445"/>
+        <source>The user declined, so nothing was changed. Do not ask again with the same change set - explain what you wanted to do and why, and let them decide.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="473"/>
+        <source>%1 of %2 changes written to %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="476"/>
+        <source>
+These could not be written: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="510"/>
+        <source>Already testing against %1. Use shadow_set to change it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="516"/>
+        <source>The test copy could not be created.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="522"/>
+        <source>Testing against %1, a disposable copy of the configuration of %2 that shares its real file set. Change it with shadow_set. Remember that files written while testing land in the real sandbox - only the configuration is disposable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="542"/>
+        <source>There is no test copy for &apos;%1&apos; yet. Call shadow_begin first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="547"/>
+        <location filename="Mcp/McpOperate.cpp" line="568"/>
+        <source>The test copy %1 has gone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="563"/>
+        <source>There is no test copy for &apos;%1&apos;. Nothing to keep.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="636"/>
+        <source>The test copy is identical to %1, so there is nothing to keep. Discarding it would have the same effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="648"/>
+        <source>(the agent gave no reason)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="651"/>
+        <source>The user declined. The test copy is still there, and %1 is unchanged - call shadow_discard to clean up.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="658"/>
+        <source>The changes could not be copied back.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="663"/>
+        <source>%1 change(s) applied to %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="674"/>
+        <source>There was no test copy for &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="681"/>
+        <source>The test copy is gone and %1 was never changed. Note that any files the test wrote are still in the sandbox - discarding only undoes configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="697"/>
+        <source>&apos;%1&apos; holds no content, so there is nothing to snapshot. Note that an encrypted or image-backed sandbox also looks empty while it is not mounted - if this one is, it has to be opened first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="702"/>
+        <source>&apos;%1&apos; is a RAM-disk sandbox: its contents are discarded when it is unmounted or the machine restarts, so a snapshot would protect nothing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="706"/>
+        <source>Something is still running in &apos;%1&apos;. Snapshots require the sandbox to be idle - ask the user to close its programs, or use box_terminate, and then try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="713"/>
+        <source>Confirm snapshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="714"/>
+        <source>Take a snapshot of sandbox %1, so its files and registry can be rolled back later.
+
+This is quick and does not copy the sandbox. It does mean the sandbox cannot shrink until the snapshot is merged or deleted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="717"/>
+        <source>Take Snapshot</source>
+        <translation type="unfinished">擷取快照</translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="718"/>
+        <source>The user declined; no snapshot was taken.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="721"/>
+        <source>Before AI agent changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="722"/>
+        <source>Taking a snapshot of %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="724"/>
+        <source>The snapshot failed: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="733"/>
+        <source>Snapshot taken for %1. File and registry changes from here on can be undone with snapshot_rollback.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="747"/>
+        <source>&apos;%1&apos; has no snapshot to roll back to.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="754"/>
+        <source>Roll sandbox %1 back to its snapshot.
+
+Every file and registry change made in the sandbox since the snapshot will be discarded. This cannot be undone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="760"/>
+        <source>
+
+%1 program(s) are running in the sandbox and will be terminated first. Unsaved work in them will be lost.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="764"/>
+        <source>Confirm rollback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="765"/>
+        <source>Roll Back and Discard Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="766"/>
+        <source>The user declined; nothing was rolled back.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="772"/>
+        <source>The sandbox could not be stopped, so nothing was rolled back: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="778"/>
+        <source>Rolling %1 back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="780"/>
+        <source>The rollback failed: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="786"/>
+        <source>%1 was rolled back to its snapshot.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="798"/>
+        <source>Nothing is running in %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="803"/>
+        <source>Confirm terminate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="804"/>
+        <source>Terminate %1 program(s) running in sandbox %2.
+
+Unsaved work in them will be lost.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="806"/>
+        <source>Terminate Them</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="807"/>
+        <source>The user declined; nothing was terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="812"/>
+        <source>Terminating failed: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="814"/>
+        <source>%1 program(s) in %2 were terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="822"/>
+        <location filename="Mcp/McpTools.cpp" line="607"/>
+        <location filename="Mcp/McpTools.cpp" line="843"/>
+        <location filename="Mcp/McpTools.cpp" line="906"/>
+        <source>The &apos;box&apos; argument is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="826"/>
+        <source>&apos;%1&apos; is not a usable sandbox name. Use letters, digits and underscores.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="830"/>
+        <source>A sandbox called &apos;%1&apos; already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="835"/>
+        <source>Confirm new sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="836"/>
+        <source>Create a new sandbox called %1, with default settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="837"/>
+        <source>Create It</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="838"/>
+        <source>The user declined; no sandbox was created.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="843"/>
+        <source>The sandbox could not be created: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="848"/>
+        <source>Sandbox %1 was created with default settings. Use box_apply_changes to configure it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="876"/>
+        <source>The &apos;command&apos; argument is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="880"/>
+        <source>That command line is %1 characters, and the confirmation can only honestly show up to %2. Write a shorter command, or put the work in a script file and run that.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="887"/>
+        <source>That command line contains a line break or a control character. It has to be a single plain line, because the user is shown it as one and has to be able to read exactly what they are approving.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="893"/>
+        <source>The working directory has to be a single line.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="911"/>
+        <source>&apos;%1&apos; is a test copy, which is a copy of a sandbox&apos;s configuration and not a sandbox a program can run in - it shares the real sandbox&apos;s files, so anything started against it would run in the real sandbox with the real settings. Apply the change with shadow_commit first, then run against the sandbox itself.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="927"/>
+        <source>Run this command inside %1:
+
+    %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="929"/>
+        <source>
+
+Working directory:
+    %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="931"/>
+        <source>
+
+Its reason, in its own words:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="932"/>
+        <source>
+
+It runs sandboxed and with your normal privileges, not as administrator - but the command above is the agent&apos;s choice, so read it before agreeing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="935"/>
+        <source>Confirm running a program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="936"/>
+        <source>Run It</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="937"/>
+        <source>The user declined; nothing was started.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="944"/>
+        <source>The program could not be started: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="957"/>
+        <source>Launched in %1. The pid is not reported because the program is started through Sandboxie&apos;s launcher, which exits immediately - its pid is not the program&apos;s. Call box_processes on %2 to get the real pid and to confirm it is still running, and trace_query or box_diagnostics to see what it did. Nothing is waited for and no and trace_query to see what it did. Nothing is waited for and no output is captured.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="972"/>
+        <source>Sandboxie is not running, so nothing can be changed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpOperate.cpp" line="987"/>
+        <location filename="Mcp/McpReport.cpp" line="685"/>
+        <location filename="Mcp/McpTools.cpp" line="1358"/>
+        <source>Tool &apos;%1&apos; is not implemented.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="14"/>
+        <source>the endpoint name is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="19"/>
+        <source>the endpoint name is longer than 64 characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="29"/>
+        <source>the endpoint name contains &apos;%1&apos;; only letters, digits, underscore, hyphen and dot are allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="39"/>
+        <source>the endpoint name must start with &apos;%1&apos; - that is the prefix the template which keeps sandboxed programs away from this pipe matches, and a name outside it would not be protected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="111"/>
+        <source>malformed JSON: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="117"/>
+        <source>message is not a JSON object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="126"/>
+        <source>missing or wrong jsonrpc version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="132"/>
+        <source>no method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="183"/>
+        <source>missing MCP-Protocol-Version header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="187"/>
+        <source>MCP-Protocol-Version header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="192"/>
+        <source>missing Mcp-Method header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="196"/>
+        <source>Mcp-Method header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="203"/>
+        <source>missing Mcp-Name header for %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="210"/>
+        <source>Mcp-Name header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpProtocol.cpp" line="257"/>
+        <source>Unsupported protocol version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="42"/>
+        <source>Reporting is unavailable because there is no way to ask the user, and nothing is sent without being asked.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="49"/>
+        <source>A confirmation is already waiting for the user. Nothing was sent - wait for them to answer the previous request before asking again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="205"/>
+        <source>an unidentified agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="311"/>
+        <source>One of: fixed, partly_fixed, not_fixed. Report a success as readily as a failure - a run that found a cause and applied a working fix is the material the knowledge base is made of, and the project currently never sees one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="322"/>
+        <source>Name or alias of the sandbox the run was about. Optional.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="324"/>
+        <source>One line naming the problem, as an issue title would.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="325"/>
+        <source>What you found and why you think it was the cause. Written as your own account - it is labelled as model output in the report and a maintainer will read it as such.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="328"/>
+        <source>What you did, one step per entry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="329"/>
+        <source>The settings you changed, as &apos;Setting=Value&apos; lines. These become the ini_changes block of the draft knowledge-base entry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="332"/>
+        <source>How you established the result - what you ran, what you read afterwards. A fix nobody verified is a guess.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="335"/>
+        <source>Hypotheses you ruled out, and what ruled them out. Please fill this in: what a cause is NOT is what makes a knowledge-base entry discriminate instead of merely sounding right.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="338"/>
+        <source>Set this only when the user has told you whether their problem is gone - not when you believe it is. Ask them: &apos;is it working now?&apos; is a question worth one turn. Until this is set, Sandboxie-Plus asks the user itself before the report is sent, and the report says plainly that the outcome is your assessment rather than theirs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="340"/>
+        <source>Ask to attach the whole Sandboxie.ini. Off unless the problem is about configuration the box section does not show; it carries every sandbox the user has.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="343"/>
+        <source>Ask to attach the resource trace as well as the message log. Large, and detailed about everything running on the machine.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="362"/>
+        <source>Issue title.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="363"/>
+        <source>Issue body, Markdown. Leave empty to use the composed report, which is the better choice: it is the text the user has already read.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="366"/>
+        <source>Label names to suggest. The user can change them.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="381"/>
+        <source>Name or alias of the sandbox the workaround is for.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="382"/>
+        <source>The settings, as &apos;Setting=Value&apos; lines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="383"/>
+        <source>What the workaround does and what it costs, in plain words.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="400"/>
+        <source>Write up what happened</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="401"/>
+        <source>Builds a report from your account of the run plus the facts Sandboxie-Plus captures itself, and shows you the result. Nothing is sent - this only composes.
+
+The two halves stay separate and labelled: what the machine observed, and what you wrote. Do not try to blend them; a maintainer has to be able to tell which sentences are evidence.
+
+Call this on a success too. A failure report tells the project what is still broken; a success report tells it what the fix was, and that is the one it never gets.
+
+Call it early and again as you learn more, rather than once at the end. Whatever you composed last is what Sandboxie-Plus offers the user when they close the agent window, and they may close it at any moment - the console going away does not wait for you to finish. An early rough write-up that gets sent is worth more than a perfect one that was never composed.
+
+You cannot send it yourself, by design. When you are done, tell the user to press Finish - the green tick at the bottom of the Sandboxie-Plus agent window - which opens your report for them to read, correct and send.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="426"/>
+        <source>Open a prefilled GitHub issue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="427"/>
+        <source>Opens GitHub&apos;s new-issue form in the user&apos;s browser with the title and body filled in. It submits nothing - the user reads it on the site and decides.
+
+Prefer report_submit. This one requires the user to have a GitHub account and to be signed in, which many are not; report_submit reaches the project&apos;s own tracker with no account at all. Use this only when the user has said they want to discuss it on GitHub, or when they ask for it by name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="435"/>
+        <source>Save a workaround others can apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="436"/>
+        <source>Writes a file holding the settings as an INI snippet plus the equivalent SbieIni.exe commands, so the fix can be shared or reapplied. Local only - nothing leaves the machine. The user picks where it goes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="456"/>
+        <source>&apos;outcome&apos; must be one of: fixed, partly_fixed, not_fixed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="460"/>
+        <source>&apos;title&apos; is required - one line naming the problem.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="462"/>
+        <source>&apos;narrative&apos; is required. A report with no account of what you found is not worth a maintainer&apos;s time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="528"/>
+        <source>Composed, and nothing has been sent. The user has not seen it yet either - call report_submit to put it in front of them, or issue_prefill to open it as a GitHub issue instead. This is the full text:
+
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="541"/>
+        <source>Nothing has been written up yet, and sending is not yours to do in any case. Call report_compose first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="545"/>
+        <source>Sending is the user&apos;s to do, not yours - this tool no longer submits anything.
+
+Your write-up is already with Sandboxie-Plus. Tell the user to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: that opens the report for them to read, lets them correct anything, and sends it if they agree. Say that sending it is worth doing and why, once, and then leave the decision with them.
+
+Keep composing if you learn more - they are offered whatever you wrote last.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="559"/>
+        <source>&apos;title&apos; is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="565"/>
+        <source>There is nothing to put in the issue. Supply &apos;body&apos;, or call report_compose first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="596"/>
+        <source>Confirm opening a GitHub issue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="597"/>
+        <source>Open the Sandboxie-Plus issue form in your browser, filled in with this:
+
+Title: %1
+
+%2
+
+Nothing is submitted by opening it - you still have to press the button on the site, and you can edit it there first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="601"/>
+        <source>Open the Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="602"/>
+        <source>The user declined; no issue was opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="606"/>
+        <source>The browser could not be opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="609"/>
+        <source>The issue form is open in the browser, but the body did not fit in a URL and was truncated. Nothing has been submitted; the user decides on the site.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="611"/>
+        <source>The issue form is open in the browser, prefilled. Nothing has been submitted; the user decides on the site.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="624"/>
+        <source>&apos;changes&apos; is required - there is no workaround without it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="635"/>
+        <source>an AI agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="654"/>
+        <source>Save the workaround</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="656"/>
+        <source>Sandboxie configuration (*.ini);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="658"/>
+        <source>The user cancelled; nothing was written.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="662"/>
+        <source>That file could not be written: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="670"/>
+        <source>Written to %1 - %2 setting(s), as an INI section plus the equivalent SbieIni.exe commands.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpReport.cpp" line="678"/>
+        <source>Sandboxie is not running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="697"/>
+        <source>The six-digit code shown in Sandboxie-Plus. Omit it on the first call and Sandboxie-Plus will display one; then ask the user to read it to you.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="712"/>
+        <source>Connect to Sandboxie-Plus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpServer.cpp" line="713"/>
+        <source>Authorises this connection to look at this machine. Call with no arguments and Sandboxie-Plus shows a six-digit code on the user&apos;s screen; ask the user for it and call again with code set.
+
+You do not need this to read the documentation or the settings schema - those work now. You do need it before anything that reads the user&apos;s sandboxes, and before anything that changes them. Do not guess the code: a handful of wrong attempts invalidates it and a new one has to be requested.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="93"/>
+        <source>How many results at most. Defaults to 10.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="113"/>
+        <source>The entry id, as returned by kb_search or kb_match.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="132"/>
+        <source>Name or alias of the sandbox to explain.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="136"/>
+        <source>How many candidates at most. Defaults to 5.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="211"/>
+        <source>Limit to one sandbox, by name or alias. Many entries carry no box.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="215"/>
+        <source>One of message, diagnostic or notice. Omit for all three.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="219"/>
+        <source>Only entries whose text contains this.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="223"/>
+        <source>Entries to return, newest first. Default 100, maximum 200.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="241"/>
+        <source>Limit to one sandbox, by name or alias. Omit for every sandbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="245"/>
+        <source>Only rows whose path or message contains this text.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="249"/>
+        <source>Only rows with this status, for example Denied. Omit for all.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="253"/>
+        <source>Rows to return, default 100, maximum 300.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="257"/>
+        <source>Rows to skip, for paging. The result reports the total.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="292"/>
+        <source>Sandboxie version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="293"/>
+        <source>Version of Sandboxie-Plus and of the operating system it is running on. Call this first: fixes and setting names differ between versions, and a suggestion that does not apply to the installed build wastes a round trip.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="298"/>
+        <source>List sandboxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="299"/>
+        <source>Every configured sandbox with its type, whether it is enabled, how many processes are running in it, and whether it holds any content. Boxes often have an alias, which is what the user calls them - refer to a box the way displayName shows it, and pass either the name or the alias to other tools.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="305"/>
+        <source>Read sandbox configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="306"/>
+        <source>The settings explicitly set on one sandbox, as name and value pairs. Values inherited from templates and global defaults are not included, so an absent setting means it is not set here, not that it has no effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="309"/>
+        <source>Name or alias of the sandbox, as reported by box_list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="311"/>
+        <source>What is running in a sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="312"/>
+        <source>The processes currently running in a sandbox, with their image paths, command lines and start times. Empty is a useful answer too: a program that exits immediately leaves nothing here, which points at a start-up failure rather than a running-program problem.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="319"/>
+        <source>Sandbox diagnostic events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="320"/>
+        <source>Diagnostic events Sandboxie has recorded for a sandbox - the same ones the troubleshooting wizard reports. These are the driver saying what it refused or had trouble with, so read them before guessing at a cause. Paths and account names are redacted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="327"/>
+        <source>Search the message log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="328"/>
+        <source>Everything Sandboxie-Plus has reported this session: driver and service messages, diagnostic events, and notices from SandMan itself. This is the same log the user is looking at, newest first. Unlike the resource trace it needs nothing switched on, so it is the first place to look. Paths and account names are redacted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="335"/>
+        <source>Search the resource trace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="336"/>
+        <source>The resource access trace: what sandboxed programs tried to open and whether it was allowed. This is where a &apos;why will it not start&apos; answer usually comes from - look for denied accesses just before the program exits.
+
+Requires tracing to be enabled in SandMan, and only covers what has been recorded since. If it is off, say so and ask the user to turn it on and reproduce the problem - do not speculate from an empty trace. Results are paged and redacted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="346"/>
+        <source>Search known problems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="347"/>
+        <source>Searches the troubleshooting knowledge base - curated entries mapping a symptom to a cause and a fix. This is a different thing from the documentation: the docs say what a setting does, these say why something is broken.
+
+Search by how the user described the problem, in their words. Returns ids; pass one to kb_get for the whole entry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="352"/>
+        <source>What the user reports, in their own words.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="354"/>
+        <source>Read a known problem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="355"/>
+        <source>The whole knowledge-base entry: what it looks like, why it happens, the settings that fix it, what the fix costs, and how to confirm it worked.
+
+Read the risk before proposing the fix. Every one of these loosens something, and the user is entitled to hear what, in your own words, when you ask them to approve it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="361"/>
+        <source>What could explain this sandbox&apos;s problems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="362"/>
+        <source>Scores the knowledge base against what this machine actually logged for a sandbox - the message codes seen, the resources that were blocked, and which settings are present - and returns the entries that explain some of it, best first.
+
+Each result carries matchedBecause, saying which observations it accounts for. Read that rather than trusting the order: a top-ranked entry that matched on one weak signal is a guess, and an entry that explains three separate observations is not. Nothing here is a verdict - it is a shortlist to check against the trace.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="371"/>
+        <source>Search the documentation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="372"/>
+        <source>Finds documentation pages by title, path, heading or setting name. Returns paths to read with docs_get, not the page text. Coverage is partial: roughly two in five settings have a page, so finding nothing here does not mean the setting does not exist - check config_schema.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="376"/>
+        <source>A setting name, a feature name, or a few words.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="377"/>
+        <source>Maximum results, default 10.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="379"/>
+        <source>Read a documentation page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="380"/>
+        <source>The full Markdown text of one page, addressed by the path that docs_search or docs_for_setting returned.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="382"/>
+        <source>Page path, for example Content/UseRamDisk.md.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="384"/>
+        <source>Look up a setting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="385"/>
+        <source>What Sandboxie itself knows about a configuration setting: whether it exists, its category and syntax, which version added or removed it, and what supersedes it. This is the authority on whether a setting is real - the documentation covers only some of them. An unknown setting name is silently ignored by the driver rather than rejected, so check here before recommending one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="391"/>
+        <location filename="Mcp/McpTools.cpp" line="398"/>
+        <source>Setting name, for example ClosedFilePath.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="393"/>
+        <source>Find the page for a setting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="394"/>
+        <source>The reference page for one Sandboxie.ini setting, plus any other pages that discuss it. Distinguishes a setting that exists but is undocumented from one that does not exist at all - do not infer the latter from the former.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="519"/>
+        <source>Sandboxie-Plus %1 on %2 (%3, kernel %4)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="526"/>
+        <source>
+
+No active supporter certificate. Settings whose Requirements name one will not take effect here - check with config_validate before recommending them.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="531"/>
+        <source>isolated desktops</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="532"/>
+        <source>advanced network features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="533"/>
+        <source>box encryption and protection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="534"/>
+        <source>enhanced security box types</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="536"/>
+        <source>
+
+Supporter certificate: active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="538"/>
+        <source> but expired%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="539"/>
+        <source>, inside the renewal grace period</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="541"/>
+        <source>, and no longer valid for this build</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="543"/>
+        <source>. No optional features unlocked.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="544"/>
+        <source>. Unlocked: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="595"/>
+        <source>
+(%1 of %2 sandboxes listed; the rest were omitted)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="598"/>
+        <source>No sandboxes are configured.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="611"/>
+        <source>No sandbox called &apos;%1&apos;. Either its name or its alias works; call box_list for both.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="642"/>
+        <source>
+(%1 of %2 settings listed; the rest were omitted)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="645"/>
+        <source>Sandbox &apos;%1&apos; has no settings of its own; it runs on templates and global defaults.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="652"/>
+        <source>The offline documentation pack is not installed, so documentation lookups are unavailable on this machine. The settings themselves can still be inspected with box_get_config, and the online documentation is at https://sandboxie-plus.com/docs/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="665"/>
+        <source>The &apos;query&apos; argument is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="677"/>
+        <source>   [reference page for %1]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="681"/>
+        <source>Nothing in the documentation matches &apos;%1&apos;. Note that only about two in five settings have a documentation page, so this is not evidence that a setting does not exist - check it with config_schema or box_get_config.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="699"/>
+        <source>The &apos;path&apos; argument is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="704"/>
+        <source>%1. Use docs_search to find a valid page path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="719"/>
+        <location filename="Mcp/McpTools.cpp" line="771"/>
+        <source>The &apos;setting&apos; argument is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="725"/>
+        <source>%1 is documented on %2 (%3).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="730"/>
+        <source>
+Also discussed on:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="736"/>
+        <source>%1 has no page of its own, but is discussed on:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="743"/>
+        <source>&apos;%1&apos; has no documentation page. That does not mean it is not a real setting - most settings are undocumented. Verify it exists before telling the user it does not.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="774"/>
+        <source>The settings reference (SbieSettings.ini) could not be loaded, so settings cannot be verified on this installation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="784"/>
+        <source>&apos;%1&apos; is not a known Sandboxie setting. Note that the driver ignores unknown settings silently instead of reporting an error, so a typo here would look like the setting simply had no effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="813"/>
+        <source>%1 is a known setting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="814"/>
+        <source>
+Category: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="815"/>
+        <source>
+Syntax: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="816"/>
+        <source>
+Requires: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="817"/>
+        <source>
+Added in: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="818"/>
+        <source>
+Removed in: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="819"/>
+        <source>
+Superseded by: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="820"/>
+        <source>
+
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="822"/>
+        <source>
+
+Documentation: %1 (read it with docs_get)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="824"/>
+        <source>
+
+This setting has no documentation page; most do not.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="847"/>
+        <location filename="Mcp/McpTools.cpp" line="910"/>
+        <location filename="Mcp/McpTools.cpp" line="987"/>
+        <location filename="Mcp/McpTools.cpp" line="1087"/>
+        <source>No sandbox called &apos;%1&apos;. Call box_list for names and aliases.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="885"/>
+        <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at box_diagnostics and trace_query rather than at the process list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="889"/>
+        <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at log_query and trace_query rather than at the process list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="914"/>
+        <source>Diagnostics are not available for &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="954"/>
+        <source>No diagnostic events have been recorded for &apos;%1&apos;. That is the normal state for a healthy sandbox, and it is not evidence that nothing went wrong - events are only recorded for the kinds of problem Sandboxie detects itself.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="970"/>
+        <source>Resource tracing is turned off, so there is no trace to search. Ask the user to enable it in SandMan and then reproduce the problem - the trace only records what happens while it is on. Do not draw conclusions from the absence of trace data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1052"/>
+        <source>
+(%1 of %2 matching rows; call again with offset=%3 for the next page)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1056"/>
+        <source>No trace rows match. The trace holds %1 entries in total - if that is 0, tracing has only just been enabled and the problem still has to be reproduced before there is anything to see.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1075"/>
+        <source>The message log is not available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1152"/>
+        <source>Nothing in the log matches. It holds %1 entries in total.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1155"/>
+        <source>
+(newest %1 of %2 matching entries)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1167"/>
+        <source>There is no troubleshooting knowledge base on this installation, so nothing could be consulted. This is not the same as finding no match: treat it as the lookup being unavailable, and fall back to the documentation and the trace.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1180"/>
+        <source>&apos;query&apos; is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1186"/>
+        <source>Nothing in the knowledge base matches &quot;%1&quot;. It holds %2 entries, so this is a real absence rather than an empty database - the problem may simply not be a known one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1213"/>
+        <source>&apos;id&apos; is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1217"/>
+        <source>There is no knowledge-base entry called &apos;%1&apos;. Use kb_search to find one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1221"/>
+        <source>%1 - %2
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1224"/>
+        <source>
+Why it happens:
+  %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1228"/>
+        <source>
+The fix:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1233"/>
+        <source>
+A troubleshooting script also applies this: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1237"/>
+        <source>
+What it costs:
+  %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1239"/>
+        <source>
+How to confirm it worked:
+  %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1241"/>
+        <source>
+%1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1288"/>
+        <source>Nothing in the knowledge base explains what %1 has logged. %2 entries were checked against %3 message code(s) and %4 blocked resource(s). Either the problem is not a known one, or nothing has been logged yet - if you have not reproduced the fault since Sandboxie-Plus started, there may be nothing to match against.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1295"/>
+        <source>Candidates for %1, best first. These explain some of what was logged; none of them is a verdict.
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1299"/>
+        <source>%1  (score %2)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1304"/>
+        <source>    matched: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Mcp/McpTools.cpp" line="1335"/>
+        <source>Sandboxie is not running or SandMan is not connected to the driver.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="5192"/>
+        <location filename="SandMan.cpp" line="5654"/>
         <source>OK</source>
         <translation>確定</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5193"/>
+        <location filename="SandMan.cpp" line="5655"/>
         <source>Apply</source>
         <translation>套用</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5194"/>
+        <location filename="SandMan.cpp" line="5656"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5195"/>
+        <location filename="SandMan.cpp" line="5657"/>
         <source>&amp;Yes</source>
         <translation>是(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5196"/>
+        <location filename="SandMan.cpp" line="5658"/>
         <source>&amp;No</source>
         <translation>否(&amp;N)</translation>
     </message>
@@ -11872,7 +15006,7 @@ Please note that this values are currently user specific and saved globally for 
         <translation>將此使用者介面上的連結在沙箱中開啟</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="771"/>
+        <location filename="Forms/SettingsWindow.ui" line="880"/>
         <source>Systray options</source>
         <translation>系統匣選項</translation>
     </message>
@@ -11882,32 +15016,32 @@ Please note that this values are currently user specific and saved globally for 
         <translation>使用者介面語言:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="473"/>
+        <location filename="Forms/SettingsWindow.ui" line="582"/>
         <source>Shell Integration</source>
         <translation>系統殼層整合</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="620"/>
+        <location filename="Forms/SettingsWindow.ui" line="729"/>
         <source>Run Sandboxed - Actions</source>
         <translation>在沙箱內執行 - 動作</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="502"/>
+        <location filename="Forms/SettingsWindow.ui" line="611"/>
         <source>Start Sandbox Manager</source>
         <translation>沙箱管理員啟動選項</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="643"/>
+        <location filename="Forms/SettingsWindow.ui" line="752"/>
         <source>Start UI when a sandboxed process is started</source>
         <translation>當有沙箱化處理程序啟動時啟動使用者介面</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="653"/>
+        <location filename="Forms/SettingsWindow.ui" line="762"/>
         <source>Start UI with Windows</source>
         <translation>Windows 啟動時開啟使用者介面</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="489"/>
+        <location filename="Forms/SettingsWindow.ui" line="598"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>加入「在沙箱內執行」至檔案總管環境選單</translation>
     </message>
@@ -11922,67 +15056,67 @@ Please note that this values are currently user specific and saved globally for 
         <translation>用於終止所有沙箱處理程式的快速鍵:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="730"/>
+        <location filename="Forms/SettingsWindow.ui" line="839"/>
         <source>Show boxes in tray list:</source>
         <translation>顯示沙箱清單:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="538"/>
+        <location filename="Forms/SettingsWindow.ui" line="647"/>
         <source>Always use DefaultBox</source>
         <translation>總是使用 DefaultBox</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="673"/>
+        <location filename="Forms/SettingsWindow.ui" line="782"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
         <translation>加入「在沙箱外執行」至環境選單</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="820"/>
+        <location filename="Forms/SettingsWindow.ui" line="929"/>
         <source>Show a tray notification when automatic box operations are started</source>
         <translation>當沙箱自動化作業事件開始執行時，跳出系統匣通知</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1251"/>
+        <location filename="Forms/SettingsWindow.ui" line="1360"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
         <translation>* 部分選中的核取方塊之行為取決於其檢視模式。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2413"/>
+        <location filename="Forms/SettingsWindow.ui" line="2522"/>
         <source>Advanced Config</source>
         <translation>進階組態</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2533"/>
+        <location filename="Forms/SettingsWindow.ui" line="2642"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>啟動核心模式物件篩選</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2553"/>
+        <location filename="Forms/SettingsWindow.ui" line="2662"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>沙箱 &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;檔案系統根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2820"/>
+        <location filename="Forms/SettingsWindow.ui" line="2929"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>主視窗隱藏時清除密碼</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2630"/>
+        <location filename="Forms/SettingsWindow.ui" line="2739"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>沙箱 &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC 根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2486"/>
+        <location filename="Forms/SettingsWindow.ui" line="2595"/>
         <source>Sandbox default</source>
         <translation>沙箱預設</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2853"/>
+        <location filename="Forms/SettingsWindow.ui" line="2962"/>
         <source>Config protection</source>
         <translation>組態保護</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2652"/>
+        <location filename="Forms/SettingsWindow.ui" line="2761"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -12042,7 +15176,7 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="vanished">停用 SBIE 訊息通知 (SBIE 仍然會被記錄到訊息頁籤中)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="483"/>
+        <location filename="Forms/SettingsWindow.ui" line="592"/>
         <source>Windows Shell</source>
         <translation>Windows 殼層</translation>
     </message>
@@ -12051,40 +15185,41 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="vanished">圖示</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="993"/>
+        <location filename="Forms/SettingsWindow.ui" line="1102"/>
         <source>Move Up</source>
         <translation>向上移</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1012"/>
+        <location filename="Forms/SettingsWindow.ui" line="1121"/>
         <source>Move Down</source>
         <translation>向下移</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1134"/>
+        <location filename="Forms/SettingsWindow.ui" line="1243"/>
         <source>Show overlay icons for boxes and processes</source>
         <translation>為沙箱與處理程序顯示覆蓋圖示</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1158"/>
+        <location filename="Forms/SettingsWindow.ui" line="1267"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
         <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
         <translation>對工作清單隱藏 Sandboxie 的處理程序</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1214"/>
-        <location filename="Forms/SettingsWindow.ui" line="1264"/>
+        <location filename="Forms/SettingsWindow.ui" line="1323"/>
+        <location filename="Forms/SettingsWindow.ui" line="1373"/>
         <source>Interface Options</source>
         <oldsource>Display Options</oldsource>
         <translation>介面選項</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1305"/>
+        <location filename="Forms/SettingsWindow.ui" line="1414"/>
         <source>Ini Editor Font</source>
         <translation>INI 編輯器字型</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1394"/>
+        <location filename="Forms/SettingsWindow.ui" line="545"/>
+        <location filename="Forms/SettingsWindow.ui" line="1503"/>
         <source>Graphic Options</source>
         <translation>圖形選項</translation>
     </message>
@@ -12110,48 +15245,48 @@ Please note that this values are currently user specific and saved globally for 
         <translation>當 Sandboxie 管理員啟動時檢查沙箱的自動刪除狀態</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="571"/>
+        <location filename="Forms/SettingsWindow.ui" line="680"/>
         <source>Integrate with Host Desktop</source>
         <translation>與主機桌面整合</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="680"/>
+        <location filename="Forms/SettingsWindow.ui" line="789"/>
         <source>Add &apos;Set Force in Sandbox&apos; to the context menu</source>
         <oldsource>Add ‘Set Force in Sandbox&apos; to the context menu</oldsource>
         <translation>加入「設定強制沙箱化」至環境選單</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="587"/>
+        <location filename="Forms/SettingsWindow.ui" line="696"/>
         <source>Add &apos;Set Open Path in Sandbox&apos; to context menu</source>
         <translation>加入「設為沙箱開放路徑」至環境選單</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="722"/>
+        <location filename="Forms/SettingsWindow.ui" line="831"/>
         <source>System Tray</source>
         <translation>系統匣</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="834"/>
+        <location filename="Forms/SettingsWindow.ui" line="943"/>
         <source>On main window close:</source>
         <translation>當主視窗關閉時:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="844"/>
+        <location filename="Forms/SettingsWindow.ui" line="953"/>
         <source>Open/Close from/to tray with a single click</source>
         <translation>一鍵開啟/關閉自/至系統匣</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="851"/>
+        <location filename="Forms/SettingsWindow.ui" line="960"/>
         <source>Minimize to tray</source>
         <translation>最小化至系統匣</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1337"/>
+        <location filename="Forms/SettingsWindow.ui" line="1446"/>
         <source>Select font</source>
         <translation>選取字型</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1347"/>
+        <location filename="Forms/SettingsWindow.ui" line="1456"/>
         <source>Reset font</source>
         <translation>重設字型</translation>
     </message>
@@ -12160,8 +15295,8 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="vanished">INI 選項</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1440"/>
-        <location filename="Forms/SettingsWindow.ui" line="1503"/>
+        <location filename="Forms/SettingsWindow.ui" line="1549"/>
+        <location filename="Forms/SettingsWindow.ui" line="1612"/>
         <source>#</source>
         <translation>#</translation>
     </message>
@@ -12171,182 +15306,182 @@ Please note that this values are currently user specific and saved globally for 
         <translation>當沙箱管理員退出時終止全部沙箱化處理程序</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="693"/>
+        <location filename="Forms/SettingsWindow.ui" line="802"/>
         <source>Sandboxed Desktop</source>
         <translation>沙箱化桌面</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="700"/>
+        <location filename="Forms/SettingsWindow.ui" line="809"/>
         <source>Switch to sandboxed desktop when starting a process</source>
         <translation>當開啟處理程序時切換至沙箱化桌面</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="707"/>
+        <location filename="Forms/SettingsWindow.ui" line="816"/>
         <source>Switch to sandboxed desktop with double click</source>
         <translation>按兩下切換到沙箱化桌面</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1292"/>
+        <location filename="Forms/SettingsWindow.ui" line="1401"/>
         <source>External Ini Editor</source>
         <translation>外部 INI 編輯器</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1476"/>
+        <location filename="Forms/SettingsWindow.ui" line="1585"/>
         <source>Ini Editor Options</source>
         <translation>ini 編輯器選項</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1483"/>
+        <location filename="Forms/SettingsWindow.ui" line="1592"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
         <translation>於螢幕擷取中隱藏 Sandboxie 管理員視窗 (需要重新啟動 UI)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1710"/>
+        <location filename="Forms/SettingsWindow.ui" line="1819"/>
         <source>Add-Ons Manager</source>
         <translation>附加元件管理員</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1720"/>
+        <location filename="Forms/SettingsWindow.ui" line="1829"/>
         <source>Optional Add-Ons</source>
         <translation>可選附加元件</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1728"/>
+        <location filename="Forms/SettingsWindow.ui" line="1837"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
         <translation>Sandboxie-Plus 提供眾多選項並支援大量擴充套件。在此頁面上，您可以設定附加元件、外掛程式及其他第三方元件的整合。選用元件可從網際網路下載，某些安裝可能需要系統管理員權限。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1764"/>
+        <location filename="Forms/SettingsWindow.ui" line="1873"/>
         <source>Status</source>
         <translation>狀態</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1769"/>
+        <location filename="Forms/SettingsWindow.ui" line="1878"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1774"/>
+        <location filename="Forms/SettingsWindow.ui" line="1883"/>
         <source>Description</source>
         <translation>說明</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1782"/>
+        <location filename="Forms/SettingsWindow.ui" line="1891"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update add-on list now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://addons&quot;&gt;立即更新附加元件清單&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1792"/>
+        <location filename="Forms/SettingsWindow.ui" line="1901"/>
         <source>Install</source>
         <translation>安裝</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1802"/>
+        <location filename="Forms/SettingsWindow.ui" line="1911"/>
         <source>Add-On Configuration</source>
         <translation>附加元件組態</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1810"/>
+        <location filename="Forms/SettingsWindow.ui" line="1919"/>
         <source>Enable Ram Disk creation</source>
         <translation>啟用 RAM 磁碟之建立</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1817"/>
+        <location filename="Forms/SettingsWindow.ui" line="1926"/>
         <source>kilobytes</source>
         <translation>KB</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1834"/>
+        <location filename="Forms/SettingsWindow.ui" line="1943"/>
         <source>Assign drive letter to Ram Disk</source>
         <translation>為 RAM 磁碟分配磁碟機序號</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1870"/>
+        <location filename="Forms/SettingsWindow.ui" line="1979"/>
         <source>Disk Image Support</source>
         <translation>磁碟映像支援</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1887"/>
+        <location filename="Forms/SettingsWindow.ui" line="1996"/>
         <source>RAM Limit</source>
         <translation>RAM 限制</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1854"/>
+        <location filename="Forms/SettingsWindow.ui" line="1963"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
         <translation>&lt;a href=&quot;addon://ImDisk&quot;&gt;安裝 ImDisk&lt;/a&gt; 驅動程式以啟用 RAM 磁碟和磁碟映像支援。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1913"/>
+        <location filename="Forms/SettingsWindow.ui" line="2022"/>
         <source>When a Ram Disk is already mounted you need to unmount it for this option to take effect.</source>
         <translation>當 RAM 磁碟已裝載時，需要將其卸載才能使此選項生效。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1916"/>
+        <location filename="Forms/SettingsWindow.ui" line="2025"/>
         <source>* takes effect on disk creation</source>
         <translation>* 磁碟建立時生效</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1940"/>
+        <location filename="Forms/SettingsWindow.ui" line="2049"/>
         <source>Sandboxie Support</source>
         <translation>Sandboxie 贊助</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2029"/>
+        <location filename="Forms/SettingsWindow.ui" line="2138"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此贊助者憑證已逾期，請&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;取得更新的憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2096"/>
+        <location filename="Forms/SettingsWindow.ui" line="2205"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>Sandboxie-Plus 專案的贊助者將收到&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;。這類似於授權碼，但是是為擁抱開放原始碼軟體的優秀人士準備的。:-)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1977"/>
+        <location filename="Forms/SettingsWindow.ui" line="2086"/>
         <source>Get</source>
         <translation>取得</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2119"/>
+        <location filename="Forms/SettingsWindow.ui" line="2228"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
         <translation>使用序號取得/升級/續期憑證</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2064"/>
+        <location filename="Forms/SettingsWindow.ui" line="2173"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
         <translation>使 Sandboxie 與 Windows 的持續性更新相同步，並和主流網頁瀏覽器保持相容性，是一項永無止境的努力。您可以透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;直接參與專案&lt;/a&gt;來支援開發、透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;購買贊助者憑證&lt;/a&gt;來表達您的支持、透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在 Patreon 上訂閱&lt;/a&gt;成為贊助者、或者透過 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal 捐款&lt;/a&gt;。&lt;br /&gt;您的支持對 Sandboxie 的進步和維護至關重要。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1963"/>
+        <location filename="Forms/SettingsWindow.ui" line="2072"/>
         <source>SBIE_-_____-_____-_____-_____</source>
         <translation>SBIE_-_____-_____-_____-_____</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2016"/>
+        <location filename="Forms/SettingsWindow.ui" line="2125"/>
         <source>Cert Options</source>
         <translation>憑證選項</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2045"/>
+        <location filename="Forms/SettingsWindow.ui" line="2154"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;憑證使用指南&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2129"/>
+        <location filename="Forms/SettingsWindow.ui" line="2238"/>
         <source>Eval Cert</source>
         <translation>評估憑證</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2171"/>
+        <location filename="Forms/SettingsWindow.ui" line="2280"/>
         <source>Sandboxie-Plus Version: 0.0.0</source>
         <translation>Sandboxie-Plus 版本: 0.0.0</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2431"/>
+        <location filename="Forms/SettingsWindow.ui" line="2540"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>沙箱 &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;登錄根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2623"/>
+        <location filename="Forms/SettingsWindow.ui" line="2732"/>
         <source>Sandboxing features</source>
         <translation>沙箱功能</translation>
     </message>
@@ -12355,43 +15490,43 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="vanished">Sandboxie.ini 預設選項</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2695"/>
+        <location filename="Forms/SettingsWindow.ui" line="2804"/>
         <source>Change Password</source>
         <translation>變更密碼</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2722"/>
+        <location filename="Forms/SettingsWindow.ui" line="2831"/>
         <source>Password must be entered in order to make changes</source>
         <translation>必須輸入密碼以進行變更</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2702"/>
+        <location filename="Forms/SettingsWindow.ui" line="2811"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>僅限管理員帳戶進行變更</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2827"/>
+        <location filename="Forms/SettingsWindow.ui" line="2936"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>追蹤 Sandboxie.ini 變更</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3121"/>
+        <location filename="Forms/SettingsWindow.ui" line="3230"/>
         <source>App Templates</source>
         <translation>軟體範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3131"/>
+        <location filename="Forms/SettingsWindow.ui" line="3240"/>
         <source>App Compatibility</source>
         <translation>軟體相容性</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2761"/>
+        <location filename="Forms/SettingsWindow.ui" line="2870"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
         <translation>僅管理員帳戶可使用「暫停強制沙箱程式」命令</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2569"/>
+        <location filename="Forms/SettingsWindow.ui" line="2678"/>
         <source>Portable root folder</source>
         <translation>便攜化根資料夾</translation>
     </message>
@@ -12406,17 +15541,17 @@ Please note that this values are currently user specific and saved globally for 
         <translation>一般選項</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="746"/>
+        <location filename="Forms/SettingsWindow.ui" line="855"/>
         <source>Show Icon in Systray:</source>
         <translation>在系統匣中顯示圖示:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2596"/>
+        <location filename="Forms/SettingsWindow.ui" line="2705"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>使用 Windows 篩選平台 (WFP) 限制區域網路存取</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2586"/>
+        <location filename="Forms/SettingsWindow.ui" line="2695"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
         <translation>為選取的 Win32k 系統呼叫進行勾點以啟用 GPU 加速 (Chrome, Firefox 和其他瀏覽器必需)</translation>
@@ -12428,52 +15563,52 @@ Please note that this values are currently user specific and saved globally for 
         <translation>統計並顯示每個沙箱的磁碟空間佔用情況</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="804"/>
+        <location filename="Forms/SettingsWindow.ui" line="913"/>
         <source>Use Compact Box List</source>
         <translation>使用緊湊的沙箱清單</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1066"/>
+        <location filename="Forms/SettingsWindow.ui" line="1175"/>
         <source>Interface Config</source>
         <translation>介面組態</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1141"/>
+        <location filename="Forms/SettingsWindow.ui" line="1250"/>
         <source>Make Box Icons match the Border Color</source>
         <translation>使沙箱圖示與邊框顏色一致</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1148"/>
+        <location filename="Forms/SettingsWindow.ui" line="1257"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
         <translation>在沙箱選項中使用樹狀頁面，而不是巢式頁籤 *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1182"/>
+        <location filename="Forms/SettingsWindow.ui" line="1291"/>
         <source>Use large icons in box list *</source>
         <translation>在沙箱清單中使用大圖示 *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1272"/>
+        <location filename="Forms/SettingsWindow.ui" line="1381"/>
         <source>High DPI Scaling</source>
         <translation>高 DPI 縮放</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1192"/>
+        <location filename="Forms/SettingsWindow.ui" line="1301"/>
         <source>Don&apos;t show icons in menus *</source>
         <translation>不要在選單中顯示圖示 *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1107"/>
+        <location filename="Forms/SettingsWindow.ui" line="1216"/>
         <source>Use Dark Theme</source>
         <translation>使用深色主題</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1427"/>
+        <location filename="Forms/SettingsWindow.ui" line="1536"/>
         <source>Font Scaling</source>
         <translation>字型縮放</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1463"/>
+        <location filename="Forms/SettingsWindow.ui" line="1572"/>
         <source>(Restart required)</source>
         <translation>(需要重新啟動)</translation>
     </message>
@@ -12483,23 +15618,23 @@ Please note that this values are currently user specific and saved globally for 
         <translation>最上層顯示復原檔案視窗</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1084"/>
+        <location filename="Forms/SettingsWindow.ui" line="1193"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation>在沙箱清單中顯示「披薩」背景 *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1285"/>
+        <location filename="Forms/SettingsWindow.ui" line="1394"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1175"/>
+        <location filename="Forms/SettingsWindow.ui" line="1284"/>
         <source>Alternate row background in lists</source>
         <translation>在清單中使用替代單列背景</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1117"/>
+        <location filename="Forms/SettingsWindow.ui" line="1226"/>
         <source>Use Fusion Theme</source>
         <translation>使用 Fusion 風格主題</translation>
     </message>
@@ -12508,46 +15643,46 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="vanished">使用 Sandboxie 登入程序替代匿名權杖 (實驗性)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="936"/>
-        <location filename="Forms/SettingsWindow.ui" line="1759"/>
-        <location filename="Forms/SettingsWindow.ui" line="2949"/>
-        <location filename="Forms/SettingsWindow.ui" line="3162"/>
-        <location filename="Forms/SettingsWindow.ui" line="3322"/>
+        <location filename="Forms/SettingsWindow.ui" line="1045"/>
+        <location filename="Forms/SettingsWindow.ui" line="1868"/>
+        <location filename="Forms/SettingsWindow.ui" line="3058"/>
+        <location filename="Forms/SettingsWindow.ui" line="3271"/>
+        <location filename="Forms/SettingsWindow.ui" line="3431"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2954"/>
+        <location filename="Forms/SettingsWindow.ui" line="3063"/>
         <source>Path</source>
         <translation>路徑</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2913"/>
+        <location filename="Forms/SettingsWindow.ui" line="3022"/>
         <source>Remove Program</source>
         <translation>移除程式</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2934"/>
+        <location filename="Forms/SettingsWindow.ui" line="3043"/>
         <source>Add Program</source>
         <translation>加入程式</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2903"/>
+        <location filename="Forms/SettingsWindow.ui" line="3012"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>當下列程式在任意沙箱之外啟動時，Sandboxie 將發出錯誤代碼 SBIE1301。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2927"/>
+        <location filename="Forms/SettingsWindow.ui" line="3036"/>
         <source>Add Folder</source>
         <translation>加入資料夾</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2883"/>
+        <location filename="Forms/SettingsWindow.ui" line="2992"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>阻止下列程式在此系統中啟動</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2941"/>
+        <location filename="Forms/SettingsWindow.ui" line="3050"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>當程式啟動失敗時發出錯誤代碼 SBIE1308</translation>
     </message>
@@ -12567,52 +15702,52 @@ Please note that this values are currently user specific and saved globally for 
         <translation>禁用 SBIE 訊息跳出視窗 (仍將被記錄至訊息頁籤)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="666"/>
+        <location filename="Forms/SettingsWindow.ui" line="775"/>
         <source>Start Menu Integration</source>
         <translation>開始選單整合</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="594"/>
+        <location filename="Forms/SettingsWindow.ui" line="703"/>
         <source>Scan shell folders and offer links in run menu</source>
         <translation>掃描殼層資料夾並在快速執行選單提供連結</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="627"/>
+        <location filename="Forms/SettingsWindow.ui" line="736"/>
         <source>Integrate with Host Start Menu</source>
         <translation>與主機的開始功能表整合</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1221"/>
+        <location filename="Forms/SettingsWindow.ui" line="1330"/>
         <source>Use new config dialog layout *</source>
         <translation>使用新的組態對話框佈局 *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1990"/>
+        <location filename="Forms/SettingsWindow.ui" line="2099"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
         <translation>HwId: 00000000-0000-0000-0000-000000000000</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2155"/>
+        <location filename="Forms/SettingsWindow.ui" line="2264"/>
         <source>Cert Info</source>
         <translation>憑證資訊</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2865"/>
+        <location filename="Forms/SettingsWindow.ui" line="2974"/>
         <source>Program Control</source>
         <translation>應用程式控制</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2875"/>
+        <location filename="Forms/SettingsWindow.ui" line="2984"/>
         <source>Program Alerts</source>
         <translation>程式警報</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2920"/>
+        <location filename="Forms/SettingsWindow.ui" line="3029"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>當強制沙箱處理程序被停用時，發出錯誤代碼 SBIE1301</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2423"/>
+        <location filename="Forms/SettingsWindow.ui" line="2532"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>Sandboxie 組態</translation>
@@ -12628,39 +15763,39 @@ Please note that this values are currently user specific and saved globally for 
         <translation>在「遊戲 / 簡報」模式下，停用跳出通知</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1076"/>
+        <location filename="Forms/SettingsWindow.ui" line="1185"/>
         <source>User Interface</source>
         <translation>使用者介面</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="914"/>
+        <location filename="Forms/SettingsWindow.ui" line="1023"/>
         <source>Run Menu</source>
         <translation>執行選單</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="961"/>
+        <location filename="Forms/SettingsWindow.ui" line="1070"/>
         <source>Add program</source>
         <translation>加入程式</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1019"/>
+        <location filename="Forms/SettingsWindow.ui" line="1128"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
         <translation>您可以為所有「在沙箱內執行」選單設定自訂條目組態。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1041"/>
-        <location filename="Forms/SettingsWindow.ui" line="1738"/>
-        <location filename="Forms/SettingsWindow.ui" line="3342"/>
+        <location filename="Forms/SettingsWindow.ui" line="1150"/>
+        <location filename="Forms/SettingsWindow.ui" line="1847"/>
+        <location filename="Forms/SettingsWindow.ui" line="3451"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="941"/>
+        <location filename="Forms/SettingsWindow.ui" line="1050"/>
         <source>Command Line</source>
         <translation>命令列</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1930"/>
+        <location filename="Forms/SettingsWindow.ui" line="2039"/>
         <source>Support &amp;&amp; Updates</source>
         <translation>支援 &amp;&amp; 更新</translation>
     </message>
@@ -12669,85 +15804,85 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="vanished">使 Sandboxie 與 Windows 的持續性更新相同步，並和主流網頁瀏覽器保持相容性，是一項永無止境的努力。您可以透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;直接參與專案&lt;/a&gt;來支援開發、透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;購買贊助者憑證&lt;/a&gt;來表達您的支持、透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在 Patreon 上訂閱&lt;/a&gt;成為贊助者、或者透過 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal 捐款&lt;/a&gt;。&lt;br /&gt;您的支持對 Sandboxie 的進步和維護至關重要。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2181"/>
+        <location filename="Forms/SettingsWindow.ui" line="2290"/>
         <source>Sandboxie Updater</source>
         <translation>Sandboxie 更新程式</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2212"/>
+        <location filename="Forms/SettingsWindow.ui" line="2321"/>
         <source>Keep add-on list up to date</source>
         <translation>保持附加元件清單為最新</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2225"/>
+        <location filename="Forms/SettingsWindow.ui" line="2334"/>
         <source>Update Settings</source>
         <translation>更新設定</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2269"/>
+        <location filename="Forms/SettingsWindow.ui" line="2378"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Insider 通道提供對「最終將公開發表的新功能和錯誤修復」的早期存取，以及包含穩定通道的所有相關改進。
 與預覽通道不同，它不包含未經測試、可能會破壞或可能尚未準備好供更廣泛使用的實驗性變更。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2273"/>
+        <location filename="Forms/SettingsWindow.ui" line="2382"/>
         <source>Search in the Insider channel</source>
         <translation>在測試人員通道中搜尋</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2303"/>
+        <location filename="Forms/SettingsWindow.ui" line="2412"/>
         <source>New full installers from the selected release channel.</source>
         <translation>來自所選發行通道的全新完整安裝程式。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2306"/>
+        <location filename="Forms/SettingsWindow.ui" line="2415"/>
         <source>Full Upgrades</source>
         <translation>完整升級</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2316"/>
+        <location filename="Forms/SettingsWindow.ui" line="2425"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
         <translation>定期檢查新的 Sandboxie-Plus 版本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2326"/>
+        <location filename="Forms/SettingsWindow.ui" line="2435"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>了解更多關於 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;測試人員通道&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2346"/>
+        <location filename="Forms/SettingsWindow.ui" line="2455"/>
         <source>Keep Troubleshooting scripts up to date</source>
         <translation>保持疑難排解腳本為最新</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2382"/>
+        <location filename="Forms/SettingsWindow.ui" line="2491"/>
         <source>Update Check Interval</source>
         <translation>更新檢查間隔</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2540"/>
+        <location filename="Forms/SettingsWindow.ui" line="2649"/>
         <source>Default sandbox:</source>
         <translation>預設沙箱:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2610"/>
+        <location filename="Forms/SettingsWindow.ui" line="2719"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>使用 Sandboxie 登入程序替代匿名權杖</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2447"/>
+        <location filename="Forms/SettingsWindow.ui" line="2556"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
         <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
         <translation>將「Sandboxie\All Sandboxes (全部沙箱)」群組新增至沙箱化權杖</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2576"/>
+        <location filename="Forms/SettingsWindow.ui" line="2685"/>
         <source>This feature protects the sandbox by restricting access, preventing other users from accessing the folder. Ensure the root folder path contains the %USER% macro so that each user gets a dedicated sandbox folder.</source>
         <translation>此功能透過存取限制保護沙箱，阻止其他使用者存取資料夾。保證根資料夾路徑包含 %USER% 巨集，以確保每個使用者取得其專用的沙箱資料夾。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2579"/>
+        <location filename="Forms/SettingsWindow.ui" line="2688"/>
         <source>Restrict box root folder access to the the user whom created that sandbox</source>
         <translation>限制僅建立沙箱的使用者可存取對應沙箱的根資料夾</translation>
     </message>
@@ -12767,158 +15902,195 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>在 Windows 11 上使用新的沙箱管理員風格</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="714"/>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
+        <source>AI Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="477"/>
+        <source>Where each session starts. The agent window can raise or lower it for that session alone.
+
+Diagnostic data an agent reads can contain text written by programs inside a sandbox, so a confirmation is also what stands between a misled agent and a silent change. Whatever is chosen here, everything the agent does is recorded.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="512"/>
+        <source>Before changing anything, the agent:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="519"/>
+        <source>Allows an AI agent to connect to Sandboxie-Plus over a local named pipe. Turning this off removes the option entirely: the connection cannot be armed, and a request from an agent is ignored rather than shown to you.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="522"/>
+        <source>Allow an AI agent to connect (MCP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="529"/>
+        <source>Sandboxie-Plus shows a six-digit code that you read to the agent before it can see anything about your machine. Without it, any program running as you that finds the pipe is treated as authorised - which includes programs you did not start on purpose. Sandboxed programs are refused either way.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="532"/>
+        <source>Require a code before an agent may look at this machine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="823"/>
         <source>Remember last used box</source>
         <translation>記住上次使用的沙箱</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="827"/>
+        <location filename="Forms/SettingsWindow.ui" line="936"/>
         <source>Show search box in tray menu</source>
         <translation>在系統匣選單中顯示搜尋方塊</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="858"/>
+        <location filename="Forms/SettingsWindow.ui" line="967"/>
         <source>Show custom box icons in tray list</source>
         <translation>在系統匣清單中顯示自訂沙箱圖示</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="865"/>
+        <location filename="Forms/SettingsWindow.ui" line="974"/>
         <source>Show overlay icons for boxes in tray list</source>
         <translation>在系統匣清單中顯示沙箱的覆疊圖示</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="872"/>
+        <location filename="Forms/SettingsWindow.ui" line="981"/>
         <source>Show box alias name instead of box name in tray list</source>
         <translation>在系統匣清單中顯示沙箱別名而非沙箱名稱</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="879"/>
+        <location filename="Forms/SettingsWindow.ui" line="988"/>
         <source>Maximum displayed characters for compact tray aliases. Ignored when alias display is disabled (name limit is fixed to 32).</source>
         <translation>精簡系統匣清單中，沙箱別名可顯示的最大字元數。停用別名顯示時會忽略此設定（名稱上限固定為 32 個字元）。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="895"/>
+        <location filename="Forms/SettingsWindow.ui" line="1004"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while Ctrl is held (default), checked = always.</source>
         <translation>三態行為：未勾選 = 永不，部分勾選 = 僅在按住 Ctrl 時（預設），已勾選 = 永遠。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="898"/>
+        <location filename="Forms/SettingsWindow.ui" line="1007"/>
         <source>Show sandbox status as tooltip in tray list</source>
         <translation>在系統匣清單中以工具提示顯示沙箱狀態</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1127"/>
+        <location filename="Forms/SettingsWindow.ui" line="1236"/>
         <source>Controls whether display-only text uses the sandbox name, alias, or both. Compact views may show only the alias. Paths and internal sandbox identifiers always use the sandbox name.</source>
         <translation>控制僅供顯示的文字要使用沙箱名稱、別名或兩者。精簡檢視可能只顯示別名。路徑與沙箱的內部識別碼一律使用沙箱名稱。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1165"/>
+        <location filename="Forms/SettingsWindow.ui" line="1274"/>
         <source>Highlight unapplied changes in Options and Settings</source>
         <translation>在「選項」和「設定」中醒目提示尚未套用的變更</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1234"/>
+        <location filename="Forms/SettingsWindow.ui" line="1343"/>
         <source>Group state on start</source>
         <translation>啟動時分組狀態</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1241"/>
+        <location filename="Forms/SettingsWindow.ui" line="1350"/>
         <source>Sandbox name display:</source>
         <translation>沙箱名稱顯示方式：</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1490"/>
+        <location filename="Forms/SettingsWindow.ui" line="1599"/>
         <source>UI Font</source>
         <translation>UI字型</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1512"/>
+        <location filename="Forms/SettingsWindow.ui" line="1621"/>
         <source>Select Font</source>
         <translation>選取字型</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1522"/>
+        <location filename="Forms/SettingsWindow.ui" line="1631"/>
         <source>Reset Font</source>
         <translation>重設字型</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1550"/>
+        <location filename="Forms/SettingsWindow.ui" line="1659"/>
         <source>Window Options</source>
         <translation>視窗選項</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1561"/>
+        <location filename="Forms/SettingsWindow.ui" line="1670"/>
         <source>Support Dialog:</source>
         <translation>支援對話方塊：</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1574"/>
+        <location filename="Forms/SettingsWindow.ui" line="1683"/>
         <source>File Recovery:</source>
         <translation>檔案復原：</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1587"/>
+        <location filename="Forms/SettingsWindow.ui" line="1696"/>
         <source>Fallback:</source>
         <translation>無法使用時：</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1632"/>
+        <location filename="Forms/SettingsWindow.ui" line="1741"/>
         <source>Non-main:</source>
         <translation>非主要視窗：</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1648"/>
+        <location filename="Forms/SettingsWindow.ui" line="1757"/>
         <source>Hint: Specific window settings override non-main settings. Fallback is used when the target monitor cannot be used; when disabled, each window falls back to its default current-monitor behavior.</source>
         <translation>提示：特定視窗的設定會覆寫非主要視窗的設定。無法使用目標顯示器時，會採用「無法使用時」的設定；若停用，則每個視窗會回復為保留目前顯示器的預設行為。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1670"/>
+        <location filename="Forms/SettingsWindow.ui" line="1779"/>
         <source>Window Locations</source>
         <translation>視窗位置</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1677"/>
+        <location filename="Forms/SettingsWindow.ui" line="1786"/>
         <source>Notifications:</source>
         <translation>通知：</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1690"/>
+        <location filename="Forms/SettingsWindow.ui" line="1799"/>
         <source>Main:</source>
         <translation>主要視窗：</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2672"/>
+        <location filename="Forms/SettingsWindow.ui" line="2781"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
         <translation>使用 Sandboxie 自有增強型 UAC 提示視窗 (建議使用)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2682"/>
+        <location filename="Forms/SettingsWindow.ui" line="2791"/>
         <source>Sandboxie.ini</source>
         <translation>Sandboxie.ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2715"/>
+        <location filename="Forms/SettingsWindow.ui" line="2824"/>
         <source>Add Portable Box</source>
         <translation>新增可攜式沙箱</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2745"/>
+        <location filename="Forms/SettingsWindow.ui" line="2854"/>
         <source>Remove Entry</source>
         <translation>移除條目</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2753"/>
+        <location filename="Forms/SettingsWindow.ui" line="2862"/>
         <source>Import Path</source>
         <translation>匯入路徑</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2840"/>
+        <location filename="Forms/SettingsWindow.ui" line="2949"/>
         <source>Sandbox Configuration</source>
         <translation>沙箱設定組態</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2787"/>
+        <location filename="Forms/SettingsWindow.ui" line="2896"/>
         <source>Create Portable Box</source>
         <translation>建立可攜式沙箱</translation>
     </message>
@@ -12927,89 +16099,89 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">匯入可攜式沙箱</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2729"/>
+        <location filename="Forms/SettingsWindow.ui" line="2838"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
         <translation>&lt;b&gt;僅套用至 Sandboxie.ini 可攜式沙箱之設定組態的組態保護，不受以下機制的保護&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2688"/>
+        <location filename="Forms/SettingsWindow.ui" line="2797"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
         <translation>在以下清單中，你可以加入可攜式沙箱的設定組態之路徑</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2813"/>
+        <location filename="Forms/SettingsWindow.ui" line="2922"/>
         <source>Add Portable Root</source>
         <translation>加入可攜式根目錄</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2962"/>
+        <location filename="Forms/SettingsWindow.ui" line="3071"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
         <translation>當程式已被強制執行至一個沙箱時，發出錯誤代碼 SBIE1321</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2972"/>
+        <location filename="Forms/SettingsWindow.ui" line="3081"/>
         <source>Force Process Options</source>
         <translation>強制處理程序選項</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3000"/>
+        <location filename="Forms/SettingsWindow.ui" line="3109"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
         <translation>強制開啟沙箱內檔案的程式在該沙箱中執行。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3003"/>
+        <location filename="Forms/SettingsWindow.ui" line="3112"/>
         <source>Force programs opening boxed files into their sandbox</source>
         <translation>強制開啟沙箱化檔案的程式在其所屬沙箱中執行</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3010"/>
+        <location filename="Forms/SettingsWindow.ui" line="3119"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
         <translation>強制具有網際網路來源標記之檔案在沙箱中開啟</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3030"/>
+        <location filename="Forms/SettingsWindow.ui" line="3139"/>
         <source>Sandbox for MoTW marked files</source>
         <translation>網際網路標記檔案的沙箱</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3049"/>
+        <location filename="Forms/SettingsWindow.ui" line="3158"/>
         <source>USB Drive Sandboxing</source>
         <translation>USB 裝置沙箱化</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3065"/>
+        <location filename="Forms/SettingsWindow.ui" line="3174"/>
         <source>Volume</source>
         <translation>磁碟區</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3070"/>
+        <location filename="Forms/SettingsWindow.ui" line="3179"/>
         <source>Information</source>
         <translation>資訊</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3078"/>
+        <location filename="Forms/SettingsWindow.ui" line="3187"/>
         <source>Sandbox for USB drives:</source>
         <translation>USB 裝置沙箱:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3094"/>
+        <location filename="Forms/SettingsWindow.ui" line="3203"/>
         <source>Automatically sandbox all attached USB drives</source>
         <translation>自動將所有加入的 USB 裝置沙箱化</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3151"/>
+        <location filename="Forms/SettingsWindow.ui" line="3260"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
         <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
         <translation>&lt;a href=&quot;sbie://templates&quot;&gt;立即更新相容性範本&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3207"/>
+        <location filename="Forms/SettingsWindow.ui" line="3316"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>以後不再檢查軟體相容性</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3382"/>
+        <location filename="Forms/SettingsWindow.ui" line="3491"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
@@ -13044,7 +16216,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3430"/>
+        <location filename="Forms/SettingsWindow.ui" line="3539"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -13110,17 +16282,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3453"/>
+        <location filename="Forms/SettingsWindow.ui" line="3562"/>
         <source>Complete</source>
         <translation>自動完成</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3519"/>
+        <location filename="Forms/SettingsWindow.ui" line="3628"/>
         <source>Editor settings</source>
         <translation>編輯器設定</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3522"/>
+        <location filename="Forms/SettingsWindow.ui" line="3631"/>
         <source>⚙</source>
         <translation>⚙</translation>
     </message>
@@ -13131,42 +16303,42 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 資訊包括版本、語法及功能描述，旨在幫助您正確理解並配置每個項目。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3400"/>
+        <location filename="Forms/SettingsWindow.ui" line="3509"/>
         <source>Tooltips</source>
         <translation>提供訊息</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3503"/>
+        <location filename="Forms/SettingsWindow.ui" line="3612"/>
         <source>Validate</source>
         <translation>驗證</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3187"/>
+        <location filename="Forms/SettingsWindow.ui" line="3296"/>
         <source>Enable</source>
         <translation>啟用</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3170"/>
+        <location filename="Forms/SettingsWindow.ui" line="3279"/>
         <source>Disable</source>
         <translation>停用</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3177"/>
+        <location filename="Forms/SettingsWindow.ui" line="3286"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>Sandboxie 偵測到您的系統中安裝了以下軟體。按下「確定」套用設定，將改進與這些軟體的相容性。這些設定作用於所有沙箱，包括現存的和未來新增的沙箱。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3230"/>
+        <location filename="Forms/SettingsWindow.ui" line="3339"/>
         <source>Local Templates</source>
         <translation>本機範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3298"/>
+        <location filename="Forms/SettingsWindow.ui" line="3407"/>
         <source>Add Template</source>
         <translation>加入範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3266"/>
+        <location filename="Forms/SettingsWindow.ui" line="3375"/>
         <source>Text Filter</source>
         <translation>文字篩選器</translation>
     </message>
@@ -13175,22 +16347,22 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <translation type="vanished">輸入/查看贊助者憑證</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3276"/>
+        <location filename="Forms/SettingsWindow.ui" line="3385"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation>該清單包含使用者為沙箱選項建立的自訂範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3311"/>
+        <location filename="Forms/SettingsWindow.ui" line="3420"/>
         <source>Open Template</source>
         <translation>開啟範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3369"/>
+        <location filename="Forms/SettingsWindow.ui" line="3478"/>
         <source>Edit ini Section</source>
         <translation>編輯 INI 區段</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3486"/>
+        <location filename="Forms/SettingsWindow.ui" line="3595"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
@@ -13234,22 +16406,22 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 &lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3466"/>
+        <location filename="Forms/SettingsWindow.ui" line="3575"/>
         <source>Save</source>
         <translation>儲存</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3420"/>
+        <location filename="Forms/SettingsWindow.ui" line="3529"/>
         <source>Edit ini</source>
         <translation>編輯 INI</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3413"/>
+        <location filename="Forms/SettingsWindow.ui" line="3522"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2249"/>
+        <location filename="Forms/SettingsWindow.ui" line="2358"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
         <translation>增量升級</translation>
@@ -13259,7 +16431,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <translation type="vanished">新的來自所選取發佈通道的完整版本。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2246"/>
+        <location filename="Forms/SettingsWindow.ui" line="2355"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>更新已安裝版本的 Templates.ini 範本和翻譯的修補程式。</translation>
     </message>
@@ -13268,7 +16440,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <translation type="vanished">此贊助者憑證已逾期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2259"/>
+        <location filename="Forms/SettingsWindow.ui" line="2368"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>預覽通道包含最新的 GitHub 預先發佈版本。</translation>
     </message>
@@ -13277,27 +16449,27 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <translation type="vanished">新版本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2353"/>
+        <location filename="Forms/SettingsWindow.ui" line="2462"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>穩定通道包含最新的 GitHub 穩定版本。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2356"/>
+        <location filename="Forms/SettingsWindow.ui" line="2465"/>
         <source>Search in the Stable channel</source>
         <translation>在穩定通道中搜尋</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2262"/>
+        <location filename="Forms/SettingsWindow.ui" line="2371"/>
         <source>Search in the Preview channel</source>
         <translation>在預覽通道中搜尋</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1970"/>
+        <location filename="Forms/SettingsWindow.ui" line="2079"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
         <translation>不再通知憑證逾期情況</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2112"/>
+        <location filename="Forms/SettingsWindow.ui" line="2221"/>
         <source>Enter the support certificate here</source>
         <translation>在此輸入贊助者憑證</translation>
     </message>

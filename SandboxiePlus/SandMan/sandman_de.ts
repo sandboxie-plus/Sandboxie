@@ -386,28 +386,29 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="Boxes/BoxReport.cpp" line="122"/>
         <source>Compressing Logs</source>
-        <translation type="unfinished">Komprimiere Protokolle</translation>
+        <translation>Komprimiere Protokolle</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="150"/>
         <source>Compressing Dumps</source>
-        <translation type="unfinished">Komprimiere Dumps</translation>
+        <translation>Komprimiere Dumps</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="187"/>
         <source>Submitting report...</source>
-        <translation type="unfinished"></translation>
+        <translation>Übermittele Problembericht...</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="250"/>
         <source>Failed to submit report, error %1
 Try submitting without the log attached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Problembericht nicht übermitteln, Fehler %1
+Versuche Übermittlung ohne die angehängten Protokolle.</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="252"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
-        <translation type="unfinished">Ihr Problembericht wurde erfolgreich übermittelt, vielen Dank.</translation>
+        <translation>Ihr Problembericht wurde erfolgreich übermittelt, vielen Dank.</translation>
     </message>
 </context>
 <context>
@@ -8858,7 +8859,7 @@ Vor dem Absenden können Sie die Protokolle im Hauptfenster überprüfen.</trans
         <source>Failed to submit issue report, error %1
 Try submitting without the log attached.</source>
         <translation>Konnte Problembericht nicht übermitteln, Fehler %1
-Versuchen Sie die Übermittlung ohne die angehängten Protokolle.</translation>
+Versuche Übermittlung ohne die angehängten Protokolle.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1057"/>
@@ -11943,8 +11944,11 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <source>Stacked letters remain upright. Stacked (compact) removes the extra row gap and reduces
 top/bottom padding without shrinking the font. Rotated down reads top to bottom;
 rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
-        <oldsource>Stacked letters remain upright. Stacked (compact) removes the extra row gap and reduces top/bottom padding without shrinking the font. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</oldsource>
-        <translation type="unfinished">Bei &apos;Buchstaben untereinander&apos; anordnen bleiben diese aufrecht stehen. &apos;Buchstaben untereinander (kompakt)&apos; entfernt den zusätzlichen Zeilenabstand und verringert den oberen und unteren Abstand, ohne die Schriftgröße zu verkleinern. &apos;Gedreht nach unten&apos; wird von oben nach unten gelesen, &apos;Gedreht nach oben&apos; wird von unten nach oben gelesen, jeweils auf beiden Seiten. Beschriftungen auf der oberen und unteren Seite ignorieren diese Auswahl.</translation>
+        <translation>Bei &apos;Buchstaben untereinander&apos; anordnen bleiben diese aufrecht stehen. &apos;Buchstaben untereinander (kompakt)&apos;
+entfernt den zusätzlichen Zeilenabstand und verringert den oberen und unteren Abstand, ohne die Schriftgröße
+zu verkleinern. &apos;Text gedreht nach unten&apos; wird von oben nach unten gelesen, &apos;Text gedreht nach oben&apos; wird
+von unten nach oben gelesen, jeweils auf beiden Seiten. Beschriftungen auf der oberen und unteren Seite
+ignorieren diese Auswahl.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="656"/>
@@ -11964,7 +11968,7 @@ Die adaptiven Modi berücksichtigen einen Ausschluss der Taskleiste. Das Verhalt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="680"/>
         <source>Side labels can be stacked or rotated. Both stacked modes use vertical parentheses when the font supports them. Stacked (compact) keeps the font size, removes the extra row gap and uses 1-pixel top/bottom padding. Rotated down/up select the reading direction on either side. Top/bottom labels use horizontal text. Adaptive movement can stay on the configured side, try its opposite, or try any edge before moving inward. Labels that do not fit are clipped without shrinking the font.</source>
-        <translation>Bei seitlichen Beschriftungen können entweder die einzelnen Buchstaben untereinander angeordnet oder der gesamte Text gedreht werden. Bei Beschriftungen mit untereinander angeordneten Buchstaben werden vertikale Klammern verwendet, sofern die Schriftart diese unterstützt. Die kompakte Darstellung behält die Schriftgröße bei, entfernt den zusätzlichen Zeilenabstand und verwendet einen Abstand von 1 Pixel oben und unten. Durch Drehen nach unten bzw. oben wird die Leserichtung auf beiden Seiten festgelegt. Beschriftungen auf der oberen und unteren Seite sind horizontal ausgerichtet. Mit adaptiver Verschiebung können Beschriftungen auf der konfigurierten Seite verbleiben oder es werden die entgegengesetzte oder jede verbleibende Seite ausprobiert, bevor Beschriftungen nach innen verschoben werden. Beschriftungen, die nicht passen, werden abgeschnitten, ohne die Schriftgröße zu verringern.</translation>
+        <translation>Bei seitlichen Beschriftungen können entweder die einzelnen Buchstaben untereinander angeordnet oder der gesamte Text gedreht werden. Bei Beschriftungen mit untereinander angeordneten Buchstaben werden vertikale Klammern verwendet, sofern die Schriftart diese unterstützt. Die kompakte Darstellung behält die Schriftgröße bei, entfernt den zusätzlichen Zeilenabstand und verwendet einen Abstand von 1 Pixel oben und unten. Durch Drehen nach unten bzw. oben wird die Leserichtung auf beiden Seiten festgelegt. Beschriftungen auf der oberen und unteren Seite sind horizontal ausgerichtet. Mit adaptiver Verschiebung können Beschriftungen auf der konfigurierten Seite verbleiben oder es werden die entgegengesetzte oder jede verbleibende Seite dafür getestet, bevor Beschriftungen nach innen verschoben werden. Beschriftungen, die nicht passen, werden abgeschnitten, ohne die Schriftgröße zu verringern.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="689"/>

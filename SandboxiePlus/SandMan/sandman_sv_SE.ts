@@ -1322,6 +1322,11 @@ Hitta sträng:</translation>
         <source>Go to Line:</source>
         <translation>Gå till rad:</translation>
     </message>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CCompletePage</name>
@@ -1559,6 +1564,14 @@ Du kan klicka på Avsluta för att stänga denna guide.</translation>
         <location filename="Windows/EditorSettingsWindow.cpp" line="216"/>
         <source>Reset this setting to default value</source>
         <translation>Återställ denna inställning till standardvärdet</translation>
+    </message>
+</context>
+<context>
+    <name>CExitDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ExitDialog.h" line="44"/>
+        <source>Yes (%1)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2240,6 +2253,14 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
         <translation>Flytta ner</translation>
+    </message>
+</context>
+<context>
+    <name>CKbpsEdit</name>
+    <message>
+        <location filename="../MiscHelpers/Common/SettingsWidgets.h" line="49"/>
+        <source>Unlimited</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3922,6 +3943,15 @@ Vill du aktivera autoavsluta?</translation>
         <translation>Använd alltid ElevateCreateProcess fixen, som då och då tillämpas av assistenten för programkompatibilitet.</translation>
     </message>
     <message>
+        <location filename="Windows/OptionsAdvanced.cpp" line="70"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="74"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="75"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="78"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="340"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
         <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
@@ -5107,6 +5137,14 @@ Full sökväg: %4</translation>
     </message>
 </context>
 <context>
+    <name>CProgressDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ProgressDialog.h" line="101"/>
+        <source>Close (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CRecoveryLogWnd</name>
     <message>
         <location filename="SandManRecovery.cpp" line="348"/>
@@ -5249,6 +5287,11 @@ Full sökväg: %4</translation>
         <location filename="Wizards/BoxAssistant.cpp" line="592"/>
         <source>Troubleshooting ...</source>
         <translation>Felsökning ...</translation>
+    </message>
+    <message>
+        <location filename="Wizards/BoxAssistant.cpp" line="593"/>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="615"/>
@@ -7591,6 +7634,12 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
 </context>
 <context>
     <name>CSbieProcess</name>
+    <message>
+        <location filename="SbieProcess.cpp" line="57"/>
+        <location filename="SbieProcess.cpp" line="89"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="SbieProcess.cpp" line="58"/>
         <source>Sbie RpcSs</source>

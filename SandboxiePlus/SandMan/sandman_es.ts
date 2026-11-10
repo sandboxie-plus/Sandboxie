@@ -1238,6 +1238,11 @@ Buscar Cadena:</translation>
         <source>Go to Line:</source>
         <translation>Ir a Línea:</translation>
     </message>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CCompletePage</name>
@@ -1467,6 +1472,14 @@ Puede hacer clic en Finalizar para cerrar este asistente.</translation>
         <location filename="Windows/EditorSettingsWindow.cpp" line="216"/>
         <source>Reset this setting to default value</source>
         <translation>Restablecer este ajuste a su valor predeterminado</translation>
+    </message>
+</context>
+<context>
+    <name>CExitDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ExitDialog.h" line="44"/>
+        <source>Yes (%1)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2125,6 +2138,14 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
         <translation>Mover Abajo</translation>
+    </message>
+</context>
+<context>
+    <name>CKbpsEdit</name>
+    <message>
+        <location filename="../MiscHelpers/Common/SettingsWidgets.h" line="49"/>
+        <source>Unlimited</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3456,6 +3477,15 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <location filename="Windows/OptionsAdvanced.cpp" line="69"/>
         <source>Always use ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant.</source>
         <translation>Siempre usar el arreglo ElevateCreateProcess, como se aplica ocasionalmente por el Asistente de Compatibilidad de Programas.</translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsAdvanced.cpp" line="70"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="74"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="75"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="78"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="340"/>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
@@ -4998,6 +5028,14 @@ Ruta completa: %4</translation>
     </message>
 </context>
 <context>
+    <name>CProgressDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ProgressDialog.h" line="101"/>
+        <source>Close (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CRecoveryLogWnd</name>
     <message>
         <location filename="SandManRecovery.cpp" line="348"/>
@@ -5175,6 +5213,11 @@ Ruta completa: %4</translation>
         <location filename="Wizards/BoxAssistant.cpp" line="592"/>
         <source>Troubleshooting ...</source>
         <translation>Solucionando problemas...</translation>
+    </message>
+    <message>
+        <location filename="Wizards/BoxAssistant.cpp" line="593"/>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="615"/>
@@ -7702,6 +7745,12 @@ NO seleccionará: %2</translation>
         <location filename="SbieProcess.cpp" line="102"/>
         <source>Running</source>
         <translation>Ejecutando</translation>
+    </message>
+    <message>
+        <location filename="SbieProcess.cpp" line="57"/>
+        <location filename="SbieProcess.cpp" line="89"/>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="108"/>

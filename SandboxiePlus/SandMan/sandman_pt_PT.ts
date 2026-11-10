@@ -1226,6 +1226,11 @@ Find String:</source>
         <source>Go to Line:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CCompletePage</name>
@@ -1454,6 +1459,14 @@ Você pode clicar em Concluir para fechar este assistente.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="216"/>
         <source>Reset this setting to default value</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CExitDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ExitDialog.h" line="44"/>
+        <source>Yes (%1)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2119,6 +2132,14 @@ Você pode utilizar %USER% para guardar a caixa de proteção de cada utilizador
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
         <translation type="unfinished">Mover para Baixo</translation>
+    </message>
+</context>
+<context>
+    <name>CKbpsEdit</name>
+    <message>
+        <location filename="../MiscHelpers/Common/SettingsWidgets.h" line="49"/>
+        <source>Unlimited</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3698,6 +3719,15 @@ Nota: A verificação de actualização geralmente está por trás da versão ma
         <translation>Sempre utilizar a correção ElevateCreateProcess, às vezes aplicada pelo Assistente de Compatibilidade de programa.</translation>
     </message>
     <message>
+        <location filename="Windows/OptionsAdvanced.cpp" line="70"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="74"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="75"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="78"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="340"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
         <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
@@ -4997,6 +5027,14 @@ Localização completo: %4</translation>
     </message>
 </context>
 <context>
+    <name>CProgressDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ProgressDialog.h" line="101"/>
+        <source>Close (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CRecoveryLogWnd</name>
     <message>
         <location filename="SandManRecovery.cpp" line="348"/>
@@ -5143,6 +5181,11 @@ Localização completo: %4</translation>
         <location filename="Wizards/BoxAssistant.cpp" line="592"/>
         <source>Troubleshooting ...</source>
         <translation>Solução de Problemas ...</translation>
+    </message>
+    <message>
+        <location filename="Wizards/BoxAssistant.cpp" line="593"/>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="615"/>
@@ -7677,6 +7720,12 @@ Não vou definir: %2</translation>
         <location filename="SbieProcess.cpp" line="102"/>
         <source>Running</source>
         <translation>A rodar</translation>
+    </message>
+    <message>
+        <location filename="SbieProcess.cpp" line="57"/>
+        <location filename="SbieProcess.cpp" line="89"/>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="108"/>

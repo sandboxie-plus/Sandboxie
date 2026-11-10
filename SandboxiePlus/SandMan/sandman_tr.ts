@@ -1141,7 +1141,7 @@ Dize Bul:</translation>
         <translation>Satıra Git:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="923"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
         <source></source>
         <translation></translation>
     </message>
@@ -1374,6 +1374,14 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
         <location filename="Windows/EditorSettingsWindow.cpp" line="216"/>
         <source>Reset this setting to default value</source>
         <translation>Bu ayarı varsayılan değere sıfırlar</translation>
+    </message>
+</context>
+<context>
+    <name>CExitDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ExitDialog.h" line="44"/>
+        <source>Yes (%1)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1993,6 +2001,14 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
         <translation>Aşağı Taşı</translation>
+    </message>
+</context>
+<context>
+    <name>CKbpsEdit</name>
+    <message>
+        <location filename="../MiscHelpers/Common/SettingsWidgets.h" line="49"/>
+        <source>Unlimited</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4301,11 +4317,11 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
         <translation>Bazen Program Uyumluluk Yardımcısı tarafından uygulandığı gibi her zaman ElevateCreateProcess düzeltmesini kullanır.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="66"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="70"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="74"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="332"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="75"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="78"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="340"/>
         <source></source>
         <translation></translation>
     </message>
@@ -4707,6 +4723,14 @@ Dosyayı yazan: %3</translation>
 Full path: %4</source>
         <translation>%1 boyutundaki dosya %2 korumalı alanına taşınıyor, %3 kaldı.
 Tam yol: %4</translation>
+    </message>
+</context>
+<context>
+    <name>CProgressDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ProgressDialog.h" line="101"/>
+        <source>Close (%1)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

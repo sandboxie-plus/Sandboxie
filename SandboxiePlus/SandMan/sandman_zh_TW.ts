@@ -1326,6 +1326,11 @@ Find String:</source>
         <source>Go to Line:</source>
         <translation>移至行:</translation>
     </message>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CCompletePage</name>
@@ -1563,6 +1568,14 @@ You can click Finish to close this wizard.</source>
         <location filename="Windows/EditorSettingsWindow.cpp" line="216"/>
         <source>Reset this setting to default value</source>
         <translation>重設此設定為預設值</translation>
+    </message>
+</context>
+<context>
+    <name>CExitDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ExitDialog.h" line="44"/>
+        <source>Yes (%1)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2278,6 +2291,14 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
         <translation>向下移</translation>
+    </message>
+</context>
+<context>
+    <name>CKbpsEdit</name>
+    <message>
+        <location filename="../MiscHelpers/Common/SettingsWidgets.h" line="49"/>
+        <source>Unlimited</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3808,6 +3829,15 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>始終使用 ElevateCreateProcess 修復，因偶爾會被程式相容性疑難排解員套用。</translation>
     </message>
     <message>
+        <location filename="Windows/OptionsAdvanced.cpp" line="70"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="74"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="75"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="78"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="340"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
         <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
@@ -5095,6 +5125,14 @@ Full path: %4</source>
     </message>
 </context>
 <context>
+    <name>CProgressDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ProgressDialog.h" line="101"/>
+        <source>Close (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CRecoveryLogWnd</name>
     <message>
         <location filename="SandManRecovery.cpp" line="348"/>
@@ -5237,6 +5275,11 @@ Full path: %4</source>
         <location filename="Wizards/BoxAssistant.cpp" line="592"/>
         <source>Troubleshooting ...</source>
         <translation>疑難排解中...</translation>
+    </message>
+    <message>
+        <location filename="Wizards/BoxAssistant.cpp" line="593"/>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="615"/>
@@ -7593,6 +7636,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SbieProcess.cpp" line="102"/>
         <source>Running</source>
         <translation>運作中</translation>
+    </message>
+    <message>
+        <location filename="SbieProcess.cpp" line="57"/>
+        <location filename="SbieProcess.cpp" line="89"/>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="108"/>

@@ -1170,6 +1170,11 @@ Shift: 뒤로
         <source>Go to Line:</source>
         <translation>줄로 가기:</translation>
     </message>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CCompletePage</name>
@@ -1397,6 +1402,14 @@ You can click Finish to close this wizard.</source>
         <location filename="Windows/EditorSettingsWindow.cpp" line="216"/>
         <source>Reset this setting to default value</source>
         <translation>이 설정을 기본값으로 재설정</translation>
+    </message>
+</context>
+<context>
+    <name>CExitDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ExitDialog.h" line="44"/>
+        <source>Yes (%1)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2022,6 +2035,14 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
         <translation>아래로 이동</translation>
+    </message>
+</context>
+<context>
+    <name>CKbpsEdit</name>
+    <message>
+        <location filename="../MiscHelpers/Common/SettingsWidgets.h" line="49"/>
+        <source>Unlimited</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3485,6 +3506,15 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>프로그램 호환성 관리자에서 적용되는 ElevateCreateProcess 수정을 항상 사용하세요.</translation>
     </message>
     <message>
+        <location filename="Windows/OptionsAdvanced.cpp" line="70"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="74"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="75"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="78"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="340"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
         <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
@@ -4739,6 +4769,14 @@ Full path: %4</source>
     </message>
 </context>
 <context>
+    <name>CProgressDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ProgressDialog.h" line="101"/>
+        <source>Close (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CRecoveryLogWnd</name>
     <message>
         <location filename="SandManRecovery.cpp" line="348"/>
@@ -4881,6 +4919,11 @@ Full path: %4</source>
         <location filename="Wizards/BoxAssistant.cpp" line="592"/>
         <source>Troubleshooting ...</source>
         <translation>문제 해결...</translation>
+    </message>
+    <message>
+        <location filename="Wizards/BoxAssistant.cpp" line="593"/>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="615"/>
@@ -5193,13 +5236,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="1096"/>
         <source>&amp;Sandbox</source>
         <translation>샌드박스(&amp;S)</translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="843"/>
-        <location filename="SandMan.cpp" line="1345"/>
-        <location filename="SandMan.cpp" line="1346"/>
-        <source></source>
-        <translation></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="856"/>
@@ -7187,6 +7223,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SbieProcess.cpp" line="102"/>
         <source>Running</source>
         <translation>실행</translation>
+    </message>
+    <message>
+        <location filename="SbieProcess.cpp" line="57"/>
+        <location filename="SbieProcess.cpp" line="89"/>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="108"/>

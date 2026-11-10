@@ -944,6 +944,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	m_pSearch->setPlaceholderText(tr("Search for settings"));
 
 	SetTabOrder(this);
+	connect(ui.tabsTemplates, &QTabWidget::currentChanged, this, [this](int index) {
+		if (!m_pTree && ui.tabsTemplates->widget(index) == ui.tabLocalTemplates)
+			OnTab(ui.tabLocalTemplates);
+	});
 }
 
 void CSettingsWindow::ApplyIniEditFont()
@@ -1070,6 +1074,8 @@ void CSettingsWindow::showTab(const QString& Name, bool bExclusive, bool bExec)
 	else
 		m_pStack->setCurrentWidget(pWidget);
 
+	if (pWidget == ui.tabLocalTemplates && theAPI->IsConnected())
+		LoadTemplates();
 	if(pWidget == ui.tabCompat)
 		m_CompatLoaded = 2;
 	if(pWidget == ui.tabSupport)
@@ -2587,6 +2593,10 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 	{
 		LoadIniSection();
 		//ui.txtIniSection->setReadOnly(true);
+	}
+	else if (pTab == ui.tabLocalTemplates && theAPI->IsConnected())
+	{
+		LoadTemplates();
 	}
 	else if (pTab == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
 	{

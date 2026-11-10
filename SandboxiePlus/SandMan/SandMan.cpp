@@ -3945,11 +3945,10 @@ QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData,
 
 	if (MsgCode != 0) {
 		Message = theAPI->GetSbieMsgStr(MsgCode, m_LanguageId);
-		if (pLink) {
-			Message.insert(8, "</a>");
+		// Build only the URL here; wrap it once below, after argument substitution.
+		// Early wrapping can consume URL escapes as placeholders; double wrapping breaks the tag.
+		if (pLink)
 			*pLink = MakeSbieMsgLink(MsgCode, MsgData, ProcessName);
-			Message.prepend("<a href=\"" + *pLink + "\">");
-		}
 	}
 	else if(MsgData.size() > 0)
 		Message = MsgData[0];

@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+- fixed imported sandbox configurations discarding the destination file-root setting, leaving restored files at a different location from the sandbox [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)
+
 
 
 ## [1.19.1 / 5.74.1] - 2026-10-??

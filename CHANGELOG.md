@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added line numbers to the built-in INI section editors, with an Advanced Editor Settings toggle and Ctrl+G destination highlighting; copying and saving exclude the line numbers
 - added configurable sandbox border labels on all four window edges through `BorderLabelPosition`, with adjustable position, stacked or rotated side text, fixed/adaptive placement, and a dedicated Box Border tab in sandbox options
 - added customizable sandbox border label fonts with native style and writing-system selection, GDI preview, synchronized point size, immediate font-only Apply, and reset to legacy defaults
+- added `CustomProcessCommandLine` to conditionally add, remove, replace, or clear sandboxed process arguments
 - added an opt-in MCP server to SandMan, so an AI agent can help troubleshoot a sandbox: it is started from the new "Troubleshoot with an AI Agent" toolbar button, listens on a local named pipe only, and stays off until it is explicitly enabled
 - added `SbieMcp.exe`, a stdio bridge that connects any MCP capable AI client to a running SandMan
 - added a pairing step the agent must pass before any tool works: it has to repeat a one time code shown in SandMan, sandboxed callers are rejected on the driver's verdict rather than by image name, and the pairing code is never written to the audit log

@@ -35,7 +35,6 @@ protected:
     SB_STATUS TryToCreateBox();
 
     bool m_bAdvanced;
-    bool m_bUseRandomName;
 };
 
 
@@ -68,6 +67,8 @@ signals:
 
 private slots:
     void OnBoxTypChanged();
+    void OnBoxNameChanged(const QString& name);
+    void OnGuidNameToggled(bool checked);
     void OnAdvanced();
 
 private:
@@ -77,6 +78,8 @@ private:
 #endif
     QLineEdit*      m_pBoxName;
     QLineEdit*      m_pAlias;
+    QCheckBox*      m_pUseGuidName;
+    QString         m_ManualName;
     QButtonGroup*   m_TypeGroup;
     QCheckBox*      m_pAdvanced;
 

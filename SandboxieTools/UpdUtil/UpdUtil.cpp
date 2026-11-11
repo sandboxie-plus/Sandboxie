@@ -1634,6 +1634,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 					return ERROR_GET;
 				}
 			}
+			else if (bModify && !add_addons.empty()) {
+				std::wcout << L"Failed to download add-on data" << std::endl;
+				return ERROR_GET;
+			}
 
 			ret = 0;
 

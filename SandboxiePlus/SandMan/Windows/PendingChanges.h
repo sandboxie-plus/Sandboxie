@@ -125,17 +125,30 @@ public:
 	{
 	}
 
-	void CaptureItemBaselines(QTreeWidget* pExcludedTree, QTreeWidget* pTree = nullptr)
+	bool IsItemChanged(const QTreeWidgetItem* pItem) const
 	{
-		auto Capture = [this](QTreeWidget* pTree) {
+		QVariant Baseline = pItem->data(0, ItemBaselineRole);
+		return !IsTemplateItem(pItem) && (!Baseline.isValid() || Baseline.toString() != GetItemSignature(pItem));
+	}
+
+	void CaptureItemBaseline(QTreeWidgetItem* pItem)
+	{
+		if (IsTemplateItem(pItem))
+			return;
+		QSignalBlocker Blocker(pItem->treeWidget());
+		SetItemHighlight(pItem, eNone);
+		pItem->setData(0, ItemBaselineRole, GetItemSignature(pItem));
+	}
+
+	void CaptureItemBaselines(QTreeWidget* pExcludedTree, QTreeWidget* pTree = nullptr, bool bKeepExisting = false)
+	{
+		auto Capture = [this, bKeepExisting](QTreeWidget* pTree) {
 			QSignalBlocker Blocker(pTree);
 			QTreeWidgetItemIterator It(pTree);
 			while (*It) {
 				QTreeWidgetItem* pItem = *It;
-				if (!IsTemplateItem(pItem)) {
-					SetItemHighlight(pItem, eNone);
-					pItem->setData(0, ItemBaselineRole, GetItemSignature(pItem));
-				}
+				if (!bKeepExisting || !pItem->data(0, ItemBaselineRole).isValid())
+					CaptureItemBaseline(pItem);
 				++It;
 			}
 		};

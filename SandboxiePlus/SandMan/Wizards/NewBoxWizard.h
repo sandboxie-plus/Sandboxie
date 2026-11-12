@@ -10,6 +10,8 @@ class QLineEdit;
 class QRadioButton;
 QT_END_NAMESPACE
 
+class CSharedFileWidget;
+
 //#define USE_COMBO
 
 class CNewBoxWizard : public QWizard
@@ -17,7 +19,7 @@ class CNewBoxWizard : public QWizard
     Q_OBJECT
 
 public:
-    enum { Page_Type, Page_Files, Page_Isolation, Page_Advanced, Page_Summary };
+    enum { Page_Type, Page_Files, Page_AccessControl, Page_Isolation, Page_Advanced, Page_Summary };
 
     CNewBoxWizard(bool bAlowTemp, QWidget *parent = nullptr);
 
@@ -101,6 +103,29 @@ public:
 
 private:
     QComboBox* m_pBoxLocation;
+    QCheckBox* m_pSetAccessControl;
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CAccessControlPage
+// 
+
+class CAccessControlPage : public QWizardPage
+{
+    Q_OBJECT
+
+public:
+    CAccessControlPage(QWidget *parent = nullptr);
+
+    int nextId() const override;
+    void initializePage() override;
+    bool validatePage() override;
+
+    QList<QPair<QString, QString>> GetFileAccessEntries() const;
+
+private:
+    CSharedFileWidget* m_pFileAccess;
 };
 
 

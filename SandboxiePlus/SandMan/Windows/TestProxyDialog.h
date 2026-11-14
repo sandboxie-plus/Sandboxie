@@ -11,7 +11,7 @@ class CTestProxyDialog : public QDialog
 
 public:
 	CTestProxyDialog(const QString& IP, const QString& Port, COptionsWindow::EAuthMode AuthMode, const QString& Username = QString(), const QString& Password = QString(), QWidget* parent = Q_NULLPTR);
-	~CTestProxyDialog() { ; }
+	~CTestProxyDialog() override;
 
 protected:
 	void showEvent(QShowEvent* event) override;

@@ -195,5 +195,6 @@ Before submitting a translation, read the [translation collaboration and attribu
 ## 📚 Documentation Translators
 
 - Vstory, GT-Stardust, wzxjohn, SOLEADO20, habatake, YuHuanTin, darkskygit, oddwatcher - Simplified Chinese
+- hisamotodev - Japanese
 
 All documentation translators are encouraged to look at the [Multilingual Translation Contribution Guide](https://github.com/sandboxie-plus/sandboxie-docs/issues/175#issuecomment-2840258519) before sending a translation.

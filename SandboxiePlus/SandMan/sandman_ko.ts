@@ -1189,7 +1189,9 @@ Shift: 뒤로
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
-        <translation>마침을 클릭하여 이 마법사를 닫을 수 있습니다.</translation>
+        <translation>Sandboxie-Plus의 문제 해결 마법사를 사용해 주셔서 감사합니다. 진행 과정에서 불편을 겪으신 점 사과드립니다. 추가 질문이 있으시거나 더 도와드릴 일이 있으시면 언제든지 연락해 주세요. 도와드리겠습니다. 이해와 협조에 감사드립니다. 
+
+마침을 클릭하여 이 마법사를 닫을 수 있습니다.</translation>
     </message>
 </context>
 <context>

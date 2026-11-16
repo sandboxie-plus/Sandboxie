@@ -394,28 +394,29 @@ Leet (L337) 말풍선 변형을 적용하면 512비트로 증가하며, 완전�
     <message>
         <location filename="Boxes/BoxReport.cpp" line="122"/>
         <source>Compressing Logs</source>
-        <translation type="unfinished">로그 압축</translation>
+        <translation>로그 압축</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="150"/>
         <source>Compressing Dumps</source>
-        <translation type="unfinished">덤프 압축</translation>
+        <translation>덤프 압축</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="187"/>
         <source>Submitting report...</source>
-        <translation type="unfinished"></translation>
+        <translation>보고서 제출 중...</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="250"/>
         <source>Failed to submit report, error %1
 Try submitting without the log attached.</source>
-        <translation type="unfinished"></translation>
+        <translation>보고서 제출 실패, 오류 %1
+로그를 첨부하지 않고 제출해 보세요.</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="252"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
-        <translation type="unfinished">문제 보고서가 성공적으로 제출되었습니다. 감사합니다.</translation>
+        <translation>문제 보고서가 성공적으로 제출되었습니다. 감사합니다.</translation>
     </message>
 </context>
 <context>
@@ -1173,7 +1174,7 @@ Shift: 뒤로
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1409,7 +1410,7 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="../MiscHelpers/Common/ExitDialog.h" line="44"/>
         <source>Yes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>예 (%1)</translation>
     </message>
 </context>
 <context>
@@ -1708,72 +1709,72 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="25"/>
         <source>empty endpoint name</source>
-        <translation type="unfinished"></translation>
+        <translation>엔드포인트 이름이 비어 있음</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="37"/>
         <source>&apos;%1&apos; looks like a bracketed IPv6 endpoint but is not one</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;은 괄호로 묶인 IPv6 엔드포인트처럼 보이지만, 실제로는 하나가 아닙니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="66"/>
         <source>&apos;%1&apos; is not a valid port</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;은 유효한 포트가 아닙니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="73"/>
         <source>&apos;%1&apos; is not a valid IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;은 유효한 IP 주소가 아닙니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="92"/>
         <source>empty local socket name</source>
-        <translation type="unfinished"></translation>
+        <translation>로컬 소켓 이름 비어 있음</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="100"/>
         <source>local socket name is too long (%1 characters, 247 max)</source>
-        <translation type="unfinished"></translation>
+        <translation>로컬 소켓 이름이 너무 깁니다 (%1 문자, 최대 247)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="105"/>
         <source>local socket name must not contain a path separator</source>
-        <translation type="unfinished"></translation>
+        <translation>로컬 소켓 이름에는 경로 구분자가 포함되어서는 안 됩니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="110"/>
         <source>&apos;%1&apos; is not a usable local socket name</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;은 사용할 수 있는 로컬 소켓 이름이 아닙니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="117"/>
         <source>local socket name must not contain control characters</source>
-        <translation type="unfinished"></translation>
+        <translation>로컬 소켓 이름에는 제어 문자가 포함되어서는 안됩니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="135"/>
         <source>Failed to listen on %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에서 수신 대기 실패</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="143"/>
         <source>Invalid local socket name &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>유효하지 않은 로컬 소켓 이름 &apos;%1&apos;: %2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="150"/>
         <source>Invalid endpoint &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>잘못된 엔드포인트 &apos;%1&apos;: %2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="196"/>
         <source>Failed to listen on local socket %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>로컬 소켓 %1에서 수신 대기 실패: %2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="325"/>
         <source>recived new request, befoure the previouse response was completly sent</source>
-        <translation type="unfinished"></translation>
+        <translation>이전 응답이 완전히 전송되기 전에 새로운 요청을 수신했습니다</translation>
     </message>
 </context>
 <context>
@@ -1781,37 +1782,37 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
         <source>recived invalid HTTP request</source>
-        <translation type="unfinished"></translation>
+        <translation>잘못된 HTTP 요청을 수신했습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="99"/>
         <source>recived unsupported HTTP request %1 from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%2로부터 지원되지 않는 HTTP 요청 %1을(를) 수신했습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="127"/>
         <source>recived invalid POST request %1</source>
-        <translation type="unfinished"></translation>
+        <translation>잘못된 POST 요청이 %1회 수신되었습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="146"/>
         <source>recived POST/PUT request without Content-Length !!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Content-Length가 없는 POST/PUT 요청을 수신했습니다!!!</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="176"/>
         <source>recived GET request with attached data ?!</source>
-        <translation type="unfinished"></translation>
+        <translation>데이터가 포함된 GET 요청을 수신했습니다?!</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="292"/>
         <source>recived a POST payload before any part header</source>
-        <translation type="unfinished"></translation>
+        <translation>부분 헤더 이전에 POST 페이로드를 수신했습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="429"/>
         <source>Error While Sending response</source>
-        <translation type="unfinished"></translation>
+        <translation>응답 전송 중 오류</translation>
     </message>
 </context>
 <context>
@@ -2042,7 +2043,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.h" line="49"/>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>제한 없음</translation>
     </message>
 </context>
 <context>
@@ -2068,83 +2069,85 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="17"/>
         <source>Connect an AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트 연결</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="22"/>
         <source>An AI agent can read your sandbox configuration, the bundled documentation and diagnostic data, and help you work out why something does not run in a sandbox.
 
 It is off until you turn it on, it is not reachable from inside a sandbox, and it has to be authorised with a code shown on your screen before it can do anything.</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트는 샌드박스 구성, 함께 제공되는 문서 및 진단 데이터를 읽고, 샌드박스에서 어떤 항목이 실행되지 않는 이유를 파악하는 데 도움을 드릴 수 있습니다.
+
+켜기 전까지는 꺼져 있으며, 샌드박스 내부에서는 접근할 수 없고, 어떤 작업도 수행하기 전에 화면에 표시된 코드로 인증해야 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="34"/>
         <source>Which client do you want to use?</source>
-        <translation type="unfinished"></translation>
+        <translation>어떤 클라이언트를 사용하시겠습니까?</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="50"/>
         <location filename="Mcp/McpConnectDialog.cpp" line="144"/>
         <source>Configure It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>구성해 주세요</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="51"/>
         <source>Start It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>시작해 주세요</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="52"/>
         <location filename="Mcp/McpConnectDialog.cpp" line="219"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>복사</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="91"/>
         <source>   (found, already configured)</source>
-        <translation type="unfinished"></translation>
+        <translation>   (찾음, 이미 구성됨)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="93"/>
         <source>   (found)</source>
-        <translation type="unfinished"></translation>
+        <translation>   (찾음)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="95"/>
         <source>   (not found)</source>
-        <translation type="unfinished"></translation>
+        <translation>   (찾을 수 없음)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="102"/>
         <source>Turn Off</source>
-        <translation type="unfinished"></translation>
+        <translation>끄기</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="102"/>
         <source>Turn On</source>
-        <translation type="unfinished"></translation>
+        <translation>켜기</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="106"/>
         <source>The connection is ON. A client can connect now.</source>
-        <translation type="unfinished"></translation>
+        <translation>연결이 켜져 있습니다. 이제 클라이언트가 연결할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="107"/>
         <source>The connection is OFF. Turn it on here, or let the client ask for it - Sandboxie-Plus will offer when something tries to connect.</source>
-        <translation type="unfinished"></translation>
+        <translation>연결이 꺼져 있습니다. 여기에서 켜시거나, 클라이언트가 요청하도록 하세요 - Sandboxie-Plus는 어떤 것이 연결을 시도할 때 이를 제공합니다.</translation>
     </message>
     <message numerus="yes">
         <location filename="Mcp/McpConnectDialog.cpp" line="112"/>
         <source>Forget %1 Remembered Program(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>기억된 프로그램 %1개 잊기</numerusform>
         </translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="115"/>
         <source>SbieMcp.exe was not found next to SandMan, so this installation cannot accept agent connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>SandMan 옆에서 SbieMcp.exe를 찾을 수 없어, 이 설치는 에이전트 연결을 허용할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="138"/>
@@ -2152,12 +2155,15 @@ It is off until you turn it on, it is not reachable from inside a sandbox, and i
 %1
 
 Your other servers are kept; only the Sandboxie entry is added or updated, and the file is backed up first.</source>
-        <translation type="unfinished"></translation>
+        <translation>구성 파일:
+%1
+
+다른 서버들은 그대로 유지되며, Sandboxie 항목만 추가되거나 업데이트되고, 해당 파일은 먼저 백업됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="144"/>
         <source>Update It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>업데이트해 주세요</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="149"/>
@@ -2167,12 +2173,17 @@ Or let Sandboxie-Plus start it for you, in a folder of its own:
 %2
 
 The configuration written there reaches that one session and nothing else you do with it.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+
+또는 Sandboxie-Plus가 별도의 폴더에서 실행하도록 해 주세요:
+%2
+
+그곳에 작성된 설정은 해당 세션에서만 적용되며, 그 외에 다른 곳에서 사용하는 내용은 적용되지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="180"/>
         <source>%1 is configured. Restart it if it is running, so it picks up the change.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1이 구성되었습니다. 실행 중이라면 다시 시작하여 변경 사항을 적용합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="182"/>
@@ -2180,34 +2191,39 @@ The configuration written there reaches that one session and nothing else you do
 
 The previous configuration was kept as:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+이전 구성은 다음과 같이 유지되었습니다:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="185"/>
         <source>MCP: wrote the agent configuration for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1의 에이전트 구성을 작성했습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="207"/>
         <source>MCP: started %1 in %2</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %2에서 %1 시작</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="218"/>
         <source>Copied</source>
-        <translation type="unfinished"></translation>
+        <translation>복사됨</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="232"/>
         <source>Forget these programs? Each will have to be authorised with a code again.
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>이 프로그램들은 잊으시겠어요? 각각은 코드로 다시 승인받아야 합니다.
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="238"/>
         <source>MCP: the remembered agent programs were forgotten</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: 기억된 에이전트 프로그램이 잊혀졌습니다</translation>
     </message>
 </context>
 <context>
@@ -2215,98 +2231,98 @@ The previous configuration was kept as:
     <message>
         <location filename="Mcp/McpConsent.cpp" line="62"/>
         <source>Look, do not touch</source>
-        <translation type="unfinished"></translation>
+        <translation>보기만 하고 건드리지 않음</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="63"/>
         <source>Ask only for risky things</source>
-        <translation type="unfinished"></translation>
+        <translation>위험한 것들에 대해서만 물어보세요</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="64"/>
         <source>Do not ask, just tell me</source>
-        <translation type="unfinished"></translation>
+        <translation>묻지 말고, 그냥 내게 말하세요</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="65"/>
         <source>Ask before every change</source>
-        <translation type="unfinished"></translation>
+        <translation>무언가를 바꿀 때마다 먼저 물어보세요</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="73"/>
         <source>The agent can read and diagnose, and every attempt to change anything is refused without asking you.</source>
-        <translation type="unfinished"></translation>
+        <translation>에이전트는 내용을 읽고 진단할 수 있지만, 사용자에게 묻지 않고 이루어지는 모든 변경 시도는 거부됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="76"/>
         <source>Ordinary setting changes happen without interrupting you. You are still asked before anything that cannot be undone, runs a program, sends something off this computer, or opens a sandbox up.</source>
-        <translation type="unfinished"></translation>
+        <translation>일반적인 설정 변경은 작업 흐름을 방해하지 않고 수행됩니다. 하지만 되돌릴 수 없는 작업, 프로그램 실행, 외부로 데이터 전송, 또는 샌드박스 환경을 여는 작업 등은 실행하기 전에 반드시 사용자에게 확인을 구합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="80"/>
         <source>The agent acts without asking. Everything it does is still listed here and written to the audit log - you are not asked, but you are told.</source>
-        <translation type="unfinished"></translation>
+        <translation>에이전트는 사용자에게 묻지 않고 수행합니다. 에이전트가 수행하는 모든 작업은 여기에 기록되고 감사 로그에 저장됩니다. 사용자에게 묻지는 않지만, 결과를 알려줍니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="83"/>
         <source>Nothing changes, starts or stops until you say so.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 지시하기 전까지는 아무것도 변경되거나 시작되거나 중지되지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="107"/>
         <source>refused, because the agent is set to look but not touch: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>거부됨: 에이전트가 &apos;보기만 하고 건드리지 않도록&apos; 설정되어 있습니다. %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="108"/>
         <source>refused: the agent may not change anything</source>
-        <translation type="unfinished"></translation>
+        <translation>거부됨: 에이전트는 어떠한 변경도 수행할 수 없습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="117"/>
         <source>done without asking: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>확인 없이 수행됨: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="118"/>
         <source>allowed automatically (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>자동으로 허용됨 (%1)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="128"/>
         <source>another confirmation was already open</source>
-        <translation type="unfinished"></translation>
+        <translation>이미 다른 확인 요청이 열려 있습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="142"/>
         <source>allowed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>허용됨: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="142"/>
         <source>refused: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>거부됨: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="144"/>
         <source>allowed by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자에 의해 허용됨</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="144"/>
         <source>refused by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자에 의해 거부됨</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="151"/>
         <location filename="Mcp/McpConsent.cpp" line="204"/>
         <source>An AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="153"/>
         <source>%1 wants to change the configuration of sandbox %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1이(가) 샌드박스 %2의 구성을 변경하려고 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="159"/>
@@ -2314,7 +2330,10 @@ The previous configuration was kept as:
 
 Its reason, in its own words:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+에이전트가 밝힌 이유:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="162"/>
@@ -2322,59 +2341,69 @@ Its reason, in its own words:
 
 These are the changes:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+변경 사항은 다음과 같습니다:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="171"/>
         <source>
   remove  %1 = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  %1 제거 = %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="173"/>
         <source>
   add     %1 = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  추가  %1 = %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="175"/>
         <source>
   change  %1 = %2   (was %3)</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  변경  %1 = %2   (기존: %3)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="178"/>
         <source>   &lt;- not a known setting</source>
-        <translation type="unfinished"></translation>
+        <translation>   &lt;- 알려지지 않은 설정</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="184"/>
         <source>
 
 Warning: at least one of these is not a setting Sandboxie recognises. Unknown settings are ignored silently rather than reported as an error, so such a change would appear to work and have no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+경고: 이 중 적어도 하나는 Sandboxie가 인식하는 설정이 아닙니다. 알 수 없는 설정은 오류로 보고되지 않고 조용히 무시되므로, 이러한 변경은 동작하는 것처럼 보이며 아무런 영향도 주지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="197"/>
         <source>Confirm configuration change</source>
-        <translation type="unfinished"></translation>
+        <translation>구성 변경 확인</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="197"/>
         <source>Apply These Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>변경 사항 적용</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="198"/>
         <source>change %1 setting(s) on %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1개의 설정을 %2로 변경</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="205"/>
         <source>%1 wants to do the following.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1은 다음을 수행하려고 합니다.
+
+%2</translation>
     </message>
 </context>
 <context>
@@ -2382,137 +2411,137 @@ Warning: at least one of these is not a setting Sandboxie recognises. Unknown se
     <message>
         <location filename="Mcp/McpServer.cpp" line="94"/>
         <source>released a session whose client exited, discarding its test copies</source>
-        <translation type="unfinished"></translation>
+        <translation>클라이언트가 종료된 세션을 해제하고, 해당 세션의 테스트 사본을 삭제했습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="98"/>
         <source>the agent</source>
-        <translation type="unfinished"></translation>
+        <translation>에이전트</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="100"/>
         <source>disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>연결을 끊었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="103"/>
         <source>%1 exited; its test copies were discarded</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 종료되었습니다. 테스트 복사본이 폐기되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="104"/>
         <source>%1 exited</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 종료되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="142"/>
         <source>refusing to listen on &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;에서의 수신 거부: %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="153"/>
         <source>MCP server could not listen on &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP 서버가 &apos;%1&apos;에서 수신 대기할 수 없었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="163"/>
         <source>documentation pack mounted: %1 pages from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>문서 팩이 마운트되었습니다: %2에서 가져온 %1페이지</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="166"/>
         <source>no documentation pack found - docs lookups will be unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>문서 팩을 찾을 수 없습니다. 문서 조회 기능을 사용할 수 없습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="180"/>
         <source>knowledge base: %1 entries from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>지식 베이스: %2에서 가져온 %1개 항목</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="183"/>
         <source>no troubleshooting knowledge base found</source>
-        <translation type="unfinished"></translation>
+        <translation>문제 해결 지식 베이스를 찾을 수 없습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="192"/>
         <source>audit log: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>감사 로그: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="203"/>
         <source>MCP server listening on &apos;%1%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP 서버가 &apos;%1%2&apos;에서 수신 대기 중입니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="272"/>
         <source>the connecting process could not be identified</source>
-        <translation type="unfinished"></translation>
+        <translation>연결을 시도하는 프로세스를 식별할 수 없습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="283"/>
         <source>process %1 is sandboxed, in box &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>프로세스 %1은(는) 샌드박스 &apos;%2&apos; 내에 있습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="288"/>
         <source>box membership of process %1 could not be established</source>
-        <translation type="unfinished"></translation>
+        <translation>프로세스 %1이(가) 어떤 샌드박스에 속해 있는지 확인할 수 없습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="297"/>
         <source>refused an MCP connection: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP 연결 거부됨: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="299"/>
         <source>Refused: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>거부됨: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="307"/>
         <source>refused an MCP connection from origin &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>출처 &apos;%1&apos;로부터의 MCP 연결이 거부되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="308"/>
         <source>Origin not allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>허용되지 않은 출처</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="315"/>
         <source>The MCP endpoint accepts POST only</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP 엔드포인트는 POST 요청만 허용합니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="344"/>
         <source>rejected an MCP message: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP 메시지 거부: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="414"/>
         <source>authorised without a code, because asking for one is turned off</source>
-        <translation type="unfinished"></translation>
+        <translation>인증 코드 요청 기능이 비활성화되어 있어, 코드 없이 인증되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="448"/>
         <source>asked for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1을(를) 요청했습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="467"/>
         <source>Your write-up is now out of date - this is not in it. Call report_compose again so that what the user is offered describes what you have actually done.</source>
-        <translation type="unfinished"></translation>
+        <translation>작성하신 내용이 최신 상태가 아닙니다. 현재 항목이 포함되어 있지 않습니다. `report_compose`를 다시 호출하여, 사용자에게 제공되는 정보가 실제 수행한 작업을 정확히 반영하도록 하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="469"/>
         <source>You have changed something on this machine and nothing is written up yet. Call report_compose now, with what you know so far - the symptom and what you have ruled out is already worth having - and again as you learn more. The user is offered whatever you composed last, and they may close the agent window at any moment.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 머신에서 무언가를 변경하셨지만 아직 정리된 내용이 없습니다. 지금 report_compose로 전화해 주세요. 현재까지 알고 계신 증상과, 이미 배제된 것으로 판단되는 항목이 무엇인지 말씀해 주시고, 더 알아가시는 대로 다시 알려 주세요. 사용자는 마지막으로 작성하신 내용을 그대로 받게 되며, 언제든지 상담 창을 닫을 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="492"/>
         <source>Method not found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>방법을 찾을 수 없습니다: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="529"/>
@@ -2561,72 +2590,116 @@ Compose on a success as readily as on a failure. A failure report tells the proj
 You do not send it - that is the user&apos;s, and you have no tool for it. When you are done, tell them to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: it opens your report for them to read, correct and send to the project&apos;s own tracker, which needs no account of any kind. Say once that sending it is worth doing and why, then leave it with them - they may say no, and that is a normal answer.
 
 Fill in what you ruled out, not only what you concluded. A cause is made identifiable by what it is not, and that is the field that turns one report into something that recognises the same fault on somebody else&apos;s machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 서버는 이 컴퓨터에 설치된 로컬 Sandboxie-Plus를 노출합니다.
+
+문서와 설정 구성표를 바로 확인하실 수 있습니다. 해당 도구들은 이 머신에 대한 어떤 정보도 반환하지 않고 Sandboxie 기본 제공값만 반환하므로, 별도의 권한 부여가 필요하지 않습니다.
+
+머신 자체를 살펴보기 위해, 즉 어떤 샌드박스가 존재하는지, 무엇이 작동 중인지, 무엇이 거부되었는지를 확인하려면 먼저 권한을 부여해야 합니다. 인수 없이 &apos;페어&apos;를 호출하면 Sandboxie-Plus가 사용자에게 6자리 코드를 보여 줍니다. 사용자에게 그 코드를 물어본 뒤, 그 코드로 다시 &apos;페어&apos;를 호출합니다. 코드를 추측하지 마세요.
+
+아직 사용할 수 없는 도구까지 포함해, 처음부터 모든 도구가 목록으로 제공됩니다. 아직 페어링하기 전까지는 사용할 수 없는 도구이며, 페어링이 완료되면 그 사실을 알려줍니다. 목록에서 아무것도 나타나거나 사라지지 않으므로 새로 고칠 필요가 없으며, 사용자에게 다시 연결하라고 요청할 필요도 없습니다.
+
+반드시 지켜야 하는 규칙 하나가 있습니다. 선택 사항이 아닙니다. report_compose를 사용하여 항상 보고서를 작성해 두세요. 증상과 의심만 생기면 곧바로 하나 작성해 두세요. 원인은 커녕 해결책은 말할 것도 없이, 바꾸거나 실행하거나 배제한 모든 일 뒤에 다시 작성해 두세요. 기존 것을 대체하므로 자주 해도 비용이 들지 않으며, 관리해야 할 부분 상태도 없습니다.
+
+그리고 그것이 효과가 있었는지 알아보세요. 사용자가 문제가 해결되었다고 말하거나 그렇지 않다고 말하면, 그 판결이 사용자 본인의 것임을 기록하는 confirmed_by_user 설정으로 다시 작성하세요. 그들이 말하지 않았다면, &quot;지금 효과가 있습니까?&quot;라고 물어보세요. 이는 한 차례의 가치가 있으며, 보고서에서 가장 가치 있는 한 줄입니다. 해당 플래그가 설정되기 전까지 Sandboxie-Plus는 실행이 완료되지 않은 것으로 간주합니다. 따라서 사용자가 직접 종료할 수 있도록 버튼을 표시하며, 아무것도 전송되기 전에 사용자에게 직접 질문을 합니다.
+
+마지막에 처리해야 할 서류가 아니라 업무의 일부로 생각해 주세요. Sandboxie-Plus는 최신 작성 내용을 보관하며, 사용자가 언제든지 에이전트 창을 닫을 때 이를 사용자에게 제공합니다. 그리고 작성한 내용이 하나도 없다면 아무것도 제공되지 않으며, 사용자가 정리해 둔 모든 내용은 프로젝트에서 사라집니다. 사용자가 아무것도 수정하지 않고 아무것도 정리하지 않은 채 실행을 마쳤다면, 사용자가 아무리 만족하더라도 실패한 실행입니다.
+
+그다음에는 설정과 수정 사항이 빌드마다 다르므로 먼저 sandboxie_version을 읽고, 이어서 box_list를 읽은 다음, 해당 박스에 대해서는 box_get_config를 읽으세요. box_get_config는 해당 박스에 설정된 항목만 표시하며, 템플릿에서 상속된 값과 전역 기본값은 목록에 포함되지 않으므로, 설정이 없다고 해서 반드시 비활성 상태인 것은 아닙니다.
+
+설정에 관한 진실의 출처는 서로 두 가지이며, 대부분의 표면에 대해서는 서로 의견이 다릅니다. config_schema는 설정의 존재 여부, 문법이 무엇인지, 그리고 어떤 버전에서 추가되거나 제거되었는지에 대한 권위 있는 정보입니다. 묶음 문서 (docs_search, docs_get, docs_for_setting)는 각 설정의 의미를 설명하지만, 그중 약 5개 중 2개 정도만 다룹니다. 문서에 설정에 대해 아무것도 언급되어 있지 않더라도, 그것이 해당 설정이 존재하지 않는다는 증거는 아닙니다. 사용자에게 해당 설정이 존재하지 않는다고 알리기 전에 config_schema를 확인하세요. 반대로 설정 이름을 임의로 생성하지 마세요. 드라이버가 오류를 보고하는 대신 알 수 없는 이름을 조용히 무시하므로, 오타가 마치 아무 영향도 없는 설정처럼 보일 수 있습니다.
+
+샌드박스에서 어떤 것이 작동하지 않을 때, 효과적인 순서는 다음과 같습니다: box_processes로 해당 작업이 실제로 실행 중인지 확인하고, box_diagnostics로 Sandboxie 자체가 무엇에 대해 이의를 제기했는지 확인한 다음, trace_query로 해당 박스에 대해 거부된 접근을 필터링합니다. 추적이 제대로 되지 않는 경우 trace_query가 이를 알려줍니다. user_box_processes로 해당 박스가 실제로 실행 중인지 확인한 다음, Sandboxie 자체가 보고한 값에 따라 log_query를 사용하고, 그다음 trace_query로 해당 박스에서 거부된 접근을 필터링했습니다. 추적이 제대로 되지 않는다면 trace_query가 그렇게 말합니다. 빈 추적만으로 추론하기보다, 사용자에게 이를 활성화하도록 요청하고 문제를 다시 발생시켜 보세요.
+
+박스에는 보통 별칭이 있으며, 사용자가 그것으로 부르는 이름입니다. displayName에 box_list가 표시하는 방식대로 상자를 참조하세요. 이름 또는 별칭 중 어느 것이든 입력값으로 허용됩니다.
+
+진단 출력의 경로와 계정 이름은 %User% 및 %Computer%와 같은 토큰으로 대체됩니다. 이는 의도된 것입니다. 사용자에게 이를 되돌리라고 요청하지 마시고, 토큰을 리터럴 경로로 처리하지 마세요.
+
+일부 도구는 내용을 변경하며, 각각의 도구는 무엇이 변경되는지 사용자에게 정확히 보여 준 뒤 승인을 기다립니다. 아무것도 조용히 바꿀 수는 없으니, 요청하시는 내용을 축소하려고 하지 마세요. 분명한 설명은 승인되지만, 모호한 설명은 승인되지 않습니다.
+
+해결 방법이 확실하지 않다면 먼저 테스트해 보세요: shadow_begin은 실제 파일 세트를 공유하는 일회용 복사본으로 구성을 복제하고, shadow_set은 그 복사본을 수정한 뒤, shadow_commit은 차이점을 다시 복사합니다. 이는 전체 수정 사항에 대한 하나의 확인이며, 또는 shadow_discard는 이를 버립니다. 실제로 시도해 보신 해결책은 믿고 계신 것보다 훨씬 더 큰 가치가 있습니다. 일회용으로 처리되는 것은 설정뿐이라는 점에 유의하세요. 테스트 중에 작성한 파일은 실제 샌드박스에 저장되며, 삭제해도 이를 되돌릴 수는 없습니다.
+
+자신 있는 작업이거나 프로그램을 샌드박스로 강제로 옮기는 것과 같은 일상적인 요청의 경우에는 box_apply_changes를 직접 사용하세요. 어떤 방식이든 먼저 config_validate를 실행하세요.
+
+설정이 아니라 파일을 변경하려는 경우 먼저 snapshot_create를 제공하세요. 거의 즉시 실행되며 변경 사항을 되돌릴 수 없게 만들지만, 샌드박스에서 아무것도 실행 중이지 않을 때만 동작하므로, 무엇이든 시작하기 전에 실행되어야 합니다.
+
+수정이 실제로 작동했는지 확인하기 위해 box_run은 샌드박스 안에서 프로그램을 실행합니다. 사용자는 입력하신 그대로의 명령줄을 보게 되며, 어떤 작업이 실행되기 전에 반드시 동의해야 하므로, 의도하신 대로 작성해 주세요. 이 작업은 샌드박스의 현재 설정을 기준으로 실행된다는 점에 유의해 주세요. shadow_set으로 스테이징한 변경 사항은 적용되지 않으므로, 테스트용으로 실행하는 경우 먼저 커밋해 주세요.
+
+여기에는 샌드박스나 그 내용을 의도적으로 삭제하는 것이 없습니다.
+
+마지막에 저장하는 대신 report_compose로 진행하면서 계속 작성 기록을 유지하세요. 보고할 가치가 있다고 판단되는 내용, 즉 증상과 이미 배제한 것이 무엇인지가 이미 충분히 의미가 있다고 느껴지는 내용을 알게 되는 즉시 작성하시고, 더 알아보실 때마다 다시 작성해 주세요. 각 호출은 이전 호출을 대체합니다.
+
+그 이유는 회계 장부 관리가 아닙니다. Sandboxie-Plus는 최신 작성 내용을 보관하며, 사용자가 에이전트 창을 닫을 때 이를 제공합니다. 사용자는 언제든지 창을 닫을 수 있으며, 콘솔이 닫힐 때 생각이 끝나기를 기다리지는 않습니다. 아무것도 작성하지 않으시면 제공되는 것이 없으며, 전체 런이 프로젝트에서 사라집니다. 실제로 존재하지 않았던 것을 그대로 옮겨 보낸, 거친 소개글이 다듬어진 글보다 더 낫습니다.
+
+성공에 대해서도, 실패에 대해서도 얼마든지 글을 쓰세요. 실패 보고서는 프로젝트에 무엇이 여전히 잘못되었는지 알려주지만, 성공 보고서는 무엇을 수정했는지 알려주며, 이는 거의 받지 못하는 보고서입니다.
+
+그걸 보내시면 안 됩니다. 그것은 사용자의 것이며, 이를 위한 도구도 없습니다. 완료되면 Sandboxie-Plus 에이전트 창 하단의 초록색 체크 표시인 마침을 누르라고 안내해 주세요. 그러면 보고서가 열리며, 이를 읽고 수정한 뒤 어떤 종류의 계정도 필요 없는 프로젝트 자체 트래커로 전송할 수 있습니다. 한 번만 보내는 것이 왜 가치 있는 일인지, 그리고 그 이유가 무엇인지 말해 주신 뒤 맡겨 보세요. 아이가 거절할 수도 있는데, 그것도 자연스러운 반응입니다.
+
+결론만이 아니라, 배제한 것까지 포함해 작성해 주세요. 원인은 그것이 무엇이 아닌지로 식별할 수 있는데, 바로 한 보고서를 다른 사람의 기기에서도 동일한 결함을 인식하는 것으로 바꾸어 놓는 분야입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="788"/>
         <source>That needs authorisation: it reads this machine rather than the documentation. Call the pair tool, read the code Sandboxie-Plus displays to the user, and submit it. The documentation and schema tools work without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>해당 항목은 승인이 필요합니다: 문서가 아니라 이 기계를 읽습니다. 페어 도구를 호출하고, Sandboxie-Plus가 사용자에게 표시하는 코드 Sandboxie-Plus를 읽은 다음 제출합니다. 문서 및 스키마 도구는 이것이 없어도 작동합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="807"/>
         <source>Unknown tool: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>알 수 없는 도구: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="817"/>
         <source>This connection is already authorised.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 연결은 이미 승인되었습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="825"/>
         <source>Sandboxie-Plus is now showing a six-digit code. Ask the user to read it to you, then call pair again with that code. It is valid for five minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus가 이제 6자리 코드를 표시합니다. 사용자에게 읽어 달라고 요청한 다음, 그 코드로 pair을 다시 호출합니다. 유효 시간은 5분입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="835"/>
         <source>an agent was authorised: %1 (process %2)</source>
-        <translation type="unfinished"></translation>
+        <translation>에이전트가 승인되었습니다: %1 (프로세스 %2)</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="836"/>
         <source>unidentified client</source>
-        <translation type="unfinished"></translation>
+        <translation>미확인 클라이언트</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="843"/>
         <source>Authorised. Every tool you can see will now answer, including the ones that were refusing. Changes still need the user to confirm them one at a time.</source>
-        <translation type="unfinished"></translation>
+        <translation>승인되었습니다. 이제 보이는 모든 도구가 답변해 드립니다. 거부하던 도구들까지 포함됩니다. 변경 사항은 여전히 사용자가 하나씩 확인해야 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="848"/>
         <source>No code has been requested. Call pair with no arguments first.</source>
-        <translation type="unfinished"></translation>
+        <translation>코드를 요청하지 않았습니다. 인수 없이 페어를 먼저 호출합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="852"/>
         <source>That code has expired. Call pair with no arguments to request a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>해당 코드는 만료되었습니다. 인수 없이 페어를 호출하여 새 페어를 요청합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="856"/>
         <source>Too many incorrect attempts; the code has been invalidated. Call pair with no arguments to request a new one, and ask the user to read it again.</source>
-        <translation type="unfinished"></translation>
+        <translation>잘못된 시도가 너무 많아 코드가 무효 처리되었습니다. 인수 없이 페어를 호출하여 새 페어를 요청하고, 사용자에게 다시 읽어 달라고 요청합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="861"/>
         <source>That code is not correct. Ask the user to read it again from the Sandboxie-Plus window.</source>
-        <translation type="unfinished"></translation>
+        <translation>해당 코드는 올바르지 않습니다. 사용자에게 Sandboxie-Plus 창에서 다시 읽어 달라고 요청합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="906"/>
         <source>the user allowed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 허용함: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="907"/>
         <source>the user refused: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 거부함: %1 (%2)</translation>
     </message>
 </context>
 <context>
@@ -2634,27 +2707,27 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
     <message>
         <location filename="Mcp/McpSession.cpp" line="253"/>
         <source>no code had been requested</source>
-        <translation type="unfinished"></translation>
+        <translation>코드가 요청되지 않았습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="254"/>
         <source>wrong code</source>
-        <translation type="unfinished"></translation>
+        <translation>잘못된 코드입니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="255"/>
         <source>the code had expired</source>
-        <translation type="unfinished"></translation>
+        <translation>코드가 만료되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="256"/>
         <source>too many attempts</source>
-        <translation type="unfinished"></translation>
+        <translation>시도가 너무 많습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="257"/>
         <source>refused</source>
-        <translation type="unfinished"></translation>
+        <translation>거부되었습니다</translation>
     </message>
 </context>
 <context>
@@ -2663,213 +2736,217 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
         <location filename="Mcp/McpSessionWindow.cpp" line="41"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="470"/>
         <source>AI Agent Session - Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트 세션 - Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="56"/>
         <source>For this session:</source>
-        <translation type="unfinished"></translation>
+        <translation>이번 세션에서:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="80"/>
         <source>Give the agent this code:</source>
-        <translation type="unfinished"></translation>
+        <translation>이 코드를 에이전트에 전달하세요:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="101"/>
         <source>Do not ask again for this program</source>
-        <translation type="unfinished"></translation>
+        <translation>이 프로그램에 대해 다시 묻지 않음</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="107"/>
         <source>What this agent has done:</source>
-        <translation type="unfinished"></translation>
+        <translation>이 에이전트가 수행한 작업:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="111"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>시간</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="111"/>
         <source>What happened</source>
-        <translation type="unfinished"></translation>
+        <translation>발생한 상황</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="118"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="422"/>
         <source>Waiting for you</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자를 기다리고 있습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="121"/>
         <source>Nothing is waiting. Once authorised the agent can read your sandboxes freely; anything it wants to change, start or stop will appear here first, and nothing happens until you answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>아무것도 기다리고 있지 않습니다. 권한이 승인되면 에이전트가 샌드박스를 자유롭게 읽을 수 있습니다. 변경, 시작 또는 중지하려는 항목이 여기에 먼저 표시되며, 사용자가 응답하기 전까지는 아무 일도 일어나지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="145"/>
         <source>Allow</source>
-        <translation type="unfinished">허용</translation>
+        <translation>허용</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="146"/>
         <source>Refuse</source>
-        <translation type="unfinished"></translation>
+        <translation>거부</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="177"/>
         <source>Cancel</source>
-        <translation type="unfinished">취소</translation>
+        <translation>취소</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="178"/>
         <source>Finish</source>
-        <translation type="unfinished"></translation>
+        <translation>마침</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="183"/>
         <source>End this session without sending anything.</source>
-        <translation type="unfinished"></translation>
+        <translation>아무것도 보내지 않은 채로 이 세션을 종료합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="206"/>
         <source>Sandboxie-Plus was closing, so the request was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus가 종료되어 요청이 거부되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="211"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="580"/>
         <source>No agent is connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>연결된 에이전트가 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="258"/>
         <source>%1 Asking cannot be turned off on this machine: AiAgentRequireConfirmation is set in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 이 머신에서는 요청을 끌 수 없습니다. Sandboxie.ini 파일에 AiAgentRequireConfirmation이 설정되어 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="266"/>
         <source>this session starts at: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>이번 세션은 %1에 시작됩니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="282"/>
         <source>you set this session to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>이 세션을 %1로 설정했습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="372"/>
         <source>Valid for %1 minutes. Until it is entered the agent can do nothing. If you did not ask for this, ignore it.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1분 동안 유효합니다. 입력될 때까지 에이전트는 아무 작업도 수행할 수 없습니다. 요청하지 않은 경우 무시하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="382"/>
         <source>Skips this code next time. Anything able to run from %1 will then be authorised without asking.</source>
-        <translation type="unfinished"></translation>
+        <translation>다음 번에는 이 코드를 건너뜁니다. 그 후 %1에서 실행 가능한 모든 항목은 확인 요청 없이 승인됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="433"/>
         <source>Waiting for you - please answer</source>
-        <translation type="unfinished"></translation>
+        <translation>기다리고 있습니다 - 답변해 주세요</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="443"/>
         <source>AI Agent Session - waiting for you</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트 세션 - 기다리고 있습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="517"/>
         <source>recorded that you confirmed the result</source>
-        <translation type="unfinished"></translation>
+        <translation>결과를 확인하셨다는 내용이 기록되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="523"/>
         <source>wrote up what it has found - press Finish when you are done to read and send it</source>
-        <translation type="unfinished"></translation>
+        <translation>검색 결과를 정리했습니다 - 확인이 끝나면 마침을 눌러 내용을 확인하고 전송하세요</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="524"/>
         <source>updated its write-up of what it has found</source>
-        <translation type="unfinished"></translation>
+        <translation>발견한 내용에 대한 정리 내용을 업데이트했습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="560"/>
         <source>Wrap up: read what the agent wrote and decide whether to send it.</source>
-        <translation type="unfinished"></translation>
+        <translation>마무리: 에이전트가 작성한 내용을 읽고 전송할지 여부를 결정하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="561"/>
         <source>The agent has not written anything up yet. Ask it to write up what it found - it has a tool for that - and this becomes available.</source>
-        <translation type="unfinished"></translation>
+        <translation>에이전트가 아직 아무것도 정리하지 않았습니다. 발견한 내용을 정리해 달라고 요청하세요. 이를 위한 도구가 있으며, 요청 시 사용할 수 있게 됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="570"/>
         <source>the connection closed while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>요청이 대기 중인 상태에서 연결이 종료되어 요청이 거부되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="589"/>
         <source>the session was finished while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>요청이 대기 중인 상태에서 세션이 종료되어 요청이 거부되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="633"/>
         <source>Close this window - and the agent connection with it?</source>
-        <translation type="unfinished"></translation>
+        <translation>이 창을 닫으시겠습니까? - 그러면 에이전트 연결도 함께 끊어지나요?</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="637"/>
         <source>The agent has written up what it found, and closing does not send it. Finish instead - the green tick - to read it and decide; it is the only way what happened here reaches anyone else. Nothing is lost either way: the write-up is kept, and you can reopen this window and finish later.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>에이전트가 조사 결과를 정리해 보고서로 작성했으며, 종결 처리로는 전달되지 않습니다. 대신 읽고 판단하시려면 초록색 체크 표시를 눌러 마무리해 주세요. 여기서 일어난 일이 다른 누구에게든 전달되는 유일한 방법입니다. 어느 쪽이든 잃는 것은 없습니다. 작성 내용은 유지되며, 이 창을 다시 열어 나중에 마무리하실 수 있습니다.
+
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="643"/>
         <source>A request is waiting for an answer, and closing refuses it.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>요청이 응답을 기다리고 있는 상태에서 창을 닫으면 해당 요청이 거부됩니다.
+
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="648"/>
         <source>Disconnecting closes the agent connection as well: nothing can connect again until you turn it back on. Staying connected leaves it open, so the agent can carry on and this window comes back the next time it needs you.</source>
-        <translation type="unfinished"></translation>
+        <translation>연결을 끊으면 에이전트 연결도 함께 종료됩니다. 다시 켜기 전까지는 아무도 연결할 수 없습니다. 연결 상태를 유지하면 연결이 열려 있는 상태로 남아, 에이전트가 작업을 계속할 수 있으며, 다음에 사용자의 도움이 필요할 때 이 창이 다시 나타납니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="654"/>
         <source>Close and Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>닫기 및 연결 해제</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="655"/>
         <source>Close, Stay Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>닫기, 연결 유지</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="656"/>
         <source>Keep Open</source>
-        <translation type="unfinished"></translation>
+        <translation>열어 두기</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="677"/>
         <source>the window was closed while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>요청이 대기 중인 상태에서 창이 닫혔기 때문에 요청이 거부되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="681"/>
         <source>the window was closed, so the write-up was not sent</source>
-        <translation type="unfinished"></translation>
+        <translation>창이 닫혔기 때문에 작성된 내용이 전송되지 않았습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="713"/>
         <source>the report was sent to the Sandboxie-Plus issue tracker</source>
-        <translation type="unfinished"></translation>
+        <translation>보고서가 Sandboxie-Plus 이슈 추적 시스템으로 전송되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="729"/>
         <source>the report was not sent - press Finish again if you change your mind</source>
-        <translation type="unfinished"></translation>
+        <translation>보고서가 전송되지 않았습니다. 마음이 바뀌셨다면 마침을 다시 누르세요</translation>
     </message>
 </context>
 <context>
@@ -2877,124 +2954,126 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="32"/>
         <source>Send this to the Sandboxie-Plus project?</source>
-        <translation type="unfinished"></translation>
+        <translation>이 내용을 Sandboxie-Plus 프로젝트로 보내시겠습니까?</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="42"/>
         <source>The agent wrote this up while it worked.</source>
-        <translation type="unfinished"></translation>
+        <translation>작업이 수행되는 동안 에이전트가 이 내용을 작성했습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="43"/>
         <source>%1 wrote this up while it worked.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1이(가) 작업 수행 중에 이 내용을 작성했습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="50"/>
         <source>Sending it is how what happened here reaches the people who maintain Sandboxie. A fix that worked tells them what to recommend to the next person with the same problem - and that is the report they almost never get. One that did not work tells them what is still broken.
 
 Nothing is sent unless you choose to, and nothing goes without you reading it. Edit or delete anything below first - the second half was written by the agent and can contain anything it saw.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 보고서를 보내야만 여기서 발생한 문제가 Sandboxie 개발팀에 전달됩니다. 효과가 있었던 해결책은 개발팀이 같은 문제를 겪는 다음 사용자에게 무엇을 권장해야 할지 알려주며, 이는 개발팀이 거의 받아보지 못하는 유형의 보고서입니다. 효과가 없었던 해결책은 여전히 어떤 부분이 제대로 작동하지 않는지 알려줍니다.
+
+사용자가 직접 보내기로 선택하지 않는 한 아무것도 전송되지 않으며, 사용자가 내용을 확인하지 않고는 아무것도 전송되지 않습니다. 먼저 아래 내용을 수정하거나 삭제하세요. 후반부는 에이전트가 작성한 것으로, 에이전트가 감지한 모든 내용이 포함되어 있을 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="84"/>
         <source>Detailed issue description</source>
-        <translation type="unfinished">상세 문제 설명</translation>
+        <translation>상세한 문제 설명</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="92"/>
         <source>Is the problem actually gone?</source>
-        <translation type="unfinished"></translation>
+        <translation>문제가 정말로 사라졌나요?</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="95"/>
         <source>The agent did not establish this, and it is the single most useful line in the report - it is what tells the project whether the fix it is reading about actually works. Answering is optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>에이전트가 이를 확립한 것은 아니며, 보고서에서 가장 유용한 한 줄입니다. 바로 프로젝트가 읽고 있는 수정 사항이 실제로 작동하는지 여부를 알려 주는 부분입니다. 답변은 선택 사항입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="101"/>
         <source>Yes - the problem is fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>예, - 문제가 해결되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="102"/>
         <source>No - it is still there</source>
-        <translation type="unfinished"></translation>
+        <translation>아니요, 아직 거기에 있습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="114"/>
         <source>Attach Sandboxie.ini</source>
-        <translation type="unfinished">Sandboxie.ini 첨부</translation>
+        <translation>Sandboxie.ini 첨부</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="118"/>
         <source>Attach Logs</source>
-        <translation type="unfinished">로그 첨부</translation>
+        <translation>로그 첨부</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="127"/>
         <source>Email address</source>
-        <translation type="unfinished">이메일주소</translation>
+        <translation>이메일주소</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="138"/>
         <source>Don&apos;t Send</source>
-        <translation type="unfinished"></translation>
+        <translation>전송하지 않음</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="140"/>
         <source>Send Report</source>
-        <translation type="unfinished"></translation>
+        <translation>보고서 보내기</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="186"/>
         <source>The report could not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>보고서를 보낼 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="229"/>
         <source>the Sandboxie-Plus message log</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 메시지 로그</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="230"/>
         <source>the resource trace - everything every sandboxed program touched while it was on</source>
-        <translation type="unfinished"></translation>
+        <translation>리소스 추적 기록 — 샌드박스화된 프로그램이 실행 중일 때 접근한 모든 항목</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="232"/>
         <source>your whole Sandboxie.ini, which describes every sandbox you have</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자의 모든 샌드박스를 설명하는 전체 Sandboxie.ini 파일</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="237"/>
         <source>any contact address, so nobody can reply to you about it</source>
-        <translation type="unfinished"></translation>
+        <translation>연락처 정보 없음. 따라서 아무도 이에 대해 답장할 수 없음</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="239"/>
         <source>your address %1, so a maintainer can reply</source>
-        <translation type="unfinished"></translation>
+        <translation>주소 %1이므로, 관리자가 답장을 보낼 수 있음</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="241"/>
         <source>Selecting the partially checked state sends the message log but not the resource trace. Both can be read in the main window before you send.</source>
-        <translation type="unfinished"></translation>
+        <translation>부분적으로 선택된 상태를 선택하면 메시지 로그만 전송되고 리소스 추적 정보는 전송되지 않습니다. 두 정보 모두 전송하기 전에 메인 창에서 확인할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="244"/>
         <source>Sent with the report:</source>
-        <translation type="unfinished"></translation>
+        <translation>보고서와 함께 발송됨:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="246"/>
         <source>nothing but the text above</source>
-        <translation type="unfinished"></translation>
+        <translation>위의 텍스트 외에는 없습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="249"/>
         <source>Left out:</source>
-        <translation type="unfinished"></translation>
+        <translation>제외된 항목:</translation>
     </message>
 </context>
 <context>
@@ -3262,7 +3341,9 @@ Do you still want to update?</source>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
-        <translation></translation>
+        <translation>새 업데이트가 없습니다. Sandboxie-Plus가 최신 상태입니다.
+
+참고: 업데이트 검사는 테스트된 업데이트만 제공되도록 하기 위해 최신 GitHub 릴리스보다 뒤늦게 이루어지는 경우가 많습니다.</translation>
     </message>
 </context>
 <context>
@@ -3512,7 +3593,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="78"/>
         <location filename="Windows/OptionsNetwork.cpp" line="340"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
@@ -4773,7 +4854,7 @@ Full path: %4</source>
     <message>
         <location filename="../MiscHelpers/Common/ProgressDialog.h" line="101"/>
         <source>Close (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>닫기 (%1)</translation>
     </message>
 </context>
 <context>
@@ -4923,7 +5004,7 @@ Full path: %4</source>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="593"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="615"/>
@@ -5072,22 +5153,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="5663"/>
+        <location filename="SandMan.cpp" line="5664"/>
         <source>Waiting for folder: %1</source>
         <translation>폴더 대기 중: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5664"/>
+        <location filename="SandMan.cpp" line="5665"/>
         <source>Deleting folder: %1</source>
         <translation>폴더 삭제 중: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5665"/>
+        <location filename="SandMan.cpp" line="5666"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>폴더 병합: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5666"/>
+        <location filename="SandMan.cpp" line="5667"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>스냅샷 병합을 완료하는 중...</translation>
     </message>
@@ -5184,22 +5265,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Sandboxie-Plus v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5508"/>
+        <location filename="SandMan.cpp" line="5509"/>
         <source>Reset Columns</source>
         <translation>열 재설정</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5509"/>
+        <location filename="SandMan.cpp" line="5510"/>
         <source>Copy Cell</source>
         <translation>셀 복사</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5510"/>
+        <location filename="SandMan.cpp" line="5511"/>
         <source>Copy Row</source>
         <translation>행 복사</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5511"/>
+        <location filename="SandMan.cpp" line="5512"/>
         <source>Copy Panel</source>
         <translation>패널 복사</translation>
     </message>
@@ -5455,7 +5536,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="SandMan.cpp" line="847"/>
-        <location filename="SandMan.cpp" line="5601"/>
+        <location filename="SandMan.cpp" line="5602"/>
         <source>About Sandboxie-Plus</source>
         <translation>Sandboxie-Plus 정보 - 번역: 비너스걸</translation>
     </message>
@@ -5541,9 +5622,9 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1781"/>
         <location filename="SandMan.cpp" line="2391"/>
         <location filename="SandMan.cpp" line="2933"/>
-        <location filename="SandMan.cpp" line="4506"/>
-        <location filename="SandMan.cpp" line="4963"/>
-        <location filename="SandMan.cpp" line="4979"/>
+        <location filename="SandMan.cpp" line="4507"/>
+        <location filename="SandMan.cpp" line="4964"/>
+        <location filename="SandMan.cpp" line="4980"/>
         <source>Don&apos;t show this message again.</source>
         <translation>이 메시지를 다시 표시하지 않습니다.</translation>
     </message>
@@ -5695,19 +5776,19 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>설정 마법사를 생략하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4642"/>
-        <location filename="SandMan.cpp" line="4644"/>
-        <location filename="SandMan.cpp" line="5255"/>
+        <location filename="SandMan.cpp" line="4643"/>
+        <location filename="SandMan.cpp" line="4645"/>
+        <location filename="SandMan.cpp" line="5256"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - 오류</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4642"/>
+        <location filename="SandMan.cpp" line="4643"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>모든 Sandboxie 구성 요소를 중지하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4644"/>
+        <location filename="SandMan.cpp" line="4645"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>필수 Sandboxie 구성 요소를 시작하지 못했습니다</translation>
     </message>
@@ -5741,7 +5822,7 @@ No will choose: %2</source>
         <translation>   -   연결되지 않음</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4179"/>
+        <location filename="SandMan.cpp" line="4180"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>선택한 기능 세트는 프로젝트 후원자만 사용할 수 있습니다. 후원자 인증서 없이 이 기능 세트가 활성화된 박스에서 시작된 프로세스는 5분 후에 종료됩니다.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;프로젝트 후원자가 되어&lt;/a&gt;, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원 인증서&lt;/a&gt;를 받습니다</translation>
     </message>
@@ -5806,132 +5887,132 @@ No will choose: %2</source>
         <translation>샌드박스 이름: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4358"/>
+        <location filename="SandMan.cpp" line="4359"/>
         <source>Only Administrators can change the config.</source>
         <translation>관리자만 구성을 변경할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4368"/>
+        <location filename="SandMan.cpp" line="4369"/>
         <source>Please enter the configuration password.</source>
         <translation>구성 비밀번호를 입력하세요.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4376"/>
+        <location filename="SandMan.cpp" line="4377"/>
         <source>Login Failed: %1</source>
         <translation>로그인 실패: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4415"/>
+        <location filename="SandMan.cpp" line="4416"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>모든 sandboxes의 모든 프로세스를 종료하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4505"/>
+        <location filename="SandMan.cpp" line="4506"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus는 포터블 모드로 시작되었으며 필요한 서비스를 만들어야 합니다. 관리 권한을 묻는 메시지가 나타납니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4539"/>
+        <location filename="SandMan.cpp" line="4540"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>주의: 다른 에이전트 (아마도 SbieCtrl.exe)가 이미 이 Sandboxie 세션을 관리하고 있습니다. 먼저 이 세션을 닫은 후 다시 연결하여 작업을 수행하세요.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4671"/>
+        <location filename="SandMan.cpp" line="4672"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>유지 보수 작업을 실행하는 중입니다. 잠시 기다려 주세요...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4873"/>
+        <location filename="SandMan.cpp" line="4874"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>숨겨진 메시지 박스 (예)를 재설정하시겠습니까, 아니면 모든 로그 메시지 (아니요)만 재설정하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4977"/>
+        <location filename="SandMan.cpp" line="4978"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>파일이 저장될 때마다 변경 내용이 자동으로 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4978"/>
+        <location filename="SandMan.cpp" line="4979"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>편집기가 닫히는 즉시 변경 내용이 자동으로 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5178"/>
+        <location filename="SandMan.cpp" line="5179"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>오류 상태: 0x%1(%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5179"/>
+        <location filename="SandMan.cpp" line="5180"/>
         <source>Unknown</source>
         <translation>알 수 없음</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5199"/>
+        <location filename="SandMan.cpp" line="5200"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>샌드박스를 삭제하려면 먼저 비워야 합니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5204"/>
+        <location filename="SandMan.cpp" line="5205"/>
         <source>Failed to copy box data files</source>
         <translation>박스 데이터 파일을 복사하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5209"/>
+        <location filename="SandMan.cpp" line="5210"/>
         <source>Failed to remove old box data files</source>
         <translation>이전 박스 데이터 파일을 제거하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5227"/>
+        <location filename="SandMan.cpp" line="5228"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>알 수 없는 오류 상태: 0x%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5329"/>
+        <location filename="SandMan.cpp" line="5330"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
         <translation>%1을 샌드박스 또는 샌드박스 해제된 웹 브라우저에서 열겠습니까?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5333"/>
+        <location filename="SandMan.cpp" line="5334"/>
         <source>Sandboxed</source>
         <translation>샌드박스됨</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5334"/>
+        <location filename="SandMan.cpp" line="5335"/>
         <source>Unsandboxed</source>
         <translation>샌드박스 해제</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5512"/>
+        <location filename="SandMan.cpp" line="5513"/>
         <source>Case Sensitive</source>
         <translation>대소문자 구분</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5513"/>
+        <location filename="SandMan.cpp" line="5514"/>
         <source>RegExp</source>
         <translation>정규식</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5514"/>
+        <location filename="SandMan.cpp" line="5515"/>
         <source>Highlight</source>
         <translation>강조</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5515"/>
+        <location filename="SandMan.cpp" line="5516"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5516"/>
+        <location filename="SandMan.cpp" line="5517"/>
         <source>&amp;Find ...</source>
         <translation>찾기(&amp;F)...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5517"/>
+        <location filename="SandMan.cpp" line="5518"/>
         <source>All columns</source>
         <translation>모든 열</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5181"/>
+        <location filename="SandMan.cpp" line="5182"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>이 작업을 수행하려면 관리자 권한이 필요합니다.</translation>
     </message>
@@ -5977,12 +6058,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="838"/>
         <source>Troubleshoot with an AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트로 문제 해결</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="839"/>
         <source>Set up an AI agent to look at a sandbox with you - which clients are supported, and the exact configuration each one needs.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스를 함께 살펴볼 AI 에이전트를 설정해 주세요. 어떤 클라이언트를 지원하는지, 그리고 각 클라이언트에 필요한 정확한 구성은 무엇인지 확인할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="855"/>
@@ -5999,23 +6080,23 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="984"/>
         <source>AI Agent Connection (MCP)</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트 연결 (MCP)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="986"/>
         <location filename="SandMan.cpp" line="3466"/>
         <source>Let a local AI agent inspect this Sandboxie installation. Off until you turn it on, and unreachable from inside a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>로컬 AI 에이전트가 이 Sandboxie 설치본을 검사하도록 하세요. 켜기 전까지는 꺼져 있으며, 샌드박스 내부에서는 접근할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="988"/>
         <source>AI Agent Session Window</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트 세션 창</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="989"/>
         <source>Everything the agent has asked for and what you answered. Opens on its own when an agent connects.</source>
-        <translation type="unfinished"></translation>
+        <translation>에이전트가 요청한 모든 내용과 사용자가 답변한 내용입니다. 에이전트가 연결되면 독립적으로 열립니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="992"/>
@@ -6119,7 +6200,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1236"/>
         <source>AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1265"/>
@@ -6139,17 +6220,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2161"/>
         <source>MCP: %1 requested via command line, now %2</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: 명령줄을 통해 요청된 %1, 이제 %2입니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2162"/>
         <source>on</source>
-        <translation type="unfinished"></translation>
+        <translation>켬</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2162"/>
         <source>off</source>
-        <translation type="unfinished"></translation>
+        <translation>끔</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2316"/>
@@ -6224,20 +6305,20 @@ sandboxie에 업데이트가 있는지 확인해 주세요.</translation>
         <translation> (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4058"/>
+        <location filename="SandMan.cpp" line="4059"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>%2 박스에서 시작한 프로그램 %1은 프로젝트 후원자가 독점적으로 사용할 수 있는 기능을 사용하도록 구성되었기 때문에 5분 후에 종료됩니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4060"/>
+        <location filename="SandMan.cpp" line="4061"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>%1 박스는 프로젝트 후원자가 독점적으로 사용할 수 있는 기능을 사용하도록 구성되었으며, 이러한 사전 설정은 무시됩니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4041"/>
-        <location filename="SandMan.cpp" line="4049"/>
-        <location filename="SandMan.cpp" line="4061"/>
-        <location filename="SandMan.cpp" line="4168"/>
+        <location filename="SandMan.cpp" line="4042"/>
+        <location filename="SandMan.cpp" line="4050"/>
+        <location filename="SandMan.cpp" line="4062"/>
+        <location filename="SandMan.cpp" line="4169"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;프로젝트 후원자가 되어&lt;/a&gt;, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원자 인증서&lt;/a&gt;를 받습니다</translation>
     </message>
@@ -6361,7 +6442,7 @@ sandboxie에 업데이트가 있는지 확인해 주세요.</translation>
     <message>
         <location filename="SandMan.cpp" line="3010"/>
         <source>Removed %1 leftover sandbox configuration copies from an interrupted troubleshooting session</source>
-        <translation type="unfinished"></translation>
+        <translation>중단된 문제 해결 세션에서 남아 있던 샌드박스 구성 복사본 %1개를 제거했습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3096"/>
@@ -6380,89 +6461,89 @@ Do you want to disable Windows Updates scanning from the the software compatibil
     <message>
         <location filename="SandMan.cpp" line="3376"/>
         <source>The AI agent connection is turned off in the settings</source>
-        <translation type="unfinished"></translation>
+        <translation>설정에서 AI 에이전트 연결이 해제되었습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3388"/>
         <source>The AI agent connection is disabled by AllowAiAgent=n in Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini에서 AllowAiAgent=n으로 AI 에이전트 연결이 비활성화됩니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3405"/>
         <source>An AI agent can now connect to Sandboxie on %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>이제 AI 에이전트가 %1%2에서 Sandboxie에 연결할 수 있습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3416"/>
         <source>The AI agent connection is closed</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트 연결이 종료되었습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3460"/>
         <location filename="SandMan.cpp" line="3494"/>
         <source>Turned off for this machine by AllowAiAgent=n in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini에서 AllowAiAgent=n으로 설정되어 있어 이 머신에서는 비활성화되었습니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3462"/>
         <source>Turned off in Settings, under General Config, AI Agent.</source>
-        <translation type="unfinished"></translation>
+        <translation>설정의 일반 구성에서 AI 에이전트 항목을 끄면 됩니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3464"/>
         <source>An AI agent can connect. Click to close the connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트가 연결할 수 있습니다. 연결을 종료하려면 클릭하세요.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3503"/>
         <location filename="SandMan.cpp" line="3602"/>
         <source>The AI agent connection could not be opened. The message log has the reason.</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트 연결을 열 수 없습니다. 메시지 로그에는 이유가 있습니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3526"/>
         <source>An unidentified program</source>
-        <translation type="unfinished"></translation>
+        <translation>알 수 없는 프로그램</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3533"/>
         <source>connected, waiting to be authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>연결됨, 승인을 기다리는 중</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3534"/>
         <source>%1 connected</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 연결됨</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3555"/>
         <source>MCP: ignored a connection request from %1 (asked too recently)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1의 연결 요청을 무시했습니다 (너무 최근에 요청됨)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3556"/>
         <source>an unidentified application</source>
-        <translation type="unfinished"></translation>
+        <translation>알 수 없는 응용 프로그램</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3560"/>
         <source>An application</source>
-        <translation type="unfinished"></translation>
+        <translation>응용 프로그램</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3563"/>
         <source>asking to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>연결 요청 중</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3564"/>
         <source>%1 is asking to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 연결을 요청 중</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3568"/>
         <source>%1 is asking to connect an AI agent to Sandboxie-Plus.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1은 AI 에이전트를 Sandboxie-Plus에 연결해 달라는 요청입니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3569"/>
@@ -6473,237 +6554,243 @@ To look at YOUR sandboxes - what exists, what is running, what was blocked - it 
 It is not reachable from inside a sandbox.
 
 If you did not just ask an AI assistant to look at Sandboxie, refuse this.</source>
-        <translation type="unfinished"></translation>
+        <translation>이를 허용하면 에이전트가 Sandboxie의 자체 문서를 바로 읽을 수 있습니다.
+
+사용자의 샌드박스에서 무엇이 있는지, 무엇이 실행 중인지, 무엇이 차단되었는지 확인하려면, 이 창이 보여드릴 코드를 사용자가 입력하도록 요청해야 합니다. 무엇이든 바꾸거나, 무엇이든 시작하거나, 무엇이든 멈추려면 매번 다시 물어봐야 합니다.
+
+샌드박스 내부에서는 접근할 수 없습니다.
+
+AI 어시스턴트에게 Sandboxie를 살펴봐 달라고만 요청하지 않으셨다면, 이를 거부해 주세요.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3575"/>
         <source>Allow the Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>연결 허용</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3585"/>
         <source>the connection was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>연결이 거부되었습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3586"/>
         <source>not connected</source>
-        <translation type="unfinished"></translation>
+        <translation>연결되지 않았습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3589"/>
         <source>MCP: declined a connection request from %1 (%2 in a row - further requests ignored for a minute)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1의 연결 요청을 거부했습니다 (%2 in a row - 추가 요청은 1분 동안 무시됨)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3593"/>
         <source>MCP: declined a connection request from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1의 연결 요청을 거부했습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3599"/>
         <source>the connection was allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>연결이 허용되었습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3628"/>
         <source>An AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3630"/>
         <source>waiting for the code below to be read to it</source>
-        <translation type="unfinished"></translation>
+        <translation>아래 코드가 읽어지기를 기다리고 있습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3631"/>
         <source>%1 asked to be authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>%1이 인증을 요청했습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3636"/>
         <source>MCP: %1 is asking to connect; a pairing code is displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 연결 요청 중입니다. 페어링 코드가 표시됩니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3641"/>
         <location filename="SandMan.cpp" line="3662"/>
         <location filename="SandMan.cpp" line="3670"/>
         <source>an AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3648"/>
         <source>this program will be authorised without asking from now on</source>
-        <translation type="unfinished"></translation>
+        <translation>이제부터 이 프로그램은 별도의 확인 없이 인증됩니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3649"/>
         <source>MCP: %1 will be authorised without asking from now on</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: 이제부터는 별도의 요청 없이 %1이 승인됩니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3655"/>
         <source>authorised - it can read freely, and must ask for anything else</source>
-        <translation type="unfinished"></translation>
+        <translation>인증됨 - 자유롭게 읽을 수 있으며, 그 외의 작업은 반드시 요청해야 합니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3656"/>
         <source>%1 is now authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에 권한이 부여되었습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3657"/>
         <source>MCP: %1 is now authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1이(가) 이제 승인되었습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3664"/>
         <source>%1 failed to authorise (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1의 권한 부여에 실패했습니다 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3665"/>
         <source>MCP: %1 failed to authorise (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1이 승인에 실패했습니다 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3672"/>
         <source>suspended after an hour idle - it must be authorised again</source>
-        <translation type="unfinished"></translation>
+        <translation>1시간 동안 활동이 없으므로 일시 정지되었습니다 - 다시 권한을 부여해야 합니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3673"/>
         <source>the session for %1 was suspended after an hour idle</source>
-        <translation type="unfinished"></translation>
+        <translation>%1의 세션이 1시간 동안 활동이 없으므로 일시 정지되었습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3674"/>
         <source>MCP: the session for %1 was suspended after an hour idle; it can be resumed by authorising again</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 세션은 1시간 동안 유휴 상태였기 때문에 일시 중지되었습니다. 다시 승인하면 재개할 수 있습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3682"/>
         <source>MCP: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4040"/>
+        <location filename="SandMan.cpp" line="4041"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
         <translation>박스 %1은 프로젝트 후원자에게만 제공되는 기능을 사용하도록 구성되어 있습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4045"/>
+        <location filename="SandMan.cpp" line="4046"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>박스 %1은 &lt;b&gt;고급&lt;/b&gt; 후원 인증서가 필요한 기능을 사용하도록 구성되어 있습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4047"/>
-        <location filename="SandMan.cpp" line="4166"/>
+        <location filename="SandMan.cpp" line="4048"/>
+        <location filename="SandMan.cpp" line="4167"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert &quot;&gt;인증서를 업그레이드&lt;/a&gt;하여 고급 기능을 사용해 보세요.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4162"/>
+        <location filename="SandMan.cpp" line="4163"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>선택한 기능에는 &lt;b&gt;고급&lt;/b&gt; 후원자 인증서가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4164"/>
+        <location filename="SandMan.cpp" line="4165"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
         <translation>&lt;br /&gt;이 기능을 사용하려면 Great Patreon 레벨 이상이어야 합니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4176"/>
+        <location filename="SandMan.cpp" line="4177"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>선택된 기능 세트는 프로젝트 후원자만 이용할 수 있습니다.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert &quot;&gt;프로젝트 후원자가 되어 주세요&lt;/a&gt; 그러면 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert &quot;&gt;후원자 인증서&lt;/a&gt;를 받으실 수 있습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4222"/>
+        <location filename="SandMan.cpp" line="4223"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
         <translation>사용하려는 인증서가 차단되었습니다. 이는 정당한 사유로 무효화되었음을 의미합니다. 이를 사용하려는 모든 시도는 이용 약관 위반에 해당합니다!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4234"/>
+        <location filename="SandMan.cpp" line="4235"/>
         <source>The Certificate Signature is invalid!</source>
         <translation>인증서 서명이 잘못되었습니다!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4235"/>
+        <location filename="SandMan.cpp" line="4236"/>
         <source>The Certificate is not suitable for this product.</source>
         <translation>인증서가 이 제품에 적합하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4236"/>
+        <location filename="SandMan.cpp" line="4237"/>
         <source>The Certificate is node locked.</source>
         <translation>인증서가 노드 잠금 상태입니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4240"/>
+        <location filename="SandMan.cpp" line="4241"/>
         <source>The support certificate is not valid.
 Error: %1</source>
         <translation>지원 증명서는 유효하지 않습니다.
 오류: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4304"/>
+        <location filename="SandMan.cpp" line="4305"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>평가 기간이 만료되었습니다!!!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4416"/>
-        <location filename="SandMan.cpp" line="4441"/>
+        <location filename="SandMan.cpp" line="4417"/>
+        <location filename="SandMan.cpp" line="4442"/>
         <source>Don&apos;t ask in future</source>
         <translation>앞으로는 묻지 않음</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4440"/>
+        <location filename="SandMan.cpp" line="4441"/>
         <source>Do you want to terminate all processes in encrypted sandboxes, and unmount them?</source>
         <translation>암호화된 샌드박스의 모든 프로세스를 종료하고 마운트를 해제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4466"/>
+        <location filename="SandMan.cpp" line="4467"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>강제 프로그램 규칙을 비활성화하는 기간을 초로 입력하세요.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4481"/>
+        <location filename="SandMan.cpp" line="4482"/>
         <source>No Recovery</source>
         <translation>복구 안 함</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4487"/>
+        <location filename="SandMan.cpp" line="4488"/>
         <source>No Messages</source>
         <translation>메시지 없음</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4543"/>
+        <location filename="SandMan.cpp" line="4544"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation>&lt;b&gt;오류:&lt;/b&gt; Sandboxie-Plus Manager(SandMan.exe)에 유효한 서명(SandMan.exe.sig)이 없습니다. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;공식 다운로드 페이지&lt;/a&gt;에서 신뢰할 수 있는 릴리스를 다운로드하세요.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4646"/>
+        <location filename="SandMan.cpp" line="4647"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>유지 관리 작업에 실패했습니다 (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4651"/>
+        <location filename="SandMan.cpp" line="4652"/>
         <source>Maintenance operation completed</source>
         <translation>유지 보수 작업이 완료되었습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4804"/>
+        <location filename="SandMan.cpp" line="4805"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>Plus UI에서 이 기능은 기본 샌드박스 목록 보기에 통합되었습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4805"/>
+        <location filename="SandMan.cpp" line="4806"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>박스/그룹의 상황에 맞는 메뉴를 사용하여 박스와 그룹을 다른 그룹으로 이동할 수 있습니다. 끌어서 놓기를 사용하여 항목을 이동할 수도 있습니다. 또는 ALT를 누른 상태에서 화살표 키를 사용하여 그룹 내에서 항목을 위아래로 이동할 수도 있습니다.&lt;br /&gt;.샌드박스 메뉴에서 새 박스 및 그룹을 생성할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4961"/>
+        <location filename="SandMan.cpp" line="4962"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -6712,250 +6799,250 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 이 파일은 Sandboxie의 일부이며, 여기에 적용된 모든 변경 사항은 다음번 Sandboxie 업데이트 시 되돌려집니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5041"/>
+        <location filename="SandMan.cpp" line="5042"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>Sandboxie 구성을 다시 불러왔습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5182"/>
+        <location filename="SandMan.cpp" line="5183"/>
         <source>Failed to execute: %1</source>
         <translation>실행하지 못했습니다: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5183"/>
+        <location filename="SandMan.cpp" line="5184"/>
         <source>Failed to connect to the driver</source>
         <translation>드라이버에 연결하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5184"/>
+        <location filename="SandMan.cpp" line="5185"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>Sandboxie Service와 통신하지 못했습니다: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5185"/>
+        <location filename="SandMan.cpp" line="5186"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>호환되지 않는 Sandboxie %1이(가) 발견되었습니다. 호환 버전: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5186"/>
+        <location filename="SandMan.cpp" line="5187"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>Sandboxie 설치 경로를 찾을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5187"/>
+        <location filename="SandMan.cpp" line="5188"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>%1에서 구성을 복사하지 못했습니다: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5188"/>
+        <location filename="SandMan.cpp" line="5189"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>%1 이름의 샌드박스가 이미 있습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5189"/>
+        <location filename="SandMan.cpp" line="5190"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>샌드박스 %1을(를) 삭제하지 못했습니다: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5190"/>
+        <location filename="SandMan.cpp" line="5191"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>샌드박스 이름은 32자를 초과할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5191"/>
+        <location filename="SandMan.cpp" line="5192"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>샌드박스 이름은 장치 이름이 될 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5192"/>
+        <location filename="SandMan.cpp" line="5193"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>샌드박스 이름에는 공백으로 표시되는 문자, 숫자 및 밑줄만 포함될 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5193"/>
+        <location filename="SandMan.cpp" line="5194"/>
         <source>Failed to terminate all processes</source>
         <translation>모든 프로세스를 종료하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5194"/>
+        <location filename="SandMan.cpp" line="5195"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>샌드박스에 대해 삭제 보호가 활성화되었습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5195"/>
+        <location filename="SandMan.cpp" line="5196"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>박스 내용을 삭제하려면 먼저 모든 샌드박스 프로세스를 중지해야 합니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5196"/>
+        <location filename="SandMan.cpp" line="5197"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>샌드박스 폴더 삭제 중 오류 발생: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5197"/>
+        <location filename="SandMan.cpp" line="5198"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation>샌드박스의 모든 프로세스를 중지해야 이름을 바꿀 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5200"/>
+        <location filename="SandMan.cpp" line="5201"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>&apos;%1&apos; 디렉터리를 &apos;%2&apos;로 이동하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5201"/>
+        <location filename="SandMan.cpp" line="5202"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>박스 이미지 &apos;%1&apos;을(를) &apos;%2&apos;(으)로 이동하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5202"/>
+        <location filename="SandMan.cpp" line="5203"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>프로세스가 박스에서 실행 중인 동안에는 이 스냅샷 작업을 수행할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5203"/>
+        <location filename="SandMan.cpp" line="5204"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>새 스냅샷에 대한 디렉터리를 생성하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5205"/>
+        <location filename="SandMan.cpp" line="5206"/>
         <source>Snapshot not found</source>
         <translation>스냅샷을 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5206"/>
+        <location filename="SandMan.cpp" line="5207"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>&apos;%1&apos; 스냅샷 디렉터리를 &apos;%2&apos;과(와) 병합하는 동안 오류가 발생했습니다. 스냅샷이 완전히 병합되지 않았습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5207"/>
+        <location filename="SandMan.cpp" line="5208"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>이전 스냅샷 디렉터리 &apos;%1&apos;을(를) 제거하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5208"/>
+        <location filename="SandMan.cpp" line="5209"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>이후 여러 스냅샷이 공유하는 스냅샷을 제거할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5210"/>
+        <location filename="SandMan.cpp" line="5211"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>&apos;%1&apos; 섹션의 구성을 업데이트할 수 있는 권한이 없습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5211"/>
+        <location filename="SandMan.cpp" line="5212"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>%2 섹션에서 구성 설정 %1을 설정하지 못했습니다: %3</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5212"/>
+        <location filename="SandMan.cpp" line="5213"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>빈 샌드박스의 스냅샷을 생성할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5213"/>
+        <location filename="SandMan.cpp" line="5214"/>
         <source>A sandbox with that name already exists</source>
         <translation>같은 이름의 샌드박스가 이미 있습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5214"/>
+        <location filename="SandMan.cpp" line="5215"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>구성 비밀번호는 64자를 초과할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5215"/>
+        <location filename="SandMan.cpp" line="5216"/>
         <source>The operation was canceled by the user</source>
         <translation>사용자가 작업을 취소했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5216"/>
+        <location filename="SandMan.cpp" line="5217"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
         <translation>마운트 해제된 샌드박스의 내용을 삭제할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5218"/>
+        <location filename="SandMan.cpp" line="5219"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5220"/>
+        <location filename="SandMan.cpp" line="5221"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>가져오기/내보내기 기능을 사용할 수 없습니다, 7z.dll을 불러올 수 없습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5221"/>
+        <location filename="SandMan.cpp" line="5222"/>
         <source>Failed to create the box archive</source>
         <translation>박스 압축파일을 만들지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5222"/>
+        <location filename="SandMan.cpp" line="5223"/>
         <source>Failed to open the 7z archive</source>
         <translation>7z 압축파일을 열지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5223"/>
+        <location filename="SandMan.cpp" line="5224"/>
         <source>Failed to unpack the box archive</source>
         <translation>박스 압축파일의 압축을 풀지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5224"/>
+        <location filename="SandMan.cpp" line="5225"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>선택한 7z 파일이 박스 압축파일이 아닙니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5225"/>
+        <location filename="SandMan.cpp" line="5226"/>
         <source>Failed to copy directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>디렉터리 &apos;%1&apos;을 &apos;%2&apos;로 복사하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5257"/>
+        <location filename="SandMan.cpp" line="5258"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>%1 항목에 대한 작업에 실패했습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5330"/>
+        <location filename="SandMan.cpp" line="5331"/>
         <source>Remember choice for later.</source>
         <translation>나중을 위해 선택을 기억합니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5570"/>
+        <location filename="SandMan.cpp" line="5571"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
         <translation>&lt;h3&gt;Sandboxie-Plus 정보&lt;/h3&gt;&lt;p&gt;버전 %1&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5578"/>
+        <location filename="SandMan.cpp" line="5579"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
         <translation>이 Sandboxie-Plus 사본은 다음에 대해 인증되었습니다: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5580"/>
+        <location filename="SandMan.cpp" line="5581"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
         <translation>Sandboxie-Plus는 개인 및 비상업적 용도로 무료로 사용할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5584"/>
+        <location filename="SandMan.cpp" line="5585"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus는 Sandboxie의 오픈 소스 확장판입니다.&lt;br /&gt;자세한 내용은 &lt;a href=&quot;https://sandboxie-plus.com &quot;&gt;sandboxie-plus.com &lt;/a&gt;를 방문해 주세요.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;기능: %3&lt;br /&gt;&lt;br /&gt;설치: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;아이콘 출처: &lt;a href=&quot;https://icons8.com &quot;&gt;icons8.com &lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4309"/>
+        <location filename="SandMan.cpp" line="4310"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>후원자 인증서가 이 빌드에 유효하지 않습니다. 업데이트된 인증서를 받으세요</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4312"/>
+        <location filename="SandMan.cpp" line="4313"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
         <translation>후원자 인증서가 %1일 전에 만료되었습니다. 업데이트된 인증서를 받으세요</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4313"/>
+        <location filename="SandMan.cpp" line="4314"/>
         <source>, but it remains valid for the current build</source>
         <translation>, 하지만 현재 빌드에 대해서는 유효합니다</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4315"/>
+        <location filename="SandMan.cpp" line="4316"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>후원자 인증서가 %1일 후에 만료됩니다. 업데이트된 인증서를 받으세요</translation>
     </message>
@@ -7228,7 +7315,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SbieProcess.cpp" line="57"/>
         <location filename="SbieProcess.cpp" line="89"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="108"/>
@@ -8257,17 +8344,17 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1806"/>
         <source>AllowAiAgent=n in Sandboxie.ini disables this on the whole machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini 파일에서 AllowAiAgent=n을 설정하면 머신 전체에서 이 기능이 비활성화됩니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1811"/>
         <source>AiAgentRequirePairing=y in Sandboxie.ini means the code cannot be waived.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini에서 AiAgentRequirePairing=y로 설정하면 해당 코드를 생략할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1816"/>
         <source>AiAgentRequireConfirmation=y in Sandboxie.ini keeps the confirmations on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini에서 AiAgentRequireConfirmation=y로 설정하면 확인 절차가 계속 유지됩니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3394"/>
@@ -12143,7 +12230,9 @@ Please note that this values are currently user specific and saved globally for 
 top/bottom padding without shrinking the font. Rotated down reads top to bottom;
 rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
         <oldsource>Stacked letters remain upright. Stacked (compact) removes the extra row gap and reduces top/bottom padding without shrinking the font. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</oldsource>
-        <translation type="unfinished">쌓인 글자는 수직으로 유지됩니다. 쌓기 (압축) 모드는 여분의 행 간격을 제거하고, 글꼴 크기를 줄이지 않으면서 상하 패딩을 줄여줍니다. ‘아래로 회전’은 양쪽 모두 위에서 아래로 읽히며, ‘위로 회전’은 양쪽 모두 아래에서 위로 읽힙니다. 상하 레이블은 이 설정을 무시합니다.</translation>
+        <translation>쌓인 문자는 똑바로 유지됩니다. 스택형(압축)은 추가 행 간격을 제거하고 글꼴을 축소하지 않고
+위쪽/아래쪽 여백을 줄입니다. 아래로 회전하면 위에서 아래로 읽습니다. 위쪽으로 회전하면
+양쪽에서 아래쪽에서 위쪽으로 읽습니다. 상단/하단 레이블은 이 선택을 무시합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="656"/>
@@ -12338,217 +12427,221 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="67"/>
         <source>Claude Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude 데스크톱</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="79"/>
         <source>Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude 코드</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="82"/>
         <source>Claude Code manages its own configuration; run this command instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude 코드가 자체 구성 정보를 관리합니다. 대신 이 명령을 실행하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="91"/>
         <source>Visual Studio Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Visual Studio Code</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="93"/>
         <source>Add it per workspace or to your user settings - we do not write into a workspace, because that file lives in your repository.</source>
-        <translation type="unfinished"></translation>
+        <translation>작업 공간 또는 사용자 설정에 추가하세요 - 작업 공간에는 기록하지 않습니다. 해당 파일이 저장소에 있기 때문입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="101"/>
         <source>Another client</source>
-        <translation type="unfinished"></translation>
+        <translation>다른 클라이언트</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="103"/>
         <source>Most clients take a command to run. Use the path or the snippet below.</source>
-        <translation type="unfinished"></translation>
+        <translation>대부분의 클라이언트는 실행할 명령을 받습니다. 아래 경로 또는 스니펫을 사용하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="120"/>
         <source>%1 could not be opened for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1을 읽기용으로 열 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="137"/>
         <source>%1 is not valid JSON (%2), so it was left untouched. Add the configuration by hand instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1은(는) 올바른 JSON(%2)이 아니므로 그대로 두었습니다. 대신 수동으로 구성을 추가하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="169"/>
         <source>This client has to be configured by hand.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 클라이언트는 수동으로 구성해야 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="173"/>
         <location filename="Mcp/McpClientSetup.cpp" line="247"/>
         <source>SbieMcp.exe was not found next to SandMan.</source>
-        <translation type="unfinished"></translation>
+        <translation>SandMan 옆에서 SbieMcp.exe를 찾을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="187"/>
         <source>%1 could not be backed up, so it was left untouched.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1을 백업할 수 없어서 그대로 두었습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="193"/>
         <source>%1 could not be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1을(를) 만들 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="210"/>
         <source>%1 could not be written.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1을(를) 작성할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="218"/>
         <source>%1 could not be replaced; the new configuration is in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1을(를) 대체할 수 없습니다. 새 구성이 %2에 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="252"/>
         <source>This folder could not be created:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>이 폴더를 만들 수 없습니다:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="264"/>
         <source>This file could not be read:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>이 파일을 읽을 수 없습니다:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="275"/>
         <source>This file is not the JSON this expects, so it was left alone:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>이 파일은 이 파일이 기대하는 JSON이 아니어서 그대로 두었습니다:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="293"/>
         <source>This file could not be written:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>이 파일은 쓰기할 수 없습니다:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="307"/>
         <source>Claude Code was not found. Install it, or open a terminal yourself and run the command shown above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude 코드를 찾을 수 없습니다. 설치하시거나, 직접 터미널을 열어 위에 표시된 명령을 실행해 주세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="342"/>
         <source>Claude Code could not be started (error %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Code를 시작할 수 없습니다(오류 %1).</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="151"/>
         <source>the documentation pack is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>문서 팩을 사용할 수 없습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="159"/>
         <source>&apos;%1&apos; is not a page in the documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;은 문서의 페이지가 아닙니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="165"/>
         <source>&apos;%1&apos; could not be read from the pack</source>
-        <translation type="unfinished"></translation>
+        <translation>패키지에서 &apos;%1&apos;을 읽을 수 없습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="301"/>
         <source>message SBIE%1 was seen</source>
-        <translation type="unfinished"></translation>
+        <translation>메시지 SBIE%1이 표시되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="313"/>
         <source>a blocked resource matched %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1과 일치하는 차단된 리소스</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="330"/>
         <source>%1 is not set on the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스에 %1이 설정되어 있지 않음</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="339"/>
         <source>%1 is set on the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스의 %1이 설정됨</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="63"/>
         <source>The &apos;changes&apos; argument must be a non-empty array of {setting, value} objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;changes&apos; 인수는 {setting, value} 객체의 비어 있지 않은 배열이어야 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="69"/>
         <source>That is %1 changes at once. Propose at most 50, so the user can actually read what they are agreeing to.</source>
-        <translation type="unfinished"></translation>
+        <translation>그것은 %1만큼 한 번에 변경됩니다. 사용자가 실제로 무엇에 동의하는지 읽을 수 있도록, 최대 50개까지 제안해 주세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="79"/>
         <source>Every entry in &apos;changes&apos; needs a &apos;setting&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;changes&apos;의 모든 항목에는 &apos;setting&apos;이 필요합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="85"/>
         <source>&apos;%1&apos; is not a usable setting name.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;은 사용할 수 있는 설정 이름이 아닙니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="91"/>
         <source>The value for &apos;%1&apos; contains a line break, which cannot be stored in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;의 값에 줄 바꿈이 포함되어 있어 Sandboxie.ini에 저장할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="119"/>
         <source>Changes cannot be confirmed right now, so nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>현재로서는 변경 사항을 확인할 수 없으므로, 변경된 내용은 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="125"/>
         <source>A confirmation is already waiting for the user. Nothing was changed - wait for them to answer the previous request before asking again.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자를 기다리며 확인이 이미 대기 중입니다. 아무것도 변경되지 않았습니다. 다시 요청하기 전에 이전 요청에 대한 답변을 기다려 주세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="174"/>
         <source>Name or alias of the sandbox to run in.</source>
-        <translation type="unfinished"></translation>
+        <translation>실행할 샌드박스의 이름 또는 별칭입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="178"/>
         <source>The command line to start, exactly as it should run. Quote paths containing spaces. It has to be a single plain line - a command carrying line breaks is refused, because the user must be able to read what they are approving as one command.</source>
-        <translation type="unfinished"></translation>
+        <translation>정상적으로 실행되어야 할 대로 시작하는 명령줄입니다. 공백이 포함된 인용 경로입니다. 단일 일반 줄이어야 합니다. 사용자가 승인하는 내용을 하나의 명령으로 읽을 수 있어야 하므로, 명령이 줄 바꿈을 포함하는 것은 허용되지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="185"/>
         <source>Working directory for the program. Optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>프로그램의 작업 디렉터리입니다. 선택 사항입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="189"/>
         <source>Why this needs to run, in one sentence. Shown to the user as your words, next to the command. A request with no reason given is a harder one to agree to.</source>
-        <translation type="unfinished"></translation>
+        <translation>이것이 왜 실행되어야 하는지 한 문장으로 설명해 주세요. 명령 옆에 사용자 입력으로 표시됩니다. 이유를 밝히지 않은 요청은 동의하기가 더 어렵습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="214"/>
         <source>The Sandboxie.ini setting name. Check it with config_schema first.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박시.이름을 설정합니다. 먼저 config_schema로 확인해 보세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="218"/>
         <source>The value to set. Omit or leave empty to remove the setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>설정할 값. 설정을 제거하려면 생략하거나 비워 두세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="230"/>
         <source>The changes, at most 50.</source>
-        <translation type="unfinished"></translation>
+        <translation>변경 사항은 많아야 50개입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="235"/>
@@ -12558,122 +12651,126 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
         <location filename="Mcp/McpTools.cpp" line="316"/>
         <location filename="Mcp/McpTools.cpp" line="324"/>
         <source>Name or alias of the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스의 이름 또는 별칭입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="248"/>
         <source>Why these changes should help. Shown to the user verbatim when they are asked to approve, so write it for them and not for yourself.</source>
-        <translation type="unfinished"></translation>
+        <translation>이러한 변경 사항이 왜 도움이 되는지 설명하세요. 사용자가 승인을 요청받을 때 이 내용이 그대로 표시되므로, 본인이 아닌 사용자를 고려하여 작성하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="265"/>
         <source>Check a change set before proposing it</source>
-        <translation type="unfinished"></translation>
+        <translation>변경 세트를 제안하기 전에 확인하세요</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="266"/>
         <source>Checks proposed settings against what Sandboxie actually accepts, without changing anything and without asking the user. Always call this before box_apply_changes: an unknown setting name is ignored silently by the driver, so a typo produces a change that appears to work and does nothing.</source>
-        <translation type="unfinished"></translation>
+        <translation>아무것도 변경하지 않고 사용자에게 묻지 않은 채, Sandboxie가 실제로 허용하는 값과 제안된 설정을 비교합니다. box_apply_changes를 호출하기 전에 항상 이를 호출하세요. 알 수 없는 설정 이름은 드라이버가 조용히 무시하므로, 오타가 있으면 작동하는 것처럼 보이지만 실제로는 아무 일도 일어나지 않는 변경이 발생합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="272"/>
         <source>Change sandbox settings</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 설정 변경</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="273"/>
         <source>Proposes configuration changes to one sandbox. The user is shown a diff of current against proposed values and must approve it; nothing is written if they decline. Use this for a fix you are confident about, and for everyday requests such as adding a forced program.
 
 If you want to test a fix before asking the user to accept it, use shadow_begin instead - that lets you try it against a disposable copy of the configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>하나의 샌드박스에 대한 구성 변경을 제안합니다. 사용자에게 현재 값과 제안된 값의 차이가 표시되며, 승인해야 합니다. 거부하면 아무것도 표시되지 않습니다. 확실하다고 생각하시는 수정이나 강제 프로그램 추가와 같은 일상적인 요청에 사용하세요.
+
+사용자에게 수락을 요청하기 전에 수정 사항을 테스트하고 싶으시다면 shadow_begin을 사용하세요. 구성의 일회용 복사본을 대상으로 시험해 볼 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="282"/>
         <source>Start testing a fix</source>
-        <translation type="unfinished"></translation>
+        <translation>수정 사항 테스트 시작</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="283"/>
         <source>Clones a sandbox configuration to a disposable copy that shares the real file set, so a fix can be tried without touching the sandbox. Returns the name of the copy; change it with shadow_set, then either shadow_commit to copy the differences back - which asks the user once - or shadow_discard to throw them away.
 
 Note what is shared: files written while testing land in the real sandbox and a discard does not undo them. Only configuration is disposable.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 구성이 실제 파일 집합을 공유하는 일회용 복사본으로 복제되므로, 샌드박스를 건드리지 않고도 수정 사항을 시험해 볼 수 있습니다. 복사본의 이름을 반환합니다. shadow_set으로 이를 변경한 다음, 차이를 다시 복사하려면 shadow_commit을 실행하여 사용자에게 한 번 묻거나, 아니면 shadow_discard를 실행하여 이를 폐기합니다.
+
+공유되는 내용을 확인해 주세요: 실제 샌드박스에서 테스트하는 동안 작성한 파일은 버려도 되돌릴 수 없습니다. 구성만 일회용입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="290"/>
         <source>Name or alias of the sandbox to test against.</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 대상 샌드박스의 이름 또는 별칭입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="292"/>
         <source>Change a setting in the test copy</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 복사본의 설정 변경</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="293"/>
         <source>Applies changes to the disposable copy. No confirmation is needed because nothing real is affected yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>일회용 복사본에 변경 사항을 적용합니다. 아직 실제로 영향을 받은 것이 없으므로 확인이 필요하지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="297"/>
         <source>Keep the tested fix</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트된 수정 사항 유지</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="298"/>
         <source>Copies the differences from the test copy back onto the real sandbox, after showing the user what they are. This is the one confirmation on the troubleshooting path.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자에게 그것이 무엇인지 보여 준 뒤, 테스트 복사본의 차이점을 실제 샌드박스로 다시 복사합니다. 이것이 문제 해결 과정에서 확인할 수 있는 유일한 항목입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="301"/>
         <location filename="Mcp/McpOperate.cpp" line="306"/>
         <source>Name or alias of the sandbox being tested.</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 중인 샌드박스의 이름 또는 별칭입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="303"/>
         <source>Abandon the tested fix</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트된 수정 사항을 제거합니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="304"/>
         <source>Deletes the test copy. Nothing to roll back, because the real sandbox was never changed. Call this when a hypothesis turns out to be wrong.</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 복사본을 삭제합니다. 롤백할 것은 아무것도 없습니다. 진짜 샌드박스는 애초에 바뀐 적이 없기 때문입니다. 가설이 틀린 것으로 드러났을 때 이것을 호출합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="308"/>
         <source>Take a rollback point</source>
-        <translation type="unfinished"></translation>
+        <translation>롤백 지점 선택</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="309"/>
         <source>Takes a snapshot of a sandbox so file and registry changes can be undone later. Near-instant regardless of sandbox size, but it refuses while anything is running in the box - so take it before starting anything. Not offered for empty sandboxes or RAM-disk sandboxes, where it would be meaningless.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스의 상태를 스냅샷으로 저장하여 나중에 파일 및 레지스트리 변경 사항을 복원할 수 있게 합니다. 샌드박스 크기와 관계없이 거의 즉시 실행되지만, 박스 안에서 어떤 작업이 실행 중이면 거부됩니다. 따라서 아무 작업도 시작하기 전에 실행해 주세요. 빈 sandboxes 또는 RAM-disk sandboxes의 경우에는 의미가 없으므로 제공되지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="315"/>
         <source>Roll a sandbox back</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스를 이전 상태로 되돌리기</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="316"/>
         <source>Reverts a sandbox to a snapshot, discarding file and registry changes made since. Terminates whatever is running in the box first, because the operation requires it. This throws work away and cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스를 스냅샷 상태로 되돌리며, 이후에 적용된 파일 및 레지스트리 변경 사항은 무시합니다. 해당 작업이 필요하므로, 박스에서 실행 중인 모든 작업을 먼저 종료합니다. 이 작업은 취소되지 않으며 되돌릴 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="321"/>
         <source>Stop everything in a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 내에서 모든 작업 중지</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="322"/>
         <source>Terminates all processes in a sandbox. Unsaved work in those programs is lost, which is why the user is asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스에서 모든 프로세스를 종료합니다. 해당 프로그램에서 저장되지 않은 작업이 사라지므로, 사용자에게 그렇게 요청합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="326"/>
         <source>Run a program inside a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 안에서 프로그램 실행</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="327"/>
@@ -12682,22 +12779,26 @@ Note what is shared: files written while testing land in the real sandbox and a 
 This is how a fix gets tested rather than described - start the program that was failing, then read trace_query and box_diagnostics to see whether it still fails. failing, then read trace_query to see whether it still fails. The call returns as soon as the program has started: it does not wait for it to exit and captures no output, so get the pid from box_processes.
 
 The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with shadow_set is not in effect here - a test copy shares the real sandbox&apos;s file root, so a program started against it runs in the real sandbox with the real settings. To test a configuration change by running something, apply it first with shadow_commit, or write it directly with box_apply_changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 안에서 명령을 실행하며, 권한은 Sandboxie-Plus 자체가 가진 것만 적용되고 절대 상승되지 않습니다. 사용자에게는 주어진 그대로의 명령줄이 표시되며, 어떤 작업도 실행되기 전에 이를 확인해야 하므로, 실제로 의미하는 명령을 작성해 주세요. 요약되거나 다시 작성된 것이 아닙니다.
+
+이 방법은 설명하는 대신 수정 사항을 테스트하는 방식입니다. 실패하던 프로그램을 실행한 다음 trace_query와 box_diagnostics를 읽어 여전히 실패하는지 확인해 보세요. 실패한다면 trace_query를 읽어 여전히 실패하는지 확인하세요. 프로그램이 시작되는 즉시 호출이 반환됩니다. 종료될 때까지 기다리지 않으며 출력도 캡처하지 않으므로, box_processes에서 pid를 가져오세요.
+
+적용되는 설정은 샌드박스의 CURRENT 설정입니다. 여기서 shadow_set으로 스테이징한 변경 사항은 실제로 적용되지 않습니다. 테스트 복사본이 실제 샌드박스의 파일 루트를 공유하므로, 이를 대상으로 시작된 프로그램은 실제 샌드박스에서 실제 설정으로 실행됩니다. 구성 변경을 실행으로 테스트하려면 먼저 shadow_commit으로 적용하거나, box_apply_changes로 직접 적용하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="346"/>
         <source>Create a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 만들기</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="347"/>
         <source>Creates a new, empty sandbox with default settings. The user is asked first. Settings can then be applied with box_apply_changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>기본 설정이 적용된 새 빈 샌드박스를 생성합니다. 사용자에게 먼저 질문합니다. 그 다음 box_apply_changes로 설정을 적용할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="349"/>
         <source>Name for the new sandbox. Letters, digits and underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>새 샌드박스의 이름. 영문자, 숫자 및 밑줄만 사용할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="374"/>
@@ -12714,271 +12815,284 @@ The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with
         <location filename="Mcp/McpReport.cpp" line="619"/>
         <location filename="Mcp/McpTools.cpp" line="1257"/>
         <source>No sandbox called &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;이라는 샌드박스가 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="399"/>
         <source>  ok</source>
-        <translation type="unfinished"></translation>
+        <translation>  확인</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="399"/>
         <source>  NOT A KNOWN SETTING</source>
-        <translation type="unfinished"></translation>
+        <translation>  알려진 설정이 아님</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="401"/>
         <source>  (superseded by %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>  (%1로 대체됨)</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="403"/>
         <source>  (removed in %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>  (%1에서 제거됨)</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="414"/>
         <source>
 The settings reference could not be loaded, so none of this was verified.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+설정 참조를 불러올 수 없어, 해당 항목을 검증하지 못했습니다.
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="416"/>
         <source>
 %1 of these are not settings Sandboxie recognises. Fix them before proposing the change - an unknown name is ignored silently rather than reported, so it would look like a fix that did nothing.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+이 중 %1은 Sandboxie가 인식하는 설정이 아닙니다. 변경을 제안하기 전에 먼저 수정하세요. 알 수 없는 이름은 보고되지 않고 조용히 무시되므로, 아무것도 하지 않은 수정처럼 보일 수 있습니다.
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="445"/>
         <source>The user declined, so nothing was changed. Do not ask again with the same change set - explain what you wanted to do and why, and let them decide.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 거절했기 때문에 아무것도 변경되지 않았습니다. 같은 변경 사항으로 다시 요청하지 마시고, 무엇을 왜 하고 싶었는지 설명한 뒤 상대방이 결정하도록 하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="473"/>
         <source>%1 of %2 changes written to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%2의 %1이 %3으로 변경됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="476"/>
         <source>
 These could not be written: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+이들은 쓸 수 없습니다: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="510"/>
         <source>Already testing against %1. Use shadow_set to change it.</source>
-        <translation type="unfinished"></translation>
+        <translation>이미 %1에 대해 테스트 중입니다. shadow_set을 사용하여 변경하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="516"/>
         <source>The test copy could not be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 사본을 만들 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="522"/>
         <source>Testing against %1, a disposable copy of the configuration of %2 that shares its real file set. Change it with shadow_set. Remember that files written while testing land in the real sandbox - only the configuration is disposable.</source>
-        <translation type="unfinished"></translation>
+        <translation>실제 파일 집합을 공유하는 %2의 구성 복사본인 %1을 기준으로 테스트합니다. shadow_set으로 변경하세요. 테스트 중에 작성한 파일은 실제 샌드박스에 저장된다는 점을 기억해 주세요. 일회용으로 처리되는 것은 설정뿐입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="542"/>
         <source>There is no test copy for &apos;%1&apos; yet. Call shadow_begin first.</source>
-        <translation type="unfinished"></translation>
+        <translation>아직 &apos;%1&apos;에 대한 테스트 사본이 없습니다. shadow_begin을 먼저 호출합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="547"/>
         <location filename="Mcp/McpOperate.cpp" line="568"/>
         <source>The test copy %1 has gone.</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 복사본 %1이 사라졌습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="563"/>
         <source>There is no test copy for &apos;%1&apos;. Nothing to keep.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;에 대한 테스트 복사본이 없습니다. 보관할 것이 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="636"/>
         <source>The test copy is identical to %1, so there is nothing to keep. Discarding it would have the same effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 복사본이 %1과 동일하므로 유지할 것이 없습니다. 그것을 버려도 같은 효과가 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="648"/>
         <source>(the agent gave no reason)</source>
-        <translation type="unfinished"></translation>
+        <translation>(에이전트는 이유를 제시하지 않음)</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="651"/>
         <source>The user declined. The test copy is still there, and %1 is unchanged - call shadow_discard to clean up.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 거절했습니다. 테스트 복사본은 여전히 존재하며 %1은 변경되지 않았습니다. 정리하려면 shadow_discard를 호출하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="658"/>
         <source>The changes could not be copied back.</source>
-        <translation type="unfinished"></translation>
+        <translation>변경 사항을 다시 복사할 수 없었습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="663"/>
         <source>%1 change(s) applied to %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 변경(이) %2에 적용되었습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="674"/>
         <source>There was no test copy for &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;에 대한 테스트 사본이 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="681"/>
         <source>The test copy is gone and %1 was never changed. Note that any files the test wrote are still in the sandbox - discarding only undoes configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 복사본은 사라졌으며 %1은 한 번도 변경되지 않았습니다. 테스트가 쓴 모든 파일은 여전히 샌드박스에 남아 있다는 점에 유의하세요. discard만으로는 설정이 되돌려지지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="697"/>
         <source>&apos;%1&apos; holds no content, so there is nothing to snapshot. Note that an encrypted or image-backed sandbox also looks empty while it is not mounted - if this one is, it has to be opened first.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;에는 내용이 없으므로 스냅샷을 만들 대상이 없습니다. 암호화되었거나 이미지 기반 샌드박스도 마운트되어 있지 않으면 빈 것처럼 보인다는 점에 유의하세요. 이미 마운트되어 있다면 먼저 열어야 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="702"/>
         <source>&apos;%1&apos; is a RAM-disk sandbox: its contents are discarded when it is unmounted or the machine restarts, so a snapshot would protect nothing.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;은 RAM 디스크 샌드박스입니다. 마운트 해제되거나 시스템이 재시작되면 그 내용이 삭제되므로, 스냅샷을 만들어도 아무것도 보호되지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="706"/>
         <source>Something is still running in &apos;%1&apos;. Snapshots require the sandbox to be idle - ask the user to close its programs, or use box_terminate, and then try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;에서 아직 실행 중인 항목이 있습니다. 스냅샷을 사용하려면 샌드박스가 유휴 상태여야 합니다. 사용자에게 프로그램을 종료하도록 요청하거나 box_terminate를 사용한 다음, 다시 시도해 주세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="713"/>
         <source>Confirm snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>스냅샷 확인</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="714"/>
         <source>Take a snapshot of sandbox %1, so its files and registry can be rolled back later.
 
 This is quick and does not copy the sandbox. It does mean the sandbox cannot shrink until the snapshot is merged or deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스의 %1을 스냅샷으로 저장하여 나중에 파일과 레지스트리를 롤백할 수 있도록 합니다.
+
+이 방법은 빠르지만 샌드박스를 복사하지는 않습니다. 즉, 스냅샷이 병합되거나 삭제될 때까지 샌드박스가 축소되지 않는다는 뜻입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="717"/>
         <source>Take Snapshot</source>
-        <translation type="unfinished">스냅샷 찍기</translation>
+        <translation>스냅샷 찍기</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="718"/>
         <source>The user declined; no snapshot was taken.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 거부하여 스냅샷이 촬영되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="721"/>
         <source>Before AI agent changes</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트 변경 전</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="722"/>
         <source>Taking a snapshot of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1의 스냅샷 찍기</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="724"/>
         <source>The snapshot failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>스냅샷에 실패했습니다: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="733"/>
         <source>Snapshot taken for %1. File and registry changes from here on can be undone with snapshot_rollback.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1을 위해 캡처된 스냅샷. 이후의 파일 및 레지스트리 변경 사항은 snapshot_rollback으로 되돌릴 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="747"/>
         <source>&apos;%1&apos; has no snapshot to roll back to.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;은 롤백할 스냅샷이 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="754"/>
         <source>Roll sandbox %1 back to its snapshot.
 
 Every file and registry change made in the sandbox since the snapshot will be discarded. This cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 %1을 스냅샷으로 되돌립니다.
+
+스냅샷 이후 샌드박스에서 수행된 모든 파일 및 레지스트리 변경 사항은 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="760"/>
         <source>
 
 %1 program(s) are running in the sandbox and will be terminated first. Unsaved work in them will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+샌드박스에서 실행 중인 %1개의 프로그램이 먼저 종료됩니다. 그 안에 저장하지 않은 작업은 사라집니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="764"/>
         <source>Confirm rollback</source>
-        <translation type="unfinished"></translation>
+        <translation>롤백 확인</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="765"/>
         <source>Roll Back and Discard Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>변경 사항 되돌리기 및 폐기</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="766"/>
         <source>The user declined; nothing was rolled back.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 거부했습니다. 아무것도 롤백되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="772"/>
         <source>The sandbox could not be stopped, so nothing was rolled back: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스를 중지할 수 없었으므로 아무것도 롤백되지 않았습니다: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="778"/>
         <source>Rolling %1 back</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 롤백 중</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="780"/>
         <source>The rollback failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>롤백에 실패했습니다: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="786"/>
         <source>%1 was rolled back to its snapshot.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1이 스냅샷 상태로 롤백되었습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="798"/>
         <source>Nothing is running in %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에서는 아무것도 실행되고 있지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="803"/>
         <source>Confirm terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>종료 확인</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="804"/>
         <source>Terminate %1 program(s) running in sandbox %2.
 
 Unsaved work in them will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 %2에서 실행 중인 %1개의 프로그램을 종료합니다.
+
+저장되지 않은 작업 내용은 모두 손실됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="806"/>
         <source>Terminate Them</source>
-        <translation type="unfinished"></translation>
+        <translation>종료하기</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="807"/>
         <source>The user declined; nothing was terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 거부했습니다. 아무것도 종료되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="812"/>
         <source>Terminating failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>종료 실패: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="814"/>
         <source>%1 program(s) in %2 were terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 %2 내의 %1개 프로그램이 종료되었습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="822"/>
@@ -12986,79 +13100,81 @@ Unsaved work in them will be lost.</source>
         <location filename="Mcp/McpTools.cpp" line="843"/>
         <location filename="Mcp/McpTools.cpp" line="906"/>
         <source>The &apos;box&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;box&apos; 인수가 필요합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="826"/>
         <source>&apos;%1&apos; is not a usable sandbox name. Use letters, digits and underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;은(는) 사용할 수 없는 샌드박스 이름입니다. 문자, 숫자, 밑줄을 사용하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="830"/>
         <source>A sandbox called &apos;%1&apos; already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;이라는 이름의 샌드박스가 이미 존재합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="835"/>
         <source>Confirm new sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>새 샌드박스 확인</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="836"/>
         <source>Create a new sandbox called %1, with default settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>기본 설정으로 &apos;%1&apos;이라는 이름의 새 샌드박스를 생성합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="837"/>
         <source>Create It</source>
-        <translation type="unfinished"></translation>
+        <translation>생성하기</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="838"/>
         <source>The user declined; no sandbox was created.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 거부했습니다. 샌드박스가 생성되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="843"/>
         <source>The sandbox could not be created: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스를 생성할 수 없습니다: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="848"/>
         <source>Sandbox %1 was created with default settings. Use box_apply_changes to configure it.</source>
-        <translation type="unfinished"></translation>
+        <translation>기본 설정으로 샌드박스 %1이(가) 생성되었습니다. 설정을 변경하려면 &apos;box_apply_changes&apos;를 사용하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="876"/>
         <source>The &apos;command&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;command&apos; 인수가 필요합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="880"/>
         <source>That command line is %1 characters, and the confirmation can only honestly show up to %2. Write a shorter command, or put the work in a script file and run that.</source>
-        <translation type="unfinished"></translation>
+        <translation>해당 명령줄은 %1자입니다. 확인 창에는 최대 %2자까지만 표시될 수 있습니다. 명령을 더 짧게 작성하거나, 스크립트 파일에 작성한 후 실행하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="887"/>
         <source>That command line contains a line break or a control character. It has to be a single plain line, because the user is shown it as one and has to be able to read exactly what they are approving.</source>
-        <translation type="unfinished"></translation>
+        <translation>해당 명령줄에 줄 바꿈이나 제어 문자가 포함되어 있습니다. 사용자가 내용을 정확히 확인하고 승인할 수 있도록, 명령줄은 줄 바꿈이 없는 단일 행 형태여야 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="893"/>
         <source>The working directory has to be a single line.</source>
-        <translation type="unfinished"></translation>
+        <translation>작업 디렉터리는 한 줄로 작성해야 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="911"/>
         <source>&apos;%1&apos; is a test copy, which is a copy of a sandbox&apos;s configuration and not a sandbox a program can run in - it shares the real sandbox&apos;s files, so anything started against it would run in the real sandbox with the real settings. Apply the change with shadow_commit first, then run against the sandbox itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;은(는) 테스트용 복사본입니다. 이는 샌드박스 설정의 복사본일 뿐, 프로그램이 실제로 실행될 수 있는 샌드박스가 아닙니다. 실제 샌드박스의 파일을 공유하므로, 이를 대상으로 작업을 실행하면 실제 샌드박스에서 실제 설정으로 실행됩니다. 먼저 &apos;shadow_commit&apos;을 사용하여 변경 사항을 적용한 다음, 실제 샌드박스를 대상으로 실행하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="927"/>
         <source>Run this command inside %1:
 
     %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 내부에서 다음 명령을 실행하세요:
+
+%2</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="929"/>
@@ -13066,7 +13182,11 @@ Unsaved work in them will be lost.</source>
 
 Working directory:
     %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+작업 디렉터리:
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="931"/>
@@ -13074,231 +13194,236 @@ Working directory:
 
 Its reason, in its own words:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+그 이유는 다음과 같습니다.
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="932"/>
         <source>
 
 It runs sandboxed and with your normal privileges, not as administrator - but the command above is the agent&apos;s choice, so read it before agreeing.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+관리자가 아닌 일반 권한으로 샌드박스로 실행됩니다. 하지만 위 명령은 에이전트가 선택하므로 동의하기 전에 읽어보세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="935"/>
         <source>Confirm running a program</source>
-        <translation type="unfinished"></translation>
+        <translation>프로그램 실행 확인</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="936"/>
         <source>Run It</source>
-        <translation type="unfinished"></translation>
+        <translation>실행하기</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="937"/>
         <source>The user declined; nothing was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 거부했습니다. 아무것도 시작되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="944"/>
         <source>The program could not be started: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>프로그램을 시작할 수 없습니다: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="957"/>
         <source>Launched in %1. The pid is not reported because the program is started through Sandboxie&apos;s launcher, which exits immediately - its pid is not the program&apos;s. Call box_processes on %2 to get the real pid and to confirm it is still running, and trace_query or box_diagnostics to see what it did. Nothing is waited for and no and trace_query to see what it did. Nothing is waited for and no output is captured.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에서 실행되었습니다. 프로그램이 Sandboxie 런처를 통해 시작되는데, 이 런처는 즉시 종료되므로 해당 PID는 실제 프로그램의 PID가 아닙니다. 실제 PID를 확인하고 프로그램이 여전히 실행 중인지 알아보려면 %2에 대해 `box_processes`를 호출하세요. 또한 프로그램이 어떤 작업을 수행했는지 확인하려면 `trace_query`나 `box_diagnostics`를 사용하세요. 어떠한 작업도 완료될 때까지 대기하지 않으며, 출력 내용도 캡처되지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="972"/>
         <source>Sandboxie is not running, so nothing can be changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie가 실행 중이지 않으므로, 아무것도 변경할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="987"/>
         <location filename="Mcp/McpReport.cpp" line="685"/>
         <location filename="Mcp/McpTools.cpp" line="1358"/>
         <source>Tool &apos;%1&apos; is not implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>도구 &apos;%1&apos;은(는) 구현되어 있지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="14"/>
         <source>the endpoint name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>엔드포인트 이름이 비어 있습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="19"/>
         <source>the endpoint name is longer than 64 characters</source>
-        <translation type="unfinished"></translation>
+        <translation>엔드포인트 이름이 64자를 초과합니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="29"/>
         <source>the endpoint name contains &apos;%1&apos;; only letters, digits, underscore, hyphen and dot are allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>엔드포인트 이름에 &apos;%1&apos;이(가) 포함되어 있습니다. 영문자, 숫자, 밑줄, 하이픈, 점만 사용할 수 있습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="39"/>
         <source>the endpoint name must start with &apos;%1&apos; - that is the prefix the template which keeps sandboxed programs away from this pipe matches, and a name outside it would not be protected</source>
-        <translation type="unfinished"></translation>
+        <translation>엔드포인트 이름은 &apos;%1&apos;(으)로 시작해야 합니다. 이는 샌드박스 처리된 프로그램이 해당 파이프에 접근하지 못하도록 제한하는 템플릿의 접두사이며, 이 범위를 벗어나는 이름은 보호되지 않습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="111"/>
         <source>malformed JSON: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>잘못된 형식의 JSON: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="117"/>
         <source>message is not a JSON object</source>
-        <translation type="unfinished"></translation>
+        <translation>메시지가 JSON 객체가 아닙니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="126"/>
         <source>missing or wrong jsonrpc version</source>
-        <translation type="unfinished"></translation>
+        <translation>jsonrpc 버전이 누락되었거나 잘못되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="132"/>
         <source>no method</source>
-        <translation type="unfinished"></translation>
+        <translation>메서드가 없습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="183"/>
         <source>missing MCP-Protocol-Version header</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP-Protocol-Version 헤더가 누락되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="187"/>
         <source>MCP-Protocol-Version header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP-Protocol-Version 헤더 값 &apos;%1&apos;이(가) 본문 값 &apos;%2&apos;와(과) 일치하지 않습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="192"/>
         <source>missing Mcp-Method header</source>
-        <translation type="unfinished"></translation>
+        <translation>Mcp-Method 헤더가 누락되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="196"/>
         <source>Mcp-Method header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Mcp-Method 헤더 값 &apos;%1&apos;이(가) 본문 값 &apos;%2&apos;와(과) 일치하지 않습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="203"/>
         <source>missing Mcp-Name header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에 대한 Mcp-Name 헤더가 누락되었습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="210"/>
         <source>Mcp-Name header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Mcp-Name 헤더 값 &apos;%1&apos;이(가) 본문 값 &apos;%2&apos;와(과) 일치하지 않습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="257"/>
         <source>Unsupported protocol version</source>
-        <translation type="unfinished"></translation>
+        <translation>지원되지 않는 프로토콜 버전입니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="42"/>
         <source>Reporting is unavailable because there is no way to ask the user, and nothing is sent without being asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자에게 확인할 방법이 없으므로 보고 기능을 사용할 수 없으며, 확인 절차 없이는 어떠한 정보도 전송되지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="49"/>
         <source>A confirmation is already waiting for the user. Nothing was sent - wait for them to answer the previous request before asking again.</source>
-        <translation type="unfinished"></translation>
+        <translation>이미 사용자에게 확인을 요청해 둔 상태입니다. 아무것도 전송되지 않았으니, 이전 요청에 대한 사용자의 응답을 기다린 후 다시 요청하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="205"/>
         <source>an unidentified agent</source>
-        <translation type="unfinished"></translation>
+        <translation>식별되지 않은 에이전트</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="311"/>
         <source>One of: fixed, partly_fixed, not_fixed. Report a success as readily as a failure - a run that found a cause and applied a working fix is the material the knowledge base is made of, and the project currently never sees one.</source>
-        <translation type="unfinished"></translation>
+        <translation>다음 중 하나: 수정됨, 부분 수정됨, 수정되지 않음. 실패뿐만 아니라 성공 사례도 보고하세요. 원인을 찾아내고 유효한 수정 사항을 적용한 실행 사례는 지식 베이스를 구성하는 핵심 자료가 되는데, 현재 이 프로젝트에서는 이러한 사례가 전혀 수집되지 않고 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="322"/>
         <source>Name or alias of the sandbox the run was about. Optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>실행 대상이었던 샌드박스의 이름 또는 별칭. 선택 사항입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="324"/>
         <source>One line naming the problem, as an issue title would.</source>
-        <translation type="unfinished"></translation>
+        <translation>이슈 제목처럼 문제를 한 줄로 요약한 내용.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="325"/>
         <source>What you found and why you think it was the cause. Written as your own account - it is labelled as model output in the report and a maintainer will read it as such.</source>
-        <translation type="unfinished"></translation>
+        <translation>발견한 내용과 그것이 원인이라고 생각하는 이유. 본인의 관점에서 작성해 주세요. 보고서에서는 ‘모델 출력’으로 표시되며, 관리자는 이를 해당 맥락에서 읽게 됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="328"/>
         <source>What you did, one step per entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>실행한 절차. 각 항목당 한 단계씩 기재해 주세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="329"/>
         <source>The settings you changed, as &apos;Setting=Value&apos; lines. These become the ini_changes block of the draft knowledge-base entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>변경한 설정은 ‘Setting=Value’ 형식의 줄로 표시됩니다. 이 설정들은 지식베이스 항목 초안의 ini_changes 블록에 포함됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="332"/>
         <source>How you established the result - what you ran, what you read afterwards. A fix nobody verified is a guess.</source>
-        <translation type="unfinished"></translation>
+        <translation>결과를 어떻게 도출하셨는지 - 무엇을 실행했고, 그 후 무엇을 읽으셨는지. 아무도 검증하지 않은 해결책은 추측일 뿐입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="335"/>
         <source>Hypotheses you ruled out, and what ruled them out. Please fill this in: what a cause is NOT is what makes a knowledge-base entry discriminate instead of merely sounding right.</source>
-        <translation type="unfinished"></translation>
+        <translation>배제한 가설들과 그 근거도 함께 기재해 주세요. &apos;무엇이 원인이 아닌지&apos;를 명시하는 것은, 단순히 그럴듯하게 들리는 설명을 넘어 지식 베이스 항목으로서 실질적인 변별력을 갖추게 하는 핵심 요소입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="338"/>
         <source>Set this only when the user has told you whether their problem is gone - not when you believe it is. Ask them: &apos;is it working now?&apos; is a question worth one turn. Until this is set, Sandboxie-Plus asks the user itself before the report is sent, and the report says plainly that the outcome is your assessment rather than theirs.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 항목은 사용자가 문제 해결 여부를 직접 확인하고 알려주었을 때만 설정하세요. 단순히 본인이 해결되었다고 판단하는 것만으로는 부족합니다. 사용자에게 &quot;이제 잘 작동하나요?&quot;라고 물어보는 것만으로도 충분히 가치 있는 확인 과정이 됩니다. 이 항목이 설정되기 전까지는, Sandboxie-Plus가 보고서 전송 전에 사용자에게 직접 확인을 요청하며, 보고서에도 해당 결과가 사용자의 확인이 아닌 작성자의 판단임을 명확히 명시합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="340"/>
         <source>Ask to attach the whole Sandboxie.ini. Off unless the problem is about configuration the box section does not show; it carries every sandbox the user has.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini 파일 전체를 첨부하도록 요청하세요. 설정 관련 문제가 아닐 경우를 제외하고는 이 파일을 포함해야 합니다. 여기에는 사용자가 생성한 모든 샌드박스 정보가 담겨 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="343"/>
         <source>Ask to attach the resource trace as well as the message log. Large, and detailed about everything running on the machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>메시지 로그와 함께 리소스 추적 데이터도 첨부하도록 요청하세요. 이 데이터는 매우 방대하며, 시스템에서 실행 중인 모든 항목에 대한 상세 정보를 담고 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="362"/>
         <source>Issue title.</source>
-        <translation type="unfinished"></translation>
+        <translation>이슈 제목.입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="363"/>
         <source>Issue body, Markdown. Leave empty to use the composed report, which is the better choice: it is the text the user has already read.</source>
-        <translation type="unfinished"></translation>
+        <translation>이슈 본문입니다. 비워두면 자동으로 생성된 보고서가 사용됩니다. 이 보고서는 사용자가 이미 검토한 내용을 담고 있으므로, 직접 작성하는 것보다 이 방식을 사용하는 것이 더 좋습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="366"/>
         <source>Label names to suggest. The user can change them.</source>
-        <translation type="unfinished"></translation>
+        <translation>제안할 레이블입니다 이름. 사용자가 이를 수정할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="381"/>
         <source>Name or alias of the sandbox the workaround is for.</source>
-        <translation type="unfinished"></translation>
+        <translation>해결 방법이 적용되는 샌드박스의 이름 또는 별칭입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="382"/>
         <source>The settings, as &apos;Setting=Value&apos; lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;Setting=Value&apos; 형식으로 구성된 설정 항목들입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="383"/>
         <source>What the workaround does and what it costs, in plain words.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 우회 방안이 어떤 역할을 하는지, 그리고 그 대가는 무엇인지 알기 쉽게 설명해 드립니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="400"/>
         <source>Write up what happened</source>
-        <translation type="unfinished"></translation>
+        <translation>무슨 일이 있었는지 내용을 정리해 주세요</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="401"/>
@@ -13311,56 +13436,68 @@ Call this on a success too. A failure report tells the project what is still bro
 Call it early and again as you learn more, rather than once at the end. Whatever you composed last is what Sandboxie-Plus offers the user when they close the agent window, and they may close it at any moment - the console going away does not wait for you to finish. An early rough write-up that gets sent is worth more than a perfect one that was never composed.
 
 You cannot send it yourself, by design. When you are done, tell the user to press Finish - the green tick at the bottom of the Sandboxie-Plus agent window - which opens your report for them to read, correct and send.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus는 사용자가 작성한 내용과 프로그램 자체가 수집한 정보를 결합하여 보고서를 생성하고 그 결과를 보여줍니다. 외부로 데이터가 전송되지는 않으며, 보고서 초안을 구성하기만 합니다.
+
+사용자가 작성한 내용과 시스템이 기록한 정보는 서로 구분되어 표시됩니다. 이 둘을 섞지 마세요. 유지보수 담당자가 어떤 문장이 실제 증거기록인지 파악할 수 있어야 하기 때문입니다.
+
+문제가 해결된 경우에도 보고서를 작성해 주세요. 실패 보고서는 무엇이 여전히 문제인지 알려주지만, 성공 보고서는 어떤 조치가 문제를 해결했는지 알려줍니다. 사실 성공 보고서는 개발팀이 가장 얻기 어려운 귀중한 정보입니다.
+
+마지막에 한 번만 작성하기보다는, 새로운 사실을 알게 될 때마다 수시로 내용을 업데이트하세요. 사용자가 에이전트 창을 닫는 순간, Sandboxie-Plus는 마지막으로 작성된 내용을 사용자에게 보여줍니다. 사용자는 언제든 창을 닫을 수 있으므로, 콘솔이 사라지기 전에 내용을 기록해야 합니다. 완벽하지만 결국 작성되지 않은 보고서보다는, 다소 거칠더라도 제때 전송된 보고서가 훨씬 가치 있습니다.
+
+설계상 사용자가 직접 보고서를 전송할 수는 없습니다. 작성이 완료되면 사용자에게 Sandboxie-Plus 에이전트 창 하단에 있는 녹색 체크 표시인 완료 버튼을 누르라고 안내하세요. 그러면 보고서가 열리며, 사용자가 내용을 확인하고 수정하여 직접 전송할 수 있게 됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="426"/>
         <source>Open a prefilled GitHub issue</source>
-        <translation type="unfinished"></translation>
+        <translation>내용이 미리 채워진 GitHub 이슈 열기</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="427"/>
         <source>Opens GitHub&apos;s new-issue form in the user&apos;s browser with the title and body filled in. It submits nothing - the user reads it on the site and decides.
 
 Prefer report_submit. This one requires the user to have a GitHub account and to be signed in, which many are not; report_submit reaches the project&apos;s own tracker with no account at all. Use this only when the user has said they want to discuss it on GitHub, or when they ask for it by name.</source>
-        <translation type="unfinished"></translation>
+        <translation>제목과 본문이 채워진 GitHub의 새 문제 양식을 사용자 브라우저에서 엽니다. 아무 것도 제출하지 않습니다. 사용자가 사이트에서 이를 읽고 결정합니다.
+
+신고_제출을 선호하세요. 이를 위해서는 사용자가 GitHub 계정을 갖고 로그인해야 하지만 많은 경우 그렇지 않습니다. report_submit은 계정 없이 프로젝트 자체 추적기에 도달합니다. 사용자가 GitHub에서 토론하고 싶다고 말하거나 이름을 물어볼 때만 사용하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="435"/>
         <source>Save a workaround others can apply</source>
-        <translation type="unfinished"></translation>
+        <translation>다른 사람들이 활용할 수 있는 해결 방안을 저장해 두세요</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="436"/>
         <source>Writes a file holding the settings as an INI snippet plus the equivalent SbieIni.exe commands, so the fix can be shared or reapplied. Local only - nothing leaves the machine. The user picks where it goes.</source>
-        <translation type="unfinished"></translation>
+        <translation>설정 내용을 INI 형식의 조각과 그에 대응하는 SbieIni.exe 명령어로 구성된 파일로 저장합니다. 이를 통해 수정 사항을 공유하거나 다시 적용할 수 있습니다. 모든 작업은 로컬에서만 이루어지며, 데이터가 외부로 유출되지 않습니다. 파일이 저장될 위치는 사용자가 직접 선택합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="456"/>
         <source>&apos;outcome&apos; must be one of: fixed, partly_fixed, not_fixed.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;outcome&apos; 값은 fixed, partly_fixed, not_fixed 중 하나여야 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="460"/>
         <source>&apos;title&apos; is required - one line naming the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;title&apos; 항목은 필수이며, 문제의 내용을 한 줄로 요약하여 기재해야 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="462"/>
         <source>&apos;narrative&apos; is required. A report with no account of what you found is not worth a maintainer&apos;s time.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;narrative&apos; 또한 필수 항목입니다. 문제의 원인이나 발견한 내용에 대한 설명이 없는 보고서는 유지보수 담당자의 시간을 낭비하게 할 뿐입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="528"/>
         <source>Composed, and nothing has been sent. The user has not seen it yet either - call report_submit to put it in front of them, or issue_prefill to open it as a GitHub issue instead. This is the full text:
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>보고서가 작성되었으나 아직 전송되지는 않았습니다. 사용자에게도 아직 표시되지 않은 상태입니다. `report_submit`을 호출하여 사용자에게 보고서를 보여주거나, `issue_prefill`을 사용하여 GitHub 이슈 형태로 열 수 있습니다. 전체 내용은 다음과 같습니다.
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="541"/>
         <source>Nothing has been written up yet, and sending is not yours to do in any case. Call report_compose first.</source>
-        <translation type="unfinished"></translation>
+        <translation>아직 보고서가 작성되지 않았으며, 애초에 사용자가 직접 전송할 수 있는 단계가 아닙니다. 먼저 `report_compose`를 호출하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="545"/>
@@ -13369,22 +13506,26 @@ Prefer report_submit. This one requires the user to have a GitHub account and to
 Your write-up is already with Sandboxie-Plus. Tell the user to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: that opens the report for them to read, lets them correct anything, and sends it if they agree. Say that sending it is worth doing and why, once, and then leave the decision with them.
 
 Keep composing if you learn more - they are offered whatever you wrote last.</source>
-        <translation type="unfinished"></translation>
+        <translation>전송은 사용자가 직접 결정할 일입니다. 이 도구는 더 이상 자동으로 데이터를 전송하지 않습니다.
+
+작성하신 내용은 이미 Sandboxie-Plus에 전달되었습니다. 사용자에게 Sandboxie-Plus 에이전트 창 하단에 있는 녹색 체크 표시(Finish 버튼)를 누르라고 안내해 주세요. 이를 통해 사용자는 보고서를 확인하고, 필요한 경우 내용을 수정하며, 동의할 경우 최종적으로 전송할 수 있습니다. 전송하는 것이 왜 유익한지 한 번만 설명해 주시고, 최종 결정은 사용자에게 맡기세요.
+
+추가로 알게 된 정보가 있다면 계속해서 내용을 보완하세요. 사용자는 가장 마지막에 작성된 내용을 확인하게 됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="559"/>
         <source>&apos;title&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;title&apos;은 필수 항목입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="565"/>
         <source>There is nothing to put in the issue. Supply &apos;body&apos;, or call report_compose first.</source>
-        <translation type="unfinished"></translation>
+        <translation>이슈에 포함할 내용이 없습니다. &apos;body&apos;(본문) 내용을 제공하거나, 먼저 `report_compose`를 호출하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="596"/>
         <source>Confirm opening a GitHub issue</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub 이슈 생성 확인</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="597"/>
@@ -13395,557 +13536,596 @@ Title: %1
 %2
 
 Nothing is submitted by opening it - you still have to press the button on the site, and you can edit it there first.</source>
-        <translation type="unfinished"></translation>
+        <translation>브라우저에서 Sandboxie-Plus 이슈 양식을 여세요. 양식에는 다음 내용이 미리 채워져 있을 것입니다:
+
+제목: %1
+
+%2
+
+양식을 연다고 해서 바로 제출되는 것은 아닙니다. 사이트에서 직접 버튼을 눌러야 제출이 완료되며, 제출하기 전에 내용을 수정할 수도 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="601"/>
         <source>Open the Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>브라우저 열기</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="602"/>
         <source>The user declined; no issue was opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 거절했습니다. 이슈는 생성되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="606"/>
         <source>The browser could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>브라우저를 열 수 없었습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="609"/>
         <source>The issue form is open in the browser, but the body did not fit in a URL and was truncated. Nothing has been submitted; the user decides on the site.</source>
-        <translation type="unfinished"></translation>
+        <translation>브라우저에 문제 신고 양식이 열렸으나, 본문 내용이 URL에 모두 담기지 않아 일부가 잘렸습니다. 아무것도 제출되지 않았으며, 이후 진행 여부는 사용자가 해당 사이트에서 결정하게 됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="611"/>
         <source>The issue form is open in the browser, prefilled. Nothing has been submitted; the user decides on the site.</source>
-        <translation type="unfinished"></translation>
+        <translation>브라우저에서 이슈 양식이 미리 채워진 상태로 열렸습니다. 아직 아무것도 제출되지 않았으며, 실제 제출 여부는 사용자가 결정합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="624"/>
         <source>&apos;changes&apos; is required - there is no workaround without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;changes&apos; 항목은 필수입니다. 이 항목 없이는 다른 해결 방법이 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="635"/>
         <source>an AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="654"/>
         <source>Save the workaround</source>
-        <translation type="unfinished"></translation>
+        <translation>우회 방법 저장</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="656"/>
         <source>Sandboxie configuration (*.ini);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 구성 파일 (*.ini);;모든 파일 (*.*)</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="658"/>
         <source>The user cancelled; nothing was written.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 취소했습니다. 아무것도 작성되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="662"/>
         <source>That file could not be written: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>해당 파일을 기록할 수 없습니다: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="670"/>
         <source>Written to %1 - %2 setting(s), as an INI section plus the equivalent SbieIni.exe commands.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에 기록되었습니다. %2개의 설정이 INI 섹션 및 이에 대응하는 SbieIni.exe 명령 형태로 저장되었습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="678"/>
         <source>Sandboxie is not running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie가 실행 중이 아닙니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="697"/>
         <source>The six-digit code shown in Sandboxie-Plus. Omit it on the first call and Sandboxie-Plus will display one; then ask the user to read it to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus에 표시되는 6자리 코드입니다. 첫 호출 시 이 코드를 생략하면 Sandboxie-Plus가 코드를 표시하며, 사용자에게 해당 코드를 알려달라고 요청하면 됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="712"/>
         <source>Connect to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus에 연결</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="713"/>
         <source>Authorises this connection to look at this machine. Call with no arguments and Sandboxie-Plus shows a six-digit code on the user&apos;s screen; ask the user for it and call again with code set.
 
 You do not need this to read the documentation or the settings schema - those work now. You do need it before anything that reads the user&apos;s sandboxes, and before anything that changes them. Do not guess the code: a handful of wrong attempts invalidates it and a new one has to be requested.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 연결을 통해 해당 컴퓨터를 조회할 수 있도록 승인합니다. 인자 없이 호출하면 Sandboxie-Plus가 사용자 화면에 6자리 코드를 표시합니다. 사용자에게 이 코드를 물어본 뒤, 해당 코드를 포함하여 다시 호출하세요.
+
+문서나 설정 스키마를 읽는 데는 이 과정이 필요하지 않으며, 바로 확인할 수 있습니다. 하지만 사용자의 샌드박스 정보를 읽거나 샌드박스 설정을 변경하는 작업을 수행하려면 반드시 이 과정이 필요합니다. 코드를 추측하여 입력하지 마세요. 잘못된 시도가 반복되면 해당 코드는 무효화되며, 새로운 코드를 다시 요청해야 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="93"/>
         <source>How many results at most. Defaults to 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>최대 결과 개수입니다. 기본값은 10입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="113"/>
         <source>The entry id, as returned by kb_search or kb_match.</source>
-        <translation type="unfinished"></translation>
+        <translation>kb_search 또는 kb_match를 통해 반환된 항목 ID입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="132"/>
         <source>Name or alias of the sandbox to explain.</source>
-        <translation type="unfinished"></translation>
+        <translation>설명할 샌드박스의 이름 또는 별칭입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="136"/>
         <source>How many candidates at most. Defaults to 5.</source>
-        <translation type="unfinished"></translation>
+        <translation>최대 후보 개수입니다. 기본값은 5입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="211"/>
         <source>Limit to one sandbox, by name or alias. Many entries carry no box.</source>
-        <translation type="unfinished"></translation>
+        <translation>이름이나 별칭을 사용하여 특정 샌드박스로 범위를 제한합니다. 많은 항목이 특정 샌드박스에 속해 있지 않습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="215"/>
         <source>One of message, diagnostic or notice. Omit for all three.</source>
-        <translation type="unfinished"></translation>
+        <translation>메시지, 진단, 알림 중 하나를 선택합니다. 생략할 경우 세 가지 모두 포함됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="219"/>
         <source>Only entries whose text contains this.</source>
-        <translation type="unfinished"></translation>
+        <translation>텍스트 내에 해당 내용을 포함하는 항목만 조회합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="223"/>
         <source>Entries to return, newest first. Default 100, maximum 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>최신 순으로  반환할 항목들입니다. 기본값은 100개, 최대 200개까지 입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="241"/>
         <source>Limit to one sandbox, by name or alias. Omit for every sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>이름이나 별칭을 사용하여 샌드박스를 하나로 제한하세요. 생략할 경우 모든 샌드박스가 대상이 됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="245"/>
         <source>Only rows whose path or message contains this text.</source>
-        <translation type="unfinished"></translation>
+        <translation>경로 또는 메시지에 이 텍스트가 포함된 행만 해당합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="249"/>
         <source>Only rows with this status, for example Denied. Omit for all.</source>
-        <translation type="unfinished"></translation>
+        <translation>예를 들어 거부된 상태인 행만 포함합니다. 모두 생략합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="253"/>
         <source>Rows to return, default 100, maximum 300.</source>
-        <translation type="unfinished"></translation>
+        <translation>반환할 행 수. 기본값은 100이며, 최대값은 300입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="257"/>
         <source>Rows to skip, for paging. The result reports the total.</source>
-        <translation type="unfinished"></translation>
+        <translation>페이지 처리를 위해 건너뛸 행 수입니다. 결과에는 전체 행 수가 포함됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="292"/>
         <source>Sandboxie version</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 버전</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="293"/>
         <source>Version of Sandboxie-Plus and of the operating system it is running on. Call this first: fixes and setting names differ between versions, and a suggestion that does not apply to the installed build wastes a round trip.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 버전 및 실행 중인 운영체제 버전입니다. 이 정보를 가장 먼저 확인하세요. 버전마다 수정 사항이나 설정 명칭이 다를 수 있으므로, 설치된 빌드에 맞지 않는 제안을 하는 것은 불필요한 통신 과정만 늘릴 뿐입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="298"/>
         <source>List sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 목록</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="299"/>
         <source>Every configured sandbox with its type, whether it is enabled, how many processes are running in it, and whether it holds any content. Boxes often have an alias, which is what the user calls them - refer to a box the way displayName shows it, and pass either the name or the alias to other tools.</source>
-        <translation type="unfinished"></translation>
+        <translation>설정된 모든 샌드박스에 대한 정보입니다. 각 샌드박스의 유형, 활성화 여부, 실행 중인 프로세스 수, 콘텐츠 포함 여부가 표시됩니다. 샌드박스에는 사용자가 지정한 별칭이 있을 수 있습니다. `displayName`에 표시된 이름을 기준으로 샌드박스를 식별하고, 다른 도구를 사용할 때는 해당 이름이나 별칭을 전달하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="305"/>
         <source>Read sandbox configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 구성 읽기</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="306"/>
         <source>The settings explicitly set on one sandbox, as name and value pairs. Values inherited from templates and global defaults are not included, so an absent setting means it is not set here, not that it has no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>특정 샌드박스에 명시적으로 설정된 항목을 &apos;이름-및 값&apos; 쌍으로 반환합니다. 템플릿이나 전역 기본값에서 상속된 설정은 포함되지 않습니다. 따라서 특정 설정이 결과에 없더라도 해당 설정이 적용되지 않는다는 의미는 아니며, 단지 해당 샌드박스 내에 별도로 설정되지 않았음을 뜻합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="309"/>
         <source>Name or alias of the sandbox, as reported by box_list.</source>
-        <translation type="unfinished"></translation>
+        <translation>`box_list`를 통해 확인된 샌드박스의 이름 또는 별칭입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="311"/>
         <source>What is running in a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 내에서 실행 중인 항목</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="312"/>
         <source>The processes currently running in a sandbox, with their image paths, command lines and start times. Empty is a useful answer too: a program that exits immediately leaves nothing here, which points at a start-up failure rather than a running-program problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>현재 샌드박스에서 실행 중인 프로세스 목록으로, 각 프로세스의 이미지 경로, 명령줄, 시작 시간이 포함됩니다. 결과가 비어 있는 경우도 유용한 정보가 될 수 있습니다. 예를 들어, 프로그램이 즉시 종료되어 목록에 아무것도 나타나지 않는다면, 이는 프로그램 실행 중 발생한 문제라기보다 시작 과정에서의 실패를 시사합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="319"/>
         <source>Sandbox diagnostic events</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 진단 이벤트</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="320"/>
         <source>Diagnostic events Sandboxie has recorded for a sandbox - the same ones the troubleshooting wizard reports. These are the driver saying what it refused or had trouble with, so read them before guessing at a cause. Paths and account names are redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스에서 Sandboxie가 기록한 진단 이벤트 - 문제 해결 마법사가 보고하는 것과 동일한 항목. 이것은 드라이버가 무엇을 거부했거나 어떤 문제를 겪었는지에 대한 내용이므로, 원인을 추측하기 전에 먼저 읽어 보세요. 경로와 계정 이름이 삭제되었습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="327"/>
         <source>Search the message log</source>
-        <translation type="unfinished"></translation>
+        <translation>메시지 로그 검색</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="328"/>
         <source>Everything Sandboxie-Plus has reported this session: driver and service messages, diagnostic events, and notices from SandMan itself. This is the same log the user is looking at, newest first. Unlike the resource trace it needs nothing switched on, so it is the first place to look. Paths and account names are redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 세션에서 Sandboxie-Plus가 보고한 모든 내용: 드라이버 및 서비스 메시지, 진단 이벤트, 그리고 SandMan 자체의 알림. 사용자가 보고 있는 것과 동일한 로그이며, 최신 순입니다. 리소스 트레이스와 달리 전원이 켜져 있을 필요가 없으므로, 가장 먼저 살펴봐야 하는 곳입니다. 경로와 계정 이름이 삭제되었습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="335"/>
         <source>Search the resource trace</source>
-        <translation type="unfinished"></translation>
+        <translation>리소스 추적 검색</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="336"/>
         <source>The resource access trace: what sandboxed programs tried to open and whether it was allowed. This is where a &apos;why will it not start&apos; answer usually comes from - look for denied accesses just before the program exits.
 
 Requires tracing to be enabled in SandMan, and only covers what has been recorded since. If it is off, say so and ask the user to turn it on and reproduce the problem - do not speculate from an empty trace. Results are paged and redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>리소스 액세스 추적: 어떤 샌드박스 프로그램이 열려고 했으며, 허용되었는지 여부. 보통 &apos;왜 시작되지 않는가&apos;에 대한 답은 여기에서 나옵니다. 프로그램이 종료되기 직전에 접근이 거부되는지 확인해 보세요.
+
+SandMan에서 추적 기능이 활성화되어 있어야 하며, 이후 기록된 내용만 다룹니다. 이상이 있다면 이를 명시하고 사용자에게 전원을 켠 뒤 동일한 문제가 재현되도록 요청하세요. 빈 트레이스만으로 추측하지 마세요. 결과는 페이지 단위로 정리되고 편집됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="346"/>
         <source>Search known problems</source>
-        <translation type="unfinished"></translation>
+        <translation>알려진 문제 검색</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="347"/>
         <source>Searches the troubleshooting knowledge base - curated entries mapping a symptom to a cause and a fix. This is a different thing from the documentation: the docs say what a setting does, these say why something is broken.
 
 Search by how the user described the problem, in their words. Returns ids; pass one to kb_get for the whole entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>증상과 원인 및 해결 방법을 연결해 정리한 문의 해결 지식 기반을 검색합니다. 이는 문서와는 다른 내용입니다. 문서는 설정이 무엇을 하는지 설명하고, 이 문서는 왜 어떤 부분이 깨졌는지 설명합니다.
+
+사용자가 자신의 말로 문제를 어떻게 설명했는지에 따라 검색하세요. ids를 반환합니다. 전체 항목에 대해 kb_get에 하나를 전달합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="352"/>
         <source>What the user reports, in their own words.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자가 자신의 말로 보고하는 내용입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="354"/>
         <source>Read a known problem</source>
-        <translation type="unfinished"></translation>
+        <translation>알려진 문제 읽기</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="355"/>
         <source>The whole knowledge-base entry: what it looks like, why it happens, the settings that fix it, what the fix costs, and how to confirm it worked.
 
 Read the risk before proposing the fix. Every one of these loosens something, and the user is entitled to hear what, in your own words, when you ask them to approve it.</source>
-        <translation type="unfinished"></translation>
+        <translation>지식 베이스 항목 전체 내용: 현상, 발생 원인, 해결을 위한 설정, 해결 비용, 그리고 조치가 제대로 적용되었는지 확인합니다.
+
+수정을 제안하기 전에 위험을 읽어 보세요. 이 모든 것은 무엇인가를 느슨하게 만들며, 사용자는 승인을 요청하실 때 그것이 무엇인지 본인의 말로 설명해 달라고 요청하실 권리가 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="361"/>
         <source>What could explain this sandbox&apos;s problems</source>
-        <translation type="unfinished"></translation>
+        <translation>이 샌드박스의 문제를 무엇으로 설명할 수 있을까</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="362"/>
         <source>Scores the knowledge base against what this machine actually logged for a sandbox - the message codes seen, the resources that were blocked, and which settings are present - and returns the entries that explain some of it, best first.
 
 Each result carries matchedBecause, saying which observations it accounts for. Read that rather than trusting the order: a top-ranked entry that matched on one weak signal is a guess, and an entry that explains three separate observations is not. Nothing here is a verdict - it is a shortlist to check against the trace.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 지식 기반을 샌드박스에서 해당 기계가 실제로 기록한 내용, 즉 확인된 메시지 코드, 차단된 리소스, 존재하는 설정과 비교하여 점수를 매기고, 그중 일부를 가장 먼저 설명하는 항목들을 반환합니다.
+
+각 결과에는 어떤 관측값을 포함하는지 나타내는 matchedBecause가 포함됩니다. 순서를 그대로 믿기보다는 이를 읽어 보세요. 약한 신호 하나만으로 일치하는 최상위 순위 항목은 추측이고, 서로 다른 세 가지 관측을 설명하는 항목은 추측이 아닙니다. 여기에는 어떤 것도 확정 판정이 아닙니다. 추적과 대조해 볼 후보군일 뿐입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="371"/>
         <source>Search the documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>문서 검색</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="372"/>
         <source>Finds documentation pages by title, path, heading or setting name. Returns paths to read with docs_get, not the page text. Coverage is partial: roughly two in five settings have a page, so finding nothing here does not mean the setting does not exist - check config_schema.</source>
-        <translation type="unfinished"></translation>
+        <translation>제목, 경로, 헤딩 또는 설정 이름으로 문서 페이지를 찾습니다. 페이지 텍스트가 아니라 docs_get으로 읽을 경로를 반환합니다. 커버리지는 부분적입니다. 대략 5개 중 2개 환경에서 페이지가 제공되므로, 여기에서 아무것도 찾지 못했다고 해서 해당 환경이 존재하지 않는다는 뜻은 아닙니다. config_schema를 확인해 주세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="376"/>
         <source>A setting name, a feature name, or a few words.</source>
-        <translation type="unfinished"></translation>
+        <translation>설정 이름, 기능 이름, 또는 몇 개의 단어.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="377"/>
         <source>Maximum results, default 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>최대 결과값은 기본값으로 10입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="379"/>
         <source>Read a documentation page</source>
-        <translation type="unfinished"></translation>
+        <translation>문서 페이지 읽기</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="380"/>
         <source>The full Markdown text of one page, addressed by the path that docs_search or docs_for_setting returned.</source>
-        <translation type="unfinished"></translation>
+        <translation>docs_search 또는 docs_for_setting이 반환한 경로로 지정한 한 페이지의 전체 Markdown 텍스트입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="382"/>
         <source>Page path, for example Content/UseRamDisk.md.</source>
-        <translation type="unfinished"></translation>
+        <translation>페이지 경로, 예를 들어 Content/UseRamDisk.md .</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="384"/>
         <source>Look up a setting</source>
-        <translation type="unfinished"></translation>
+        <translation>설정 검색하기</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="385"/>
         <source>What Sandboxie itself knows about a configuration setting: whether it exists, its category and syntax, which version added or removed it, and what supersedes it. This is the authority on whether a setting is real - the documentation covers only some of them. An unknown setting name is silently ignored by the driver rather than rejected, so check here before recommending one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie가 구성 설정에 대해 알고 있는 내용: 존재 여부, 카테고리와 문법, 어떤 버전에서 추가되거나 제거되었는지, 그리고 무엇이 이를 대체하는지. 이는 해당 설정이 실제인지 여부를 판단하는 기준이며, 문서에는 그중 일부만 다루고 있습니다. 알 수 없는 설정 이름은 거부되지 않고 드라이버가 조용히 무시하므로, 하나를 추천하기 전에 여기에서 확인해 주세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="391"/>
         <location filename="Mcp/McpTools.cpp" line="398"/>
         <source>Setting name, for example ClosedFilePath.</source>
-        <translation type="unfinished"></translation>
+        <translation>이름을 지정합니다. 예: ClosedFilePath.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="393"/>
         <source>Find the page for a setting</source>
-        <translation type="unfinished"></translation>
+        <translation>설정에 해당하는 페이지 찾기</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="394"/>
         <source>The reference page for one Sandboxie.ini setting, plus any other pages that discuss it. Distinguishes a setting that exists but is undocumented from one that does not exist at all - do not infer the latter from the former.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 1의 참고 페이지입니다.이 설정과, 이를 다루는 다른 모든 페이지. 존재는 하지만 문서화되어 있지 않은 설정과, 아예 존재하지 않는 설정을 구분합니다. 전자만으로 후자를 추론하지 마세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="519"/>
         <source>Sandboxie-Plus %1 on %2 (%3, kernel %4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus %1, %2 (%3, 커널 %4)</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="526"/>
         <source>
 
 No active supporter certificate. Settings whose Requirements name one will not take effect here - check with config_validate before recommending them.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+활성 후원자 인증서가 없습니다. ㅇㅅ구사항이 하나로 지정된 설정은 여기서 적용되지 않습니다. 권장하기 전에 config_validate에서 확인해 주세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="531"/>
         <source>isolated desktops</source>
-        <translation type="unfinished"></translation>
+        <translation>격리된 데스크톱</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="532"/>
         <source>advanced network features</source>
-        <translation type="unfinished"></translation>
+        <translation>고급 네트워크 기능</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="533"/>
         <source>box encryption and protection</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 암호화 및 보호</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="534"/>
         <source>enhanced security box types</source>
-        <translation type="unfinished"></translation>
+        <translation>보안 강화형 박스 유형</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="536"/>
         <source>
 
 Supporter certificate: active</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+후원자 증서: 유효</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="538"/>
         <source> but expired%1</source>
-        <translation type="unfinished"></translation>
+        <translation> 하지만 만료됨%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="539"/>
         <source>, inside the renewal grace period</source>
-        <translation type="unfinished"></translation>
+        <translation>, 갱신 유예 기간 내이며</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="541"/>
         <source>, and no longer valid for this build</source>
-        <translation type="unfinished"></translation>
+        <translation>, 이 빌드에서는 더 이상 유효하지 않습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="543"/>
         <source>. No optional features unlocked.</source>
-        <translation type="unfinished"></translation>
+        <translation>. 선택 기능이 잠금 해제되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="544"/>
         <source>. Unlocked: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>. 잠금 해제됨: %1.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="595"/>
         <source>
 (%1 of %2 sandboxes listed; the rest were omitted)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%2개의 샌드박스 중 %1개가 나열됨; 나머지는 생략됨)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="598"/>
         <source>No sandboxes are configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>구성된 샌드박스가 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="611"/>
         <source>No sandbox called &apos;%1&apos;. Either its name or its alias works; call box_list for both.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;(이)라는 이름의 샌드박스가 없습니다. 이름이나 별칭 중 어느 것을 사용해도 무방하며, 둘 다 확인하려면 box_list를 호출하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="642"/>
         <source>
 (%1 of %2 settings listed; the rest were omitted)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%1 of %2개의 설정이 나열됨; 나머지는 제외됨)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="645"/>
         <source>Sandbox &apos;%1&apos; has no settings of its own; it runs on templates and global defaults.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox &apos;%1&apos;에는 자체 설정이 없으며, 템플릿과 전역 기본값을 사용하여 실행됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="652"/>
         <source>The offline documentation pack is not installed, so documentation lookups are unavailable on this machine. The settings themselves can still be inspected with box_get_config, and the online documentation is at https://sandboxie-plus.com/docs/</source>
-        <translation type="unfinished"></translation>
+        <translation>오프라인 문서 팩이 설치되어 있지 않아 이 장치에서는 문서 검색을 사용할 수 없습니다. 설정 자체는 box_get_config로 여전히 확인할 수 있으며, 온라인 문서는 https://sandboxie-plus.com/docs/ 에 있습니다</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="665"/>
         <source>The &apos;query&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;query&apos; 인수는 필수입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="677"/>
         <source>   [reference page for %1]</source>
-        <translation type="unfinished"></translation>
+        <translation>   %1 참조 페이지</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="681"/>
         <source>Nothing in the documentation matches &apos;%1&apos;. Note that only about two in five settings have a documentation page, so this is not evidence that a setting does not exist - check it with config_schema or box_get_config.</source>
-        <translation type="unfinished"></translation>
+        <translation>문서에서 &apos;%1&apos;과 일치하는 항목이 없습니다. 문서 페이지가 있는 설정은 약 5개 중 2개 정도에 불과하므로, 이것이 해당 설정이 존재하지 않는다는 증거는 아닙니다. config_schema 또는 box_get_config로 확인해 보세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="699"/>
         <source>The &apos;path&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;path&apos; 인수는 필수입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="704"/>
         <source>%1. Use docs_search to find a valid page path.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1. docs_search를 사용하여 유효한 페이지 경로를 찾습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="719"/>
         <location filename="Mcp/McpTools.cpp" line="771"/>
         <source>The &apos;setting&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;setting&apos; 인수는 필수입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="725"/>
         <source>%1 is documented on %2 (%3).</source>
-        <translation type="unfinished"></translation>
+        <translation>%1은 %2 (%3)에 문서화되어 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="730"/>
         <source>
 Also discussed on:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+다음에서도 논의됨:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="736"/>
         <source>%1 has no page of its own, but is discussed on:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1은 자체 페이지가 없지만, 다음에서 논의됩니다:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="743"/>
         <source>&apos;%1&apos; has no documentation page. That does not mean it is not a real setting - most settings are undocumented. Verify it exists before telling the user it does not.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;에는 문서 페이지가 없습니다. 그렇다고 해서 실제 설정이 아니라는 뜻은 아닙니다. 대부분의 설정은 문서화되어 있지 않습니다. 사용자에게 존재하지 않는다고 말하기 전에, 해당 항목이 존재하는지 확인하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="774"/>
         <source>The settings reference (SbieSettings.ini) could not be loaded, so settings cannot be verified on this installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>설정 참조 (SbieSettings.ini)를 불러올 수 없어, 이 설치본에서는 설정을 확인할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="784"/>
         <source>&apos;%1&apos; is not a known Sandboxie setting. Note that the driver ignores unknown settings silently instead of reporting an error, so a typo here would look like the setting simply had no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;은 알려진 Sandboxie 설정이 아닙니다. 드라이버는 오류를 보고하는 대신 알 수 없는 설정을 조용히 무시하므로, 여기서 오타가 있으면 해당 설정이 단순히 아무런 영향을 주지 않은 것처럼 보일 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="813"/>
         <source>%1 is a known setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1은 알려진 설정입니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="814"/>
         <source>
 Category: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+범주: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="815"/>
         <source>
 Syntax: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+구문: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="816"/>
         <source>
 Requires: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+필요: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="817"/>
         <source>
 Added in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+추가됨: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="818"/>
         <source>
 Removed in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+제거됨: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="819"/>
         <source>
 Superseded by: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+대체된 항목: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="820"/>
         <source>
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="822"/>
         <source>
 
 Documentation: %1 (read it with docs_get)</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+문서화: %1 (docs_get으로 읽기)</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="824"/>
         <source>
 
 This setting has no documentation page; most do not.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+이 설정에는 문서 페이지가 없습니다. 대부분 그렇습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="847"/>
@@ -13953,92 +14133,97 @@ This setting has no documentation page; most do not.</source>
         <location filename="Mcp/McpTools.cpp" line="987"/>
         <location filename="Mcp/McpTools.cpp" line="1087"/>
         <source>No sandbox called &apos;%1&apos;. Call box_list for names and aliases.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;이라는 샌드박스가 없습니다. 이름과 별칭에 대해 box_list를 호출합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="885"/>
         <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at box_diagnostics and trace_query rather than at the process list.</source>
-        <translation type="unfinished"></translation>
+        <translation>현재 &apos;%1&apos;에 실행 중인 항목이 없습니다. 프로그램이 예상대로 시작되고 종료되었다면, 프로세스 목록보다 box_diagnostics와 trace_query를 확인해 보세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="889"/>
         <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at log_query and trace_query rather than at the process list.</source>
-        <translation type="unfinished"></translation>
+        <translation>현재 &apos;%1&apos;에 실행 중인 항목이 없습니다. 프로그램이 예상대로 시작되고 종료되었다면, 프로세스 목록보다 log_query와 trace_query를 확인해 보세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="914"/>
         <source>Diagnostics are not available for &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1&apos;에 대한 진단 정보를 사용할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="954"/>
         <source>No diagnostic events have been recorded for &apos;%1&apos;. That is the normal state for a healthy sandbox, and it is not evidence that nothing went wrong - events are only recorded for the kinds of problem Sandboxie detects itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;에 대해 기록된 진단 이벤트가 없습니다. 이는 건강한 Sandbox의 정상적인 상태이며, 아무 일도 잘못되지 않았다는 증거는 아닙니다. 발생한 이벤트는 Sandboxie가 스스로 감지한 유형의 문제에 대해서만 기록됩니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="970"/>
         <source>Resource tracing is turned off, so there is no trace to search. Ask the user to enable it in SandMan and then reproduce the problem - the trace only records what happens while it is on. Do not draw conclusions from the absence of trace data.</source>
-        <translation type="unfinished"></translation>
+        <translation>리소스 추적이 비활성화되어 있어 검색할 흔적이 없습니다. 사용자에게 SandMan에서 이를 활성화하도록 요청한 다음, 문제를 재현해 보세요. 이 추적은 켜져 있는 동안 발생하는 일만 기록합니다. 흔적 데이터의 부재만으로 결론을 내리지 마세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1052"/>
         <source>
 (%1 of %2 matching rows; call again with offset=%3 for the next page)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%1 of %2 일치 행; 다음 페이지를 위해 offset=%3으로 다시 호출)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1056"/>
         <source>No trace rows match. The trace holds %1 entries in total - if that is 0, tracing has only just been enabled and the problem still has to be reproduced before there is anything to see.</source>
-        <translation type="unfinished"></translation>
+        <translation>일치하는 행이 없습니다. 이 추적에는 총 %1개의 항목이 포함되어 있습니다. 이 값이 0이면 추적이 막 활성화된 상태이며, 확인할 수 있는 것이 나타나려면 문제를 다시 재현해야 합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1075"/>
         <source>The message log is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>메시지 로그를 사용할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1152"/>
         <source>Nothing in the log matches. It holds %1 entries in total.</source>
-        <translation type="unfinished"></translation>
+        <translation>로그에 일치하는 항목이 없습니다. 전체 항목 중 %1개를 차지합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1155"/>
         <source>
 (newest %1 of %2 matching entries)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(최신 일치 항목의 %1% 중 %2%)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1167"/>
         <source>There is no troubleshooting knowledge base on this installation, so nothing could be consulted. This is not the same as finding no match: treat it as the lookup being unavailable, and fall back to the documentation and the trace.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 설치에 대한 문제 해결 지식 기반이 없어 참고할 수 있는 것이 없었습니다. 이는 일치 항목이 없다는 것을 찾는 것과는 다릅니다. 조회가 불가능한 것으로 간주하고, 문서와 추적 정보로 대체하여 확인하세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1180"/>
         <source>&apos;query&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;query&apos;가 필요합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1186"/>
         <source>Nothing in the knowledge base matches &quot;%1&quot;. It holds %2 entries, so this is a real absence rather than an empty database - the problem may simply not be a known one.</source>
-        <translation type="unfinished"></translation>
+        <translation>지식 베이스에서 &quot;%1&quot;과 일치하는 항목이 없습니다. 이 항목은 %2개의 항목을 포함하고 있으므로, 이는 빈 데이터베이스가 아니라 실제 누락입니다. 문제는 단순히 알려진 것이 아닐 수도 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1213"/>
         <source>&apos;id&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;id&apos;가 필요합니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1217"/>
         <source>There is no knowledge-base entry called &apos;%1&apos;. Use kb_search to find one.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;이라는 지식 기반 항목이 없습니다. kb_search를 사용하여 하나를 찾으세요.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1221"/>
         <source>%1 - %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1224"/>
@@ -14046,21 +14231,28 @@ This setting has no documentation page; most do not.</source>
 Why it happens:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+발생 원인:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1228"/>
         <source>
 The fix:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+해결 방법:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1233"/>
         <source>
 A troubleshooting script also applies this: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+문제 해결 스크립트도 이를 적용합니다: %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1237"/>
@@ -14068,7 +14260,10 @@ A troubleshooting script also applies this: %1
 What it costs:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+비용:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1239"/>
@@ -14076,69 +14271,78 @@ What it costs:
 How to confirm it worked:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+작동 여부를 확인하는 방법:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1241"/>
         <source>
 %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+%1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1288"/>
         <source>Nothing in the knowledge base explains what %1 has logged. %2 entries were checked against %3 message code(s) and %4 blocked resource(s). Either the problem is not a known one, or nothing has been logged yet - if you have not reproduced the fault since Sandboxie-Plus started, there may be nothing to match against.</source>
-        <translation type="unfinished"></translation>
+        <translation>지식 베이스에는 %1이 무엇을 로그했는지 설명하는 내용이 없습니다. %2 항목이 %3 메시지 코드와 대조되었으며, %4 차단된 리소스입니다. 문제가 알려진 것이 아니거나 아직 기록된 것이 없는 경우일 수 있습니다. Sandboxie-Plus가 시작된 이후로 해당 문제를 재현하지 않으셨다면, 대조할 만한 것이 없을 수도 있습니다.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1295"/>
         <source>Candidates for %1, best first. These explain some of what was logged; none of them is a verdict.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1의 후보자 중 가장 먼저 선호됩니다. 이는 기록된 내용 중 일부를 설명할 뿐이며, 어느 것도 판결문은 아닙니다.
+
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1299"/>
         <source>%1  (score %2)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (점수 %2)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1304"/>
         <source>    matched: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    일치: %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1335"/>
         <source>Sandboxie is not running or SandMan is not connected to the driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie가 실행 중이 아니거나 SandMan이 드라이버에 연결되어 있지 않습니다.</translation>
     </message>
 </context>
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="5653"/>
+        <location filename="SandMan.cpp" line="5654"/>
         <source>OK</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5654"/>
+        <location filename="SandMan.cpp" line="5655"/>
         <source>Apply</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5655"/>
+        <location filename="SandMan.cpp" line="5656"/>
         <source>Cancel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5656"/>
+        <location filename="SandMan.cpp" line="5657"/>
         <source>&amp;Yes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="5657"/>
+        <location filename="SandMan.cpp" line="5658"/>
         <source>&amp;No</source>
         <translation></translation>
     </message>
@@ -15169,39 +15373,41 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>AI Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 통합</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="477"/>
         <source>Where each session starts. The agent window can raise or lower it for that session alone.
 
 Diagnostic data an agent reads can contain text written by programs inside a sandbox, so a confirmation is also what stands between a misled agent and a silent change. Whatever is chosen here, everything the agent does is recorded.</source>
-        <translation type="unfinished"></translation>
+        <translation>각 세션이 시작되는 곳입니다. 에이전트 창에서는 해당 세션에 한해 이 창을 올리거나 내릴 수 있습니다.
+
+에이전트가 읽는 진단 데이터에는 샌드박스 내부의 프로그램이 작성한 텍스트가 포함될 수 있으므로, 확인 절차는 에이전트가 오인하는 것과 은밀한 변경이 발생하는 것을 막아주는 유일한 장벽이기도 합니다. 여기서 어떤 옵션을 선택하든, 에이전트가 수행하는 모든 작업은 기록됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="512"/>
         <source>Before changing anything, the agent:</source>
-        <translation type="unfinished"></translation>
+        <translation>무엇이든 변경하기 전에, 에이전트는:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="519"/>
         <source>Allows an AI agent to connect to Sandboxie-Plus over a local named pipe. Turning this off removes the option entirely: the connection cannot be armed, and a request from an agent is ignored rather than shown to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트가 로컬 명명된 파이프를 통해 Sandboxie-Plus에 연결할 수 있도록 합니다. 이 기능을 비활성화하면 해당 옵션이 완전히 제거됩니다. 즉, 연결을 설정할 수 없으며, 에이전트의 요청은 사용자에게 표시되지 않고 무시됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="522"/>
         <source>Allow an AI agent to connect (MCP)</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 에이전트가 연결되도록 허용 (MCP)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="529"/>
         <source>Sandboxie-Plus shows a six-digit code that you read to the agent before it can see anything about your machine. Without it, any program running as you that finds the pipe is treated as authorised - which includes programs you did not start on purpose. Sandboxed programs are refused either way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus는 에이전트가 사용자의 컴퓨터에 대한 정보를 확인하기 전에 사용자가 에이전트에게 읽어줘야 하는 6자리 코드를 표시합니다. 이 코드가 없으면, 사용자로 실행 중인 프로그램 중 파이프를 발견한 모든 프로그램은 승인된 것으로 간주됩니다. 여기에는 사용자가 의도적으로 실행하지 않은 프로그램도 포함됩니다. 샌드박스화된 프로그램은 어떤 경우든 실행이 거부됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="532"/>
         <source>Require a code before an agent may look at this machine</source>
-        <translation type="unfinished"></translation>
+        <translation>에이전트가 이 컴퓨터를 확인하기 전에 코드 입력을 요구합니다</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="823"/>

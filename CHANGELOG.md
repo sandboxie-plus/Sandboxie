@@ -2,13 +2,170 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+- fixed severe slowdowns (e.g. FPS drops in games) in sandboxed applications that often call `GetUserDefaultUILanguage`, `LoadString`, `FindResource` or `FormatMessage`: the temporary impersonation around each system call reset ntdll's cached UI language settings, so every lookup re-read them from the registry
 
 
-## [1.18.6 / 5.73.6] - 2026-10-??
+
+## [1.19.1 / 5.74.1] - 2026-10-??
+
+### Added
+- added line numbers to the built-in INI section editors, with an Advanced Editor Settings toggle and Ctrl+G destination highlighting; copying and saving exclude the line numbers
+- added configurable sandbox border labels on all four window edges through `BorderLabelPosition`, with adjustable position, stacked or rotated side text, fixed/adaptive placement, and a dedicated Box Border tab in sandbox options
+- added customizable sandbox border label fonts with native style and writing-system selection, GDI preview, synchronized point size, immediate font-only Apply, and reset to legacy defaults
+- added opt-in, per-process `FakeProcessMitigations` compatibility reporting for dynamic-code and extension-point restrictions without changing actual Windows mitigation enforcement
+- added an opt-in MCP server to SandMan, so an AI agent can help troubleshoot a sandbox: it is started from the new "Troubleshoot with an AI Agent" toolbar button, listens on a local named pipe only, and stays off until it is explicitly enabled
+- added `SbieMcp.exe`, a stdio bridge that connects any MCP capable AI client to a running SandMan
+- added a pairing step the agent must pass before any tool works: it has to repeat a one time code shown in SandMan, sandboxed callers are rejected on the driver's verdict rather than by image name, and the pairing code is never written to the audit log
+- added an audit trail and a consent prompt for every change an agent wants to make: configuration edits are shown as a verbatim diff and commands to run are shown verbatim, each confirmed by the user per call; there are no tools to delete a box or its contents and no way for an agent to start a program elevated
+- added the AI Agent Session window, listing everything the agent asked for and everything the user answered, with "Finish" to end a session and submit, "Cancel" to abort it, and a three way close that asks whether the MCP server should keep running
+- added an issue report submission window for AI agent sessions, carrying the agent's write-up, a separate log of the actions actually taken, optional Sandboxie.ini and trace log attachments with a tooltip spelling out what will and will not be included, and a success/failure choice for the case where the agent never established the outcome; nothing is ever sent without the user pressing "Send Report"
+- the agent is instructed to keep its write-up current as it works, so closing the console at any point still leaves something worth submitting
+
+### Changed
+- switched x64 build to qt 6.8.4
+- changed pending-change tracking to support individually applied numeric fields without clearing unrelated pending highlights
+
+### Fixed
+- fixed misleading comment highlighting for INI lines starting with `;` without `=`; saving now shows a line-numbered error recommending `#` and preserves unsaved edits [#5685](https://github.com/sandboxie-plus/Sandboxie/issues/5685)
+- fixed numeric fields retaining their pending-change highlight after keyboard editing and clicking Apply in sandbox options and global settings
+- Language corrupted after version 1.16.0 [#5079](https://github.com/sandboxie-plus/Sandboxie/issues/5079)
+- fixed immediate portable sandbox configuration updates reporting success when saving the INI file or reloading the configuration fails
+- fixed boxed processes not terminating when closing the SandMan window with termination-on-exit enabled, and prevented premature termination when canceling portable cleanup [#5696](https://github.com/sandboxie-plus/Sandboxie/issues/5696)
+- fixed sandbox options not showing the default sandbox icon on opening when no custom icon is configured
+- fixed windows 7 incomatibility introduced in 1.19.0
+- fixed submitting an issue report leaving an async progress operation registered for ever, which made the next modal wait - "Saving TraceLog..." for instance - hang; the upload is now registered only once it is actually running
+- fixed concurrent process creations serializing on the global configuration lock, caused by the force-rule scan enumerating every `Templates.ini` section and the configuration use count being adjusted under an exclusive lock
+- fixed the Local Templates list not populating on first visit [#5715](https://github.com/sandboxie-plus/Sandboxie/issues/5715/)
+- fixed empty or stale App Compatibility lists; added prelisting, scan status and manual checking [#5718](https://github.com/sandboxie-plus/Sandboxie/issues/5718)
+- fixed reversed Yes/No handling when enabling a disabled or user-restricted sandbox
+
+
+## [1.19.0 / 5.74.0] - 2026-10-23
+
+### Fixed
+- fixed kernel pool out-of-bounds write in `Api_CopyStringFromUser`, which placed the terminator one character past its allocation and copied two bytes beyond the caller's string (reached through `API_UPDATE_CONF`)
+- fixed `Session_ListLock` and the raised IRQL being leaked for the lifetime of the driver when the monitor put handlers faulted on a user mode string
+- fixed `API_MONITOR_GET_EX` copying eight bytes of the log buffer past each entry, and its bounds check being defeated by a USHORT cast and a signed underflow
+- fixed kernel stack buffer overflow in `_wntoi` when a box's `NetworkAccess` rule carried a long port token
+- fixed `BlockLocalLoop` never blocking IPv4 loopback, because `WFP_isLoopback` tested the last octet of the address instead of the first
+- fixed kernel pool over-read in the rename/link minifilter path, where `FileNameLength` out of the caller's information buffer was used as a length without being checked against that buffer
+- fixed the new LPC implementation leaking the per-connection port handle and any pending reassembly buffer on every disconnect
+- fixed concurrent requests on one LPC connection racing the shared reassembly state, which could free it twice
+- fixed stack buffer overflow in `MSGID_SBIE_INI_SET_DAT`, where the unterminated `setting` field was appended to a fixed size path buffer
+- fixed `SbieIniServer` abandoning its critical section when a handler faulted, which left every later INI request blocked on it
+- fixed `value_len` being truncated while scaled to bytes in the INI setting and template handlers, so a large value passed the bounds check and was then read far past the message
+- fixed `GUI_MAP_WINDOW_POINTS` copying more points out of a request than it actually carried, returning service heap to the caller
+- fixed `WndHookRegisterSlave` returning while holding `m_SlavesLock` on two caller reachable rejections, which wedged the GUI proxy for the rest of the session
+- fixed `GUI_GET_RAW_INPUT_DEVICE_INFO` truncating its size while scaling it to bytes, so an over large `cbSize` skipped both bounds checks and was handed to the OS as a buffer size
+- fixed the desktop `startExplorer` and `startRun` actions launching as LocalSystem rather than with the calling user's token
+- fixed `PORT_DATA_INFO` being read without requiring the whole structure to lie inside the LPC message
+- fixed the ALPC connect reply returning its uninitialised tail - up to `PIPE_MAX_DATA_LEN` of service heap - to the caller
+- fixed global ("asterisk") queue names having no session scoping, which let any unsandboxed process squat a well-known name such as the interactive queue
+- fixed the UAC packet being accepted with no minimum length, and its string offsets being used without being checked against it
+- fixed the ICMP echo reply fix-up writing a whole `ICMP_ECHO_REPLY` past a caller sized reply buffer when the echo itself failed
+- fixed `request_size` not being checked against the message in the ICMP echo handler, which put up to 64 KB of service heap on the wire
+- fixed `m_WorkersList` being mutated without taking the lock that exists for it, so concurrent startup requests could close and free the same worker twice
+- fixed `UserServer::OpenFile` using unvalidated request offsets, and matching the box's file rules against a path that was not canonical
+- fixed a WCHAR/byte length confusion in the SbieDrv `API_GET_FILE_NAME` handler that over-read the file-object name into the caller's buffer
+- fixed two paged-pool leaks in the SbieDrv `API_RENAME_FILE` handler (an early return and a faulting user copy) reachable by a sandboxed process
+- fixed the SbieDrv `API_OPEN_FILE` handler not checking its allocation and leaking it when the user copy faulted
+- fixed the spooler ALPC message filter being dead code on Windows 8.1+ (the driver compared the port id against the wrong literal, so the filter never armed)
+- fixed a kernel NULL-pointer dereference and a NonPagedPool leak in the `NetworkAccess` firewall-rule parser (`netfw.c`)
+- fixed a wrong range-overlap test in the firewall-rule parser that could insert overlapping ranges and make a Block rule stop matching
+- fixed two paged-pool leaks on the error paths of the driver configuration variable expander (`Conf_Expand_2`)
+- fixed the SbieDrv `API_IS_BOX_ENABLED` handler dereferencing an unprobed user SID pointer in kernel mode
+- fixed `proc->file_lock` and the raised IRQL being leaked if `WFP_UpdateProcess` faulted in the SbieDrv `API_REFRESH_FILE_PATH_LIST` handler
+- fixed a use-after-free of a protected-root list entry in the file minifilter (the node was read after its lock was released)
+- fixed `proc->threads_lock` being leaked if the output write faulted in the `itok`/`ttok` paths of the SbieDrv process-query handler
+- fixed the duplicated-handle access re-validation being skipped for Directory/SymbolicLink/Job objects in `Syscall_DuplicateHandle_3` (a loop counter clobbered the type length before the suffix test)
+- fixed the SbieDrv `API_OPEN_PROCESS` handler dereferencing the terminated-process sentinel with a lock held when asked for PID 0
+- fixed two token references and a handle being leaked if the output write faulted in the SbieDrv `API_FILTER_TOKEN` handler
+- fixed a 32-bit truncation of the entry size in the driver monitor-log writer that could overflow the log buffer
+- fixed SandMan over-reading an unterminated file path out of a queue reply (`MAN_FILE_MIGRATION`), which a sandboxed process could use to crash the UI
+- fixed INI section names not being rejected for CR/LF or brackets, which let a caller forge additional sections/settings and bypass a per-section `EditAdminOnly` lock
+- fixed the SbieSvc `USER_SHELL_EXEC` handler using an unvalidated, possibly-unterminated wire path offset
+- fixed the SbieSvc `MSGID_SBIE_INI_SET_DAT` handler using an unvalidated `value_len` as the write length, reading past the request buffer
+- fixed the INI setting handlers not terminating their fixed-size `section`/`setting`/`password` wire fields before use
+- fixed a per-message heap leak in the SbieSvc log drain loop (`DriverAssist::LogMessage`)
+- fixed `GUI_CHANGE_DISPLAY_SETTINGS` passing an unterminated device name and an unbounded DEVMODE to the display API
+- fixed `GUI_GRANT_HANDLE` leaking the two bitmaps `GetIconInfo` creates on every call
+- fixed `GUI_GET_WINDOW_PROP` and `GUI_FIND_WINDOW` treating a caller-chosen value outside the atom range as a raw string pointer
+- fixed `GUI_SET_CLIPBOARD_DATA` not validating the request length and not bounding the caller-supplied data length
+- fixed the SbieSvc process-info handler disclosing any process's command line/image path to any local user (now restricted to the caller's session or administrators)
+- fixed the SbieSvc WOW64 registry-open handler indexing a fixed prefix of `KeyPath` without checking its length or termination
+- fixed the SbieSvc named-pipe read handler returning the uninitialised tail of its reply buffer (information disclosure)
+- fixed the SbieSvc terminal `GetName` handler leaking uninitialised stack into its reply and terminating the wrong buffer
+- fixed the four SbieSvc terminal query handlers having no caller gate and taking a session id off the wire, letting any user query other sessions as SYSTEM; `QUERY_INFO` now also allow-lists the information class
+- fixed the SbieSvc ImBox `QueryHandler` leaking its critical section (and deadlocking the mount subsystem) when the queried mount raced to NULL
+- fixed the SbieSvc queue server accepting an unbounded number of undrained requests (per-queue cap added)
+
+
+
+## [1.18.8 / 5.73.8] - 2026-10-17
+
+### Added
+- made it easier to choose a sandbox in Set Open and Set Force dialog: select from a list showing sandbox names and aliases, or start typing a name or alias to see suggestions
+- added an option to skip the Set Open and Set Force dialog when only one sandbox is available. Check "Skip this dialog when only one sandbox is enabled" to use that sandbox automatically. The dialog is shown by default [#5653](https://github.com/sandboxie-plus/Sandboxie/issues/5653)
+- added "fixboxdacls" command to KmdUtil.exe, it adds the AppContainer ACEs to already existing boxes
+- added `KeepBroadGroupsInAppContainerToken=n` to restore the old all-deny-only AppContainer stand-in token
+- added `NeutralizeLowBoxToken=n` to let a direct `NtCreateLowBoxToken` call through
+- `FakeAppContainerToken` is now evaluated, `=n` lets a boxed program create real AppContainer children
+
+### Fixed
+- fixed video playback in sandboxed Firefox on sites awaiting `mediaCapabilities.decodingInfo()`, like espn.com
+- fixed boxes lacking AppContainer ACEs, which made an AppContainer child of a boxed program die with `0xC0000022`
+- fixed the restricted stand-in for an AppContainer token disabling every group, leaving it unable to open `\KnownDlls`
+- fixed boxed IPC objects lacking AppContainer ACEs, which crashed Firefox's media CDM process in app compartment boxes as it could not connect to the boxed epmapper
+- fixed "SBIE2204 Cannot start sandboxed service RpcSs (1341)" from AppContainer processes in app compartment boxes, they now find the already running boxed RpcSs
+- fixed an out-of-bounds read in the GUI proxy's MapWindowPoints handler leaking service heap to sandboxed callers
+- `UnRestrictAppContainerToken` no longer defaults to on for MS Edge, the stand-in token works for it again
+- fixed Import Boxes not letting the user choose where the imported sandboxes are created [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)
+
+
+
+## [1.18.7 / 5.73.7] - 2026-10-16
+
+### Fixed
+- FIXED SECURITY ISSUE ID-43: kernel pool and stack buffer overflow via the SbieSvc ImBox mount handlers and the SbieDrv `API_PROTECT_ROOT` / `API_UNPROTECT_ROOT` handlers (GHSA-mvcr-mmcq-27xq)
+  - `File_Api_ProtectRoot` and `File_Api_UnprotectRoot` took the length of the caller supplied `reg_root` with an unbounded `wcslen` and copied it into fixed `WCHAR[MAX_REG_ROOT_LEN]` destinations - a pool allocation sized only for the trailing `file_root` in the first case and a kernel stack buffer in the second - without probing the user pointer at all
+  - `MSGID_IMBOX_MOUNT` / `MSGID_IMBOX_UNMOUNT` never checked that the fixed `reg_root[MAX_REG_ROOT_LEN]` wire field was NUL terminated before handing it to the driver, so string processing continued into the `file_root` field that follows it; since the service's request buffer is terminated at exactly the caller declared `h.length`, an unprivileged non-sandboxed process chose both the overflow length and every byte of its content (the `MSGID_IMBOX` handlers reject only *sandboxed* callers, and the service port has a NULL DACL by design)
+  - both driver handlers now capture the name through a bounded, probing, single-fetch helper that rejects a `reg_root` which is not terminated within `MAX_REG_ROOT_LEN` characters instead of truncating it, validate `file_root` against a bounded maximum, and release their allocation rather than leak it if the copy faults; `File_Api_ProtectRoot` also reports `STATUS_INSUFFICIENT_RESOURCES` instead of claiming success when the root could not be allocated, which previously left the service believing a root was protected when it was not
+  - the ImBox request handlers now validate every caller supplied string before first use, including the root lookup, which also closes a heap overflow in `MSGID_IMBOX_ENUM` whose reply was sized on the assumption that every stored root name fits `MAX_REG_ROOT_LEN`; that reply is now sized from the stored names themselves
+  - fixed `MSGID_IMBOX_CREATE` constructing a `std::wstring` from an invalid iterator range when the requested `file_root` contained no path separator, which crashed the service on an unprivileged request
+- FIXED SECURITY ISSUE ID-44: sandbox escape via the SbieDrv `API_SET_LOW_LABEL_KEY` handler (found by internal audit)
+  - `Key_Api_SetLowLabel` checked containment with `Box_IsBoxedPath(proc->box, file, ...)`, which compares a `\REGISTRY\...` name against the box's *file* path and therefore never matches, and the sense was inverted on top of that, leaving the deny branch unreachable; as the key is then opened with `KEY_ALL_ACCESS | WRITE_DAC` from kernel mode (no DACL check) and given `Driver_LowLabelSd`, any sandboxed process could make any registry key on the system world-writable - it now uses the `key` component with the correct sense, matching `key.c:437`
+- FIXED SECURITY ISSUE ID-45: arbitrary kernel write via the SbieDrv `API_MONITOR_GET2` handler (found by internal audit)
+  - `Session_Api_MonitorGet2` bounded entries with `entry_size > buffer_len - sizeof(LOG_BUFFER_SIZE_T)`, which underflows for a `buffer_len` below 4, and `ProbeForWrite` does nothing at all for a zero length so `buffer_ptr` was never validated either, letting a caller that passes `buffer_len = 0` have the monitor log written to an arbitrary address; it now rejects a buffer too small for the terminating null length and reserves room for that terminator using a 64-bit addition (`Session_Api_MonitorGetEx` has a related underflow that is not yet addressed)
+- FIXED SECURITY ISSUE ID-46: kernel pool overflow parsing `Certificate.dat` (found by internal audit)
+  - `b64_decoded_size` subtracted a byte for every trailing `=` with no cap while `b64_decode` writes 3 bytes per 4-character group, so a SIGNATURE line ending in a long run of `=` got an allocation far smaller than the decode writes - with enough padding it reached zero and then underflowed; `KphValidateCertificate` decodes before verifying anything and `MSGID_SBIE_INI_SET_DAT` lets a non-admin have the service write `Certificate.dat`, so this needed no elevation - the size now rejects a non-multiple-of-4 length and clamps the padding to 2, `b64_decode` bounds every store against `outlen`, and the caller checks its result
+- FIXED SECURITY ISSUE ID-47: sandboxed process obtained a write handle to a host directory via the SbieDrv `API_RENAME_FILE` handler (found by internal audit)
+  - `File_Api_Rename` opened the rename target's parent directory for `FILE_GENERIC_WRITE` without `OBJ_KERNEL_HANDLE`, so the handle landed in the *calling* sandboxed process's handle table, and with `PreviousMode == KernelMode` and no `OBJ_FORCE_ACCESS_CHECK` it carried write access the box has no rights to; it now sets `OBJ_KERNEL_HANDLE` and closes with `ZwClose` - the DACL is still deliberately not checked, since that is how this API grants the access box policy allows
+- FIXED SECURITY ISSUE ID-48: stack buffer overflow in the SbieSvc GUI proxy via `GUI_GET_CLIPBOARD_FORMATS` (found by internal audit)
+  - `GetClipboardFormats` appended one `ULONG` per stored clipboard format into the 32 KB stack reply buffer shared by all slave handlers with no bound, and the count is caller driven because `SetClipboardDataSlave` stores any `req->format` with no cap and `GUI_EMPTY_CLIPBOARD` is parent-only, so a sandboxed process could smash the LocalSystem slave thread's stack; the loop is now bounded by `MAX_RPL_BUF_SIZE` (moved to `GuiServer.h`) as `EnumWindowsSlave` already was, and a box may no longer store an unbounded number of distinct formats
+- FIXED SECURITY ISSUE ID-49: heap buffer overflow in SbieSvc via `MSGID_SBIE_INI_TEMPLATE` (found by internal audit)
+  - `SbieIniServer::SetTemplate` never terminated the fixed `varname[66]` wire field on the `req->user == 0` path before `wcscpy`ing it into the `setting[66]` field of a roughly 288 byte heap block, and a request buffer is only terminated at the caller declared `h.length`, so the copy ran on to the end of the message with a length and content of the caller's choosing; both `varname` and `password` are now terminated right after the length check, as in `namedpipeserver.cpp`
+
+
+
+## [1.18.6 / 5.73.6] - 2026-10-11
+
+### Added
+- added Persian (Farsi) translations for SandMan, the Troubleshooting Wizard and the installer [#5633](https://github.com/sandboxie-plus/Sandboxie/pull/5633) (thanks imalyzer)
 
 ### Fixed
 - fixed corrupted SBIE message links in SandMan when URL-encoded characters were interpreted as message placeholders
-- fixed severe slowdowns (e.g. FPS drops in games) in sandboxed applications that often call `GetUserDefaultUILanguage`, `LoadString`, `FindResource` or `FormatMessage`: the temporary impersonation around each system call reset ntdll's cached UI language settings, so every lookup re-read them from the registry
+- FIXED SECURITY ISSUE ID-40: local privilege escalation from standard user to SYSTEM via the SbieSvc updater service (reported by ghostx86)
+  - the MSGID_PROCESS_RUN_UPDATER `elevate=2` path starts UpdUtil.exe with the service's SYSTEM token and is reachable by passing a caller-image signature check that can be satisfied by injecting code into any signed Sandboxie process; this remains available to non-administrative users (no UAC prompt), but UpdUtil is now safe to run as SYSTEM with attacker-chosen arguments:
+    - when running under the SYSTEM account UpdUtil now only accepts the signature-gated update/add-on management actions (update, upgrade, install, modify) and refuses the raw file utility actions (download, print, run_setup, get_cert), which otherwise wrote caller-controlled content to caller-controlled paths
+    - add-on removal read the `UninstallString` to execute from any hive; it is now read only from the admin-writable HKLM hive, so a standard user can no longer plant the command via HKCU
+    - the `/restart` and `/open:` steps launched `KmdUtil.exe` / `start.exe` from the caller-supplied `/path:` directory; they now run from UpdUtil's own (admin-only) install directory
+  - hardened `IsCallerSigned` to read the caller's image path from the kernel (`QueryFullProcessImageName`) instead of the spoofable process PEB
+- FIXED SECURITY ISSUE ID-41: sandbox isolation bypass via the SbieDrv `API_PROCESS_EXEMPTION_CONTROL` driver handler (GHSA-vwqp-f692-7jxq)
+  - the caller signature check in `Api_ProcessExemptionControl` only recorded `STATUS_ACCESS_DENIED` into a local variable and fell through, so an unsigned local process could still set another sandboxed process's `AllowInternetAccess` / `ipc_allowSpoolerPrintToFile` flags - overriding network blocking (`wfp.c`) and spooler print-to-file interception (`file_flt.c`) - before the handler returned the (cosmetic) denial; it now aborts immediately on a failed signature check, matching `Api_SetSecureParam`
+- FIXED SECURITY ISSUE ID-42: path-traversal sandbox escape via the SbieSvc `MSGID_FILE_SET_ATTRIBUTES` / `MSGID_FILE_SET_SHORT_NAME` handlers (GHSA-524m-vh66-wmxw)
+  - `CheckBoxFilePath` / `CheckBoxKeyPath` validated the sandbox prefix with a case-insensitive compare only and never rejected `..` components, so a sandboxed process could send a path that string-prefixed its box directory but resolved (via `..`) to a host file, letting the SYSTEM service change the timestamps/attributes or 8.3 short name of arbitrary host files; both functions now reject any `..` path component
+- fixed local kernel NULL-pointer dereference in the SbieDrv `API_UNLOAD_DRIVER` handler (GHSA-pjhp-45j7-4rp2)
 
 
 
@@ -34,7 +191,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed stale INI completion-popup candidate tooltips during editing and limited `Template`/`TemplateReject` tooltips to setting-name text
 - fixed SandMan File Panel "Create Shortcut" producing a shortcut without a working directory, so the sandboxed program inherited SandMan's current directory and applications that open their data files by relative path failed to find them [#5542](https://github.com/sandboxie-plus/Sandboxie/issues/5542)
-- fixed wrong return type ein sbiesvc
+- fixed wrong return type in SbieSvc
 - fixed archive path cleaning
 
 ### Removed
@@ -68,7 +225,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added a SandMan setting to restore either the active or default snapshot after automatic deletion, consistently across synchronous and asynchronous cleanup, with Snapshot Manager access and refresh controls
 
 ### Changed
-- changed SandMan's Auto Expand Tree to preserve explicit group, sandbox, and process expansion choices while using the toggle as the default for items without saved state; Find bar Expand All and Collapse All remain one-time actions, and `Options/LegacyAutoExpandTree=true` retains the previous behavior [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
+- changed SandMan's Auto Expand Tree to preserve explicit group, sandbox, and process expansion choices while using the toggle as the default for items without saved state; Find bar Expand All and Collapse All remain one-time actions, and `Options/LegacyAutoExpandTree=true` retains the previous behaviour [#5491](https://github.com/sandboxie-plus/Sandboxie/pull/5491)
 - validated compatibility with Windows build 29634 and updated DynData
 - changed SandMan Trace Log auto scrolling overriding manual scrolling; it now pauses away from the bottom and provides an in-list resume button
 
@@ -85,7 +242,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed ApiTrace stack exhaustion on Cygwin and other alternate stacks by replacing callback-side formatting with a compact synchronous logging path, preserving legacy ordering and stack capture
 - improved early stack symbol loading by retrying unresolved addresses after process discovery and refreshing the DbgHelp module list when needed
 - fixed SandMan offering to install the DbgHelp add-on when enabling stack traces even though the add-on was already installed
-- fixed ConfidentialBox=y could trap the user on a black screen when trying to elevate a process.
+- fixed 'ConfidentialBox=y' could trap the user on a black screen when trying to elevate a process
 
 
 

@@ -75,7 +75,7 @@ signals:
 
 public slots:
 	void ok();
-	void apply();
+	bool apply();
 
 	void showTab(const QString& Name, bool bExclusive = false, bool bExec = false);
 
@@ -136,6 +136,7 @@ private slots:
 	void OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAddCompat();
 	void OnDelCompat();
+	void OnCheckCompat();
 
 	void OnFilterTemplates()		{ LoadTemplates(); }
 	void OnAddTemplates();
@@ -191,9 +192,11 @@ protected:
 	void	SaveSettings();
 
 	void	LoadTemplates();
+	void	LoadCompat(bool bCheck, bool bResetChanges = false);
+	void	UpdateCompatStatus();
 
 	void	LoadIniSection();
-	void	SaveIniSection();
+	bool	SaveIniSection();
 	void    ApplyIniEditFont();
 
 	// Autocompletion support
@@ -206,7 +209,8 @@ protected:
 	bool	m_HoldChange;
 	CPendingChanges m_PendingChanges{this, &m_HoldChange, -1, true};
 	bool	m_SkipSaveOnToggle; // Skip saving to config when applying reset settings
-	int 	m_CompatLoaded;
+	bool	m_CompatLoaded;
+	QString m_UpdateTemplatesText;
 	QString m_NewPassword;
 	bool	m_MessagesChanged;
 	bool	m_WarnProgsChanged;

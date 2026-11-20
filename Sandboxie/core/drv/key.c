@@ -1455,7 +1455,15 @@ _FX NTSTATUS Key_Api_Open(PROCESS *proc, ULONG64 *parms)
     ProbeForRead(args->path_str.val, path_len, sizeof(WCHAR));
 
     path = Mem_Alloc(proc->pool, path_len + 8);
-    memcpy(path, args->path_str.val, path_len);
+    if (! path)
+        return STATUS_INSUFFICIENT_RESOURCES;
+
+    __try {
+        memcpy(path, args->path_str.val, path_len);
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        Mem_Free(path, path_len + 8);
+        return GetExceptionCode();
+    }
     path[path_len / sizeof(WCHAR)] = L'\0';
 
     //
@@ -1527,7 +1535,15 @@ _FX NTSTATUS Key_Api_SetLowLabel(PROCESS *proc, ULONG64 *parms)
     ProbeForRead(args->path_str.val, path_len, sizeof(WCHAR));
 
     path = Mem_Alloc(proc->pool, path_len + 8);
-    memcpy(path, args->path_str.val, path_len);
+    if (! path)
+        return STATUS_INSUFFICIENT_RESOURCES;
+
+    __try {
+        memcpy(path, args->path_str.val, path_len);
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        Mem_Free(path, path_len + 8);
+        return GetExceptionCode();
+    }
     path[path_len / sizeof(WCHAR)] = L'\0';
 
     //
@@ -1535,7 +1551,7 @@ _FX NTSTATUS Key_Api_SetLowLabel(PROCESS *proc, ULONG64 *parms)
     //
 
     RtlInitUnicodeString(&objname, path);
-    if (! Box_IsBoxedPath(proc->box, file, &objname))
+    if (Box_IsBoxedPath(proc->box, key, &objname))
         status = STATUS_SUCCESS;
     else
         status = STATUS_ACCESS_DENIED;

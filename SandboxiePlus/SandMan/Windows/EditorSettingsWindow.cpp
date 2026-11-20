@@ -17,7 +17,7 @@ struct EditorSettingInfo {
 };
 
 // Define all settings in one place - this is the single source of truth
-#define SETTING_COUNT 7
+#define SETTING_COUNT 8
 
 // Get setting metadata - single source of truth for all settings
 // This is a file-scope function with internal linkage
@@ -44,6 +44,9 @@ static EditorSettingInfo GetSettingInfo(int index)
 		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Disabled (default)"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enabled")},
 		// ShowFutureSettings
 		{"Options/ShowFutureSettings", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Show Future Settings"), false, 1,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Hidden"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Shown (default)")},
+		// ShowIniLineNumbers
+		{"Options/ShowIniLineNumbers", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Show INI Line Numbers"), false, 1,
 		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Hidden"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Shown (default)")}
 	};
 	
@@ -118,6 +121,7 @@ QCheckBox* CEditorSettingsWindow::GetCheckBoxByIndex(int index)
 		case 4: return chkEnableAutoCompletion;
 		case 5: return chkEnableFuzzyMatching;
 		case 6: return chkShowFutureSettings;
+		case 7: return chkShowIniLineNumbers;
 		default: return nullptr;
 	}
 }
@@ -133,6 +137,7 @@ bool* CEditorSettingsWindow::GetResetFlagByIndex(int index)
 		case 4: return &m_resetEnableAutoCompletion;
 		case 5: return &m_resetEnableFuzzyMatching;
 		case 6: return &m_resetShowFutureSettings;
+		case 7: return &m_resetShowIniLineNumbers;
 		default: return nullptr;
 	}
 }
@@ -185,6 +190,7 @@ void CEditorSettingsWindow::InitializeTable()
 	checkboxes[4] = chkEnableAutoCompletion = new QCheckBox(this);
 	checkboxes[5] = chkEnableFuzzyMatching = new QCheckBox(this);
 	checkboxes[6] = chkShowFutureSettings = new QCheckBox(this);
+	checkboxes[7] = chkShowIniLineNumbers = new QCheckBox(this);
 	
 	// Configure checkboxes and populate table using metadata
 	for (int i = 0; i < SETTING_COUNT; ++i) {
@@ -417,6 +423,7 @@ int CEditorSettingsWindow::GetOriginalValue(int index) const
 		case 4: return m_originalEnableAutoCompletion;
 		case 5: return m_originalEnableFuzzyMatching ? 1 : 0;
 		case 6: return m_originalShowFutureSettings ? 1 : 0;
+		case 7: return m_originalShowIniLineNumbers ? 1 : 0;
 		default: return 0;
 	}
 }
@@ -484,6 +491,7 @@ void CEditorSettingsWindow::StoreOriginalValues()
 	m_originalEnableAutoCompletion = static_cast<int>(chkEnableAutoCompletion->checkState());
 	m_originalEnableFuzzyMatching = chkEnableFuzzyMatching->isChecked();
 	m_originalShowFutureSettings = chkShowFutureSettings->isChecked();
+	m_originalShowIniLineNumbers = chkShowIniLineNumbers->isChecked();
 }
 
 void CEditorSettingsWindow::RestoreOriginalValues()

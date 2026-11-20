@@ -28,6 +28,7 @@
 #include "common/win32_ntddk.h"
 #include <winioctl.h>
 #include <psapi.h>
+#include <wtsapi32.h>
 #include "common/my_version.h"
 #include <algorithm>
 #include "../../../SandboxieTools/ImBox/ImBox.h"
@@ -165,6 +166,49 @@ void MountManager::Shutdown()
 
 
 //---------------------------------------------------------------------------
+// ImBox_IsFieldTerminated
+//---------------------------------------------------------------------------
+
+
+// Returns true if the fixed size character field pField[count] contains a
+// terminating NUL.  A field that does not must be rejected before it is
+// used: every string operation applied to it would run on into the fields
+// that follow, and the driver copies reg_root into a fixed size buffer of
+// its own, where an over long name overflows kernel memory.
+
+static bool ImBox_IsFieldTerminated(const WCHAR *pField, size_t count)
+{
+    for (size_t i = 0; i < count; i++) {
+        if (pField[i] == L'\0')
+            return true;
+    }
+
+    return false;
+}
+
+
+//---------------------------------------------------------------------------
+// ImBox_IsTailTerminated
+//---------------------------------------------------------------------------
+
+
+// Returns true if the variable length string that starts at pTail is NUL
+// terminated before the end of the request message.  The length check each
+// handler performs only guarantees the first character of such a field.
+
+static bool ImBox_IsTailTerminated(const MSG_HEADER *msg, const WCHAR *pTail)
+{
+    const UCHAR *end = (const UCHAR *)msg + msg->length;
+    const UCHAR *ptr = (const UCHAR *)pTail;
+
+    if (ptr < (const UCHAR *)msg || ptr + sizeof(WCHAR) > end)
+        return false;
+
+    return ImBox_IsFieldTerminated(pTail, (end - ptr) / sizeof(WCHAR));
+}
+
+
+//---------------------------------------------------------------------------
 // Handler
 //---------------------------------------------------------------------------
 
@@ -221,12 +265,26 @@ MSG_HEADER *MountManager::CreateHandler(MSG_HEADER *msg)
     if (req->h.length < sizeof(IMBOX_CREATE_REQ))
         return SHORT_REPLY(ERROR_INVALID_PARAMETER);
 
+    //
+    // validate the caller supplied strings before any string use
+    //
+
+    if (! ImBox_IsFieldTerminated(req->password, ARRAYSIZE(req->password)))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    if (! ImBox_IsTailTerminated(msg, req->file_root))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    WCHAR *file_root_sep = wcsrchr(req->file_root, L'\\');
+    if (! file_root_sep)
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
     ULONG session_id = PipeServer::GetCallerSessionId();
 
     std::wstring ImageFile = GetImageFileName(req->file_root);
 
-    std::wstring RootPath(req->file_root, wcsrchr(req->file_root, L'\\'));
-    HANDLE handle = OpenOrCreateNtFolder(RootPath.c_str());
+    std::wstring RootPath(req->file_root, file_root_sep);
+    HANDLE handle = OpenOrCreateNtFolder(RootPath.c_str(), eImpPipeCaller); // caller-supplied host path
     if (!handle)
         return SHORT_REPLY(ERROR_PATH_NOT_FOUND);
     CloseHandle(handle);
@@ -253,6 +311,20 @@ MSG_HEADER *MountManager::MountHandler(MSG_HEADER *msg)
 
     IMBOX_MOUNT_REQ *req = (IMBOX_MOUNT_REQ *)msg;
     if (req->h.length < sizeof(IMBOX_MOUNT_REQ))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    //
+    // validate the caller supplied strings before any string use, including
+    // the root lookup;  reg_root is also handed to the driver below
+    //
+
+    if (! ImBox_IsFieldTerminated(req->password, ARRAYSIZE(req->password)))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    if (! ImBox_IsFieldTerminated(req->reg_root, ARRAYSIZE(req->reg_root)))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    if (! ImBox_IsTailTerminated(msg, req->file_root))
         return SHORT_REPLY(ERROR_INVALID_PARAMETER);
 
     ULONG session_id = PipeServer::GetCallerSessionId();
@@ -297,7 +369,7 @@ MSG_HEADER *MountManager::MountHandler(MSG_HEADER *msg)
     {
         CloseHandle(handle);
 
-        errlvl = CreateJunction(TargetNtPath, req->file_root, session_id);
+        errlvl = CreateJunction(TargetNtPath, req->file_root, session_id, eImpPipeCaller); // caller-supplied host path
     }
 
     if (errlvl != 0) {
@@ -325,6 +397,9 @@ MSG_HEADER *MountManager::UnmountHandler(MSG_HEADER *msg)
 
     IMBOX_UNMOUNT_REQ *req = (IMBOX_UNMOUNT_REQ *)msg;
     if (req->h.length < sizeof(IMBOX_UNMOUNT_REQ))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    if (! ImBox_IsFieldTerminated(req->reg_root, ARRAYSIZE(req->reg_root)))
         return SHORT_REPLY(ERROR_INVALID_PARAMETER);
 
     ULONG session_id = PipeServer::GetCallerSessionId();
@@ -373,14 +448,23 @@ MSG_HEADER *MountManager::EnumHandler(MSG_HEADER *msg)
 
     EnterCriticalSection(&m_CritSec);
 
+    //
+    // size the reply from the stored names rather than assuming each one
+    // fits MAX_REG_ROOT_LEN characters
+    //
+
     ULONG rpl_len = sizeof(IMBOX_ENUM_RPL) + sizeof(WCHAR);
 
-    rpl_len += (m_RootMap.size() * MAX_REG_ROOT_LEN) * sizeof(WCHAR);
+    for (auto I = m_RootMap.begin(); I != m_RootMap.end(); I++)
+        rpl_len += (ULONG)((I->first.size() + 1) * sizeof(WCHAR));
 
     IMBOX_ENUM_RPL *rpl = (IMBOX_ENUM_RPL *)LONG_REPLY(rpl_len);
     if (rpl) {
 
         rpl->h.status = ERROR_SUCCESS;
+
+        memset(rpl->reg_roots, 0,
+               rpl_len - FIELD_OFFSET(IMBOX_ENUM_RPL, reg_roots));
 
         WCHAR *reg_roots = rpl->reg_roots;
         for (auto I = m_RootMap.begin(); I != m_RootMap.end(); I++) {
@@ -414,17 +498,24 @@ MSG_HEADER *MountManager::QueryHandler(MSG_HEADER *msg)
     if (req->h.length < sizeof(IMBOX_QUERY_REQ))
         return SHORT_REPLY(ERROR_INVALID_PARAMETER);
 
+    if (! ImBox_IsFieldTerminated(req->reg_root, ARRAYSIZE(req->reg_root)))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
     if(!IsImDiskDriverReady())
         return SHORT_REPLY(ERROR_DEVICE_NOT_AVAILABLE);
 
     std::shared_ptr<BOX_MOUNT> pMount;
-    if (*req->reg_root) { 
+    bool locked = false;
+    if (*req->reg_root) {
         std::shared_ptr<BOX_ROOT> pRoot = GetBoxRootLocked(req->reg_root, false);
-        if (pRoot)
+        if (pRoot) {
+            locked = true; // GetBoxRootLocked returns holding m_CritSec
             pMount = pRoot->Mount;
+        }
     }
-    else if (m_RamDisk != NULL) { // empty root to query ramdisk
+    else { // empty root to query ramdisk - re-read it under the lock
         EnterCriticalSection(&m_CritSec);
+        locked = true;
         pMount = m_RamDisk;
     }
 
@@ -438,6 +529,9 @@ MSG_HEADER *MountManager::QueryHandler(MSG_HEADER *msg)
         if (rpl) {
 
             rpl->h.status = ERROR_SUCCESS;
+
+            memset((UCHAR *)rpl + sizeof(MSG_HEADER), 0,
+                   rpl_len - sizeof(MSG_HEADER));
 
             //scscpy(rpl->boxname, pRoot
 
@@ -454,10 +548,12 @@ MSG_HEADER *MountManager::QueryHandler(MSG_HEADER *msg)
             }
             wcscpy(rpl->disk_root, pMount->NtPath.c_str());
         }
-
-        LeaveCriticalSection(&m_CritSec);
     }
-    else
+
+    if (locked)
+        LeaveCriticalSection(&m_CritSec);
+
+    if (! pMount)
         return SHORT_REPLY(ERROR_NOT_FOUND);
     if (! rpl)
         return SHORT_REPLY(ERROR_NOT_ENOUGH_MEMORY);
@@ -491,7 +587,7 @@ MSG_HEADER *MountManager::UpdateHandler(MSG_HEADER *msg)
 //---------------------------------------------------------------------------
 
 
-HANDLE MountManager::OpenOrCreateNtFolder(const WCHAR* NtPath)
+HANDLE MountManager::OpenOrCreateNtFolder(const WCHAR* NtPath, EFolderImp Imp, ULONG session_id)
 {
     UNICODE_STRING objname;
     RtlInitUnicodeString(&objname, NtPath);
@@ -503,20 +599,62 @@ HANDLE MountManager::OpenOrCreateNtFolder(const WCHAR* NtPath)
     IO_STATUS_BLOCK IoStatusBlock;
     NTSTATUS status;
 
+    HANDLE hSessionToken = NULL;
+    bool impersonating = false;
+
+    if (Imp == eImpPipeCaller) {
+        if (PipeServer::ImpersonateCaller(NULL) != 0)
+            return NULL;
+        impersonating = true;
+    }
+    else if (Imp == eImpSessionUser) {
+        if (WTSQueryUserToken(session_id, &hSessionToken)) {
+            if (! ImpersonateLoggedOnUser(hSessionToken)) {
+                CloseHandle(hSessionToken);
+                return NULL;
+            }
+            impersonating = true;
+        }
+        else if (session_id != 0) {
+            //
+            // an interactive session (id >= 1) with no obtainable user token:
+            // fail closed rather than fall back to SYSTEM
+            //
+            return NULL;
+        }
+        //
+        // else: session 0 has no interactive user to impersonate.  A box in
+        // session 0 is started by a service/SYSTEM, not by a standard user
+        // (a non-admin cannot launch a process into session 0), so this is not
+        // the ini-driven elevation vector - that always runs in the attacker's
+        // own interactive session.  Creating the box root as SYSTEM here is
+        // therefore safe and keeps session-0 box creation working.
+        //
+    }
+
     status = NtCreateFile(&handle, GENERIC_READ | GENERIC_WRITE, &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS, FILE_OPEN_IF, FILE_DIRECTORY_FILE | FILE_OPEN_REPARSE_POINT, NULL, 0);
     if (status == STATUS_OBJECT_PATH_NOT_FOUND) {
 
         std::wstring DosPath = NtPath;
-        if (!SbieDll_TranslateNtToDosPath((WCHAR*)DosPath.c_str()))
-            return NULL;
-
-        WCHAR* dosPath = (WCHAR*)DosPath.c_str();
-        *wcsrchr(dosPath, L'\\') = L'\0'; // truncate path as we want the last folder to be created with SbieDll_GetPublicSD
-        if (__sys_SHCreateDirectoryExW(NULL, dosPath, NULL) != ERROR_SUCCESS)
-            return NULL;
-
-        status = NtCreateFile(&handle, GENERIC_READ | GENERIC_WRITE, &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS, FILE_OPEN_IF, FILE_DIRECTORY_FILE | FILE_OPEN_REPARSE_POINT, NULL, 0);
+        if (!SbieDll_TranslateNtToDosPath((WCHAR*)DosPath.c_str())) {
+            status = STATUS_OBJECT_PATH_NOT_FOUND;
+        }
+        else {
+            WCHAR* dosPath = (WCHAR*)DosPath.c_str();
+            *wcsrchr(dosPath, L'\\') = L'\0'; // truncate path as we want the last folder to be created with SbieDll_GetPublicSD
+            if (__sys_SHCreateDirectoryExW(NULL, dosPath, NULL) != ERROR_SUCCESS)
+                status = STATUS_OBJECT_PATH_NOT_FOUND;
+            else
+                status = NtCreateFile(&handle, GENERIC_READ | GENERIC_WRITE, &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS, FILE_OPEN_IF, FILE_DIRECTORY_FILE | FILE_OPEN_REPARSE_POINT, NULL, 0);
+        }
     }
+
+    // revert before returning so the SYSTEM thread is not left impersonating
+    if (impersonating)
+        RevertToSelf();
+    if (hSessionToken)
+        CloseHandle(hSessionToken);
+
     if (!NT_SUCCESS(status))
         return NULL;
 
@@ -529,7 +667,7 @@ HANDLE MountManager::OpenOrCreateNtFolder(const WCHAR* NtPath)
 //---------------------------------------------------------------------------
 
 
-int MountManager::CreateJunction(const std::wstring& TargetNtPath, const std::wstring& FileRootPath, ULONG session_id)
+int MountManager::CreateJunction(const std::wstring& TargetNtPath, const std::wstring& FileRootPath, ULONG session_id, EFolderImp Imp)
 {
     ULONG errlvl = 0;
     HANDLE handle;
@@ -538,7 +676,7 @@ int MountManager::CreateJunction(const std::wstring& TargetNtPath, const std::ws
     // open root folder, if not exist, create it
     //
 
-    handle = OpenOrCreateNtFolder(FileRootPath.c_str());
+    handle = OpenOrCreateNtFolder(FileRootPath.c_str(), Imp, session_id);
     if(!handle)
         errlvl = 0x33;
 
@@ -627,7 +765,9 @@ bool MountManager::RemoveJunction(const std::wstring& FileRootPath, ULONG sessio
     IO_STATUS_BLOCK IoStatusBlock;
     NTSTATUS status;
 
-    status = NtCreateFile(&handle, GENERIC_READ | GENERIC_WRITE, &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS, FILE_OPEN, FILE_DIRECTORY_FILE | FILE_OPEN_REPARSE_POINT, NULL, 0);
+    // DELETE is needed so the directory can be removed through this very
+    // handle below instead of a fresh by-name open
+    status = NtCreateFile(&handle, GENERIC_READ | GENERIC_WRITE | DELETE, &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS, FILE_OPEN, FILE_DIRECTORY_FILE | FILE_OPEN_REPARSE_POINT, NULL, 0);
     if (NT_SUCCESS(status)) {
 
         BYTE buf[REPARSE_MOUNTPOINT_HEADER_SIZE];
@@ -642,9 +782,14 @@ bool MountManager::RemoveJunction(const std::wstring& FileRootPath, ULONG sessio
         ReparseBuffer.ReparseTag = IO_REPARSE_TAG_MOUNT_POINT;
         ok = !!::DeviceIoControl(handle, FSCTL_DELETE_REPARSE_POINT, &ReparseBuffer, REPARSE_MOUNTPOINT_HEADER_SIZE, NULL, 0, &dwRet, NULL);
 
-        CloseHandle(handle);
+        if (ok) {
+            FILE_DISPOSITION_INFORMATION disp;
+            disp.DeleteFileOnClose = TRUE;
+            NtSetInformationFile(handle, &IoStatusBlock, &disp, sizeof(disp),
+                                 FileDispositionInformation);
+        }
 
-        NtDeleteFile(&objattrs);
+        CloseHandle(handle);
     }
 
     return ok;
@@ -1195,7 +1340,7 @@ bool MountManager::AcquireBoxRoot(const WCHAR* boxname, const WCHAR* reg_root, c
             // Setup box root folder junction
             //
 
-            errlvl = CreateJunction(TargetNtPath, file_root, session_id);
+            errlvl = CreateJunction(TargetNtPath, file_root, session_id, eImpSessionUser);
         }
     }
 

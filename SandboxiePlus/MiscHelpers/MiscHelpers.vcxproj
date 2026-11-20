@@ -258,6 +258,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Common\HttpServer\HttpServer.cpp" />
+    <ClCompile Include="Common\HttpServer\HttpSocket.cpp" />
+    <ClCompile Include="Common\HttpServer\HttpHelper.cpp" />
+    <ClCompile Include="Common\HttpServer\HttpTransport.cpp" />
     <ClCompile Include="Archive\Archive.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -341,6 +345,10 @@
     <QtMoc Include="Common\CheckableMessageBox.h" />
     <QtMoc Include="Common\ComboInputDialog.h" />
     <QtMoc Include="Common\CheckList.h" />
+    <ClInclude Include="Common\HttpServer\HttpHelper.h" />
+    <ClInclude Include="Common\HttpServer\HttpTransport.h" />
+    <QtMoc Include="Common\HttpServer\HttpServer.h" />
+    <QtMoc Include="Common\HttpServer\HttpSocket.h" />
     <ClInclude Include="Archive\Archive.h" />
     <ClInclude Include="Archive\ArchiveExtractor.h" />
     <ClInclude Include="Archive\ArchiveFS.h" />

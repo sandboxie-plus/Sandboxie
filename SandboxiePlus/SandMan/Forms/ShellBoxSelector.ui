@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ShellBoxSelector</class>
+ <widget class="QDialog" name="ShellBoxSelector">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="lblPrompt">
+     <property name="text">
+      <string>Select a sandbox or type its name or alias:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="cmbBoxes">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <property name="insertPolicy">
+      <enum>QComboBox::NoInsert</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="chkSkipSingleBox">
+     <property name="toolTip">
+      <string>Applies to both Set Open and Set Force. The dialog is always shown when more than one sandbox is enabled.</string>
+     </property>
+     <property name="text">
+      <string>Skip this dialog when only one sandbox is enabled</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>cmbBoxes</tabstop>
+  <tabstop>chkSkipSingleBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ShellBoxSelector</receiver>
+   <slot>accept()</slot>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ShellBoxSelector</receiver>
+   <slot>reject()</slot>
+  </connection>
+ </connections>
+</ui>

@@ -1231,7 +1231,7 @@ _FX void *SbieDll_HookFunc(
             //    // skip hooking if we are a already pre hooked worker process
             //    return (void*)-1;
             //}
-            SbieApi_Log(2328, _fmt1, SourceFuncName, ChromeError);
+            //SbieApi_Log(2328, _fmt1, SourceFuncName, ChromeError);
             if (pHookStats) *pHookStats |= HOOK_STAT_CHROME_FAIL;
         }
     }

@@ -87,14 +87,14 @@ bool ServiceServer::CanCallerDoElevation(
 
             if (DropRights && (SbieDll_CheckStringInList(ServiceName, boxname, L"StartService") || SbieDll_CheckStringInList(ServiceName, boxname, L"RunServiceAsSystem")))
                 DropRights = false;
-
-            //
-            // always allow to start cryptsvc if needed
-            //
-
-            if (DropRights && _wcsicmp(ServiceName, L"CryptSvc") == 0)
-                DropRights = false;
         }
+
+        //
+        // always allow to start cryptsvc if needed
+        //
+
+        if (DropRights && _wcsicmp(ServiceName, L"CryptSvc") == 0)
+            DropRights = false;
     }
                     
 
@@ -1313,14 +1313,13 @@ void ServiceServer::RunUacSlave3(
         if (BoxName[0]){
 
             errlvl = 0x89;
-            hProcess = NULL;
-            hProcess = SbieDll_OpenProcess(PROCESS_VM_READ | PROCESS_VM_WRITE |
-                                PROCESS_VM_OPERATION | PROCESS_DUP_HANDLE,
-                                idProcess);
+            hProcess = OpenProcess(PROCESS_VM_READ | PROCESS_VM_WRITE |
+                                   PROCESS_VM_OPERATION | PROCESS_DUP_HANDLE,
+                                   FALSE, (ULONG)(ULONG_PTR)idProcess);
             if (! hProcess)
                 SetLastError(ERROR_ACCESS_DENIED);
 
-        } else {
+        } else { // we are unsandboxed
 
             errlvl = 0x82;
             hProcess = OpenProcess(PROCESS_VM_READ | PROCESS_VM_WRITE |
@@ -1361,10 +1360,19 @@ void ServiceServer::RunUacSlave3(
 
     if (ok) {
         errlvl = 0x83;
-        pkt = (SECURE_UAC_PACKET *)HeapAlloc(GetProcessHeap(), 0, pkt_len);
-        if (! pkt) {
+
+        if (pkt_len < sizeof(SECURE_UAC_PACKET)
+                        || pkt_len > PIPE_MAX_DATA_LEN) {
             ok = FALSE;
-            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+            SetLastError(ERROR_INVALID_DATA);
+
+        } else {
+
+            pkt = (SECURE_UAC_PACKET *)HeapAlloc(GetProcessHeap(), 0, pkt_len);
+            if (! pkt) {
+                ok = FALSE;
+                SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+            }
         }
     }
 
@@ -1441,6 +1449,13 @@ void ServiceServer::RunUacSlave3(
 //---------------------------------------------------------------------------
 
 
+static bool ServiceServer__UacPktRangeOk(ULONG pkt_len, ULONG ofs, ULONG chars)
+{
+    return ((ULONG64)ofs + (ULONG64)chars * sizeof(WCHAR))
+                                            <= (ULONG64)pkt_len;
+}
+
+
 bool ServiceServer::RunUacSlave4(
     HANDLE hClientProcess, void *xpkt, WCHAR **OutAppName)
 {
@@ -1466,6 +1481,11 @@ bool ServiceServer::RunUacSlave4(
         return false;
 
     ptr = (UCHAR *)pkt;
+
+    if (! ServiceServer__UacPktRangeOk(pkt->len, pkt->app_ofs, app_len)
+     || ! ServiceServer__UacPktRangeOk(pkt->len, pkt->cmd_ofs, cmd_len)
+     || ! ServiceServer__UacPktRangeOk(pkt->len, pkt->dir_ofs, dir_len))
+        return false;
 
     app = (WCHAR *)HeapAlloc(
                         GetProcessHeap(), 0, (app_len + 1) * sizeof(WCHAR));

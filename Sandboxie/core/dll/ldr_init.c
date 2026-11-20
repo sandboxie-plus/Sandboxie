@@ -142,6 +142,8 @@ static void Ldr_FixImagePath_3(
 
 static void Ldr_FixImagePath_DllPath(void);
 
+static WCHAR *Ldr_GetLaunchImagePath(void);
+
 void Ldr_Inject_Init(BOOLEAN bHostInject);
 
 
@@ -468,7 +470,39 @@ _FX void Ldr_FixImagePath(void)
 
         if (TruePathForBoxedPath) {
 
-            Ldr_FixImagePath_3(TruePathForBoxedPath, FullName, BaseName);
+            WCHAR *LaunchPath;
+
+            //
+            // TruePathForBoxedPath is the user visible path derived from the
+            // redirected image location.  It carries the spelling that the
+            // file system reports, which may differ in letter case from the
+            // spelling used on the command line.
+            //
+            // Applications doing a case sensitive comparison of
+            // GetModuleFileName() against argv[0] then conclude that a file
+            // is missing.  Chromium FilePath::AppendRelativePath()
+            // (base/files/file_path.cc) is such a case: it compares every
+            // component strictly except the drive letter.
+            //
+            // Windows paths are case insensitive, so when argv[0] denotes the
+            // very same file, prefer its spelling to keep the module path
+            // consistent with what the caller passed in.
+            //
+
+            LaunchPath = Ldr_GetLaunchImagePath();
+
+            if (LaunchPath &&
+                    _wcsicmp(LaunchPath, TruePathForBoxedPath) == 0) {
+
+                Ldr_FixImagePath_3(LaunchPath, FullName, BaseName);
+
+            } else {
+
+                Ldr_FixImagePath_3(TruePathForBoxedPath, FullName, BaseName);
+            }
+
+            if (LaunchPath)
+                Dll_Free(LaunchPath);
 
             Dll_Free(TruePathForBoxedPath);
 
@@ -496,6 +530,90 @@ _FX void Ldr_FixImagePath(void)
     }
 
     Ldr_FixImagePath_DllPath();
+}
+
+
+//---------------------------------------------------------------------------
+// Ldr_GetLaunchImagePath
+//---------------------------------------------------------------------------
+
+
+//
+// Returns argv[0] of the current process as recorded in the command line,
+// with surrounding quotes removed, or NULL when it cannot be used.
+// Only absolute paths with a drive letter are returned, everything else is
+// ignored so that the caller can fall back to its default behaviour.
+// The caller must release the result with Dll_Free().
+//
+
+_FX WCHAR *Ldr_GetLaunchImagePath(void)
+{
+    RTL_USER_PROCESS_PARAMETERS *ProcessParms =
+                                    Proc_GetRtlUserProcessParameters();
+    const WCHAR *CmdLine;
+    const WCHAR *Limit;
+    const WCHAR *Start;
+    const WCHAR *End;
+    WCHAR *Result;
+    ULONG Len;
+
+    if (! ProcessParms)
+        return NULL;
+
+    CmdLine = ProcessParms->CommandLine.Buffer;
+    if (! CmdLine || ! ProcessParms->CommandLine.Length)
+        return NULL;
+
+    //
+    // the command line is a UNICODE_STRING, which is not guaranteed to be
+    // NUL terminated (e.g. parameters built by hand for NtCreateUserProcess),
+    // so bound every scan by its Length rather than relying on a terminator
+    //
+
+    Limit = CmdLine + ProcessParms->CommandLine.Length / sizeof(WCHAR);
+
+    //
+    // skip leading white space, then take either everything up to the
+    // closing quote, or everything up to the first white space
+    //
+
+    Start = CmdLine;
+    while (Start < Limit && (*Start == L' ' || *Start == L'\t'))
+        ++Start;
+
+    if (Start < Limit && *Start == L'"') {
+
+        ++Start;
+        End = Start;
+        while (End < Limit && *End && *End != L'"')
+            ++End;
+
+    } else {
+
+        End = Start;
+        while (End < Limit && *End && *End != L' ' && *End != L'\t')
+            ++End;
+    }
+
+    Len = (ULONG)(End - Start);
+    if (Len < 3)
+        return NULL;
+
+    //
+    // only drive absolute paths are useful for the comparison in the caller
+    //
+
+    if (Start[1] != L':' || (Start[2] != L'\\' && Start[2] != L'/'))
+        return NULL;
+
+    Result = (WCHAR *)Dll_AllocTemp((Len + 1) * sizeof(WCHAR));
+    if (! Result)
+        return NULL;
+
+    wmemcpy(Result, Start, Len);
+    Result[Len] = L'\0';
+
+    return Result;
 }
 
 

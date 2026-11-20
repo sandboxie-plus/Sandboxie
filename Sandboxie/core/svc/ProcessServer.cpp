@@ -1907,6 +1907,12 @@ MSG_HEADER *ProcessServer::ProcInfoHandler(MSG_HEADER *msg)
     if(SbieApi_QueryProcessInfo((HANDLE)(ULONG_PTR)CallerProcessId, 0))
         return SHORT_REPLY(STATUS_ACCESS_DENIED);
 
+    ULONG TargetSessionId = (ULONG)-1;
+    if (! ProcessIdToSessionId(req->dwProcessId, &TargetSessionId)
+            || (TargetSessionId != PipeServer::GetCallerSessionId()
+                    && ! PipeServer::IsCallerAdmin()))
+        return SHORT_REPLY(STATUS_ACCESS_DENIED);
+
     HANDLE ProcessHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, req->dwProcessId);
 	if (ProcessHandle == NULL) // try with less rights
 		ProcessHandle = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, req->dwProcessId);

@@ -1,7 +1,7 @@
 # Sandboxie Plus / Classic
 
 <p align='center'>
-<a href='./README.md'>EN</a> | 中文
+<a href='./README.md'>EN</a> | 中文 | <a href='./README_ja.md'>日本語</a>
 </p>
 
 [![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./LICENSE.Plus) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE.Classic) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml) [![WinGet Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/winget.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/winget.yml) [![Gurubase](https://img.shields.io/badge/Gurubase-Ask%20Sandboxie%20Guru-006BFF)](https://gurubase.io/g/sandboxie)
@@ -163,6 +163,9 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 - stdedos - 文档补充
 - habatake - 界面新增功能 / 代码修复
 - Polyester6719 - 文档补充
+- oddwatcher - 文档补充与改进
+- mihomoQ - 代码修复与文档改进
+- marcelodotnet - 文档补充与改进
 
 ## 🌏 翻译人员
 
@@ -170,12 +173,13 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 - yuhao2348732、0x391F、nkh0472、yfdyh000、gexgd0419、Zerorigin、UnnamedOrange、DevSplash、Becods、okrc、4rt3mi5、sepcnt、fzxx、Vstory、GT-Stardust、habatake、mihomoQ - 简体中文
 - TragicLifeHu、Hulen、xiongsp、habatake、mihomoQ - 繁体中文
 - RockyTDR - 荷兰语
+- imalyzer - 波斯语
 - clexanis、Mmoi-Fr、hippalectryon-0、Monsieur Pissou - 法语（通过电子邮件提供）
 - bastik-1001、APMichael - 德语
 - timinoun - 匈牙利语（通过电子邮件提供）
 - isaak654、DerivativeOfLog7 - 意大利语
 - takahiro-itou、lllIIIlll - 日语
-- VenusGirl - 韩语
+- VenusGirl、꿈을꾸는 파랑새(Sakai) - 韩语
 - divinity76 - 书面挪威语
 - 7zip、AndrzejRafalowski - 波兰语（[单独提供](https://forum.xanasoft.com/threads/polish-translation.4/page-2)）
 - JNylson - 葡萄牙语及巴西葡萄牙语
@@ -186,10 +190,10 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 - SuperMaxusa、lufog、Nazar1ky - 乌克兰语
 - GunGunGun - 越南语
 
-所有译者在提交翻译前，建议先查看[本地化说明和提示](https://github.com/sandboxie-plus/Sandboxie/discussions/1123)。
+提交翻译前，请阅读[翻译协作与署名规范](./TRANSLATING.md#translation-collaboration-and-attribution)及[本地化说明和提示](https://github.com/sandboxie-plus/Sandboxie/discussions/1123)。
 
 ## 📚 文档翻译人员
 
-- Vstory、GT-Stardust、wzxjohn、SOLEADO20、habatake - 简体中文
+- Vstory、GT-Stardust、wzxjohn、SOLEADO20、habatake、YuHuanTin、darkskygit、oddwatcher - 简体中文
 
 所有文档译者在提交翻译前，建议先查看[多语言翻译贡献指南](https://github.com/sandboxie-plus/sandboxie-docs/issues/175#issuecomment-2840258519)。

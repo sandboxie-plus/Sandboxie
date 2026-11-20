@@ -1,7 +1,7 @@
 # Sandboxie Plus / Classic
 
 <p align='center'>
-EN | <a href='./README_zh_CN.md'>中文</a>
+EN | <a href='./README_zh_CN.md'>中文</a> | <a href='./README_ja.md'>日本語</a>
 </p>
 
 [![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./LICENSE.Plus) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE.Classic) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml) [![WinGet Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/winget.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/winget.yml) [![Gurubase](https://img.shields.io/badge/Gurubase-Ask%20Sandboxie%20Guru-006BFF)](https://gurubase.io/g/sandboxie)
@@ -163,6 +163,9 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - stdedos - Documentation additions
 - habatake - UI additions, Code fixes
 - Polyester6719 - Documentation additions
+- oddwatcher - Documentation additions & improvements
+- mihomoQ - Code fixes & documentation improvements
+- marcelodotnet - Documentation additions & improvements
 
 ## 🌏 Translators
 
@@ -170,12 +173,13 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - yuhao2348732, 0x391F, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, DevSplash, Becods, okrc, 4rt3mi5, sepcnt, fzxx, Vstory, GT-Stardust, habatake, mihomoQ - Simplified Chinese
 - TragicLifeHu, Hulen, xiongsp, habatake, mihomoQ - Traditional Chinese
 - RockyTDR - Dutch
+- imalyzer - Farsi
 - clexanis, Mmoi-Fr, hippalectryon-0, Monsieur Pissou - French (provided by email)
 - bastik-1001, APMichael - German
 - timinoun - Hungarian (provided by email)
 - isaak654, DerivativeOfLog7 - Italian
 - takahiro-itou, lllIIIlll - Japanese
-- VenusGirl - Korean
+- VenusGirl, 꿈을꾸는 파랑새(Sakai) - Korean
 - divinity76 - Norwegian Bokmål
 - 7zip, AndrzejRafalowski - Polish ([provided separately](https://forum.xanasoft.com/threads/polish-translation.4/page-2))
 - JNylson - Portuguese and Brazilian Portuguese
@@ -186,10 +190,11 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - SuperMaxusa, lufog, Nazar1ky - Ukrainian
 - GunGunGun - Vietnamese
 
-All translators are encouraged to look at the [Localization notes and tips](https://github.com/sandboxie-plus/Sandboxie/discussions/1123) before sending a translation.
+Before submitting a translation, read the [translation collaboration and attribution guidelines](./TRANSLATING.md#translation-collaboration-and-attribution) and the [Localization notes and tips](https://github.com/sandboxie-plus/Sandboxie/discussions/1123).
 
 ## 📚 Documentation Translators
 
-- Vstory, GT-Stardust, wzxjohn, SOLEADO20, habatake - Simplified Chinese
+- Vstory, GT-Stardust, wzxjohn, SOLEADO20, habatake, YuHuanTin, darkskygit, oddwatcher - Simplified Chinese
+- hisamotodev - Japanese
 
 All documentation translators are encouraged to look at the [Multilingual Translation Contribution Guide](https://github.com/sandboxie-plus/sandboxie-docs/issues/175#issuecomment-2840258519) before sending a translation.

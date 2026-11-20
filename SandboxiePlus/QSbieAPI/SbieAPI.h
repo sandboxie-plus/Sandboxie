@@ -67,11 +67,13 @@ public:
 	virtual SB_STATUS		UpdateProcesses(int iKeep, bool bAllSessions);
 	bool					IsProcessListInitialized() const;
 
-	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { return m_SandBoxes; }
-	virtual QMap<quint32, CBoxedProcessPtr> GetAllProcesses() { return m_BoxedProxesses; }
+	// m_SandBoxes and m_BoxedProxesses are only modified on the UI thread, under m_BoxesLock;
+	// other threads (e.g. the CBoxBorder thread) must only access them through these getters
+	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { QReadLocker Lock(&m_BoxesLock); return m_SandBoxes; }
+	virtual QMap<quint32, CBoxedProcessPtr> GetAllProcesses() { QReadLocker Lock(&m_BoxesLock); return m_BoxedProxesses; }
 
 	virtual CSandBoxPtr		GetBoxByProcessId(quint32 ProcessId) const;
-	virtual CSandBoxPtr		GetBoxByName(const QString &BoxName) const { return m_SandBoxes.value(BoxName.toLower()); }
+	virtual CSandBoxPtr		GetBoxByName(const QString &BoxName) const { QReadLocker Lock(&m_BoxesLock); return m_SandBoxes.value(BoxName.toLower()); }
 	virtual CBoxedProcessPtr GetProcessById(quint32 ProcessId) const;
 
 	virtual SB_STATUS		TerminateAll(bool bNoExceptions = false);
@@ -266,6 +268,7 @@ protected:
 
 	QMap<QString, CSandBoxPtr> m_SandBoxes;
 	QMap<quint32, CBoxedProcessPtr> m_BoxedProxesses;
+	mutable QReadWriteLock	m_BoxesLock; // guards modifications of m_SandBoxes and m_BoxedProxesses
 
 	QMap<quint32, SWndInfo> m_WindowMap;
 

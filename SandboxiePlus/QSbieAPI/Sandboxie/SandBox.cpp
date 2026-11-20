@@ -309,6 +309,7 @@ SB_STATUS CSandBox::RenameBox(const QString& NewName)
 	QString OldName = m_Name;
 	Status = RenameSection(NewName);
 	if (!Status.IsError()) {
+		QWriteLocker Lock(&m_pAPI->m_BoxesLock);
 		CSandBoxPtr pBox = m_pAPI->m_SandBoxes.take(OldName.toLower());
 		if (pBox)m_pAPI->m_SandBoxes.insert(NewName.toLower(), pBox);
 	}

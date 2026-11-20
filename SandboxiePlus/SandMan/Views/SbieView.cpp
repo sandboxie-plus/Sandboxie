@@ -699,7 +699,8 @@ bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBox
 	if(iSandBoxeCount == 1)
 		UpdateRunMenu(pBox);
 
-	m_pMenuRename->setEnabled(iSandBoxeCount == 1 && pBoxEx->GetMountRoot().isEmpty());
+	m_pMenuRename->setText(iSandBoxeCount > 1 ? tr("Rename Sandboxes") : tr("Rename Sandbox"));
+	m_pMenuRename->setEnabled(iSandBoxeCount > 1 || (iSandBoxeCount == 1 && pBoxEx->GetMountRoot().isEmpty()));
 
 	m_pMenuOptions->setEnabled(iSandBoxeCount == 1);
 
@@ -1697,69 +1698,207 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuRename)
 	{
-		auto pBox = SandBoxes.first();
-		QString oldNameDisplay = pBox->GetName().replace("_", " ");
-		QString oldAliasDisabledValue = pBox->GetText("BoxAliasDisabled");
-		QString oldAliasNormalValue = pBox->GetText("BoxAlias");
-		QString oldAlias = !oldAliasDisabledValue.isEmpty() ? oldAliasDisabledValue : oldAliasNormalValue;
-		bool oldAliasDisabled = !oldAliasDisabledValue.isEmpty();
-		bool hasAliasSetting = !oldAliasDisabledValue.isEmpty() || !oldAliasNormalValue.isEmpty();
-
-		CRenameSandboxDialog dlg(oldNameDisplay, oldAlias, oldAliasDisabled, hasAliasSetting, this);
-		if (theGUI->SafeExec(&dlg) != QDialog::Accepted)
-			return;
-
-		QString newNameDisplay = dlg.GetBoxName();
-		QString newAlias = dlg.GetAlias();
-		bool newAliasDisabled = dlg.IsAliasDisabled();
-
-		if (newNameDisplay.isEmpty())
-			return;
-
-		QString oldName = oldNameDisplay.replace(" ", "_");
-		QString newName = newNameDisplay.replace(" ", "_");
-
-		if (newName.compare(oldName, Qt::CaseInsensitive) != 0)
+		struct SRenameDraft
 		{
-			if (!TestNameAndWarn(newNameDisplay))
-				return;
-			SB_STATUS validateStatus = CSbieAPI::ValidateName(newName);
-			if (validateStatus.IsError()) {
-				theGUI->CheckResults(QList<SB_STATUS>() << validateStatus, this);
-				return;
-			}
+			CSandBoxPtr Box;
+			QString SavedName;
+			QString SavedAlias;
+			bool SavedAliasDisabled = false;
+			QString Name;
+			QString Alias;
+			bool AliasDisabled = false;
+			bool AliasPending = false;
+			bool UseGuidName = false;
+			QString ManualName;
+		};
+		auto ReadSavedAlias = [](SRenameDraft& Draft) {
+			QString DisabledAlias = Draft.Box->GetText("BoxAliasDisabled");
+			Draft.SavedAliasDisabled = !DisabledAlias.isEmpty();
+			Draft.SavedAlias = Draft.SavedAliasDisabled ? DisabledAlias : Draft.Box->GetText("BoxAlias");
+		};
+		auto HasChanges = [](const SRenameDraft& Draft) {
+			return Draft.AliasPending
+				|| QString(Draft.Name).trimmed().replace(" ", "_").compare(Draft.SavedName, Qt::CaseInsensitive) != 0
+				|| Draft.Alias.trimmed() != Draft.SavedAlias.trimmed()
+				|| (Draft.AliasDisabled && !Draft.Alias.trimmed().isEmpty())
+					!= (Draft.SavedAliasDisabled && !Draft.SavedAlias.trimmed().isEmpty());
+		};
+		QList<SRenameDraft> Drafts;
+		for (const CSandBoxPtr& pBox : SandBoxes) {
+			SRenameDraft Draft;
+			Draft.Box = pBox;
+			Draft.SavedName = pBox->GetName();
+			ReadSavedAlias(Draft);
+			Draft.Name = QString(Draft.SavedName).replace("_", " ");
+			Draft.ManualName = Draft.Name;
+			Draft.Alias = Draft.SavedAlias;
+			Draft.AliasDisabled = Draft.SavedAliasDisabled;
+			Drafts.append(Draft);
 		}
 
-		if (newAlias.isEmpty()) {
-			pBox->DelValue("BoxAlias");
-			pBox->DelValue("BoxAliasDisabled");
-		}
-		else if (newAliasDisabled) {
-			pBox->DelValue("BoxAlias");
-			pBox->SetText("BoxAliasDisabled", newAlias);
-		}
-		else {
-			pBox->SetText("BoxAlias", newAlias);
-			pBox->DelValue("BoxAliasDisabled");
-		}
-
-		if (newName.compare(oldName, Qt::CaseInsensitive) != 0)
-		{
-			SB_STATUS Status = pBox->RenameBox(newName);
+		auto CheckStatus = [&](const SB_STATUS& Status) {
 			if (!Status.IsError())
-			{
-				RenameItem(oldName, newName);
-				if (theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox").compare(oldName, Qt::CaseInsensitive) == 0)
-					theAPI->GetGlobalSettings()->SetText("DefaultBox", newName);
-				Refresh();
-				RestoreBoxSelectionLater(QStringList() << newName);
+				return true;
+			theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
+			return false;
+		};
+		auto CheckTarget = [&](const SRenameDraft& Draft) {
+			QString Reason;
+			if (!theAPI->IsConnected()
+				|| Draft.Box->GetName().compare(Draft.SavedName, Qt::CaseInsensitive) != 0
+				|| theAPI->GetBoxByName(Draft.SavedName) != Draft.Box) {
+				Reason = tr("Sandbox %1 was removed or changed while this dialog was open. "
+					"Close the dialog and select the sandbox again.").arg(Draft.SavedName);
+			} else {
+				auto pBoxEx = Draft.Box.objectCast<CSandBoxPlus>();
+				if (!pBoxEx)
+					Reason = tr("Sandbox %1 cannot be edited by this dialog.").arg(Draft.SavedName);
+				else if (!Draft.Box->IsEnabled())
+					Reason = tr("Sandbox %1 is disabled.").arg(Draft.SavedName);
+				else if (pBoxEx->IsBoxBusy(false))
+					Reason = tr("Sandbox %1 has an active or queued operation. "
+						"Wait for it to finish before saving.").arg(Draft.SavedName);
 			}
-			Results.append(Status);
-		}
-		else
-			pBox->UpdateDetails();
+			if (!Reason.isEmpty()) {
+				QMessageBox::warning(this, "Sandboxie-Plus", Reason + "\n\n"
+					+ tr("Changes already saved are kept. Unsaved edits remain as drafts."));
+				return false;
+			}
+			return true;
+		};
+		auto ValidateDraft = [&](const SRenameDraft& Draft) {
+			if (!CheckTarget(Draft))
+				return false;
+			QString NewName = QString(Draft.Name).trimmed().replace(" ", "_");
+			if (NewName.compare(Draft.SavedName, Qt::CaseInsensitive) != 0) {
+				auto pBoxEx = Draft.Box.objectCast<CSandBoxPlus>();
+				if (!pBoxEx->GetMountRoot().isEmpty()) {
+					QMessageBox::warning(this, "Sandboxie-Plus",
+						tr("Unmount sandbox %1 before renaming it.").arg(Draft.SavedName));
+					return false;
+				}
+				return TestNameAndWarn(Draft.Name) && CheckStatus(CSbieAPI::ValidateName(NewName));
+			}
+			return true;
+		};
+		auto SaveDraft = [&](SRenameDraft& Draft) {
+			if (!ValidateDraft(Draft))
+				return false;
+			QString NewName = QString(Draft.Name).trimmed().replace(" ", "_");
+			if (NewName.compare(Draft.SavedName, Qt::CaseInsensitive) != 0) {
+				QString OldName = Draft.SavedName;
+				if (!CheckStatus(Draft.Box->RenameBox(NewName)))
+					return false;
+				Draft.SavedName = Draft.Box->GetName();
+				RenameItem(OldName, Draft.SavedName);
+				if (theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox").compare(OldName, Qt::CaseInsensitive) == 0)
+					theAPI->GetGlobalSettings()->SetText("DefaultBox", Draft.SavedName);
+				Refresh();
+				RestoreBoxSelectionLater(QStringList() << Draft.SavedName);
+				SaveBoxGrouping();
+			}
+			QString Alias = Draft.Alias.trimmed();
+			bool AliasDisabled = Draft.AliasDisabled && !Alias.isEmpty();
+			if (Draft.AliasPending || Alias != Draft.SavedAlias.trimmed()
+				|| AliasDisabled != (Draft.SavedAliasDisabled && !Draft.SavedAlias.trimmed().isEmpty())) {
+				if (!CheckTarget(Draft))
+					return false;
+				Draft.AliasPending = true;
+				SB_STATUS Status;
+				if (Alias.isEmpty()) {
+					Status = Draft.Box->DelValue("BoxAlias");
+					if (!Status.IsError())
+						Status = Draft.Box->DelValue("BoxAliasDisabled");
+				} else {
+					Status = Draft.Box->SetText(AliasDisabled ? "BoxAliasDisabled" : "BoxAlias", Alias);
+					if (!Status.IsError())
+						Status = Draft.Box->DelValue(AliasDisabled ? "BoxAlias" : "BoxAliasDisabled");
+				}
+				ReadSavedAlias(Draft);
+				Draft.Box->UpdateDetails();
+				if (!CheckStatus(Status))
+					return false;
+				Draft.AliasPending = false;
+				Refresh();
+				RestoreBoxSelectionLater(QStringList() << Draft.SavedName);
+			}
+			Draft.Name = QString(Draft.SavedName).replace("_", " ");
+			Draft.Alias = Draft.SavedAlias;
+			Draft.AliasDisabled = Draft.SavedAliasDisabled;
+			return true;
+		};
 
-		SaveBoxGrouping();
+		int i = 0;
+		while (i < Drafts.count()) {
+			SRenameDraft& Draft = Drafts[i];
+			bool PendingDrafts = Draft.AliasPending;
+			for (int j = 0; j < Drafts.count(); ++j) {
+				if (j != i && HasChanges(Drafts[j]))
+					PendingDrafts = true;
+			}
+			CRenameSandboxDialog dlg(QString(Draft.SavedName).replace("_", " "), Draft.SavedAlias,
+				Draft.SavedAliasDisabled, !Draft.SavedAlias.isEmpty(), this, i, Drafts.count(), PendingDrafts);
+			dlg.SetDraft(Draft.Name, Draft.Alias, Draft.AliasDisabled, Draft.UseGuidName, Draft.ManualName);
+			int Result = theGUI->SafeExec(&dlg);
+			if (Result == QDialog::Rejected)
+				return;
+			Draft.Name = dlg.GetBoxName();
+			Draft.Alias = dlg.GetAlias();
+			Draft.AliasDisabled = dlg.IsAliasDisabled();
+			Draft.UseGuidName = dlg.IsGuidName();
+			Draft.ManualName = dlg.GetManualName();
+			if (Result == CRenameSandboxDialog::ePrevious) {
+				if (i > 0)
+					--i;
+				continue;
+			}
+			if (Result == CRenameSandboxDialog::eNext) {
+				if (i + 1 < Drafts.count())
+					++i;
+				continue;
+			}
+			if (Result != QDialog::Accepted)
+				return;
+
+			QList<int> ToSave;
+			for (int j = 0; j < Drafts.count(); ++j) {
+				if ((j == i || i + 1 == Drafts.count()) && HasChanges(Drafts[j]))
+					ToSave.append(j);
+			}
+			if (!ToSave.isEmpty() && !CheckStatus(theAPI->ReloadBoxes()))
+				continue;
+			bool Ready = true;
+			QSet<QString> NewNames;
+			for (int j : ToSave) {
+				const SRenameDraft& Pending = Drafts[j];
+				QString NewName = QString(Pending.Name).trimmed().replace(" ", "_");
+				if (!ValidateDraft(Pending)) {
+					i = j;
+					Ready = false;
+					break;
+				}
+				if (NewNames.contains(NewName.toLower())) {
+					QMessageBox::warning(this, "Sandboxie-Plus",
+						tr("More than one draft uses the sandbox name %1. Choose different names.").arg(NewName));
+					i = j;
+					Ready = false;
+					break;
+				}
+				NewNames.insert(NewName.toLower());
+			}
+			if (!Ready)
+				continue;
+			for (int j : ToSave) {
+				if (!SaveDraft(Drafts[j])) {
+					i = j;
+					Ready = false;
+					break;
+				}
+			}
+			if (!Ready)
+				continue;
+			++i;
+		}
 	}
 	else if (Action == m_pMenuMount)
 	{

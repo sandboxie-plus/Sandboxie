@@ -136,6 +136,7 @@ private slots:
 	void OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAddCompat();
 	void OnDelCompat();
+	void OnCheckCompat();
 
 	void OnFilterTemplates()		{ LoadTemplates(); }
 	void OnAddTemplates();
@@ -191,6 +192,8 @@ protected:
 	void	SaveSettings();
 
 	void	LoadTemplates();
+	void	LoadCompat(bool bCheck, bool bResetChanges = false);
+	void	UpdateCompatStatus();
 
 	void	LoadIniSection();
 	bool	SaveIniSection();
@@ -206,7 +209,8 @@ protected:
 	bool	m_HoldChange;
 	CPendingChanges m_PendingChanges{this, &m_HoldChange, -1, true};
 	bool	m_SkipSaveOnToggle; // Skip saving to config when applying reset settings
-	int 	m_CompatLoaded;
+	bool	m_CompatLoaded;
+	QString m_UpdateTemplatesText;
 	QString m_NewPassword;
 	bool	m_MessagesChanged;
 	bool	m_WarnProgsChanged;

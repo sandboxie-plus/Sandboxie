@@ -98,6 +98,11 @@ struct _PROCESS {
 
     HASH_MAP thread_map;
 
+    // incremented whenever a THREAD.token_object in this process changes,
+    // see Thread_RestoreMuiState
+
+    volatile LONG token_generation;
+
     // flags
 
     volatile BOOLEAN initialized;       // process initialized once?

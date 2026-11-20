@@ -2,8 +2,6 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
-- fixed severe slowdowns (e.g. FPS drops in games) in sandboxed applications that often call `GetUserDefaultUILanguage`, `LoadString`, `FindResource` or `FormatMessage`: the temporary impersonation around each system call reset ntdll's cached UI language settings, so every lookup re-read them from the registry
 
 
 
@@ -38,6 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed concurrent process creations serializing on the global configuration lock, caused by the force-rule scan enumerating every `Templates.ini` section and the configuration use count being adjusted under an exclusive lock
 - fixed the Local Templates list not populating on first visit [#5715](https://github.com/sandboxie-plus/Sandboxie/issues/5715/)
 - fixed empty or stale App Compatibility lists; added prelisting, scan status and manual checking [#5718](https://github.com/sandboxie-plus/Sandboxie/issues/5718)
+- fixed severe slowdowns (e.g. FPS drops in games) in sandboxed applications that often call `GetUserDefaultUILanguage`, `LoadString`, `FindResource` or `FormatMessage`: the temporary impersonation around each system call reset ntdll's cached UI language settings, so every lookup re-read them from the registry [#5628](https://github.com/sandboxie-plus/Sandboxie/pull/5628)
 - fixed reversed Yes/No handling when enabling a disabled or user-restricted sandbox
 
 

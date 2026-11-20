@@ -67,7 +67,7 @@ typedef struct _THREAD_MUI_STATE {
     ULONG *mui_ptr32;
     ULONG mui_value;
     ULONG mui_value32;
-    void *token_object;
+    LONG token_generation;
 
 } THREAD_MUI_STATE;
 

@@ -256,6 +256,7 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
 
                 TokenObject = InterlockedExchangePointer(
                                             &thrd->token_object, NULL);
+                InterlockedIncrement(&proc->token_generation);
 
                 Mem_Free(thrd, sizeof(THREAD));
             }
@@ -327,6 +328,7 @@ _FX void Thread_ReleaseProcess(PROCESS *proc)
 
                 TokenObject = InterlockedExchangePointer(
                                             &thrd->token_object, NULL);
+                InterlockedIncrement(&proc->token_generation);
                 if (TokenObject)
                     break;
             }
@@ -811,6 +813,7 @@ _FX NTSTATUS Thread_StoreThreadToken(PROCESS *proc)
 
         TokenObject = InterlockedExchangePointer(
                                         &thrd->token_object, TokenObject);
+        InterlockedIncrement(&proc->token_generation);
         thrd->token_CopyOnOpen = CopyOnOpen;
         thrd->token_EffectiveOnly = EffectiveOnly;
         thrd->token_ImpersonationLevel = SecurityImpersonation;
@@ -843,6 +846,19 @@ _FX NTSTATUS Thread_StoreThreadToken(PROCESS *proc)
 //---------------------------------------------------------------------------
 
 
+//
+// TEB.MuiImpersonation is at the same offset on every build from Windows 7
+// RTM to Windows 11 25H2 (checked against the _TEB/_TEB32 symbol layouts):
+// 0x17E8 in the 64-bit TEB and 0xFC4 in the 32-bit TEB.  ARM64 uses the x64
+// TEB layout, which ARM64EC requires.  the WoW64 TEB32 is located at
+// TEB + ROUND_TO_PAGES(sizeof(TEB)), which is 0x2000 on all these builds
+// (sizeof(TEB) ranges from 0x1818 to 0x1878).
+//
+// note that in a WoW64 process the cache is tracked in the 64-bit TEB;
+// the TEB32 copy stays zero on current builds and is handled only so that
+// a build which uses it is covered as well
+//
+
 #ifdef _WIN64
 #define TEB_MUI_IMPERSONATION_OFFSET    0x17E8
 #define TEB32_OFFSET                    0x2000  // Wow64 TEB follows the native TEB
@@ -855,7 +871,6 @@ _FX NTSTATUS Thread_StoreThreadToken(PROCESS *proc)
 _FX void Thread_SaveMuiState(PROCESS *proc, THREAD_MUI_STATE *state)
 {
     UCHAR *Teb;
-    THREAD *thrd;
 
     //
     // ntdll caches the user interface language settings (as used by
@@ -908,11 +923,14 @@ _FX void Thread_SaveMuiState(PROCESS *proc, THREAD_MUI_STATE *state)
         state->mui_ptr32 = NULL;
     }
 
-    if (state->mui_ptr || state->mui_ptr32) {
+    //
+    // remember the impersonation generation instead of looking up the
+    // thread's recorded token, which would need the exclusive threads_lock
+    // on every system call
+    //
 
-        thrd = Thread_GetByThreadId(proc, 0);
-        state->token_object = thrd ? thrd->token_object : NULL;
-    }
+    if (state->mui_ptr || state->mui_ptr32)
+        state->token_generation = proc->token_generation;
 }
 
 
@@ -923,20 +941,20 @@ _FX void Thread_SaveMuiState(PROCESS *proc, THREAD_MUI_STATE *state)
 
 _FX void Thread_RestoreMuiState(PROCESS *proc, THREAD_MUI_STATE *state)
 {
-    THREAD *thrd;
-
     if (! state->mui_ptr && ! state->mui_ptr32)
         return;
 
     //
-    // if the system call changed the impersonation token recorded for
-    // this thread (e.g. SetThreadToken or RevertToSelf), keep the reset
-    // so ntdll re-evaluates the language settings, as it would outside
-    // the sandbox.  the token object is only compared, not referenced
+    // if an impersonation token recorded in this process changed during the
+    // system call (e.g. SetThreadToken or RevertToSelf), keep the reset so
+    // ntdll re-evaluates the language settings, as it would outside the
+    // sandbox.  proc->token_generation is incremented on every change of a
+    // THREAD.token_object, so a change made by this thread is always seen.
+    // a change made by another thread in the meantime also skips the
+    // restore, which only costs one cache refresh
     //
 
-    thrd = Thread_GetByThreadId(proc, 0);
-    if ((thrd ? thrd->token_object : NULL) != state->token_object)
+    if (proc->token_generation != state->token_generation)
         return;
 
     __try {

@@ -1319,6 +1319,7 @@ _FX NTSTATUS Thread_SetInformationThread_ImpersonationToken(
 
             TokenObject = InterlockedExchangePointer(
                                         &thrd2->token_object, TokenObject);
+            InterlockedIncrement(&proc2->token_generation);
             thrd2->token_CopyOnOpen = FALSE;    // PsAssignImpersonationToken
             thrd2->token_EffectiveOnly = FALSE;
             thrd2->token_ImpersonationLevel = ImpersonationLevel;

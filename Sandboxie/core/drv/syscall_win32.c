@@ -603,6 +603,12 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
 
     // DbgPrint("[syscall] request p=%06d t=%06d - BEGIN %s\n", PsGetCurrentProcessId(), PsGetCurrentThreadId(), entry->name);
 
+    //
+    // note: this is the win32k system call path, not the WoW64 one.  the
+    // MUI state is saved here for the same reason as in Syscall_Api_Invoke,
+    // see Thread_SaveMuiState
+    //
+
     if(!proc->is_locked_down || entry->approved) {
         Thread_SaveMuiState(proc, &mui_state);
         Thread_SetThreadToken(proc);        // may set proc->terminated // does nothing if !proc->primary_token

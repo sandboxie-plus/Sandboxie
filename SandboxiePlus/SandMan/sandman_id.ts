@@ -394,28 +394,29 @@ meningkat menjadi 512 bit dengan penerapan modifikasi Leet (L337), dan melebihi 
     <message>
         <location filename="Boxes/BoxReport.cpp" line="122"/>
         <source>Compressing Logs</source>
-        <translation type="unfinished">Mengompresi Log</translation>
+        <translation>Mengompresi Log</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="150"/>
         <source>Compressing Dumps</source>
-        <translation type="unfinished">Mengompresi Dump</translation>
+        <translation>Mengompresi Dump</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="187"/>
         <source>Submitting report...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengirim laporan...</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="250"/>
         <source>Failed to submit report, error %1
 Try submitting without the log attached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gagal mengirim laporan, kesalahan %1
+Coba kirim tanpa log terlampir.</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="252"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
-        <translation type="unfinished">Laporan masalah Anda telah berhasil dikirim, terima kasih.</translation>
+        <translation>Laporan masalah Anda berhasil dikirim, terima kasih.</translation>
     </message>
 </context>
 <context>
@@ -423,87 +424,87 @@ Try submitting without the log attached.</source>
     <message>
         <location filename="BoxTransfer.cpp" line="78"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekspor Sandbox</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Impor Sandbox</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="87"/>
         <source>Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama Box</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="87"/>
         <source>Status</source>
-        <translation type="unfinished">Status</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="90"/>
         <source>Archive Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama Box Arsip</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="90"/>
         <source>Import As</source>
-        <translation type="unfinished"></translation>
+        <translation>Impor Sebagai</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="90"/>
         <source>Conflict</source>
-        <translation type="unfinished"></translation>
+        <translation>Konflik</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="90"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Sumber</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="100"/>
         <source>Export Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekspor Konfigurasi Global</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="100"/>
         <source>Import Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Impor Konfigurasi Global</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="113"/>
         <source>Export each box to its own file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekspor setiap box ke file terpisah</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="152"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih Semua</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="156"/>
         <source>Select None</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih Tidak Ada</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="252"/>
         <source>Running</source>
-        <translation type="unfinished">Sedang Berjalan</translation>
+        <translation>Sedang Berjalan</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="254"/>
         <source>Encrypted</source>
-        <translation type="unfinished"></translation>
+        <translation>Terenkripsi</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="256"/>
         <source>Empty</source>
-        <translation type="unfinished">Kosong</translation>
+        <translation>Kosong</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="364"/>
         <source>Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sudah Ada!</translation>
     </message>
     <message>
         <source>Select file name</source>
@@ -512,161 +513,161 @@ Try submitting without the log attached.</source>
     <message>
         <location filename="BoxTransfer.cpp" line="800"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>Arsip 7-Zip (*.7z);;Arsip Zip (*.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="783"/>
         <location filename="BoxTransfer.cpp" line="793"/>
         <location filename="BoxTransfer.cpp" line="806"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished">Mengekspor: %1</translation>
+        <translation>Mengekspor: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="105"/>
         <source>Show sandbox aliases (reads archive configuration)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan alias sandbox (baca konfigurasi arsip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="106"/>
         <source>Disabled by default because reading aliases requires opening and extracting configuration from every selected archive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nonaktif secara default karena membaca alias memerlukan pembukaan dan ekstraksi konfigurasi dari setiap arsip yang dipilih.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="126"/>
         <source>Create sandboxes in:</source>
-        <translation type="unfinished"></translation>
+        <translation>Buat sandbox di:</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Where the imported sandboxes are created. Keep %SANDBOX% in the path so that each box gets its own folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempat sandbox yang diimpor dibuat. Pertahankan %SANDBOX% pada path agar setiap box mendapat foldernya sendiri.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="144"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Telusuri...</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="199"/>
         <source>Select the folder to create the sandboxes in</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih folder untuk membuat sandbox</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="218"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished">Sandbox tidak dapat ditempatkan di jaringan bersama, silakan pilih folder lokal.</translation>
+        <translation>Sandbox tidak dapat ditempatkan di jaringan bersama, silakan pilih folder lokal.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="226"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished">Sandbox tidak dapat ditempatkan di root partisi, silakan pilih folder.</translation>
+        <translation>Sandbox tidak dapat ditempatkan di root partisi, silakan pilih folder.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="368"/>
         <source>Duplicate!</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplikat!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="478"/>
         <source>Sandbox name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama sandbox: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="599"/>
         <location filename="BoxTransfer.cpp" line="1231"/>
         <source>7-Zip library is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pustaka 7-Zip tidak tersedia.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="614"/>
         <source>Cannot export: Sandbox has running processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat mengekspor: Sandbox memiliki proses yang sedang berjalan.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="633"/>
         <source>Nothing selected for export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada yang dipilih untuk diekspor.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="638"/>
         <source>No boxes selected for separate file export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada box yang dipilih untuk ekspor file terpisah.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="685"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox &apos;%1&apos; memiliki proses yang berjalan. Lewati?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="703"/>
         <source>Mount &apos;%1&apos; for Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasang &apos;%1&apos; untuk Ekspor</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="706"/>
         <source>Encrypted sandbox &apos;%1&apos; is not mounted. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox terenkripsi &apos;%1&apos; belum dipasang. Lewati?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="717"/>
         <source>Failed to unmount &apos;%1&apos; for remounting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gagal melepas &apos;%1&apos; untuk dipasang ulang.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="727"/>
         <source>Failed to mount encrypted sandbox &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gagal memasang sandbox terenkripsi &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="759"/>
         <source>Select Export Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih Folder Ekspor</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="798"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekspor Sandbox</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1160"/>
         <source>Password for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kata sandi untuk %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1176"/>
         <source>Failed to open archive (%1): %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Gagal membuka arsip (%1): %2</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1236"/>
         <source>Select Archives</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih Arsip</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1237"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>Arsip 7-Zip (*.7z);;Arsip Zip (*.zip);;Semua Arsip (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1274"/>
         <source>The selected archives do not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Arsip yang dipilih tidak berisi data sandbox apa pun.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1301"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat mengimpor beberapa box dengan nama yang sama &apos;%1&apos;. Silakan ubah namanya terlebih dahulu.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1396"/>
         <location filename="BoxTransfer.cpp" line="1404"/>
         <source>Importing: %1</source>
-        <translation type="unfinished">Mengimpor: %1</translation>
+        <translation>Mengimpor: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1166"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation type="unfinished">Gagal membuka arsip, kata sandi salah?</translation>
+        <translation>Gagal membuka arsip, kata sandi salah?</translation>
     </message>
     <message>
         <source>Failed to open archive (%1)!</source>
@@ -675,12 +676,12 @@ Try submitting without the log attached.</source>
     <message>
         <location filename="BoxTransfer.cpp" line="1289"/>
         <source>Nothing selected for import.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada yang dipilih untuk diimpor.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1317"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox &apos;%1&apos; sudah ada. Konfigurasinya akan ditimpa. Lanjutkan?</translation>
     </message>
 </context>
 <context>
@@ -703,7 +704,7 @@ Try submitting without the log attached.</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="359"/>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="377"/>
@@ -1112,7 +1113,7 @@ Kesalahan: %1</translation>
     <message>
         <location filename="../MiscHelpers/Common/CheckableComboBox.cpp" line="12"/>
         <source>Select Items...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih Item...</translation>
     </message>
 </context>
 <context>
@@ -1120,7 +1121,7 @@ Kesalahan: %1</translation>
     <message>
         <location filename="../MiscHelpers/Common/CheckableMessageBox.cpp" line="52"/>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan tanya lagi</translation>
     </message>
 </context>
 <context>
@@ -1137,22 +1138,22 @@ Kesalahan: %1</translation>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1415"/>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2699"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Cari</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1420"/>
         <source>FindNext</source>
-        <translation type="unfinished"></translation>
+        <translation>Cari Berikutnya</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1430"/>
         <source>GoTo</source>
-        <translation type="unfinished"></translation>
+        <translation>Ke Baris</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1848"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mungkin maksud Anda: %1? (Tekan Ctrl+R untuk mengganti)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2699"/>
@@ -1162,17 +1163,22 @@ Kesalahan: %1</translation>
 + Alt: Whole Words
 
 Find String:</source>
-        <translation type="unfinished"></translation>
+        <translation>F3: Cari Berikutnya
++ Shift: Mundur
++ Ctrl: Bedakan Huruf Besar/Kecil
++ Alt: Kata Utuh
+
+Teks Pencarian:</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
         <source>Go to Line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ke Baris:</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1245,164 +1251,164 @@ Anda dapat mengklik Selesai untuk menutup panduan ini.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="28"/>
         <source>Validate INI Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Validasi Kunci INI</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>No validation</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanpa validasi</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>Full validation (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Validasi penuh (default)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="31"/>
         <source>Enable INI Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktifkan Tooltip INI</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>No tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanpa tooltip</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Basic info (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Info dasar (default)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Full details</source>
-        <translation type="unfinished"></translation>
+        <translation>Detail lengkap</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="34"/>
         <source>Enable Popup Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktifkan Tooltip Pop-up</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="37"/>
         <source>Auto Completion Consent</source>
-        <translation type="unfinished"></translation>
+        <translation>Persetujuan Auto-Completion</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Not consented (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Belum disetujui (default)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Consented</source>
-        <translation type="unfinished"></translation>
+        <translation>Disetujui</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="40"/>
         <source>Enable Auto Completion</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktifkan Auto-Completion</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Disabled (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nonaktif (default)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Saat Mengetik</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="43"/>
         <source>Enable Fuzzy Matching</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktifkan Pencocokan Fuzzy</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Enabled</source>
-        <translation type="unfinished">Diaktifkan</translation>
+        <translation>Diaktifkan</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="46"/>
         <source>Show Future Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan Pengaturan Mendatang</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="50"/>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Sembunyikan</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="50"/>
         <source>Shown (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan (default)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="49"/>
         <source>Show INI Line Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan Nomor Baris INI</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="61"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengaturan Editor</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="81"/>
         <source>Reset All to Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset Semua ke Default</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="82"/>
         <source>Reset all settings to their default values and remove custom config entries.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset semua pengaturan ke nilai default dan hapus entri konfigurasi kustom.</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="181"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengaturan</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="181"/>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="181"/>
         <source>Unchecked</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak Dicentang</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="181"/>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>Sebagian</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="181"/>
         <source>Checked</source>
-        <translation type="unfinished"></translation>
+        <translation>Dicentang</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="181"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="215"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="216"/>
         <source>Reset this setting to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset pengaturan ini ke nilai default</translation>
     </message>
 </context>
 <context>
@@ -1410,7 +1416,7 @@ Anda dapat mengklik Selesai untuk menutup panduan ini.</translation>
     <message>
         <location filename="../MiscHelpers/Common/ExitDialog.h" line="44"/>
         <source>Yes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ya (%1)</translation>
     </message>
 </context>
 <context>
@@ -1474,14 +1480,16 @@ Anda dapat mengklik Selesai untuk menutup panduan ini.</translation>
     <message>
         <location filename="Views/FileView.cpp" line="1139"/>
         <source>Delete Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Gagal Menghapus</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="1140"/>
         <source>The selected files could not be deleted.
 
 Error: 0x%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Berkas yang dipilih tidak dapat dihapus.
+
+Kesalahan: 0x%1</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="1169"/>
@@ -1584,17 +1592,17 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="52"/>
         <source>Clear search</source>
-        <translation type="unfinished"></translation>
+        <translation>Bersihkan pencarian</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="127"/>
         <source>Expand all</source>
-        <translation type="unfinished"></translation>
+        <translation>Luaskan semua</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="133"/>
         <source>Collapse all</source>
-        <translation type="unfinished"></translation>
+        <translation>Lipat semua</translation>
     </message>
 </context>
 <context>
@@ -1707,72 +1715,72 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="25"/>
         <source>empty endpoint name</source>
-        <translation type="unfinished"></translation>
+        <translation>nama endpoint kosong</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="37"/>
         <source>&apos;%1&apos; looks like a bracketed IPv6 endpoint but is not one</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; tampak seperti endpoint IPv6 dalam tanda kurung, tetapi bukan</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="66"/>
         <source>&apos;%1&apos; is not a valid port</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; bukan port yang valid</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="73"/>
         <source>&apos;%1&apos; is not a valid IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; bukan alamat IP yang valid</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="92"/>
         <source>empty local socket name</source>
-        <translation type="unfinished"></translation>
+        <translation>nama soket lokal kosong</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="100"/>
         <source>local socket name is too long (%1 characters, 247 max)</source>
-        <translation type="unfinished"></translation>
+        <translation>nama soket lokal terlalu panjang (%1 karakter, maksimal 247)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="105"/>
         <source>local socket name must not contain a path separator</source>
-        <translation type="unfinished"></translation>
+        <translation>nama soket lokal tidak boleh mengandung pemisah path</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="110"/>
         <source>&apos;%1&apos; is not a usable local socket name</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; bukan nama soket lokal yang dapat digunakan</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="117"/>
         <source>local socket name must not contain control characters</source>
-        <translation type="unfinished"></translation>
+        <translation>nama soket lokal tidak boleh mengandung karakter kontrol</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="135"/>
         <source>Failed to listen on %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Gagal mendengarkan pada %1</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="143"/>
         <source>Invalid local socket name &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama soket lokal tidak valid &apos;%1&apos;: %2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="150"/>
         <source>Invalid endpoint &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Endpoint tidak valid &apos;%1&apos;: %2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="196"/>
         <source>Failed to listen on local socket %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Gagal mendengarkan pada soket lokal %1: %2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="325"/>
         <source>recived new request, befoure the previouse response was completly sent</source>
-        <translation type="unfinished"></translation>
+        <translation>menerima permintaan baru sebelum respons sebelumnya selesai dikirim</translation>
     </message>
 </context>
 <context>
@@ -1780,37 +1788,37 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
         <source>recived invalid HTTP request</source>
-        <translation type="unfinished"></translation>
+        <translation>menerima permintaan HTTP tidak valid</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="99"/>
         <source>recived unsupported HTTP request %1 from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>menerima permintaan HTTP yang tidak didukung %1 dari %2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="127"/>
         <source>recived invalid POST request %1</source>
-        <translation type="unfinished"></translation>
+        <translation>menerima permintaan POST tidak valid %1</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="146"/>
         <source>recived POST/PUT request without Content-Length !!!</source>
-        <translation type="unfinished"></translation>
+        <translation>menerima permintaan POST/PUT tanpa Content-Length !!!</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="176"/>
         <source>recived GET request with attached data ?!</source>
-        <translation type="unfinished"></translation>
+        <translation>menerima permintaan GET dengan data terlampir ?!</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="292"/>
         <source>recived a POST payload before any part header</source>
-        <translation type="unfinished"></translation>
+        <translation>menerima payload POST sebelum header bagian apa pun</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="429"/>
         <source>Error While Sending response</source>
-        <translation type="unfinished"></translation>
+        <translation>Kesalahan saat mengirim respons</translation>
     </message>
 </context>
 <context>
@@ -1818,45 +1826,45 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1135"/>
         <source>Validate (Failed)</source>
-        <translation type="unfinished"></translation>
+        <translation>Validasi (Gagal)</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1522"/>
         <source>Added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Ditambahkan pada versi</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1523"/>
         <location filename="Helpers/IniHighlighter.cpp" line="2868"/>
         <source>Removed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Dihapus pada versi</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1524"/>
         <source>Re-added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Ditambahkan lagi pada versi</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1525"/>
         <location filename="Helpers/IniHighlighter.cpp" line="2867"/>
         <source>Renamed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Diubah nama pada versi</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1526"/>
         <location filename="Helpers/IniHighlighter.cpp" line="2869"/>
         <source>Superseded by</source>
-        <translation type="unfinished"></translation>
+        <translation>Digantikan oleh</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2680"/>
         <source>Line %1: Semicolons (;) are not supported as comment markers. Use # instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Baris %1: Titik koma (;) tidak didukung sebagai penanda komentar. Gunakan # sebagai gantinya.</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2909"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Perhatian</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -1873,29 +1881,29 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2158"/>
         <source>Category</source>
-        <translation type="unfinished">Kategori</translation>
+        <translation>Kategori</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2159"/>
         <source>Context</source>
-        <translation type="unfinished"></translation>
+        <translation>Konteks</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2160"/>
         <source>Requirements</source>
-        <translation type="unfinished"></translation>
+        <translation>Persyaratan</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2370"/>
         <location filename="Helpers/IniHighlighter.cpp" line="2894"/>
         <source>Syntax</source>
-        <translation type="unfinished"></translation>
+        <translation>Sintaks</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2371"/>
         <location filename="Helpers/IniHighlighter.cpp" line="2889"/>
         <source>Description</source>
-        <translation type="unfinished">Deskripsi</translation>
+        <translation>Deskripsi</translation>
     </message>
 </context>
 <context>
@@ -2020,32 +2028,32 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="7"/>
         <source>Item Chooser</source>
-        <translation type="unfinished"></translation>
+        <translation>Pemilih Item</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="12"/>
         <source>Select items that will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih item yang akan digunakan.</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="29"/>
         <source>Add &gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Tambah &gt;</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="33"/>
         <source>&lt; Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt; Hapus</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="47"/>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Pindah Atas</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Pindah Bawah</translation>
     </message>
 </context>
 <context>
@@ -2053,7 +2061,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.h" line="49"/>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak terbatas</translation>
     </message>
 </context>
 <context>
@@ -2079,83 +2087,85 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="17"/>
         <source>Connect an AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>Hubungkan AI Agent</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="22"/>
         <source>An AI agent can read your sandbox configuration, the bundled documentation and diagnostic data, and help you work out why something does not run in a sandbox.
 
 It is off until you turn it on, it is not reachable from inside a sandbox, and it has to be authorised with a code shown on your screen before it can do anything.</source>
-        <translation type="unfinished"></translation>
+        <translation>AI agent dapat membaca konfigurasi sandbox, dokumentasi bawaan, dan data diagnostik, serta membantu Anda mencari tahu mengapa sesuatu tidak berjalan di dalam sandbox.
+
+Koneksi ini mati sampai Anda menyalakannya, tidak dapat dijangkau dari dalam sandbox, dan harus diotorisasi dengan kode yang ditampilkan di layar sebelum agent dapat melakukan apa pun.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="34"/>
         <source>Which client do you want to use?</source>
-        <translation type="unfinished"></translation>
+        <translation>Klien mana yang ingin Anda gunakan?</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="50"/>
         <location filename="Mcp/McpConnectDialog.cpp" line="144"/>
         <source>Configure It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurasikan Untuk Saya</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="51"/>
         <source>Start It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>Jalankan Untuk Saya</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="52"/>
         <location filename="Mcp/McpConnectDialog.cpp" line="219"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Salin</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="91"/>
         <source>   (found, already configured)</source>
-        <translation type="unfinished"></translation>
+        <translation>   (ditemukan, sudah dikonfigurasi)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="93"/>
         <source>   (found)</source>
-        <translation type="unfinished"></translation>
+        <translation>   (ditemukan)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="95"/>
         <source>   (not found)</source>
-        <translation type="unfinished"></translation>
+        <translation>   (tidak ditemukan)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="102"/>
         <source>Turn Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Matikan</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="102"/>
         <source>Turn On</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyalakan</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="106"/>
         <source>The connection is ON. A client can connect now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Koneksi AKTIF. Klien sekarang dapat terhubung.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="107"/>
         <source>The connection is OFF. Turn it on here, or let the client ask for it - Sandboxie-Plus will offer when something tries to connect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Koneksi NONAKTIF. Nyalakan di sini, atau biarkan klien yang memintanya — Sandboxie-Plus akan menawarkan saat ada yang mencoba terhubung.</translation>
     </message>
     <message numerus="yes">
         <location filename="Mcp/McpConnectDialog.cpp" line="112"/>
         <source>Forget %1 Remembered Program(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Lupakan %1 program yang diingat</numerusform>
         </translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="115"/>
         <source>SbieMcp.exe was not found next to SandMan, so this installation cannot accept agent connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>SbieMcp.exe tidak ditemukan di samping SandMan, sehingga instalasi ini tidak dapat menerima koneksi agent.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="138"/>
@@ -2163,12 +2173,15 @@ It is off until you turn it on, it is not reachable from inside a sandbox, and i
 %1
 
 Your other servers are kept; only the Sandboxie entry is added or updated, and the file is backed up first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Berkas konfigurasi:
+%1
+
+Server lain Anda tetap disimpan; hanya entri Sandboxie yang ditambahkan atau diperbarui, dan berkas dicadangkan terlebih dahulu.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="144"/>
         <source>Update It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>Perbarui Untuk Saya</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="149"/>
@@ -2178,12 +2191,17 @@ Or let Sandboxie-Plus start it for you, in a folder of its own:
 %2
 
 The configuration written there reaches that one session and nothing else you do with it.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+
+Atau biarkan Sandboxie-Plus yang menjalankannya untuk Anda, dalam folder tersendiri:
+%2
+
+Konfigurasi yang ditulis di sana hanya berlaku untuk sesi itu dan tidak memengaruhi hal lain yang Anda lakukan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="180"/>
         <source>%1 is configured. Restart it if it is running, so it picks up the change.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 telah dikonfigurasi. Mulai ulang jika sedang berjalan agar perubahan diterapkan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="182"/>
@@ -2191,34 +2209,39 @@ The configuration written there reaches that one session and nothing else you do
 
 The previous configuration was kept as:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Konfigurasi sebelumnya disimpan sebagai:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="185"/>
         <source>MCP: wrote the agent configuration for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: menulis konfigurasi agent untuk %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="207"/>
         <source>MCP: started %1 in %2</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: menjalankan %1 di %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="218"/>
         <source>Copied</source>
-        <translation type="unfinished"></translation>
+        <translation>Disalin</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="232"/>
         <source>Forget these programs? Each will have to be authorised with a code again.
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lupakan program-program ini? Masing-masing harus diotorisasi ulang dengan kode.
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="238"/>
         <source>MCP: the remembered agent programs were forgotten</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: program agent yang diingat telah dilupakan</translation>
     </message>
 </context>
 <context>
@@ -2226,98 +2249,98 @@ The previous configuration was kept as:
     <message>
         <location filename="Mcp/McpConsent.cpp" line="62"/>
         <source>Look, do not touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Lihat, jangan sentuh</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="63"/>
         <source>Ask only for risky things</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanya hanya untuk hal berisiko</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="64"/>
         <source>Do not ask, just tell me</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan tanya, beri tahu saja</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="65"/>
         <source>Ask before every change</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanya sebelum setiap perubahan</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="73"/>
         <source>The agent can read and diagnose, and every attempt to change anything is refused without asking you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Agent dapat membaca dan mendiagnosis, dan setiap upaya mengubah apa pun ditolak tanpa bertanya kepada Anda.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="76"/>
         <source>Ordinary setting changes happen without interrupting you. You are still asked before anything that cannot be undone, runs a program, sends something off this computer, or opens a sandbox up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Perubahan pengaturan biasa terjadi tanpa mengganggu Anda. Anda tetap ditanya sebelum hal yang tidak dapat dibatalkan, menjalankan program, mengirim sesuatu keluar dari komputer ini, atau membuka sandbox.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="80"/>
         <source>The agent acts without asking. Everything it does is still listed here and written to the audit log - you are not asked, but you are told.</source>
-        <translation type="unfinished"></translation>
+        <translation>Agent bertindak tanpa bertanya. Semua yang dilakannya tetap tercantum di sini dan ditulis ke log audit — Anda tidak ditanya, tetapi tetap diberi tahu.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="83"/>
         <source>Nothing changes, starts or stops until you say so.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada yang berubah, dimulai, atau dihentikan sampai Anda mengizinkannya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="107"/>
         <source>refused, because the agent is set to look but not touch: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ditolak, karena agent diatur untuk lihat saja: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="108"/>
         <source>refused: the agent may not change anything</source>
-        <translation type="unfinished"></translation>
+        <translation>ditolak: agent tidak boleh mengubah apa pun</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="117"/>
         <source>done without asking: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>dilakukan tanpa bertanya: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="118"/>
         <source>allowed automatically (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>diizinkan otomatis (%1)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="128"/>
         <source>another confirmation was already open</source>
-        <translation type="unfinished"></translation>
+        <translation>konfirmasi lain sudah terbuka</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="142"/>
         <source>allowed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>diizinkan: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="142"/>
         <source>refused: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ditolak: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="144"/>
         <source>allowed by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>diizinkan oleh pengguna</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="144"/>
         <source>refused by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>ditolak oleh pengguna</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="151"/>
         <location filename="Mcp/McpConsent.cpp" line="204"/>
         <source>An AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>AI Agent</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="153"/>
         <source>%1 wants to change the configuration of sandbox %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ingin mengubah konfigurasi sandbox %2.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="159"/>
@@ -2325,7 +2348,10 @@ The previous configuration was kept as:
 
 Its reason, in its own words:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Alasannya, dengan kata-katanya sendiri:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="162"/>
@@ -2333,59 +2359,69 @@ Its reason, in its own words:
 
 These are the changes:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Berikut perubahannya:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="171"/>
         <source>
   remove  %1 = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  hapus   %1 = %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="173"/>
         <source>
   add     %1 = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  tambah  %1 = %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="175"/>
         <source>
   change  %1 = %2   (was %3)</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  ubah    %1 = %2   (dulu %3)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="178"/>
         <source>   &lt;- not a known setting</source>
-        <translation type="unfinished"></translation>
+        <translation>   &lt;- bukan pengaturan yang dikenal</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="184"/>
         <source>
 
 Warning: at least one of these is not a setting Sandboxie recognises. Unknown settings are ignored silently rather than reported as an error, so such a change would appear to work and have no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Peringatan: setidaknya salah satu di antaranya bukan pengaturan yang dikenal Sandboxie. Pengaturan yang tidak dikenal diabaikan tanpa laporan kesalahan, sehingga perubahan seperti itu akan terlihat berhasil tetapi tidak berpengaruh.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="197"/>
         <source>Confirm configuration change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfirmasi perubahan konfigurasi</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="197"/>
         <source>Apply These Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Terapkan Perubahan Ini</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="198"/>
         <source>change %1 setting(s) on %2</source>
-        <translation type="unfinished"></translation>
+        <translation>ubah %1 pengaturan di %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="205"/>
         <source>%1 wants to do the following.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ingin melakukan hal berikut.
+
+%2</translation>
     </message>
 </context>
 <context>
@@ -2393,137 +2429,137 @@ Warning: at least one of these is not a setting Sandboxie recognises. Unknown se
     <message>
         <location filename="Mcp/McpServer.cpp" line="94"/>
         <source>released a session whose client exited, discarding its test copies</source>
-        <translation type="unfinished"></translation>
+        <translation>mengakhiri sesi yang kliennya keluar, membuang salinan ujinya</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="98"/>
         <source>the agent</source>
-        <translation type="unfinished"></translation>
+        <translation>agent</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="100"/>
         <source>disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>terputus</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="103"/>
         <source>%1 exited; its test copies were discarded</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 keluar; salinan ujinya dibuang</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="104"/>
         <source>%1 exited</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 keluar</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="142"/>
         <source>refusing to listen on &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>menolak mendengarkan pada &apos;%1&apos;: %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="153"/>
         <source>MCP server could not listen on &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Server MCP tidak dapat mendengarkan pada &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="163"/>
         <source>documentation pack mounted: %1 pages from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>paket dokumentasi dipasang: %1 halaman dari %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="166"/>
         <source>no documentation pack found - docs lookups will be unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>paket dokumentasi tidak ditemukan — pencarian dokumentasi tidak tersedia</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="180"/>
         <source>knowledge base: %1 entries from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>basis pengetahuan: %1 entri dari %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="183"/>
         <source>no troubleshooting knowledge base found</source>
-        <translation type="unfinished"></translation>
+        <translation>basis pengetahuan pemecahan masalah tidak ditemukan</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="192"/>
         <source>audit log: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>log audit: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="203"/>
         <source>MCP server listening on &apos;%1%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Server MCP mendengarkan pada &apos;%1%2&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="272"/>
         <source>the connecting process could not be identified</source>
-        <translation type="unfinished"></translation>
+        <translation>proses yang terhubung tidak dapat diidentifikasi</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="283"/>
         <source>process %1 is sandboxed, in box &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>proses %1 berada di sandbox, di box &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="288"/>
         <source>box membership of process %1 could not be established</source>
-        <translation type="unfinished"></translation>
+        <translation>keanggotaan box proses %1 tidak dapat ditentukan</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="297"/>
         <source>refused an MCP connection: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>menolak koneksi MCP: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="299"/>
         <source>Refused: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ditolak: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="307"/>
         <source>refused an MCP connection from origin &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>menolak koneksi MCP dari asal &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="308"/>
         <source>Origin not allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>Asal tidak diizinkan</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="315"/>
         <source>The MCP endpoint accepts POST only</source>
-        <translation type="unfinished"></translation>
+        <translation>Endpoint MCP hanya menerima POST</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="344"/>
         <source>rejected an MCP message: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>menolak pesan MCP: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="414"/>
         <source>authorised without a code, because asking for one is turned off</source>
-        <translation type="unfinished"></translation>
+        <translation>diotorisasi tanpa kode, karena permintaan kode dimatikan</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="448"/>
         <source>asked for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>meminta %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="467"/>
         <source>Your write-up is now out of date - this is not in it. Call report_compose again so that what the user is offered describes what you have actually done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Laporan Anda sudah kedaluwarsa — ini belum tercantum di dalamnya. Panggil report_compose lagi agar apa yang ditawarkan kepada pengguna menggambarkan apa yang benar-benar Anda lakukan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="469"/>
         <source>You have changed something on this machine and nothing is written up yet. Call report_compose now, with what you know so far - the symptom and what you have ruled out is already worth having - and again as you learn more. The user is offered whatever you composed last, and they may close the agent window at any moment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anda telah mengubah sesuatu pada komputer ini dan belum ada yang ditulis. Panggil report_compose sekarang dengan apa yang Anda ketahui sejauh ini — gejala dan hal yang sudah Anda singkirkan sudah layak dicatat — lalu panggil lagi saat Anda mempelajari hal baru. Yang ditawarkan kepada pengguna adalah laporan terakhir yang Anda buat, dan mereka bisa menutup jendela agent kapan saja.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="492"/>
         <source>Method not found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Metode tidak ditemukan: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="529"/>
@@ -2572,72 +2608,116 @@ Compose on a success as readily as on a failure. A failure report tells the proj
 You do not send it - that is the user&apos;s, and you have no tool for it. When you are done, tell them to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: it opens your report for them to read, correct and send to the project&apos;s own tracker, which needs no account of any kind. Say once that sending it is worth doing and why, then leave it with them - they may say no, and that is a normal answer.
 
 Fill in what you ruled out, not only what you concluded. A cause is made identifiable by what it is not, and that is the field that turns one report into something that recognises the same fault on somebody else&apos;s machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Server ini mengekspos instalasi Sandboxie-Plus lokal pada komputer ini.
+
+Anda dapat langsung membaca dokumentasi dan skema pengaturan — tool-tool itu tidak memerlukan otorisasi, karena mengembalikan apa yang disertakan Sandboxie, bukan apa pun tentang komputer ini.
+
+Untuk melihat komputer itu sendiri — sandbox apa yang ada, apa yang berjalan, apa yang diblokir — otorisasi dulu. Panggil &apos;pair&apos; tanpa argumen, lalu Sandboxie-Plus menampilkan kode enam digit kepada pengguna; minta kode itu kepada pengguna dan panggil &apos;pair&apos; lagi dengannya. Jangan menebak kodenya.
+
+Semua tool tercantum sejak awal, termasuk yang belum bisa Anda pakai: tool itu menolak sampai Anda melakukan pairing, dan mengatakannya saat menolak. Tidak ada yang muncul atau hilang dari daftar, jadi tidak perlu menyegarkannya — dan tidak ada gunanya meminta pengguna untuk tersambung ulang.
+
+Satu aturan tetap, dan ini tidak opsional: selalu buat laporan tertulis dengan report_compose. Buat begitu Anda punya gejala dan dugaan — sebelum ada sebab, apalagi solusi — lalu buat lagi setelah setiap hal yang Anda ubah, jalankan, atau singkirkan. Laporan baru menggantikan yang lama, jadi tidak ada biaya untuk sering melakukannya dan tidak ada状态 parsial yang perlu dikelola.
+
+Dan ketahuilah apakah perbaikannya berhasil. Saat pengguna mengatakan masalahnya hilang — atau belum — buat lagi dengan confirmed_by_user diset, yang mencatat bahwa penilaian itu berasal dari mereka, bukan dari Anda. Jika mereka belum mengatakan apa-apa, tanyakan: &apos;apakah sekarang sudah berfungsi?&apos; layak mendapat satu giliran, dan itu adalah baris paling berharga dalam laporan. Sebelum flag itu diset, Sandboxie-Plus menganggap sesi belum selesai: ia menampilkan tombol bagi pengguna untuk mengakhirinya sendiri, dan menanyakan hal itu sebelum apa pun dikirim.
+
+Anggap ini bagian dari pekerjaan, bukan administrasi di akhir. Sandboxie-Plus menyimpan laporan terbaru Anda dan menawarkannya kepada pengguna saat mereka menutup jendela agent — yang bisa mereka lakukan kapan saja — dan jika Anda tidak menulis apa pun, tidak ada yang ditawarkan dan semua yang Anda temukan hilang bagi proyek. Menyelesaikan sesi setelah memperbaiki sesuatu tetapi tidak menulis laporan adalah sesi yang gagal, betapapun senangnya pengguna.
+
+Lalu bacalah sebelum bertindak: sandboxie_version terlebih dahulu, karena pengaturan dan perbaikan berbeda antar build, lalu box_list, lalu box_get_config untuk box yang bersangkutan. Perhatikan bahwa box_get_config hanya menampilkan apa yang diatur pada box itu — nilai yang diwariskan dari templat dan default global tidak tercantum, jadi pengaturan yang tidak ada belum tentu tidak aktif.
+
+Ada dua sumber kebenaran yang terpisah tentang pengaturan, dan keduanya berbeda pada sebagian besar hal. config_schema adalah otoritas tentang apakah sebuah pengaturan ada, apa sintaksnya, dan versi mana yang menambah atau menghapusnya. Dokumentasi bawaan (docs_search, docs_get, docs_for_setting) menjelaskan arti pengaturan, tetapi hanya mencakup sekitar dua dari lima pengaturan. Jika dokumentasi tidak mengatakan apa-apa tentang sebuah pengaturan, itu bukan bukti bahwa pengaturan itu tidak ada — periksa config_schema sebelum mengatakan kepada pengguna bahwa pengaturan itu tidak nyata. Sebaliknya, jangan pernah mengarang nama pengaturan: driver mengabaikan nama yang tidak dikenal tanpa melaporkan kesalahan, jadi typo terlihat persis seperti pengaturan yang tidak berpengaruh.
+
+Saat sesuatu tidak berjalan di dalam sandbox, urutan yang membuahkan hasil adalah: box_processes untuk melihat apakah ia benar-benar berjalan, box_diagnostics untuk apa yang keberatan dikatakan Sandboxie, lalu trace_query yang difilter ke box itu untuk akses yang ditolak. Jika pelacakan mati, trace_query akan mengatakannya — minta pengguna mengaktifkannya dan mereproduksi masalah, bukan menyimpulkan dari jejak kosong.
+
+Box biasanya memiliki alias, dan itulah yang dipanggil pengguna. Rujuk box sesuai yang ditampilkan box_list pada displayName; baik nama maupun alias diterima sebagai input.
+
+Path dan nama akun dalam keluaran diagnostik diganti dengan token seperti %User% dan %Computer%. Ini disengaja — jangan minta pengguna membatalkannya, dan jangan perlakukan token sebagai path literal.
+
+Beberapa tool mengubah sesuatu, dan semuanya menunjukkan kepada pengguna persis apa yang akan diubah dan menunggu persetujuan. Anda tidak dapat mengubah apa pun diam-diam, jadi jangan meminimalkan apa yang Anda minta — penjelasan yang jelas disetujui, yang kabur tidak.
+
+Untuk perbaikan yang masih Anda ragukan, uji dulu: shadow_begin mengkloning konfigurasi ke salinan sekali pakai yang berbagi kumpulan berkas nyata, shadow_set mengubah salinan itu, lalu shadow_commit menyalin perubahan kembali — satu konfirmasi untuk seluruh perbaikan — atau shadow_discard membuangnya. Perbaikan yang benar-benar Anda coba jauh lebih berharga daripada yang hanya Anda yakini. Perhatikan bahwa hanya konfigurasi yang sekali pakai: berkas yang ditulis saat pengujian masuk ke sandbox yang nyata, dan pembatalan tidak membatalkannya.
+
+Untuk perubahan yang Anda yakin, atau permintaan sehari-hari seperti memaksa program masuk ke sandbox, gunakan box_apply_changes langsung. Tetap jalankan config_validate terlebih dahulu.
+
+Jika Anda akan mengubah berkas, bukan pengaturan, tawarkan snapshot_create dulu — hampir instan dan membuat perubahan dapat dibatalkan — tetapi hanya berfungsi saat tidak ada yang berjalan di sandbox, jadi harus dilakukan sebelum Anda memulai apa pun.
+
+Untuk melihat apakah perbaikan benar-benar berhasil, box_run menjalankan program di dalam sandbox. Pengguna melihat baris perintah persis seperti yang Anda tulis dan harus menyetujui sebelum apa pun berjalan, jadi tulislah dengan jelas. Perhatikan bahwa ia berjalan terhadap pengaturan sandbox saat ini: perubahan yang baru di-stage dengan shadow_set belum berlaku, jadi lakukan commit dulu jika menjalankan program itu dimaksudkan untuk mengujinya.
+
+Tidak ada di sini yang menghapus sandbox atau isinya, dengan sengaja.
+
+Terus buat laporan selagi Anda bekerja, dengan report_compose, daripada menundanya sampai akhir. Buat begitu Anda tahu sesuatu yang layak dilaporkan — gejala dan apa yang sudah Anda singkirkan sudah layak — lalu buat lagi setiap kali Anda mempelajari hal baru. Setiap panggilan menggantikan yang terakhir.
+
+Alasannya bukan sekadar pembukuan. Sandboxie-Plus menyimpan laporan terbaru Anda dan menawarkannya kepada pengguna saat mereka menutup jendela agent, yang bisa mereka lakukan kapan saja — konsol Anda tidak menunggu Anda menyelesaikan pikiran. Jika Anda tidak menulis apa pun, tidak ada yang ditawarkan dan seluruh sesi hilang bagi proyek. Laporan kasar yang terkirim lebih baik daripada laporan rapi yang tidak pernah ada.
+
+Buat laporan pada keberhasilan sama siapnya dengan pada kegagalan. Laporan kegagalan memberi tahu proyek apa yang masih rusak; laporan keberhasilan memberi tahu apa solusinya, dan itu adalah yang hampir tidak pernah mereka terima.
+
+Anda yang tidak mengirimnya — itu hak pengguna, dan Anda tidak punya tool untuk itu. Saat selesai, katakan kepada mereka untuk menekan Finish, centang hijau di bawah jendela agent Sandboxie-Plus: itu membuka laporan Anda untuk mereka baca, sunting, dan kirim ke pelacak masalah proyek, yang tidak memerlukan akun apa pun. Katakan sekali bahwa mengirimnya layak dilakukan dan mengapa, lalu serahkan kepada mereka — mereka boleh menolak, dan itu jawaban yang wajar.
+
+Isilah apa yang Anda singkirkan, bukan hanya kesimpulan Anda. Sebab menjadi dapat diidentifikasi dari apa yang bukan dia, dan itulah bidang yang mengubah satu laporan menjadi laporan yang mengenali kerusakan yang sama di komputer orang lain.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="788"/>
         <source>That needs authorisation: it reads this machine rather than the documentation. Call the pair tool, read the code Sandboxie-Plus displays to the user, and submit it. The documentation and schema tools work without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Itu memerlukan otorisasi: ia membaca komputer ini, bukan dokumentasi. Panggil tool pair, bacalah kode yang ditampilkan Sandboxie-Plus kepada pengguna, lalu kirimkan. Tool dokumentasi dan skema bekerja tanpa otorisasi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="807"/>
         <source>Unknown tool: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool tidak dikenal: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="817"/>
         <source>This connection is already authorised.</source>
-        <translation type="unfinished"></translation>
+        <translation>Koneksi ini sudah diotorisasi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="825"/>
         <source>Sandboxie-Plus is now showing a six-digit code. Ask the user to read it to you, then call pair again with that code. It is valid for five minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus sekarang menampilkan kode enam digit. Minta pengguna membacakannya kepada Anda, lalu panggil pair lagi dengan kode tersebut. Kode berlaku selama lima menit.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="835"/>
         <source>an agent was authorised: %1 (process %2)</source>
-        <translation type="unfinished"></translation>
+        <translation>agent diotorisasi: %1 (proses %2)</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="836"/>
         <source>unidentified client</source>
-        <translation type="unfinished"></translation>
+        <translation>klien tidak teridentifikasi</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="843"/>
         <source>Authorised. Every tool you can see will now answer, including the ones that were refusing. Changes still need the user to confirm them one at a time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diotorisasi. Semua tool yang Anda lihat sekarang akan merespons, termasuk yang sebelumnya menolak. Perubahan tetap memerlukan konfirmasi pengguna satu per satu.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="848"/>
         <source>No code has been requested. Call pair with no arguments first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Belum ada kode yang diminta. Panggil pair tanpa argumen terlebih dahulu.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="852"/>
         <source>That code has expired. Call pair with no arguments to request a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kode itu sudah kedaluwarsa. Panggil pair tanpa argumen untuk meminta yang baru.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="856"/>
         <source>Too many incorrect attempts; the code has been invalidated. Call pair with no arguments to request a new one, and ask the user to read it again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Terlalu banyak percobaan salah; kode telah dibatalkan. Panggil pair tanpa argumen untuk meminta yang baru, dan minta pengguna membacakannya lagi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="861"/>
         <source>That code is not correct. Ask the user to read it again from the Sandboxie-Plus window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kode itu tidak benar. Minta pengguna membacanya lagi dari jendela Sandboxie-Plus.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="906"/>
         <source>the user allowed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>pengguna mengizinkan: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="907"/>
         <source>the user refused: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>pengguna menolak: %1 (%2)</translation>
     </message>
 </context>
 <context>
@@ -2645,27 +2725,27 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
     <message>
         <location filename="Mcp/McpSession.cpp" line="253"/>
         <source>no code had been requested</source>
-        <translation type="unfinished"></translation>
+        <translation>tidak ada kode yang diminta</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="254"/>
         <source>wrong code</source>
-        <translation type="unfinished"></translation>
+        <translation>kode salah</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="255"/>
         <source>the code had expired</source>
-        <translation type="unfinished"></translation>
+        <translation>kode sudah kedaluwarsa</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="256"/>
         <source>too many attempts</source>
-        <translation type="unfinished"></translation>
+        <translation>terlalu banyak percobaan</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="257"/>
         <source>refused</source>
-        <translation type="unfinished"></translation>
+        <translation>ditolak</translation>
     </message>
 </context>
 <context>
@@ -2674,213 +2754,217 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
         <location filename="Mcp/McpSessionWindow.cpp" line="41"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="470"/>
         <source>AI Agent Session - Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesi AI Agent - Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="56"/>
         <source>For this session:</source>
-        <translation type="unfinished"></translation>
+        <translation>Untuk sesi ini:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="80"/>
         <source>Give the agent this code:</source>
-        <translation type="unfinished"></translation>
+        <translation>Berikan kode ini kepada agent:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="101"/>
         <source>Do not ask again for this program</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan tanya lagi untuk program ini</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="107"/>
         <source>What this agent has done:</source>
-        <translation type="unfinished"></translation>
+        <translation>Yang telah dilakukan agent ini:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="111"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Waktu</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="111"/>
         <source>What happened</source>
-        <translation type="unfinished"></translation>
+        <translation>Yang terjadi</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="118"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="422"/>
         <source>Waiting for you</source>
-        <translation type="unfinished"></translation>
+        <translation>Menunggu Anda</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="121"/>
         <source>Nothing is waiting. Once authorised the agent can read your sandboxes freely; anything it wants to change, start or stop will appear here first, and nothing happens until you answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada yang menunggu. Setelah diotorisasi, agent dapat membaca sandbox Anda dengan bebas; apa pun yang ingin diubah, dijalankan, atau dihentikan akan muncul di sini terlebih dahulu, dan tidak ada yang terjadi sampai Anda menjawab.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="145"/>
         <source>Allow</source>
-        <translation type="unfinished">Izinkan</translation>
+        <translation>Izinkan</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="146"/>
         <source>Refuse</source>
-        <translation type="unfinished"></translation>
+        <translation>Tolak</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="177"/>
         <source>Cancel</source>
-        <translation type="unfinished">Batal</translation>
+        <translation>Batal</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="178"/>
         <source>Finish</source>
-        <translation type="unfinished"></translation>
+        <translation>Selesai</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="183"/>
         <source>End this session without sending anything.</source>
-        <translation type="unfinished"></translation>
+        <translation>Akhiri sesi ini tanpa mengirim apa pun.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="206"/>
         <source>Sandboxie-Plus was closing, so the request was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus sedang ditutup, sehingga permintaan ditolak</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="211"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="580"/>
         <source>No agent is connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada agent yang terhubung.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="258"/>
         <source>%1 Asking cannot be turned off on this machine: AiAgentRequireConfirmation is set in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Bertanya tidak dapat dimatikan di komputer ini: AiAgentRequireConfirmation diatur di Sandboxie.ini.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="266"/>
         <source>this session starts at: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>sesi ini dimulai pada: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="282"/>
         <source>you set this session to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Anda mengatur sesi ini menjadi: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="372"/>
         <source>Valid for %1 minutes. Until it is entered the agent can do nothing. If you did not ask for this, ignore it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Berlaku selama %1 menit. Sebelum dimasukkan, agent tidak dapat melakukan apa pun. Jika Anda tidak memintanya, abaikan saja.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="382"/>
         <source>Skips this code next time. Anything able to run from %1 will then be authorised without asking.</source>
-        <translation type="unfinished"></translation>
+        <translation>Melewati kode ini lain kali. Apa pun yang dapat dijalankan dari %1 akan diotorisasi tanpa bertanya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="433"/>
         <source>Waiting for you - please answer</source>
-        <translation type="unfinished"></translation>
+        <translation>Menunggu Anda — silakan jawab</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="443"/>
         <source>AI Agent Session - waiting for you</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesi AI Agent - menunggu Anda</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="517"/>
         <source>recorded that you confirmed the result</source>
-        <translation type="unfinished"></translation>
+        <translation>mencatat bahwa Anda mengonfirmasi hasilnya</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="523"/>
         <source>wrote up what it has found - press Finish when you are done to read and send it</source>
-        <translation type="unfinished"></translation>
+        <translation>menulis temuannya — tekan Selesai setelah selesai untuk membaca dan mengirimnya</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="524"/>
         <source>updated its write-up of what it has found</source>
-        <translation type="unfinished"></translation>
+        <translation>memperbarui laporan temuannya</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="560"/>
         <source>Wrap up: read what the agent wrote and decide whether to send it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Penutup: bacalah yang ditulis agent dan putuskan apakah akan dikirim.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="561"/>
         <source>The agent has not written anything up yet. Ask it to write up what it found - it has a tool for that - and this becomes available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Agent belum menulis apa pun. Mintalah ia menulis temuannya — ia memiliki tool untuk itu — lalu opsi ini akan tersedia.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="570"/>
         <source>the connection closed while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>koneksi tertutup saat permintaan sedang menunggu, sehingga ditolak</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="589"/>
         <source>the session was finished while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>sesi diakhiri saat permintaan sedang menunggu, sehingga ditolak</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="633"/>
         <source>Close this window - and the agent connection with it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutup jendela ini — dan koneksi agent bersamanya?</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="637"/>
         <source>The agent has written up what it found, and closing does not send it. Finish instead - the green tick - to read it and decide; it is the only way what happened here reaches anyone else. Nothing is lost either way: the write-up is kept, and you can reopen this window and finish later.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Agent telah menulis temuannya, dan menutup jendela tidak mengirimnya. Gunakan Finish — centang hijau — untuk membacanya dan memutuskan; itu satu-satunya cara agar apa yang terjadi di sini sampai ke orang lain. Tidak ada yang hilang dengan cara apa pun: laporan tetap disimpan, dan Anda bisa membuka jendela ini lagi lalu menyelesaikannya nanti.
+
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="643"/>
         <source>A request is waiting for an answer, and closing refuses it.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ada permintaan yang menunggu jawaban, dan menutup jendela akan menolaknya.
+
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="648"/>
         <source>Disconnecting closes the agent connection as well: nothing can connect again until you turn it back on. Staying connected leaves it open, so the agent can carry on and this window comes back the next time it needs you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Memutus koneksi juga menutup koneksi agent: tidak ada yang dapat terhubung lagi sampai Anda menyalakannya kembali. Tetap terhubung membiarkannya terbuka, sehingga agent dapat melanjutkan dan jendela ini muncul lagi saat membutuhkan Anda.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="654"/>
         <source>Close and Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutup dan Putuskan</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="655"/>
         <source>Close, Stay Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutup, Tetap Terhubung</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="656"/>
         <source>Keep Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Biarkan Terbuka</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="677"/>
         <source>the window was closed while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>jendela ditutup saat permintaan menunggu, sehingga ditolak</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="681"/>
         <source>the window was closed, so the write-up was not sent</source>
-        <translation type="unfinished"></translation>
+        <translation>jendela ditutup, sehingga laporan tidak dikirim</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="713"/>
         <source>the report was sent to the Sandboxie-Plus issue tracker</source>
-        <translation type="unfinished"></translation>
+        <translation>laporan dikirim ke pelacak masalah Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="729"/>
         <source>the report was not sent - press Finish again if you change your mind</source>
-        <translation type="unfinished"></translation>
+        <translation>laporan tidak dikirim — tekan Selesai lagi jika Anda berubah pikiran</translation>
     </message>
 </context>
 <context>
@@ -2888,124 +2972,126 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="32"/>
         <source>Send this to the Sandboxie-Plus project?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kirim ini ke proyek Sandboxie-Plus?</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="42"/>
         <source>The agent wrote this up while it worked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Agent menulis ini saat bekerja.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="43"/>
         <source>%1 wrote this up while it worked.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 menulis ini saat bekerja.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="50"/>
         <source>Sending it is how what happened here reaches the people who maintain Sandboxie. A fix that worked tells them what to recommend to the next person with the same problem - and that is the report they almost never get. One that did not work tells them what is still broken.
 
 Nothing is sent unless you choose to, and nothing goes without you reading it. Edit or delete anything below first - the second half was written by the agent and can contain anything it saw.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengirimnya adalah cara agar apa yang terjadi di sini sampai ke orang-orang yang memelihara Sandboxie. Perbaikan yang berhasil memberi tahu mereka apa yang harus disarankan kepada orang berikutnya dengan masalah yang sama — dan itu adalah laporan yang hampir tidak pernah mereka terima. Perbaikan yang gagal memberi tahu mereka apa yang masih rusak.
+
+Tidak ada yang dikirim kecuali Anda memilihnya, dan tidak ada yang pergi tanpa Anda baca. Sunting atau hapus apa pun di bawah terlebih dahulu — bagian kedua ditulis oleh agent dan dapat berisi apa pun yang dilihatnya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="84"/>
         <source>Detailed issue description</source>
-        <translation type="unfinished">Deskripsi masalah secara rinci</translation>
+        <translation>Deskripsi masalah detail</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="92"/>
         <source>Is the problem actually gone?</source>
-        <translation type="unfinished"></translation>
+        <translation>Apakah masalahnya benar-benar hilang?</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="95"/>
         <source>The agent did not establish this, and it is the single most useful line in the report - it is what tells the project whether the fix it is reading about actually works. Answering is optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>Agent tidak memastikannya, dan ini adalah baris paling berguna dalam laporan — inilah yang memberi tahu proyek apakah perbaikan yang dibacanya benar-benar berfungsi. Menjawab bersifat opsional.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="101"/>
         <source>Yes - the problem is fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ya — masalahnya sudah teratasi</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="102"/>
         <source>No - it is still there</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak — masalahnya masih ada</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="114"/>
         <source>Attach Sandboxie.ini</source>
-        <translation type="unfinished">Lampirkan Sandboxie.ini</translation>
+        <translation>Lampirkan Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="118"/>
         <source>Attach Logs</source>
-        <translation type="unfinished">Lampirkan Log</translation>
+        <translation>Lampirkan Log</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="127"/>
         <source>Email address</source>
-        <translation type="unfinished">Alamat email</translation>
+        <translation>Alamat email</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="138"/>
         <source>Don&apos;t Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan Kirim</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="140"/>
         <source>Send Report</source>
-        <translation type="unfinished"></translation>
+        <translation>Kirim Laporan</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="186"/>
         <source>The report could not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Laporan tidak dapat dikirim.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="229"/>
         <source>the Sandboxie-Plus message log</source>
-        <translation type="unfinished"></translation>
+        <translation>log pesan Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="230"/>
         <source>the resource trace - everything every sandboxed program touched while it was on</source>
-        <translation type="unfinished"></translation>
+        <translation>jejak sumber daya — semua yang disentuh setiap program sandbox saat aktif</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="232"/>
         <source>your whole Sandboxie.ini, which describes every sandbox you have</source>
-        <translation type="unfinished"></translation>
+        <translation>seluruh Sandboxie.ini Anda, yang menjelaskan setiap sandbox yang Anda miliki</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="237"/>
         <source>any contact address, so nobody can reply to you about it</source>
-        <translation type="unfinished"></translation>
+        <translation>alamat kontak apa pun, sehingga tidak ada yang dapat membalas Anda</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="239"/>
         <source>your address %1, so a maintainer can reply</source>
-        <translation type="unfinished"></translation>
+        <translation>alamat Anda %1, agar maintainer dapat membalas</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="241"/>
         <source>Selecting the partially checked state sends the message log but not the resource trace. Both can be read in the main window before you send.</source>
-        <translation type="unfinished"></translation>
+        <translation>Memilih status dicentang sebagian mengirim log pesan, tetapi bukan jejak sumber daya. Keduanya dapat dibaca di jendela utama sebelum Anda mengirim.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="244"/>
         <source>Sent with the report:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dikirim bersama laporan:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="246"/>
         <source>nothing but the text above</source>
-        <translation type="unfinished"></translation>
+        <translation>hanya teks di atas</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="249"/>
         <source>Left out:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak disertakan:</translation>
     </message>
 </context>
 <context>
@@ -3073,7 +3159,7 @@ Nothing is sent unless you choose to, and nothing goes without you reading it. E
     <message>
         <location filename="Views/NtObjectView.cpp" line="213"/>
         <source>%1 - NT Object Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Ruang Nama Objek NT</translation>
     </message>
 </context>
 <context>
@@ -3081,17 +3167,17 @@ Nothing is sent unless you choose to, and nothing goes without you reading it. E
     <message>
         <location filename="Models/NtObjectModel.cpp" line="726"/>
         <source>Name</source>
-        <translation type="unfinished">Nama</translation>
+        <translation>Nama</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="727"/>
         <source>Type</source>
-        <translation type="unfinished">Tipe</translation>
+        <translation>Tipe</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="728"/>
         <source>Access</source>
-        <translation type="unfinished">Akses</translation>
+        <translation>Akses</translation>
     </message>
 </context>
 <context>
@@ -3524,7 +3610,7 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <location filename="Windows/OptionsAdvanced.cpp" line="78"/>
         <location filename="Windows/OptionsNetwork.cpp" line="340"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
@@ -3571,7 +3657,7 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="167"/>
         <source>Name|Type|Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama|Tipe|Nilai</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="807"/>
@@ -3594,7 +3680,7 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="837"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1011"/>
@@ -3673,12 +3759,12 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1527"/>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Global</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1528"/>
         <source>Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Templat</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1579"/>
@@ -3822,140 +3908,140 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="68"/>
         <source>Don&apos;t show in border</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan tampilkan di batas</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="69"/>
         <source>Show within the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan di dalam batas</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="70"/>
         <source>Show outside the border</source>
         <oldsource>Show above the border</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan di luar batas</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="71"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Atas</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Bawah</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiri</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanan</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="75"/>
         <source>Stacked upright letters</source>
-        <translation type="unfinished"></translation>
+        <translation>Huruf ditumpuk tegak</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="76"/>
         <source>Stacked (compact)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ditumpuk (ringkas)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="77"/>
         <source>Rotated down</source>
-        <translation type="unfinished"></translation>
+        <translation>Diputar ke bawah</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="78"/>
         <source>Rotated up</source>
-        <translation type="unfinished"></translation>
+        <translation>Diputar ke atas</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="79"/>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Tetap</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="80"/>
         <source>Adaptive (same edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>Adaptif (tepi yang sama)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="81"/>
         <source>Adaptive (opposite edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>Adaptif (tepi berlawanan)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="82"/>
         <source>Adaptive (any edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>Adaptif (tepi mana pun)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="83"/>
         <source>Use inherited/default setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Gunakan pengaturan warisan/default</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="84"/>
         <source>Avoid covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Hindari menutupi taskbar</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="85"/>
         <source>Allow covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Izinkan menutupi taskbar</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="86"/>
         <source>Use inherited/automatic setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Gunakan pengaturan warisan/otomatis</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="87"/>
         <source>Hide border and label from capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Sembunyikan batas dan label dari tangkapan</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="88"/>
         <source>Include border and label in capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Sertakan batas dan label dalam tangkapan</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="92"/>
         <location filename="Windows/OptionsGeneral.cpp" line="96"/>
         <source>Always show (focused window only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Selalu tampilkan (hanya jendela aktif)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="93"/>
         <location filename="Windows/OptionsGeneral.cpp" line="97"/>
         <source>Show for all windows in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan untuk semua jendela di box ini</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="94"/>
         <source> (outside)</source>
-        <translation type="unfinished"></translation>
+        <translation> (di luar)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="99"/>
         <source>Active snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Snapshot aktif</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="100"/>
         <source>Default snapshot</source>
-        <translation type="unfinished">Snapshot default</translation>
+        <translation>Snapshot default</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="101"/>
         <source>Selects the snapshot restored by SandMan after automatic deletion. The active state may be the empty sandbox rather than a saved snapshot.</source>
-        <translation type="unfinished"></translation>
+        <translation>Memilih snapshot yang dipulihkan SandMan setelah penghapusan otomatis. Status aktif bisa jadi sandbox kosong, bukan snapshot tersimpan.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="116"/>
@@ -4044,17 +4130,17 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <location filename="Windows/OptionsGeneral.cpp" line="806"/>
         <location filename="Windows/OptionsGeneral.cpp" line="913"/>
         <source>Copy newer</source>
-        <translation type="unfinished"></translation>
+        <translation>Salin yang lebih baru</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1051"/>
         <source>Select the font, native style, writing system and point size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih font, gaya native, sistem tulisan, dan ukuran poin.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1052"/>
         <source>Default: Segoe UI Bold; legacy sizing</source>
-        <translation type="unfinished"></translation>
+        <translation>Default: Segoe UI Bold; ukuran lama</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1136"/>
@@ -4094,7 +4180,7 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1560"/>
         <source>Failed to Change Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Gagal Mengubah Kata Sandi</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1569"/>
@@ -4151,7 +4237,7 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <location filename="Windows/BorderFontDialog.cpp" line="128"/>
         <location filename="Windows/OptionsGeneral.cpp" line="1094"/>
         <source>Border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Font label batas</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="133"/>
@@ -4163,77 +4249,77 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="138"/>
         <source>Unavailable writing system (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistem tulisan tidak tersedia (%1)</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="142"/>
         <source>&amp;Writing system:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sistem tulisan:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="152"/>
         <source>Font &amp;family:</source>
-        <translation type="unfinished"></translation>
+        <translation>Keluarga &amp;font:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="154"/>
         <source>Font st&amp;yle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gaya &amp;font:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="159"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation> pt</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="161"/>
         <source>&amp;Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ukuran:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="162"/>
         <source>&amp;Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Garis bawah</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="164"/>
         <source>Stri&amp;keout</source>
-        <translation type="unfinished"></translation>
+        <translation>Core&amp;t</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="173"/>
         <source>Native font preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Pratinjau font native</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="182"/>
         <source>Save only this font and size immediately. Other pending box options are not applied. Cancel keeps the last applied font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Simpan hanya font dan ukuran ini sekarang. Opsi box lain yang tertunda tidak diterapkan. Batal mempertahankan font yang terakhir diterapkan.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="183"/>
         <source>This template is read-only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Templat ini hanya-baca.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="291"/>
         <source>The saved selection is unavailable. Choose an installed family and a native style.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilihan yang tersimpan tidak tersedia. Pilih keluarga font yang terpasang dan gaya native.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="325"/>
         <source>Sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama sandbox</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="340"/>
         <source>Unable to create the native font preview.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat membuat pratinjau font native.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="342"/>
         <source>Native GDI preview. Writing system filters the font list; it does not change label language or direction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pratinjau GDI native. Sistem tulisan menyaring daftar font; ia tidak mengubah bahasa atau arah label.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="56"/>
@@ -4256,7 +4342,7 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="111"/>
         <source>None (Don&apos;t bind to adapter)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada (Jangan ikat ke adapter)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="206"/>
@@ -4297,7 +4383,7 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <location filename="Windows/OptionsNetwork.cpp" line="1178"/>
         <source>Entry %1 : IP or Port cannot be empty</source>
         <oldsource> entry: IP or Port cannot be empty</oldsource>
-        <translation type="unfinished"> entri: IP atau Port tidak boleh kosong</translation>
+        <translation>Entri %1: IP atau Port tidak boleh kosong</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>
@@ -4495,12 +4581,12 @@ Silakan pilih folder yang berisi file ini.</translation>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1865"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Persetujuan Auto-Completion Diperlukan</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1867"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitur auto-completion memerlukan persetujuan Anda untuk melanjutkan.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1869"/>
@@ -4509,37 +4595,41 @@ Silakan pilih folder yang berisi file ini.</translation>
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jika Anda ragu tentang pengaturan yang ditampilkan di popup auto-completion, kami sangat menyarankan membaca dokumentasi atau kode sumber perangkat lunak ini sebelum melanjutkan. Mengaktifkan fitur ini tanpa pemahaman yang memadai dapat menyebabkan konsekuensi yang tidak diinginkan, dan Anda sepenuhnya bertanggung jawab atas hal itu.
+
+Pilih mode auto-completion:
+%1 Manual: Saran auto-completion dengan %2.
+%1 Saat Mengetik: Saran auto-completion saat mengetik.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1877"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1878"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Memunculkan saran auto-completion dengan %1.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1880"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Saat Mengetik</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1881"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Memunculkan saran auto-completion saat mengetik.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1884"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menonaktifkan saran auto-completion.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1883"/>
         <source>Cancel</source>
-        <translation type="unfinished">Batal</translation>
+        <translation>Batal</translation>
     </message>
 </context>
 <context>
@@ -4547,17 +4637,17 @@ Choose autocomplete mode:
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="31"/>
         <source>Any File (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Semua Berkas (*.*)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="37"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Pilih Direktori</translation>
+        <translation>Pilih Direktori</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="38"/>
         <source>Browse</source>
-        <translation type="unfinished">Jelajahi</translation>
+        <translation>Telusuri</translation>
     </message>
 </context>
 <context>
@@ -4732,52 +4822,56 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="28"/>
         <source>Sandboxie-Plus Notifications</source>
-        <translation></translation>
+        <translation>Notifikasi Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="315"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
-        <translation></translation>
+        <translation>Izinkan print spooler menulis di luar sandbox untuk %1 (%2)?</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="497"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation></translation>
+        <translation>Izinkan %4 (%5) menyalin berkas besar %1 ke dalam sandbox: %2?
+Nama berkas: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="503"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation></translation>
+        <translation>Izinkan %1 (%2) mengakses internet?
+Path lengkap: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="565"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation></translation>
+        <translation>%1 memenuhi syarat untuk pemulihan cepat dari %2.
+Berkas ditulis oleh: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="567"/>
         <source>an UNKNOWN process.</source>
-        <translation></translation>
+        <translation>proses yang TIDAK DIKENAL.</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="567"/>
         <source>%1 (%2)</source>
-        <translation></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="657"/>
         <location filename="Windows/PopUpWindow.cpp" line="659"/>
         <source>UNKNOWN</source>
-        <translation></translation>
+        <translation>TIDAK DIKENAL</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="665"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation></translation>
+        <translation>Memindahkan berkas besar %1 ke sandbox %2, sisa %3.
+Path lengkap: %4</translation>
     </message>
 </context>
 <context>
@@ -4785,7 +4879,7 @@ Full path: %4</source>
     <message>
         <location filename="../MiscHelpers/Common/ProgressDialog.h" line="101"/>
         <source>Close (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutup (%1)</translation>
     </message>
 </context>
 <context>
@@ -4793,23 +4887,23 @@ Full path: %4</source>
     <message>
         <location filename="SandManRecovery.cpp" line="348"/>
         <source>Sandboxie-Plus - Recovery Log</source>
-        <translation></translation>
+        <translation>Sandboxie-Plus - Log Pemulihan</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="359"/>
         <source>Time|Box Name|File Path</source>
-        <translation></translation>
+        <translation>Waktu|Nama Box|Path Berkas</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="361"/>
         <source>Cleanup Recovery Log</source>
-        <translation></translation>
+        <translation>Bersihkan Log Pemulihan</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="371"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
-        <translation></translation>
+        <translation>Berkas-berkas berikut baru saja dipulihkan dan dipindahkan keluar dari sandbox.</translation>
     </message>
 </context>
 <context>
@@ -4894,7 +4988,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="932"/>
         <source>%1 file(s) hidden by AutoRecoverIgnore</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 berkas disembunyikan oleh AutoRecoverIgnore</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="1283"/>
@@ -4912,17 +5006,17 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="17"/>
         <source>Sandboxie-Plus - Rename Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Ubah Nama Sandbox</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="23"/>
         <source>When enabled, alias display is disabled for this sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jika diaktifkan, tampilan alias dinonaktifkan untuk sandbox ini.</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="24"/>
         <source>Hide alias input in this dialog. This preference is remembered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sembunyikan kolom alias di dialog ini. Preferensi ini disimpan.</translation>
     </message>
 </context>
 <context>
@@ -4935,7 +5029,7 @@ Full path: %4</source>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="593"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="615"/>
@@ -5179,12 +5273,12 @@ Berbeda dengan saluran pratinjau, saluran ini tidak mencakup perubahan yang belu
     <message>
         <location filename="SbiePlusAPI.cpp" line="674"/>
         <source> (Portable)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Portable)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="677"/>
         <source> (Virtual)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Virtual)</translation>
     </message>
 </context>
 <context>
@@ -5350,12 +5444,12 @@ Berbeda dengan saluran pratinjau, saluran ini tidak mencakup perubahan yang belu
     <message>
         <location filename="SandMan.cpp" line="838"/>
         <source>Troubleshoot with an AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>Pecahkan masalah dengan AI Agent</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="839"/>
         <source>Set up an AI agent to look at a sandbox with you - which clients are supported, and the exact configuration each one needs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Siapkan AI agent untuk memeriksa sandbox bersama Anda — klien mana yang didukung, dan konfigurasi pasti yang dibutuhkan masing-masing.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="893"/>
@@ -5443,23 +5537,23 @@ Berbeda dengan saluran pratinjau, saluran ini tidak mencakup perubahan yang belu
     <message>
         <location filename="SandMan.cpp" line="984"/>
         <source>AI Agent Connection (MCP)</source>
-        <translation type="unfinished"></translation>
+        <translation>Koneksi AI Agent (MCP)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="986"/>
         <location filename="SandMan.cpp" line="3466"/>
         <source>Let a local AI agent inspect this Sandboxie installation. Off until you turn it on, and unreachable from inside a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izinkan AI agent lokal memeriksa instalasi Sandboxie ini. Mati sampai Anda menyalakannya, dan tidak dapat dijangkau dari dalam sandbox.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="988"/>
         <source>AI Agent Session Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Jendela Sesi AI Agent</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="989"/>
         <source>Everything the agent has asked for and what you answered. Opens on its own when an agent connects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Semua yang diminta agent dan jawaban Anda. Terbuka otomatis saat agent terhubung.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1004"/>
@@ -5630,7 +5724,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandManTray.cpp" line="214"/>
         <source>Find sandbox...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cari sandbox...</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="228"/>
@@ -5650,57 +5744,58 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandManTray.cpp" line="314"/>
         <source>No pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada sandbox yang disematkan untuk ditampilkan.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="316"/>
         <source>No active or pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada sandbox aktif atau yang disematkan untuk ditampilkan.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="317"/>
         <source>No sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada sandbox untuk ditampilkan.</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="270"/>
         <source>    Alias: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Alias: %1
+</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="271"/>
         <source>    File root: %1
 </source>
-        <translation type="unfinished">    Root file: %1
+        <translation>    Root berkas: %1
 </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="272"/>
         <source>    Registry root: %1
 </source>
-        <translation type="unfinished">    Root registri: %1
+        <translation>    Root registri: %1
 </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="273"/>
         <source>    IPC root: %1
 </source>
-        <translation type="unfinished">    Root IPC: %1
+        <translation>    Root IPC: %1
 </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="275"/>
         <source>    Disk root: %1
 </source>
-        <translation type="unfinished">    Root disk: %1
+        <translation>    Root disk: %1
 </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="276"/>
         <source>Options:
     </source>
-        <translation type="unfinished">Opsi:
+        <translation>Opsi:
     </translation>
     </message>
     <message>
@@ -5791,7 +5886,7 @@ Tidak akan memilih: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="3106"/>
         <source>   -   NOT connected</source>
-        <translation></translation>
+        <translation>   -   TIDAK terhubung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4179"/>
@@ -5856,7 +5951,7 @@ Tidak akan memilih: %2</translation>
     <message>
         <location filename="SandManRecovery.cpp" line="314"/>
         <source>Sandbox name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama sandbox: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4358"/>
@@ -6073,7 +6168,7 @@ Tidak akan memilih: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1073"/>
         <source>Programs</source>
-        <translation></translation>
+        <translation>Program</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1074"/>
@@ -6142,7 +6237,7 @@ Tidak akan memilih: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1236"/>
         <source>AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>AI Agent</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1265"/>
@@ -6162,17 +6257,17 @@ Tidak akan memilih: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2161"/>
         <source>MCP: %1 requested via command line, now %2</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 diminta lewat baris perintah, sekarang %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2162"/>
         <source>on</source>
-        <translation type="unfinished"></translation>
+        <translation>aktif</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2162"/>
         <source>off</source>
-        <translation type="unfinished"></translation>
+        <translation>nonaktif</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2316"/>
@@ -6267,7 +6362,7 @@ Silakan periksa apakah ada pembaruan untuk Sandboxie.</translation>
     <message>
         <location filename="SandMan.cpp" line="528"/>
         <source> (Administrator)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Administrator)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="795"/>
@@ -6277,12 +6372,12 @@ Silakan periksa apakah ada pembaruan untuk Sandboxie.</translation>
     <message>
         <location filename="SandMan.cpp" line="857"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Impor Box</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="859"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekspor Box</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="863"/>
@@ -6305,22 +6400,22 @@ Silakan periksa apakah ada pembaruan untuk Sandboxie.</translation>
     <message>
         <location filename="SandMan.cpp" line="938"/>
         <source>Auto Expand Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Luaskan Pohon Otomatis</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1103"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Impor Sandbox</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1105"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekspor Sandbox</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1572"/>
         <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Box: %1 (%2 aktif)  |  Proses: %3  |  Memori: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1989"/>
@@ -6330,7 +6425,7 @@ Silakan periksa apakah ada pembaruan untuk Sandboxie.</translation>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="53"/>
         <source>No enabled sandbox is available. Please create or enable a sandbox and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada sandbox yang aktif. Silakan buat atau aktifkan sandbox lalu coba lagi.</translation>
     </message>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="63"/>
@@ -6340,7 +6435,7 @@ Silakan periksa apakah ada pembaruan untuk Sandboxie.</translation>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="106"/>
         <source>More than one sandbox has this alias. Select a sandbox from the list or type its actual name. Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebih dari satu sandbox memiliki alias ini. Pilih sandbox dari daftar atau ketik nama aslinya. Tidak ada yang diubah.</translation>
     </message>
     <message>
         <source>Type the box name which you are going to set:</source>
@@ -6373,7 +6468,7 @@ Silakan periksa apakah ada pembaruan untuk Sandboxie.</translation>
     <message>
         <location filename="SandMan.cpp" line="2389"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Beberapa templat kompatibilitas tidak ditemukan:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Mungkin sudah dihapus. Hapus dari semua box?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2476"/>
@@ -6388,7 +6483,7 @@ Silakan periksa apakah ada pembaruan untuk Sandboxie.</translation>
     <message>
         <location filename="SandMan.cpp" line="3010"/>
         <source>Removed %1 leftover sandbox configuration copies from an interrupted troubleshooting session</source>
-        <translation type="unfinished"></translation>
+        <translation>Menghapus %1 salinan konfigurasi sandbox sisa dari sesi pemecahan masalah yang terputus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3096"/>
@@ -6407,89 +6502,89 @@ Apakah Anda ingin menonaktifkan pemindaian Pembaruan Windows dari deteksi kompat
     <message>
         <location filename="SandMan.cpp" line="3376"/>
         <source>The AI agent connection is turned off in the settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Koneksi AI agent dimatikan di pengaturan</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3388"/>
         <source>The AI agent connection is disabled by AllowAiAgent=n in Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Koneksi AI agent dinonaktifkan oleh AllowAiAgent=n di Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3405"/>
         <source>An AI agent can now connect to Sandboxie on %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>AI agent sekarang dapat terhubung ke Sandboxie di %1%2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3416"/>
         <source>The AI agent connection is closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Koneksi AI agent ditutup</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3460"/>
         <location filename="SandMan.cpp" line="3494"/>
         <source>Turned off for this machine by AllowAiAgent=n in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimatikan untuk komputer ini oleh AllowAiAgent=n di Sandboxie.ini.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3462"/>
         <source>Turned off in Settings, under General Config, AI Agent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimatikan di Pengaturan, bawah Konfigurasi Umum, AI Agent.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3464"/>
         <source>An AI agent can connect. Click to close the connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>AI agent dapat terhubung. Klik untuk menutup koneksi.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3503"/>
         <location filename="SandMan.cpp" line="3602"/>
         <source>The AI agent connection could not be opened. The message log has the reason.</source>
-        <translation type="unfinished"></translation>
+        <translation>Koneksi AI agent tidak dapat dibuka. Log pesan memuat alasannya.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3526"/>
         <source>An unidentified program</source>
-        <translation type="unfinished"></translation>
+        <translation>Program yang tidak teridentifikasi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3533"/>
         <source>connected, waiting to be authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>terhubung, menunggu otorisasi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3534"/>
         <source>%1 connected</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 terhubung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3555"/>
         <source>MCP: ignored a connection request from %1 (asked too recently)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: mengabaikan permintaan koneksi dari %1 (terlalu baru diminta)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3556"/>
         <source>an unidentified application</source>
-        <translation type="unfinished"></translation>
+        <translation>aplikasi yang tidak teridentifikasi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3560"/>
         <source>An application</source>
-        <translation type="unfinished"></translation>
+        <translation>Sebuah aplikasi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3563"/>
         <source>asking to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>meminta untuk terhubung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3564"/>
         <source>%1 is asking to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 meminta untuk terhubung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3568"/>
         <source>%1 is asking to connect an AI agent to Sandboxie-Plus.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 meminta untuk menghubungkan AI agent ke Sandboxie-Plus.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3569"/>
@@ -6500,119 +6595,125 @@ To look at YOUR sandboxes - what exists, what is running, what was blocked - it 
 It is not reachable from inside a sandbox.
 
 If you did not just ask an AI assistant to look at Sandboxie, refuse this.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengizinkan ini membuat agent dapat langsung membaca dokumentasi Sandboxie sendiri.
+
+Untuk melihat sandbox ANDA — apa yang ada, apa yang berjalan, apa yang diblokir — agent harus meminta kode kepada Anda, yang akan ditampilkan jendela ini. Untuk mengubah, menjalankan, atau menghentikan apa pun, ia harus bertanya lagi, setiap kali.
+
+Agent tidak dapat dijangkau dari dalam sandbox.
+
+Jika Anda baru saja tidak meminta asisten AI untuk melihat Sandboxie, tolak ini.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3575"/>
         <source>Allow the Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Izinkan Koneksi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3585"/>
         <source>the connection was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>koneksi ditolak</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3586"/>
         <source>not connected</source>
-        <translation type="unfinished"></translation>
+        <translation>tidak terhubung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3589"/>
         <source>MCP: declined a connection request from %1 (%2 in a row - further requests ignored for a minute)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: menolak permintaan koneksi dari %1 (%2 berturut-turut — permintaan berikutnya diabaikan selama satu menit)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3593"/>
         <source>MCP: declined a connection request from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: menolak permintaan koneksi dari %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3599"/>
         <source>the connection was allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>koneksi diizinkan</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3628"/>
         <source>An AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>AI Agent</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3630"/>
         <source>waiting for the code below to be read to it</source>
-        <translation type="unfinished"></translation>
+        <translation>menunggu kode di bawah dibacakannya</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3631"/>
         <source>%1 asked to be authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 meminta otorisasi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3636"/>
         <source>MCP: %1 is asking to connect; a pairing code is displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 meminta koneksi; kode pasangan ditampilkan</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3641"/>
         <location filename="SandMan.cpp" line="3662"/>
         <location filename="SandMan.cpp" line="3670"/>
         <source>an AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>sebuah AI agent</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3648"/>
         <source>this program will be authorised without asking from now on</source>
-        <translation type="unfinished"></translation>
+        <translation>program ini akan diotorisasi tanpa bertanya mulai sekarang</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3649"/>
         <source>MCP: %1 will be authorised without asking from now on</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 akan diotorisasi tanpa bertanya mulai sekarang</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3655"/>
         <source>authorised - it can read freely, and must ask for anything else</source>
-        <translation type="unfinished"></translation>
+        <translation>diotorisasi — ia dapat membaca dengan bebas, dan harus bertanya untuk hal lain</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3656"/>
         <source>%1 is now authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 sekarang diotorisasi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3657"/>
         <source>MCP: %1 is now authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 sekarang diotorisasi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3664"/>
         <source>%1 failed to authorise (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 gagal diotorisasi (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3665"/>
         <source>MCP: %1 failed to authorise (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 gagal diotorisasi (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3672"/>
         <source>suspended after an hour idle - it must be authorised again</source>
-        <translation type="unfinished"></translation>
+        <translation>ditangguhkan setelah menganggur satu jam — harus diotorisasi lagi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3673"/>
         <source>the session for %1 was suspended after an hour idle</source>
-        <translation type="unfinished"></translation>
+        <translation>sesi untuk %1 ditangguhkan setelah menganggur satu jam</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3674"/>
         <source>MCP: the session for %1 was suspended after an hour idle; it can be resumed by authorising again</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: sesi untuk %1 ditangguhkan setelah menganggur satu jam; dapat dilanjutkan dengan otorisasi ulang</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3682"/>
         <source>MCP: %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4040"/>
@@ -7052,17 +7153,17 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
     <message>
         <location filename="Models/SbieModel.cpp" line="840"/>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation>CPU</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="841"/>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Memori</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="842"/>
         <source>Private Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Byte Pribadi</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="843"/>
@@ -7255,7 +7356,7 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
         <location filename="SbieProcess.cpp" line="57"/>
         <location filename="SbieProcess.cpp" line="89"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="108"/>
@@ -7270,7 +7371,7 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation type="unfinished"></translation>
+        <translation> (Admin palsu)</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -7503,12 +7604,12 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
         <location filename="Views/SbieView.cpp" line="178"/>
         <location filename="Views/SbieView.cpp" line="349"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Impor Box</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="269"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekspor Box</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="299"/>
@@ -7562,7 +7663,7 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
     <message>
         <location filename="Views/SbieView.cpp" line="945"/>
         <source>[None]</source>
-        <translation></translation>
+        <translation>[Tidak ada]</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1392"/>
@@ -7668,7 +7769,7 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
         <location filename="Views/SbieView.cpp" line="265"/>
         <location filename="Views/SbieView.cpp" line="402"/>
         <source>Browse NT Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>Telusuri Ruang Nama NT</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="268"/>
@@ -7750,7 +7851,7 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
     <message>
         <location filename="Views/SbieView.cpp" line="406"/>
         <source>Export Sandbox</source>
-        <translation></translation>
+        <translation>Ekspor Sandbox</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="473"/>
@@ -7767,25 +7868,29 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
         <location filename="Views/SbieView.cpp" line="642"/>
         <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    CPU: %1  |  Memori: %2  |  Byte Pribadi: %3
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="646"/>
         <source>    Sandbox: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Sandbox: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="648"/>
         <source>    Image: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Citra: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="651"/>
         <source>    Start Time: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Waktu Mulai: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1126"/>
@@ -8100,17 +8205,17 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
         <location filename="Windows/SettingsWindow.cpp" line="442"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ingat status sebelumnya</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="443"/>
         <source>Expand all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Luaskan semua grup</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="444"/>
         <source>Collapse all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Lipat semua grup</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="446"/>
@@ -8161,23 +8266,23 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3764"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Persetujuan Auto-Completion Diperlukan</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3239"/>
         <location filename="Windows/SettingsWindow.cpp" line="3248"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3244"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(salin)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3257"/>
         <source>Sandboxie-Plus Version: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Versi Sandboxie-Plus: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="944"/>
@@ -8225,14 +8330,14 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3236"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik untuk menampilkan</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3237"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Klik untuk menyembunyikan</translation>
     </message>
     <message>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
@@ -8279,88 +8384,88 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="328"/>
         <source>Arabic (Morocco) - LTR</source>
-        <translation type="unfinished"></translation>
+        <translation>Arab (Maroko) - LTR</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="347"/>
         <location filename="Windows/SettingsWindow.cpp" line="591"/>
         <source>Ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="348"/>
         <source>Shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="354"/>
         <source>Sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama sandbox</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="355"/>
         <source>Sandbox alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias sandbox</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="356"/>
         <source>Sandbox alias and name</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias dan nama sandbox</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="359"/>
         <source>Same as main</source>
-        <translation type="unfinished"></translation>
+        <translation>Sama dengan utama</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="360"/>
         <source>Keep current monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Pertahankan monitor saat ini</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="361"/>
         <source>Active monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor aktif</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="362"/>
         <source>Primary monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor utama</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="418"/>
         <source>Unknown Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilan tidak dikenal</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="420"/>
         <source>Display %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilan %1: %2</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="422"/>
         <source> (Primary)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Utama)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="592"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Perilaku tiga status: tidak dicentang = tidak pernah, dicentang sebagian = hanya saat %1 ditekan (default), dicentang = selalu.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1806"/>
         <source>AllowAiAgent=n in Sandboxie.ini disables this on the whole machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>AllowAiAgent=n di Sandboxie.ini menonaktifkan ini untuk seluruh komputer.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1811"/>
         <source>AiAgentRequirePairing=y in Sandboxie.ini means the code cannot be waived.</source>
-        <translation type="unfinished"></translation>
+        <translation>AiAgentRequirePairing=y di Sandboxie.ini berarti kode tidak dapat dilewati.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1816"/>
         <source>AiAgentRequireConfirmation=y in Sandboxie.ini keeps the confirmations on.</source>
-        <translation type="unfinished"></translation>
+        <translation>AiAgentRequireConfirmation=y di Sandboxie.ini menjaga konfirmasi tetap aktif.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3394"/>
@@ -8496,7 +8601,7 @@ Anda dapat meminta hingga %3 sertifikat evaluasi untuk setiap ID perangkat keras
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3766"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitur auto-completion memerlukan persetujuan Anda untuk melanjutkan.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3768"/>
@@ -8505,37 +8610,41 @@ Anda dapat meminta hingga %3 sertifikat evaluasi untuk setiap ID perangkat keras
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jika Anda ragu tentang pengaturan yang ditampilkan di popup auto-completion, kami sangat menyarankan membaca dokumentasi atau kode sumber perangkat lunak ini sebelum melanjutkan. Mengaktifkan fitur ini tanpa pemahaman yang memadai dapat menyebabkan konsekuensi yang tidak diinginkan, dan Anda sepenuhnya bertanggung jawab atas hal itu.
+
+Pilih mode auto-completion:
+%1 Manual: Saran auto-completion dengan %2.
+%1 Saat Mengetik: Saran auto-completion saat mengetik.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3776"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3777"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Memunculkan saran auto-completion dengan %1.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3779"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Saat Mengetik</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3780"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Memunculkan saran auto-completion saat mengetik.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3783"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menonaktifkan saran auto-completion.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3782"/>
         <source>Cancel</source>
-        <translation type="unfinished">Batal</translation>
+        <translation>Batal</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1952"/>
@@ -8642,7 +8751,7 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3331"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Untuk build ini fitur Plus tetap aktif&lt;/font&gt;, tetapi Anda tidak lagi memiliki akses ke layanan Sandboxie-Live, termasuk pembaruan kompatibilitas dan basis data pemecahan masalah daring.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3409"/>
@@ -8762,33 +8871,33 @@ Ini adalah sertifikat Patreon sementara, berlaku selama 3 bulan. Setelah mendeka
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2646"/>
         <source>Select Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih ini Box Portable</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2646"/>
         <location filename="Windows/SettingsWindow.cpp" line="2656"/>
         <source>Ini Files (*.ini)</source>
-        <translation type="unfinished"></translation>
+        <translation>Berkas Ini (*.ini)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2656"/>
         <source>Save new Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Simpan ini Box Portable baru</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2661"/>
         <source>File already exists, please select a different file name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Berkas sudah ada, silakan pilih nama lain.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2667"/>
         <source>Invalid box name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama box tidak valid</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2688"/>
         <source>Select Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih Folder Root</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2716"/>
@@ -8972,7 +9081,7 @@ Ini adalah sertifikat Patreon sementara, berlaku selama 3 bulan. Setelah mendeka
     <message>
         <location filename="Views/StackView.cpp" line="17"/>
         <source>#|Symbol</source>
-        <translation></translation>
+        <translation>#|Simbol</translation>
     </message>
 </context>
 <context>
@@ -9108,7 +9217,8 @@ Try submitting without the log attached.</source>
         <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
         <source>
 The actual sandbox name is: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Nama sandbox yang sebenarnya adalah: %1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1112"/>
@@ -9132,7 +9242,7 @@ Konten box ini akan DIBUANG saat ditutup, dan box akan dihapus.</translation>
 This box will DISCARD its content when it&apos;s closed, it&apos;s suitable only for temporary data.</source>
         <oldsource>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</oldsource>
-        <translation type="unfinished">
+        <translation>
 Box ini akan MEMBUANG isinya saat ditutup, hanya cocok untuk data sementara.</translation>
     </message>
     <message>
@@ -9588,7 +9698,7 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
     <message>
         <location filename="Models/TraceModel.cpp" line="173"/>
         <source>%1 (%2)</source>
-        <translation></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="174"/>
@@ -9608,12 +9718,12 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
     <message>
         <location filename="Models/TraceModel.cpp" line="333"/>
         <source>Type</source>
-        <translation></translation>
+        <translation>Tipe</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="334"/>
         <source>Status</source>
-        <translation></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="335"/>
@@ -9707,12 +9817,12 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
     <message>
         <location filename="Views/TraceView.cpp" line="344"/>
         <source>Resume Auto Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Lanjutkan Gulir Otomatis</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="345"/>
         <source>Auto scrolling is paused. Click to resume.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gulir otomatis dijeda. Klik untuk melanjutkan.</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="372"/>
@@ -9742,7 +9852,7 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
     <message>
         <location filename="Views/TraceView.cpp" line="738"/>
         <source>%1 (%2)</source>
-        <translation></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="259"/>
@@ -9765,22 +9875,22 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
     <message>
         <location filename="Views/TraceView.cpp" line="951"/>
         <source>Trace Logging is still active. What do you want to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>Pencatatan jejak masih aktif. Apa yang ingin Anda lakukan?</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="954"/>
         <source>Stop and Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Hentikan dan Bersihkan</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="956"/>
         <source>Disable, Keep Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Nonaktifkan, Simpan Log</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="958"/>
         <source>Keep Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>Tetap Catat</translation>
     </message>
 </context>
 <context>
@@ -9865,12 +9975,12 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="14"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengaturan Editor</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure Editor Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the checkboxes in the table to configure each setting. The table shows what each state means.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Atur Pengaturan Editor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Gunakan kotak centang pada tabel untuk mengatur setiap pengaturan. Tabel menunjukkan arti setiap status.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -9899,7 +10009,7 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
     <message>
         <location filename="Forms/ExtractDialog.ui" line="35"/>
         <source>...</source>
-        <translation></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="82"/>
@@ -10139,7 +10249,7 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
         <location filename="Forms/OptionsWindow.ui" line="6373"/>
         <location filename="Forms/OptionsWindow.ui" line="6459"/>
         <source>Name</source>
-        <translation></translation>
+        <translation>Nama</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1581"/>
@@ -10732,42 +10842,42 @@ Ini dilakukan untuk mencegah proses jahat di dalam sandbox membuat salinan dirin
     <message>
         <location filename="Forms/OptionsWindow.ui" line="395"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Alpha</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="463"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jika dicentang, bingkai berwarna disembunyikan dan hanya nama atau alias sandbox yang ditampilkan sebagai label. Memerlukan opsi label diaktifkan.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="466"/>
         <source>Label only</source>
-        <translation type="unfinished"></translation>
+        <translation>Hanya label</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="421"/>
         <source>When an outside border would be clipped by the monitor edge, draw it inside maximized or snapped windows instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Saat batas luar terpotong tepi monitor, gambarlah di dalam jendela yang dimaksimalkan atau disnap sebagai gantinya.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="424"/>
         <source>Inside when maximized or snapped</source>
-        <translation type="unfinished"></translation>
+        <translation>Di dalam saat dimaksimalkan atau disnap</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="799"/>
         <source>After automatic deletion, restore from snapshot:</source>
-        <translation type="unfinished"></translation>
+        <translation>Setelah penghapusan otomatis, pulihkan dari snapshot:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="824"/>
         <source>Open Snapshot Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Buka Pengelola Snapshot</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="827"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1863"/>
@@ -10794,29 +10904,29 @@ Ini dilakukan untuk mencegah proses jahat di dalam sandbox membuat salinan dirin
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2185"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
-        <translation type="unfinished"></translation>
+        <translation>Saat root box dilindungi, SandMan harus dijalankan sebagai Administrator untuk mengakses berkas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2291"/>
         <source>Total CPU Rate Limit (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Batas Total Laju CPU (%):</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2307"/>
         <source>Leave it blank to disable the setting (1-100)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kosongkan untuk menonaktifkan pengaturan (1-100)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="602"/>
         <location filename="Forms/OptionsWindow.ui" line="2317"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2377"/>
         <location filename="Forms/OptionsWindow.ui" line="2410"/>
         <source>bytes</source>
-        <translation></translation>
+        <translation>bita</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2575"/>
@@ -10838,98 +10948,99 @@ Dicentang sebagian: Tidak ada grup yang akan ditambahkan ke token sandbox baru y
     <message>
         <location filename="Forms/OptionsWindow.ui" line="154"/>
         <source>Sandbox icon...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikon sandbox...</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="155"/>
         <source>Configure the sandbox icon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atur ikon sandbox.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="285"/>
         <source>Box Border</source>
-        <translation type="unfinished"></translation>
+        <translation>Batas Box</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="296"/>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Bingkai</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="323"/>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Warna:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="436"/>
         <source>Sandbox label</source>
-        <translation type="unfinished"></translation>
+        <translation>Label sandbox</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="473"/>
         <source>Label font size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukuran font label:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="563"/>
         <source>Edge:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tepi:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="583"/>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Posisi:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="605"/>
         <source>0% is the start of the usable edge; 50% is centered; 100% is the end. Top/bottom run left to right; left/right run top to bottom.</source>
-        <translation type="unfinished"></translation>
+        <translation>0% adalah awal tepi yang dapat dipakai; 50% di tengah; 100% di akhir. Atas/bawah berjalan kiri ke kanan; kiri/kanan berjalan atas ke bawah.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="618"/>
         <source>Side text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Teks samping:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="643"/>
         <source>Movement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pergerakan:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="701"/>
         <source>Visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Visibilitas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="708"/>
         <source>Taskbar:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taskbar:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="721"/>
         <source>Choose whether border overlays avoid taskbars and shell appbars. The inherited/default option follows the global setting, which defaults to avoiding taskbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih apakah hamparan batas menghindari taskbar dan appbar shell. Opsi warisan/default mengikuti pengaturan global, yang secara default menghindari taskbar.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="731"/>
         <source>Screen capture:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tangkapan layar:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="744"/>
         <source>Exclude the border and label from screen capture, not the application itself. When inherited and otherwise unset, CoverBoxedWindows determines the default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kecualikan batas dan label dari tangkapan layar, bukan aplikasinya sendiri. Saat diwariskan dan tidak diatur, CoverBoxedWindows yang menentukan default.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2520"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Secara default, Sandboxie menjalankan proses dengan token integritas TIDAK TEpercaya untuk isolasi maksimal.
+Mengaktifkan opsi ini menggunakan token integritas RENDAH sebagai gantinya, yang dapat meningkatkan kompatibilitas tetapi mengurangi isolasi dan keamanan sandbox.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2524"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gunakan token integritas RENDAH, bukan TIDAK TEpercaya (mengurangi isolasi)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2823"/>
@@ -11108,22 +11219,22 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4858"/>
         <source>Use the above exclusion list to hide matching files from the Quick Recovery window</source>
-        <translation type="unfinished"></translation>
+        <translation>Gunakan daftar pengecualian di atas untuk menyembunyikan berkas yang cocok dari jendela Pemulihan Cepat</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4855"/>
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Membutuhkan kotak centang &quot;Tampilkan Semua&quot; tidak dicentang di jendela pemulihan.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4919"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
-        <translation type="unfinished"></translation>
+        <translation>Mulai ulang proses paksa yang diluncurkan dalam objek kerja PCA (Program Compatibility Assistant)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4997"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Gunakan heuristik untuk mengidentifikasi proses berbasis Electron/Chromium</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6594"/>
@@ -11159,7 +11270,22 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        Menampilkan tooltip detail saat kursor di atas pengaturan.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Mode:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Dicentang&lt;/span&gt;: Detail lengkap (versi, sintaks, deskripsi, dll.)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Dicentang Sebagian&lt;/span&gt;: Hanya informasi penting&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Bantuan Sintaks:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Garis pipa&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Memisahkan nilai alternatif&lt;br&gt;
+        • &lt;i&gt;Tanda kurung siku&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Parameter opsional&lt;br&gt;
+        • &lt;i&gt;Tanda kurung&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Opsi yang valid&lt;br&gt;
+        • &lt;i&gt;Tanda kurung sudut&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Placeholder yang dapat diganti&lt;br&gt;
+        • &lt;i&gt;Nilai tebal&lt;/i&gt; — Nilai default (boleh dihilangkan)&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6662"/>
@@ -11205,27 +11331,47 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;b&gt;Auto-Completion &amp; Koreksi Huruf&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Saran muncul setelah 2+ karakter&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Pilih dari popup untuk &lt;u&gt;menerapkan otomatis&lt;/u&gt; dengan huruf yang benar&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; untuk mengonfirmasi pilihan&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Koreksi manual&lt;/u&gt;: Setelah mengetik setting=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; muncul untuk koreksi huruf&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Mode:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Dicentang&lt;/span&gt;: Auto-complete + koreksi huruf&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Dicentang Sebagian&lt;/span&gt;: Hanya koreksi manual &lt;code&gt;Ctrl+R&lt;/code&gt;&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Navigasi:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Berpindah di popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Konfirmasi pilihan&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Paksa buka saran&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Terapkan saran pertama atau konfirmasi pilihan&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6685"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengkap</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6738"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengaturan editor</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6741"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6612"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Tooltip</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6695"/>
@@ -11257,12 +11403,26 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;Jika diaktifkan, pengaturan akan diperiksa dan disorot berdasarkan berkas INI. Matikan untuk menonaktifkan pemeriksaan dan penyorotan.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Teks Hitam, Latar Kuning, Miring&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Pengaturan diubah nama (nama lama - tidak valid)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Teks Putih, Latar Hitam, Coret&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Pengaturan dihapus (tidak tersedia lagi)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Teks Biru Tua, Latar Putih&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Pengaturan mendatang (belum tersedia)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Garis Bawah Merah Pemeriksa Ejaan&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Pengaturan tidak valid/tidak dikenal&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Teks Merah Tua/Muda&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Pengaturan valid/dikenal&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Catatan&lt;/span&gt;: Hanya pengaturan valid/dikenal yang berfungsi di versi ini. Namun, tidak ada validasi global maupun per-box. Beberapa pengaturan mungkin tampak valid tetapi tidak bekerja di semua konteks.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6712"/>
         <source>Validate</source>
-        <translation type="unfinished"></translation>
+        <translation>Validasi</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1185"/>
@@ -11392,7 +11552,7 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4284"/>
         <source>DNS Filter</source>
-        <translation></translation>
+        <translation>Filter DNS</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4324"/>
@@ -11407,12 +11567,12 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4340"/>
         <source>Domain</source>
-        <translation></translation>
+        <translation>Domain</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4363"/>
         <source>Internet Proxy</source>
-        <translation></translation>
+        <translation>Proxy Internet</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4453"/>
@@ -11966,7 +12126,7 @@ sebagai pengganti &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5846"/>
         <source>IPC Trace</source>
-        <translation></translation>
+        <translation>Jejak IPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5880"/>
@@ -12145,37 +12305,37 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="443"/>
         <source>Sandboxed window label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Label jendela sandbox:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="488"/>
         <source>Font size in points, synchronized with the font selector. Existing legacy sizing is retained until you explicitly change the font or size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukuran font dalam poin, disinkronkan dengan pemilih font. Ukuran lama tetap dipertahankan sampai Anda secara eksplisit mengubah font atau ukurannya.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="491"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation> pt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="519"/>
         <source>Select border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih font label batas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="526"/>
         <source>Reset font. Removes the custom font, point size and writing-system override, restoring Segoe UI Bold and legacy sizing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset font. Menghapus font kustom, ukuran poin, dan penimpa sistem tulisan, mengembalikan Segoe UI Bold dan ukuran lama.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="532"/>
         <source>Reset border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset font label batas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="551"/>
         <source>Segoe UI</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="631"/>
@@ -12183,7 +12343,9 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
 top/bottom padding without shrinking the font. Rotated down reads top to bottom;
 rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
         <oldsource>Stacked letters remain upright. Stacked (compact) removes the extra row gap and reduces top/bottom padding without shrinking the font. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Huruf yang ditumpuk tetap tegak. Ditumpuk (ringkas) menghilangkan jarak baris ekstra dan mengurangi
+bantalan atas/bawah tanpa memperkecil font. Diputar ke bawah dibaca atas ke bawah;
+diputar ke atas dibaca bawah ke atas di kedua sisi. Label atas/bawah mengabaikan pilihan ini.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="656"/>
@@ -12193,22 +12355,27 @@ Adaptive (opposite edge) tries the opposite edge before that inward fallback.
 Adaptive (any edge), the default, also tries the best-fitting remaining edge.
 Edge changes preserve percentage and inside/outside placement where possible.
 Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tetap menonaktifkan cadangan otomatis.
+Adaptif (tepi sama) menggeser label yang terpotong ke dalam pada sisi yang dikonfigurasi.
+Adaptif (tepi berlawanan) mencoba tepi lawan sebelum cadangan ke dalam itu.
+Adaptif (tepi mana pun), yang default, juga mencoba tepi tersisa yang paling pas.
+Perubahan tepi mempertahankan persentase dan penempatan dalam/luar bila memungkinkan.
+Mode adaptif menghormati pengecualian taskbar. Perilaku maksimal/snapped tetap terpisah.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="680"/>
         <source>Side labels can be stacked or rotated. Both stacked modes use vertical parentheses when the font supports them. Stacked (compact) keeps the font size, removes the extra row gap and uses 1-pixel top/bottom padding. Rotated down/up select the reading direction on either side. Top/bottom labels use horizontal text. Adaptive movement can stay on the configured side, try its opposite, or try any edge before moving inward. Labels that do not fit are clipped without shrinking the font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Label samping dapat ditumpuk atau diputar. Kedua mode tumpuk memakai tanda kurung vertikal bila font mendukungnya. Ditumpuk (ringkas) mempertahankan ukuran font, menghilangkan jarak baris ekstra, dan memakai bantalan atas/bawah 1 piksel. Diputar ke bawah/atas memilih arah baca di kedua sisi. Label atas/bawah memakai teks horizontal. Pergerakan adaptif dapat tetap di sisi yang dikonfigurasi, mencoba sisi lawannya, atau mencoba tepi mana pun sebelum masuk ke dalam. Label yang tidak muat dipotong tanpa memperkecil font.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="689"/>
         <source>Border label information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informasi label batas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4515"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gunakan thread relay proxy dalam proses, bukan mengubah soket langsung (mengatasi masalah kompatibilitas langka)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4622"/>
@@ -12253,32 +12420,32 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6069"/>
         <source>Debug Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opsi Debug</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6145"/>
         <source>Config Dump</source>
-        <translation type="unfinished"></translation>
+        <translation>Dump Konfigurasi</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6176"/>
         <source>No Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanpa Templat</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6186"/>
         <source>No Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanpa Global</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6196"/>
         <source>No Expand</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanpa Ekspansi</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6206"/>
         <source>Refresh</source>
-        <translation type="unfinished">Segarkan</translation>
+        <translation>Segarkan</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6251"/>
@@ -12313,7 +12480,7 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6622"/>
         <source>Edit ini</source>
-        <translation></translation>
+        <translation>Edit ini</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6648"/>
@@ -12352,238 +12519,242 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
     <message>
         <location filename="../MiscHelpers/Common/FlexError.h" line="21"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kesalahan</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="89"/>
         <location filename="Windows/SettingsWindow.cpp" line="91"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="89"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>default</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="91"/>
         <source>fallback</source>
-        <translation type="unfinished"></translation>
+        <translation>cadangan</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="67"/>
         <source>Claude Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="79"/>
         <source>Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="82"/>
         <source>Claude Code manages its own configuration; run this command instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Code mengelola konfigurasinya sendiri; jalankan perintah ini sebagai gantinya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="91"/>
         <source>Visual Studio Code</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="93"/>
         <source>Add it per workspace or to your user settings - we do not write into a workspace, because that file lives in your repository.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tambahkan per workspace atau ke pengaturan pengguna Anda — kami tidak menulis ke dalam workspace, karena berkas itu ada di repositori Anda.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="101"/>
         <source>Another client</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="103"/>
         <source>Most clients take a command to run. Use the path or the snippet below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kebanyakan klien menerima perintah untuk dijalankan. Gunakan path atau cuplikan di bawah.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="120"/>
         <source>%1 could not be opened for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tidak dapat dibuka untuk dibaca.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="137"/>
         <source>%1 is not valid JSON (%2), so it was left untouched. Add the configuration by hand instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bukan JSON yang valid (%2), jadi dibiarkan apa adanya. Tambahkan konfigurasi secara manual sebagai gantinya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="169"/>
         <source>This client has to be configured by hand.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klien ini harus dikonfigurasi secara manual.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="173"/>
         <location filename="Mcp/McpClientSetup.cpp" line="247"/>
         <source>SbieMcp.exe was not found next to SandMan.</source>
-        <translation type="unfinished"></translation>
+        <translation>SbieMcp.exe tidak ditemukan di samping SandMan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="187"/>
         <source>%1 could not be backed up, so it was left untouched.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tidak dapat dicadangkan, jadi dibiarkan apa adanya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="193"/>
         <source>%1 could not be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tidak dapat dibuat.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="210"/>
         <source>%1 could not be written.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tidak dapat ditulis.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="218"/>
         <source>%1 could not be replaced; the new configuration is in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tidak dapat diganti; konfigurasi baru ada di %2.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="252"/>
         <source>This folder could not be created:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Folder ini tidak dapat dibuat:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="264"/>
         <source>This file could not be read:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Berkas ini tidak dapat dibaca:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="275"/>
         <source>This file is not the JSON this expects, so it was left alone:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Berkas ini bukan JSON yang diharapkan, jadi dibiarkan:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="293"/>
         <source>This file could not be written:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Berkas ini tidak dapat ditulis:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="307"/>
         <source>Claude Code was not found. Install it, or open a terminal yourself and run the command shown above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Code tidak ditemukan. Pasanglah, atau buka terminal sendiri dan jalankan perintah yang ditampilkan di atas.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="342"/>
         <source>Claude Code could not be started (error %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Code tidak dapat dijalankan (kesalahan %1).</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="151"/>
         <source>the documentation pack is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>paket dokumentasi tidak tersedia</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="159"/>
         <source>&apos;%1&apos; is not a page in the documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; bukan halaman dalam dokumentasi</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="165"/>
         <source>&apos;%1&apos; could not be read from the pack</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; tidak dapat dibaca dari paket</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="301"/>
         <source>message SBIE%1 was seen</source>
-        <translation type="unfinished"></translation>
+        <translation>pesan SBIE%1 terlihat</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="313"/>
         <source>a blocked resource matched %1</source>
-        <translation type="unfinished"></translation>
+        <translation>sumber daya yang diblokir cocok dengan %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="330"/>
         <source>%1 is not set on the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tidak diatur pada sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="339"/>
         <source>%1 is set on the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 diatur pada sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="63"/>
         <source>The &apos;changes&apos; argument must be a non-empty array of {setting, value} objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Argumen &apos;changes&apos; harus berupa larik tidak kosong dari objek {setting, value}.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="69"/>
         <source>That is %1 changes at once. Propose at most 50, so the user can actually read what they are agreeing to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Itu %1 perubahan sekaligus. Usulkan maksimal 50, agar pengguna benar-benar dapat membaca apa yang mereka setujui.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="79"/>
         <source>Every entry in &apos;changes&apos; needs a &apos;setting&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Setiap entri dalam &apos;changes&apos; memerlukan &apos;setting&apos;.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="85"/>
         <source>&apos;%1&apos; is not a usable setting name.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; bukan nama pengaturan yang dapat dipakai.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="91"/>
         <source>The value for &apos;%1&apos; contains a line break, which cannot be stored in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nilai untuk &apos;%1&apos; mengandung baris baru, yang tidak dapat disimpan di Sandboxie.ini.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="119"/>
         <source>Changes cannot be confirmed right now, so nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Perubahan tidak dapat dikonfirmasi sekarang, jadi tidak ada yang diubah.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="125"/>
         <source>A confirmation is already waiting for the user. Nothing was changed - wait for them to answer the previous request before asking again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sebuah konfirmasi sudah menunggu pengguna. Tidak ada yang diubah — tunggu mereka menjawab permintaan sebelumnya sebelum bertanya lagi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="174"/>
         <source>Name or alias of the sandbox to run in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama atau alias sandbox tempat menjalankan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="178"/>
         <source>The command line to start, exactly as it should run. Quote paths containing spaces. It has to be a single plain line - a command carrying line breaks is refused, because the user must be able to read what they are approving as one command.</source>
-        <translation type="unfinished"></translation>
+        <translation>Baris perintah yang akan dijalankan, persis seperti seharusnya. Gunakan tanda kutip pada path yang mengandung spasi. Harus satu baris biasa — perintah dengan baris baru ditolak, karena pengguna harus dapat membaca apa yang mereka setujui sebagai satu perintah.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="185"/>
         <source>Working directory for the program. Optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>Direktori kerja untuk program. Opsional.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="189"/>
         <source>Why this needs to run, in one sentence. Shown to the user as your words, next to the command. A request with no reason given is a harder one to agree to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengapa ini perlu dijalankan, dalam satu kalimat. Ditampilkan kepada pengguna sebagai kata-kata Anda, di sebelah perintah. Permintaan tanpa alasan lebih sulit untuk disetujui.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="214"/>
         <source>The Sandboxie.ini setting name. Check it with config_schema first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama pengaturan Sandboxie.ini. Periksa dulu dengan config_schema.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="218"/>
         <source>The value to set. Omit or leave empty to remove the setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nilai yang akan diatur. Hilangkan atau kosongkan untuk menghapus pengaturan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="230"/>
         <source>The changes, at most 50.</source>
-        <translation type="unfinished"></translation>
+        <translation>Perubahan, maksimal 50.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="235"/>
@@ -12593,122 +12764,126 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
         <location filename="Mcp/McpTools.cpp" line="316"/>
         <location filename="Mcp/McpTools.cpp" line="324"/>
         <source>Name or alias of the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama atau alias sandbox.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="248"/>
         <source>Why these changes should help. Shown to the user verbatim when they are asked to approve, so write it for them and not for yourself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengapa perubahan ini harus membantu. Ditampilkan kepada pengguna apa adanya saat diminta persetujuan, jadi tulislah untuk mereka, bukan untuk diri Anda sendiri.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="265"/>
         <source>Check a change set before proposing it</source>
-        <translation type="unfinished"></translation>
+        <translation>Periksa sekumpulan perubahan sebelum mengusulkannya</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="266"/>
         <source>Checks proposed settings against what Sandboxie actually accepts, without changing anything and without asking the user. Always call this before box_apply_changes: an unknown setting name is ignored silently by the driver, so a typo produces a change that appears to work and does nothing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Memeriksa pengaturan yang diusulkan terhadap apa yang benar-benar diterima Sandboxie, tanpa mengubah apa pun dan tanpa bertanya kepada pengguna. Selalu panggil ini sebelum box_apply_changes: nama pengaturan yang tidak dikenal diabaikan diam-diam oleh driver, sehingga typo menghasilkan perubahan yang tampak berhasil tetapi tidak melakukan apa-apa.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="272"/>
         <source>Change sandbox settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubah pengaturan sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="273"/>
         <source>Proposes configuration changes to one sandbox. The user is shown a diff of current against proposed values and must approve it; nothing is written if they decline. Use this for a fix you are confident about, and for everyday requests such as adding a forced program.
 
 If you want to test a fix before asking the user to accept it, use shadow_begin instead - that lets you try it against a disposable copy of the configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengusulkan perubahan konfigurasi pada satu sandbox. Pengguna melihat perbedaan antara nilai saat ini dan yang diusulkan, dan harus menyetujuinya; tidak ada yang ditulis jika mereka menolak. Gunakan ini untuk perbaikan yang Anda yakini, dan untuk permintaan sehari-hari seperti menambahkan program paksa.
+
+Jika ingin menguji perbaikan sebelum meminta pengguna menerimanya, gunakan shadow_begin — itu memungkinkan Anda mencobanya pada salinan konfigurasi sekali pakai.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="282"/>
         <source>Start testing a fix</source>
-        <translation type="unfinished"></translation>
+        <translation>Mulai menguji perbaikan</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="283"/>
         <source>Clones a sandbox configuration to a disposable copy that shares the real file set, so a fix can be tried without touching the sandbox. Returns the name of the copy; change it with shadow_set, then either shadow_commit to copy the differences back - which asks the user once - or shadow_discard to throw them away.
 
 Note what is shared: files written while testing land in the real sandbox and a discard does not undo them. Only configuration is disposable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengkloning konfigurasi sandbox ke salinan sekali pakai yang berbagi kumpulan berkas asli, sehingga perbaikan dapat dicoba tanpa menyentuh sandbox. Mengembalikan nama salinan; ubah dengan shadow_set, lalu shadow_commit untuk menyalin perubahan kembali — yang bertanya kepada pengguna sekali — atau shadow_discard untuk membuangnya.
+
+Perhatikan apa yang dibagikan: berkas yang ditulis saat pengujian masuk ke sandbox asli dan pembatalan tidak membatalkannya. Hanya konfigurasi yang sekali pakai.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="290"/>
         <source>Name or alias of the sandbox to test against.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama atau alias sandbox yang dijadikan uji.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="292"/>
         <source>Change a setting in the test copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubah pengaturan dalam salinan uji</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="293"/>
         <source>Applies changes to the disposable copy. No confirmation is needed because nothing real is affected yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menerapkan perubahan pada salinan sekali pakai. Tidak perlu konfirmasi karena belum ada yang nyata terdampak.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="297"/>
         <source>Keep the tested fix</source>
-        <translation type="unfinished"></translation>
+        <translation>Simpan perbaikan yang diuji</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="298"/>
         <source>Copies the differences from the test copy back onto the real sandbox, after showing the user what they are. This is the one confirmation on the troubleshooting path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menyalin perbedaan dari salinan uji kembali ke sandbox asli, setelah menunjukkan kepada pengguna apa perubahannya. Ini adalah satu-satunya konfirmasi dalam jalur pemecahan masalah.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="301"/>
         <location filename="Mcp/McpOperate.cpp" line="306"/>
         <source>Name or alias of the sandbox being tested.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama atau alias sandbox yang sedang diuji.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="303"/>
         <source>Abandon the tested fix</source>
-        <translation type="unfinished"></translation>
+        <translation>Batalkan perbaikan yang diuji</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="304"/>
         <source>Deletes the test copy. Nothing to roll back, because the real sandbox was never changed. Call this when a hypothesis turns out to be wrong.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menghapus salinan uji. Tidak ada yang perlu dibatalkan, karena sandbox asli tidak pernah diubah. Panggil ini saat dugaan ternyata salah.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="308"/>
         <source>Take a rollback point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ambil titik pemulihan</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="309"/>
         <source>Takes a snapshot of a sandbox so file and registry changes can be undone later. Near-instant regardless of sandbox size, but it refuses while anything is running in the box - so take it before starting anything. Not offered for empty sandboxes or RAM-disk sandboxes, where it would be meaningless.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengambil snapshot sandbox agar perubahan berkas dan registri dapat dibatalkan nanti. Hampir instan berapa pun ukuran sandbox, tetapi menolak saat ada yang berjalan di box — jadi ambil sebelum memulai apa pun. Tidak ditawarkan untuk sandbox kosong atau RAM-disk, karena tidak ada gunanya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="315"/>
         <source>Roll a sandbox back</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulihkan sandbox ke titik sebelumnya</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="316"/>
         <source>Reverts a sandbox to a snapshot, discarding file and registry changes made since. Terminates whatever is running in the box first, because the operation requires it. This throws work away and cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengembalikan sandbox ke snapshot, membuang perubahan berkas dan registri sejak itu. Menghentikan apa pun yang berjalan di box terlebih dahulu, karena operasi ini memerlukannya. Ini membuang pekerjaan dan tidak dapat dibatalkan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="321"/>
         <source>Stop everything in a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Hentikan semuanya dalam sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="322"/>
         <source>Terminates all processes in a sandbox. Unsaved work in those programs is lost, which is why the user is asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menghentikan semua proses dalam sandbox. Pekerjaan yang belum disimpan di program-program itu hilang, itulah sebabnya pengguna diminta konfirmasi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="326"/>
         <source>Run a program inside a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Jalankan program di dalam sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="327"/>
@@ -12717,22 +12892,26 @@ Note what is shared: files written while testing land in the real sandbox and a 
 This is how a fix gets tested rather than described - start the program that was failing, then read trace_query and box_diagnostics to see whether it still fails. failing, then read trace_query to see whether it still fails. The call returns as soon as the program has started: it does not wait for it to exit and captures no output, so get the pid from box_processes.
 
 The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with shadow_set is not in effect here - a test copy shares the real sandbox&apos;s file root, so a program started against it runs in the real sandbox with the real settings. To test a configuration change by running something, apply it first with shadow_commit, or write it directly with box_apply_changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menjalankan perintah di dalam sandbox, dengan hak istimewa yang dimiliki Sandboxie-Plus sendiri — tidak pernah dinaikkan. Pengguna melihat baris perintah persis seperti yang diberikan dan harus mengonfirmasinya sebelum apa pun berjalan, jadi tulis perintah yang benar-benar Anda maksud: tidak diringkas atau ditulis ulang.
+
+Inilah cara perbaikan diuji, bukan sekadar dijelaskan — jalankan program yang gagal tadi, lalu baca trace_query dan box_diagnostics untuk melihat apakah masih gagal. Panggilan kembali begitu program dimulai: tidak menunggunya keluar dan tidak menangkap keluaran, jadi ambil pid dari box_processes.
+
+Pengaturan yang berlaku adalah pengaturan sandbox SAAT INI. Perubahan yang baru di-stage dengan shadow_set belum berlaku di sini — salinan uji berbagi root berkas sandbox asli, sehingga program yang dijalankan terhadapnya berjalan di sandbox asli dengan pengaturan asli. Untuk menguji perubahan konfigurasi dengan menjalankan sesuatu, terapkan dulu dengan shadow_commit, atau tulis langsung dengan box_apply_changes.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="346"/>
         <source>Create a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Buat sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="347"/>
         <source>Creates a new, empty sandbox with default settings. The user is asked first. Settings can then be applied with box_apply_changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Membuat sandbox baru yang kosong dengan pengaturan default. Pengguna ditanya terlebih dahulu. Pengaturan kemudian dapat diterapkan dengan box_apply_changes.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="349"/>
         <source>Name for the new sandbox. Letters, digits and underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama untuk sandbox baru. Huruf, angka, dan garis bawah.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="374"/>
@@ -12749,271 +12928,284 @@ The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with
         <location filename="Mcp/McpReport.cpp" line="619"/>
         <location filename="Mcp/McpTools.cpp" line="1257"/>
         <source>No sandbox called &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada sandbox bernama &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="399"/>
         <source>  ok</source>
-        <translation type="unfinished"></translation>
+        <translation>  ok</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="399"/>
         <source>  NOT A KNOWN SETTING</source>
-        <translation type="unfinished"></translation>
+        <translation>  BUKAN PENGATURAN YANG DIKENAL</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="401"/>
         <source>  (superseded by %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>  (digantikan oleh %1)</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="403"/>
         <source>  (removed in %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>  (dihapus pada %1)</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="414"/>
         <source>
 The settings reference could not be loaded, so none of this was verified.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Referensi pengaturan tidak dapat dimuat, jadi tidak ada yang diverifikasi.
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="416"/>
         <source>
 %1 of these are not settings Sandboxie recognises. Fix them before proposing the change - an unknown name is ignored silently rather than reported, so it would look like a fix that did nothing.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+%1 di antaranya bukan pengaturan yang dikenal Sandboxie. Perbaiki sebelum mengusulkan perubahan — nama yang tidak dikenal diabaikan tanpa laporan, sehingga tampak seperti perbaikan yang tidak berpengaruh.
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="445"/>
         <source>The user declined, so nothing was changed. Do not ask again with the same change set - explain what you wanted to do and why, and let them decide.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengguna menolak, jadi tidak ada yang diubah. Jangan bertanya lagi dengan kumpulan perubahan yang sama — jelaskan apa yang ingin Anda lakukan dan mengapa, lalu biarkan mereka memutuskan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="473"/>
         <source>%1 of %2 changes written to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dari %2 perubahan ditulis ke %3.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="476"/>
         <source>
 These could not be written: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Ini tidak dapat ditulis: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="510"/>
         <source>Already testing against %1. Use shadow_set to change it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sedang menguji terhadap %1. Gunakan shadow_set untuk mengubahnya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="516"/>
         <source>The test copy could not be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Salinan uji tidak dapat dibuat.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="522"/>
         <source>Testing against %1, a disposable copy of the configuration of %2 that shares its real file set. Change it with shadow_set. Remember that files written while testing land in the real sandbox - only the configuration is disposable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menguji terhadap %1, salinan sekali pakai konfigurasi %2 yang berbagi kumpulan berkas aslinya. Ubah dengan shadow_set. Ingat bahwa berkas yang ditulis saat pengujian masuk ke sandbox asli — hanya konfigurasi yang sekali pakai.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="542"/>
         <source>There is no test copy for &apos;%1&apos; yet. Call shadow_begin first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Belum ada salinan uji untuk &apos;%1&apos;. Panggil shadow_begin terlebih dahulu.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="547"/>
         <location filename="Mcp/McpOperate.cpp" line="568"/>
         <source>The test copy %1 has gone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Salinan uji %1 sudah hilang.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="563"/>
         <source>There is no test copy for &apos;%1&apos;. Nothing to keep.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada salinan uji untuk &apos;%1&apos;. Tidak ada yang disimpan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="636"/>
         <source>The test copy is identical to %1, so there is nothing to keep. Discarding it would have the same effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Salinan uji identik dengan %1, jadi tidak ada yang disimpan. Membuangnya akan berpengaruh sama.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="648"/>
         <source>(the agent gave no reason)</source>
-        <translation type="unfinished"></translation>
+        <translation>(agent tidak memberikan alasan)</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="651"/>
         <source>The user declined. The test copy is still there, and %1 is unchanged - call shadow_discard to clean up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengguna menolak. Salinan uji masih ada, dan %1 tidak berubah — panggil shadow_discard untuk membersihkannya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="658"/>
         <source>The changes could not be copied back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Perubahan tidak dapat disalin kembali.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="663"/>
         <source>%1 change(s) applied to %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 perubahan diterapkan pada %2.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="674"/>
         <source>There was no test copy for &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada salinan uji untuk &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="681"/>
         <source>The test copy is gone and %1 was never changed. Note that any files the test wrote are still in the sandbox - discarding only undoes configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Salinan uji sudah hilang dan %1 tidak pernah diubah. Perhatikan bahwa berkas apa pun yang ditulis saat pengujian masih ada di sandbox — pembatalan hanya membatalkan konfigurasi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="697"/>
         <source>&apos;%1&apos; holds no content, so there is nothing to snapshot. Note that an encrypted or image-backed sandbox also looks empty while it is not mounted - if this one is, it has to be opened first.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; tidak berisi apa pun, jadi tidak ada yang di-snapshot. Perhatikan bahwa sandbox terenkripsi atau berbasis citra juga tampak kosong saat belum dipasang — jika demikian, sandbox itu harus dibuka terlebih dahulu.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="702"/>
         <source>&apos;%1&apos; is a RAM-disk sandbox: its contents are discarded when it is unmounted or the machine restarts, so a snapshot would protect nothing.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; adalah sandbox RAM-disk: isinya dibuang saat dilepas atau komputer dinyalakan ulang, jadi snapshot tidak akan melindungi apa pun.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="706"/>
         <source>Something is still running in &apos;%1&apos;. Snapshots require the sandbox to be idle - ask the user to close its programs, or use box_terminate, and then try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Masih ada yang berjalan di &apos;%1&apos;. Snapshot memerlukan sandbox dalam keadaan kosong — minta pengguna menutup program-programnya, atau gunakan box_terminate, lalu coba lagi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="713"/>
         <source>Confirm snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfirmasi snapshot</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="714"/>
         <source>Take a snapshot of sandbox %1, so its files and registry can be rolled back later.
 
 This is quick and does not copy the sandbox. It does mean the sandbox cannot shrink until the snapshot is merged or deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ambil snapshot sandbox %1, agar berkas dan registrinya dapat dikembalikan nanti.
+
+Ini cepat dan tidak menyalin sandbox. Ini berarti sandbox tidak dapat menyusut sampai snapshot digabungkan atau dihapus.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="717"/>
         <source>Take Snapshot</source>
-        <translation type="unfinished">Ambil Snapshot</translation>
+        <translation>Ambil Snapshot</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="718"/>
         <source>The user declined; no snapshot was taken.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengguna menolak; tidak ada snapshot yang diambil.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="721"/>
         <source>Before AI agent changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sebelum perubahan AI agent</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="722"/>
         <source>Taking a snapshot of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengambil snapshot %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="724"/>
         <source>The snapshot failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Snapshot gagal: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="733"/>
         <source>Snapshot taken for %1. File and registry changes from here on can be undone with snapshot_rollback.</source>
-        <translation type="unfinished"></translation>
+        <translation>Snapshot diambil untuk %1. Perubahan berkas dan registri sejak sekarang dapat dibatalkan dengan snapshot_rollback.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="747"/>
         <source>&apos;%1&apos; has no snapshot to roll back to.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; tidak memiliki snapshot untuk dikembalikan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="754"/>
         <source>Roll sandbox %1 back to its snapshot.
 
 Every file and registry change made in the sandbox since the snapshot will be discarded. This cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kembalikan sandbox %1 ke snapshot-nya.
+
+Setiap perubahan berkas dan registri di sandbox sejak snapshot akan dibuang. Ini tidak dapat dibatalkan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="760"/>
         <source>
 
 %1 program(s) are running in the sandbox and will be terminated first. Unsaved work in them will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+%1 program sedang berjalan di sandbox dan akan dihentikan terlebih dahulu. Pekerjaan yang belum disimpan akan hilang.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="764"/>
         <source>Confirm rollback</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfirmasi pengembalian</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="765"/>
         <source>Roll Back and Discard Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Kembalikan dan Buang Perubahan</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="766"/>
         <source>The user declined; nothing was rolled back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengguna menolak; tidak ada yang dikembalikan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="772"/>
         <source>The sandbox could not be stopped, so nothing was rolled back: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox tidak dapat dihentikan, jadi tidak ada yang dikembalikan: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="778"/>
         <source>Rolling %1 back</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengembalikan %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="780"/>
         <source>The rollback failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengembalian gagal: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="786"/>
         <source>%1 was rolled back to its snapshot.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dikembalikan ke snapshot-nya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="798"/>
         <source>Nothing is running in %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada yang berjalan di %1.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="803"/>
         <source>Confirm terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfirmasi penghentian</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="804"/>
         <source>Terminate %1 program(s) running in sandbox %2.
 
 Unsaved work in them will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hentikan %1 program yang berjalan di sandbox %2.
+
+Pekerjaan yang belum disimpan akan hilang.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="806"/>
         <source>Terminate Them</source>
-        <translation type="unfinished"></translation>
+        <translation>Hentikan</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="807"/>
         <source>The user declined; nothing was terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengguna menolak; tidak ada yang dihentikan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="812"/>
         <source>Terminating failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Penghentian gagal: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="814"/>
         <source>%1 program(s) in %2 were terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 program di %2 telah dihentikan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="822"/>
@@ -13021,79 +13213,81 @@ Unsaved work in them will be lost.</source>
         <location filename="Mcp/McpTools.cpp" line="843"/>
         <location filename="Mcp/McpTools.cpp" line="906"/>
         <source>The &apos;box&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>Argumen &apos;box&apos; wajib diisi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="826"/>
         <source>&apos;%1&apos; is not a usable sandbox name. Use letters, digits and underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; bukan nama sandbox yang dapat dipakai. Gunakan huruf, angka, dan garis bawah.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="830"/>
         <source>A sandbox called &apos;%1&apos; already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox bernama &apos;%1&apos; sudah ada.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="835"/>
         <source>Confirm new sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfirmasi sandbox baru</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="836"/>
         <source>Create a new sandbox called %1, with default settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Buat sandbox baru bernama %1 dengan pengaturan default.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="837"/>
         <source>Create It</source>
-        <translation type="unfinished"></translation>
+        <translation>Buat</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="838"/>
         <source>The user declined; no sandbox was created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengguna menolak; tidak ada sandbox yang dibuat.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="843"/>
         <source>The sandbox could not be created: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox tidak dapat dibuat: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="848"/>
         <source>Sandbox %1 was created with default settings. Use box_apply_changes to configure it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox %1 dibuat dengan pengaturan default. Gunakan box_apply_changes untuk mengonfigurasinya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="876"/>
         <source>The &apos;command&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>Argumen &apos;command&apos; wajib diisi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="880"/>
         <source>That command line is %1 characters, and the confirmation can only honestly show up to %2. Write a shorter command, or put the work in a script file and run that.</source>
-        <translation type="unfinished"></translation>
+        <translation>Baris perintah itu terdiri dari %1 karakter, dan konfirmasi hanya dapat menampilkan hingga %2. Tulis perintah yang lebih pendek, atau letakkan pekerjaan itu dalam berkas skrip lalu jalankan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="887"/>
         <source>That command line contains a line break or a control character. It has to be a single plain line, because the user is shown it as one and has to be able to read exactly what they are approving.</source>
-        <translation type="unfinished"></translation>
+        <translation>Baris perintah itu mengandung baris baru atau karakter kontrol. Harus satu baris biasa, karena pengguna melihatnya sebagai satu baris dan harus dapat membaca persis apa yang mereka setujui.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="893"/>
         <source>The working directory has to be a single line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Direktori kerja harus satu baris.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="911"/>
         <source>&apos;%1&apos; is a test copy, which is a copy of a sandbox&apos;s configuration and not a sandbox a program can run in - it shares the real sandbox&apos;s files, so anything started against it would run in the real sandbox with the real settings. Apply the change with shadow_commit first, then run against the sandbox itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; adalah salinan uji, yaitu salinan konfigurasi sandbox dan bukan sandbox tempat program dapat dijalankan — ia berbagi berkas sandbox asli, jadi apa pun yang dijalankan terhadapnya akan berjalan di sandbox asli dengan pengaturan asli. Terapkan perubahan dengan shadow_commit terlebih dahulu, lalu jalankan terhadap sandbox itu sendiri.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="927"/>
         <source>Run this command inside %1:
 
     %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Jalankan perintah ini di dalam %1:
+
+    %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="929"/>
@@ -13101,7 +13295,10 @@ Unsaved work in them will be lost.</source>
 
 Working directory:
     %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Direktori kerja:
+    %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="931"/>
@@ -13109,231 +13306,236 @@ Working directory:
 
 Its reason, in its own words:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Alasannya, dengan kata-katanya sendiri:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="932"/>
         <source>
 
 It runs sandboxed and with your normal privileges, not as administrator - but the command above is the agent&apos;s choice, so read it before agreeing.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Program berjalan di sandbox dengan hak istimewa normal Anda, bukan sebagai administrator — tetapi perintah di atas adalah pilihan agent, jadi bacalah sebelum menyetujui.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="935"/>
         <source>Confirm running a program</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfirmasi menjalankan program</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="936"/>
         <source>Run It</source>
-        <translation type="unfinished"></translation>
+        <translation>Jalankan</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="937"/>
         <source>The user declined; nothing was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengguna menolak; tidak ada yang dijalankan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="944"/>
         <source>The program could not be started: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Program tidak dapat dijalankan: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="957"/>
         <source>Launched in %1. The pid is not reported because the program is started through Sandboxie&apos;s launcher, which exits immediately - its pid is not the program&apos;s. Call box_processes on %2 to get the real pid and to confirm it is still running, and trace_query or box_diagnostics to see what it did. Nothing is waited for and no and trace_query to see what it did. Nothing is waited for and no output is captured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dijalankan di %1. PID tidak dilaporkan karena program dimulai melalui peluncur Sandboxie, yang langsung keluar — PID-nya bukan PID program itu. Panggil box_processes pada %2 untuk mendapatkan PID asli dan memastikan program masih berjalan, serta trace_query atau box_diagnostics untuk melihat apa yang dilakukannya. Tidak ada yang ditunggu dan tidak ada keluaran yang ditangkap.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="972"/>
         <source>Sandboxie is not running, so nothing can be changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie tidak berjalan, jadi tidak ada yang dapat diubah.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="987"/>
         <location filename="Mcp/McpReport.cpp" line="685"/>
         <location filename="Mcp/McpTools.cpp" line="1358"/>
         <source>Tool &apos;%1&apos; is not implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool &apos;%1&apos; belum diimplementasikan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="14"/>
         <source>the endpoint name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>nama endpoint kosong</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="19"/>
         <source>the endpoint name is longer than 64 characters</source>
-        <translation type="unfinished"></translation>
+        <translation>nama endpoint lebih panjang dari 64 karakter</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="29"/>
         <source>the endpoint name contains &apos;%1&apos;; only letters, digits, underscore, hyphen and dot are allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>nama endpoint mengandung &apos;%1&apos;; hanya huruf, angka, garis bawah, tanda hubung, dan titik yang diizinkan</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="39"/>
         <source>the endpoint name must start with &apos;%1&apos; - that is the prefix the template which keeps sandboxed programs away from this pipe matches, and a name outside it would not be protected</source>
-        <translation type="unfinished"></translation>
+        <translation>nama endpoint harus diawali &apos;%1&apos; — itu adalah awalan yang dicocokkan templat yang menjauhkan program sandbox dari pipe ini, dan nama di luar itu tidak akan dilindungi</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="111"/>
         <source>malformed JSON: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>JSON rusak: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="117"/>
         <source>message is not a JSON object</source>
-        <translation type="unfinished"></translation>
+        <translation>pesan bukan objek JSON</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="126"/>
         <source>missing or wrong jsonrpc version</source>
-        <translation type="unfinished"></translation>
+        <translation>versi jsonrpc hilang atau salah</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="132"/>
         <source>no method</source>
-        <translation type="unfinished"></translation>
+        <translation>tidak ada metode</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="183"/>
         <source>missing MCP-Protocol-Version header</source>
-        <translation type="unfinished"></translation>
+        <translation>header MCP-Protocol-Version hilang</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="187"/>
         <source>MCP-Protocol-Version header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Header MCP-Protocol-Version &apos;%1&apos; tidak cocok dengan nilai isi &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="192"/>
         <source>missing Mcp-Method header</source>
-        <translation type="unfinished"></translation>
+        <translation>header Mcp-Method hilang</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="196"/>
         <source>Mcp-Method header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Header Mcp-Method &apos;%1&apos; tidak cocok dengan nilai isi &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="203"/>
         <source>missing Mcp-Name header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>header Mcp-Name hilang untuk %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="210"/>
         <source>Mcp-Name header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Header Mcp-Name &apos;%1&apos; tidak cocok dengan nilai isi &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="257"/>
         <source>Unsupported protocol version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versi protokol tidak didukung</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="42"/>
         <source>Reporting is unavailable because there is no way to ask the user, and nothing is sent without being asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelaporan tidak tersedia karena tidak ada cara bertanya kepada pengguna, dan tidak ada yang dikirim tanpa diminta.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="49"/>
         <source>A confirmation is already waiting for the user. Nothing was sent - wait for them to answer the previous request before asking again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sebuah konfirmasi sudah menunggu pengguna. Tidak ada yang dikirim — tunggu mereka menjawab permintaan sebelumnya sebelum bertanya lagi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="205"/>
         <source>an unidentified agent</source>
-        <translation type="unfinished"></translation>
+        <translation>agent yang tidak teridentifikasi</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="311"/>
         <source>One of: fixed, partly_fixed, not_fixed. Report a success as readily as a failure - a run that found a cause and applied a working fix is the material the knowledge base is made of, and the project currently never sees one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Salah satu dari: fixed, partly_fixed, not_fixed. Laporkan keberhasilan sama siapnya dengan kegagalan — sesi yang menemukan sebab dan menerapkan perbaikan yang berhasil adalah bahan pembuatan basis pengetahuan, dan proyek saat ini tidak pernah melihatnya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="322"/>
         <source>Name or alias of the sandbox the run was about. Optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama atau alias sandbox yang menjadi objek sesi. Opsional.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="324"/>
         <source>One line naming the problem, as an issue title would.</source>
-        <translation type="unfinished"></translation>
+        <translation>Satu baris yang menyebut masalah, seperti judul isu.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="325"/>
         <source>What you found and why you think it was the cause. Written as your own account - it is labelled as model output in the report and a maintainer will read it as such.</source>
-        <translation type="unfinished"></translation>
+        <translation>Apa yang Anda temukan dan mengapa Anda mengira itu penyebabnya. Ditulis sebagai catatan Anda sendiri — akan diberi label sebagai keluaran model dalam laporan dan maintainer akan membacanya demikian.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="328"/>
         <source>What you did, one step per entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Apa yang Anda lakukan, satu langkah per entri.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="329"/>
         <source>The settings you changed, as &apos;Setting=Value&apos; lines. These become the ini_changes block of the draft knowledge-base entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengaturan yang Anda ubah, sebagai baris &apos;Setting=Value&apos;. Ini menjadi blok ini_changes dari draf entri basis pengetahuan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="332"/>
         <source>How you established the result - what you ran, what you read afterwards. A fix nobody verified is a guess.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bagaimana Anda memastikan hasilnya — apa yang Anda jalankan, apa yang Anda baca setelahnya. Perbaikan yang tidak diverifikasi siapa pun hanyalah tebakan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="335"/>
         <source>Hypotheses you ruled out, and what ruled them out. Please fill this in: what a cause is NOT is what makes a knowledge-base entry discriminate instead of merely sounding right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dugaan yang Anda singkirkan, dan apa yang menyingkirkannya. Mohon isi ini: apa yang BUKAN suatu penyebablah yang membuat entri basis pengetahuan dapat membedakan, bukan sekadar terdengar benar.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="338"/>
         <source>Set this only when the user has told you whether their problem is gone - not when you believe it is. Ask them: &apos;is it working now?&apos; is a question worth one turn. Until this is set, Sandboxie-Plus asks the user itself before the report is sent, and the report says plainly that the outcome is your assessment rather than theirs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Set ini hanya ketika pengguna telah mengatakan apakah masalahnya hilang — bukan ketika Anda mengira begitu. Tanyakan mereka: &apos;apakah sekarang sudah berfungsi?&apos; adalah pertanyaan yang layak satu giliran. Sebelum ini diset, Sandboxie-Plus sendiri yang bertanya kepada pengguna sebelum laporan dikirim, dan laporan menyatakan dengan jelas bahwa hasilnya adalah penilaian Anda, bukan mereka.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="340"/>
         <source>Ask to attach the whole Sandboxie.ini. Off unless the problem is about configuration the box section does not show; it carries every sandbox the user has.</source>
-        <translation type="unfinished"></translation>
+        <translation>Minta lampirkan seluruh Sandboxie.ini. Nonaktif kecuali masalahnya tentang konfigurasi yang tidak ditampilkan bagian box; berkas ini memuat setiap sandbox yang dimiliki pengguna.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="343"/>
         <source>Ask to attach the resource trace as well as the message log. Large, and detailed about everything running on the machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Minta lampirkan jejak sumber daya serta log pesan. Besar, dan merinci semua yang berjalan di komputer.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="362"/>
         <source>Issue title.</source>
-        <translation type="unfinished"></translation>
+        <translation>Judul isu.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="363"/>
         <source>Issue body, Markdown. Leave empty to use the composed report, which is the better choice: it is the text the user has already read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Isi isu, Markdown. Kosongkan untuk memakai laporan yang disusun, yang merupakan pilihan lebih baik: itu adalah teks yang sudah dibaca pengguna.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="366"/>
         <source>Label names to suggest. The user can change them.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama label untuk disarankan. Pengguna dapat mengubahnya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="381"/>
         <source>Name or alias of the sandbox the workaround is for.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama atau alias sandbox yang menjadi objek solusi sementara.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="382"/>
         <source>The settings, as &apos;Setting=Value&apos; lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengaturan, sebagai baris &apos;Setting=Value&apos;.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="383"/>
         <source>What the workaround does and what it costs, in plain words.</source>
-        <translation type="unfinished"></translation>
+        <translation>Apa yang dilakukan solusi sementara itu dan apa pengorbanannya, dengan kata-kata sederhana.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="400"/>
         <source>Write up what happened</source>
-        <translation type="unfinished"></translation>
+        <translation>Tulis apa yang terjadi</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="401"/>
@@ -13346,56 +13548,68 @@ Call this on a success too. A failure report tells the project what is still bro
 Call it early and again as you learn more, rather than once at the end. Whatever you composed last is what Sandboxie-Plus offers the user when they close the agent window, and they may close it at any moment - the console going away does not wait for you to finish. An early rough write-up that gets sent is worth more than a perfect one that was never composed.
 
 You cannot send it yourself, by design. When you are done, tell the user to press Finish - the green tick at the bottom of the Sandboxie-Plus agent window - which opens your report for them to read, correct and send.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menyusun laporan dari catatan Anda tentang sesi ditambah fakta yang direkam Sandboxie-Plus sendiri, dan menampilkan hasilnya. Tidak ada yang dikirim — ini hanya menyusun.
+
+Kedua bagian tetap terpisah dan diberi label: apa yang diamati mesin, dan apa yang Anda tulis. Jangan coba mencampurnya; maintainer harus dapat membedakan kalimat mana yang merupakan bukti.
+
+Panggil ini juga pada keberhasilan. Laporan kegagalan memberi tahu proyek apa yang masih rusak; laporan keberhasilan memberi tahu apa perbaikannya, dan itu adalah yang tidak pernah mereka terima.
+
+Panggil lebih awal dan lagi saat Anda mempelajari hal baru, bukan sekali di akhir. Apa pun yang terakhir Anda susun itulah yang ditawarkan Sandboxie-Plus kepada pengguna saat mereka menutup jendela agent, dan mereka bisa menutupnya kapan saja — konsol yang hilang tidak menunggu Anda selesai. Laporan kasar awal yang terkirim lebih berharga daripada laporan sempurna yang tidak pernah disusun.
+
+Anda tidak dapat mengirimnya sendiri, sesuai desain. Saat selesai, katakan kepada pengguna untuk menekan Finish — centang hijau di bawah jendela agent Sandboxie-Plus — yang membuka laporan Anda untuk mereka baca, perbaiki, dan kirim.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="426"/>
         <source>Open a prefilled GitHub issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Buka isu GitHub yang sudah diisi</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="427"/>
         <source>Opens GitHub&apos;s new-issue form in the user&apos;s browser with the title and body filled in. It submits nothing - the user reads it on the site and decides.
 
 Prefer report_submit. This one requires the user to have a GitHub account and to be signed in, which many are not; report_submit reaches the project&apos;s own tracker with no account at all. Use this only when the user has said they want to discuss it on GitHub, or when they ask for it by name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Membuka formulir isu baru GitHub di browser pengguna dengan judul dan isi yang sudah diisi. Tidak mengirim apa pun — pengguna membacanya di situs dan memutuskan.
+
+Lebih baik gunakan report_submit. Ini mengharuskan pengguna memiliki akun GitHub dan sudah masuk, yang banyak tidak punya; report_submit sampai ke pelacak masalah proyek tanpa akun sama sekali. Gunakan ini hanya ketika pengguna mengatakan ingin mendiskusikannya di GitHub, atau ketika mereka memintanya secara eksplisit.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="435"/>
         <source>Save a workaround others can apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Simpan solusi sementara yang dapat dipakai orang lain</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="436"/>
         <source>Writes a file holding the settings as an INI snippet plus the equivalent SbieIni.exe commands, so the fix can be shared or reapplied. Local only - nothing leaves the machine. The user picks where it goes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menulis berkas yang berisi pengaturan sebagai cuplikan INI beserta perintah SbieIni.exe yang setara, agar perbaikan dapat dibagikan atau diterapkan ulang. Hanya lokal — tidak ada yang keluar dari komputer. Pengguna memilih lokasinya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="456"/>
         <source>&apos;outcome&apos; must be one of: fixed, partly_fixed, not_fixed.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;outcome&apos; harus salah satu dari: fixed, partly_fixed, not_fixed.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="460"/>
         <source>&apos;title&apos; is required - one line naming the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;title&apos; wajib diisi — satu baris yang menyebut masalah.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="462"/>
         <source>&apos;narrative&apos; is required. A report with no account of what you found is not worth a maintainer&apos;s time.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;narrative&apos; wajib diisi. Laporan tanpa catatan tentang apa yang Anda temukan tidak layak menghabiskan waktu maintainer.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="528"/>
         <source>Composed, and nothing has been sent. The user has not seen it yet either - call report_submit to put it in front of them, or issue_prefill to open it as a GitHub issue instead. This is the full text:
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sudah disusun, dan tidak ada yang dikirim. Pengguna juga belum melihatnya — panggil report_submit untuk menampilkannya kepada mereka, atau issue_prefill untuk membukanya sebagai isu GitHub. Ini teks lengkapnya:
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="541"/>
         <source>Nothing has been written up yet, and sending is not yours to do in any case. Call report_compose first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Belum ada yang ditulis, dan mengirim bukan hak Anda dalam keadaan apa pun. Panggil report_compose terlebih dahulu.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="545"/>
@@ -13404,22 +13618,26 @@ Prefer report_submit. This one requires the user to have a GitHub account and to
 Your write-up is already with Sandboxie-Plus. Tell the user to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: that opens the report for them to read, lets them correct anything, and sends it if they agree. Say that sending it is worth doing and why, once, and then leave the decision with them.
 
 Keep composing if you learn more - they are offered whatever you wrote last.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengirim adalah hak pengguna, bukan Anda — tool ini tidak lagi mengirim apa pun.
+
+Laporan Anda sudah ada di Sandboxie-Plus. Katakan kepada pengguna untuk menekan Finish, centang hijau di bawah jendela agent Sandboxie-Plus: itu membuka laporan untuk mereka baca, memungkinkan mereka memperbaiki apa pun, dan mengirimnya jika mereka setuju. Katakan sekali bahwa mengirimnya layak dilakukan dan mengapa, lalu serahkan keputusan kepada mereka.
+
+Terus susun laporan jika Anda mempelajari hal baru — yang ditawarkan adalah apa pun yang terakhir Anda tulis.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="559"/>
         <source>&apos;title&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;title&apos; wajib diisi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="565"/>
         <source>There is nothing to put in the issue. Supply &apos;body&apos;, or call report_compose first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada yang dimasukkan ke dalam isu. Berikan &apos;body&apos;, atau panggil report_compose terlebih dahulu.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="596"/>
         <source>Confirm opening a GitHub issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfirmasi membuka isu GitHub</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="597"/>
@@ -13430,557 +13648,596 @@ Title: %1
 %2
 
 Nothing is submitted by opening it - you still have to press the button on the site, and you can edit it there first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Buka formulir isu Sandboxie-Plus di browser Anda, dengan isi sebagai berikut:
+
+Judul: %1
+
+%2
+
+Tidak ada yang dikirim dengan membukanya — Anda tetap harus menekan tombol di situs, dan dapat menyuntingnya terlebih dahulu di sana.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="601"/>
         <source>Open the Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Buka Browser</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="602"/>
         <source>The user declined; no issue was opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengguna menolak; tidak ada isu yang dibuka.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="606"/>
         <source>The browser could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Browser tidak dapat dibuka.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="609"/>
         <source>The issue form is open in the browser, but the body did not fit in a URL and was truncated. Nothing has been submitted; the user decides on the site.</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulir isu terbuka di browser, tetapi isinya tidak muat dalam URL dan dipotong. Tidak ada yang dikirim; pengguna memutuskan di situs.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="611"/>
         <source>The issue form is open in the browser, prefilled. Nothing has been submitted; the user decides on the site.</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulir isu terbuka di browser dengan isi sudah diisi. Tidak ada yang dikirim; pengguna memutuskan di situs.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="624"/>
         <source>&apos;changes&apos; is required - there is no workaround without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;changes&apos; wajib diisi — tidak ada solusi sementara tanpanya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="635"/>
         <source>an AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>sebuah AI agent</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="654"/>
         <source>Save the workaround</source>
-        <translation type="unfinished"></translation>
+        <translation>Simpan solusi sementara</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="656"/>
         <source>Sandboxie configuration (*.ini);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurasi Sandboxie (*.ini);;Semua berkas (*.*)</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="658"/>
         <source>The user cancelled; nothing was written.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengguna membatalkan; tidak ada yang ditulis.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="662"/>
         <source>That file could not be written: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Berkas itu tidak dapat ditulis: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="670"/>
         <source>Written to %1 - %2 setting(s), as an INI section plus the equivalent SbieIni.exe commands.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ditulis ke %1 — %2 pengaturan, sebagai bagian INI beserta perintah SbieIni.exe yang setara.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="678"/>
         <source>Sandboxie is not running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie tidak berjalan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="697"/>
         <source>The six-digit code shown in Sandboxie-Plus. Omit it on the first call and Sandboxie-Plus will display one; then ask the user to read it to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kode enam digit yang ditampilkan Sandboxie-Plus. Hilangkan pada panggilan pertama dan Sandboxie-Plus akan menampilkannya; lalu minta pengguna membacakannya kepada Anda.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="712"/>
         <source>Connect to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Hubungkan ke Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="713"/>
         <source>Authorises this connection to look at this machine. Call with no arguments and Sandboxie-Plus shows a six-digit code on the user&apos;s screen; ask the user for it and call again with code set.
 
 You do not need this to read the documentation or the settings schema - those work now. You do need it before anything that reads the user&apos;s sandboxes, and before anything that changes them. Do not guess the code: a handful of wrong attempts invalidates it and a new one has to be requested.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengotorisasi koneksi ini untuk melihat komputer ini. Panggil tanpa argumen dan Sandboxie-Plus menampilkan kode enam digit di layar pengguna; minta kode itu kepada pengguna lalu panggil lagi dengan code diset.
+
+Anda tidak memerlukannya untuk membaca dokumentasi atau skema pengaturan — itu sudah berfungsi. Anda memerlukannya sebelum apa pun yang membaca sandbox pengguna, dan sebelum apa pun yang mengubahnya. Jangan menebak kode: beberapa kali percobaan salah akan membatalkannya dan kode baru harus diminta.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="93"/>
         <source>How many results at most. Defaults to 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jumlah hasil maksimal. Default 10.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="113"/>
         <source>The entry id, as returned by kb_search or kb_match.</source>
-        <translation type="unfinished"></translation>
+        <translation>ID entri, seperti yang dikembalikan kb_search atau kb_match.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="132"/>
         <source>Name or alias of the sandbox to explain.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama atau alias sandbox yang akan dijelaskan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="136"/>
         <source>How many candidates at most. Defaults to 5.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jumlah kandidat maksimal. Default 5.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="211"/>
         <source>Limit to one sandbox, by name or alias. Many entries carry no box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Batasi pada satu sandbox, berdasarkan nama atau alias. Banyak entri tidak memiliki box.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="215"/>
         <source>One of message, diagnostic or notice. Omit for all three.</source>
-        <translation type="unfinished"></translation>
+        <translation>Salah satu dari message, diagnostic, atau notice. Hilangkan untuk ketiganya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="219"/>
         <source>Only entries whose text contains this.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hanya entri yang teksnya mengandung ini.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="223"/>
         <source>Entries to return, newest first. Default 100, maximum 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entri yang dikembalikan, terbaru lebih dulu. Default 100, maksimal 200.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="241"/>
         <source>Limit to one sandbox, by name or alias. Omit for every sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Batasi pada satu sandbox, berdasarkan nama atau alias. Hilangkan untuk semua sandbox.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="245"/>
         <source>Only rows whose path or message contains this text.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hanya baris yang path atau pesannya mengandung teks ini.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="249"/>
         <source>Only rows with this status, for example Denied. Omit for all.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hanya baris dengan status ini, misalnya Denied. Hilangkan untuk semua.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="253"/>
         <source>Rows to return, default 100, maximum 300.</source>
-        <translation type="unfinished"></translation>
+        <translation>Baris yang dikembalikan, default 100, maksimal 300.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="257"/>
         <source>Rows to skip, for paging. The result reports the total.</source>
-        <translation type="unfinished"></translation>
+        <translation>Baris yang dilewati, untuk halaman. Hasil melaporkan totalnya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="292"/>
         <source>Sandboxie version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versi Sandboxie</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="293"/>
         <source>Version of Sandboxie-Plus and of the operating system it is running on. Call this first: fixes and setting names differ between versions, and a suggestion that does not apply to the installed build wastes a round trip.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versi Sandboxie-Plus dan sistem operasi tempat ia berjalan. Panggil ini terlebih dahulu: perbaikan dan nama pengaturan berbeda antar versi, dan saran yang tidak berlaku pada build yang terpasang hanya membuang satu giliran.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="298"/>
         <source>List sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Daftar sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="299"/>
         <source>Every configured sandbox with its type, whether it is enabled, how many processes are running in it, and whether it holds any content. Boxes often have an alias, which is what the user calls them - refer to a box the way displayName shows it, and pass either the name or the alias to other tools.</source>
-        <translation type="unfinished"></translation>
+        <translation>Setiap sandbox yang dikonfigurasi beserta tipenya, apakah aktif, berapa proses yang berjalan di dalamnya, dan apakah ia berisi sesuatu. Box sering memiliki alias, itulah yang dipanggil pengguna — rujuk box sesuai tampilan displayName, dan berikan nama atau alias kepada tool lain.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="305"/>
         <source>Read sandbox configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Baca konfigurasi sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="306"/>
         <source>The settings explicitly set on one sandbox, as name and value pairs. Values inherited from templates and global defaults are not included, so an absent setting means it is not set here, not that it has no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengaturan yang secara eksplisit diatur pada satu sandbox, sebagai pasangan nama dan nilai. Nilai yang diwariskan dari templat dan default global tidak disertakan, jadi pengaturan yang tidak ada berarti tidak diatur di sini, bukan berarti tidak berpengaruh.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="309"/>
         <source>Name or alias of the sandbox, as reported by box_list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama atau alias sandbox, seperti yang dilaporkan box_list.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="311"/>
         <source>What is running in a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Apa yang berjalan di dalam sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="312"/>
         <source>The processes currently running in a sandbox, with their image paths, command lines and start times. Empty is a useful answer too: a program that exits immediately leaves nothing here, which points at a start-up failure rather than a running-program problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proses yang sedang berjalan di dalam sandbox, beserta path citra, baris perintah, dan waktu mulai. Kosong juga merupakan jawaban yang berguna: program yang langsung keluar tidak meninggalkan apa pun di sini, yang menunjukkan kegagalan saat mulai, bukan masalah program yang berjalan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="319"/>
         <source>Sandbox diagnostic events</source>
-        <translation type="unfinished"></translation>
+        <translation>Peristiwa diagnostik Sandboxie</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="320"/>
         <source>Diagnostic events Sandboxie has recorded for a sandbox - the same ones the troubleshooting wizard reports. These are the driver saying what it refused or had trouble with, so read them before guessing at a cause. Paths and account names are redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Peristiwa diagnostik yang direkam Sandboxie untuk sebuah sandbox — sama seperti yang dilaporkan wizard pemecahan masalah. Ini adalah driver yang mengatakan apa yang ditolak atau bermasalah, jadi bacalah sebelum menebak penyebab. Path dan nama akun disamarkan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="327"/>
         <source>Search the message log</source>
-        <translation type="unfinished"></translation>
+        <translation>Cari log pesan</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="328"/>
         <source>Everything Sandboxie-Plus has reported this session: driver and service messages, diagnostic events, and notices from SandMan itself. This is the same log the user is looking at, newest first. Unlike the resource trace it needs nothing switched on, so it is the first place to look. Paths and account names are redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Semua yang dilaporkan Sandboxie-Plus sesi ini: pesan driver dan layanan, peristiwa diagnostik, dan pemberitahuan dari SandMan sendiri. Ini log yang sama yang dilihat pengguna, terbaru lebih dulu. Tidak seperti jejak sumber daya, ini tidak memerlukan apa pun diaktifkan, jadi ini tempat pertama untuk melihat. Path dan nama akun disamarkan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="335"/>
         <source>Search the resource trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Cari jejak sumber daya</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="336"/>
         <source>The resource access trace: what sandboxed programs tried to open and whether it was allowed. This is where a &apos;why will it not start&apos; answer usually comes from - look for denied accesses just before the program exits.
 
 Requires tracing to be enabled in SandMan, and only covers what has been recorded since. If it is off, say so and ask the user to turn it on and reproduce the problem - do not speculate from an empty trace. Results are paged and redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jejak akses sumber daya: apa yang dicoba dibuka program sandbox dan apakah diizinkan. Di sinilah jawaban &apos;mengapa tidak mau:start&apos; biasanya berasal — cari akses yang ditolak tepat sebelum program keluar.
+
+Memerlukan pelacakan diaktifkan di SandMan, dan hanya mencakup apa yang direkam sejak saat itu. Jika mati, katakan demikian dan minta pengguna mengaktifkannya serta mereproduksi masalah — jangan berspekulasi dari jejak kosong. Hasil dibagi per halaman dan disamarkan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="346"/>
         <source>Search known problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Cari masalah yang diketahui</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="347"/>
         <source>Searches the troubleshooting knowledge base - curated entries mapping a symptom to a cause and a fix. This is a different thing from the documentation: the docs say what a setting does, these say why something is broken.
 
 Search by how the user described the problem, in their words. Returns ids; pass one to kb_get for the whole entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mencari basis pengetahuan pemecahan masalah — entri pilihan yang memetakan gejala ke penyebab dan perbaikan. Ini berbeda dengan dokumentasi: dokumentasi menjelaskan apa yang dilakukan pengaturan, ini menjelaskan mengapa sesuatu rusak.
+
+Cari berdasarkan cara pengguna mendeskripsikan masalah, dengan kata-kata mereka. Mengembalikan id; berikan salah satu ke kb_get untuk entri lengkap.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="352"/>
         <source>What the user reports, in their own words.</source>
-        <translation type="unfinished"></translation>
+        <translation>Apa yang dilaporkan pengguna, dengan kata-kata mereka sendiri.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="354"/>
         <source>Read a known problem</source>
-        <translation type="unfinished"></translation>
+        <translation>Baca masalah yang diketahui</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="355"/>
         <source>The whole knowledge-base entry: what it looks like, why it happens, the settings that fix it, what the fix costs, and how to confirm it worked.
 
 Read the risk before proposing the fix. Every one of these loosens something, and the user is entitled to hear what, in your own words, when you ask them to approve it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entri basis pengetahuan lengkap: seperti apa tampilannya, mengapa terjadi, pengaturan yang memperbaikinya, apa pengorbanan perbaikannya, dan cara memastikan perbaikannya berhasil.
+
+Baca risikonya sebelum mengusulkan perbaikan. Semuanya melonggarkan sesuatu, dan pengguna berhak mendengar apa, dengan kata-kata Anda, saat Anda meminta persetujuan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="361"/>
         <source>What could explain this sandbox&apos;s problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Apa yang bisa menjelaskan masalah sandbox ini</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="362"/>
         <source>Scores the knowledge base against what this machine actually logged for a sandbox - the message codes seen, the resources that were blocked, and which settings are present - and returns the entries that explain some of it, best first.
 
 Each result carries matchedBecause, saying which observations it accounts for. Read that rather than trusting the order: a top-ranked entry that matched on one weak signal is a guess, and an entry that explains three separate observations is not. Nothing here is a verdict - it is a shortlist to check against the trace.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menilai basis pengetahuan terhadap apa yang benar-benar direkam komputer ini untuk sebuah sandbox — kode pesan yang terlihat, sumber daya yang diblokir, dan pengaturan yang ada — lalu mengembalikan entri yang menjelaskan sebagian di antaranya, yang terbaik lebih dulu.
+
+Setiap hasil membawa matchedBecause, yang menyebutkan pengamatan apa yang dijelaskannya. Bacalah itu daripada mempercayai urutannya: entri peringkat atas yang cocok pada satu sinyal lemah adalah tebakan, sedangkan entri yang menjelaskan tiga pengamatan terpisah bukan. Tidak ada di sini yang merupakan vonis — ini hanya daftar pendek untuk dicek terhadap jejak.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="371"/>
         <source>Search the documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>Cari dokumentasi</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="372"/>
         <source>Finds documentation pages by title, path, heading or setting name. Returns paths to read with docs_get, not the page text. Coverage is partial: roughly two in five settings have a page, so finding nothing here does not mean the setting does not exist - check config_schema.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menemukan halaman dokumentasi berdasarkan judul, path, tajuk, atau nama pengaturan. Mengembalikan path untuk dibaca dengan docs_get, bukan teks halaman. Cakupannya sebagian: sekitar dua dari lima pengaturan memiliki halaman, jadi tidak menemukan apa pun di sini tidak berarti pengaturan itu tidak ada — periksa config_schema.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="376"/>
         <source>A setting name, a feature name, or a few words.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama pengaturan, nama fitur, atau beberapa kata.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="377"/>
         <source>Maximum results, default 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasil maksimal, default 10.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="379"/>
         <source>Read a documentation page</source>
-        <translation type="unfinished"></translation>
+        <translation>Baca halaman dokumentasi</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="380"/>
         <source>The full Markdown text of one page, addressed by the path that docs_search or docs_for_setting returned.</source>
-        <translation type="unfinished"></translation>
+        <translation>Teks Markdown lengkap satu halaman, ditujukan oleh path yang dikembalikan docs_search atau docs_for_setting.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="382"/>
         <source>Page path, for example Content/UseRamDisk.md.</source>
-        <translation type="unfinished"></translation>
+        <translation>Path halaman, misalnya Content/UseRamDisk.md.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="384"/>
         <source>Look up a setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Cari pengaturan</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="385"/>
         <source>What Sandboxie itself knows about a configuration setting: whether it exists, its category and syntax, which version added or removed it, and what supersedes it. This is the authority on whether a setting is real - the documentation covers only some of them. An unknown setting name is silently ignored by the driver rather than rejected, so check here before recommending one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Apa yang diketahui Sandboxie sendiri tentang pengaturan konfigurasi: apakah ada, kategori dan sintaksnya, versi mana yang menambah atau menghapusnya, dan apa yang menggantikannya. Ini otoritas tentang apakah pengaturan itu nyata — dokumentasi hanya mencakup sebagian. Nama pengaturan yang tidak dikenal diabaikan diam-diam oleh driver, bukan ditolak, jadi periksa di sini sebelum merekomendasikannya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="391"/>
         <location filename="Mcp/McpTools.cpp" line="398"/>
         <source>Setting name, for example ClosedFilePath.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama pengaturan, misalnya ClosedFilePath.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="393"/>
         <source>Find the page for a setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Temukan halaman untuk pengaturan</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="394"/>
         <source>The reference page for one Sandboxie.ini setting, plus any other pages that discuss it. Distinguishes a setting that exists but is undocumented from one that does not exist at all - do not infer the latter from the former.</source>
-        <translation type="unfinished"></translation>
+        <translation>Halaman referensi untuk satu pengaturan Sandboxie.ini, plus halaman lain yang membahasnya. Membedakan pengaturan yang ada tetapi tidak didokumentasikan dari yang tidak ada sama sekali — jangan menyimpulkan yang后者 dari yang前者.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="519"/>
         <source>Sandboxie-Plus %1 on %2 (%3, kernel %4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus %1 pada %2 (%3, kernel %4)</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="526"/>
         <source>
 
 No active supporter certificate. Settings whose Requirements name one will not take effect here - check with config_validate before recommending them.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Tidak ada sertifikat pendukung yang aktif. Pengaturan yang pada Requirements menyebutkannya tidak akan berlaku di sini — periksa dengan config_validate sebelum merekomendasikannya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="531"/>
         <source>isolated desktops</source>
-        <translation type="unfinished"></translation>
+        <translation>desktop terisolasi</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="532"/>
         <source>advanced network features</source>
-        <translation type="unfinished"></translation>
+        <translation>fitur jaringan lanjutan</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="533"/>
         <source>box encryption and protection</source>
-        <translation type="unfinished"></translation>
+        <translation>enkripsi dan perlindungan box</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="534"/>
         <source>enhanced security box types</source>
-        <translation type="unfinished"></translation>
+        <translation>jenis box keamanan ditingkatkan</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="536"/>
         <source>
 
 Supporter certificate: active</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Sertifikat pendukung: aktif</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="538"/>
         <source> but expired%1</source>
-        <translation type="unfinished"></translation>
+        <translation> tetapi kedaluwarsa%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="539"/>
         <source>, inside the renewal grace period</source>
-        <translation type="unfinished"></translation>
+        <translation>, dalam masa tenggang perpanjangan</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="541"/>
         <source>, and no longer valid for this build</source>
-        <translation type="unfinished"></translation>
+        <translation>, dan tidak lagi berlaku untuk build ini</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="543"/>
         <source>. No optional features unlocked.</source>
-        <translation type="unfinished"></translation>
+        <translation>. Tidak ada fitur opsional yang dibuka.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="544"/>
         <source>. Unlocked: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>. Dibuka: %1.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="595"/>
         <source>
 (%1 of %2 sandboxes listed; the rest were omitted)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%1 dari %2 sandbox tercantum; sisanya dihilangkan)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="598"/>
         <source>No sandboxes are configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada sandbox yang dikonfigurasi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="611"/>
         <source>No sandbox called &apos;%1&apos;. Either its name or its alias works; call box_list for both.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada sandbox bernama &apos;%1&apos;. Baik nama maupun aliasnya dapat dipakai; panggil box_list untuk keduanya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="642"/>
         <source>
 (%1 of %2 settings listed; the rest were omitted)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%1 dari %2 pengaturan tercantum; sisanya dihilangkan)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="645"/>
         <source>Sandbox &apos;%1&apos; has no settings of its own; it runs on templates and global defaults.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox &apos;%1&apos; tidak memiliki pengaturan sendiri; ia berjalan dengan templat dan default global.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="652"/>
         <source>The offline documentation pack is not installed, so documentation lookups are unavailable on this machine. The settings themselves can still be inspected with box_get_config, and the online documentation is at https://sandboxie-plus.com/docs/</source>
-        <translation type="unfinished"></translation>
+        <translation>Paket dokumentasi offline tidak terpasang, jadi pencarian dokumentasi tidak tersedia di komputer ini. Pengaturannya sendiri masih dapat diperiksa dengan box_get_config, dan dokumentasi daring ada di https://sandboxie-plus.com/docs/</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="665"/>
         <source>The &apos;query&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>Argumen &apos;query&apos; wajib diisi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="677"/>
         <source>   [reference page for %1]</source>
-        <translation type="unfinished"></translation>
+        <translation>   [halaman referensi untuk %1]</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="681"/>
         <source>Nothing in the documentation matches &apos;%1&apos;. Note that only about two in five settings have a documentation page, so this is not evidence that a setting does not exist - check it with config_schema or box_get_config.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada dalam dokumentasi yang cocok dengan &apos;%1&apos;. Perhatikan bahwa hanya sekitar dua dari lima pengaturan yang memiliki halaman dokumentasi, jadi ini bukan bukti bahwa pengaturan itu tidak ada — periksalah dengan config_schema atau box_get_config.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="699"/>
         <source>The &apos;path&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>Argumen &apos;path&apos; wajib diisi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="704"/>
         <source>%1. Use docs_search to find a valid page path.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1. Gunakan docs_search untuk menemukan path halaman yang valid.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="719"/>
         <location filename="Mcp/McpTools.cpp" line="771"/>
         <source>The &apos;setting&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>Argumen &apos;setting&apos; wajib diisi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="725"/>
         <source>%1 is documented on %2 (%3).</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 didokumentasikan di %2 (%3).</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="730"/>
         <source>
 Also discussed on:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Juga dibahas di:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="736"/>
         <source>%1 has no page of its own, but is discussed on:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tidak memiliki halaman sendiri, tetapi dibahas di:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="743"/>
         <source>&apos;%1&apos; has no documentation page. That does not mean it is not a real setting - most settings are undocumented. Verify it exists before telling the user it does not.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; tidak memiliki halaman dokumentasi. Itu tidak berarti pengaturan itu tidak nyata — sebagian besar pengaturan tidak didokumentasikan. Verifikasi keberadaannya sebelum mengatakan kepada pengguna bahwa tidak ada.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="774"/>
         <source>The settings reference (SbieSettings.ini) could not be loaded, so settings cannot be verified on this installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Referensi pengaturan (SbieSettings.ini) tidak dapat dimuat, jadi pengaturan tidak dapat diverifikasi pada instalasi ini.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="784"/>
         <source>&apos;%1&apos; is not a known Sandboxie setting. Note that the driver ignores unknown settings silently instead of reporting an error, so a typo here would look like the setting simply had no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; bukan pengaturan Sandboxie yang dikenal. Perhatikan bahwa driver mengabaikan pengaturan yang tidak dikenal tanpa melaporkan kesalahan, jadi typo di sini akan tampak seperti pengaturan itu tidak berpengaruh.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="813"/>
         <source>%1 is a known setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 adalah pengaturan yang dikenal.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="814"/>
         <source>
 Category: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Kategori: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="815"/>
         <source>
 Syntax: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Sintaks: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="816"/>
         <source>
 Requires: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Membutuhkan: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="817"/>
         <source>
 Added in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Ditambahkan pada: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="818"/>
         <source>
 Removed in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Dihapus pada: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="819"/>
         <source>
 Superseded by: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Digantikan oleh: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="820"/>
         <source>
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="822"/>
         <source>
 
 Documentation: %1 (read it with docs_get)</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Dokumentasi: %1 (baca dengan docs_get)</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="824"/>
         <source>
 
 This setting has no documentation page; most do not.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Pengaturan ini tidak memiliki halaman dokumentasi; sebagian besar juga demikian.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="847"/>
@@ -13988,92 +14245,97 @@ This setting has no documentation page; most do not.</source>
         <location filename="Mcp/McpTools.cpp" line="987"/>
         <location filename="Mcp/McpTools.cpp" line="1087"/>
         <source>No sandbox called &apos;%1&apos;. Call box_list for names and aliases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada sandbox bernama &apos;%1&apos;. Panggil box_list untuk nama dan alias.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="885"/>
         <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at box_diagnostics and trace_query rather than at the process list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada yang berjalan di &apos;%1&apos; saat ini. Jika ada program yang diharapkan, ia mulai lalu keluar — lihat box_diagnostics dan trace_query, bukan daftar proses.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="889"/>
         <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at log_query and trace_query rather than at the process list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada yang berjalan di &apos;%1&apos; saat ini. Jika ada program yang diharapkan, ia mulai lalu keluar — lihat log_query dan trace_query, bukan daftar proses.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="914"/>
         <source>Diagnostics are not available for &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diagnostik tidak tersedia untuk &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="954"/>
         <source>No diagnostic events have been recorded for &apos;%1&apos;. That is the normal state for a healthy sandbox, and it is not evidence that nothing went wrong - events are only recorded for the kinds of problem Sandboxie detects itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada peristiwa diagnostik yang direkam untuk &apos;%1&apos;. Itu kondisi normal untuk sandbox yang sehat, dan bukan bukti bahwa tidak ada masalah — peristiwa hanya direkam untuk jenis masalah yang terdeteksi Sandboxie sendiri.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="970"/>
         <source>Resource tracing is turned off, so there is no trace to search. Ask the user to enable it in SandMan and then reproduce the problem - the trace only records what happens while it is on. Do not draw conclusions from the absence of trace data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelacakan sumber daya dimatikan, jadi tidak ada jejak untuk dicari. Minta pengguna mengaktifkannya di SandMan lalu mereproduksi masalah — jejak hanya merekam apa yang terjadi saat aktif. Jangan menarik kesimpulan dari tidak adanya data jejak.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1052"/>
         <source>
 (%1 of %2 matching rows; call again with offset=%3 for the next page)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%1 dari %2 baris yang cocok; panggil lagi dengan offset=%3 untuk halaman berikutnya)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1056"/>
         <source>No trace rows match. The trace holds %1 entries in total - if that is 0, tracing has only just been enabled and the problem still has to be reproduced before there is anything to see.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada baris jejak yang cocok. Jejak berisi %1 entri secara total — jika 0, pelacakan baru saja diaktifkan dan masalah masih harus direproduksi sebelum ada yang bisa dilihat.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1075"/>
         <source>The message log is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Log pesan tidak tersedia.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1152"/>
         <source>Nothing in the log matches. It holds %1 entries in total.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada dalam log yang cocok. Log berisi %1 entri secara total.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1155"/>
         <source>
 (newest %1 of %2 matching entries)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(terbaru %1 dari %2 entri yang cocok)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1167"/>
         <source>There is no troubleshooting knowledge base on this installation, so nothing could be consulted. This is not the same as finding no match: treat it as the lookup being unavailable, and fall back to the documentation and the trace.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada basis pengetahuan pemecahan masalah pada instalasi ini, jadi tidak ada yang dapat dikonsultasikan. Ini berbeda dengan tidak menemukan kecocokan: anggap pencarian tidak tersedia, dan beralih ke dokumentasi serta jejak.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1180"/>
         <source>&apos;query&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;query&apos; wajib diisi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1186"/>
         <source>Nothing in the knowledge base matches &quot;%1&quot;. It holds %2 entries, so this is a real absence rather than an empty database - the problem may simply not be a known one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada dalam basis pengetahuan yang cocok dengan &quot;%1&quot;. Basis ini berisi %2 entri, jadi ini benar-benar tidak ada, bukan basis data kosong — masalahnya mungkin memang belum diketahui.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1213"/>
         <source>&apos;id&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;id&apos; wajib diisi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1217"/>
         <source>There is no knowledge-base entry called &apos;%1&apos;. Use kb_search to find one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada entri basis pengetahuan bernama &apos;%1&apos;. Gunakan kb_search untuk menemukannya.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1221"/>
         <source>%1 - %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1224"/>
@@ -14081,21 +14343,28 @@ This setting has no documentation page; most do not.</source>
 Why it happens:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Mengapa terjadi:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1228"/>
         <source>
 The fix:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Perbaikannya:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1233"/>
         <source>
 A troubleshooting script also applies this: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Skrip pemecahan masalah juga menerapkan ini: %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1237"/>
@@ -14103,7 +14372,10 @@ A troubleshooting script also applies this: %1
 What it costs:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Apa pengorbanannya:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1239"/>
@@ -14111,43 +14383,52 @@ What it costs:
 How to confirm it worked:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Cara memastikan berhasil:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1241"/>
         <source>
 %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+%1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1288"/>
         <source>Nothing in the knowledge base explains what %1 has logged. %2 entries were checked against %3 message code(s) and %4 blocked resource(s). Either the problem is not a known one, or nothing has been logged yet - if you have not reproduced the fault since Sandboxie-Plus started, there may be nothing to match against.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada dalam basis pengetahuan yang menjelaskan apa yang direkam %1. %2 entri diperiksa terhadap %3 kode pesan dan %4 sumber daya yang diblokir. Entah masalahnya belum diketahui, atau belum ada yang direkam — jika Anda belum mereproduksi kerusakan sejak Sandboxie-Plus dimulai, mungkin tidak ada yang bisa dicocokkan.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1295"/>
         <source>Candidates for %1, best first. These explain some of what was logged; none of them is a verdict.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kandidat untuk %1, yang terbaik lebih dulu. Ini menjelaskan sebagian dari apa yang direkam; tidak ada yang merupakan vonis.
+
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1299"/>
         <source>%1  (score %2)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1  (skor %2)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1304"/>
         <source>    matched: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    cocok: %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1335"/>
         <source>Sandboxie is not running or SandMan is not connected to the driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie tidak berjalan atau SandMan tidak terhubung ke driver.</translation>
     </message>
 </context>
 <context>
@@ -14218,7 +14499,7 @@ How to confirm it worked:
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>Show Ignored Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan Berkas yang Diabaikan</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
@@ -14241,27 +14522,27 @@ How to confirm it worked:
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="20"/>
         <source>Rename Sandbox</source>
-        <translation type="unfinished">Ubah Nama Sandbox</translation>
+        <translation>Ubah Nama Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="31"/>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation type="unfinished">Silakan masukkan nama baru untuk Sandbox.</translation>
+        <translation>Masukkan nama baru untuk Sandbox.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="38"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="unfinished">Silakan masukkan alias baru untuk Sandbox.</translation>
+        <translation>Masukkan alias baru untuk Sandbox.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="52"/>
         <source>Disable alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Nonaktifkan alias</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="59"/>
         <source>Hide alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Sembunyikan alias</translation>
     </message>
 </context>
 <context>
@@ -14448,7 +14729,7 @@ How to confirm it worked:
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2761"/>
         <source>...</source>
-        <translation></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="154"/>
@@ -14587,7 +14868,7 @@ How to confirm it worked:
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1878"/>
         <source>Version</source>
-        <translation></translation>
+        <translation>Versi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1883"/>
@@ -14763,7 +15044,7 @@ How to confirm it worked:
         <location filename="Forms/SettingsWindow.ui" line="2695"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
-        <translation type="unfinished">Kaitkan panggilan sistem Win32k yang dipilih untuk mengaktifkan akselerasi GPU (eksperimental)</translation>
+        <translation>Kait panggilan sistem Win32k tertentu untuk mengaktifkan akselerasi GPU (diperlukan chrome, firefox, dll.)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="161"/>
@@ -14835,7 +15116,7 @@ How to confirm it worked:
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1394"/>
         <source>%</source>
-        <translation></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1284"/>
@@ -14854,7 +15135,7 @@ How to confirm it worked:
         <location filename="Forms/SettingsWindow.ui" line="3271"/>
         <location filename="Forms/SettingsWindow.ui" line="3431"/>
         <source>Name</source>
-        <translation></translation>
+        <translation>Nama</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3063"/>
@@ -15109,7 +15390,7 @@ How to confirm it worked:
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1585"/>
         <source>Ini Editor Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opsi Editor INI</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2264"/>
@@ -15119,7 +15400,7 @@ How to confirm it worked:
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2280"/>
         <source>Sandboxie-Plus Version: 0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>Versi Sandboxie-Plus: 0.0.0</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2290"/>
@@ -15182,7 +15463,7 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
         <location filename="Forms/SettingsWindow.ui" line="2556"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
         <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
-        <translation type="unfinished">Tambah grup &quot;Sandboxie\Semua Sandbox&quot; ke token sandbox (eksperimental)</translation>
+        <translation>Tambahkan grup &quot;Sandboxie\Semua Sandbox&quot; ke token sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2685"/>
@@ -15202,220 +15483,222 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
     <message>
         <location filename="Forms/SettingsWindow.ui" line="71"/>
         <source>Use random GUID as sandbox name when creating new boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Gunakan GUID acak sebagai nama sandbox saat membuat box baru</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="281"/>
         <source>Use the new SandMan style on Windows 11</source>
-        <translation type="unfinished"></translation>
+        <translation>Gunakan gaya SandMan baru di Windows 11</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>AI Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Integrasi AI</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="477"/>
         <source>Where each session starts. The agent window can raise or lower it for that session alone.
 
 Diagnostic data an agent reads can contain text written by programs inside a sandbox, so a confirmation is also what stands between a misled agent and a silent change. Whatever is chosen here, everything the agent does is recorded.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempat setiap sesi dimulai. Jendela agent dapat menaikkan atau menurunkannya hanya untuk sesi itu.
+
+Data diagnostik yang dibaca agent dapat memuat teks yang ditulis program di dalam sandbox, jadi konfirmasi juga menjadi penghalang antara agent yang tersesat dan perubahan diam-diam. Apa pun yang dipilih di sini, semua yang dilakukan agent direcam.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="512"/>
         <source>Before changing anything, the agent:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sebelum mengubah apa pun, agent:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="519"/>
         <source>Allows an AI agent to connect to Sandboxie-Plus over a local named pipe. Turning this off removes the option entirely: the connection cannot be armed, and a request from an agent is ignored rather than shown to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengizinkan AI agent terhubung ke Sandboxie-Plus melalui named pipe lokal. Mematikannya menghapus opsi ini sepenuhnya: koneksi tidak dapat diaktifkan, dan permintaan dari agent diabaikan, bukan ditampilkan kepada Anda.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="522"/>
         <source>Allow an AI agent to connect (MCP)</source>
-        <translation type="unfinished"></translation>
+        <translation>Izinkan AI agent terhubung (MCP)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="529"/>
         <source>Sandboxie-Plus shows a six-digit code that you read to the agent before it can see anything about your machine. Without it, any program running as you that finds the pipe is treated as authorised - which includes programs you did not start on purpose. Sandboxed programs are refused either way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus menampilkan kode enam digit yang Anda bacakan kepada agent sebelum ia dapat melihat apa pun tentang komputer Anda. Tanpa itu, program apa pun yang berjalan sebagai Anda yang menemukan pipe dianggap diotorisasi — termasuk program yang tidak Anda jalankan dengan sengaja. Program sandbox tetap ditolak bagaimanapun.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="532"/>
         <source>Require a code before an agent may look at this machine</source>
-        <translation type="unfinished"></translation>
+        <translation>Minta kode sebelum agent boleh melihat komputer ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="823"/>
         <source>Remember last used box</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingat box terakhir yang digunakan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="936"/>
         <source>Show search box in tray menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan kolom pencarian di menu baki</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="967"/>
         <source>Show custom box icons in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan ikon box kustom di daftar baki</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="974"/>
         <source>Show overlay icons for boxes in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan ikon overlay untuk box di daftar baki</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="981"/>
         <source>Show box alias name instead of box name in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan alias box, bukan nama box, di daftar baki</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="988"/>
         <source>Maximum displayed characters for compact tray aliases. Ignored when alias display is disabled (name limit is fixed to 32).</source>
-        <translation type="unfinished"></translation>
+        <translation>Jumlah karakter maksimum untuk alias baki ringkas. Diabaikan saat tampilan alias dinonaktifkan (batas nama tetap 32).</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1004"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while Ctrl is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Perilaku tiga status: tidak dicentang = tidak pernah, dicentang sebagian = hanya saat Ctrl ditekan (default), dicentang = selalu.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1007"/>
         <source>Show sandbox status as tooltip in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilkan status sandbox sebagai tooltip di daftar baki</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1236"/>
         <source>Controls whether display-only text uses the sandbox name, alias, or both. Compact views may show only the alias. Paths and internal sandbox identifiers always use the sandbox name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengatur apakah teks tampilan menggunakan nama sandbox, alias, atau keduanya. Tampilan ringkas mungkin hanya menampilkan alias. Path dan identifikasi internal sandbox selalu menggunakan nama sandbox.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1274"/>
         <source>Highlight unapplied changes in Options and Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Soroti perubahan yang belum diterapkan di Opsi dan Pengaturan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1343"/>
         <source>Group state on start</source>
-        <translation type="unfinished"></translation>
+        <translation>Status grup saat mulai</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1350"/>
         <source>Sandbox name display:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tampilan nama sandbox:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1599"/>
         <source>UI Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Font Antarmuka</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1621"/>
         <source>Select Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih Font</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1631"/>
         <source>Reset Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset Font</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1659"/>
         <source>Window Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opsi Jendela</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1670"/>
         <source>Support Dialog:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialog Dukungan:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1683"/>
         <source>File Recovery:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pemulihan Berkas:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1696"/>
         <source>Fallback:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cadangan:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1741"/>
         <source>Non-main:</source>
-        <translation type="unfinished"></translation>
+        <translation>Non-utama:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1757"/>
         <source>Hint: Specific window settings override non-main settings. Fallback is used when the target monitor cannot be used; when disabled, each window falls back to its default current-monitor behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>Petunjuk: Pengaturan jendela tertentu menggantikan pengaturan non-utama. Cadangan digunakan saat monitor target tidak dapat dipakai; saat dinonaktifkan, setiap jendela kembali ke perilaku monitor saat ini secara default.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1779"/>
         <source>Window Locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokasi Jendela</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1786"/>
         <source>Notifications:</source>
-        <translation type="unfinished"></translation>
+        <translation>Notifikasi:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1799"/>
         <source>Main:</source>
-        <translation type="unfinished"></translation>
+        <translation>Utama:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2781"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Gunakan prompt UAC bawaan Sandboxie yang ditingkatkan (disarankan)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2791"/>
         <source>Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2824"/>
         <source>Add Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Tambah Box Portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2854"/>
         <source>Remove Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Hapus Entri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2862"/>
         <source>Import Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Impor Path</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2949"/>
         <source>Sandbox Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurasi Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2896"/>
         <source>Create Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Buat Box Portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2838"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Perlindungan konfigurasi hanya berlaku untuk Sandboxie.ini. Konfigurasi box portable tidak dilindungi oleh mekanisme di bawah ini&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2797"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Pada daftar di bawah, Anda dapat menambahkan path ke berkas ini konfigurasi box portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2922"/>
         <source>Add Portable Root</source>
-        <translation type="unfinished"></translation>
+        <translation>Tambah Root Portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3071"/>
@@ -15426,27 +15709,27 @@ Diagnostic data an agent reads can contain text written by programs inside a san
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3081"/>
         <source>Force Process Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opsi Proses Paksa</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3109"/>
         <source>Force programs opening files from a sandbox to run in that sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Paksa program yang membuka berkas dari sandbox agar berjalan di sandbox tersebut.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3112"/>
         <source>Force programs opening boxed files into their sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Paksa program yang membuka berkas box masuk ke sandbox mereka</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3119"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Paksa berkas dengan Mark of The Web masuk ke sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3139"/>
         <source>Sandbox for MoTW marked files</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox untuk berkas bertanda MoTW</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3158"/>
@@ -15502,7 +15785,22 @@ Diagnostic data an agent reads can contain text written by programs inside a san
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        Menampilkan tooltip detail saat kursor di atas pengaturan.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Mode:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Dicentang&lt;/span&gt;: Detail lengkap (versi, sintaks, deskripsi, dll.)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Dicentang Sebagian&lt;/span&gt;: Hanya informasi penting&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Bantuan Sintaks:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Garis pipa&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Memisahkan nilai alternatif&lt;br&gt;
+        • &lt;i&gt;Tanda kurung siku&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Parameter opsional&lt;br&gt;
+        • &lt;i&gt;Tanda kurung&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Opsi yang valid&lt;br&gt;
+        • &lt;i&gt;Tanda kurung sudut&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Placeholder yang dapat diganti&lt;br&gt;
+        • &lt;i&gt;Nilai tebal&lt;/i&gt; — Nilai default (boleh dihilangkan)&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3539"/>
@@ -15548,32 +15846,52 @@ Diagnostic data an agent reads can contain text written by programs inside a san
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;b&gt;Auto-Completion &amp; Koreksi Huruf&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Saran muncul setelah 2+ karakter&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Pilih dari popup untuk &lt;u&gt;menerapkan otomatis&lt;/u&gt; dengan huruf yang benar&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; untuk mengonfirmasi pilihan&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Koreksi manual&lt;/u&gt;: Setelah mengetik setting=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; muncul untuk koreksi huruf&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Mode:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Dicentang&lt;/span&gt;: Auto-complete + koreksi huruf&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Dicentang Sebagian&lt;/span&gt;: Hanya koreksi manual &lt;code&gt;Ctrl+R&lt;/code&gt;&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Navigasi:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Berpindah di popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Konfirmasi pilihan&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Paksa buka saran&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Terapkan saran pertama atau konfirmasi pilihan&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3562"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengkap</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3628"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengaturan editor</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3631"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3509"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Tooltip</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3612"/>
         <source>Validate</source>
-        <translation type="unfinished"></translation>
+        <translation>Validasi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3296"/>
@@ -15650,7 +15968,21 @@ Diagnostic data an agent reads can contain text written by programs inside a san
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;Jika diaktifkan, pengaturan akan diperiksa dan disorot berdasarkan berkas INI. Matikan untuk menonaktifkan pemeriksaan dan penyorotan.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Teks Hitam, Latar Kuning, Miring&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Pengaturan diubah nama (nama lama - tidak valid)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Teks Putih, Latar Hitam, Coret&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Pengaturan dihapus (tidak tersedia lagi)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Teks Biru Tua, Latar Putih&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Pengaturan mendatang (belum tersedia)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Garis Bawah Merah Pemeriksa Ejaan&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Pengaturan tidak valid/tidak dikenal&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Teks Merah Tua/Muda&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Pengaturan valid/dikenal&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Catatan&lt;/span&gt;: Hanya pengaturan valid/dikenal yang berfungsi di versi ini. Namun, tidak ada validasi global maupun per-box. Beberapa pengaturan mungkin tampak valid tetapi tidak bekerja di semua konteks.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3575"/>
@@ -15660,7 +15992,7 @@ Diagnostic data an agent reads can contain text written by programs inside a san
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3529"/>
         <source>Edit ini</source>
-        <translation></translation>
+        <translation>Edit ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3522"/>
@@ -15714,17 +16046,17 @@ Diagnostic data an agent reads can contain text written by programs inside a san
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="9"/>
         <source>Select a sandbox or type its name or alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih sandbox atau ketik nama/aliasnya:</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="26"/>
         <source>Applies to both Set Open and Set Force. The dialog is always shown when more than one sandbox is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Berlaku untuk Set Open maupun Set Force. Dialog selalu ditampilkan saat lebih dari satu sandbox aktif.</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="29"/>
         <source>Skip this dialog when only one sandbox is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Lewati dialog ini hanya ketika satu sandbox aktif</translation>
     </message>
 </context>
 <context>
@@ -15742,7 +16074,7 @@ Diagnostic data an agent reads can contain text written by programs inside a san
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="66"/>
         <source>Name:</source>
-        <translation></translation>
+        <translation>Nama:</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="123"/>
@@ -15767,7 +16099,7 @@ Diagnostic data an agent reads can contain text written by programs inside a san
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="176"/>
         <source>Refresh View</source>
-        <translation type="unfinished">Segarkan Tampilan</translation>
+        <translation>Segarkan Tampilan</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="195"/>

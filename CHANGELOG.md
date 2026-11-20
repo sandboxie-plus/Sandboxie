@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added configurable sandbox border labels on all four window edges through `BorderLabelPosition`, with adjustable position, stacked or rotated side text, fixed/adaptive placement, and a dedicated Box Border tab in sandbox options
 - added customizable sandbox border label fonts with native style and writing-system selection, GDI preview, synchronized point size, immediate font-only Apply, and reset to legacy defaults
 - added `CustomProcessCommandLine` to conditionally add, remove, replace, or clear sandboxed process arguments
+- added opt-in, per-process `FakeProcessMitigations` compatibility reporting for dynamic-code and extension-point restrictions without changing actual Windows mitigation enforcement
 - added an opt-in MCP server to SandMan, so an AI agent can help troubleshoot a sandbox: it is started from the new "Troubleshoot with an AI Agent" toolbar button, listens on a local named pipe only, and stays off until it is explicitly enabled
 - added `SbieMcp.exe`, a stdio bridge that connects any MCP capable AI client to a running SandMan
 - added a pairing step the agent must pass before any tool works: it has to repeat a one time code shown in SandMan, sandboxed callers are rejected on the driver's verdict rather than by image name, and the pairing code is never written to the audit log
@@ -32,6 +33,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed sandbox options not showing the default sandbox icon on opening when no custom icon is configured
 - fixed windows 7 incomatibility introduced in 1.19.0
 - fixed submitting an issue report leaving an async progress operation registered for ever, which made the next modal wait - "Saving TraceLog..." for instance - hang; the upload is now registered only once it is actually running
+- fixed concurrent process creations serializing on the global configuration lock, caused by the force-rule scan enumerating every `Templates.ini` section and the configuration use count being adjusted under an exclusive lock
+- fixed the Local Templates list not populating on first visit [#5715](https://github.com/sandboxie-plus/Sandboxie/issues/5715/)
+- fixed empty or stale App Compatibility lists; added prelisting, scan status and manual checking [#5718](https://github.com/sandboxie-plus/Sandboxie/issues/5718)
 
 
 

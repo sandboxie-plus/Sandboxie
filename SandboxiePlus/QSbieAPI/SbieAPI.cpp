@@ -413,8 +413,16 @@ SB_STATUS CSbieAPI::Disconnect()
 		m->SbieMsgDll = NULL;
 	}
 
-	m_SandBoxes.clear();
-	m_BoxedProxesses.clear();
+	{
+		QMap<QString, CSandBoxPtr> OldSandBoxes;
+		QMap<quint32, CBoxedProcessPtr> OldProcesses;
+		{
+			QWriteLocker Lock(&m_BoxesLock);
+			OldSandBoxes.swap(m_SandBoxes);
+			OldProcesses.swap(m_BoxedProxesses);
+		}
+		// the old objects are released here, outside of the lock
+	}
 	m->ProcessListInitialized = false;
 	m_bBoxesDirty = true;
 
@@ -1194,7 +1202,10 @@ SB_STATUS CSbieAPI::ReloadBoxes(bool bForceUpdate)
 		if (!pBox)
 		{
 			pBox = CSandBoxPtr(NewSandBox(BoxName, this));
-			m_SandBoxes.insert(BoxName.toLower(), pBox);
+			{
+				QWriteLocker Lock(&m_BoxesLock);
+				m_SandBoxes.insert(BoxName.toLower(), pBox);
+			}
 			emit BoxAdded(pBox);
 		}
 		UpdateBoxPaths(pBox.data());
@@ -1205,7 +1216,11 @@ SB_STATUS CSbieAPI::ReloadBoxes(bool bForceUpdate)
 	}
 
 	foreach(const QString & BoxName, OldSandBoxes.keys()) {
-		CSandBoxPtr pBox = m_SandBoxes.take(BoxName);
+		CSandBoxPtr pBox;
+		{
+			QWriteLocker Lock(&m_BoxesLock);
+			pBox = m_SandBoxes.take(BoxName);
+		}
 		pBox->SetBoxPaths(QString(), QString(), QString());
 		emit BoxRemoved(pBox);
 	}
@@ -1546,7 +1561,10 @@ SB_STATUS CSbieAPI::UpdateProcesses(int iKeep, bool bAllSessions)
 
 			pProcess->m_pBox = pBox.data();
 			pBox->m_ProcessList.insert(ProcessId, pProcess);
-			m_BoxedProxesses.insert(ProcessId, pProcess);
+			{
+				QWriteLocker Lock(&m_BoxesLock);
+				m_BoxedProxesses.insert(ProcessId, pProcess);
+			}
 			pBox->m_ActiveProcessDirty = true;
 
 			pProcess->InitProcessInfo();
@@ -1563,7 +1581,10 @@ SB_STATUS CSbieAPI::UpdateProcesses(int iKeep, bool bAllSessions)
 		}
 		else if (iKeep != -1 && pProcess->IsTerminated(iKeep)) {
 			pProcess->m_pBox->m_ProcessList.remove(pProcess->m_ProcessId);
-			m_BoxedProxesses.remove(pProcess->m_ProcessId);
+			{
+				QWriteLocker Lock(&m_BoxesLock);
+				m_BoxedProxesses.remove(pProcess->m_ProcessId);
+			}
 		}
 	}
 
@@ -1732,7 +1753,7 @@ SB_STATUS CSbieAPI::GetProcessInfo(quint32 ProcessId, quint32* pParentId, quint3
 
 CSandBoxPtr CSbieAPI::GetBoxByProcessId(quint32 ProcessId) const
 {
-	CBoxedProcessPtr pProcess = m_BoxedProxesses.value(ProcessId);
+	CBoxedProcessPtr pProcess = GetProcessById(ProcessId);
 	if (!pProcess || pProcess->IsTerminated())
 		return CSandBoxPtr();
 	return GetBoxByName(pProcess->GetBoxName());
@@ -1740,6 +1761,7 @@ CSandBoxPtr CSbieAPI::GetBoxByProcessId(quint32 ProcessId) const
 
 CBoxedProcessPtr CSbieAPI::GetProcessById(quint32 ProcessId) const
 {
+	QReadLocker Lock(&m_BoxesLock);
 	return m_BoxedProxesses.value(ProcessId);
 }
 
@@ -2634,7 +2656,10 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 
 		pProcess = CBoxedProcessPtr(NewBoxedProcess(ProcessId, pBox.data()));
 		pBox->m_ProcessList.insert(ProcessId, pProcess);
-		m_BoxedProxesses.insert(ProcessId, pProcess);
+		{
+			QWriteLocker Lock(&m_BoxesLock);
+			m_BoxedProxesses.insert(ProcessId, pProcess);
+		}
 		pBox->m_ActiveProcessDirty = true;
 
 		UpdateProcessInfo(pProcess);

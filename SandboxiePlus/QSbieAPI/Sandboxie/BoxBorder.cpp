@@ -2916,19 +2916,25 @@ bool CBoxBorder::CheckGlobalAllBordersMode()
 	// Check if any active box has AllBordersMode enabled
 	QMap<quint32, CBoxedProcessPtr> processes = m_Api->GetAllProcesses();
 
-	std::set<CSandBox*> checkedBoxes;
+	QSet<QString> checkedBoxes;
 	for (auto it = processes.begin(); it != processes.end(); ++it)
 	{
 		if (it.value()->IsTerminated())
 			continue;
-		CSandBox* pBox = it.value()->GetBoxPtr();
-		if (!pBox || checkedBoxes.find(pBox) != checkedBoxes.end())
+		// resolve the box through the API to hold a reference, the process' raw box pointer
+		// may be released on the UI thread while we are using it here
+		QString BoxName = it.value()->GetBoxName().toLower();
+		if (BoxName.isEmpty() || checkedBoxes.contains(BoxName))
 			continue;
 
-		checkedBoxes.insert(pBox);
+		checkedBoxes.insert(BoxName);
+
+		CSandBoxPtr pBox = m_Api->GetBoxByName(BoxName);
+		if (!pBox)
+			continue;
 
 		SBoxBorderSettings settings;
-		if (GetBoxBorderSettings(pBox, settings, false) && (settings.mode == eBorderAllWindows || settings.mode == eBorderAllWindowsLabelOnly))
+		if (GetBoxBorderSettings(pBox.data(), settings, false) && (settings.mode == eBorderAllWindows || settings.mode == eBorderAllWindowsLabelOnly))
 			return true;
 	}
 

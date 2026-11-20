@@ -93,6 +93,7 @@ public:
 	// accumulates - everything the agent asked for and what was answered.
 	CMcpSessionWindow*	GetMcpWindow();
 	void				CheckCompat(QObject* receiver, const char* member);
+	bool				IsCompatCheckRunning() const { return m_CompatChecks != 0; }
 	CScriptManager*		GetScripts() { return m_SbieScripts; }
 	CAddonManager*		GetAddonManager() { return m_AddonManager; }
 
@@ -174,6 +175,8 @@ public:
 	void				SaveMessageLog(QIODevice* pFile);
 
 signals:
+	void				CompatCheckChanged();
+
 	void				DrivesChanged();
 
 	void				CertUpdated();
@@ -211,6 +214,7 @@ protected:
 	bool				m_bStopPending;
 	CBoxBorder*			m_pBoxBorder;
 	CSbieTemplatesEx*	m_SbieTemplates;
+	int					m_CompatChecks = 0;
 	CMcpServer*         m_pMcpServerImpl;
 	// Rate limiting for the doorbell: a client that retries in a loop must not
 	// be able to put a prompt on screen repeatedly, and a declined prompt is a

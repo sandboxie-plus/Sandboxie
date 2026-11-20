@@ -951,7 +951,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	}
 		m_pMenuView->addSeparator();
 		m_pEnableMonitoring = m_pMenuView->addAction(CSandMan::GetIcon("SetLogging"), tr("Trace Logging"), this, SLOT(OnMonitoring()));
-	if (bAdvanced)
+		// Simple View also uses this checked state to toggle standalone monitoring.
 		m_pEnableMonitoring->setCheckable(true);
 	if (!bAdvanced)
 		m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Recovery Log"), this, SLOT(OnRecoveryLog()));
@@ -3119,6 +3119,9 @@ void CSandMan::OnStatusChanged()
 
 void CSandMan::CheckCompat(QObject* receiver, const char* member)
 {
+	++m_CompatChecks;
+	emit CompatCheckChanged();
+
 	QElapsedTimer* timer = new QElapsedTimer();
 	timer->start();
 
@@ -3126,7 +3129,6 @@ void CSandMan::CheckCompat(QObject* receiver, const char* member)
 		QString Script = theGUI->GetScripts()->GetScript("AppCompatibility");
 		if (!Script.isEmpty()) {
 			CBoxEngine* pEngine = new CBoxEngine(this);
-			pEngine->RunScript(Script, "AppCompatibility.js"); // note: script runs asynchronously
 			QPointer<QObject> pObj = receiver; // QPointer tracks lifetime of receiver
 			connect(pEngine, &CBoxEngine::finished, this, [pEngine, this, timer, pObj, member]() {
 
@@ -3135,9 +3137,12 @@ void CSandMan::CheckCompat(QObject* receiver, const char* member)
 				qDebug() << "Compatibility Check took" << timer->elapsed() << "ms";
 				delete timer;
 				pEngine->deleteLater(); // script done
+				--m_CompatChecks;
+				emit CompatCheckChanged();
 
 				if (pObj) QMetaObject::invokeMethod(pObj, member);
 			});
+			pEngine->RunScript(Script, "AppCompatibility.js"); // note: script runs asynchronously
 			return;
 		}
 	}
@@ -3146,8 +3151,10 @@ void CSandMan::CheckCompat(QObject* receiver, const char* member)
 
 	qDebug() << "Template Check took" << timer->elapsed() << "ms";
 	delete timer;
+	--m_CompatChecks;
+	emit CompatCheckChanged();
 
-	QMetaObject::invokeMethod(receiver, member);
+	if (receiver) QMetaObject::invokeMethod(receiver, member);
 }
 
 void CSandMan::OpenCompat()
@@ -3945,11 +3952,10 @@ QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData,
 
 	if (MsgCode != 0) {
 		Message = theAPI->GetSbieMsgStr(MsgCode, m_LanguageId);
-		if (pLink) {
-			Message.insert(8, "</a>");
+		// Build only the URL here; wrap it once below, after argument substitution.
+		// Early wrapping can consume URL escapes as placeholders; double wrapping breaks the tag.
+		if (pLink)
 			*pLink = MakeSbieMsgLink(MsgCode, MsgData, ProcessName);
-			Message.prepend("<a href=\"" + *pLink + "\">");
-		}
 	}
 	else if(MsgData.size() > 0)
 		Message = MsgData[0];

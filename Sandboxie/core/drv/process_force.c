@@ -1164,7 +1164,7 @@ _FX void Process_CreateForceData(
 
     while (1) {
 
-        section = Conf_Get(NULL, NULL, index1);
+        section = Conf_Get(NULL, NULL, index1 | CONF_GET_NO_TEMPLS);
         if (! section)
             break;
         ++index1;

@@ -853,8 +853,54 @@ static QString ExtractIniSection(const QString& iniContent, const QString& secti
 	return sectionContent;
 }
 
+//
+// the archived box configuration replaces the whole ini section of the target
+// box, which would also drop the FileRootPath the files are being restored to.
+// this returns the unexpanded root pattern that must be written back, or an
+// empty string when the box can keep inheriting its root.
+//
+// the pattern is read before any box image is mounted, so a temporary mount
+// path never ends up in the configuration.
+//
+
+static QString GetImportRootSetting(const CSandBoxPtr& pBox, bool importGlobalConfig)
+{
+	// a root the box has itself (custom import location, existing box) is always kept
+	QString root = pBox->GetText("FileRootPath");
+	if (!root.isEmpty())
+		return root;
+
+	// an inherited root only needs pinning when the imported global settings may
+	// move it away from where the files are extracted to
+	if (!importGlobalConfig)
+		return QString();
+
+	root = pBox->GetText("FileRootPath", QString(), true, true, true);
+	if (!root.isEmpty())
+		return root;
+	root = pBox->GetText("BoxRootFolder", QString(), true, true, true);
+	if (!root.isEmpty())
+		return root + "\\Sandbox\\%SANDBOX%";
+	return "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%";
+}
+
+static QString PrepareImportedBoxConfig(const QString& rawContent, const QString& archiveName, const QString& rootSetting)
+{
+	// handles both the old format (no section header) and the new one ([BoxName] header)
+	QString configContent = ExtractIniSection(rawContent, archiveName);
+
+	// the archived root belongs to the source machine, the box location is decided here
+	configContent.remove(QRegularExpression("^[\\t ]*FileRootPath[\\t ]*=[^\\r\\n]*(?:\\r?\\n|$)",
+		QRegularExpression::MultilineOption | QRegularExpression::CaseInsensitiveOption));
+
+	if (!configContent.trimmed().isEmpty() && !rootSetting.isEmpty())
+		configContent.prepend("FileRootPath=" + rootSetting + "\n");
+	return configContent;
+}
+
 static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QString& importPath, const QString& password,
 	const QMap<QString, QString>& boxNameMapping, const QMap<QString, QString>& boxRoots,
+	const QMap<QString, QString>& boxRootSettings,
 	bool importGlobalConfig, const QStringList& boxesToUnmount)
 {
 	CArchive Archive(importPath);
@@ -1018,12 +1064,8 @@ static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 				QString rawContent = QString::fromUtf8(File.readAll());
 				File.close();
 
-				// Extract section content - handles both old format (no section header)
-				// and new format (with [BoxName] section header)
-				QString configContent = ExtractIniSection(rawContent, entry.ArchiveBoxName);
-
-				// Remove FileRootPath= entries as the path should be determined by the new box location
-				configContent.remove(QRegularExpression("(?m)^FileRootPath=.*$\\n?"));
+				QString configContent = PrepareImportedBoxConfig(rawContent, entry.ArchiveBoxName,
+					boxRootSettings.value(entry.TargetBoxName));
 
 				QMetaObject::invokeMethod(theAPI, "SbieIniSetSection", Qt::BlockingQueuedConnection,
 					Q_ARG(QString, entry.TargetBoxName),
@@ -1305,6 +1347,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 
 	// 5. Create boxes on main thread
 	QMap<QString, QString> boxRoots;
+	QMap<QString, QString> boxRootSettings; // FileRootPath to write back after the archived config was applied
 	QList<SB_STATUS> Results;
 	QList<CBoxTransferDialog::SImportEntry> validEntries;
 	QStringList boxesToUnmount; // Track boxes we mount so we can unmount them after import
@@ -1319,6 +1362,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 			if (ret != QMessageBox::Yes)
 				continue;
 			boxRoots.insert(entry.ImportName, pExisting->GetFileRoot());
+			boxRootSettings.insert(entry.ImportName, GetImportRootSetting(pExisting, importGlobalConfig));
 			validEntries.append(entry);
 			continue;
 		}
@@ -1341,6 +1385,9 @@ QStringList ImportMultiBoxes(QWidget* parent)
 
 			if (!importLocation.isEmpty())
 				pBox->SetFileRoot(importLocation);
+
+			// capture the root pattern now, before a box image gets mounted
+			boxRootSettings.insert(entry.ImportName, GetImportRootSetting(pBox, importGlobalConfig));
 
 			if (!entry.Password.isEmpty())
 			{
@@ -1392,7 +1439,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 		bool importGlobalForThisFile = importGlobalConfig && (sourceFile == globalConfigSourceFile);
 
 		CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, sourceFile, password, boxNameMapping, boxRoots, importGlobalForThisFile, fileBoxesToUnmount);
+		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, sourceFile, password, boxNameMapping, boxRoots, boxRootSettings, importGlobalForThisFile, fileBoxesToUnmount);
 		theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Importing: %1").arg(sourceFile));
 	}
 
@@ -1400,7 +1447,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 	if (importGlobalConfig && !entriesByFile.contains(globalConfigSourceFile)) {
 		QMap<QString, QString> emptyMapping;
 		CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, globalConfigSourceFile, globalConfigPassword, emptyMapping, QMap<QString, QString>(), true, QStringList());
+		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, globalConfigSourceFile, globalConfigPassword, emptyMapping, QMap<QString, QString>(), QMap<QString, QString>(), true, QStringList());
 		theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Importing: %1").arg(globalConfigSourceFile));
 	}
 

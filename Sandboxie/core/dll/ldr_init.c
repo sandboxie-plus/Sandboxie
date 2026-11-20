@@ -551,6 +551,7 @@ _FX WCHAR *Ldr_GetLaunchImagePath(void)
     RTL_USER_PROCESS_PARAMETERS *ProcessParms =
                                     Proc_GetRtlUserProcessParameters();
     const WCHAR *CmdLine;
+    const WCHAR *Limit;
     const WCHAR *Start;
     const WCHAR *End;
     WCHAR *Result;
@@ -560,8 +561,16 @@ _FX WCHAR *Ldr_GetLaunchImagePath(void)
         return NULL;
 
     CmdLine = ProcessParms->CommandLine.Buffer;
-    if (! CmdLine)
+    if (! CmdLine || ! ProcessParms->CommandLine.Length)
         return NULL;
+
+    //
+    // the command line is a UNICODE_STRING, which is not guaranteed to be
+    // NUL terminated (e.g. parameters built by hand for NtCreateUserProcess),
+    // so bound every scan by its Length rather than relying on a terminator
+    //
+
+    Limit = CmdLine + ProcessParms->CommandLine.Length / sizeof(WCHAR);
 
     //
     // skip leading white space, then take either everything up to the
@@ -569,20 +578,20 @@ _FX WCHAR *Ldr_GetLaunchImagePath(void)
     //
 
     Start = CmdLine;
-    while (*Start == L' ' || *Start == L'\t')
+    while (Start < Limit && (*Start == L' ' || *Start == L'\t'))
         ++Start;
 
-    if (*Start == L'"') {
+    if (Start < Limit && *Start == L'"') {
 
         ++Start;
         End = Start;
-        while (*End && *End != L'"')
+        while (End < Limit && *End && *End != L'"')
             ++End;
 
     } else {
 
         End = Start;
-        while (*End && *End != L' ' && *End != L'\t')
+        while (End < Limit && *End && *End != L' ' && *End != L'\t')
             ++End;
     }
 

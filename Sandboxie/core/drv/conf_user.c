@@ -567,12 +567,15 @@ _FX NTSTATUS Conf_Api_IsBoxEnabled(PROCESS *proc, ULONG64 *parms)
     UNICODE_STRING SidString;
     const WCHAR* sid;
     WCHAR boxname[BOXNAME_COUNT];
+    WCHAR sid_buf[96];
 
     if (! Api_CopyBoxNameFromUser(boxname, (WCHAR *)args->box_name.val))
         return STATUS_INVALID_PARAMETER;
 
     if (args->sid_string.val != NULL) {
-        sid = args->sid_string.val;
+        if (! Api_CopySidStringFromUser(sid_buf, (WCHAR *)args->sid_string.val))
+            return STATUS_INVALID_PARAMETER;
+        sid = sid_buf;
         SessionId = args->session_id.val;
         SidString.Buffer = NULL;
         status = STATUS_SUCCESS;

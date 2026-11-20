@@ -37,6 +37,8 @@
 5. 若想成为在 [Sandboxie-docs](https://github.com/sandboxie-plus/sandboxie-docs) 或 [Sandboxie](https://github.com/sandboxie-plus/Sandboxie) 仓库的 [协作者](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-personal-account-settings/permission-levels-for-a-personal-account-repository#collaborator-access-for-a-repository-owned-by-a-personal-account)
 需通过诸如"持续为打开的议题（issues）提供帮助"和/或"娴熟处理拉取请求（pull requests）"的方式证明自己的能力
 
+提交翻译贡献前，请阅读[翻译协作与署名规范](./TRANSLATING.md#translation-collaboration-and-attribution)。
+
 如果你愿意成为新贡献者或协作者，请通过[该邮箱](https://xanasoft.com/contact/)联系我们，以获取更多详情。
 
 ## 如何协助处理 Sandboxie 的问题？

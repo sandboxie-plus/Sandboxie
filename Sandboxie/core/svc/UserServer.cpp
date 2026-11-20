@@ -131,6 +131,16 @@ ULONG UserServer::StartWorker(ULONG session_id)
     BOOL ok = TRUE;
 
     //
+    // m_WorkersLock is created for this list in the constructor but was
+    // never actually taken anywhere, so two concurrent MSGID_QUEUE_STARTUP
+    // requests for the same session both walked to the same worker and both
+    // ran CloseHandle and HeapFree on it.  hold it across the whole
+    // function, which also stops two workers being created for one session
+    //
+
+    EnterCriticalSection(&m_WorkersLock);
+
+    //
     // terminate an existing worker process that stopped functioning
     //
 
@@ -159,8 +169,10 @@ ULONG UserServer::StartWorker(ULONG session_id)
 
     WCHAR *cmdline = (WCHAR *)HeapAlloc(
                                 GetProcessHeap(), 0, 768 * sizeof(WCHAR));
-    if (! cmdline)
+    if (! cmdline) {
+        LeaveCriticalSection(&m_WorkersLock);
         return STATUS_INSUFFICIENT_RESOURCES;
+    }
 
     cmdline[0] = L'\"';
     status = SbieApi_GetHomePath(NULL, 0, &cmdline[1], 512);
@@ -307,6 +319,8 @@ ULONG UserServer::StartWorker(ULONG session_id)
     if (hOldToken)
         CloseHandle(hOldToken);
     HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, cmdline);
+
+    LeaveCriticalSection(&m_WorkersLock);
 
     return status;
 }
@@ -622,6 +636,103 @@ bool UserServer::QueueCallbackWorker2(void)
 //---------------------------------------------------------------------------
 
 
+//
+// The rules are matched against the caller's string and the very same string
+// is then handed to NtCreateFile, so anything that makes the two disagree is
+// an escape (SVC-19).  Two mechanisms were confirmed and are closed here.
+//
+// (1) Alternate data streams.  The driver cuts everything from the first colon
+//     in the last path component before evaluating the rules (drv/file.c), so
+//     "...\vault.kdbx::$DATA" is matched as "...\vault.kdbx".  This proxy
+//     matched the raw string, so a trailing stream name defeated any exact or
+//     suffix anchored ClosedFilePath / ReadFilePath pattern.  Mirror the
+//     driver and match the stripped name, while still opening the stream that
+//     was actually asked for.
+//
+// (2) Reparse points.  NTFS resolves a junction during the create, so the file
+//     that gets opened need not be the one the rules were evaluated on.  A
+//     boxed process issuing the same create directly has the post-reparse name
+//     re-evaluated by the driver, because the object manager restarts the
+//     lookup through its parse procedure; this proxy did a single user mode
+//     NtCreateFile with the unfiltered interactive token and never looked
+//     again.  So re-evaluate the name the object manager actually resolved and
+//     fail closed unless that one is permitted too.  Deliberately NOT
+//     FILE_OPEN_REPARSE_POINT, which would change file semantics and break
+//     paths that legitimately traverse a junction.
+//
+
+struct UserServer__FileRules {
+#ifdef USE_MATCH_PATH_EX
+    LIST *normal_list, *open_list, *closed_list, *write_list, *read_list;
+    BOOLEAN use_rule_specificity;
+#else
+    LIST *open_list, *closed_list, *write_list;
+#endif
+};
+
+
+static BOOLEAN UserServer__IsPathPermitted(
+    const UserServer__FileRules *rules, WCHAR *path, BOOL write_access)
+{
+    //
+    // strip the stream name for matching, exactly as the driver does
+    //
+
+    WCHAR *colon = NULL;
+    WCHAR *sep = wcsrchr(path, L'\\');
+    if (sep)
+        colon = wcschr(sep, L':');
+    if (colon)
+        *colon = L'\0';
+
+#ifdef USE_MATCH_PATH_EX
+    ULONG mp_flags = SbieDll_MatchPathImpl(
+        rules->use_rule_specificity, path, rules->normal_list,
+        rules->open_list, rules->closed_list, rules->write_list,
+        rules->read_list);
+#else
+    ULONG mp_flags = SbieDll_MatchPathImpl(
+        path, rules->open_list, rules->closed_list, rules->write_list);
+#endif
+
+    if (colon)
+        *colon = L':';
+
+    if (write_access && (!PATH_IS_OPEN(mp_flags) || PATH_IS_READ(mp_flags)))
+        return FALSE;
+    if (PATH_IS_CLOSED(mp_flags) || PATH_IS_WRITE(mp_flags))
+        return FALSE;
+    return TRUE;
+}
+
+
+//
+// the device component has to be complete:  a plain 22 character prefix test
+// also accepts \Device\HarddiskVolumeShadowCopy1\..., which exposes a whole
+// snapshot of the volume under a name that no ClosedFilePath written for the
+// real volume can match.  an empty path component is likewise never legitimate
+//
+
+static BOOLEAN UserServer__IsDiskVolumePath(const WCHAR *path)
+{
+    if (_wcsnicmp(path, L"\\Device\\HarddiskVolume", 22) != 0)
+        return FALSE;
+
+    const WCHAR *p = path + 22;
+    if (*p < L'0' || *p > L'9')
+        return FALSE;
+    while (*p >= L'0' && *p <= L'9')
+        ++p;
+    if (*p != L'\\')
+        return FALSE;
+
+    if (wcsstr(p, L"\\\\"))
+        return FALSE;
+
+    return TRUE;
+}
+
+
 ULONG UserServer::OpenFile(WorkerArgs *args)
 {
     USER_OPEN_FILE_REQ *req = (USER_OPEN_FILE_REQ *)args->req_buf;
@@ -630,7 +741,39 @@ ULONG UserServer::OpenFile(WorkerArgs *args)
     if (args->req_len < sizeof(USER_OPEN_FILE_REQ))
         return STATUS_INFO_LENGTH_MISMATCH;
 
+    //
+    // FileNameOffset, EaBufferOffset and EaLength are all caller supplied
+    // and were used without validation:  the path pointer could be aimed
+    // anywhere relative to the request, and the Ea buffer passed to
+    // NtCreateFile below could be made to read past the end of it
+    //
+
+    if (req->FileNameOffset < sizeof(USER_OPEN_FILE_REQ)
+            || (req->FileNameOffset & 1)
+            || (ULONG64)req->FileNameOffset + sizeof(WCHAR) > args->req_len)
+        return STATUS_INFO_LENGTH_MISMATCH;
+
+    if (req->EaLength) {
+        if (req->EaBufferOffset < sizeof(USER_OPEN_FILE_REQ)
+                || (ULONG64)req->EaBufferOffset + (ULONG64)req->EaLength
+                                                        > args->req_len)
+            return STATUS_INFO_LENGTH_MISMATCH;
+    }
+
     WCHAR* path_buff = (WCHAR*)(((UCHAR*)req) + req->FileNameOffset);
+
+    //
+    // there is no FileNameSize in this request, so the path has to be
+    // terminated inside the message or every string operation below runs
+    // off the end of it
+    //
+
+    ULONG path_max = (args->req_len - req->FileNameOffset) / sizeof(WCHAR);
+    ULONG path_len = 0;
+    while (path_len < path_max && path_buff[path_len])
+        ++path_len;
+    if (path_len >= path_max)
+        return STATUS_INFO_LENGTH_MISMATCH;
 
     //
     // check if the caller belongs to our session
@@ -657,9 +800,27 @@ ULONG UserServer::OpenFile(WorkerArgs *args)
     // and the file access rules must allow for the access
     //
 
-    if(_wcsnicmp(path_buff, L"\\Device\\HarddiskVolume", 22) != 0)
+    if (! UserServer__IsDiskVolumePath(path_buff))
         return STATUS_ACCESS_DENIED;
-    
+
+    //
+    // the very same string is matched against the box's file rules below
+    // and then handed to NtCreateFile, so it has to be canonical:  a ".."
+    // component lets the matcher see a permitted path while the object
+    // manager resolves it somewhere else entirely.  this mirrors the ".."
+    // rejection added to CheckBoxFilePath for ID-42
+    //
+
+    for (const WCHAR *p = path_buff; (p = wcsstr(p, L"..")) != NULL; p += 2) {
+
+        BOOLEAN at_start = (p == path_buff) || (p[-1] == L'\\');
+        BOOLEAN at_end   = (p[2] == L'\0')  || (p[2] == L'\\');
+
+        if (at_start && at_end)
+            return STATUS_ACCESS_DENIED;
+    }
+
+
     BOOL write_access = FALSE;
 
 #define FILE_DENIED_ACCESS ~(                                           \
@@ -678,18 +839,14 @@ ULONG UserServer::OpenFile(WorkerArgs *args)
 #undef FILE_DENIED_ACCESS
 
     POOL *pool;
-#ifdef USE_MATCH_PATH_EX
-    LIST *normal_list, *open_list, *closed_list, *write_list, *read_list;
-#else
-    LIST *open_list, *closed_list, *write_list;
-#endif
+    UserServer__FileRules rules = { 0 };
 
-    if (!NT_SUCCESS(GetProcessPathList('fo', args->pid, (void **)&pool, &open_list))
-     || !NT_SUCCESS(GetProcessPathList('fc', args->pid, (void **)&pool, &closed_list))
-     || !NT_SUCCESS(GetProcessPathList('fr', args->pid, (void **)&pool, &write_list))
+    if (!NT_SUCCESS(GetProcessPathList('fo', args->pid, (void **)&pool, &rules.open_list))
+     || !NT_SUCCESS(GetProcessPathList('fc', args->pid, (void **)&pool, &rules.closed_list))
+     || !NT_SUCCESS(GetProcessPathList('fr', args->pid, (void **)&pool, &rules.write_list))
 #ifdef USE_MATCH_PATH_EX
-     || !NT_SUCCESS(GetProcessPathList('fn', args->pid, (void **)&pool, &normal_list))
-     || !NT_SUCCESS(GetProcessPathList('fw', args->pid, (void **)&pool, &read_list))
+     || !NT_SUCCESS(GetProcessPathList('fn', args->pid, (void **)&pool, &rules.normal_list))
+     || !NT_SUCCESS(GetProcessPathList('fw', args->pid, (void **)&pool, &rules.read_list))
 #endif
         )  
         return STATUS_INTERNAL_ERROR;
@@ -697,21 +854,21 @@ ULONG UserServer::OpenFile(WorkerArgs *args)
 #ifdef USE_MATCH_PATH_EX
     ULONG64 Dll_ProcessFlags = SbieApi_QueryProcessInfo((HANDLE)args->pid, 0);
 
-    BOOLEAN use_rule_specificity = (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
+    rules.use_rule_specificity =
+        (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
     //BOOLEAN use_privacy_mode = (Dll_ProcessFlags & SBIE_FLAG_PRIVACY_MODE) != 0;
-
-    //ULONG mp_flags = SbieDll_MatchPathImpl(use_rule_specificity, use_privacy_mode, path_buff, normal_list, open_list, closed_list, write_list, read_list);
-    ULONG mp_flags = SbieDll_MatchPathImpl(use_rule_specificity, path_buff, normal_list, open_list, closed_list, write_list, read_list);
-#else
-    ULONG mp_flags = SbieDll_MatchPathImpl(path_buff, open_list, closed_list, write_list);
 #endif
 
-    Pool_Delete(pool);
+    //
+    // the path lists stay alive past the open:  the resolved name has to be
+    // checked against the same rules once the object manager has followed
+    // whatever reparse points were on the way
+    //
 
-    if(write_access && (!PATH_IS_OPEN(mp_flags) || PATH_IS_READ(mp_flags)))
+    if (! UserServer__IsPathPermitted(&rules, path_buff, write_access)) {
+        Pool_Delete(pool);
         return STATUS_ACCESS_DENIED;
-    if(PATH_IS_CLOSED(mp_flags) || PATH_IS_WRITE(mp_flags))
-        return STATUS_ACCESS_DENIED;
+    }
 
     //
     // open the file on behalf of the caller
@@ -741,6 +898,94 @@ ULONG UserServer::OpenFile(WorkerArgs *args)
     if (NT_SUCCESS(rpl->error)) {
 
         //
+        // re-evaluate the name that was actually resolved (see the reparse
+        // note above).  anything we cannot read back, or that no longer sits
+        // on a plain disk volume, or that the rules do not permit on its own,
+        // fails closed
+        //
+
+        BOOLEAN resolved_ok = FALSE;
+
+        const ULONG name_len =
+            (ULONG)sizeof(OBJECT_NAME_INFORMATION) + 4096 * sizeof(WCHAR);
+        OBJECT_NAME_INFORMATION *name_info = (OBJECT_NAME_INFORMATION *)
+            HeapAlloc(GetProcessHeap(), 0, name_len);
+
+        if (name_info) {
+
+            ULONG ret_len = 0;
+            if (NT_SUCCESS(NtQueryObject(hFile, ObjectNameInformation,
+                                         name_info, name_len, &ret_len))
+                    && name_info->Name.Buffer
+                    && name_info->Name.Length
+                    && (ULONG)sizeof(OBJECT_NAME_INFORMATION)
+                            + name_info->Name.Length + sizeof(WCHAR)
+                                                            <= name_len) {
+
+                // the query returns a counted string; terminate it in the
+                // slack we allocated so it can be matched as a C string
+                WCHAR *resolved = name_info->Name.Buffer;
+                resolved[name_info->Name.Length / sizeof(WCHAR)] = L'\0';
+
+                resolved_ok = (_wcsicmp(resolved, path_buff) == 0)
+                           || (UserServer__IsDiskVolumePath(resolved)
+                               && UserServer__IsPathPermitted(
+                                        &rules, resolved, write_access));
+            }
+
+            HeapFree(GetProcessHeap(), 0, name_info);
+        }
+
+        if (! resolved_ok) {
+
+            //
+            // denying the handle is not enough when the create already made
+            // the file:  a redirected FILE_CREATE would otherwise leave a
+            // zero byte file planted outside the box.
+            //
+            // hFile carries the caller's DesiredAccess, which normally has no
+            // DELETE, so setting the disposition on it just fails - measured:
+            // the planted file survived.  Re-open the *same file object* by
+            // handle instead (RootDirectory = hFile with an empty name), which
+            // asks for DELETE explicitly and, because no name is resolved a
+            // second time, cannot be steered somewhere else in between - the
+            // by-name re-open that would be the obvious alternative is exactly
+            // the TOCTOU this handler is being hardened against.
+            //
+            // Still best effort: it needs DELETE on the object, which the
+            // creating user normally has but is not guaranteed.
+            //
+
+            if (IoStatusBlock.Information == FILE_CREATED) {
+
+                UNICODE_STRING empty;
+                OBJECT_ATTRIBUTES delattrs;
+                IO_STATUS_BLOCK iosb;
+                HANDLE hDel = NULL;
+
+                RtlInitUnicodeString(&empty, L"");
+                InitializeObjectAttributes(&delattrs, &empty,
+                                           OBJ_CASE_INSENSITIVE, hFile, NULL);
+
+                if (NT_SUCCESS(NtOpenFile(&hDel, DELETE | SYNCHRONIZE,
+                        &delattrs, &iosb,
+                        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                        FILE_SYNCHRONOUS_IO_NONALERT))) {
+
+                    FILE_DISPOSITION_INFORMATION disp;
+                    disp.DeleteFileOnClose = TRUE;
+                    NtSetInformationFile(hDel, &iosb, &disp, sizeof(disp),
+                                         FileDispositionInformation);
+                    NtClose(hDel);
+                }
+            }
+
+            NtClose(hFile);
+            Pool_Delete(pool);
+            return STATUS_ACCESS_DENIED;
+        }
+
+        //
         // duplicate the handle into the calling process, and close our own
         //
 
@@ -754,6 +999,8 @@ ULONG UserServer::OpenFile(WorkerArgs *args)
 
         NtClose(hFile);
     }
+
+    Pool_Delete(pool);
 
     args->rpl_len = sizeof(USER_OPEN_FILE_RPL);
     return STATUS_SUCCESS;
@@ -772,7 +1019,28 @@ ULONG UserServer::OpenDocument(WorkerArgs *args)
     if (args->req_len < sizeof(USER_SHELL_EXEC_REQ))
         return STATUS_INFO_LENGTH_MISMATCH;
 
+    //
+    // FileNameOffset is a caller-chosen offset with no bound; validate it and
+    // require the path to be NUL-terminated inside the message before any
+    // string use (wcslen / pattern match / ShellExecute), since the queue
+    // request buffer carries no trailing sentinel
+    //
+
+    if (req->FileNameOffset < sizeof(USER_SHELL_EXEC_REQ)
+            || (req->FileNameOffset & 1)
+            || (ULONG64)req->FileNameOffset + sizeof(WCHAR) > args->req_len)
+        return STATUS_INFO_LENGTH_MISMATCH;
+
     WCHAR* path_buff = (WCHAR*)(((UCHAR*)req) + req->FileNameOffset);
+
+    {
+        ULONG path_max = (args->req_len - req->FileNameOffset) / sizeof(WCHAR);
+        ULONG path_len = 0;
+        while (path_len < path_max && path_buff[path_len])
+            ++path_len;
+        if (path_len >= path_max)
+            return STATUS_INFO_LENGTH_MISMATCH;
+    }
 
     //
     // check if the caller belongs to our session

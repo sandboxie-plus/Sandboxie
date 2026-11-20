@@ -32,6 +32,7 @@ HEADERS += ./stdafx.h \
     ./Windows/PopUpWindow.h \
     ./Windows/SnapshotsWindow.h \
     ./Windows/SettingsWindow.h \
+    ./Windows/BorderFontDialog.h \
     ./Windows/OptionsWindow.h \
     ./Windows/PendingChanges.h \
     ./Windows/EditorSettingsWindow.h \
@@ -48,6 +49,24 @@ HEADERS += ./stdafx.h \
     ./Windows/CompressDialog.h \
     ./Windows/ExtractDialog.h \
     ./Windows/RenameSandboxDialog.h \
+    ./Mcp/McpServer.h \
+    ./Mcp/McpSession.h \
+    ./Mcp/McpClientSetup.h \
+    ./Mcp/McpConnectDialog.h \
+    ./Mcp/McpSessionWindow.h \
+    ./Mcp/McpSubmitDialog.h \
+    ./Mcp/McpAudit.h \
+    ./Mcp/McpStream.h \
+    ./Mcp/McpOperate.h \
+    ./Mcp/McpReport.h \
+    ./Mcp/McpKnowledge.h \
+    ./Mcp/McpConsent.h \
+    ./Mcp/McpDocs.h \
+    ./Mcp/McpProtocol.h \
+    ./Mcp/McpRedact.h \
+    ./Mcp/McpTools.h \
+    ./Boxes/BoxReport.h \
+    ./Boxes/BoxShadows.h \
     ./Engine/BoxEngine.h \
     ./Engine/ScriptManager.h \
     ./Engine/BoxObject.h \
@@ -89,6 +108,7 @@ SOURCES += ./main.cpp \
     ./Helpers/WindowFromPointEx.cpp \
     ./Helpers/TabOrder.cpp \
     ./Helpers/MiniDumpFilter.cpp \
+    ./Windows/BorderFontDialog.cpp \
     ./Windows/OptionsWindow.cpp \
     ./Windows/EditorSettingsWindow.cpp \
     ./Windows/PopUpWindow.cpp \
@@ -108,6 +128,24 @@ SOURCES += ./main.cpp \
     ./Windows/CompressDialog.cpp \
     ./Windows/ExtractDialog.cpp \
     ./Windows/RenameSandboxDialog.cpp \
+    ./Mcp/McpClientSetup.cpp \
+    ./Mcp/McpConnectDialog.cpp \
+    ./Mcp/McpSessionWindow.cpp \
+    ./Mcp/McpSubmitDialog.cpp \
+    ./Mcp/McpAudit.cpp \
+    ./Mcp/McpStream.cpp \
+    ./Mcp/McpConsent.cpp \
+    ./Mcp/McpOperate.cpp \
+    ./Mcp/McpReport.cpp \
+    ./Mcp/McpKnowledge.cpp \
+    ./Mcp/McpDocs.cpp \
+    ./Mcp/McpProtocol.cpp \
+    ./Mcp/McpRedact.cpp \
+    ./Mcp/McpSession.cpp \
+    ./Mcp/McpServer.cpp \
+    ./Mcp/McpTools.cpp \
+    ./Boxes/BoxReport.cpp \
+    ./Boxes/BoxShadows.cpp \
     ./Engine/BoxEngine.cpp \
     ./Engine/ScriptManager.cpp \
     ./Engine/BoxObject.cpp \

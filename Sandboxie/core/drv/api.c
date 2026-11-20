@@ -23,6 +23,7 @@
 
 #include "api.h"
 #include "process.h"
+#include "wfp.h"
 #include "util.h"
 #ifndef _M_ARM64
 #include "hook.h"
@@ -1091,16 +1092,27 @@ _FX NTSTATUS Api_CopyStringFromUser(
 	WCHAR** str, size_t* len, UNICODE_STRING64* uni)
 {
 	if (uni) {
+
+		ULONG name_len;
+		WCHAR* buff;
+
 		ProbeForRead(uni, sizeof(UNICODE_STRING64), sizeof(ULONG_PTR));
-		*len = uni->Length + sizeof(WCHAR);
-		WCHAR* buff = (WCHAR*)uni->Buffer;
-        ProbeForRead(buff, *len, sizeof(WCHAR));
+
+		name_len = (ULONG)(uni->Length & ~1);
+		buff = (WCHAR*)uni->Buffer;
+
+		*len = name_len + sizeof(WCHAR);
+
+		ProbeForRead(buff, name_len, sizeof(WCHAR));
+
 		*str = (WCHAR*)Mem_Alloc(Driver_Pool, *len);
         if(!*str)
 			return STATUS_INSUFFICIENT_RESOURCES;
-		memcpy(*str, buff, *len);
-		(*str)[*len / sizeof(WCHAR)] = L'\0';
-	} 
+
+		memcpy(*str, buff, name_len);
+
+		(*str)[name_len / sizeof(WCHAR)] = L'\0';
+	}
     return STATUS_SUCCESS;
 }
 
@@ -1156,8 +1168,11 @@ _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
         }
         else if (pArgs->action_id.val == 'inet')
         {
-            if (in_flag)
+            if (in_flag) {
                 proc->AllowInternetAccess = in_value != 0;
+
+                WFP_UpdateProcess(proc);
+            }
             if (out_flag)
                 out_value = proc->AllowInternetAccess;
         }

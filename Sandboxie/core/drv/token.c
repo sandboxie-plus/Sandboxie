@@ -176,6 +176,14 @@ UCHAR SandboxieAdminSid[16] = { // S-1-5-100-544
     0x20, 0x02, 0x00, 0x00                  // SubAuthority[1] = 544 (0x220 in little endian = 0x20 0x02 0x00 0x00)
 };
 
+UCHAR SandboxieSystemSid[16] = { // S-1-5-100-18
+    1,                                      // Revision
+    2,                                      // SubAuthorityCount
+    0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+    SBIE_RID,0,0,0,                         // SubAuthority[0]
+    0x12, 0x00, 0x00, 0x00                  // SubAuthority[1] = 18 (0x0012 in little endian = 0x12 0x00 0x00 0x00)
+};
+
 static UCHAR SystemLogonSid[12] = {
 	1,                                      // Revision
 	1,                                      // SubAuthorityCount
@@ -2055,8 +2063,14 @@ _FX NTSTATUS Token_Api_Filter(PROCESS* proc, ULONG64* parms)
             HANDLE MyTokenHandle;
             status = ObOpenObjectByPointer(FilteredTokenObject, 0, NULL, TOKEN_ALL_ACCESS, *SeTokenObjectType, UserMode, &MyTokenHandle);
 
-            if (NT_SUCCESS(status))
-                *pHandle = MyTokenHandle;
+            if (NT_SUCCESS(status)) {
+                __try {
+                    *pHandle = MyTokenHandle;
+                } __except (EXCEPTION_EXECUTE_HANDLER) {
+                    ZwClose(MyTokenHandle);
+                    status = GetExceptionCode();
+                }
+            }
 
             ObDereferenceObject(FilteredTokenObject);
         }

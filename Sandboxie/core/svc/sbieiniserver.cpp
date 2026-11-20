@@ -96,12 +96,18 @@ SbieIniServer::~SbieIniServer()
 MSG_HEADER *SbieIniServer::Handler(void *_this, MSG_HEADER *msg)
 {
     SbieIniServer *pThis = (SbieIniServer *)_this;
+    MSG_HEADER *rpl = NULL;
 
     EnterCriticalSection(&pThis->m_critsec);
 
-    MSG_HEADER *rpl = pThis->Handler2(msg);
+    __try {
 
-    LeaveCriticalSection(&pThis->m_critsec);
+        rpl = pThis->Handler2(msg);
+
+    } __finally {
+
+        LeaveCriticalSection(&pThis->m_critsec);
+    }
 
     return rpl;
 }
@@ -448,11 +454,31 @@ ULONG SbieIniServer::CheckRequest(MSG_HEADER *msg)
     if (req->h.length < sizeof(SBIE_INI_SETTING_REQ))
         return STATUS_INVALID_PARAMETER;
 
-    ULONG value_len = req->value_len * sizeof(WCHAR);
-    if (value_len > PIPE_MAX_DATA_LEN)
+    //
+    // these fixed-size fields are attacker-sized blobs; terminate them before
+    // any string use so the EditAdminOnly lookup and the ini write both see
+    // the same bounded strings (as GetSetting already does)
+    //
+    req->password[ARRAYSIZE(req->password) - 1] = L'\0';
+    req->section[ARRAYSIZE(req->section) - 1] = L'\0';
+    req->setting[ARRAYSIZE(req->setting) - 1] = L'\0';
+
+    //
+    // bound the character count BEFORE multiplying.  the product is formed
+    // in 64 bit (sizeof is size_t) and was then truncated into this ULONG,
+    // so a value_len of 0x80000000 became 0, passed every check below, and
+    // the terminator test then read about 4 GB past the message
+    //
+
+    if (req->value_len > PIPE_MAX_DATA_LEN / sizeof(WCHAR))
         return STATUS_INVALID_PARAMETER;
+
+    ULONG value_len = req->value_len * sizeof(WCHAR);
     ULONG offset = FIELD_OFFSET(SBIE_INI_SETTING_REQ, value);
-    if (offset + value_len > req->h.length)
+
+    // the + sizeof(WCHAR) proves the terminator read just below is in bounds
+    if ((ULONG64)offset + (ULONG64)value_len + sizeof(WCHAR)
+                                            > (ULONG64)req->h.length)
         return STATUS_INVALID_PARAMETER;
     if (req->value[req->value_len])
         return STATUS_INVALID_PARAMETER;
@@ -1118,11 +1144,14 @@ ULONG SbieIniServer::SetTemplate(MSG_HEADER *msg)
     req->varname[ARRAYSIZE(req->varname) - 1] = L'\0';
     req->password[ARRAYSIZE(req->password) - 1] = L'\0';
 
-    ULONG value_len = req->value_len * sizeof(WCHAR);
-    if (value_len > PIPE_MAX_DATA_LEN)
+    // bound the character count before multiplying - see CheckRequest
+    if (req->value_len > PIPE_MAX_DATA_LEN / sizeof(WCHAR))
         return STATUS_INVALID_PARAMETER;
+
+    ULONG value_len = req->value_len * sizeof(WCHAR);
     ULONG offset = FIELD_OFFSET(SBIE_INI_TEMPLATE_REQ, value);
-    if (offset + value_len > req->h.length)
+    if ((ULONG64)offset + (ULONG64)value_len + sizeof(WCHAR)
+                                            > (ULONG64)req->h.length)
         return STATUS_INVALID_PARAMETER;
     if (req->value[req->value_len])
         return STATUS_INVALID_PARAMETER;
@@ -1587,6 +1616,67 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
     return SHORT_REPLY(status);
 }
 
+//---------------------------------------------------------------------------
+// IsSafeAgentCommand
+//---------------------------------------------------------------------------
+
+
+static bool IsSafeAgentCommand(const WCHAR *pgm, const WCHAR *args)
+{
+    //
+    // program name: empty means the caller falls back to the trusted
+    // SBIECTRL_EXE default; otherwise it must be a bare home-directory file
+    // name and must not be Start.exe
+    //
+
+    if (pgm && *pgm) {
+
+        for (const WCHAR *p = pgm; *p; ++p) {
+            if (*p == L'\\' || *p == L'/' || *p == L':')
+                return false;
+        }
+        if (wcsstr(pgm, L".."))
+            return false;
+        if (_wcsicmp(pgm, L"Start.exe") == 0)
+            return false;
+    }
+
+    //
+    // arguments: zero or more whitespace-separated simple switches
+    //
+
+    if (args) {
+
+        const WCHAR *p = args;
+        while (*p) {
+
+            while (*p == L' ' || *p == L'\t')
+                ++p;
+            if (! *p)
+                break;
+
+            if (*p != L'-' && *p != L'/')               // must begin a switch
+                return false;
+            ++p;
+            if (! *p || *p == L' ' || *p == L'\t')       // bare '-' / '/'
+                return false;
+
+            while (*p && *p != L' ' && *p != L'\t') {
+                WCHAR c = *p;
+                if (! ((c >= L'A' && c <= L'Z') ||
+                       (c >= L'a' && c <= L'z') ||
+                       (c >= L'0' && c <= L'9') ||
+                       c == L'-'))
+                    return false;
+                ++p;
+            }
+        }
+    }
+
+    return true;
+}
+
+
 NTSTATUS SbieIniServer::RunSbieCtrl(HANDLE hToken, const WCHAR* DeskName, const WCHAR* CtrlCmd, size_t CtrlCmdLen)
 {
     NTSTATUS status = STATUS_UNSUCCESSFUL;
@@ -1646,11 +1736,17 @@ NTSTATUS SbieIniServer::RunSbieCtrl(HANDLE hToken, const WCHAR* DeskName, const 
         }
 
         //
+
+        if (! IsSafeAgentCommand(*ctrlCmd ? ctrlCmd : NULL, args)) {
+
+            status = STATUS_ACCESS_DENIED;
+
+        //
         // run the agent executable from the sbie home directory,
         // when none was specified fallback to SBIECTRL_EXE
         //
 
-        if (SbieDll_RunFromHome(*ctrlCmd ? ctrlCmd : SBIECTRL_EXE, args, &si, NULL)) {
+        } else if (SbieDll_RunFromHome(*ctrlCmd ? ctrlCmd : SBIECTRL_EXE, args, &si, NULL)) {
 
             WCHAR *CmdLine = (WCHAR *)si.lpReserved;
 
@@ -1706,14 +1802,52 @@ MSG_HEADER *SbieIniServer::SetDatFile(MSG_HEADER *msg, HANDLE idProcess)
     if (req->h.length < sizeof(SBIE_INI_SETTING_REQ))
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);
 
+    //
+    // value_len is used as the NtWriteFile byte count below; it is never
+    // bounded by the message, so a value larger than the reassembled buffer
+    // would write off the end of the Pool_Alloc block into the file
+    //
+    if (req->value_len > PIPE_MAX_DATA_LEN)
+        return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+    if ((ULONG64)FIELD_OFFSET(SBIE_INI_SETTING_REQ, value) + (ULONG64)req->value_len
+                                                            > (ULONG64)req->h.length)
+        return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+
+    //
+    // setting is a fixed size field in a caller supplied message whose
+    // buffer is only terminated at h.length, so terminate it before any
+    // string operation - without this the checks below, and the append into
+    // path[], ran on to the end of the message
+    //
+
+    req->setting[ARRAYSIZE(req->setting) - 1] = L'\0';
+
     wchar_t* ext = wcsrchr(req->setting, L'.');
     if (!ext || (_wcsicmp(ext, L".dat") != 0) || wcsstr(req->setting, L"..") != NULL)
+        return SHORT_REPLY(STATUS_INVALID_FILE_FOR_SECTION);
+
+    //
+    // the name must stay a plain file name in the home directory - reject
+    // any separator so it cannot descend into or out of a subdirectory
+    //
+
+    if (wcschr(req->setting, L'\\') || wcschr(req->setting, L'/')
+                                    || wcschr(req->setting, L':'))
         return SHORT_REPLY(STATUS_INVALID_FILE_FOR_SECTION);
 
     WCHAR path[768];
     NTSTATUS status = SbieApi_GetHomePath(path, 768, NULL, 0);
     if (!NT_SUCCESS(status))
         return SHORT_REPLY(status);
+
+    //
+    // bounded append - path[] is 768 characters and the home path is not
+    // bounded by anything this function controls
+    //
+
+    if (wcslen(path) + 1 + wcslen(req->setting) + 1 > ARRAYSIZE(path))
+        return SHORT_REPLY(STATUS_NAME_TOO_LONG);
+
     wcscat(path, L"\\");
     wcscat(path, req->setting);
 

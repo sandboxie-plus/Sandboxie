@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "IniHighlighter.h"
+#include <QMessageBox>
 #include "../MiscHelpers/Common/Settings.h"
 #include "../version.h"
 
@@ -128,7 +129,7 @@ namespace {
         static const QRegularExpression SECTION_REGEX(R"(^\[([^\]]+)\]\s*$)");
         static const QRegularExpression VERSION_REGEX("^[0-9]+\\.[0-9]+\\.[0-9]+$");
         static const QRegularExpression KEY_REGEX(R"(^\s*([^=]+?)\s*=)");
-        static const QRegularExpression COMMENT_REGEX(R"(^\s*[;#].*)");
+        static const QRegularExpression COMMENT_REGEX(R"(^\s*(?:#.*|;.*=.*))");
         static const QRegularExpression CLEAN_NAME_REGEX("[^a-zA-Z0-9_.]");
 		static const QRegularExpression SETTING_NAME_REGEX("^[a-zA-Z0-9_. ()-]+$");
 		static const QRegularExpression JSON_KEY_REGEX(R"("(?:(?:\\.)|[^"\\])*"(?=\s*:))");
@@ -710,9 +711,9 @@ CIniHighlighter::CIniHighlighter(bool bDarkMode, QTextDocument* parent, bool ena
     rule.format = sectionFormat;
     highlightRules.append(rule);
 
-    // Comments: ; comment or # comment
+    // Comments and semicolon-prefixed assignments
     commentFormat.setForeground(green);
-    rule.pattern = QRegularExpression("^\\s*[;#].*");
+    rule.pattern = CompiledRegex::COMMENT_REGEX;
     rule.format = commentFormat;
     highlightRules.append(rule);
 
@@ -1049,6 +1050,57 @@ static QString ResolveTooltipStyleColor(const QString& colorValue)
 	if (darkMode)
 		return darkColor.isEmpty() ? lightColor : darkColor;
 	return lightColor.isEmpty() ? darkColor : lightColor;
+}
+
+//
+// The schema is loaded by the constructor, and a highlighter with a null
+// document is already how the options and settings windows build one before
+// they have a text edit to attach (see OptionsWindow.cpp). Constructing a
+// throwaway is therefore the existing, supported way to populate the static
+// schema, and it reuses the real load path - version handling, user-ini
+// overrides and all - instead of reimplementing it.
+//
+bool CIniHighlighter::EnsureSettingsLoaded()
+{
+	if (settingsLoaded)
+		return true;
+	CIniHighlighter Probe(false, nullptr, true);
+	return settingsLoaded;
+}
+
+bool CIniHighlighter::IsValidSetting(const QString& settingName)
+{
+	QMutexLocker locker(&settingsMutex);
+	// The same resolution the highlighter itself uses: the Ovr./Reg. prefixes
+	// map onto one schema entry, and the keys are stored as written rather than
+	// folded, so matching has to be case-insensitive explicitly.
+	return !findCaseInsensitiveSettingKey(resolveSettingLookupKey(settingName, validSettings), validSettings).isEmpty();
+}
+
+QStringList CIniHighlighter::GetSettingNames()
+{
+	QMutexLocker locker(&settingsMutex);
+	QStringList Names;
+	Names.reserve(validSettings.count());
+	// The key, not Info.name: aliases are inserted under their own key and some
+	// entries carry no name of their own.
+	for (auto I = validSettings.constBegin(); I != validSettings.constEnd(); ++I)
+		Names.append(I.key());
+	Names.sort(Qt::CaseInsensitive);
+	return Names;
+}
+
+bool CIniHighlighter::GetSettingInfo(const QString& settingName, SettingInfo* pInfo)
+{
+	QMutexLocker locker(&settingsMutex);
+	const QString Key = findCaseInsensitiveSettingKey(resolveSettingLookupKey(settingName, validSettings), validSettings);
+	if (Key.isEmpty())
+		return false;
+	auto I = validSettings.constFind(Key);
+	if (I == validSettings.constEnd())
+		return false;
+	if (pInfo) *pInfo = I.value();
+	return true;
 }
 
 // Load settings from SbieSettings.ini
@@ -2614,9 +2666,22 @@ SettingInfo CIniHighlighter::resolveSettingInfo(const QString& settingName, cons
 
 bool CIniHighlighter::IsCommentLine(const QString& line)
 {
-	// Skip lines that start with # or ; (after optional whitespace)
+	// Skip # lines and ; lines containing = (after optional whitespace).
 	QString trimmed = line.trimmed();
-	return trimmed.startsWith('#') || trimmed.startsWith(';');
+	return trimmed.startsWith('#') || (trimmed.startsWith(';') && trimmed.contains('='));
+}
+
+bool CIniHighlighter::ValidateIniComments(const QString& section, QWidget* parent)
+{
+	const QStringList lines = section.split('\n');
+	for (int i = 0; i < lines.size(); ++i) {
+		const QString line = lines.at(i).trimmed();
+		if (line.startsWith(';') && !line.contains('=')) {
+			QMessageBox::critical(parent, "Sandboxie-Plus", tr("Line %1: Semicolons (;) are not supported as comment markers. Use # instead.").arg(i + 1));
+			return false;
+		}
+	}
+	return true;
 }
 
 CIniHighlighter::TooltipMode CIniHighlighter::GetTooltipMode()

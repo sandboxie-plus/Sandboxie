@@ -1,7 +1,7 @@
 # Sandboxie Plus / Classic
 
 <p align='center'>
-<a href='./README.md'>EN</a> | 中文
+<a href='./README.md'>EN</a> | 中文 | <a href='./README_ja.md'>日本語</a>
 </p>
 
 [![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./LICENSE.Plus) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE.Classic) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml) [![WinGet Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/winget.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/winget.yml) [![Gurubase](https://img.shields.io/badge/Gurubase-Ask%20Sandboxie%20Guru-006BFF)](https://gurubase.io/g/sandboxie)
@@ -190,7 +190,7 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 - SuperMaxusa、lufog、Nazar1ky - 乌克兰语
 - GunGunGun - 越南语
 
-所有译者在提交翻译前，建议先查看[本地化说明和提示](https://github.com/sandboxie-plus/Sandboxie/discussions/1123)。
+提交翻译前，请阅读[翻译协作与署名规范](./TRANSLATING.md#translation-collaboration-and-attribution)及[本地化说明和提示](https://github.com/sandboxie-plus/Sandboxie/discussions/1123)。
 
 ## 📚 文档翻译人员
 

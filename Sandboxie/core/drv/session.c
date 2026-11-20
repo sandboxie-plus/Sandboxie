@@ -601,60 +601,72 @@ _FX void Session_MonitorPutEx(ULONG type, const WCHAR** strings, ULONG* lengths,
     if (! session)
         return;
 
-    if (session->monitor_log) {
+    __try {
 
-        LARGE_INTEGER timestamp = Util_GetTimestamp();
+        if (session->monitor_log) {
 
-		ULONG pid = (ULONG)hpid;
-        ULONG tid = (ULONG)htid;
+            LARGE_INTEGER timestamp = Util_GetTimestamp();
 
-		SIZE_T data_len = 0;
-		for(int i=0; strings[i] != NULL; i++)
-			data_len += ((lengths ? lengths [i] : wcslen(strings[i])) + 1) * sizeof(WCHAR);
+    		ULONG pid = (ULONG)hpid;
+            ULONG tid = (ULONG)htid;
+
+    		SIZE_T data_len = 0;
+    		for(int i=0; strings[i] != NULL; i++)
+    			data_len += ((lengths ? lengths [i] : wcslen(strings[i])) + 1) * sizeof(WCHAR);
 
         
-		//[Time 8][Type 4][PID 4][TID 4][Data n*2](0xFFFF[ID1][LEN1][DATA1]...[IDn][LENn][DATAn])
-		SIZE_T entry_size = 8 + 4 + 4 + 4 + data_len;
+    		//[Time 8][Type 4][PID 4][TID 4][Data n*2](0xFFFF[ID1][LEN1][DATA1]...[IDn][LENn][DATAn])
+    		SIZE_T entry_size = 8 + 4 + 4 + 4 + data_len;
 
-        PVOID backTrace[MAX_STACK_DEPTH];
-        ULONG frames = 0;
-        if (session->monitor_stack_trace) {
-            frames = Util_CaptureStack(backTrace, MAX_STACK_DEPTH);
-            entry_size += sizeof(WCHAR) + sizeof(ULONG) + sizeof(ULONG) + (frames * sizeof(PVOID));
-        }
-
-		CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, session->monitor_log, FALSE);
-		if (write_ptr) {
-            WCHAR null_char = L'\0';
-            log_buffer_push_bytes((CHAR*)&timestamp.QuadPart, 8, &write_ptr, session->monitor_log);
-			log_buffer_push_bytes((CHAR*)&type, 4, &write_ptr, session->monitor_log);
-			log_buffer_push_bytes((CHAR*)&pid, 4, &write_ptr, session->monitor_log);
-            log_buffer_push_bytes((CHAR*)&tid, 4, &write_ptr, session->monitor_log);
-
-			// add strings '\0' separated
-            for (int i = 0; strings[i] != NULL; i++) {
-                log_buffer_push_bytes((CHAR*)strings[i], (lengths ? lengths[i] : wcslen(strings[i])) * sizeof(WCHAR), &write_ptr, session->monitor_log);
-                log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, session->monitor_log);
+            PVOID backTrace[MAX_STACK_DEPTH];
+            ULONG frames = 0;
+            if (session->monitor_stack_trace) {
+                frames = Util_CaptureStack(backTrace, MAX_STACK_DEPTH);
+                entry_size += sizeof(WCHAR) + sizeof(ULONG) + sizeof(ULONG) + (frames * sizeof(PVOID));
             }
 
-            if (frames) {
-                WCHAR strings_end = 0xFFFF;
-                log_buffer_push_bytes((CHAR*)&strings_end, sizeof(WCHAR), &write_ptr, session->monitor_log);
+    		// entry_size is a 64-bit SIZE_T but log_buffer_push_entry takes a
+    		// 32-bit LOG_BUFFER_SIZE_T;  a >4GB data_len (the MonitorPut* APIs
+    		// put no upper bound on log_len) would truncate in the cast, pass
+    		// push_entry's size check and then be written at full length.
+    		// reject anything that cannot fit before the cast
+    		CHAR* write_ptr = (entry_size <= session->monitor_log->buffer_size)
+    			? log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, session->monitor_log, FALSE)
+    			: NULL;
+    		if (write_ptr) {
+                WCHAR null_char = L'\0';
+                log_buffer_push_bytes((CHAR*)&timestamp.QuadPart, 8, &write_ptr, session->monitor_log);
+    			log_buffer_push_bytes((CHAR*)&type, 4, &write_ptr, session->monitor_log);
+    			log_buffer_push_bytes((CHAR*)&pid, 4, &write_ptr, session->monitor_log);
+                log_buffer_push_bytes((CHAR*)&tid, 4, &write_ptr, session->monitor_log);
 
-                ULONG tag_id = 'STCK';
-                ULONG tag_len = frames * sizeof(PVOID);
-                log_buffer_push_bytes((CHAR*)&tag_id, sizeof(ULONG), &write_ptr, session->monitor_log);
-                log_buffer_push_bytes((CHAR*)&tag_len, sizeof(ULONG), &write_ptr, session->monitor_log);
-                log_buffer_push_bytes((CHAR*)backTrace, frames * sizeof(PVOID), &write_ptr, session->monitor_log);
+    			// add strings '\0' separated
+                for (int i = 0; strings[i] != NULL; i++) {
+                    log_buffer_push_bytes((CHAR*)strings[i], (lengths ? lengths[i] : wcslen(strings[i])) * sizeof(WCHAR), &write_ptr, session->monitor_log);
+                    log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, session->monitor_log);
+                }
+
+                if (frames) {
+                    WCHAR strings_end = 0xFFFF;
+                    log_buffer_push_bytes((CHAR*)&strings_end, sizeof(WCHAR), &write_ptr, session->monitor_log);
+
+                    ULONG tag_id = 'STCK';
+                    ULONG tag_len = frames * sizeof(PVOID);
+                    log_buffer_push_bytes((CHAR*)&tag_id, sizeof(ULONG), &write_ptr, session->monitor_log);
+                    log_buffer_push_bytes((CHAR*)&tag_len, sizeof(ULONG), &write_ptr, session->monitor_log);
+                    log_buffer_push_bytes((CHAR*)backTrace, frames * sizeof(PVOID), &write_ptr, session->monitor_log);
+                }
+    		}
+            else if (!session->monitor_overflow) {
+                session->monitor_overflow = TRUE;
+                Log_Msg0(MSG_MONITOR_OVERFLOW);
             }
-		}
-        else if (!session->monitor_overflow) {
-            session->monitor_overflow = TRUE;
-            Log_Msg0(MSG_MONITOR_OVERFLOW);
         }
+
+    } __finally {
+
+        Session_Unlock(irql);
     }
-
-    Session_Unlock(irql);
 }
 
 
@@ -1143,18 +1155,29 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS* proc, ULONG64* parms)
         if (log_tid != NULL)
             *log_tid = tid;
 
-        ULONG data_size = (entry_size - (4 + 4 + 4));
-        if ((USHORT)data_size > (log_data->MaximumLength - 1))
-        {
-            data_size = (log_data->MaximumLength - 1);
+        ULONG data_size = (entry_size > (8 + 4 + 4 + 4))
+                        ? (entry_size - (8 + 4 + 4 + 4)) : 0;
+
+        ULONG max_len = log_data->MaximumLength;
+        ULONG cap = (max_len >= sizeof(WCHAR))
+                  ? ((max_len - sizeof(WCHAR)) & ~(ULONG)1) : 0;
+
+        if (data_size > cap) {
+            data_size = cap;
             status = STATUS_BUFFER_TOO_SMALL;
         }
-        
-        log_data->Length = (USHORT)data_size;
-        ProbeForWrite(log_buffer, data_size + 1, sizeof(WCHAR));
-        log_buffer_get_bytes((CHAR*)log_buffer, data_size, &read_ptr, session->monitor_log);
 
-        log_buffer[data_size / sizeof(wchar_t)] = L'\0';
+        log_data->Length = (USHORT)data_size;
+
+        if (max_len >= sizeof(WCHAR)) {
+
+            ProbeForWrite(log_buffer, data_size + sizeof(WCHAR), sizeof(WCHAR));
+            log_buffer_get_bytes((CHAR*)log_buffer, data_size, &read_ptr, session->monitor_log);
+
+            log_buffer[data_size / sizeof(wchar_t)] = L'\0';
+
+        } else
+            status = STATUS_BUFFER_TOO_SMALL;
         
 
         //if (seq_num != NULL)

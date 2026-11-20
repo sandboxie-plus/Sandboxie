@@ -413,8 +413,16 @@ SB_STATUS CSbieAPI::Disconnect()
 		m->SbieMsgDll = NULL;
 	}
 
-	m_SandBoxes.clear();
-	m_BoxedProxesses.clear();
+	{
+		QMap<QString, CSandBoxPtr> OldSandBoxes;
+		QMap<quint32, CBoxedProcessPtr> OldProcesses;
+		{
+			QWriteLocker Lock(&m_BoxesLock);
+			OldSandBoxes.swap(m_SandBoxes);
+			OldProcesses.swap(m_BoxedProxesses);
+		}
+		// the old objects are released here, outside of the lock
+	}
 	m->ProcessListInitialized = false;
 	m_bBoxesDirty = true;
 
@@ -630,11 +638,14 @@ bool CSbieAPI::GetQueueReq()
 			{
 				case MAN_FILE_MIGRATION:
 				{
+					if (rpl->data_len < sizeof(MAN_FILE_MIGRATION_REQ))
+						break;
 					MAN_FILE_MIGRATION_REQ *req = (MAN_FILE_MIGRATION_REQ *)rpl->data;
 
 					Data["id"] = (int)eFileMigration;
 					Data["fileSize"] = req->file_size;
-					Data["fileName"] = Nt2DosPath(QString::fromWCharArray(req->file_path));
+					Data["fileName"] = Nt2DosPath(QString::fromWCharArray(req->file_path,
+						(int)wcsnlen(req->file_path, sizeof(req->file_path) / sizeof(WCHAR))));
 					break;
 				}
 				case MAN_INET_BLOCKADE:
@@ -1191,7 +1202,10 @@ SB_STATUS CSbieAPI::ReloadBoxes(bool bForceUpdate)
 		if (!pBox)
 		{
 			pBox = CSandBoxPtr(NewSandBox(BoxName, this));
-			m_SandBoxes.insert(BoxName.toLower(), pBox);
+			{
+				QWriteLocker Lock(&m_BoxesLock);
+				m_SandBoxes.insert(BoxName.toLower(), pBox);
+			}
 			emit BoxAdded(pBox);
 		}
 		UpdateBoxPaths(pBox.data());
@@ -1202,7 +1216,11 @@ SB_STATUS CSbieAPI::ReloadBoxes(bool bForceUpdate)
 	}
 
 	foreach(const QString & BoxName, OldSandBoxes.keys()) {
-		CSandBoxPtr pBox = m_SandBoxes.take(BoxName);
+		CSandBoxPtr pBox;
+		{
+			QWriteLocker Lock(&m_BoxesLock);
+			pBox = m_SandBoxes.take(BoxName);
+		}
 		pBox->SetBoxPaths(QString(), QString(), QString());
 		emit BoxRemoved(pBox);
 	}
@@ -1543,7 +1561,10 @@ SB_STATUS CSbieAPI::UpdateProcesses(int iKeep, bool bAllSessions)
 
 			pProcess->m_pBox = pBox.data();
 			pBox->m_ProcessList.insert(ProcessId, pProcess);
-			m_BoxedProxesses.insert(ProcessId, pProcess);
+			{
+				QWriteLocker Lock(&m_BoxesLock);
+				m_BoxedProxesses.insert(ProcessId, pProcess);
+			}
 			pBox->m_ActiveProcessDirty = true;
 
 			pProcess->InitProcessInfo();
@@ -1560,7 +1581,10 @@ SB_STATUS CSbieAPI::UpdateProcesses(int iKeep, bool bAllSessions)
 		}
 		else if (iKeep != -1 && pProcess->IsTerminated(iKeep)) {
 			pProcess->m_pBox->m_ProcessList.remove(pProcess->m_ProcessId);
-			m_BoxedProxesses.remove(pProcess->m_ProcessId);
+			{
+				QWriteLocker Lock(&m_BoxesLock);
+				m_BoxedProxesses.remove(pProcess->m_ProcessId);
+			}
 		}
 	}
 
@@ -1729,7 +1753,7 @@ SB_STATUS CSbieAPI::GetProcessInfo(quint32 ProcessId, quint32* pParentId, quint3
 
 CSandBoxPtr CSbieAPI::GetBoxByProcessId(quint32 ProcessId) const
 {
-	CBoxedProcessPtr pProcess = m_BoxedProxesses.value(ProcessId);
+	CBoxedProcessPtr pProcess = GetProcessById(ProcessId);
 	if (!pProcess || pProcess->IsTerminated())
 		return CSandBoxPtr();
 	return GetBoxByName(pProcess->GetBoxName());
@@ -1737,7 +1761,51 @@ CSandBoxPtr CSbieAPI::GetBoxByProcessId(quint32 ProcessId) const
 
 CBoxedProcessPtr CSbieAPI::GetProcessById(quint32 ProcessId) const
 {
+	QReadLocker Lock(&m_BoxesLock);
 	return m_BoxedProxesses.value(ProcessId);
+}
+
+CSbieAPI::EBoxedState CSbieAPI::QueryProcessBox(quint32 ProcessId, QString* pBoxName, quint32* pSessionId) const
+{
+	if (pBoxName) pBoxName->clear();
+
+	// A zero or sentinel pid means "the calling process" to the driver, which
+	// would cheerfully answer about us instead of the process being vetted -
+	// an unboxed answer for a question never asked. Refuse it outright.
+	if (ProcessId == 0 || ProcessId == (quint32)-1)
+		return eBoxedUnknown;
+
+	WCHAR box_name[BOXNAME_COUNT] = { 0 };
+	ULONG session_id = 0;
+
+	__declspec(align(8)) UNICODE_STRING64 BoxName = { 0, sizeof(box_name), (ULONG64)box_name };
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+	API_QUERY_PROCESS_ARGS* args = (API_QUERY_PROCESS_ARGS*)parms;
+
+	memset(parms, 0, sizeof(parms));
+	args->func_code = API_QUERY_PROCESS;
+	args->process_id.val64 = (ULONG64)(ULONG_PTR)ProcessId;
+	args->box_name.val64 = (ULONG64)&BoxName;
+	args->session_id.val64 = (ULONG64)&session_id;
+
+	NTSTATUS status = m->IoControl(parms);
+	if (!NT_SUCCESS(status))
+	{
+		// Process_Api_Query answers STATUS_INVALID_CID when it holds no live
+		// sandboxed process for the pid - the normal reply for an unboxed or
+		// already-terminated one. Everything else is a real failure.
+		if (status == STATUS_INVALID_CID)
+			return eNotBoxed;
+		return eBoxedUnknown;
+	}
+
+	QString Name = QString::fromWCharArray(box_name);
+	if (Name.isEmpty())
+		return eNotBoxed;	// should not happen on success, but do not guess
+
+	if (pBoxName) *pBoxName = Name;
+	if (pSessionId) *pSessionId = session_id;
+	return eBoxed;
 }
 
 quint64 CSbieAPI::QueryProcessInfo(quint32 ProcessId, quint32 InfoClass)
@@ -2588,7 +2656,10 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 
 		pProcess = CBoxedProcessPtr(NewBoxedProcess(ProcessId, pBox.data()));
 		pBox->m_ProcessList.insert(ProcessId, pProcess);
-		m_BoxedProxesses.insert(ProcessId, pProcess);
+		{
+			QWriteLocker Lock(&m_BoxesLock);
+			m_BoxedProxesses.insert(ProcessId, pProcess);
+		}
 		pBox->m_ActiveProcessDirty = true;
 
 		UpdateProcessInfo(pProcess);

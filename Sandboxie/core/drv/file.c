@@ -1974,13 +1974,23 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
         return STATUS_INSUFFICIENT_RESOURCES;
     memzero(path, path_len);
 
-    memcpy(path, user_dir, user_dir_len);
-    name = path + wcslen(path);
-    *name = L'\\';
-    memcpy(&name[1], user_name, user_name_len);
 
-    if (wcschr(&name[1], L'\\'))
+    __try {
+
+        memcpy(path, user_dir, user_dir_len);
+        name = path + wcslen(path);
+        *name = L'\\';
+        memcpy(&name[1], user_name, user_name_len);
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        Mem_Free(path, path_len);
+        return GetExceptionCode();
+    }
+
+    if (wcschr(&name[1], L'\\')) {
+        Mem_Free(path, path_len);
         return STATUS_INVALID_PARAMETER;
+    }
 
     //
     // check if the full target path is an open path, and stop if not
@@ -2174,10 +2184,17 @@ _FX NTSTATUS File_Api_GetName(PROCESS *proc, ULONG64 *parms)
                             // strip \;Q:000000000000b09f prefix 
                             //
 
-                            if (fileName_Buffer[1] == L';') {
-                                wchar_t* ptr = wcschr(fileName_Buffer + 2, L'\\');
+                            if (fileName_Length >= 2 * sizeof(WCHAR) && fileName_Buffer[1] == L';') {
+                                ULONG fn_chars = fileName_Length / sizeof(WCHAR);
+                                wchar_t* ptr = NULL;
+                                for (ULONG fn_i = 2; fn_i < fn_chars; ++fn_i) {
+                                    if (fileName_Buffer[fn_i] == L'\\') {
+                                        ptr = fileName_Buffer + fn_i;
+                                        break;
+                                    }
+                                }
                                 if (ptr) {
-                                    fileName_Length -= (ULONG)(ptr - fileName_Buffer);
+                                    fileName_Length -= (ULONG)((ptr - fileName_Buffer) * sizeof(WCHAR));
                                     fileName_Buffer = ptr;
                                 }
                             }
@@ -2328,6 +2345,9 @@ _FX NTSTATUS File_Api_RefreshPathList(PROCESS *proc, ULONG64 *parms)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(proc->file_lock, TRUE);
 
+
+    __try {
+
     if (ok) {
 
         //
@@ -2386,8 +2406,11 @@ _FX NTSTATUS File_Api_RefreshPathList(PROCESS *proc, ULONG64 *parms)
         status = STATUS_UNSUCCESSFUL;
     }
 
-    ExReleaseResourceLite(proc->file_lock);
-    KeLowerIrql(irql);
+    } __finally {
+
+        ExReleaseResourceLite(proc->file_lock);
+        KeLowerIrql(irql);
+    }
 
     return status;
 }
@@ -2443,7 +2466,15 @@ _FX NTSTATUS File_Api_Open(PROCESS *proc, ULONG64 *parms)
     ProbeForRead(args->path_str.val, path_len, sizeof(WCHAR));
 
     path = Mem_Alloc(proc->pool, path_len + 8);
-    memcpy(path, args->path_str.val, path_len);
+    if (! path)
+        return STATUS_INSUFFICIENT_RESOURCES;
+
+    __try {
+        memcpy(path, args->path_str.val, path_len);
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        Mem_Free(path, path_len + 8);
+        return GetExceptionCode();
+    }
     path[path_len / sizeof(WCHAR)] = L'\0';
 
     //

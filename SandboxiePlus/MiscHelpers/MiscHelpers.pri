@@ -38,6 +38,10 @@ HEADERS += ./MiscHelpers.h \
     ./Common/MultiErrorDialog.h \
     ./Common/CheckableComboBox.h \
     ./Common/CodeEdit.h \
+    ./Common/HttpServer/HttpServer.h \
+    ./Common/HttpServer/HttpSocket.h \
+    ./Common/HttpServer/HttpHelper.h \
+    ./Common/HttpServer/HttpTransport.h \
     ./Archive/Archive.h \
     ./Archive/ArchiveFS.h \
     ./Archive/ArchiveExtractor.h \
@@ -76,6 +80,10 @@ SOURCES += ./MiscHelpers.cpp \
     ./Common/MultiErrorDialog.cpp \
     ./Common/CheckableComboBox.cpp \
     ./Common/CodeEdit.cpp \
+    ./Common/HttpServer/HttpServer.cpp \
+    ./Common/HttpServer/HttpSocket.cpp \
+    ./Common/HttpServer/HttpHelper.cpp \
+    ./Common/HttpServer/HttpTransport.cpp \
     ./Archive/Archive.cpp \
     ./Archive/ArchiveFS.cpp \
     ./Archive/ArchiveExtractor.cpp \

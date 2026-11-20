@@ -768,6 +768,9 @@ _FX WCHAR *Conf_Expand_2(
         if (wcslen(new_value) > 1024) {
             Log_Status_Ex(
                 MSG_CONF_EXPAND, 0, STATUS_UNSUCCESSFUL, L"(TooLong)");
+            if (new_value != model_value)
+                Mem_FreeString(new_value);
+            ExFreePoolWithTag(Conf_Expand_Buffer, tzuk);
             return NULL;
         }
 
@@ -790,6 +793,9 @@ _FX WCHAR *Conf_Expand_2(
         if (retries > 10) {
             Log_Status_Ex(
                 MSG_CONF_EXPAND, 0, STATUS_UNSUCCESSFUL, L"(Recursion)");
+            if (new_value != model_value)
+                Mem_FreeString(new_value);
+            ExFreePoolWithTag(Conf_Expand_Buffer, tzuk);
             return NULL;
         }
     }

@@ -382,6 +382,24 @@ void PipeServer::Thread()
             if (! client)
                 continue;
 
+#ifdef USE_NEW_LPC_IMPL
+            //
+            // serialize the requests of one connection.  the reassembly
+            // state (buf_hdr / buf_ptr / replying / sequence) lives in the
+            // client structure, and this implementation keys clients per
+            // connection rather than per thread, so two threads of the same
+            // client sending at the same time would otherwise race it into
+            // a double free.  the old implementation got this for free by
+            // keying on the thread id
+            //
+            // released below, before the SClientPtr goes out of scope, so a
+            // concurrent PortDisconnect can never run the destructor - and
+            // with it DeleteCriticalSection - while this is held
+            //
+
+            EnterCriticalSection(&client->req_lock);
+#endif
+
             if (! client->replying)
                 PortRequest(client->hPort, msg, client);
 
@@ -398,6 +416,10 @@ void PipeServer::Thread()
             ReplyMsg = msg;
 
             client->in_use = FALSE;
+
+#ifdef USE_NEW_LPC_IMPL
+            LeaveCriticalSection(&client->req_lock);
+#endif
 
         } else if (msg->u2.s2.Type == LPC_PORT_CLOSED ||
                    msg->u2.s2.Type == LPC_CLIENT_DIED) {
@@ -418,6 +440,41 @@ void PipeServer::Thread()
 
 
 #ifdef USE_NEW_LPC_IMPL
+
+PipeServer::SClient::SClient()
+{
+    idProcess = NULL;
+    idThread = NULL;
+    replying = FALSE;
+    in_use = FALSE;
+    sequence = 0;
+    hPort = NULL;
+    buf_hdr = NULL;
+    buf_ptr = NULL;
+
+    InitializeCriticalSection(&req_lock);
+}
+
+PipeServer::SClient::~SClient()
+{
+    //
+    // the port handle and any half assembled request belong to this
+    // connection.  releasing them here rather than in PortDisconnect means
+    // they go away exactly when the last reference does, so a worker that is
+    // still handling a request cannot have them pulled out from under it -
+    // and the early returns in PortConnect are covered as well
+    //
+
+    if (buf_hdr)
+        PipeServer::GetPipeServer()->FreeMsg(buf_hdr);
+
+    if (hPort)
+        NtClose(hPort);
+
+    DeleteCriticalSection(&req_lock);
+}
+
+
 void PipeServer::PortConnect(PORT_MESSAGE* msg)
 {
     NTSTATUS status;
@@ -436,6 +493,7 @@ void PipeServer::PortConnect(PORT_MESSAGE* msg)
         return;
     }
 
+    client->idProcess = msg->ClientId.UniqueProcess;
     client->idThread = msg->ClientId.UniqueThread;
     client->replying = FALSE;
     client->in_use = FALSE;
@@ -632,11 +690,40 @@ void PipeServer::PortDisconnect(PVOID PortContext)
 {
     EnterCriticalSection(&m_lock);
 
+    //
+    // dropping the map's reference is all that is needed:  SClient's
+    // destructor closes hPort and frees any pending reassembly buffer, and
+    // it runs only once the last reference goes, so a worker still handling
+    // a request on this connection keeps them alive.  do NOT close them
+    // here - that would pull them out from under such a worker
+    //
+
+    HANDLE idProcess = NULL;
     auto F = m_Clients.find(PortContext);
-    if (F != m_Clients.end())
+    if (F != m_Clients.end()) {
+        idProcess = F->second->idProcess;
 		m_Clients.erase(F);
+    }
+
+    BOOLEAN lastForPid = (idProcess != NULL);
+    if (lastForPid) {
+        for (auto& pair : m_Clients) {
+            if (pair.second->idProcess == idProcess) {
+                lastForPid = FALSE;
+                break;
+            }
+        }
+    }
 
     LeaveCriticalSection(&m_lock);
+
+    //
+    // run the notification outside m_lock: the sub-server handlers take their
+    // own locks, and we must not invert lock order against them
+    //
+
+    if (lastForPid)
+        NotifyTargets(idProcess);
 }
 #else
 void PipeServer::PortDisconnect(PORT_MESSAGE *msg)

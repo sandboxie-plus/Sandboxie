@@ -309,6 +309,7 @@ SB_STATUS CSandBox::RenameBox(const QString& NewName)
 	QString OldName = m_Name;
 	Status = RenameSection(NewName);
 	if (!Status.IsError()) {
+		QWriteLocker Lock(&m_pAPI->m_BoxesLock);
 		CSandBoxPtr pBox = m_pAPI->m_SandBoxes.take(OldName.toLower());
 		if (pBox)m_pAPI->m_SandBoxes.insert(NewName.toLower(), pBox);
 	}
@@ -903,8 +904,9 @@ SB_STATUS CSandBox::SbieIniSet(const QString& Section, const QString& Setting, c
 			return SB_ERR(status);
 
 		if (bRefresh) {
-			m_pIniFile->SaveIni((WCHAR*)m_PortablePath.utf16());
-			m_pAPI->ReloadConfig();
+			status = m_pIniFile->SaveIni((WCHAR*)m_PortablePath.utf16());
+			if (!NT_SUCCESS(status)) return SB_ERR(status);
+			return m_pAPI->ReloadConfig();
 		}
 
 		return SB_OK;

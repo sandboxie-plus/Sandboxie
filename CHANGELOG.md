@@ -32,6 +32,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed sandbox options not showing the default sandbox icon on opening when no custom icon is configured
 - fixed windows 7 incomatibility introduced in 1.19.0
 - fixed submitting an issue report leaving an async progress operation registered for ever, which made the next modal wait - "Saving TraceLog..." for instance - hang; the upload is now registered only once it is actually running
+- fixed concurrent process creations serializing on the global configuration lock, caused by the force-rule scan enumerating every `Templates.ini` section and the configuration use count being adjusted under an exclusive lock
 - fixed the Local Templates list not populating on first visit [#5715](https://github.com/sandboxie-plus/Sandboxie/issues/5715/)
 - fixed empty or stale App Compatibility lists; added prelisting, scan status and manual checking [#5718](https://github.com/sandboxie-plus/Sandboxie/issues/5718)
 

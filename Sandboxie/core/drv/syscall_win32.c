@@ -566,6 +566,7 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
     SYSCALL_ENTRY *entry;
     ULONG syscall_index;
     NTSTATUS status;
+    THREAD_MUI_STATE mui_state = { 0 };
 #ifdef _M_AMD64
     volatile ULONG_PTR ret = 0;
     volatile ULONG_PTR UserStack = 0;
@@ -602,8 +603,10 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
 
     // DbgPrint("[syscall] request p=%06d t=%06d - BEGIN %s\n", PsGetCurrentProcessId(), PsGetCurrentThreadId(), entry->name);
 
-    if(!proc->is_locked_down || entry->approved)
+    if(!proc->is_locked_down || entry->approved) {
+        Thread_SaveMuiState(proc, &mui_state);
         Thread_SetThreadToken(proc);        // may set proc->terminated // does nothing if !proc->primary_token
+    }
 
 //    if (proc->terminated) {
 //
@@ -725,8 +728,10 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
     // use of the highly restricted primary token in this thread
     //
 
-    if(proc->primary_token)
+    if(proc->primary_token) {
         Thread_ClearThreadToken();
+        Thread_RestoreMuiState(proc, &mui_state);
+    }
 
     /*if (! NT_SUCCESS(status)) {
         DbgPrint("Process %06d Syscall %04X Status %08X\n", proc->pid, syscall_index, status);

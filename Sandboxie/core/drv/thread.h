@@ -61,6 +61,16 @@ struct _THREAD {
     BOOLEAN create_process_in_progress;
 };
 
+typedef struct _THREAD_MUI_STATE {
+
+    ULONG *mui_ptr;
+    ULONG *mui_ptr32;
+    ULONG mui_value;
+    ULONG mui_value32;
+    void *token_object;
+
+} THREAD_MUI_STATE;
+
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
@@ -85,6 +95,10 @@ NTSTATUS Thread_StoreThreadToken(PROCESS *proc);
 #define Thread_ClearThreadToken()                                   \
             PsImpersonateClient(PsGetCurrentThread(), NULL,         \
             FALSE, FALSE, SecurityAnonymous);
+
+void Thread_SaveMuiState(PROCESS *proc, THREAD_MUI_STATE *state);
+
+void Thread_RestoreMuiState(PROCESS *proc, THREAD_MUI_STATE *state);
 
 NTSTATUS Thread_CheckTokenObject(
     PROCESS *proc, void *Object, ACCESS_MASK GrantedAccess);

@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+- fixed severe slowdowns (e.g. FPS drops in games) in sandboxed applications that often call `GetUserDefaultUILanguage`, `LoadString`, `FindResource` or `FormatMessage`: the temporary impersonation around each system call reset ntdll's cached UI language settings, so every lookup re-read them from the registry
 
 
 

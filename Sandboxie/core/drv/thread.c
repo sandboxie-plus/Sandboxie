@@ -839,6 +839,126 @@ _FX NTSTATUS Thread_StoreThreadToken(PROCESS *proc)
 
 
 //---------------------------------------------------------------------------
+// Thread_SaveMuiState
+//---------------------------------------------------------------------------
+
+
+#ifdef _WIN64
+#define TEB_MUI_IMPERSONATION_OFFSET    0x17E8
+#define TEB32_OFFSET                    0x2000  // Wow64 TEB follows the native TEB
+#define TEB32_MUI_IMPERSONATION_OFFSET  0x0FC4
+#else
+#define TEB_MUI_IMPERSONATION_OFFSET    0x0FC4
+#endif
+
+
+_FX void Thread_SaveMuiState(PROCESS *proc, THREAD_MUI_STATE *state)
+{
+    UCHAR *Teb;
+    THREAD *thrd;
+
+    //
+    // ntdll caches the user interface language settings (as used by
+    // GetUserDefaultUILanguage, LoadString, FindResource, FormatMessage)
+    // and validates the cache against TEB.MuiImpersonation, which the
+    // kernel resets to zero on every impersonation change.
+    //
+    // Thread_SetThreadToken and Thread_ClearThreadToken impersonate and
+    // revert around every system call, which would otherwise invalidate
+    // this cache on each call and cause ntdll to re-read the language
+    // settings from the registry on every lookup.
+    //
+    // this function records the value before the system call, so that
+    // Thread_RestoreMuiState can put it back afterwards
+    //
+
+    memzero(state, sizeof(THREAD_MUI_STATE));
+
+    if (! proc->primary_token)
+        return;
+
+    Teb = (UCHAR *)PsGetCurrentThreadTeb();
+    if (! Teb)
+        return;
+
+    __try {
+
+        ULONG *ptr = (ULONG *)(Teb + TEB_MUI_IMPERSONATION_OFFSET);
+        ProbeForRead(ptr, sizeof(ULONG), sizeof(ULONG));
+        if (*ptr) {
+            state->mui_value = *ptr;
+            state->mui_ptr = ptr;
+        }
+
+#ifdef _WIN64
+        if (IoIs32bitProcess(NULL)) {
+
+            ptr = (ULONG *)(Teb + TEB32_OFFSET + TEB32_MUI_IMPERSONATION_OFFSET);
+            ProbeForRead(ptr, sizeof(ULONG), sizeof(ULONG));
+            if (*ptr) {
+                state->mui_value32 = *ptr;
+                state->mui_ptr32 = ptr;
+            }
+        }
+#endif
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+
+        state->mui_ptr = NULL;
+        state->mui_ptr32 = NULL;
+    }
+
+    if (state->mui_ptr || state->mui_ptr32) {
+
+        thrd = Thread_GetByThreadId(proc, 0);
+        state->token_object = thrd ? thrd->token_object : NULL;
+    }
+}
+
+
+//---------------------------------------------------------------------------
+// Thread_RestoreMuiState
+//---------------------------------------------------------------------------
+
+
+_FX void Thread_RestoreMuiState(PROCESS *proc, THREAD_MUI_STATE *state)
+{
+    THREAD *thrd;
+
+    if (! state->mui_ptr && ! state->mui_ptr32)
+        return;
+
+    //
+    // if the system call changed the impersonation token recorded for
+    // this thread (e.g. SetThreadToken or RevertToSelf), keep the reset
+    // so ntdll re-evaluates the language settings, as it would outside
+    // the sandbox.  the token object is only compared, not referenced
+    //
+
+    thrd = Thread_GetByThreadId(proc, 0);
+    if ((thrd ? thrd->token_object : NULL) != state->token_object)
+        return;
+
+    __try {
+
+        if (state->mui_ptr) {
+            ProbeForWrite(state->mui_ptr, sizeof(ULONG), sizeof(ULONG));
+            if (*state->mui_ptr == 0)
+                *state->mui_ptr = state->mui_value;
+        }
+
+        if (state->mui_ptr32) {
+            ProbeForWrite(state->mui_ptr32, sizeof(ULONG), sizeof(ULONG));
+            if (*state->mui_ptr32 == 0)
+                *state->mui_ptr32 = state->mui_value32;
+        }
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+    }
+}
+
+
+//---------------------------------------------------------------------------
 // Thread_CheckProcessObject
 //---------------------------------------------------------------------------
 

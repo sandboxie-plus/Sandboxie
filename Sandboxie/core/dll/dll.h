@@ -802,6 +802,11 @@ BOOLEAN MsCorEE_Init(HMODULE hmodule);
 
 void Custom_ComServer(void);
 
+// The caller releases the returned string with Dll_Free.
+// Optional status reports literal fallback and makes query-buffer errors fatal.
+WCHAR *SbieDll_ExpandEnvironmentStrings(
+    const WCHAR *Command, ULONG BufferChars, NTSTATUS *ExpansionStatus);
+
 //void Custom_Load_UxTheme(void);
 
 NTSTATUS StopTailCallOptimization(NTSTATUS status);
@@ -830,11 +835,15 @@ DWORD Dll_rand(void);
 
 BOOLEAN Config_MatchImageGroup(
     const WCHAR* group, ULONG group_len, const WCHAR* test_str,
-    ULONG depth);
+    ULONG depth, const ULONG* image_type);
 
 BOOLEAN Config_MatchImage(
     const WCHAR* pat_str, ULONG pat_len, const WCHAR* test_str,
     ULONG depth);
+
+BOOLEAN Config_MatchImageEx(
+    const WCHAR* pat_str, ULONG pat_len, const WCHAR* test_str,
+    ULONG depth, ULONG image_type);
 
 WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, ULONG* pMode);
 

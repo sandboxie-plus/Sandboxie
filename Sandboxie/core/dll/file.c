@@ -308,6 +308,13 @@ static NTSTATUS File_NtQueryFullAttributesFileImpl(
     OBJECT_ATTRIBUTES *ObjectAttributes,
     FILE_NETWORK_OPEN_INFORMATION *FileInformation);
 
+static BOOLEAN File_InfoClassHasFileId(
+    FILE_INFORMATION_CLASS FileInformationClass);
+
+static void File_ScrambleFileIdInfo(
+    void *FileInformation, ULONG Length,
+    FILE_INFORMATION_CLASS FileInformationClass);
+
 static NTSTATUS File_NtQueryInformationFile(
     HANDLE FileHandle,
     IO_STATUS_BLOCK *IoStatusBlock,
@@ -6313,6 +6320,131 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
 }
 
 
+#if (NTDDI_VERSION < NTDDI_WIN8)
+// FileIdInformation - FILE_ID_INFO is not provided with _WIN32_WINNT=0x0502
+typedef struct _FILE_ID_INFO {
+    ULONGLONG        VolumeSerialNumber;
+    UCHAR            FileId[16];
+} FILE_ID_INFO, *PFILE_ID_INFO;
+#endif
+
+
+// FileStatBasicInformation - FILE_STAT_BASIC_INFORMATION is only provided
+// with NTDDI_WIN11_ZN, so use a private copy of the layout.  the leading
+// fields up to NumberOfLinks match FILE_STAT_INFORMATION and
+// FILE_STAT_LX_INFORMATION, all of which start with the 64-bit FileId
+typedef struct _SBIE_FILE_STAT_BASIC_INFORMATION {
+    LARGE_INTEGER    FileId;
+    LARGE_INTEGER    CreationTime;
+    LARGE_INTEGER    LastAccessTime;
+    LARGE_INTEGER    LastWriteTime;
+    LARGE_INTEGER    ChangeTime;
+    LARGE_INTEGER    AllocationSize;
+    LARGE_INTEGER    EndOfFile;
+    ULONG            FileAttributes;
+    ULONG            ReparseTag;
+    ULONG            NumberOfLinks;
+    ULONG            DeviceType;
+    ULONG            DeviceCharacteristics;
+    ULONG            Reserved;
+    LARGE_INTEGER    VolumeSerialNumber;
+    UCHAR            FileId128[16];
+} SBIE_FILE_STAT_BASIC_INFORMATION;
+
+C_ASSERT(FIELD_OFFSET(SBIE_FILE_STAT_BASIC_INFORMATION, FileId128) == 88);
+C_ASSERT(sizeof(SBIE_FILE_STAT_BASIC_INFORMATION) == 104);
+
+
+//---------------------------------------------------------------------------
+// File_InfoClassHasFileId
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN File_InfoClassHasFileId(FILE_INFORMATION_CLASS FileInformationClass)
+{
+    return (FileInformationClass == FileInternalInformation     ||
+            FileInformationClass == FileAllInformation          ||
+            FileInformationClass == FileIdInformation           ||
+            FileInformationClass == FileStatInformation         ||
+            FileInformationClass == FileStatLxInformation       ||
+            FileInformationClass == FileStatBasicInformation);
+}
+
+
+//---------------------------------------------------------------------------
+// File_ScrambleFileIdInfo
+//---------------------------------------------------------------------------
+
+
+_FX void File_ScrambleFileIdInfo(
+    void *FileInformation, ULONG Length,
+    FILE_INFORMATION_CLASS FileInformationClass)
+{
+    LARGE_INTEGER *FileId = NULL;
+    LARGE_INTEGER *FileId2 = NULL;
+    ULONG MinLength = 0;
+
+    //
+    // scramble the FileId of a file in the sandbox, see the discussion
+    // in File_NtQueryInformationFile and also File_GetName_FromFileId.
+    //
+    // the 128-bit FileId in FILE_ID_INFO and FILE_STAT_BASIC_INFORMATION
+    // holds on most file systems the same value as the 64-bit FileId in
+    // its low 64 bits, hence scramble only those, the same way
+    //
+
+    if (FileInformationClass == FileInternalInformation) {
+
+        FileId = &((FILE_INTERNAL_INFORMATION *)FileInformation)
+                        ->IndexNumber;
+        MinLength = sizeof(FILE_INTERNAL_INFORMATION);
+
+    } else if (FileInformationClass == FileAllInformation) {
+
+        FileId = &(((FILE_ALL_INFORMATION *)FileInformation)->
+                        InternalInformation.IndexNumber);
+        MinLength = FIELD_OFFSET(FILE_ALL_INFORMATION, InternalInformation)
+                  + sizeof(FILE_INTERNAL_INFORMATION);
+
+    } else if (FileInformationClass == FileIdInformation) {
+
+        FileId = (LARGE_INTEGER *)
+            ((FILE_ID_INFO *)FileInformation)->FileId;
+        MinLength = sizeof(FILE_ID_INFO);
+
+    } else if (FileInformationClass == FileStatInformation ||
+               FileInformationClass == FileStatLxInformation) {
+
+        FileId = &((SBIE_FILE_STAT_BASIC_INFORMATION *)FileInformation)
+                        ->FileId;
+        MinLength = sizeof(LARGE_INTEGER);
+
+    } else if (FileInformationClass == FileStatBasicInformation) {
+
+        FileId = &((SBIE_FILE_STAT_BASIC_INFORMATION *)FileInformation)
+                        ->FileId;
+        FileId2 = (LARGE_INTEGER *)
+            ((SBIE_FILE_STAT_BASIC_INFORMATION *)FileInformation)->FileId128;
+        MinLength = sizeof(SBIE_FILE_STAT_BASIC_INFORMATION);
+    }
+
+    if (Length < MinLength)
+        return;
+
+    if (FileId && FileId->QuadPart) {
+
+        FileId->LowPart  ^= 0xFFFFFFFF;
+        FileId->HighPart ^= 0xFFFFFFFF;
+    }
+
+    if (FileId2 && FileId2->QuadPart) {
+
+        FileId2->LowPart  ^= 0xFFFFFFFF;
+        FileId2->HighPart ^= 0xFFFFFFFF;
+    }
+}
+
+
 //---------------------------------------------------------------------------
 // File_NtQueryInformationFile
 //---------------------------------------------------------------------------
@@ -6372,8 +6504,6 @@ _FX NTSTATUS File_NtQueryInformationFile(
 
     else if (FileInformationClass != FileNameInformation) {
 
-        LARGE_INTEGER *FileId = NULL;
-
         status = __sys_NtQueryInformationFile(
             FileHandle, IoStatusBlock, FileInformation,
             Length, FileInformationClass);
@@ -6392,24 +6522,14 @@ _FX NTSTATUS File_NtQueryInformationFile(
         // makes it impossible to figure out if the program wants
         // the file on C: or the sandboxed file on D:.  to make
         // this less likely to be a problem, we scrambe the FileId
-        // for files in the sandbox.  see also NtQueryDirectoryFile
-        // and File_GetFullInformation
+        // for files in the sandbox.  see also NtQueryDirectoryFile,
+        // File_GetFullInformation and File_NtQueryInformationByName
         //
 
-        if (FileInformationClass == FileInternalInformation &&
-                NT_SUCCESS(status)) {
-
-            FileId = &((FILE_INTERNAL_INFORMATION *)FileInformation)
-                            ->IndexNumber;
-
-        } else if (FileInformationClass == FileAllInformation &&
-            (NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW)) {
-
-            FileId = &(((FILE_ALL_INFORMATION *)FileInformation)->
-                            InternalInformation.IndexNumber);
-        }
-
-        if (FileId && FileId->QuadPart) {
+        if (File_InfoClassHasFileId(FileInformationClass) &&
+                (NT_SUCCESS(status) ||
+                    (FileInformationClass == FileAllInformation &&
+                        status == STATUS_BUFFER_OVERFLOW))) {
 
             BOOLEAN IsBoxedPath;
             NTSTATUS status2 =
@@ -6417,8 +6537,8 @@ _FX NTSTATUS File_NtQueryInformationFile(
             if (IsBoxedPath && (NT_SUCCESS(status2)
                                     || (status2 == STATUS_BAD_INITIAL_PC))) {
 
-                FileId->LowPart  ^= 0xFFFFFFFF;
-                FileId->HighPart ^= 0xFFFFFFFF;
+                File_ScrambleFileIdInfo(
+                    FileInformation, Length, FileInformationClass);
             }
         }
 
@@ -6679,6 +6799,17 @@ _FX NTSTATUS File_NtQueryInformationByName(
                     status = STATUS_OBJECT_NAME_NOT_FOUND;
             }*/
 
+            //
+            // the file is in the sandbox, so scramble the FileId the same
+            // way as File_NtQueryInformationFile does for a handle
+            //
+
+            if (NT_SUCCESS(status)) {
+
+                File_ScrambleFileIdInfo(
+                    FileInformation, Length, FileInformationClass);
+            }
+
             __leave;
         }
 
@@ -6768,6 +6899,17 @@ _FX NTSTATUS File_NtQueryInformationByName(
         if (status2 != STATUS_OBJECT_PATH_NOT_FOUND) {
 
             status = status2;
+
+            //
+            // if the true path was relocated, it points to a snapshot
+            // inside the sandbox, so scramble the FileId as above
+            //
+
+            if (OriginalPath && NT_SUCCESS(status)) {
+
+                File_ScrambleFileIdInfo(
+                    FileInformation, Length, FileInformationClass);
+            }
         }
 
         //

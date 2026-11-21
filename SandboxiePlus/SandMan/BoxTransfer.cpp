@@ -12,6 +12,7 @@
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QLabel>
 #include <QDialogButtonBox>
 #include <QHeaderView>
 #include <QFileDialog>
@@ -113,6 +114,40 @@ CBoxTransferDialog::CBoxTransferDialog(EMode mode, QWidget* parent)
 		pLayout->addWidget(m_pSeparateFiles);
 	}
 
+	//
+	// let the user say where the imported boxes are created, the same way the
+	// new box wizard does.  without this they always end up under the global
+	// FileRootPath of the importing machine, see issue #5657
+	//
+
+	m_pBoxLocation = nullptr;
+	if (mode == eImport) {
+		QHBoxLayout* pLocationRow = new QHBoxLayout();
+		pLocationRow->addWidget(new QLabel(tr("Create sandboxes in:"), this));
+
+		m_pBoxLocation = new QComboBox(this);
+		m_pBoxLocation->setEditable(true);
+		m_pBoxLocation->setToolTip(tr("Where the imported sandboxes are created. Keep %SANDBOX% in the path so that each box gets its own folder."));
+
+		QString Location = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
+		m_pBoxLocation->addItem(Location);
+		QStringList StdLocations = QStringList()
+			<< "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%"
+			<< "\\??\\%SystemDrive%\\Sandbox\\%SANDBOX%"
+			<< "\\??\\%SystemDrive%\\Users\\%USER%\\Sandbox\\%SANDBOX%";
+		foreach(const QString& StdLocation, StdLocations) {
+			if (StdLocation != Location)
+				m_pBoxLocation->addItem(StdLocation);
+		}
+		pLocationRow->addWidget(m_pBoxLocation, 1);
+
+		QPushButton* pBrowseLocation = new QPushButton(tr("Browse..."), this);
+		connect(pBrowseLocation, &QPushButton::clicked, this, &CBoxTransferDialog::OnBrowseLocation);
+		pLocationRow->addWidget(pBrowseLocation);
+
+		pLayout->addLayout(pLocationRow);
+	}
+
 	QHBoxLayout* pButtonRow = new QHBoxLayout();
 	m_pSelectAll = new QPushButton(tr("Select All"), this);
 	connect(m_pSelectAll, &QPushButton::clicked, this, &CBoxTransferDialog::OnSelectAll);
@@ -128,6 +163,73 @@ CBoxTransferDialog::CBoxTransferDialog(EMode mode, QWidget* parent)
 	connect(pButtons, &QDialogButtonBox::accepted, this, &QDialog::accept);
 	connect(pButtons, &QDialogButtonBox::rejected, this, &QDialog::reject);
 	pLayout->addWidget(pButtons);
+}
+
+QString CBoxTransferDialog::GetImportLocation() const
+{
+	if (!m_pBoxLocation)
+		return QString();
+
+	QString Location = m_pBoxLocation->currentText().trimmed();
+
+	//
+	// the first entry is the configured default, for which no per box
+	// FileRootPath is needed
+	//
+
+	if (Location.isEmpty() || Location == m_pBoxLocation->itemText(0))
+		return QString();
+
+	//
+	// several boxes can be imported at once, so each one needs its own folder
+	// below the selected location
+	//
+
+	if (!Location.contains("%SANDBOX%", Qt::CaseInsensitive)) {
+		while (Location.endsWith("\\"))
+			Location.chop(1);
+		Location += "\\%SANDBOX%";
+	}
+
+	return Location;
+}
+
+void CBoxTransferDialog::OnBrowseLocation()
+{
+	QString Location = QFileDialog::getExistingDirectory(this, tr("Select the folder to create the sandboxes in"));
+	if (Location.isEmpty())
+		return;
+
+	Location = QDir::toNativeSeparators(Location);
+	while (Location.endsWith("\\"))
+		Location.chop(1);
+
+	m_pBoxLocation->setCurrentText(Location + "\\%SANDBOX%");
+}
+
+void CBoxTransferDialog::accept()
+{
+	if (m_pBoxLocation) {
+
+		QString Location = m_pBoxLocation->currentText().trimmed();
+		if (!Location.isEmpty() && Location != m_pBoxLocation->itemText(0)) {
+
+			if (Location.left(2) == "\\\\") {
+				QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located on a network share, please select a local folder."));
+				return;
+			}
+
+			QString Folder = Location;
+			Folder.remove(QRegularExpression("\\\\?%SANDBOX%\\\\?$", QRegularExpression::CaseInsensitiveOption));
+			int offset = Folder.left(4) == "\\??\\" ? 4 : 0;
+			if (Folder.length() < offset + 4) {
+				QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located at the root of a partition, please select a folder."));
+				return;
+			}
+		}
+	}
+
+	QDialog::accept();
 }
 
 void CBoxTransferDialog::PopulateExportList(const QList<CSandBoxPtr>& SandBoxes)
@@ -751,8 +853,54 @@ static QString ExtractIniSection(const QString& iniContent, const QString& secti
 	return sectionContent;
 }
 
+//
+// the archived box configuration replaces the whole ini section of the target
+// box, which would also drop the FileRootPath the files are being restored to.
+// this returns the unexpanded root pattern that must be written back, or an
+// empty string when the box can keep inheriting its root.
+//
+// the pattern is read before any box image is mounted, so a temporary mount
+// path never ends up in the configuration.
+//
+
+static QString GetImportRootSetting(const CSandBoxPtr& pBox, bool importGlobalConfig)
+{
+	// a root the box has itself (custom import location, existing box) is always kept
+	QString root = pBox->GetText("FileRootPath");
+	if (!root.isEmpty())
+		return root;
+
+	// an inherited root only needs pinning when the imported global settings may
+	// move it away from where the files are extracted to
+	if (!importGlobalConfig)
+		return QString();
+
+	root = pBox->GetText("FileRootPath", QString(), true, true, true);
+	if (!root.isEmpty())
+		return root;
+	root = pBox->GetText("BoxRootFolder", QString(), true, true, true);
+	if (!root.isEmpty())
+		return root + "\\Sandbox\\%SANDBOX%";
+	return "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%";
+}
+
+static QString PrepareImportedBoxConfig(const QString& rawContent, const QString& archiveName, const QString& rootSetting)
+{
+	// handles both the old format (no section header) and the new one ([BoxName] header)
+	QString configContent = ExtractIniSection(rawContent, archiveName);
+
+	// the archived root belongs to the source machine, the box location is decided here
+	configContent.remove(QRegularExpression("^[\\t ]*FileRootPath[\\t ]*=[^\\r\\n]*(?:\\r?\\n|$)",
+		QRegularExpression::MultilineOption | QRegularExpression::CaseInsensitiveOption));
+
+	if (!configContent.trimmed().isEmpty() && !rootSetting.isEmpty())
+		configContent.prepend("FileRootPath=" + rootSetting + "\n");
+	return configContent;
+}
+
 static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QString& importPath, const QString& password,
 	const QMap<QString, QString>& boxNameMapping, const QMap<QString, QString>& boxRoots,
+	const QMap<QString, QString>& boxRootSettings,
 	bool importGlobalConfig, const QStringList& boxesToUnmount)
 {
 	CArchive Archive(importPath);
@@ -916,12 +1064,8 @@ static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 				QString rawContent = QString::fromUtf8(File.readAll());
 				File.close();
 
-				// Extract section content - handles both old format (no section header)
-				// and new format (with [BoxName] section header)
-				QString configContent = ExtractIniSection(rawContent, entry.ArchiveBoxName);
-
-				// Remove FileRootPath= entries as the path should be determined by the new box location
-				configContent.remove(QRegularExpression("(?m)^FileRootPath=.*$\\n?"));
+				QString configContent = PrepareImportedBoxConfig(rawContent, entry.ArchiveBoxName,
+					boxRootSettings.value(entry.TargetBoxName));
 
 				QMetaObject::invokeMethod(theAPI, "SbieIniSetSection", Qt::BlockingQueuedConnection,
 					Q_ARG(QString, entry.TargetBoxName),
@@ -1181,6 +1325,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 
 	QList<CBoxTransferDialog::SImportEntry> importEntries = dlg.GetImportEntries();
 	bool importGlobalConfig = dlg.ExportGlobalConfig();
+	QString importLocation = dlg.GetImportLocation();
 
 	if (importEntries.isEmpty() && !importGlobalConfig) {
 		QMessageBox::information(parent, "Sandboxie-Plus", CBoxTransferDialog::tr("Nothing selected for import."));
@@ -1202,6 +1347,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 
 	// 5. Create boxes on main thread
 	QMap<QString, QString> boxRoots;
+	QMap<QString, QString> boxRootSettings; // FileRootPath to write back after the archived config was applied
 	QList<SB_STATUS> Results;
 	QList<CBoxTransferDialog::SImportEntry> validEntries;
 	QStringList boxesToUnmount; // Track boxes we mount so we can unmount them after import
@@ -1216,6 +1362,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 			if (ret != QMessageBox::Yes)
 				continue;
 			boxRoots.insert(entry.ImportName, pExisting->GetFileRoot());
+			boxRootSettings.insert(entry.ImportName, GetImportRootSetting(pExisting, importGlobalConfig));
 			validEntries.append(entry);
 			continue;
 		}
@@ -1229,6 +1376,18 @@ QStringList ImportMultiBoxes(QWidget* parent)
 		CSandBoxPtr pBox = theAPI->GetBoxByName(entry.ImportName);
 		if (pBox) {
 			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+
+			//
+			// move the new box to the selected location before its root is
+			// read below, and before a box image is created inside it.  an
+			// already existing box keeps the location it has.
+			//
+
+			if (!importLocation.isEmpty())
+				pBox->SetFileRoot(importLocation);
+
+			// capture the root pattern now, before a box image gets mounted
+			boxRootSettings.insert(entry.ImportName, GetImportRootSetting(pBox, importGlobalConfig));
 
 			if (!entry.Password.isEmpty())
 			{
@@ -1280,7 +1439,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 		bool importGlobalForThisFile = importGlobalConfig && (sourceFile == globalConfigSourceFile);
 
 		CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, sourceFile, password, boxNameMapping, boxRoots, importGlobalForThisFile, fileBoxesToUnmount);
+		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, sourceFile, password, boxNameMapping, boxRoots, boxRootSettings, importGlobalForThisFile, fileBoxesToUnmount);
 		theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Importing: %1").arg(sourceFile));
 	}
 
@@ -1288,7 +1447,7 @@ QStringList ImportMultiBoxes(QWidget* parent)
 	if (importGlobalConfig && !entriesByFile.contains(globalConfigSourceFile)) {
 		QMap<QString, QString> emptyMapping;
 		CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, globalConfigSourceFile, globalConfigPassword, emptyMapping, QMap<QString, QString>(), true, QStringList());
+		QtConcurrent::run(ImportMultiBoxesAsync, pProgress, globalConfigSourceFile, globalConfigPassword, emptyMapping, QMap<QString, QString>(), QMap<QString, QString>(), true, QStringList());
 		theGUI->AddAsyncOp(pProgress, false, CBoxTransferDialog::tr("Importing: %1").arg(globalConfigSourceFile));
 	}
 

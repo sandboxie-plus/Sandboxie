@@ -194,8 +194,14 @@ static const WCHAR *Conf_N = L"N";
 _FX void Conf_AdjustUseCount(BOOLEAN increase)
 {
     KIRQL irql;
+
+    //
+    // the count is changed under the lock, but only the swap in Conf_Read
+    // needs to exclude other users, so take the lock shared here
+    //
+
     KeRaiseIrql(APC_LEVEL, &irql);
-    ExAcquireResourceExclusiveLite(Conf_Lock, TRUE);
+    ExAcquireResourceSharedLite(Conf_Lock, TRUE);
 
     if (increase)
         InterlockedIncrement(&Conf_Data.use_count);

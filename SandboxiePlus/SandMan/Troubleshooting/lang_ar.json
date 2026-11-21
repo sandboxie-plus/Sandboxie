@@ -1,0 +1,152 @@
+{
+"Address and resolve active problems": "معالجة المشكلات النشطة وحلها",
+"Fix current issues": "إصلاح المشكلات الحالية",
+"Troubleshoot sandbox isolation issues": "استكشاف مشكلات عزل البيئة المعزولة وإصلاحها",
+"Fix issues with sandboxing": "إصلاح مشكلات العزل في البيئة المعزولة",
+"Fix app compatibility problems": "إصلاح مشكلات توافق التطبيقات",
+"An Application does not work properly when sandboxed": "أحد التطبيقات لا يعمل بشكل صحيح عند تشغيله في بيئة معزولة",
+"Resolve browser-specific problems": "حل المشكلات الخاصة بالمتصفح",
+"Issues with a web browser": "مشكلات في متصفح الويب",
+"Clean up and maintain sandboxes": "تنظيف وصيانة البيئات المعزولة",
+"Perform Sandbox maintenance": "إجراء صيانة للبيئة المعزولة",
+"Fix interface and shell integration": "إصلاح الواجهة وتكامل الغلاف (Shell)",
+"Fix issues with the UI or Shell": "إصلاح مشكلات واجهة المستخدم أو الغلاف (Shell)",
+
+"Yes": "نعم",
+"No": "لا",
+"\nPlease note that this required preset works only with a valid supporter certificate!": "\nيرجى ملاحظة أن هذا الإعداد المسبق المطلوب يعمل فقط مع شهادة دعم صالحة!",
+
+"App compatibility checker": "مدقق توافق التطبيقات",
+"This script checks which app compatibility templates need to be enabled": "يتحقق هذا النص البرمجي من قوالب توافق التطبيقات التي يجب تمكينها",
+"Loaded %1 templates": "تم تحميل %1 قالباً",
+
+"Browser shortcut is missing from the desktop": "اختصار المتصفح مفقود من سطح المكتب",
+"This procedure will add a browser shortcut to the desktop": "ستقوم هذه الإجراء بإضافة اختصار للمتصفح على سطح المكتب",
+"Default Browser": "المتصفح الافتراضي",
+"Another": "آخر",
+"Select Browser": "تحديد المتصفح",
+"Select Sandbox": "تحديد البيئة المعزولة",
+"Select which browser you want to create a shortcut for and in what box": "حدد المتصفح الذي ترغب في إنشاء اختصار له وفي أي بيئة معزولة",
+"Select Browser Path": "تحديد مسار المتصفح",
+
+"Explorer Context Menu extension does not work": "إضافة قائمة السياق في المستكشف (Explorer) لا تعمل",
+"This procedure will reinstall the shell integration": "ستقوم هذه الإجراء بإعادة تثبيت تكامل الغلاف (Shell)",
+"Add Run Sandboxed": "إضافة \"تشغيل في بيئة معزولة\"",
+"Add Run Unsandboxed": "إضافة \"تشغيل خارج البيئة المعزولة\"",
+"Install legacy shell extensions": "تثبيت إضافات الغلاف (Shell) القديمة",
+"Select which shell options should be reinstalled": "حدد خيارات الغلاف التي يجب إعادة تثبيتها",
+
+"Extensions or Credentials are disappearing": "الإضافات أو بيانات الاعتماد تختفي",
+"Web Browser Extensions are being reset, or login credentials are forgotten": "يتم إعادة تعيين إضافات متصفح الويب، أو يتم نسيان بيانات اعتماد تسجيل الدخول",
+"Select which box to fix.": "حدد البيئة المعزولة المراد إصلاحها.",
+"The options have been applied. Please test your browser in %1 and indicate if the issue has been resolved.": "تم تطبيق الخيارات. يرجى اختبار متصفحك في %1 والإشارة إلى ما إذا كانت المشكلة قد حُلت.",
+"Chrome elevation service fix not successful": "فشل إصلاح خدمة الرفع (Elevation) في Chrome",
+
+"Low FPS in sandboxed games": "معدل إطارات منخفض (FPS) في الألعاب المعزولة",
+"This procedure will optimize the box settings for gaming": "ستقوم هذه الإجراء بتحسين إعدادات البيئة المعزولة للألعاب",
+"Select which box to optimize.": "حدد البيئة المعزولة المراد تحسينها.",
+"To apply recommended settings press NEXT. \n": "لتطبيق الإعدادات الموصى بها، اضغط على \"التالي\". \n",
+"The options have been applied. Please try out your game in %1 and indicate if the issue has been resolved.": "تم تطبيق الخيارات. يرجى تجربة لعبتك في %1 والإشارة إلى ما إذا كانت المشكلة قد حُلت.",
+"FPS optimization not successful": "فشل تحسين معدل الإطارات (FPS)",
+
+"Failed to install application into a sandbox": "فشل تثبيت التطبيق في بيئة معزولة",
+"It helps troubleshoot issues related to installing applications in the sandbox": "يساعد هذا في استكشاف المشكلات المتعلقة بتثبيت التطبيقات في البيئة المعزولة وإصلاحها",
+"Enter Installer Path": "أدخل مسار برنامج التثبيت",
+"Select a sandbox to install into": "حدد بيئة معزولة للتثبيت فيها",
+"This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "هذه البيئة المعزولة لديها خيار DropAdminRights مُفعّل، مما يمنع تنفيذ برامج التثبيت. هل تريد تعطيل هذا القيد؟ سيؤدي ذلك إلى تقليل مستوى الأمان.",
+"Disable DropAdminRights": "تعطيل DropAdminRights",
+"Enable FakeAdminRights": "تمكين FakeAdminRights",
+"running installer, pid: %1 press NEXT once it finishes to continue": "جاري تشغيل برنامج التثبيت، معرف العملية (pid): %1. اضغط على \"التالي\" بمجرد الانتهاء للمتابعة",
+"Was the issue resolved?": "هل تم حل المشكلة؟",
+"no mitigation worked": "لم تنجح أي إجراءات تخفيف",
+
+"Webcam or Sound does not work when sandboxed": "كاميرا الويب أو الصوت لا يعملان عند العزل",
+"This procedure enables webcam and sound support on Windows 11": "تُمكّن هذه الإجراء دعم كاميرا الويب والصوت على نظام Windows 11",
+"To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "لتمكين دعم كاميرا الويب على نظام Windows 11، يجب تقليل مستوى العزل. \nإذا كنت ترغب في المتابعة، يرجى الضغط على \"التالي\" وتحديد بيئة معزولة لتعديلها. \n",
+"Select which box to turn into a reduced isolation app compartment box.": "حدد البيئة المعزولة التي ترغب في تحويلها إلى حجرة تطبيق بعزل مخفض.",
+"The mitigation has been applied. Please try out the webcam in %1 and indicate if the issue has been resolved.": "تم تطبيق إجراء التخفيف. يرجى تجربة كاميرا الويب في %1 والإشارة إلى ما إذا كانت المشكلة قد حُلت.",
+"Webcam mitigation not successful": "فشل إجراء التخفيف الخاص بكاميرا الويب",
+
+"Select affected sandbox": "حدد البيئة المعزولة المتأثرة",
+"Enter Process Name": "أدخل اسم العملية",
+
+"SBIE1307: Program cannot access the Internet due to restrictions": "SBIE1307: لا يمكن للبرنامج الوصول إلى الإنترنت بسبب القيود",
+"Program cannot access the Internet due to restrictions": "لا يمكن للبرنامج الوصول إلى الإنترنت بسبب القيود",
+"Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "قيود الوصول إلى الإنترنت سارية المفعول للبيئة المعزولة التي يعمل فيها البرنامج. يُمنع البرنامج من الوصول إلى الإنترنت.",
+
+"SBIE1308: Program cannot start due to restrictions": "SBIE1308: لا يمكن للبرنامج البدء بسبب القيود",
+"Program cannot start due to restrictions": "لا يمكن للبرنامج البدء بسبب القيود",
+"Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "قيود البدء/التشغيل سارية المفعول للبيئة المعزولة التي يعمل فيها البرنامج. يُمنع البرنامج من البدء أو التشغيل.",
+
+"SBIE2102: File is too large to copy into sandbox": "SBIE2102: الملف كبير جداً لنسخه إلى البيئة المعزولة",
+"File is too large to copy into sandbox": "الملف كبير جداً لنسخه إلى البيئة المعزولة",
+
+"SBIE2113: File is too large to copy into sandbox, creating empty file": "SBIE2113: الملف كبير جداً لنسخه إلى البيئة المعزولة، جاري إنشاء ملف فارغ",
+"File is too large to copy into sandbox, creating empty file": "الملف كبير جداً لنسخه إلى البيئة المعزولة، جاري إنشاء ملف فارغ",
+
+"SBIE2114: File is too large to copy into sandbox, denying access": "SBIE2114: الملف كبير جداً لنسخه إلى البيئة المعزولة، تم رفض الوصول",
+"File is too large to copy into sandbox, denying access": "الملف كبير جداً لنسخه إلى البيئة المعزولة، تم رفض الوصول",
+
+"SBIE2115: File is too large to copy into sandbox, opening in read only": "SBIE2115: الملف كبير جداً لنسخه إلى البيئة المعزولة، جاري الفتح في وضع القراءة فقط",
+"File is too large to copy into sandbox, opening in read only": "الملف كبير جداً لنسخه إلى البيئة المعزولة، جاري الفتح في وضع القراءة فقط",
+
+"SBIE2181: Failed to load SbieDll.dll": "SBIE2181: فشل تحميل SbieDll.dll",
+"Fix the DACLs of Sandboxie's home folder": "إصلاح قوائم التحكم بالوصول المنفصلة (DACLs) للمجلد الرئيسي لـ Sandboxie",
+"Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "عندما يفشل Chrome أو برنامج آخر يستخدم حاويات التطبيقات في تحميل SbieDll.dll، فإن السبب غالباً هو وجود إدخالات DACL غير صالحة للمجلد الرئيسي لـ Sandboxie. سيقوم إجراء التخفيف هذا بإصلاحها، ولهذا السبب سيطلب صلاحيات المسؤول التي يجب منحها لـ kmdutil.exe.",
+"The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "تم تعديل قوائم DACLs، يرجى محاولة تشغيل تطبيقك مرة أخرى والإشارة إلى ما إذا كانت المشكلة قد حُلت.",
+"DACLs fix did not resolve the issue": "لم يحل إصلاح قوائم DACLs المشكلة",
+
+"SBIE2189: Application is likely chromium based": "SBIE2189: من المحتمل أن التطبيق يعتمد على Chromium",
+"Application is likely chromium based but its image type is not set to chrome": "من المحتمل أن التطبيق يعتمد على Chromium ولكن نوع صورته (Image Type) لم يتم تعيينه على chrome",
+"The Process \"%1\" is likely chromium based but its image type is not set to chrome, it is likely to fail. Do you want to set its ImageType setting to chrome for this box?": "من المحتمل أن العملية \"%1\" تعتمد على Chromium ولكن نوع صورتها لم يتم تعيينه على chrome، مما يجعلها عرضة للفشل. هل تريد تعيين إعداد ImageType الخاص بها إلى chrome لهذه البيئة المعزولة؟",
+"Yes, add \"%1\" to Sandboxie.ini": "نعم، أضف \"%1\" إلى Sandboxie.ini",
+"No, report application to sbie devs": "لا، قم بالإبلاغ عن التطبيق لمطوري Sbie",
+
+"SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: لا يمكن بدء خدمة معينة في البيئة المعزولة",
+"Sandboxie failed to start a service in the sandbox": "فشل Sandboxie في بدء خدمة في البيئة المعزولة",
+"The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "يشير هذا الرسالة إلى أن Sandboxie لم يتمكن من بدء أحد البرامج المساعدة SandboxieRpcSs أو SandboxieDcomLaunch. يمكن أن يكون الاسم المذكور في الرسالة rpcss أو dcomlaunch.\n\nيمكنك إرسال تقرير مشكلة في الصفحة التالية لمساعدتنا في تحليل المشكلة.",
+
+"SBIE2224: Sandboxed program has crashed": "SBIE2224: تعطل برنامج في البيئة المعزولة",
+"A Sandboxed program has crashed": "تعطل برنامج في البيئة المعزولة",
+"The Process '%1' crashed": "تعطلت العملية '%1'",
+"This program is known to work in a Green (App Compartment) type sandbox.": "من المعروف أن هذا البرنامج يعمل في بيئة معزولة من النوع الأخضر (حجرة التطبيق / App Compartment).",
+"There is no known workaround for this process. Do you want to report this issue?": "لا يوجد حل بديل معروف لهذه العملية. هل تريد الإبلاغ عن هذه المشكلة؟",
+
+"SBIE2313: Could not execute specific process": "SBIE2313: تعذر تنفيذ عملية معينة",
+"Sandboxie failed to start a process in the sandbox": "فشل Sandboxie في بدء عملية في البيئة المعزولة",
+"Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "لم يتمكن Sandboxie من تنفيذ أحد برامجه الخاصة. تحقق من أذونات الوصول إلى مجلد تثبيت Sandboxie و/أو أعد تثبيت Sandboxie.\n\nالأسباب المحتملة:\n1. تم تكوين Sandboxie لحظر الوصول إلى المجلد الذي يحتوي على ملفات برامجه.\n2. تم تكوين برنامج أمان تابع لجهة خارجية (HIPS) لحظر تنفيذ البرنامج المذكور في الرسالة.\n\nيمكنك إرسال تقرير مشكلة في الصفحة التالية لمساعدتنا في تحليل المشكلة.",
+
+"open config": "فتح الإعدادات",
+"opens box config on a given page": "يفتح إعدادات البيئة المعزولة في صفحة معينة",
+"Do you want to open the box option dialog to change this preset?": "هل تريد فتح مربع حوار خيارات البيئة المعزولة لتغيير هذا الإعداد المسبق؟",
+"No, it is fine as it is": "لا، إنه جيد كما هو",
+"No, but I want to report a bug": "لا، ولكنني أريد الإبلاغ عن خطأ",
+
+"SBIE 2113/2114/2115 and 2102": "SBIE 2113/2114/2115 و 2102",
+"handle migration error messages": "معالجة رسائل خطأ نقل الملفات",
+"The message %1 is caused by the file migration limit being reached.": "السبب في الرسالة %1 هو الوصول إلى حد نقل الملفات.",
+
+"fix parental controls breaking sandboxie": "إصلاح مشكلات الرقابة الأبوية التي تعطل Sandboxie",
+"stops AppId driver and AppIdSvc service and disables the offending policy file": "يوقف برنامج تشغيل AppId وخدمة AppIdSvc ويعطل ملف السياسة المسبب للمشكلة",
+"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "يبدو أنك تستخدم حساب مستخدم غير مسؤول على نظام تم تمكين الرقابة الأبوية فيه، ومن المعروف أن هذا غير متوافق مع Sandboxie.\nلديك الخيارات التالية لحل المشكلة.",
+
+"SBIEMSG, I'm getting a cryptic SBIExxxx message": "SBIEMSG، أتلقى رسالة SBIExxxx غامضة",
+"Handle all sbie messages...": "معالجة جميع رسائل sbie...",
+"Sbie Message Code": "رمز رسالة Sbie",
+"Name affected process": "تسمية العملية المتأثرة",
+"Please enter the SBIEMSG ID you have encountered.": "يرجى إدخال معرف SBIEMSG الذي واجهته.",
+"There is no automated troubleshooting available for SBIE%1 yet.<br />": "لا يتوفر حتى الآن استكشاف أخطاء تلقائي لـ SBIE%1.<br />",
+"The full message text is: %1<br />": "النص الكامل للرسالة هو: %1<br />",
+"Visit our <a href=\"%1\">online documentation</a> to learn more about this and other SBIE messages.": "قم بزيارة <a href=\"%1\">وثائقنا عبر الإنترنت</a> لمعرفة المزيد حول رسالة SBIE هذه والرسائل الأخرى.",
+"Would you like to collect some logs to help us resolve the issue.": "هل ترغب في جمع بعض السجلات لمساعدتنا في حل المشكلة؟",
+"Now please run your application again to trigger the Sbie message.<br /><br />": "الآن، يرجى تشغيل تطبيقك مرة أخرى لاستدعاء رسالة Sbie.<br /><br />",
+"Press NEXT when you are done collecting logs.": "اضغط على \"التالي\" عند الانتهاء من جمع السجلات.",
+
+"Unknown application crashed": "تعطل تطبيق غير معروف",
+"An Unknown application crashed": "تعطل تطبيق غير معروف",
+"Do you want to report this issue?": "هل تريد الإبلاغ عن هذه المشكلة؟",
+
+"Viber crashes on startup": "تعطل Viber عند بدء التشغيل",
+"The Viber messenger crashes on startup": "يتعطل تطبيق المراسلة Viber عند بدء التشغيل",
+"Viber is not compatible with the standard isolation yellow type Sandbox. However, it is known to work in a Green (App Compartment) type sandbox.": "لا يتوافق Viber مع البيئة المعزولة القياسية من النوع الأصفر. ومع ذلك، من المعروف أنه يعمل في بيئة معزولة من النوع الأخضر (حجرة التطبيق / App Compartment)."
+}

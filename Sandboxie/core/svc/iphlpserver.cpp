@@ -281,6 +281,11 @@ MSG_HEADER *IpHlpServer::SendEchoHandler(MSG_HEADER *msg, HANDLE idProcess)
     if ((req->request_size > 0xFFFF) || (req->reply_size > 0x0FFFFF))
         return SHORT_REPLY(ERROR_INVALID_PARAMETER);
 
+
+    if (FIELD_OFFSET(IPHLP_SEND_ECHO_REQ, request_data) + req->request_size
+                                                        > req->h.length)
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
     PROXY_ICMP_HANDLE *ProxyIcmp =
         (PROXY_ICMP_HANDLE *)m_ProxyHandle->Find(idProcess, req->handle);
     if (! ProxyIcmp)
@@ -367,6 +372,12 @@ MSG_HEADER *IpHlpServer::SendEchoHandler(MSG_HEADER *msg, HANDLE idProcess)
             num_replies = 1; // even on error we need to return one valid result buffer
         } else
             rpl->h.status = ERROR_SUCCESS;
+
+        //
+
+        ULONG max_replies = reply_size / sizeof(ICMP_ECHO_REPLY);
+        if (num_replies > max_replies)
+            num_replies = max_replies;
 
         //
         // for an IPv4 reply buffer, we need to adjust the pointers.

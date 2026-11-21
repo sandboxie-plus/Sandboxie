@@ -244,13 +244,19 @@ void CSelectBoxWindow::OnBoxType()
 
 void CSelectBoxWindow::OnRun()
 {
+	// Note: the nested event loops below (message boxes, new box wizard, image mount dialog in RunStart)
+	// may close this window (e.g. via CSandMan::Closed), closeEvent calls deleteLater and the
+	// deferred delete gets processed by the nested loop, so guard against "this" being deleted
+	QPointer<CSelectBoxWindow> pThis = this;
+
 	QStringList BoxNames;
 	int Flags = CSbieAPI::eStartDefault;
 	if (ui.chkAdmin->isChecked())
 		Flags |= CSbieAPI::eStartElevated;
 	if (ui.radUnBoxed->isChecked())
 	{
-		if (QMessageBox("Sandboxie-Plus", tr("Are you sure you want to run the program outside the sandbox?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
+		int Ret = QMessageBox("Sandboxie-Plus", tr("Are you sure you want to run the program outside the sandbox?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec();
+		if (!pThis || Ret != QMessageBox::Yes)
 			return;
 
 		BoxNames.append("");
@@ -258,6 +264,8 @@ void CSelectBoxWindow::OnRun()
 	if (ui.radBoxedNew->isChecked())
 	{
 		QString BoxName = theGUI->GetBoxView()->AddNewBox(true);
+		if (!pThis)
+			return;
 		if (BoxName.isEmpty()) {
 			close();
 			return;
@@ -275,10 +283,15 @@ void CSelectBoxWindow::OnRun()
 		}
 	}
 
+	QStringList Commands = m_Commands; // copy, "this" may get deleted while starting
+	QString WrkDir = m_WrkDir;
 	foreach(const QString & BoxName, BoxNames) {
-		foreach(const QString & Command, m_Commands)
-			theGUI->RunStart(BoxName, Command, (CSbieAPI::EStartFlags)Flags, m_WrkDir);
+		foreach(const QString & Command, Commands)
+			theGUI->RunStart(BoxName, Command, (CSbieAPI::EStartFlags)Flags, WrkDir);
 	}
+
+	if (!pThis)
+		return;
 
 	setResult(1);
 	close();

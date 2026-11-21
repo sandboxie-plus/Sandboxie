@@ -22,6 +22,9 @@
     <Filter Include="Common">
       <UniqueIdentifier>{964acff8-ecee-4dfc-939d-e2406a533100}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common\HttpServer">
+      <UniqueIdentifier>{a7e1c3d4-5b26-4f81-9c03-7e5d2f8a1b64}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Archive">
       <UniqueIdentifier>{1e331c49-0544-4a02-83e5-e47774ab5fac}</UniqueIdentifier>
     </Filter>
@@ -95,6 +98,18 @@
     </ClCompile>
     <ClCompile Include="Common\OtherFunctions.cpp">
       <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\HttpServer\HttpServer.cpp">
+      <Filter>Common\HttpServer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\HttpServer\HttpSocket.cpp">
+      <Filter>Common\HttpServer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\HttpServer\HttpHelper.cpp">
+      <Filter>Common\HttpServer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\HttpServer\HttpTransport.cpp">
+      <Filter>Common\HttpServer</Filter>
     </ClCompile>
     <ClCompile Include="Archive\Archive.cpp">
       <Filter>Archive</Filter>
@@ -287,6 +302,20 @@
     </QtMoc>
     <QtMoc Include="Common\CodeEdit.h">
       <Filter>Common</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\HttpServer\HttpHelper.h">
+      <Filter>Common\HttpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\HttpServer\HttpTransport.h">
+      <Filter>Common\HttpServer</Filter>
+    </ClInclude>
+    <QtMoc Include="Common\HttpServer\HttpServer.h">
+      <Filter>Common\HttpServer</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\HttpServer\HttpSocket.h">
+      <Filter>Common\HttpServer</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

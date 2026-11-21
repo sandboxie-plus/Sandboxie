@@ -181,11 +181,17 @@ std::wstring ReadRegistryStringValue(std::wstring key, const std::wstring& value
 	auto RootPath = Split2(key, L"\\");
 
 	HKEY hKey;
+    //
+    // Only accept keys in an admin-writable hive (HKLM).  This function reads the
+    // UninstallString that gets executed - possibly as SYSTEM - when an add-on is
+    // removed.  HKCU is writable by a standard user, so honoring it here would let
+    // an attacker point the uninstall command at a value they fully control.  A
+    // key under HKLM can only have been written by a prior elevated installation,
+    // so the command found there is trusted even though the caller selected it.
+    //
     if (_wcsicmp(RootPath.first.c_str(), L"HKEY_LOCAL_MACHINE") == 0)
         hKey = HKEY_LOCAL_MACHINE;
-    else if (_wcsicmp(RootPath.first.c_str(), L"HKEY_CURRENT_USER") == 0)
-        hKey = HKEY_CURRENT_USER;
-    else 
+    else
         return L"";
 
     if (RegOpenKeyEx(hKey, RootPath.second.c_str(), 0, KEY_READ, &hKey) == ERROR_SUCCESS) 
@@ -1298,6 +1304,41 @@ bool HasFlag(const std::vector<std::wstring>& arguments, std::wstring name)
 	return std::find(arguments.begin(), arguments.end(), L"/" + name) != arguments.end();
 }
 
+// Is this process running under the NT AUTHORITY\SYSTEM account?
+bool IsProcessLocalSystem()
+{
+	bool isSystem = false;
+	HANDLE hToken = NULL;
+	if (OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken)) {
+		UCHAR buffer[256];
+		DWORD len = 0;
+		if (GetTokenInformation(hToken, TokenUser, buffer, sizeof(buffer), &len)) {
+			TOKEN_USER* pUser = (TOKEN_USER*)buffer;
+			SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
+			PSID SystemSid = NULL;
+			if (AllocateAndInitializeSid(&NtAuthority, 1, SECURITY_LOCAL_SYSTEM_RID,
+					0, 0, 0, 0, 0, 0, 0, &SystemSid)) {
+				isSystem = EqualSid(pUser->User.Sid, SystemSid) != FALSE;
+				FreeSid(SystemSid);
+			}
+		}
+		CloseHandle(hToken);
+	}
+	return isSystem;
+}
+
+// Operations that are allowed to run under the SYSTEM account (via the service's
+// elevate=2 path).  These route every executed payload and privileged write
+// through signature verification; the remaining command-line actions (download,
+// print, run_setup, get_cert, ...) write caller-chosen content to caller-chosen
+// paths and must never run as SYSTEM, even though a signed - and therefore
+// potentially hijacked - process is allowed to request the updater.
+bool IsActionAllowedAsSystem(const std::wstring& action)
+{
+	return action == L"update" || action == L"upgrade"
+		|| action == L"install" || action == L"modify";
+}
+
 std::wstring GetArgument(const std::vector<std::wstring>& arguments, std::wstring name, std::wstring mod = L"/") 
 {
 	std::wstring prefix = mod + name + L":";
@@ -1344,6 +1385,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			std::cout << std::endl << "Press enter to continue..." << std::endl;
 			std::cin.get();
 		}
+	}
+
+	//
+	// When launched as SYSTEM (the service's elevate=2 path, reachable by any
+	// signed - possibly hijacked - process), only the signature-gated update and
+	// add-on management actions are permitted.  This keeps the raw file utility
+	// actions, which write caller-controlled content to caller-controlled paths,
+	// from being abused as an arbitrary code/file-write primitive under SYSTEM.
+	// Running non-elevated or with a normal (even elevated-admin) user token is
+	// unaffected, so direct command-line use and the installer keep working.
+	//
+	if (!arguments.empty() && IsProcessLocalSystem() && !IsActionAllowedAsSystem(arguments[0])) {
+		std::wcout << L"Operation '" << arguments[0] << L"' is not permitted when running as SYSTEM" << std::endl;
+		return ERROR_INVALID;
 	}
 
 	std::wstring temp_dir = GetArgument(arguments, L"temp");
@@ -1599,11 +1654,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			bRestart = HasFlag(arguments, L"restart");
 
 		if (bRestart) {
-			Execute(base_dir + L"\\KmdUtil.exe", L"scandll_silent");
-			Execute(base_dir + L"\\KmdUtil.exe", L"stop SbieSvc");
-			Execute(base_dir + L"\\KmdUtil.exe", L"stop SbieDrv");
+			//
+			// run KmdUtil from our own (admin-only) install directory, never from
+			// the caller-supplied base_dir: these commands execute with our token
+			// (SYSTEM when launched via the service), so loading the binary from a
+			// caller-controlled path would be an arbitrary code execution vector.
+			// KmdUtil acts on the SbieSvc/SbieDrv services by name, so the binary's
+			// location does not change which services are affected.
+			//
+			Execute(wPath + L"\\KmdUtil.exe", L"scandll_silent");
+			Execute(wPath + L"\\KmdUtil.exe", L"stop SbieSvc");
+			Execute(wPath + L"\\KmdUtil.exe", L"stop SbieDrv");
 			Sleep(3000);
-			Execute(base_dir + L"\\KmdUtil.exe", L"stop SbieDrv");
+			Execute(wPath + L"\\KmdUtil.exe", L"stop SbieDrv");
 		}
 
 		//
@@ -1770,12 +1833,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		if (bRestart) {
 			Sleep(1000);
-			Execute(base_dir + L"\\KmdUtil.exe", L"start SbieSvc");
+			// run from our own (admin-only) install directory, not caller-supplied base_dir
+			Execute(wPath + L"\\KmdUtil.exe", L"start SbieSvc");
 		}
 
 		std::wstring wOpen = GetArgument(arguments, L"open");
 		if (!wOpen.empty()) {
-			Execute(base_dir + L"\\start.exe", L"open_agent:" + wOpen);
+			// run the trusted start.exe from our own install directory, not base_dir;
+			// the agent to open is forwarded to the (separately guarded) service
+			Execute(wPath + L"\\start.exe", L"open_agent:" + wOpen);
 		}
 
 		//

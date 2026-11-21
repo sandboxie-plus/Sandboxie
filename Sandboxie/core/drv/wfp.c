@@ -247,6 +247,34 @@ _FX BOOLEAN WFP_Init(void)
 
 
 //---------------------------------------------------------------------------
+// WFP_RegisterLiveProcesses
+//---------------------------------------------------------------------------
+
+
+static void WFP_RegisterLiveProcesses(void)
+{
+	PROCESS *proc;
+	KIRQL irql;
+	map_iter_t iter;
+
+	KeRaiseIrql(APC_LEVEL, &irql);
+	ExAcquireResourceSharedLite(Process_ListLock, TRUE);
+
+	iter = map_iter();
+	while (map_next(&Process_Map, &iter)) {
+		proc = iter.value;
+		if (proc->box && !proc->bHostInject) {
+			WFP_InitProcess(proc);
+			WFP_UpdateProcess(proc);
+		}
+	}
+
+	ExReleaseResourceLite(Process_ListLock);
+	KeLowerIrql(irql);
+}
+
+
+//---------------------------------------------------------------------------
 // WFP_Load
 //---------------------------------------------------------------------------
 
@@ -284,6 +312,8 @@ _FX BOOLEAN WFP_Load(void)
 		ExReleaseResourceLite(WFP_InitLock);
 
 		KeLeaveCriticalRegion();
+
+		WFP_RegisterLiveProcesses();
 	}
 	else
 		DbgPrint("Sbie WFP is not ready\r\n");
@@ -801,7 +831,7 @@ BOOLEAN WFP_isLoopback(const IP_ADDRESS* ip)
 	if (ip->Data32[0] == 0 &&
 		ip->Data32[1] == 0 &&
 		ip->Data32[2] == 0xFFFF0000 &&
-		((ip->Data32[3] & 0xFF000000) == 0x7F000000)) // 127.x.x.x
+		ip->Data[12] == 0x7F) // 127.x.x.x
 	{
 		return TRUE;
 	}

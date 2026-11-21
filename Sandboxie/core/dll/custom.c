@@ -1136,39 +1136,72 @@ _FX void AutoExec(void)
 
 
 //---------------------------------------------------------------------------
-// SbieDll_ExpandAndRunProgram
+// SbieDll_ExpandEnvironmentStrings
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command)
+_FX WCHAR *SbieDll_ExpandEnvironmentStrings(
+    const WCHAR *Command, ULONG BufferChars, NTSTATUS *ExpansionStatus)
 {
     ULONG len;
-    WCHAR *cmdline, *cmdline2;
-    STARTUPINFO si;
-    PROCESS_INFORMATION pi;
-    BOOL ok;
+    ULONG expanded_len;
+    ULONG value_len;
+    WCHAR *cmdline = NULL, *cmdline2 = NULL;
+    ULONG cmdline2_chars;
+    NTSTATUS failure = STATUS_BUFFER_TOO_SMALL;
+
+    if (ExpansionStatus)
+        *ExpansionStatus = STATUS_SUCCESS;
 
     //
     // expand command line
     //
 
+    if (! Command) {
+        failure = STATUS_INVALID_PARAMETER;
+        goto finish;
+    }
+    if (! BufferChars || BufferChars > 0x7FFF)
+        goto finish;
+
     len = ExpandEnvironmentStrings(Command, NULL, 0);
-    if (len == 0)
-        return FALSE;
+    if (len == 0) {
+        failure = STATUS_UNSUCCESSFUL;
+        goto finish;
+    }
+    if (len > 0xFFFFFFFFu / sizeof(WCHAR) - 8)
+        goto finish;
 
     cmdline = Dll_AllocTemp((len + 8) * sizeof(WCHAR));
-    ExpandEnvironmentStrings(Command, cmdline, len);
+    if (! cmdline) {
+        failure = STATUS_INSUFFICIENT_RESOURCES;
+        goto finish;
+    }
+
+    expanded_len = ExpandEnvironmentStrings(Command, cmdline, len);
+    if (expanded_len == 0) {
+        failure = STATUS_UNSUCCESSFUL;
+        goto finish;
+    }
+    if (expanded_len > len)
+        goto finish;
     cmdline[len] = L'\0';
 
     //
     // expand sandboxie variables
     //
 
-    len = 8192 * sizeof(WCHAR);
+    len = BufferChars * sizeof(WCHAR);
     cmdline2 = Dll_AllocTemp(len);
+    cmdline2_chars = len / sizeof(WCHAR);
 
 	const WCHAR* ptr1 = cmdline;
 	WCHAR* ptr2 = cmdline2;
+    if (! cmdline2) {
+        failure = STATUS_INSUFFICIENT_RESOURCES;
+        goto finish;
+    }
+    cmdline2[0] = L'\0';
 	for (;;) {
 		const WCHAR* ptr = wcschr(ptr1, L'%');
 		if (!ptr)
@@ -1179,31 +1212,96 @@ _FX BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command)
 
 		if (ptr != ptr1) { // copy static portion unless we start with a %
 			ULONG length = (ULONG)(ptr - ptr1);
+            ULONG remaining = cmdline2_chars - (ULONG)(ptr2 - cmdline2);
+            if (length >= remaining)
+                goto finish;
 			wmemcpy(ptr2, ptr1, length);
 			ptr2 += length;
+            *ptr2 = L'\0';
 		}
 		ptr1 = end + 1;
 
 		ULONG length = (ULONG)(end - ptr + 1);
 		if (length <= 64) {
 			WCHAR Var[66];
+            ULONG remaining_chars = cmdline2_chars - (ULONG)(ptr2 - cmdline2);
+            NTSTATUS status;
 			wmemcpy(Var, ptr, length);
 			Var[length] = L'\0';
-			if (NT_SUCCESS(SbieApi_QueryConf(NULL, Var, CONF_JUST_EXPAND, ptr2, len - ((ptr2 - cmdline2) * sizeof(WCHAR))))) {
+            status = SbieApi_QueryConf(
+                NULL, Var, CONF_JUST_EXPAND, ptr2, remaining_chars * sizeof(WCHAR));
+            if (NT_SUCCESS(status)) {
+                value_len = (ULONG)wcsnlen(ptr2, remaining_chars);
+                if (value_len >= remaining_chars)
+                    goto finish;
+
 				if (_wcsnicmp(ptr2, L"\\Device\\", 8) == 0)
 					SbieDll_TranslateNtToDosPath(ptr2);
-				ptr2 += wcslen(ptr2);
+
+                value_len = (ULONG)wcsnlen(ptr2, remaining_chars);
+                if (value_len >= remaining_chars)
+                    goto finish;
+
+                ptr2 += value_len;
 				continue; // success - look for the next one
 			}
+            if (ExpansionStatus) {
+                if (status == STATUS_BUFFER_TOO_SMALL || status == STATUS_BUFFER_OVERFLOW) {
+                    failure = status;
+                    goto finish;
+                }
+                if (NT_SUCCESS(*ExpansionStatus))
+                    *ExpansionStatus = status;
+            }
 		}
 		
-		// fallback - not found keep the %something%
+		// Keep the original token when the variable query fails.
+        {
+            ULONG remaining = cmdline2_chars - (ULONG)(ptr2 - cmdline2);
+            if (length >= remaining)
+                goto finish;
+        }
 		wmemcpy(ptr2, ptr, length);
-		ptr2 += len;
+		ptr2 += length;
+        *ptr2 = L'\0';
 	}
-	wcscpy(ptr2, ptr1); // copy what's left
+    {
+        ULONG length = (ULONG)wcslen(ptr1);
+        ULONG remaining = cmdline2_chars - (ULONG)(ptr2 - cmdline2);
+        if (length >= remaining)
+            goto finish;
+        wmemcpy(ptr2, ptr1, length + 1); // copy what's left including terminator
+    }
 
     Dll_Free(cmdline);
+    return cmdline2;
+
+finish:
+    if (ExpansionStatus)
+        *ExpansionStatus = failure;
+    if (cmdline)
+        Dll_Free(cmdline);
+    if (cmdline2)
+        Dll_Free(cmdline2);
+    return NULL;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_ExpandAndRunProgram
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command)
+{
+    WCHAR *cmdline2;
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+    BOOL ok;
+
+    cmdline2 = SbieDll_ExpandEnvironmentStrings(Command, 8192, NULL);
+    if (!cmdline2)
+        return FALSE;
 
     //
     // execute command line

@@ -38,7 +38,7 @@ NTSTATUS Api_GetSecureParamImpl(const wchar_t* name, PVOID* data_ptr, ULONG* dat
 #define FILE_BUFFER_SIZE (2 * PAGE_SIZE)
 #define FILE_MAX_SIZE (128 * 1024 * 1024) // 128 MB
 
-static UCHAR KphpTrustedPublicKey[] =
+static const UCHAR KphpTrustedPublicKey[] =
 {
     0x45, 0x43, 0x53, 0x31, 0x20, 0x00, 0x00, 0x00, 0x05, 0x7A, 0x12, 0x5A, 0xF8, 0x54, 0x01, 0x42,
     0xDB, 0x19, 0x87, 0xFC, 0xC4, 0xE3, 0xD3, 0x8D, 0x46, 0x7B, 0x74, 0x01, 0x12, 0xFC, 0x78, 0xEB,
@@ -235,7 +235,7 @@ NTSTATUS KphVerifySignature(
     if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(&signAlgHandle, KPH_SIGN_ALGORITHM, NULL, 0)))
         goto CleanupExit;
     if (!NT_SUCCESS(status = BCryptImportKeyPair(signAlgHandle, NULL, KPH_BLOB_PUBLIC, &keyHandle,
-        KphpTrustedPublicKey, sizeof(KphpTrustedPublicKey), 0)))
+        (PUCHAR)KphpTrustedPublicKey, sizeof(KphpTrustedPublicKey), 0)))
     {
         goto CleanupExit;
     }
@@ -658,13 +658,21 @@ _FX NTSTATUS KphValidateCertificate()
         //
 
         if (_wcsicmp(L"SIGNATURE", name) == 0 && signature == NULL) {
-            signatureSize = b64_decoded_size(value);
+            signatureSize = (ULONG)b64_decoded_size(value);
+            if (!signatureSize) {
+                // not a well formed base64 value
+                status = STATUS_INVALID_PARAMETER;
+                goto CleanupExit;
+            }
             signature = Mem_Alloc(Driver_Pool, signatureSize);
             if (!signature) {
                 status = STATUS_INSUFFICIENT_RESOURCES;
                 goto CleanupExit;
             }
-            b64_decode(value, signature, signatureSize);
+            if (!b64_decode(value, signature, signatureSize)) {
+                status = STATUS_INVALID_PARAMETER;
+                goto CleanupExit;
+            }
             goto next;
         }
 

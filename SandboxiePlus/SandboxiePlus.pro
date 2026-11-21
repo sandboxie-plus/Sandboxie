@@ -9,6 +9,7 @@ message("You are running qmake on a generated .pro file. This may not work!")
 
 TEMPLATE = subdirs
 SUBDIRS += SandMan/SandMan.qc.pro \
+    SbieMcp/SbieMcp.qc.pro \
     QSbieAPI/QSbieAPI.qc.pro \
     MiscHelpers/MiscHelpers.qc.pro \
     QtSingleApp/qtsingleapp/qtsingleapp/qtsingleapp.qc.pro

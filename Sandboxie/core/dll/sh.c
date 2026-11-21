@@ -562,55 +562,147 @@ HICON SH32_BorderToIcon(HICON hIcon, COLORREF color)
     GET_WIN_API(DeleteObject, DllName_gdi32);
     GET_WIN_API(DeleteDC, DllName_gdi32);
 
+    //
+    // resolve the DIB helpers used by the alpha-safe path; if any is missing
+    // we simply fall through to the legacy GetPixel/SetPixel overlay below
+    //
+    typedef int  (WINAPI *P_GetObjectW_)(HANDLE h, int c, LPVOID pv);
+    typedef int  (WINAPI *P_GetDIBits_)(HDC, HBITMAP, UINT, UINT, LPVOID, LPBITMAPINFO, UINT);
+    typedef int  (WINAPI *P_SetDIBits_)(HDC, HBITMAP, UINT, UINT, const VOID *, const BITMAPINFO *, UINT);
+    P_GetObjectW_ pGetObject = (P_GetObjectW_)Ldr_GetProcAddrNew(DllName_gdi32, L"GetObjectW", "GetObjectW");
+    P_GetDIBits_  pGetDIBits = (P_GetDIBits_) Ldr_GetProcAddrNew(DllName_gdi32, L"GetDIBits", "GetDIBits");
+    P_SetDIBits_  pSetDIBits = (P_SetDIBits_) Ldr_GetProcAddrNew(DllName_gdi32, L"SetDIBits", "SetDIBits");
 
     HICON       hNewIcon = NULL;
-    HDC         hMainDC = NULL, hMemDC1 = NULL, hMemDC3 = NULL;
-    HBITMAP     hOldBmp1 = NULL, hOldBmp3 = NULL;
     ICONINFO    csII;
 
     if (!GetIconInfo(hIcon, &csII)) return NULL;
 
-    hMainDC = GetDC(NULL);
-    hMemDC1 = CreateCompatibleDC(hMainDC);
-    hMemDC3 = CreateCompatibleDC(hMainDC);
-    if (hMainDC == NULL || hMemDC1 == NULL || hMemDC3 == NULL) return NULL;
+    HDC hMainDC = GetDC(NULL);
+    if (hMainDC == NULL) {
+        if (csII.hbmColor) DeleteObject(csII.hbmColor);
+        if (csII.hbmMask)  DeleteObject(csII.hbmMask);
+        return NULL;
+    }
 
+    //
+    // Alpha-safe path.  A modern tray icon (e.g. an Electron app like Discord)
+    // is a 32bpp bitmap with a per-pixel alpha channel.  The legacy
+    // GetPixel/SetPixel loop below round-trips every pixel through 24-bit
+    // COLORREFs, which zeroes the alpha of the whole image -> CreateIconIndirect
+    // then yields a fully transparent (empty) tray icon.  So when the icon
+    // carries a real alpha channel, edit the 32bpp DIB directly: paint only the
+    // 1px border ring (forced opaque) and leave every interior pixel - and its
+    // alpha - untouched.
+    //
 
-    DWORD   dwWidth = csII.xHotspot * 2;
-    DWORD   dwHeight = csII.yHotspot * 2;
+    if (pGetObject && pGetDIBits && pSetDIBits && csII.hbmColor) {
 
-    hOldBmp1 = (HBITMAP)SelectObject(hMemDC1, csII.hbmColor);
-    hOldBmp3 = (HBITMAP)SelectObject(hMemDC3, csII.hbmMask);
+        BITMAP bm;
+        memzero(&bm, sizeof(bm));
 
-    DWORD    dwLoopY = 0, dwLoopX = 0;
-    COLORREF crPixel = 0;
+        if (pGetObject(csII.hbmColor, sizeof(bm), &bm)
+                && bm.bmWidth > 0 && bm.bmHeight > 0) {
 
-    for (dwLoopY = 0; dwLoopY < dwHeight; dwLoopY++)
-    {
-        for (dwLoopX = 0; dwLoopX < dwWidth; dwLoopX++)
-        {
-            crPixel = GetPixel(hMemDC1, dwLoopX, dwLoopY);
-            if (dwLoopY == 0 || dwLoopX == 0 || dwLoopY + 1 == dwHeight || dwLoopX + 1 == dwWidth)
-                crPixel = color; // RGB(255, 255, 0);
-            SetPixel(hMemDC1, dwLoopX, dwLoopY, crPixel);
+            LONG  w = bm.bmWidth, h = bm.bmHeight;
+            ULONG pxCount = (ULONG)(w * h);
 
-            crPixel = GetPixel(hMemDC3, dwLoopX, dwLoopY);
-            if (dwLoopY == 0 || dwLoopX == 0 || dwLoopY + 1 == dwHeight || dwLoopX + 1 == dwWidth)
-                crPixel = 0;
-            SetPixel(hMemDC3, dwLoopX, dwLoopY, crPixel);
+            BITMAPINFO bi;
+            memzero(&bi, sizeof(bi));
+            bi.bmiHeader.biSize        = sizeof(BITMAPINFOHEADER);
+            bi.bmiHeader.biWidth       = w;
+            bi.bmiHeader.biHeight      = -h;            // top-down (direction is
+            bi.bmiHeader.biPlanes      = 1;             // irrelevant here: the
+            bi.bmiHeader.biBitCount    = 32;            // border ring is symmetric)
+            bi.bmiHeader.biCompression = BI_RGB;
+
+            DWORD *bits = Dll_AllocTemp(pxCount * (ULONG)sizeof(DWORD));
+            if (bits && pGetDIBits(hMainDC, csII.hbmColor, 0, h, bits, &bi, DIB_RGB_COLORS)) {
+
+                //
+                // only treat it as an alpha icon if some pixel is non-transparent;
+                // otherwise it is a classic mask icon (alpha all zero) and must go
+                // through the legacy path so its AND-mask still drives transparency
+                //
+
+                BOOLEAN hasAlpha = FALSE;
+                ULONG i;
+                for (i = 0; i < pxCount; ++i) {
+                    if (bits[i] & 0xFF000000u) { hasAlpha = TRUE; break; }
+                }
+
+                if (hasAlpha) {
+
+                    DWORD bc = 0xFF000000u                               // opaque
+                             | ((DWORD)GetRValue(color) << 16)
+                             | ((DWORD)GetGValue(color) << 8)
+                             |  (DWORD)GetBValue(color);
+
+                    LONG x, y;
+                    for (y = 0; y < h; ++y)
+                    for (x = 0; x < w; ++x)
+                        if (y == 0 || x == 0 || y + 1 == h || x + 1 == w)
+                            bits[(ULONG)(y * w + x)] = bc;
+
+                    if (pSetDIBits(hMainDC, csII.hbmColor, 0, h, bits, &bi, DIB_RGB_COLORS))
+                        hNewIcon = CreateIconIndirect(&csII);
+                }
+            }
+            if (bits)
+                Dll_Free(bits);
         }
     }
 
-    SelectObject(hMemDC1, hOldBmp1);
-    SelectObject(hMemDC3, hOldBmp3);
+    //
+    // Legacy path for icons without a per-pixel alpha channel (classic mask
+    // icons): the original GetPixel/SetPixel overlay is safe here because there
+    // is no alpha to destroy.  Also the fallback if the DIB helpers were absent.
+    //
 
-    hNewIcon = CreateIconIndirect(&csII);
+    if (hNewIcon == NULL) {
 
+        HDC hMemDC1 = CreateCompatibleDC(hMainDC);
+        HDC hMemDC3 = CreateCompatibleDC(hMainDC);
 
-    DeleteObject(csII.hbmColor);
-    DeleteObject(csII.hbmMask);
-    DeleteDC(hMemDC1);
-    DeleteDC(hMemDC3);
+        if (hMemDC1 && hMemDC3) {
+
+            DWORD dwWidth  = csII.xHotspot * 2;
+            DWORD dwHeight = csII.yHotspot * 2;
+
+            HBITMAP hOldBmp1 = (HBITMAP)SelectObject(hMemDC1, csII.hbmColor);
+            HBITMAP hOldBmp3 = (HBITMAP)SelectObject(hMemDC3, csII.hbmMask);
+
+            DWORD    dwLoopY, dwLoopX;
+            COLORREF crPixel;
+
+            for (dwLoopY = 0; dwLoopY < dwHeight; dwLoopY++)
+            {
+                for (dwLoopX = 0; dwLoopX < dwWidth; dwLoopX++)
+                {
+                    crPixel = GetPixel(hMemDC1, dwLoopX, dwLoopY);
+                    if (dwLoopY == 0 || dwLoopX == 0 || dwLoopY + 1 == dwHeight || dwLoopX + 1 == dwWidth)
+                        crPixel = color; // RGB(255, 255, 0);
+                    SetPixel(hMemDC1, dwLoopX, dwLoopY, crPixel);
+
+                    crPixel = GetPixel(hMemDC3, dwLoopX, dwLoopY);
+                    if (dwLoopY == 0 || dwLoopX == 0 || dwLoopY + 1 == dwHeight || dwLoopX + 1 == dwWidth)
+                        crPixel = 0;
+                    SetPixel(hMemDC3, dwLoopX, dwLoopY, crPixel);
+                }
+            }
+
+            SelectObject(hMemDC1, hOldBmp1);
+            SelectObject(hMemDC3, hOldBmp3);
+
+            hNewIcon = CreateIconIndirect(&csII);
+        }
+
+        if (hMemDC1) DeleteDC(hMemDC1);
+        if (hMemDC3) DeleteDC(hMemDC3);
+    }
+
+    if (csII.hbmColor) DeleteObject(csII.hbmColor);
+    if (csII.hbmMask)  DeleteObject(csII.hbmMask);
     ReleaseDC(NULL, hMainDC);
 
     return hNewIcon;

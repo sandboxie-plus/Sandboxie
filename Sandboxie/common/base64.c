@@ -59,23 +59,36 @@ size_t b64_decoded_size(const wchar_t *in)
 {
 	size_t len;
 	size_t ret;
+	size_t pad;
 	size_t i;
 
 	if (in == NULL)
 		return 0;
 
 	len = wcslen(in);
+
+	/* a valid base64 string is a whole number of 4 character groups;
+	   anything else is rejected rather than sized, because b64_decode
+	   writes a full 3 bytes for every group it processes */
+	if (len == 0 || (len % 4) != 0)
+		return 0;
+
 	ret = len / 4 * 3;
 
-	for (i=len; i-->0; ) {
-		if (in[i] == L'=') {
-			ret--;
-		} else {
+	/* only the final one or two characters of the last group may be
+	   padding.  subtracting one byte for every trailing '=' - as this
+	   used to - reports a size far smaller than what b64_decode goes on
+	   to write, and for a long enough run of '=' it underflowed */
+	pad = 0;
+	i = len;
+	while (i > 0 && pad < 2) {
+		--i;
+		if (in[i] != L'=')
 			break;
-		}
+		++pad;
 	}
 
-	return ret;
+	return ret - pad;
 }
 
 //static void b64_generate_decode_table()
@@ -135,11 +148,22 @@ int b64_decode(const wchar_t *in, unsigned char *out, size_t outlen)
 		v = in[i+2]=='=' ? v << 6 : (v << 6) | b64_invs[in[i+2]-43];
 		v = in[i+3]=='=' ? v << 6 : (v << 6) | b64_invs[in[i+3]-43];
 
+		/* bound every store against the caller's buffer instead of
+		   trusting the size computed up front, so that a disagreement
+		   between the two can never become an overflow again */
+		if (j >= outlen)
+			return 0;
 		out[j] = (v >> 16) & 0xFF;
-		if (in[i+2] != '=')
+		if (in[i+2] != '=') {
+			if (j + 1 >= outlen)
+				return 0;
 			out[j+1] = (v >> 8) & 0xFF;
-		if (in[i+3] != '=')
+		}
+		if (in[i+3] != '=') {
+			if (j + 2 >= outlen)
+				return 0;
 			out[j+2] = v & 0xFF;
+		}
 	}
 
 	return 1;

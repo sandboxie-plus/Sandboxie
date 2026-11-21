@@ -22,6 +22,8 @@
 #include <private/qv4script_p.h>
 #include <private/qv4qobjectwrapper_p.h>
 
+#include <QElapsedTimer>
+
 QSet<CBoxEngine*> CBoxEngine::m_Instances;
 
 CBoxEngine::CBoxEngine(QObject* parent) : QThread(parent)
@@ -49,6 +51,12 @@ void CBoxEngine::Stop()
         return;
 
     m_Mutex.lock();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    // Abort the running script at its next instruction, so it does not issue any further calls.
+    // m_pEngine is only cleared by run() while holding m_Mutex, so it is valid here.
+    if (m_pEngine)
+        m_pEngine->setInterrupted(true);
+#endif
     if (m_State == eQuery || m_State == eReady)
         Continue(true, eCanceled);
     else {
@@ -57,11 +65,41 @@ void CBoxEngine::Stop()
         m_Mutex.unlock();
     }
 
-    if (!wait(30 * 1000)) {
-        qDebug() << "Failed to stop Box Engine";
-        terminate();
-        m_State = eCanceled;
+    // The engine thread talks to the rest of SandMan through Qt::BlockingQueuedConnection calls
+    // targeting our helper objects (CSbieObject, CBoxObject, CIniObject, ...) which live in this,
+    // the main, thread. A plain wait() here would dead-lock with such a call until the timeout and
+    // terminate() would then kill the thread while its call is still queued; destroying that
+    // QMetaCallEvent later (when the helper object is deleted) releases a QSemaphore located on
+    // the dead thread's stack and crashes. So keep cancelling pending calls while we wait.
+    QElapsedTimer Timer;
+    Timer.start();
+    while (!wait(10)) {
+        CancelPendingCalls();
+        if (Timer.elapsed() > 30 * 1000) {
+            qDebug() << "Failed to stop Box Engine";
+            CancelPendingCalls(); // make sure the thread is not left waiting on one of our calls
+            terminate();
+            wait();
+            m_State = eCanceled;
+            break;
+        }
     }
+}
+
+void CBoxEngine::CancelPendingCalls()
+{
+    // WARNING: call this function only from the main thread !!!
+
+    // Removing a pending blocking meta call destroys its event, which releases the semaphore the
+    // engine thread is waiting on, without executing the slot; the caller sees default return values.
+    foreach(QObject* pObject, findChildren<QObject*>()) {
+        if (pObject->thread() == QThread::currentThread())
+            QCoreApplication::removePostedEvents(pObject, QEvent::MetaCall);
+    }
+
+    // method_invoke calls into the script manager, this one is harmless, just execute it
+    if (theGUI && theGUI->GetScripts())
+        QCoreApplication::sendPostedEvents(theGUI->GetScripts(), QEvent::MetaCall);
 }
 
 void CBoxEngine::StopAll()
@@ -156,7 +194,17 @@ bool CBoxEngine::RunScript(const QString& Script, const QString& Name, const QVa
     m_Params = Params;
     m_State = eRunning;
 
-    if(!m_pEngine) m_pEngine = new CJSEngineExt(); // the engine lives in its own thread
+    if (!m_pEngine) {
+        // QJSEngine's constructor does not fail gracefully, it crashes the process when it can not get its stack memory
+        if (!CJSEngineExt::canCreateEngine()) {
+            QString Error = tr("Failed to initialize the script engine, not enough memory or memory access blocked by third-party software.");
+            AppendLog(Error);
+            SetState(eError, Error);
+            start(); // run() bails out without an engine, but 'finished' is still emitted for anyone waiting on it
+            return false;
+        }
+        m_pEngine = new CJSEngineExt(); // the engine lives in its own thread
+    }
     //m_pEngine->installExtensions(QJSEngine::ConsoleExtension);
 
     init();
@@ -188,7 +236,10 @@ void CBoxEngine::run()
 {
     //QElapsedTimer timer;
     //timer.start();
-    
+
+    if (!m_pEngine) // engine creation failed, see RunScript
+        return;
+
     for (auto I = m_Params.begin(); I != m_Params.end(); ++I)
         m_pEngine->globalObject().setProperty(I.key(), m_pEngine->toScriptValue(*I));
 
@@ -208,9 +259,12 @@ void CBoxEngine::run()
     }
 
     m_Result = m_pEngine->globalObject().property("result").toVariant();
-    
-    delete m_pEngine;
+
+    m_Mutex.lock(); // see Stop()
+    CJSEngineExt* pEngine = m_pEngine;
     m_pEngine = NULL;
+    m_Mutex.unlock();
+    delete pEngine;
 }
 
 //bool CBoxEngine::Wait()
@@ -287,8 +341,11 @@ void CBoxEngine::AppendLog(const QString& Line)
 
 QObject* CBoxEngine::GetDebuggerBackend()
 {
-    if(!m_pEngine) 
+    if(!m_pEngine) {
+        if (!CJSEngineExt::canCreateEngine())
+            return NULL;
         m_pEngine = new CJSEngineExt();
+    }
     if (!m_pDebuggerBackend) {
         m_pDebuggerBackend = newV4ScriptDebuggerBackendDynamic(m_pEngine);
         if (m_pDebuggerBackend) {
@@ -314,64 +371,8 @@ CWizardEngine::CWizardEngine(QObject* parent)
 
 CWizardEngine::~CWizardEngine()
 {
-    foreach(const SBoxShadow& pShadow, m_Shadows) {
-        if (pShadow.pShadow) {
-            if (pShadow.iApplyChanges == 2)
-                continue; // this is a new added entry keep it
-            CSandBoxPtr pBox = pShadow.pShadow.objectCast<CSandBox>();
-            if(!pBox.isNull()) pBox->TerminateAll();
-            pShadow.pShadow->RemoveSection();
-        }
-    }
-    theAPI->ReloadBoxes(true);
-
+    // m_Shadows discards whatever was not applied when it is destroyed.
     m_InstanceCount--;
-}
-
-bool CWizardEngine::ApplyShadowChanges()
-{
-    for (auto I = m_Shadows.begin(); I != m_Shadows.end(); ++I) {
-        if (I->iApplyChanges != 1)
-            continue;
-
-        if (I->pOriginal.isNull()) {
-            // This is a new box or template, not a copy, just clear shadow flag
-            I->pShadow->DelValue("IsShadow", "y");
-            I->iApplyChanges = 2;
-            continue;
-        }
-        
-        QList<CSbieIni::SbieIniValue> New = I->pShadow->GetIniSection();
-        QList<CSbieIni::SbieIniValue> Old = I->pOriginal->GetIniSection();
-
-        // discard unchanged
-        for (auto I = New.begin(); I != New.end();) {
-            auto II = I++;
-            for (auto J = Old.begin(); J != Old.end();) {
-                auto JJ = J++;
-                if (II->Name == JJ->Name && II->Value == JJ->Value) {
-                    I = New.erase(II);
-                    J = Old.erase(JJ);
-                    break;
-                }
-            }
-        }
-
-        // apply changed
-        foreach(auto & O, Old)
-            I->pOriginal->DelValue(O.Name, O.Value);
-        foreach(auto & N, New) {
-            if (N.Name == "FileRootPath" || N.Name == "IsShadow")
-                continue; // skip
-            if(N.Name == "Template" && IsNoAppliedShadow("Template_" + N.Value))
-                continue; // don't copy non-applied shadow templates
-            I->pOriginal->AppendText(N.Name, N.Value);
-        }
-    }
-
-    theAPI->CommitIniChanges();
-
-    return true;
 }
 
 void CWizardEngine::init()
@@ -390,62 +391,6 @@ void CWizardEngine::SetState(EState state, const QString& Text)
             m_Report["Failure"] = Text;
     }
     CBoxEngine::SetState(state, Text);
-}
-
-QSharedPointer<CSbieIni> CWizardEngine::MakeShadow(const QSharedPointer<CSbieIni>& pIni)
-{
-    SBoxShadow& pShadow = m_Shadows[pIni->GetName().toLower()];
-    if (!pShadow.pShadow) {
-        QString ShadowName = pIni->GetName();
-        QString Suffix = "_Shadow"; // do not translate must be a valid sandbox name suffix
-        ShadowName.truncate(32 - (Suffix.length() + 3)); // BOXNAME_COUNT
-        ShadowName = theAPI->MkNewName(ShadowName.append(Suffix));
-
-		QList<CSbieIni::SbieIniValue> Settings = pIni->GetIniSection();
-		for (QList<CSbieIni::SbieIniValue>::iterator I = Settings.begin(); I != Settings.end(); ++I)
-			theAPI->SbieIniSet(ShadowName, I->Name, I->Value, CSbieIni::eIniInsert, false);
-
-        CSandBoxPtr pBox = pIni.objectCast<CSandBox>();
-        if(!pBox.isNull())
-            theAPI->SbieIniSet(ShadowName, "FileRootPath", pBox->GetFileRoot(), CSbieIni::eIniUpdate, false);
-        theAPI->SbieIniSet(ShadowName, "IsShadow", "y", CSbieIni::eIniUpdate, false);
-
-		theAPI->CommitIniChanges();
-		theAPI->ReloadBoxes(true);
-
-        pShadow.pOriginal = pIni;
-        if (pBox)
-            pShadow.pShadow = theAPI->GetBoxByName(ShadowName);
-        else
-            pShadow.pShadow = QSharedPointer<CSbieIni>(new CSbieIni(ShadowName, theAPI));
-    }
-    return pShadow.pShadow;
-}
-
-void CWizardEngine::AddShadow(const QSharedPointer<CSbieIni>& pIni)
-{
-    SBoxShadow& pShadow = m_Shadows[pIni->GetName().toLower()];
-    if (!pShadow.pShadow) {
-
-        pIni->SetText("IsShadow", "y");
-
-        pShadow.pShadow = pIni;
-    }
-}
-
-void CWizardEngine::SetApplyShadow(const QString& OriginalName, bool bApply)
-{
-    auto I = m_Shadows.find(OriginalName.toLower());
-    if(I !=  m_Shadows.end())
-        I->iApplyChanges = bApply ? 1 : 0;
-}
-
-bool CWizardEngine::IsNoAppliedShadow(const QString& OriginalName)
-{
-    auto I = m_Shadows.find(OriginalName.toLower());
-    if (I != m_Shadows.end())
-        return I->iApplyChanges == 0;
-    return false;
 }
 
 void CWizardEngine::OpenSettings(const QString& page)

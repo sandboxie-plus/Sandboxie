@@ -32,6 +32,8 @@ extern void Kmd_ScanDll(BOOLEAN silent);
 
 extern BOOL Kmd_FixDacls();
 
+extern BOOL Kmd_FixBoxDacls();
+
 
 //---------------------------------------------------------------------------
 // Defines
@@ -46,7 +48,8 @@ typedef enum _COMMAND {
     CMD_SCANDLL,
     CMD_SCANDLL_SILENT,
     CMD_MESSAGE,
-    CMD_FIXDACLS
+    CMD_FIXDACLS,
+    CMD_FIXBOXDACLS
 } COMMAND;
 
 typedef enum _OPTIONS {
@@ -229,6 +232,10 @@ BOOL Parse_Command_Line(
 
     } else if (_wcsicmp(args[1], L"fixdacls") == 0) {
         *Command = CMD_FIXDACLS;
+        num_args_needed = 0;
+
+    } else if (_wcsicmp(args[1], L"fixboxdacls") == 0) {
+        *Command = CMD_FIXBOXDACLS;
         num_args_needed = 0;
 
     } else {
@@ -774,7 +781,18 @@ int __stdcall WinMain(
     }
 
     if (Command == CMD_FIXDACLS) {
+        //
+        // also migrate the box folders: boxes created before the AppContainer
+        // ACEs were added keep the old DACL, see Kmd_FixBoxDacls
+        //
         ok = Kmd_FixDacls();
+        if (! Kmd_FixBoxDacls())
+            ok = FALSE;
+        goto finish;
+    }
+
+    if (Command == CMD_FIXBOXDACLS) {
+        ok = Kmd_FixBoxDacls();
         goto finish;
     }
 

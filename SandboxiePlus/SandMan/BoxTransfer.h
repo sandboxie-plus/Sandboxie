@@ -3,6 +3,7 @@
 #include <QDialog>
 #include <QTreeWidget>
 #include <QCheckBox>
+#include <QComboBox>
 #include <QPushButton>
 #include <QRegularExpression>
 #include "SbiePlusAPI.h"
@@ -46,14 +47,20 @@ public:
 	};
 	QList<SImportEntry> GetImportEntries() const;
 
+	// For import: the FileRootPath to give the newly created boxes,
+	// empty when the configured default should be kept
+	QString GetImportLocation() const;
+
 public slots:
 	void SetFilter(const QRegularExpression& Exp, int iOptions = 0, int Column = -1);
+	void accept() override;
 
 private slots:
 	void OnSelectAll();
 	void OnSelectNone();
 	void OnItemChanged(QTreeWidgetItem* item, int column);
 	void OnReadAliases(bool checked);
+	void OnBrowseLocation();
 
 private:
 	void UpdateConflictIndicators();
@@ -63,6 +70,7 @@ private:
 	QCheckBox* m_pGlobalConfig;
 	QCheckBox* m_pReadAliases;
 	QCheckBox* m_pSeparateFiles;
+	QComboBox* m_pBoxLocation;
 	QPushButton* m_pSelectAll;
 	QPushButton* m_pSelectNone;
 	QMap<QString, QMap<QString, QString>> m_ArchiveAliases;

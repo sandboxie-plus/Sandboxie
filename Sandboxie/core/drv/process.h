@@ -98,6 +98,11 @@ struct _PROCESS {
 
     HASH_MAP thread_map;
 
+    // incremented whenever a THREAD.token_object in this process changes,
+    // see Thread_RestoreMuiState
+
+    volatile LONG token_generation;
+
     // flags
 
     volatile BOOLEAN initialized;       // process initialized once?
@@ -233,6 +238,16 @@ void Process_Unload(BOOLEAN FreeLock);
 // termination, the return value is PROCESS_TERMINATED
 
 PROCESS *Process_Find(HANDLE ProcessId, KIRQL *out_irql);
+
+// Process_FindLockedShared finds the PROCESS block for ProcessId and returns
+// with Process_ListLock held SHARED (inside a critical region, so the caller
+// stays at PASSIVE_LEVEL and may call e.g. ObQueryNameString).  The returned
+// pointer stays valid until the caller releases with Process_UnlockShared().
+// The lock is held on return even when no process matches (return value NULL),
+// so every call must be paired with Process_UnlockShared().
+
+PROCESS *Process_FindLockedShared(HANDLE ProcessId);
+void Process_UnlockShared(void);
 
 #ifdef XP_SUPPORT
 PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql);
@@ -541,6 +556,7 @@ extern HASH_MAP Process_Map;
 extern HASH_MAP Process_MapDfp;
 extern HASH_MAP Process_MapFcp;
 extern PERESOURCE Process_ListLock;
+extern PERESOURCE Process_DfpFcpLock;
 
 extern volatile BOOLEAN Process_ReadyToSandbox;
 

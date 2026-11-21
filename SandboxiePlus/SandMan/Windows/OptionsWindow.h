@@ -258,6 +258,9 @@ private slots:
 	void OnInternetTab()  { OnTab(ui.tabsInternet->currentWidget()); }
 
 	void OnGeneralChanged();
+	void OnSelectBorderLabelFont();
+	void OnBorderLabelSizeChanged(double points);
+	void OnResetBorderLabelFont();
 	void OnPSTChanged();
 	void OnActionChanged();
 	void OnSecurityMode();
@@ -429,6 +432,8 @@ protected:
 
 	void CreateGeneral();
 	void LoadGeneral();
+	void SetBorderLabelFont(const QString& value);
+	void UpdateBorderLabelFontName();
 	void SaveGeneral();
 
 	void LoadCopyRules();
@@ -590,6 +595,7 @@ protected:
 	CPendingChanges m_PendingChanges{this, &m_HoldChange, PendingItemTemplateRole, false};
 	QColor m_BorderColor;
 	int m_BorderAlpha;
+	int m_BorderLabelLegacySize = 6;
 	QString m_BoxIcon;
 	bool m_CustomColor;
 	bool m_SliderCustomColor;

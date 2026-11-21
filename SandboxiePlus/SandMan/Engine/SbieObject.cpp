@@ -13,7 +13,7 @@ CSbieObject::CSbieObject(QObject* parent)
 
 CSbieObject::~CSbieObject()
 {
-	if(m_TraceStarted)
+	if(m_TraceStarted && theAPI) // theAPI is already gone when this is destroyed during CSandMan teardown
 		theAPI->EnableMonitor(false);
 }
 

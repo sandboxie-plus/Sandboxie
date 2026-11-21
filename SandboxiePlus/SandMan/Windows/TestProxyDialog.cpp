@@ -64,6 +64,15 @@ CTestProxyDialog::CTestProxyDialog(const QString& IP, const QString& Port, COpti
 	});
 }
 
+CTestProxyDialog::~CTestProxyDialog()
+{
+	if (m_Watcher->isRunning())
+	{
+		m_TestShouldCancel.storeRelease(1);
+		m_Watcher->waitForFinished();
+	}
+}
+
 void CTestProxyDialog::showEvent(QShowEvent* event)
 {
 	QDialog::showEvent(event);
@@ -80,13 +89,13 @@ void CTestProxyDialog::RunTest1(bool& failed, int& progress, int segment)
 	emit emitTestMessage(tr("[%1] Starting Test 1: Connection to the Proxy Server").arg(time));
 	emit emitTestMessage(tr("[%1] IP Address: %2").arg(time).arg(m_ProxyIP));
 
-	QScopedPointer<QTcpSocket> socket(new QTcpSocket(this));
+	QTcpSocket socket;
 
 	bool success = false;
 	for (int elapsed = 0; !success && elapsed < m_TestTimeout; elapsed += pollInterval)
 	{
-		socket->connectToHost(m_ProxyIP, m_ProxyPort.toInt());
-		success = socket->waitForConnected(pollInterval);
+		socket.connectToHost(m_ProxyIP, m_ProxyPort.toInt());
+		success = socket.waitForConnected(pollInterval);
 		if (m_TestShouldCancel.loadAcquire()) return;
 	}
 
@@ -100,7 +109,7 @@ void CTestProxyDialog::RunTest1(bool& failed, int& progress, int segment)
 	else
 	{
 		failed = true;
-		emit emitTestMessage(tr("[%1] Connection to proxy server failed: %2.").arg(time).arg(socket->errorString()));
+		emit emitTestMessage(tr("[%1] Connection to proxy server failed: %2.").arg(time).arg(socket.errorString()));
 		emit emitTestMessage(tr("[%1] Test failed.").arg(time));
 	}
 }
@@ -122,14 +131,14 @@ void CTestProxyDialog::RunTest2(bool& failed, int& progress, int segment, bool l
 		proxy.setPassword(m_ProxyPass);
 	}
 
-	QScopedPointer<QTcpSocket> socket(new QTcpSocket(this));
-	socket->setProxy(proxy);
+	QTcpSocket socket;
+	socket.setProxy(proxy);
 
 	bool success = false;
 	for (int elapsed = 0; !success && elapsed < m_TestTimeout; elapsed += pollInterval)
 	{
-		socket->connectToHost(m_TestHost, m_TestPort);
-		success = socket->waitForConnected(pollInterval);
+		socket.connectToHost(m_TestHost, m_TestPort);
+		success = socket.waitForConnected(pollInterval);
 		if (m_TestShouldCancel.loadAcquire()) return;
 	}
 
@@ -154,7 +163,7 @@ void CTestProxyDialog::RunTest2(bool& failed, int& progress, int segment, bool l
 	else
 	{
 		failed = true;
-		emit emitTestMessage(tr("[%1] Connection through proxy server failed: %2.").arg(time).arg(socket->errorString()));
+		emit emitTestMessage(tr("[%1] Connection through proxy server failed: %2.").arg(time).arg(socket.errorString()));
 		emit emitTestMessage(tr("[%1] Test failed.").arg(time));
 	}
 }
@@ -163,18 +172,18 @@ void CTestProxyDialog::RunTest2LoadPage(const QNetworkProxy& proxy, bool& failed
 {
 	const constexpr int pollInterval = 100;
 
-	QScopedPointer<QNetworkAccessManager> manager(new QNetworkAccessManager(this));
-	manager->setProxy(proxy);
+	QNetworkAccessManager manager;
+	manager.setProxy(proxy);
 
 	QEventLoop loop;
 	QNetworkRequest request(QUrl("http://" + m_TestHost + ":" + QString::number(m_TestPort)));
-	QScopedPointer<QNetworkReply> reply(manager->get(request));
+	QNetworkReply* reply = manager.get(request);
 
 	QTimer timer;
 	timer.setInterval(pollInterval);
 	int elapsed = 0;
 
-	connect(&timer, &QTimer::timeout, this, [&]() {
+	connect(&timer, &QTimer::timeout, &loop, [&]() {
 		elapsed += pollInterval;
 		if (elapsed >= m_TestTimeout && !reply->isFinished()) reply->abort();
 		if (m_TestShouldCancel.loadAcquire())
@@ -184,7 +193,7 @@ void CTestProxyDialog::RunTest2LoadPage(const QNetworkProxy& proxy, bool& failed
 		}
 	});
 
-	connect(reply.data(), &QNetworkReply::finished, this, [&]() {
+	connect(reply, &QNetworkReply::finished, &loop, [&]() {
 		QString time = QTime::currentTime().toString("hh:mm:ss");
 		if (reply->error() == QNetworkReply::NoError)
 		{
@@ -214,28 +223,30 @@ void CTestProxyDialog::RunTest3(bool& failed, int& progress, int segment)
 	emit emitTestMessage(tr("[%1] Starting Test 3: Proxy Server latency").arg(time));
 
 	bool finished = false;
-	QScopedPointer<QProcess> pingProc(new QProcess(this));
+	QProcess pingProc;
 	QString program = "ping";
 	QStringList args = { "-n", QString::number(m_TestPingCount), "-w", QString::number(m_TestTimeout), m_ProxyIP };
-	connect(pingProc.data(), 
-        static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), 
-        this, 
-        [&finished](int, QProcess::ExitStatus) { finished = true; });
-	pingProc->start(program, args);
+	pingProc.start(program, args);
 
 	for (int elapsed = 0; !finished && elapsed < totalTimeout; elapsed += pollInterval)
 	{
-		finished = pingProc->waitForFinished(pollInterval);
+		finished = pingProc.waitForFinished(pollInterval);
 		if (m_TestShouldCancel.loadAcquire())
 		{
-			pingProc->kill();
+			pingProc.kill();
+			pingProc.waitForFinished();
 			return;
 		}
 	}
+	if (!finished)
+	{
+		pingProc.kill();
+		pingProc.waitForFinished();
+	}
 
-	QString pingOutput = pingProc->readAllStandardOutput();
+	QString pingOutput = pingProc.readAllStandardOutput();
 	time = QTime::currentTime().toString("hh:mm:ss");
-	if (pingProc->exitStatus() == QProcess::NormalExit && pingProc->exitCode() == 0)
+	if (pingProc.exitStatus() == QProcess::NormalExit && pingProc.exitCode() == 0)
 	{
 		QRegularExpression re(" = (\\d+)ms");
 		QRegularExpressionMatchIterator it = re.globalMatch(pingOutput);
@@ -279,11 +290,12 @@ void CTestProxyDialog::Test2EnableParams(bool enable)
 
 void CTestProxyDialog::TestProxy()
 {
-	QFuture<bool> future = QtConcurrent::run([this]() {
-		bool test1 = ui.checkBoxTest1->isChecked();
-		bool test2 = ui.checkBoxTest2->isChecked();
-		bool test2LoadPage = ui.checkBoxTest2Load->isChecked();
-		bool test3 = ui.checkBoxTest3->isChecked();
+	const bool test1 = ui.checkBoxTest1->isChecked();
+	const bool test2 = ui.checkBoxTest2->isChecked();
+	const bool test2LoadPage = ui.checkBoxTest2Load->isChecked();
+	const bool test3 = ui.checkBoxTest3->isChecked();
+
+	QFuture<bool> future = QtConcurrent::run([this, test1, test2, test2LoadPage, test3]() {
 		bool failed = false;
 		int segment = TestProgressMax / (test1 + test2 + test3);
 		int progress = 0;

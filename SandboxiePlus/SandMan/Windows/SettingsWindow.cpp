@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SettingsWindow.h"
+#include "../Mcp/McpConsent.h"
 #include "EditorSettingsWindow.h"
 #include "SandMan.h"
 #include "../MiscHelpers/Common/Settings.h"
@@ -16,6 +17,7 @@
 #include "../Wizards/TemplateWizard.h"
 #include "../AddonManager.h"
 #include <qfontdialog.h>
+#include <QJsonDocument>
 #include <QJsonObject>
 #include "Helpers/TabOrder.h"
 #include "../MiscHelpers/Common/CodeEdit.h"
@@ -227,6 +229,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.tabsGeneral->setCurrentIndex(0);
 	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Presets"));
 	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Notification"));
+	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("ChatBot"));
 
 	ui.tabsShell->setCurrentIndex(0);
 	ui.tabsShell->setTabIcon(0, CSandMan::GetIcon("Windows"));
@@ -267,6 +270,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	AddIconToLabel(ui.lblNotify, CSandMan::GetIcon("Notification").pixmap(size,size));
 	AddIconToLabel(ui.lblMessages, CSandMan::GetIcon("Email").pixmap(size,size));
 	//AddIconToLabel(ui.lblMessages, CSandMan::GetIcon("Filter").pixmap(size,size));
+	AddIconToLabel(ui.lblAI, CSandMan::GetIcon("ChatBot").pixmap(size,size));
 
 	AddIconToLabel(ui.lblStartUp, CSandMan::GetIcon("Start").pixmap(size,size));
 	AddIconToLabel(ui.lblRunBoxed, CSandMan::GetIcon("Run").pixmap(size,size));
@@ -748,10 +752,19 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	// Templates
 	connect(ui.btnAddCompat, SIGNAL(clicked(bool)), this, SLOT(OnAddCompat()));
 	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
-	m_CompatLoaded = 0;
+	connect(ui.btnCheckCompat, SIGNAL(clicked(bool)), this, SLOT(OnCheckCompat()));
+	m_CompatLoaded = false;
 	m_SettingsDirty = false;
 	m_CompatChanged = false;
 	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
+	m_UpdateTemplatesText = ui.lblUpdateTemplates->text();
+	UpdateCompatStatus();
+	connect(theAPI, &CSbieAPI::StatusChanged, this, &CSettingsWindow::UpdateCompatStatus);
+	connect(theGUI, &CSandMan::CompatCheckChanged, this, [this]() {
+		UpdateCompatStatus();
+		if (!theGUI->IsCompatCheckRunning())
+			OnCompat();
+	});
 
 	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
 	connect(ui.treeCompat, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateDoubleClicked(QTreeWidgetItem*, int)));
@@ -770,6 +783,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.btnDelTemplate, SIGNAL(clicked(bool)), this, SLOT(OnDelTemplates()));
 
 	connect(ui.lblUpdateTemplates, &QLabel::linkActivated, this, [=]() {
+		if (theGUI->IsCompatCheckRunning())
+			return;
 		theGUI->m_pUpdater->UpdateTemplates();
 #ifndef _DEBUG
 		ui.lblUpdateTemplates->setVisible(false);
@@ -838,6 +853,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	// Create initial highlighter and editor
 	m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, nullptr, m_IniValidationEnabled);
 	m_pCodeEdit = new CCodeEdit(m_pIniHighlighter);
+	m_pCodeEdit->SetLineNumbersVisible(theConf->GetBool("Options/ShowIniLineNumbers", true));
 	m_pCodeEdit->installEventFilter(this);
 	ui.txtIniSection->parentWidget()->layout()->replaceWidget(ui.txtIniSection, m_pCodeEdit);
 	delete ui.txtIniSection;
@@ -927,8 +943,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	else {
 		QWidget* pSearch = AddConfigSearch(ui.tabs);
 		ui.horizontalLayout->insertWidget(0, pSearch);
-		QTimer::singleShot(0, [this]() {
-			m_pSearch->setMaximumWidth(m_pTabs->tabBar()->width());
+		// use this as context, so the deferred call is dropped if the window gets destroyed first
+		QTimer::singleShot(0, this, [this]() {
+			if (m_pSearch && ui.tabs) // ui.tabs is gone once OnSetTree switched to the tree view
+				m_pSearch->setMaximumWidth(ui.tabs->tabBar()->width());
 		});
 
 		QAction* pSetTree = new QAction();
@@ -940,6 +958,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	m_pSearch->setPlaceholderText(tr("Search for settings"));
 
 	SetTabOrder(this);
+	connect(ui.tabsTemplates, &QTabWidget::currentChanged, this, [this](int index) {
+		if (!m_pTree)
+			OnTab(ui.tabsTemplates->widget(index));
+	});
 }
 
 void CSettingsWindow::ApplyIniEditFont()
@@ -1044,6 +1066,8 @@ CSettingsWindow::~CSettingsWindow()
 void CSettingsWindow::showTab(const QString& Name, bool bExclusive, bool bExec)
 {
 	QWidget* pWidget = this->findChild<QWidget*>("tab" + Name);
+	if ((pWidget == ui.tabCompat || pWidget == ui.tabAppCompat) && !m_CompatLoaded && theAPI->IsConnected())
+		LoadCompat(theGUI->GetCompat()->GetTemplates().isEmpty());
 
 	if (ui.tabs) {
 		
@@ -1066,8 +1090,8 @@ void CSettingsWindow::showTab(const QString& Name, bool bExclusive, bool bExec)
 	else
 		m_pStack->setCurrentWidget(pWidget);
 
-	if(pWidget == ui.tabCompat)
-		m_CompatLoaded = 2;
+	if (pWidget == ui.tabLocalTemplates && theAPI->IsConnected())
+		LoadTemplates();
 	if(pWidget == ui.tabSupport)
 		ui.chkNoCheck->setVisible(true);
 
@@ -1188,14 +1212,15 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 					break;
 			}
 
-			// Show tooltip if it's a valid setting
-			if (CIniHighlighter::IsValidTooltipContext(currentLine.left(endPos))) {
+			const int equalsIndex = currentLine.indexOf('=');
+			// Only show setting tooltips on the key side of the line.
+			if ((equalsIndex < 0 || endPos <= equalsIndex)
+				&& CIniHighlighter::IsValidTooltipContext(currentLine.left(endPos))) {
 				// Only try to show tooltips if settings are loaded
 				if (CIniHighlighter::IsSettingsLoaded()) {
 					QString settingName = currentLine.mid(startPos, endPos - startPos);
 					if (settingName.endsWith('='))
 						settingName.chop(1);
-					const int equalsIndex = currentLine.indexOf('=');
 					const QString settingValue = equalsIndex >= 0 ? currentLine.mid(equalsIndex + 1).trimmed() : QString();
 					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName, settingValue, 'g');
 					if (!tooltipText.isEmpty()) {
@@ -1723,6 +1748,7 @@ void CSettingsWindow::LoadSettings()
 		ui.treeCompat->setEnabled(false);
 		ui.btnAddCompat->setEnabled(false);
 		ui.btnDelCompat->setEnabled(false);
+		ui.btnCheckCompat->setEnabled(false);
 		ui.treeTemplates->setEnabled(false);
 		ui.btnAddTemplate->setEnabled(false);
 		ui.btnDelTemplate->setEnabled(false);
@@ -1777,6 +1803,41 @@ void CSettingsWindow::LoadSettings()
 	m_PendingChanges.CaptureCheckboxBaselines();
 	m_PendingChanges.CaptureRadioButtonBaselines();
 	m_PendingChanges.CaptureValueBaselines();
+
+
+
+	// The AI agent tab. Three settings, and each one removes a different
+	// thing: the feature, the authentication, or the questions.
+	ui.chkMcpEnabled->setChecked(theConf->GetBool("Options/McpEnabled", true));
+	ui.chkMcpPairing->setChecked(theConf->GetBool("Options/McpRequirePairing", true));
+	for (int i = CMcpConsent::eReadOnly; i <= CMcpConsent::eAskNever; i++) {
+		ui.cmbMcpConsent->addItem(CMcpConsent::ModeName((CMcpConsent::EMode)i), i);
+		ui.cmbMcpConsent->setItemData(ui.cmbMcpConsent->count() - 1,
+			CMcpConsent::ModeDescription((CMcpConsent::EMode)i), Qt::ToolTipRole);
+	}
+	ui.cmbMcpConsent->setCurrentIndex(ui.cmbMcpConsent->findData(
+		theConf->GetInt("Options/McpConsentMode", CMcpConsent::eAskAlways)));
+
+	// Where an administrator has decided, say so rather than showing a
+	// control that silently does nothing.
+	{
+		QStringList Notes;
+		if (theAPI && theAPI->IsConnected()
+			&& !theAPI->GetGlobalSettings()->GetBool("AllowAiAgent", true)) {
+			Notes.append(tr("AllowAiAgent=n in Sandboxie.ini disables this on the whole machine."));
+			ui.chkMcpEnabled->setEnabled(false);
+		}
+		if (theAPI && theAPI->IsConnected()
+			&& theAPI->GetGlobalSettings()->GetBool("AiAgentRequirePairing", false)) {
+			Notes.append(tr("AiAgentRequirePairing=y in Sandboxie.ini means the code cannot be waived."));
+			ui.chkMcpPairing->setChecked(true);
+			ui.chkMcpPairing->setEnabled(false);
+		}
+		if (CMcpConsent::IsConfirmationRequired())
+			Notes.append(tr("AiAgentRequireConfirmation=y in Sandboxie.ini keeps the confirmations on."));
+		ui.lblMcpNote->setText(Notes.join(" "));
+	}
+
 }
 
 void CSettingsWindow::OnRamDiskChange()
@@ -2320,26 +2381,29 @@ void CSettingsWindow::SaveSettings()
 			{
 				m_CompatChanged = false;
 
-				QStringList Used;
-				QStringList Rejected;
+				// Preserve configured templates not represented by this view.
+				QStringList Used = theAPI->GetGlobalSettings()->GetTextList("Template", false);
+				QStringList Rejected = theAPI->GetGlobalSettings()->GetTextList("TemplateReject", false);
 				for (int i = 0; i < ui.treeCompat->topLevelItemCount(); i++) {
 					QTreeWidgetItem* pItem = ui.treeCompat->topLevelItem(i);
 					QString Template = pItem->data(0, Qt::UserRole).toString().mid(9);
+					for (int j = Used.count() - 1; j >= 0; --j) {
+						if (Used[j].compare(Template, Qt::CaseInsensitive) == 0)
+							Used.removeAt(j);
+					}
+					for (int j = Rejected.count() - 1; j >= 0; --j) {
+						if (Rejected[j].compare(Template, Qt::CaseInsensitive) == 0)
+							Rejected.removeAt(j);
+					}
 					if (pItem->checkState(0) == Qt::Unchecked)
 						Rejected.append(Template);
 					else
 						Used.append(Template);
 				}
 
-				// retain local templates
-				foreach(const QString& Template, theAPI->GetGlobalSettings()->GetTextList("Template", false)) {
-					if (Template.left(6) == "Local_") {
-						Used.append(Template);
-					}
-				}
-
 				WriteTextList("Template", Used);
 				WriteTextList("TemplateReject", Rejected);
+				LoadCompat(false, true);
 			}
 		}
 		catch (SB_STATUS Status)
@@ -2382,6 +2446,10 @@ void CSettingsWindow::SaveSettings()
 	//theConf->SetValue("Options/CheckForTemplates", CSettingsWindow__Chk2Int(ui.chkUpdateTemplates->checkState()));
 	theConf->SetValue("Options/CheckForAddons", CSettingsWindow__Chk2Int(ui.chkUpdateAddons->checkState()));
 	theConf->SetValue("Options/CheckForIssues", CSettingsWindow__Chk2Int(ui.chkUpdateIssues->checkState()));
+
+	theConf->SetValue("Options/McpEnabled", ui.chkMcpEnabled->isChecked());
+	theConf->SetValue("Options/McpRequirePairing", ui.chkMcpPairing->isChecked());
+	theConf->SetValue("Options/McpConsentMode", ui.cmbMcpConsent->currentData().toInt());
 
 	emit OptionsChanged(m_bRebuildUI);
 }
@@ -2561,57 +2629,127 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 		LoadIniSection();
 		//ui.txtIniSection->setReadOnly(true);
 	}
-	else if (pTab == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
+	else if (pTab == ui.tabLocalTemplates && theAPI->IsConnected())
 	{
-		if(m_CompatLoaded == 0)
-			theGUI->CheckCompat(this, "OnCompat");
+		LoadTemplates();
+	}
+	else if ((pTab == ui.tabCompat || pTab == ui.tabAppCompat) && !m_CompatLoaded && theAPI->IsConnected())
+	{
+		LoadCompat(true);
 	}
 }
 
 void CSettingsWindow::OnCompat()
 {
-	ui.treeCompat->clear();
+	if (!m_CompatLoaded || !theAPI->IsConnected())
+		return;
 
-	bool bNew = false;
+	LoadCompat(false);
+	LoadTemplates();
+}
 
-	QMap<QString, int> Templates = theGUI->GetCompat()->GetTemplates();
-	for (QMap<QString, int>::iterator I = Templates.begin(); I != Templates.end(); ++I)
-	{
-		if (I.value() == CSbieTemplates::eNone)
-			continue;
+void CSettingsWindow::OnCheckCompat()
+{
+	if (!theAPI->IsConnected() || theGUI->IsCompatCheckRunning())
+		return;
 
-		QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + I.key(), theAPI));
+	LoadCompat(true);
+}
 
-		QString Title = pTemplate->GetText("Tmpl.Title", "", false, true, true);
-		if (Title.left(1) == "#")
-		{
-			int End = Title.mid(1).indexOf(",");
-			if (End == -1) End = Title.length() - 1;
-			int MsgNum = Title.mid(1, End).toInt();
-			Title = theAPI->GetSbieMsgStr(MsgNum, theGUI->m_LanguageId).arg(Title.mid(End + 2)).arg("");
-		}
-		//if (Title.isEmpty()) Title = Name;
+void CSettingsWindow::UpdateCompatStatus()
+{
+	bool bChecking = theGUI->IsCompatCheckRunning();
+	ui.lblUpdateTemplates->setText(bChecking ? tr("Checking software compatibility...") : m_UpdateTemplatesText);
+	ui.lblUpdateTemplates->setVisible(true);
+	ui.btnCheckCompat->setEnabled(theAPI->IsConnected() && !bChecking);
+}
 
-		QTreeWidgetItem* pItem = new QTreeWidgetItem();
-		pItem->setText(0, Title);
-		pItem->setData(0, Qt::UserRole, "Template_" + I.key());
-		if((I.value() & CSbieTemplates::eDisabled) != 0)
-			pItem->setCheckState(0, Qt::Unchecked);
-		else if((I.value() & CSbieTemplates::eEnabled) != 0)
-			pItem->setCheckState(0, Qt::Checked);
-		else {
-			pItem->setCheckState(0, Qt::PartiallyChecked);
-			bNew = true;
-		}
-		ui.treeCompat->addTopLevelItem(pItem);
+void CSettingsWindow::LoadCompat(bool bCheck, bool bResetChanges)
+{
+	m_CompatLoaded = true;
+
+	QSignalBlocker Blocker(ui.treeCompat);
+	bool bChanged = false;
+
+	QMap<QString, QTreeWidgetItem*> Items;
+	for (int i = 0; i < ui.treeCompat->topLevelItemCount(); ++i) {
+		QTreeWidgetItem* pItem = ui.treeCompat->topLevelItem(i);
+		Items.insert(pItem->data(0, Qt::UserRole).toString().mid(9).toCaseFolded(), pItem);
 	}
 
-	m_CompatLoaded = 1;
-	m_PendingChanges.CaptureItemBaselines(m_pTree, ui.treeCompat);
-	if(bNew)
+	QMap<QString, int> Templates = theGUI->GetCompat()->GetTemplates();
+	QStringList Used = theAPI->GetGlobalSettings()->GetTextList("Template", false);
+	QStringList Rejected = theAPI->GetGlobalSettings()->GetTextList("TemplateReject", false);
+	QStringList Names = Templates.keys();
+	foreach(const QString& Name, Used + Rejected) {
+		if (!Names.contains(Name, Qt::CaseInsensitive))
+			Names.append(Name);
+	}
+	foreach(const QString& Name, Names)
+	{
+		if (Name.isEmpty() || Name.startsWith("Local_", Qt::CaseInsensitive))
+			continue;
+
+		QTreeWidgetItem* pItem = Items.take(Name.toCaseFolded());
+		bool bEdited = pItem && !bResetChanges && m_PendingChanges.IsItemChanged(pItem);
+		// An INI save restores saved choices, not cached compatibility suggestions.
+		int State = bResetChanges ? CSbieTemplates::eNone : (Templates.value(Name) & CSbieTemplates::eRequired);
+		if (Used.contains(Name, Qt::CaseInsensitive))
+			State |= CSbieTemplates::eEnabled;
+		if (Rejected.contains(Name, Qt::CaseInsensitive))
+			State |= CSbieTemplates::eDisabled;
+		if (State == CSbieTemplates::eNone && !bEdited) {
+			delete pItem;
+			continue;
+		}
+
+		if (!pItem)
+		{
+			QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + Name, theAPI));
+
+			QString Title = pTemplate->GetText("Tmpl.Title", "", false, true, true);
+			if (Title.left(1) == "#")
+			{
+				int End = Title.mid(1).indexOf(",");
+				if (End == -1) End = Title.length() - 1;
+				int MsgNum = Title.mid(1, End).toInt();
+				Title = theAPI->GetSbieMsgStr(MsgNum, theGUI->m_LanguageId).arg(Title.mid(End + 2)).arg("");
+			}
+			if (Title.isEmpty()) Title = Name;
+
+			pItem = new QTreeWidgetItem();
+			pItem->setText(0, Title);
+			pItem->setData(0, Qt::UserRole, "Template_" + Name);
+			ui.treeCompat->addTopLevelItem(pItem);
+		}
+
+		if (!bEdited)
+		{
+			if((State & CSbieTemplates::eDisabled) != 0)
+				pItem->setCheckState(0, Qt::Unchecked);
+			else if((State & CSbieTemplates::eEnabled) != 0)
+				pItem->setCheckState(0, Qt::Checked);
+			else
+				pItem->setCheckState(0, Qt::PartiallyChecked);
+			m_PendingChanges.CaptureItemBaseline(pItem);
+		}
+		if (bEdited || pItem->checkState(0) == Qt::PartiallyChecked)
+			bChanged = true;
+	}
+
+	foreach(QTreeWidgetItem* pItem, Items) {
+		if (!bResetChanges && m_PendingChanges.IsItemChanged(pItem))
+			bChanged = true;
+		else
+			delete pItem;
+	}
+	m_CompatChanged = bChanged;
+	if(bChanged)
 		OnCompatChanged();
 
-	LoadTemplates();
+	if (bCheck && !theGUI->IsCompatCheckRunning())
+		theGUI->CheckCompat(nullptr, nullptr);
+	UpdateCompatStatus();
 }
 
 void CSettingsWindow::OnImportBox()
@@ -3039,17 +3177,23 @@ void CSettingsWindow::LoadIniSection()
 
 bool CSettingsWindow::SaveIniSection()
 {
+	const QString Section = m_pCodeEdit->GetCode();
+	if (!CIniHighlighter::ValidateIniComments(Section, this))
+		return false;
+
 	if (!theAPI->IsConnected()) {
 		QMessageBox::critical(this, "Sandboxie-Plus", tr("Sandboxie is not connected."));
 		return false;
 	}
 
 	m_SettingsDirty = true; // A reported failure can still leave partially applied changes.
-	SB_STATUS Status = theAPI->SbieIniSet("GlobalSettings", "", m_pCodeEdit->GetCode());
+	SB_STATUS Status = theAPI->SbieIniSet("GlobalSettings", "", Section);
 	if (!Status) {
 		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
 		return false;
 	}
+	LoadCompat(false, true);
+
 	return true;
 }
 
@@ -3802,8 +3946,8 @@ void CSettingsWindow::OnEditorSettings()
 		// - ValidateIniKeys (ui.chkValidateIniKeys)
 		// - EnableIniTooltips (ui.chkEnableTooltips)
 		// - EnableAutoCompletion (ui.chkEnableAutoCompletion)
-		// The other 4 settings (EnablePopupTooltips, EnableFuzzyMatching, AutoCompletionConsent,
-		// ShowFutureSettings)
+		// The other 5 settings (EnablePopupTooltips, EnableFuzzyMatching, AutoCompletionConsent,
+		// ShowFutureSettings, ShowIniLineNumbers)
 		// are managed by EditorSettings but don't have corresponding UI in SettingsWindow
 		
 		// Block signals while updating checkboxes to prevent toggle handlers from being called prematurely
@@ -3856,6 +4000,7 @@ void CSettingsWindow::OnEditorSettings()
 		// These are managed via EditorSettings only
 		bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
 		m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
+		m_pCodeEdit->SetLineNumbersVisible(theConf->GetBool("Options/ShowIniLineNumbers", true));
 		
 		// Always update autocompletion list regardless of reset status
 		UpdateAutoCompletion();

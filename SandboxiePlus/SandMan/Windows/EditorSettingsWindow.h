@@ -64,6 +64,7 @@ private:
 	QCheckBox* chkEnableAutoCompletion;
 	QCheckBox* chkEnableFuzzyMatching;
 	QCheckBox* chkShowFutureSettings;
+	QCheckBox* chkShowIniLineNumbers;
 	
 	// Store original values for restore on cancel
 	int m_originalEnableIniTooltips;
@@ -71,6 +72,7 @@ private:
 	int m_originalEnableAutoCompletion;
 	bool m_originalEnableFuzzyMatching;
 	bool m_originalShowFutureSettings;
+	bool m_originalShowIniLineNumbers;
 	bool m_originalValidateIniKeys;
 	int m_originalEnablePopupTooltips;
 	
@@ -82,6 +84,7 @@ private:
 	bool m_resetEnableAutoCompletion;
 	bool m_resetEnableFuzzyMatching;
 	bool m_resetShowFutureSettings;
+	bool m_resetShowIniLineNumbers;
 	
 	// Persistent flags to track which settings were reset (not cleared by SaveSettings)
 	// These are used by OptionsWindow after dialog closes

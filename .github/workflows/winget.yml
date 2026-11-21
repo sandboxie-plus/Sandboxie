@@ -51,6 +51,7 @@ jobs:
           echo "PLUS_VER=$VERSION" >> $env:GITHUB_OUTPUT
         shell: pwsh
       - name: Publish Sandboxie-Plus
+        id: publish_plus
         if: steps.check_plus.outputs.ready == 'true'
         uses: vedantmgoyal9/winget-releaser@main
         with:
@@ -58,6 +59,149 @@ jobs:
           identifier: Sandboxie.Plus
           installers-regex: "Sandboxie-Plus.*.exe$"
           token: ${{ secrets.WINGET_TOKEN }}
+
+      - name: Normalize Sandboxie-Plus manifest
+        if: steps.check_plus.outputs.ready == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.WINGET_TOKEN }}
+          PR_URL: ${{ steps.publish_plus.outputs.pr-url }}
+          PACKAGE_VERSION: ${{ steps.get_version.outputs.PLUS_VER }}
+        run: |
+          set -euo pipefail
+          python -m pip install 'ruamel.yaml==0.18.10'
+
+          python - <<'PY'
+          import base64
+          import io
+          import json
+          import os
+          import re
+          import subprocess
+
+          from ruamel.yaml import YAML
+
+          def gh(*args, data=None):
+              result = subprocess.run(
+                  ["gh", "api", *args],
+                  input=json.dumps(data) if data is not None else None,
+                  text=True,
+                  capture_output=True,
+              )
+              if result.returncode:
+                  raise RuntimeError(result.stderr.strip() or "gh api failed")
+              return json.loads(result.stdout)
+
+          pr_match = re.fullmatch(
+              r"https://github\.com/microsoft/winget-pkgs/pull/(\d+)",
+              os.environ["PR_URL"],
+          )
+          version = os.environ["PACKAGE_VERSION"]
+          if not pr_match or not re.fullmatch(r"\d+(?:\.\d+)+", version):
+              raise ValueError("Unexpected PR URL or package version")
+
+          pr = gh(f"repos/microsoft/winget-pkgs/pulls/{pr_match.group(1)}")
+          repo = pr["head"]["repo"]["full_name"]
+          branch = pr["head"]["ref"]
+          if (
+              pr["state"] != "open"
+              or pr["base"]["repo"]["full_name"].lower() != "microsoft/winget-pkgs"
+              or repo.lower() != "sandboxie-plus/winget-pkgs"
+          ):
+              raise ValueError("PR state or repository does not match the expected values")
+
+          path = f"manifests/s/Sandboxie/Plus/{version}/Sandboxie.Plus.installer.yaml"
+          endpoint = f"repos/{repo}/contents/{path}"
+          file = gh(endpoint, "--method", "GET", "-f", f"ref={branch}")
+          original = base64.b64decode(file["content"]).decode("utf-8")
+
+          yaml = YAML()
+          yaml.preserve_quotes = True
+          yaml.indent(mapping=2, sequence=2, offset=0)
+          manifest = yaml.load(original)
+
+          if (
+              manifest["PackageIdentifier"] != "Sandboxie.Plus"
+              or str(manifest["PackageVersion"]) != version
+          ):
+              raise ValueError("Unexpected manifest identity")
+
+          installers = manifest["Installers"]
+          expected_arches = {"x64", "arm64"}
+          root_switches = {"Custom": "/ALLUSERS"}
+
+          normalized = (
+              manifest.get("Scope") == "machine"
+              and manifest.get("InstallerSwitches") == root_switches
+              and len(installers) == 2
+              and {item.get("Architecture") for item in installers} == expected_arches
+              and all("Scope" not in item and "InstallerSwitches" not in item for item in installers)
+          )
+
+          if not normalized:
+              pairs = {}
+              for item in installers:
+                  key = (item.get("Architecture"), item.get("Scope"))
+                  if key in pairs:
+                      raise ValueError(f"Duplicate installer variant: {key}")
+                  pairs[key] = item
+
+              expected = {
+                  (arch, scope)
+                  for arch in expected_arches
+                  for scope in ("user", "machine")
+              }
+              if set(pairs) != expected or "Scope" in manifest or "InstallerSwitches" in manifest:
+                  raise ValueError("Unexpected Komac installer manifest structure")
+
+              machine_installers = []
+              for arch in ("x64", "arm64"):
+                  user = pairs[(arch, "user")]
+                  machine = pairs[(arch, "machine")]
+                  if (
+                      user.get("InstallerSwitches") != {"Custom": "/CURRENTUSER"}
+                      or machine.get("InstallerSwitches") != root_switches
+                  ):
+                      raise ValueError(f"Unexpected installer switches for {arch}")
+                  for field in ("InstallerUrl", "InstallerSha256"):
+                      if user.get(field) != machine.get(field):
+                          raise ValueError(f"Installer variants differ in {field}: {arch}")
+
+                  del machine["Scope"]
+                  del machine["InstallerSwitches"]
+                  machine_installers.append(machine)
+
+              manifest["Installers"][:] = machine_installers
+              manifest.insert(list(manifest).index("InstallerType") + 1, "Scope", "machine")
+              manifest.insert(
+                  list(manifest).index("UpgradeBehavior"),
+                  "InstallerSwitches",
+                  root_switches,
+              )
+
+          for entry in manifest.get("AppsAndFeaturesEntries", []):
+              if str(entry.get("DisplayVersion", "")) == version:
+                  del entry["DisplayVersion"]
+
+          output = io.StringIO()
+          yaml.dump(manifest, output)
+          updated = output.getvalue()
+          if updated == original:
+              print("Manifest already normalized; no commit needed.")
+              raise SystemExit(0)
+
+          gh(
+              endpoint,
+              "--method", "PUT",
+              "--input", "-",
+              data={
+                  "message": "Normalize Sandboxie.Plus installer scope",
+                  "content": base64.b64encode(updated.encode()).decode(),
+                  "sha": file["sha"],
+                  "branch": branch,
+              },
+          )
+          PY
 
   publish-classic:
     needs: sync-upstream-winget-pkgs

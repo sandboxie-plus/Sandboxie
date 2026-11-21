@@ -5,17 +5,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.19.2 / 5.74.2] - 2026-??-??
+## [1.19.2 / 5.74.2] - 2026-12-??
 
 ### Fixed
+- fixed incorrect pending-change highlighting and Apply behavior for AI Integration settings
 - fixed ignored INI list and boolean write errors and SandMan discarding pending options or raw INI edits after a reported save failure, including sandbox Apply/OK writing stale structured settings right after cancelling a partial raw save
 
 
 
-## [1.19.1 / 5.74.1] - 2026-10-21
+## [1.19.1 / 5.74.1] - 2026-11-21
 
 ### Added
 - added line numbers to the built-in INI section editors, with an Advanced Editor Settings toggle and Ctrl+G destination highlighting; copying and saving exclude the line numbers
+- added per-dialog GUID name controls to Rename Sandbox and the New Box wizard, with alias overwrite confirmation; GUID-like names offer regeneration without being copied into aliases, and the global GUID option only supplies the wizard default
+- added batch sandbox name and alias editing with Previous/Next draft navigation; OK saves and advances, the final OK saves remaining drafts, and Cancel warns before discarding unsaved edits
 - added configurable sandbox border labels on all four window edges through `BorderLabelPosition`, with adjustable position, stacked or rotated side text, fixed/adaptive placement, and a dedicated Box Border tab in sandbox options
 - added customizable sandbox border label fonts with native style and writing-system selection, GDI preview, synchronized point size, immediate font-only Apply, and reset to legacy defaults
 - added `CustomProcessCommandLine` to conditionally add, remove, replace, or clear sandboxed process arguments
@@ -65,8 +68,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed a crash on exit with the Troubleshooting Wizard open, its shadow boxes are now discarded while the API is still available
 - worked around a Qt 6.8 crash when activating a window while a modal dialog without a native window was shown
 - fixed SBIE2218 `[86 / 00000005]` and a hanging requester when elevating a program in a box with Windows Administrator Protection enabled
-
-
 
 
 

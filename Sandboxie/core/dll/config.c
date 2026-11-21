@@ -192,9 +192,7 @@ _FX BOOLEAN Config_MatchImageGroup(
         //
 
         NTSTATUS status = SbieApi_QueryConf(
-            NULL, L"ProcessGroup", index, conf_buf,
-            image_type ? (CONF_LINE_LEN - 16) * sizeof(WCHAR)
-                       : sizeof(conf_buf) - 16 * sizeof(WCHAR));
+            NULL, L"ProcessGroup", index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
         if (!NT_SUCCESS(status))
             break;
 

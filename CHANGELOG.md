@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.19.1 / 5.74.1] - 2026-10-??
+## [1.19.1 / 5.74.1] - 2026-10-21
 
 ### Added
 - added line numbers to the built-in INI section editors, with an Advanced Editor Settings toggle and Ctrl+G destination highlighting; copying and saving exclude the line numbers

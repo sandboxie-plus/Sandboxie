@@ -300,7 +300,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Engine/BoxEngine.cpp" line="200"/>
         <source>Failed to initialize the script engine, not enough memory or memory access blocked by third-party software.</source>
-        <translation type="unfinished"></translation>
+        <translation>Betik motoru başlatılamadı; yeterli bellek yok veya bellek erişimi üçüncü taraf yazılımlar tarafından engelleniyor.</translation>
     </message>
     <message>
         <location filename="Engine/BoxEngine.cpp" line="253"/>
@@ -386,28 +386,29 @@ Leet (L337) Konuşma değişikliklerinin uygulanmasıyla 512 bit&apos;e çıkar 
     <message>
         <location filename="Boxes/BoxReport.cpp" line="122"/>
         <source>Compressing Logs</source>
-        <translation type="unfinished">Günlükler Sıkıştırılıyor</translation>
+        <translation>Günlükler Sıkıştırılıyor</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="150"/>
         <source>Compressing Dumps</source>
-        <translation type="unfinished">Çökme Dosyaları Sıkıştırılıyor</translation>
+        <translation>Çökme Dosyaları Sıkıştırılıyor</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="187"/>
         <source>Submitting report...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapor gönderiliyor...</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="255"/>
         <source>Failed to submit report, error %1
 Try submitting without the log attached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapor gönderilemedi, hata %1
+Günlüğü eklemeden göndermeyi deneyin.</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="257"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
-        <translation type="unfinished">Sorun raporunuz başarıyla gönderildi, teşekkür ederiz.</translation>
+        <translation>Sorun raporunuz başarıyla gönderildi, teşekkür ederiz.</translation>
     </message>
 </context>
 <context>
@@ -522,32 +523,32 @@ Try submitting without the log attached.</source>
     <message>
         <location filename="BoxTransfer.cpp" line="126"/>
         <source>Create sandboxes in:</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alanların oluşturulacağı konum:</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Where the imported sandboxes are created. Keep %SANDBOX% in the path so that each box gets its own folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>İçe aktarılan korumalı alanların oluşturulacağı konum. Her alanın kendi klasörüne sahip olması için yolda %SANDBOX% ifadesini koruyun.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="144"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gözat...</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="199"/>
         <source>Select the folder to create the sandboxes in</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alanların oluşturulacağı klasörü seçin</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="218"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished">Korumalı alan bir ağ paylaşımında bulunamaz, lütfen yerel bir klasör seçin.</translation>
+        <translation>Korumalı alan bir ağ paylaşımında bulunamaz, lütfen yerel bir klasör seçin.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="226"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished">Korumalı alan bir disk bölümünün kök dizininde bulunamaz, lütfen bir alt klasör seçin.</translation>
+        <translation>Korumalı alan bir disk bölümünün kök dizininde bulunamaz, lütfen bir alt klasör seçin.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="368"/>
@@ -699,12 +700,12 @@ Try submitting without the log attached.</source>
         <location filename="Wizards/NewBoxWizard.cpp" line="366"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="569"/>
         <source>Use a random GUID as sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan adı olarak rastgele bir GUID kullan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="367"/>
         <source>Generate a new GUID. A non-GUID name can be copied to the alias field. Uncheck to restore the previous name; alias edits are kept.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni bir GUID oluşturun. GUID olmayan bir ad takma ad alanına kopyalanabilir. Önceki adı geri yüklemek için seçimi kaldırın; takma ad değişiklikleri korunur.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="400"/>
@@ -823,17 +824,17 @@ Bu şekilde gizli korumalı alan ortamında en yüksek düzeyde gizlilik ve veri
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="569"/>
         <source>Generate a new GUID</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni bir GUID oluştur</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="577"/>
         <source>Replace alias?</source>
-        <translation type="unfinished"></translation>
+        <translation>Takma ad değiştirilsin mi?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="578"/>
         <source>The alias field is not empty. Replace it with the current sandbox name?</source>
-        <translation type="unfinished"></translation>
+        <translation>Takma ad alanı boş değil. Geçerli korumalı alan adıyla değiştirilsin mi?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="648"/>
@@ -1336,24 +1337,24 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="46"/>
         <source>Show Future Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelecekteki Ayarları Göster</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="50"/>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Gizli</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="47"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="50"/>
         <source>Shown (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Göster (varsayılan)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="49"/>
         <source>Show INI Line Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>INI Satır Numaralarını Göster</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="61"/>
@@ -1412,7 +1413,7 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
     <message>
         <location filename="../MiscHelpers/Common/ExitDialog.h" line="44"/>
         <source>Yes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Evet (%1)</translation>
     </message>
 </context>
 <context>
@@ -1705,72 +1706,72 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="25"/>
         <source>empty endpoint name</source>
-        <translation type="unfinished"></translation>
+        <translation>boş uç nokta adı</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="37"/>
         <source>&apos;%1&apos; looks like a bracketed IPv6 endpoint but is not one</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; köşeli parantezli bir IPv6 uç noktası gibi görünüyor, ancak geçerli değil</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="66"/>
         <source>&apos;%1&apos; is not a valid port</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; geçerli bir bağlantı noktası değil</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="73"/>
         <source>&apos;%1&apos; is not a valid IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; geçerli bir IP adresi değil</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="92"/>
         <source>empty local socket name</source>
-        <translation type="unfinished"></translation>
+        <translation>boş yerel soket adı</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="100"/>
         <source>local socket name is too long (%1 characters, 247 max)</source>
-        <translation type="unfinished"></translation>
+        <translation>yerel soket adı çok uzun (%1 karakter, en fazla 247)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="105"/>
         <source>local socket name must not contain a path separator</source>
-        <translation type="unfinished"></translation>
+        <translation>yerel soket adı yol ayırıcı içeremez</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="110"/>
         <source>&apos;%1&apos; is not a usable local socket name</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; kullanılabilir bir yerel soket adı değil</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="117"/>
         <source>local socket name must not contain control characters</source>
-        <translation type="unfinished"></translation>
+        <translation>yerel soket adı kontrol karakterleri içeremez</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="135"/>
         <source>Failed to listen on %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dinlenemedi</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="143"/>
         <source>Invalid local socket name &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçersiz yerel soket adı &apos;%1&apos;: %2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="150"/>
         <source>Invalid endpoint &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçersiz uç nokta &apos;%1&apos;: %2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="196"/>
         <source>Failed to listen on local socket %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Yerel soket %1 dinlenemedi: %2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="325"/>
         <source>recived new request, befoure the previouse response was completly sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Önceki yanıt tamamen gönderilmeden yeni bir istek alındı</translation>
     </message>
 </context>
 <context>
@@ -1778,37 +1779,37 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
         <source>recived invalid HTTP request</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçersiz HTTP isteği alındı</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="99"/>
         <source>recived unsupported HTTP request %1 from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%2 adresinden desteklenmeyen HTTP isteği %1 alındı</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="127"/>
         <source>recived invalid POST request %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçersiz POST isteği %1 alındı</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="146"/>
         <source>recived POST/PUT request without Content-Length !!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Content-Length içermeyen POST/PUT isteği alındı !!!</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="176"/>
         <source>recived GET request with attached data ?!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekli veriler içeren GET isteği alındı ?!</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="292"/>
         <source>recived a POST payload before any part header</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhangi bir bölüm başlığından önce POST yükü alındı</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="429"/>
         <source>Error While Sending response</source>
-        <translation type="unfinished"></translation>
+        <translation>Yanıt gönderilirken hata oluştu</translation>
     </message>
 </context>
 <context>
@@ -1876,7 +1877,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2680"/>
         <source>Line %1: Semicolons (;) are not supported as comment markers. Use # instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Satır %1: Noktalı virgül (;) yorum işareti olarak desteklenmez. Bunun yerine # kullanın.</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2909"/>
@@ -2039,7 +2040,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.h" line="49"/>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>Sınırsız</translation>
     </message>
 </context>
 <context>
@@ -2065,83 +2066,85 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="17"/>
         <source>Connect an AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir Yapay Zeka Aracısı Bağla</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="22"/>
         <source>An AI agent can read your sandbox configuration, the bundled documentation and diagnostic data, and help you work out why something does not run in a sandbox.
 
 It is off until you turn it on, it is not reachable from inside a sandbox, and it has to be authorised with a code shown on your screen before it can do anything.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir yapay zeka aracısı korumalı alan yapılandırmanızı, birlikte verilen belgeleri ve tanılama verilerini okuyabilir ve bir şeyin korumalı alanda neden çalışmadığını anlamanıza yardımcı olabilir.
+
+Siz açana kadar kapalıdır, korumalı alanın içinden erişilemez ve herhangi bir işlem yapabilmesi için önce ekranınızda gösterilen bir kodla yetkilendirilmesi gerekir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="34"/>
         <source>Which client do you want to use?</source>
-        <translation type="unfinished"></translation>
+        <translation>Hangi istemciyi kullanmak istiyorsunuz?</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="50"/>
         <location filename="Mcp/McpConnectDialog.cpp" line="144"/>
         <source>Configure It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>Benim İçin Yapılandır</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="51"/>
         <source>Start It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>Benim İçin Başlat</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="52"/>
         <location filename="Mcp/McpConnectDialog.cpp" line="219"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopyala</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="91"/>
         <source>   (found, already configured)</source>
-        <translation type="unfinished"></translation>
+        <translation>   (bulundu, zaten yapılandırılmış)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="93"/>
         <source>   (found)</source>
-        <translation type="unfinished"></translation>
+        <translation>   (bulundu)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="95"/>
         <source>   (not found)</source>
-        <translation type="unfinished"></translation>
+        <translation>   (bulunamadı)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="102"/>
         <source>Turn Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapat</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="102"/>
         <source>Turn On</source>
-        <translation type="unfinished"></translation>
+        <translation>Aç</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="106"/>
         <source>The connection is ON. A client can connect now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlantı AÇIK. Bir istemci şimdi bağlanabilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="107"/>
         <source>The connection is OFF. Turn it on here, or let the client ask for it - Sandboxie-Plus will offer when something tries to connect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlantı KAPALI. Buradan açın veya istemcinin talep etmesini bekleyin - bir şey bağlanmaya çalıştığında Sandboxie-Plus bunu önerecektir.</translation>
     </message>
     <message numerus="yes">
         <location filename="Mcp/McpConnectDialog.cpp" line="112"/>
         <source>Forget %1 Remembered Program(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Hatırlanan %1 Programı Unut</numerusform>
         </translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="115"/>
         <source>SbieMcp.exe was not found next to SandMan, so this installation cannot accept agent connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>SbieMcp.exe, SandMan&apos;in yanında bulunamadı; bu nedenle bu kurulum aracı bağlantılarını kabul edemez.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="138"/>
@@ -2149,12 +2152,15 @@ It is off until you turn it on, it is not reachable from inside a sandbox, and i
 %1
 
 Your other servers are kept; only the Sandboxie entry is added or updated, and the file is backed up first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırma dosyası:
+%1
+
+Diğer sunucularınız korunur; yalnızca Sandboxie girdisi eklenir veya güncellenir ve önce dosyanın yedeği alınır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="144"/>
         <source>Update It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>Benim İçin Güncelle</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="149"/>
@@ -2164,12 +2170,17 @@ Or let Sandboxie-Plus start it for you, in a folder of its own:
 %2
 
 The configuration written there reaches that one session and nothing else you do with it.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+
+Veya Sandboxie-Plus&apos;ın sizin için kendi klasöründe başlatmasına izin verin:
+%2
+
+Buraya yazılan yapılandırma yalnızca o oturuma uygulanır; onunla yaptığınız diğer işlemleri etkilemez.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="180"/>
         <source>%1 is configured. Restart it if it is running, so it picks up the change.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 yapılandırıldı. Değişikliğin uygulanması için çalışıyorsa yeniden başlatın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="182"/>
@@ -2177,34 +2188,39 @@ The configuration written there reaches that one session and nothing else you do
 
 The previous configuration was kept as:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Önceki yapılandırma şu adla saklandı:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="185"/>
         <source>MCP: wrote the agent configuration for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 için aracı yapılandırması yazıldı</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="207"/>
         <source>MCP: started %1 in %2</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1, %2 içinde başlatıldı</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="218"/>
         <source>Copied</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopyalandı</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="232"/>
         <source>Forget these programs? Each will have to be authorised with a code again.
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu programlar unutulsun mu? Her birinin yeniden bir kodla yetkilendirilmesi gerekecek.
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="238"/>
         <source>MCP: the remembered agent programs were forgotten</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: hatırlanan aracı programları unutuldu</translation>
     </message>
 </context>
 <context>
@@ -2212,98 +2228,98 @@ The previous configuration was kept as:
     <message>
         <location filename="Mcp/McpConsent.cpp" line="62"/>
         <source>Look, do not touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Bak, dokunma</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="63"/>
         <source>Ask only for risky things</source>
-        <translation type="unfinished"></translation>
+        <translation>Yalnızca riskli işlemler için sor</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="64"/>
         <source>Do not ask, just tell me</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorma, yalnızca bildir</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="65"/>
         <source>Ask before every change</source>
-        <translation type="unfinished"></translation>
+        <translation>Her değişiklikten önce sor</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="73"/>
         <source>The agent can read and diagnose, and every attempt to change anything is refused without asking you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aracı okuyabilir ve tanı koyabilir; herhangi bir şeyi değiştirmeye yönelik her girişimi size sorulmadan reddedilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="76"/>
         <source>Ordinary setting changes happen without interrupting you. You are still asked before anything that cannot be undone, runs a program, sends something off this computer, or opens a sandbox up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Olağan ayar değişiklikleri size mâni olmadan yapılır. Geri alınamayan, bir program çalıştıran, bu bilgisayarın dışına bir şey gönderen veya bir korumalı alanın korumasını gevşeten işlemlerden önce yine de size sorulur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="80"/>
         <source>The agent acts without asking. Everything it does is still listed here and written to the audit log - you are not asked, but you are told.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aracı sormadan işlem yapar. Yaptığı her şey yine burada listelenir ve denetim günlüğüne yazılır - size sorulmaz, ancak bilgi verilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="83"/>
         <source>Nothing changes, starts or stops until you say so.</source>
-        <translation type="unfinished"></translation>
+        <translation>Siz söylemeden hiçbir şey değiştirilmez, başlatılmaz veya durdurulmaz.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="107"/>
         <source>refused, because the agent is set to look but not touch: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>reddedildi, çünkü aracı yalnızca bakacak, dokunmayacak şekilde ayarlanmış: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="108"/>
         <source>refused: the agent may not change anything</source>
-        <translation type="unfinished"></translation>
+        <translation>reddedildi: aracı hiçbir şeyi değiştiremez</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="117"/>
         <source>done without asking: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>sorulmadan yapıldı: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="118"/>
         <source>allowed automatically (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>otomatik olarak izin verildi (%1)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="128"/>
         <source>another confirmation was already open</source>
-        <translation type="unfinished"></translation>
+        <translation>başka bir onay penceresi zaten açıktı</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="142"/>
         <source>allowed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>izin verildi: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="142"/>
         <source>refused: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>reddedildi: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="144"/>
         <source>allowed by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>kullanıcı izin verdi</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="144"/>
         <source>refused by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>kullanıcı reddetti</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="151"/>
         <location filename="Mcp/McpConsent.cpp" line="204"/>
         <source>An AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir yapay zeka aracısı</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="153"/>
         <source>%1 wants to change the configuration of sandbox %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1, %2 korumalı alanının yapılandırmasını değiştirmek istiyor.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="159"/>
@@ -2311,7 +2327,10 @@ The previous configuration was kept as:
 
 Its reason, in its own words:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Kendi sözleriyle gerekçesi:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="162"/>
@@ -2319,59 +2338,69 @@ Its reason, in its own words:
 
 These are the changes:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Değişiklikler şunlar:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="171"/>
         <source>
   remove  %1 = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  kaldır  %1 = %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="173"/>
         <source>
   add     %1 = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  ekle     %1 = %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="175"/>
         <source>
   change  %1 = %2   (was %3)</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  değiştir  %1 = %2   (önceki değer %3)</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="178"/>
         <source>   &lt;- not a known setting</source>
-        <translation type="unfinished"></translation>
+        <translation>   &lt;- bilinen bir ayar değil</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="184"/>
         <source>
 
 Warning: at least one of these is not a setting Sandboxie recognises. Unknown settings are ignored silently rather than reported as an error, so such a change would appear to work and have no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Uyarı: Bunlardan en az biri Sandboxie&apos;nin tanıdığı bir ayar değil. Bilinmeyen ayarlar hata olarak bildirilmek yerine sessizce yok sayılır; bu nedenle böyle bir değişiklik işe yaramış gibi görünür, ancak hiçbir etkisi olmaz.</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="197"/>
         <source>Confirm configuration change</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırma değişikliğini onayla</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="197"/>
         <source>Apply These Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu Değişiklikleri Uygula</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="198"/>
         <source>change %1 setting(s) on %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%2 üzerinde %1 ayarı değiştir</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="205"/>
         <source>%1 wants to do the following.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 şunları yapmak istiyor.
+
+%2</translation>
     </message>
 </context>
 <context>
@@ -2379,137 +2408,137 @@ Warning: at least one of these is not a setting Sandboxie recognises. Unknown se
     <message>
         <location filename="Mcp/McpServer.cpp" line="94"/>
         <source>released a session whose client exited, discarding its test copies</source>
-        <translation type="unfinished"></translation>
+        <translation>istemcisi kapanan bir oturumu serbest bıraktı ve test kopyalarını attı</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="98"/>
         <source>the agent</source>
-        <translation type="unfinished"></translation>
+        <translation>aracı</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="100"/>
         <source>disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>bağlantı kesildi</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="103"/>
         <source>%1 exited; its test copies were discarded</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kapandı; test kopyaları atıldı</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="104"/>
         <source>%1 exited</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kapandı</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="142"/>
         <source>refusing to listen on &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; üzerinde dinleme reddediliyor: %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="153"/>
         <source>MCP server could not listen on &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP sunucusu &apos;%1&apos; üzerinde dinleme yapamadı</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="163"/>
         <source>documentation pack mounted: %1 pages from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>belge paketi bağlandı: %2 kaynağından %1 sayfa</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="166"/>
         <source>no documentation pack found - docs lookups will be unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>belge paketi bulunamadı - belge aramaları kullanılamayacak</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="180"/>
         <source>knowledge base: %1 entries from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>bilgi tabanı: %2 kaynağından %1 girdi</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="183"/>
         <source>no troubleshooting knowledge base found</source>
-        <translation type="unfinished"></translation>
+        <translation>sorun giderme bilgi tabanı bulunamadı</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="192"/>
         <source>audit log: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>denetim günlüğü: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="203"/>
         <source>MCP server listening on &apos;%1%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP sunucusu &apos;%1%2&apos; üzerinde dinliyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="272"/>
         <source>the connecting process could not be identified</source>
-        <translation type="unfinished"></translation>
+        <translation>bağlanan işlem tanımlanamadı</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="283"/>
         <source>process %1 is sandboxed, in box &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 işlemi, &apos;%2&apos; alanında korumalı olarak çalışıyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="288"/>
         <source>box membership of process %1 could not be established</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 işleminin hangi alana ait olduğu belirlenemedi</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="297"/>
         <source>refused an MCP connection: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>bir MCP bağlantısı reddedildi: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="299"/>
         <source>Refused: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Reddedildi: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="307"/>
         <source>refused an MCP connection from origin &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; kaynağından gelen bir MCP bağlantısı reddedildi</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="308"/>
         <source>Origin not allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaynağa izin verilmiyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="315"/>
         <source>The MCP endpoint accepts POST only</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP uç noktası yalnızca POST kabul eder</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="344"/>
         <source>rejected an MCP message: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>bir MCP iletisi reddedildi: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="414"/>
         <source>authorised without a code, because asking for one is turned off</source>
-        <translation type="unfinished"></translation>
+        <translation>kod isteme kapalı olduğundan kod olmadan yetkilendirildi</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="448"/>
         <source>asked for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 istendi</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="467"/>
         <source>Your write-up is now out of date - this is not in it. Call report_compose again so that what the user is offered describes what you have actually done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Raporunuz artık güncel değil - bu, raporda yer almıyor. Kullanıcıya sunulan raporun gerçekten yaptıklarınızı açıklaması için report_compose aracını yeniden çağırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="469"/>
         <source>You have changed something on this machine and nothing is written up yet. Call report_compose now, with what you know so far - the symptom and what you have ruled out is already worth having - and again as you learn more. The user is offered whatever you composed last, and they may close the agent window at any moment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu makinede bir şeyi değiştirdiniz ve henüz hiçbir rapor yazılmadı. Şu ana kadar bildiklerinizle report_compose aracını şimdi çağırın - belirti ve elediğiniz olasılıklar bile kayda değerdir - ve yeni şeyler öğrendikçe yeniden çağırın. Kullanıcıya en son hazırladığınız rapor sunulur ve kullanıcı aracı penceresini her an kapatabilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="492"/>
         <source>Method not found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Yöntem bulunamadı: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="529"/>
@@ -2558,72 +2587,116 @@ Compose on a success as readily as on a failure. A failure report tells the proj
 You do not send it - that is the user&apos;s, and you have no tool for it. When you are done, tell them to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: it opens your report for them to read, correct and send to the project&apos;s own tracker, which needs no account of any kind. Say once that sending it is worth doing and why, then leave it with them - they may say no, and that is a normal answer.
 
 Fill in what you ruled out, not only what you concluded. A cause is made identifiable by what it is not, and that is the field that turns one report into something that recognises the same fault on somebody else&apos;s machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu sunucu, bu makinedeki yerel Sandboxie-Plus kurulumuna erişim sağlar.
+
+Belgeleri ve ayar şemasını hemen okuyabilirsiniz - bu araçlar, bu makineye ilişkin bilgiler yerine Sandboxie ile birlikte gelen bilgileri döndürdükleri için yetkilendirme gerektirmez.
+
+Makinenin kendisini incelemek için - hangi korumalı alanların var olduğu, nelerin çalıştığı, nelerin reddedildiği - önce yetki alın. &apos;pair&apos; aracını bağımsız değişken olmadan çağırın; Sandboxie-Plus kullanıcıya altı haneli bir kod gösterir. Kullanıcıdan bu kodu isteyin ve &apos;pair&apos; aracını bu kodla yeniden çağırın. Kodu tahmin etmeyin.
+
+Henüz kullanamadıklarınız dahil, bütün araçlar baştan listelenir: bunlar eşleştirme yapana kadar istekleri reddeder ve bunu belirtir. Listeye hiçbir şey eklenmez veya listeden çıkarılmaz; dolayısıyla listeyi yenilemeye gerek yoktur - kullanıcıdan yeniden bağlanmasını istemenin de anlamı yoktur.
+
+Değişmez ve zorunlu bir kural: report_compose ile her zaman yazılı bir rapor tutun. Bir belirti ve şüpheniz olur olmaz - nedenini, hele çözümünü bulmayı beklemeden - bir rapor hazırlayın; değiştirdiğiniz, çalıştırdığınız veya elediğiniz her şeyden sonra yeniden hazırlayın. Önceki raporun yerini alır; bu nedenle sık kullanmanın bir maliyeti ve yönetilecek kısmi bir durum yoktur.
+
+İşe yarayıp yaramadığını da öğrenin. Kullanıcı sorunun giderildiğini - ya da giderilmediğini - söylediğinde, confirmed_by_user ayarlanmış olarak yeniden rapor hazırlayın; bu, sonucun size değil kullanıcıya ait olduğunu kaydeder. Söylemediyse sorun: &apos;şimdi çalışıyor mu?&apos; sorusu bir konuşma turuna değer ve rapordaki en değerli satırdır. Bu bayrak ayarlanana kadar Sandboxie-Plus çalışmanın tamamlanmadığını varsayar: kullanıcıya çalışmayı kendi başına bitirebileceği düğmeler gösterir ve herhangi bir şey gönderilmeden önce soruyu kendisi sorar.
+
+Bunu sonda yapılacak evrak işi değil, çalışmanın bir parçası olarak görün. Sandboxie-Plus en son raporunuzu saklar ve kullanıcı aracı penceresini kapattığında kendisine sunar; bu her an olabilir - ve hiç rapor hazırlamadıysanız hiçbir şey sunulmaz, bulduğunuz her şey proje açısından kaybolur. Bir şeyi düzeltmiş ancak hiçbir rapor yazmamış olarak çalışmayı bitirmek, kullanıcı ne kadar memnun olursa olsun başarısız bir çalışmadır.
+
+Ardından, işlem yapmadan önce okuyun: ayarlar ve düzeltmeler derlemeler arasında değiştiğinden önce sandboxie_version, sonra box_list, ardından ilgili alan için box_get_config. box_get_config aracının yalnızca o alanda ayarlanmış değerleri gösterdiğine dikkat edin - şablonlardan ve genel varsayılanlardan devralınan değerler listelenmez; dolayısıyla bir ayarın görünmemesi, mutlaka etkin olmadığı anlamına gelmez.
+
+Ayarlar hakkında iki ayrı doğruluk kaynağı vardır ve kapsamlarının çoğunda birbiriyle uyuşmazlar. Bir ayarın var olup olmadığı, söz dizimi ve hangi sürümde eklendiği veya kaldırıldığı konusunda yetkili kaynak config_schema aracıdır. Birlikte gelen belgeler (docs_search, docs_get, docs_for_setting) bir ayarın ne anlama geldiğini açıklar, ancak ayarların yalnızca yaklaşık beşte ikisini kapsar. Belgelerde bir ayardan söz edilmemesi, o ayarın bulunmadığına kanıt değildir - kullanıcıya gerçek bir ayar olmadığını söylemeden önce config_schema aracını kontrol edin. Öte yandan asla bir ayar adı uydurmayın: sürücü bilinmeyen bir adı hata bildirmek yerine sessizce yok sayar; bu nedenle bir yazım hatası, hiçbir etkisi olmayan bir ayarla tamamen aynı görünür.
+
+Bir şey korumalı alanda çalışmadığında, yararlı inceleme sırası şöyledir: çalışıp çalışmadığını görmek için box_processes, Sandboxie&apos;nin neye itiraz ettiğini görmek için box_diagnostics, ardından reddedilen erişimleri görmek için o alana göre filtrelenmiş trace_query. İzleme kapalıysa trace_query bunu söyler - kullanıcıdan çalışıp çalışmadığını görmek için box_processes, ardından Sandboxie&apos;nin ne bildirdiğini görmek için log_query, sonra reddedilen erişimleri görmek için o alana göre filtrelenmiş trace_query. İzleme kapalıysa trace_query bunu söyler - boş bir iz kaydından çıkarım yapmak yerine kullanıcıdan izlemeyi etkinleştirmesini ve sorunu yeniden oluşturmasını isteyin.
+
+Alanların genellikle bir takma adı vardır ve kullanıcı onları bu adla anar. Bir alandan söz ederken box_list çıktısındaki displayName değerini kullanın; girdi olarak ad da takma ad da kabul edilir.
+
+Tanılama çıktısındaki yollar ve hesap adları, %User% ve %Computer% gibi belirteçlerle değiştirilir. Bu kasıtlıdır - kullanıcıdan bunu geri almasını istemeyin ve bir belirteci gerçek bir yol olarak değerlendirmeyin.
+
+Bazı araçlar değişiklik yapar ve bunların her biri kullanıcıya tam olarak neyin değişeceğini gösterir ve onayını bekler. Hiçbir şeyi sessizce değiştiremezsiniz; bu nedenle istediğiniz şeyi olduğundan küçük göstermeye çalışmayın - açık bir açıklama onay alır, belirsiz bir açıklama almaz.
+
+Emin olmadığınız bir düzeltmeyi önce test edin: shadow_begin, yapılandırmayı gerçek dosya kümesini paylaşan geçici bir kopyaya klonlar; shadow_set kopyayı değiştirir; ardından shadow_commit farkları geri kopyalar - tüm düzeltme için tek onay - veya shadow_discard kopyayı atar. Gerçekten denediğiniz bir düzeltme, işe yarayacağına inandığınız bir düzeltmeden çok daha değerlidir. Yalnızca yapılandırmanın geçici olduğuna dikkat edin: test sırasında yazılan dosyalar gerçek korumalı alana kaydedilir ve kopyayı atmak bunları geri almaz.
+
+Emin olduğunuz bir değişiklik veya bir programı zorla korumalı alanda çalıştırmak gibi günlük bir istek için doğrudan box_apply_changes kullanın. Her iki durumda da önce config_validate çalıştırın.
+
+Ayarlar yerine dosyaları değiştirmek üzereyseniz önce snapshot_create önerin - neredeyse anında tamamlanır ve değişikliğin geri alınmasını sağlar - ancak yalnızca korumalı alanda hiçbir şey çalışmıyorken kullanılabilir; dolayısıyla herhangi bir şeyi başlatmadan önce yapılmalıdır.
+
+Bir düzeltmenin gerçekten işe yarayıp yaramadığını görmek için box_run, korumalı alanda bir program başlatır. Kullanıcıya komut satırı tam yazdığınız biçimde gösterilir ve herhangi bir şey çalıştırılmadan önce kabul etmesi gerekir; bu nedenle ne yapmak istiyorsanız onu yazın. Bunun korumalı alanın geçerli ayarlarıyla çalıştığına dikkat edin: shadow_set ile hazırlanan bir değişiklik henüz yürürlükte değildir; dolayısıyla çalıştırma bu değişikliği test etmek içinse önce uygulayın.
+
+Buradaki hiçbir araç bir korumalı alanı veya içeriğini silmez; bu kasıtlıdır.
+
+Raporu sona bırakmak yerine çalışma boyunca report_compose ile güncel tutun. Bildirmeye değer bir şey öğrenir öğrenmez - belirti ve elediğiniz olasılıklar bile kayda değerdir - bir rapor hazırlayın ve yeni bir şey öğrendiğinizde yeniden hazırlayın. Her çağrı öncekinin yerini alır.
+
+Bunun nedeni kayıt tutma zorunluluğu değildir. Sandboxie-Plus en son raporunuzu saklar ve kullanıcı aracı penceresini kapattığında kendisine sunar; bu her an olabilir - konsolunuzun kapanması, düşüncenizi tamamlamanızı beklemez. Hiç rapor hazırlamadıysanız hiçbir şey sunulmaz ve bütün çalışma proje açısından kaybolur. Gönderilen kaba bir rapor, hiç var olmamış kusursuz bir rapordan iyidir.
+
+Başarısızlık kadar başarı durumunda da rapor hazırlayın. Başarısızlık raporu projeye neyin hâlâ bozuk olduğunu söyler; başarı raporu ise çözümün ne olduğunu söyler ve neredeyse hiç alamadığı rapor budur.
+
+Raporu siz göndermezsiniz - bu kullanıcıya aittir ve bunun için bir aracınız yoktur. İşiniz bittiğinde kullanıcıya Sandboxie-Plus aracı penceresinin altındaki yeşil onay işareti olan Bitir düğmesine basmasını söyleyin: bu, raporunuzu okuması, düzeltmesi ve hiçbir hesap gerektirmeyen projenin kendi sorun takip sistemine göndermesi için açar. Göndermeye değer olduğunu ve nedenini bir kez söyleyin, sonra kararı ona bırakın - hayır diyebilir ve bu normal bir yanıttır.
+
+Yalnızca vardığınız sonucu değil, elediğiniz olasılıkları da doldurun. Bir nedeni tanımlanabilir kılan, ne olmadığıdır ve bir raporu başka birinin makinesindeki aynı arızayı tanıyabilecek bir kayda dönüştüren alan budur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="788"/>
         <source>That needs authorisation: it reads this machine rather than the documentation. Call the pair tool, read the code Sandboxie-Plus displays to the user, and submit it. The documentation and schema tools work without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu işlem yetkilendirme gerektirir: belgeleri değil, bu makineyi okur. pair aracını çağırın, Sandboxie-Plus&apos;ın kullanıcıya gösterdiği kodu okuyun ve gönderin. Belge ve şema araçları bu olmadan da çalışır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="807"/>
         <source>Unknown tool: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilinmeyen araç: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="817"/>
         <source>This connection is already authorised.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu bağlantı zaten yetkilendirilmiş.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="825"/>
         <source>Sandboxie-Plus is now showing a six-digit code. Ask the user to read it to you, then call pair again with that code. It is valid for five minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus şimdi altı haneli bir kod gösteriyor. Kullanıcıdan kodu size okumasını isteyin, ardından pair aracını bu kodla yeniden çağırın. Kod beş dakika geçerlidir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="835"/>
         <source>an agent was authorised: %1 (process %2)</source>
-        <translation type="unfinished"></translation>
+        <translation>bir aracı yetkilendirildi: %1 (işlem %2)</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="836"/>
         <source>unidentified client</source>
-        <translation type="unfinished"></translation>
+        <translation>tanımlanamayan istemci</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="843"/>
         <source>Authorised. Every tool you can see will now answer, including the ones that were refusing. Changes still need the user to confirm them one at a time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yetkilendirildi. Reddedenler dahil, gördüğünüz bütün araçlar artık yanıt verecek. Değişiklikler için yine de kullanıcının her birini ayrı ayrı onaylaması gerekir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="848"/>
         <source>No code has been requested. Call pair with no arguments first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Henüz kod istenmedi. Önce pair aracını bağımsız değişken olmadan çağırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="852"/>
         <source>That code has expired. Call pair with no arguments to request a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu kodun süresi doldu. Yeni bir kod istemek için pair aracını bağımsız değişken olmadan çağırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="856"/>
         <source>Too many incorrect attempts; the code has been invalidated. Call pair with no arguments to request a new one, and ask the user to read it again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Çok fazla yanlış deneme yapıldı; kod geçersiz kılındı. Yeni bir kod istemek için pair aracını bağımsız değişken olmadan çağırın ve kullanıcıdan kodu yeniden okumasını isteyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="861"/>
         <source>That code is not correct. Ask the user to read it again from the Sandboxie-Plus window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu kod doğru değil. Kullanıcıdan kodu Sandboxie-Plus penceresinden yeniden okumasını isteyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="906"/>
         <source>the user allowed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>kullanıcı izin verdi: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="907"/>
         <source>the user refused: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>kullanıcı reddetti: %1 (%2)</translation>
     </message>
 </context>
 <context>
@@ -2631,27 +2704,27 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
     <message>
         <location filename="Mcp/McpSession.cpp" line="253"/>
         <source>no code had been requested</source>
-        <translation type="unfinished"></translation>
+        <translation>henüz kod istenmemişti</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="254"/>
         <source>wrong code</source>
-        <translation type="unfinished"></translation>
+        <translation>yanlış kod</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="255"/>
         <source>the code had expired</source>
-        <translation type="unfinished"></translation>
+        <translation>kodun süresi dolmuştu</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="256"/>
         <source>too many attempts</source>
-        <translation type="unfinished"></translation>
+        <translation>çok fazla deneme</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="257"/>
         <source>refused</source>
-        <translation type="unfinished"></translation>
+        <translation>reddedildi</translation>
     </message>
 </context>
 <context>
@@ -2660,213 +2733,217 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
         <location filename="Mcp/McpSessionWindow.cpp" line="41"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="470"/>
         <source>AI Agent Session - Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay Zeka Aracısı Oturumu - Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="56"/>
         <source>For this session:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu oturum için:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="80"/>
         <source>Give the agent this code:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aracıya bu kodu verin:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="101"/>
         <source>Do not ask again for this program</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu program için yeniden sorma</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="107"/>
         <source>What this agent has done:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu aracının yaptıkları:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="111"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaman</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="111"/>
         <source>What happened</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne oldu</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="118"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="422"/>
         <source>Waiting for you</source>
-        <translation type="unfinished"></translation>
+        <translation>Sizi bekliyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="121"/>
         <source>Nothing is waiting. Once authorised the agent can read your sandboxes freely; anything it wants to change, start or stop will appear here first, and nothing happens until you answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekleyen bir şey yok. Yetkilendirildikten sonra aracı korumalı alanlarınızı serbestçe okuyabilir; değiştirmek, başlatmak veya durdurmak istediği her şey önce burada görünür ve siz yanıt verene kadar hiçbir şey yapılmaz.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="145"/>
         <source>Allow</source>
-        <translation type="unfinished">İzin ver</translation>
+        <translation>İzin ver</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="146"/>
         <source>Refuse</source>
-        <translation type="unfinished"></translation>
+        <translation>Reddet</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="177"/>
         <source>Cancel</source>
-        <translation type="unfinished">İptal</translation>
+        <translation>İptal</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="178"/>
         <source>Finish</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitir</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="183"/>
         <source>End this session without sending anything.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiçbir şey göndermeden bu oturumu bitir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="206"/>
         <source>Sandboxie-Plus was closing, so the request was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus kapanmakta olduğundan istek reddedildi</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="211"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="580"/>
         <source>No agent is connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlı bir aracı yok.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="258"/>
         <source>%1 Asking cannot be turned off on this machine: AiAgentRequireConfirmation is set in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Bu makinede onay isteme kapatılamaz: Sandboxie.ini dosyasında AiAgentRequireConfirmation ayarlanmış.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="266"/>
         <source>this session starts at: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>bu oturumun başlangıç ayarı: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="282"/>
         <source>you set this session to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>bu oturum için seçtiğiniz ayar: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="372"/>
         <source>Valid for %1 minutes. Until it is entered the agent can do nothing. If you did not ask for this, ignore it.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dakika geçerlidir. Kod girilene kadar aracı hiçbir şey yapamaz. Bunu siz istemediyseniz yok sayın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="382"/>
         <source>Skips this code next time. Anything able to run from %1 will then be authorised without asking.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir dahaki sefere bu kodu atlar. Böylece %1 konumundan çalışabilen her şey sorulmadan yetkilendirilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="433"/>
         <source>Waiting for you - please answer</source>
-        <translation type="unfinished"></translation>
+        <translation>Sizi bekliyor - lütfen yanıt verin</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="443"/>
         <source>AI Agent Session - waiting for you</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay Zeka Aracısı Oturumu - sizi bekliyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="517"/>
         <source>recorded that you confirmed the result</source>
-        <translation type="unfinished"></translation>
+        <translation>sonucu onayladığınızı kaydetti</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="523"/>
         <source>wrote up what it has found - press Finish when you are done to read and send it</source>
-        <translation type="unfinished"></translation>
+        <translation>bulduklarını raporladı - işiniz bittiğinde okumak ve göndermek için Bitir&apos;e basın</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="524"/>
         <source>updated its write-up of what it has found</source>
-        <translation type="unfinished"></translation>
+        <translation>bulduklarıyla ilgili raporunu güncelledi</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="560"/>
         <source>Wrap up: read what the agent wrote and decide whether to send it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonlandırın: aracının yazdıklarını okuyun ve gönderip göndermeyeceğinize karar verin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="561"/>
         <source>The agent has not written anything up yet. Ask it to write up what it found - it has a tool for that - and this becomes available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aracı henüz bir rapor yazmadı. Bulduklarını raporlamasını isteyin - bunun için bir aracı var - ardından bu seçenek kullanılabilir olur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="570"/>
         <source>the connection closed while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>bir istek beklerken bağlantı kapandığından istek reddedildi</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="589"/>
         <source>the session was finished while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>bir istek beklerken oturum bitirildiğinden istek reddedildi</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="633"/>
         <source>Close this window - and the agent connection with it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu pencere ve onunla birlikte aracı bağlantısı kapatılsın mı?</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="637"/>
         <source>The agent has written up what it found, and closing does not send it. Finish instead - the green tick - to read it and decide; it is the only way what happened here reaches anyone else. Nothing is lost either way: the write-up is kept, and you can reopen this window and finish later.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Aracı bulduklarını raporladı ve pencereyi kapatmak raporu göndermez. Okumak ve karar vermek için bunun yerine Bitir&apos;e - yeşil onay işaretine - basın; burada olanları başkalarına ulaştırmanın tek yolu budur. Her iki durumda da hiçbir şey kaybolmaz: rapor saklanır; bu pencereyi yeniden açıp daha sonra bitirebilirsiniz.
+
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="643"/>
         <source>A request is waiting for an answer, and closing refuses it.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Bir istek yanıt bekliyor ve pencereyi kapatmak bu isteği reddeder.
+
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="648"/>
         <source>Disconnecting closes the agent connection as well: nothing can connect again until you turn it back on. Staying connected leaves it open, so the agent can carry on and this window comes back the next time it needs you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlantıyı kesmek aracı bağlantısını da kapatır: yeniden açana kadar hiçbir şey bağlanamaz. Bağlı kalmak bağlantıyı açık bırakır; böylece aracı çalışmaya devam edebilir ve size bir sonraki ihtiyaç duyduğunda bu pencere yeniden açılır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="654"/>
         <source>Close and Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapat ve Bağlantıyı Kes</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="655"/>
         <source>Close, Stay Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapat, Bağlı Kal</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="656"/>
         <source>Keep Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Açık Tut</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="677"/>
         <source>the window was closed while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>bir istek beklerken pencere kapatıldığından istek reddedildi</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="681"/>
         <source>the window was closed, so the write-up was not sent</source>
-        <translation type="unfinished"></translation>
+        <translation>pencere kapatıldığından rapor gönderilmedi</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="713"/>
         <source>the report was sent to the Sandboxie-Plus issue tracker</source>
-        <translation type="unfinished"></translation>
+        <translation>rapor Sandboxie-Plus sorun takip sistemine gönderildi</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="729"/>
         <source>the report was not sent - press Finish again if you change your mind</source>
-        <translation type="unfinished"></translation>
+        <translation>rapor gönderilmedi - fikrinizi değiştirirseniz yeniden Bitir&apos;e basın</translation>
     </message>
 </context>
 <context>
@@ -2874,124 +2951,126 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="32"/>
         <source>Send this to the Sandboxie-Plus project?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu rapor Sandboxie-Plus projesine gönderilsin mi?</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="42"/>
         <source>The agent wrote this up while it worked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aracı bu raporu çalışırken yazdı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="43"/>
         <source>%1 wrote this up while it worked.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bu raporu çalışırken yazdı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="50"/>
         <source>Sending it is how what happened here reaches the people who maintain Sandboxie. A fix that worked tells them what to recommend to the next person with the same problem - and that is the report they almost never get. One that did not work tells them what is still broken.
 
 Nothing is sent unless you choose to, and nothing goes without you reading it. Edit or delete anything below first - the second half was written by the agent and can contain anything it saw.</source>
-        <translation type="unfinished"></translation>
+        <translation>Raporu göndermek, burada olanları Sandboxie&apos;nin bakımını yapan kişilere ulaştırır. İşe yarayan bir çözüm, aynı sorunu yaşayan bir sonraki kişiye ne önereceklerini söyler - ve neredeyse hiç alamadıkları rapor budur. İşe yaramayan bir çözüm ise neyin hâlâ bozuk olduğunu söyler.
+
+Siz seçmedikçe hiçbir şey gönderilmez ve siz okumadan hiçbir şey gitmez. Önce aşağıda istediğiniz her şeyi düzenleyin veya silin - ikinci yarıyı aracı yazdı ve gördüğü her şeyi içerebilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="84"/>
         <source>Detailed issue description</source>
-        <translation type="unfinished">Ayrıntılı sorun açıklaması</translation>
+        <translation>Ayrıntılı sorun açıklaması</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="92"/>
         <source>Is the problem actually gone?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun gerçekten giderildi mi?</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="95"/>
         <source>The agent did not establish this, and it is the single most useful line in the report - it is what tells the project whether the fix it is reading about actually works. Answering is optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aracı bunu belirlemedi ve bu, rapordaki en yararlı satırdır - projeye, okuduğu çözümün gerçekten işe yarayıp yaramadığını söyler. Yanıtlamak isteğe bağlıdır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="101"/>
         <source>Yes - the problem is fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Evet - sorun giderildi</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="102"/>
         <source>No - it is still there</source>
-        <translation type="unfinished"></translation>
+        <translation>Hayır - sorun devam ediyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="114"/>
         <source>Attach Sandboxie.ini</source>
-        <translation type="unfinished">Sandboxie.ini&apos;yi Ekle</translation>
+        <translation>Sandboxie.ini&apos;yi Ekle</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="118"/>
         <source>Attach Logs</source>
-        <translation type="unfinished">Günlükleri Ekle</translation>
+        <translation>Günlükleri Ekle</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="127"/>
         <source>Email address</source>
-        <translation type="unfinished">E-posta adresi</translation>
+        <translation>E-posta adresi</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="138"/>
         <source>Don&apos;t Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Gönderme</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="140"/>
         <source>Send Report</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapor Gönder</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="186"/>
         <source>The report could not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapor gönderilemedi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="229"/>
         <source>the Sandboxie-Plus message log</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus ileti günlüğü</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="230"/>
         <source>the resource trace - everything every sandboxed program touched while it was on</source>
-        <translation type="unfinished"></translation>
+        <translation>kaynak iz kaydı - açık olduğu sürece korumalı alandaki her programın eriştiği her şey</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="232"/>
         <source>your whole Sandboxie.ini, which describes every sandbox you have</source>
-        <translation type="unfinished"></translation>
+        <translation>sahip olduğunuz bütün korumalı alanları tanımlayan Sandboxie.ini dosyanızın tamamı</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="237"/>
         <source>any contact address, so nobody can reply to you about it</source>
-        <translation type="unfinished"></translation>
+        <translation>herhangi bir iletişim adresi; bu nedenle kimse size bu konuda yanıt veremez</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="239"/>
         <source>your address %1, so a maintainer can reply</source>
-        <translation type="unfinished"></translation>
+        <translation>bir bakım sorumlusunun yanıt verebilmesi için %1 adresiniz</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="241"/>
         <source>Selecting the partially checked state sends the message log but not the resource trace. Both can be read in the main window before you send.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kısmen işaretli durumu seçmek, ileti günlüğünü gönderir ancak kaynak iz kaydını göndermez. Her ikisi de göndermeden önce ana pencerede okunabilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="244"/>
         <source>Sent with the report:</source>
-        <translation type="unfinished"></translation>
+        <translation>Raporla birlikte gönderilenler:</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="246"/>
         <source>nothing but the text above</source>
-        <translation type="unfinished"></translation>
+        <translation>yalnızca yukarıdaki metin</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="249"/>
         <source>Left out:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dahil edilmeyenler:</translation>
     </message>
 </context>
 <context>
@@ -3032,7 +3111,7 @@ Nothing is sent unless you choose to, and nothing goes without you reading it. E
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="107"/>
         <source>The new box &apos;%1&apos; could not be found after creation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni &apos;%1&apos; alanı oluşturulduktan sonra bulunamadı.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="124"/>
@@ -3836,7 +3915,7 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
         <location filename="Windows/BorderFontDialog.cpp" line="128"/>
         <location filename="Windows/OptionsGeneral.cpp" line="1094"/>
         <source>Border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenarlık etiketi yazı tipi</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="133"/>
@@ -3848,77 +3927,77 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="138"/>
         <source>Unavailable writing system (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanılamayan yazı sistemi (%1)</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="142"/>
         <source>&amp;Writing system:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Yazı sistemi:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="152"/>
         <source>Font &amp;family:</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipi &amp;ailesi:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="154"/>
         <source>Font st&amp;yle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipi &amp;stili:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="159"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation> nk</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="161"/>
         <source>&amp;Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Boyut:</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="162"/>
         <source>&amp;Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Altı çizili</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="164"/>
         <source>Stri&amp;keout</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Üstü çizili</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="173"/>
         <source>Native font preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Yerel yazı tipi önizlemesi</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="182"/>
         <source>Save only this font and size immediately. Other pending box options are not applied. Cancel keeps the last applied font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yalnızca bu yazı tipini ve boyutunu hemen kaydet. Bekleyen diğer alan seçenekleri uygulanmaz. İptal, son uygulanan yazı tipini korur.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="183"/>
         <source>This template is read-only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu şablon salt okunurdur.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="291"/>
         <source>The saved selection is unavailable. Choose an installed family and a native style.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaydedilen seçim kullanılamıyor. Yüklü bir yazı tipi ailesi ve yerel bir stil seçin.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="325"/>
         <source>Sandbox name</source>
-        <translation type="unfinished">Alan adı</translation>
+        <translation>Alan adı</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="340"/>
         <source>Unable to create the native font preview.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yerel yazı tipi önizlemesi oluşturulamıyor.</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="342"/>
         <source>Native GDI preview. Writing system filters the font list; it does not change label language or direction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yerel GDI önizlemesi. Yazı sistemi yazı tipi listesini filtreler; etiketin dilini veya yönünü değiştirmez.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="56"/>
@@ -4039,97 +4118,97 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
         <location filename="Windows/OptionsGeneral.cpp" line="70"/>
         <source>Show outside the border</source>
         <oldsource>Show above the border</oldsource>
-        <translation type="unfinished">Kenarlık üstünde göster</translation>
+        <translation>Kenarlığın dışında göster</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="71"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Üst</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Sol</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Sağ</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="75"/>
         <source>Stacked upright letters</source>
-        <translation type="unfinished"></translation>
+        <translation>Dikey sıralanmış dik harfler</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="76"/>
         <source>Stacked (compact)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dikey sıralı (sıkışık)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="77"/>
         <source>Rotated down</source>
-        <translation type="unfinished"></translation>
+        <translation>Aşağı döndürülmüş</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="78"/>
         <source>Rotated up</source>
-        <translation type="unfinished"></translation>
+        <translation>Yukarı döndürülmüş</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="79"/>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sabit</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="80"/>
         <source>Adaptive (same edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uyarlanabilir (aynı kenar)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="81"/>
         <source>Adaptive (opposite edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uyarlanabilir (karşı kenar)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="82"/>
         <source>Adaptive (any edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uyarlanabilir (herhangi bir kenar)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="83"/>
         <source>Use inherited/default setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Devralınan/varsayılan ayarı kullan</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="84"/>
         <source>Avoid covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Görev çubuğunu örtmekten kaçın</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="85"/>
         <source>Allow covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Görev çubuğunun örtülmesine izin ver</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="86"/>
         <source>Use inherited/automatic setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Devralınan/otomatik ayarı kullan</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="87"/>
         <source>Hide border and label from capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenarlığı ve etiketi ekran yakalamalarından gizle</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="88"/>
         <source>Include border and label in capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenarlığı ve etiketi ekran yakalamalarına dahil et</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="92"/>
@@ -4270,12 +4349,12 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1051"/>
         <source>Select the font, native style, writing system and point size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipini, yerel stili, yazı sistemini ve punto boyutunu seçin.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1052"/>
         <source>Default: Segoe UI Bold; legacy sizing</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsayılan: Segoe UI Kalın; eski boyutlandırma</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1247"/>
@@ -4766,7 +4845,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="../MiscHelpers/Common/ProgressDialog.h" line="101"/>
         <source>Close (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapat (%1)</translation>
     </message>
 </context>
 <context>
@@ -4892,7 +4971,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="25"/>
         <source>Sandboxie-Plus - Rename Sandboxes (%1/%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Korumalı Alanları Yeniden Adlandır (%1/%2)</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="26"/>
@@ -4912,43 +4991,44 @@ Tam yol: %4</translation>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="43"/>
         <source>Save this sandbox and advance. On the last sandbox, also save all remaining drafts.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu korumalı alanı kaydet ve ilerle. Son korumalı alanda kalan tüm taslakları da kaydet.</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="45"/>
         <source>Discard unsaved drafts. Changes already saved with OK are kept.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaydedilmemiş taslakları at. Tamam ile daha önce kaydedilen değişiklikler korunur.</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="87"/>
         <source>Discard unsaved renames?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaydedilmemiş yeniden adlandırmalar atılsın mı?</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="88"/>
         <source>Discard all unsaved sandbox names and aliases?
 Changes already saved with OK will be kept.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaydedilmemiş tüm korumalı alan adları ve takma adları atılsın mı?
+Tamam ile daha önce kaydedilen değişiklikler korunacaktır.</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="111"/>
         <source>Generate a new GUID</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni bir GUID oluştur</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="111"/>
         <source>Use a random GUID as sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan adı olarak rastgele bir GUID kullan</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="119"/>
         <source>Replace alias?</source>
-        <translation type="unfinished"></translation>
+        <translation>Takma ad değiştirilsin mi?</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="120"/>
         <source>The alias field is not empty. Replace it with the current sandbox name?</source>
-        <translation type="unfinished"></translation>
+        <translation>Takma ad alanı boş değil. Geçerli korumalı alan adıyla değiştirilsin mi?</translation>
     </message>
 </context>
 <context>
@@ -5637,7 +5717,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="53"/>
         <source>No enabled sandbox is available. Please create or enable a sandbox and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkin bir korumalı alan yok. Lütfen bir korumalı alan oluşturun veya etkinleştirin ve yeniden deneyin.</translation>
     </message>
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="63"/>
@@ -5647,11 +5727,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Windows/ShellBoxSelector.cpp" line="106"/>
         <source>More than one sandbox has this alias. Select a sandbox from the list or type its actual name. Nothing was changed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type the box name which you are going to set:</source>
-        <translation type="vanished">Ayarın ekleneceği alan adını yazın:</translation>
+        <translation>Birden fazla korumalı alan bu takma adı kullanıyor. Listeden bir korumalı alan seçin veya gerçek adını yazın. Hiçbir şey değiştirilmedi.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2103"/>
@@ -5775,7 +5851,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="3031"/>
         <source>Removed %1 leftover sandbox configuration copies from an interrupted troubleshooting session</source>
-        <translation type="unfinished"></translation>
+        <translation>Kesintiye uğrayan bir sorun giderme oturumundan kalan %1 korumalı alan yapılandırma kopyası kaldırıldı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3110"/>
@@ -5802,89 +5878,89 @@ Yazılım uyumluluğu denetiminden Windows Güncellemeleri taramasını devre d�
     <message>
         <location filename="SandMan.cpp" line="3404"/>
         <source>The AI agent connection is turned off in the settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay zeka aracısı bağlantısı ayarlarda kapalı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3416"/>
         <source>The AI agent connection is disabled by AllowAiAgent=n in Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay zeka aracısı bağlantısı Sandboxie.ini dosyasındaki AllowAiAgent=n ile devre dışı bırakılmış</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3433"/>
         <source>An AI agent can now connect to Sandboxie on %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir yapay zeka aracısı artık %1%2 üzerinden Sandboxie&apos;ye bağlanabilir</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3444"/>
         <source>The AI agent connection is closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay zeka aracısı bağlantısı kapalı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3488"/>
         <location filename="SandMan.cpp" line="3522"/>
         <source>Turned off for this machine by AllowAiAgent=n in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu makinede Sandboxie.ini dosyasındaki AllowAiAgent=n ile kapatılmış.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3490"/>
         <source>Turned off in Settings, under General Config, AI Agent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayarlar&apos;da Genel Yapılandırma altındaki Yapay Zeka Aracısı bölümünde kapatılmış.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3492"/>
         <source>An AI agent can connect. Click to close the connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir yapay zeka aracısı bağlanabilir. Bağlantıyı kapatmak için tıklayın.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3531"/>
         <location filename="SandMan.cpp" line="3630"/>
         <source>The AI agent connection could not be opened. The message log has the reason.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay zeka aracısı bağlantısı açılamadı. Nedeni ileti günlüğünde bulunuyor.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3554"/>
         <source>An unidentified program</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanımlanamayan bir program</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3561"/>
         <source>connected, waiting to be authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>bağlandı, yetkilendirilmeyi bekliyor</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3562"/>
         <source>%1 connected</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bağlandı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3583"/>
         <source>MCP: ignored a connection request from %1 (asked too recently)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 kaynağından gelen bir bağlantı isteği yok sayıldı (çok kısa süre önce istenmişti)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3584"/>
         <source>an unidentified application</source>
-        <translation type="unfinished"></translation>
+        <translation>tanımlanamayan bir uygulama</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3588"/>
         <source>An application</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir uygulama</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3591"/>
         <source>asking to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>bağlanmak istiyor</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3592"/>
         <source>%1 is asking to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bağlanmak istiyor</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3596"/>
         <source>%1 is asking to connect an AI agent to Sandboxie-Plus.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1, Sandboxie-Plus&apos;a bir yapay zeka aracısı bağlamak istiyor.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3597"/>
@@ -5895,119 +5971,125 @@ To look at YOUR sandboxes - what exists, what is running, what was blocked - it 
 It is not reachable from inside a sandbox.
 
 If you did not just ask an AI assistant to look at Sandboxie, refuse this.</source>
-        <translation type="unfinished"></translation>
+        <translation>Buna izin vermek, aracının Sandboxie&apos;nin kendi belgelerini hemen okumasını sağlar.
+
+SİZİN korumalı alanlarınızı incelemek için - nelerin bulunduğu, nelerin çalıştığı, nelerin engellendiği - daha sonra sizden bu pencerenin göstereceği bir kod istemesi gerekir. Herhangi bir şeyi değiştirmek, başlatmak veya durdurmak için her seferinde yeniden izin istemesi gerekir.
+
+Korumalı alan içinden erişilemez.
+
+Bir yapay zeka asistanından az önce Sandboxie&apos;yi incelemesini istemediyseniz bu isteği reddedin.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3603"/>
         <source>Allow the Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlantıya İzin Ver</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3613"/>
         <source>the connection was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>bağlantı reddedildi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3614"/>
         <source>not connected</source>
-        <translation type="unfinished"></translation>
+        <translation>bağlı değil</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3617"/>
         <source>MCP: declined a connection request from %1 (%2 in a row - further requests ignored for a minute)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 tarafından gönderilen bağlantı isteği reddedildi (art arda %2 - sonraki istekler bir dakika boyunca yok sayılacak)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3621"/>
         <source>MCP: declined a connection request from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 tarafından gönderilen bağlantı isteği reddedildi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3627"/>
         <source>the connection was allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>bağlantıya izin verildi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3656"/>
         <source>An AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir yapay zeka aracısı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3658"/>
         <source>waiting for the code below to be read to it</source>
-        <translation type="unfinished"></translation>
+        <translation>aşağıdaki kodun kendisine okunmasını bekliyor</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3659"/>
         <source>%1 asked to be authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 yetkilendirme istedi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3664"/>
         <source>MCP: %1 is asking to connect; a pairing code is displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 bağlanmak istiyor; bir eşleştirme kodu gösteriliyor</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3669"/>
         <location filename="SandMan.cpp" line="3690"/>
         <location filename="SandMan.cpp" line="3698"/>
         <source>an AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>bir yapay zeka aracısı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3676"/>
         <source>this program will be authorised without asking from now on</source>
-        <translation type="unfinished"></translation>
+        <translation>bu program bundan sonra sorulmadan yetkilendirilecek</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3677"/>
         <source>MCP: %1 will be authorised without asking from now on</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 bundan sonra sorulmadan yetkilendirilecek</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3683"/>
         <source>authorised - it can read freely, and must ask for anything else</source>
-        <translation type="unfinished"></translation>
+        <translation>yetkilendirildi - serbestçe okuyabilir, diğer her şey için izin istemelidir</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3684"/>
         <source>%1 is now authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 artık yetkilendirildi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3685"/>
         <source>MCP: %1 is now authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 artık yetkilendirildi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3692"/>
         <source>%1 failed to authorise (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 yetkilendirilemedi (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3693"/>
         <source>MCP: %1 failed to authorise (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 yetkilendirilemedi (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3700"/>
         <source>suspended after an hour idle - it must be authorised again</source>
-        <translation type="unfinished"></translation>
+        <translation>bir saat boşta kaldıktan sonra askıya alındı - yeniden yetkilendirilmesi gerekiyor</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3701"/>
         <source>the session for %1 was suspended after an hour idle</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 oturumu bir saat boşta kaldıktan sonra askıya alındı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3702"/>
         <source>MCP: the session for %1 was suspended after an hour idle; it can be resumed by authorising again</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 oturumu bir saat boşta kaldıktan sonra askıya alındı; yeniden yetkilendirilerek sürdürülebilir</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3710"/>
         <source>MCP: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4074"/>
@@ -6523,33 +6605,33 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="859"/>
         <source>Troubleshoot with an AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay Zeka Aracısıyla Sorun Gider</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="860"/>
         <source>Set up an AI agent to look at a sandbox with you - which clients are supported, and the exact configuration each one needs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alanı sizinle birlikte incelemesi için yapay zeka aracısı kurun - desteklenen istemciler ve her birinin gerektirdiği tam yapılandırma.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1005"/>
         <source>AI Agent Connection (MCP)</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay Zeka Aracısı Bağlantısı (MCP)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1007"/>
         <location filename="SandMan.cpp" line="3494"/>
         <source>Let a local AI agent inspect this Sandboxie installation. Off until you turn it on, and unreachable from inside a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yerel bir yapay zeka aracısının bu Sandboxie kurulumunu incelemesine izin verin. Siz açana kadar kapalıdır ve korumalı alan içinden erişilemez.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1009"/>
         <source>AI Agent Session Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay Zeka Aracısı Oturum Penceresi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1010"/>
         <source>Everything the agent has asked for and what you answered. Opens on its own when an agent connects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aracının istediği her şey ve verdiğiniz yanıtlar. Bir aracı bağlandığında kendiliğinden açılır.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1016"/>
@@ -6655,7 +6737,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1257"/>
         <source>AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay Zeka Aracısı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1286"/>
@@ -6753,17 +6835,17 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2182"/>
         <source>MCP: %1 requested via command line, now %2</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP: %1 komut satırı üzerinden istendi, artık %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2183"/>
         <source>on</source>
-        <translation type="unfinished"></translation>
+        <translation>açık</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2183"/>
         <source>off</source>
-        <translation type="unfinished"></translation>
+        <translation>kapalı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3083"/>
@@ -7796,7 +7878,7 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Views/SbieView.cpp" line="702"/>
         <source>Rename Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı Alanları Yeniden Adlandır</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1127"/>
@@ -7827,37 +7909,37 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Views/SbieView.cpp" line="1752"/>
         <source>Sandbox %1 was removed or changed while this dialog was open. Close the dialog and select the sandbox again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu iletişim kutusu açıkken %1 korumalı alanı kaldırıldı veya değiştirildi. İletişim kutusunu kapatıp korumalı alanı yeniden seçin.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1757"/>
         <source>Sandbox %1 cannot be edited by this dialog.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 korumalı alanı bu iletişim kutusuyla düzenlenemez.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1759"/>
         <source>Sandbox %1 is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 korumalı alanı devre dışı.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1761"/>
         <source>Sandbox %1 has an active or queued operation. Wait for it to finish before saving.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 korumalı alanında etkin veya sıraya alınmış bir işlem var. Kaydetmeden önce bitmesini bekleyin.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1766"/>
         <source>Changes already saved are kept. Unsaved edits remain as drafts.</source>
-        <translation type="unfinished"></translation>
+        <translation>Önceden kaydedilmiş değişiklikler korunur. Kaydedilmemiş düzenlemeler taslak olarak kalır.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1779"/>
         <source>Unmount sandbox %1 before renaming it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeniden adlandırmadan önce %1 korumalı alanının bağlantısını kesin.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1884"/>
         <source>More than one draft uses the sandbox name %1. Choose different names.</source>
-        <translation type="unfinished"></translation>
+        <translation>Birden fazla taslak %1 korumalı alan adını kullanıyor. Farklı adlar seçin.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1923"/>
@@ -8118,7 +8200,7 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="328"/>
         <source>Arabic (Morocco) - LTR</source>
-        <translation type="unfinished"></translation>
+        <translation>Arapça (Fas) - Soldan Sağa</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="347"/>
@@ -8189,22 +8271,22 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1826"/>
         <source>AllowAiAgent=n in Sandboxie.ini disables this on the whole machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini içindeki AllowAiAgent=n, bunu tüm makinede devre dışı bırakır.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1831"/>
         <source>AiAgentRequirePairing=y in Sandboxie.ini means the code cannot be waived.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini içindeki AiAgentRequirePairing=y, kod gereksiniminin kaldırılamayacağı anlamına gelir.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1836"/>
         <source>AiAgentRequireConfirmation=y in Sandboxie.ini keeps the confirmations on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini içindeki AiAgentRequireConfirmation=y, onayları açık tutar.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2644"/>
         <source>Checking software compatibility...</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazılım uyumluluğu denetleniyor...</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3494"/>
@@ -8986,12 +9068,12 @@ Before sending, you can review the logs in the main window.</source>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="889"/>
         <source>Submit Diagnostic Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanılama Verilerini Gönder</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="890"/>
         <source>%1 has collected some valuable diagnostic data. Thank you for taking the time to review and submit this information, as it helps improve Sandboxie for everyone! :-) </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bazı değerli tanılama verileri topladı. Bu bilgileri inceleyip göndermek için zaman ayırdığınız için teşekkür ederiz; bu, Sandboxie&apos;yi herkes için geliştirmeye yardımcı olur! :-) </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="892"/>
@@ -9012,28 +9094,6 @@ Before sending, you can review the logs in the main window.</source>
         <location filename="Wizards/BoxAssistant.cpp" line="916"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
         <translation>Sorun raporu göndermek istiyorsanız, lütfen aşağıdaki raporu inceleyin ve &apos;Bitir&apos;e tıklayın.</translation>
-    </message>
-    <message>
-        <source>Compressing Logs</source>
-        <translation type="vanished">Günlükler Sıkıştırılıyor</translation>
-    </message>
-    <message>
-        <source>Compressing Dumps</source>
-        <translation type="vanished">Çökme Dosyaları Sıkıştırılıyor</translation>
-    </message>
-    <message>
-        <source>Submitting issue report...</source>
-        <translation type="vanished">Sorun raporu gönderiliyor...</translation>
-    </message>
-    <message>
-        <source>Failed to submit issue report, error %1
-Try submitting without the log attached.</source>
-        <translation type="vanished">Sorun raporu gönderilemedi, hata %1
-Günlük eklemeden göndermeyi deneyin.</translation>
-    </message>
-    <message>
-        <source>Your issue report has been successfully submitted, thank you.</source>
-        <translation type="vanished">Sorun raporunuz başarıyla gönderildi, teşekkür ederiz.</translation>
     </message>
 </context>
 <context>
@@ -9705,22 +9765,22 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Views/TraceView.cpp" line="951"/>
         <source>Trace Logging is still active. What do you want to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>İzleme kaydı hâlâ etkin. Ne yapmak istiyorsunuz?</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="954"/>
         <source>Stop and Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Durdur ve Temizle</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="956"/>
         <source>Disable, Keep Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Devre Dışı Bırak, Günlükleri Koru</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="958"/>
         <source>Keep Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaydetmeye Devam Et</translation>
     </message>
 </context>
 <context>
@@ -10643,32 +10703,32 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="488"/>
         <source>Font size in points, synchronized with the font selector. Existing legacy sizing is retained until you explicitly change the font or size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipi seçicisiyle eşitlenen punto cinsinden yazı tipi boyutu. Yazı tipini veya boyutunu açıkça değiştirene kadar mevcut eski boyutlandırma korunur.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="491"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation> pt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="519"/>
         <source>Select border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenarlık etiketi yazı tipini seç</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="526"/>
         <source>Reset font. Removes the custom font, point size and writing-system override, restoring Segoe UI Bold and legacy sizing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipini sıfırla. Özel yazı tipini, punto boyutunu ve yazı sistemi geçersiz kılmasını kaldırarak Segoe UI Bold ve eski boyutlandırmayı geri yükler.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="532"/>
         <source>Reset border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenarlık etiketi yazı tipini sıfırla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="551"/>
         <source>Segoe UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Segoe UI</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="631"/>
@@ -10676,7 +10736,9 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
 top/bottom padding without shrinking the font. Rotated down reads top to bottom;
 rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
         <oldsource>Stacked letters remain upright. Stacked (compact) removes the extra row gap and reduces top/bottom padding without shrinking the font. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Üst üste dizilen harfler dik kalır. Üst üste (kompakt), fazladan satır aralığını kaldırır ve
+yazı tipini küçültmeden üst/alt boşluğu azaltır. Aşağı döndürülmüş, yukarıdan aşağıya;
+yukarı döndürülmüş ise her iki tarafta da aşağıdan yukarıya okunur. Üst/alt etiketler bu seçimi yok sayar.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="656"/>
@@ -10686,17 +10748,22 @@ Adaptive (opposite edge) tries the opposite edge before that inward fallback.
 Adaptive (any edge), the default, also tries the best-fitting remaining edge.
 Edge changes preserve percentage and inside/outside placement where possible.
 Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sabit, otomatik alternatif yerleşimi devre dışı bırakır.
+Uyarlanabilir (aynı kenar), kırpılan etiketleri yapılandırılmış tarafta içeri taşır.
+Uyarlanabilir (karşı kenar), bu içe taşıma seçeneğinden önce karşı kenarı dener.
+Varsayılan olan Uyarlanabilir (herhangi bir kenar), en iyi sığan diğer kenarı da dener.
+Kenar değişiklikleri, mümkün olduğunda yüzdeyi ve iç/dış yerleşimi korur.
+Uyarlanabilir modlar görev çubuğundan kaçınmayı gözetir. Büyütülmüş/yaslanmış pencere davranışı ayrıdır.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="680"/>
         <source>Side labels can be stacked or rotated. Both stacked modes use vertical parentheses when the font supports them. Stacked (compact) keeps the font size, removes the extra row gap and uses 1-pixel top/bottom padding. Rotated down/up select the reading direction on either side. Top/bottom labels use horizontal text. Adaptive movement can stay on the configured side, try its opposite, or try any edge before moving inward. Labels that do not fit are clipped without shrinking the font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yan etiketler üst üste dizilebilir veya döndürülebilir. Her iki üst üste dizme modu da yazı tipi desteklediğinde dikey parantezler kullanır. Üst üste (kompakt), yazı tipi boyutunu korur, fazladan satır aralığını kaldırır ve üstte/altta 1 piksel boşluk kullanır. Aşağı/yukarı döndürülmüş seçenekleri her iki tarafta okuma yönünü seçer. Üst/alt etiketler yatay metin kullanır. Uyarlanabilir hareket, içeri taşımadan önce yapılandırılmış tarafta kalabilir, karşı tarafı veya herhangi bir kenarı deneyebilir. Sığmayan etiketler yazı tipi küçültülmeden kırpılır.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="689"/>
         <source>Border label information</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenarlık etiketi bilgileri</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="933"/>
@@ -11159,87 +11226,87 @@ Kısmen işaretli: Yeni oluşturulan korumalı alan belirtecine hiçbir grup ekl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="154"/>
         <source>Sandbox icon...</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan simgesi...</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="155"/>
         <source>Configure the sandbox icon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan simgesini yapılandırın.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="285"/>
         <source>Box Border</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan Kenarlığı</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="296"/>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Çerçeve</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="323"/>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Renk:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="436"/>
         <source>Sandbox label</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan etiketi</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="473"/>
         <source>Label font size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiket yazı tipi boyutu:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="563"/>
         <source>Edge:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenar:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="583"/>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Konum:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="605"/>
         <source>0% is the start of the usable edge; 50% is centered; 100% is the end. Top/bottom run left to right; left/right run top to bottom.</source>
-        <translation type="unfinished"></translation>
+        <translation>0%, kullanılabilir kenarın başlangıcıdır; 50% ortasıdır; 100% sonudur. Üst/alt kenarlar soldan sağa; sol/sağ kenarlar yukarıdan aşağıya ilerler.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="618"/>
         <source>Side text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Yan metin:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="643"/>
         <source>Movement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hareket:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="701"/>
         <source>Visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Görünürlük</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="708"/>
         <source>Taskbar:</source>
-        <translation type="unfinished"></translation>
+        <translation>Görev çubuğu:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="721"/>
         <source>Choose whether border overlays avoid taskbars and shell appbars. The inherited/default option follows the global setting, which defaults to avoiding taskbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenarlık katmanlarının görev çubuklarından ve kabuk uygulama çubuklarından kaçınıp kaçınmayacağını seçin. Devralınan/varsayılan seçenek, varsayılanı görev çubuklarından kaçınmak olan genel ayarı izler.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="731"/>
         <source>Screen capture:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekran yakalama:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="744"/>
         <source>Exclude the border and label from screen capture, not the application itself. When inherited and otherwise unset, CoverBoxedWindows determines the default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uygulamanın kendisini değil, kenarlığı ve etiketi ekran yakalamadan hariç tutun. Devralındığında ve başka türlü ayarlanmadığında varsayılanı CoverBoxedWindows belirler.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2520"/>
@@ -12126,10 +12193,6 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
         <translation>(Güvenlik Açısından Kritik)</translation>
     </message>
     <message>
-        <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation type="vanished">Korumalı alandaki SİSTEM işlemlerini ayrıcalıksız işlemlerden koru</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1917"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it&apos;s no longer providing reliable security, just simple application compartmentalization.</source>
         <translation>Güvenlik Yalıtımı, Sandboxie&apos;nin çok kısıtlı işlem belirteci kullanımı yoluyla korumalı alan kısıtlamalarını uygulamasının birincil yoludur. Bu devre dışı bırakılırsa, alan, uygulama bölmesi modunda çalıştırılır, yani artık sağlıklı bir güvenlik sağlayamaz ve yalnızca basit uygulama bölümlemesi sağlar.</translation>
@@ -12288,217 +12351,221 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="67"/>
         <source>Claude Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Desktop</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="79"/>
         <source>Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Code</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="82"/>
         <source>Claude Code manages its own configuration; run this command instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Code kendi yapılandırmasını yönetir; bunun yerine bu komutu çalıştırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="91"/>
         <source>Visual Studio Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Visual Studio Code</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="93"/>
         <source>Add it per workspace or to your user settings - we do not write into a workspace, because that file lives in your repository.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bunu çalışma alanı başına veya kullanıcı ayarlarınıza ekleyin - bu dosya deponuzda bulunduğu için çalışma alanına yazmıyoruz.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="101"/>
         <source>Another client</source>
-        <translation type="unfinished"></translation>
+        <translation>Başka bir istemci</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="103"/>
         <source>Most clients take a command to run. Use the path or the snippet below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Çoğu istemci çalıştırılacak bir komut alır. Aşağıdaki yolu veya kod parçasını kullanın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="120"/>
         <source>%1 could not be opened for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 okumak için açılamadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="137"/>
         <source>%1 is not valid JSON (%2), so it was left untouched. Add the configuration by hand instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 geçerli JSON değil (%2), bu yüzden değiştirilmedi. Bunun yerine yapılandırmayı elle ekleyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="169"/>
         <source>This client has to be configured by hand.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu istemcinin elle yapılandırılması gerekiyor.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="173"/>
         <location filename="Mcp/McpClientSetup.cpp" line="247"/>
         <source>SbieMcp.exe was not found next to SandMan.</source>
-        <translation type="unfinished"></translation>
+        <translation>SbieMcp.exe, SandMan&apos;in yanında bulunamadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="187"/>
         <source>%1 could not be backed up, so it was left untouched.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 yedeklenemediği için değiştirilmedi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="193"/>
         <source>%1 could not be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 oluşturulamadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="210"/>
         <source>%1 could not be written.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 yazılamadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="218"/>
         <source>%1 could not be replaced; the new configuration is in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 değiştirilemedi; yeni yapılandırma %2 konumunda.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="252"/>
         <source>This folder could not be created:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu klasör oluşturulamadı:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="264"/>
         <source>This file could not be read:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu dosya okunamadı:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="275"/>
         <source>This file is not the JSON this expects, so it was left alone:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu dosya beklenen JSON biçiminde olmadığı için değiştirilmedi:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="293"/>
         <source>This file could not be written:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu dosya yazılamadı:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="307"/>
         <source>Claude Code was not found. Install it, or open a terminal yourself and run the command shown above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Code bulunamadı. Yükleyin veya bir terminal açıp yukarıda gösterilen komutu kendiniz çalıştırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="342"/>
         <source>Claude Code could not be started (error %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Code başlatılamadı (hata %1).</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="151"/>
         <source>the documentation pack is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>belge paketi kullanılamıyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="159"/>
         <source>&apos;%1&apos; is not a page in the documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;, belgelerde bulunan bir sayfa değil</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="165"/>
         <source>&apos;%1&apos; could not be read from the pack</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; paketten okunamadı</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="301"/>
         <source>message SBIE%1 was seen</source>
-        <translation type="unfinished"></translation>
+        <translation>SBIE%1 iletisi görüldü</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="313"/>
         <source>a blocked resource matched %1</source>
-        <translation type="unfinished"></translation>
+        <translation>engellenen bir kaynak %1 ile eşleşti</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="330"/>
         <source>%1 is not set on the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alanda %1 ayarlanmamış</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="339"/>
         <source>%1 is set on the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alanda %1 ayarlanmış</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="63"/>
         <source>The &apos;changes&apos; argument must be a non-empty array of {setting, value} objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;changes&apos; bağımsız değişkeni, {setting, value} nesnelerinden oluşan boş olmayan bir dizi olmalıdır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="69"/>
         <source>That is %1 changes at once. Propose at most 50, so the user can actually read what they are agreeing to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu, aynı anda %1 değişiklik demektir. Kullanıcının neye onay verdiğini gerçekten okuyabilmesi için en fazla 50 değişiklik önerin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="79"/>
         <source>Every entry in &apos;changes&apos; needs a &apos;setting&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;changes&apos; içindeki her girdide bir &apos;setting&apos; bulunmalıdır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="85"/>
         <source>&apos;%1&apos; is not a usable setting name.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; kullanılabilir bir ayar adı değil.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="91"/>
         <source>The value for &apos;%1&apos; contains a line break, which cannot be stored in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; değeri, Sandboxie.ini içinde saklanamayan bir satır sonu içeriyor.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="119"/>
         <source>Changes cannot be confirmed right now, so nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Değişiklikler şu anda onaylanamadığı için hiçbir şey değiştirilmedi.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="125"/>
         <source>A confirmation is already waiting for the user. Nothing was changed - wait for them to answer the previous request before asking again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcının yanıtını bekleyen bir onay zaten var. Hiçbir şey değiştirilmedi - yeniden sormadan önce önceki isteği yanıtlamasını bekleyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="174"/>
         <source>Name or alias of the sandbox to run in.</source>
-        <translation type="unfinished"></translation>
+        <translation>İçinde çalıştırılacak korumalı alanın adı veya takma adı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="178"/>
         <source>The command line to start, exactly as it should run. Quote paths containing spaces. It has to be a single plain line - a command carrying line breaks is refused, because the user must be able to read what they are approving as one command.</source>
-        <translation type="unfinished"></translation>
+        <translation>Başlatılacak komut satırı, tam olarak çalıştırılması gerektiği gibi. Boşluk içeren yolları tırnak içine alın. Tek bir düz satır olmalıdır - kullanıcı neye onay verdiğini tek bir komut olarak okuyabilmelidir; bu yüzden satır sonu içeren komut reddedilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="185"/>
         <source>Working directory for the program. Optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programın çalışma dizini. İsteğe bağlı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="189"/>
         <source>Why this needs to run, in one sentence. Shown to the user as your words, next to the command. A request with no reason given is a harder one to agree to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bunun neden çalıştırılması gerektiği, tek bir cümleyle. Kullanıcıya komutun yanında sizin sözleriniz olarak gösterilir. Gerekçe belirtilmeyen bir isteği kabul etmek daha zordur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="214"/>
         <source>The Sandboxie.ini setting name. Check it with config_schema first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini ayarının adı. Önce config_schema ile denetleyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="218"/>
         <source>The value to set. Omit or leave empty to remove the setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayarlanacak değer. Ayarı kaldırmak için belirtmeyin veya boş bırakın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="230"/>
         <source>The changes, at most 50.</source>
-        <translation type="unfinished"></translation>
+        <translation>Değişiklikler, en fazla 50.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="235"/>
@@ -12508,122 +12575,126 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Mcp/McpTools.cpp" line="316"/>
         <location filename="Mcp/McpTools.cpp" line="324"/>
         <source>Name or alias of the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alanın adı veya takma adı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="248"/>
         <source>Why these changes should help. Shown to the user verbatim when they are asked to approve, so write it for them and not for yourself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu değişikliklerin neden yardımcı olacağı. Onay istendiğinde kullanıcıya aynen gösterilir; bu yüzden kendiniz için değil, kullanıcı için yazın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="265"/>
         <source>Check a change set before proposing it</source>
-        <translation type="unfinished"></translation>
+        <translation>Önermeden önce bir değişiklik kümesini denetle</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="266"/>
         <source>Checks proposed settings against what Sandboxie actually accepts, without changing anything and without asking the user. Always call this before box_apply_changes: an unknown setting name is ignored silently by the driver, so a typo produces a change that appears to work and does nothing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Önerilen ayarları, hiçbir şeyi değiştirmeden ve kullanıcıya sormadan Sandboxie&apos;nin gerçekten kabul ettiği ayarlara göre denetler. Bunu her zaman box_apply_changes öncesinde çağırın: bilinmeyen bir ayar adı sürücü tarafından sessizce yok sayılır; dolayısıyla bir yazım hatası, çalışıyor gibi görünen ama hiçbir şey yapmayan bir değişikliğe yol açar.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="272"/>
         <source>Change sandbox settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan ayarlarını değiştir</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="273"/>
         <source>Proposes configuration changes to one sandbox. The user is shown a diff of current against proposed values and must approve it; nothing is written if they decline. Use this for a fix you are confident about, and for everyday requests such as adding a forced program.
 
 If you want to test a fix before asking the user to accept it, use shadow_begin instead - that lets you try it against a disposable copy of the configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alan için yapılandırma değişiklikleri önerir. Kullanıcıya mevcut ve önerilen değerlerin farkı gösterilir ve onaylaması gerekir; reddederse hiçbir şey yazılmaz. Bunu doğruluğundan emin olduğunuz bir düzeltme ve zorunlu program eklemek gibi günlük istekler için kullanın.
+
+Kullanıcıdan kabul etmesini istemeden önce bir düzeltmeyi denemek istiyorsanız bunun yerine shadow_begin kullanın - bu, yapılandırmanın tek kullanımlık bir kopyası üzerinde deneme yapmanızı sağlar.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="282"/>
         <source>Start testing a fix</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir düzeltmeyi denemeye başla</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="283"/>
         <source>Clones a sandbox configuration to a disposable copy that shares the real file set, so a fix can be tried without touching the sandbox. Returns the name of the copy; change it with shadow_set, then either shadow_commit to copy the differences back - which asks the user once - or shadow_discard to throw them away.
 
 Note what is shared: files written while testing land in the real sandbox and a discard does not undo them. Only configuration is disposable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir düzeltmenin korumalı alana dokunulmadan denenebilmesi için korumalı alan yapılandırmasını gerçek dosya kümesini paylaşan tek kullanımlık bir kopyaya klonlar. Kopyanın adını döndürür; shadow_set ile değiştirin, ardından farkları geri kopyalamak için shadow_commit kullanın - bu, kullanıcıya bir kez sorar - veya bunları atmak için shadow_discard kullanın.
+
+Nelerin paylaşıldığına dikkat edin: deneme sırasında yazılan dosyalar gerçek korumalı alana gider ve kopyayı atmak bunları geri almaz. Yalnızca yapılandırma tek kullanımlıktır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="290"/>
         <source>Name or alias of the sandbox to test against.</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzerinde deneme yapılacak korumalı alanın adı veya takma adı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="292"/>
         <source>Change a setting in the test copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Deneme kopyasındaki bir ayarı değiştir</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="293"/>
         <source>Applies changes to the disposable copy. No confirmation is needed because nothing real is affected yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Değişiklikleri tek kullanımlık kopyaya uygular. Henüz gerçek hiçbir şey etkilenmediği için onay gerekmez.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="297"/>
         <source>Keep the tested fix</source>
-        <translation type="unfinished"></translation>
+        <translation>Denenen düzeltmeyi koru</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="298"/>
         <source>Copies the differences from the test copy back onto the real sandbox, after showing the user what they are. This is the one confirmation on the troubleshooting path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcıya farkları gösterdikten sonra bunları deneme kopyasından gerçek korumalı alana geri kopyalar. Sorun giderme sürecindeki tek onay budur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="301"/>
         <location filename="Mcp/McpOperate.cpp" line="306"/>
         <source>Name or alias of the sandbox being tested.</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzerinde deneme yapılan korumalı alanın adı veya takma adı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="303"/>
         <source>Abandon the tested fix</source>
-        <translation type="unfinished"></translation>
+        <translation>Denenen düzeltmeden vazgeç</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="304"/>
         <source>Deletes the test copy. Nothing to roll back, because the real sandbox was never changed. Call this when a hypothesis turns out to be wrong.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deneme kopyasını siler. Gerçek korumalı alan hiç değiştirilmediği için geri alınacak bir şey yoktur. Bir varsayımın yanlış olduğu ortaya çıktığında bunu çağırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="308"/>
         <source>Take a rollback point</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir geri dönüş noktası oluştur</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="309"/>
         <source>Takes a snapshot of a sandbox so file and registry changes can be undone later. Near-instant regardless of sandbox size, but it refuses while anything is running in the box - so take it before starting anything. Not offered for empty sandboxes or RAM-disk sandboxes, where it would be meaningless.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosya ve kayıt defteri değişikliklerinin daha sonra geri alınabilmesi için korumalı alanın anlık görüntüsünü alır. Korumalı alanın boyutundan bağımsız olarak neredeyse anlıktır; ancak alanda herhangi bir şey çalışırken reddedilir - bu yüzden herhangi bir şey başlatmadan önce alın. Anlamsız olacağı için boş korumalı alanlarda veya RAM disk korumalı alanlarında sunulmaz.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="315"/>
         <source>Roll a sandbox back</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alanı geri al</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="316"/>
         <source>Reverts a sandbox to a snapshot, discarding file and registry changes made since. Terminates whatever is running in the box first, because the operation requires it. This throws work away and cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alanı anlık görüntüsüne döndürerek o zamandan beri yapılan dosya ve kayıt defteri değişikliklerini atar. İşlem bunu gerektirdiği için önce alanda çalışan her şeyi sonlandırır. Bu, çalışmaları atar ve geri alınamaz.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="321"/>
         <source>Stop everything in a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alandaki her şeyi durdur</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="322"/>
         <source>Terminates all processes in a sandbox. Unsaved work in those programs is lost, which is why the user is asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alandaki tüm işlemleri sonlandırır. Bu programlardaki kaydedilmemiş çalışmalar kaybolur; bu yüzden kullanıcıya sorulur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="326"/>
         <source>Run a program inside a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alan içinde program çalıştır</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="327"/>
@@ -12632,22 +12703,26 @@ Note what is shared: files written while testing land in the real sandbox and a 
 This is how a fix gets tested rather than described - start the program that was failing, then read trace_query and box_diagnostics to see whether it still fails. failing, then read trace_query to see whether it still fails. The call returns as soon as the program has started: it does not wait for it to exit and captures no output, so get the pid from box_processes.
 
 The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with shadow_set is not in effect here - a test copy shares the real sandbox&apos;s file root, so a program started against it runs in the real sandbox with the real settings. To test a configuration change by running something, apply it first with shadow_commit, or write it directly with box_apply_changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alan içinde Sandboxie-Plus&apos;ın kendi ayrıcalıklarıyla bir komut başlatır - asla yükseltilmiş ayrıcalıklarla değil. Kullanıcıya komut satırı tam olarak verildiği biçimde gösterilir ve herhangi bir şey çalışmadan önce onaylaması gerekir; bu yüzden gerçekten kastettiğiniz komutu yazın: özetlenmez veya yeniden yazılmaz.
+
+Bir düzeltme böylece anlatılmak yerine denenir - başarısız olan programı başlatın, ardından hâlâ başarısız olup olmadığını görmek için trace_query ve box_diagnostics okuyun. başarısız olan, ardından hâlâ başarısız olup olmadığını görmek için trace_query okuyun. Çağrı, program başlar başlamaz döner: programın çıkmasını beklemez ve çıktı yakalamaz; bu yüzden pid değerini box_processes üzerinden alın.
+
+Geçerli ayarlar, korumalı alanın MEVCUT ayarlarıdır. shadow_set ile hazırlanan bir değişiklik burada geçerli değildir - deneme kopyası gerçek korumalı alanın dosya kökünü paylaşır; dolayısıyla ona yönelik başlatılan bir program gerçek korumalı alanda gerçek ayarlarla çalışır. Bir yapılandırma değişikliğini bir şey çalıştırarak denemek için önce shadow_commit ile uygulayın veya doğrudan box_apply_changes ile yazın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="346"/>
         <source>Create a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alan oluştur</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="347"/>
         <source>Creates a new, empty sandbox with default settings. The user is asked first. Settings can then be applied with box_apply_changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsayılan ayarlarla yeni, boş bir korumalı alan oluşturur. Önce kullanıcıya sorulur. Daha sonra box_apply_changes ile ayarlar uygulanabilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="349"/>
         <source>Name for the new sandbox. Letters, digits and underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni korumalı alanın adı. Harfler, rakamlar ve alt çizgiler.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="374"/>
@@ -12664,271 +12739,284 @@ The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with
         <location filename="Mcp/McpReport.cpp" line="619"/>
         <location filename="Mcp/McpTools.cpp" line="1257"/>
         <source>No sandbox called &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; adında bir korumalı alan yok.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="399"/>
         <source>  ok</source>
-        <translation type="unfinished"></translation>
+        <translation>  tamam</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="399"/>
         <source>  NOT A KNOWN SETTING</source>
-        <translation type="unfinished"></translation>
+        <translation>  BİLİNEN BİR AYAR DEĞİL</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="401"/>
         <source>  (superseded by %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>  (yerini %1 aldı)</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="403"/>
         <source>  (removed in %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>  (%1 sürümünde kaldırıldı)</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="414"/>
         <source>
 The settings reference could not be loaded, so none of this was verified.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Ayar başvurusu yüklenemediği için bunların hiçbiri doğrulanmadı.
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="416"/>
         <source>
 %1 of these are not settings Sandboxie recognises. Fix them before proposing the change - an unknown name is ignored silently rather than reported, so it would look like a fix that did nothing.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Bunlardan %1 tanesi Sandboxie&apos;nin tanıdığı ayarlar değil. Değişikliği önermeden önce düzeltin - bilinmeyen bir ad bildirilmek yerine sessizce yok sayılır; bu yüzden hiçbir şey yapmayan bir düzeltme gibi görünür.
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="445"/>
         <source>The user declined, so nothing was changed. Do not ask again with the same change set - explain what you wanted to do and why, and let them decide.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı reddettiği için hiçbir şey değiştirilmedi. Aynı değişiklik kümesiyle yeniden sormayın - ne yapmak istediğinizi ve nedenini açıklayıp kararı ona bırakın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="473"/>
         <source>%1 of %2 changes written to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%2 değişiklikten %1 tanesi %3 konumuna yazıldı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="476"/>
         <source>
 These could not be written: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Şunlar yazılamadı: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="510"/>
         <source>Already testing against %1. Use shadow_set to change it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaten %1 üzerinde deneme yapılıyor. Değiştirmek için shadow_set kullanın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="516"/>
         <source>The test copy could not be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deneme kopyası oluşturulamadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="522"/>
         <source>Testing against %1, a disposable copy of the configuration of %2 that shares its real file set. Change it with shadow_set. Remember that files written while testing land in the real sandbox - only the configuration is disposable.</source>
-        <translation type="unfinished"></translation>
+        <translation>%2 yapılandırmasının gerçek dosya kümesini paylaşan tek kullanımlık kopyası %1 üzerinde deneme yapılıyor. shadow_set ile değiştirin. Deneme sırasında yazılan dosyaların gerçek korumalı alana gittiğini unutmayın - yalnızca yapılandırma tek kullanımlıktır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="542"/>
         <source>There is no test copy for &apos;%1&apos; yet. Call shadow_begin first.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; için henüz bir deneme kopyası yok. Önce shadow_begin çağırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="547"/>
         <location filename="Mcp/McpOperate.cpp" line="568"/>
         <source>The test copy %1 has gone.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 deneme kopyası artık yok.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="563"/>
         <source>There is no test copy for &apos;%1&apos;. Nothing to keep.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; için deneme kopyası yok. Korunacak bir şey yok.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="636"/>
         <source>The test copy is identical to %1, so there is nothing to keep. Discarding it would have the same effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deneme kopyası %1 ile aynı olduğu için korunacak bir şey yok. Atılması da aynı etkiyi yaratır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="648"/>
         <source>(the agent gave no reason)</source>
-        <translation type="unfinished"></translation>
+        <translation>(aracı gerekçe belirtmedi)</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="651"/>
         <source>The user declined. The test copy is still there, and %1 is unchanged - call shadow_discard to clean up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı reddetti. Deneme kopyası hâlâ duruyor ve %1 değiştirilmedi - temizlemek için shadow_discard çağırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="658"/>
         <source>The changes could not be copied back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Değişiklikler geri kopyalanamadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="663"/>
         <source>%1 change(s) applied to %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%2 üzerine %1 değişiklik uygulandı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="674"/>
         <source>There was no test copy for &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; için bir deneme kopyası yoktu.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="681"/>
         <source>The test copy is gone and %1 was never changed. Note that any files the test wrote are still in the sandbox - discarding only undoes configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deneme kopyası artık yok ve %1 hiç değiştirilmedi. Denemenin yazdığı dosyaların hâlâ korumalı alanda olduğunu unutmayın - kopyayı atmak yalnızca yapılandırmayı geri alır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="697"/>
         <source>&apos;%1&apos; holds no content, so there is nothing to snapshot. Note that an encrypted or image-backed sandbox also looks empty while it is not mounted - if this one is, it has to be opened first.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; içerik barındırmadığı için anlık görüntüsü alınacak bir şey yok. Şifreli veya disk görüntüsü tabanlı bir korumalı alanın da bağlı değilken boş göründüğünü unutmayın - bu alan böyleyse önce açılması gerekir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="702"/>
         <source>&apos;%1&apos; is a RAM-disk sandbox: its contents are discarded when it is unmounted or the machine restarts, so a snapshot would protect nothing.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; bir RAM disk korumalı alanıdır: bağlantısı kesildiğinde veya makine yeniden başlatıldığında içeriği atılır; dolayısıyla anlık görüntü hiçbir şeyi korumaz.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="706"/>
         <source>Something is still running in &apos;%1&apos;. Snapshots require the sandbox to be idle - ask the user to close its programs, or use box_terminate, and then try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; içinde hâlâ bir şey çalışıyor. Anlık görüntüler korumalı alanın boşta olmasını gerektirir - kullanıcıdan programlarını kapatmasını isteyin veya box_terminate kullanın, ardından yeniden deneyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="713"/>
         <source>Confirm snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Anlık görüntüyü onayla</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="714"/>
         <source>Take a snapshot of sandbox %1, so its files and registry can be rolled back later.
 
 This is quick and does not copy the sandbox. It does mean the sandbox cannot shrink until the snapshot is merged or deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosyalarının ve kayıt defterinin daha sonra geri alınabilmesi için %1 korumalı alanının anlık görüntüsünü alın.
+
+Bu işlem hızlıdır ve korumalı alanı kopyalamaz. Ancak anlık görüntü birleştirilene veya silinene kadar korumalı alanın küçülemeyeceği anlamına gelir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="717"/>
         <source>Take Snapshot</source>
-        <translation type="unfinished">Anlık Görüntü Al</translation>
+        <translation>Anlık Görüntü Al</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="718"/>
         <source>The user declined; no snapshot was taken.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı reddetti; anlık görüntü alınmadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="721"/>
         <source>Before AI agent changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay zeka aracısı değişikliklerinden önce</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="722"/>
         <source>Taking a snapshot of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 anlık görüntüsü alınıyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="724"/>
         <source>The snapshot failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Anlık görüntü alınamadı: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="733"/>
         <source>Snapshot taken for %1. File and registry changes from here on can be undone with snapshot_rollback.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 için anlık görüntü alındı. Bundan sonraki dosya ve kayıt defteri değişiklikleri snapshot_rollback ile geri alınabilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="747"/>
         <source>&apos;%1&apos; has no snapshot to roll back to.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; için geri dönülebilecek bir anlık görüntü yok.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="754"/>
         <source>Roll sandbox %1 back to its snapshot.
 
 Every file and registry change made in the sandbox since the snapshot will be discarded. This cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 korumalı alanını anlık görüntüsüne geri döndürün.
+
+Anlık görüntüden bu yana korumalı alanda yapılan tüm dosya ve kayıt defteri değişiklikleri atılacaktır. Bu işlem geri alınamaz.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="760"/>
         <source>
 
 %1 program(s) are running in the sandbox and will be terminated first. Unsaved work in them will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Korumalı alanda %1 program çalışıyor ve önce bunlar sonlandırılacak. Bu programlardaki kaydedilmemiş çalışmalar kaybolacak.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="764"/>
         <source>Confirm rollback</source>
-        <translation type="unfinished"></translation>
+        <translation>Geri almayı onayla</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="765"/>
         <source>Roll Back and Discard Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Geri Al ve Değişiklikleri At</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="766"/>
         <source>The user declined; nothing was rolled back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı reddetti; hiçbir şey geri alınmadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="772"/>
         <source>The sandbox could not be stopped, so nothing was rolled back: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan durdurulamadığı için hiçbir şey geri alınmadı: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="778"/>
         <source>Rolling %1 back</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 geri alınıyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="780"/>
         <source>The rollback failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Geri alma başarısız oldu: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="786"/>
         <source>%1 was rolled back to its snapshot.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 anlık görüntüsüne geri döndürüldü.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="798"/>
         <source>Nothing is running in %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 içinde hiçbir şey çalışmıyor.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="803"/>
         <source>Confirm terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonlandırmayı onayla</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="804"/>
         <source>Terminate %1 program(s) running in sandbox %2.
 
 Unsaved work in them will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>%2 korumalı alanında çalışan %1 programı sonlandırın.
+
+Bu programlardaki kaydedilmemiş çalışmalar kaybolacak.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="806"/>
         <source>Terminate Them</source>
-        <translation type="unfinished"></translation>
+        <translation>Bunları Sonlandır</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="807"/>
         <source>The user declined; nothing was terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı reddetti; hiçbir şey sonlandırılmadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="812"/>
         <source>Terminating failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonlandırma başarısız oldu: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="814"/>
         <source>%1 program(s) in %2 were terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>%2 içindeki %1 program sonlandırıldı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="822"/>
@@ -12936,79 +13024,81 @@ Unsaved work in them will be lost.</source>
         <location filename="Mcp/McpTools.cpp" line="843"/>
         <location filename="Mcp/McpTools.cpp" line="906"/>
         <source>The &apos;box&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;box&apos; bağımsız değişkeni gereklidir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="826"/>
         <source>&apos;%1&apos; is not a usable sandbox name. Use letters, digits and underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; kullanılabilir bir korumalı alan adı değil. Harfleri, rakamları ve alt çizgileri kullanın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="830"/>
         <source>A sandbox called &apos;%1&apos; already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; adında bir korumalı alan zaten var.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="835"/>
         <source>Confirm new sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni korumalı alanı onayla</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="836"/>
         <source>Create a new sandbox called %1, with default settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsayılan ayarlarla %1 adında yeni bir korumalı alan oluşturun.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="837"/>
         <source>Create It</source>
-        <translation type="unfinished"></translation>
+        <translation>Oluştur</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="838"/>
         <source>The user declined; no sandbox was created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı reddetti; korumalı alan oluşturulmadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="843"/>
         <source>The sandbox could not be created: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan oluşturulamadı: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="848"/>
         <source>Sandbox %1 was created with default settings. Use box_apply_changes to configure it.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 korumalı alanı varsayılan ayarlarla oluşturuldu. Yapılandırmak için box_apply_changes kullanın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="876"/>
         <source>The &apos;command&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;command&apos; bağımsız değişkeni gereklidir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="880"/>
         <source>That command line is %1 characters, and the confirmation can only honestly show up to %2. Write a shorter command, or put the work in a script file and run that.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu komut satırı %1 karakter uzunluğunda ve onay penceresi yalnızca %2 karaktere kadar eksiksiz gösterebilir. Daha kısa bir komut yazın veya yapılacak işi bir betik dosyasına koyup onu çalıştırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="887"/>
         <source>That command line contains a line break or a control character. It has to be a single plain line, because the user is shown it as one and has to be able to read exactly what they are approving.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu komut satırı bir satır sonu veya denetim karakteri içeriyor. Kullanıcıya tek satır olarak gösterildiği ve tam olarak neye onay verdiğini okuyabilmesi gerektiği için tek bir düz satır olmalıdır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="893"/>
         <source>The working directory has to be a single line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Çalışma dizini tek satır olmalıdır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="911"/>
         <source>&apos;%1&apos; is a test copy, which is a copy of a sandbox&apos;s configuration and not a sandbox a program can run in - it shares the real sandbox&apos;s files, so anything started against it would run in the real sandbox with the real settings. Apply the change with shadow_commit first, then run against the sandbox itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; bir test kopyasıdır; bu, korumalı alanın yapılandırmasının bir kopyasıdır ve bir programın çalışabileceği bir korumalı alan değildir - gerçek korumalı alanın dosyalarını paylaşır, dolayısıyla bu kopya üzerinden başlatılan her şey gerçek korumalı alanda gerçek ayarlarla çalışır. Önce değişikliği shadow_commit ile uygulayın, ardından korumalı alanın kendisinde çalıştırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="927"/>
         <source>Run this command inside %1:
 
     %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu komutu %1 içinde çalıştırın:
+
+    %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="929"/>
@@ -13016,7 +13106,10 @@ Unsaved work in them will be lost.</source>
 
 Working directory:
     %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Çalışma dizini:
+    %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="931"/>
@@ -13024,231 +13117,236 @@ Working directory:
 
 Its reason, in its own words:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Kendi sözleriyle gerekçesi:
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="932"/>
         <source>
 
 It runs sandboxed and with your normal privileges, not as administrator - but the command above is the agent&apos;s choice, so read it before agreeing.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Yönetici olarak değil, korumalı alanda ve normal ayrıcalıklarınızla çalışır - ancak yukarıdaki komutu aracı seçmiştir, bu yüzden onaylamadan önce okuyun.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="935"/>
         <source>Confirm running a program</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir programın çalıştırılmasını onaylayın</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="936"/>
         <source>Run It</source>
-        <translation type="unfinished"></translation>
+        <translation>Çalıştır</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="937"/>
         <source>The user declined; nothing was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı reddetti; hiçbir şey başlatılmadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="944"/>
         <source>The program could not be started: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Program başlatılamadı: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="957"/>
         <source>Launched in %1. The pid is not reported because the program is started through Sandboxie&apos;s launcher, which exits immediately - its pid is not the program&apos;s. Call box_processes on %2 to get the real pid and to confirm it is still running, and trace_query or box_diagnostics to see what it did. Nothing is waited for and no and trace_query to see what it did. Nothing is waited for and no output is captured.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 içinde başlatıldı. Program, hemen kapanan Sandboxie başlatıcısı aracılığıyla başlatıldığından pid bildirilmez - onun pid değeri programınki değildir. Gerçek pid değerini almak ve hâlâ çalıştığını doğrulamak için %2 üzerinde box_processes aracını, ne yaptığını görmek için de trace_query veya box_diagnostics aracını çağırın. Hiçbir şey beklenmez ve hiçbir ve ne yaptığını görmek için trace_query. Hiçbir şey beklenmez ve hiçbir çıktı yakalanmaz.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="972"/>
         <source>Sandboxie is not running, so nothing can be changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie çalışmıyor, bu yüzden hiçbir şey değiştirilemez.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="987"/>
         <location filename="Mcp/McpReport.cpp" line="685"/>
         <location filename="Mcp/McpTools.cpp" line="1358"/>
         <source>Tool &apos;%1&apos; is not implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; aracı uygulanmamış.</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="14"/>
         <source>the endpoint name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>uç nokta adı boş</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="19"/>
         <source>the endpoint name is longer than 64 characters</source>
-        <translation type="unfinished"></translation>
+        <translation>uç nokta adı 64 karakterden uzun</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="29"/>
         <source>the endpoint name contains &apos;%1&apos;; only letters, digits, underscore, hyphen and dot are allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>uç nokta adı &apos;%1&apos; içeriyor; yalnızca harflere, rakamlara, alt çizgiye, kısa çizgiye ve noktaya izin verilir</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="39"/>
         <source>the endpoint name must start with &apos;%1&apos; - that is the prefix the template which keeps sandboxed programs away from this pipe matches, and a name outside it would not be protected</source>
-        <translation type="unfinished"></translation>
+        <translation>uç nokta adı &apos;%1&apos; ile başlamalıdır - korumalı alandaki programları bu kanaldan uzak tutan şablonun eşleştirdiği önek budur ve bu önekin dışındaki bir ad korunmaz</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="111"/>
         <source>malformed JSON: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>bozuk JSON: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="117"/>
         <source>message is not a JSON object</source>
-        <translation type="unfinished"></translation>
+        <translation>ileti bir JSON nesnesi değil</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="126"/>
         <source>missing or wrong jsonrpc version</source>
-        <translation type="unfinished"></translation>
+        <translation>jsonrpc sürümü eksik veya yanlış</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="132"/>
         <source>no method</source>
-        <translation type="unfinished"></translation>
+        <translation>yöntem yok</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="183"/>
         <source>missing MCP-Protocol-Version header</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP-Protocol-Version başlığı eksik</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="187"/>
         <source>MCP-Protocol-Version header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP-Protocol-Version başlığı &apos;%1&apos;, gövdedeki &apos;%2&apos; değeriyle eşleşmiyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="192"/>
         <source>missing Mcp-Method header</source>
-        <translation type="unfinished"></translation>
+        <translation>Mcp-Method başlığı eksik</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="196"/>
         <source>Mcp-Method header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Mcp-Method başlığı &apos;%1&apos;, gövdedeki &apos;%2&apos; değeriyle eşleşmiyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="203"/>
         <source>missing Mcp-Name header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 için Mcp-Name başlığı eksik</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="210"/>
         <source>Mcp-Name header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Mcp-Name başlığı &apos;%1&apos;, gövdedeki &apos;%2&apos; değeriyle eşleşmiyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="257"/>
         <source>Unsupported protocol version</source>
-        <translation type="unfinished"></translation>
+        <translation>Desteklenmeyen protokol sürümü</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="42"/>
         <source>Reporting is unavailable because there is no way to ask the user, and nothing is sent without being asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcıya sormanın bir yolu olmadığından raporlama kullanılamıyor ve sorulmadan hiçbir şey gönderilmez.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="49"/>
         <source>A confirmation is already waiting for the user. Nothing was sent - wait for them to answer the previous request before asking again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir onay zaten kullanıcıyı bekliyor. Hiçbir şey gönderilmedi - yeniden sormadan önce önceki isteği yanıtlamasını bekleyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="205"/>
         <source>an unidentified agent</source>
-        <translation type="unfinished"></translation>
+        <translation>kimliği belirsiz bir aracı</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="311"/>
         <source>One of: fixed, partly_fixed, not_fixed. Report a success as readily as a failure - a run that found a cause and applied a working fix is the material the knowledge base is made of, and the project currently never sees one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Şunlardan biri: fixed, partly_fixed, not_fixed. Başarıyı da başarısızlık kadar kolaylıkla bildirin - bir neden bulup işe yarayan bir düzeltme uygulayan çalışma, bilgi tabanını oluşturan malzemedir ve proje şu anda bunları hiç görmüyor.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="322"/>
         <source>Name or alias of the sandbox the run was about. Optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>Çalışmanın ilgili olduğu korumalı alanın adı veya takma adı. İsteğe bağlı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="324"/>
         <source>One line naming the problem, as an issue title would.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir sorun başlığı gibi, sorunu adlandıran tek satır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="325"/>
         <source>What you found and why you think it was the cause. Written as your own account - it is labelled as model output in the report and a maintainer will read it as such.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne bulduğunuz ve neden bunun sorunun nedeni olduğunu düşündüğünüz. Kendi anlatımınızla yazın - raporda model çıktısı olarak etiketlenir ve bir bakımcı bunu bu şekilde okur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="328"/>
         <source>What you did, one step per entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yaptıklarınız, her girdide bir adım.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="329"/>
         <source>The settings you changed, as &apos;Setting=Value&apos; lines. These become the ini_changes block of the draft knowledge-base entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Değiştirdiğiniz ayarlar, &apos;Setting=Value&apos; satırları olarak. Bunlar, taslak bilgi tabanı girdisinin ini_changes bloğunu oluşturur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="332"/>
         <source>How you established the result - what you ran, what you read afterwards. A fix nobody verified is a guess.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonucu nasıl doğruladığınız - ne çalıştırdığınız, sonrasında ne okuduğunuz. Kimsenin doğrulamadığı bir düzeltme bir tahmindir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="335"/>
         <source>Hypotheses you ruled out, and what ruled them out. Please fill this in: what a cause is NOT is what makes a knowledge-base entry discriminate instead of merely sounding right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Elediğiniz varsayımlar ve bunları neyin elediği. Lütfen bunu doldurun: nedenin ne OLMADIĞI, bir bilgi tabanı girdisini yalnızca kulağa doğru gelen bir metin olmaktan çıkarıp ayırt edici kılar.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="338"/>
         <source>Set this only when the user has told you whether their problem is gone - not when you believe it is. Ask them: &apos;is it working now?&apos; is a question worth one turn. Until this is set, Sandboxie-Plus asks the user itself before the report is sent, and the report says plainly that the outcome is your assessment rather than theirs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bunu yalnızca kullanıcı sorununun giderilip giderilmediğini size söylediğinde ayarlayın - siz giderildiğine inandığınızda değil. Ona sorun: &apos;şimdi çalışıyor mu?&apos; bir tura değen bir sorudur. Bu ayarlanana kadar Sandboxie-Plus, rapor gönderilmeden önce kullanıcıya kendisi sorar ve rapor, sonucun kullanıcının değil sizin değerlendirmeniz olduğunu açıkça belirtir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="340"/>
         <source>Ask to attach the whole Sandboxie.ini. Off unless the problem is about configuration the box section does not show; it carries every sandbox the user has.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini dosyasının tamamını eklemek için izin isteyin. Sorun, alan bölümünde görünmeyen bir yapılandırmayla ilgili değilse kapalı tutun; kullanıcının tüm korumalı alanlarını içerir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="343"/>
         <source>Ask to attach the resource trace as well as the message log. Large, and detailed about everything running on the machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>İleti günlüğünün yanı sıra kaynak izini de eklemek için izin isteyin. Büyüktür ve makinede çalışan her şey hakkında ayrıntı içerir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="362"/>
         <source>Issue title.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun başlığı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="363"/>
         <source>Issue body, Markdown. Leave empty to use the composed report, which is the better choice: it is the text the user has already read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun gövdesi, Markdown biçiminde. Oluşturulan raporu kullanmak için boş bırakın; bu daha iyi bir seçimdir: kullanıcının zaten okuduğu metindir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="366"/>
         <source>Label names to suggest. The user can change them.</source>
-        <translation type="unfinished"></translation>
+        <translation>Önerilecek etiket adları. Kullanıcı bunları değiştirebilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="381"/>
         <source>Name or alias of the sandbox the workaround is for.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçici çözümün ilgili olduğu korumalı alanın adı veya takma adı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="382"/>
         <source>The settings, as &apos;Setting=Value&apos; lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayarlar, &apos;Setting=Value&apos; satırları olarak.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="383"/>
         <source>What the workaround does and what it costs, in plain words.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçici çözümün ne yaptığı ve bedelinin ne olduğu, sade bir dille.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="400"/>
         <source>Write up what happened</source>
-        <translation type="unfinished"></translation>
+        <translation>Olanları yazın</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="401"/>
@@ -13261,56 +13359,68 @@ Call this on a success too. A failure report tells the project what is still bro
 Call it early and again as you learn more, rather than once at the end. Whatever you composed last is what Sandboxie-Plus offers the user when they close the agent window, and they may close it at any moment - the console going away does not wait for you to finish. An early rough write-up that gets sent is worth more than a perfect one that was never composed.
 
 You cannot send it yourself, by design. When you are done, tell the user to press Finish - the green tick at the bottom of the Sandboxie-Plus agent window - which opens your report for them to read, correct and send.</source>
-        <translation type="unfinished"></translation>
+        <translation>Çalışmaya ilişkin anlatımınızdan ve Sandboxie-Plus&apos;ın kendisinin topladığı gerçeklerden bir rapor oluşturur ve sonucu size gösterir. Hiçbir şey gönderilmez - bu yalnızca metni oluşturur.
+
+İki bölüm ayrı ve etiketli kalır: makinenin gözlemledikleri ve sizin yazdıklarınız. Bunları harmanlamaya çalışmayın; bir bakımcı hangi cümlelerin kanıt olduğunu ayırt edebilmelidir.
+
+Başarı durumunda da bunu çağırın. Bir başarısızlık raporu projeye hâlâ neyin bozuk olduğunu söyler; bir başarı raporu ise düzeltmenin ne olduğunu söyler ve proje bunu hiç alamaz.
+
+Bunu sonda bir kez çağırmak yerine erken çağırın ve öğrendikçe yeniden çağırın. Kullanıcı aracı penceresini kapattığında Sandboxie-Plus ona en son oluşturduğunuz metni sunar ve kullanıcı pencereyi her an kapatabilir - konsolun kapanması sizin bitirmenizi beklemez. Gönderilen erken bir kaba taslak, hiç oluşturulmamış kusursuz bir metinden daha değerlidir.
+
+Tasarım gereği bunu kendiniz gönderemezsiniz. İşiniz bittiğinde kullanıcıya Sandboxie-Plus aracı penceresinin altındaki yeşil onay işareti olan Bitir&apos;e basmasını söyleyin; bu, raporun okunması, düzeltilmesi ve gönderilmesi için açılmasını sağlar.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="426"/>
         <source>Open a prefilled GitHub issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Önceden doldurulmuş bir GitHub sorunu açın</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="427"/>
         <source>Opens GitHub&apos;s new-issue form in the user&apos;s browser with the title and body filled in. It submits nothing - the user reads it on the site and decides.
 
 Prefer report_submit. This one requires the user to have a GitHub account and to be signed in, which many are not; report_submit reaches the project&apos;s own tracker with no account at all. Use this only when the user has said they want to discuss it on GitHub, or when they ask for it by name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcının tarayıcısında GitHub&apos;ın yeni sorun formunu başlığı ve gövdesi doldurulmuş olarak açar. Hiçbir şey göndermez - kullanıcı sitede okur ve karar verir.
+
+report_submit aracını tercih edin. Bu araç, kullanıcının bir GitHub hesabının olmasını ve oturum açmış olmasını gerektirir; birçok kullanıcıda bunlar yoktur. report_submit ise hiçbir hesap gerektirmeden projenin kendi takip sistemine ulaşır. Bunu yalnızca kullanıcı GitHub&apos;da tartışmak istediğini söylediğinde veya bu aracı adıyla istediğinde kullanın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="435"/>
         <source>Save a workaround others can apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Başkalarının uygulayabileceği bir geçici çözümü kaydedin</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="436"/>
         <source>Writes a file holding the settings as an INI snippet plus the equivalent SbieIni.exe commands, so the fix can be shared or reapplied. Local only - nothing leaves the machine. The user picks where it goes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Düzeltmenin paylaşılabilmesi veya yeniden uygulanabilmesi için ayarları bir INI parçası ve eşdeğer SbieIni.exe komutları olarak içeren bir dosya yazar. Yalnızca yereldir - makineden hiçbir şey çıkmaz. Nereye kaydedileceğini kullanıcı seçer.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="456"/>
         <source>&apos;outcome&apos; must be one of: fixed, partly_fixed, not_fixed.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;outcome&apos; şunlardan biri olmalıdır: fixed, partly_fixed, not_fixed.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="460"/>
         <source>&apos;title&apos; is required - one line naming the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;title&apos; gereklidir - sorunu adlandıran tek satır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="462"/>
         <source>&apos;narrative&apos; is required. A report with no account of what you found is not worth a maintainer&apos;s time.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;narrative&apos; gereklidir. Ne bulduğunuzu anlatmayan bir rapor, bir bakımcının zamanına değmez.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="528"/>
         <source>Composed, and nothing has been sent. The user has not seen it yet either - call report_submit to put it in front of them, or issue_prefill to open it as a GitHub issue instead. This is the full text:
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Oluşturuldu ve hiçbir şey gönderilmedi. Kullanıcı da henüz görmedi - önüne getirmek için report_submit aracını, bunun yerine GitHub sorunu olarak açmak için issue_prefill aracını çağırın. Tam metin:
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="541"/>
         <source>Nothing has been written up yet, and sending is not yours to do in any case. Call report_compose first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Henüz hiçbir şey yazılmadı ve zaten göndermek sizin yapacağınız bir iş değil. Önce report_compose aracını çağırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="545"/>
@@ -13319,22 +13429,26 @@ Prefer report_submit. This one requires the user to have a GitHub account and to
 Your write-up is already with Sandboxie-Plus. Tell the user to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: that opens the report for them to read, lets them correct anything, and sends it if they agree. Say that sending it is worth doing and why, once, and then leave the decision with them.
 
 Keep composing if you learn more - they are offered whatever you wrote last.</source>
-        <translation type="unfinished"></translation>
+        <translation>Göndermek kullanıcının yapacağı bir iştir, sizin değil - bu araç artık hiçbir şey göndermez.
+
+Yazdığınız metin zaten Sandboxie-Plus&apos;tadır. Kullanıcıya Sandboxie-Plus aracı penceresinin altındaki yeşil onay işareti olan Bitir&apos;e basmasını söyleyin: bu, raporu okuması için açar, istediğini düzeltmesine izin verir ve kabul ederse gönderir. Göndermenin neden değerli olduğunu bir kez söyleyin ve ardından kararı ona bırakın.
+
+Daha fazla bilgi edinirseniz metni oluşturmaya devam edin - kullanıcıya en son yazdığınız metin sunulur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="559"/>
         <source>&apos;title&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;title&apos; gereklidir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="565"/>
         <source>There is nothing to put in the issue. Supply &apos;body&apos;, or call report_compose first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soruna eklenecek bir şey yok. &apos;body&apos; sağlayın veya önce report_compose aracını çağırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="596"/>
         <source>Confirm opening a GitHub issue</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub sorunu açılmasını onaylayın</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="597"/>
@@ -13345,557 +13459,596 @@ Title: %1
 %2
 
 Nothing is submitted by opening it - you still have to press the button on the site, and you can edit it there first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarayıcınızda Sandboxie-Plus sorun formunu aşağıdaki içerikle doldurulmuş olarak açın:
+
+Başlık: %1
+
+%2
+
+Formu açmak hiçbir şey göndermez - sitedeki düğmeye yine de basmanız gerekir ve önce metni orada düzenleyebilirsiniz.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="601"/>
         <source>Open the Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarayıcıyı Aç</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="602"/>
         <source>The user declined; no issue was opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı reddetti; hiçbir sorun açılmadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="606"/>
         <source>The browser could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarayıcı açılamadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="609"/>
         <source>The issue form is open in the browser, but the body did not fit in a URL and was truncated. Nothing has been submitted; the user decides on the site.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun formu tarayıcıda açık, ancak gövde bir URL&apos;ye sığmadığı için kısaltıldı. Hiçbir şey gönderilmedi; kullanıcı sitede karar verir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="611"/>
         <source>The issue form is open in the browser, prefilled. Nothing has been submitted; the user decides on the site.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun formu tarayıcıda önceden doldurulmuş olarak açık. Hiçbir şey gönderilmedi; kullanıcı sitede karar verir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="624"/>
         <source>&apos;changes&apos; is required - there is no workaround without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;changes&apos; gereklidir - onsuz bir geçici çözüm olmaz.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="635"/>
         <source>an AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>bir yapay zekâ aracısı</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="654"/>
         <source>Save the workaround</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçici çözümü kaydet</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="656"/>
         <source>Sandboxie configuration (*.ini);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie yapılandırması (*.ini);;Tüm dosyalar (*.*)</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="658"/>
         <source>The user cancelled; nothing was written.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı iptal etti; hiçbir şey yazılmadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="662"/>
         <source>That file could not be written: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu dosya yazılamadı: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="670"/>
         <source>Written to %1 - %2 setting(s), as an INI section plus the equivalent SbieIni.exe commands.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 konumuna yazıldı - %2 ayar, bir INI bölümü ve eşdeğer SbieIni.exe komutları olarak.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="678"/>
         <source>Sandboxie is not running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie çalışmıyor.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="697"/>
         <source>The six-digit code shown in Sandboxie-Plus. Omit it on the first call and Sandboxie-Plus will display one; then ask the user to read it to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus&apos;ta gösterilen altı haneli kod. İlk çağrıda bunu atlayın; Sandboxie-Plus bir kod gösterir. Ardından kullanıcıdan bu kodu size okumasını isteyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="712"/>
         <source>Connect to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus&apos;a bağlanın</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="713"/>
         <source>Authorises this connection to look at this machine. Call with no arguments and Sandboxie-Plus shows a six-digit code on the user&apos;s screen; ask the user for it and call again with code set.
 
 You do not need this to read the documentation or the settings schema - those work now. You do need it before anything that reads the user&apos;s sandboxes, and before anything that changes them. Do not guess the code: a handful of wrong attempts invalidates it and a new one has to be requested.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu bağlantıya bu makineyi inceleme yetkisi verir. Bağımsız değişken olmadan çağırın; Sandboxie-Plus kullanıcının ekranında altı haneli bir kod gösterir. Kullanıcıdan kodu isteyin ve code ayarlanmış olarak yeniden çağırın.
+
+Belgeleri veya ayar şemasını okumak için buna ihtiyacınız yoktur - bunlar şu anda çalışır. Kullanıcının korumalı alanlarını okuyan veya değiştiren her şeyden önce buna ihtiyacınız vardır. Kodu tahmin etmeyin: birkaç yanlış deneme kodu geçersiz kılar ve yeni bir kod istenmesi gerekir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="93"/>
         <source>How many results at most. Defaults to 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>En fazla sonuç sayısı. Varsayılan 10.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="113"/>
         <source>The entry id, as returned by kb_search or kb_match.</source>
-        <translation type="unfinished"></translation>
+        <translation>kb_search veya kb_match tarafından döndürülen girdi kimliği.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="132"/>
         <source>Name or alias of the sandbox to explain.</source>
-        <translation type="unfinished"></translation>
+        <translation>Açıklanacak korumalı alanın adı veya takma adı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="136"/>
         <source>How many candidates at most. Defaults to 5.</source>
-        <translation type="unfinished"></translation>
+        <translation>En fazla aday sayısı. Varsayılan 5.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="211"/>
         <source>Limit to one sandbox, by name or alias. Many entries carry no box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Adı veya takma adıyla tek bir korumalı alanla sınırlandırın. Birçok girdinin bir alanı yoktur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="215"/>
         <source>One of message, diagnostic or notice. Omit for all three.</source>
-        <translation type="unfinished"></translation>
+        <translation>message, diagnostic veya notice değerlerinden biri. Üçü için de atlayın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="219"/>
         <source>Only entries whose text contains this.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yalnızca metni bunu içeren girdiler.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="223"/>
         <source>Entries to return, newest first. Default 100, maximum 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>Döndürülecek girdiler, en yeniler önce. Varsayılan 100, en fazla 200.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="241"/>
         <source>Limit to one sandbox, by name or alias. Omit for every sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Adı veya takma adıyla tek bir korumalı alanla sınırlandırın. Tüm korumalı alanlar için atlayın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="245"/>
         <source>Only rows whose path or message contains this text.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yalnızca yolu veya iletisi bu metni içeren satırlar.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="249"/>
         <source>Only rows with this status, for example Denied. Omit for all.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yalnızca bu duruma sahip satırlar, örneğin Denied. Tümü için atlayın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="253"/>
         <source>Rows to return, default 100, maximum 300.</source>
-        <translation type="unfinished"></translation>
+        <translation>Döndürülecek satırlar, varsayılan 100, en fazla 300.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="257"/>
         <source>Rows to skip, for paging. The result reports the total.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sayfalama için atlanacak satırlar. Sonuç toplam sayıyı bildirir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="292"/>
         <source>Sandboxie version</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie sürümü</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="293"/>
         <source>Version of Sandboxie-Plus and of the operating system it is running on. Call this first: fixes and setting names differ between versions, and a suggestion that does not apply to the installed build wastes a round trip.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus&apos;ın ve çalıştığı işletim sisteminin sürümü. Önce bunu çağırın: düzeltmeler ve ayar adları sürümler arasında değişir ve kurulu derlemeye uymayan bir öneri gereksiz bir gidiş gelişe neden olur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="298"/>
         <source>List sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alanları listeleyin</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="299"/>
         <source>Every configured sandbox with its type, whether it is enabled, how many processes are running in it, and whether it holds any content. Boxes often have an alias, which is what the user calls them - refer to a box the way displayName shows it, and pass either the name or the alias to other tools.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırılmış her korumalı alanı türüyle, etkin olup olmadığıyla, içinde kaç işlemin çalıştığıyla ve içerik barındırıp barındırmadığıyla gösterir. Alanların genellikle kullanıcının onları adlandırdığı bir takma adı vardır - bir alandan displayName içinde gösterildiği şekilde söz edin ve diğer araçlara adını veya takma adını iletin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="305"/>
         <source>Read sandbox configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan yapılandırmasını okuyun</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="306"/>
         <source>The settings explicitly set on one sandbox, as name and value pairs. Values inherited from templates and global defaults are not included, so an absent setting means it is not set here, not that it has no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alanda açıkça ayarlanmış ayarlar, ad ve değer çiftleri olarak. Şablonlardan ve genel varsayılanlardan devralınan değerler dahil değildir; dolayısıyla bir ayarın bulunmaması, etkisinin olmadığı değil, burada ayarlanmadığı anlamına gelir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="309"/>
         <source>Name or alias of the sandbox, as reported by box_list.</source>
-        <translation type="unfinished"></translation>
+        <translation>box_list tarafından bildirildiği şekliyle korumalı alanın adı veya takma adı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="311"/>
         <source>What is running in a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alanda neler çalışıyor</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="312"/>
         <source>The processes currently running in a sandbox, with their image paths, command lines and start times. Empty is a useful answer too: a program that exits immediately leaves nothing here, which points at a start-up failure rather than a running-program problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alanda şu anda çalışan işlemler; yürütülebilir dosya yolları, komut satırları ve başlangıç zamanlarıyla birlikte. Boş bir sonuç da yararlı bir yanıttır: hemen kapanan bir program burada hiçbir şey bırakmaz; bu, çalışan bir program sorunundan ziyade bir başlangıç hatasına işaret eder.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="319"/>
         <source>Sandbox diagnostic events</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan tanılama olayları</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="320"/>
         <source>Diagnostic events Sandboxie has recorded for a sandbox - the same ones the troubleshooting wizard reports. These are the driver saying what it refused or had trouble with, so read them before guessing at a cause. Paths and account names are redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie&apos;nin bir korumalı alan için kaydettiği tanılama olayları - sorun giderme sihirbazının bildirdikleriyle aynıdır. Bunlar sürücünün neyi reddettiğini veya neyle sorun yaşadığını belirtir; bu yüzden neden hakkında tahmin yürütmeden önce bunları okuyun. Yollar ve hesap adları gizlenir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="327"/>
         <source>Search the message log</source>
-        <translation type="unfinished"></translation>
+        <translation>İleti günlüğünde arayın</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="328"/>
         <source>Everything Sandboxie-Plus has reported this session: driver and service messages, diagnostic events, and notices from SandMan itself. This is the same log the user is looking at, newest first. Unlike the resource trace it needs nothing switched on, so it is the first place to look. Paths and account names are redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus&apos;ın bu oturumda bildirdiği her şey: sürücü ve hizmet iletileri, tanılama olayları ve SandMan&apos;in kendi bildirimleri. Bu, kullanıcının baktığı günlüğün aynısıdır, en yeniler önce gösterilir. Kaynak izinin aksine hiçbir şeyin açılmasını gerektirmez; bu yüzden ilk bakılacak yerdir. Yollar ve hesap adları gizlenir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="335"/>
         <source>Search the resource trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaynak izinde arayın</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="336"/>
         <source>The resource access trace: what sandboxed programs tried to open and whether it was allowed. This is where a &apos;why will it not start&apos; answer usually comes from - look for denied accesses just before the program exits.
 
 Requires tracing to be enabled in SandMan, and only covers what has been recorded since. If it is off, say so and ask the user to turn it on and reproduce the problem - do not speculate from an empty trace. Results are paged and redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaynak erişim izi: korumalı alandaki programların neleri açmaya çalıştığı ve buna izin verilip verilmediği. &apos;Neden başlamıyor&apos; sorusunun yanıtı genellikle buradan gelir - program kapanmadan hemen önce reddedilen erişimlere bakın.
+
+SandMan&apos;de izlemenin etkinleştirilmesini gerektirir ve yalnızca o zamandan beri kaydedilenleri kapsar. Kapalıysa bunu söyleyin ve kullanıcıdan açıp sorunu yeniden oluşturmasını isteyin - boş bir izden tahminde bulunmayın. Sonuçlar sayfalanır ve hassas bilgiler gizlenir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="346"/>
         <source>Search known problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilinen sorunlarda arayın</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="347"/>
         <source>Searches the troubleshooting knowledge base - curated entries mapping a symptom to a cause and a fix. This is a different thing from the documentation: the docs say what a setting does, these say why something is broken.
 
 Search by how the user described the problem, in their words. Returns ids; pass one to kb_get for the whole entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun giderme bilgi tabanında arar - bir belirtiyi bir nedene ve düzeltmeye bağlayan, gözden geçirilmiş girdiler. Bu, belgelerden farklıdır: belgeler bir ayarın ne yaptığını söyler, bunlar ise bir şeyin neden bozuk olduğunu söyler.
+
+Kullanıcının sorunu kendi sözleriyle nasıl anlattığına göre arayın. Kimlikleri döndürür; girdinin tamamı için bunlardan birini kb_get aracına iletin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="352"/>
         <source>What the user reports, in their own words.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcının kendi sözleriyle bildirdiği sorun.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="354"/>
         <source>Read a known problem</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilinen bir sorunu okuyun</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="355"/>
         <source>The whole knowledge-base entry: what it looks like, why it happens, the settings that fix it, what the fix costs, and how to confirm it worked.
 
 Read the risk before proposing the fix. Every one of these loosens something, and the user is entitled to hear what, in your own words, when you ask them to approve it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilgi tabanı girdisinin tamamı: nasıl göründüğü, neden olduğu, düzelten ayarlar, düzeltmenin bedeli ve işe yaradığının nasıl doğrulanacağı.
+
+Düzeltmeyi önermeden önce riski okuyun. Bunların her biri bir kısıtlamayı gevşetir ve kullanıcıdan onay isterken, neyin gevşediğini sizin sözlerinizle duymaya hakkı vardır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="361"/>
         <source>What could explain this sandbox&apos;s problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu korumalı alanın sorunlarını ne açıklayabilir</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="362"/>
         <source>Scores the knowledge base against what this machine actually logged for a sandbox - the message codes seen, the resources that were blocked, and which settings are present - and returns the entries that explain some of it, best first.
 
 Each result carries matchedBecause, saying which observations it accounts for. Read that rather than trusting the order: a top-ranked entry that matched on one weak signal is a guess, and an entry that explains three separate observations is not. Nothing here is a verdict - it is a shortlist to check against the trace.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilgi tabanını bu makinenin bir korumalı alan için gerçekten günlüğe kaydettikleriyle - görülen ileti kodları, engellenen kaynaklar ve mevcut ayarlar - karşılaştırarak puanlar ve bunların bir kısmını açıklayan girdileri en iyiler önce olacak şekilde döndürür.
+
+Her sonuç, hangi gözlemleri açıkladığını belirten matchedBecause içerir. Sıralamaya güvenmek yerine onu okuyun: tek bir zayıf işaretle eşleşip en üstte yer alan bir girdi tahmindir, üç ayrı gözlemi açıklayan bir girdi ise değildir. Buradaki hiçbir şey bir hüküm değildir - izle karşılaştırılarak denetlenecek kısa bir listedir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="371"/>
         <source>Search the documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>Belgelerde arayın</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="372"/>
         <source>Finds documentation pages by title, path, heading or setting name. Returns paths to read with docs_get, not the page text. Coverage is partial: roughly two in five settings have a page, so finding nothing here does not mean the setting does not exist - check config_schema.</source>
-        <translation type="unfinished"></translation>
+        <translation>Belge sayfalarını başlığa, yola, bölüm başlığına veya ayar adına göre bulur. Sayfa metnini değil, docs_get ile okunacak yolları döndürür. Kapsam kısmidir: yaklaşık beş ayardan ikisinin bir sayfası vardır, dolayısıyla burada hiçbir şey bulamamak ayarın bulunmadığı anlamına gelmez - config_schema ile denetleyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="376"/>
         <source>A setting name, a feature name, or a few words.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir ayar adı, bir özellik adı veya birkaç sözcük.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="377"/>
         <source>Maximum results, default 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>En fazla sonuç sayısı, varsayılan 10.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="379"/>
         <source>Read a documentation page</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir belge sayfasını okuyun</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="380"/>
         <source>The full Markdown text of one page, addressed by the path that docs_search or docs_for_setting returned.</source>
-        <translation type="unfinished"></translation>
+        <translation>docs_search veya docs_for_setting tarafından döndürülen yolla belirtilen bir sayfanın tam Markdown metni.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="382"/>
         <source>Page path, for example Content/UseRamDisk.md.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sayfa yolu, örneğin Content/UseRamDisk.md.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="384"/>
         <source>Look up a setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir ayarı sorgulayın</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="385"/>
         <source>What Sandboxie itself knows about a configuration setting: whether it exists, its category and syntax, which version added or removed it, and what supersedes it. This is the authority on whether a setting is real - the documentation covers only some of them. An unknown setting name is silently ignored by the driver rather than rejected, so check here before recommending one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie&apos;nin bir yapılandırma ayarı hakkında bildikleri: var olup olmadığı, kategorisi ve sözdizimi, hangi sürümde eklendiği veya kaldırıldığı ve yerini neyin aldığı. Bir ayarın gerçek olup olmadığı konusunda yetkili kaynak budur - belgeler bunların yalnızca bir kısmını kapsar. Bilinmeyen bir ayar adı sürücü tarafından reddedilmek yerine sessizce yok sayılır; bu yüzden bir ayarı önermeden önce burada denetleyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="391"/>
         <location filename="Mcp/McpTools.cpp" line="398"/>
         <source>Setting name, for example ClosedFilePath.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayar adı, örneğin ClosedFilePath.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="393"/>
         <source>Find the page for a setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir ayarın sayfasını bulun</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="394"/>
         <source>The reference page for one Sandboxie.ini setting, plus any other pages that discuss it. Distinguishes a setting that exists but is undocumented from one that does not exist at all - do not infer the latter from the former.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir Sandboxie.ini ayarının başvuru sayfası ve onu ele alan diğer sayfalar. Var olan ancak belgelenmemiş bir ayarı, hiç var olmayan bir ayardan ayırır - ilkinden ikincisini çıkarsamayın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="519"/>
         <source>Sandboxie-Plus %1 on %2 (%3, kernel %4)</source>
-        <translation type="unfinished"></translation>
+        <translation>%2 üzerinde Sandboxie-Plus %1 (%3, çekirdek %4)</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="526"/>
         <source>
 
 No active supporter certificate. Settings whose Requirements name one will not take effect here - check with config_validate before recommending them.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Etkin destekçi sertifikası yok. Requirements alanında böyle bir sertifika belirtilen ayarlar burada etkili olmaz - önermeden önce config_validate ile denetleyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="531"/>
         <source>isolated desktops</source>
-        <translation type="unfinished"></translation>
+        <translation>yalıtılmış masaüstleri</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="532"/>
         <source>advanced network features</source>
-        <translation type="unfinished"></translation>
+        <translation>gelişmiş ağ özellikleri</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="533"/>
         <source>box encryption and protection</source>
-        <translation type="unfinished"></translation>
+        <translation>alan şifreleme ve koruma</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="534"/>
         <source>enhanced security box types</source>
-        <translation type="unfinished"></translation>
+        <translation>gelişmiş güvenlikli alan türleri</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="536"/>
         <source>
 
 Supporter certificate: active</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Destekçi sertifikası: etkin</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="538"/>
         <source> but expired%1</source>
-        <translation type="unfinished"></translation>
+        <translation> ancak süresi dolmuş%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="539"/>
         <source>, inside the renewal grace period</source>
-        <translation type="unfinished"></translation>
+        <translation>, yenileme için tanınan ek süre içinde</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="541"/>
         <source>, and no longer valid for this build</source>
-        <translation type="unfinished"></translation>
+        <translation>, ve artık bu derleme için geçerli değil</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="543"/>
         <source>. No optional features unlocked.</source>
-        <translation type="unfinished"></translation>
+        <translation>. İsteğe bağlı hiçbir özelliğin kilidi açılmadı.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="544"/>
         <source>. Unlocked: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>. Kilidi açılanlar: %1.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="595"/>
         <source>
 (%1 of %2 sandboxes listed; the rest were omitted)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%2 korumalı alandan %1 tanesi listelendi; geri kalanı atlandı)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="598"/>
         <source>No sandboxes are configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırılmış korumalı alan yok.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="611"/>
         <source>No sandbox called &apos;%1&apos;. Either its name or its alias works; call box_list for both.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; adlı korumalı alan yok. Adı da takma adı da kullanılabilir; her ikisi için box_list aracını çağırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="642"/>
         <source>
 (%1 of %2 settings listed; the rest were omitted)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%2 ayardan %1 tanesi listelendi; geri kalanı atlandı)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="645"/>
         <source>Sandbox &apos;%1&apos; has no settings of its own; it runs on templates and global defaults.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; korumalı alanının kendine ait ayarları yok; şablonlar ve genel varsayılanlarla çalışır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="652"/>
         <source>The offline documentation pack is not installed, so documentation lookups are unavailable on this machine. The settings themselves can still be inspected with box_get_config, and the online documentation is at https://sandboxie-plus.com/docs/</source>
-        <translation type="unfinished"></translation>
+        <translation>Çevrimdışı belge paketi kurulu değil, bu yüzden bu makinede belge sorguları kullanılamıyor. Ayarlar yine de box_get_config ile incelenebilir ve çevrimiçi belgeler https://sandboxie-plus.com/docs/ adresindedir</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="665"/>
         <source>The &apos;query&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;query&apos; bağımsız değişkeni gereklidir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="677"/>
         <source>   [reference page for %1]</source>
-        <translation type="unfinished"></translation>
+        <translation>   [%1 için başvuru sayfası]</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="681"/>
         <source>Nothing in the documentation matches &apos;%1&apos;. Note that only about two in five settings have a documentation page, so this is not evidence that a setting does not exist - check it with config_schema or box_get_config.</source>
-        <translation type="unfinished"></translation>
+        <translation>Belgelerde &apos;%1&apos; ile eşleşen bir şey yok. Yaklaşık beş ayardan yalnızca ikisinin bir belge sayfası olduğunu unutmayın; dolayısıyla bu, bir ayarın var olmadığına kanıt değildir - config_schema veya box_get_config ile denetleyin.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="699"/>
         <source>The &apos;path&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;path&apos; bağımsız değişkeni gereklidir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="704"/>
         <source>%1. Use docs_search to find a valid page path.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1. Geçerli bir sayfa yolu bulmak için docs_search kullanın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="719"/>
         <location filename="Mcp/McpTools.cpp" line="771"/>
         <source>The &apos;setting&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;setting&apos; bağımsız değişkeni gereklidir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="725"/>
         <source>%1 is documented on %2 (%3).</source>
-        <translation type="unfinished"></translation>
+        <translation>%1, %2 (%3) sayfasında belgelenmiştir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="730"/>
         <source>
 Also discussed on:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Ayrıca şu sayfalarda ele alınır:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="736"/>
         <source>%1 has no page of its own, but is discussed on:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 için ayrı bir sayfa yok, ancak şu sayfalarda ele alınır:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="743"/>
         <source>&apos;%1&apos; has no documentation page. That does not mean it is not a real setting - most settings are undocumented. Verify it exists before telling the user it does not.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; için bir belge sayfası yok. Bu, gerçek bir ayar olmadığı anlamına gelmez - ayarların çoğu belgelenmemiştir. Kullanıcıya var olmadığını söylemeden önce var olup olmadığını doğrulayın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="774"/>
         <source>The settings reference (SbieSettings.ini) could not be loaded, so settings cannot be verified on this installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayar başvurusu (SbieSettings.ini) yüklenemedi, bu yüzden bu kurulumda ayarlar doğrulanamıyor.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="784"/>
         <source>&apos;%1&apos; is not a known Sandboxie setting. Note that the driver ignores unknown settings silently instead of reporting an error, so a typo here would look like the setting simply had no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; bilinen bir Sandboxie ayarı değil. Sürücünün bilinmeyen ayarları hata bildirmek yerine sessizce yok saydığını unutmayın; dolayısıyla buradaki bir yazım hatası, ayarın hiçbir etkisi yokmuş gibi görünür.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="813"/>
         <source>%1 is a known setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bilinen bir ayardır.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="814"/>
         <source>
 Category: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Kategori: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="815"/>
         <source>
 Syntax: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Sözdizimi: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="816"/>
         <source>
 Requires: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Gereksinimler: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="817"/>
         <source>
 Added in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Eklendiği sürüm: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="818"/>
         <source>
 Removed in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Kaldırıldığı sürüm: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="819"/>
         <source>
 Superseded by: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Yerini alan: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="820"/>
         <source>
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="822"/>
         <source>
 
 Documentation: %1 (read it with docs_get)</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Belgeler: %1 (docs_get ile okuyun)</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="824"/>
         <source>
 
 This setting has no documentation page; most do not.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Bu ayarın belge sayfası yok; çoğunun yoktur.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="847"/>
@@ -13903,92 +14056,97 @@ This setting has no documentation page; most do not.</source>
         <location filename="Mcp/McpTools.cpp" line="987"/>
         <location filename="Mcp/McpTools.cpp" line="1087"/>
         <source>No sandbox called &apos;%1&apos;. Call box_list for names and aliases.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; adlı korumalı alan yok. Adlar ve takma adlar için box_list aracını çağırın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="885"/>
         <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at box_diagnostics and trace_query rather than at the process list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Şu anda &apos;%1&apos; içinde hiçbir şey çalışmıyor. Bir programın çalışması bekleniyorsa başlamış ve kapanmıştır - işlem listesi yerine box_diagnostics ve trace_query araçlarına bakın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="889"/>
         <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at log_query and trace_query rather than at the process list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Şu anda &apos;%1&apos; içinde hiçbir şey çalışmıyor. Bir programın çalışması bekleniyorsa başlamış ve kapanmıştır - işlem listesi yerine log_query ve trace_query araçlarına bakın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="914"/>
         <source>Diagnostics are not available for &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; için tanılama kullanılamıyor.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="954"/>
         <source>No diagnostic events have been recorded for &apos;%1&apos;. That is the normal state for a healthy sandbox, and it is not evidence that nothing went wrong - events are only recorded for the kinds of problem Sandboxie detects itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; için tanılama olayı kaydedilmemiş. Bu, sağlıklı bir korumalı alan için normal durumdur ve hiçbir şeyin ters gitmediğinin kanıtı değildir - olaylar yalnızca Sandboxie&apos;nin kendisinin algıladığı sorun türleri için kaydedilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="970"/>
         <source>Resource tracing is turned off, so there is no trace to search. Ask the user to enable it in SandMan and then reproduce the problem - the trace only records what happens while it is on. Do not draw conclusions from the absence of trace data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaynak izleme kapalı olduğundan aranacak bir iz yok. Kullanıcıdan SandMan&apos;de bunu etkinleştirmesini ve ardından sorunu yeniden oluşturmasını isteyin - iz yalnızca açıkken olanları kaydeder. İz verilerinin yokluğundan sonuç çıkarmayın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1052"/>
         <source>
 (%1 of %2 matching rows; call again with offset=%3 for the next page)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%2 eşleşen satırdan %1 tanesi; sonraki sayfa için offset=%3 ile yeniden çağırın)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1056"/>
         <source>No trace rows match. The trace holds %1 entries in total - if that is 0, tracing has only just been enabled and the problem still has to be reproduced before there is anything to see.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eşleşen iz satırı yok. İzde toplam %1 girdi var - bu sayı 0 ise izleme yeni etkinleştirilmiştir ve görülecek bir şey olması için sorunun yeniden oluşturulması gerekir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1075"/>
         <source>The message log is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>İleti günlüğü kullanılamıyor.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1152"/>
         <source>Nothing in the log matches. It holds %1 entries in total.</source>
-        <translation type="unfinished"></translation>
+        <translation>Günlükte eşleşen bir şey yok. Toplam %1 girdi içeriyor.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1155"/>
         <source>
 (newest %1 of %2 matching entries)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%2 eşleşen girdinin en yeni %1 tanesi)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1167"/>
         <source>There is no troubleshooting knowledge base on this installation, so nothing could be consulted. This is not the same as finding no match: treat it as the lookup being unavailable, and fall back to the documentation and the trace.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu kurulumda sorun giderme bilgi tabanı bulunmadığından hiçbir kaynağa başvurulamadı. Bu, eşleşme bulamamakla aynı şey değildir: sorgunun kullanılamaması olarak değerlendirin ve belgelere ve ize başvurun.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1180"/>
         <source>&apos;query&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;query&apos; gereklidir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1186"/>
         <source>Nothing in the knowledge base matches &quot;%1&quot;. It holds %2 entries, so this is a real absence rather than an empty database - the problem may simply not be a known one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilgi tabanında &quot;%1&quot; ile eşleşen bir şey yok. %2 girdi içeriyor, dolayısıyla bu, boş bir veritabanından değil gerçek bir yokluktan kaynaklanıyor - sorun bilinen bir sorun olmayabilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1213"/>
         <source>&apos;id&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;id&apos; gereklidir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1217"/>
         <source>There is no knowledge-base entry called &apos;%1&apos;. Use kb_search to find one.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; adlı bir bilgi tabanı girdisi yok. Bulmak için kb_search kullanın.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1221"/>
         <source>%1 - %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1224"/>
@@ -13996,21 +14154,28 @@ This setting has no documentation page; most do not.</source>
 Why it happens:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Neden olur:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1228"/>
         <source>
 The fix:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Düzeltme:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1233"/>
         <source>
 A troubleshooting script also applies this: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Bir sorun giderme betiği de bunu uygular: %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1237"/>
@@ -14018,7 +14183,10 @@ A troubleshooting script also applies this: %1
 What it costs:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Bedeli:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1239"/>
@@ -14026,43 +14194,52 @@ What it costs:
 How to confirm it worked:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+İşe yaradığı nasıl doğrulanır:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1241"/>
         <source>
 %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+%1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1288"/>
         <source>Nothing in the knowledge base explains what %1 has logged. %2 entries were checked against %3 message code(s) and %4 blocked resource(s). Either the problem is not a known one, or nothing has been logged yet - if you have not reproduced the fault since Sandboxie-Plus started, there may be nothing to match against.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilgi tabanında %1 tarafından günlüğe kaydedilenleri açıklayan bir şey yok. %2 girdi, %3 ileti kodu ve %4 engellenen kaynakla karşılaştırıldı. Ya sorun bilinen bir sorun değil ya da henüz hiçbir şey günlüğe kaydedilmedi - Sandboxie-Plus başladığından beri hatayı yeniden oluşturmadıysanız karşılaştırılacak hiçbir şey olmayabilir.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1295"/>
         <source>Candidates for %1, best first. These explain some of what was logged; none of them is a verdict.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 için adaylar, en iyiler önce. Bunlar günlüğe kaydedilenlerin bir kısmını açıklar; hiçbiri bir hüküm değildir.
+
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1299"/>
         <source>%1  (score %2)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1  (puan %2)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1304"/>
         <source>    matched: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    eşleşen: %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1335"/>
         <source>Sandboxie is not running or SandMan is not connected to the driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie çalışmıyor veya SandMan sürücüye bağlı değil.</translation>
     </message>
 </context>
 <context>
@@ -14171,12 +14348,12 @@ How to confirm it worked:
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="56"/>
         <source>Use a random GUID as sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan adı olarak rastgele bir GUID kullan</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="59"/>
         <source>Generate a new GUID. A non-GUID name can be copied to the alias field. Uncheck to restore the previous name; alias edits are kept.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni bir GUID oluşturun. GUID olmayan bir ad, takma ad alanına kopyalanabilir. Önceki adı geri yüklemek için işareti kaldırın; takma ad düzenlemeleri korunur.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="70"/>
@@ -14191,22 +14368,22 @@ How to confirm it worked:
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="124"/>
         <source>&amp;Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Önceki</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="130"/>
         <source>Keep edits as a draft and show the previous sandbox. Drafts are saved on the final OK.</source>
-        <translation type="unfinished"></translation>
+        <translation>Düzenlemeleri taslak olarak tutun ve önceki korumalı alanı gösterin. Taslaklar son Tamam onayında kaydedilir.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="147"/>
         <source>&amp;Next</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sonraki</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="153"/>
         <source>Keep edits as a draft and show the next sandbox. Drafts are saved on the final OK.</source>
-        <translation type="unfinished"></translation>
+        <translation>Düzenlemeleri taslak olarak tutun ve sonraki korumalı alanı gösterin. Taslaklar son Tamam onayında kaydedilir.</translation>
     </message>
 </context>
 <context>
@@ -15155,39 +15332,41 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>AI Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapay Zekâ Entegrasyonu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="477"/>
         <source>Where each session starts. The agent window can raise or lower it for that session alone.
 
 Diagnostic data an agent reads can contain text written by programs inside a sandbox, so a confirmation is also what stands between a misled agent and a silent change. Whatever is chosen here, everything the agent does is recorded.</source>
-        <translation type="unfinished"></translation>
+        <translation>Her oturumun başlangıç düzeyi. Aracı penceresi bunu yalnızca o oturum için yükseltebilir veya düşürebilir.
+
+Bir aracının okuduğu tanılama verileri, korumalı alandaki programlar tarafından yazılmış metinler içerebilir; dolayısıyla onay, yanıltılmış bir aracıyla sessiz bir değişiklik arasında duran engeldir. Burada ne seçilirse seçilsin, aracının yaptığı her şey kaydedilir.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="512"/>
         <source>Before changing anything, the agent:</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhangi bir şeyi değiştirmeden önce aracı:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="519"/>
         <source>Allows an AI agent to connect to Sandboxie-Plus over a local named pipe. Turning this off removes the option entirely: the connection cannot be armed, and a request from an agent is ignored rather than shown to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir yapay zekâ aracısının yerel bir adlandırılmış kanal üzerinden Sandboxie-Plus&apos;a bağlanmasına izin verir. Bunu kapatmak seçeneği tamamen kaldırır: bağlantı hazır duruma getirilemez ve bir aracıdan gelen istek size gösterilmek yerine yok sayılır.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="522"/>
         <source>Allow an AI agent to connect (MCP)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir yapay zekâ aracısının bağlanmasına izin ver (MCP)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="529"/>
         <source>Sandboxie-Plus shows a six-digit code that you read to the agent before it can see anything about your machine. Without it, any program running as you that finds the pipe is treated as authorised - which includes programs you did not start on purpose. Sandboxed programs are refused either way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus, aracının makineniz hakkında herhangi bir şey görebilmesinden önce ona okumanız gereken altı haneli bir kod gösterir. Bu kod olmadan, sizin kullanıcı hesabınızla çalışan ve kanalı bulan her program yetkili kabul edilir - buna bilerek başlatmadığınız programlar da dahildir. Korumalı alandaki programlar her iki durumda da reddedilir.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="532"/>
         <source>Require a code before an agent may look at this machine</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir aracının bu makineyi inceleyebilmesi için kod gerektir</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="823"/>
@@ -15443,12 +15622,12 @@ Diagnostic data an agent reads can contain text written by programs inside a san
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3303"/>
         <source>Check software compatibility again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazılım uyumluluğunu yeniden denetleyin.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3306"/>
         <source>Check</source>
-        <translation type="unfinished"></translation>
+        <translation>Denetle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3349"/>
@@ -15664,17 +15843,17 @@ Diagnostic data an agent reads can contain text written by programs inside a san
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="9"/>
         <source>Select a sandbox or type its name or alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alan seçin veya adını ya da takma adını yazın:</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="26"/>
         <source>Applies to both Set Open and Set Force. The dialog is always shown when more than one sandbox is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hem Açık Erişime Ayarla hem de Zorlamaya Ayarla için geçerlidir. Birden fazla korumalı alan etkin olduğunda iletişim kutusu her zaman gösterilir.</translation>
     </message>
     <message>
         <location filename="Forms/ShellBoxSelector.ui" line="29"/>
         <source>Skip this dialog when only one sandbox is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Yalnızca bir korumalı alan etkinken bu iletişim kutusunu atla</translation>
     </message>
 </context>
 <context>

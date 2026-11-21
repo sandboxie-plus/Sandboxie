@@ -106,6 +106,8 @@ copy %srcPath%\UGlobalHotkey.dll %instPath%\
 copy %srcPath%\UGlobalHotkey.pdb %instPath%\
 copy %srcPath%\SandMan.exe %instPath%\
 copy %srcPath%\SandMan.pdb %instPath%\
+copy %srcPath%\SbieMcp.exe %instPath%\
+copy %srcPath%\SbieMcp.pdb %instPath%\
 
 ECHO Copying SandMan translations
 

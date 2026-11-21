@@ -137,6 +137,16 @@ if NOT EXIST %~dp0\bin\%build_arch%\Release\SandMan.exe goto :error
 
 
 
+mkdir %~dp0\Build_SbieMcp_%build_arch%
+cd %~dp0\Build_SbieMcp_%build_arch%
+
+%qt_path%\bin\qmake.exe %~dp0\SbieMcp\SbieMcp.qc.pro %qt_params%
+%~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
+IF %ERRORLEVEL% NEQ 0 goto :error
+if NOT EXIST %~dp0\Bin\%build_arch%\Release\SbieMcp.exe goto :error
+
+
+
 cd %~dp0
 
 rem dir .\bin

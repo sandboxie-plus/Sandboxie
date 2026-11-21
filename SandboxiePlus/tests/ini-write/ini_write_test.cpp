@@ -76,6 +76,10 @@ struct SMessageBox {
 	static void critical(void*, const char*, const QString&) { CHECK(false); }
 };
 #define QMessageBox SMessageBox
+struct CIniHighlighter {
+	template<class P> static bool ValidateIniComments(const QString&, P*) { CHECK(false); return false; }
+};
+struct SCodeEdit { QString GetCode() const { return {}; } };
 
 #include "fixture_return.inc"
 
@@ -84,6 +88,8 @@ class COptionsWindow
 public:
 	CSbieIni Box;
 	SBoxPointer m_pBox{&Box};
+	SCodeEdit Code;
+	SCodeEdit* m_pCodeEdit = &Code;
 	bool m_Template = false;
 	bool m_ConfigDirty = false;
 	QString m_Password;

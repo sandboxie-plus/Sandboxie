@@ -81,6 +81,9 @@ struct SMessageBox {
 };
 int SMessageBox::Criticals = 0;
 #define QMessageBox SMessageBox
+struct CIniHighlighter {
+	template<class P> static bool ValidateIniComments(const QString&, P*) { return true; }
+};
 
 struct SCodeEdit {
 	QTextEdit Editor;
@@ -110,6 +113,8 @@ struct SEditorWindow : QDialog {
 		QWidget* tabSupport = nullptr;
 		QWidget* tabAddons = nullptr;
 		QWidget* tabCompat = nullptr;
+		QWidget* tabAppCompat = nullptr;
+		QWidget* tabLocalTemplates = nullptr;
 		QPushButton* lblCurrent = nullptr;
 		QPushButton* lblUpdateAddons = nullptr;
 		QCheckBox* chkAutoUpdate = nullptr;
@@ -167,10 +172,13 @@ public:
 class CSettingsWindow : public SEditorWindow {
 public:
 	QWidget* m_pCurrentTab = nullptr;
-	int m_CompatLoaded = 0;
+	bool m_CompatLoaded = false;
 	bool m_SettingsDirty = false;
+	int CompatReloads = 0;
 	static bool CertRefreshRequired() { return false; }
 	void GetUpdates() { CHECK(false); }
+	void LoadTemplates() { CHECK(false); }
+	void LoadCompat(bool, bool = false) { ++CompatReloads; }
 	void OnTab(QWidget*);
 	void ReloadDirtySettings();
 	QPushButton Current, UpdateAddons;

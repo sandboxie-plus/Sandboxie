@@ -534,6 +534,9 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.chkUseW11Style, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkRandomGuidName, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkMcpEnabled, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkMcpPairing, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbMcpConsent, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	QOperatingSystemVersion current = QOperatingSystemVersion::current();
 	ui.chkUseW11Style->setEnabled(current.majorVersion() == 10 && current.microVersion() >= 22000); // Windows 10 22000+ (Windows 11)
 	//
@@ -1798,21 +1801,18 @@ void CSettingsWindow::LoadSettings()
 
 	//ui.chkUpdateTemplates->setEnabled(g_CertInfo.active && !g_CertInfo.expired);
 	ui.chkUpdateIssues->setEnabled(g_CertInfo.active && !g_CertInfo.expired);
-	m_PendingChanges.CaptureItemBaselines(m_pTree);
-	m_PendingChanges.CaptureCheckboxBaselines();
-	m_PendingChanges.CaptureRadioButtonBaselines();
-	m_PendingChanges.CaptureValueBaselines();
-
-
 
 	// The AI agent tab. Three settings, and each one removes a different
 	// thing: the feature, the authentication, or the questions.
+	m_HoldChange = true;
 	ui.chkMcpEnabled->setChecked(theConf->GetBool("Options/McpEnabled", true));
 	ui.chkMcpPairing->setChecked(theConf->GetBool("Options/McpRequirePairing", true));
-	for (int i = CMcpConsent::eReadOnly; i <= CMcpConsent::eAskNever; i++) {
-		ui.cmbMcpConsent->addItem(CMcpConsent::ModeName((CMcpConsent::EMode)i), i);
-		ui.cmbMcpConsent->setItemData(ui.cmbMcpConsent->count() - 1,
-			CMcpConsent::ModeDescription((CMcpConsent::EMode)i), Qt::ToolTipRole);
+	if (ui.cmbMcpConsent->count() == 0) {
+		for (int i = CMcpConsent::eReadOnly; i <= CMcpConsent::eAskNever; i++) {
+			ui.cmbMcpConsent->addItem(CMcpConsent::ModeName((CMcpConsent::EMode)i), i);
+			ui.cmbMcpConsent->setItemData(ui.cmbMcpConsent->count() - 1,
+				CMcpConsent::ModeDescription((CMcpConsent::EMode)i), Qt::ToolTipRole);
+		}
 	}
 	ui.cmbMcpConsent->setCurrentIndex(ui.cmbMcpConsent->findData(
 		theConf->GetInt("Options/McpConsentMode", CMcpConsent::eAskAlways)));
@@ -1836,6 +1836,12 @@ void CSettingsWindow::LoadSettings()
 			Notes.append(tr("AiAgentRequireConfirmation=y in Sandboxie.ini keeps the confirmations on."));
 		ui.lblMcpNote->setText(Notes.join(" "));
 	}
+	m_HoldChange = false;
+
+	m_PendingChanges.CaptureItemBaselines(m_pTree);
+	m_PendingChanges.CaptureCheckboxBaselines();
+	m_PendingChanges.CaptureRadioButtonBaselines();
+	m_PendingChanges.CaptureValueBaselines();
 
 }
 

@@ -507,7 +507,6 @@ void File_GetSetDeviceMap(WCHAR *DeviceMap96);
 
 void File_NotifyRecover(HANDLE FileHandle, void* CloseParams);
 
-BOOLEAN File_Junction_IsMappedSrc(const WCHAR *Path, ULONG PathLen);
 WCHAR *File_ApplyJunctionMap(THREAD_DATA *TlsData, WCHAR *TruePath);
 
 //---------------------------------------------------------------------------

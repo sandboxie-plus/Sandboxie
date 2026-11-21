@@ -133,6 +133,24 @@ static BOOLEAN File_Junction_IsNtPath(const WCHAR *Path, ULONG PathLen)
 
 
 //---------------------------------------------------------------------------
+// File_Junction_TrimNtPath
+//---------------------------------------------------------------------------
+
+
+static void File_Junction_TrimNtPath(WCHAR *str, ULONG *len)
+{
+    //
+    // an NT device root may be stored or derived with a trailing
+    // separator, unlike a DOS drive root which is kept as "X:\".  such
+    // a prefix never matches the boundary check, so drop the separator.
+    //
+
+    while (*len > 0 && str[*len - 1] == L'\\')
+        str[--(*len)] = L'\0';
+}
+
+
+//---------------------------------------------------------------------------
 // File_Junction_FindForward
 //---------------------------------------------------------------------------
 
@@ -252,19 +270,6 @@ _FX BOOLEAN File_Junction_BlockRawAccessPath(const WCHAR *Path, ULONG PathLen)
     if (! File_Junction_BlockRawAccess)
         return FALSE;
     return File_Junction_FindReverse(Path, PathLen, &matched_dos) != NULL;
-}
-
-
-//---------------------------------------------------------------------------
-// File_Junction_IsMappedSrc
-//---------------------------------------------------------------------------
-
-
-_FX BOOLEAN File_Junction_IsMappedSrc(const WCHAR *Path, ULONG PathLen)
-{
-    BOOLEAN matched_dos;
-
-    return File_Junction_FindForward(Path, PathLen, &matched_dos) != NULL;
 }
 
 
@@ -391,10 +396,12 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
     if (! NT_SUCCESS(status) || ! CopyPath ||
             _wcsnicmp(CopyPath, Dll_BoxFilePath, Dll_BoxFilePathLen) != 0) {
 
-        Sbie_snwprintf(dbg, 512,
-            L"junction: box placeholder GetCopyPath failed st=%08x src=%s",
-            status, NtSource);
-        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
+        if (Dll_FileTrace) {
+            Sbie_snwprintf(dbg, 512,
+                L"junction: box placeholder GetCopyPath failed st=%08x src=%s",
+                status, NtSource);
+            SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
+        }
         Dll_PopTlsNameBuffer(TlsData);
         return;
     }
@@ -458,10 +465,12 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
                 }
                 else if (st != STATUS_OBJECT_NAME_COLLISION &&
                          st != STATUS_FILE_IS_A_DIRECTORY) {
-                    Sbie_snwprintf(dbg, 512,
-                        L"junction: box placeholder create failed st=%08x path=%s",
-                        st, buf);
-                    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
+                    if (Dll_FileTrace) {
+                        Sbie_snwprintf(dbg, 512,
+                            L"junction: box placeholder create failed st=%08x path=%s",
+                            st, buf);
+                        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
+                    }
                     Dll_Free(buf);
                     Dll_PopTlsNameBuffer(TlsData);
                     return;
@@ -473,9 +482,6 @@ static void File_Junction_CreateSourceBoxCopy(const WCHAR *NtSource)
             p = end;
         }
     }
-
-    Sbie_snwprintf(dbg, 512, L"junction: box placeholder ensured path=%s", buf);
-    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
 
     Dll_Free(buf);
     Dll_PopTlsNameBuffer(TlsData);
@@ -519,9 +525,11 @@ _FX void File_InitJunctions(void)
     }
 
     //
-    // determine whether raw (reverse) access to junction destination
-    // paths should be blocked;  defaults to no, enable with
-    // JunctionBlockRawAccess=y
+    // JunctionBlockRawAccess is a best-effort user-mode compatibility
+    // option that denies direct access to junction destination paths.
+    // it can be bypassed (direct syscalls, handle-relative opens) and is
+    // not a security boundary; real blocking would have to happen in
+    // the driver.  defaults to no, enable with JunctionBlockRawAccess=y
     //
 
     File_Junction_BlockRawAccess = SbieApi_QueryConfBool(
@@ -648,6 +656,9 @@ _FX void File_InitJunctions(void)
             }
         }
 
+        if (entry->src_nt)
+            File_Junction_TrimNtPath(entry->src_nt, &entry->src_nt_len);
+
         if (File_Junction_IsNtPath(entry->dst, entry->dst_len)) {
 
             //
@@ -696,6 +707,9 @@ _FX void File_InitJunctions(void)
             }
         }
 
+        if (entry->dst_nt)
+            File_Junction_TrimNtPath(entry->dst_nt, &entry->dst_nt_len);
+
         //
         // if the virtual source directory does not exist anywhere on the
         // real files system, create an empty placeholder of that name in
@@ -708,27 +722,6 @@ _FX void File_InitJunctions(void)
             File_Junction_CreateSourceBoxCopy(entry->src_nt);
 
         ++File_JunctionCount;
-    }
-
-    //
-    // diagnostic:  report the loaded junction entries so that a failure
-    // to map can be traced back to the entries or the path forms
-    //
-
-    if (File_JunctionCount) {
-
-        FILE_JUNCTION_ENTRY *e = &File_JunctionEntries[0];
-        WCHAR dbg[CONF_LINE_LEN * 2 + 96];
-
-        Sbie_snwprintf(dbg, CONF_LINE_LEN * 2 + 96,
-            L"junction: %u entries, src=%s dst=%s src_nt=%s dst_nt=%s",
-            File_JunctionCount,
-            e->src ? e->src : L"<null>",
-            e->dst ? e->dst : L"<null>",
-            e->src_nt ? e->src_nt : L"<null>",
-            e->dst_nt ? e->dst_nt : L"<null>");
-
-        SbieApi_MonitorPut(MONITOR_FILE | MONITOR_OPEN, dbg);
     }
 }
 
@@ -773,13 +766,14 @@ _FX WCHAR *File_ApplyJunctionMap(THREAD_DATA *TlsData, WCHAR *TruePath)
     NewPath_len = dst_len + (TruePath_len - src_len);
 
     //
-    // leave room for a trailing root separator that File_GetName may
-    // need to restore after the mapping
+    // use a TLS name buffer like the rest of File_GetName, since the
+    // result becomes *OutTruePath and is owned by the caller.  leave
+    // room for a trailing root separator that File_GetName may need to
+    // restore after the mapping.
     //
 
-    NewPath = Dll_AllocTemp((NewPath_len + 2) * sizeof(WCHAR));
-    if (! NewPath)
-        return TruePath;
+    NewPath = Dll_GetTlsNameBuffer(
+        TlsData, MISC_NAME_BUFFER, (NewPath_len + 2) * sizeof(WCHAR));
 
     wmemmove(NewPath + dst_len, TruePath + src_len,
                 NewPath_len - dst_len + 1);
@@ -826,9 +820,13 @@ _FX WCHAR *File_ApplyJunctionMapReverse(
 
     NewPath_len = src_len + (Path_len - dst_len);
 
-    NewPath = Dll_AllocTemp((NewPath_len + 1) * sizeof(WCHAR));
-    if (! NewPath)
-        return NULL;
+    //
+    // use a TLS name buffer like the rest of File_GetName, since the
+    // result is owned by the caller and must stay valid after return
+    //
+
+    NewPath = Dll_GetTlsNameBuffer(
+        TlsData, MISC_NAME_BUFFER, (NewPath_len + 1) * sizeof(WCHAR));
 
     wmemmove(NewPath + src_len, Path + dst_len,
                 NewPath_len - src_len + 1);

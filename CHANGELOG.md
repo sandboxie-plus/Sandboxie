@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.18.1 / 5.73.1] - 2026-07-??
 
+### Added
+- added `JunctionPath=source,target` to redirect accesses from a virtual source path to a real target path (DOS and NT path forms, including drive roots), with `JunctionBlockRawAccess=[y|n]` as a best-effort user-mode compatibility option to deny direct access to the target; note that this option is not a security boundary and can be bypassed, real blocking would require driver support
+
 ### Changed
 - updated Chromium_Elevation template now using specifig 'RunServiceAsSystem=...' instead of 'RunServicesAsSystem=y' and added more service names
 

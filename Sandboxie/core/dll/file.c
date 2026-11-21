@@ -1541,12 +1541,18 @@ check_sandbox_prefix:
     }
 
     //
-    // block raw (reverse) access to junction destination paths, unless
-    // it was disabled with JunctionBlockRawAccess=n.  the block applies
-    // only to path opens (objname_len != 0) of paths that are not already
-    // inside the sandbox, since a box copy path is the program's own
-    // sandboxed copy, not a direct access to the real destination.
-    // neither the block nor the forward mapping applies to paths under
+    // junction path mapping.  skip all of this when no JunctionPath is
+    // configured.
+    //
+    // JunctionBlockRawAccess is a best-effort user-mode compatibility
+    // option that denies direct access to junction destination paths
+    // when enabled.  it can be bypassed (direct syscalls, handle-relative
+    // opens) and is not a security boundary; real blocking would have to
+    // happen in the driver.  it applies only to path opens
+    // (objname_len != 0) of paths that are not already inside the
+    // sandbox, since a box copy path is the program's own sandboxed
+    // copy, not a direct access to the real destination.
+    // neither the option nor the forward mapping applies to paths under
     // the Sandboxie home directory, to keep the sandbox's own binaries
     // from being remapped.
     //
@@ -1559,7 +1565,8 @@ check_sandbox_prefix:
     // device path while process creation checks may pass DOS paths
     //
 
-    if (TruePath && ! File_Junction_IsHomePath(TruePath, wcslen(TruePath))) {
+    if (File_JunctionCount && TruePath &&
+            ! File_Junction_IsHomePath(TruePath, wcslen(TruePath))) {
 
         if (Dll_FileTrace) {
             WCHAR dbg[512];
@@ -6550,7 +6557,8 @@ _FX NTSTATUS File_NtQueryInformationFile(
                 // caller sees the virtual path it used to open the file
                 //
 
-                if (TruePathLen >= 3 && TruePath[1] == L':') {
+                if (File_JunctionCount && TruePathLen >= 3 &&
+                            TruePath[1] == L':') {
 
                     WCHAR *JunctionPath = File_ApplyJunctionMapReverse(
                         TlsData, TruePath, TruePathLen);
@@ -6926,7 +6934,7 @@ _FX ULONG File_GetFinalPathNameByHandleW(
     // path mapping so that the caller sees the virtual path
     //
 
-    if (rc >= 6 && rc < cchFilePath &&
+    if (File_JunctionCount && rc >= 6 && rc < cchFilePath &&
             lpszFilePath[0] == L'\\' && lpszFilePath[1] == L'\\' &&
             lpszFilePath[2] == L'?' && lpszFilePath[3] == L'\\' &&
             (lpszFilePath[4] >= L'A' && lpszFilePath[4] <= L'Z' ||

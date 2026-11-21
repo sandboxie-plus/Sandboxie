@@ -39,6 +39,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed severe slowdowns (e.g. FPS drops in games) in sandboxed applications that often call `GetUserDefaultUILanguage`, `LoadString`, `FindResource` or `FormatMessage`: the temporary impersonation around each system call reset ntdll's cached UI language settings, so every lookup re-read them from the registry [#5628](https://github.com/sandboxie-plus/Sandboxie/pull/5628)
 - fixed reversed Yes/No handling when enabling a disabled or user-restricted sandbox
 - fixed issues with new Administrator protection [#5703](https://github.com/sandboxie-plus/Sandboxie/issues/5703)
+- Fix heap corruption on the box border thread [#5722](https://github.com/sandboxie-plus/Sandboxie/pull/5722)
+- Fix process creations serializing on the configuration lock [#5728](https://github.com/sandboxie-plus/Sandboxie/pull/5728)
+- Fix main image path letter case mismatch with the launch command line [#5729](https://github.com/sandboxie-plus/Sandboxie/pull/5729)
+
+
 
 
 

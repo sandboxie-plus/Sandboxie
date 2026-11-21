@@ -38,6 +38,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed empty or stale App Compatibility lists; added prelisting, scan status and manual checking [#5718](https://github.com/sandboxie-plus/Sandboxie/issues/5718)
 - fixed severe slowdowns (e.g. FPS drops in games) in sandboxed applications that often call `GetUserDefaultUILanguage`, `LoadString`, `FindResource` or `FormatMessage`: the temporary impersonation around each system call reset ntdll's cached UI language settings, so every lookup re-read them from the registry [#5628](https://github.com/sandboxie-plus/Sandboxie/pull/5628)
 - fixed reversed Yes/No handling when enabling a disabled or user-restricted sandbox
+- fixed issues with new Administrator protection [#5703](https://github.com/sandboxie-plus/Sandboxie/issues/5703)
+
 
 
 ## [1.19.0 / 5.74.0] - 2026-10-23

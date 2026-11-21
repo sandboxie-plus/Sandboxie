@@ -515,6 +515,74 @@ MSG_HEADER *ServiceServer::UacHandler(
 
 
 //---------------------------------------------------------------------------
+// ServiceServer__GrantElevatedProxyAccess
+//---------------------------------------------------------------------------
+
+
+static bool ServiceServer__GrantElevatedProxyAccess(HANDLE idProcess)
+{
+    const DWORD ProxyAccess = PROCESS_VM_OPERATION | PROCESS_VM_READ
+                            | PROCESS_VM_WRITE | PROCESS_DUP_HANDLE
+                            | PROCESS_QUERY_INFORMATION
+                            | PROCESS_QUERY_LIMITED_INFORMATION
+                            | SYNCHRONIZE;
+
+    HANDLE hProcess = OpenProcess(READ_CONTROL | WRITE_DAC, FALSE,
+                                  (ULONG)(ULONG_PTR)idProcess);
+    if (! hProcess)
+        return false;
+
+    PACL pOldDacl = NULL;
+    PSECURITY_DESCRIPTOR pSD = NULL;
+    DWORD err;
+
+    err = GetSecurityInfo(hProcess, SE_KERNEL_OBJECT, DACL_SECURITY_INFORMATION,
+                          NULL, NULL, &pOldDacl, NULL, &pSD);
+    if (err == ERROR_SUCCESS) {
+
+        UCHAR AdminSid[SECURITY_MAX_SID_SIZE];
+        DWORD AdminSidLen = sizeof(AdminSid);
+
+        if (! CreateWellKnownSid(WinBuiltinAdministratorsSid, NULL,
+                                 AdminSid, &AdminSidLen))
+            err = GetLastError();
+        else {
+
+            EXPLICIT_ACCESS ea;
+            memzero(&ea, sizeof(ea));
+            ea.grfAccessPermissions = ProxyAccess;
+            ea.grfAccessMode        = GRANT_ACCESS;
+            ea.grfInheritance       = NO_INHERITANCE;
+            ea.Trustee.TrusteeForm  = TRUSTEE_IS_SID;
+            ea.Trustee.TrusteeType  = TRUSTEE_IS_WELL_KNOWN_GROUP;
+            ea.Trustee.ptstrName    = (LPWSTR)AdminSid;
+
+            PACL pNewDacl = NULL;
+            err = SetEntriesInAcl(1, &ea, pOldDacl, &pNewDacl);
+            if (err == ERROR_SUCCESS) {
+
+                err = SetSecurityInfo(hProcess, SE_KERNEL_OBJECT,
+                                      DACL_SECURITY_INFORMATION,
+                                      NULL, NULL, pNewDacl, NULL);
+
+                LocalFree(pNewDacl);
+            }
+        }
+
+        LocalFree(pSD);
+    }
+
+    CloseHandle(hProcess);
+
+    if (err != ERROR_SUCCESS) {
+        SetLastError(err);
+        return false;
+    }
+    return true;
+}
+
+
+//---------------------------------------------------------------------------
 // UacHandler2
 //---------------------------------------------------------------------------
 
@@ -670,8 +738,22 @@ ULONG ServiceServer::UacHandler2(
             quick = FALSE;
     }
 
+    if (ok && !fake) {
+
+        //
+        // the elevated proxy may run as a different account than the
+        // client (Administrator Protection), both with the runas path and
+        // with the quick path, where the linked token is then the shadow
+        // admin token.  make sure the proxy can still return the result,
+        // see ServiceServer__GrantElevatedProxyAccess
+        //
+
+        if (! ServiceServer__GrantElevatedProxyAccess(idProcess))
+            ReportError2218(idProcess, 0x47);
+    }
+
     if (ok) {
-        
+
         //
         // Prepare command line
         //

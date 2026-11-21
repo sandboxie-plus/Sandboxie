@@ -208,14 +208,22 @@ static int ProgramControl_RuntimeCompileBackend(
     return 1;
 }
 
-static int ProgramControl_RuntimeMatchPatternLower(
+typedef struct _PROGRAM_CONTROL_RUNTIME_LOWER_TEXT
+{
+    WCHAR text[512];
+    const WCHAR *source;
+    unsigned long length;
+} PROGRAM_CONTROL_RUNTIME_LOWER_TEXT;
+
+static int ProgramControl_RuntimeMatchPatternLowerEx(
     const SBIE_RT_RULESET *ruleset,
     XPATTERN *pattern,
     const WCHAR *text,
     unsigned long textLen,
-    int *evaluationFailed)
+    int *evaluationFailed,
+    PROGRAM_CONTROL_RUNTIME_LOWER_TEXT *preparedText,
+    int reuseShortText)
 {
-    WCHAR stackText[512];
     size_t bytes;
     WCHAR *lowerText;
     unsigned long i;
@@ -229,8 +237,8 @@ static int ProgramControl_RuntimeMatchPatternLower(
         textLen = (unsigned long)wcslen(text);
 
     bytes = ((size_t)textLen + 1) * sizeof(WCHAR);
-    if ((textLen + 1) <= (sizeof(stackText) / sizeof(stackText[0])))
-        lowerText = stackText;
+    if ((textLen + 1) <= (sizeof(preparedText->text) / sizeof(preparedText->text[0])))
+        lowerText = preparedText->text;
     else {
         lowerText = (WCHAR *)Pool_Alloc(ruleset->pool, (ULONG)bytes);
         if (!lowerText) {
@@ -241,10 +249,18 @@ static int ProgramControl_RuntimeMatchPatternLower(
         usedPool = 1;
     }
 
-    for (i = 0; i < textLen; ++i)
-        lowerText[i] = text[i];
-    lowerText[textLen] = L'\0';
-    _wcslwr(lowerText);
+    // Long paths retain per-pattern allocations; only short candidates can be reused.
+    if (usedPool || !reuseShortText ||
+            preparedText->source != text || preparedText->length != textLen) {
+        for (i = 0; i < textLen; ++i)
+            lowerText[i] = text[i];
+        lowerText[textLen] = L'\0';
+        _wcslwr(lowerText);
+        if (!usedPool) {
+            preparedText->source = reuseShortText ? text : NULL;
+            preparedText->length = textLen;
+        }
+    }
 
     matched = Pattern_Match(pattern, lowerText, (int)textLen) ? 1 : 0;
 
@@ -252,6 +268,20 @@ static int ProgramControl_RuntimeMatchPatternLower(
         Pool_Free(lowerText, (ULONG)bytes);
 
     return matched;
+}
+
+static int ProgramControl_RuntimeMatchPatternLower(
+    const SBIE_RT_RULESET *ruleset,
+    XPATTERN *pattern,
+    const WCHAR *text,
+    unsigned long textLen,
+    int *evaluationFailed)
+{
+    PROGRAM_CONTROL_RUNTIME_LOWER_TEXT lowerText;
+
+    lowerText.source = NULL;
+    return ProgramControl_RuntimeMatchPatternLowerEx(
+        ruleset, pattern, text, textLen, evaluationFailed, &lowerText, 0);
 }
 
 static int ProgramControl_RuntimeMatchProcessRule(
@@ -291,6 +321,7 @@ static int ProgramControl_RuntimeMatchFolderRule(
     const SBIE_RT_RULE *rule,
     const WCHAR *path,
     unsigned long pathLen,
+    PROGRAM_CONTROL_RUNTIME_LOWER_TEXT *lowerText,
     int *evaluationFailed)
 {
     if (!rule || !rule->normalized.base_rule || !path || !*path)
@@ -310,12 +341,13 @@ static int ProgramControl_RuntimeMatchFolderRule(
         int fullPathMatched = 0;
 
         if (_wcsicmp(rule->setting_name, L"BreakoutFolder") == 0 && path[pathLen] == L'\\')
-            fullPathMatched = ProgramControl_RuntimeMatchPatternLower(
-                ruleset, (XPATTERN *)rule->backend_state, path, (unsigned long)wcslen(path), evaluationFailed);
+            fullPathMatched = ProgramControl_RuntimeMatchPatternLowerEx(
+                ruleset, (XPATTERN *)rule->backend_state, path, (unsigned long)wcslen(path), evaluationFailed, lowerText, 0);
 
         // ForceFolder uses only the caller-supplied directory prefix.
         if (!fullPathMatched &&
-            !ProgramControl_RuntimeMatchPatternLower(ruleset, (XPATTERN *)rule->backend_state, path, pathLen, evaluationFailed))
+            !ProgramControl_RuntimeMatchPatternLowerEx(ruleset, (XPATTERN *)rule->backend_state, path, pathLen,
+                evaluationFailed, lowerText, _wcsicmp(rule->setting_name, L"ForceFolder") == 0))
             return 0;
 
         // Preserve the accepted native directory or filename match during depth checks.
@@ -469,13 +501,14 @@ static void ProgramControl_RuntimeUpdateBestMatch(
         ProgramControl_RuntimeStoreMatch(outMatch, rule, level);
 }
 
-static int ProgramControl_RuntimeFindBestProcessMatch(
+int ProgramControl_RuntimeMatchProcessList(
     const SBIE_RT_RULESET *ruleset,
     const SBIE_RT_RULE_LIST *list,
     const WCHAR *imageName,
     const WCHAR *imagePath,
     BreakoutMatchImageFn matchImage,
     void *matchContext,
+    int firstMatchOnly,
     SBIE_RT_MATCH *outMatch)
 {
     ULONG i;
@@ -501,12 +534,14 @@ static int ProgramControl_RuntimeFindBestProcessMatch(
             continue;
 
         ProgramControl_RuntimeUpdateBestMatch(rule, level, &overall, &targeted, outMatch);
+        if (firstMatchOnly)
+            return 1;
     }
 
     return overall.has_match;
 }
 
-static int ProgramControl_RuntimeFindBestFolderMatch(
+int ProgramControl_RuntimeMatchFolderList(
     const SBIE_RT_RULESET *ruleset,
     const SBIE_RT_RULE_LIST *list,
     const WCHAR *imageName,
@@ -515,9 +550,11 @@ static int ProgramControl_RuntimeFindBestFolderMatch(
     const WCHAR *path,
     unsigned long pathLen,
     int skipWildcardPaths,
+    int firstMatchOnly,
     SBIE_RT_MATCH *outMatch)
 {
     ULONG i;
+    PROGRAM_CONTROL_RUNTIME_LOWER_TEXT lowerText;
     PROGRAM_CONTROL_RUNTIME_MATCH_STATE overall = {0, 0, -1, (unsigned long)-1};
     PROGRAM_CONTROL_RUNTIME_MATCH_STATE targeted = {0, 0, -1, (unsigned long)-1};
 
@@ -526,6 +563,8 @@ static int ProgramControl_RuntimeFindBestFolderMatch(
 
     if (!ruleset || !list || !path || !*path)
         return 0;
+
+    lowerText.source = NULL;
 
     for (i = 0; i < list->count; ++i) {
         const SBIE_RT_RULE *rule = &list->rules[i];
@@ -537,11 +576,13 @@ static int ProgramControl_RuntimeFindBestFolderMatch(
         if (!ProgramControl_RuntimeMatchScope(rule, imageName, matchImage, matchContext, &level))
             continue;
 
-        if (!ProgramControl_RuntimeMatchFolderRule(ruleset, rule, path, pathLen,
+        if (!ProgramControl_RuntimeMatchFolderRule(ruleset, rule, path, pathLen, &lowerText,
                 outMatch ? &outMatch->evaluation_failed : NULL))
             continue;
 
         ProgramControl_RuntimeUpdateBestMatch(rule, level, &overall, &targeted, outMatch);
+        if (firstMatchOnly)
+            return 1;
     }
 
     return overall.has_match;
@@ -762,11 +803,11 @@ int ProgramControl_RuntimeMatchProcess(
     if (!ruleset || !image_name || !*image_name || !image_path || !*image_path)
         return 0;
 
-    if (ProgramControl_RuntimeFindBestProcessMatch(ruleset, &ruleset->force_process, image_name, image_path, match_image, match_context, force_process_match))
+    if (ProgramControl_RuntimeMatchProcessList(ruleset, &ruleset->force_process, image_name, image_path, match_image, match_context, 0, force_process_match))
         anyMatch = 1;
-    if (ProgramControl_RuntimeFindBestProcessMatch(ruleset, &ruleset->force_children, image_name, image_path, match_image, match_context, force_children_match))
+    if (ProgramControl_RuntimeMatchProcessList(ruleset, &ruleset->force_children, image_name, image_path, match_image, match_context, 0, force_children_match))
         anyMatch = 1;
-    if (ProgramControl_RuntimeFindBestProcessMatch(ruleset, &ruleset->breakout_process, image_name, image_path, match_image, match_context, breakout_process_match))
+    if (ProgramControl_RuntimeMatchProcessList(ruleset, &ruleset->breakout_process, image_name, image_path, match_image, match_context, 0, breakout_process_match))
         anyMatch = 1;
 
     return anyMatch;
@@ -808,7 +849,7 @@ int ProgramControl_RuntimeMatchFolderEx(
     if (!ruleset || !path || !*path)
         return 0;
 
-    if (ProgramControl_RuntimeFindBestFolderMatch(
+    if (ProgramControl_RuntimeMatchFolderList(
             ruleset,
             &ruleset->force_folder,
             image_name,
@@ -817,11 +858,12 @@ int ProgramControl_RuntimeMatchFolderEx(
             path,
             path_len,
             0,
+            0,
             force_folder_match)) {
         anyMatch = 1;
     }
 
-    if (ProgramControl_RuntimeFindBestFolderMatch(
+    if (ProgramControl_RuntimeMatchFolderList(
             ruleset,
             &ruleset->breakout_folder,
             image_name,
@@ -830,6 +872,7 @@ int ProgramControl_RuntimeMatchFolderEx(
             path,
             path_len,
             skip_wildcard_breakout_folder,
+            0,
             breakout_folder_match)) {
         anyMatch = 1;
     }

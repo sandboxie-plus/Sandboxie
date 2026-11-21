@@ -53,6 +53,8 @@ extern __declspec(dllexport) int __CRTDECL Sbie_snprintf(char *_Buffer, size_t C
 #define NAME_BUFFER_COUNT       12
 #define NAME_BUFFER_DEPTH       16
 
+#define DLL_RESTARTED_ENV       ENV_VAR_PFX L"FORCE_RESTARTED"
+
 
 #ifdef _WIN64
 #define Dll_IsWin64 1
@@ -605,6 +607,11 @@ void Gui_ResetClipCursor(void);
 // Functions (other)
 //---------------------------------------------------------------------------
 
+
+BOOL SbieDll_RunSandboxedEx(
+    const WCHAR *box_name, const WCHAR *cmd, const WCHAR *dir,
+    ULONG creation_flags, STARTUPINFO *si, PROCESS_INFORMATION *pi,
+    BOOLEAN clean_restart);
 
 BOOLEAN AdvApi_EnableDisableSRP(BOOLEAN Enable);
 

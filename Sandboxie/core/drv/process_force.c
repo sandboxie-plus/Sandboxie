@@ -56,6 +56,12 @@ static BOOLEAN Process_AreBreakoutRulesEnabled(const WCHAR *boxname)
 //---------------------------------------------------------------------------
 
 
+// Legacy Alert storage belongs to one evaluation, independently of runtime pools.
+typedef struct _FORCE_ALERT_POOL {
+    POOL *pool;
+    BOOLEAN attempted;
+} FORCE_ALERT_POOL;
+
 typedef struct _FORCE_BOX {
 
     LIST_ELEM list_elem;
@@ -155,9 +161,9 @@ static BOOLEAN Process_IsImmersiveProcess(
 //static BOOLEAN Process_IsProcessParent(HANDLE ParentId, WCHAR* Name);
 
 void Process_CreateForceData(
-    LIST *boxes, const WCHAR *SidString, ULONG SessionId);
+    LIST *boxes, const WCHAR *SidString, ULONG SessionId, FORCE_ALERT_POOL *alert_pool);
 
-void Process_DeleteForceData(LIST *boxes);
+void Process_DeleteForceData(LIST *boxes, FORCE_ALERT_POOL *alert_pool);
 
 static BOX *Process_CheckBoxPath(LIST *boxes, const WCHAR *path);
 
@@ -288,6 +294,7 @@ _FX BOX *Process_GetForcedStartBox(
     WCHAR *CurDir, *DocArg;
     ULONG CurDir_len, DocArg_len;
     LIST boxes;
+    FORCE_ALERT_POOL alert_pool;
     BOX *box;
     ULONG alert;
     BOOLEAN check_force;
@@ -386,7 +393,7 @@ _FX BOX *Process_GetForcedStartBox(
     box = NULL;
     alert = 0;
 
-    Process_CreateForceData(&boxes, pSidString, SessionId);
+    Process_CreateForceData(&boxes, pSidString, SessionId, &alert_pool);
 
     //
     // check if process can be forced
@@ -562,7 +569,7 @@ _FX BOX *Process_GetForcedStartBox(
     // finish
     //
 
-    Process_DeleteForceData(&boxes);
+    Process_DeleteForceData(&boxes, &alert_pool);
 
     if (nbuf)
 		Mem_Free(nbuf, nlen);
@@ -1144,12 +1151,16 @@ _FX BOOLEAN Process_IsImmersiveProcess(
 //---------------------------------------------------------------------------
 
 
-_FX void Process_AddForceFolders(
-    LIST* Folders, const WCHAR* Setting, BOX *box, const WCHAR *section)
+static void Process_AddForceFoldersEx(
+    LIST* Folders, const WCHAR* Setting, BOX *box, const WCHAR *section,
+    FORCE_ALERT_POOL *alert_pool)
 {
     ULONG index2;
     const WCHAR *value;
     FORCE_ENTRY *folder;
+    POOL *allocation_pool = Driver_Pool;
+    CONF_EXPAND_ARGS local_expand_args;
+    CONF_EXPAND_ARGS *expand_args = box->expand_args;
     const BOOLEAN breakout_setting = (_wcsicmp(Setting, L"BreakoutFolder") == 0 || _wcsicmp(Setting, L"BreakoutProcess") == 0);
     const BOOLEAN alert_setting = (_wcsicmp(Setting, L"AlertFolder") == 0 || _wcsicmp(Setting, L"AlertProcess") == 0);
     const BOOLEAN folder_scope_setting =
@@ -1181,8 +1192,22 @@ _FX void Process_AddForceFolders(
             break;
         ++index2;
 
+        // Select storage before the first rule allocation; do not mix owners.
+        if (alert_setting && alert_pool && allocation_pool == Driver_Pool) {
+            if (!alert_pool->attempted) {
+                alert_pool->attempted = TRUE;
+                alert_pool->pool = Pool_Create();
+            }
+            if (alert_pool->pool) {
+                allocation_pool = alert_pool->pool;
+                local_expand_args = *box->expand_args;
+                local_expand_args.pool = allocation_pool;
+                expand_args = &local_expand_args;
+            }
+        }
+
         value_copy_len = (ULONG)((wcslen(value) + 1) * sizeof(WCHAR));
-        value_copy = Mem_AllocString(Driver_Pool, value);
+        value_copy = Mem_AllocString(allocation_pool, value);
         if (!value_copy)
             continue;
 
@@ -1225,7 +1250,7 @@ _FX void Process_AddForceFolders(
             if (value[0] && value[1] == L':' && value[2] && value[2] != L'\\' && value[2] != L'/') {
                 ULONG value_len = (ULONG)wcslen(value);
                 value_norm_len = (value_len + 2) * sizeof(WCHAR);
-                value_norm = Mem_Alloc(Driver_Pool, value_norm_len);
+                value_norm = Mem_Alloc(allocation_pool, value_norm_len);
                 if (value_norm) {
                     value_norm[0] = value[0];
                     value_norm[1] = L':';
@@ -1241,7 +1266,7 @@ _FX void Process_AddForceFolders(
 
         if (wcschr(value, L'\\') != NULL) { // folder, full_path or path_pattern
 
-            expnd = Conf_Expand(box->expand_args, value, Setting);
+            expnd = Conf_Expand(expand_args, value, Setting);
 
             buf = NULL;
 
@@ -1253,7 +1278,7 @@ _FX void Process_AddForceFolders(
 
                 WCHAR* tmp1, * tmp2;
                 buf_len = (wcslen(expnd) + 1) * sizeof(WCHAR);
-                tmp1 = Mem_Alloc(Driver_Pool, buf_len);
+                tmp1 = Mem_Alloc(allocation_pool, buf_len);
 
                 if (tmp1) {
 
@@ -1270,7 +1295,7 @@ _FX void Process_AddForceFolders(
                     }
                     *dst_ptr = L'\0';
 
-                    tmp2 = File_TranslateReparsePoints(tmp1, Driver_Pool);
+                    tmp2 = File_TranslateReparsePoints(tmp1, allocation_pool);
                     if (tmp2) {
 
                         Mem_Free(tmp1, buf_len);
@@ -1288,7 +1313,7 @@ _FX void Process_AddForceFolders(
         else { // image name
 
             buf_len = (wcslen(value) + 1) * sizeof(WCHAR);
-            buf = Mem_Alloc(Driver_Pool, buf_len);
+            buf = Mem_Alloc(allocation_pool, buf_len);
             if (buf)
                 wcscpy(buf, value);
         }
@@ -1301,7 +1326,7 @@ _FX void Process_AddForceFolders(
             continue;
         }
 
-        folder = Mem_Alloc(Driver_Pool, sizeof(FORCE_ENTRY));
+        folder = Mem_Alloc(allocation_pool, sizeof(FORCE_ENTRY));
         if (! folder) {
             Mem_Free(buf, buf_len);
             Mem_Free(value_copy, value_copy_len);
@@ -1319,7 +1344,7 @@ _FX void Process_AddForceFolders(
         folder->target_box[0] = L'\0';
 
         if (has_scope && scope && *scope) {
-            folder->scope = Mem_AllocString(Driver_Pool, scope);
+            folder->scope = Mem_AllocString(allocation_pool, scope);
             if (!folder->scope) {
                 Mem_Free(buf, buf_len);
                 Mem_Free(folder, sizeof(FORCE_ENTRY));
@@ -1331,7 +1356,7 @@ _FX void Process_AddForceFolders(
         if (wcschr(buf, L'*') || wcschr(buf, L'?')) {
 
             folder->pat =
-                Pattern_Create(box->expand_args->pool, buf, TRUE, 0);
+                Pattern_Create(expand_args->pool, buf, TRUE, 0);
 
             if (! folder->pat) {
                 if (folder->scope)
@@ -1364,6 +1389,12 @@ _FX void Process_AddForceFolders(
         List_Insert_After(Folders, NULL, folder);
         Mem_Free(value_copy, value_copy_len);
     }
+}
+
+_FX void Process_AddForceFolders(
+    LIST* Folders, const WCHAR* Setting, BOX *box, const WCHAR *section)
+{
+    Process_AddForceFoldersEx(Folders, Setting, box, section, NULL);
 }
 
 
@@ -1618,9 +1649,7 @@ static BOOLEAN Process_RuntimeMatchForceProcess(
     FORCE_BOX *box, const WCHAR *processName, const WCHAR *path,
     BOOLEAN useChildrenList, BOOLEAN *outHasPriority, LONG *outPriority)
 {
-    SBIE_RT_MATCH force_process_match;
-    SBIE_RT_MATCH force_children_match;
-    SBIE_RT_MATCH *match;
+    SBIE_RT_MATCH match;
 
     if (outHasPriority)
         *outHasPriority = FALSE;
@@ -1640,32 +1669,30 @@ static BOOLEAN Process_RuntimeMatchForceProcess(
             outPriority);
     }
 
-    ProgramControl_RuntimeInitMatch(&force_process_match);
-    ProgramControl_RuntimeInitMatch(&force_children_match);
+    ProgramControl_RuntimeInitMatch(&match);
 
-    ProgramControl_RuntimeMatchProcess(
+    ProgramControl_RuntimeMatchProcessList(
         &box->RuntimeRuleset,
+        useChildrenList ? &box->RuntimeRuleset.force_children : &box->RuntimeRuleset.force_process,
         processName,
         path,
         Process_RuntimeMatchImage,
         box->box,
-        useChildrenList ? NULL : &force_process_match,
-        useChildrenList ? &force_children_match : NULL,
-        NULL);
+        0,
+        &match);
 
-    match = useChildrenList ? &force_children_match : &force_process_match;
-    if (match->evaluation_failed) {
+    if (match.evaluation_failed) {
         box->RuntimeEvaluationFailed = TRUE;
         return FALSE;
     }
-    if (!match->matched)
+    if (!match.matched)
         return FALSE;
 
-    if (match->has_priority) {
+    if (match.has_priority) {
         if (outHasPriority)
             *outHasPriority = TRUE;
         if (outPriority)
-            *outPriority = (LONG)match->priority;
+            *outPriority = (LONG)match.priority;
     }
 
     return TRUE;
@@ -1698,15 +1725,17 @@ static BOOLEAN Process_RuntimeMatchForceFolder(
 
     ProgramControl_RuntimeInitMatch(&force_folder_match);
 
-    ProgramControl_RuntimeMatchFolder(
+    ProgramControl_RuntimeMatchFolderList(
         &box->RuntimeRuleset,
+        &box->RuntimeRuleset.force_folder,
         scopeName,
         Process_RuntimeMatchImage,
         box->box,
         path,
         prefix_len,
-        &force_folder_match,
-        NULL);
+        0,
+        0,
+        &force_folder_match);
 
     if (force_folder_match.evaluation_failed) {
         box->RuntimeEvaluationFailed = TRUE;
@@ -1728,8 +1757,6 @@ static BOOLEAN Process_RuntimeMatchForceFolder(
 static BOOLEAN Process_RuntimeMatchAlertProcess(
     FORCE_BOX *box, const WCHAR *processName, const WCHAR *path)
 {
-    SBIE_RT_MATCH alert_match;
-
     if (!box || !processName || !*processName || !path || !*path)
         return FALSE;
 
@@ -1743,25 +1770,20 @@ static BOOLEAN Process_RuntimeMatchAlertProcess(
             NULL);
     }
 
-    ProgramControl_RuntimeInitMatch(&alert_match);
-    ProgramControl_RuntimeMatchProcess(
+    return ProgramControl_RuntimeMatchProcessList(
         &box->AlertRuntimeRuleset,
+        &box->AlertRuntimeRuleset.force_process,
         processName,
         path,
         Process_RuntimeMatchImage,
         box->box,
-        &alert_match,
-        NULL,
-        NULL);
-
-    return alert_match.matched ? TRUE : FALSE;
+        1,
+        NULL) ? TRUE : FALSE;
 }
 
 static BOOLEAN Process_RuntimeMatchAlertFolder(
     FORCE_BOX *box, const WCHAR *scopeName, const WCHAR *path, ULONG prefix_len)
 {
-    SBIE_RT_MATCH alert_match;
-
     if (!box || !box->box || !scopeName || !*scopeName || !path || !*path || !prefix_len)
         return FALSE;
 
@@ -1776,18 +1798,17 @@ static BOOLEAN Process_RuntimeMatchAlertFolder(
             NULL);
     }
 
-    ProgramControl_RuntimeInitMatch(&alert_match);
-    ProgramControl_RuntimeMatchFolder(
+    return ProgramControl_RuntimeMatchFolderList(
         &box->AlertRuntimeRuleset,
+        &box->AlertRuntimeRuleset.force_folder,
         scopeName,
         Process_RuntimeMatchImage,
         box->box,
         path,
         prefix_len,
-        &alert_match,
-        NULL);
-
-    return alert_match.matched ? TRUE : FALSE;
+        0,
+        1,
+        NULL) ? TRUE : FALSE;
 }
 
 static BOOLEAN Process_AddBreakoutEntries(
@@ -1950,7 +1971,7 @@ static BOOLEAN Process_AddBreakoutEntries(
 
 
 _FX void Process_CreateForceData(
-    LIST *boxes, const WCHAR *SidString, ULONG SessionId)
+    LIST *boxes, const WCHAR *SidString, ULONG SessionId, FORCE_ALERT_POOL *alert_pool)
 {
     ULONG index1;
     const WCHAR *section;
@@ -1961,6 +1982,8 @@ _FX void Process_CreateForceData(
     //
 
     List_Init(boxes);
+    alert_pool->pool = NULL;
+    alert_pool->attempted = FALSE;
 
     Conf_AdjustUseCount(TRUE);
 
@@ -1969,7 +1992,7 @@ _FX void Process_CreateForceData(
     while (1) {
         BOOLEAN breakout_rules_complete = TRUE;
 
-        section = Conf_Get(NULL, NULL, index1);
+        section = Conf_Get(NULL, NULL, index1 | CONF_GET_NO_TEMPLS);
         if (! section)
             break;
         ++index1;
@@ -1982,8 +2005,9 @@ _FX void Process_CreateForceData(
         //
 
         box = Mem_Alloc(Driver_Pool, sizeof(FORCE_BOX));
-        if (! box)
+        if (! box) {
             break;
+        }
 
         box->box = Box_CreateEx(
                         Driver_Pool, section, SidString, SessionId, TRUE);
@@ -2044,14 +2068,14 @@ _FX void Process_CreateForceData(
         //
 
         if (box->ForceRulesEnabled)
-            Process_AddForceFolders(&box->AlertFolder, L"AlertFolder", box->box, section);
+            Process_AddForceFoldersEx(&box->AlertFolder, L"AlertFolder", box->box, section, alert_pool);
 
         //
         // scan list of AlertProcess settings for the box
         //
 
         if (box->ForceRulesEnabled)
-            Process_AddForceFolders(&box->AlertProcess, L"AlertProcess", box->box, section);
+            Process_AddForceFoldersEx(&box->AlertProcess, L"AlertProcess", box->box, section, alert_pool);
 
         //
         // scan list of HostInjectProcess settings for the box
@@ -2106,6 +2130,7 @@ _FX void Process_CreateForceData(
                 }
             }
         }
+
 
         {
             LIST *alert_lists[2] = {
@@ -2197,7 +2222,7 @@ _FX void Process_DeleteForceDataProcesses(LIST* Folders)
 //---------------------------------------------------------------------------
 
 
-_FX void Process_DeleteForceData(LIST *boxes)
+_FX void Process_DeleteForceData(LIST *boxes, FORCE_ALERT_POOL *alert_pool)
 {
     FORCE_BOX *box;
 
@@ -2212,8 +2237,10 @@ _FX void Process_DeleteForceData(LIST *boxes)
         Process_DeleteForceDataFolders(&box->ForceFolder);
         Process_DeleteForceDataFolders(&box->ForceProcess);
         Process_DeleteForceDataFolders(&box->ForceChildren);
-        Process_DeleteForceDataFolders(&box->AlertFolder);
-        Process_DeleteForceDataFolders(&box->AlertProcess);
+        if (!alert_pool->pool) {
+            Process_DeleteForceDataFolders(&box->AlertFolder);
+            Process_DeleteForceDataFolders(&box->AlertProcess);
+        }
         Process_DeleteForceDataProcesses(&box->HostInjectProcess);
         Process_DeleteForceDataFolders(&box->BreakoutFolder);
         Process_DeleteForceDataFolders(&box->BreakoutProcess);
@@ -2230,6 +2257,11 @@ _FX void Process_DeleteForceData(LIST *boxes)
         Box_Free(box->box);
 
         Mem_Free(box, sizeof(FORCE_BOX));
+    }
+    // All legacy consumers, runtime rulesets and BOX objects are finished.
+    if (alert_pool->pool) {
+        Pool_Delete(alert_pool->pool);
+        alert_pool->pool = NULL;
     }
 }
 
@@ -3872,6 +3904,7 @@ _FX BOOLEAN Process_MatchForceChildrenRule(
     BOOLEAN *outHasPriority, LONG *outPriority, BOOLEAN *evaluationFailed)
 {
     LIST boxes;
+    FORCE_ALERT_POOL alert_pool;
     FORCE_BOX *force_box;
     BOOLEAN matched = FALSE;
 
@@ -3884,7 +3917,7 @@ _FX BOOLEAN Process_MatchForceChildrenRule(
     if (!box || !box->sid || !parent_name || !*parent_name || !parent_path || !*parent_path)
         return FALSE;
 
-    Process_CreateForceData(&boxes, box->sid, box->session_id);
+    Process_CreateForceData(&boxes, box->sid, box->session_id, &alert_pool);
 
     force_box = List_Head(&boxes);
     while (force_box) {
@@ -3904,7 +3937,7 @@ _FX BOOLEAN Process_MatchForceChildrenRule(
         force_box = List_Next(force_box);
     }
 
-    Process_DeleteForceData(&boxes);
+    Process_DeleteForceData(&boxes, &alert_pool);
     return matched;
 }
 

@@ -194,8 +194,14 @@ static const WCHAR *Conf_N = L"N";
 _FX void Conf_AdjustUseCount(BOOLEAN increase)
 {
     KIRQL irql;
+
+    //
+    // Serialize with the exclusive configuration swap in Conf_Read.
+    // The count itself is updated atomically.
+    //
+
     KeRaiseIrql(APC_LEVEL, &irql);
-    ExAcquireResourceExclusiveLite(Conf_Lock, TRUE);
+    ExAcquireResourceSharedLite(Conf_Lock, TRUE);
 
     if (increase)
         InterlockedIncrement(&Conf_Data.use_count);

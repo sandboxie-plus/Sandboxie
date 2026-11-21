@@ -4482,8 +4482,8 @@ _FX void Proc_RestartProcessOutOfPcaJob(void)
     StartupInfo.dwFlags = STARTF_FORCEOFFFEEDBACK;
     memzero(&ProcessInformation, sizeof(PROCESS_INFORMATION));
 
-    ok = SbieDll_RunSandboxed(L"", CommandLine, Directory, 0,
-                              &StartupInfo, &ProcessInformation);
+    ok = SbieDll_RunSandboxedEx(L"", CommandLine, Directory, 0,
+                                &StartupInfo, &ProcessInformation, TRUE);
 
     if (ok) {
         if(Dll_OsBuild < 15025) {

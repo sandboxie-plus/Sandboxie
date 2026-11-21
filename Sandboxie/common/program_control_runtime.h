@@ -126,6 +126,30 @@ int ProgramControl_RuntimeGetApplicableTargetBox(
     const SBIE_RT_MATCH *match,
     const WCHAR **out_target_box);
 
+// Explicit list selection leaves the aggregate match APIs unchanged.
+// Use first_match_only only when priority and target winners are not needed.
+int ProgramControl_RuntimeMatchProcessList(
+    const SBIE_RT_RULESET *ruleset,
+    const SBIE_RT_RULE_LIST *list,
+    const WCHAR *image_name,
+    const WCHAR *image_path,
+    BreakoutMatchImageFn match_image,
+    void *match_context,
+    int first_match_only,
+    SBIE_RT_MATCH *match);
+
+int ProgramControl_RuntimeMatchFolderList(
+    const SBIE_RT_RULESET *ruleset,
+    const SBIE_RT_RULE_LIST *list,
+    const WCHAR *image_name,
+    BreakoutMatchImageFn match_image,
+    void *match_context,
+    const WCHAR *path,
+    unsigned long path_len,
+    int skip_wildcard_paths,
+    int first_match_only,
+    SBIE_RT_MATCH *match);
+
 int ProgramControl_RuntimeMatchProcess(
     const SBIE_RT_RULESET *ruleset,
     const WCHAR *image_name,

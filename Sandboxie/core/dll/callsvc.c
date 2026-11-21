@@ -1013,6 +1013,15 @@ _FX BOOL SbieDll_RunSandboxed(
     const WCHAR *box_name, const WCHAR *cmd, const WCHAR *dir,
     ULONG creation_flags, STARTUPINFO *si, PROCESS_INFORMATION *pi)
 {
+    return SbieDll_RunSandboxedEx(
+        box_name, cmd, dir, creation_flags, si, pi, FALSE);
+}
+
+_FX BOOL SbieDll_RunSandboxedEx(
+    const WCHAR *box_name, const WCHAR *cmd, const WCHAR *dir,
+    ULONG creation_flags, STARTUPINFO *si, PROCESS_INFORMATION *pi,
+    BOOLEAN clean_restart)
+{
     PROCESS_RUN_SANDBOXED_REQ *req;
     PROCESS_RUN_SANDBOXED_RPL *rpl;
     WCHAR *env, *ptr;
@@ -1035,6 +1044,8 @@ _FX BOOL SbieDll_RunSandboxed(
 
     req_len = sizeof(PROCESS_RUN_SANDBOXED_REQ)
             + (cmd_len + dir_len + env_len + 8) * sizeof(WCHAR);
+    if (clean_restart)
+        req_len += sizeof(DLL_RESTARTED_ENV L"=1");
     req = Dll_AllocTemp(req_len);
 
     req->h.length = req_len;
@@ -1065,11 +1076,28 @@ _FX BOOL SbieDll_RunSandboxed(
     ++ptr;
 
     req->env_ofs = (ULONG)((ULONG_PTR)ptr - (ULONG_PTR)req);
-    req->env_len = env_len;
-    if (env_len) {
+    if (clean_restart) {
+        const WCHAR *entry;
+        const ULONG marker_name_len = ARRAYSIZE(DLL_RESTARTED_ENV) - 1;
+        const WCHAR marker[] = DLL_RESTARTED_ENV L"=1";
+
+        wmemcpy(ptr, marker, ARRAYSIZE(marker));
+        ptr += ARRAYSIZE(marker);
+        for (entry = env; *entry; ) {
+            ULONG entry_len = (ULONG)wcslen(entry) + 1;
+            if (entry_len <= marker_name_len + 1 ||
+                _wcsnicmp(entry, DLL_RESTARTED_ENV, marker_name_len) != 0 ||
+                entry[marker_name_len] != L'=') {
+                wmemcpy(ptr, entry, entry_len);
+                ptr += entry_len;
+            }
+            entry += entry_len;
+        }
+    } else if (env_len) {
         wmemcpy(ptr, env, env_len);
         ptr += env_len;
     }
+    req->env_len = (ULONG)(ptr - (WCHAR *)((ULONG_PTR)req + req->env_ofs));
     *ptr = L'\0';
     ++ptr;
 

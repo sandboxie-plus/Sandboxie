@@ -946,6 +946,27 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
         // complete the initialization for a sandboxed process
         //
         HANDLE heventProcessStart = 0;
+        WCHAR restartValue[2];
+        DWORD restartLength;
+        DWORD restartError;
+        BOOLEAN cleanRestart = FALSE;
+
+        SetLastError(ERROR_SUCCESS);
+        restartLength = GetEnvironmentVariable(
+            DLL_RESTARTED_ENV, restartValue, ARRAYSIZE(restartValue));
+        restartError = GetLastError();
+        if (restartLength || restartError == ERROR_SUCCESS) {
+            cleanRestart = restartLength == 1 && restartValue[0] == L'1';
+            if (!SetEnvironmentVariable(DLL_RESTARTED_ENV, NULL)) {
+                static const WCHAR error[] = L"Failed to remove clean restart marker";
+                SbieApi_LogMsgEx(-1, 2205, error, sizeof(error) - sizeof(WCHAR));
+                ExitProcess(-1);
+            }
+        } else if (restartError != ERROR_ENVVAR_NOT_FOUND) {
+            static const WCHAR error[] = L"Failed to read clean restart marker";
+            SbieApi_LogMsgEx(-1, 2205, error, sizeof(error) - sizeof(WCHAR));
+            ExitProcess(-1);
+        }
 
         Dll_InitInjected(); // install required hooks (Dll_InitInjected -> Ldr_Init -> Ldr_Inject_Init(FALSE))
 
@@ -975,7 +996,7 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
                 MustRestartProcess = 1;
         }
 
-        else if (Dll_ProcessFlags & SBIE_FLAG_FORCED_PROCESS) {
+        else if (!cleanRestart && (Dll_ProcessFlags & SBIE_FLAG_FORCED_PROCESS)) {
             if (SbieApi_QueryConfBool(NULL, L"ForceRestartAll", FALSE)
              || SbieDll_CheckStringInList(Dll_ImageName, NULL, L"ForceRestart"))
                 MustRestartProcess = 2;

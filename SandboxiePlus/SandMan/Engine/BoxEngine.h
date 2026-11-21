@@ -73,6 +73,7 @@ protected:
 	virtual void		init();
 	virtual void		run();
 	virtual void		Stop();
+	void				CancelPendingCalls();
 	//virtual bool		Wait();
 	virtual bool		Continue(bool bLocked, EState State = eRunning);
 

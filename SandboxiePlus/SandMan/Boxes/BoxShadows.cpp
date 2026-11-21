@@ -15,6 +15,15 @@ void CBoxShadows::DiscardAll()
 	if (m_Shadows.isEmpty())
 		return;
 
+	// The owner (wizard engine, MCP session) can outlive theAPI when it is
+	// destroyed as a child of CSandMan during teardown; theAPI is then NULL and
+	// the CSbiePlusAPI object the shadows point to may already be deleted, so
+	// touching them would crash. Leave the shadow sections be in that case.
+	if (!theAPI) {
+		m_Shadows.clear();
+		return;
+	}
+
 	foreach(const SBoxShadow& pShadow, m_Shadows) {
 		if (pShadow.pShadow) {
 			if (pShadow.iApplyChanges == 2)

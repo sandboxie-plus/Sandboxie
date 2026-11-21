@@ -22,6 +22,8 @@
 #include <private/qv4script_p.h>
 #include <private/qv4qobjectwrapper_p.h>
 
+#include <QElapsedTimer>
+
 QSet<CBoxEngine*> CBoxEngine::m_Instances;
 
 CBoxEngine::CBoxEngine(QObject* parent) : QThread(parent)
@@ -49,6 +51,12 @@ void CBoxEngine::Stop()
         return;
 
     m_Mutex.lock();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    // Abort the running script at its next instruction, so it does not issue any further calls.
+    // m_pEngine is only cleared by run() while holding m_Mutex, so it is valid here.
+    if (m_pEngine)
+        m_pEngine->setInterrupted(true);
+#endif
     if (m_State == eQuery || m_State == eReady)
         Continue(true, eCanceled);
     else {
@@ -57,11 +65,41 @@ void CBoxEngine::Stop()
         m_Mutex.unlock();
     }
 
-    if (!wait(30 * 1000)) {
-        qDebug() << "Failed to stop Box Engine";
-        terminate();
-        m_State = eCanceled;
+    // The engine thread talks to the rest of SandMan through Qt::BlockingQueuedConnection calls
+    // targeting our helper objects (CSbieObject, CBoxObject, CIniObject, ...) which live in this,
+    // the main, thread. A plain wait() here would dead-lock with such a call until the timeout and
+    // terminate() would then kill the thread while its call is still queued; destroying that
+    // QMetaCallEvent later (when the helper object is deleted) releases a QSemaphore located on
+    // the dead thread's stack and crashes. So keep cancelling pending calls while we wait.
+    QElapsedTimer Timer;
+    Timer.start();
+    while (!wait(10)) {
+        CancelPendingCalls();
+        if (Timer.elapsed() > 30 * 1000) {
+            qDebug() << "Failed to stop Box Engine";
+            CancelPendingCalls(); // make sure the thread is not left waiting on one of our calls
+            terminate();
+            wait();
+            m_State = eCanceled;
+            break;
+        }
     }
+}
+
+void CBoxEngine::CancelPendingCalls()
+{
+    // WARNING: call this function only from the main thread !!!
+
+    // Removing a pending blocking meta call destroys its event, which releases the semaphore the
+    // engine thread is waiting on, without executing the slot; the caller sees default return values.
+    foreach(QObject* pObject, findChildren<QObject*>()) {
+        if (pObject->thread() == QThread::currentThread())
+            QCoreApplication::removePostedEvents(pObject, QEvent::MetaCall);
+    }
+
+    // method_invoke calls into the script manager, this one is harmless, just execute it
+    if (theGUI && theGUI->GetScripts())
+        QCoreApplication::sendPostedEvents(theGUI->GetScripts(), QEvent::MetaCall);
 }
 
 void CBoxEngine::StopAll()
@@ -156,7 +194,17 @@ bool CBoxEngine::RunScript(const QString& Script, const QString& Name, const QVa
     m_Params = Params;
     m_State = eRunning;
 
-    if(!m_pEngine) m_pEngine = new CJSEngineExt(); // the engine lives in its own thread
+    if (!m_pEngine) {
+        // QJSEngine's constructor does not fail gracefully, it crashes the process when it can not get its stack memory
+        if (!CJSEngineExt::canCreateEngine()) {
+            QString Error = tr("Failed to initialize the script engine, not enough memory or memory access blocked by third-party software.");
+            AppendLog(Error);
+            SetState(eError, Error);
+            start(); // run() bails out without an engine, but 'finished' is still emitted for anyone waiting on it
+            return false;
+        }
+        m_pEngine = new CJSEngineExt(); // the engine lives in its own thread
+    }
     //m_pEngine->installExtensions(QJSEngine::ConsoleExtension);
 
     init();
@@ -188,7 +236,10 @@ void CBoxEngine::run()
 {
     //QElapsedTimer timer;
     //timer.start();
-    
+
+    if (!m_pEngine) // engine creation failed, see RunScript
+        return;
+
     for (auto I = m_Params.begin(); I != m_Params.end(); ++I)
         m_pEngine->globalObject().setProperty(I.key(), m_pEngine->toScriptValue(*I));
 
@@ -208,9 +259,12 @@ void CBoxEngine::run()
     }
 
     m_Result = m_pEngine->globalObject().property("result").toVariant();
-    
-    delete m_pEngine;
+
+    m_Mutex.lock(); // see Stop()
+    CJSEngineExt* pEngine = m_pEngine;
     m_pEngine = NULL;
+    m_Mutex.unlock();
+    delete pEngine;
 }
 
 //bool CBoxEngine::Wait()
@@ -287,8 +341,11 @@ void CBoxEngine::AppendLog(const QString& Line)
 
 QObject* CBoxEngine::GetDebuggerBackend()
 {
-    if(!m_pEngine) 
+    if(!m_pEngine) {
+        if (!CJSEngineExt::canCreateEngine())
+            return NULL;
         m_pEngine = new CJSEngineExt();
+    }
     if (!m_pDebuggerBackend) {
         m_pDebuggerBackend = newV4ScriptDebuggerBackendDynamic(m_pEngine);
         if (m_pDebuggerBackend) {

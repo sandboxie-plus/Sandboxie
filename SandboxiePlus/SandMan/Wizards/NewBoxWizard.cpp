@@ -98,6 +98,13 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 	if (!Status.IsError())
 	{
 		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+		if (!pBox) {
+			// the box list may not have been refreshed (e.g. the driver config reload failed), force a reload
+			theAPI->ReloadBoxes(true);
+			pBox = theAPI->GetBoxByName(BoxName);
+		}
+		if (!pBox)
+			return SB_ERR(SB_OtherError, QVariantList() << tr("The new box '%1' could not be found after creation.").arg(BoxName));
 
         QString alias = field("boxNameAlias").toString().trimmed();
         if (!alias.isEmpty())

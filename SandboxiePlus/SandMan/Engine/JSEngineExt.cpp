@@ -43,6 +43,39 @@ CJSEngineExt* CJSEngineExt::getEngineByHandle(void* handle)
     return g_engineMap.value(handle);
 }
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+
+static bool probeStackAllocation(SIZE_T bytes)
+{
+    // mirrors WTF::OSAllocator::reserveAndCommit(..., includesGuardPages = true) used by QV4::ExecutionEngine
+    SYSTEM_INFO si;
+    GetSystemInfo(&si);
+    SIZE_T guardSize = si.dwPageSize;
+    bytes += 2 * guardSize;
+    void* p = VirtualAlloc(NULL, bytes, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+    if (!p)
+        return false;
+    DWORD oldProtect;
+    bool ok = VirtualProtect(p, guardSize, PAGE_READONLY, &oldProtect)
+        && VirtualProtect((char*)p + bytes - guardSize, guardSize, PAGE_READONLY, &oldProtect);
+    VirtualFree(p, 0, MEM_RELEASE);
+    return ok;
+}
+#endif
+
+bool CJSEngineExt::canCreateEngine()
+{
+#ifdef Q_OS_WIN
+    // default V4 sizes: JS stack 4 MB + 256 KB, GC stack 2 MB
+    if (!probeStackAllocation(4 * 1024 * 1024 + 256 * 1024) || !probeStackAllocation(2 * 1024 * 1024)) {
+        qWarning() << "CJSEngineExt: failed to allocate script engine stacks";
+        return false;
+    }
+#endif
+    return true;
+}
+
 static QV4::ReturnedValue printCall(const QV4::FunctionObject* b, const QV4::Value* v, const QV4::Value* argv, int argc);
 static QV4::ReturnedValue debuggerCall(const QV4::FunctionObject* b, const QV4::Value* v, const QV4::Value* argv, int argc);
 static QV4::ReturnedValue evalCall(const QV4::FunctionObject* b, const QV4::Value* v, const QV4::Value* argv, int argc);

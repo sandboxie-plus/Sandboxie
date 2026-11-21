@@ -9,6 +9,10 @@
 #include "./Windows/SettingsWindow.h"
 #include "./Wizards/SetupWizard.h"
 #include "./Helpers/MiniDumpFilter.h"
+#include <QThread>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+#include <QtCore/private/qcoreapplication_p.h>
+#endif
 
 CSettings* theConf = NULL;
 
@@ -16,6 +20,22 @@ QString g_PendingMessage;
 
 int main(int argc, char *argv[])
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+	// Qt treats the first thread that touches its per-thread data as the "main thread".
+	// Global QObjects in our DLLs (e.g. the QLibrary inside MiscHelpers' theArc) are constructed
+	// during DLL initialization, which runs on whichever thread initializes the process. When
+	// third-party code (e.g. the r77 rootkit) injects a remote thread into our still-suspended
+	// process, that thread does the loader initialization and Qt adopts it as the main thread.
+	// QThread::isMainThread() then returns false for the real main thread and the QApplication
+	// constructor crashes in qwindows (QPixmap's thread check calls into the not yet set
+	// platform integration). Re-establish this thread as Qt's main thread before creating the app.
+	QThread* pCurThread = QThread::currentThread(); // adopts this thread if not yet known to Qt
+	if (!QThread::isMainThread()) {
+		QCoreApplicationPrivate::theMainThread.storeRelease(pCurThread);
+		QCoreApplicationPrivate::theMainThreadId.storeRelaxed(QThread::currentThreadId());
+	}
+#endif
+
 	srand(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 
 	wchar_t szPath[MAX_PATH];

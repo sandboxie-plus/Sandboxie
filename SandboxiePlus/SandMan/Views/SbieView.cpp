@@ -1342,7 +1342,9 @@ bool CSbieView::MoveItem(const QString& Name, const QString& To, int pos)
 	}
 
 	// add to new
-	if (pos < 0/* || pos > m_Groups[To].size()*/)
+	// pos comes from the drop location, it can be past the end of the group (e.g. stale after the
+	// removal above or counted against the view rather than m_Groups), QList::insert does not check
+	if (pos < 0 || pos > m_Groups[To].size())
 		m_Groups[To].append(Name);
 	else
 		m_Groups[To].insert(pos, Name);

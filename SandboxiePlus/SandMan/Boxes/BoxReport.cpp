@@ -246,10 +246,15 @@ bool CBoxReport::Submit(QWidget* pParent, const SSubmission& Request,
 		// either way, so the body is the only thing that says what happened.
 		const QVariantMap Result = QJsonDocument::fromJson(Answer).toVariant().toMap();
 		const bool bOk = Result["success"].toBool();
+
+		// the upload can outlive the dialog that started it, if that window was closed in the
+		// mean time it may already be tearing down and parenting a message box to it crashes
+		// in QWidgetPrivate::createWinId, so only use it while it is still shown
+		QWidget* pBoxParent = (pParent && pParent->window()->isVisible()) ? pParent : nullptr;
 		if (!bOk)
-			QMessageBox::critical(pParent, "Sandboxie-Plus", tr("Failed to submit report, error %1\nTry submitting without the log attached.").arg(Result["error"].toInt()));
+			QMessageBox::critical(pBoxParent, "Sandboxie-Plus", tr("Failed to submit report, error %1\nTry submitting without the log attached.").arg(Result["error"].toInt()));
 		else
-			QMessageBox::information(pParent, "Sandboxie-Plus", tr("Your issue report has been successfully submitted, thank you."));
+			QMessageBox::information(pBoxParent, "Sandboxie-Plus", tr("Your issue report has been successfully submitted, thank you."));
 
 		if (OnDone)
 			OnDone(bOk);

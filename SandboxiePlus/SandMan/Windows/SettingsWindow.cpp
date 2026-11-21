@@ -942,8 +942,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	else {
 		QWidget* pSearch = AddConfigSearch(ui.tabs);
 		ui.horizontalLayout->insertWidget(0, pSearch);
-		QTimer::singleShot(0, [this]() {
-			m_pSearch->setMaximumWidth(m_pTabs->tabBar()->width());
+		// use this as context, so the deferred call is dropped if the window gets destroyed first
+		QTimer::singleShot(0, this, [this]() {
+			if (m_pSearch && ui.tabs) // ui.tabs is gone once OnSetTree switched to the tree view
+				m_pSearch->setMaximumWidth(ui.tabs->tabBar()->width());
 		});
 
 		QAction* pSetTree = new QAction();

@@ -102,7 +102,7 @@ public:
 protected:
 	bool					CreateArchiveHandler(const CArcInfoEx &ai, void **archive, bool outHandler) const;
 
-	QLibrary				m_7z;
+	QLibrary*				m_7z;
 	//QList<CCdrInfo>			m_Coders;
 	QVector<CArcInfoEx>		m_Formats;
 	CreateObjectFunc		createObjectFunc;

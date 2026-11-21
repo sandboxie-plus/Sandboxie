@@ -49,6 +49,10 @@ public:
 
     static CJSEngineExt* getEngineByHandle(void* handle);
 
+    // The V4 engine constructor hard-crashes (WTF CRASH() -> write to 0xbbadbeef) when it fails to
+    // allocate its JS/GC stacks or to set their guard pages; probe this before creating an engine.
+    static bool canCreateEngine();
+
 signals:
     void evaluateFinished(const QJSValue& ret);
     void printTrace(const QString& Message);

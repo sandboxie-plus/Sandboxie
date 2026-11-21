@@ -88,7 +88,7 @@ _FX BOOLEAN Config_MatchImage(
     if (*pat_str == L'<') {
 
         ok = Config_MatchImageGroup(
-            Pattern_Source(pat), 0, test_str, depth + 1);
+            Pattern_Source(pat), 0, test_str, depth + 1, NULL);
 
         Pattern_Free(pat);
 
@@ -119,6 +119,52 @@ _FX BOOLEAN Config_MatchImage(
 }
 
 
+_FX BOOLEAN Config_MatchImageEx(
+    const WCHAR* pat_str, ULONG pat_len, const WCHAR* test_str,
+    ULONG depth, ULONG image_type)
+{
+    const WCHAR* name;
+    ULONG name_len;
+    ULONG required_type = DLL_IMAGE_UNSPECIFIED;
+
+    if (!pat_str || !test_str)
+        return FALSE;
+
+    if (!pat_len)
+        pat_len = (ULONG)wcslen(pat_str);
+
+    if (pat_len > 10 && _wcsnicmp(pat_str, L"<Special:", 9) == 0 &&
+            pat_str[pat_len - 1] == L'>') {
+
+        name = pat_str + 9;
+        name_len = pat_len - 10;
+
+        if (name_len == 6 && _wcsnicmp(name, L"chrome", name_len) == 0)
+            required_type = DLL_IMAGE_GOOGLE_CHROME;
+        else if (name_len == 7 && _wcsnicmp(name, L"firefox", name_len) == 0)
+            required_type = DLL_IMAGE_MOZILLA_FIREFOX;
+        else if (name_len == 11 && _wcsnicmp(name, L"thunderbird", name_len) == 0)
+            required_type = DLL_IMAGE_MOZILLA_THUNDERBIRD;
+        else if (name_len == 7 && _wcsnicmp(name, L"browser", name_len) == 0)
+            required_type = DLL_IMAGE_OTHER_WEB_BROWSER;
+        else if (name_len == 4 && _wcsnicmp(name, L"mail", name_len) == 0)
+            required_type = DLL_IMAGE_OTHER_MAIL_CLIENT;
+        else if (name_len == 6 && _wcsnicmp(name, L"plugin", name_len) == 0)
+            required_type = DLL_IMAGE_PLUGIN_CONTAINER;
+        else
+            return FALSE;
+
+        return image_type == required_type;
+    }
+
+    if (*pat_str == L'<')
+        return Config_MatchImageGroup(
+            pat_str, pat_len, test_str, depth + 1, &image_type);
+
+    return Config_MatchImage(pat_str, pat_len, test_str, depth);
+}
+
+
 //---------------------------------------------------------------------------
 // Config_MatchImageGroup
 //---------------------------------------------------------------------------
@@ -126,11 +172,14 @@ _FX BOOLEAN Config_MatchImage(
 
 _FX BOOLEAN Config_MatchImageGroup(
     const WCHAR* group, ULONG group_len, const WCHAR* test_str,
-    ULONG depth)
+    ULONG depth, const ULONG* image_type)
 {
     ULONG index;
     BOOLEAN match = FALSE;
     WCHAR conf_buf[2048];
+
+    if (image_type && depth >= 6)
+        return FALSE;
 
     if (!group_len)
         group_len = wcslen(group);
@@ -143,7 +192,9 @@ _FX BOOLEAN Config_MatchImageGroup(
         //
 
         NTSTATUS status = SbieApi_QueryConf(
-            NULL, L"ProcessGroup", index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+            NULL, L"ProcessGroup", index, conf_buf,
+            image_type ? (CONF_LINE_LEN - 16) * sizeof(WCHAR)
+                       : sizeof(conf_buf) - 16 * sizeof(WCHAR));
         if (!NT_SUCCESS(status))
             break;
 
@@ -174,13 +225,17 @@ _FX BOOLEAN Config_MatchImageGroup(
                 value_len = wcslen(value);
 
             if (value_len) {
-                if (*value != L'<') {
+                if (image_type) {
+                    match = Config_MatchImageEx(
+                        value, value_len, test_str, depth, *image_type);
+                }
+                else if (*value != L'<') {
                     match = Config_MatchImage(
                         value, value_len, test_str, depth + 1);
                 }
                 else if (depth < 6) {
                     match = Config_MatchImageGroup(
-                        value, value_len, test_str, depth + 1);
+                        value, value_len, test_str, depth + 1, NULL);
                 }
                 if (match)
                     break;

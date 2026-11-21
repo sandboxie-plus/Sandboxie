@@ -86,6 +86,7 @@ jobs:
                   ["gh", "api", *args],
                   input=json.dumps(data) if data is not None else None,
                   text=True,
+                  encoding="utf-8",
                   capture_output=True,
               )
               if result.returncode:
@@ -179,13 +180,20 @@ jobs:
                   root_switches,
               )
 
+          if normalized and not any(
+              str(entry.get("DisplayVersion", "")) == version
+              for entry in manifest.get("AppsAndFeaturesEntries", [])
+          ):
+              print("Manifest already normalized; no commit needed.")
+              raise SystemExit(0)
+
           for entry in manifest.get("AppsAndFeaturesEntries", []):
               if str(entry.get("DisplayVersion", "")) == version:
                   del entry["DisplayVersion"]
 
           output = io.StringIO()
           yaml.dump(manifest, output)
-          updated = output.getvalue()
+          updated = output.getvalue().replace("\r\n", "\n").replace("\n", "\r\n")
           if updated == original:
               print("Manifest already normalized; no commit needed.")
               raise SystemExit(0)

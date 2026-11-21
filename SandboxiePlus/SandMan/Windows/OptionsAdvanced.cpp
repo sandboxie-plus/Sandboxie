@@ -73,6 +73,7 @@ void COptionsWindow::CreateAdvanced()
 	m_AdvOptions.insert("CopyBlockDenyWrite",			SAdvOption{eSpec, QStringList() << "y" << "n", tr("Makes a write open call to a file that won't be copied fail instead of turning it read-only.")});
 	m_AdvOptions.insert("UseSbieDeskHack",				SAdvOption{eOnlySpec, QStringList() << "n" << "y", tr("")});
 	m_AdvOptions.insert("UseSbieWndStation",			SAdvOption{eOnlySpec, QStringList() << "n" << "y", tr("")});
+	m_AdvOptions.insert("DropAdminRights",				SAdvOption{eOnlySpec, QStringList() << "n" << "y", tr("Override 'Drop rights from Administrators and Power Users groups' for specified processes. A process can only keep admin rights if the process starting it has them too, hence when a program is set to 'n', start.exe is set to 'n' as well, as it starts programs launched from SandMan or the context menu.")});
 	m_AdvOptions.insert("FakeAdminRights",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Make specified processes think they have admin permissions.")});
 	m_AdvOptions.insert("WaitForDebugger",				SAdvOption{eList, QStringList(), tr("Force specified processes to wait for a debugger to attach.")});
 	m_AdvOptions.insert("BoxNameTitle",					SAdvOption{eOnlySpec, QStringList() << "y" << "n" << "-", tr("")});
@@ -968,6 +969,25 @@ void COptionsWindow::SaveOptionList()
 		if (!Program.isEmpty()) Options.append(Program);
 		if (!Value.isEmpty()) Options.append(Value);
 		OptionMap[Name].append(Options.join(","));
+	}
+
+	// a process can not regain admin rights which were dropped from the process starting it,
+	// programs started from SandMan or the context menu are started by start.exe inside the box,
+	// hence an exemption from DropAdminRights only takes effect when start.exe is exempted too
+	bool bDropRightsExemption = false;
+	bool bStartExeEntry = false;
+	foreach(const QString& Value, OptionMap["DropAdminRights"]) {
+		QStringList Values = Value.split(",");
+		if (Values.count() < 2)
+			continue;
+		if (Values[0].compare("start.exe", Qt::CaseInsensitive) == 0)
+			bStartExeEntry = true;
+		else if (Values[1].compare("n", Qt::CaseInsensitive) == 0)
+			bDropRightsExemption = true;
+	}
+	if (bDropRightsExemption && !bStartExeEntry) {
+		OptionMap["DropAdminRights"].append("start.exe,n");
+		AddOptionEntry("DropAdminRights", "start.exe", "n");
 	}
 
 	foreach(const QString & Key, m_AdvOptions.keys()) {

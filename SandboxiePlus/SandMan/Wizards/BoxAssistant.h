@@ -27,6 +27,10 @@ public:
 
     void TryFix(quint32 MsgCode, const QStringList& MsgData, const QString& ProcessName, const QString& BoxName);
 
+    void FixKnownIssue(const QString& BoxName, const QString& KnownFix);
+
+    void ShowReport(const QString& BoxName);
+
     virtual void accept();
     virtual void reject();
 
@@ -66,11 +70,12 @@ protected:
 
     QList<SUsedBox> m_UsedBoxes;
 
+    QVariantMap m_Params;
+
 private:
     QList<QVariantMap> m_IssueStack;
 
     CWizardEngine* m_pEngine;
-    QVariantMap m_Params;
     bool m_bUseDebugger;
     QMainWindow* m_pDebugger;
 };
@@ -197,14 +202,13 @@ public:
     bool validatePage() override;
 
 private:
+
     QLabel* m_pTopLabel;
     QTextEdit* m_pReport;
     QLineEdit* m_pMail;
     QCheckBox* m_pAttachIni;
     QCheckBox* m_pAttachLog;
     QCheckBox* m_pAttachDmp;
-
-    CSbieProgressPtr m_pUploadProgress;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -20,6 +20,7 @@
 #include <QHttpMultiPart>
 #include "../Views/TraceView.h"
 #include "../AddonManager.h"
+#include "../Boxes/BoxReport.h"
 #include "../MiscHelpers/Common/NetworkAccessManager.h"
 #include "../CustomStyles.h"
 #include "../OnlineUpdater.h"
@@ -87,6 +88,33 @@ void CBoxAssistant::TryFix(quint32 MsgCode, const QStringList& MsgData, const QS
     }
 }
 
+void CBoxAssistant::FixKnownIssue(const QString& BoxName, const QString& KnownFix)
+{
+    QMap<QString, QList<QVariantMap>> GroupedIssues = theGUI->GetScripts()->GetIssues();
+    QVariantMap Issue;
+    for (auto I = GroupedIssues.begin(); I != GroupedIssues.end(); ++I) {
+        for(auto J = I->begin(); J != I->end(); ++J) {
+            // Find message specific handler
+            if (J->value("id").toString().compare(KnownFix, Qt::CaseInsensitive) == 0) {
+                Issue = *J;
+                break;
+            }
+        }
+    }
+    if (!Issue.isEmpty()) {
+        PushIssue(Issue);
+        m_Params["boxName"] = BoxName;
+        setStartId(Page_Run);
+    }
+}
+
+void CBoxAssistant::ShowReport(const QString& BoxName)
+{
+    m_Params["diag_report"] = true;
+    m_Params["boxName"] = BoxName;
+    setStartId(Page_Submit);
+}
+
 void CBoxAssistant::OnIssuesUpdated()
 {
     CBeginPage* pBegin = qobject_cast<CBeginPage*>(currentPage());
@@ -98,7 +126,8 @@ void CBoxAssistant::OnToggleDebugger()
 {
     m_bUseDebugger = !m_bUseDebugger;
 
-    if (m_bUseDebugger && theGUI->GetAddonManager()->GetAddon("V4dbg", CAddonManager::eInstalled).isNull())
+    //if (m_bUseDebugger && theGUI->GetAddonManager()->GetAddon("V4dbg", CAddonManager::eInstalled).isNull())
+    if (m_bUseDebugger && !QFile::exists(QApplication::applicationDirPath() + "/V4ScriptDebugger.dll"))
         theGUI->GetAddonManager()->TryInstallAddon("V4dbg", this, tr("To debug troubleshooting scripts you need the V4 Script Debugger add-on, do you want to download and install it?"));
 
     QString title = windowTitle();
@@ -842,6 +871,7 @@ CSubmitPage::CSubmitPage(QWidget *parent)
     pLayout->addWidget(m_pAttachDmp, row, 2);
 
     m_pMail = new QLineEdit();
+    m_pMail->setText(theConf->GetString("User/eMail"));
     m_pMail->setPlaceholderText(tr("Email address"));
     m_pMail->setToolTip(tr("You have the option to provide an email address to receive a notification once a solution for your issue has been identified."));
     pLayout->addWidget(m_pMail, ++row, 0, 1, 3);
@@ -851,17 +881,28 @@ CSubmitPage::CSubmitPage(QWidget *parent)
 
 void CSubmitPage::initializePage()
 {
-    QString Info = tr("We apologize for the inconvenience you are currently facing with Sandboxie-Plus. ");
+    CBoxAssistant* pWizard = (CBoxAssistant*)wizard();
+    bool bDiagReport = pWizard->m_Params["diag_report"].toBool();
+
+    QString Info;
+    if (bDiagReport) {
+        setTitle(tr("Submit Diagnostic Data"));
+        Info = tr("%1 has collected some valuable diagnostic data. Thank you for taking the time to review and submit this information, as it helps improve Sandboxie for everyone! :-) ").arg(pWizard->m_Params["boxName"].toString());
+    } else
+        Info = tr("We apologize for the inconvenience you are currently facing with Sandboxie-Plus. ");
 
     QString Report; // DO NOT TRANSLATE - Reports must be in English!
 
-    CWizardEngine* pEngine = ((CBoxAssistant*)wizard())->GetEngine();
+    CWizardEngine* pEngine = pWizard->GetEngine();
     if (pEngine) {
         if (pEngine->HasFailed() || pEngine->HasError())
             Info += tr("Unfortunately, the automated troubleshooting procedure failed. ");
 
-        QVariantMap Issue = ((CBoxAssistant*)wizard())->CurrentIssue();
+        QVariantMap Issue = pWizard->CurrentIssue();
         Report = QString("Troubleshooting procedure '%1'").arg(Issue["id"].toString());
+    }
+    else if (bDiagReport) {
+        Report = CBoxReport::AssembleDiagData(pWizard->m_Params["boxName"].toString());
     }
     else {
         Info += tr("Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. ");
@@ -869,16 +910,17 @@ void CSubmitPage::initializePage()
         Report = "[PLEASE ENTER YOUR ISSUE DESCRIPTION HERE]";
     }
 
-    Info += tr("If you wish to submit an issue report, please review the report below and click 'Finish'.");
+    if (bDiagReport)
+        m_pMail->setVisible(false);
+    else
+        Info += tr("If you wish to submit an issue report, please review the report below and click 'Finish'.");
 
     m_pTopLabel->setText(Info);
 
-    Report += "\n\nFurther information:\n";
-    Report += "Sandboxie-Plus Version: " + theGUI->GetVersion() + "\n";
-    Report += "Operating System Version: " + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture() + "\n";
+    Report += CBoxReport::AssembleDiagInfo();
 
     bool bNewDumps = false;
-    foreach(auto & UsedBox, ((CBoxAssistant*)wizard())->m_UsedBoxes) {
+    foreach(auto & UsedBox, pWizard->m_UsedBoxes) {
         QDir Dir(UsedBox.pBox->GetFileRoot());
         foreach(const QFileInfo & Info, Dir.entryInfoList(QStringList() << "*.dmp", QDir::Files)) {
             if (!UsedBox.OldDumps.contains(Info.fileName())) {
@@ -911,158 +953,38 @@ void CSubmitPage::initializePage()
 
 bool CSubmitPage::validatePage()
 {
-    QBuffer* pTraceLog = NULL;
-    if (m_pAttachLog->checkState() == Qt::Checked) {
-        pTraceLog = new QBuffer();
-        pTraceLog->open(QIODevice::ReadWrite);
-        if (!CTraceView::SaveToFile(pTraceLog)) {
-            delete pTraceLog;
-            return false;
-        }
-    }
+    CBoxAssistant* pWizard = (CBoxAssistant*)wizard();
 
-    m_pUploadProgress = CSbieProgressPtr(new CSbieProgress());
-	theGUI->AddAsyncOp(m_pUploadProgress, false, QString(), this);
+    CBoxReport::SSubmission Request;
+    Request.Text = m_pReport->toPlainText();
+    Request.AttachLog = CBoxReport::AttachLogFrom(m_pAttachLog->checkState());
+    Request.bAttachIni = m_pAttachIni->isChecked();
 
-    CNetworkAccessManager* pRequestManager = new CNetworkAccessManager(30 * 1000, this);
-
-    QHttpMultiPart* pMultiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
-
-    QHttpPart Report;
-    Report.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"report\""));
-    Report.setBody(m_pReport->toPlainText().toUtf8());
-    pMultiPart->append(Report);
-
-    if (m_pAttachIni->isChecked()) {
-
-        QFile* pSbieIni = new QFile(theAPI->GetIniPath(), pMultiPart);
-
-        if (pSbieIni->open(QIODevice::ReadOnly)) {
-
-            QHttpPart SbieIni;
-            SbieIni.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
-            SbieIni.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"sbieIni\"; filename=\"Sandboxie.ini\""));
-
-            SbieIni.setBodyDevice(pSbieIni);
-            pMultiPart->append(SbieIni);
-        }
-    }
-
-    if (m_pAttachLog->isChecked()) {
-
-        QBuffer* pSbieLogs = new QBuffer(pMultiPart);
-        CArchive Archive("SbieTrace.7z", pSbieLogs);
-
-        QMap<int, QIODevice*> Files;
-
-        QBuffer* pMessageLog = new QBuffer();
-        pMessageLog->open(QIODevice::ReadWrite);
-        theGUI->SaveMessageLog(pMessageLog);
-        int ArcIndex = Archive.AddFile("SbieMsg.log");
-        pMessageLog->seek(0);
-	    Files.insert(ArcIndex, pMessageLog);
-
-        if (pTraceLog) {
-            ArcIndex = Archive.AddFile("SbieTrace.log");
-            pTraceLog->seek(0);
-            Files.insert(ArcIndex, pTraceLog);
-        }
-
-        m_pUploadProgress->ShowMessage(tr("Compressing Logs"));
-        SCompressParams Params;
-        Params.iLevel = 9;
-        Archive.Update(&Files, true, &Params);
-        
-        if (pSbieLogs->open(QIODevice::ReadOnly)) {
-
-            QHttpPart SbieLogs;
-            SbieLogs.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/octet-strea"));
-            SbieLogs.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"sbieLogs\"; filename=\"SbieLogs.7z\""));
-
-            SbieLogs.setBodyDevice(pSbieLogs);
-            pMultiPart->append(SbieLogs);
-        }
-    }
-
+    // Only dumps that appeared during this procedure: the box may have been
+    // littered with old ones before the wizard ever ran.
     if (m_pAttachDmp->isChecked()) {
-
-        QBuffer* pSbieDumps = new QBuffer(pMultiPart);
-        CArchive Archive("SbieDumps.7z", pSbieDumps);
-
-        QMap<int, QIODevice*> Files;
-
-        foreach(auto & UsedBox, ((CBoxAssistant*)wizard())->m_UsedBoxes) {
+        foreach(auto & UsedBox, pWizard->m_UsedBoxes) {
             QDir Dir(UsedBox.pBox->GetFileRoot());
             foreach(const QFileInfo & Info, Dir.entryInfoList(QStringList() << "*.dmp", QDir::Files)) {
-                if (!UsedBox.OldDumps.contains(Info.fileName())) {
-                    QFile* pCrashDump = new QFile(Info.filePath());
-                    int ArcIndex = Archive.AddFile(Info.fileName());
-                    Files.insert(ArcIndex, pCrashDump);
-                }
+                if (!UsedBox.OldDumps.contains(Info.fileName()))
+                    Request.CrashDumps.append(Info);
             }
         }
-
-        m_pUploadProgress->ShowMessage(tr("Compressing Dumps"));
-        SCompressParams Params;
-        Params.iLevel = 9;
-        Archive.Update(&Files, true, &Params);
-
-        if (pSbieDumps->open(QIODevice::ReadOnly)) {
-
-            QHttpPart SbieDumps;
-            SbieDumps.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/octet-strea"));
-            SbieDumps.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"sbieDumps\"; filename=\"SbieDumps.7z\""));
-
-            SbieDumps.setBodyDevice(pSbieDumps);
-            pMultiPart->append(SbieDumps);
-        }
     }
 
-    if (!m_pMail->text().isEmpty()) {
-        QHttpPart eMail;
-        eMail.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"email\""));
-        eMail.setBody(m_pMail->text().toUtf8());
-        pMultiPart->append(eMail);
-    }
+    Request.Mail = m_pMail->text();
+    CBoxReport::RememberMail(Request.Mail);
 
-    quint64 RandID = COnlineUpdater::GetRandID();
-    QHttpPart randId;
-    randId.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"randId\""));
-    randId.setBody(QString::number(RandID, 16).rightJustified(16, '0').toUpper().toUtf8());
-    pMultiPart->append(randId);
-
-    QUrl Url("https://sandboxie-plus.com/issues/submit.php");
-    QNetworkRequest Request(Url);
-	//Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	Request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
-	//Request.setRawHeader("Accept-Encoding", "gzip");
-    QNetworkReply* pReply = pRequestManager->post(Request, pMultiPart);
-    pMultiPart->setParent(pReply);
-
-	m_pUploadProgress->ShowMessage(tr("Submitting issue report..."));
-
-    connect(pReply, &QNetworkReply::finished, this, [pReply, this]() {
-        QByteArray Reply = pReply->readAll();
-        pReply->deleteLater();
-
-        m_pUploadProgress->Finish(SB_OK);
-		m_pUploadProgress.clear();
-
-        QVariantMap Result = QJsonDocument::fromJson(Reply).toVariant().toMap();
-        if (!Result["success"].toBool()) {
-            QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to submit issue report, error %1\nTry submitting without the log attached.").arg(Result["error"].toInt()));
-            return;
-        }
-
-        QMessageBox::information(this, "Sandboxie-Plus", tr("Your issue report has been successfully submitted, thank you."));
-        wizard()->close();
+    // The upload, the progress and the tracker's answer all live in
+    // CBoxReport now, because the agent session submits through the same
+    // path from its own window.
+    CBoxReport::Submit(this, Request, [this](bool bOk) {
+        if (bOk)
+            wizard()->close();
     });
 
-    connect(pReply, &QNetworkReply::uploadProgress, this, [this](qint64 bytes, qint64 bytesTotal) {
-        if (bytesTotal != 0 && !m_pUploadProgress.isNull())
-		    m_pUploadProgress->Progress(100 * bytes / bytesTotal);
-    });
-
+    // Never advances by itself: the page closes the wizard when the tracker
+    // has accepted, and stays put so it can be retried when it has not.
     return false;
 }
 

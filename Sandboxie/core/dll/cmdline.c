@@ -35,6 +35,7 @@
 #define CMD_SEEN_CASE_SENSITIVE         0x0020
 #define CMD_SEEN_CONDITION_SOURCE       0x0040
 #define CMD_SEEN_UPDATE_PEB             0x0080
+#define CMD_SEEN_EXPAND                 0x0100
 
 typedef enum {
     CMD_ACTION_NONE,
@@ -93,6 +94,7 @@ typedef struct {
 
 typedef struct {
     WCHAR* storage;
+    WCHAR* expanded;
     WCHAR* selector;
     WCHAR* id;
     WCHAR* value;
@@ -116,6 +118,7 @@ typedef struct {
     BOOLEAN case_sensitive;
     BOOLEAN condition_input;
     BOOLEAN applied;
+    BOOLEAN expand;
 } CMD_RULE;
 
 typedef struct {
@@ -302,6 +305,7 @@ static BOOLEAN CmdLine_ParseRule(WCHAR* text, CMD_RULE* rule)
 
     memset(rule, 0, sizeof(*rule));
     rule->storage = text;
+    rule->expand = TRUE;
     rule->match = CMD_MATCH_EXACT;
     rule->position = CMD_ADD_END;
     rule->case_sensitive = TRUE;
@@ -443,6 +447,12 @@ static BOOLEAN CmdLine_ParseRule(WCHAR* text, CMD_RULE* rule)
                 return FALSE;
             seen |= CMD_SEEN_UPDATE_PEB;
         }
+        else if (_wcsicmp(key, L"Expand") == 0) {
+            if ((seen & CMD_SEEN_EXPAND) ||
+                    !CmdLine_ParseBoolean(value, &rule->expand))
+                return FALSE;
+            seen |= CMD_SEEN_EXPAND;
+        }
         else if (_wcsicmp(key, L"Match") == 0) {
             if (seen & CMD_SEEN_MATCH)
                 return FALSE;
@@ -510,6 +520,10 @@ static BOOLEAN CmdLine_ParseRule(WCHAR* text, CMD_RULE* rule)
         }
     }
 
+    if ((seen & CMD_SEEN_EXPAND) &&
+            rule->action != CMD_ACTION_ADD && rule->action != CMD_ACTION_SET &&
+            rule->action != CMD_ACTION_REPLACE && rule->action != CMD_ACTION_REPLACE_SEQUENCE)
+        return FALSE;
     if (rule->disabled)
         return rule->id && rule->action == CMD_ACTION_NONE;
 
@@ -568,7 +582,7 @@ static BOOLEAN CmdLine_ParseRule(WCHAR* text, CMD_RULE* rule)
 }
 
 static WCHAR* CmdLine_DecodeArgument(
-    const WCHAR* text, ULONG start, ULONG end)
+    const WCHAR* text, ULONG start, ULONG end, BOOLEAN executable)
 {
     WCHAR* decoded;
     ULONG read = start;
@@ -581,6 +595,13 @@ static WCHAR* CmdLine_DecodeArgument(
 
     while (read < end) {
         ULONG slashes = 0;
+
+        if (executable) {
+            if (text[read] != L'"')
+                decoded[write++] = text[read];
+            ++read;
+            continue;
+        }
 
         while (read < end && text[read] == L'\\') {
             ++slashes;
@@ -681,7 +702,7 @@ static BOOLEAN CmdLine_ParseArguments(CMD_STATE* state)
             }
 
             if (ch == L'"') {
-                if (!(slashes & 1))
+                if (!state->count || !(slashes & 1))
                     quoted = !quoted;
                 slashes = 0;
                 ++pos;
@@ -699,7 +720,8 @@ static BOOLEAN CmdLine_ParseArguments(CMD_STATE* state)
         arg->raw_start = start;
         arg->raw_end = pos;
         arg->unterminated_quote = quoted;
-        arg->value = CmdLine_DecodeArgument(state->text, start, pos);
+        arg->value = CmdLine_DecodeArgument(
+            state->text, start, pos, state->count == 1);
         if (!arg->value)
             return FALSE;
     }
@@ -1347,6 +1369,8 @@ static void CmdLine_FreeRules(CMD_RULE* rules, ULONG count)
     for (i = 0; i < count; ++i) {
         if (rules[i].storage)
             LocalFree(rules[i].storage);
+        if (rules[i].expanded)
+            Dll_Free(rules[i].expanded);
     }
 }
 
@@ -1356,8 +1380,8 @@ BOOLEAN CmdLine_Build(
     ANSI_STRING* command_line_a,
     UNICODE_STRING* command_line_peb)
 {
-    CMD_RULE rules[CMDLINE_MAX_RULES];
-    CMD_RULE planned[CMDLINE_MAX_RULES];
+    CMD_RULE* rules = NULL;
+    CMD_RULE* planned = NULL;
     CMD_STATE state;
     CMD_STATE input;
     CMD_STATE peb;
@@ -1384,11 +1408,16 @@ BOOLEAN CmdLine_Build(
             !command_line_w || !command_line_a || !command_line_peb)
         return FALSE;
 
-    memset(rules, 0, sizeof(rules));
-    memset(planned, 0, sizeof(planned));
     memset(&state, 0, sizeof(state));
     memset(&input, 0, sizeof(input));
     memset(&peb, 0, sizeof(peb));
+
+    rules = Dll_AllocTemp(CMDLINE_MAX_RULES * sizeof(*rules));
+    planned = Dll_AllocTemp(CMDLINE_MAX_RULES * sizeof(*planned));
+    if (!rules || !planned)
+        goto finish;
+    memset(rules, 0, CMDLINE_MAX_RULES * sizeof(*rules));
+    memset(planned, 0, CMDLINE_MAX_RULES * sizeof(*planned));
 
     if (!CmdLine_AddChromiumFlags(rules, &count, process_parms->CommandLine.Buffer))
         goto finish;
@@ -1461,6 +1490,36 @@ BOOLEAN CmdLine_Build(
     if (!planned_count) {
         failure = NULL;
         goto finish;
+    }
+
+    for (index = 0; index < planned_count; ++index) {
+        CMD_RULE* rule = &planned[index];
+        WCHAR** value = NULL;
+
+        if (!rule->expand)
+            continue;
+        if (rule->action == CMD_ACTION_ADD || rule->action == CMD_ACTION_SET)
+            value = &rule->value;
+        else if (rule->action == CMD_ACTION_REPLACE ||
+                rule->action == CMD_ACTION_REPLACE_SEQUENCE)
+            value = &rule->replacement;
+        if (!value || !wcschr(*value, L'%'))
+            continue;
+
+        NTSTATUS expansion_status;
+        rule->expanded = SbieDll_ExpandEnvironmentStrings(*value, 0x7FFF, &expansion_status);
+        if (!rule->expanded || !NT_SUCCESS(expansion_status)) {
+            WCHAR diagnostic[160];
+            Sbie_snwprintf(diagnostic, ARRAYSIZE(diagnostic),
+                L"CustomProcessCommandLine: expansion failed (%08X); %s",
+                expansion_status, rule->expanded ? L"some variables kept literal" : L"plan discarded");
+            SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, diagnostic);
+        }
+        if (!rule->expanded) {
+            failure = NULL;
+            goto finish;
+        }
+        *value = rule->expanded;
     }
 
     original_text = CmdLine_DuplicateLength(
@@ -1587,6 +1646,10 @@ finish:
     CmdLine_FreeArguments(&peb);
     CmdLine_FreeRules(rules, count);
     CmdLine_FreeRules(planned, planned_count);
+    if (rules)
+        Dll_Free(rules);
+    if (planned)
+        Dll_Free(planned);
     if (original_text)
         LocalFree(original_text);
     if (!result && ansi.Buffer)

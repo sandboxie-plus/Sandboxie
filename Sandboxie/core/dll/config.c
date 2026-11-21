@@ -39,10 +39,6 @@
 extern POOL* Dll_Pool;
 extern POOL* Dll_PoolTemp;
 
-static BOOLEAN Config_MatchImageGroupEx(
-    const WCHAR* group, ULONG group_len, const WCHAR* test_str,
-    ULONG depth, ULONG image_type);
-
 //---------------------------------------------------------------------------
 // Config_MatchImage
 //---------------------------------------------------------------------------
@@ -92,7 +88,7 @@ _FX BOOLEAN Config_MatchImage(
     if (*pat_str == L'<') {
 
         ok = Config_MatchImageGroup(
-            Pattern_Source(pat), 0, test_str, depth + 1);
+            Pattern_Source(pat), 0, test_str, depth + 1, NULL);
 
         Pattern_Free(pat);
 
@@ -162,61 +158,10 @@ _FX BOOLEAN Config_MatchImageEx(
     }
 
     if (*pat_str == L'<')
-        return Config_MatchImageGroupEx(
-            pat_str, pat_len, test_str, depth + 1, image_type);
+        return Config_MatchImageGroup(
+            pat_str, pat_len, test_str, depth + 1, &image_type);
 
     return Config_MatchImage(pat_str, pat_len, test_str, depth);
-}
-
-
-static BOOLEAN Config_MatchImageGroupEx(
-    const WCHAR* group, ULONG group_len, const WCHAR* test_str,
-    ULONG depth, ULONG image_type)
-{
-    ULONG index;
-    WCHAR conf_buf[CONF_LINE_LEN];
-
-    if (depth >= 6)
-        return FALSE;
-
-    if (!group_len)
-        group_len = (ULONG)wcslen(group);
-
-    for (index = 0; ; ++index) {
-        const WCHAR* value;
-        ULONG value_len;
-        NTSTATUS status = SbieApi_QueryConf(
-            NULL, L"ProcessGroup", index, conf_buf,
-            sizeof(conf_buf) - 16 * sizeof(WCHAR));
-
-        if (!NT_SUCCESS(status))
-            break;
-
-        value = conf_buf;
-        value_len = (ULONG)wcslen(value);
-        if (value_len <= group_len + 1 ||
-                _wcsnicmp(value, group, group_len) != 0)
-            continue;
-
-        value += group_len;
-        if (*value++ != L',')
-            continue;
-
-        while (*value) {
-            const WCHAR* comma = wcschr(value, L',');
-            value_len = comma ? (ULONG)(comma - value) : (ULONG)wcslen(value);
-
-            if (value_len && Config_MatchImageEx(
-                    value, value_len, test_str, depth, image_type))
-                return TRUE;
-
-            value += value_len;
-            while (*value == L',')
-                ++value;
-        }
-    }
-
-    return FALSE;
 }
 
 
@@ -227,11 +172,14 @@ static BOOLEAN Config_MatchImageGroupEx(
 
 _FX BOOLEAN Config_MatchImageGroup(
     const WCHAR* group, ULONG group_len, const WCHAR* test_str,
-    ULONG depth)
+    ULONG depth, const ULONG* image_type)
 {
     ULONG index;
     BOOLEAN match = FALSE;
     WCHAR conf_buf[2048];
+
+    if (image_type && depth >= 6)
+        return FALSE;
 
     if (!group_len)
         group_len = wcslen(group);
@@ -244,7 +192,9 @@ _FX BOOLEAN Config_MatchImageGroup(
         //
 
         NTSTATUS status = SbieApi_QueryConf(
-            NULL, L"ProcessGroup", index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+            NULL, L"ProcessGroup", index, conf_buf,
+            image_type ? (CONF_LINE_LEN - 16) * sizeof(WCHAR)
+                       : sizeof(conf_buf) - 16 * sizeof(WCHAR));
         if (!NT_SUCCESS(status))
             break;
 
@@ -275,13 +225,17 @@ _FX BOOLEAN Config_MatchImageGroup(
                 value_len = wcslen(value);
 
             if (value_len) {
-                if (*value != L'<') {
+                if (image_type) {
+                    match = Config_MatchImageEx(
+                        value, value_len, test_str, depth, *image_type);
+                }
+                else if (*value != L'<') {
                     match = Config_MatchImage(
                         value, value_len, test_str, depth + 1);
                 }
                 else if (depth < 6) {
                     match = Config_MatchImageGroup(
-                        value, value_len, test_str, depth + 1);
+                        value, value_len, test_str, depth + 1, NULL);
                 }
                 if (match)
                     break;

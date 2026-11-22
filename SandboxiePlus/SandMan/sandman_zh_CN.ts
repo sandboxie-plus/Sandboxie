@@ -1216,7 +1216,7 @@ Find String:</source>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3350,7 +3350,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="78"/>
         <location filename="Windows/OptionsNetwork.cpp" line="340"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
@@ -5026,7 +5026,7 @@ Changes already saved with OK will be kept.</source>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="622"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="644"/>
@@ -6570,10 +6570,6 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>多个沙盒使用了此别名。请从列表中选择一个沙盒，或输入其实际名称。未进行任何更改。</translation>
     </message>
     <message>
-        <source>Type the box name which you are going to set:</source>
-        <translation type="vanished">输入您希望设置的沙盒名称：</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="2103"/>
         <location filename="Windows/ShellBoxSelector.cpp" line="52"/>
         <location filename="Windows/ShellBoxSelector.cpp" line="89"/>
@@ -7349,7 +7345,7 @@ Error: %1</source>
         <location filename="SbieProcess.cpp" line="57"/>
         <location filename="SbieProcess.cpp" line="89"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="108"/>
@@ -9141,29 +9137,6 @@ Before sending you can review the logs in the main window.</oldsource>
         <location filename="Wizards/BoxAssistant.cpp" line="916"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
         <translation>如果您希望提交问题报告，请查看下面的报告并单击“完成”。</translation>
-    </message>
-    <message>
-        <source>Compressing Logs</source>
-        <translation type="vanished">正在压缩日志</translation>
-    </message>
-    <message>
-        <source>Compressing Dumps</source>
-        <translation type="vanished">正在压缩转储</translation>
-    </message>
-    <message>
-        <source>Submitting issue report...</source>
-        <translation type="vanished">提交问题报告……</translation>
-    </message>
-    <message>
-        <source>Failed to submit issue report, error %1
-Try submitting without the log attached.</source>
-        <translation type="vanished">提交问题报告失败，错误%1
-请尝试在不附加日志的情况下提交。</translation>
-    </message>
-    <message>
-        <source>Your issue report has been successfully submitted, thank you.</source>
-        <oldsource>Your issue report have been successfully submitted, thank you.</oldsource>
-        <translation type="vanished">您的问题报告已成功提交，感谢。</translation>
     </message>
 </context>
 <context>

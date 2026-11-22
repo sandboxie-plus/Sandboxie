@@ -8181,65 +8181,65 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3864"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3870"/>
         <source>Autocomplete Consent Required</source>
         <translation>نیاز به تأیید تکمیل خودکار</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3339"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3348"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3345"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3354"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3350"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(کپی)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3363"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation>نسخه‌ی Sandboxie-Plus: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="957"/>
+        <location filename="Windows/SettingsWindow.cpp" line="960"/>
         <source>Search for settings</source>
         <translation>جست‌وجو در تنظیمات</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1359"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1360"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1370"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1362"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1363"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1373"/>
         <source>Run &amp;Sandboxed</source>
         <translation>اجرا در &amp;سندباکس</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1856"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1862"/>
         <source>kilobytes (%1)</source>
         <translation>کیلوبایت (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1944"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1950"/>
         <source>Volume not attached</source>
         <translation>درایو متصل نشده است</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3426"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3432"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>این گواهی حامی منقضی شده است، لطفاً &lt;a href=&quot;%1&quot;&gt;یک گواهی به‌روزشده دریافت کنید&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3506"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3512"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;شما %1/%2 گواهی ارزیابی را استفاده کرده‌اید. امکان تولید گواهی رایگان دیگری وجود ندارد.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3508"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3514"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;یک گواهی ارزیابی رایگان دریافت کنید&lt;/a&gt; و به مدت %1 روز از همه‌ی امکانات ویژه بهره‌مند شوید.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3439"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3445"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>این گواهی حامی تا &lt;font color=&apos;red&apos;&gt;%1 روز دیگر منقضی می‌شود&lt;/font&gt;، لطفاً &lt;a href=&quot;%2&quot;&gt;یک گواهی به‌روزشده دریافت کنید&lt;/a&gt;.</translation>
@@ -8261,52 +8261,52 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>جمع کردن همه‌ی گروه‌ها</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3342"/>
         <source>Click to reveal</source>
         <translation>برای نمایش کلیک کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3337"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3343"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
         <translation>برای پنهان‌سازی کلیک کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3474"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3480"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>انقضا: %1 روز دیگر</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3478"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3484"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>؛ حامیان واجد شرایط Patreon همیشه می‌توانند &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;یک گواهی به‌روزشده دریافت کنند&lt;/a&gt; از xanasoft.com</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3490"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3496"/>
         <source>Options: %1</source>
         <translation>گزینه‌ها: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3493"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3499"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>جعبه‌های تقویت‌شده‌ی امنیت/حریم خصوصی و اپلیکیشن (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3493"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3494"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3495"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3496"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3499"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3500"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3501"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3502"/>
         <source>Enabled</source>
         <translation>فعال</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="379"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3493"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3494"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3495"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3496"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3499"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3500"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3501"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3502"/>
         <source>Disabled</source>
         <translation>غیرفعال</translation>
     </message>
@@ -8317,7 +8317,7 @@ Right-click to copy</oldsource>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="347"/>
-        <location filename="Windows/SettingsWindow.cpp" line="591"/>
+        <location filename="Windows/SettingsWindow.cpp" line="594"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
@@ -8377,7 +8377,7 @@ Right-click to copy</oldsource>
         <translation> (اصلی)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="592"/>
+        <location filename="Windows/SettingsWindow.cpp" line="595"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
         <translation>رفتار سه‌حالته: تیک‌نخورده = هرگز، نیمه‌تیک‌خورده = فقط هنگام نگه‌داشتن %1 (پیش‌فرض)، تیک‌خورده = همیشه.</translation>
     </message>
@@ -8397,148 +8397,148 @@ Right-click to copy</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2644"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2650"/>
         <source>Checking software compatibility...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3494"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3500"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>جعبه‌های رمزنگاری‌شده (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3495"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3501"/>
         <source>Network Interception (NetI): %1</source>
         <translation>رهگیری شبکه (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3496"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3502"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>دسکتاپ Sandboxie (Desk): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3527"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3533"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>این متن شبیه شماره‌ی سریال Sandboxie-Plus به نظر نمی‌رسد.&lt;br /&gt;اگر تلاش کرده‌اید UpdateKey یا امضای یک گواهی را وارد کنید، این کار درست نیست؛ در عوض کل گواهی را در کادر متنی بالا وارد کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3534"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3540"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>شما در حال تلاش برای استفاده از یک کلید ارتقای ویژگی (Upgrade-Key) هستید، بدون آنکه گواهی حامی از پیش موجودی وارد کرده باشید. لطفاً توجه داشته باشید که این نوع کلید (&lt;b&gt;همان‌طور که به‌صورت پررنگ در وب‌سایت ذکر شده است&lt;/b&gt;) به یک گواهی حامی معتبر از پیش موجود نیاز دارد؛ بدون آن بی‌فایده است.&lt;br /&gt;اگر می‌خواهید از ویژگی‌های پیشرفته استفاده کنید، باید هم یک گواهی استاندارد و هم کلید ارتقای ویژگی را برای باز کردن قابلیت‌های پیشرفته تهیه کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3546"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>شما در حال تلاش برای استفاده از یک کلید تمدید (Renew-Key) هستید، بدون آنکه گواهی حامی از پیش موجودی وارد کرده باشید. لطفاً توجه داشته باشید که این نوع کلید (&lt;b&gt;همان‌طور که به‌صورت پررنگ در وب‌سایت ذکر شده است&lt;/b&gt;) به یک گواهی حامی معتبر از پیش موجود نیاز دارد؛ بدون آن بی‌فایده است.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3545"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3551"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;اگر توضیحات محصول را نخوانده‌اید و این کلید را به اشتباه دریافت کرده‌اید، لطفاً برای رفع این مشکل از طریق ایمیل (که در وب‌سایت ما ارائه شده) با ما تماس بگیرید.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3576"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3582"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - دریافت گواهی ارزیابی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3576"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3582"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>لطفاً آدرس ایمیل خود را برای دریافت یک گواهی ارزیابی رایگان %1 روزه وارد کنید، که به نام %2 صادر شده و به سخت‌افزار فعلی قفل خواهد شد.
 شما می‌توانید تا %3 گواهی ارزیابی برای هر شناسه‌ی سخت‌افزاری یکتا درخواست کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3602"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3608"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>خطا در دریافت گواهی: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3602"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3608"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>خطای ناشناخته (احتمالاً یک مشکل شبکه)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3657"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3663"/>
         <source>Contributor</source>
         <translation>مشارکت‌کننده</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3659"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3665"/>
         <source>Eternal</source>
         <translation>همیشگی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3661"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3667"/>
         <source>Developer</source>
         <translation>توسعه‌دهنده</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3663"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3669"/>
         <source>Business</source>
         <translation>تجاری</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3665"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3671"/>
         <source>Personal</source>
         <translation>شخصی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3667"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3673"/>
         <source>Great Patreon</source>
         <translation>Patreon بزرگ</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3669"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3675"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3671"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3677"/>
         <source>Family</source>
         <translation>خانوادگی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3675"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3681"/>
         <source>Evaluation</source>
         <translation>ارزیابی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3677"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3683"/>
         <source>Type %1</source>
         <translation>نوع %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3707"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3713"/>
         <source>Advanced</source>
         <translation>پیشرفته</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3709"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3715"/>
         <source>Advanced (L)</source>
         <translation>پیشرفته (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3711"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3717"/>
         <source>Max Level</source>
         <translation>حداکثر سطح</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3713"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3719"/>
         <source>Level %1</source>
         <translation>سطح %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3866"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3872"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
         <translation>ویژگی تکمیل خودکار برای ادامه نیاز به رضایت شما دارد.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3868"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3874"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
@@ -8551,63 +8551,63 @@ Choose autocomplete mode:
 %1 هنگام تایپ: پیشنهادهای تکمیل خودکار هنگام تایپ کردن.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3876"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3882"/>
         <source>Manual</source>
         <translation>دستی</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3877"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3883"/>
         <source>Triggers autocomplete suggestions with %1.</source>
         <translation>پیشنهادهای تکمیل خودکار را با %1 فعال می‌کند.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3879"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3885"/>
         <source>While Typing</source>
         <translation>هنگام تایپ</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3880"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3886"/>
         <source>Triggers autocomplete suggestions while typing.</source>
         <translation>پیشنهادهای تکمیل خودکار را هنگام تایپ کردن فعال می‌کند.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3883"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3889"/>
         <source>Keeps autocomplete suggestions disabled.</source>
         <translation>پیشنهادهای تکمیل خودکار را غیرفعال نگه می‌دارد.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3882"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3888"/>
         <source>Cancel</source>
         <translation>لغو</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1972"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1978"/>
         <source>Supporter certificate required for access</source>
         <translation>برای دسترسی به گواهی حامی نیاز است</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1989"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1995"/>
         <source>Supporter certificate required for automation</source>
         <translation>برای اتوماسیون به گواهی حامی نیاز است</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3752"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3758"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>متأسفانه این گواهی برای نسخه‌ی فعلی معتبر نیست؛ باید یک گواهی جدید تهیه کنید یا به نسخه‌ی قدیمی‌تری بازگردید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3754"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3760"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>اگرچه این گواهی منقضی شده است، امکانات Plus برای نسخه‌ی نصب‌شده‌ی فعلی همچنان فعال باقی می‌مانند. با این حال، دیگر به خدمات Sandboxie-Live، از جمله به‌روزرسانی‌های سازگاری و پایگاه داده‌ی آنلاین عیب‌یابی، دسترسی نخواهید داشت.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3756"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3762"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>متأسفانه این گواهی منقضی شده است؛ باید یک گواهی جدید تهیه کنید.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1391"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1394"/>
         <source>Sandboxed Web Browser</source>
         <translation>مرورگر وب سندباکس‌شده</translation>
     </message>
@@ -8630,256 +8630,256 @@ Choose autocomplete mode:
         <translation>دانلود و نصب</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="648"/>
+        <location filename="Windows/SettingsWindow.cpp" line="651"/>
         <source>Browse for Program</source>
         <translation>مرور برای انتخاب برنامه</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="778"/>
+        <location filename="Windows/SettingsWindow.cpp" line="781"/>
         <source>Add %1 Template</source>
         <translation>افزودن قالب %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="633"/>
-        <location filename="Windows/SettingsWindow.cpp" line="826"/>
+        <location filename="Windows/SettingsWindow.cpp" line="636"/>
+        <location filename="Windows/SettingsWindow.cpp" line="829"/>
         <source>Select font</source>
         <translation>انتخاب قلم</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="635"/>
-        <location filename="Windows/SettingsWindow.cpp" line="828"/>
+        <location filename="Windows/SettingsWindow.cpp" line="638"/>
+        <location filename="Windows/SettingsWindow.cpp" line="831"/>
         <source>Reset font</source>
         <translation>بازنشانی قلم</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="975"/>
+        <location filename="Windows/SettingsWindow.cpp" line="978"/>
         <source>%0, %1 pt</source>
         <translation>%0، %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1240"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1243"/>
         <source>Please enter message</source>
         <translation>لطفاً پیام را وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1272"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1275"/>
         <source>Select Program</source>
         <translation>انتخاب برنامه</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1272"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1275"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>فایل‌های اجرایی (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1276"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1292"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1279"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1295"/>
         <source>Please enter a menu title</source>
         <translation>لطفاً یک عنوان منو وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1288"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1291"/>
         <source>Please enter a command</source>
         <translation>لطفاً یک دستور وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3431"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3437"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;امکانات Plus برای نسخه‌ی فعلی همچنان فعال باقی می‌مانند&lt;/font&gt;، اما دیگر به خدمات Sandboxie-Live، از جمله به‌روزرسانی‌های سازگاری و پایگاه داده‌ی آنلاین عیب‌یابی، دسترسی نخواهید داشت.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3509"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3515"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>می‌توانید یک گواهی ارزیابی رایگان %1 روزه را تا %2 بار برای هر شناسه‌ی سخت‌افزاری درخواست کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3429"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3435"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;امکانات Plus تا %1 روز دیگر غیرفعال خواهند شد.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3433"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3439"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;امکانات Plus دیگر فعال نیستند.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3476"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3482"/>
         <source>Expired: %1 days ago</source>
         <translation>منقضی‌شده: %1 روز پیش</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3560"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3588"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3817"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3566"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3594"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3823"/>
         <source>Retrieving certificate...</source>
         <translation>در حال دریافت گواهی...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3673"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3679"/>
         <source>Home</source>
         <translation>خانه</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2107"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2113"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>اجرا خارج از &amp;سندباکس</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2115"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2121"/>
         <source>Set Force in Sandbox</source>
         <translation>تنظیم اجبار در سندباکس</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2124"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2130"/>
         <source>Set Open Path in Sandbox</source>
         <translation>تنظیم مسیر باز در سندباکس</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3735"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3741"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>این متن شبیه یک گواهی به نظر نمی‌رسد. لطفاً کل گواهی را وارد کنید، نه فقط بخشی از آن را.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3760"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3766"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>گواهی ارزیابی با موفقیت اعمال شد. از دوره‌ی آزمایشی رایگان خود لذت ببرید!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3763"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3769"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>از شما بابت حمایت از توسعه‌ی Sandboxie-Plus سپاسگزاریم.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3765"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3771"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
 این یک گواهی موقت Patreon است که برای ۳ ماه اعتبار دارد. هنگامی که به زمان انقضا نزدیک شد، می‌توانید به‌صورت آنلاین گواهی جدیدی دریافت کنید که برای کل مدت اعتبار دارد.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3803"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3809"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>یک به‌روزرسانی امنیتی الزامی برای گواهی حامی Sandboxie-Plus شما لازم است. آیا می‌خواهید اکنون گواهی به‌روزشده را دانلود کنید؟</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3804"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3810"/>
         <source>Auto update in future</source>
         <translation>به‌روزرسانی خودکار در آینده</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2515"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2521"/>
         <source>Update Available</source>
         <translation>به‌روزرسانی موجود است</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2517"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2523"/>
         <source>Installed</source>
         <translation>نصب‌شده</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2522"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2528"/>
         <source>by %1</source>
         <translation>توسط %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2530"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2536"/>
         <source>(info website)</source>
         <translation>(وب‌سایت اطلاعات)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2558"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2564"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>این افزونه الزامی است و نمی‌توان آن را حذف کرد.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2567"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2849"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2573"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2855"/>
         <source>Select Directory</source>
         <translation>انتخاب پوشه</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2605"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;اکنون بررسی کنید&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2739"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2745"/>
         <source>Select Portable Box ini</source>
         <translation>انتخاب فایل ini جعبه‌ی پرتابل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2739"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2749"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2745"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2755"/>
         <source>Ini Files (*.ini)</source>
         <translation>فایل‌های Ini (*.ini)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2749"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2755"/>
         <source>Save new Portable Box ini</source>
         <translation>ذخیره‌ی فایل ini جدید جعبه‌ی پرتابل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2754"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2760"/>
         <source>File already exists, please select a different file name.</source>
         <translation>فایل از قبل وجود دارد؛ لطفاً نام فایل دیگری انتخاب کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2760"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2766"/>
         <source>Invalid box name</source>
         <translation>نام جعبه نامعتبر است</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2781"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2787"/>
         <source>Select Root Folder</source>
         <translation>انتخاب پوشه‌ی ریشه</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2809"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2815"/>
         <source>Please enter the new configuration password.</source>
         <translation>لطفاً گذرواژه‌ی جدید پیکربندی را وارد کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2813"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2819"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>لطفاً گذرواژه‌ی جدید پیکربندی را دوباره وارد کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2818"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2824"/>
         <source>Passwords did not match, please retry.</source>
         <translation>گذرواژه‌ها مطابقت نداشتند؛ لطفاً دوباره تلاش کنید.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2830"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2836"/>
         <source>Process</source>
         <translation>فرایند</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2830"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2836"/>
         <source>Folder</source>
         <translation>پوشه</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2840"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2846"/>
         <source>Please enter a program file name</source>
         <translation>لطفاً نام فایل برنامه را وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2908"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2914"/>
         <source>Please enter the template identifier</source>
         <translation>لطفاً شناسه‌ی قالب را وارد کنید</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2916"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2922"/>
         <source>Error: %1</source>
         <translation>خطا: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2948"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2954"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>آیا واقعاً می‌خواهید قالب(های) محلی انتخاب‌شده را حذف کنید؟</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3263"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3269"/>
         <source>%1 (Current)</source>
         <translation>%1 (فعلی)</translation>
     </message>

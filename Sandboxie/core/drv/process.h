@@ -40,6 +40,8 @@
 #define PROCESS_TERMINATED      ((PROCESS *) 0xFFFFFFFF)
 #endif
 
+#define IPC_SAM_BINDINGS_MAX    16
+
 
 //---------------------------------------------------------------------------
 // Structures and Types
@@ -204,6 +206,10 @@ struct _PROCESS {
     BOOLEAN ipc_open_sam_endpoint;
     BOOLEAN ipc_allowSpoolerPrintToFile;
     BOOLEAN ipc_openPrintSpooler;
+    // bindings of other interfaces than SAMR on \RPC Control\samss lpc,
+    // filled from index 0, each port object is referenced, see ipc_sam.c
+    void *ipc_sam_port[IPC_SAM_BINDINGS_MAX];
+    USHORT ipc_sam_binding[IPC_SAM_BINDINGS_MAX];
 
     // gui-related
 

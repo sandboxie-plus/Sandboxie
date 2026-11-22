@@ -1668,6 +1668,8 @@ _FX void Process_Delete(HANDLE ProcessId)
 
             Key_UnmountHive(proc);
 
+            Ipc_Sam_ReleaseProcess(proc);
+
             if (proc->file_lock)
                 Mem_FreeLockResource(&proc->file_lock);
             if (proc->key_lock)

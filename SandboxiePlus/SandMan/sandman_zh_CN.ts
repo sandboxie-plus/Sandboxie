@@ -2517,7 +2517,7 @@ Warning: at least one of these is not a setting Sandboxie recognises. Unknown se
     <message>
         <location filename="Mcp/McpServer.cpp" line="299"/>
         <source>Refused: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Refused: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="307"/>
@@ -2527,12 +2527,12 @@ Warning: at least one of these is not a setting Sandboxie recognises. Unknown se
     <message>
         <location filename="Mcp/McpServer.cpp" line="308"/>
         <source>Origin not allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>Origin not allowed</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="315"/>
         <source>The MCP endpoint accepts POST only</source>
-        <translation type="unfinished"></translation>
+        <translation>The MCP endpoint accepts POST only</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="344"/>
@@ -2552,17 +2552,17 @@ Warning: at least one of these is not a setting Sandboxie recognises. Unknown se
     <message>
         <location filename="Mcp/McpServer.cpp" line="467"/>
         <source>Your write-up is now out of date - this is not in it. Call report_compose again so that what the user is offered describes what you have actually done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Your write-up is now out of date - this is not in it. Call report_compose again so that what the user is offered describes what you have actually done.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="469"/>
         <source>You have changed something on this machine and nothing is written up yet. Call report_compose now, with what you know so far - the symptom and what you have ruled out is already worth having - and again as you learn more. The user is offered whatever you composed last, and they may close the agent window at any moment.</source>
-        <translation type="unfinished"></translation>
+        <translation>You have changed something on this machine and nothing is written up yet. Call report_compose now, with what you know so far - the symptom and what you have ruled out is already worth having - and again as you learn more. The user is offered whatever you composed last, and they may close the agent window at any moment.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="492"/>
         <source>Method not found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Method not found: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="529"/>
@@ -2611,27 +2611,71 @@ Compose on a success as readily as on a failure. A failure report tells the proj
 You do not send it - that is the user&apos;s, and you have no tool for it. When you are done, tell them to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: it opens your report for them to read, correct and send to the project&apos;s own tracker, which needs no account of any kind. Say once that sending it is worth doing and why, then leave it with them - they may say no, and that is a normal answer.
 
 Fill in what you ruled out, not only what you concluded. A cause is made identifiable by what it is not, and that is the field that turns one report into something that recognises the same fault on somebody else&apos;s machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>This server exposes the local Sandboxie-Plus installation on this machine.
+
+You can read the documentation and the settings schema straight away - those tools need no authorisation, because they return what Sandboxie ships rather than anything about this machine.
+
+To look at the machine itself - which sandboxes exist, what is running, what was denied - authorise first. Call &apos;pair&apos; with no arguments, and Sandboxie-Plus shows the user a six-digit code; ask the user for that code and call &apos;pair&apos; again with it. Do not guess the code.
+
+Every tool is listed from the start, including the ones you cannot use yet: those refuse until you have paired, and say so when they do. Nothing appears or disappears from the list, so there is no need to refresh it - and no point asking the user to reconnect.
+
+One standing rule, and it is not optional: keep a written report going at all times, with report_compose. Compose one as soon as you have a symptom and a suspicion - before you have a cause, let alone a fix - and compose again after every single thing you change, run or rule out. It replaces the previous one, so there is no cost to doing it often and no partial state to manage.
+
+And find out whether it worked. When the user tells you their problem is gone - or that it is not - compose again with confirmed_by_user set, which records that the verdict is theirs rather than yours. If they have not said, ask: &apos;is it working now?&apos; is worth one turn, and it is the single most valuable line in the report. Until that flag is set Sandboxie-Plus assumes the run is unfinished: it shows the user buttons to end it themselves, and asks them the question itself before anything is sent.
+
+Treat it as part of the work rather than as paperwork at the end. Sandboxie-Plus keeps your latest write-up and offers it to the user when they close the agent window, which they may do at any moment - and if you have composed nothing, nothing is offered and everything you worked out is lost to the project. Finishing a run having fixed something and written nothing up is a failed run, however pleased the user is.
+
+Then read before acting: sandboxie_version first, because settings and fixes differ between builds, then box_list, then box_get_config for the box in question. Note that box_get_config shows only what is set on that box - values inherited from templates and global defaults are not listed, so an absent setting is not necessarily inactive.
+
+Two separate sources of truth about settings, and they disagree about most of the surface. config_schema is the authority on whether a setting exists, what its syntax is, and which version added or removed it. The bundled documentation (docs_search, docs_get, docs_for_setting) explains what a setting means, but covers only about two in five of them. If the documentation says nothing about a setting, that is not evidence the setting does not exist - check config_schema before telling the user it is not real. Conversely, never invent a setting name: the driver ignores an unknown name silently instead of reporting an error, so a typo looks exactly like a setting that had no effect.
+
+When something does not work in a sandbox, the order that pays off is: box_processes to see whether it is even running, box_diagnostics for what Sandboxie itself objected to, then trace_query filtered to that box for the accesses that were denied. If tracing is off, trace_query says so - ask the user box_processes to see whether it is even running, then log_query for what Sandboxie itself reported, then trace_query filtered to that box for the accesses that were denied. If tracing is off, trace_query says so - ask the user to enable it and reproduce the problem rather than reasoning from an empty trace.
+
+Boxes usually have an alias, and that is what the user calls them. Refer to a box the way box_list shows in displayName; either the name or the alias is accepted as input.
+
+Paths and account names in diagnostic output are replaced with tokens such as %User% and %Computer%. That is deliberate - do not ask the user to undo it, and do not treat a token as a literal path.
+
+Some tools change things, and every one of them shows the user exactly what will change and waits for them to approve it. You cannot change anything silently, so do not try to minimise what you are asking for - a clear explanation gets approved and a vague one does not.
+
+For a fix you are unsure about, test it first: shadow_begin clones the configuration to a disposable copy that shares the real file set, shadow_set changes the copy, and then shadow_commit copies the differences back - one confirmation for the whole fix - or shadow_discard throws it away. A fix you have actually tried is worth far more than one you believe in. Note that only configuration is disposable: files written while testing land in the real sandbox, and a discard does not undo them.
+
+For a change you are confident about, or an everyday request such as forcing a program into a sandbox, use box_apply_changes directly. Run config_validate first either way.
+
+If you are about to change files rather than settings, offer snapshot_create first - it is near-instant and makes the change undoable - but it only works while nothing is running in the sandbox, so it has to come before you start anything.
+
+To see whether a fix actually worked, box_run starts a program inside a sandbox. The user is shown the command line exactly as you write it and has to agree before anything runs, so write what you mean. Note that it runs against the sandbox&apos;s current settings: a change staged with shadow_set is not in effect, so commit it first if the run is meant to test it.
+
+Nothing here deletes a sandbox or its contents, deliberately.
+
+Keep a running write-up as you go, with report_compose, rather than saving it for the end. Compose as soon as you know something worth reporting - the symptom and what you have ruled out is already worth having - and compose again whenever you learn more. Each call replaces the last.
+
+The reason is not bookkeeping. Sandboxie-Plus keeps your latest write-up and offers it to the user when they close the agent window, which they may do at any moment - your console closing does not wait for you to finish a thought. If you have composed nothing, nothing is offered and the whole run is lost to the project. A rough write-up that gets sent beats a polished one that never existed.
+
+Compose on a success as readily as on a failure. A failure report tells the project what is still broken; a success report tells it what the fix was, and that is the one it almost never receives.
+
+You do not send it - that is the user&apos;s, and you have no tool for it. When you are done, tell them to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: it opens your report for them to read, correct and send to the project&apos;s own tracker, which needs no account of any kind. Say once that sending it is worth doing and why, then leave it with them - they may say no, and that is a normal answer.
+
+Fill in what you ruled out, not only what you concluded. A cause is made identifiable by what it is not, and that is the field that turns one report into something that recognises the same fault on somebody else&apos;s machine.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="788"/>
         <source>That needs authorisation: it reads this machine rather than the documentation. Call the pair tool, read the code Sandboxie-Plus displays to the user, and submit it. The documentation and schema tools work without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>That needs authorisation: it reads this machine rather than the documentation. Call the pair tool, read the code Sandboxie-Plus displays to the user, and submit it. The documentation and schema tools work without it.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="807"/>
         <source>Unknown tool: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Unknown tool: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="817"/>
         <source>This connection is already authorised.</source>
-        <translation type="unfinished"></translation>
+        <translation>This connection is already authorised.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="825"/>
         <source>Sandboxie-Plus is now showing a six-digit code. Ask the user to read it to you, then call pair again with that code. It is valid for five minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus is now showing a six-digit code. Ask the user to read it to you, then call pair again with that code. It is valid for five minutes.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="835"/>
@@ -2646,27 +2690,27 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
     <message>
         <location filename="Mcp/McpServer.cpp" line="843"/>
         <source>Authorised. Every tool you can see will now answer, including the ones that were refusing. Changes still need the user to confirm them one at a time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Authorised. Every tool you can see will now answer, including the ones that were refusing. Changes still need the user to confirm them one at a time.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="848"/>
         <source>No code has been requested. Call pair with no arguments first.</source>
-        <translation type="unfinished"></translation>
+        <translation>No code has been requested. Call pair with no arguments first.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="852"/>
         <source>That code has expired. Call pair with no arguments to request a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>That code has expired. Call pair with no arguments to request a new one.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="856"/>
         <source>Too many incorrect attempts; the code has been invalidated. Call pair with no arguments to request a new one, and ask the user to read it again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Too many incorrect attempts; the code has been invalidated. Call pair with no arguments to request a new one, and ask the user to read it again.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="861"/>
         <source>That code is not correct. Ask the user to read it again from the Sandboxie-Plus window.</source>
-        <translation type="unfinished"></translation>
+        <translation>That code is not correct. Ask the user to read it again from the Sandboxie-Plus window.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="906"/>
@@ -12595,107 +12639,107 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
     <message>
         <location filename="Mcp/McpDocs.cpp" line="151"/>
         <source>the documentation pack is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>the documentation pack is not available</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="159"/>
         <source>&apos;%1&apos; is not a page in the documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; is not a page in the documentation</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="165"/>
         <source>&apos;%1&apos; could not be read from the pack</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; could not be read from the pack</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="301"/>
         <source>message SBIE%1 was seen</source>
-        <translation type="unfinished"></translation>
+        <translation>message SBIE%1 was seen</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="313"/>
         <source>a blocked resource matched %1</source>
-        <translation type="unfinished"></translation>
+        <translation>a blocked resource matched %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="330"/>
         <source>%1 is not set on the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is not set on the sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="339"/>
         <source>%1 is set on the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is set on the sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="63"/>
         <source>The &apos;changes&apos; argument must be a non-empty array of {setting, value} objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>The &apos;changes&apos; argument must be a non-empty array of {setting, value} objects.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="69"/>
         <source>That is %1 changes at once. Propose at most 50, so the user can actually read what they are agreeing to.</source>
-        <translation type="unfinished"></translation>
+        <translation>That is %1 changes at once. Propose at most 50, so the user can actually read what they are agreeing to.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="79"/>
         <source>Every entry in &apos;changes&apos; needs a &apos;setting&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Every entry in &apos;changes&apos; needs a &apos;setting&apos;.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="85"/>
         <source>&apos;%1&apos; is not a usable setting name.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; is not a usable setting name.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="91"/>
         <source>The value for &apos;%1&apos; contains a line break, which cannot be stored in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>The value for &apos;%1&apos; contains a line break, which cannot be stored in Sandboxie.ini.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="119"/>
         <source>Changes cannot be confirmed right now, so nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Changes cannot be confirmed right now, so nothing was changed.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="125"/>
         <source>A confirmation is already waiting for the user. Nothing was changed - wait for them to answer the previous request before asking again.</source>
-        <translation type="unfinished"></translation>
+        <translation>A confirmation is already waiting for the user. Nothing was changed - wait for them to answer the previous request before asking again.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="174"/>
         <source>Name or alias of the sandbox to run in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name or alias of the sandbox to run in.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="178"/>
         <source>The command line to start, exactly as it should run. Quote paths containing spaces. It has to be a single plain line - a command carrying line breaks is refused, because the user must be able to read what they are approving as one command.</source>
-        <translation type="unfinished"></translation>
+        <translation>The command line to start, exactly as it should run. Quote paths containing spaces. It has to be a single plain line - a command carrying line breaks is refused, because the user must be able to read what they are approving as one command.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="185"/>
         <source>Working directory for the program. Optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>Working directory for the program. Optional.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="189"/>
         <source>Why this needs to run, in one sentence. Shown to the user as your words, next to the command. A request with no reason given is a harder one to agree to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Why this needs to run, in one sentence. Shown to the user as your words, next to the command. A request with no reason given is a harder one to agree to.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="214"/>
         <source>The Sandboxie.ini setting name. Check it with config_schema first.</source>
-        <translation type="unfinished"></translation>
+        <translation>The Sandboxie.ini setting name. Check it with config_schema first.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="218"/>
         <source>The value to set. Omit or leave empty to remove the setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>The value to set. Omit or leave empty to remove the setting.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="230"/>
         <source>The changes, at most 50.</source>
-        <translation type="unfinished"></translation>
+        <translation>The changes, at most 50.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="235"/>
@@ -12705,122 +12749,126 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
         <location filename="Mcp/McpTools.cpp" line="316"/>
         <location filename="Mcp/McpTools.cpp" line="324"/>
         <source>Name or alias of the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name or alias of the sandbox.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="248"/>
         <source>Why these changes should help. Shown to the user verbatim when they are asked to approve, so write it for them and not for yourself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Why these changes should help. Shown to the user verbatim when they are asked to approve, so write it for them and not for yourself.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="265"/>
         <source>Check a change set before proposing it</source>
-        <translation type="unfinished"></translation>
+        <translation>Check a change set before proposing it</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="266"/>
         <source>Checks proposed settings against what Sandboxie actually accepts, without changing anything and without asking the user. Always call this before box_apply_changes: an unknown setting name is ignored silently by the driver, so a typo produces a change that appears to work and does nothing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Checks proposed settings against what Sandboxie actually accepts, without changing anything and without asking the user. Always call this before box_apply_changes: an unknown setting name is ignored silently by the driver, so a typo produces a change that appears to work and does nothing.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="272"/>
         <source>Change sandbox settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Change sandbox settings</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="273"/>
         <source>Proposes configuration changes to one sandbox. The user is shown a diff of current against proposed values and must approve it; nothing is written if they decline. Use this for a fix you are confident about, and for everyday requests such as adding a forced program.
 
 If you want to test a fix before asking the user to accept it, use shadow_begin instead - that lets you try it against a disposable copy of the configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proposes configuration changes to one sandbox. The user is shown a diff of current against proposed values and must approve it; nothing is written if they decline. Use this for a fix you are confident about, and for everyday requests such as adding a forced program.
+
+If you want to test a fix before asking the user to accept it, use shadow_begin instead - that lets you try it against a disposable copy of the configuration.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="282"/>
         <source>Start testing a fix</source>
-        <translation type="unfinished"></translation>
+        <translation>Start testing a fix</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="283"/>
         <source>Clones a sandbox configuration to a disposable copy that shares the real file set, so a fix can be tried without touching the sandbox. Returns the name of the copy; change it with shadow_set, then either shadow_commit to copy the differences back - which asks the user once - or shadow_discard to throw them away.
 
 Note what is shared: files written while testing land in the real sandbox and a discard does not undo them. Only configuration is disposable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clones a sandbox configuration to a disposable copy that shares the real file set, so a fix can be tried without touching the sandbox. Returns the name of the copy; change it with shadow_set, then either shadow_commit to copy the differences back - which asks the user once - or shadow_discard to throw them away.
+
+Note what is shared: files written while testing land in the real sandbox and a discard does not undo them. Only configuration is disposable.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="290"/>
         <source>Name or alias of the sandbox to test against.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name or alias of the sandbox to test against.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="292"/>
         <source>Change a setting in the test copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Change a setting in the test copy</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="293"/>
         <source>Applies changes to the disposable copy. No confirmation is needed because nothing real is affected yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Applies changes to the disposable copy. No confirmation is needed because nothing real is affected yet.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="297"/>
         <source>Keep the tested fix</source>
-        <translation type="unfinished"></translation>
+        <translation>Keep the tested fix</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="298"/>
         <source>Copies the differences from the test copy back onto the real sandbox, after showing the user what they are. This is the one confirmation on the troubleshooting path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copies the differences from the test copy back onto the real sandbox, after showing the user what they are. This is the one confirmation on the troubleshooting path.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="301"/>
         <location filename="Mcp/McpOperate.cpp" line="306"/>
         <source>Name or alias of the sandbox being tested.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name or alias of the sandbox being tested.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="303"/>
         <source>Abandon the tested fix</source>
-        <translation type="unfinished"></translation>
+        <translation>Abandon the tested fix</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="304"/>
         <source>Deletes the test copy. Nothing to roll back, because the real sandbox was never changed. Call this when a hypothesis turns out to be wrong.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deletes the test copy. Nothing to roll back, because the real sandbox was never changed. Call this when a hypothesis turns out to be wrong.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="308"/>
         <source>Take a rollback point</source>
-        <translation type="unfinished"></translation>
+        <translation>Take a rollback point</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="309"/>
         <source>Takes a snapshot of a sandbox so file and registry changes can be undone later. Near-instant regardless of sandbox size, but it refuses while anything is running in the box - so take it before starting anything. Not offered for empty sandboxes or RAM-disk sandboxes, where it would be meaningless.</source>
-        <translation type="unfinished"></translation>
+        <translation>Takes a snapshot of a sandbox so file and registry changes can be undone later. Near-instant regardless of sandbox size, but it refuses while anything is running in the box - so take it before starting anything. Not offered for empty sandboxes or RAM-disk sandboxes, where it would be meaningless.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="315"/>
         <source>Roll a sandbox back</source>
-        <translation type="unfinished"></translation>
+        <translation>Roll a sandbox back</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="316"/>
         <source>Reverts a sandbox to a snapshot, discarding file and registry changes made since. Terminates whatever is running in the box first, because the operation requires it. This throws work away and cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reverts a sandbox to a snapshot, discarding file and registry changes made since. Terminates whatever is running in the box first, because the operation requires it. This throws work away and cannot be undone.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="321"/>
         <source>Stop everything in a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop everything in a sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="322"/>
         <source>Terminates all processes in a sandbox. Unsaved work in those programs is lost, which is why the user is asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminates all processes in a sandbox. Unsaved work in those programs is lost, which is why the user is asked.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="326"/>
         <source>Run a program inside a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Run a program inside a sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="327"/>
@@ -12829,22 +12877,26 @@ Note what is shared: files written while testing land in the real sandbox and a 
 This is how a fix gets tested rather than described - start the program that was failing, then read trace_query and box_diagnostics to see whether it still fails. failing, then read trace_query to see whether it still fails. The call returns as soon as the program has started: it does not wait for it to exit and captures no output, so get the pid from box_processes.
 
 The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with shadow_set is not in effect here - a test copy shares the real sandbox&apos;s file root, so a program started against it runs in the real sandbox with the real settings. To test a configuration change by running something, apply it first with shadow_commit, or write it directly with box_apply_changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Starts a command inside a sandbox, at the privileges Sandboxie-Plus itself has - never elevated. The user is shown the command line exactly as given and has to confirm it before anything runs, so write the command you actually mean: it is not summarised or rewritten.
+
+This is how a fix gets tested rather than described - start the program that was failing, then read trace_query and box_diagnostics to see whether it still fails. failing, then read trace_query to see whether it still fails. The call returns as soon as the program has started: it does not wait for it to exit and captures no output, so get the pid from box_processes.
+
+The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with shadow_set is not in effect here - a test copy shares the real sandbox&apos;s file root, so a program started against it runs in the real sandbox with the real settings. To test a configuration change by running something, apply it first with shadow_commit, or write it directly with box_apply_changes.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="346"/>
         <source>Create a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Create a sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="347"/>
         <source>Creates a new, empty sandbox with default settings. The user is asked first. Settings can then be applied with box_apply_changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Creates a new, empty sandbox with default settings. The user is asked first. Settings can then be applied with box_apply_changes.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="349"/>
         <source>Name for the new sandbox. Letters, digits and underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name for the new sandbox. Letters, digits and underscores.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="374"/>
@@ -12861,7 +12913,7 @@ The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with
         <location filename="Mcp/McpReport.cpp" line="619"/>
         <location filename="Mcp/McpTools.cpp" line="1257"/>
         <source>No sandbox called &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>No sandbox called &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="399"/>
@@ -12900,7 +12952,7 @@ The settings reference could not be loaded, so none of this was verified.
     <message>
         <location filename="Mcp/McpOperate.cpp" line="445"/>
         <source>The user declined, so nothing was changed. Do not ask again with the same change set - explain what you wanted to do and why, and let them decide.</source>
-        <translation type="unfinished"></translation>
+        <translation>The user declined, so nothing was changed. Do not ask again with the same change set - explain what you wanted to do and why, and let them decide.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="473"/>
@@ -12921,7 +12973,7 @@ These could not be written: %1</source>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="516"/>
         <source>The test copy could not be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>The test copy could not be created.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="522"/>
@@ -12931,18 +12983,18 @@ These could not be written: %1</source>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="542"/>
         <source>There is no test copy for &apos;%1&apos; yet. Call shadow_begin first.</source>
-        <translation type="unfinished"></translation>
+        <translation>There is no test copy for &apos;%1&apos; yet. Call shadow_begin first.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="547"/>
         <location filename="Mcp/McpOperate.cpp" line="568"/>
         <source>The test copy %1 has gone.</source>
-        <translation type="unfinished"></translation>
+        <translation>The test copy %1 has gone.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="563"/>
         <source>There is no test copy for &apos;%1&apos;. Nothing to keep.</source>
-        <translation type="unfinished"></translation>
+        <translation>There is no test copy for &apos;%1&apos;. Nothing to keep.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="636"/>
@@ -12957,12 +13009,12 @@ These could not be written: %1</source>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="651"/>
         <source>The user declined. The test copy is still there, and %1 is unchanged - call shadow_discard to clean up.</source>
-        <translation type="unfinished"></translation>
+        <translation>The user declined. The test copy is still there, and %1 is unchanged - call shadow_discard to clean up.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="658"/>
         <source>The changes could not be copied back.</source>
-        <translation type="unfinished"></translation>
+        <translation>The changes could not be copied back.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="663"/>
@@ -12982,17 +13034,17 @@ These could not be written: %1</source>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="697"/>
         <source>&apos;%1&apos; holds no content, so there is nothing to snapshot. Note that an encrypted or image-backed sandbox also looks empty while it is not mounted - if this one is, it has to be opened first.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; holds no content, so there is nothing to snapshot. Note that an encrypted or image-backed sandbox also looks empty while it is not mounted - if this one is, it has to be opened first.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="702"/>
         <source>&apos;%1&apos; is a RAM-disk sandbox: its contents are discarded when it is unmounted or the machine restarts, so a snapshot would protect nothing.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; is a RAM-disk sandbox: its contents are discarded when it is unmounted or the machine restarts, so a snapshot would protect nothing.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="706"/>
         <source>Something is still running in &apos;%1&apos;. Snapshots require the sandbox to be idle - ask the user to close its programs, or use box_terminate, and then try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Something is still running in &apos;%1&apos;. Snapshots require the sandbox to be idle - ask the user to close its programs, or use box_terminate, and then try again.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="713"/>
@@ -13014,7 +13066,7 @@ This is quick and does not copy the sandbox. It does mean the sandbox cannot shr
     <message>
         <location filename="Mcp/McpOperate.cpp" line="718"/>
         <source>The user declined; no snapshot was taken.</source>
-        <translation type="unfinished"></translation>
+        <translation>The user declined; no snapshot was taken.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="721"/>
@@ -13029,7 +13081,7 @@ This is quick and does not copy the sandbox. It does mean the sandbox cannot shr
     <message>
         <location filename="Mcp/McpOperate.cpp" line="724"/>
         <source>The snapshot failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>The snapshot failed: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="733"/>
@@ -13039,7 +13091,7 @@ This is quick and does not copy the sandbox. It does mean the sandbox cannot shr
     <message>
         <location filename="Mcp/McpOperate.cpp" line="747"/>
         <source>&apos;%1&apos; has no snapshot to roll back to.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; has no snapshot to roll back to.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="754"/>
@@ -13068,12 +13120,12 @@ Every file and registry change made in the sandbox since the snapshot will be di
     <message>
         <location filename="Mcp/McpOperate.cpp" line="766"/>
         <source>The user declined; nothing was rolled back.</source>
-        <translation type="unfinished"></translation>
+        <translation>The user declined; nothing was rolled back.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="772"/>
         <source>The sandbox could not be stopped, so nothing was rolled back: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>The sandbox could not be stopped, so nothing was rolled back: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="778"/>
@@ -13083,7 +13135,7 @@ Every file and registry change made in the sandbox since the snapshot will be di
     <message>
         <location filename="Mcp/McpOperate.cpp" line="780"/>
         <source>The rollback failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>The rollback failed: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="786"/>
@@ -13115,12 +13167,12 @@ Unsaved work in them will be lost.</source>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="807"/>
         <source>The user declined; nothing was terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>The user declined; nothing was terminated.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="812"/>
         <source>Terminating failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminating failed: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="814"/>
@@ -13133,17 +13185,17 @@ Unsaved work in them will be lost.</source>
         <location filename="Mcp/McpTools.cpp" line="843"/>
         <location filename="Mcp/McpTools.cpp" line="906"/>
         <source>The &apos;box&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>The &apos;box&apos; argument is required.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="826"/>
         <source>&apos;%1&apos; is not a usable sandbox name. Use letters, digits and underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; is not a usable sandbox name. Use letters, digits and underscores.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="830"/>
         <source>A sandbox called &apos;%1&apos; already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>A sandbox called &apos;%1&apos; already exists.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="835"/>
@@ -13163,12 +13215,12 @@ Unsaved work in them will be lost.</source>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="838"/>
         <source>The user declined; no sandbox was created.</source>
-        <translation type="unfinished"></translation>
+        <translation>The user declined; no sandbox was created.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="843"/>
         <source>The sandbox could not be created: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>The sandbox could not be created: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="848"/>
@@ -13178,27 +13230,27 @@ Unsaved work in them will be lost.</source>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="876"/>
         <source>The &apos;command&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>The &apos;command&apos; argument is required.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="880"/>
         <source>That command line is %1 characters, and the confirmation can only honestly show up to %2. Write a shorter command, or put the work in a script file and run that.</source>
-        <translation type="unfinished"></translation>
+        <translation>That command line is %1 characters, and the confirmation can only honestly show up to %2. Write a shorter command, or put the work in a script file and run that.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="887"/>
         <source>That command line contains a line break or a control character. It has to be a single plain line, because the user is shown it as one and has to be able to read exactly what they are approving.</source>
-        <translation type="unfinished"></translation>
+        <translation>That command line contains a line break or a control character. It has to be a single plain line, because the user is shown it as one and has to be able to read exactly what they are approving.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="893"/>
         <source>The working directory has to be a single line.</source>
-        <translation type="unfinished"></translation>
+        <translation>The working directory has to be a single line.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="911"/>
         <source>&apos;%1&apos; is a test copy, which is a copy of a sandbox&apos;s configuration and not a sandbox a program can run in - it shares the real sandbox&apos;s files, so anything started against it would run in the real sandbox with the real settings. Apply the change with shadow_commit first, then run against the sandbox itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; is a test copy, which is a copy of a sandbox&apos;s configuration and not a sandbox a program can run in - it shares the real sandbox&apos;s files, so anything started against it would run in the real sandbox with the real settings. Apply the change with shadow_commit first, then run against the sandbox itself.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="927"/>
@@ -13243,12 +13295,12 @@ It runs sandboxed and with your normal privileges, not as administrator - but th
     <message>
         <location filename="Mcp/McpOperate.cpp" line="937"/>
         <source>The user declined; nothing was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>The user declined; nothing was started.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="944"/>
         <source>The program could not be started: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>The program could not be started: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="957"/>
@@ -13258,14 +13310,14 @@ It runs sandboxed and with your normal privileges, not as administrator - but th
     <message>
         <location filename="Mcp/McpOperate.cpp" line="972"/>
         <source>Sandboxie is not running, so nothing can be changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie is not running, so nothing can be changed.</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="987"/>
         <location filename="Mcp/McpReport.cpp" line="685"/>
         <location filename="Mcp/McpTools.cpp" line="1358"/>
         <source>Tool &apos;%1&apos; is not implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool &apos;%1&apos; is not implemented.</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="14"/>
@@ -13290,162 +13342,162 @@ It runs sandboxed and with your normal privileges, not as administrator - but th
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="111"/>
         <source>malformed JSON: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>malformed JSON: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="117"/>
         <source>message is not a JSON object</source>
-        <translation type="unfinished"></translation>
+        <translation>message is not a JSON object</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="126"/>
         <source>missing or wrong jsonrpc version</source>
-        <translation type="unfinished"></translation>
+        <translation>missing or wrong jsonrpc version</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="132"/>
         <source>no method</source>
-        <translation type="unfinished"></translation>
+        <translation>no method</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="183"/>
         <source>missing MCP-Protocol-Version header</source>
-        <translation type="unfinished"></translation>
+        <translation>missing MCP-Protocol-Version header</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="187"/>
         <source>MCP-Protocol-Version header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP-Protocol-Version header &apos;%1&apos; does not match body value &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="192"/>
         <source>missing Mcp-Method header</source>
-        <translation type="unfinished"></translation>
+        <translation>missing Mcp-Method header</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="196"/>
         <source>Mcp-Method header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Mcp-Method header &apos;%1&apos; does not match body value &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="203"/>
         <source>missing Mcp-Name header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>missing Mcp-Name header for %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="210"/>
         <source>Mcp-Name header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Mcp-Name header &apos;%1&apos; does not match body value &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="257"/>
         <source>Unsupported protocol version</source>
-        <translation type="unfinished"></translation>
+        <translation>Unsupported protocol version</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="42"/>
         <source>Reporting is unavailable because there is no way to ask the user, and nothing is sent without being asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reporting is unavailable because there is no way to ask the user, and nothing is sent without being asked.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="49"/>
         <source>A confirmation is already waiting for the user. Nothing was sent - wait for them to answer the previous request before asking again.</source>
-        <translation type="unfinished"></translation>
+        <translation>A confirmation is already waiting for the user. Nothing was sent - wait for them to answer the previous request before asking again.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="205"/>
         <source>an unidentified agent</source>
-        <translation type="unfinished"></translation>
+        <translation>an unidentified agent</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="311"/>
         <source>One of: fixed, partly_fixed, not_fixed. Report a success as readily as a failure - a run that found a cause and applied a working fix is the material the knowledge base is made of, and the project currently never sees one.</source>
-        <translation type="unfinished"></translation>
+        <translation>One of: fixed, partly_fixed, not_fixed. Report a success as readily as a failure - a run that found a cause and applied a working fix is the material the knowledge base is made of, and the project currently never sees one.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="322"/>
         <source>Name or alias of the sandbox the run was about. Optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name or alias of the sandbox the run was about. Optional.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="324"/>
         <source>One line naming the problem, as an issue title would.</source>
-        <translation type="unfinished"></translation>
+        <translation>One line naming the problem, as an issue title would.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="325"/>
         <source>What you found and why you think it was the cause. Written as your own account - it is labelled as model output in the report and a maintainer will read it as such.</source>
-        <translation type="unfinished"></translation>
+        <translation>What you found and why you think it was the cause. Written as your own account - it is labelled as model output in the report and a maintainer will read it as such.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="328"/>
         <source>What you did, one step per entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>What you did, one step per entry.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="329"/>
         <source>The settings you changed, as &apos;Setting=Value&apos; lines. These become the ini_changes block of the draft knowledge-base entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>The settings you changed, as &apos;Setting=Value&apos; lines. These become the ini_changes block of the draft knowledge-base entry.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="332"/>
         <source>How you established the result - what you ran, what you read afterwards. A fix nobody verified is a guess.</source>
-        <translation type="unfinished"></translation>
+        <translation>How you established the result - what you ran, what you read afterwards. A fix nobody verified is a guess.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="335"/>
         <source>Hypotheses you ruled out, and what ruled them out. Please fill this in: what a cause is NOT is what makes a knowledge-base entry discriminate instead of merely sounding right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hypotheses you ruled out, and what ruled them out. Please fill this in: what a cause is NOT is what makes a knowledge-base entry discriminate instead of merely sounding right.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="338"/>
         <source>Set this only when the user has told you whether their problem is gone - not when you believe it is. Ask them: &apos;is it working now?&apos; is a question worth one turn. Until this is set, Sandboxie-Plus asks the user itself before the report is sent, and the report says plainly that the outcome is your assessment rather than theirs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Set this only when the user has told you whether their problem is gone - not when you believe it is. Ask them: &apos;is it working now?&apos; is a question worth one turn. Until this is set, Sandboxie-Plus asks the user itself before the report is sent, and the report says plainly that the outcome is your assessment rather than theirs.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="340"/>
         <source>Ask to attach the whole Sandboxie.ini. Off unless the problem is about configuration the box section does not show; it carries every sandbox the user has.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ask to attach the whole Sandboxie.ini. Off unless the problem is about configuration the box section does not show; it carries every sandbox the user has.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="343"/>
         <source>Ask to attach the resource trace as well as the message log. Large, and detailed about everything running on the machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ask to attach the resource trace as well as the message log. Large, and detailed about everything running on the machine.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="362"/>
         <source>Issue title.</source>
-        <translation type="unfinished"></translation>
+        <translation>Issue title.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="363"/>
         <source>Issue body, Markdown. Leave empty to use the composed report, which is the better choice: it is the text the user has already read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Issue body, Markdown. Leave empty to use the composed report, which is the better choice: it is the text the user has already read.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="366"/>
         <source>Label names to suggest. The user can change them.</source>
-        <translation type="unfinished"></translation>
+        <translation>Label names to suggest. The user can change them.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="381"/>
         <source>Name or alias of the sandbox the workaround is for.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name or alias of the sandbox the workaround is for.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="382"/>
         <source>The settings, as &apos;Setting=Value&apos; lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>The settings, as &apos;Setting=Value&apos; lines.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="383"/>
         <source>What the workaround does and what it costs, in plain words.</source>
-        <translation type="unfinished"></translation>
+        <translation>What the workaround does and what it costs, in plain words.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="400"/>
         <source>Write up what happened</source>
-        <translation type="unfinished"></translation>
+        <translation>Write up what happened</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="401"/>
@@ -13458,56 +13510,68 @@ Call this on a success too. A failure report tells the project what is still bro
 Call it early and again as you learn more, rather than once at the end. Whatever you composed last is what Sandboxie-Plus offers the user when they close the agent window, and they may close it at any moment - the console going away does not wait for you to finish. An early rough write-up that gets sent is worth more than a perfect one that was never composed.
 
 You cannot send it yourself, by design. When you are done, tell the user to press Finish - the green tick at the bottom of the Sandboxie-Plus agent window - which opens your report for them to read, correct and send.</source>
-        <translation type="unfinished"></translation>
+        <translation>Builds a report from your account of the run plus the facts Sandboxie-Plus captures itself, and shows you the result. Nothing is sent - this only composes.
+
+The two halves stay separate and labelled: what the machine observed, and what you wrote. Do not try to blend them; a maintainer has to be able to tell which sentences are evidence.
+
+Call this on a success too. A failure report tells the project what is still broken; a success report tells it what the fix was, and that is the one it never gets.
+
+Call it early and again as you learn more, rather than once at the end. Whatever you composed last is what Sandboxie-Plus offers the user when they close the agent window, and they may close it at any moment - the console going away does not wait for you to finish. An early rough write-up that gets sent is worth more than a perfect one that was never composed.
+
+You cannot send it yourself, by design. When you are done, tell the user to press Finish - the green tick at the bottom of the Sandboxie-Plus agent window - which opens your report for them to read, correct and send.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="426"/>
         <source>Open a prefilled GitHub issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Open a prefilled GitHub issue</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="427"/>
         <source>Opens GitHub&apos;s new-issue form in the user&apos;s browser with the title and body filled in. It submits nothing - the user reads it on the site and decides.
 
 Prefer report_submit. This one requires the user to have a GitHub account and to be signed in, which many are not; report_submit reaches the project&apos;s own tracker with no account at all. Use this only when the user has said they want to discuss it on GitHub, or when they ask for it by name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Opens GitHub&apos;s new-issue form in the user&apos;s browser with the title and body filled in. It submits nothing - the user reads it on the site and decides.
+
+Prefer report_submit. This one requires the user to have a GitHub account and to be signed in, which many are not; report_submit reaches the project&apos;s own tracker with no account at all. Use this only when the user has said they want to discuss it on GitHub, or when they ask for it by name.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="435"/>
         <source>Save a workaround others can apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Save a workaround others can apply</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="436"/>
         <source>Writes a file holding the settings as an INI snippet plus the equivalent SbieIni.exe commands, so the fix can be shared or reapplied. Local only - nothing leaves the machine. The user picks where it goes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Writes a file holding the settings as an INI snippet plus the equivalent SbieIni.exe commands, so the fix can be shared or reapplied. Local only - nothing leaves the machine. The user picks where it goes.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="456"/>
         <source>&apos;outcome&apos; must be one of: fixed, partly_fixed, not_fixed.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;outcome&apos; must be one of: fixed, partly_fixed, not_fixed.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="460"/>
         <source>&apos;title&apos; is required - one line naming the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;title&apos; is required - one line naming the problem.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="462"/>
         <source>&apos;narrative&apos; is required. A report with no account of what you found is not worth a maintainer&apos;s time.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;narrative&apos; is required. A report with no account of what you found is not worth a maintainer&apos;s time.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="528"/>
         <source>Composed, and nothing has been sent. The user has not seen it yet either - call report_submit to put it in front of them, or issue_prefill to open it as a GitHub issue instead. This is the full text:
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Composed, and nothing has been sent. The user has not seen it yet either - call report_submit to put it in front of them, or issue_prefill to open it as a GitHub issue instead. This is the full text:
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="541"/>
         <source>Nothing has been written up yet, and sending is not yours to do in any case. Call report_compose first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nothing has been written up yet, and sending is not yours to do in any case. Call report_compose first.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="545"/>
@@ -13521,12 +13585,12 @@ Keep composing if you learn more - they are offered whatever you wrote last.</so
     <message>
         <location filename="Mcp/McpReport.cpp" line="559"/>
         <source>&apos;title&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;title&apos; is required.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="565"/>
         <source>There is nothing to put in the issue. Supply &apos;body&apos;, or call report_compose first.</source>
-        <translation type="unfinished"></translation>
+        <translation>There is nothing to put in the issue. Supply &apos;body&apos;, or call report_compose first.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="596"/>
@@ -13552,12 +13616,12 @@ Nothing is submitted by opening it - you still have to press the button on the s
     <message>
         <location filename="Mcp/McpReport.cpp" line="602"/>
         <source>The user declined; no issue was opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>The user declined; no issue was opened.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="606"/>
         <source>The browser could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>The browser could not be opened.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="609"/>
@@ -13572,12 +13636,12 @@ Nothing is submitted by opening it - you still have to press the button on the s
     <message>
         <location filename="Mcp/McpReport.cpp" line="624"/>
         <source>&apos;changes&apos; is required - there is no workaround without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;changes&apos; is required - there is no workaround without it.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="635"/>
         <source>an AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>an AI agent</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="654"/>
@@ -13592,12 +13656,12 @@ Nothing is submitted by opening it - you still have to press the button on the s
     <message>
         <location filename="Mcp/McpReport.cpp" line="658"/>
         <source>The user cancelled; nothing was written.</source>
-        <translation type="unfinished"></translation>
+        <translation>The user cancelled; nothing was written.</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="662"/>
         <source>That file could not be written: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>That file could not be written: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="670"/>
@@ -13607,492 +13671,525 @@ Nothing is submitted by opening it - you still have to press the button on the s
     <message>
         <location filename="Mcp/McpReport.cpp" line="678"/>
         <source>Sandboxie is not running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie is not running.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="697"/>
         <source>The six-digit code shown in Sandboxie-Plus. Omit it on the first call and Sandboxie-Plus will display one; then ask the user to read it to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>The six-digit code shown in Sandboxie-Plus. Omit it on the first call and Sandboxie-Plus will display one; then ask the user to read it to you.</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="712"/>
         <source>Connect to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Connect to Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="713"/>
         <source>Authorises this connection to look at this machine. Call with no arguments and Sandboxie-Plus shows a six-digit code on the user&apos;s screen; ask the user for it and call again with code set.
 
 You do not need this to read the documentation or the settings schema - those work now. You do need it before anything that reads the user&apos;s sandboxes, and before anything that changes them. Do not guess the code: a handful of wrong attempts invalidates it and a new one has to be requested.</source>
-        <translation type="unfinished"></translation>
+        <translation>Authorises this connection to look at this machine. Call with no arguments and Sandboxie-Plus shows a six-digit code on the user&apos;s screen; ask the user for it and call again with code set.
+
+You do not need this to read the documentation or the settings schema - those work now. You do need it before anything that reads the user&apos;s sandboxes, and before anything that changes them. Do not guess the code: a handful of wrong attempts invalidates it and a new one has to be requested.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="93"/>
         <source>How many results at most. Defaults to 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>How many results at most. Defaults to 10.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="113"/>
         <source>The entry id, as returned by kb_search or kb_match.</source>
-        <translation type="unfinished"></translation>
+        <translation>The entry id, as returned by kb_search or kb_match.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="132"/>
         <source>Name or alias of the sandbox to explain.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name or alias of the sandbox to explain.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="136"/>
         <source>How many candidates at most. Defaults to 5.</source>
-        <translation type="unfinished"></translation>
+        <translation>How many candidates at most. Defaults to 5.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="211"/>
         <source>Limit to one sandbox, by name or alias. Many entries carry no box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit to one sandbox, by name or alias. Many entries carry no box.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="215"/>
         <source>One of message, diagnostic or notice. Omit for all three.</source>
-        <translation type="unfinished"></translation>
+        <translation>One of message, diagnostic or notice. Omit for all three.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="219"/>
         <source>Only entries whose text contains this.</source>
-        <translation type="unfinished"></translation>
+        <translation>Only entries whose text contains this.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="223"/>
         <source>Entries to return, newest first. Default 100, maximum 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entries to return, newest first. Default 100, maximum 200.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="241"/>
         <source>Limit to one sandbox, by name or alias. Omit for every sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit to one sandbox, by name or alias. Omit for every sandbox.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="245"/>
         <source>Only rows whose path or message contains this text.</source>
-        <translation type="unfinished"></translation>
+        <translation>Only rows whose path or message contains this text.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="249"/>
         <source>Only rows with this status, for example Denied. Omit for all.</source>
-        <translation type="unfinished"></translation>
+        <translation>Only rows with this status, for example Denied. Omit for all.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="253"/>
         <source>Rows to return, default 100, maximum 300.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rows to return, default 100, maximum 300.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="257"/>
         <source>Rows to skip, for paging. The result reports the total.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rows to skip, for paging. The result reports the total.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="292"/>
         <source>Sandboxie version</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie version</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="293"/>
         <source>Version of Sandboxie-Plus and of the operating system it is running on. Call this first: fixes and setting names differ between versions, and a suggestion that does not apply to the installed build wastes a round trip.</source>
-        <translation type="unfinished"></translation>
+        <translation>Version of Sandboxie-Plus and of the operating system it is running on. Call this first: fixes and setting names differ between versions, and a suggestion that does not apply to the installed build wastes a round trip.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="298"/>
         <source>List sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>List sandboxes</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="299"/>
         <source>Every configured sandbox with its type, whether it is enabled, how many processes are running in it, and whether it holds any content. Boxes often have an alias, which is what the user calls them - refer to a box the way displayName shows it, and pass either the name or the alias to other tools.</source>
-        <translation type="unfinished"></translation>
+        <translation>Every configured sandbox with its type, whether it is enabled, how many processes are running in it, and whether it holds any content. Boxes often have an alias, which is what the user calls them - refer to a box the way displayName shows it, and pass either the name or the alias to other tools.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="305"/>
         <source>Read sandbox configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Read sandbox configuration</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="306"/>
         <source>The settings explicitly set on one sandbox, as name and value pairs. Values inherited from templates and global defaults are not included, so an absent setting means it is not set here, not that it has no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>The settings explicitly set on one sandbox, as name and value pairs. Values inherited from templates and global defaults are not included, so an absent setting means it is not set here, not that it has no effect.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="309"/>
         <source>Name or alias of the sandbox, as reported by box_list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name or alias of the sandbox, as reported by box_list.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="311"/>
         <source>What is running in a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>What is running in a sandbox</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="312"/>
         <source>The processes currently running in a sandbox, with their image paths, command lines and start times. Empty is a useful answer too: a program that exits immediately leaves nothing here, which points at a start-up failure rather than a running-program problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>The processes currently running in a sandbox, with their image paths, command lines and start times. Empty is a useful answer too: a program that exits immediately leaves nothing here, which points at a start-up failure rather than a running-program problem.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="319"/>
         <source>Sandbox diagnostic events</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox diagnostic events</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="320"/>
         <source>Diagnostic events Sandboxie has recorded for a sandbox - the same ones the troubleshooting wizard reports. These are the driver saying what it refused or had trouble with, so read them before guessing at a cause. Paths and account names are redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diagnostic events Sandboxie has recorded for a sandbox - the same ones the troubleshooting wizard reports. These are the driver saying what it refused or had trouble with, so read them before guessing at a cause. Paths and account names are redacted.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="327"/>
         <source>Search the message log</source>
-        <translation type="unfinished"></translation>
+        <translation>Search the message log</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="328"/>
         <source>Everything Sandboxie-Plus has reported this session: driver and service messages, diagnostic events, and notices from SandMan itself. This is the same log the user is looking at, newest first. Unlike the resource trace it needs nothing switched on, so it is the first place to look. Paths and account names are redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Everything Sandboxie-Plus has reported this session: driver and service messages, diagnostic events, and notices from SandMan itself. This is the same log the user is looking at, newest first. Unlike the resource trace it needs nothing switched on, so it is the first place to look. Paths and account names are redacted.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="335"/>
         <source>Search the resource trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Search the resource trace</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="336"/>
         <source>The resource access trace: what sandboxed programs tried to open and whether it was allowed. This is where a &apos;why will it not start&apos; answer usually comes from - look for denied accesses just before the program exits.
 
 Requires tracing to be enabled in SandMan, and only covers what has been recorded since. If it is off, say so and ask the user to turn it on and reproduce the problem - do not speculate from an empty trace. Results are paged and redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>The resource access trace: what sandboxed programs tried to open and whether it was allowed. This is where a &apos;why will it not start&apos; answer usually comes from - look for denied accesses just before the program exits.
+
+Requires tracing to be enabled in SandMan, and only covers what has been recorded since. If it is off, say so and ask the user to turn it on and reproduce the problem - do not speculate from an empty trace. Results are paged and redacted.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="346"/>
         <source>Search known problems</source>
-        <translation type="unfinished"></translation>
+        <translation>Search known problems</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="347"/>
         <source>Searches the troubleshooting knowledge base - curated entries mapping a symptom to a cause and a fix. This is a different thing from the documentation: the docs say what a setting does, these say why something is broken.
 
 Search by how the user described the problem, in their words. Returns ids; pass one to kb_get for the whole entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Searches the troubleshooting knowledge base - curated entries mapping a symptom to a cause and a fix. This is a different thing from the documentation: the docs say what a setting does, these say why something is broken.
+
+Search by how the user described the problem, in their words. Returns ids; pass one to kb_get for the whole entry.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="352"/>
         <source>What the user reports, in their own words.</source>
-        <translation type="unfinished"></translation>
+        <translation>What the user reports, in their own words.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="354"/>
         <source>Read a known problem</source>
-        <translation type="unfinished"></translation>
+        <translation>Read a known problem</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="355"/>
         <source>The whole knowledge-base entry: what it looks like, why it happens, the settings that fix it, what the fix costs, and how to confirm it worked.
 
 Read the risk before proposing the fix. Every one of these loosens something, and the user is entitled to hear what, in your own words, when you ask them to approve it.</source>
-        <translation type="unfinished"></translation>
+        <translation>The whole knowledge-base entry: what it looks like, why it happens, the settings that fix it, what the fix costs, and how to confirm it worked.
+
+Read the risk before proposing the fix. Every one of these loosens something, and the user is entitled to hear what, in your own words, when you ask them to approve it.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="361"/>
         <source>What could explain this sandbox&apos;s problems</source>
-        <translation type="unfinished"></translation>
+        <translation>What could explain this sandbox&apos;s problems</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="362"/>
         <source>Scores the knowledge base against what this machine actually logged for a sandbox - the message codes seen, the resources that were blocked, and which settings are present - and returns the entries that explain some of it, best first.
 
 Each result carries matchedBecause, saying which observations it accounts for. Read that rather than trusting the order: a top-ranked entry that matched on one weak signal is a guess, and an entry that explains three separate observations is not. Nothing here is a verdict - it is a shortlist to check against the trace.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scores the knowledge base against what this machine actually logged for a sandbox - the message codes seen, the resources that were blocked, and which settings are present - and returns the entries that explain some of it, best first.
+
+Each result carries matchedBecause, saying which observations it accounts for. Read that rather than trusting the order: a top-ranked entry that matched on one weak signal is a guess, and an entry that explains three separate observations is not. Nothing here is a verdict - it is a shortlist to check against the trace.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="371"/>
         <source>Search the documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>Search the documentation</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="372"/>
         <source>Finds documentation pages by title, path, heading or setting name. Returns paths to read with docs_get, not the page text. Coverage is partial: roughly two in five settings have a page, so finding nothing here does not mean the setting does not exist - check config_schema.</source>
-        <translation type="unfinished"></translation>
+        <translation>Finds documentation pages by title, path, heading or setting name. Returns paths to read with docs_get, not the page text. Coverage is partial: roughly two in five settings have a page, so finding nothing here does not mean the setting does not exist - check config_schema.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="376"/>
         <source>A setting name, a feature name, or a few words.</source>
-        <translation type="unfinished"></translation>
+        <translation>A setting name, a feature name, or a few words.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="377"/>
         <source>Maximum results, default 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximum results, default 10.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="379"/>
         <source>Read a documentation page</source>
-        <translation type="unfinished"></translation>
+        <translation>Read a documentation page</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="380"/>
         <source>The full Markdown text of one page, addressed by the path that docs_search or docs_for_setting returned.</source>
-        <translation type="unfinished"></translation>
+        <translation>The full Markdown text of one page, addressed by the path that docs_search or docs_for_setting returned.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="382"/>
         <source>Page path, for example Content/UseRamDisk.md.</source>
-        <translation type="unfinished"></translation>
+        <translation>Page path, for example Content/UseRamDisk.md.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="384"/>
         <source>Look up a setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Look up a setting</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="385"/>
         <source>What Sandboxie itself knows about a configuration setting: whether it exists, its category and syntax, which version added or removed it, and what supersedes it. This is the authority on whether a setting is real - the documentation covers only some of them. An unknown setting name is silently ignored by the driver rather than rejected, so check here before recommending one.</source>
-        <translation type="unfinished"></translation>
+        <translation>What Sandboxie itself knows about a configuration setting: whether it exists, its category and syntax, which version added or removed it, and what supersedes it. This is the authority on whether a setting is real - the documentation covers only some of them. An unknown setting name is silently ignored by the driver rather than rejected, so check here before recommending one.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="391"/>
         <location filename="Mcp/McpTools.cpp" line="398"/>
         <source>Setting name, for example ClosedFilePath.</source>
-        <translation type="unfinished"></translation>
+        <translation>Setting name, for example ClosedFilePath.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="393"/>
         <source>Find the page for a setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Find the page for a setting</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="394"/>
         <source>The reference page for one Sandboxie.ini setting, plus any other pages that discuss it. Distinguishes a setting that exists but is undocumented from one that does not exist at all - do not infer the latter from the former.</source>
-        <translation type="unfinished"></translation>
+        <translation>The reference page for one Sandboxie.ini setting, plus any other pages that discuss it. Distinguishes a setting that exists but is undocumented from one that does not exist at all - do not infer the latter from the former.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="519"/>
         <source>Sandboxie-Plus %1 on %2 (%3, kernel %4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus %1 on %2 (%3, kernel %4)</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="526"/>
         <source>
 
 No active supporter certificate. Settings whose Requirements name one will not take effect here - check with config_validate before recommending them.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+No active supporter certificate. Settings whose Requirements name one will not take effect here - check with config_validate before recommending them.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="531"/>
         <source>isolated desktops</source>
-        <translation type="unfinished"></translation>
+        <translation>isolated desktops</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="532"/>
         <source>advanced network features</source>
-        <translation type="unfinished"></translation>
+        <translation>advanced network features</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="533"/>
         <source>box encryption and protection</source>
-        <translation type="unfinished"></translation>
+        <translation>box encryption and protection</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="534"/>
         <source>enhanced security box types</source>
-        <translation type="unfinished"></translation>
+        <translation>enhanced security box types</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="536"/>
         <source>
 
 Supporter certificate: active</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Supporter certificate: active</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="538"/>
         <source> but expired%1</source>
-        <translation type="unfinished"></translation>
+        <translation> but expired%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="539"/>
         <source>, inside the renewal grace period</source>
-        <translation type="unfinished"></translation>
+        <translation>, inside the renewal grace period</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="541"/>
         <source>, and no longer valid for this build</source>
-        <translation type="unfinished"></translation>
+        <translation>, and no longer valid for this build</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="543"/>
         <source>. No optional features unlocked.</source>
-        <translation type="unfinished"></translation>
+        <translation>. No optional features unlocked.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="544"/>
         <source>. Unlocked: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>. Unlocked: %1.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="595"/>
         <source>
 (%1 of %2 sandboxes listed; the rest were omitted)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%1 of %2 sandboxes listed; the rest were omitted)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="598"/>
         <source>No sandboxes are configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>No sandboxes are configured.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="611"/>
         <source>No sandbox called &apos;%1&apos;. Either its name or its alias works; call box_list for both.</source>
-        <translation type="unfinished"></translation>
+        <translation>No sandbox called &apos;%1&apos;. Either its name or its alias works; call box_list for both.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="642"/>
         <source>
 (%1 of %2 settings listed; the rest were omitted)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%1 of %2 settings listed; the rest were omitted)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="645"/>
         <source>Sandbox &apos;%1&apos; has no settings of its own; it runs on templates and global defaults.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox &apos;%1&apos; has no settings of its own; it runs on templates and global defaults.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="652"/>
         <source>The offline documentation pack is not installed, so documentation lookups are unavailable on this machine. The settings themselves can still be inspected with box_get_config, and the online documentation is at https://sandboxie-plus.com/docs/</source>
-        <translation type="unfinished"></translation>
+        <translation>The offline documentation pack is not installed, so documentation lookups are unavailable on this machine. The settings themselves can still be inspected with box_get_config, and the online documentation is at https://sandboxie-plus.com/docs/</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="665"/>
         <source>The &apos;query&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>The &apos;query&apos; argument is required.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="677"/>
         <source>   [reference page for %1]</source>
-        <translation type="unfinished"></translation>
+        <translation>   [reference page for %1]</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="681"/>
         <source>Nothing in the documentation matches &apos;%1&apos;. Note that only about two in five settings have a documentation page, so this is not evidence that a setting does not exist - check it with config_schema or box_get_config.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nothing in the documentation matches &apos;%1&apos;. Note that only about two in five settings have a documentation page, so this is not evidence that a setting does not exist - check it with config_schema or box_get_config.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="699"/>
         <source>The &apos;path&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>The &apos;path&apos; argument is required.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="704"/>
         <source>%1. Use docs_search to find a valid page path.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1. Use docs_search to find a valid page path.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="719"/>
         <location filename="Mcp/McpTools.cpp" line="771"/>
         <source>The &apos;setting&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>The &apos;setting&apos; argument is required.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="725"/>
         <source>%1 is documented on %2 (%3).</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is documented on %2 (%3).</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="730"/>
         <source>
 Also discussed on:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Also discussed on:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="736"/>
         <source>%1 has no page of its own, but is discussed on:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 has no page of its own, but is discussed on:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="743"/>
         <source>&apos;%1&apos; has no documentation page. That does not mean it is not a real setting - most settings are undocumented. Verify it exists before telling the user it does not.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; has no documentation page. That does not mean it is not a real setting - most settings are undocumented. Verify it exists before telling the user it does not.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="774"/>
         <source>The settings reference (SbieSettings.ini) could not be loaded, so settings cannot be verified on this installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>The settings reference (SbieSettings.ini) could not be loaded, so settings cannot be verified on this installation.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="784"/>
         <source>&apos;%1&apos; is not a known Sandboxie setting. Note that the driver ignores unknown settings silently instead of reporting an error, so a typo here would look like the setting simply had no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; is not a known Sandboxie setting. Note that the driver ignores unknown settings silently instead of reporting an error, so a typo here would look like the setting simply had no effect.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="813"/>
         <source>%1 is a known setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is a known setting.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="814"/>
         <source>
 Category: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Category: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="815"/>
         <source>
 Syntax: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Syntax: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="816"/>
         <source>
 Requires: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Requires: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="817"/>
         <source>
 Added in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Added in: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="818"/>
         <source>
 Removed in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Removed in: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="819"/>
         <source>
 Superseded by: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Superseded by: %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="820"/>
         <source>
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="822"/>
         <source>
 
 Documentation: %1 (read it with docs_get)</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Documentation: %1 (read it with docs_get)</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="824"/>
         <source>
 
 This setting has no documentation page; most do not.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+This setting has no documentation page; most do not.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="847"/>
@@ -14100,92 +14197,97 @@ This setting has no documentation page; most do not.</source>
         <location filename="Mcp/McpTools.cpp" line="987"/>
         <location filename="Mcp/McpTools.cpp" line="1087"/>
         <source>No sandbox called &apos;%1&apos;. Call box_list for names and aliases.</source>
-        <translation type="unfinished"></translation>
+        <translation>No sandbox called &apos;%1&apos;. Call box_list for names and aliases.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="885"/>
         <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at box_diagnostics and trace_query rather than at the process list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at box_diagnostics and trace_query rather than at the process list.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="889"/>
         <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at log_query and trace_query rather than at the process list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at log_query and trace_query rather than at the process list.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="914"/>
         <source>Diagnostics are not available for &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diagnostics are not available for &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="954"/>
         <source>No diagnostic events have been recorded for &apos;%1&apos;. That is the normal state for a healthy sandbox, and it is not evidence that nothing went wrong - events are only recorded for the kinds of problem Sandboxie detects itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>No diagnostic events have been recorded for &apos;%1&apos;. That is the normal state for a healthy sandbox, and it is not evidence that nothing went wrong - events are only recorded for the kinds of problem Sandboxie detects itself.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="970"/>
         <source>Resource tracing is turned off, so there is no trace to search. Ask the user to enable it in SandMan and then reproduce the problem - the trace only records what happens while it is on. Do not draw conclusions from the absence of trace data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Resource tracing is turned off, so there is no trace to search. Ask the user to enable it in SandMan and then reproduce the problem - the trace only records what happens while it is on. Do not draw conclusions from the absence of trace data.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1052"/>
         <source>
 (%1 of %2 matching rows; call again with offset=%3 for the next page)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(%1 of %2 matching rows; call again with offset=%3 for the next page)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1056"/>
         <source>No trace rows match. The trace holds %1 entries in total - if that is 0, tracing has only just been enabled and the problem still has to be reproduced before there is anything to see.</source>
-        <translation type="unfinished"></translation>
+        <translation>No trace rows match. The trace holds %1 entries in total - if that is 0, tracing has only just been enabled and the problem still has to be reproduced before there is anything to see.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1075"/>
         <source>The message log is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>The message log is not available.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1152"/>
         <source>Nothing in the log matches. It holds %1 entries in total.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nothing in the log matches. It holds %1 entries in total.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1155"/>
         <source>
 (newest %1 of %2 matching entries)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+(newest %1 of %2 matching entries)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1167"/>
         <source>There is no troubleshooting knowledge base on this installation, so nothing could be consulted. This is not the same as finding no match: treat it as the lookup being unavailable, and fall back to the documentation and the trace.</source>
-        <translation type="unfinished"></translation>
+        <translation>There is no troubleshooting knowledge base on this installation, so nothing could be consulted. This is not the same as finding no match: treat it as the lookup being unavailable, and fall back to the documentation and the trace.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1180"/>
         <source>&apos;query&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;query&apos; is required.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1186"/>
         <source>Nothing in the knowledge base matches &quot;%1&quot;. It holds %2 entries, so this is a real absence rather than an empty database - the problem may simply not be a known one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nothing in the knowledge base matches &quot;%1&quot;. It holds %2 entries, so this is a real absence rather than an empty database - the problem may simply not be a known one.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1213"/>
         <source>&apos;id&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;id&apos; is required.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1217"/>
         <source>There is no knowledge-base entry called &apos;%1&apos;. Use kb_search to find one.</source>
-        <translation type="unfinished"></translation>
+        <translation>There is no knowledge-base entry called &apos;%1&apos;. Use kb_search to find one.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1221"/>
         <source>%1 - %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1224"/>
@@ -14193,21 +14295,28 @@ This setting has no documentation page; most do not.</source>
 Why it happens:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Why it happens:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1228"/>
         <source>
 The fix:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+The fix:
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1233"/>
         <source>
 A troubleshooting script also applies this: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+A troubleshooting script also applies this: %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1237"/>
@@ -14215,7 +14324,10 @@ A troubleshooting script also applies this: %1
 What it costs:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+What it costs:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1239"/>
@@ -14223,43 +14335,52 @@ What it costs:
 How to confirm it worked:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+How to confirm it worked:
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1241"/>
         <source>
 %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+%1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1288"/>
         <source>Nothing in the knowledge base explains what %1 has logged. %2 entries were checked against %3 message code(s) and %4 blocked resource(s). Either the problem is not a known one, or nothing has been logged yet - if you have not reproduced the fault since Sandboxie-Plus started, there may be nothing to match against.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nothing in the knowledge base explains what %1 has logged. %2 entries were checked against %3 message code(s) and %4 blocked resource(s). Either the problem is not a known one, or nothing has been logged yet - if you have not reproduced the fault since Sandboxie-Plus started, there may be nothing to match against.</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1295"/>
         <source>Candidates for %1, best first. These explain some of what was logged; none of them is a verdict.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Candidates for %1, best first. These explain some of what was logged; none of them is a verdict.
+
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1299"/>
         <source>%1  (score %2)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1  (score %2)
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1304"/>
         <source>    matched: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    matched: %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1335"/>
         <source>Sandboxie is not running or SandMan is not connected to the driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie is not running or SandMan is not connected to the driver.</translation>
     </message>
 </context>
 <context>

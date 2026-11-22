@@ -2,13 +2,66 @@
 本项目的所有重要更改均将记录在此文件中。
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
-## [1.19.1 / 5.74.1] - 2026-10-??
-
-### 新增
-- 内置的 INI 分区编辑器现已支持显示行号，并提供「高级编辑器设置」开关与 Ctrl+G 跳转高亮功能；复制和保存时会排除行号
+## [1.19.2 / 5.74.2] - 2026-12-??
 
 ### 修复
-- 修复了以 `;` 开头且不含 `=` 的 INI 行被错误地当作注释高亮的问题；保存时现在会显示带行号的错误提示并建议改用 `#`，同时保留未保存的编辑内容 [#5685](https://github.com/sandboxie-plus/Sandboxie/issues/5685)
+- 修复了 AI 集成设置中待应用更改的高亮显示及应用行为不正确的问题
+
+## [1.19.1 / 5.74.1] - 2026-11-21
+
+### 新增
+- 内置的 INI 分区编辑器现已支持显示行号，并提供高级编辑器设置开关与 Ctrl+G 跳转目标高亮功能；复制和保存时会排除行号
+- 为重命名沙盒对话框和新建沙盒向导新增了按对话框区分的 GUID 名称控件，并带有别名覆盖确认；类 GUID 的名称可提供重新生成选项，且不会被复制到别名中，全局 GUID 选项仅用于提供向导的默认值
+- 新增批量沙盒名称与别名编辑功能，支持上一个/下一个草稿导航；点击确定将保存并跳转到下一项，最后一项点击确定时保存所有剩余草稿，点击取消时会在丢弃未保存的修改前给出警告
+- 新增了通过 `BorderLabelPosition` 在窗口四条边上显示可配置沙盒边框标签的功能，支持调整位置、侧边文字堆叠或旋转、固定/自适应摆放，并在沙盒选项中新增专用的沙盒边框选项卡
+- 新增了可自定义沙盒边框标签字体的功能，支持原生样式与书写系统选择、GDI 预览、字号同步、仅应用字体更改的即时生效，以及恢复为旧版默认值
+- 新增 `CustomProcessCommandLine`，可按条件对沙盒内进程的参数进行添加、删除、替换或清空
+- 新增可按进程选择启用的 `FakeProcessMitigations` 兼容性功能，用于报告动态代码和扩展点限制状态，不改变 Windows 对缓解措施的实际执行行为
+- 为 SandMan 新增了可选启用的 MCP 服务器，让 AI 智能体可以协助排查沙盒问题：它由工具栏新增的“使用 AI 智能体排查”按钮启动，仅监听本地命名管道，且在明确启用之前始终保持关闭
+- 新增 `SbieMcp.exe`，这是一个 stdio 桥接程序，可将任何支持 MCP 的 AI 客户端连接到正在运行的 SandMan
+- 新增智能体必须通过的配对步骤，通过之后任何工具才可用：它需要复述 SandMan 显示的一次性代码；是否拒绝沙盒内的调用方由驱动的判定结果决定，而非依据映像名称；配对代码绝不会写入审计日志
+- 新增审计记录与确认提示，覆盖智能体想要进行的每一次更改：配置修改以逐字差异的形式展示，要执行的命令也原样展示，每次调用均由用户确认；不提供删除沙盒或其内容的工具，智能体也无法以提权方式启动程序
+- 新增 AI 智能体会话窗口，列出智能体请求的全部内容与用户答复的全部内容，提供“完成”以结束会话并提交、“取消”以中止会话，以及三选一的关闭方式（会询问 MCP 服务器是否应继续运行）
+- 新增 AI 智能体会话的问题报告提交窗口，包含智能体撰写的说明、实际操作记录（单独一份日志）、可选的 Sandboxie.ini 与跟踪日志附件（工具提示会写明哪些内容会被包含、哪些不会），以及针对智能体未能确定结果的情形提供成功/失败选择；在用户按下“发送报告”之前不会发送任何内容
+- 智能体会被要求在工作过程中持续更新其说明文字，因此在任何时候关闭控制台，都仍会留下值得提交的内容
+
+### 变更
+- x64 构建切换至 Qt 6.8.4
+- 更改了待应用变更的跟踪方式，以支持单独应用数值字段，同时不清除其他无关的待应用高亮
+
+### 修复
+- 修复了以 `;` 开头且不含 `=` 的 INI 行被误导性地高亮为注释的问题；保存时现在会显示带行号的错误提示并建议改用 `#`，同时保留未保存的编辑内容 [#5685](https://github.com/sandboxie-plus/Sandboxie/issues/5685)
+- 修复了在沙盒选项与全局设置中，数值字段经键盘编辑并点击应用后仍保留待应用高亮的问题
+- 修复了 1.16.0 版本之后语言显示错乱的问题 [#5079](https://github.com/sandboxie-plus/Sandboxie/issues/5079)
+- 修复了便携沙盒配置的即时更新在保存 INI 文件或重新加载配置失败时仍报告成功的问题
+- 修复了在启用退出时终止的情况下关闭 SandMan 窗口时沙盒内进程未被终止的问题，并防止在取消便携清理时进程被提前终止 [#5696](https://github.com/sandboxie-plus/Sandboxie/issues/5696)
+- 修复了未配置自定义图标时沙盒选项在打开时不显示默认沙盒图标的问题
+- 修复了 1.19.0 引入的 Windows 7 兼容性问题
+- 修复了提交问题报告后遗留永久注册的异步进度操作、导致下一次模态等待（例如“保存跟踪日志……”）卡住的问题；现在仅在上传真正开始运行后才注册该操作
+- 修复了并发进程创建因全局配置锁而被迫串行执行的问题，原因是强制规则扫描会枚举 `Templates.ini` 中的所有分区，且配置使用计数在独占锁下调整
+- 修复了首次访问时本地模板列表未填充的问题 [#5715](https://github.com/sandboxie-plus/Sandboxie/issues/5715/)
+- 修复了软件兼容性列表为空或内容过时的问题；新增预先列出条目、扫描状态显示和手动检查功能 [#5718](https://github.com/sandboxie-plus/Sandboxie/issues/5718)
+- 修复了沙盒内应用出现的严重性能下降问题（例如游戏中帧率下降），这类应用会频繁调用 `GetUserDefaultUILanguage`、`LoadString`、`FindResource` 或 `FormatMessage`：每次系统调用期间临时进行的身份模拟会重置 ntdll 缓存的 UI 语言设置，导致每次查找都要重新从注册表读取这些设置 [#5628](https://github.com/sandboxie-plus/Sandboxie/pull/5628)
+- 修复了启用已禁用或受用户限制的沙盒时，是/否的处理逻辑颠倒的问题
+- 修复了新的管理员保护相关问题 [#5703](https://github.com/sandboxie-plus/Sandboxie/issues/5703)
+- 修复沙盒边框线程中的堆损坏问题 [#5722](https://github.com/sandboxie-plus/Sandboxie/pull/5722)
+- 修复进程创建在配置锁上被串行化的问题 [#5728](https://github.com/sandboxie-plus/Sandboxie/pull/5728)
+- 修复主映像路径的字母大小写与启动命令行不一致的问题 [#5729](https://github.com/sandboxie-plus/Sandboxie/pull/5729)
+- 修复了当沙盒脚本阻塞在对 UI 的调用上时，SandMan 退出时崩溃（通常伴随约 30 秒卡死）的问题：停止脚本引擎不再发生死锁，其挂起的调用将被取消，而不是被已终止的线程遗留
+- 修复了 SandMan 启动时崩溃的问题：当被注入进程的外部代码在主线程之前访问 Qt 时，Qt 6.8 会把错误的线程当作主线程；MiscHelpers 不再于 DLL 初始化期间创建 QObject
+- 修复了在创建沙盒后若沙盒列表未刷新，则完成新建沙盒向导时 SandMan 崩溃的问题，`CreateBox` 现在始终会重新加载沙盒列表
+- 修复了 SandMan 枚举窗口时，因外部窗口报告了离谱的标题长度而导致未捕获的 `bad_alloc` 异常的问题
+- 修复了当脚本引擎无法分配其栈（内存不足或被第三方软件阻止）时 SandMan 崩溃的问题；现在脚本会以错误形式失败
+- 修复了在沙盒中运行对话框在其嵌套对话框打开时被关闭而崩溃的问题
+- 修复了消息日志视图无限增长、可能在长时间会话中耗尽内存的问题
+- 修复了 `~CSbieObject` 在关闭过程中 `theAPI` 已被释放后仍对其解引用的问题
+- 修复了在沙盒视图中将沙盒拖动到其分组末尾之后的位置时崩溃的问题
+- 修复了问题报告上传完成时其对话框已被关闭而导致崩溃的问题
+- 修复了当某个进程事件到达、而该进程所属沙盒已从配置中移除时崩溃的问题，被移除的沙盒现在也会将其进程从全局进程列表中清除
+- 修复了选项和全局设置窗口在窗口关闭后仍执行延迟布局更新而崩溃的问题
+- 修复了在打开故障排除向导时退出崩溃的问题，其影子沙盒现在会在 API 仍可用时被丢弃
+- 规避了 Qt 6.8 的一个崩溃问题：在显示无原生窗口的模态对话框时激活窗口会导致崩溃
+- 修复了在启用 Windows 管理员保护的沙盒中提升程序权限时出现的 SBIE2218 `[86 / 00000005]` 错误及请求方挂起的问题
 
 
 ## [1.19.0 / 5.74.0] - 2026-10-23
@@ -69,7 +122,6 @@
 - 修复了四个 SbieSvc 终端查询处理程序缺乏调用方门禁、直接从线上取用会话 ID，使任何用户都能以 SYSTEM 身份查询其他会话的问题；`QUERY_INFO` 现同时会对信息类别进行白名单校验
 - 修复了 SbieSvc ImBox `QueryHandler` 在查询的挂载点竞态归零时泄漏其临界区（并导致挂载子系统死锁）的问题
 - 修复了 SbieSvc 队列服务端接受无限数量未抽取请求的问题（现增加每队列上限）
-- 修复了「导入沙盒」功能不允许用户选择导入沙盒创建位置的问题 [#5657](https://github.com/sandboxie-plus/Sandboxie/issues/5657)
 
 
 ## [1.18.8 / 5.73.8] - 2026-10-17
@@ -97,12 +149,24 @@
 ## [1.18.7 / 5.73.7] - 2026-10-16
 
 ### 修复
-- 修复了根目录保护 IOCTL 的问题
-- 修复了设置低完整性标签时的问题
-- 修复了监控 API 的一个问题
-- 修复了 base64 解码问题
-- 修复了 API_RENAME_FILE 的问题
-- 修复了模板处理问题
+- 修复安全问题 ID-43：通过 SbieSvc ImBox 挂载处理程序和 SbieDrv 的 `API_PROTECT_ROOT` / `API_UNPROTECT_ROOT` 处理程序触发内核池和栈缓冲区溢出（GHSA-mvcr-mmcq-27xq）
+  - `File_Api_ProtectRoot` 和 `File_Api_UnprotectRoot` 使用无长度限制的 `wcslen` 获取调用方提供的 `reg_root` 的长度，并将其复制到固定大小的 `WCHAR[MAX_REG_ROOT_LEN]` 目标缓冲区，完全未探测用户指针的有效性；前者的内存池分配大小仅按尾随的 `file_root` 计算，后者则使用内核栈缓冲区
+  - `MSGID_IMBOX_MOUNT` / `MSGID_IMBOX_UNMOUNT` 在将固定大小的消息字段 `reg_root[MAX_REG_ROOT_LEN]` 传给驱动程序前，从未检查其是否以 NUL 结尾，因此字符串处理会继续进入后面的 `file_root` 字段；由于服务的请求缓冲区恰好在调用方声明的 `h.length` 处设置终止符，非特权的非沙盒进程可以控制溢出长度及其内容的每一个字节（`MSGID_IMBOX` 处理程序仅拒绝*沙盒内*的调用方，且服务端口按设计使用 NULL DACL）
+  - 两个驱动处理程序现在均通过一个限制长度、探测指针有效性且只读取一次用户数据的辅助函数获取名称；对于在 `MAX_REG_ROOT_LEN` 个字符内没有终止符的 `reg_root`，直接拒绝而非截断；同时检查 `file_root` 是否超过长度上限，并在复制发生异常时释放已分配的内存，避免泄漏；`File_Api_ProtectRoot` 在无法为根路径分配内存时也会返回 `STATUS_INSUFFICIENT_RESOURCES`，而不再错误地报告成功，此前这会让服务误以为根路径已受到保护
+  - ImBox 请求处理程序现在会在首次使用调用方提供的任何字符串之前进行校验，包括查找根路径时使用的字符串；这也修复了 `MSGID_IMBOX_ENUM` 中的堆溢出，其响应缓冲区此前按所有已存储根路径名称均不超过 `MAX_REG_ROOT_LEN` 的假设分配大小，现在则根据实际存储的名称计算大小
+  - 修复了请求中的 `file_root` 不包含路径分隔符时，`MSGID_IMBOX_CREATE` 使用无效的迭代器范围构造 `std::wstring` 的问题，此前非特权请求即可导致服务崩溃
+- 修复安全问题 ID-44：通过 SbieDrv 的 `API_SET_LOW_LABEL_KEY` 处理程序逃逸沙盒（内部审计发现）
+  - `Key_Api_SetLowLabel` 使用 `Box_IsBoxedPath(proc->box, file, ...)` 检查路径是否位于沙盒内，但它将 `\REGISTRY\...` 名称与沙盒的*文件*路径进行比较，因此永远不会匹配；此外，判断逻辑也被颠倒，导致拒绝分支无法触发；由于随后会从内核模式以 `KEY_ALL_ACCESS | WRITE_DAC` 打开该注册表项（不检查 DACL），并为其设置 `Driver_LowLabelSd`，任何沙盒内进程都可以将系统上的任意注册表项设为所有人可写；现在改用 `key` 分量并采用正确的判断逻辑，与 `key.c:437` 一致
+- 修复安全问题 ID-45：通过 SbieDrv 的 `API_MONITOR_GET2` 处理程序进行任意内核地址写入（内部审计发现）
+  - `Session_Api_MonitorGet2` 使用 `entry_size > buffer_len - sizeof(LOG_BUFFER_SIZE_T)` 检查条目大小，但当 `buffer_len` 小于 4 时会发生下溢；同时，`ProbeForWrite` 在长度为零时不执行任何检查，因此 `buffer_ptr` 也未得到验证，调用方传入 `buffer_len = 0` 即可让监控日志被写入任意地址；现在会拒绝小到无法容纳末尾零长度终止标记的缓冲区，并使用 64 位加法为该终止标记预留空间（`Session_Api_MonitorGetEx` 中存在一个相关的下溢问题，目前尚未处理）
+- 修复安全问题 ID-46：解析 `Certificate.dat` 时发生内核池溢出（内部审计发现）
+  - `b64_decoded_size` 会为每个尾随的 `=` 减去一个字节，且不设上限，而 `b64_decode` 每处理一组 4 个字符就写入 3 个字节，因此以大量连续 `=` 结尾的 SIGNATURE 行会导致分配的空间远小于解码实际写入的数据量；填充字符足够多时，计算出的大小会先降至零，随后发生下溢；`KphValidateCertificate` 在进行任何验证之前就会解码，而 `MSGID_SBIE_INI_SET_DAT` 允许非管理员用户让服务写入 `Certificate.dat`，因此利用此问题无需提权；现在，大小计算会拒绝长度不是 4 的倍数的输入，并将计入的填充字符数限制为最多 2 个，`b64_decode` 会依据 `outlen` 检查每次写入是否越界，调用方也会检查其返回结果
+- 修复安全问题 ID-47：沙盒内进程通过 SbieDrv 的 `API_RENAME_FILE` 处理程序获得宿主目录的可写句柄（内部审计发现）
+  - `File_Api_Rename` 以 `FILE_GENERIC_WRITE` 权限打开重命名目标的父目录时未设置 `OBJ_KERNEL_HANDLE`，导致句柄进入*发起调用的*沙盒进程的句柄表；由于 `PreviousMode == KernelMode` 且未设置 `OBJ_FORCE_ACCESS_CHECK`，该句柄带有沙盒本无权获得的写入权限；现在会设置 `OBJ_KERNEL_HANDLE` 并使用 `ZwClose` 关闭句柄；仍有意不检查 DACL，因为此 API 正是通过这种方式授予沙盒策略所允许的访问权限
+- 修复安全问题 ID-48：通过 `GUI_GET_CLIPBOARD_FORMATS` 触发 SbieSvc GUI 代理中的栈缓冲区溢出（内部审计发现）
+  - `GetClipboardFormats` 会为每个已存储的剪贴板格式向所有从属处理程序共用的 32 KB 栈响应缓冲区追加一个 `ULONG`，但未检查边界；由于 `SetClipboardDataSlave` 会存储任意 `req->format` 且不设数量上限，而 `GUI_EMPTY_CLIPBOARD` 仅允许父进程调用，因此格式数量可由调用方控制，沙盒内进程由此可以破坏以 LocalSystem 身份运行的从属线程的栈；现在与已有的 `EnumWindowsSlave` 一样，使用 `MAX_RPL_BUF_SIZE`（已移至 `GuiServer.h`）限制循环写入范围，同时不再允许沙盒存储无限数量的不同格式
+- 修复安全问题 ID-49：通过 `MSGID_SBIE_INI_TEMPLATE` 触发 SbieSvc 中的堆缓冲区溢出（内部审计发现）
+  - 在 `req->user == 0` 的分支中，`SbieIniServer::SetTemplate` 未先为固定大小的消息字段 `varname[66]` 设置终止符，就使用 `wcscpy` 将其复制到一个约 288 字节堆内存块中的 `setting[66]` 字段；由于请求缓冲区仅在调用方声明的 `h.length` 处设置终止符，复制会一直持续到消息末尾，长度和内容均由调用方控制；现在与 `namedpipeserver.cpp` 一样，在长度检查后立即为 `varname` 和 `password` 设置终止符
 
 
 
@@ -113,10 +177,17 @@
 
 ### 修复
 - 修复了 SandMan 将 URL 编码的字符误当作消息占位符，导致 SBIE 消息链接损坏的问题
-- 修复了更新器的问题
-- 修复了临时豁免的处理问题
-- 修复了路径处理问题
-- 修复了卸载驱动程序时可能发生的空指针异常
+- 修复安全问题 ID-40：通过 SbieSvc 更新服务从标准用户本地提权至 SYSTEM（由 ghostx86 报告）
+  - MSGID_PROCESS_RUN_UPDATER 的 `elevate=2` 分支使用服务的 SYSTEM 令牌启动 UpdUtil.exe，只需通过调用方进程映像的签名检查即可进入，而向任意已签名的 Sandboxie 进程注入代码即可通过该检查；非管理员用户仍可使用此功能（不会弹出 UAC 提示），但现在即使参数由攻击者指定，UpdUtil 也能以 SYSTEM 身份安全运行：
+    - 在 SYSTEM 账户下运行时，UpdUtil 现在仅接受受签名验证保护的更新和附加组件管理操作（update、upgrade、install、modify），并拒绝原始文件工具操作（download、print、run_setup、get_cert），这些操作此前可将调用方控制的内容写入调用方控制的路径
+    - 移除附加组件时，此前可从任意注册表配置单元读取待执行的 `UninstallString`；现在只从仅管理员可写的 HKLM 配置单元读取，因此标准用户无法再通过 HKCU 植入命令
+    - `/restart` 和 `/open:` 步骤此前从调用方通过 `/path:` 提供的目录启动 `KmdUtil.exe` / `start.exe`；现在改为从 UpdUtil 自身的安装目录（仅管理员可写）启动
+  - 加固了 `IsCallerSigned`，改为通过内核（`QueryFullProcessImageName`）获取调用方进程的映像路径，而不再读取可被伪造的进程 PEB
+- 修复安全问题 ID-41：通过 SbieDrv 的 `API_PROCESS_EXEMPTION_CONTROL` 驱动处理程序绕过沙盒隔离（GHSA-vwqp-f692-7jxq）
+  - `Api_ProcessExemptionControl` 中的调用方签名检查仅将 `STATUS_ACCESS_DENIED` 写入局部变量，随后仍继续执行，因此未签名的本地进程仍能设置另一个沙盒进程的 `AllowInternetAccess` / `ipc_allowSpoolerPrintToFile` 标志，绕过网络阻断（`wfp.c`）和打印后台处理程序的打印到文件拦截（`file_flt.c`），处理程序最后才返回这个仅具表面效果的拒绝状态；现在签名检查失败时会立即中止，与 `Api_SetSecureParam` 一致
+- 修复安全问题 ID-42：通过 SbieSvc 的 `MSGID_FILE_SET_ATTRIBUTES` / `MSGID_FILE_SET_SHORT_NAME` 处理程序进行路径遍历以逃逸沙盒（GHSA-524m-vh66-wmxw）
+  - `CheckBoxFilePath` / `CheckBoxKeyPath` 仅通过不区分大小写的比较来验证沙盒路径前缀，从未拒绝 `..` 路径分量，因此沙盒内进程可以发送一个字符串前缀为自身沙盒目录、但通过 `..` 解析后指向宿主文件的路径，让以 SYSTEM 身份运行的服务修改任意宿主文件的时间戳、属性或 8.3 短文件名；两个函数现在都会拒绝包含任何 `..` 路径分量的路径
+- 修复了 SbieDrv 的 `API_UNLOAD_DRIVER` 处理程序中可由本地触发的内核空指针解引用问题（GHSA-pjhp-45j7-4rp2）
 
 
 ## [1.18.5 / 5.73.5] - 2026-09-25
@@ -567,18 +638,18 @@
 
 ## [1.16.3 / 5.71.3] - 2025-09-08
 ### 变更
-- 重构驱动导入机制，尽管使用 VS2022 构建，仍可在 Windows 7 上加载 (#4942)
+- 重构驱动导入机制，尽管使用 VS2022 构建，仍可在 Windows 7 上加载 [#4942](https://github.com/sandboxie-plus/Sandboxie/issues/4942)
 - 改进深色模式配色方案
 - 切换到 Qt 6.8.3，并加入 Windows 7 兼容补丁
 - 验证了与 Windows Build 27934 的兼容性，并更新了 DynData
 
 ### 修复
-- 修复 1.16.2 版本托盘菜单缺失的问题 (#4940)
-- 修复高 DPI 安全桌面下的 UAC 提示布局问题 (#4953，感谢 gexgd0419)
-- 修复 UAC 提示框中阿拉伯语的 RTL（从右到左）布局问题 (#4957，感谢 gexgd0419)
-- 修复 1.16.1 深色模式下帮助弹窗背景颜色错误的问题 (#4903)
-- 修复网络选项在编辑时无法保存的问题 (#4899)
-- 修复安装程序未清理旧版 Sandboxie 1.16.x 遗留文件的问题 (#4934)
+- 修复 1.16.2 版本托盘菜单缺失的问题 [#4940](https://github.com/sandboxie-plus/Sandboxie/issues/4940)
+- 修复高 DPI 安全桌面下的 UAC 提示布局问题 [#4953](https://github.com/sandboxie-plus/Sandboxie/issues/4953)（感谢 gexgd0419）
+- 修复 UAC 提示框中阿拉伯语的 RTL（从右到左）布局问题 [#4957](https://github.com/sandboxie-plus/Sandboxie/pull/4957)（感谢 gexgd0419）
+- 修复 1.16.1 深色模式下帮助弹窗背景颜色错误的问题 [#4903](https://github.com/sandboxie-plus/Sandboxie/issues/4903)
+- 修复网络选项在编辑时无法保存的问题 [#4899](https://github.com/sandboxie-plus/Sandboxie/issues/4899)
+- 修复安装程序未清理旧版 Sandboxie 1.16.x 遗留文件的问题 [#4934](https://github.com/sandboxie-plus/Sandboxie/issues/4934)
 - 修复以管理员身份重启时未显示窗口的问题
 
 ### 移除
@@ -587,15 +658,15 @@
 
 ## [1.16.2 / 5.71.2] - 2025-07-28
 ### 新增
-- 在“编辑 ini 配置节”中新增可切换的 INI 键验证功能 (#4915，感谢 offhub)
-- 新增可切换的逐键工具提示支持 (#4928，感谢 offhub)
-- 新增在 SandMan 中使用全新 Qt Windows 11 风格 的选项 (#4927，感谢 LumitoLuma)
+- 在“编辑 ini 配置节”中新增可切换的 INI 键验证功能 [#4915](https://github.com/sandboxie-plus/Sandboxie/pull/4915)（感谢 offhub）
+  - 新增可切换的逐键工具提示支持 [#4928](https://github.com/sandboxie-plus/Sandboxie/pull/4928)（感谢 offhub）
+- 新增在 SandMan 中使用全新 Qt Windows 11 风格 的选项 [#4927](https://github.com/sandboxie-plus/Sandboxie/pull/4927)（感谢 LumitoLuma）
 
 ### 变更
 - ImBox 在访问加密沙盒卷时，不再更新容器文件的时间戳
 
 ### 修复
-- 修复 Windows 11 24H2 Build 26100.4770 导致 Firefox Portable 140.0.4 / 141.0 在沙盒中启动时无响应的问题 (#4920)
+- 修复 Windows 11 24H2 Build 26100.4770 导致 Firefox Portable 140.0.4 / 141.0 在沙盒中启动时无响应的问题 [#4920](https://github.com/sandboxie-plus/Sandboxie/issues/4920)
 - 修复安全问题 ID-27：密码更改时加密沙盒密钥泄漏（回移植了 MajorPrivacy 的强化版 ImBox）CVE-2025-54422（感谢 love-code-yeyixiao）
 - 修复 Firefox Nightly 沙盒挂钩错误
 
@@ -607,7 +678,7 @@
 
 ## [1.16.1 / 5.71.1] - 2025-07-06
 ### 新增
-- 新增“设置窗口中的 UI 字体”选项 (#4894，感谢 srdr0p)
+- 新增“设置窗口中的 UI 字体”选项 [#4894](https://github.com/sandboxie-plus/Sandboxie/pull/4894)（感谢 srdr0p）
 
 ### 变更
 - 更新工具链至 MSVC 2022，因 GitHub CI runner 2019 已停止支持
@@ -615,12 +686,12 @@
 - 切换到 Qt6，同时也不再支持 Windows 7
 
 ### 修复
-- 修复创建快捷方式时链接目录不完整的问题 (#4882)
-- 修复 `BindAdapter` 无效的问题（即使绑定的适配器/VPN 被禁用，仍可访问互联网）(#4896)
-- 修复 `GetFullPathName()` 使用以反斜杠开头的字符串时出现的异常问题 (#4867)
-- 修复部分 UI 绑定安装语言 ID 的问题 (#4859)
-- 修复 UAC 提示框布局异常的问题 (#4863)
-- 修复启用 “Mark of The Web 强制” 时忽略“非沙盒运行”选项的问题 (#4856)
+- 修复创建快捷方式时链接目录不完整的问题 [#4882](https://github.com/sandboxie-plus/Sandboxie/issues/4882)
+- 修复 `BindAdapter` 无效的问题（即使绑定的适配器/VPN 被禁用，仍可访问互联网）[#4896](https://github.com/sandboxie-plus/Sandboxie/issues/4896)
+- 修复 `GetFullPathName()` 使用以反斜杠开头的字符串时出现的异常问题 [#4867](https://github.com/sandboxie-plus/Sandboxie/issues/4867)
+- 修复部分 UI 绑定安装语言 ID 的问题 [#4859](https://github.com/sandboxie-plus/Sandboxie/issues/4859)
+- 修复 UAC 提示框布局异常的问题 [#4863](https://github.com/sandboxie-plus/Sandboxie/issues/4863)
+- 修复启用 “Mark of The Web 强制” 时忽略“非沙盒运行”选项的问题 [#4856](https://github.com/sandboxie-plus/Sandboxie/issues/4856)
 
 
 ## [1.16.0 / 5.71.0] - 2025-06-03
@@ -3580,7 +3651,7 @@
   - 添加 'AlwaysCloseForBoxed=n' 以禁用此行为，因为这可能并不总是想要的，并且它不会提供额外的安全性
 - 向 SandMan UI 添加进程映像信息
 - 在 Plus UI 中本地化模板类别 [#727](https://github.com/sandboxie-plus/Sandboxie/issues/727)
-- 添加 "DisableResourceMonitor=y" 以禁用对选定盒子的资源访问监视
+- 添加 "DisableResourceMonitor=y" 以禁用对选定盒子的资源访问监视 [#886](https://github.com/sandboxie-plus/Sandboxie/issues/886)
 - 添加选项以仅显示选定沙盒的跟踪条目 [#886](https://github.com/sandboxie-plus/Sandboxie/issues/886)
 - 添加 "UseVolumeSerialNumbers=y"，允许驱动器字母在 \drive\ 沙盒位置后跟卷序列号
   - 这有助于避免在使用相同字母的多个便携式驱动器上文件混合

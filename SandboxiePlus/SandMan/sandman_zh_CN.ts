@@ -12360,15 +12360,15 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ? &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ? &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
-        ? &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
-        ? &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
-        ? &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
-        ? &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
-        ? &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
+        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
+        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
+        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
+        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
         <oldsource>&lt;html&gt;
@@ -12376,15 +12376,15 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ? &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ? &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
-        ? &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
-        ? &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
-        ? &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
-        ? &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
-        ? &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
+        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
+        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
+        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
+        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
         <translation>&lt;html&gt;
@@ -12392,15 +12392,15 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
         悬停在设置上时显示详细的工具提示。&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
-        ? &lt;span style=&quot;color: #009900;&quot;&gt;选中&lt;/span&gt;：完整详细信息（版本、语法、描述等）&lt;br&gt;
-        ? &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;：仅显示必要信息&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;选中&lt;/span&gt;：完整详细信息（版本、语法、描述等）&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;：仅显示必要信息&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;语法帮助：&lt;/b&gt;&lt;br&gt;
-        ? &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分隔替代值&lt;br&gt;
-        ? &lt;i&gt;方括号&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 表示可选参数&lt;br&gt;
-        ? &lt;i&gt;圆括号&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 包含有效选项&lt;br&gt;
-        ? &lt;i&gt;尖括号&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替换的占位符&lt;br&gt;
-        ? &lt;i&gt;加粗&lt;/i&gt; — 表示默认值（可省略）&lt;br&gt;
+        • &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分隔替代值&lt;br&gt;
+        • &lt;i&gt;方括号&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 表示可选参数&lt;br&gt;
+        • &lt;i&gt;圆括号&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 包含有效选项&lt;br&gt;
+        • &lt;i&gt;尖括号&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替换的占位符&lt;br&gt;
+        • &lt;i&gt;加粗&lt;/i&gt; — 表示默认值（可省略）&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -12455,72 +12455,72 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6741"/>
-        <source>?</source>
-        <translation>?</translation>
+        <source>⚙</source>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6662"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        ? &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 2+ chars&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 2+ chars&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
         &lt;br&gt;
-        ? &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
+        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ? &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
-        ? &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        ? &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
-        ? &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
-        ? &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
-       ? &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
         <oldsource>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        ? &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
         &lt;br&gt;
-        ? &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
+        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ? &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
-        ? &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        ? &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
-        ? &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
-        ? &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
-       ? &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
         <translation>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;自动补全 &amp; 大小写修正&lt;/b&gt;&lt;br&gt;
-        ? &lt;u&gt;自动补全&lt;/u&gt;: 在输入 2 个及以上字符时弹出建议&lt;br&gt;
+        • &lt;u&gt;自动补全&lt;/u&gt;: 在输入 2 个及以上字符时弹出建议&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ 从弹出菜单中选择以&lt;u&gt;自动应用&lt;/u&gt;正确的大小写&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;回车/Return键&lt;/code&gt;确认选择&lt;br&gt;
         &lt;br&gt;
-        ? &lt;u&gt;手动修正&lt;/u&gt;: 输入设置后=&lt;br&gt;
+        • &lt;u&gt;手动修正&lt;/u&gt;: 输入设置后=&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt;出现大小写修正提示&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
-        ? &lt;span style=&quot;color: #009900;&quot;&gt;已选中&lt;/span&gt;: 自动补全 + 大小写修正&lt;br&gt;
-        ? &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;: 仅手动&lt;code&gt;Ctrl+R&lt;/code&gt;修正&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已选中&lt;/span&gt;: 自动补全 + 大小写修正&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;: 仅手动&lt;code&gt;Ctrl+R&lt;/code&gt;修正&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;导航:&lt;/b&gt;&lt;br&gt;
-        ? &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在弹出菜单中移动&lt;br&gt;
-        ? &lt;code&gt;回车/Return&lt;/code&gt;: 确认选择&lt;br&gt;
-        ? &lt;code&gt;Ctrl+空格&lt;/code&gt;: 强制打开建议&lt;br&gt;
-        ? &lt;code&gt;Tab&lt;/code&gt;: 应用第一个或确认选择&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在弹出菜单中移动&lt;br&gt;
+        • &lt;code&gt;回车/Return&lt;/code&gt;: 确认选择&lt;br&gt;
+        • &lt;code&gt;Ctrl+空格&lt;/code&gt;: 强制打开建议&lt;br&gt;
+        • &lt;code&gt;Tab&lt;/code&gt;: 应用第一个或确认选择&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -15239,8 +15239,8 @@ Diagnostic data an agent reads can contain text written by programs inside a san
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3641"/>
-        <source>?</source>
-        <translation>?</translation>
+        <source>⚙</source>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3585"/>
@@ -15254,15 +15254,15 @@ Diagnostic data an agent reads can contain text written by programs inside a san
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ? &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ? &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
-        ? &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
-        ? &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
-        ? &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
-        ? &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
-        ? &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
+        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
+        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
+        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
+        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
         <translation>&lt;html&gt;
@@ -15270,15 +15270,15 @@ Diagnostic data an agent reads can contain text written by programs inside a san
         悬停在设置上时显示详细的工具提示。&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
-        ? &lt;span style=&quot;color: #009900;&quot;&gt;选中&lt;/span&gt;：完整详细信息（版本、语法、描述等）&lt;br&gt;
-        ? &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;：仅显示必要信息&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;选中&lt;/span&gt;：完整详细信息（版本、语法、描述等）&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;：仅显示必要信息&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;语法帮助：&lt;/b&gt;&lt;br&gt;
-        ? &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分隔替代值&lt;br&gt;
-        ? &lt;i&gt;方括号&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 表示可选参数&lt;br&gt;
-        ? &lt;i&gt;圆括号&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 包含有效选项&lt;br&gt;
-        ? &lt;i&gt;尖括号&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替换的占位符&lt;br&gt;
-        ? &lt;i&gt;加粗&lt;/i&gt; — 表示默认值（可省略）&lt;br&gt;
+        • &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分隔替代值&lt;br&gt;
+        • &lt;i&gt;方括号&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 表示可选参数&lt;br&gt;
+        • &lt;i&gt;圆括号&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 包含有效选项&lt;br&gt;
+        • &lt;i&gt;尖括号&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替换的占位符&lt;br&gt;
+        • &lt;i&gt;加粗&lt;/i&gt; — 表示默认值（可省略）&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -15287,64 +15287,64 @@ Diagnostic data an agent reads can contain text written by programs inside a san
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        ? &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 2+ chars&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 2+ chars&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
         &lt;br&gt;
-        ? &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
+        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ? &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
-        ? &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        ? &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
-        ? &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
-        ? &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
-       ? &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
         <oldsource>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        ? &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
         &lt;br&gt;
-        ? &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
+        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ? &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
-        ? &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        ? &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
-        ? &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
-        ? &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
-       ? &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
         <translation>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;自动补全 &amp; 大小写修正&lt;/b&gt;&lt;br&gt;
-        ? &lt;u&gt;自动补全&lt;/u&gt;: 在输入 2 个及以上字符时弹出建议&lt;br&gt;
+        • &lt;u&gt;自动补全&lt;/u&gt;: 在输入 2 个及以上字符时弹出建议&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ 从弹出菜单中选择以&lt;u&gt;自动应用&lt;/u&gt;正确的大小写&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;回车/Return键&lt;/code&gt;确认选择&lt;br&gt;
         &lt;br&gt;
-        ? &lt;u&gt;手动修正&lt;/u&gt;: 输入设置后=&lt;br&gt;
+        • &lt;u&gt;手动修正&lt;/u&gt;: 输入设置后=&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt;出现大小写修正提示&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
-        ? &lt;span style=&quot;color: #009900;&quot;&gt;选中&lt;/span&gt;: 自动补全 + 大小写修正&lt;br&gt;
-        ? &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;: 仅手动&lt;code&gt;Ctrl+R&lt;/code&gt;修正&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;选中&lt;/span&gt;: 自动补全 + 大小写修正&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;: 仅手动&lt;code&gt;Ctrl+R&lt;/code&gt;修正&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;导航:&lt;/b&gt;&lt;br&gt;
-        ? &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在弹出菜单中移动&lt;br&gt;
-        ? &lt;code&gt;回车/Return&lt;/code&gt;: 确认选择&lt;br&gt;
-        ? &lt;code&gt;Ctrl+空格&lt;/code&gt;: 强制打开建议&lt;br&gt;
-        ? &lt;code&gt;Tab&lt;/code&gt;: 应用第一个或确认选择&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在弹出菜单中移动&lt;br&gt;
+        • &lt;code&gt;回车/Return&lt;/code&gt;: 确认选择&lt;br&gt;
+        • &lt;code&gt;Ctrl+空格&lt;/code&gt;: 强制打开建议&lt;br&gt;
+        • &lt;code&gt;Tab&lt;/code&gt;: 应用第一个或确认选择&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>

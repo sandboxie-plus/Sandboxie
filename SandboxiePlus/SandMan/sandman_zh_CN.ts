@@ -8015,7 +8015,7 @@ Error: %1</source>
         <location filename="Views/SbieView.cpp" line="1425"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
-        <translation>?沙盒/组?名称不能使用 &apos;,()&apos; 符号或控制字符。</translation>
+        <translation>⌈沙盒/组⌋名称不能使用 &apos;,()&apos; 符号或控制字符。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1430"/>

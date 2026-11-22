@@ -312,7 +312,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Engine/BoxEngine.cpp" line="200"/>
         <source>Failed to initialize the script engine, not enough memory or memory access blocked by third-party software.</source>
-        <translation type="unfinished"></translation>
+        <translation>스크립트 엔진을 초기화하지 못했습니다. 메모리가 부족하거나 타사 소프트웨어에 의해 메모리 접근이 차단되었습니다.</translation>
     </message>
     <message>
         <location filename="Engine/BoxEngine.cpp" line="253"/>
@@ -3148,7 +3148,7 @@ Nothing is sent unless you choose to, and nothing goes without you reading it. E
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="107"/>
         <source>The new box &apos;%1&apos; could not be found after creation.</source>
-        <translation type="unfinished"></translation>
+        <translation>새 박스 &apos;%1&apos;을 생성한 후 찾을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="124"/>
@@ -9164,12 +9164,12 @@ Before sending you can review the logs in the main window.</oldsource>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="889"/>
         <source>Submit Diagnostic Data</source>
-        <translation type="unfinished"></translation>
+        <translation>진단 데이터 제출</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="890"/>
         <source>%1 has collected some valuable diagnostic data. Thank you for taking the time to review and submit this information, as it helps improve Sandboxie for everyone! :-) </source>
-        <translation type="unfinished"></translation>
+        <translation>%1이 유용한 진단 데이터를 일부 수집했습니다. 이 정보를 검토하고 제출해 주셔서 감사합니다. 모두를 위해 Sandboxie를 개선하는 데 큰 도움이 됩니다! :-) </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="892"/>

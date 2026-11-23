@@ -1188,8 +1188,11 @@ void COptionsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, 
 			continue;
 		if (!StrValue.isEmpty() && CurValue == StrValue)
 			StrValue.clear();
-		else
-			m_pBox->DelValue(Name, CurValue);
+		else {
+			SB_STATUS Status = m_pBox->DelValue(Name, CurValue);
+			if (!Status)
+				throw Status;
+		}
 	}
 
 	if (!StrValue.isEmpty()) {
@@ -1241,9 +1244,10 @@ QString COptionsWindow::ReadTextSafe(const QString& Name, const QString& Default
 	return Default;
 }
 
-void COptionsWindow::SaveConfig()
+bool COptionsWindow::SaveConfig()
 {
 	bool UpdatePaths = false;
+	bool Success = true;
 
 	m_pBox->SetRefreshOnChange(false);
 
@@ -1297,6 +1301,7 @@ void COptionsWindow::SaveConfig()
 	}
 	catch (SB_STATUS Status)
 	{
+		Success = false;
 		theGUI->CheckResults(QList<SB_STATUS>() << Status, theGUI);
 	}
 
@@ -1305,6 +1310,7 @@ void COptionsWindow::SaveConfig()
 
 	if (UpdatePaths)
 		TriggerPathReload();
+	return Success;
 }
 
 bool COptionsWindow::apply()
@@ -1330,6 +1336,11 @@ bool COptionsWindow::apply()
 	}
 	else
 	{
+		if (m_ConfigDirty) {
+			if (!m_pBox->GetAPI()->IsConnected())
+				return false;
+			LoadConfig();
+		}
 		if (m_GeneralChanged) {
 			auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 			if (ui.chkEncrypt->isChecked() && !QFile::exists(pBoxEx->GetBoxImagePath())) {
@@ -1341,7 +1352,8 @@ bool COptionsWindow::apply()
 			}
 		}
 
-		SaveConfig();
+		if (!SaveConfig())
+			return false;
 	}
 
 	LoadConfig();
@@ -1468,7 +1480,7 @@ void COptionsWindow::OnTab(QWidget* pTab)
 	}
 	else 
 	{
-		if (m_ConfigDirty)
+		if (m_ConfigDirty && m_pBox->GetAPI()->IsConnected())
 			LoadConfig();
 
 		UpdateCurrentTab();
@@ -1777,45 +1789,13 @@ bool COptionsWindow::SaveIniSection()
 	if (!CIniHighlighter::ValidateIniComments(Section, this))
 		return false;
 
-	m_ConfigDirty = true;
-
-	/*m_pBox->SetRefreshOnChange(false);
-
-	// Note: an incremental update would be more elegant but it would change the entry order in the ini,
-	//			hence it's better for the user to fully rebuild the section each time.
-	//
-	for (QList<QPair<QString, QString>>::const_iterator I = m_Settings.begin(); I != m_Settings.end(); ++I)
-		m_pBox->DelValue(I->first, I->second);
-
-	//QList<QPair<QString, QString>> NewSettings;
-	//QList<QPair<QString, QString>> OldSettings = m_Settings;
-
-	QStringList Section = SplitStr(ui.txtIniSection->toPlainText(), "\n");
-	foreach(const QString& Line, Section)
-	{
-		if (Line.isEmpty())
-			return;
-		StrPair Settings = Split2(Line, "=");
-		
-		//if (!OldSettings.removeOne(Settings))
-		//	NewSettings.append(Settings);
-
-		m_pBox->AppendText(Settings.first, Settings.second);
+	m_ConfigDirty = true; // A reported failure can still leave partially applied changes.
+	SB_STATUS Status = m_pBox->SbieIniSet(m_pBox->GetName(), "", Section);
+	if (!Status) {
+		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
+		return false;
 	}
 
-	//for (QList<QPair<QString, QString>>::const_iterator I = OldSettings.begin(); I != OldSettings.end(); ++I)
-	//	m_pBox->DelValue(I->first, I->second);
-	//
-	//for (QList<QPair<QString, QString>>::const_iterator I = NewSettings.begin(); I != NewSettings.end(); ++I)
-	//	m_pBox->AppendText(I->first, I->second);
-
-	m_pBox->SetRefreshOnChange(true);
-	m_pBox->CommitIniChanges();*/
-
-	//m_pBox->GetAPI()->SbieIniSet(m_pBox->GetName(), "", ui.txtIniSection->toPlainText());
-	m_pBox->SbieIniSet(m_pBox->GetName(), "", Section);
-
-	//LoadIniSection();
 	return true;
 }
 

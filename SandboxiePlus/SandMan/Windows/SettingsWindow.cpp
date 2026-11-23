@@ -757,6 +757,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
 	connect(ui.btnCheckCompat, SIGNAL(clicked(bool)), this, SLOT(OnCheckCompat()));
 	m_CompatLoaded = false;
+	m_SettingsDirty = false;
 	m_CompatChanged = false;
 	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
 	m_UpdateTemplatesText = ui.lblUpdateTemplates->text();
@@ -2466,8 +2467,13 @@ bool CSettingsWindow::apply()
 		if (!SaveIniSection())
 			return false;
 	}
-	else
+	else {
+		ReloadDirtySettings();
+		if (m_SettingsDirty)
+			return false;
 		SaveSettings();
+	}
+	m_SettingsDirty = false;
 	LoadSettings();
 	return true;
 }
@@ -2589,9 +2595,21 @@ void CSettingsWindow::OnTab()
 	OnTab(ui.tabs->currentWidget());
 }
 
+void CSettingsWindow::ReloadDirtySettings()
+{
+	// LoadSettings skips the service-backed fields while disconnected, so keep the invalidation until it can read them.
+	if (!m_SettingsDirty || !theAPI->IsConnected())
+		return;
+	m_SettingsDirty = false;
+	LoadSettings();
+}
+
 void CSettingsWindow::OnTab(QWidget* pTab)
 {
 	m_pCurrentTab = pTab;
+
+	if (pTab != ui.tabEdit)
+		ReloadDirtySettings();
 
 	if (pTab == ui.tabSupport)
 	{
@@ -3129,6 +3147,7 @@ void CSettingsWindow::OnSaveIni()
 	if (!SaveIniSection())
 		return;
 	SetIniEdit(false);
+	m_SettingsDirty = false;
 	LoadSettings();
 }
 
@@ -3168,18 +3187,19 @@ bool CSettingsWindow::SaveIniSection()
 	if (!CIniHighlighter::ValidateIniComments(Section, this))
 		return false;
 
-	if (!theAPI->IsConnected())
+	if (!theAPI->IsConnected()) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("Sandboxie is not connected."));
 		return false;
+	}
 
-	//theAPI->SbieIniSet("GlobalSettings", "", ui.txtIniSection->toPlainText());
+	m_SettingsDirty = true; // A reported failure can still leave partially applied changes.
 	SB_STATUS Status = theAPI->SbieIniSet("GlobalSettings", "", Section);
-	if (Status.IsError()) {
+	if (!Status) {
 		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
 		return false;
 	}
 	LoadCompat(false, true);
 
-	//LoadIniSection();
 	return true;
 }
 

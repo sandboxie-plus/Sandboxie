@@ -211,6 +211,8 @@ protected:
 	bool	m_SkipSaveOnToggle; // Skip saving to config when applying reset settings
 	bool	m_CompatLoaded;
 	QString m_UpdateTemplatesText;
+	bool	m_SettingsDirty;
+	void	ReloadDirtySettings();
 	QString m_NewPassword;
 	bool	m_MessagesChanged;
 	bool	m_WarnProgsChanged;

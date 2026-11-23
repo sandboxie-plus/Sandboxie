@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed incorrect pending-change highlighting and Apply behavior for AI Integration settings
+- fixed ignored INI list and boolean write errors and SandMan discarding pending options or raw INI edits after a reported save failure, including sandbox Apply/OK writing stale structured settings right after cancelling a partial raw save
 
 
 

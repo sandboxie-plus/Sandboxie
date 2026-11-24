@@ -34,9 +34,9 @@ public:
 	{
 		eWaiting = 0, 
 		eReading,	// reading request
-		eHandling,	// passed controll to handler 
+		eHandling,	// passed control to handler 
 		eFailing,
-		eWriting,	// writign resposne
+		eWriting,	// writing response
 	};
 
 	QString			GetPath()													{return m_RequestPath;}

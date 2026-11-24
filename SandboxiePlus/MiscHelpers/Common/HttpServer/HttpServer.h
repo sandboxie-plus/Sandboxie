@@ -43,7 +43,7 @@ public:
 	//
 	// Anything that is not an <address>:<port> pair is taken as a local socket
 	// name and validated as one. A string that clearly *meant* to be an endpoint
-	// but is malformed - a bad port, an unparseable address - is rejected rather
+	// but is malformed - a bad port, an unparsable address - is rejected rather
 	// than silently becoming a pipe called "1.2.3.4:99999".
 	//
 	// Construction never throws: on failure the server simply is not listening,

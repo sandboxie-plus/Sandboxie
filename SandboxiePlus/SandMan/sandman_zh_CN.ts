@@ -311,7 +311,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Engine/BoxEngine.cpp" line="200"/>
         <source>Failed to initialize the script engine, not enough memory or memory access blocked by third-party software.</source>
-        <translation type="unfinished"></translation>
+        <translation>脚本引擎初始化失败，内存不足或内存访问被第三方软件阻止。</translation>
     </message>
     <message>
         <location filename="Engine/BoxEngine.cpp" line="253"/>
@@ -401,28 +401,29 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="Boxes/BoxReport.cpp" line="122"/>
         <source>Compressing Logs</source>
-        <translation type="unfinished">正在压缩日志</translation>
+        <translation>正在压缩日志</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="150"/>
         <source>Compressing Dumps</source>
-        <translation type="unfinished">正在压缩转储</translation>
+        <translation>正在压缩转储</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="187"/>
         <source>Submitting report...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在提交报告……</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="255"/>
         <source>Failed to submit report, error %1
 Try submitting without the log attached.</source>
-        <translation type="unfinished"></translation>
+        <translation>提交报告失败，错误 %1
+请尝试在不附加日志的情况下提交。</translation>
     </message>
     <message>
         <location filename="Boxes/BoxReport.cpp" line="257"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
-        <translation type="unfinished">您的问题报告已成功提交，感谢。</translation>
+        <translation>您的问题报告已成功提交，感谢。</translation>
     </message>
 </context>
 <context>
@@ -715,12 +716,12 @@ Try submitting without the log attached.</source>
         <location filename="Wizards/NewBoxWizard.cpp" line="366"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="569"/>
         <source>Use a random GUID as sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>使用随机 GUID 作为沙箱名称。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="367"/>
         <source>Generate a new GUID. A non-GUID name can be copied to the alias field. Uncheck to restore the previous name; alias edits are kept.</source>
-        <translation type="unfinished"></translation>
+        <translation>生成一个新的 GUID。非 GUID 名称可复制到别名字段。取消勾选可恢复之前的名称；别名编辑内容将保留。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="400"/>
@@ -858,17 +859,17 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="569"/>
         <source>Generate a new GUID</source>
-        <translation type="unfinished"></translation>
+        <translation>生成一个新的 GUID。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="577"/>
         <source>Replace alias?</source>
-        <translation type="unfinished"></translation>
+        <translation>替换别名？</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="578"/>
         <source>The alias field is not empty. Replace it with the current sandbox name?</source>
-        <translation type="unfinished"></translation>
+        <translation>别名字段不为空。是否将其替换为当前沙箱名称？</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="648"/>
@@ -1216,7 +1217,7 @@ Find String:</source>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1398,7 +1399,7 @@ You can click Finish to close this wizard.</oldsource>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="49"/>
         <source>Show INI Line Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>显示 INI 的行号</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="61"/>
@@ -1457,7 +1458,7 @@ You can click Finish to close this wizard.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/ExitDialog.h" line="44"/>
         <source>Yes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>是（%1）</translation>
     </message>
 </context>
 <context>
@@ -1758,72 +1759,72 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="25"/>
         <source>empty endpoint name</source>
-        <translation type="unfinished"></translation>
+        <translation>端点名称为空</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="37"/>
         <source>&apos;%1&apos; looks like a bracketed IPv6 endpoint but is not one</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 看起来像带方括号的 IPv6 端点，但并不是</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="66"/>
         <source>&apos;%1&apos; is not a valid port</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 不是有效的端口</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="73"/>
         <source>&apos;%1&apos; is not a valid IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 不是有效的 IP 地址</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="92"/>
         <source>empty local socket name</source>
-        <translation type="unfinished"></translation>
+        <translation>本地套接字名称为空</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="100"/>
         <source>local socket name is too long (%1 characters, 247 max)</source>
-        <translation type="unfinished"></translation>
+        <translation>本地套接字名称过长（%1 个字符，最多 247 个）</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="105"/>
         <source>local socket name must not contain a path separator</source>
-        <translation type="unfinished"></translation>
+        <translation>本地套接字名称不得包含路径分隔符</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="110"/>
         <source>&apos;%1&apos; is not a usable local socket name</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 不是可用的本地套接字名称</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="117"/>
         <source>local socket name must not contain control characters</source>
-        <translation type="unfinished"></translation>
+        <translation>本地套接字名称不得包含控制字符</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="135"/>
         <source>Failed to listen on %1</source>
-        <translation type="unfinished"></translation>
+        <translation>无法监听 %1</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="143"/>
         <source>Invalid local socket name &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>无效的本地套接字名称 &apos;%1&apos;：%2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="150"/>
         <source>Invalid endpoint &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>无效的端点 &apos;%1&apos;：%2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="196"/>
         <source>Failed to listen on local socket %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>无法监听本地套接字 %1：%2</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="325"/>
         <source>recived new request, befoure the previouse response was completly sent</source>
-        <translation type="unfinished"></translation>
+        <translation>在上一个响应完全发送之前收到了新请求</translation>
     </message>
 </context>
 <context>
@@ -1831,37 +1832,37 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
         <source>recived invalid HTTP request</source>
-        <translation type="unfinished"></translation>
+        <translation>收到了无效的 HTTP 请求</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="99"/>
         <source>recived unsupported HTTP request %1 from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>从 %2 收到了不支持的 HTTP 请求 %1</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="127"/>
         <source>recived invalid POST request %1</source>
-        <translation type="unfinished"></translation>
+        <translation>收到了无效的 POST 请求 %1</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="146"/>
         <source>recived POST/PUT request without Content-Length !!!</source>
-        <translation type="unfinished"></translation>
+        <translation>收到了无 Content-Length 的 POST/PUT 请求！！！</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="176"/>
         <source>recived GET request with attached data ?!</source>
-        <translation type="unfinished"></translation>
+        <translation>收到了附带数据的 GET 请求？！</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="292"/>
         <source>recived a POST payload before any part header</source>
-        <translation type="unfinished"></translation>
+        <translation>在任何部分标头之前收到了 POST 负载</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="429"/>
         <source>Error While Sending response</source>
-        <translation type="unfinished"></translation>
+        <translation>发送响应时出错</translation>
     </message>
 </context>
 <context>
@@ -1902,7 +1903,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2680"/>
         <source>Line %1: Semicolons (;) are not supported as comment markers. Use # instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>第 %1 行：不支持用分号（;）作为注释标记。请改用 #。</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="2909"/>
@@ -2092,7 +2093,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.h" line="49"/>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>无限制</translation>
     </message>
 </context>
 <context>
@@ -2118,83 +2119,85 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="17"/>
         <source>Connect an AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>连接 AI 智能体</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="22"/>
         <source>An AI agent can read your sandbox configuration, the bundled documentation and diagnostic data, and help you work out why something does not run in a sandbox.
 
 It is off until you turn it on, it is not reachable from inside a sandbox, and it has to be authorised with a code shown on your screen before it can do anything.</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 智能体可以读取你的沙箱配置、随附文档和诊断数据，并帮助你排查某项内容为何无法在沙箱中运行。
+
+在你启用它之前，它处于关闭状态；它无法从沙箱内部访问；并且在它执行任何操作之前，必须先使用屏幕上显示的代码进行授权。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="34"/>
         <source>Which client do you want to use?</source>
-        <translation type="unfinished"></translation>
+        <translation>你想使用哪个客户端？</translation>
     </message>
-    <message>
+	<message>
         <location filename="Mcp/McpConnectDialog.cpp" line="50"/>
         <location filename="Mcp/McpConnectDialog.cpp" line="144"/>
         <source>Configure It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>为我配置</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="51"/>
         <source>Start It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>为我启动</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="52"/>
         <location filename="Mcp/McpConnectDialog.cpp" line="219"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>复制</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="91"/>
         <source>   (found, already configured)</source>
-        <translation type="unfinished"></translation>
+        <translation>   （已找到，已配置）</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="93"/>
         <source>   (found)</source>
-        <translation type="unfinished"></translation>
+        <translation>   （已找到）</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="95"/>
         <source>   (not found)</source>
-        <translation type="unfinished"></translation>
+        <translation>   （未找到）</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="102"/>
         <source>Turn Off</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="102"/>
         <source>Turn On</source>
-        <translation type="unfinished"></translation>
+        <translation>开启</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="106"/>
         <source>The connection is ON. A client can connect now.</source>
-        <translation type="unfinished"></translation>
+        <translation>连接已开启。客户端现在可以连接。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="107"/>
         <source>The connection is OFF. Turn it on here, or let the client ask for it - Sandboxie-Plus will offer when something tries to connect.</source>
-        <translation type="unfinished"></translation>
+        <translation>连接已关闭。可在此处开启，或让客户端请求连接——当有程序尝试连接时，Sandboxie-Plus 会提示。</translation>
     </message>
     <message numerus="yes">
         <location filename="Mcp/McpConnectDialog.cpp" line="112"/>
         <source>Forget %1 Remembered Program(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>忘记 %1 个已记住的程序</numerusform>
         </translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="115"/>
         <source>SbieMcp.exe was not found next to SandMan, so this installation cannot accept agent connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>在 SandMan 旁边未找到 SbieMcp.exe，因此此安装无法接受智能体连接。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="138"/>
@@ -2202,12 +2205,15 @@ It is off until you turn it on, it is not reachable from inside a sandbox, and i
 %1
 
 Your other servers are kept; only the Sandboxie entry is added or updated, and the file is backed up first.</source>
-        <translation type="unfinished"></translation>
+        <translation>配置文件：
+%1
+
+将保留你的其他服务器；仅添加或更新 Sandboxie 条目，并且会先备份文件。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="144"/>
         <source>Update It For Me</source>
-        <translation type="unfinished"></translation>
+        <translation>为我更新</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="149"/>
@@ -2217,12 +2223,17 @@ Or let Sandboxie-Plus start it for you, in a folder of its own:
 %2
 
 The configuration written there reaches that one session and nothing else you do with it.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+
+或者让 Sandboxie-Plus 在它自己的文件夹中为你启动它：
+%2
+
+写入该处的配置只作用于那一个会话，不会影响你用它做的其他事情。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="180"/>
         <source>%1 is configured. Restart it if it is running, so it picks up the change.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 已配置。如果它正在运行，请重启它以应用更改。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="182"/>
@@ -2230,34 +2241,39 @@ The configuration written there reaches that one session and nothing else you do
 
 The previous configuration was kept as:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+先前的配置已保留为：
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="185"/>
         <source>MCP: wrote the agent configuration for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：已写入 %1 的智能体配置</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="207"/>
         <source>MCP: started %1 in %2</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：已在 %2 中启动 %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="218"/>
         <source>Copied</source>
-        <translation type="unfinished"></translation>
+        <translation>已复制</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="232"/>
         <source>Forget these programs? Each will have to be authorised with a code again.
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>忘记这些程序？每个程序都需要再次通过代码授权。
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConnectDialog.cpp" line="238"/>
         <source>MCP: the remembered agent programs were forgotten</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：已忘记记住的智能体程序</translation>
     </message>
 </context>
 <context>
@@ -2265,98 +2281,98 @@ The previous configuration was kept as:
     <message>
         <location filename="Mcp/McpConsent.cpp" line="62"/>
         <source>Look, do not touch</source>
-        <translation type="unfinished"></translation>
+        <translation>只看，不改动</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="63"/>
         <source>Ask only for risky things</source>
-        <translation type="unfinished"></translation>
+        <translation>仅对风险操作询问</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="64"/>
         <source>Do not ask, just tell me</source>
-        <translation type="unfinished"></translation>
+        <translation>不询问，只告知我</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="65"/>
         <source>Ask before every change</source>
-        <translation type="unfinished"></translation>
+        <translation>每次更改前都询问</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="73"/>
         <source>The agent can read and diagnose, and every attempt to change anything is refused without asking you.</source>
-        <translation type="unfinished"></translation>
+        <translation>智能体可以读取和诊断，任何更改尝试都会被拒绝，且不会询问你。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="76"/>
         <source>Ordinary setting changes happen without interrupting you. You are still asked before anything that cannot be undone, runs a program, sends something off this computer, or opens a sandbox up.</source>
-        <translation type="unfinished"></translation>
+        <translation>普通设置更改不会打断你。对于无法撤销、运行程序、将内容发送到本机之外或打开沙箱的操作，仍会先询问你。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="80"/>
         <source>The agent acts without asking. Everything it does is still listed here and written to the audit log - you are not asked, but you are told.</source>
-        <translation type="unfinished"></translation>
+        <translation>智能体会直接执行而不询问。它所做的所有事情仍会列在此处并写入审计日志——不询问你，但会告知你。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="83"/>
         <source>Nothing changes, starts or stops until you say so.</source>
-        <translation type="unfinished"></translation>
+        <translation>未经你确认，不会更改、启动或停止任何内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="107"/>
         <source>refused, because the agent is set to look but not touch: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>已拒绝，因为智能体设置为只看不改动：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="108"/>
         <source>refused: the agent may not change anything</source>
-        <translation type="unfinished"></translation>
+        <translation>已拒绝：智能体不得更改任何内容</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="117"/>
         <source>done without asking: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>未经询问已执行：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="118"/>
         <source>allowed automatically (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>已自动允许（%1）</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="128"/>
         <source>another confirmation was already open</source>
-        <translation type="unfinished"></translation>
+        <translation>另一个确认窗口已打开</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="142"/>
         <source>allowed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>已允许：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="142"/>
         <source>refused: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>已拒绝：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="144"/>
         <source>allowed by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>用户已允许</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="144"/>
         <source>refused by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>用户已拒绝</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="151"/>
         <location filename="Mcp/McpConsent.cpp" line="204"/>
         <source>An AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>一个 AI 智能体</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="153"/>
         <source>%1 wants to change the configuration of sandbox %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 想要更改沙箱 %2 的配置。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="159"/>
@@ -2364,7 +2380,10 @@ The previous configuration was kept as:
 
 Its reason, in its own words:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+其原因（按其原话）：
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="162"/>
@@ -2372,59 +2391,69 @@ Its reason, in its own words:
 
 These are the changes:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+更改如下：
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="171"/>
         <source>
   remove  %1 = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  移除  %1 = %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="173"/>
         <source>
   add     %1 = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  添加     %1 = %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="175"/>
         <source>
   change  %1 = %2   (was %3)</source>
-        <translation type="unfinished"></translation>
+        <translation>
+  更改  %1 = %2   （原为 %3）</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="178"/>
         <source>   &lt;- not a known setting</source>
-        <translation type="unfinished"></translation>
+        <translation>   &lt;- 不是已知设置</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="184"/>
         <source>
 
 Warning: at least one of these is not a setting Sandboxie recognises. Unknown settings are ignored silently rather than reported as an error, so such a change would appear to work and have no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+警告：其中至少有一项不是 Sandboxie 识别的设置。未知设置会被静默忽略，而不会报告为错误，因此此类更改看起来会生效，但实际上没有效果。</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="197"/>
         <source>Confirm configuration change</source>
-        <translation type="unfinished"></translation>
+        <translation>确认配置更改</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="197"/>
         <source>Apply These Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>应用这些更改</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="198"/>
         <source>change %1 setting(s) on %2</source>
-        <translation type="unfinished"></translation>
+        <translation>更改 %2 上的 %1 项设置</translation>
     </message>
     <message>
         <location filename="Mcp/McpConsent.cpp" line="205"/>
         <source>%1 wants to do the following.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 想要执行以下操作。
+
+%2</translation>
     </message>
 </context>
 <context>
@@ -2432,139 +2461,139 @@ Warning: at least one of these is not a setting Sandboxie recognises. Unknown se
     <message>
         <location filename="Mcp/McpServer.cpp" line="94"/>
         <source>released a session whose client exited, discarding its test copies</source>
-        <translation type="unfinished"></translation>
+        <translation>释放了一个客户端已退出的会话，并丢弃其测试副本</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="98"/>
         <source>the agent</source>
-        <translation type="unfinished"></translation>
+        <translation>智能体</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="100"/>
         <source>disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>已断开连接</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="103"/>
         <source>%1 exited; its test copies were discarded</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 已退出；其测试副本已丢弃</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="104"/>
         <source>%1 exited</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 已退出</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="142"/>
         <source>refusing to listen on &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>拒绝监听 &apos;%1&apos;：%2</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="153"/>
         <source>MCP server could not listen on &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP 服务器无法监听 &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="163"/>
         <source>documentation pack mounted: %1 pages from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>已挂载文档包：来自 %2 的 %1 个页面</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="166"/>
         <source>no documentation pack found - docs lookups will be unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>未找到文档包——文档查询将不可用</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="180"/>
         <source>knowledge base: %1 entries from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>知识库：来自 %2 的 %1 个条目</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="183"/>
         <source>no troubleshooting knowledge base found</source>
-        <translation type="unfinished"></translation>
+        <translation>未找到故障排除知识库</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="192"/>
         <source>audit log: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>审计日志：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="203"/>
         <source>MCP server listening on &apos;%1%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP 服务器正在监听 &apos;%1%2&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="272"/>
         <source>the connecting process could not be identified</source>
-        <translation type="unfinished"></translation>
+        <translation>无法识别连接进程</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="283"/>
         <source>process %1 is sandboxed, in box &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>进程 %1 已在沙箱中，位于沙箱 &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="288"/>
         <source>box membership of process %1 could not be established</source>
-        <translation type="unfinished"></translation>
+        <translation>无法确定进程 %1 所属的沙箱</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="297"/>
         <source>refused an MCP connection: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>拒绝了一个 MCP 连接：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="299"/>
         <source>Refused: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>已拒绝：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="307"/>
         <source>refused an MCP connection from origin &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>拒绝了来自源 &apos;%1&apos; 的 MCP 连接</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="308"/>
         <source>Origin not allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>不允许该源</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="315"/>
         <source>The MCP endpoint accepts POST only</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP 端点仅接受 POST</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="344"/>
         <source>rejected an MCP message: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>拒绝了一条 MCP 消息：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="414"/>
         <source>authorised without a code, because asking for one is turned off</source>
-        <translation type="unfinished"></translation>
+        <translation>未使用代码即已授权，因为已关闭要求输入代码</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="448"/>
         <source>asked for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>请求了 %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="467"/>
         <source>Your write-up is now out of date - this is not in it. Call report_compose again so that what the user is offered describes what you have actually done.</source>
-        <translation type="unfinished"></translation>
+        <translation>你的报告现已过时——其中没有这一项。请再次调用 report_compose，以便向用户提供的内容描述你实际做了什么。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="469"/>
         <source>You have changed something on this machine and nothing is written up yet. Call report_compose now, with what you know so far - the symptom and what you have ruled out is already worth having - and again as you learn more. The user is offered whatever you composed last, and they may close the agent window at any moment.</source>
-        <translation type="unfinished"></translation>
+        <translation>你已更改此机器上的某些内容，但尚未撰写任何报告。请立即调用 report_compose，写入你目前所知的内容——症状和已排除项就已经值得记录——并在了解更多后再次调用。向用户提供的是你最后撰写的内容，而他们可能随时关闭智能体窗口。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="492"/>
         <source>Method not found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>未找到方法：%1</translation>
     </message>
-    <message>
+	<message>
         <location filename="Mcp/McpServer.cpp" line="529"/>
         <source>This server exposes the local Sandboxie-Plus installation on this machine.
 
@@ -2611,72 +2640,116 @@ Compose on a success as readily as on a failure. A failure report tells the proj
 You do not send it - that is the user&apos;s, and you have no tool for it. When you are done, tell them to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: it opens your report for them to read, correct and send to the project&apos;s own tracker, which needs no account of any kind. Say once that sending it is worth doing and why, then leave it with them - they may say no, and that is a normal answer.
 
 Fill in what you ruled out, not only what you concluded. A cause is made identifiable by what it is not, and that is the field that turns one report into something that recognises the same fault on somebody else&apos;s machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>此服务器提供对本机上本地 Sandboxie-Plus 安装的访问。
+
+你可以直接阅读文档和设置架构——这些工具无需授权，因为它们返回的是 Sandboxie 随附的内容，而不是关于本机的任何信息。
+
+要查看本机本身——存在哪些沙盒、正在运行什么、什么被拒绝了——请先授权。不带参数调用 &apos;pair&apos;，Sandboxie-Plus 会向用户显示一个六位代码；向用户询问该代码，并带上它再次调用 &apos;pair&apos;。不要猜测代码。
+
+所有工具从一开始就列在列表中，包括你尚不能使用的工具：这些工具在你完成配对前会拒绝，并在拒绝时说明原因。列表中的内容不会出现或消失，因此无需刷新——也没有必要让用户重新连接。
+
+一条固定规则，且不可省略：始终用 report_compose 保持撰写报告。一旦有了症状和怀疑——在找到原因之前，更不用说修复之前——就立即撰写一份，并在你更改、运行或排除每一项之后再次撰写。它会替换上一份，因此经常撰写没有代价，也没有需要管理的部分状态。
+
+并且要查明它是否有效。当用户告诉你问题已消失——或者并未消失——再次撰写并设置 confirmed_by_user，以记录结论是用户的而非你的。如果用户没有说，就问：&apos;现在能正常工作吗？&apos; 值得花一轮对话，而且它是报告中唯一最有价值的一行。在该标志设置之前，Sandboxie-Plus 会认为本次运行尚未完成：它会向用户显示自行结束运行的按钮，并在发送任何内容之前自行询问该问题。
+
+把它当作工作的一部分，而不是最后才做的文书工作。Sandboxie-Plus 会保留你最新的报告，并在用户关闭智能体窗口时提供给他们，而他们可能随时关闭——如果你什么都没撰写，就不会提供任何内容，你推导出的一切都会对项目丢失。完成一次运行、修复了某些问题却什么都没写，就是一次失败的运行，无论用户多满意。
+
+然后先阅读再行动：先 sandboxie_version，因为不同版本的设置和修复不同；然后 box_list；然后针对相关沙盒调用 box_get_config。注意 box_get_config 只显示该沙盒上设置的内容——从模板和全局默认继承的值不会列出，因此某项设置缺失并不一定意味着它未生效。
+
+关于设置有两个独立的真相来源，而且它们对大部分表面内容并不一致。config_schema 是判断设置是否存在、其语法是什么以及哪个版本添加或移除它的权威。随附文档（docs_search、docs_get、docs_for_setting）解释设置的含义，但只覆盖约五分之二。如果文档对某项设置只字未提，这并不是该设置不存在的证据——在告诉用户它不是真实设置之前，请检查 config_schema。反过来，永远不要编造设置名称：驱动程序会静默忽略未知名称而不是报告错误，因此拼写错误看起来完全就像一项没有效果的设置。
+
+当沙盒中某功能不工作时，有效的顺序是：box_processes 查看它是否在运行，box_diagnostics 查看 Sandboxie 本身反对什么，然后 trace_query 过滤到该沙盒以查看被拒绝的访问。如果跟踪已关闭，trace_query 会说明——请用户启用跟踪并重现问题，而不是基于空跟踪进行推理。
+
+沙盒通常有别名，用户就是这样称呼它们的。引用沙盒时使用 box_list 在 displayName 中显示的名称；名称或别名都可作为输入接受。
+
+诊断输出中的路径和账户名会被替换为 %User% 和 %Computer% 等标记。这是有意为之——不要要求用户撤销它，也不要把标记当作字面路径。
+
+有些工具会更改内容，每一个都会向用户准确显示将更改什么，并等待他们批准。你无法静默更改任何内容，因此不要试图弱化你所请求的内容——清晰的解释会获得批准，模糊的则不会。
+
+对于你不确定的修复，先测试：shadow_begin 将配置克隆到共享真实文件集的一次性副本，shadow_set 更改该副本，然后 shadow_commit 将差异复制回来——整个修复只需一次确认——或者 shadow_discard 将其丢弃。你实际尝试过的修复远比仅相信的修复更有价值。注意只有配置是一次性的：测试期间写入的文件会落在真实沙盒中，丢弃并不会撤销它们。
+
+对于你有把握的更改，或日常请求（例如强制程序进入沙盒），直接使用 box_apply_changes。无论哪种方式，先运行 config_validate。
+
+如果你即将更改文件而不是设置，先提供 snapshot_create——它几乎瞬间完成并使更改可撤销——但它只在沙盒中没有运行任何内容时有效，因此必须在你启动任何内容之前进行。
+
+要查看修复是否真正有效，box_run 会在沙盒内启动程序。用户会看到你编写的准确命令行，并且必须在任何内容运行前同意，因此请写出你的真实意图。注意它会针对沙盒的当前设置运行：用 shadow_set 暂存的更改不会生效，因此如果运行是为了测试该更改，请先提交。
+
+这里没有任何操作会故意删除沙盒或其内容。
+
+随着进展持续撰写报告，使用 report_compose，而不是留到最后。一旦你知道值得报告的内容就撰写——症状和你已排除的内容就已经值得记录——并在了解更多时再次撰写。每次调用都会替换上一次。
+
+原因不是记账。Sandboxie-Plus 会保留你最新的报告，并在用户关闭智能体窗口时提供给他们，而他们可能随时关闭——你的控制台关闭不会等待你想完。如果你什么都没撰写，就不会提供任何内容，整个运行都会对项目丢失。一份被发送的粗略报告胜过一份从未存在过的精炼报告。
+
+成功时也要像失败时一样撰写。失败报告告诉项目还有什么仍然损坏；成功报告告诉它修复是什么，而这几乎是它最常收不到的报告。
+
+你不是发送者——那是用户的事，而且你没有相应的工具。完成后，告诉用户按“完成”，即 Sandboxie-Plus 智能体窗口底部的绿色对勾：它会打开你的报告供用户阅读、更正并发送到项目自己的跟踪器，无需任何账户。说一次发送它值得做以及为什么，然后交给他们——他们可能说不，这是正常的回答。
+
+填写你排除了什么，而不仅仅是你得出了什么结论。原因通过它不是什么而变得可识别，而正是这个字段让一份报告变成能在别人机器上识别同一故障的东西。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="788"/>
         <source>That needs authorisation: it reads this machine rather than the documentation. Call the pair tool, read the code Sandboxie-Plus displays to the user, and submit it. The documentation and schema tools work without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>这需要授权：它读取本机而不是文档。调用 pair 工具，读取 Sandboxie-Plus 向用户显示的代码，并提交它。文档和架构工具无需授权即可使用。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="807"/>
         <source>Unknown tool: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>未知工具：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="817"/>
         <source>This connection is already authorised.</source>
-        <translation type="unfinished"></translation>
+        <translation>此连接已获授权。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="825"/>
         <source>Sandboxie-Plus is now showing a six-digit code. Ask the user to read it to you, then call pair again with that code. It is valid for five minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 现在正在显示一个六位代码。请用户读给你听，然后带上该代码再次调用 pair。代码有效期为五分钟。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="835"/>
         <source>an agent was authorised: %1 (process %2)</source>
-        <translation type="unfinished"></translation>
+        <translation>一个智能体已获授权：%1（进程 %2）</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="836"/>
         <source>unidentified client</source>
-        <translation type="unfinished"></translation>
+        <translation>未识别的客户端</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="843"/>
         <source>Authorised. Every tool you can see will now answer, including the ones that were refusing. Changes still need the user to confirm them one at a time.</source>
-        <translation type="unfinished"></translation>
+        <translation>已授权。你现在能看到的所有工具都会响应，包括之前拒绝的工具。更改仍需用户逐一确认。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="848"/>
         <source>No code has been requested. Call pair with no arguments first.</source>
-        <translation type="unfinished"></translation>
+        <translation>尚未请求代码。请先不带参数调用 pair。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="852"/>
         <source>That code has expired. Call pair with no arguments to request a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>该代码已过期。不带参数调用 pair 以请求新代码。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="856"/>
         <source>Too many incorrect attempts; the code has been invalidated. Call pair with no arguments to request a new one, and ask the user to read it again.</source>
-        <translation type="unfinished"></translation>
+        <translation>错误尝试次数过多；代码已失效。不带参数调用 pair 以请求新代码，并请用户再次读取。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="861"/>
         <source>That code is not correct. Ask the user to read it again from the Sandboxie-Plus window.</source>
-        <translation type="unfinished"></translation>
+        <translation>该代码不正确。请用户从 Sandboxie-Plus 窗口再次读取。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="906"/>
         <source>the user allowed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>用户已允许：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="907"/>
         <source>the user refused: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>用户已拒绝：%1（%2）</translation>
     </message>
 </context>
 <context>
@@ -2684,27 +2757,27 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
     <message>
         <location filename="Mcp/McpSession.cpp" line="253"/>
         <source>no code had been requested</source>
-        <translation type="unfinished"></translation>
+        <translation>未请求过代码</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="254"/>
         <source>wrong code</source>
-        <translation type="unfinished"></translation>
+        <translation>代码错误</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="255"/>
         <source>the code had expired</source>
-        <translation type="unfinished"></translation>
+        <translation>代码已过期</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="256"/>
         <source>too many attempts</source>
-        <translation type="unfinished"></translation>
+        <translation>尝试次数过多</translation>
     </message>
     <message>
         <location filename="Mcp/McpSession.cpp" line="257"/>
         <source>refused</source>
-        <translation type="unfinished"></translation>
+        <translation>已拒绝</translation>
     </message>
 </context>
 <context>
@@ -2713,213 +2786,217 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
         <location filename="Mcp/McpSessionWindow.cpp" line="41"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="470"/>
         <source>AI Agent Session - Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 智能体会话 - Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="56"/>
         <source>For this session:</source>
-        <translation type="unfinished"></translation>
+        <translation>本次会话：</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="80"/>
         <source>Give the agent this code:</source>
-        <translation type="unfinished"></translation>
+        <translation>将此代码提供给智能体：</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="101"/>
         <source>Do not ask again for this program</source>
-        <translation type="unfinished"></translation>
+        <translation>不再询问此程序</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="107"/>
         <source>What this agent has done:</source>
-        <translation type="unfinished"></translation>
+        <translation>此智能体已执行的操作：</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="111"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>时间</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="111"/>
         <source>What happened</source>
-        <translation type="unfinished"></translation>
+        <translation>发生了什么</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="118"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="422"/>
         <source>Waiting for you</source>
-        <translation type="unfinished"></translation>
+        <translation>正在等待你</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="121"/>
         <source>Nothing is waiting. Once authorised the agent can read your sandboxes freely; anything it wants to change, start or stop will appear here first, and nothing happens until you answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有等待中的操作。授权后，智能体可以自由读取你的沙盒；它想要更改、启动或停止的任何内容都会先显示在这里，在你答复之前不会发生任何事。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="145"/>
         <source>Allow</source>
-        <translation type="unfinished">允许</translation>
+        <translation>允许</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="146"/>
         <source>Refuse</source>
-        <translation type="unfinished"></translation>
+        <translation>拒绝</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="177"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="178"/>
         <source>Finish</source>
-        <translation type="unfinished"></translation>
+        <translation>完成</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="183"/>
         <source>End this session without sending anything.</source>
-        <translation type="unfinished"></translation>
+        <translation>结束此会话且不发送任何内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="206"/>
         <source>Sandboxie-Plus was closing, so the request was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 正在关闭，因此请求被拒绝</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="211"/>
         <location filename="Mcp/McpSessionWindow.cpp" line="580"/>
         <source>No agent is connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>未连接任何智能体。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="258"/>
         <source>%1 Asking cannot be turned off on this machine: AiAgentRequireConfirmation is set in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 此机器上无法关闭询问：Sandboxie.ini 中设置了 AiAgentRequireConfirmation。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="266"/>
         <source>this session starts at: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>此会话起始于：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="282"/>
         <source>you set this session to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>你将此会话设置为：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="372"/>
         <source>Valid for %1 minutes. Until it is entered the agent can do nothing. If you did not ask for this, ignore it.</source>
-        <translation type="unfinished"></translation>
+        <translation>有效期为 %1 分钟。在输入之前，智能体无法做任何事。如果你没有请求此操作，请忽略。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="382"/>
         <source>Skips this code next time. Anything able to run from %1 will then be authorised without asking.</source>
-        <translation type="unfinished"></translation>
+        <translation>下次跳过此代码。届时任何能从 %1 运行的内容都将无需询问即获授权。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="433"/>
         <source>Waiting for you - please answer</source>
-        <translation type="unfinished"></translation>
+        <translation>正在等待你——请答复</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="443"/>
         <source>AI Agent Session - waiting for you</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 智能体会话 - 正在等待你</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="517"/>
         <source>recorded that you confirmed the result</source>
-        <translation type="unfinished"></translation>
+        <translation>已记录你确认了结果</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="523"/>
         <source>wrote up what it has found - press Finish when you are done to read and send it</source>
-        <translation type="unfinished"></translation>
+        <translation>已撰写其发现——完成后按“完成”以阅读并发送</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="524"/>
         <source>updated its write-up of what it has found</source>
-        <translation type="unfinished"></translation>
+        <translation>已更新其发现报告</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="560"/>
         <source>Wrap up: read what the agent wrote and decide whether to send it.</source>
-        <translation type="unfinished"></translation>
+        <translation>收尾：阅读智能体撰写的内容，并决定是否发送。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="561"/>
         <source>The agent has not written anything up yet. Ask it to write up what it found - it has a tool for that - and this becomes available.</source>
-        <translation type="unfinished"></translation>
+        <translation>智能体尚未撰写任何内容。请它撰写其发现——它有相应的工具——然后此功能就可用。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="570"/>
         <source>the connection closed while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>请求等待期间连接已关闭，因此请求被拒绝</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="589"/>
         <source>the session was finished while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>请求等待期间会话已结束，因此请求被拒绝</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="633"/>
         <source>Close this window - and the agent connection with it?</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭此窗口——并同时断开智能体连接？</translation>
     </message>
-    <message>
+	<message>
         <location filename="Mcp/McpSessionWindow.cpp" line="637"/>
         <source>The agent has written up what it found, and closing does not send it. Finish instead - the green tick - to read it and decide; it is the only way what happened here reaches anyone else. Nothing is lost either way: the write-up is kept, and you can reopen this window and finish later.
 
-</source>
-        <translation type="unfinished"></translation>
+		</source>
+        <translation>智能体已撰写其发现，而关闭不会发送它。请改为按“完成”——绿色对勾——以阅读并决定；这是此处发生的事情传达给其他人的唯一方式。无论哪种方式都不会丢失：报告会被保留，你可以重新打开此窗口并在稍后完成。
+
+		</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="643"/>
         <source>A request is waiting for an answer, and closing refuses it.
 
-</source>
-        <translation type="unfinished"></translation>
+		</source>
+        <translation>有一个请求正在等待答复，关闭将拒绝它。
+
+		</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="648"/>
         <source>Disconnecting closes the agent connection as well: nothing can connect again until you turn it back on. Staying connected leaves it open, so the agent can carry on and this window comes back the next time it needs you.</source>
-        <translation type="unfinished"></translation>
+        <translation>断开连接也会关闭智能体连接：在你重新开启之前，任何内容都无法再次连接。保持连接则让它保持开放，智能体可以继续工作，下次需要你时此窗口会再次出现。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="654"/>
         <source>Close and Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭并断开连接</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="655"/>
         <source>Close, Stay Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭，保持连接</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="656"/>
         <source>Keep Open</source>
-        <translation type="unfinished"></translation>
+        <translation>保持打开</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="677"/>
         <source>the window was closed while a request was waiting, so it was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>请求等待期间窗口已关闭，因此请求被拒绝</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="681"/>
         <source>the window was closed, so the write-up was not sent</source>
-        <translation type="unfinished"></translation>
+        <translation>窗口已关闭，因此报告未发送</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="713"/>
         <source>the report was sent to the Sandboxie-Plus issue tracker</source>
-        <translation type="unfinished"></translation>
+        <translation>报告已发送到 Sandboxie-Plus 问题跟踪器</translation>
     </message>
     <message>
         <location filename="Mcp/McpSessionWindow.cpp" line="729"/>
         <source>the report was not sent - press Finish again if you change your mind</source>
-        <translation type="unfinished"></translation>
+        <translation>报告未发送——如果你改变主意，请再次按“完成”</translation>
     </message>
 </context>
 <context>
@@ -2927,124 +3004,126 @@ Fill in what you ruled out, not only what you concluded. A cause is made identif
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="32"/>
         <source>Send this to the Sandboxie-Plus project?</source>
-        <translation type="unfinished"></translation>
+        <translation>将此内容发送到 Sandboxie-Plus 项目？</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="42"/>
         <source>The agent wrote this up while it worked.</source>
-        <translation type="unfinished"></translation>
+        <translation>智能体在工作时撰写了此内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="43"/>
         <source>%1 wrote this up while it worked.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 在工作时撰写了此内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="50"/>
         <source>Sending it is how what happened here reaches the people who maintain Sandboxie. A fix that worked tells them what to recommend to the next person with the same problem - and that is the report they almost never get. One that did not work tells them what is still broken.
 
 Nothing is sent unless you choose to, and nothing goes without you reading it. Edit or delete anything below first - the second half was written by the agent and can contain anything it saw.</source>
-        <translation type="unfinished"></translation>
+        <translation>发送它是让此处发生的事情传达给 Sandboxie 维护者的方式。有效的修复会告诉他们该向遇到同样问题的下一个人推荐什么——而这几乎是他们最常收不到的报告。无效的修复则告诉他们还有什么仍然损坏。
+
+除非你选择发送，否则不会发送任何内容，而且没有你的阅读就不会发出任何内容。请先编辑或删除下面的任何内容——后半部分由智能体撰写，可能包含它看到的任何内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="84"/>
         <source>Detailed issue description</source>
-        <translation type="unfinished">详细问题描述</translation>
+        <translation>详细问题描述</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="92"/>
         <source>Is the problem actually gone?</source>
-        <translation type="unfinished"></translation>
+        <translation>问题真的消失了吗？</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="95"/>
         <source>The agent did not establish this, and it is the single most useful line in the report - it is what tells the project whether the fix it is reading about actually works. Answering is optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>智能体并未确认这一点，而它是报告中唯一最有价值的一行——它告诉项目正在阅读的修复是否真正有效。回答是可选的。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="101"/>
         <source>Yes - the problem is fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>是——问题已修复</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="102"/>
         <source>No - it is still there</source>
-        <translation type="unfinished"></translation>
+        <translation>否——问题仍然存在</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="114"/>
         <source>Attach Sandboxie.ini</source>
-        <translation type="unfinished">附加 Sandboxie.ini</translation>
+        <translation>附加 Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="118"/>
         <source>Attach Logs</source>
-        <translation type="unfinished">附加日志</translation>
+        <translation>附加日志</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="127"/>
         <source>Email address</source>
-        <translation type="unfinished">电子邮件地址</translation>
+        <translation>电子邮件地址</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="138"/>
         <source>Don&apos;t Send</source>
-        <translation type="unfinished"></translation>
+        <translation>不发送</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="140"/>
         <source>Send Report</source>
-        <translation type="unfinished"></translation>
+        <translation>发送报告</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="186"/>
         <source>The report could not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>报告无法发送。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="229"/>
         <source>the Sandboxie-Plus message log</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 消息日志</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="230"/>
         <source>the resource trace - everything every sandboxed program touched while it was on</source>
-        <translation type="unfinished"></translation>
+        <translation>资源跟踪——开启期间每个沙盒程序接触过的所有内容</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="232"/>
         <source>your whole Sandboxie.ini, which describes every sandbox you have</source>
-        <translation type="unfinished"></translation>
+        <translation>你完整的 Sandboxie.ini，其中描述了你拥有的每个沙盒</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="237"/>
         <source>any contact address, so nobody can reply to you about it</source>
-        <translation type="unfinished"></translation>
+        <translation>任何联系地址，因此没有人能就此回复你</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="239"/>
         <source>your address %1, so a maintainer can reply</source>
-        <translation type="unfinished"></translation>
+        <translation>你的地址 %1，以便维护者回复</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="241"/>
         <source>Selecting the partially checked state sends the message log but not the resource trace. Both can be read in the main window before you send.</source>
-        <translation type="unfinished"></translation>
+        <translation>选择部分选中状态会发送消息日志，但不发送资源跟踪。在发送前，两者都可以在主窗口中阅读。</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="244"/>
         <source>Sent with the report:</source>
-        <translation type="unfinished"></translation>
+        <translation>随报告发送：</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="246"/>
         <source>nothing but the text above</source>
-        <translation type="unfinished"></translation>
+        <translation>仅上面的文本</translation>
     </message>
     <message>
         <location filename="Mcp/McpSubmitDialog.cpp" line="249"/>
         <source>Left out:</source>
-        <translation type="unfinished"></translation>
+        <translation>未包含：</translation>
     </message>
 </context>
 <context>
@@ -3086,7 +3165,7 @@ Nothing is sent unless you choose to, and nothing goes without you reading it. E
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="107"/>
         <source>The new box &apos;%1&apos; could not be found after creation.</source>
-        <translation type="unfinished"></translation>
+        <translation>创建后找不到新沙盒“%1”。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="124"/>
@@ -3350,7 +3429,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="78"/>
         <location filename="Windows/OptionsNetwork.cpp" line="340"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
@@ -3540,7 +3619,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="76"/>
         <source>Stacked (compact)</source>
-        <translation type="unfinished"></translation>
+        <translation>堆叠（紧凑）</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="90"/>
@@ -3597,92 +3676,92 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsGeneral.cpp" line="70"/>
         <source>Show outside the border</source>
         <oldsource>Show above the border</oldsource>
-        <translation type="unfinished">显示在边框上方</translation>
+        <translation>显示在边框上方</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="71"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>顶部</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="72"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>底部</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>左侧</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>右侧</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="75"/>
         <source>Stacked upright letters</source>
-        <translation type="unfinished"></translation>
+        <translation>竖排直立文字</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="77"/>
         <source>Rotated down</source>
-        <translation type="unfinished"></translation>
+        <translation>向下转</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="78"/>
         <source>Rotated up</source>
-        <translation type="unfinished"></translation>
+        <translation>向上转</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="79"/>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>固定</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="80"/>
         <source>Adaptive (same edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>自适应（同一边缘）</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="81"/>
         <source>Adaptive (opposite edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>自适应（相对边缘）</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="82"/>
         <source>Adaptive (any edge)</source>
-        <translation type="unfinished"></translation>
+        <translation>自适应（任意边缘）</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="83"/>
         <source>Use inherited/default setting</source>
-        <translation type="unfinished"></translation>
+        <translation>使用继承/默认设置</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="84"/>
         <source>Avoid covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>避免覆盖任务栏</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="85"/>
         <source>Allow covering the taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>允许覆盖任务栏</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="86"/>
         <source>Use inherited/automatic setting</source>
-        <translation type="unfinished"></translation>
+        <translation>使用继承/自动设置</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="87"/>
         <source>Hide border and label from capture</source>
-        <translation type="unfinished"></translation>
+        <translation>从截图中隐藏边框和标签</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="88"/>
         <source>Include border and label in capture</source>
-        <translation type="unfinished"></translation>
+        <translation>在截图中包含边框和标签</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="92"/>
@@ -3808,12 +3887,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1051"/>
         <source>Select the font, native style, writing system and point size.</source>
-        <translation type="unfinished"></translation>
+        <translation>选择字体、原生样式、书写系统和字号。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1052"/>
         <source>Default: Segoe UI Bold; legacy sizing</source>
-        <translation type="unfinished"></translation>
+        <translation>默认：Segoe UI 粗体；传统大小</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1528"/>
@@ -4406,7 +4485,7 @@ Please select a folder which contains this file.</source>
         <location filename="Windows/BorderFontDialog.cpp" line="128"/>
         <location filename="Windows/OptionsGeneral.cpp" line="1094"/>
         <source>Border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>边框标签字体</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="133"/>
@@ -4415,80 +4494,80 @@ Please select a folder which contains this file.</source>
         <source>Any</source>
         <translation>任意</translation>
     </message>
-    <message>
+	<message>
         <location filename="Windows/BorderFontDialog.cpp" line="138"/>
         <source>Unavailable writing system (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>不可用的书写系统（%1）</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="142"/>
         <source>&amp;Writing system:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;书写系统：</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="152"/>
         <source>Font &amp;family:</source>
-        <translation type="unfinished"></translation>
+        <translation>字体&amp;家族：</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="154"/>
         <source>Font st&amp;yle:</source>
-        <translation type="unfinished"></translation>
+        <translation>字体样&amp;式：</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="159"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation> pt</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="161"/>
         <source>&amp;Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;大小：</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="162"/>
         <source>&amp;Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;下划线</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="164"/>
         <source>Stri&amp;keout</source>
-        <translation type="unfinished"></translation>
+        <translation>删除&amp;线</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="173"/>
         <source>Native font preview</source>
-        <translation type="unfinished"></translation>
+        <translation>原生字体预览</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="182"/>
         <source>Save only this font and size immediately. Other pending box options are not applied. Cancel keeps the last applied font.</source>
-        <translation type="unfinished"></translation>
+        <translation>立即仅保存此字体和大小。其他待处理的沙盒选项不会应用。取消将保留上次应用的字体。</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="183"/>
         <source>This template is read-only.</source>
-        <translation type="unfinished"></translation>
+        <translation>此模板为只读。</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="291"/>
         <source>The saved selection is unavailable. Choose an installed family and a native style.</source>
-        <translation type="unfinished"></translation>
+        <translation>已保存的选择不可用。请选择已安装的字体家族和原生样式。</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="325"/>
         <source>Sandbox name</source>
-        <translation type="unfinished">沙盒名称</translation>
+        <translation>沙盒名称</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="340"/>
         <source>Unable to create the native font preview.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法创建原生字体预览。</translation>
     </message>
     <message>
         <location filename="Windows/BorderFontDialog.cpp" line="342"/>
         <source>Native GDI preview. Writing system filters the font list; it does not change label language or direction.</source>
-        <translation type="unfinished"></translation>
+        <translation>原生 GDI 预览。书写系统用于筛选字体列表；它不会更改标签的语言或方向。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="56"/>
@@ -4829,7 +4908,7 @@ Full path: %4</source>
     <message>
         <location filename="../MiscHelpers/Common/ProgressDialog.h" line="101"/>
         <source>Close (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭（%1）</translation>
     </message>
 </context>
 <context>
@@ -4957,7 +5036,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="25"/>
         <source>Sandboxie-Plus - Rename Sandboxes (%1/%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - 重命名沙盒（%1/%2）</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="26"/>
@@ -4974,46 +5053,47 @@ Full path: %4</source>
         <source>Hide alias input in this dialog. This preference is remembered.</source>
         <translation>在此对话框中隐藏别名输入。此偏好会被记住。</translation>
     </message>
-    <message>
+	<message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="43"/>
         <source>Save this sandbox and advance. On the last sandbox, also save all remaining drafts.</source>
-        <translation type="unfinished"></translation>
+        <translation>保存此沙盒并继续。在最后一个沙盒上，还会保存所有剩余的草稿。</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="45"/>
         <source>Discard unsaved drafts. Changes already saved with OK are kept.</source>
-        <translation type="unfinished"></translation>
+        <translation>丢弃未保存的草稿。已通过“确定”保存的更改将保留。</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="87"/>
         <source>Discard unsaved renames?</source>
-        <translation type="unfinished"></translation>
+        <translation>丢弃未保存的重命名？</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="88"/>
         <source>Discard all unsaved sandbox names and aliases?
 Changes already saved with OK will be kept.</source>
-        <translation type="unfinished"></translation>
+        <translation>丢弃所有未保存的沙盒名称和别名？
+已通过“确定”保存的更改将保留。</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="111"/>
         <source>Generate a new GUID</source>
-        <translation type="unfinished"></translation>
+        <translation>生成一个新的 GUID</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="111"/>
         <source>Use a random GUID as sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>使用随机 GUID 作为沙盒名称</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="119"/>
         <source>Replace alias?</source>
-        <translation type="unfinished"></translation>
+        <translation>替换别名？</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="120"/>
         <source>The alias field is not empty. Replace it with the current sandbox name?</source>
-        <translation type="unfinished"></translation>
+        <translation>别名字段不为空。是否将其替换为当前沙盒名称？</translation>
     </message>
 </context>
 <context>
@@ -5026,7 +5106,7 @@ Changes already saved with OK will be kept.</source>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="622"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="644"/>
@@ -5608,12 +5688,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="859"/>
         <source>Troubleshoot with an AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation type="使用 AI 智能体排除故障"></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="860"/>
         <source>Set up an AI agent to look at a sandbox with you - which clients are supported, and the exact configuration each one needs.</source>
-        <translation type="unfinished"></translation>
+        <translation>设置一个 AI 智能体与你一起查看沙盒——支持哪些客户端，以及每个客户端所需的确切配置。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="865"/>
@@ -5663,23 +5743,23 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="1005"/>
         <source>AI Agent Connection (MCP)</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 智能体连接（MCP）</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1007"/>
         <location filename="SandMan.cpp" line="3494"/>
         <source>Let a local AI agent inspect this Sandboxie installation. Off until you turn it on, and unreachable from inside a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>允许本地 AI 智能体检查此 Sandboxie 安装。在你开启之前它处于关闭状态，并且无法从沙盒内部访问。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1009"/>
         <source>AI Agent Session Window</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 智能体会话窗口</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1010"/>
         <source>Everything the agent has asked for and what you answered. Opens on its own when an agent connects.</source>
-        <translation type="unfinished"></translation>
+        <translation>智能体请求的一切以及你的答复。智能体连接时会自动打开。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1013"/>
@@ -5800,7 +5880,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="1257"/>
         <source>AI Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 智能体</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1286"/>
@@ -6095,19 +6175,19 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="2182"/>
         <source>MCP: %1 requested via command line, now %2</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：%1 通过命令行请求，现为 %2</translation>
     </message>
-    <message>
+	<message>
         <location filename="SandMan.cpp" line="2183"/>
         <source>on</source>
-        <translation type="unfinished"></translation>
+        <translation>开</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2183"/>
         <source>off</source>
-        <translation type="unfinished"></translation>
+        <translation>关</translation>
     </message>
-    <message>
+	<message>
         <location filename="SandMan.cpp" line="3083"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
@@ -6632,10 +6712,10 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <source>   -   for Non-Commercial use ONLY</source>
         <translation>   -   仅用于非商业用途</translation>
     </message>
-    <message>
+	<message>
         <location filename="SandMan.cpp" line="3031"/>
         <source>Removed %1 leftover sandbox configuration copies from an interrupted troubleshooting session</source>
-        <translation type="unfinished"></translation>
+        <translation>已从一次中断的故障排除会话中移除 %1 个残留的沙盒配置副本</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3117"/>
@@ -6654,89 +6734,89 @@ Do you want to disable Windows Updates scanning from the the software compatibil
     <message>
         <location filename="SandMan.cpp" line="3404"/>
         <source>The AI agent connection is turned off in the settings</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 智能体连接已在设置中关闭</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3416"/>
         <source>The AI agent connection is disabled by AllowAiAgent=n in Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 智能体连接已被 Sandboxie.ini 中的 AllowAiAgent=n 禁用</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3433"/>
         <source>An AI agent can now connect to Sandboxie on %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 智能体现在可以在 %1%2 上连接到 Sandboxie</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3444"/>
         <source>The AI agent connection is closed</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 智能体连接已关闭</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3488"/>
         <location filename="SandMan.cpp" line="3522"/>
         <source>Turned off for this machine by AllowAiAgent=n in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>已通过 Sandboxie.ini 中的 AllowAiAgent=n 对此机器关闭。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3490"/>
         <source>Turned off in Settings, under General Config, AI Agent.</source>
-        <translation type="unfinished"></translation>
+        <translation>已在“设置”中的“常规配置”下的“AI 智能体”中关闭。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3492"/>
         <source>An AI agent can connect. Click to close the connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 智能体可以连接。点击以关闭连接。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3531"/>
         <location filename="SandMan.cpp" line="3630"/>
         <source>The AI agent connection could not be opened. The message log has the reason.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法打开 AI 智能体连接。原因见消息日志。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3554"/>
         <source>An unidentified program</source>
-        <translation type="unfinished"></translation>
+        <translation>一个未识别的程序</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3561"/>
         <source>connected, waiting to be authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>已连接，正在等待授权</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3562"/>
         <source>%1 connected</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 已连接</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3583"/>
         <source>MCP: ignored a connection request from %1 (asked too recently)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：忽略了来自 %1 的连接请求（请求过于频繁）</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3584"/>
         <source>an unidentified application</source>
-        <translation type="unfinished"></translation>
+        <translation>一个未识别的应用程序</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3588"/>
         <source>An application</source>
-        <translation type="unfinished"></translation>
+        <translation>一个应用程序</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3591"/>
         <source>asking to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>正在请求连接</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3592"/>
         <source>%1 is asking to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 正在请求连接</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3596"/>
         <source>%1 is asking to connect an AI agent to Sandboxie-Plus.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 正在请求将一个 AI 智能体连接到 Sandboxie-Plus。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3597"/>
@@ -6747,119 +6827,125 @@ To look at YOUR sandboxes - what exists, what is running, what was blocked - it 
 It is not reachable from inside a sandbox.
 
 If you did not just ask an AI assistant to look at Sandboxie, refuse this.</source>
-        <translation type="unfinished"></translation>
+        <translation>允许此操作后，智能体可以立即阅读 Sandboxie 自带的文档。
+
+要查看你的沙盒——有哪些沙盒、正在运行什么、什么被阻止了——它随后必须向你索取一个代码，此窗口会向你显示该代码。要更改、启动或停止任何内容，它每次都必须再次征询你的同意。
+
+它无法从沙盒内部访问。
+
+如果你刚刚并没有让 AI 助手查看 Sandboxie，请拒绝此请求。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3603"/>
         <source>Allow the Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>允许连接</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3613"/>
         <source>the connection was refused</source>
-        <translation type="unfinished"></translation>
+        <translation>连接被拒绝</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3614"/>
         <source>not connected</source>
-        <translation type="unfinished"></translation>
+        <translation>未连接</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3617"/>
         <source>MCP: declined a connection request from %1 (%2 in a row - further requests ignored for a minute)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：拒绝了来自 %1 的连接请求（连续 %2 次——之后一分钟内的请求将被忽略）</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3621"/>
         <source>MCP: declined a connection request from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：拒绝了来自 %1 的连接请求</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3627"/>
         <source>the connection was allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>连接已被允许</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3656"/>
         <source>An AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>一个 AI 智能体</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3658"/>
         <source>waiting for the code below to be read to it</source>
-        <translation type="unfinished"></translation>
+        <translation>正在等待向其读取下方的代码</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3659"/>
         <source>%1 asked to be authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 请求获得授权</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3664"/>
         <source>MCP: %1 is asking to connect; a pairing code is displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：%1 正在请求连接；已显示配对代码</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3669"/>
         <location filename="SandMan.cpp" line="3690"/>
         <location filename="SandMan.cpp" line="3698"/>
         <source>an AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>一个 AI 智能体</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3676"/>
         <source>this program will be authorised without asking from now on</source>
-        <translation type="unfinished"></translation>
+        <translation>此程序从今往后将无需询问即获授权</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3677"/>
         <source>MCP: %1 will be authorised without asking from now on</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：%1 从今往后将无需询问即获授权</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3683"/>
         <source>authorised - it can read freely, and must ask for anything else</source>
-        <translation type="unfinished"></translation>
+        <translation>已授权——它可以自由读取，其他任何操作都必须征询同意</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3684"/>
         <source>%1 is now authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 现已获得授权</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3685"/>
         <source>MCP: %1 is now authorised</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：%1 现已获得授权</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3692"/>
         <source>%1 failed to authorise (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 授权失败（%2）</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3693"/>
         <source>MCP: %1 failed to authorise (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：%1 授权失败（%2）</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3700"/>
         <source>suspended after an hour idle - it must be authorised again</source>
-        <translation type="unfinished"></translation>
+        <translation>闲置一小时后已挂起——必须重新授权</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3701"/>
         <source>the session for %1 was suspended after an hour idle</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 的会话在闲置一小时后已挂起</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3702"/>
         <source>MCP: the session for %1 was suspended after an hour idle; it can be resumed by authorising again</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：%1 的会话在闲置一小时后已挂起；再次授权即可恢复</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3710"/>
         <source>MCP: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP：%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3857"/>
@@ -7349,7 +7435,7 @@ Error: %1</source>
         <location filename="SbieProcess.cpp" line="57"/>
         <location filename="SbieProcess.cpp" line="89"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="108"/>
@@ -7833,7 +7919,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="702"/>
         <source>Rename Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>重命名沙盒</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1127"/>
@@ -7876,40 +7962,40 @@ Error: %1</source>
         <source>Copying: %1</source>
         <translation>正在复制：%1</translation>
     </message>
-    <message>
+	<message>
         <location filename="Views/SbieView.cpp" line="1752"/>
         <source>Sandbox %1 was removed or changed while this dialog was open. Close the dialog and select the sandbox again.</source>
-        <translation type="unfinished"></translation>
+        <translation>此对话框打开期间，沙盒 %1 已被移除或更改。请关闭对话框并重新选择该沙盒。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1757"/>
         <source>Sandbox %1 cannot be edited by this dialog.</source>
-        <translation type="unfinished"></translation>
+        <translation>此对话框无法编辑沙盒 %1。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1759"/>
         <source>Sandbox %1 is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒 %1 已禁用。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1761"/>
         <source>Sandbox %1 has an active or queued operation. Wait for it to finish before saving.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒 %1 有正在执行或排队中的操作。请等待其完成后再保存。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1766"/>
         <source>Changes already saved are kept. Unsaved edits remain as drafts.</source>
-        <translation type="unfinished"></translation>
+        <translation>已保存的更改将保留。未保存的编辑仍作为草稿保留。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1779"/>
         <source>Unmount sandbox %1 before renaming it.</source>
-        <translation type="unfinished"></translation>
+        <translation>重命名沙盒 %1 之前，请先卸载该沙盒。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1884"/>
         <source>More than one draft uses the sandbox name %1. Choose different names.</source>
-        <translation type="unfinished"></translation>
+        <translation>有多个草稿使用了沙盒名称 %1。请选择不同的名称。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1923"/>
@@ -8408,25 +8494,25 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
         <translation>三态设置：未选中=从不，部分选中=仅在按住 %1 时（默认），选中=始终。</translation>
     </message>
-    <message>
+	<message>
         <location filename="Windows/SettingsWindow.cpp" line="1826"/>
         <source>AllowAiAgent=n in Sandboxie.ini disables this on the whole machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini 中的 AllowAiAgent=n 会在整台机器上禁用此功能。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1831"/>
         <source>AiAgentRequirePairing=y in Sandboxie.ini means the code cannot be waived.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini 中的 AiAgentRequirePairing=y 意味着不能免除代码验证。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1836"/>
         <source>AiAgentRequireConfirmation=y in Sandboxie.ini keeps the confirmations on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini 中的 AiAgentRequireConfirmation=y 会保持确认开启。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2650"/>
         <source>Checking software compatibility...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在检查软件兼容性……</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3500"/>
@@ -9115,12 +9201,12 @@ Before sending you can review the logs in the main window.</oldsource>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="889"/>
         <source>Submit Diagnostic Data</source>
-        <translation type="unfinished"></translation>
+        <translation>提交诊断数据</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="890"/>
         <source>%1 has collected some valuable diagnostic data. Thank you for taking the time to review and submit this information, as it helps improve Sandboxie for everyone! :-) </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 已收集了一些有价值的诊断数据。感谢你抽出时间审阅并提交这些信息，这有助于为所有人改进 Sandboxie！:-)</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="892"/>
@@ -10988,90 +11074,90 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <source>Breakout Folder</source>
         <translation>分离目录</translation>
     </message>
-    <message>
+	<message>
         <location filename="Forms/OptionsWindow.ui" line="154"/>
         <source>Sandbox icon...</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒图标……</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="155"/>
         <source>Configure the sandbox icon.</source>
-        <translation type="unfinished"></translation>
+        <translation>配置沙盒图标。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="285"/>
         <source>Box Border</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒边框</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="296"/>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>外框</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="323"/>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>颜色：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="436"/>
         <source>Sandbox label</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒标签</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="473"/>
         <source>Label font size:</source>
-        <translation type="unfinished"></translation>
+        <translation>标签字体大小：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="563"/>
         <source>Edge:</source>
-        <translation type="unfinished"></translation>
+        <translation>边缘：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="583"/>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>位置：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="605"/>
         <source>0% is the start of the usable edge; 50% is centered; 100% is the end. Top/bottom run left to right; left/right run top to bottom.</source>
-        <translation type="unfinished"></translation>
+        <translation>0% 为可用边缘的起点；50% 为居中；100% 为终点。上/下边缘从左到右；左/右边缘从上到下。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="618"/>
         <source>Side text:</source>
-        <translation type="unfinished"></translation>
+        <translation>侧边文字：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="643"/>
         <source>Movement:</source>
-        <translation type="unfinished"></translation>
+        <translation>移动方式：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="701"/>
         <source>Visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>可见性</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="708"/>
         <source>Taskbar:</source>
-        <translation type="unfinished"></translation>
+        <translation>任务栏：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="721"/>
         <source>Choose whether border overlays avoid taskbars and shell appbars. The inherited/default option follows the global setting, which defaults to avoiding taskbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>选择边框叠加层是否避开任务栏和 Shell 应用栏。继承/默认选项会遵循全局设置，全局设置默认为避开任务栏。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="731"/>
         <source>Screen capture:</source>
-        <translation type="unfinished"></translation>
+        <translation>屏幕捕获：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="744"/>
         <source>Exclude the border and label from screen capture, not the application itself. When inherited and otherwise unset, CoverBoxedWindows determines the default.</source>
-        <translation type="unfinished"></translation>
+        <translation>从屏幕捕获中排除边框和标签，而不是应用程序本身。当使用继承且未另行设置时，默认值由 CoverBoxedWindows 决定。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2890"/>
@@ -12090,35 +12176,35 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
         <source>Requires the &quot;Show All&quot; checkbox to be unchecked in the recovery window.</source>
         <translation>需要在恢复窗口中取消选中&quot;显示全部&quot;复选框。</translation>
     </message>
-    <message>
+	<message>
         <location filename="Forms/OptionsWindow.ui" line="488"/>
         <source>Font size in points, synchronized with the font selector. Existing legacy sizing is retained until you explicitly change the font or size.</source>
-        <translation type="unfinished"></translation>
+        <translation>以磅为单位的字体大小，与字体选择器同步。在你明确更改字体或大小之前，现有的传统大小设置将保留。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="491"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation> pt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="519"/>
         <source>Select border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>选择边框标签字体</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="526"/>
         <source>Reset font. Removes the custom font, point size and writing-system override, restoring Segoe UI Bold and legacy sizing.</source>
-        <translation type="unfinished"></translation>
+        <translation>重置字体。移除自定义字体、磅值和书写系统覆盖设置，恢复为 Segoe UI 粗体和传统大小。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="532"/>
         <source>Reset border label font</source>
-        <translation type="unfinished"></translation>
+        <translation>重置边框标签字体</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="551"/>
         <source>Segoe UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Segoe UI</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="631"/>
@@ -12126,7 +12212,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
 top/bottom padding without shrinking the font. Rotated down reads top to bottom;
 rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</source>
         <oldsource>Stacked letters remain upright. Stacked (compact) removes the extra row gap and reduces top/bottom padding without shrinking the font. Rotated down reads top to bottom; rotated up reads bottom to top on either side. Top/bottom labels ignore this choice.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>堆叠模式下字母保持直立。堆叠（紧凑）会移除额外的行间距并减少上/下内边距，但不缩小字体。向下旋转为从上到下阅读；向上旋转在两侧均为从下到上阅读。上/下边缘的标签忽略此选项。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="656"/>
@@ -12136,17 +12222,22 @@ Adaptive (opposite edge) tries the opposite edge before that inward fallback.
 Adaptive (any edge), the default, also tries the best-fitting remaining edge.
 Edge changes preserve percentage and inside/outside placement where possible.
 Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separate.</source>
-        <translation type="unfinished"></translation>
+        <translation>固定会禁用自动回退。
+自适应（同一边缘）会在配置的一侧将裁剪的标签向内移动。
+自适应（相对边缘）会先尝试相对边缘，再采用向内回退。
+自适应（任意边缘，默认）还会尝试最合适的其余边缘。
+边缘更改会尽可能保留百分比和内侧/外侧放置方式。
+自适应模式会遵循任务栏排除设置。最大化/贴靠行为仍单独处理。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="680"/>
         <source>Side labels can be stacked or rotated. Both stacked modes use vertical parentheses when the font supports them. Stacked (compact) keeps the font size, removes the extra row gap and uses 1-pixel top/bottom padding. Rotated down/up select the reading direction on either side. Top/bottom labels use horizontal text. Adaptive movement can stay on the configured side, try its opposite, or try any edge before moving inward. Labels that do not fit are clipped without shrinking the font.</source>
-        <translation type="unfinished"></translation>
+        <translation>侧边标签可以堆叠或旋转。两种堆叠模式在字体支持时都会使用竖排括号。堆叠（紧凑）保持字体大小不变，移除额外的行间距并使用 1 像素的上/下内边距。向下/向上旋转用于选择两侧的阅读方向。上/下边缘的标签使用水平文字。自适应移动可以停留在配置的一侧、尝试其相对侧，或在向内移动之前尝试任意边缘。不适合的标签会被裁剪，而不会缩小字体。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="689"/>
         <source>Border label information</source>
-        <translation type="unfinished"></translation>
+        <translation>边框标签信息</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="799"/>
@@ -12509,220 +12600,224 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
         <source>fallback</source>
         <translation>失败回退</translation>
     </message>
-    <message>
+	<message>
         <location filename="Mcp/McpClientSetup.cpp" line="67"/>
         <source>Claude Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Desktop</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="79"/>
         <source>Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Code</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="82"/>
         <source>Claude Code manages its own configuration; run this command instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Code 管理自己的配置；请改为运行此命令。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="91"/>
         <source>Visual Studio Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Visual Studio Code</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="93"/>
         <source>Add it per workspace or to your user settings - we do not write into a workspace, because that file lives in your repository.</source>
-        <translation type="unfinished"></translation>
+        <translation>可按工作区添加，或添加到用户设置——我们不会写入工作区，因为该文件位于你的代码仓库中。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="101"/>
         <source>Another client</source>
-        <translation type="unfinished"></translation>
+        <translation>其他客户端</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="103"/>
         <source>Most clients take a command to run. Use the path or the snippet below.</source>
-        <translation type="unfinished"></translation>
+        <translation>大多数客户端接受要运行的命令。请使用下面的路径或代码片段。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="120"/>
         <source>%1 could not be opened for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法打开 %1 进行读取。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="137"/>
         <source>%1 is not valid JSON (%2), so it was left untouched. Add the configuration by hand instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 不是有效的 JSON（%2），因此未作改动。请改为手动添加配置。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="169"/>
         <source>This client has to be configured by hand.</source>
-        <translation type="unfinished"></translation>
+        <translation>此客户端必须手动配置。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="173"/>
         <location filename="Mcp/McpClientSetup.cpp" line="247"/>
         <source>SbieMcp.exe was not found next to SandMan.</source>
-        <translation type="unfinished"></translation>
+        <translation>在 SandMan 旁边未找到 SbieMcp.exe。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="187"/>
         <source>%1 could not be backed up, so it was left untouched.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法备份 %1，因此未作改动。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="193"/>
         <source>%1 could not be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法创建 %1。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="210"/>
         <source>%1 could not be written.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法写入 %1。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="218"/>
         <source>%1 could not be replaced; the new configuration is in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法替换 %1；新配置位于 %2。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="252"/>
         <source>This folder could not be created:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>无法创建此文件夹：
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="264"/>
         <source>This file could not be read:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>无法读取此文件：
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="275"/>
         <source>This file is not the JSON this expects, so it was left alone:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>此文件不是预期的 JSON，因此未作改动：
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="293"/>
         <source>This file could not be written:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>无法写入此文件：
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="307"/>
         <source>Claude Code was not found. Install it, or open a terminal yourself and run the command shown above.</source>
-        <translation type="unfinished"></translation>
+        <translation>未找到 Claude Code。请安装它，或自行打开终端并运行上方显示的命令。</translation>
     </message>
     <message>
         <location filename="Mcp/McpClientSetup.cpp" line="342"/>
         <source>Claude Code could not be started (error %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>无法启动 Claude Code（错误 %1）。</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="151"/>
         <source>the documentation pack is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>文档包不可用</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="159"/>
         <source>&apos;%1&apos; is not a page in the documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 不是文档中的页面</translation>
     </message>
     <message>
         <location filename="Mcp/McpDocs.cpp" line="165"/>
         <source>&apos;%1&apos; could not be read from the pack</source>
-        <translation type="unfinished"></translation>
+        <translation>无法从文档包中读取 &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="301"/>
         <source>message SBIE%1 was seen</source>
-        <translation type="unfinished"></translation>
+        <translation>看到了消息 SBIE%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="313"/>
         <source>a blocked resource matched %1</source>
-        <translation type="unfinished"></translation>
+        <translation>被阻止的资源匹配了 %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="330"/>
         <source>%1 is not set on the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒上未设置 %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpKnowledge.cpp" line="339"/>
         <source>%1 is set on the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒上已设置 %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="63"/>
         <source>The &apos;changes&apos; argument must be a non-empty array of {setting, value} objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;changes&apos; 参数必须是非空的 {setting, value} 对象数组。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="69"/>
         <source>That is %1 changes at once. Propose at most 50, so the user can actually read what they are agreeing to.</source>
-        <translation type="unfinished"></translation>
+        <translation>一次有 %1 项更改。最多提议 50 项，以便用户能够真正阅读他们同意的内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="79"/>
         <source>Every entry in &apos;changes&apos; needs a &apos;setting&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;changes&apos; 中的每一项都需要一个 &apos;setting&apos;。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="85"/>
         <source>&apos;%1&apos; is not a usable setting name.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 不是可用的设置名称。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="91"/>
         <source>The value for &apos;%1&apos; contains a line break, which cannot be stored in Sandboxie.ini.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 的值包含换行符，无法存储在 Sandboxie.ini 中。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="119"/>
         <source>Changes cannot be confirmed right now, so nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>当前无法确认更改，因此未作任何更改。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="125"/>
         <source>A confirmation is already waiting for the user. Nothing was changed - wait for them to answer the previous request before asking again.</source>
-        <translation type="unfinished"></translation>
+        <translation>已有一个确认正在等待用户。未作任何更改——请等待他们答复之前的请求后再询问。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="174"/>
         <source>Name or alias of the sandbox to run in.</source>
-        <translation type="unfinished"></translation>
+        <translation>要在其中运行的沙盒的名称或别名。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="178"/>
         <source>The command line to start, exactly as it should run. Quote paths containing spaces. It has to be a single plain line - a command carrying line breaks is refused, because the user must be able to read what they are approving as one command.</source>
-        <translation type="unfinished"></translation>
+        <translation>要启动的命令行，完全按照应运行的方式。包含空格的路径请加引号。它必须是单独的一行纯文本——带换行符的命令会被拒绝，因为用户必须能够将其作为一条命令来阅读他们所批准的内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="185"/>
         <source>Working directory for the program. Optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>程序的工作目录。可选。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="189"/>
         <source>Why this needs to run, in one sentence. Shown to the user as your words, next to the command. A request with no reason given is a harder one to agree to.</source>
-        <translation type="unfinished"></translation>
+        <translation>用一句话说明为什么需要运行此命令。会作为你的原话显示在命令旁边。没有给出理由的请求更难获得同意。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="214"/>
         <source>The Sandboxie.ini setting name. Check it with config_schema first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini 设置名称。请先用 config_schema 检查。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="218"/>
         <source>The value to set. Omit or leave empty to remove the setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>要设置的值。省略或留空以移除该设置。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="230"/>
         <source>The changes, at most 50.</source>
-        <translation type="unfinished"></translation>
+        <translation>更改内容，最多 50 项。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="235"/>
@@ -12732,122 +12827,126 @@ Adaptive modes respect taskbar exclusion. Maximized/snapped behavior stays separ
         <location filename="Mcp/McpTools.cpp" line="316"/>
         <location filename="Mcp/McpTools.cpp" line="324"/>
         <source>Name or alias of the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒的名称或别名。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="248"/>
         <source>Why these changes should help. Shown to the user verbatim when they are asked to approve, so write it for them and not for yourself.</source>
-        <translation type="unfinished"></translation>
+        <translation>说明这些更改为什么会有帮助。在请求用户批准时会原样显示给用户，因此请为用户而写，而不是为你自己而写。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="265"/>
         <source>Check a change set before proposing it</source>
-        <translation type="unfinished"></translation>
+        <translation>在提议更改集之前进行检查</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="266"/>
         <source>Checks proposed settings against what Sandboxie actually accepts, without changing anything and without asking the user. Always call this before box_apply_changes: an unknown setting name is ignored silently by the driver, so a typo produces a change that appears to work and does nothing.</source>
-        <translation type="unfinished"></translation>
+        <translation>对照 Sandboxie 实际接受的内容检查提议的设置，不更改任何内容，也不询问用户。在 box_apply_changes 之前务必调用此工具：驱动程序会静默忽略未知设置名称，因此拼写错误会产生看似生效但实际没有任何作用的更改。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="272"/>
         <source>Change sandbox settings</source>
-        <translation type="unfinished"></translation>
+        <translation>更改沙盒设置</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="273"/>
         <source>Proposes configuration changes to one sandbox. The user is shown a diff of current against proposed values and must approve it; nothing is written if they decline. Use this for a fix you are confident about, and for everyday requests such as adding a forced program.
 
 If you want to test a fix before asking the user to accept it, use shadow_begin instead - that lets you try it against a disposable copy of the configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>向一个沙盒提议配置更改。会向用户显示当前值与提议值的差异，用户必须批准；如果用户拒绝，则不会写入任何内容。对于你有把握的修复以及日常请求（例如添加强制程序），请使用此工具。
+
+如果你想在请求用户接受之前测试某个修复，请改用 shadow_begin——它可以让你针对配置的一次性副本进行尝试。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="282"/>
         <source>Start testing a fix</source>
-        <translation type="unfinished"></translation>
+        <translation>开始测试修复</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="283"/>
         <source>Clones a sandbox configuration to a disposable copy that shares the real file set, so a fix can be tried without touching the sandbox. Returns the name of the copy; change it with shadow_set, then either shadow_commit to copy the differences back - which asks the user once - or shadow_discard to throw them away.
 
 Note what is shared: files written while testing land in the real sandbox and a discard does not undo them. Only configuration is disposable.</source>
-        <translation type="unfinished"></translation>
+        <translation>将沙盒配置克隆到共享真实文件集的一次性副本，以便在不影响沙盒的情况下尝试修复。返回该副本的名称；用 shadow_set 更改它，然后要么用 shadow_commit 将差异复制回来（只会询问用户一次），要么用 shadow_discard 将其丢弃。
+
+注意哪些内容是共享的：测试期间写入的文件会落在真实沙盒中，丢弃操作并不会撤销它们。只有配置是一次性的。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="290"/>
         <source>Name or alias of the sandbox to test against.</source>
-        <translation type="unfinished"></translation>
+        <translation>要针对其进行测试的沙盒的名称或别名。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="292"/>
         <source>Change a setting in the test copy</source>
-        <translation type="unfinished"></translation>
+        <translation>更改测试副本中的设置</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="293"/>
         <source>Applies changes to the disposable copy. No confirmation is needed because nothing real is affected yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>将更改应用于一次性副本。无需确认，因为尚未影响任何真实内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="297"/>
         <source>Keep the tested fix</source>
-        <translation type="unfinished"></translation>
+        <translation>保留已测试的修复</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="298"/>
         <source>Copies the differences from the test copy back onto the real sandbox, after showing the user what they are. This is the one confirmation on the troubleshooting path.</source>
-        <translation type="unfinished"></translation>
+        <translation>在向用户显示差异内容后，将测试副本中的差异复制回真实沙盒。这是故障排除路径上唯一的一次确认。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="301"/>
         <location filename="Mcp/McpOperate.cpp" line="306"/>
         <source>Name or alias of the sandbox being tested.</source>
-        <translation type="unfinished"></translation>
+        <translation>正在测试的沙盒的名称或别名。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="303"/>
         <source>Abandon the tested fix</source>
-        <translation type="unfinished"></translation>
+        <translation>放弃已测试的修复</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="304"/>
         <source>Deletes the test copy. Nothing to roll back, because the real sandbox was never changed. Call this when a hypothesis turns out to be wrong.</source>
-        <translation type="unfinished"></translation>
+        <translation>删除测试副本。无需回滚，因为真实沙盒从未被更改。当假设被证明是错误的时候调用此工具。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="308"/>
         <source>Take a rollback point</source>
-        <translation type="unfinished"></translation>
+        <translation>创建回滚点</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="309"/>
         <source>Takes a snapshot of a sandbox so file and registry changes can be undone later. Near-instant regardless of sandbox size, but it refuses while anything is running in the box - so take it before starting anything. Not offered for empty sandboxes or RAM-disk sandboxes, where it would be meaningless.</source>
-        <translation type="unfinished"></translation>
+        <translation>为沙盒创建快照，以便日后撤销文件和注册表更改。无论沙盒大小如何，几乎瞬间完成，但沙盒中有任何内容运行时它会拒绝——因此请在启动任何内容之前创建快照。对于空沙盒或内存盘沙盒不提供此功能，因为那没有意义。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="315"/>
         <source>Roll a sandbox back</source>
-        <translation type="unfinished"></translation>
+        <translation>回滚沙盒</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="316"/>
         <source>Reverts a sandbox to a snapshot, discarding file and registry changes made since. Terminates whatever is running in the box first, because the operation requires it. This throws work away and cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>将沙盒恢复到某个快照，丢弃此后所做的文件和注册表更改。会先终止沙盒中正在运行的所有内容，因为该操作需要如此。这会丢弃工作成果且无法撤销。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="321"/>
         <source>Stop everything in a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>停止沙盒中的所有内容</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="322"/>
         <source>Terminates all processes in a sandbox. Unsaved work in those programs is lost, which is why the user is asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>终止沙盒中的所有进程。这些程序中未保存的工作将丢失，因此会询问用户。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="326"/>
         <source>Run a program inside a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>在沙盒中运行程序</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="327"/>
@@ -12856,22 +12955,26 @@ Note what is shared: files written while testing land in the real sandbox and a 
 This is how a fix gets tested rather than described - start the program that was failing, then read trace_query and box_diagnostics to see whether it still fails. failing, then read trace_query to see whether it still fails. The call returns as soon as the program has started: it does not wait for it to exit and captures no output, so get the pid from box_processes.
 
 The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with shadow_set is not in effect here - a test copy shares the real sandbox&apos;s file root, so a program started against it runs in the real sandbox with the real settings. To test a configuration change by running something, apply it first with shadow_commit, or write it directly with box_apply_changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>在沙盒内以 Sandboxie-Plus 本身拥有的权限启动一条命令——绝不会提权。会向用户原样显示命令行，用户必须在任何内容运行前确认，因此请写出你真正想执行的命令：它不会被概括或重写。
+
+这就是修复被测试而不是被描述的方式——启动之前失败的程序，然后读取 trace_query 和 box_diagnostics 看它是否仍然失败。调用会在程序启动后立即返回：它不会等待程序退出，也不捕获输出，因此请从 box_processes 获取 pid。
+
+生效的设置是沙盒的当前设置。用 shadow_set 暂存的更改在此不生效——测试副本共享真实沙盒的文件根目录，因此针对它启动的程序会在真实沙盒中以真实设置运行。要通过运行某个程序来测试配置更改，请先用 shadow_commit 应用该更改，或用 box_apply_changes 直接写入。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="346"/>
         <source>Create a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>创建沙盒</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="347"/>
         <source>Creates a new, empty sandbox with default settings. The user is asked first. Settings can then be applied with box_apply_changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>创建一个使用默认设置的新空沙盒。会先询问用户。之后可以用 box_apply_changes 应用设置。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="349"/>
         <source>Name for the new sandbox. Letters, digits and underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>新沙盒的名称。字母、数字和下划线。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="374"/>
@@ -12888,271 +12991,284 @@ The settings in effect are the sandbox&apos;s CURRENT ones. A change staged with
         <location filename="Mcp/McpReport.cpp" line="619"/>
         <location filename="Mcp/McpTools.cpp" line="1257"/>
         <source>No sandbox called &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有名为 &apos;%1&apos; 的沙盒。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="399"/>
         <source>  ok</source>
-        <translation type="unfinished"></translation>
+        <translation>  正常</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="399"/>
         <source>  NOT A KNOWN SETTING</source>
-        <translation type="unfinished"></translation>
+        <translation>  不是已知设置</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="401"/>
         <source>  (superseded by %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>  （已被 %1 取代）</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="403"/>
         <source>  (removed in %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>  （在 %1 中移除）</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="414"/>
         <source>
 The settings reference could not be loaded, so none of this was verified.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+无法加载设置参考，因此未验证其中任何内容。
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="416"/>
         <source>
 %1 of these are not settings Sandboxie recognises. Fix them before proposing the change - an unknown name is ignored silently rather than reported, so it would look like a fix that did nothing.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+其中 %1 项不是 Sandboxie 识别的设置。在提议更改之前先修正它们——未知名称会被静默忽略而不是报告，因此它看起来会像是一个没有起作用的修复。
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="445"/>
         <source>The user declined, so nothing was changed. Do not ask again with the same change set - explain what you wanted to do and why, and let them decide.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户拒绝了，因此未作任何更改。不要用同一组更改再次询问——解释你想做什么以及为什么，然后让他们决定。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="473"/>
         <source>%1 of %2 changes written to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>已将 %2 项更改中的 %1 项写入 %3。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="476"/>
         <source>
 These could not be written: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+这些无法写入：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="510"/>
         <source>Already testing against %1. Use shadow_set to change it.</source>
-        <translation type="unfinished"></translation>
+        <translation>已在针对 %1 进行测试。使用 shadow_set 更改它。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="516"/>
         <source>The test copy could not be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法创建测试副本。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="522"/>
         <source>Testing against %1, a disposable copy of the configuration of %2 that shares its real file set. Change it with shadow_set. Remember that files written while testing land in the real sandbox - only the configuration is disposable.</source>
-        <translation type="unfinished"></translation>
+        <translation>正在针对 %1 进行测试，它是 %2 配置的一次性副本，共享其真实文件集。用 shadow_set 更改它。请记住，测试期间写入的文件会落在真实沙盒中——只有配置是一次性的。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="542"/>
         <source>There is no test copy for &apos;%1&apos; yet. Call shadow_begin first.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 还没有测试副本。请先调用 shadow_begin。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="547"/>
         <location filename="Mcp/McpOperate.cpp" line="568"/>
         <source>The test copy %1 has gone.</source>
-        <translation type="unfinished"></translation>
+        <translation>测试副本 %1 已不存在。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="563"/>
         <source>There is no test copy for &apos;%1&apos;. Nothing to keep.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 没有测试副本。没有可保留的内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="636"/>
         <source>The test copy is identical to %1, so there is nothing to keep. Discarding it would have the same effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>测试副本与 %1 完全相同，因此没有可保留的内容。丢弃它也会产生相同的效果。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="648"/>
         <source>(the agent gave no reason)</source>
-        <translation type="unfinished"></translation>
+        <translation>（智能体未给出理由）</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="651"/>
         <source>The user declined. The test copy is still there, and %1 is unchanged - call shadow_discard to clean up.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户拒绝了。测试副本仍在，%1 未更改——调用 shadow_discard 进行清理。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="658"/>
         <source>The changes could not be copied back.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法将更改复制回来。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="663"/>
         <source>%1 change(s) applied to %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>已将 %1 项更改应用于 %2。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="674"/>
         <source>There was no test copy for &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 没有测试副本。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="681"/>
         <source>The test copy is gone and %1 was never changed. Note that any files the test wrote are still in the sandbox - discarding only undoes configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>测试副本已不存在，且 %1 从未被更改。请注意，测试写入的任何文件仍在沙盒中——丢弃只会撤销配置。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="697"/>
         <source>&apos;%1&apos; holds no content, so there is nothing to snapshot. Note that an encrypted or image-backed sandbox also looks empty while it is not mounted - if this one is, it has to be opened first.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 不含任何内容，因此没有可创建快照的内容。请注意，加密或映像支持的沙盒在未挂载时也看起来是空的——如果此沙盒是这种情况，必须先打开它。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="702"/>
         <source>&apos;%1&apos; is a RAM-disk sandbox: its contents are discarded when it is unmounted or the machine restarts, so a snapshot would protect nothing.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 是内存盘沙盒：其内容在卸载或机器重启时会被丢弃，因此快照不会保护任何内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="706"/>
         <source>Something is still running in &apos;%1&apos;. Snapshots require the sandbox to be idle - ask the user to close its programs, or use box_terminate, and then try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 中仍有内容在运行。快照要求沙盒处于空闲状态——请用户关闭其程序，或使用 box_terminate，然后重试。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="713"/>
         <source>Confirm snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>确认快照</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="714"/>
         <source>Take a snapshot of sandbox %1, so its files and registry can be rolled back later.
 
 This is quick and does not copy the sandbox. It does mean the sandbox cannot shrink until the snapshot is merged or deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>为沙盒 %1 创建快照，以便日后回滚其文件和注册表。
+
+此操作很快，且不会复制沙盒。但这意味着在快照被合并或删除之前，沙盒无法缩小。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="717"/>
         <source>Take Snapshot</source>
-        <translation type="unfinished">抓取快照</translation>
+        <translation>创建快照</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="718"/>
         <source>The user declined; no snapshot was taken.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户拒绝了；未创建快照。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="721"/>
         <source>Before AI agent changes</source>
-        <translation type="unfinished"></translation>
+        <translation>在 AI 智能体更改之前</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="722"/>
         <source>Taking a snapshot of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在为 %1 创建快照</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="724"/>
         <source>The snapshot failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>快照失败：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="733"/>
         <source>Snapshot taken for %1. File and registry changes from here on can be undone with snapshot_rollback.</source>
-        <translation type="unfinished"></translation>
+        <translation>已为 %1 创建快照。此后所做的文件和注册表更改可以用 snapshot_rollback 撤销。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="747"/>
         <source>&apos;%1&apos; has no snapshot to roll back to.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 没有可回滚到的快照。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="754"/>
         <source>Roll sandbox %1 back to its snapshot.
 
 Every file and registry change made in the sandbox since the snapshot will be discarded. This cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>将沙盒 %1 回滚到其快照。
+
+自快照以来在该沙盒中所做的所有文件和注册表更改都将被丢弃。此操作无法撤销。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="760"/>
         <source>
 
 %1 program(s) are running in the sandbox and will be terminated first. Unsaved work in them will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+沙盒中有 %1 个程序正在运行，它们将先被终止。其中未保存的工作将丢失。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="764"/>
         <source>Confirm rollback</source>
-        <translation type="unfinished"></translation>
+        <translation>确认回滚</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="765"/>
         <source>Roll Back and Discard Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>回滚并丢弃更改</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="766"/>
         <source>The user declined; nothing was rolled back.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户拒绝了；未进行任何回滚。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="772"/>
         <source>The sandbox could not be stopped, so nothing was rolled back: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>无法停止沙盒，因此未进行任何回滚：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="778"/>
         <source>Rolling %1 back</source>
-        <translation type="unfinished"></translation>
+        <translation>正在回滚 %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="780"/>
         <source>The rollback failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>回滚失败：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="786"/>
         <source>%1 was rolled back to its snapshot.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 已回滚到其快照。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="798"/>
         <source>Nothing is running in %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 中没有内容在运行。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="803"/>
         <source>Confirm terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>确认终止</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="804"/>
         <source>Terminate %1 program(s) running in sandbox %2.
 
 Unsaved work in them will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>终止沙盒 %2 中正在运行的 %1 个程序。
+
+其中未保存的工作将丢失。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="806"/>
         <source>Terminate Them</source>
-        <translation type="unfinished"></translation>
+        <translation>终止它们</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="807"/>
         <source>The user declined; nothing was terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户拒绝了；未终止任何内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="812"/>
         <source>Terminating failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>终止失败：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="814"/>
         <source>%1 program(s) in %2 were terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>%2 中的 %1 个程序已被终止。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="822"/>
@@ -13160,79 +13276,81 @@ Unsaved work in them will be lost.</source>
         <location filename="Mcp/McpTools.cpp" line="843"/>
         <location filename="Mcp/McpTools.cpp" line="906"/>
         <source>The &apos;box&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;box&apos; 参数是必需的。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="826"/>
         <source>&apos;%1&apos; is not a usable sandbox name. Use letters, digits and underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 不是可用的沙盒名称。请使用字母、数字和下划线。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="830"/>
         <source>A sandbox called &apos;%1&apos; already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>名为 &apos;%1&apos; 的沙盒已存在。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="835"/>
         <source>Confirm new sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>确认新沙盒</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="836"/>
         <source>Create a new sandbox called %1, with default settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>创建一个名为 %1 的新沙盒，使用默认设置。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="837"/>
         <source>Create It</source>
-        <translation type="unfinished"></translation>
+        <translation>创建它</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="838"/>
         <source>The user declined; no sandbox was created.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户拒绝了；未创建沙盒。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="843"/>
         <source>The sandbox could not be created: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>无法创建沙盒：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="848"/>
         <source>Sandbox %1 was created with default settings. Use box_apply_changes to configure it.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒 %1 已使用默认设置创建。使用 box_apply_changes 对其进行配置。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="876"/>
         <source>The &apos;command&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;command&apos; 参数是必需的。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="880"/>
         <source>That command line is %1 characters, and the confirmation can only honestly show up to %2. Write a shorter command, or put the work in a script file and run that.</source>
-        <translation type="unfinished"></translation>
+        <translation>该命令行有 %1 个字符，而确认框最多只能如实显示 %2 个字符。请写一条更短的命令，或将工作放入脚本文件中再运行该脚本。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="887"/>
         <source>That command line contains a line break or a control character. It has to be a single plain line, because the user is shown it as one and has to be able to read exactly what they are approving.</source>
-        <translation type="unfinished"></translation>
+        <translation>该命令行包含换行符或控制字符。它必须是单独的一行纯文本，因为会将其作为一行显示给用户，且用户必须能够准确阅读他们所批准的内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="893"/>
         <source>The working directory has to be a single line.</source>
-        <translation type="unfinished"></translation>
+        <translation>工作目录必须是单独的一行。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="911"/>
         <source>&apos;%1&apos; is a test copy, which is a copy of a sandbox&apos;s configuration and not a sandbox a program can run in - it shares the real sandbox&apos;s files, so anything started against it would run in the real sandbox with the real settings. Apply the change with shadow_commit first, then run against the sandbox itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 是测试副本，它是沙盒配置的副本，而不是程序可以运行的沙盒——它共享真实沙盒的文件，因此针对它启动的任何内容都会在真实沙盒中以真实设置运行。请先用 shadow_commit 应用更改，然后针对沙盒本身运行。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="927"/>
         <source>Run this command inside %1:
 
     %2</source>
-        <translation type="unfinished"></translation>
+        <translation>在 %1 中运行此命令：
+
+    %2</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="929"/>
@@ -13240,7 +13358,10 @@ Unsaved work in them will be lost.</source>
 
 Working directory:
     %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+工作目录：
+    %1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="931"/>
@@ -13248,231 +13369,236 @@ Working directory:
 
 Its reason, in its own words:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+其原因（按其原话）：
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="932"/>
         <source>
 
 It runs sandboxed and with your normal privileges, not as administrator - but the command above is the agent&apos;s choice, so read it before agreeing.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+它会在沙盒中以你的常规权限运行，而不是以管理员身份——但上面的命令是智能体选择的，因此在同意之前请先阅读它。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="935"/>
         <source>Confirm running a program</source>
-        <translation type="unfinished"></translation>
+        <translation>确认运行程序</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="936"/>
         <source>Run It</source>
-        <translation type="unfinished"></translation>
+        <translation>运行它</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="937"/>
         <source>The user declined; nothing was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户拒绝了；未启动任何内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="944"/>
         <source>The program could not be started: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>无法启动程序：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="957"/>
         <source>Launched in %1. The pid is not reported because the program is started through Sandboxie&apos;s launcher, which exits immediately - its pid is not the program&apos;s. Call box_processes on %2 to get the real pid and to confirm it is still running, and trace_query or box_diagnostics to see what it did. Nothing is waited for and no and trace_query to see what it did. Nothing is waited for and no output is captured.</source>
-        <translation type="unfinished"></translation>
+        <translation>已在 %1 中启动。未报告 pid，因为程序是通过 Sandboxie 的启动器启动的，而该启动器会立即退出——它的 pid 不是该程序的 pid。请对 %2 调用 box_processes 以获取真实 pid 并确认它仍在运行，并调用 trace_query 或 box_diagnostics 查看它做了什么。不会等待任何内容，也不会捕获任何输出。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="972"/>
         <source>Sandboxie is not running, so nothing can be changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 未运行，因此无法更改任何内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpOperate.cpp" line="987"/>
         <location filename="Mcp/McpReport.cpp" line="685"/>
         <location filename="Mcp/McpTools.cpp" line="1358"/>
         <source>Tool &apos;%1&apos; is not implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>工具 &apos;%1&apos; 未实现。</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="14"/>
         <source>the endpoint name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>端点名称为空</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="19"/>
         <source>the endpoint name is longer than 64 characters</source>
-        <translation type="unfinished"></translation>
+        <translation>端点名称超过 64 个字符</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="29"/>
         <source>the endpoint name contains &apos;%1&apos;; only letters, digits, underscore, hyphen and dot are allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>端点名称包含 &apos;%1&apos;；仅允许字母、数字、下划线、连字符和点</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="39"/>
         <source>the endpoint name must start with &apos;%1&apos; - that is the prefix the template which keeps sandboxed programs away from this pipe matches, and a name outside it would not be protected</source>
-        <translation type="unfinished"></translation>
+        <translation>端点名称必须以 &apos;%1&apos; 开头——这是使沙盒内程序无法访问此管道的模板所匹配的前缀，超出该前缀的名称将不受保护</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="111"/>
         <source>malformed JSON: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>格式错误的 JSON：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="117"/>
         <source>message is not a JSON object</source>
-        <translation type="unfinished"></translation>
+        <translation>消息不是 JSON 对象</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="126"/>
         <source>missing or wrong jsonrpc version</source>
-        <translation type="unfinished"></translation>
+        <translation>缺少 jsonrpc 版本或版本错误</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="132"/>
         <source>no method</source>
-        <translation type="unfinished"></translation>
+        <translation>没有方法</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="183"/>
         <source>missing MCP-Protocol-Version header</source>
-        <translation type="unfinished"></translation>
+        <translation>缺少 MCP-Protocol-Version 标头</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="187"/>
         <source>MCP-Protocol-Version header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>MCP-Protocol-Version 标头 &apos;%1&apos; 与正文值 &apos;%2&apos; 不匹配</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="192"/>
         <source>missing Mcp-Method header</source>
-        <translation type="unfinished"></translation>
+        <translation>缺少 Mcp-Method 标头</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="196"/>
         <source>Mcp-Method header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Mcp-Method 标头 &apos;%1&apos; 与正文值 &apos;%2&apos; 不匹配</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="203"/>
         <source>missing Mcp-Name header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 缺少 Mcp-Name 标头</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="210"/>
         <source>Mcp-Name header &apos;%1&apos; does not match body value &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Mcp-Name 标头 &apos;%1&apos; 与正文值 &apos;%2&apos; 不匹配</translation>
     </message>
     <message>
         <location filename="Mcp/McpProtocol.cpp" line="257"/>
         <source>Unsupported protocol version</source>
-        <translation type="unfinished"></translation>
+        <translation>不支持的协议版本</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="42"/>
         <source>Reporting is unavailable because there is no way to ask the user, and nothing is sent without being asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>报告功能不可用，因为无法询问用户，而未经询问不会发送任何内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="49"/>
         <source>A confirmation is already waiting for the user. Nothing was sent - wait for them to answer the previous request before asking again.</source>
-        <translation type="unfinished"></translation>
+        <translation>已有一个确认正在等待用户。未发送任何内容——请等待他们答复之前的请求后再询问。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="205"/>
         <source>an unidentified agent</source>
-        <translation type="unfinished"></translation>
+        <translation>一个未识别的智能体</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="311"/>
         <source>One of: fixed, partly_fixed, not_fixed. Report a success as readily as a failure - a run that found a cause and applied a working fix is the material the knowledge base is made of, and the project currently never sees one.</source>
-        <translation type="unfinished"></translation>
+        <translation>以下之一：fixed、partly_fixed、not_fixed。成功时也要像失败时一样报告——一次找到了原因并应用了有效修复的运行，正是知识库的构成材料，而项目目前从未见到过这样的报告。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="322"/>
         <source>Name or alias of the sandbox the run was about. Optional.</source>
-        <translation type="unfinished"></translation>
+        <translation>本次运行所针对的沙盒的名称或别名。可选。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="324"/>
         <source>One line naming the problem, as an issue title would.</source>
-        <translation type="unfinished"></translation>
+        <translation>用一行命名问题，如同问题标题一样。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="325"/>
         <source>What you found and why you think it was the cause. Written as your own account - it is labelled as model output in the report and a maintainer will read it as such.</source>
-        <translation type="unfinished"></translation>
+        <translation>你发现了什么以及为什么你认为它是原因。以你自己的叙述方式撰写——它在报告中被标记为模型输出，维护者也会如此阅读。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="328"/>
         <source>What you did, one step per entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>你做了什么，每个条目一个步骤。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="329"/>
         <source>The settings you changed, as &apos;Setting=Value&apos; lines. These become the ini_changes block of the draft knowledge-base entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>你更改的设置，以 &apos;Setting=Value&apos; 行的形式。这些将成为知识库草稿条目中的 ini_changes 块。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="332"/>
         <source>How you established the result - what you ran, what you read afterwards. A fix nobody verified is a guess.</source>
-        <translation type="unfinished"></translation>
+        <translation>你如何确定结果——你运行了什么，之后阅读了什么。没有人验证过的修复只是一种猜测。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="335"/>
         <source>Hypotheses you ruled out, and what ruled them out. Please fill this in: what a cause is NOT is what makes a knowledge-base entry discriminate instead of merely sounding right.</source>
-        <translation type="unfinished"></translation>
+        <translation>你排除的假设以及排除它们的依据。请填写此项：原因不是什么，正是使知识库条目具有区分度而不是仅仅听起来正确的东西。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="338"/>
         <source>Set this only when the user has told you whether their problem is gone - not when you believe it is. Ask them: &apos;is it working now?&apos; is a question worth one turn. Until this is set, Sandboxie-Plus asks the user itself before the report is sent, and the report says plainly that the outcome is your assessment rather than theirs.</source>
-        <translation type="unfinished"></translation>
+        <translation>仅当用户已告诉你他们的问题是否消失时才设置此项——而不是当你认为它消失时。询问他们：&apos;现在能正常工作吗？&apos; 是一个值得花一轮对话的问题。在此项设置之前，Sandboxie-Plus 会在发送报告前自行询问用户，并且报告会明确说明结果是你的评估而非用户的评估。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="340"/>
         <source>Ask to attach the whole Sandboxie.ini. Off unless the problem is about configuration the box section does not show; it carries every sandbox the user has.</source>
-        <translation type="unfinished"></translation>
+        <translation>请求附加完整的 Sandboxie.ini。除非问题涉及沙盒部分未显示的配置，否则默认关闭；它包含用户拥有的每个沙盒。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="343"/>
         <source>Ask to attach the resource trace as well as the message log. Large, and detailed about everything running on the machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>请求除消息日志外还附加资源跟踪。体积大，且详细记录机器上运行的所有内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="362"/>
         <source>Issue title.</source>
-        <translation type="unfinished"></translation>
+        <translation>问题标题。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="363"/>
         <source>Issue body, Markdown. Leave empty to use the composed report, which is the better choice: it is the text the user has already read.</source>
-        <translation type="unfinished"></translation>
+        <translation>问题正文，Markdown 格式。留空则使用已撰写的报告，这是更好的选择：它是用户已经阅读过的文本。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="366"/>
         <source>Label names to suggest. The user can change them.</source>
-        <translation type="unfinished"></translation>
+        <translation>要建议的标签名称。用户可以更改它们。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="381"/>
         <source>Name or alias of the sandbox the workaround is for.</source>
-        <translation type="unfinished"></translation>
+        <translation>变通方案所针对的沙盒的名称或别名。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="382"/>
         <source>The settings, as &apos;Setting=Value&apos; lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>设置，以 &apos;Setting=Value&apos; 行的形式。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="383"/>
         <source>What the workaround does and what it costs, in plain words.</source>
-        <translation type="unfinished"></translation>
+        <translation>用通俗的语言说明该变通方案的作用及其代价。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="400"/>
         <source>Write up what happened</source>
-        <translation type="unfinished"></translation>
+        <translation>撰写发生了什么</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="401"/>
@@ -13485,56 +13611,68 @@ Call this on a success too. A failure report tells the project what is still bro
 Call it early and again as you learn more, rather than once at the end. Whatever you composed last is what Sandboxie-Plus offers the user when they close the agent window, and they may close it at any moment - the console going away does not wait for you to finish. An early rough write-up that gets sent is worth more than a perfect one that was never composed.
 
 You cannot send it yourself, by design. When you are done, tell the user to press Finish - the green tick at the bottom of the Sandboxie-Plus agent window - which opens your report for them to read, correct and send.</source>
-        <translation type="unfinished"></translation>
+        <translation>根据你对本次运行的叙述以及 Sandboxie-Plus 自行捕获的事实构建报告，并向你显示结果。不会发送任何内容——此工具仅进行撰写。
+
+两部分保持分离并加以标注：机器观察到的内容，以及你写下的内容。不要试图将它们混合；维护者必须能够分辨哪些句子是证据。
+
+成功时也要调用此工具。失败报告告诉项目还有什么仍然损坏；成功报告告诉它修复是什么，而这几乎是它最常收不到的报告。
+
+尽早调用，并在了解更多时再次调用，而不是只在最后调用一次。你最后撰写的内容就是 Sandboxie-Plus 在用户关闭智能体窗口时提供给他们的内容，而他们可能随时关闭——控制台消失不会等待你完成。一份被发送的早期粗略报告胜过一份从未被撰写的完美报告。
+
+你无法自行发送，这是设计如此。完成后，告诉用户按“完成”——Sandboxie-Plus 智能体窗口底部的绿色对勾——它会打开你的报告供用户阅读、更正并发送。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="426"/>
         <source>Open a prefilled GitHub issue</source>
-        <translation type="unfinished"></translation>
+        <translation>打开预填充的 GitHub 问题</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="427"/>
         <source>Opens GitHub&apos;s new-issue form in the user&apos;s browser with the title and body filled in. It submits nothing - the user reads it on the site and decides.
 
 Prefer report_submit. This one requires the user to have a GitHub account and to be signed in, which many are not; report_submit reaches the project&apos;s own tracker with no account at all. Use this only when the user has said they want to discuss it on GitHub, or when they ask for it by name.</source>
-        <translation type="unfinished"></translation>
+        <translation>在用户的浏览器中打开 GitHub 的新建问题表单，并填入标题和正文。它不会提交任何内容——用户在网站上阅读后再决定。
+
+优先使用 report_submit。此工具要求用户拥有 GitHub 账户并已登录，而许多用户并非如此；report_submit 无需任何账户即可到达项目自己的跟踪器。仅当用户表示希望在 GitHub 上讨论，或明确要求使用此工具时才使用它。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="435"/>
         <source>Save a workaround others can apply</source>
-        <translation type="unfinished"></translation>
+        <translation>保存可供他人应用的变通方案</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="436"/>
         <source>Writes a file holding the settings as an INI snippet plus the equivalent SbieIni.exe commands, so the fix can be shared or reapplied. Local only - nothing leaves the machine. The user picks where it goes.</source>
-        <translation type="unfinished"></translation>
+        <translation>写入一个文件，包含作为 INI 片段的设置以及等效的 SbieIni.exe 命令，以便修复可以被分享或重新应用。仅限本地——不会离开本机。由用户选择保存位置。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="456"/>
         <source>&apos;outcome&apos; must be one of: fixed, partly_fixed, not_fixed.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;outcome&apos; 必须是以下之一：fixed、partly_fixed、not_fixed。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="460"/>
         <source>&apos;title&apos; is required - one line naming the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;title&apos; 是必需的——用一行命名问题。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="462"/>
         <source>&apos;narrative&apos; is required. A report with no account of what you found is not worth a maintainer&apos;s time.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;narrative&apos; 是必需的。没有对你所发现内容的叙述的报告不值得占用维护者的时间。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="528"/>
         <source>Composed, and nothing has been sent. The user has not seen it yet either - call report_submit to put it in front of them, or issue_prefill to open it as a GitHub issue instead. This is the full text:
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>已撰写，且未发送任何内容。用户也尚未看到它——调用 report_submit 将其呈现给用户，或调用 issue_prefill 改为将其作为 GitHub 问题打开。以下是完整文本：
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="541"/>
         <source>Nothing has been written up yet, and sending is not yours to do in any case. Call report_compose first.</source>
-        <translation type="unfinished"></translation>
+        <translation>尚未撰写任何内容，而且无论如何发送都不是你该做的事。请先调用 report_compose。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="545"/>
@@ -13543,22 +13681,26 @@ Prefer report_submit. This one requires the user to have a GitHub account and to
 Your write-up is already with Sandboxie-Plus. Tell the user to press Finish, the green tick at the bottom of the Sandboxie-Plus agent window: that opens the report for them to read, lets them correct anything, and sends it if they agree. Say that sending it is worth doing and why, once, and then leave the decision with them.
 
 Keep composing if you learn more - they are offered whatever you wrote last.</source>
-        <translation type="unfinished"></translation>
+        <translation>发送是用户该做的事，而不是你——此工具不再提交任何内容。
+
+你的报告已经在 Sandboxie-Plus 中。告诉用户按“完成”，即 Sandboxie-Plus 智能体窗口底部的绿色对勾：它会打开报告供用户阅读，允许他们更正任何内容，并在他们同意时发送。说一次发送它值得做以及为什么，然后让决定权留给他们。
+
+如果你了解更多，请继续撰写——向他们提供的是你最后写下的内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="559"/>
         <source>&apos;title&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;title&apos; 是必需的。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="565"/>
         <source>There is nothing to put in the issue. Supply &apos;body&apos;, or call report_compose first.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有可放入问题的内容。请提供 &apos;body&apos;，或先调用 report_compose。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="596"/>
         <source>Confirm opening a GitHub issue</source>
-        <translation type="unfinished"></translation>
+        <translation>确认打开 GitHub 问题</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="597"/>
@@ -13569,557 +13711,596 @@ Title: %1
 %2
 
 Nothing is submitted by opening it - you still have to press the button on the site, and you can edit it there first.</source>
-        <translation type="unfinished"></translation>
+        <translation>在你的浏览器中打开 Sandboxie-Plus 问题表单，并填入以下内容：
+
+标题：%1
+
+%2
+
+打开它不会提交任何内容——你仍需在网站上按按钮，并且可以先在那里编辑。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="601"/>
         <source>Open the Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>打开浏览器</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="602"/>
         <source>The user declined; no issue was opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户拒绝了；未打开问题。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="606"/>
         <source>The browser could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法打开浏览器。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="609"/>
         <source>The issue form is open in the browser, but the body did not fit in a URL and was truncated. Nothing has been submitted; the user decides on the site.</source>
-        <translation type="unfinished"></translation>
+        <translation>问题表单已在浏览器中打开，但正文无法放入 URL 且已被截断。未提交任何内容；由用户在网站上决定。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="611"/>
         <source>The issue form is open in the browser, prefilled. Nothing has been submitted; the user decides on the site.</source>
-        <translation type="unfinished"></translation>
+        <translation>问题表单已在浏览器中打开并预填充。未提交任何内容；由用户在网站上决定。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="624"/>
         <source>&apos;changes&apos; is required - there is no workaround without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;changes&apos; 是必需的——没有它就没有变通方案。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="635"/>
         <source>an AI agent</source>
-        <translation type="unfinished"></translation>
+        <translation>一个 AI 智能体</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="654"/>
         <source>Save the workaround</source>
-        <translation type="unfinished"></translation>
+        <translation>保存变通方案</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="656"/>
         <source>Sandboxie configuration (*.ini);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 配置 (*.ini);;所有文件 (*.*)</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="658"/>
         <source>The user cancelled; nothing was written.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户取消了；未写入任何内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="662"/>
         <source>That file could not be written: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>无法写入该文件：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="670"/>
         <source>Written to %1 - %2 setting(s), as an INI section plus the equivalent SbieIni.exe commands.</source>
-        <translation type="unfinished"></translation>
+        <translation>已写入 %1——%2 项设置，以 INI 节的形式加上等效的 SbieIni.exe 命令。</translation>
     </message>
     <message>
         <location filename="Mcp/McpReport.cpp" line="678"/>
         <source>Sandboxie is not running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 未运行。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="697"/>
         <source>The six-digit code shown in Sandboxie-Plus. Omit it on the first call and Sandboxie-Plus will display one; then ask the user to read it to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 中显示的六位代码。第一次调用时省略它，Sandboxie-Plus 将显示一个代码；然后请用户读给你听。</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="712"/>
         <source>Connect to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>连接到 Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Mcp/McpServer.cpp" line="713"/>
         <source>Authorises this connection to look at this machine. Call with no arguments and Sandboxie-Plus shows a six-digit code on the user&apos;s screen; ask the user for it and call again with code set.
 
 You do not need this to read the documentation or the settings schema - those work now. You do need it before anything that reads the user&apos;s sandboxes, and before anything that changes them. Do not guess the code: a handful of wrong attempts invalidates it and a new one has to be requested.</source>
-        <translation type="unfinished"></translation>
+        <translation>授权此连接查看本机。不带参数调用，Sandboxie-Plus 会在用户屏幕上显示一个六位代码；向用户询问该代码，并带上 code 参数再次调用。
+
+阅读文档或设置架构不需要此授权——它们现在就可以使用。但在任何读取用户沙盒的操作之前，以及任何更改它们的操作之前，你都需要此授权。不要猜测代码：几次错误尝试就会使其失效，必须请求新的代码。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="93"/>
         <source>How many results at most. Defaults to 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>最多返回多少个结果。默认为 10。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="113"/>
         <source>The entry id, as returned by kb_search or kb_match.</source>
-        <translation type="unfinished"></translation>
+        <translation>条目 ID，由 kb_search 或 kb_match 返回。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="132"/>
         <source>Name or alias of the sandbox to explain.</source>
-        <translation type="unfinished"></translation>
+        <translation>要解释的沙盒的名称或别名。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="136"/>
         <source>How many candidates at most. Defaults to 5.</source>
-        <translation type="unfinished"></translation>
+        <translation>最多返回多少个候选。默认为 5。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="211"/>
         <source>Limit to one sandbox, by name or alias. Many entries carry no box.</source>
-        <translation type="unfinished"></translation>
+        <translation>按名称或别名限制为一个沙盒。许多条目不携带沙盒信息。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="215"/>
         <source>One of message, diagnostic or notice. Omit for all three.</source>
-        <translation type="unfinished"></translation>
+        <translation>以下之一：message、diagnostic 或 notice。省略则包含全部三种。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="219"/>
         <source>Only entries whose text contains this.</source>
-        <translation type="unfinished"></translation>
+        <translation>仅返回文本包含此内容的条目。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="223"/>
         <source>Entries to return, newest first. Default 100, maximum 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>要返回的条目数，最新的在前。默认 100，最大 200。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="241"/>
         <source>Limit to one sandbox, by name or alias. Omit for every sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>按名称或别名限制为一个沙盒。省略则包含所有沙盒。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="245"/>
         <source>Only rows whose path or message contains this text.</source>
-        <translation type="unfinished"></translation>
+        <translation>仅返回路径或消息包含此文本的行。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="249"/>
         <source>Only rows with this status, for example Denied. Omit for all.</source>
-        <translation type="unfinished"></translation>
+        <translation>仅返回具有此状态的行，例如 Denied。省略则包含全部。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="253"/>
         <source>Rows to return, default 100, maximum 300.</source>
-        <translation type="unfinished"></translation>
+        <translation>要返回的行数，默认 100，最大 300。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="257"/>
         <source>Rows to skip, for paging. The result reports the total.</source>
-        <translation type="unfinished"></translation>
+        <translation>要跳过的行数，用于分页。结果中会报告总数。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="292"/>
         <source>Sandboxie version</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 版本</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="293"/>
         <source>Version of Sandboxie-Plus and of the operating system it is running on. Call this first: fixes and setting names differ between versions, and a suggestion that does not apply to the installed build wastes a round trip.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 及其运行所在操作系统的版本。请先调用此工具：不同版本的修复和设置名称不同，而不适用于已安装版本的提议会浪费一次往返。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="298"/>
         <source>List sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>列出沙盒</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="299"/>
         <source>Every configured sandbox with its type, whether it is enabled, how many processes are running in it, and whether it holds any content. Boxes often have an alias, which is what the user calls them - refer to a box the way displayName shows it, and pass either the name or the alias to other tools.</source>
-        <translation type="unfinished"></translation>
+        <translation>每个已配置的沙盒及其类型、是否启用、其中运行了多少进程以及是否包含任何内容。沙盒通常有别名，用户就是这样称呼它们的——引用沙盒时使用 displayName 显示的名称，并将名称或别名传递给其他工具。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="305"/>
         <source>Read sandbox configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>读取沙盒配置</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="306"/>
         <source>The settings explicitly set on one sandbox, as name and value pairs. Values inherited from templates and global defaults are not included, so an absent setting means it is not set here, not that it has no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>显式设置在一个沙盒上的设置，以名称和值对的形式。从模板和全局默认继承的值不包含在内，因此某项设置缺失意味着它未在此处设置，而不是它没有效果。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="309"/>
         <source>Name or alias of the sandbox, as reported by box_list.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒的名称或别名，如 box_list 所报告。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="311"/>
         <source>What is running in a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒中正在运行什么</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="312"/>
         <source>The processes currently running in a sandbox, with their image paths, command lines and start times. Empty is a useful answer too: a program that exits immediately leaves nothing here, which points at a start-up failure rather than a running-program problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>当前在沙盒中运行的进程，及其映像路径、命令行和启动时间。空结果也是有用的答案：立即退出的程序不会在此留下任何内容，这指向启动失败而不是运行中程序的问题。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="319"/>
         <source>Sandbox diagnostic events</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒诊断事件</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="320"/>
         <source>Diagnostic events Sandboxie has recorded for a sandbox - the same ones the troubleshooting wizard reports. These are the driver saying what it refused or had trouble with, so read them before guessing at a cause. Paths and account names are redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 为沙盒记录的诊断事件——与故障排除向导报告的事件相同。这些是驱动程序在说明它拒绝了什么或遇到了什么问题，因此在猜测原因之前请先阅读它们。路径和账户名已被遮蔽。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="327"/>
         <source>Search the message log</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索消息日志</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="328"/>
         <source>Everything Sandboxie-Plus has reported this session: driver and service messages, diagnostic events, and notices from SandMan itself. This is the same log the user is looking at, newest first. Unlike the resource trace it needs nothing switched on, so it is the first place to look. Paths and account names are redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 本次会话报告的所有内容：驱动和服务消息、诊断事件以及来自 SandMan 本身的通知。这与用户查看的是同一份日志，最新的在前。与资源跟踪不同，它无需开启任何功能，因此是首先应该查看的地方。路径和账户名已被遮蔽。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="335"/>
         <source>Search the resource trace</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索资源跟踪</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="336"/>
         <source>The resource access trace: what sandboxed programs tried to open and whether it was allowed. This is where a &apos;why will it not start&apos; answer usually comes from - look for denied accesses just before the program exits.
 
 Requires tracing to be enabled in SandMan, and only covers what has been recorded since. If it is off, say so and ask the user to turn it on and reproduce the problem - do not speculate from an empty trace. Results are paged and redacted.</source>
-        <translation type="unfinished"></translation>
+        <translation>资源访问跟踪：沙盒程序尝试打开什么以及是否被允许。&apos;为什么它无法启动&apos; 的答案通常来自这里——查找程序退出前刚被拒绝的访问。
+
+需要在 SandMan 中启用跟踪，且仅涵盖自启用以来记录的内容。如果跟踪已关闭，请说明并请用户开启跟踪并重现问题——不要基于空跟踪进行推测。结果分页显示且已遮蔽。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="346"/>
         <source>Search known problems</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索已知问题</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="347"/>
         <source>Searches the troubleshooting knowledge base - curated entries mapping a symptom to a cause and a fix. This is a different thing from the documentation: the docs say what a setting does, these say why something is broken.
 
 Search by how the user described the problem, in their words. Returns ids; pass one to kb_get for the whole entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索故障排除知识库——将症状映射到原因和修复的精选条目。这与文档不同：文档说明设置的作用，而这些条目说明某些东西为什么损坏。
+
+按用户描述问题的方式来搜索，使用他们的原话。返回 ID；将一个 ID 传递给 kb_get 以获取完整条目。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="352"/>
         <source>What the user reports, in their own words.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户报告的内容，用他们自己的话。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="354"/>
         <source>Read a known problem</source>
-        <translation type="unfinished"></translation>
+        <translation>读取已知问题</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="355"/>
         <source>The whole knowledge-base entry: what it looks like, why it happens, the settings that fix it, what the fix costs, and how to confirm it worked.
 
 Read the risk before proposing the fix. Every one of these loosens something, and the user is entitled to hear what, in your own words, when you ask them to approve it.</source>
-        <translation type="unfinished"></translation>
+        <translation>完整的知识库条目：它看起来是什么样、为什么会发生、修复它的设置、修复的代价以及如何确认它有效。
+
+在提议修复之前请先阅读风险。这些修复中的每一个都会放松某些限制，当你请求用户批准时，用户有权听到你用自己的话说明放松了什么。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="361"/>
         <source>What could explain this sandbox&apos;s problems</source>
-        <translation type="unfinished"></translation>
+        <translation>什么可以解释此沙盒的问题</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="362"/>
         <source>Scores the knowledge base against what this machine actually logged for a sandbox - the message codes seen, the resources that were blocked, and which settings are present - and returns the entries that explain some of it, best first.
 
 Each result carries matchedBecause, saying which observations it accounts for. Read that rather than trusting the order: a top-ranked entry that matched on one weak signal is a guess, and an entry that explains three separate observations is not. Nothing here is a verdict - it is a shortlist to check against the trace.</source>
-        <translation type="unfinished"></translation>
+        <translation>根据此机器实际为某个沙盒记录的内容（看到的消息代码、被阻止的资源以及存在哪些设置）对知识库进行评分，并返回能解释其中部分内容的条目，最佳者在前。
+
+每个结果都带有 matchedBecause，说明它解释了哪些观察结果。请阅读该字段而不是信任排序：仅凭一个弱信号匹配的排名最高条目只是一种猜测，而解释了三个独立观察结果的条目则不是。这里没有任何内容是定论——它是一份对照跟踪进行检查的候选清单。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="371"/>
         <source>Search the documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索文档</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="372"/>
         <source>Finds documentation pages by title, path, heading or setting name. Returns paths to read with docs_get, not the page text. Coverage is partial: roughly two in five settings have a page, so finding nothing here does not mean the setting does not exist - check config_schema.</source>
-        <translation type="unfinished"></translation>
+        <translation>按标题、路径、标题或设置名称查找文档页面。返回用于 docs_get 阅读的路径，而不是页面文本。覆盖范围是部分的：大约五分之二的设置才有页面，因此在此找不到任何内容并不意味着该设置不存在——请检查 config_schema。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="376"/>
         <source>A setting name, a feature name, or a few words.</source>
-        <translation type="unfinished"></translation>
+        <translation>一个设置名称、一个功能名称或几个词。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="377"/>
         <source>Maximum results, default 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>最大结果数，默认 10。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="379"/>
         <source>Read a documentation page</source>
-        <translation type="unfinished"></translation>
+        <translation>阅读文档页面</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="380"/>
         <source>The full Markdown text of one page, addressed by the path that docs_search or docs_for_setting returned.</source>
-        <translation type="unfinished"></translation>
+        <translation>一个页面的完整 Markdown 文本，通过 docs_search 或 docs_for_setting 返回的路径来寻址。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="382"/>
         <source>Page path, for example Content/UseRamDisk.md.</source>
-        <translation type="unfinished"></translation>
+        <translation>页面路径，例如 Content/UseRamDisk.md。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="384"/>
         <source>Look up a setting</source>
-        <translation type="unfinished"></translation>
+        <translation>查找设置</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="385"/>
         <source>What Sandboxie itself knows about a configuration setting: whether it exists, its category and syntax, which version added or removed it, and what supersedes it. This is the authority on whether a setting is real - the documentation covers only some of them. An unknown setting name is silently ignored by the driver rather than rejected, so check here before recommending one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 本身对某个配置设置的了解：它是否存在、其类别和语法、哪个版本添加或移除了它，以及什么取代了它。这是判断设置是否真实的权威——文档只覆盖了其中一部分。未知设置名称会被驱动程序静默忽略而不是拒绝，因此在推荐某个设置之前请先在此检查。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="391"/>
         <location filename="Mcp/McpTools.cpp" line="398"/>
         <source>Setting name, for example ClosedFilePath.</source>
-        <translation type="unfinished"></translation>
+        <translation>设置名称，例如 ClosedFilePath。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="393"/>
         <source>Find the page for a setting</source>
-        <translation type="unfinished"></translation>
+        <translation>查找某个设置的页面</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="394"/>
         <source>The reference page for one Sandboxie.ini setting, plus any other pages that discuss it. Distinguishes a setting that exists but is undocumented from one that does not exist at all - do not infer the latter from the former.</source>
-        <translation type="unfinished"></translation>
+        <translation>某个 Sandboxie.ini 设置的参考页面，以及讨论它的任何其他页面。区分存在但未文档化的设置与完全不存在的设置——不要从前者推断出后者。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="519"/>
         <source>Sandboxie-Plus %1 on %2 (%3, kernel %4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus %1 运行于 %2（%3，内核 %4）</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="526"/>
         <source>
 
 No active supporter certificate. Settings whose Requirements name one will not take effect here - check with config_validate before recommending them.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+没有有效的赞助者证书。Requirements 中指定了证书的设置在此不会生效——在推荐它们之前请用 config_validate 检查。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="531"/>
         <source>isolated desktops</source>
-        <translation type="unfinished"></translation>
+        <translation>隔离桌面</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="532"/>
         <source>advanced network features</source>
-        <translation type="unfinished"></translation>
+        <translation>高级网络功能</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="533"/>
         <source>box encryption and protection</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒加密和保护</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="534"/>
         <source>enhanced security box types</source>
-        <translation type="unfinished"></translation>
+        <translation>增强安全沙盒类型</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="536"/>
         <source>
 
 Supporter certificate: active</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+赞助者证书：有效</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="538"/>
         <source> but expired%1</source>
-        <translation type="unfinished"></translation>
+        <translation> 但已过期%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="539"/>
         <source>, inside the renewal grace period</source>
-        <translation type="unfinished"></translation>
+        <translation>，处于续期宽限期内</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="541"/>
         <source>, and no longer valid for this build</source>
-        <translation type="unfinished"></translation>
+        <translation>，且对此版本不再有效</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="543"/>
         <source>. No optional features unlocked.</source>
-        <translation type="unfinished"></translation>
+        <translation>。未解锁任何可选功能。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="544"/>
         <source>. Unlocked: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>。已解锁：%1。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="595"/>
         <source>
 (%1 of %2 sandboxes listed; the rest were omitted)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+（已列出 %2 个沙盒中的 %1 个；其余已省略）
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="598"/>
         <source>No sandboxes are configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>未配置任何沙盒。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="611"/>
         <source>No sandbox called &apos;%1&apos;. Either its name or its alias works; call box_list for both.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有名为 &apos;%1&apos; 的沙盒。其名称或别名均可使用；调用 box_list 获取两者。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="642"/>
         <source>
 (%1 of %2 settings listed; the rest were omitted)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+（已列出 %2 项设置中的 %1 项；其余已省略）
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="645"/>
         <source>Sandbox &apos;%1&apos; has no settings of its own; it runs on templates and global defaults.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒 &apos;%1&apos; 没有自己的设置；它运行于模板和全局默认值之上。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="652"/>
         <source>The offline documentation pack is not installed, so documentation lookups are unavailable on this machine. The settings themselves can still be inspected with box_get_config, and the online documentation is at https://sandboxie-plus.com/docs/</source>
-        <translation type="unfinished"></translation>
+        <translation>未安装离线文档包，因此此机器上无法进行文档查询。设置本身仍可用 box_get_config 检查，在线文档位于 https://sandboxie-plus.com/docs/</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="665"/>
         <source>The &apos;query&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;query&apos; 参数是必需的。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="677"/>
         <source>   [reference page for %1]</source>
-        <translation type="unfinished"></translation>
+        <translation>   [%1 的参考页面]</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="681"/>
         <source>Nothing in the documentation matches &apos;%1&apos;. Note that only about two in five settings have a documentation page, so this is not evidence that a setting does not exist - check it with config_schema or box_get_config.</source>
-        <translation type="unfinished"></translation>
+        <translation>文档中没有任何内容匹配 &apos;%1&apos;。请注意，只有约五分之二的设置有文档页面，因此这并不能证明某个设置不存在——请用 config_schema 或 box_get_config 检查。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="699"/>
         <source>The &apos;path&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;path&apos; 参数是必需的。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="704"/>
         <source>%1. Use docs_search to find a valid page path.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1。使用 docs_search 查找有效的页面路径。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="719"/>
         <location filename="Mcp/McpTools.cpp" line="771"/>
         <source>The &apos;setting&apos; argument is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;setting&apos; 参数是必需的。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="725"/>
         <source>%1 is documented on %2 (%3).</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 记录在 %2（%3）上。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="730"/>
         <source>
 Also discussed on:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+另在以下页面中讨论：
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="736"/>
         <source>%1 has no page of its own, but is discussed on:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 没有自己的页面，但在以下页面中讨论：
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="743"/>
         <source>&apos;%1&apos; has no documentation page. That does not mean it is not a real setting - most settings are undocumented. Verify it exists before telling the user it does not.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 没有文档页面。这并不意味着它不是真实设置——大多数设置都没有文档。在告诉用户它不存在之前，请先验证它是否存在。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="774"/>
         <source>The settings reference (SbieSettings.ini) could not be loaded, so settings cannot be verified on this installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法加载设置参考（SbieSettings.ini），因此无法在此安装上验证设置。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="784"/>
         <source>&apos;%1&apos; is not a known Sandboxie setting. Note that the driver ignores unknown settings silently instead of reporting an error, so a typo here would look like the setting simply had no effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 不是已知的 Sandboxie 设置。请注意，驱动程序会静默忽略未知设置而不是报告错误，因此此处的拼写错误看起来就像该设置根本没有效果。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="813"/>
         <source>%1 is a known setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 是已知设置。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="814"/>
         <source>
 Category: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+类别：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="815"/>
         <source>
 Syntax: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+语法：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="816"/>
         <source>
 Requires: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+要求：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="817"/>
         <source>
 Added in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+添加于：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="818"/>
         <source>
 Removed in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+移除于：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="819"/>
         <source>
 Superseded by: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+被以下取代：%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="820"/>
         <source>
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+%1</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="822"/>
         <source>
 
 Documentation: %1 (read it with docs_get)</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+文档：%1（用 docs_get 阅读）</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="824"/>
         <source>
 
 This setting has no documentation page; most do not.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+此设置没有文档页面；大多数都没有。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="847"/>
@@ -14127,92 +14308,97 @@ This setting has no documentation page; most do not.</source>
         <location filename="Mcp/McpTools.cpp" line="987"/>
         <location filename="Mcp/McpTools.cpp" line="1087"/>
         <source>No sandbox called &apos;%1&apos;. Call box_list for names and aliases.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有名为 &apos;%1&apos; 的沙盒。调用 box_list 获取名称和别名。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="885"/>
         <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at box_diagnostics and trace_query rather than at the process list.</source>
-        <translation type="unfinished"></translation>
+        <translation>当前 &apos;%1&apos; 中没有内容在运行。如果预期有程序运行，它已启动并退出——请查看 box_diagnostics 和 trace_query，而不是进程列表。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="889"/>
         <source>Nothing is running in &apos;%1&apos; right now. If a program was expected, it started and exited - look at log_query and trace_query rather than at the process list.</source>
-        <translation type="unfinished"></translation>
+        <translation>当前 &apos;%1&apos; 中没有内容在运行。如果预期有程序运行，它已启动并退出——请查看 log_query 和 trace_query，而不是进程列表。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="914"/>
         <source>Diagnostics are not available for &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 的诊断信息不可用。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="954"/>
         <source>No diagnostic events have been recorded for &apos;%1&apos;. That is the normal state for a healthy sandbox, and it is not evidence that nothing went wrong - events are only recorded for the kinds of problem Sandboxie detects itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>未为 &apos;%1&apos; 记录任何诊断事件。这是健康沙盒的正常状态，但这并不是没有出错的证据——只有 Sandboxie 自身检测到的问题类型才会记录事件。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="970"/>
         <source>Resource tracing is turned off, so there is no trace to search. Ask the user to enable it in SandMan and then reproduce the problem - the trace only records what happens while it is on. Do not draw conclusions from the absence of trace data.</source>
-        <translation type="unfinished"></translation>
+        <translation>资源跟踪已关闭，因此没有可搜索的跟踪。请用户在 SandMan 中启用它，然后重现问题——跟踪只记录开启期间发生的事情。不要从跟踪数据缺失中得出结论。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1052"/>
         <source>
 (%1 of %2 matching rows; call again with offset=%3 for the next page)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+（%2 个匹配行中的 %1 个；用 offset=%3 再次调用以获取下一页）
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1056"/>
         <source>No trace rows match. The trace holds %1 entries in total - if that is 0, tracing has only just been enabled and the problem still has to be reproduced before there is anything to see.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有匹配的跟踪行。跟踪中总共有 %1 个条目——如果为 0，则跟踪才刚启用，必须先重现问题才能看到任何内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1075"/>
         <source>The message log is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>消息日志不可用。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1152"/>
         <source>Nothing in the log matches. It holds %1 entries in total.</source>
-        <translation type="unfinished"></translation>
+        <translation>日志中没有匹配的内容。它总共有 %1 个条目。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1155"/>
         <source>
 (newest %1 of %2 matching entries)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+（%2 个匹配条目中最新的 %1 个）
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1167"/>
         <source>There is no troubleshooting knowledge base on this installation, so nothing could be consulted. This is not the same as finding no match: treat it as the lookup being unavailable, and fall back to the documentation and the trace.</source>
-        <translation type="unfinished"></translation>
+        <translation>此安装上没有故障排除知识库，因此无法查询任何内容。这与未找到匹配不同：应将其视为查询不可用，并回退到文档和跟踪。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1180"/>
         <source>&apos;query&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;query&apos; 是必需的。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1186"/>
         <source>Nothing in the knowledge base matches &quot;%1&quot;. It holds %2 entries, so this is a real absence rather than an empty database - the problem may simply not be a known one.</source>
-        <translation type="unfinished"></translation>
+        <translation>知识库中没有任何内容匹配“%1”。它包含 %2 个条目，因此这是真正的缺失而非空数据库——问题可能只是尚未被记录为已知问题。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1213"/>
         <source>&apos;id&apos; is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;id&apos; 是必需的。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1217"/>
         <source>There is no knowledge-base entry called &apos;%1&apos;. Use kb_search to find one.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有名为 &apos;%1&apos; 的知识库条目。使用 kb_search 查找一个。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1221"/>
         <source>%1 - %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1224"/>
@@ -14220,21 +14406,28 @@ This setting has no documentation page; most do not.</source>
 Why it happens:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+为什么会发生：
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1228"/>
         <source>
 The fix:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+修复方法：
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1233"/>
         <source>
 A troubleshooting script also applies this: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+故障排除脚本也会应用此方法：%1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1237"/>
@@ -14242,7 +14435,10 @@ A troubleshooting script also applies this: %1
 What it costs:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+代价：
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1239"/>
@@ -14250,43 +14446,52 @@ What it costs:
 How to confirm it worked:
   %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+如何确认它有效：
+  %1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1241"/>
         <source>
 %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+%1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1288"/>
         <source>Nothing in the knowledge base explains what %1 has logged. %2 entries were checked against %3 message code(s) and %4 blocked resource(s). Either the problem is not a known one, or nothing has been logged yet - if you have not reproduced the fault since Sandboxie-Plus started, there may be nothing to match against.</source>
-        <translation type="unfinished"></translation>
+        <translation>知识库中没有任何内容能解释 %1 所记录的情况。已对照 %3 个消息代码和 %4 个被阻止的资源检查了 %2 个条目。要么该问题不是已知问题，要么尚未记录任何内容——如果你自 Sandboxie-Plus 启动以来尚未重现故障，可能没有可供匹配的内容。</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1295"/>
         <source>Candidates for %1, best first. These explain some of what was logged; none of them is a verdict.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 的候选条目，最佳者在前。这些条目解释了所记录的部分内容；它们都不是定论。
+
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1299"/>
         <source>%1  (score %2)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1  （得分 %2）
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1304"/>
         <source>    matched: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    匹配：%1
+</translation>
     </message>
     <message>
         <location filename="Mcp/McpTools.cpp" line="1335"/>
         <source>Sandboxie is not running or SandMan is not connected to the driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 未运行，或 SandMan 未连接到驱动程序。</translation>
     </message>
 </context>
 <context>
@@ -14395,12 +14600,12 @@ How to confirm it worked:
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="56"/>
         <source>Use a random GUID as sandbox name</source>
-        <translation type="unfinished"></translation>
+        <translation>使用随机 GUID 作为沙盒名称</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="59"/>
         <source>Generate a new GUID. A non-GUID name can be copied to the alias field. Uncheck to restore the previous name; alias edits are kept.</source>
-        <translation type="unfinished"></translation>
+        <translation>生成一个新的 GUID。非 GUID 名称可复制到别名字段。取消勾选可恢复之前的名称；别名编辑内容将保留。</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="70"/>
@@ -14415,22 +14620,22 @@ How to confirm it worked:
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="124"/>
         <source>&amp;Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;上一个</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="130"/>
         <source>Keep edits as a draft and show the previous sandbox. Drafts are saved on the final OK.</source>
-        <translation type="unfinished"></translation>
+        <translation>将编辑内容保留为草稿并显示上一个沙盒。草稿在最后按“确定”时保存。</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="147"/>
         <source>&amp;Next</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;下一个</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="153"/>
         <source>Keep edits as a draft and show the next sandbox. Drafts are saved on the final OK.</source>
-        <translation type="unfinished"></translation>
+        <translation>将编辑内容保留为草稿并显示下一个沙盒。草稿在最后按“确定”时保存。</translation>
     </message>
 </context>
 <context>
@@ -14710,39 +14915,41 @@ How to confirm it worked:
     <message>
         <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>AI Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>AI 集成</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="477"/>
         <source>Where each session starts. The agent window can raise or lower it for that session alone.
 
 Diagnostic data an agent reads can contain text written by programs inside a sandbox, so a confirmation is also what stands between a misled agent and a silent change. Whatever is chosen here, everything the agent does is recorded.</source>
-        <translation type="unfinished"></translation>
+        <translation>每个会话的起始级别。智能体窗口可以仅为该会话提高或降低该级别。
+
+智能体读取的诊断数据可能包含沙盒内程序写入的文本，因此确认也是介于被误导的智能体与静默更改之间的屏障。无论此处选择什么，智能体所做的所有事情都会被记录。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="512"/>
         <source>Before changing anything, the agent:</source>
-        <translation type="unfinished"></translation>
+        <translation>在更改任何内容之前，智能体会：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="519"/>
         <source>Allows an AI agent to connect to Sandboxie-Plus over a local named pipe. Turning this off removes the option entirely: the connection cannot be armed, and a request from an agent is ignored rather than shown to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>允许 AI 智能体通过本地命名管道连接到 Sandboxie-Plus。关闭此项会完全移除该选项：连接无法启用，来自智能体的请求会被忽略而不是显示给你。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="522"/>
         <source>Allow an AI agent to connect (MCP)</source>
-        <translation type="unfinished"></translation>
+        <translation>允许 AI 智能体连接（MCP）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="529"/>
         <source>Sandboxie-Plus shows a six-digit code that you read to the agent before it can see anything about your machine. Without it, any program running as you that finds the pipe is treated as authorised - which includes programs you did not start on purpose. Sandboxed programs are refused either way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 会显示一个六位代码，在你将该代码读给智能体之前，它无法看到关于你机器的任何信息。如果不要求此代码，任何以你的身份运行并找到该管道的程序都会被当作已授权——这包括你并非有意启动的程序。无论哪种方式，沙盒内程序都会被拒绝。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="532"/>
         <source>Require a code before an agent may look at this machine</source>
-        <translation type="unfinished"></translation>
+        <translation>要求智能体在查看此机器之前输入代码</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="823"/>
@@ -15903,12 +16110,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3303"/>
         <source>Check software compatibility again.</source>
-        <translation type="unfinished"></translation>
+        <translation>重新检查软件兼容性。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3306"/>
         <source>Check</source>
-        <translation type="unfinished"></translation>
+        <translation>检查</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3326"/>

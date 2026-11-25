@@ -1167,7 +1167,7 @@ Kesalahan: %1</translation>
     <name>CCodeEdit</name>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1415"/>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2699"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2698"/>
         <source>Find</source>
         <translation>Cari</translation>
     </message>
@@ -1187,7 +1187,7 @@ Kesalahan: %1</translation>
         <translation>Mungkin maksud Anda: %1? (Tekan Ctrl+R untuk mengganti)</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2699"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2698"/>
         <source>F3: Find Next
 + Shift: Backward
 + Ctrl: Case Sensitively
@@ -1202,12 +1202,12 @@ Find String:</source>
 Teks Pencarian:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2724"/>
         <source>Go to Line:</source>
         <translation>Ke Baris:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2724"/>
         <source></source>
         <translation></translation>
     </message>
@@ -1810,41 +1810,69 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="325"/>
+        <source>received new request, before the previous response was completely sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>recived new request, befoure the previouse response was completly sent</source>
-        <translation>menerima permintaan baru sebelum respons sebelumnya selesai dikirim</translation>
+        <translation type="vanished">menerima permintaan baru sebelum respons sebelumnya selesai dikirim</translation>
     </message>
 </context>
 <context>
     <name>CHttpSocket</name>
     <message>
-        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
         <source>recived invalid HTTP request</source>
-        <translation>menerima permintaan HTTP tidak valid</translation>
+        <translation type="vanished">menerima permintaan HTTP tidak valid</translation>
+    </message>
+    <message>
+        <source>recived unsupported HTTP request %1 from %2</source>
+        <translation type="vanished">menerima permintaan HTTP yang tidak didukung %1 dari %2</translation>
+    </message>
+    <message>
+        <source>recived invalid POST request %1</source>
+        <translation type="vanished">menerima permintaan POST tidak valid %1</translation>
+    </message>
+    <message>
+        <source>recived POST/PUT request without Content-Length !!!</source>
+        <translation type="vanished">menerima permintaan POST/PUT tanpa Content-Length !!!</translation>
+    </message>
+    <message>
+        <source>recived GET request with attached data ?!</source>
+        <translation type="vanished">menerima permintaan GET dengan data terlampir ?!</translation>
+    </message>
+    <message>
+        <source>recived a POST payload before any part header</source>
+        <translation type="vanished">menerima payload POST sebelum header bagian apa pun</translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
+        <source>received invalid HTTP request</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="99"/>
-        <source>recived unsupported HTTP request %1 from %2</source>
-        <translation>menerima permintaan HTTP yang tidak didukung %1 dari %2</translation>
+        <source>received unsupported HTTP request %1 from %2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="127"/>
-        <source>recived invalid POST request %1</source>
-        <translation>menerima permintaan POST tidak valid %1</translation>
+        <source>received invalid POST request %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="146"/>
-        <source>recived POST/PUT request without Content-Length !!!</source>
-        <translation>menerima permintaan POST/PUT tanpa Content-Length !!!</translation>
+        <source>received POST/PUT request without Content-Length !!!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="176"/>
-        <source>recived GET request with attached data ?!</source>
-        <translation>menerima permintaan GET dengan data terlampir ?!</translation>
+        <source>received GET request with attached data ?!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="292"/>
-        <source>recived a POST payload before any part header</source>
-        <translation>menerima payload POST sebelum header bagian apa pun</translation>
+        <source>received a POST payload before any part header</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="429"/>

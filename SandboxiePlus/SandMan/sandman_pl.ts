@@ -1235,7 +1235,7 @@ Błąd: %1</translation>
     <name>CCodeEdit</name>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1415"/>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2699"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2698"/>
         <source>Find</source>
         <translation>Znajdź</translation>
     </message>
@@ -1255,7 +1255,7 @@ Błąd: %1</translation>
         <translation>Czy masz na myśli: %1? (Naciśnij Ctrl+R, aby zastąpić)</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2699"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2698"/>
         <source>F3: Find Next
 + Shift: Backward
 + Ctrl: Case Sensitively
@@ -1270,12 +1270,12 @@ Find String:</source>
 Ciąg do wyszukania:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2724"/>
         <source>Go to Line:</source>
         <translation>Przejdź do linii:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2724"/>
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -1903,7 +1903,7 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="325"/>
-        <source>recived new request, befoure the previouse response was completly sent</source>
+        <source>received new request, before the previous response was completely sent</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1911,32 +1911,32 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <name>CHttpSocket</name>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
-        <source>recived invalid HTTP request</source>
+        <source>received invalid HTTP request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="99"/>
-        <source>recived unsupported HTTP request %1 from %2</source>
+        <source>received unsupported HTTP request %1 from %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="127"/>
-        <source>recived invalid POST request %1</source>
+        <source>received invalid POST request %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="146"/>
-        <source>recived POST/PUT request without Content-Length !!!</source>
+        <source>received POST/PUT request without Content-Length !!!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="176"/>
-        <source>recived GET request with attached data ?!</source>
+        <source>received GET request with attached data ?!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="292"/>
-        <source>recived a POST payload before any part header</source>
+        <source>received a POST payload before any part header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

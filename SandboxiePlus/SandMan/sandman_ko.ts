@@ -1807,7 +1807,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="325"/>
         <source>received new request, before the previous response was completely sent</source>
-        <translation type="unfinished"></translation>
+        <translation>이전 응답이 완전히 전송되기 전에 새 요청을 수신했습니다</translation>
     </message>
     <message>
         <source>recived new request, befoure the previouse response was completly sent</source>
@@ -1843,32 +1843,32 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
         <source>received invalid HTTP request</source>
-        <translation type="unfinished"></translation>
+        <translation>유효하지 않은 HTTP 요청을 수신했습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="99"/>
         <source>received unsupported HTTP request %1 from %2</source>
-        <translation type="unfinished"></translation>
+        <translation>지원되지 않는 HTTP 요청 %1을(를) %2로부터 수신했습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="127"/>
         <source>received invalid POST request %1</source>
-        <translation type="unfinished"></translation>
+        <translation>유효하지 않은 POST 요청 %1을(를) 수신했습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="146"/>
         <source>received POST/PUT request without Content-Length !!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Content-Length가 없는 POST/PUT 요청을 수신했습니다 !!!</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="176"/>
         <source>received GET request with attached data ?!</source>
-        <translation type="unfinished"></translation>
+        <translation>데이터가 포함된 GET 요청을 수신했습니다 ?!</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="292"/>
         <source>received a POST payload before any part header</source>
-        <translation type="unfinished"></translation>
+        <translation>부분 헤더가 나오기 전에 POST 페이로드를 수신했습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="429"/>

@@ -587,18 +587,25 @@ int DoLingerLeader(void)
         }
 
         //
-        // kill all programs and quit
+        // kill all programs and quit.  kill only the processes we found
+        // above, SbieDll_KillAll would also kill a program that was
+        // started in the box after we looked
         //
 
         LeaveCriticalSection(&ProcessCritSec);
 do_kill_all:
 
+        if (terminate_and_stop) {
+            for (i = 0; i < process_count; ++i) {
+                if (pids[i] != GetCurrentProcessId())
+                    SbieDll_KillOne(pids[i]);
+            }
+        }
+
         HeapFree(GetProcessHeap(), 0, pids);
 
-        if (terminate_and_stop) {
-            SbieDll_KillAll(-1, NULL);
+        if (terminate_and_stop)
             break;
-        }
     }
 
 	// cleanup CS

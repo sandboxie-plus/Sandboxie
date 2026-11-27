@@ -19,7 +19,7 @@ class CSetupWizard : public QWizard
     Q_OBJECT
 
 public:
-    enum { Page_Intro, Page_Certificate, Page_UI, Page_Shell, Page_Update, Page_Finish };
+    enum { Page_Intro, Page_Certificate, Page_UI, Page_Shell, Page_Update, Page_Security, Page_Finish };
 
     CSetupWizard(int iOldLevel = 0, QWidget *parent = nullptr);
 
@@ -175,6 +175,24 @@ private:
     QCheckBox* m_pAddons;
     QLabel* m_pUpdateInfo;
     QLabel* m_pBottomLabel;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CSecurityPage
+// 
+
+class CSecurityPage : public QWizardPage
+{
+    Q_OBJECT
+
+public:
+    CSecurityPage(QWidget *parent = nullptr);
+
+    int nextId() const override;
+
+private:
+    QLabel* m_pTopLabel;
+    QLabel* m_pWarningLabel;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////

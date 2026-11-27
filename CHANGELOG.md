@@ -31,6 +31,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added an issue report submission window for AI agent sessions, carrying the agent's write-up, a separate log of the actions actually taken, optional Sandboxie.ini and trace log attachments with a tooltip spelling out what will and will not be included, and a success/failure choice for the case where the agent never established the outcome; nothing is ever sent without the user pressing "Send Report"
 - the agent is instructed to keep its write-up current as it works, so closing the console at any point still leaves something worth submitting
 
+### Added
+- added `JunctionPath=source,target` to redirect accesses from a virtual source path to a real target path (DOS and NT path forms, including drive roots), with `JunctionBlockRawAccess=[y|n]` as a best-effort user-mode compatibility option to deny direct access to the target; note that this option is not a security boundary and can be bypassed, real blocking would require driver support
+
 ### Changed
 - switched x64 build to qt 6.8.4
 - changed pending-change tracking to support individually applied numeric fields without clearing unrelated pending highlights

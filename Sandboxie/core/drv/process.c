@@ -1466,6 +1466,13 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 
     if (box) {
 
+        //
+        // query the token before Process_Create, which returns
+        // with Process_ListLock held at APC_LEVEL
+        //
+
+        BOOLEAN in_app_pkg = !bHostInject && Process_IsInAppPkg(ProcessId);
+
         PROCESS *new_proc = Process_Create(ProcessId, box, ImagePath, &irql);
         if (!new_proc) {
 		
@@ -1566,7 +1573,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 				// check if process was started in an app container
                 //
 
-                if (Process_IsInAppPkg(pid)) {
+                if (in_app_pkg) {
 
                     new_proc->in_app_pkg = TRUE;
                 }

@@ -201,6 +201,7 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
 
                 RPC_WSTR pwszPortName = NULL;
                 RpcBindingToStringBindingW(hBinding, &pwszPortName);   // Get string port name. Format is "ncalrpc:[LRPC-f760d5b40689a98168]"
+                RpcBindingFree(&hBinding);                             // each binding returned by RpcMgmtEpEltInqNextW must be freed by the caller
                 if (pwszPortName == NULL)
                     continue;
                 wcsncpy(wstrPortName, (wchar_t*)pwszPortName + 9, DYNAMIC_PORT_NAME_CHARS); // format is "ncalrpc:[LRPC-f760d5b40689a98168]" We only want actual port name

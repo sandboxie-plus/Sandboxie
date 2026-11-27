@@ -43,6 +43,8 @@
 #define PORT_DYNAMIC_SECURITY               0x80000000
 #define PORT_DELETED                        0x10000000
 
+#define ALPC_MSGFLG_SYNC_REQUEST            0x00020000
+
 
 struct LPC_PORT_OBJECT_2K {
     ULONG Length;
@@ -112,7 +114,8 @@ typedef struct _POWER_API_MESSAGE
 
 
 NTSTATUS Ipc_CheckPortRequest(
-    PROCESS *proc, HANDLE PortHandle, PORT_MESSAGE *msg);
+    PROCESS *proc, HANDLE PortHandle, PORT_MESSAGE *msg,
+    void **SamOtherBindPort);
 
 NTSTATUS Ipc_CheckPortRequest_WinApi(
     PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
@@ -124,7 +127,11 @@ NTSTATUS Ipc_CheckPortRequest_LsaEP(
     PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg);
 
 NTSTATUS Ipc_CheckPortRequest_Sam(
-    PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg);
+    PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg,
+    void* PortObject, void** OtherBindPort);
+
+void Ipc_Sam_RecordBindReply(
+    PROCESS* proc, void* PortObject, PORT_MESSAGE* ReplyMsg);
 
 NTSTATUS Ipc_CheckPortRequest_PowerManagement(
     PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
@@ -196,7 +203,8 @@ _FX void *Ipc_GetServerPort(void *Object)
 
 
 _FX NTSTATUS Ipc_CheckPortRequest(
-    PROCESS *proc, HANDLE PortHandle, PORT_MESSAGE *msg)
+    PROCESS *proc, HANDLE PortHandle, PORT_MESSAGE *msg,
+    void **SamOtherBindPort)
 {
     NTSTATUS status;
     void *client_port_object;
@@ -246,7 +254,8 @@ _FX NTSTATUS Ipc_CheckPortRequest(
     if (status == STATUS_BAD_INITIAL_PC)
         status = Ipc_CheckPortRequest_LsaEP(proc, Name, msg);
     if (status == STATUS_BAD_INITIAL_PC)
-        status = Ipc_CheckPortRequest_Sam(proc, Name, msg);
+        status = Ipc_CheckPortRequest_Sam(
+                    proc, Name, msg, client_port_object, SamOtherBindPort);
     if (status == STATUS_BAD_INITIAL_PC)
         status = Ipc_CheckPortRequest_PowerManagement(proc, Name, msg);
     if (status == STATUS_BAD_INITIAL_PC)
@@ -558,7 +567,7 @@ _FX NTSTATUS Ipc_RequestPort(
     HANDLE PortHandle = (HANDLE *)user_args[0];
     PORT_MESSAGE *Message = (PORT_MESSAGE *)user_args[1];
 
-    NTSTATUS status = Ipc_CheckPortRequest(proc, PortHandle, Message);
+    NTSTATUS status = Ipc_CheckPortRequest(proc, PortHandle, Message, NULL);
 
     if (NT_SUCCESS(status)) {
 
@@ -578,14 +587,40 @@ _FX NTSTATUS Ipc_AlpcSendWaitReceivePort(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
 {
     HANDLE PortHandle = (HANDLE *)user_args[0];
+    ULONG Flags = (ULONG)user_args[1];
     PORT_MESSAGE *Message = (PORT_MESSAGE *)user_args[2];
+    PORT_MESSAGE *ReceiveMessage = (PORT_MESSAGE *)user_args[4];
+    void *SamOtherBindPort = NULL;
 
-    NTSTATUS status = Ipc_CheckPortRequest(proc, PortHandle, Message);
+    NTSTATUS status = Ipc_CheckPortRequest(
+                        proc, PortHandle, Message, &SamOtherBindPort);
 
     if (NT_SUCCESS(status)) {
 
         status = Syscall_Invoke(syscall_entry, user_args);
+
+        //
+        // a bind of another interface than SAMR on \RPC Control\samss lpc,
+        // record the binding ids from the reply, see ipc_sam.c.  only a
+        // synchronous request guarantees the received message is the reply
+        //
+
+        if (SamOtherBindPort && status == STATUS_SUCCESS && ReceiveMessage
+                && (Flags & ALPC_MSGFLG_SYNC_REQUEST))
+            Ipc_Sam_RecordBindReply(proc, SamOtherBindPort, ReceiveMessage);
+
+        else if (SamOtherBindPort && Session_MonitorCount
+                && (proc->ipc_trace & TRACE_ALLOW)) {
+
+            WCHAR msg_str[64];
+            RtlStringCbPrintfW(msg_str, sizeof(msg_str),
+                L"Bind not recorded: status %X, flags %X", status, Flags);
+            Log_Debug_Msg(MONITOR_IPC | MONITOR_OPEN, msg_str, L"\\RPC Control\\samss lpc");
+        }
     }
+
+    if (SamOtherBindPort)
+        ObDereferenceObject(SamOtherBindPort);
 
     return status;
 }
@@ -1020,7 +1055,7 @@ _FX NTSTATUS Ipc_Api_GetRpcPortName_2(PEPROCESS ProcessObject, WCHAR* pDstPortNa
     NTSTATUS status;                                                        \
     PROCESS *proc = Process_GetCurrent();                                   \
     if (proc != PROCESS_TERMINATED)                                         \
-        status = Ipc_CheckPortRequest(proc, PortHandle, Message);           \
+        status = Ipc_CheckPortRequest(proc, PortHandle, Message, NULL);     \
     else                                                                    \
         status = STATUS_PROCESS_IS_TERMINATING;
 

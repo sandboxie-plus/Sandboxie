@@ -79,6 +79,8 @@ BOOLEAN Ipc_InitProcess(PROCESS *proc);
 
 BOOLEAN Ipc_IsRunRestricted(PROCESS *proc);
 
+void Ipc_Sam_ReleaseProcess(PROCESS *proc);
+
 
 //---------------------------------------------------------------------------
 

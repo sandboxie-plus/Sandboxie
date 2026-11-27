@@ -34,6 +34,7 @@ HEADERS += ./stdafx.h \
     ./Windows/SettingsWindow.h \
     ./Windows/BorderFontDialog.h \
     ./Windows/OptionsWindow.h \
+    ./Windows/SharedAccessWidget.h \
     ./Windows/PendingChanges.h \
     ./Windows/EditorSettingsWindow.h \
     ./Windows/SelectBoxWindow.h \
@@ -110,6 +111,7 @@ SOURCES += ./main.cpp \
     ./Helpers/MiniDumpFilter.cpp \
     ./Windows/BorderFontDialog.cpp \
     ./Windows/OptionsWindow.cpp \
+    ./Windows/SharedAccessWidget.cpp \
     ./Windows/EditorSettingsWindow.cpp \
     ./Windows/PopUpWindow.cpp \
     ./Windows/RecoveryWindow.cpp \

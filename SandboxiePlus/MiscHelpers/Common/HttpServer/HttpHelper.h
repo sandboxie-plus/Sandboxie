@@ -31,7 +31,7 @@ struct MISCHELPERS_EXPORT SHttpPost
 		Value = Entry->Value;
 		Type = Entry->Type;
 		Buffer = NULL;
-		ASSERT(Entry->IsBufferClosed()); // we cant copy SHttpPost's that are in a intermediate state
+		ASSERT(Entry->IsBufferClosed()); // we can't copy SHttpPost's that are in a intermediate state
 		Buff = eBuffNone;
 		// Entry->Buff, not Buff: both tests read the field that was just
 		// cleared, so neither branch ever ran and every copy came back empty

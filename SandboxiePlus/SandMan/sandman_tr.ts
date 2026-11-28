@@ -1133,7 +1133,7 @@ Hata: %1</translation>
     <name>CCodeEdit</name>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1415"/>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2699"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2698"/>
         <source>Find</source>
         <translation>Bul</translation>
     </message>
@@ -1153,7 +1153,7 @@ Hata: %1</translation>
         <translation>Şunu mu demek istediniz: %1? (Değiştirmek için Ctrl+R&apos;ye basın)</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2699"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2698"/>
         <source>F3: Find Next
 + Shift: Backward
 + Ctrl: Case Sensitively
@@ -1168,12 +1168,12 @@ Find String:</source>
 Dize Bul:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2724"/>
         <source>Go to Line:</source>
         <translation>Satıra Git:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2724"/>
         <source></source>
         <translation></translation>
     </message>
@@ -1770,41 +1770,69 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="325"/>
+        <source>received new request, before the previous response was completely sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>recived new request, befoure the previouse response was completly sent</source>
-        <translation>Önceki yanıt tamamen gönderilmeden yeni bir istek alındı</translation>
+        <translation type="vanished">Önceki yanıt tamamen gönderilmeden yeni bir istek alındı</translation>
     </message>
 </context>
 <context>
     <name>CHttpSocket</name>
     <message>
-        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
         <source>recived invalid HTTP request</source>
-        <translation>Geçersiz HTTP isteği alındı</translation>
+        <translation type="vanished">Geçersiz HTTP isteği alındı</translation>
+    </message>
+    <message>
+        <source>recived unsupported HTTP request %1 from %2</source>
+        <translation type="vanished">%2 adresinden desteklenmeyen HTTP isteği %1 alındı</translation>
+    </message>
+    <message>
+        <source>recived invalid POST request %1</source>
+        <translation type="vanished">Geçersiz POST isteği %1 alındı</translation>
+    </message>
+    <message>
+        <source>recived POST/PUT request without Content-Length !!!</source>
+        <translation type="vanished">Content-Length içermeyen POST/PUT isteği alındı !!!</translation>
+    </message>
+    <message>
+        <source>recived GET request with attached data ?!</source>
+        <translation type="vanished">Ekli veriler içeren GET isteği alındı ?!</translation>
+    </message>
+    <message>
+        <source>recived a POST payload before any part header</source>
+        <translation type="vanished">Herhangi bir bölüm başlığından önce POST yükü alındı</translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
+        <source>received invalid HTTP request</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="99"/>
-        <source>recived unsupported HTTP request %1 from %2</source>
-        <translation>%2 adresinden desteklenmeyen HTTP isteği %1 alındı</translation>
+        <source>received unsupported HTTP request %1 from %2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="127"/>
-        <source>recived invalid POST request %1</source>
-        <translation>Geçersiz POST isteği %1 alındı</translation>
+        <source>received invalid POST request %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="146"/>
-        <source>recived POST/PUT request without Content-Length !!!</source>
-        <translation>Content-Length içermeyen POST/PUT isteği alındı !!!</translation>
+        <source>received POST/PUT request without Content-Length !!!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="176"/>
-        <source>recived GET request with attached data ?!</source>
-        <translation>Ekli veriler içeren GET isteği alındı ?!</translation>
+        <source>received GET request with attached data ?!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="292"/>
-        <source>recived a POST payload before any part header</source>
-        <translation>Herhangi bir bölüm başlığından önce POST yükü alındı</translation>
+        <source>received a POST payload before any part header</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="429"/>

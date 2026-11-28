@@ -1943,11 +1943,10 @@ void CCodeEdit::HandleCaseCorrection(const QString& word, bool wasPopupVisible)
 			QStringList fuzzy = BuildFuzzyMatchesForCompletion(all, NormalizePrefixForFuzzy(word));
 
 			if (!fuzzy.isEmpty()) {
-				// Validate top fuzzy candidate with a small distance threshold before proposing it.
 				const QString candidate = fuzzy.first();
-				int dist = MinDistanceToCandidateSubstrings(word, candidate, 2);
 				const int MAX_ACCEPTABLE_FUZZY_DIST = 2; // tunable: allow up to 2 edits for case-correction suggestion
-				if (dist <= MAX_ACCEPTABLE_FUZZY_DIST) {
+				if (IsSubsequenceCI(word, candidate)
+					|| MinDistanceToCandidateSubstrings(word, candidate, 2) <= MAX_ACCEPTABLE_FUZZY_DIST) {
 					correctedWord = candidate;
 				}
 			}

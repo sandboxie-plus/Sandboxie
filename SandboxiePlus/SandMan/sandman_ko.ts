@@ -312,7 +312,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Engine/BoxEngine.cpp" line="200"/>
         <source>Failed to initialize the script engine, not enough memory or memory access blocked by third-party software.</source>
-        <translation type="unfinished"></translation>
+        <translation>스크립트 엔진을 초기화하지 못했습니다. 메모리가 부족하거나 타사 소프트웨어에 의해 메모리 접근이 차단되었습니다.</translation>
     </message>
     <message>
         <location filename="Engine/BoxEngine.cpp" line="253"/>
@@ -1163,7 +1163,7 @@ Error: %1</source>
     <name>CCodeEdit</name>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1415"/>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2699"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2698"/>
         <source>Find</source>
         <translation>찾기</translation>
     </message>
@@ -1183,7 +1183,7 @@ Error: %1</source>
         <translation>%1을 의미하셨나요? (Ctrl+R 키를 눌러 교체하세요)</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2699"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2698"/>
         <source>F3: Find Next
 + Shift: Backward
 + Ctrl: Case Sensitively
@@ -1198,12 +1198,12 @@ Shift: 뒤로
 문자열 찾기:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2724"/>
         <source>Go to Line:</source>
         <translation>줄로 가기:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2725"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2724"/>
         <source></source>
         <translation></translation>
     </message>
@@ -1806,41 +1806,69 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpServer.cpp" line="325"/>
+        <source>received new request, before the previous response was completely sent</source>
+        <translation>이전 응답이 완전히 전송되기 전에 새 요청을 수신했습니다</translation>
+    </message>
+    <message>
         <source>recived new request, befoure the previouse response was completly sent</source>
-        <translation>이전 응답이 완전히 전송되기 전에 새로운 요청을 수신했습니다</translation>
+        <translation type="vanished">이전 응답이 완전히 전송되기 전에 새로운 요청을 수신했습니다</translation>
     </message>
 </context>
 <context>
     <name>CHttpSocket</name>
     <message>
-        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
         <source>recived invalid HTTP request</source>
-        <translation>잘못된 HTTP 요청을 수신했습니다</translation>
+        <translation type="vanished">잘못된 HTTP 요청을 수신했습니다</translation>
+    </message>
+    <message>
+        <source>recived unsupported HTTP request %1 from %2</source>
+        <translation type="vanished">%2로부터 지원되지 않는 HTTP 요청 %1을(를) 수신했습니다</translation>
+    </message>
+    <message>
+        <source>recived invalid POST request %1</source>
+        <translation type="vanished">잘못된 POST 요청이 %1회 수신되었습니다</translation>
+    </message>
+    <message>
+        <source>recived POST/PUT request without Content-Length !!!</source>
+        <translation type="vanished">Content-Length가 없는 POST/PUT 요청을 수신했습니다!!!</translation>
+    </message>
+    <message>
+        <source>recived GET request with attached data ?!</source>
+        <translation type="vanished">데이터가 포함된 GET 요청을 수신했습니다?!</translation>
+    </message>
+    <message>
+        <source>recived a POST payload before any part header</source>
+        <translation type="vanished">부분 헤더 이전에 POST 페이로드를 수신했습니다</translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="78"/>
+        <source>received invalid HTTP request</source>
+        <translation>유효하지 않은 HTTP 요청을 수신했습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="99"/>
-        <source>recived unsupported HTTP request %1 from %2</source>
-        <translation>%2로부터 지원되지 않는 HTTP 요청 %1을(를) 수신했습니다</translation>
+        <source>received unsupported HTTP request %1 from %2</source>
+        <translation>지원되지 않는 HTTP 요청 %1을(를) %2로부터 수신했습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="127"/>
-        <source>recived invalid POST request %1</source>
-        <translation>잘못된 POST 요청이 %1회 수신되었습니다</translation>
+        <source>received invalid POST request %1</source>
+        <translation>유효하지 않은 POST 요청 %1을(를) 수신했습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="146"/>
-        <source>recived POST/PUT request without Content-Length !!!</source>
-        <translation>Content-Length가 없는 POST/PUT 요청을 수신했습니다!!!</translation>
+        <source>received POST/PUT request without Content-Length !!!</source>
+        <translation>Content-Length가 없는 POST/PUT 요청을 수신했습니다 !!!</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="176"/>
-        <source>recived GET request with attached data ?!</source>
-        <translation>데이터가 포함된 GET 요청을 수신했습니다?!</translation>
+        <source>received GET request with attached data ?!</source>
+        <translation>데이터가 포함된 GET 요청을 수신했습니다 ?!</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="292"/>
-        <source>recived a POST payload before any part header</source>
-        <translation>부분 헤더 이전에 POST 페이로드를 수신했습니다</translation>
+        <source>received a POST payload before any part header</source>
+        <translation>부분 헤더가 나오기 전에 POST 페이로드를 수신했습니다</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/HttpServer/HttpSocket.cpp" line="429"/>
@@ -3148,7 +3176,7 @@ Nothing is sent unless you choose to, and nothing goes without you reading it. E
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="107"/>
         <source>The new box &apos;%1&apos; could not be found after creation.</source>
-        <translation type="unfinished"></translation>
+        <translation>새 박스 &apos;%1&apos;을 생성한 후 찾을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="124"/>
@@ -9164,12 +9192,12 @@ Before sending you can review the logs in the main window.</oldsource>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="889"/>
         <source>Submit Diagnostic Data</source>
-        <translation type="unfinished"></translation>
+        <translation>진단 데이터 제출</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="890"/>
         <source>%1 has collected some valuable diagnostic data. Thank you for taking the time to review and submit this information, as it helps improve Sandboxie for everyone! :-) </source>
-        <translation type="unfinished"></translation>
+        <translation>%1이 유용한 진단 데이터를 일부 수집했습니다. 이 정보를 검토하고 제출해 주셔서 감사합니다. 모두를 위해 Sandboxie를 개선하는 데 큰 도움이 됩니다! :-) </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="892"/>

@@ -322,20 +322,20 @@ void CHttpServer::HandleSocket(CHttpSocket* pHttpSocket)
 	// EState meant this could only fire for a response code of 2 or 4
 	if(pHttpSocket->m_TransactionState == CHttpSocket::eHandling || pHttpSocket->m_TransactionState == CHttpSocket::eWriting)
 	{
-		LogLine(eLogError, tr("recived new request, befoure the previouse response was completly sent"));
+		LogLine(eLogError, tr("received new request, before the previous response was completely sent"));
 		return;
 	}
 
 	if(pHttpSocket->m_RequestType == CHttpSocket::eNone) // are we still completing the header?
 	{
 		int End = pHttpSocket->m_RequestBuffer.indexOf("\r\n\r\n");
-		if(End == -1) // hreader not yet complee
+		if(End == -1) // header not yet complete
 			return;
 
 		ASSERT(pHttpSocket->m_TransactionState == CHttpSocket::eWaiting);
 		pHttpSocket->m_TransactionState = CHttpSocket::eReading;
 
-		//TRACE(L"Socket %d recived hreader %S", (int)pHttpSocket, pHttpSocket->m_RequestBuffer.left(End).data());
+		//TRACE(L"Socket %d received header %S", (int)pHttpSocket, pHttpSocket->m_RequestBuffer.left(End).data());
 		QStringList RequestHeader = QString(pHttpSocket->m_RequestBuffer.left(End)).split('\n');
 		pHttpSocket->m_RequestBuffer.remove(0,End+4);
 		pHttpSocket->m_Downloaded -= End+4;
@@ -345,7 +345,7 @@ void CHttpServer::HandleSocket(CHttpSocket* pHttpSocket)
 		else if(CHttpHandler* pHandler = GetHandler(pHttpSocket->GetPath(), pHttpSocket->GetLocalPort()))
 			pHandler->HandleRequest(pHttpSocket);
 		else
-			pHttpSocket->RespondWithError(404, "No service abvailable for this this path");
+			pHttpSocket->RespondWithError(404, "No service available for this this path");
 	}
 
 	if(pHttpSocket->m_TransactionState == CHttpSocket::eReading)

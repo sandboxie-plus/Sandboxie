@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed incorrect pending-change highlighting and Apply behavior for AI Integration settings
+- fixed INI editor correction suggestions for case-insensitive subsequence matches
 
 
 

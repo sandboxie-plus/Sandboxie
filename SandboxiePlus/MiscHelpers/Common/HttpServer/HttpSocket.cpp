@@ -75,7 +75,7 @@ int CHttpSocket::HandleHeader(QStringList &RequestHeader)
 	QStringList Request = QString(RequestHeader.takeFirst()).split(" ");
 	if(Request.count() != 3)
 	{
-		GetServer()->LogLine(CHttpServer::eLogDebug, tr("recived invalid HTTP request"));
+		GetServer()->LogLine(CHttpServer::eLogDebug, tr("received invalid HTTP request"));
 		return 400;
 	}
 
@@ -96,7 +96,7 @@ int CHttpSocket::HandleHeader(QStringList &RequestHeader)
 		m_RequestType = CHttpSocket::eDELETE;
 	else
 	{
-		GetServer()->LogLine(CHttpServer::eLogDebug, tr("recived unsupported HTTP request %1 from %2").arg(Request[0]).arg(GetPeerName()));
+		GetServer()->LogLine(CHttpServer::eLogDebug, tr("received unsupported HTTP request %1 from %2").arg(Request[0]).arg(GetPeerName()));
 		return 501;
 	}
 
@@ -124,7 +124,7 @@ int CHttpSocket::HandleHeader(QStringList &RequestHeader)
 				m_Boundary = PostType.value("boundary").toUtf8();
 				if(m_Boundary.isEmpty())
 				{
-					GetServer()->LogLine(CHttpServer::eLogDebug, tr("recived invalid POST request %1").arg(GetHeader("Content-Type")));
+					GetServer()->LogLine(CHttpServer::eLogDebug, tr("received invalid POST request %1").arg(GetHeader("Content-Type")));
 					return 400;
 				}
 			}
@@ -141,9 +141,9 @@ int CHttpSocket::HandleHeader(QStringList &RequestHeader)
 			QString sLength = GetHeader("Content-Length");
 			if(!sLength.isEmpty())
 				m_DownloadedSize = sLength.toULongLong();
-			else //if(m_RequestType != CHttpSocket::eMultiPOST) // Note: wqith Boundries we can find the end relaiably
+			else //if(m_RequestType != CHttpSocket::eMultiPOST) // Note: with Boundaries we can find the end reliably
 			{
-				GetServer()->LogLine(CHttpServer::eLogWarning, tr("recived POST/PUT request without Content-Length !!!"));
+				GetServer()->LogLine(CHttpServer::eLogWarning, tr("received POST/PUT request without Content-Length !!!"));
 				return 411;
 			}
 			break;
@@ -173,7 +173,7 @@ void CHttpSocket::HandleData()
 	{
 		case CHttpSocket::eGET:
 			if(!m_RequestBuffer.isEmpty())
-				GetServer()->LogLine(CHttpServer::eLogError, tr("recived GET request with attached data ?!"));
+				GetServer()->LogLine(CHttpServer::eLogError, tr("received GET request with attached data ?!"));
 			break;
 		case CHttpSocket::eRawPOST: // bulk data, same as put
 		case CHttpSocket::ePUT:
@@ -247,7 +247,7 @@ void CHttpSocket::HandleData()
 				if(m_RequestBuffer.left(BoundarySize) == "--" + m_Boundary + "\r\n")
 				{
 					int End = m_RequestBuffer.indexOf("\r\n\r\n");
-					if(End == -1) // hreader not yet complee
+					if(End == -1) // header not yet complete
 						break;
 
 					QStringList PartHeader = QString(m_RequestBuffer.mid(BoundarySize, End-BoundarySize)).split('\n');
@@ -283,13 +283,13 @@ void CHttpSocket::HandleData()
 				else 
 				{
 					int End = m_RequestBuffer.indexOf("\r\n--" + m_Boundary);
-					if(End == -1) // paylaod not yet complee
+					if(End == -1) // payload not yet complete
 						break;
 
 					if(Post) // no part header came first, so there is nothing to attach
 						Post->Value = m_RequestBuffer.left(End);
 					else    // this to. Drop it and resync on the boundary.
-						GetServer()->LogLine(CHttpServer::eLogDebug, tr("recived a POST payload before any part header"));
+						GetServer()->LogLine(CHttpServer::eLogDebug, tr("received a POST payload before any part header"));
 					m_RequestBuffer.remove(0,End+2);
 				}
 			}
@@ -301,7 +301,7 @@ void CHttpSocket::HandleData()
 		ASSERT(m_TransactionState == eReading);
 		m_FileBuffer = NULL;
 		m_TransactionState = eHandling;
-		//TRACE(L"Socket %i emiting readChannelFinished", (int)this);
+		//TRACE(L"Socket %i emitting readChannelFinished", (int)this);
 		emit readChannelFinished();
 	}
 }
@@ -334,7 +334,7 @@ void CHttpSocket::SendResponse(int Code, quint64 UploadSize)
 	else if(Code)
 		m_ResponseCode = Code;
 
-	ASSERT(m_ResponseBuffer.isEmpty() || m_FileBuffer == NULL); // Eider or, not booth
+	ASSERT(m_ResponseBuffer.isEmpty() || m_FileBuffer == NULL); // Either or, not both
 
 	if(UploadSize != -1)
 	{
@@ -421,10 +421,10 @@ bool CHttpSocket::TrySendBuffer()
 
 	if(!m_ResponseBuffer.isEmpty() && m_pSocket->bytesToWrite() < BufferBound)
 	{
-		quint64 Writen = m_pSocket->write(m_ResponseBuffer);
-		if(Writen > 0)
-			m_ResponseBuffer.remove(0,Writen);
-		else if(Writen == -1)
+		quint64 Written = m_pSocket->write(m_ResponseBuffer);
+		if(Written > 0)
+			m_ResponseBuffer.remove(0,Written);
+		else if(Written == -1)
 		{
 			GetServer()->LogLine(CHttpServer::eLogError, tr("Error While Sending response"));
 			m_pSocket->disconnect(this);
@@ -487,7 +487,7 @@ qint64 CHttpSocket::readData(char *data, qint64 maxlen)
 
 qint64 CHttpSocket::writeData(const char *data, qint64 len)
 {
-	if(m_UploadSize != -1) // are we in long uplaod mode
+	if(m_UploadSize != -1) // are we in long upload mode
 	{
 		if(m_ResponseBuffer.size() > (1024 * 1024))
 			return 0;
